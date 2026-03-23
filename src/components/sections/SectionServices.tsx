@@ -145,7 +145,7 @@ function ServiceCard({
   const Icon     = SERVICE_ICONS[service.id] ?? Layers3
   const accent   = SERVICE_ACCENT[service.id] ?? 'from-white/5 to-white/0 border-white/10 text-white'
   const iconBg   = SERVICE_ICON_BG[service.id] ?? 'bg-white/10 text-white'
-  const [_, borderCls, textCls] = accent.split(' ')
+  const [, , textCls] = accent.split(' ')
 
   return (
     <motion.article

@@ -10,7 +10,6 @@ import {
   Database,
   Zap,
   Code2,
-  ExternalLink,
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { cases } from '../../data/cases'
