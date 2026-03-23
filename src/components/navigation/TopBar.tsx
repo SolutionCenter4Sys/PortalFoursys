@@ -1,0 +1,132 @@
+import { Search, Maximize2, Minimize2, ChevronLeft, ChevronRight, BarChart2, X } from 'lucide-react'
+import { useApp } from '../../context/AppContext'
+import { navigationItems } from '../../data/navigation'
+import { getTrailById } from '../../data/trails'
+import type { AppSection } from '../../types'
+
+export function TopBar() {
+  const { state, navigate, openSearch, toggleFullscreen, toggleMetricsPanel, stopTrail } = useApp()
+
+  const currentNav = navigationItems.find(n => n.id === state.currentSection)
+  const currentIndex = navigationItems.findIndex(n => n.id === state.currentSection)
+  const prevSection = navigationItems[currentIndex - 1]
+  const nextSection = navigationItems[currentIndex + 1]
+
+  const currentTrail = state.currentTrailId ? getTrailById(state.currentTrailId) : null
+  const trailProgress = currentTrail
+    ? currentTrail.steps.filter(s => state.trailVisitedSections.includes(s.sectionId)).length
+    : 0
+
+  return (
+    <header className={`
+      flex items-center gap-3 px-4 py-2.5 border-b border-white/[0.06] bg-foursys-dark-2/80 backdrop-blur-xl
+      transition-all duration-300
+      ${state.isFullscreen ? 'opacity-0 pointer-events-none' : 'opacity-100'}
+    `}>
+
+      {/* Breadcrumb */}
+      <div className="flex items-center gap-2 text-sm min-w-0">
+        <span className="text-foursys-text-dim text-xs uppercase tracking-widest font-semibold">{currentNav?.category}</span>
+        <span className="text-foursys-text-dim/50">/</span>
+        <span className="text-foursys-text font-semibold truncate">{currentNav?.label}</span>
+      </div>
+
+      {/* Indicador de trilha ativa */}
+      {currentTrail && (
+        <div
+          className="hidden md:flex items-center gap-2 px-2.5 py-1 rounded-full border text-xs font-semibold"
+          style={{
+            borderColor: `${currentTrail.colorHex}50`,
+            backgroundColor: `${currentTrail.colorHex}14`,
+            color: currentTrail.colorHex,
+          }}
+        >
+          <span>{currentTrail.icon}</span>
+          <span>{currentTrail.label}</span>
+          <span className="opacity-70">· {trailProgress}/{currentTrail.steps.length}</span>
+          <button
+            onClick={stopTrail}
+            className="hover:opacity-100 opacity-50 transition-opacity ml-0.5"
+            title="Encerrar trilha"
+          >
+            <X size={11} />
+          </button>
+        </div>
+      )}
+
+      <div className="flex-1" />
+
+      {/* Progress dots */}
+      <div className="hidden md:flex items-center gap-1">
+        {navigationItems.map((item, idx) => (
+          <button
+            key={item.id}
+            onClick={() => navigate(item.id as AppSection)}
+            title={item.label}
+            className={`rounded-full transition-all duration-200 ${
+              idx === currentIndex
+                ? 'bg-foursys-blue w-4 h-1.5'
+                : state.visitedSections.includes(item.id as AppSection)
+                ? 'bg-foursys-blue/40 w-1.5 h-1.5'
+                : 'bg-white/15 w-1.5 h-1.5'
+            }`}
+          />
+        ))}
+      </div>
+
+      <div className="w-px h-4 bg-white/10 mx-0.5" />
+
+      {/* Prev / Next */}
+      <button
+        onClick={() => prevSection && navigate(prevSection.id as AppSection)}
+        disabled={!prevSection}
+        className="p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
+        title="Anterior (←)"
+      >
+        <ChevronLeft size={15} />
+      </button>
+
+      <button
+        onClick={() => nextSection && navigate(nextSection.id as AppSection)}
+        disabled={!nextSection}
+        className="p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
+        title="Próximo (→)"
+      >
+        <ChevronRight size={15} />
+      </button>
+
+      <div className="w-px h-4 bg-white/10 mx-0.5" />
+
+      {/* Search */}
+      <button
+        onClick={openSearch}
+        className="p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
+        title="Buscar (Ctrl+K)"
+      >
+        <Search size={15} />
+      </button>
+
+      {/* Analytics / Métricas */}
+      <button
+        onClick={toggleMetricsPanel}
+        className={`p-1.5 rounded-lg transition-colors ${
+          state.isMetricsPanelOpen
+            ? 'bg-foursys-blue/15 text-foursys-blue'
+            : 'hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text'
+        }`}
+        title="Analytics da Sessão (Ctrl+Shift+M)"
+      >
+        <BarChart2 size={15} />
+      </button>
+
+      {/* Fullscreen */}
+      <button
+        onClick={toggleFullscreen}
+        className="p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
+        title="Fullscreen (F11)"
+      >
+        {state.isFullscreen ? <Minimize2 size={15} /> : <Maximize2 size={15} />}
+      </button>
+    </header>
+  )
+}
