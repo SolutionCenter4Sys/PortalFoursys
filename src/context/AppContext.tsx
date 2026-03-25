@@ -27,7 +27,7 @@ const initialState: AppState = {
   // Interesse e perfil
   interestedSections: [],
   sessionProfile: null,
-  isWizardOpen: true,
+  isWizardOpen: false,
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
