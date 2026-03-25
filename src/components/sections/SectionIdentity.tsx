@@ -38,7 +38,7 @@ function KPICard({ kpi, delay }: { kpi: typeof kpis[0]; delay: number }) {
       transition={{ delay, duration: 0.5 }}
       className="flex flex-col items-center p-6 rounded-2xl bg-foursys-surface/60 border border-white/10 backdrop-blur-md hover:border-foursys-blue/30 transition-all duration-300 group"
     >
-      <div className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-foursys-cyan to-foursys-blue mb-2">
+      <div className="text-3xl md:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-foursys-cyan to-foursys-blue mb-2">
         {count.toLocaleString('pt-BR')}{kpi.suffix}
       </div>
       <div className="text-base font-semibold text-foursys-text mb-1">{kpi.label}</div>
@@ -50,7 +50,7 @@ function KPICard({ kpi, delay }: { kpi: typeof kpis[0]; delay: number }) {
 export function SectionIdentity() {
   return (
     <SectionWrapper>
-      <div className="px-8 py-12 max-w-6xl mx-auto">
+      <div className="px-4 md:px-8 py-6 md:py-12 max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -59,7 +59,7 @@ export function SectionIdentity() {
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
             🌟 Quem Somos
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-foursys-text mb-4">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
             A Foursys em números
           </h2>
           <p className="text-lg text-foursys-text-muted max-w-2xl mx-auto">
@@ -67,7 +67,7 @@ export function SectionIdentity() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8 md:mb-12">
           {kpis.map((kpi, i) => (
             <KPICard key={kpi.label} kpi={kpi} delay={i * 0.1} />
           ))}

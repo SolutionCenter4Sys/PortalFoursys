@@ -18,7 +18,7 @@ const activities = [
 export function SectionFourmakers() {
   return (
     <SectionWrapper>
-      <div className="px-8 py-12 max-w-5xl mx-auto">
+      <div className="px-4 md:px-8 py-6 md:py-12 max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -27,7 +27,7 @@ export function SectionFourmakers() {
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
             🛠️ FourMakers
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-foursys-text mb-4">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
             Onde a inovação acontece de verdade
           </h2>
           <p className="text-lg text-foursys-text-muted max-w-2xl mx-auto">
@@ -40,7 +40,7 @@ export function SectionFourmakers() {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
-          className="mb-10 p-10 rounded-2xl bg-gradient-to-br from-foursys-blue/25 via-foursys-blue/10 to-foursys-cyan/10 border border-foursys-blue/30 text-center relative overflow-hidden"
+          className="mb-8 md:mb-10 p-5 md:p-10 rounded-2xl bg-gradient-to-br from-foursys-blue/25 via-foursys-blue/10 to-foursys-cyan/10 border border-foursys-blue/30 text-center relative overflow-hidden"
         >
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-0 right-0 w-64 h-64 bg-foursys-cyan/5 rounded-full blur-3xl" />

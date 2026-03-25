@@ -84,47 +84,15 @@ export function SectionOpening() {
     <SectionWrapper>
       <div className="h-full flex flex-col overflow-hidden">
 
-        {/* ── Área principal 3 colunas ── */}
-        <div className="flex-1 grid grid-cols-[2.5fr_3fr_2.5fr]">
+        {/* ── Área principal: 1 col mobile / 3 col desktop ── */}
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-[2.5fr_3fr_2.5fr] overflow-y-auto lg:overflow-hidden">
 
-          {/* ── Coluna esquerda: KPIs ── */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col justify-center px-10 py-8 gap-8"
-          >
-            {/* DESDE 2009 */}
-            <div>
-              <span className="text-xs font-bold tracking-[0.18em] uppercase text-foursys-blue">
-                Desde 2009
-              </span>
-            </div>
-
-            {kpis.map(({ ref, hasThousands, label }, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + i * 0.12, duration: 0.5 }}
-                className="border-l-[3px] border-foursys-blue pl-5"
-              >
-                <div className="text-[72px] leading-none font-black text-white tracking-tight tabular-nums">
-                  {hasThousands ? fmt(ref.count) : ref.count}
-                </div>
-                <div className="text-sm text-foursys-text-muted mt-1 font-medium">
-                  {label}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* ── Coluna central: Chama ── */}
+          {/* ── Coluna central: Chama — vem primeiro no mobile ── */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col items-center justify-center py-6 cursor-pointer"
+            className="flex flex-col items-center justify-center py-6 cursor-pointer order-1 lg:order-2"
             onClick={() => navigate('identity')}
           >
             <FoursysFlame />
@@ -139,9 +107,40 @@ export function SectionOpening() {
                 className="text-xs font-semibold tracking-[0.22em] uppercase mb-1"
                 style={{ color: 'rgba(255,255,255,0.35)' }}
               >
-                clique para começar
+                toque para começar
               </div>
             </motion.div>
+          </motion.div>
+
+          {/* ── Coluna esquerda: KPIs ── */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="flex flex-col justify-center px-5 md:px-10 py-6 md:py-8 gap-6 md:gap-8 order-2 lg:order-1"
+          >
+            <div>
+              <span className="text-xs font-bold tracking-[0.18em] uppercase text-foursys-blue">
+                Desde 2009
+              </span>
+            </div>
+
+            {kpis.map(({ ref, hasThousands, label }, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + i * 0.12, duration: 0.5 }}
+                className="border-l-[3px] border-foursys-blue pl-5"
+              >
+                <div className="text-4xl md:text-5xl lg:text-[72px] leading-none font-black text-white tracking-tight tabular-nums">
+                  {hasThousands ? fmt(ref.count) : ref.count}
+                </div>
+                <div className="text-sm text-foursys-text-muted mt-1 font-medium">
+                  {label}
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
 
           {/* ── Coluna direita: Serviços ── */}
@@ -149,7 +148,7 @@ export function SectionOpening() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col justify-center px-8 py-8 gap-5"
+            className="flex flex-col justify-center px-5 md:px-8 py-6 md:py-8 gap-4 md:gap-5 order-3"
           >
             {services.map((service, i) => (
               <motion.div
@@ -159,7 +158,7 @@ export function SectionOpening() {
                 transition={{ delay: 0.25 + i * 0.08, duration: 0.4 }}
                 className="border-l-[3px] border-foursys-blue pl-5"
               >
-                <span className="text-xl font-semibold text-white leading-snug">
+                <span className="text-base md:text-xl font-semibold text-white leading-snug">
                   {service}
                 </span>
               </motion.div>
@@ -172,10 +171,9 @@ export function SectionOpening() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.5 }}
-          className="grid grid-cols-3 border-t border-white/[0.08]"
+          className="grid grid-cols-1 sm:grid-cols-3 border-t border-white/[0.08]"
         >
-          {/* Estrutura de entrega */}
-          <div className="px-10 py-5 border-r border-white/[0.06]">
+          <div className="px-5 md:px-10 py-4 md:py-5 border-b sm:border-b-0 sm:border-r border-white/[0.06]">
             <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-blue mb-2">
               Estrutura de Entrega
             </div>
@@ -185,8 +183,7 @@ export function SectionOpening() {
             </div>
           </div>
 
-          {/* Destaques */}
-          <div className="px-10 py-5 border-r border-white/[0.06]">
+          <div className="px-5 md:px-10 py-4 md:py-5 border-b sm:border-b-0 sm:border-r border-white/[0.06]">
             <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-blue mb-2">
               Destaques
             </div>
@@ -195,8 +192,7 @@ export function SectionOpening() {
             </div>
           </div>
 
-          {/* Alianças estratégicas */}
-          <div className="px-10 py-5">
+          <div className="px-5 md:px-10 py-4 md:py-5">
             <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-blue mb-3">
               Alianças Estratégicas
             </div>
@@ -216,7 +212,7 @@ export function SectionOpening() {
 
         {/* ── Rodapé ── */}
         <div className="text-center text-[11px] text-foursys-text-dim py-2.5 border-t border-white/[0.04] tracking-wide">
-          Foursys × Santander — Construindo o futuro digital juntos há 17 anos
+          Foursys — Construindo o futuro digital do setor financeiro
         </div>
 
       </div>

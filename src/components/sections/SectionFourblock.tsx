@@ -23,7 +23,7 @@ const phases = [
 export function SectionFourblock() {
   return (
     <SectionWrapper>
-      <div className="px-8 py-12 max-w-6xl mx-auto">
+      <div className="px-4 md:px-8 py-6 md:py-12 max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -32,7 +32,7 @@ export function SectionFourblock() {
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
             ⬛ Fourblock
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-foursys-text mb-4">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
             Produtos digitais em{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-foursys-cyan to-foursys-blue">
               30 dias
@@ -48,7 +48,7 @@ export function SectionFourblock() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="flex justify-center gap-8 mb-10"
+          className="flex flex-wrap justify-center gap-6 md:gap-8 mb-8 md:mb-10"
         >
           {[
             { value: '70%', label: 'Menos tempo de desenvolvimento', color: 'text-foursys-cyan' },
@@ -62,7 +62,7 @@ export function SectionFourblock() {
               transition={{ delay: 0.3 + i * 0.1 }}
               className="text-center"
             >
-              <div className={`text-4xl font-black ${stat.color} mb-1`}>{stat.value}</div>
+              <div className={`text-3xl md:text-4xl font-black ${stat.color} mb-1`}>{stat.value}</div>
               <div className="text-xs text-foursys-text-dim">{stat.label}</div>
             </motion.div>
           ))}

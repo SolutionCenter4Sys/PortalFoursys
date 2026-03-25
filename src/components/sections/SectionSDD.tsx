@@ -13,7 +13,7 @@ const steps = [
 export function SectionSDD() {
   return (
     <SectionWrapper>
-      <div className="px-8 py-12 max-w-5xl mx-auto">
+      <div className="px-4 md:px-8 py-6 md:py-12 max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -22,7 +22,7 @@ export function SectionSDD() {
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
             🔄 SDD com Legado
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-foursys-text mb-4">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
             Modernizar sem parar
           </h2>
           <p className="text-lg text-foursys-text-muted max-w-2xl mx-auto">

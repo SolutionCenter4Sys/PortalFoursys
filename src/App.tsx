@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { AppProvider, useApp } from './context/AppContext'
 import { TopBar } from './components/navigation/TopBar'
 import { NavigationMenu } from './components/navigation/NavigationMenu'
@@ -16,14 +17,30 @@ function AppInner() {
   const mainRef = useRef<HTMLDivElement>(null)
   useKeyboard()
 
+  // Swipe hint — aparece uma única vez na primeira visita em mobile
+  const [showSwipeHint, setShowSwipeHint] = useState(() => {
+    return !localStorage.getItem('foursys_swipe_hint_seen')
+  })
+
+  useEffect(() => {
+    if (!showSwipeHint) return
+    const t = setTimeout(() => {
+      setShowSwipeHint(false)
+      localStorage.setItem('foursys_swipe_hint_seen', '1')
+    }, 3500)
+    return () => clearTimeout(t)
+  }, [showSwipeHint])
+
   // Swipe para navegar entre seções no mobile
   const currentIndex = activeNavigationItems.findIndex(n => n.id === state.currentSection)
   useSwipe(mainRef, {
     onSwipeLeft: () => {
+      setShowSwipeHint(false)
       const next = activeNavigationItems[currentIndex + 1]
       if (next) navigate(next.id as AppSection)
     },
     onSwipeRight: () => {
+      setShowSwipeHint(false)
       const prev = activeNavigationItems[currentIndex - 1]
       if (prev) navigate(prev.id as AppSection)
     },
@@ -45,7 +62,7 @@ function AppInner() {
   }, [toggleFullscreen, toggleMetricsPanel])
 
   return (
-    <div className="flex h-[100dvh] overflow-hidden bg-foursys-dark-2">
+    <div className="flex h-[100dvh] overflow-hidden bg-foursys-dark-2 pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
 
       {/* Ambient background */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
@@ -85,6 +102,21 @@ function AppInner() {
       <SessionPanel />
       <ClientSelector />
       <SessionWizard />
+
+      {/* Swipe hint — mobile, primeira visita */}
+      <AnimatePresence>
+        {showSwipeHint && (
+          <motion.div
+            className="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-black/70 backdrop-blur-sm text-white text-sm px-5 py-2.5 rounded-full pointer-events-none lg:hidden"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.4 }}
+          >
+            <span>← Deslize para navegar →</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Fullscreen hint */}
       {state.isFullscreen && (

@@ -31,13 +31,14 @@ export function TopBar() {
     <header className={`
       flex items-center gap-2 px-3 md:px-4 py-2.5 border-b border-white/[0.06]
       bg-foursys-dark-2/80 backdrop-blur-xl transition-all duration-300 flex-shrink-0
+      pt-[max(0.625rem,env(safe-area-inset-top))]
       ${state.isFullscreen ? 'opacity-0 pointer-events-none' : 'opacity-100'}
     `}>
 
       {/* Hambúrguer — visível apenas em mobile */}
       <button
         onClick={toggleMenu}
-        className="lg:hidden p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors flex-shrink-0"
+        className="lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors flex-shrink-0"
         title="Menu"
         aria-label="Abrir menu"
       >
@@ -119,7 +120,7 @@ export function TopBar() {
       <button
         onClick={() => prevSection && navigate(prevSection.id as AppSection)}
         disabled={!prevSection}
-        className="p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
+        className="min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:p-1.5 flex items-center justify-center rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
         title="Anterior (←)"
       >
         <ChevronLeft size={15} />
@@ -128,7 +129,7 @@ export function TopBar() {
       <button
         onClick={() => nextSection && navigate(nextSection.id as AppSection)}
         disabled={!nextSection}
-        className="p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
+        className="min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:p-1.5 flex items-center justify-center rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
         title="Próximo (→)"
       >
         <ChevronRight size={15} />
@@ -139,7 +140,7 @@ export function TopBar() {
       {/* Client selector */}
       <button
         onClick={toggleClientSelector}
-        className={`p-1.5 rounded-lg transition-colors ${
+        className={`min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:p-1.5 flex items-center justify-center rounded-lg transition-colors ${
           state.activeClientId
             ? 'bg-foursys-blue/15 text-foursys-blue'
             : 'hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text'
@@ -152,16 +153,16 @@ export function TopBar() {
       {/* Search */}
       <button
         onClick={openSearch}
-        className="p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
+        className="min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:p-1.5 flex items-center justify-center rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
         title="Buscar (Ctrl+K)"
       >
         <Search size={15} />
       </button>
 
-      {/* Analytics — ocultar em mobile pequeno */}
+      {/* Analytics — visível em todos os tamanhos */}
       <button
         onClick={toggleMetricsPanel}
-        className={`hidden sm:block p-1.5 rounded-lg transition-colors ${
+        className={`min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:p-1.5 flex items-center justify-center rounded-lg transition-colors ${
           state.isMetricsPanelOpen
             ? 'bg-foursys-blue/15 text-foursys-blue'
             : 'hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text'

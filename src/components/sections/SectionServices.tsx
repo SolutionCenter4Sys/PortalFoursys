@@ -79,9 +79,9 @@ function FeaturedServiceCard() {
       transition={{ duration: 0.5, delay: 0.1 }}
       className="col-span-full relative overflow-hidden rounded-2xl border border-foursys-blue/20 bg-gradient-to-br from-foursys-blue/10 to-transparent group cursor-pointer"
     >
-      <div className="grid grid-cols-[1fr_auto] h-full">
+      <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] h-full">
         {/* Conteúdo */}
-        <div className="p-8 flex flex-col justify-between">
+        <div className="p-5 md:p-8 flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 mb-4">
               <span className="px-2.5 py-1 rounded-full bg-foursys-blue/20 border border-foursys-blue/30 text-foursys-blue text-[11px] font-bold tracking-widest uppercase">
@@ -100,7 +100,7 @@ function FeaturedServiceCard() {
             </p>
           </div>
 
-          <div className="flex items-center gap-8 mt-6">
+          <div className="flex flex-wrap items-center gap-4 md:gap-8 mt-4 md:mt-6">
             <div className="flex items-center gap-2">
               <Zap size={14} className="text-foursys-blue" />
               <span className="text-sm text-foursys-text-muted">SDD Framework</span>
@@ -120,7 +120,7 @@ function FeaturedServiceCard() {
         </div>
 
         {/* Imagem */}
-        <div className="relative w-[480px] overflow-hidden">
+        <div className="relative hidden sm:block sm:w-[300px] md:w-[480px] overflow-hidden">
           <img
             src="/images/foursys-human-ai-squad-v10.png"
             alt="AI-Augmented Squad"
@@ -244,7 +244,7 @@ export function SectionServices() {
 
   return (
     <SectionWrapper>
-      <div className="px-8 py-10 max-w-7xl mx-auto">
+      <div className="px-4 md:px-8 py-6 md:py-10 max-w-7xl mx-auto">
 
         {/* ── Header ── */}
         <motion.div
@@ -258,7 +258,7 @@ export function SectionServices() {
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-blue mb-2">
                 O que fazemos
               </p>
-              <h2 className="text-4xl font-black text-white leading-none">
+              <h2 className="text-2xl md:text-4xl font-black text-white leading-none">
                 Linhas de Serviço
               </h2>
               <p className="text-foursys-text-muted mt-2 text-base max-w-lg leading-relaxed">
@@ -289,7 +289,7 @@ export function SectionServices() {
         </motion.div>
 
         {/* ── Grid ── */}
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {/* Featured card apenas no filtro "Todos" */}
           {filter === 'Todos' && <FeaturedServiceCard />}
 

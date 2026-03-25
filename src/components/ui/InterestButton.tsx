@@ -16,7 +16,7 @@ export function InterestButton({ section, className = '' }: InterestButtonProps)
     <motion.button
       onClick={() => toggleInterest(section)}
       title={isMarked ? 'Remover interesse' : 'Marcar interesse'}
-      className={`group relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+      className={`group relative flex items-center gap-1.5 px-3 py-2.5 md:px-2.5 md:py-1.5 min-h-[44px] md:min-h-0 rounded-full text-xs font-medium transition-all ${
         isMarked
           ? 'bg-amber-400/20 text-amber-300 border border-amber-400/40'
           : 'bg-white/5 text-white/40 border border-white/10 hover:bg-amber-400/10 hover:text-amber-300/70 hover:border-amber-400/20'

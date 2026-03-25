@@ -37,7 +37,7 @@ const regions = [
 export function SectionGlobal() {
   return (
     <SectionWrapper>
-      <div className="px-8 py-12 max-w-6xl mx-auto">
+      <div className="px-4 md:px-8 py-6 md:py-12 max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -46,7 +46,7 @@ export function SectionGlobal() {
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
             🌎 Presença Global
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-foursys-text mb-4">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
             Local onde importa, global onde é preciso
           </h2>
           <p className="text-lg text-foursys-text-muted max-w-2xl mx-auto">
@@ -59,7 +59,7 @@ export function SectionGlobal() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
-          className="relative mb-10 p-8 rounded-2xl bg-foursys-surface/40 border border-white/10 overflow-hidden"
+          className="relative mb-8 md:mb-10 p-4 md:p-8 rounded-2xl bg-foursys-surface/40 border border-white/10 overflow-hidden"
         >
           <div className="absolute inset-0 bg-gradient-to-b from-foursys-blue/5 to-transparent" />
 
@@ -103,7 +103,7 @@ export function SectionGlobal() {
         </motion.div>
 
         {/* Region cards */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
           {regions.map((region, i) => (
             <motion.div
               key={region.name}
