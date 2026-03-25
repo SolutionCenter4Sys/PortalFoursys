@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { MapPin, Phone } from 'lucide-react'
+import { Phone } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 
 // ─── Dados reais das unidades Foursys ────────────────────────────────────────
