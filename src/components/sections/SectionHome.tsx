@@ -1,0 +1,302 @@
+import { motion } from 'framer-motion'
+import { useCountUp } from '../../hooks/useCountUp'
+import { useApp } from '../../context/AppContext'
+import { SectionWrapper } from '../ui/SectionWrapper'
+import { clients } from '../../data/clients'
+
+// ─── Dados ────────────────────────────────────────────────────────────────────
+
+const flagshipOffers = [
+  'AI-Augmented Squad',
+  'Modernização de Legado',
+  'IA First',
+  'FourBlox',
+  'Quality IA',
+]
+
+const certifications = ['ISO 9001', 'ISO 27001', 'SAFe', 'GPTW', 'AWS', 'Microsoft']
+
+const allianceLogos = [
+  { id: 'microsoft', label: 'Microsoft', color: '#00A4EF' },
+  { id: 'aws',        label: 'AWS',       color: '#FF9900' },
+  { id: 'gcp',        label: 'Google',    color: '#4285F4' },
+  { id: 'databricks', label: 'Databricks',color: '#FF3621' },
+  { id: 'salesforce', label: 'Salesforce',color: '#00A1E0' },
+]
+
+// ─── Chama Foursys ────────────────────────────────────────────────────────────
+
+function FoursysFlame() {
+  return (
+    <div className="relative select-none flex items-center justify-center">
+      <div
+        className="absolute inset-0 rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 60% 70% at 50% 65%, rgba(200,60,0,0.35) 0%, rgba(255,100,0,0.12) 50%, transparent 80%)',
+          filter: 'blur(24px)',
+          transform: 'scale(1.4)',
+        }}
+      />
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-40 h-8 rounded-full"
+        style={{
+          background: 'radial-gradient(ellipse, rgba(255,80,0,0.55) 0%, transparent 75%)',
+          filter: 'blur(10px)',
+        }}
+      />
+      <motion.img
+        src="/images/foursys-flame.png"
+        alt="Foursys"
+        className="relative z-10 w-56 h-auto drop-shadow-[0_0_32px_rgba(255,80,0,0.6)]"
+        animate={{ y: [0, -6, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        style={{ filter: 'drop-shadow(0 0 28px rgba(255,100,0,0.55))' }}
+      />
+    </div>
+  )
+}
+
+// ─── Componente principal ─────────────────────────────────────────────────────
+
+// ─── Frases de dor contextualizadas ─────────────────────────────────────────
+
+const PAIN_STATEMENTS: Record<string, Record<string, string>> = {
+  financeiro: {
+    ceo: 'Velocidade de entrega travada por legado?',
+    cfo: 'Custo de operação digital fora de controle?',
+    cto: 'Dívida técnica impedindo escala?',
+    diretor: 'Time de TI pressionado por demanda crescente?',
+    gestor: 'Processos manuais consumindo capacidade do time?',
+    default: 'Transformação digital com segurança e escala?',
+  },
+  saude: {
+    ceo: 'Operação clínica fragmentada em sistemas legados?',
+    cfo: 'Custos invisíveis na jornada do paciente?',
+    cto: 'Dados de saúde sem integração nem governança?',
+    diretor: 'Conformidade regulatória difícil de garantir?',
+    gestor: 'Fluxos clínicos lentos por processos não automatizados?',
+    default: 'Inovação em saúde com segurança e compliance?',
+  },
+  seguros: {
+    ceo: 'Time-to-market de novos produtos em anos, não meses?',
+    cfo: 'Fraude e sinistro consumindo margem?',
+    cto: 'Core de seguros difícil de evoluir?',
+    diretor: 'Experiência do segurado abaixo das expectativas?',
+    gestor: 'Subscrição e emissão lentas por processos manuais?',
+    default: 'Modernização de seguros com agilidade e controle?',
+  },
+  outro: {
+    default: 'Como acelerar entregas digitais sem perder governança?',
+  },
+}
+
+function getPainStatement(sector: string | null, role: string | null): string | null {
+  if (!sector) return null
+  const sectorMap = PAIN_STATEMENTS[sector] ?? PAIN_STATEMENTS['outro']
+  return (role && sectorMap[role]) ? sectorMap[role] : sectorMap['default'] ?? null
+}
+
+export function SectionHome() {
+  const { navigate, setClient, state } = useApp()
+
+  const kpi1 = useCountUp(26,     1400)
+  const kpi2 = useCountUp(500,    1800)
+  const kpi3 = useCountUp(2000,   1600)
+
+  const painStatement = getPainStatement(state.sessionProfile?.sector ?? null, state.sessionProfile?.role ?? null)
+
+  const kpis = [
+    { ref: kpi1, suffix: ' anos',  label: 'de história e entrega' },
+    { ref: kpi2, suffix: 'K+',     label: 'projetos entregues' },
+    { ref: kpi3, suffix: '+',      label: 'colaboradores em 3 continentes' },
+  ]
+
+  return (
+    <SectionWrapper>
+      <div className="h-full flex flex-col overflow-hidden">
+
+        {/* ── Área principal 3 colunas ── */}
+        <div className="flex-1 grid grid-cols-[2.5fr_3fr_2.5fr]">
+
+          {/* ── Coluna esquerda: KPIs ── */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="flex flex-col justify-center px-10 py-8 gap-7"
+          >
+            <div>
+              <span className="text-xs font-bold tracking-[0.18em] uppercase text-foursys-blue">
+                Fundada em 2000
+              </span>
+            </div>
+
+            {kpis.map(({ ref, suffix, label }, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + i * 0.12, duration: 0.5 }}
+                className="border-l-[3px] border-foursys-blue pl-5"
+              >
+                <div className="text-[68px] leading-none font-black text-white tracking-tight tabular-nums">
+                  {ref.count}
+                  <span className="text-4xl">{suffix}</span>
+                </div>
+                <div className="text-sm text-foursys-text-muted mt-1 font-medium">{label}</div>
+              </motion.div>
+            ))}
+
+            {/* Clientes disponíveis */}
+            {clients.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.7 }}
+                className="mt-2"
+              >
+                <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-blue mb-2">
+                  Apresentação por cliente
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {clients.map(c => (
+                    <button
+                      key={c.id}
+                      onClick={() => setClient(c.id)}
+                      className="text-xs px-3 py-1.5 rounded-lg border border-white/15 text-foursys-text-muted hover:border-foursys-blue/50 hover:text-foursys-blue transition-all duration-200"
+                    >
+                      {c.name}
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </motion.div>
+
+          {/* ── Coluna central: Chama + tagline ── */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex flex-col items-center justify-center py-6 cursor-pointer"
+            onClick={() => navigate('identity')}
+          >
+            <FoursysFlame />
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
+              className="mt-4 text-center px-6"
+            >
+              <h1 className="text-xl font-black text-white leading-snug mb-2">
+                Soluções digitais que conectam
+                <br />
+                <span className="text-foursys-blue">estratégia, execução e evolução</span>
+              </h1>
+
+              {painStatement && (
+                <motion.div
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.0 }}
+                  className="mt-3 px-4 py-2.5 rounded-xl bg-foursys-blue/10 border border-foursys-blue/25 text-foursys-blue text-sm font-semibold leading-snug"
+                >
+                  "{painStatement}"
+                </motion.div>
+              )}
+
+              <div
+                className="text-xs font-semibold tracking-[0.22em] uppercase mt-3"
+                style={{ color: 'rgba(255,255,255,0.35)' }}
+              >
+                clique para começar
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* ── Coluna direita: Ofertas Flagship ── */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="flex flex-col justify-center px-8 py-8 gap-4"
+          >
+            <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-foursys-blue mb-1">
+              Ofertas Flagship
+            </div>
+            {flagshipOffers.map((offer, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.25 + i * 0.08, duration: 0.4 }}
+                className="border-l-[3px] border-foursys-blue pl-5 cursor-pointer hover:border-foursys-blue/80 transition-colors"
+                onClick={() => navigate('offers-flagship')}
+              >
+                <span className="text-lg font-semibold text-white leading-snug">{offer}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* ── Barra inferior ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.5 }}
+          className="grid grid-cols-3 border-t border-white/[0.08]"
+        >
+          {/* Estrutura de entrega */}
+          <div className="px-10 py-5 border-r border-white/[0.06]">
+            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-blue mb-2">
+              Modelos de Entrega
+            </div>
+            <div className="text-sm text-foursys-text-muted leading-relaxed">
+              Squads · Projetos · Alocação
+              <br />
+              AMS · AI-Augmented · Produtos
+            </div>
+          </div>
+
+          {/* Certificações */}
+          <div className="px-10 py-5 border-r border-white/[0.06]">
+            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-blue mb-2">
+              Certificações
+            </div>
+            <div className="flex flex-wrap gap-x-3 gap-y-1">
+              {certifications.map(c => (
+                <span key={c} className="text-xs text-foursys-text-muted font-medium">{c}</span>
+              ))}
+            </div>
+          </div>
+
+          {/* Alianças */}
+          <div className="px-10 py-5">
+            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-blue mb-3">
+              Parceiros Estratégicos
+            </div>
+            <div className="flex items-center gap-3 flex-wrap">
+              {allianceLogos.map(a => (
+                <span
+                  key={a.id}
+                  className="text-sm font-bold tracking-wide"
+                  style={{ color: a.color }}
+                >
+                  {a.label}
+                </span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ── Rodapé ── */}
+        <div className="text-center text-[11px] text-foursys-text-dim py-2.5 border-t border-white/[0.04] tracking-wide">
+          26 anos de história · 3,6% turnover · 500K+ projetos entregues · Brasil · EUA · Portugal
+        </div>
+
+      </div>
+    </SectionWrapper>
+  )
+}

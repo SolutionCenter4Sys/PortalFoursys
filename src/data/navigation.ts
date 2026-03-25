@@ -1,140 +1,149 @@
 import type { NavigationItem } from '../types'
 
 export const navigationItems: NavigationItem[] = [
+  // ── Início ─────────────────────────────────────────────────────────────────
   {
-    id: 'opening',
-    label: 'Abertura Santander',
-    icon: '🤝',
+    id: 'home',
+    label: 'Início',
+    icon: '🏠',
     category: 'Início',
-    description: 'Foursys × Santander — Parceria estratégica'
+    description: '26 anos transformando negócios com tecnologia',
   },
+
+  // ── Institucional ──────────────────────────────────────────────────────────
   {
     id: 'identity',
     label: 'Quem Somos',
     icon: '🌟',
     category: 'Institucional',
-    description: 'KPIs, missão e posicionamento da Foursys'
+    description: 'KPIs, missão e posicionamento da Foursys',
   },
   {
     id: 'timeline',
     label: 'Nossa Trajetória',
     icon: '📅',
     category: 'Institucional',
-    description: 'Evolução e marcos históricos da Foursys'
+    description: 'Evolução e marcos históricos — 26 anos de entrega',
   },
   {
     id: 'global',
     label: 'Presença Global',
     icon: '🌎',
     category: 'Institucional',
-    description: 'Brasil, Estados Unidos e Europa'
+    description: 'Brasil, Estados Unidos e Portugal',
   },
+
+  // ── Ofertas ────────────────────────────────────────────────────────────────
   {
-    id: 'santander-insights',
-    label: 'Percepções Santander',
-    icon: '🔍',
-    category: 'Santander',
-    description: 'O que identificamos nos projetos do Santander'
+    id: 'offers-flagship',
+    label: 'Ofertas Flagship',
+    icon: '🚀',
+    category: 'Ofertas',
+    description: 'AI-Augmented Squad, Modernização, IA First, FourBlox e Quality IA',
   },
-  {
-    id: 'quality-ia',
-    label: 'Framework Quality IA',
-    icon: '⚡',
-    category: 'Santander',
-    description: 'Plugin homologado pelo Santander'
-  },
-  {
-    id: 'shi-case',
-    label: 'Portal Imobiliário SHI',
-    icon: '🏢',
-    category: 'Santander',
-    description: 'Case de entrega dentro do ecossistema Santander'
-  },
+
+  // ── Serviços ───────────────────────────────────────────────────────────────
   {
     id: 'services',
     label: 'Linhas de Serviço',
     icon: '⚙️',
     category: 'Serviços',
-    description: 'O que fazemos, para quem e que problema resolve'
+    description: 'O que fazemos, para quem e que problema resolve',
   },
   {
     id: 'delivery',
     label: 'Estrutura de Delivery',
-    icon: '🚀',
+    icon: '📦',
     category: 'Serviços',
-    description: 'Projetos, Squads, Alocação e Squads + Agentes IA'
+    description: 'Projetos, Squads, Alocação, AMS e AI-Augmented Squads',
   },
   {
     id: 'sdd-legacy',
-    label: 'SDD com Legado',
+    label: 'Modernização de Legado',
     icon: '🔄',
     category: 'Serviços',
-    description: 'Modernização eficiente de sistemas legados'
+    description: 'Do core ao cloud, sem trauma — modernização por ondas',
   },
   {
     id: 'cyber-security',
     label: 'Cyber Security',
     icon: '🛡️',
     category: 'Serviços',
-    description: 'Portfólio completo de segurança cibernética'
+    description: 'Resiliência e identidade no centro da proteção',
   },
   {
     id: 'fourblock',
-    label: 'Fourblock',
+    label: 'FourBlox',
     icon: '⬛',
     category: 'Serviços',
-    description: 'Produtos digitais em 30 dias'
+    description: 'Produtos digitais por assinatura, prontos para escalar',
   },
+
+  // ── Inovação ───────────────────────────────────────────────────────────────
   {
     id: 'lab-ia',
-    label: 'Lab IA + Agentes Híbridos',
+    label: 'Lab IA + Agentes',
     icon: '🤖',
     category: 'Inovação',
-    description: 'Laboratório de IA e agentes híbridos Foursys'
+    description: 'Laboratório de IA e agentes híbridos Foursys',
   },
   {
     id: 'fourmakers',
     label: 'FourMakers',
     icon: '🛠️',
     category: 'Inovação',
-    description: 'Comunidade e programa de inovação'
+    description: 'Comunidade e programa de inovação aberta',
   },
   {
     id: 'alliances',
     label: 'Alianças Estratégicas',
     icon: '🤝',
     category: 'Inovação',
-    description: 'AWS, Databricks, Salesforce, Pega'
+    description: 'Microsoft, AWS, Google Cloud, SAP, Oracle, Salesforce e mais',
   },
+
+  // ── Provas ─────────────────────────────────────────────────────────────────
   {
     id: 'cases',
     label: 'Cases de Sucesso',
     icon: '🏆',
     category: 'Provas',
-    description: 'Resultados, aprendizados e onde geramos valor'
+    description: 'Resultados mensuráveis em Saúde, Financeiro e Seguros',
   },
   {
     id: 'capabilities',
     label: 'Capacidades Técnicas',
     icon: '💡',
     category: 'Provas',
-    description: 'Stack, métodos e expertise por área'
+    description: 'Stack, métodos e expertise por área',
   },
+
+  // ── ESG ────────────────────────────────────────────────────────────────────
+  {
+    id: 'esg',
+    label: 'FourLives — ESG',
+    icon: '🌱',
+    category: 'ESG',
+    description: 'Tecnologia que transforma vidas — impacto social e sustentabilidade',
+  },
+
+  // ── Referência ─────────────────────────────────────────────────────────────
   {
     id: 'faq',
     label: 'Perguntas Frequentes',
     icon: '💬',
     category: 'Referência',
-    description: 'Perguntas clássicas e como respondemos'
-  }
+    description: 'Perguntas clássicas e como respondemos',
+  },
 ]
 
 export const sectionCategories = [
   'Início',
   'Institucional',
-  'Santander',
+  'Ofertas',
   'Serviços',
   'Inovação',
   'Provas',
-  'Referência'
+  'ESG',
+  'Referência',
 ]

@@ -1,3 +1,58 @@
+// ─── Client System ────────────────────────────────────────────────────────────
+
+export interface ClientInsight {
+  id: string
+  title: string
+  description: string
+  solution: string
+  icon: string
+}
+
+export interface ClientCase {
+  id: string
+  title: string
+  sector: string
+  type: string
+  challenge: string
+  solution: string
+  results: string[]
+  metric?: { value: string; label: string }
+  stack: string[]
+}
+
+export interface ClientSection {
+  id: AppSection
+  label: string
+  description: string
+  icon: string
+  component: 'client-opening' | 'client-insights' | 'client-cases' | 'client-extra-1' | 'client-extra-2'
+}
+
+export interface ClientConfig {
+  id: string
+  name: string
+  logo?: string
+  colors: { primary: string; accent: string }
+  tagline: string
+  relationship: string
+  yearsPartnership?: number
+  sections: ClientSection[]
+  insights?: ClientInsight[]
+  cases?: ClientCase[]
+  extra1?: {
+    title: string
+    subtitle: string
+    content: unknown
+  }
+  extra2?: {
+    title: string
+    subtitle: string
+    content: unknown
+  }
+}
+
+// ─── Shared domain types ──────────────────────────────────────────────────────
+
 export interface Section {
   id: string
   title: string
@@ -10,11 +65,13 @@ export interface Section {
 export type SectionCategory =
   | 'abertura'
   | 'institucional'
-  | 'santander'
+  | 'ofertas'
   | 'servicos'
   | 'inovacao'
-  | 'cases'
+  | 'provas'
+  | 'esg'
   | 'faq'
+  | 'cliente'
 
 export interface KPI {
   value: number
@@ -96,26 +153,39 @@ export interface Perception {
   icon: string
 }
 
+// ─── App Sections ─────────────────────────────────────────────────────────────
+
 export type AppSection =
-  | 'opening'
+  // Institucional
+  | 'home'
   | 'identity'
   | 'global'
   | 'timeline'
-  | 'santander-insights'
-  | 'quality-ia'
-  | 'shi-case'
+  // Ofertas
+  | 'offers-flagship'
+  // Serviços
   | 'services'
   | 'delivery'
   | 'sdd-legacy'
   | 'cyber-security'
   | 'fourblock'
-  | 'innovation'
+  // Inovação
   | 'lab-ia'
   | 'fourmakers'
   | 'alliances'
+  // Provas
   | 'cases'
   | 'capabilities'
+  // ESG
+  | 'esg'
+  // Referência
   | 'faq'
+  // Cliente (injetadas dinamicamente)
+  | 'client-opening'
+  | 'client-insights'
+  | 'client-cases'
+  | 'client-extra-1'
+  | 'client-extra-2'
 
 export interface NavigationItem {
   id: AppSection
@@ -139,9 +209,33 @@ export interface Trail {
   icon: string
   duration: string
   audience: string
-  color: string        // Tailwind color class base (ex: 'foursys-blue')
-  colorHex: string     // Hex direto para uso em inline styles/shadows
+  color: string
+  colorHex: string
   steps: TrailStep[]
+}
+
+// ─── Perfil de Sessão (Session Wizard) ───────────────────────────────────────
+
+export interface SessionProfile {
+  sector: 'financeiro' | 'saude' | 'seguros' | 'outro' | null
+  role: 'ceo' | 'cfo' | 'cto' | 'diretor' | 'gestor' | null
+  objective: 'apresentacao' | 'proposta' | 'demo' | null
+}
+
+// ─── Histórico de Sessões (localStorage) ─────────────────────────────────────
+
+export interface SessionRecord {
+  id: string
+  date: string
+  clientId: string | null
+  clientName: string | null
+  profileSector: string | null
+  profileRole: string | null
+  trailId: string | null
+  durationSeconds: number
+  sectionsVisited: number
+  topSections: { section: AppSection; seconds: number }[]
+  interestedSections: AppSection[]
 }
 
 // ─── Analytics de Sessão ────────────────────────────────────────────────────
@@ -169,6 +263,14 @@ export interface AppState {
   sectionEnteredAt: number
   sessionStats: SectionStat[]
   isMetricsPanelOpen: boolean
+  // Cliente ativo
+  activeClientId: string | null
+  isClientSelectorOpen: boolean
+  // Sinais de interesse
+  interestedSections: AppSection[]
+  // Perfil da reunião
+  sessionProfile: SessionProfile | null
+  isWizardOpen: boolean
 }
 
 export type AppAction =
@@ -180,3 +282,9 @@ export type AppAction =
   | { type: 'START_TRAIL'; trailId: string; firstSection: AppSection; timestamp: number }
   | { type: 'STOP_TRAIL' }
   | { type: 'TOGGLE_METRICS_PANEL' }
+  | { type: 'SET_CLIENT'; clientId: string; timestamp: number }
+  | { type: 'CLEAR_CLIENT' }
+  | { type: 'TOGGLE_CLIENT_SELECTOR' }
+  | { type: 'TOGGLE_INTEREST'; section: AppSection }
+  | { type: 'SET_PROFILE'; profile: SessionProfile }
+  | { type: 'CLOSE_WIZARD' }

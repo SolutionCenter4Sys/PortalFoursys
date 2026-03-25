@@ -9,28 +9,28 @@ import {
   ShieldCheck,
   Database,
   Zap,
-  Code2,
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { InterestButton } from '../ui/InterestButton'
 import { cases } from '../../data/cases'
 import type { CaseStudy } from '../../types'
 
 // ─── Imagens por case ─────────────────────────────────────────────────────────
 
 const CASE_IMAGE: Record<string, string> = {
-  'shi-portal':       '/images/fourchickin-intro-slide-v3.png',
-  'quality-ia-impl':  '/images/foursys_deliverables_executive_slide.png',
-  'data-lakehouse':   '/images/foursys_ai_augmented_squad_slide_v3.png',
-  'modernizacao-core':'/images/foursys_requirements_to_start_slide.png',
-  'cyber-compliance': '/images/foursys_ai_augmented_squads_team_v5.png',
+  'saude-modernizacao': '/images/fourchickin-intro-slide-v3.png',
+  'fintech-lead-time':  '/images/foursys_ai_augmented_squad_slide_v3.png',
+  'seguradora-ia':      '/images/foursys_deliverables_executive_slide.png',
+  'data-lakehouse':     '/images/foursys_requirements_to_start_slide.png',
+  'cyber-compliance':   '/images/foursys_ai_augmented_squads_team_v5.png',
 }
 
 const CASE_ICON: Record<string, React.ElementType> = {
-  'shi-portal':       Building2,
-  'quality-ia-impl':  Zap,
-  'data-lakehouse':   Database,
-  'modernizacao-core':Code2,
-  'cyber-compliance': ShieldCheck,
+  'saude-modernizacao': Building2,
+  'fintech-lead-time':  Zap,
+  'seguradora-ia':      TrendingUp,
+  'data-lakehouse':     Database,
+  'cyber-compliance':   ShieldCheck,
 }
 
 // ─── Cores por tipo ───────────────────────────────────────────────────────────
@@ -309,8 +309,9 @@ export function SectionCases() {
               </p>
             </div>
 
-            {/* Filtros */}
-            <div className="flex flex-wrap gap-2">
+            {/* Filtros + Interesse */}
+            <div className="flex flex-wrap gap-2 items-center">
+              <InterestButton section="cases" />
               {sectors.map(s => (
                 <button
                   key={s}
@@ -350,8 +351,8 @@ export function SectionCases() {
           className="mt-10 pt-8 border-t border-white/[0.06] grid grid-cols-4 gap-6"
         >
           {[
-            { value: '17+',   label: 'Anos no Santander' },
-            { value: '110',   label: 'Projetos ativos' },
+            { value: '26+',   label: 'Anos de história' },
+            { value: '500K+', label: 'Projetos entregues' },
             { value: '99,9%', label: 'SLA entregue' },
             { value: '3,6%',  label: 'Turnover vs 22% do mercado' },
           ].map((stat, i) => (

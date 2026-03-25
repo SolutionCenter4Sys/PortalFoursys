@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
-import { perceptions } from '../../data/alliances'
+import { santanderClient } from '../../data/clients/santander'
 import { useApp } from '../../context/AppContext'
+
+const perceptions = santanderClient.insights ?? []
 
 export function SectionSantanderInsights() {
   const { navigate } = useApp()
@@ -81,7 +83,7 @@ export function SectionSantanderInsights() {
 
           <div className="mt-6 flex gap-3">
             <button
-              onClick={() => navigate('quality-ia')}
+              onClick={() => navigate('client-extra-1')}
               className="flex items-center gap-2 px-4 py-2 rounded-xl bg-foursys-blue/20 border border-foursys-blue/30 text-foursys-cyan text-sm hover:bg-foursys-blue/30 transition-colors"
             >
               Ver Framework Quality IA <ArrowRight size={14} />

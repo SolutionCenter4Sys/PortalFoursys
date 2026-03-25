@@ -2,22 +2,21 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, X } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
-import { navigationItems } from '../../data/navigation'
 import type { AppSection } from '../../types'
 
 export function SearchOverlay() {
-  const { state, navigate, closeSearch } = useApp()
+  const { state, navigate, closeSearch, activeNavigationItems } = useApp()
   const [query, setQuery] = useState('')
   const [selected, setSelected] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const results = query.trim()
-    ? navigationItems.filter(item =>
+    ? activeNavigationItems.filter(item =>
         item.label.toLowerCase().includes(query.toLowerCase()) ||
         item.description.toLowerCase().includes(query.toLowerCase()) ||
         item.category.toLowerCase().includes(query.toLowerCase())
       )
-    : navigationItems
+    : activeNavigationItems
 
   useEffect(() => {
     if (state.isSearchOpen) {

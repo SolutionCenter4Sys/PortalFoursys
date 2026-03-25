@@ -1,85 +1,76 @@
-import type { Alliance, Perception } from '../types'
+import type { Alliance } from '../types'
 
 export const alliances: Alliance[] = [
+  {
+    id: 'microsoft',
+    name: 'Microsoft',
+    logo: 'Microsoft',
+    level: 'Strategic Partner',
+    description: 'Parceria estratégica para soluções Azure, Microsoft 365, Copilot e modernização de workloads. Certificações em Azure Architecture, DevOps e AI/ML.',
+    color: '#00A4EF',
+    bgColor: '#001A2E'
+  },
   {
     id: 'aws',
     name: 'Amazon Web Services',
     logo: 'AWS',
     level: 'Select Consulting Partner',
-    description: 'Parceria para projetos de cloud, dados, IA e modernização de infraestrutura. Certificações em arquitetura, desenvolvimento e operações AWS.',
+    description: 'Parceria para projetos de cloud, dados, IA e modernização de infraestrutura. Certificações em arquitetura, desenvolvimento, machine learning e operações AWS.',
     color: '#FF9900',
     bgColor: '#1A1000'
   },
   {
-    id: 'databricks',
-    name: 'Databricks',
-    logo: 'Databricks',
-    level: 'Partner Certificado',
-    description: 'Implementação de Data Lakehouse, engenharia de dados e projetos de IA/ML com a plataforma Databricks. Cases em grandes instituições financeiras.',
-    color: '#FF3621',
-    bgColor: '#1A0800'
+    id: 'google-cloud',
+    name: 'Google Cloud',
+    logo: 'Google Cloud',
+    level: 'Strategic Partner',
+    description: 'Projetos de dados, analytics e IA com Google Cloud Platform. BigQuery, Vertex AI e soluções de modernização de aplicações cloud-native.',
+    color: '#4285F4',
+    bgColor: '#001028'
+  },
+  {
+    id: 'sap',
+    name: 'SAP',
+    logo: 'SAP',
+    level: 'Enterprise Partner',
+    description: 'Implementação, customização e suporte de soluções SAP para mercados regulados. Experiência em S/4HANA, BTP e integrações com ecossistemas legados.',
+    color: '#0FAAFF',
+    bgColor: '#001A2E'
+  },
+  {
+    id: 'oracle',
+    name: 'Oracle',
+    logo: 'Oracle',
+    level: 'Enterprise Partner',
+    description: 'Projetos de banco de dados, ERP e cloud Oracle para grandes empresas. OCI (Oracle Cloud Infrastructure), Oracle DB e integrações enterprise de alto volume.',
+    color: '#F80000',
+    bgColor: '#200000'
+  },
+  {
+    id: 'servicenow',
+    name: 'ServiceNow',
+    logo: 'ServiceNow',
+    level: 'Enterprise Partner',
+    description: 'Implementação da plataforma ServiceNow para ITSM, HRSD e digitalização de fluxos de trabalho. Automação de processos e gestão de serviços em escala enterprise.',
+    color: '#62D84E',
+    bgColor: '#0A1A00'
   },
   {
     id: 'salesforce',
     name: 'Salesforce',
     logo: 'Salesforce',
     level: 'Consulting Partner',
-    description: 'Implementação e customização de Sales Cloud, Service Cloud e Marketing Cloud. Times certificados em Salesforce para o mercado financeiro.',
+    description: 'Implementação e customização de Sales Cloud, Service Cloud e Marketing Cloud. Times certificados em Salesforce para o mercado financeiro e de seguros.',
     color: '#00A1E0',
     bgColor: '#001526'
   },
   {
-    id: 'pega',
-    name: 'Pega Systems',
-    logo: 'Pega',
-    level: 'Partner Certificado',
-    description: 'Implementação de automação de processos e CRM com Pega. Expertise em BPM e decisões em tempo real para o setor financeiro.',
-    color: '#00D4AA',
-    bgColor: '#001A15'
-  }
-]
-
-export const perceptions: Perception[] = [
-  {
-    id: 'legado',
-    title: 'Pressão do Legado',
-    description: 'Sistemas core críticos em COBOL e tecnologias antigas geram risco operacional e impedem a velocidade de inovação exigida pelo mercado.',
-    solution: 'Modernização progressiva com SDD — sem big-bang rewrite, com continuidade operacional garantida.',
-    icon: '🏚️'
+    id: 'databricks',
+    name: 'Databricks',
+    logo: 'Databricks',
+    level: 'Advanced Partner',
+    description: 'Implementação de Data Lakehouse, engenharia de dados e projetos de IA/ML com a plataforma Databricks. Cases em grandes instituições financeiras e seguradoras.',
+    color: '#FF3621',
+    bgColor: '#1A0800'
   },
-  {
-    id: 'qualidade',
-    title: 'Gargalo de Qualidade',
-    description: 'Ciclos de testes manuais lentos que bloqueiam releases frequentes e geram retrabalho — impactando time-to-market.',
-    solution: 'Framework Quality IA: automação inteligente de testes com IA, já homologado pelo Santander.',
-    icon: '🔍'
-  },
-  {
-    id: 'dados',
-    title: 'Fragmentação de Dados',
-    description: 'Dados críticos dispersos em silos sem integração adequada — decisões baseadas em informações parciais ou desatualizadas.',
-    solution: 'Data Lakehouse com Databricks: visão unificada de dados para analytics e IA.',
-    icon: '📊'
-  },
-  {
-    id: 'velocidade',
-    title: 'Velocidade de Entrega',
-    description: 'Demand de produtos digitais superando a capacidade de entrega interna — backlog crescente e squads sobrecarregados.',
-    solution: 'Squads + Agentes IA Foursys: velocidade 3x superior ao modelo tradicional.',
-    icon: '⚡'
-  },
-  {
-    id: 'seguranca',
-    title: 'Conformidade e Segurança',
-    description: 'Exigências regulatórias crescentes (BACEN Res. 4.658, LGPD) com necessidade de auditorias contínuas e gestão de vulnerabilidades.',
-    solution: 'Portfolio Cyber Security Foursys: SAST, DAST, pentest e compliance regulatório.',
-    icon: '🛡️'
-  },
-  {
-    id: 'inovacao',
-    title: 'Inovação com IA',
-    description: 'Necessidade de integrar IA generativa e agentes autônomos nos processos internos sem perder controle e governança.',
-    solution: 'Laboratório de IA Híbrida Foursys: agentes controlados, auditáveis e com supervisão humana.',
-    icon: '🤖'
-  }
 ]

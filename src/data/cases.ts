@@ -2,44 +2,62 @@ import type { CaseStudy, Capability } from '../types'
 
 export const cases: CaseStudy[] = [
   {
-    id: 'shi-portal',
-    title: 'Portal Imobiliário SHI',
-    client: 'Santander Housing Investments',
-    sector: 'Financeiro / Imobiliário',
-    type: 'Produto Digital',
-    challenge: 'O Santander precisava de um portal centralizado para gestão do portfólio imobiliário do SHI, integrando dados de múltiplas fontes legadas e oferecendo dashboards executivos em tempo real.',
-    solution: 'Desenvolvimento de portal web com React, APIs REST em Java Spring Boot, integração com sistemas legados via camada de API Gateway, e dashboards interativos com D3.js.',
-    stack: ['React', 'Java Spring Boot', 'AWS', 'API Gateway', 'PostgreSQL', 'D3.js'],
+    id: 'saude-modernizacao',
+    title: '100 Projetos Desbloqueados',
+    client: 'Operadora de Saúde (Grupo Nacional)',
+    sector: 'Saúde',
+    type: 'Modernização de Legado',
+    challenge: 'Core system de 15 anos travava integração com novos parceiros e impedia lançamento de produtos. Risco de parada crítica em 18 meses.',
+    solution: 'Modernização em ondas: encapsulamento do core legado, APIs de integração e substituição gradual por domínios. Piloto em módulo de autorizações em 12 semanas.',
+    stack: ['Java 21', 'Spring Boot', 'AWS', 'API Gateway', 'Kafka', 'PostgreSQL'],
     results: [
-      'Tempo de consulta de portfólio reduzido de 3 dias para 10 minutos',
-      'Visibilidade em tempo real de 100% dos imóveis do portfólio',
-      'Eliminação de 15 relatórios manuais em Excel',
-      'Adoção imediata por 200+ gestores do banco'
+      '100 projetos de integração desbloqueados em 12 meses',
+      'Tempo de integração de novos parceiros reduzido de meses para dias',
+      'Zero downtime durante modernização — continuidade operacional garantida',
+      'Risco de parada crítica eliminado com arquitetura resiliente',
     ],
-    metric: { value: '99%', label: 'Redução no tempo de consulta' },
-    color: 'from-red-600 to-red-800'
-  },
-  {
-    id: 'quality-ia-impl',
-    title: 'Framework Quality IA',
-    client: 'Santander Brasil',
-    sector: 'Financeiro',
-    type: 'Framework / Produto',
-    challenge: 'O time de QA do Santander realizava testes majoritariamente manuais, gerando ciclos de release de 6 semanas e alta taxa de defeitos em produção.',
-    solution: 'Desenvolvimento do Framework Quality IA: plugin de automação inteligente de testes que usa IA para geração automática de casos de teste, identificação de riscos e análise de impacto.',
-    stack: ['Python', 'LLMs', 'Selenium', 'Jenkins', 'SonarQube', 'Jira Integration'],
-    results: [
-      'Ciclo de release reduzido de 6 semanas para 2 semanas',
-      '78% de aumento na cobertura de testes automatizados',
-      'Redução de 60% nos defeitos em produção',
-      'Framework homologado pelo Santander para uso corporativo'
-    ],
-    metric: { value: '3x', label: 'Mais velocidade de release' },
+    metric: { value: '100', label: 'Projetos desbloqueados em 12 meses' },
     color: 'from-blue-600 to-blue-800'
   },
   {
+    id: 'fintech-lead-time',
+    title: '70% Redução no Lead Time',
+    client: 'Fintech de Crédito',
+    sector: 'Financeiro',
+    type: 'AI-Augmented Squad',
+    challenge: 'Backlog de 8 meses sem previsão. Time interno sobrecarregado. Lançamentos críticos bloqueados por falta de capacidade de entrega.',
+    solution: 'AI-Augmented Squad com playbook de qualidade e segurança. Duas squads (frontend + backend) integradas ao time e processos existentes da Fintech.',
+    stack: ['React', 'Node.js', 'AWS', 'GitHub Actions', 'Quality IA', 'Agentes IA'],
+    results: [
+      '70% de redução no lead time de entrega',
+      'Backlog de 8 meses reduzido para 3 meses em 12 semanas',
+      'Turnover de 3,6% — time estável durante todo o projeto',
+      'Throughput 3x superior ao modelo anterior',
+    ],
+    metric: { value: '70%', label: 'Redução no lead time' },
+    color: 'from-green-600 to-green-800'
+  },
+  {
+    id: 'seguradora-ia',
+    title: '85% Redução no Tempo de Análise',
+    client: 'Seguradora Multi-linha',
+    sector: 'Seguros',
+    type: 'IA First',
+    challenge: 'Processo de análise de sinistros demorava 5 dias úteis. Alta taxa de fraude e retrabalho manual gerando prejuízo operacional.',
+    solution: 'IA com Impacto: mapeamento de oportunidades, PoC de triagem automática de sinistros com LLMs, business case com ROI de 8 meses.',
+    stack: ['Python', 'LLMs', 'AWS SageMaker', 'FastAPI', 'Power BI', 'Databricks'],
+    results: [
+      '85% de redução no tempo de análise de sinistros',
+      'De 5 dias para menos de 18 horas por sinistro',
+      'ROI calculado em 8 meses — aprovado pela diretoria em 6 semanas',
+      '6 pilotos anteriores sem resultado → 1 PoC com impacto real',
+    ],
+    metric: { value: '85%', label: 'Redução no tempo de análise' },
+    color: 'from-violet-600 to-violet-800'
+  },
+  {
     id: 'data-lakehouse',
-    title: 'Data Lakehouse Financeiro',
+    title: 'R$ 45M de Otimização Identificados',
     client: 'Banco Tier 1 (confidencial)',
     sector: 'Financeiro',
     type: 'Engenharia de Dados',
@@ -50,32 +68,14 @@ export const cases: CaseStudy[] = [
       'Unificação de 12 fontes de dados em plataforma única',
       'Modelos de risco com latência reduzida de 24h para 15 minutos',
       'R$ 45M em otimização de provisões detectados nos primeiros 6 meses',
-      'Time de analytics independente — sem dependência de TI para consultas'
+      'Time de analytics independente — sem dependência de TI para consultas',
     ],
     metric: { value: 'R$ 45M', label: 'Otimização identificada em 6 meses' },
-    color: 'from-violet-600 to-violet-800'
-  },
-  {
-    id: 'modernizacao-core',
-    title: 'Modernização Core Banking',
-    client: 'Fintech Scale-up',
-    sector: 'Fintech',
-    type: 'Modernização',
-    challenge: 'Sistema core em Java legado (2008) sem testes automatizados, impossibilitando releases frequentes e bloqueando crescimento — 200k transações/dia.',
-    solution: 'Modernização incremental com SDD: decomposição em microserviços, implementação de testes automatizados (Quality IA), migração gradual de funcionalidades críticas.',
-    stack: ['Java 21', 'Spring Boot', 'Kubernetes', 'AWS EKS', 'PostgreSQL', 'Kafka'],
-    results: [
-      'Deploy de 3x por semana vs. 1x por trimestre anterior',
-      'Cobertura de testes de 0% para 85%',
-      'Capacidade de processamento escalada de 200k para 2M transações/dia',
-      'Zero downtime durante migração'
-    ],
-    metric: { value: '10x', label: 'Aumento de capacidade de transações' },
-    color: 'from-green-600 to-green-800'
+    color: 'from-amber-600 to-amber-800'
   },
   {
     id: 'cyber-compliance',
-    title: 'Programa Cyber Security BACEN',
+    title: '100% Conformidade BACEN no Prazo',
     client: 'Banco Regional (confidencial)',
     sector: 'Financeiro',
     type: 'Cyber Security',
@@ -86,11 +86,11 @@ export const cases: CaseStudy[] = [
       '100% de conformidade com BACEN Res. 4.658 no prazo',
       '347 vulnerabilidades identificadas e corrigidas',
       'Tempo de detecção de incidentes reduzido de 72h para 4h',
-      'Zero incidentes de segurança nos 12 meses pós-implementação'
+      'Zero incidentes de segurança nos 12 meses pós-implementação',
     ],
     metric: { value: '100%', label: 'Conformidade BACEN no prazo' },
     color: 'from-red-600 to-orange-700'
-  }
+  },
 ]
 
 export const capabilities: Capability[] = [

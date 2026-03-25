@@ -49,7 +49,7 @@ export const timeline: TimelineItem[] = [
   {
     year: '2005',
     title: 'Expansão Financeira',
-    description: 'Consolidação como parceiro estratégico dos maiores bancos do Brasil: Bradesco, Itaú e Santander.',
+    description: 'Consolidação como parceiro estratégico dos maiores bancos e seguradoras do Brasil — setores regulados de alta criticidade.',
     highlight: false
   },
   {
@@ -90,8 +90,8 @@ export const timeline: TimelineItem[] = [
   },
   {
     year: '2026',
-    title: 'Parceria Estratégica Santander',
-    description: 'Expansão e aprofundamento da parceria com o Santander, com Framework Quality IA homologado e múltiplos projetos em andamento.',
+    title: 'IA First & Quality IA em Escala',
+    description: 'Lançamento da oferta IA First com ROI em 4–6 semanas e homologação do Framework Quality IA em instituições financeiras de grande porte.',
     highlight: true
   }
 ]

@@ -4,7 +4,9 @@ import { TopBar } from './components/navigation/TopBar'
 import { NavigationMenu } from './components/navigation/NavigationMenu'
 import { SearchOverlay } from './components/navigation/SearchOverlay'
 import { SessionPanel } from './components/session/SessionPanel'
+import { SessionWizard } from './components/session/SessionWizard'
 import { SectionRenderer } from './components/SectionRenderer'
+import { ClientSelector } from './components/client/ClientSelector'
 import { useKeyboard } from './hooks/useKeyboard'
 
 function AppInner() {
@@ -52,6 +54,8 @@ function AppInner() {
       {/* Overlays */}
       <SearchOverlay />
       <SessionPanel />
+      <ClientSelector />
+      <SessionWizard />
 
       {/* Fullscreen click-to-exit hint */}
       {state.isFullscreen && (

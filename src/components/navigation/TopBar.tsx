@@ -1,16 +1,17 @@
-import { Search, Maximize2, Minimize2, ChevronLeft, ChevronRight, BarChart2, X } from 'lucide-react'
+import { Search, Maximize2, Minimize2, ChevronLeft, ChevronRight, BarChart2, X, Building2 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
-import { navigationItems } from '../../data/navigation'
 import { getTrailById } from '../../data/trails'
+import { getClientById } from '../../data/clients'
 import type { AppSection } from '../../types'
 
 export function TopBar() {
-  const { state, navigate, openSearch, toggleFullscreen, toggleMetricsPanel, stopTrail } = useApp()
+  const { state, navigate, openSearch, toggleFullscreen, toggleMetricsPanel, stopTrail, toggleClientSelector, activeNavigationItems } = useApp()
 
-  const currentNav = navigationItems.find(n => n.id === state.currentSection)
-  const currentIndex = navigationItems.findIndex(n => n.id === state.currentSection)
-  const prevSection = navigationItems[currentIndex - 1]
-  const nextSection = navigationItems[currentIndex + 1]
+  const currentNav = activeNavigationItems.find(n => n.id === state.currentSection)
+  const currentIndex = activeNavigationItems.findIndex(n => n.id === state.currentSection)
+  const prevSection = activeNavigationItems[currentIndex - 1]
+  const nextSection = activeNavigationItems[currentIndex + 1]
+  const activeClient = state.activeClientId ? getClientById(state.activeClientId) : null
 
   const currentTrail = state.currentTrailId ? getTrailById(state.currentTrailId) : null
   const trailProgress = currentTrail
@@ -56,9 +57,25 @@ export function TopBar() {
 
       <div className="flex-1" />
 
+      {/* Indicador de cliente ativo */}
+      {activeClient && (
+        <button
+          onClick={toggleClientSelector}
+          className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-semibold transition-all"
+          style={{
+            borderColor: `${activeClient.colors.primary}50`,
+            backgroundColor: `${activeClient.colors.primary}14`,
+            color: activeClient.colors.primary,
+          }}
+        >
+          <Building2 size={10} />
+          <span>{activeClient.name}</span>
+        </button>
+      )}
+
       {/* Progress dots */}
       <div className="hidden md:flex items-center gap-1">
-        {navigationItems.map((item, idx) => (
+        {activeNavigationItems.map((item, idx) => (
           <button
             key={item.id}
             onClick={() => navigate(item.id as AppSection)}
@@ -96,6 +113,19 @@ export function TopBar() {
       </button>
 
       <div className="w-px h-4 bg-white/10 mx-0.5" />
+
+      {/* Client selector */}
+      <button
+        onClick={toggleClientSelector}
+        className={`p-1.5 rounded-lg transition-colors ${
+          state.activeClientId
+            ? 'bg-foursys-blue/15 text-foursys-blue'
+            : 'hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text'
+        }`}
+        title="Selecionar Cliente"
+      >
+        <Building2 size={15} />
+      </button>
 
       {/* Search */}
       <button

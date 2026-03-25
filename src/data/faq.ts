@@ -5,7 +5,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-1',
     category: 'Institucional',
     question: 'O que é a Foursys e qual é o diferencial dela?',
-    answer: 'A Foursys é uma empresa de tecnologia com mais de 25 anos de mercado, especializada em transformação digital para o setor financeiro. Nosso diferencial está na combinação de expertise técnica profunda, metodologia ágil consolidada e, agora, agentes de IA híbridos que aceleram significativamente a entrega de projetos complexos. Não somos só uma software house — somos um parceiro estratégico que entende o negócio do cliente.',
+    answer: 'A Foursys é uma empresa de tecnologia com 26 anos de mercado, especializada em transformação digital para setores regulados. Nosso diferencial está na combinação de expertise técnica profunda, metodologia ágil consolidada com governança enterprise, e agentes de IA híbridos que aceleram a entrega de projetos complexos. 3,6% de turnover e 500K+ projetos entregues confirmam nossa consistência.',
     sectionLink: 'identity',
     sectionLabel: 'Ver Quem Somos'
   },
@@ -13,7 +13,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-2',
     category: 'Institucional',
     question: 'A Foursys tem experiência com bancos de grande porte?',
-    answer: 'Sim. A Foursys tem mais de 20 anos de atuação com os maiores bancos do Brasil, incluindo Santander, Bradesco, Itaú e outros. Nosso portfólio inclui projetos de core banking, modernização de sistemas legados, engenharia de dados, qualidade e segurança cibernética — sempre em ambientes de missão crítica.',
+    answer: 'Sim. A Foursys tem 26 anos de atuação com os maiores bancos e seguradoras do Brasil e exterior. Nosso portfólio inclui projetos de core banking, modernização de sistemas legados, engenharia de dados, qualidade com IA e segurança cibernética — sempre em ambientes de missão crítica e setores regulados.',
     sectionLink: 'cases',
     sectionLabel: 'Ver Cases'
   },

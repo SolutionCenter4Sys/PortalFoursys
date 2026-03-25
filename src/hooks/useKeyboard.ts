@@ -1,16 +1,15 @@
 import { useEffect } from 'react'
 import { useApp } from '../context/AppContext'
-import { navigationItems } from '../data/navigation'
 import type { AppSection } from '../types'
 
 export function useKeyboard() {
-  const { state, navigate, toggleFullscreen, openSearch, toggleMenu } = useApp()
+  const { state, navigate, toggleFullscreen, openSearch, toggleMenu, activeNavigationItems } = useApp()
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return
 
-      const idx = navigationItems.findIndex(n => n.id === state.currentSection)
+      const idx = activeNavigationItems.findIndex(n => n.id === state.currentSection)
 
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault()
@@ -31,14 +30,14 @@ export function useKeyboard() {
 
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
         e.preventDefault()
-        const next = navigationItems[idx + 1]
+        const next = activeNavigationItems[idx + 1]
         if (next) navigate(next.id as AppSection)
         return
       }
 
       if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
         e.preventDefault()
-        const prev = navigationItems[idx - 1]
+        const prev = activeNavigationItems[idx - 1]
         if (prev) navigate(prev.id as AppSection)
         return
       }
@@ -46,5 +45,5 @@ export function useKeyboard() {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [state.currentSection, navigate, toggleFullscreen, openSearch, toggleMenu])
+  }, [state.currentSection, navigate, toggleFullscreen, openSearch, toggleMenu, activeNavigationItems])
 }

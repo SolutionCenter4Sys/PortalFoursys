@@ -4,65 +4,82 @@ import {
   Users,
   Clock,
   Globe,
-  ScanEye,
-  Zap,
-  Building2,
-  LayoutGrid,
   Rocket,
+  LayoutGrid,
+  Package,
   GitMerge,
   ShieldCheck,
-  Package,
   BrainCircuit,
   Hammer,
   Network,
   Trophy,
   Code2,
   HelpCircle,
+  Leaf,
+  Building2,
+  ScanEye,
+  Zap,
+  Star,
   type LucideIcon,
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
-import { navigationItems, sectionCategories } from '../../data/navigation'
+import { getClientById } from '../../data/clients'
 import type { AppSection } from '../../types'
 
 // ─── Mapeamento de ícones Lucide por seção ───────────────────────────────────
 
 const SECTION_ICONS: Record<string, LucideIcon> = {
-  'opening':            Home,
-  'identity':           Users,
-  'timeline':           Clock,
-  'global':             Globe,
-  'santander-insights': ScanEye,
-  'quality-ia':         Zap,
-  'shi-case':           Building2,
-  'services':           LayoutGrid,
-  'delivery':           Rocket,
-  'sdd-legacy':         GitMerge,
-  'cyber-security':     ShieldCheck,
-  'fourblock':          Package,
-  'lab-ia':             BrainCircuit,
-  'fourmakers':         Hammer,
-  'alliances':          Network,
-  'cases':              Trophy,
-  'capabilities':       Code2,
-  'faq':                HelpCircle,
+  'home':            Home,
+  'identity':        Users,
+  'timeline':        Clock,
+  'global':          Globe,
+  'offers-flagship': Star,
+  'services':        LayoutGrid,
+  'delivery':        Rocket,
+  'sdd-legacy':      GitMerge,
+  'cyber-security':  ShieldCheck,
+  'fourblock':       Package,
+  'lab-ia':          BrainCircuit,
+  'fourmakers':      Hammer,
+  'alliances':       Network,
+  'cases':           Trophy,
+  'capabilities':    Code2,
+  'esg':             Leaf,
+  'faq':             HelpCircle,
+  // Client sections
+  'client-opening':  Building2,
+  'client-insights': ScanEye,
+  'client-cases':    Trophy,
+  'client-extra-1':  Zap,
+  'client-extra-2':  Zap,
 }
 
-// ─── Ícones por categoria (header do grupo) ──────────────────────────────────
+// ─── Cores por categoria ──────────────────────────────────────────────────────
 
 const CATEGORY_COLORS: Record<string, string> = {
   'Início':       'text-foursys-blue',
   'Institucional':'text-slate-400',
-  'Santander':    'text-red-400',
+  'Ofertas':      'text-orange-400',
   'Serviços':     'text-foursys-blue',
   'Inovação':     'text-violet-400',
   'Provas':       'text-amber-400',
+  'ESG':          'text-green-400',
   'Referência':   'text-slate-400',
 }
 
 // ─── Componente ──────────────────────────────────────────────────────────────
 
 export function NavigationMenu() {
-  const { state, navigate, openSearch } = useApp()
+  const {
+    state,
+    navigate,
+    openSearch,
+    toggleClientSelector,
+    activeNavigationItems,
+    activeSectionCategories,
+  } = useApp()
+
+  const activeClient = state.activeClientId ? getClientById(state.activeClientId) : null
 
   return (
     <aside className="w-64 flex-shrink-0 h-full flex flex-col bg-foursys-dark border-r border-white/[0.06] overflow-hidden z-10">
@@ -86,6 +103,25 @@ export function NavigationMenu() {
         </p>
       </div>
 
+      {/* ── Seletor de cliente ── */}
+      <div className="px-3 py-2 border-b border-white/[0.06]">
+        <button
+          onClick={toggleClientSelector}
+          className={`
+            w-full flex items-center gap-2.5 px-3 py-2 rounded-lg border text-xs transition-all duration-150
+            ${state.activeClientId
+              ? 'bg-foursys-blue/10 border-foursys-blue/30 text-foursys-blue'
+              : 'bg-white/[0.04] border-white/[0.07] text-foursys-text-dim hover:text-foursys-text-muted hover:border-foursys-blue/30'
+            }
+          `}
+        >
+          <Building2 size={13} className="flex-shrink-0" />
+          <span className="truncate">
+            {activeClient ? `Apresentação: ${activeClient.name}` : 'Selecionar cliente...'}
+          </span>
+        </button>
+      </div>
+
       {/* ── Search ── */}
       <div className="px-3 py-3 border-b border-white/[0.06]">
         <button
@@ -100,15 +136,20 @@ export function NavigationMenu() {
 
       {/* ── Navigation ── */}
       <nav className="flex-1 overflow-y-auto custom-scrollbar px-2 py-3 space-y-5">
-        {sectionCategories.map(category => {
-          const items = navigationItems.filter(n => n.category === category)
+        {activeSectionCategories.map(category => {
+          const items = activeNavigationItems.filter(n => n.category === category)
           if (items.length === 0) return null
 
-          const categoryColor = CATEGORY_COLORS[category] ?? 'text-foursys-text-dim'
+          // Para categorias de cliente, usa a cor do cliente ativo
+          const isClientCategory = !['Início', 'Institucional', 'Ofertas', 'Serviços', 'Inovação', 'Provas', 'ESG', 'Referência'].includes(category)
+          const categoryColorClass = isClientCategory ? '' : (CATEGORY_COLORS[category] ?? 'text-foursys-text-dim')
 
           return (
             <div key={category}>
-              <div className={`text-[9px] font-bold uppercase tracking-[0.14em] mb-1.5 px-3 ${categoryColor}`}>
+              <div
+                className={`text-[9px] font-bold uppercase tracking-[0.14em] mb-1.5 px-3 ${categoryColorClass}`}
+                style={isClientCategory && activeClient ? { color: activeClient.colors.primary } : undefined}
+              >
                 {category}
               </div>
               <div className="space-y-0.5">

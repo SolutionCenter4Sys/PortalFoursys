@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { InterestButton } from '../ui/InterestButton'
 
 const initiatives = [
   {
@@ -12,7 +13,7 @@ const initiatives = [
   {
     icon: '⚡',
     title: 'Quality IA',
-    status: 'Homologado Santander',
+    status: 'Homologado em produção',
     statusColor: 'text-red-400 bg-red-500/15 border-red-500/25',
     desc: 'Automação inteligente de testes com LLMs — geração de casos de teste, análise de impacto e risk scoring em tempo real.'
   },
@@ -49,6 +50,9 @@ export function SectionLabIA() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
             🤖 Lab IA · Inovação
+          </div>
+          <div className="flex justify-center mt-2 mb-2">
+            <InterestButton section="lab-ia" />
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-foursys-text mb-4">
             Laboratório de IA Foursys

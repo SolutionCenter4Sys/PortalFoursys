@@ -23,12 +23,16 @@ export function SectionAlliances() {
         </motion.div>
 
         {/* Alliance logos wall */}
-        <div className="grid grid-cols-2 gap-4 mb-10">
+        <div className="grid grid-cols-4 gap-4 mb-10">
           {[
-            { name: 'Amazon Web Services', logo: 'AWS', tagline: 'Cloud · AI · Data', color: '#FF9900', bg: 'from-amber-500/15 to-amber-600/5', border: 'border-amber-500/30' },
-            { name: 'Databricks', logo: 'Databricks', tagline: 'Data Lakehouse · ML · AI', color: '#FF3621', bg: 'from-red-500/15 to-red-600/5', border: 'border-red-500/30' },
-            { name: 'Salesforce', logo: 'Salesforce', tagline: 'CRM · Sales · Service Cloud', color: '#00A1E0', bg: 'from-sky-500/15 to-sky-600/5', border: 'border-sky-500/30' },
-            { name: 'Pega Systems', logo: 'PEGA', tagline: 'BPM · AI · Decisões', color: '#00D4AA', bg: 'from-teal-500/15 to-teal-600/5', border: 'border-teal-500/30' }
+            { name: 'Microsoft',          logo: 'Microsoft',    tagline: 'Azure · Copilot · 365',         color: '#00A4EF', bg: 'from-blue-400/15 to-blue-500/5',   border: 'border-blue-400/30' },
+            { name: 'Amazon Web Services', logo: 'AWS',          tagline: 'Cloud · AI · Data',             color: '#FF9900', bg: 'from-amber-500/15 to-amber-600/5', border: 'border-amber-500/30' },
+            { name: 'Google Cloud',        logo: 'Google Cloud', tagline: 'BigQuery · Vertex AI · GKE',    color: '#4285F4', bg: 'from-blue-500/15 to-blue-600/5',   border: 'border-blue-500/30' },
+            { name: 'SAP',                 logo: 'SAP',          tagline: 'S/4HANA · BTP · ERP',           color: '#0FAAFF', bg: 'from-sky-500/15 to-sky-600/5',     border: 'border-sky-500/30' },
+            { name: 'Oracle',              logo: 'Oracle',       tagline: 'OCI · Database · ERP',          color: '#F80000', bg: 'from-red-600/15 to-red-700/5',     border: 'border-red-600/30' },
+            { name: 'ServiceNow',          logo: 'ServiceNow',   tagline: 'ITSM · HRSD · Automação',       color: '#62D84E', bg: 'from-green-400/15 to-green-500/5', border: 'border-green-400/30' },
+            { name: 'Salesforce',          logo: 'Salesforce',   tagline: 'CRM · Sales · Service Cloud',   color: '#00A1E0', bg: 'from-sky-500/15 to-sky-600/5',     border: 'border-sky-500/30' },
+            { name: 'Databricks',          logo: 'Databricks',   tagline: 'Data Lakehouse · ML · AI',      color: '#FF3621', bg: 'from-red-500/15 to-red-600/5',     border: 'border-red-500/30' },
           ].map((partner, i) => (
             <motion.div
               key={partner.name}
