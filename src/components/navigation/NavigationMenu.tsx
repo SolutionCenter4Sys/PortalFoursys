@@ -75,7 +75,6 @@ export function NavigationMenu() {
     navigate,
     openSearch,
     toggleClientSelector,
-    toggleMenu,
     activeNavigationItems,
     activeSectionCategories,
   } = useApp()
@@ -84,8 +83,7 @@ export function NavigationMenu() {
 
   function handleNavigate(id: string) {
     navigate(id as AppSection)
-    // Fechar drawer após navegar no mobile
-    if (state.isMenuOpen) toggleMenu()
+    // O reducer NAVIGATE já define isMenuOpen: false — não chamar toggleMenu aqui
   }
 
   return (
