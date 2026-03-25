@@ -73,7 +73,7 @@ export function ClientSelector() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-6"
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6"
           onClick={toggleClientSelector}
         >
           <div className="absolute inset-0 bg-black/60 backdrop-blur-md" />
@@ -84,7 +84,7 @@ export function ClientSelector() {
             exit={{ scale: 0.95, y: 16, opacity: 0 }}
             transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
             onClick={e => e.stopPropagation()}
-            className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-2xl w-full max-w-md overflow-hidden"
+            className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-t-2xl sm:rounded-2xl w-full max-w-md overflow-hidden"
           >
             {/* Header */}
             <div className="px-6 pt-6 pb-5 border-b border-white/[0.06]">

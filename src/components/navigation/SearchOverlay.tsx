@@ -58,7 +58,7 @@ export function SearchOverlay() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-24 left-1/2 -translate-x-1/2 z-50 w-full max-w-xl"
+            className="fixed top-16 sm:top-24 left-1/2 -translate-x-1/2 z-50 w-full max-w-xl px-3 sm:px-0"
           >
             <div className="bg-foursys-dark-2/95 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden shadow-2xl">
               <div className="flex items-center gap-3 p-4 border-b border-white/10">

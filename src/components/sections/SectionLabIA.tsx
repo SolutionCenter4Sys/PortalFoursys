@@ -42,7 +42,7 @@ const agentTypes = [
 export function SectionLabIA() {
   return (
     <SectionWrapper>
-      <div className="px-8 py-12 max-w-6xl mx-auto">
+      <div className="px-4 md:px-8 py-6 md:py-12 max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -54,7 +54,7 @@ export function SectionLabIA() {
           <div className="flex justify-center mt-2 mb-2">
             <InterestButton section="lab-ia" />
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-foursys-text mb-4">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
             Laboratório de IA Foursys
           </h2>
           <p className="text-lg text-foursys-text-muted max-w-2xl mx-auto">
@@ -73,7 +73,7 @@ export function SectionLabIA() {
             Modelo de Agentes Híbridos — Como Funciona
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-5 md:mb-6">
             {agentTypes.map((agent, i) => (
               <motion.div
                 key={agent.role}
@@ -104,7 +104,7 @@ export function SectionLabIA() {
         <div className="text-sm font-semibold text-foursys-cyan text-center uppercase tracking-widest mb-5">
           Iniciativas do Laboratório
         </div>
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
           {initiatives.map((init, i) => (
             <motion.div
               key={init.title}

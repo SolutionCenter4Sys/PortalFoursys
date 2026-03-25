@@ -141,7 +141,7 @@ function OfferModal({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-6"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6"
       onClick={onClose}
     >
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
@@ -150,7 +150,7 @@ function OfferModal({
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.95, y: 16 }}
         onClick={e => e.stopPropagation()}
-        className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-2xl max-w-xl w-full overflow-hidden"
+        className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-t-2xl sm:rounded-2xl max-w-xl w-full overflow-y-auto max-h-[90dvh]"
       >
         {/* Header */}
         <div
@@ -278,48 +278,48 @@ export function SectionOffersFlag() {
 
   return (
     <SectionWrapper>
-      <div className="px-8 py-10 max-w-7xl mx-auto">
+      <div className="px-4 md:px-8 py-6 md:py-10 max-w-7xl mx-auto">
 
         {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mb-10"
+          className="mb-6 md:mb-10"
         >
-          <div className="flex items-end justify-between flex-wrap gap-4">
+          <div className="flex items-start md:items-end justify-between flex-wrap gap-3">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-blue mb-2">
                 Nossas principais ofertas
               </p>
-              <h2 className="text-4xl font-black text-white leading-none">
+              <h2 className="text-2xl md:text-4xl font-black text-white leading-none">
                 Ofertas Flagship
               </h2>
-              <p className="text-foursys-text-muted mt-2 text-base max-w-xl leading-relaxed">
-                Três ofertas, impacto comprovado — valor em semanas, governança enterprise e resultado mensurável.
+              <p className="text-foursys-text-muted mt-2 text-sm md:text-base max-w-xl leading-relaxed">
+                Impacto comprovado — valor em semanas, governança enterprise e resultado mensurável.
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 md:gap-3 flex-wrap">
               <InterestButton section="offers-flagship" />
               {[
                 { value: '26', label: 'anos' },
                 { value: '3,6%', label: 'turnover' },
                 { value: '500K+', label: 'projetos' },
               ].map(stat => (
-                <div key={stat.label} className="text-center px-4 py-2 rounded-xl bg-foursys-surface/40 border border-white/[0.08]">
-                  <div className="text-lg font-black text-foursys-blue">{stat.value}</div>
+                <div key={stat.label} className="text-center px-3 md:px-4 py-1.5 md:py-2 rounded-xl bg-foursys-surface/40 border border-white/[0.08]">
+                  <div className="text-base md:text-lg font-black text-foursys-blue">{stat.value}</div>
                   <div className="text-[10px] text-foursys-text-dim">{stat.label}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="mt-6 h-px bg-gradient-to-r from-foursys-blue/30 via-white/[0.06] to-transparent" />
+          <div className="mt-4 md:mt-6 h-px bg-gradient-to-r from-foursys-blue/30 via-white/[0.06] to-transparent" />
         </motion.div>
 
-        {/* ── Grid de ofertas ── */}
-        <div className="grid grid-cols-5 gap-4 mb-10">
+        {/* ── Grid de ofertas: 1 col mobile, 2 tablet, 5 desktop ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4 mb-6 md:mb-10">
           {flagshipOffers.map((offer, i) => (
             <OfferCard
               key={offer.id}
@@ -335,37 +335,21 @@ export function SectionOffersFlag() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.4 }}
-          className="p-6 rounded-2xl bg-foursys-surface/30 border border-white/[0.08]"
+          className="p-4 md:p-6 rounded-2xl bg-foursys-surface/30 border border-white/[0.08]"
         >
-          <h3 className="text-sm font-bold text-foursys-text mb-4">Como trabalhamos</h3>
-          <div className="grid grid-cols-4 gap-4">
+          <h3 className="text-sm font-bold text-foursys-text mb-3 md:mb-4">Como trabalhamos</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {[
-              {
-                title: 'Squads',
-                desc: 'Times multidisciplinares integrados ao seu time, com governança e métricas.',
-                icon: '👥',
-              },
-              {
-                title: 'Projetos',
-                desc: 'Escopo definido, prazo e entregas claras. Ideal para modernização e migração.',
-                icon: '📋',
-              },
-              {
-                title: 'Alocação',
-                desc: 'Profissionais especializados para demandas específicas de curto ou médio prazo.',
-                icon: '🎯',
-              },
-              {
-                title: 'AMS',
-                desc: 'Application Management Services com SLAs, NOC e evolução contínua.',
-                icon: '⚙️',
-              },
+              { title: 'Squads',   desc: 'Times multidisciplinares integrados ao seu time, com governança e métricas.', icon: '👥' },
+              { title: 'Projetos', desc: 'Escopo definido, prazo e entregas claras. Ideal para modernização e migração.', icon: '📋' },
+              { title: 'Alocação', desc: 'Profissionais especializados para demandas de curto ou médio prazo.', icon: '🎯' },
+              { title: 'AMS',      desc: 'Application Management Services com SLAs, NOC e evolução contínua.', icon: '⚙️' },
             ].map(model => (
-              <div key={model.title} className="flex gap-3">
-                <span className="text-2xl flex-shrink-0">{model.icon}</span>
+              <div key={model.title} className="flex gap-2.5 md:gap-3">
+                <span className="text-xl md:text-2xl flex-shrink-0">{model.icon}</span>
                 <div>
-                  <div className="text-sm font-bold text-foursys-text mb-1">{model.title}</div>
-                  <p className="text-xs text-foursys-text-muted leading-relaxed">{model.desc}</p>
+                  <div className="text-xs md:text-sm font-bold text-foursys-text mb-0.5 md:mb-1">{model.title}</div>
+                  <p className="text-[11px] md:text-xs text-foursys-text-muted leading-relaxed">{model.desc}</p>
                 </div>
               </div>
             ))}

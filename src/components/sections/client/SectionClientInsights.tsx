@@ -85,7 +85,7 @@ export function SectionClientInsights() {
 
   return (
     <SectionWrapper>
-      <div className="px-8 py-10 max-w-5xl mx-auto">
+      <div className="px-4 md:px-8 py-6 md:py-10 max-w-5xl mx-auto">
 
         {/* ── Header ── */}
         <motion.div
@@ -100,7 +100,7 @@ export function SectionClientInsights() {
           >
             {client.name}
           </span>
-          <h2 className="text-4xl font-black text-white leading-none mb-3">
+          <h2 className="text-2xl md:text-4xl font-black text-white leading-none mb-3">
             Percepções {client.name}
           </h2>
           <p className="text-foursys-text-muted text-base max-w-2xl leading-relaxed">
@@ -117,7 +117,7 @@ export function SectionClientInsights() {
         {insights.length > 0 ? (
           <>
             {/* ── Grid de percepções ── */}
-            <div className="grid grid-cols-2 gap-4 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-6 md:mb-8">
               {insights.map((insight, i) => (
                 <InsightCard
                   key={insight.id}

@@ -99,9 +99,9 @@ export function SessionWizard() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.92, y: 20 }}
             transition={{ type: 'spring', damping: 24, stiffness: 300 }}
-            className="fixed inset-0 z-[70] flex items-center justify-center p-6"
+            className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center p-0 sm:p-6"
           >
-            <div className="w-full max-w-md bg-[#111218] border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
+            <div className="w-full max-w-md bg-[#111218] border border-white/10 rounded-t-2xl sm:rounded-2xl shadow-2xl overflow-hidden">
 
               {/* Header */}
               <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-white/[0.07]">

@@ -73,21 +73,21 @@ const recognitions = [
 export function SectionESG() {
   return (
     <SectionWrapper>
-      <div className="px-8 py-10 max-w-6xl mx-auto">
+      <div className="px-4 md:px-8 py-6 md:py-10 max-w-6xl mx-auto">
 
         {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mb-10"
+          className="mb-6 md:mb-10"
         >
           <div className="flex items-start justify-between flex-wrap gap-6">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-blue mb-2">
                 Propósito e ESG
               </p>
-              <h2 className="text-4xl font-black text-white leading-none mb-3">
+              <h2 className="text-2xl md:text-4xl font-black text-white leading-none mb-3">
                 FourLives
               </h2>
               <p className="text-lg text-foursys-blue font-semibold mb-2">
@@ -122,7 +122,7 @@ export function SectionESG() {
         </motion.div>
 
         {/* ── 3 Frentes de impacto ── */}
-        <div className="grid grid-cols-3 gap-5 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-8 md:mb-10">
           {fronts.map((front, i) => (
             <motion.div
               key={front.id}
@@ -157,7 +157,7 @@ export function SectionESG() {
           <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-4">
             Premiações e Reconhecimentos
           </h3>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {recognitions.map((rec, i) => (
               <motion.div
                 key={rec.title}

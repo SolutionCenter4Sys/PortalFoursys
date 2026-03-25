@@ -75,11 +75,18 @@ export function NavigationMenu() {
     navigate,
     openSearch,
     toggleClientSelector,
+    toggleMenu,
     activeNavigationItems,
     activeSectionCategories,
   } = useApp()
 
   const activeClient = state.activeClientId ? getClientById(state.activeClientId) : null
+
+  function handleNavigate(id: string) {
+    navigate(id as AppSection)
+    // Fechar drawer após navegar no mobile
+    if (state.isMenuOpen) toggleMenu()
+  }
 
   return (
     <aside className="w-64 flex-shrink-0 h-full flex flex-col bg-foursys-dark border-r border-white/[0.06] overflow-hidden z-10">
@@ -161,7 +168,7 @@ export function NavigationMenu() {
                   return (
                     <button
                       key={item.id}
-                      onClick={() => navigate(item.id as AppSection)}
+                      onClick={() => handleNavigate(item.id)}
                       className={`
                         w-full flex items-center gap-2.5 px-3 py-[7px] text-left transition-all duration-150 text-[13px] relative group
                         ${isActive
@@ -194,8 +201,11 @@ export function NavigationMenu() {
 
       {/* ── Footer ── */}
       <div className="px-4 py-3 border-t border-white/[0.06]">
-        <p className="text-[9px] text-foursys-text-dim text-center leading-relaxed tracking-wide">
+        <p className="text-[9px] text-foursys-text-dim text-center leading-relaxed tracking-wide hidden lg:block">
           ← → navegar &nbsp;·&nbsp; F11 apresentação &nbsp;·&nbsp; ⌃⇧M métricas
+        </p>
+        <p className="text-[9px] text-foursys-text-dim text-center leading-relaxed tracking-wide lg:hidden">
+          Deslize para navegar entre seções
         </p>
       </div>
     </aside>

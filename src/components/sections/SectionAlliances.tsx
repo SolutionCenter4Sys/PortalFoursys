@@ -5,7 +5,7 @@ import { alliances } from '../../data/alliances'
 export function SectionAlliances() {
   return (
     <SectionWrapper>
-      <div className="px-8 py-12 max-w-5xl mx-auto">
+      <div className="px-4 md:px-8 py-6 md:py-12 max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -14,7 +14,7 @@ export function SectionAlliances() {
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
             🤝 Alianças Estratégicas
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-foursys-text mb-4">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
             Parceiros das maiores plataformas
           </h2>
           <p className="text-lg text-foursys-text-muted max-w-2xl mx-auto">
@@ -23,7 +23,7 @@ export function SectionAlliances() {
         </motion.div>
 
         {/* Alliance logos wall */}
-        <div className="grid grid-cols-4 gap-4 mb-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10">
           {[
             { name: 'Microsoft',          logo: 'Microsoft',    tagline: 'Azure · Copilot · 365',         color: '#00A4EF', bg: 'from-blue-400/15 to-blue-500/5',   border: 'border-blue-400/30' },
             { name: 'Amazon Web Services', logo: 'AWS',          tagline: 'Cloud · AI · Data',             color: '#FF9900', bg: 'from-amber-500/15 to-amber-600/5', border: 'border-amber-500/30' },
@@ -42,7 +42,7 @@ export function SectionAlliances() {
               className={`p-8 rounded-2xl bg-gradient-to-br ${partner.bg} border ${partner.border} flex flex-col items-center text-center hover:-translate-y-1 transition-all duration-300`}
             >
               <div
-                className="text-4xl md:text-5xl font-black mb-3"
+                className="text-2xl md:text-4xl lg:text-5xl font-black mb-3"
                 style={{ color: partner.color }}
               >
                 {partner.logo}

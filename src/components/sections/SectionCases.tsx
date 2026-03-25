@@ -57,7 +57,7 @@ function CaseModal({ case: c, onClose }: { case: CaseStudy; onClose: () => void 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-6"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6"
       onClick={onClose}
     >
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
@@ -66,7 +66,7 @@ function CaseModal({ case: c, onClose }: { case: CaseStudy; onClose: () => void 
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.95, y: 16 }}
         onClick={e => e.stopPropagation()}
-        className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-hidden flex flex-col"
+        className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-t-2xl sm:rounded-2xl max-w-2xl w-full max-h-[90dvh] overflow-hidden flex flex-col"
       >
         {/* Imagem */}
         {CASE_IMAGE[c.id] && (
@@ -162,7 +162,7 @@ function FeaturedCaseCard({ c, onClick }: { c: CaseStudy; onClick: () => void })
       onClick={onClick}
       className="col-span-full relative rounded-2xl border border-white/[0.1] overflow-hidden cursor-pointer group hover:border-white/20 transition-all duration-300"
     >
-      <div className="grid grid-cols-[1fr_400px] h-52">
+      <div className="grid grid-cols-1 sm:grid-cols-[1fr_300px] md:grid-cols-[1fr_400px] sm:h-52">
         {/* Texto */}
         <div className="p-8 flex flex-col justify-between">
           <div>
@@ -287,24 +287,24 @@ export function SectionCases() {
 
   return (
     <SectionWrapper>
-      <div className="px-8 py-10 max-w-7xl mx-auto">
+      <div className="px-4 md:px-8 py-6 md:py-10 max-w-7xl mx-auto">
 
         {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mb-10"
+          className="mb-6 md:mb-10"
         >
-          <div className="flex items-end justify-between flex-wrap gap-4">
+          <div className="flex items-start md:items-end justify-between flex-wrap gap-3">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-blue mb-2">
                 Resultados reais
               </p>
-              <h2 className="text-4xl font-black text-white leading-none">
+              <h2 className="text-2xl md:text-4xl font-black text-white leading-none">
                 Cases de Sucesso
               </h2>
-              <p className="text-foursys-text-muted mt-2 text-base max-w-lg leading-relaxed">
+              <p className="text-foursys-text-muted mt-2 text-sm md:text-base max-w-lg leading-relaxed">
                 Projetos entregues com métricas mensuráveis — do core banking à IA em produção.
               </p>
             </div>
@@ -316,7 +316,7 @@ export function SectionCases() {
                 <button
                   key={s}
                   onClick={() => setFilter(s)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 ${
+                  className={`px-2.5 md:px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 ${
                     filter === s
                       ? 'bg-foursys-blue/20 border border-foursys-blue/40 text-foursys-blue'
                       : 'bg-white/[0.04] border border-white/[0.08] text-foursys-text-dim hover:text-foursys-text-muted hover:border-white/20'
@@ -328,11 +328,11 @@ export function SectionCases() {
             </div>
           </div>
 
-          <div className="mt-6 h-px bg-gradient-to-r from-foursys-blue/30 via-white/[0.06] to-transparent" />
+          <div className="mt-4 md:mt-6 h-px bg-gradient-to-r from-foursys-blue/30 via-white/[0.06] to-transparent" />
         </motion.div>
 
         {/* ── Grid ── */}
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
           {/* Featured apenas no filtro "Todos" */}
           {filter === 'Todos' && (
             <FeaturedCaseCard c={featured} onClick={() => setSelectedCase(featured)} />
@@ -348,7 +348,7 @@ export function SectionCases() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.5 }}
-          className="mt-10 pt-8 border-t border-white/[0.06] grid grid-cols-4 gap-6"
+          className="mt-8 md:mt-10 pt-6 md:pt-8 border-t border-white/[0.06] grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
         >
           {[
             { value: '26+',   label: 'Anos de história' },

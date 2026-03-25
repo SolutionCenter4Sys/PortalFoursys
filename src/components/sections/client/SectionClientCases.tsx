@@ -23,7 +23,7 @@ function CaseModal({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-6"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6"
       onClick={onClose}
     >
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
@@ -32,7 +32,7 @@ function CaseModal({
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.95, y: 16 }}
         onClick={e => e.stopPropagation()}
-        className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto custom-scrollbar"
+        className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-t-2xl sm:rounded-2xl max-w-2xl w-full max-h-[90dvh] overflow-y-auto custom-scrollbar"
       >
         {/* Header do modal */}
         <div
@@ -198,7 +198,7 @@ export function SectionClientCases() {
 
   return (
     <SectionWrapper>
-      <div className="px-8 py-10 max-w-6xl mx-auto">
+      <div className="px-4 md:px-8 py-6 md:py-10 max-w-6xl mx-auto">
 
         {/* ── Header ── */}
         <motion.div
@@ -213,7 +213,7 @@ export function SectionClientCases() {
           >
             {client.name}
           </span>
-          <h2 className="text-4xl font-black text-white leading-none mb-3">
+          <h2 className="text-2xl md:text-4xl font-black text-white leading-none mb-3">
             Cases no {client.name}
           </h2>
           <p className="text-foursys-text-muted text-base max-w-2xl leading-relaxed">
@@ -231,7 +231,7 @@ export function SectionClientCases() {
         </motion.div>
 
         {cases.length > 0 ? (
-          <div className="grid grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
             {cases.map((c, i) => (
               <ClientCaseCard
                 key={c.id}

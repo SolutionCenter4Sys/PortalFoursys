@@ -39,7 +39,7 @@ export function SectionClientExtra1() {
 
   return (
     <SectionWrapper>
-      <div className="px-8 py-10 max-w-5xl mx-auto">
+      <div className="px-4 md:px-8 py-6 md:py-10 max-w-5xl mx-auto">
 
         {/* ── Header ── */}
         <motion.div
@@ -55,7 +55,7 @@ export function SectionClientExtra1() {
             <span className="text-sm font-semibold">{client.name}</span>
           </div>
 
-          <h2 className="text-4xl font-black text-white leading-none mb-3">{title}</h2>
+          <h2 className="text-2xl md:text-4xl font-black text-white leading-none mb-3">{title}</h2>
           <p className="text-foursys-text-muted text-base max-w-2xl leading-relaxed">{subtitle}</p>
           <div className="mt-4">
             <InterestButton section="client-extra-1" />
@@ -72,7 +72,7 @@ export function SectionClientExtra1() {
         {qaContent?.metrics && (
           <>
             {/* ── Métricas ── */}
-            <div className="grid grid-cols-4 gap-4 mb-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10">
               {qaContent.metrics.map((m, i) => (
                 <motion.div
                   key={m.label}
@@ -91,7 +91,7 @@ export function SectionClientExtra1() {
 
             {/* ── Fases ── */}
             {qaContent.phases && (
-              <div className="grid grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
                 {qaContent.phases.map((phase, i) => (
                   <motion.div
                     key={phase.id}

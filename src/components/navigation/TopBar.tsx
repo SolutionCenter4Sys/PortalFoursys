@@ -1,41 +1,62 @@
-import { Search, Maximize2, Minimize2, ChevronLeft, ChevronRight, BarChart2, X, Building2 } from 'lucide-react'
+import { Search, Maximize2, Minimize2, ChevronLeft, ChevronRight, BarChart2, X, Building2, Menu } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { getTrailById } from '../../data/trails'
 import { getClientById } from '../../data/clients'
 import type { AppSection } from '../../types'
 
 export function TopBar() {
-  const { state, navigate, openSearch, toggleFullscreen, toggleMetricsPanel, stopTrail, toggleClientSelector, activeNavigationItems } = useApp()
+  const {
+    state,
+    navigate,
+    openSearch,
+    toggleFullscreen,
+    toggleMetricsPanel,
+    stopTrail,
+    toggleClientSelector,
+    toggleMenu,
+    activeNavigationItems,
+  } = useApp()
 
-  const currentNav = activeNavigationItems.find(n => n.id === state.currentSection)
-  const currentIndex = activeNavigationItems.findIndex(n => n.id === state.currentSection)
-  const prevSection = activeNavigationItems[currentIndex - 1]
-  const nextSection = activeNavigationItems[currentIndex + 1]
-  const activeClient = state.activeClientId ? getClientById(state.activeClientId) : null
-
-  const currentTrail = state.currentTrailId ? getTrailById(state.currentTrailId) : null
+  const currentNav    = activeNavigationItems.find(n => n.id === state.currentSection)
+  const currentIndex  = activeNavigationItems.findIndex(n => n.id === state.currentSection)
+  const prevSection   = activeNavigationItems[currentIndex - 1]
+  const nextSection   = activeNavigationItems[currentIndex + 1]
+  const activeClient  = state.activeClientId ? getClientById(state.activeClientId) : null
+  const currentTrail  = state.currentTrailId ? getTrailById(state.currentTrailId) : null
   const trailProgress = currentTrail
     ? currentTrail.steps.filter(s => state.trailVisitedSections.includes(s.sectionId)).length
     : 0
 
   return (
     <header className={`
-      flex items-center gap-3 px-4 py-2.5 border-b border-white/[0.06] bg-foursys-dark-2/80 backdrop-blur-xl
-      transition-all duration-300
+      flex items-center gap-2 px-3 md:px-4 py-2.5 border-b border-white/[0.06]
+      bg-foursys-dark-2/80 backdrop-blur-xl transition-all duration-300 flex-shrink-0
       ${state.isFullscreen ? 'opacity-0 pointer-events-none' : 'opacity-100'}
     `}>
 
+      {/* Hambúrguer — visível apenas em mobile */}
+      <button
+        onClick={toggleMenu}
+        className="lg:hidden p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors flex-shrink-0"
+        title="Menu"
+        aria-label="Abrir menu"
+      >
+        <Menu size={18} />
+      </button>
+
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm min-w-0">
-        <span className="text-foursys-text-dim text-xs uppercase tracking-widest font-semibold">{currentNav?.category}</span>
-        <span className="text-foursys-text-dim/50">/</span>
-        <span className="text-foursys-text font-semibold truncate">{currentNav?.label}</span>
+      <div className="flex items-center gap-1.5 text-sm min-w-0 flex-1 lg:flex-none">
+        <span className="hidden sm:block text-foursys-text-dim text-xs uppercase tracking-widest font-semibold">
+          {currentNav?.category}
+        </span>
+        <span className="hidden sm:block text-foursys-text-dim/50">/</span>
+        <span className="text-foursys-text font-semibold truncate text-xs md:text-sm">{currentNav?.label}</span>
       </div>
 
       {/* Indicador de trilha ativa */}
       {currentTrail && (
         <div
-          className="hidden md:flex items-center gap-2 px-2.5 py-1 rounded-full border text-xs font-semibold"
+          className="hidden md:flex items-center gap-2 px-2.5 py-1 rounded-full border text-xs font-semibold flex-shrink-0"
           style={{
             borderColor: `${currentTrail.colorHex}50`,
             backgroundColor: `${currentTrail.colorHex}14`,
@@ -57,11 +78,11 @@ export function TopBar() {
 
       <div className="flex-1" />
 
-      {/* Indicador de cliente ativo */}
+      {/* Indicador de cliente ativo — apenas desktop */}
       {activeClient && (
         <button
           onClick={toggleClientSelector}
-          className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-semibold transition-all"
+          className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-semibold transition-all flex-shrink-0"
           style={{
             borderColor: `${activeClient.colors.primary}50`,
             backgroundColor: `${activeClient.colors.primary}14`,
@@ -73,7 +94,7 @@ export function TopBar() {
         </button>
       )}
 
-      {/* Progress dots */}
+      {/* Progress dots — apenas desktop */}
       <div className="hidden md:flex items-center gap-1">
         {activeNavigationItems.map((item, idx) => (
           <button
@@ -91,7 +112,8 @@ export function TopBar() {
         ))}
       </div>
 
-      <div className="w-px h-4 bg-white/10 mx-0.5" />
+      {/* Separador */}
+      <div className="w-px h-4 bg-white/10 mx-0.5 hidden sm:block" />
 
       {/* Prev / Next */}
       <button
@@ -136,10 +158,10 @@ export function TopBar() {
         <Search size={15} />
       </button>
 
-      {/* Analytics / Métricas */}
+      {/* Analytics — ocultar em mobile pequeno */}
       <button
         onClick={toggleMetricsPanel}
-        className={`p-1.5 rounded-lg transition-colors ${
+        className={`hidden sm:block p-1.5 rounded-lg transition-colors ${
           state.isMetricsPanelOpen
             ? 'bg-foursys-blue/15 text-foursys-blue'
             : 'hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text'
@@ -149,10 +171,10 @@ export function TopBar() {
         <BarChart2 size={15} />
       </button>
 
-      {/* Fullscreen */}
+      {/* Fullscreen — apenas desktop */}
       <button
         onClick={toggleFullscreen}
-        className="p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
+        className="hidden md:block p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
         title="Fullscreen (F11)"
       >
         {state.isFullscreen ? <Minimize2 size={15} /> : <Maximize2 size={15} />}
