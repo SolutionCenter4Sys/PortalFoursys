@@ -3,16 +3,11 @@ import { useCountUp } from '../../hooks/useCountUp'
 import { useApp } from '../../context/AppContext'
 import { SectionWrapper } from '../ui/SectionWrapper'
 
+import { serviceLines } from '../../data/services'
+
 // ─── Dados do dashboard ───────────────────────────────────────────────────────
 
-const services = [
-  'AI-Augmented Squad',
-  'IA First',
-  'Core Banking',
-  'Antifraudes',
-  'FourBlox',
-  'Cyber Security',
-]
+const openingHighlights = serviceLines.slice(0, 6).map(s => s.title)
 
 const allianceLogos = [
   { id: 'aws',        label: 'aws',        color: '#FF9900' },
@@ -150,7 +145,7 @@ export function SectionOpening() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="flex flex-col justify-center px-5 md:px-8 py-6 md:py-8 gap-4 md:gap-5 order-3"
           >
-            {services.map((service, i) => (
+            {openingHighlights.map((service, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, x: 20 }}
