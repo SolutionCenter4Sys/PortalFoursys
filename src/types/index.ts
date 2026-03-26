@@ -87,6 +87,12 @@ export interface TimelineItem {
   highlight?: boolean
 }
 
+export interface OfferDetail {
+  valueProposition: string
+  metrics: { value: string; label: string }[]
+  differentials: string[]
+}
+
 export interface ServiceLine {
   id: string
   title: string
@@ -96,6 +102,7 @@ export interface ServiceLine {
   icon: string
   color: string
   tags: string[]
+  offerDetail?: OfferDetail
 }
 
 export interface DeliveryModel {

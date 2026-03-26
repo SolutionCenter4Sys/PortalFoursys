@@ -9,7 +9,21 @@ export const serviceLines: ServiceLine[] = [
     target: 'Empresas que precisam sustentar aplicações críticas com eficiência, controle e menor volatilidade operacional.',
     icon: '🧩',
     color: 'from-indigo-500 to-indigo-700',
-    tags: ['AMS', 'Sustentação', 'SLAs', 'Governança', 'Operação Assistida']
+    tags: ['AMS', 'Sustentação', 'SLAs', 'Governança', 'Operação Assistida'],
+    offerDetail: {
+      valueProposition: 'Garantir continuidade operacional, previsibilidade de custo e evolução controlada, com equipes comprometidas com o resultado.',
+      metrics: [
+        { value: '-50%', label: 'Indisponibilidade Operacional' },
+        { value: '+30%', label: 'Eficiência de Times Internos' },
+        { value: '-20%', label: 'Redução de Backlog Técnico' },
+      ],
+      differentials: [
+        'Squads e especialistas orientados a resultados, não apenas alocação.',
+        'Governança clara, SLAs e métricas objetivas.',
+        'Aceleração com IA mantendo qualidade e segurança.',
+        'Forte experiência em ambientes críticos e regulados.',
+      ],
+    },
   },
   {
     id: 'modernizacao-legados',
@@ -19,7 +33,21 @@ export const serviceLines: ServiceLine[] = [
     target: 'Organizações com sistemas críticos que precisam modernizar com risco controlado e roadmap incremental.',
     icon: '🔄',
     color: 'from-violet-500 to-violet-700',
-    tags: ['Legado', 'Migração', 'Replatform', 'APIs', 'SDD']
+    tags: ['Legado', 'Migração', 'Replatform', 'APIs', 'SDD'],
+    offerDetail: {
+      valueProposition: 'Modernizar sistemas críticos sem interromper o negócio, reduzindo dívida técnica e criando base sólida para crescimento, inovação e escala.',
+      metrics: [
+        { value: '+30%', label: 'Redução de Custos' },
+        { value: '+70%', label: 'Aceleração Time to Market' },
+        { value: '+60%', label: 'Aumento da Segurança de Código' },
+      ],
+      differentials: [
+        'Abordagem incremental e pragmática, sem "big bang".',
+        'Uso de IA como acelerador real (análise, refatoração, testes e migração).',
+        'Forte experiência em ambientes complexos e regulados.',
+        'Integração entre modernização, arquitetura e operação (AMS).',
+      ],
+    },
   },
   {
     id: 'arquitetura-devops',
@@ -29,7 +57,21 @@ export const serviceLines: ServiceLine[] = [
     target: 'Times que precisam ganhar escala e previsibilidade com arquitetura robusta e automação de delivery.',
     icon: '🏗️',
     color: 'from-fuchsia-500 to-fuchsia-700',
-    tags: ['Arquitetura', 'DevOps', 'CI/CD', 'Observabilidade', 'Resiliência']
+    tags: ['Arquitetura', 'DevOps', 'CI/CD', 'Observabilidade', 'Resiliência'],
+    offerDetail: {
+      valueProposition: 'Construir plataformas resilientes, escaláveis e eficientes, alinhando arquitetura moderna, práticas DevOps e cloud ao ritmo real do negócio.',
+      metrics: [
+        { value: '+30%', label: 'Controle de Custos' },
+        { value: '-30%', label: 'Redução de Indisponibilidade' },
+        { value: '+40%', label: 'Frequência de Deploy' },
+      ],
+      differentials: [
+        'Arquitetura enterprise-grade, orientada a desempenho e resiliência.',
+        'DevOps com foco em previsibilidade, não só velocidade.',
+        'Cloud como meio, não como fim: custo, segurança e governança no centro.',
+        'Experiência comprovada em ambientes de missão crítica.',
+      ],
+    },
   },
   {
     id: 'integracoes-open-finance',
@@ -39,7 +81,21 @@ export const serviceLines: ServiceLine[] = [
     target: 'Empresas que dependem de integração entre plataformas, parceiros e ecossistemas regulados.',
     icon: '🔗',
     color: 'from-pink-500 to-pink-700',
-    tags: ['APIs', 'Open Finance', 'Integração', 'Microservices', 'Ecossistemas']
+    tags: ['APIs', 'Open Finance', 'Integração', 'Microservices', 'Ecossistemas'],
+    offerDetail: {
+      valueProposition: 'Conectar sistemas, parceiros e ecossistemas com segurança, escalabilidade e governança, viabilizando novos modelos de negócio.',
+      metrics: [
+        { value: '-30%', label: 'Redução de Falhas' },
+        { value: '5x', label: 'Aumento da Escalabilidade' },
+        { value: '+30%', label: 'Novos Negócios' },
+      ],
+      differentials: [
+        'Forte domínio de APIs, eventos e integrações complexas.',
+        'Experiência prática em Open Finance e ambientes regulados.',
+        'Governança de APIs desde o design até a operação.',
+        'Integração pensada como produto, não apenas como tecnologia.',
+      ],
+    },
   },
   {
     id: 'engenharia-software-ia',
@@ -49,7 +105,21 @@ export const serviceLines: ServiceLine[] = [
     target: 'Empresas que querem aumentar throughput de software com qualidade enterprise e uso pragmático de IA.',
     icon: '🧠',
     color: 'from-rose-500 to-rose-700',
-    tags: ['IA', 'Software Engineering', 'Discovery', 'Code Assist', 'Governança']
+    tags: ['IA', 'Software Engineering', 'Discovery', 'Code Assist', 'Governança'],
+    offerDetail: {
+      valueProposition: 'Entregar software crítico com mais velocidade, qualidade e controle, usando IA de forma responsável ao longo de todo o ciclo de vida.',
+      metrics: [
+        { value: '+50%', label: 'Produtividade dos Times' },
+        { value: '+35%', label: 'Aceleração do Desenvolvimento' },
+        { value: '-20%', label: 'Redução de Custo por Funcionalidade' },
+      ],
+      differentials: [
+        'IA integrada ao SDLC (análise, desenvolvimento, testes e manutenção).',
+        'Engenharia disciplinada: IA acelera, não substitui fundamentos.',
+        'Forte governança, rastreabilidade e qualidade.',
+        'Experiência em sistemas core e regulados.',
+      ],
+    },
   },
   {
     id: 'cloud-finops',
@@ -59,7 +129,21 @@ export const serviceLines: ServiceLine[] = [
     target: 'Empresas que já operam em nuvem e precisam melhorar previsibilidade, eficiência e governança financeira.',
     icon: '☁️',
     color: 'from-orange-400 to-orange-600',
-    tags: ['Cloud', 'FinOps', 'AWS', 'Azure', 'Otimização de Custos']
+    tags: ['Cloud', 'FinOps', 'AWS', 'Azure', 'Otimização de Custos'],
+    offerDetail: {
+      valueProposition: 'Equilibrar escala, custo e governança em ambientes cloud, transformando consumo em eficiência mensurável e previsível.',
+      metrics: [
+        { value: '-35%', label: 'Redução de Custo Cloud' },
+        { value: '+99.9%', label: 'Disponibilidade de Serviços' },
+        { value: '+40%', label: 'Visibilidade Financeira' },
+      ],
+      differentials: [
+        'FinOps como disciplina, não apenas ferramenta.',
+        'Otimização contínua com métricas reais de negócio.',
+        'Experiência multi-cloud (AWS, Azure, GCP).',
+        'Governança financeira integrada à operação técnica.',
+      ],
+    },
   },
   {
     id: 'dados-analytics',
@@ -69,7 +153,21 @@ export const serviceLines: ServiceLine[] = [
     target: 'Negócios que precisam elevar maturidade analítica e acelerar decisões com dados confiáveis.',
     icon: '📊',
     color: 'from-amber-400 to-amber-600',
-    tags: ['Analytics', 'BI', 'Dados', 'Databricks', 'Inteligência']
+    tags: ['Analytics', 'BI', 'Dados', 'Databricks', 'Inteligência'],
+    offerDetail: {
+      valueProposition: 'Transformar dados em decisões mais rápidas e confiáveis, construindo a base analítica que o negócio precisa para crescer com inteligência.',
+      metrics: [
+        { value: '+50%', label: 'Velocidade de Decisão' },
+        { value: '-40%', label: 'Redução de Custo Operacional' },
+        { value: '+80%', label: 'Dados Disponíveis para BI' },
+      ],
+      differentials: [
+        'Governança de dados integrada desde a origem.',
+        'Arquitetura moderna: data lake, lakehouse, streaming.',
+        'IA e analytics aplicados a cenários reais de negócio.',
+        'Parceria com Databricks, AWS e Azure.',
+      ],
+    },
   },
   {
     id: 'quality-testes-ia',
@@ -79,7 +177,21 @@ export const serviceLines: ServiceLine[] = [
     target: 'Times que precisam acelerar releases sem comprometer estabilidade, conformidade e experiência do usuário.',
     icon: '✅',
     color: 'from-yellow-400 to-yellow-600',
-    tags: ['QA', 'Testes', 'IA', 'Automação', 'Confiabilidade']
+    tags: ['QA', 'Testes', 'IA', 'Automação', 'Confiabilidade'],
+    offerDetail: {
+      valueProposition: 'Garantir qualidade como atributo estratégico, reduzindo riscos e aumentando a confiabilidade das entregas com IA e automação.',
+      metrics: [
+        { value: '-60%', label: 'Defeitos em Produção' },
+        { value: '+50%', label: 'Cobertura de Testes' },
+        { value: '+40%', label: 'Velocidade de Feedback' },
+      ],
+      differentials: [
+        'IA aplicada a geração, priorização e execução de testes.',
+        'Automação orientada a risco e impacto real.',
+        'Integração com esteiras CI/CD e DevOps.',
+        'Foco em resultado: menos defeitos, mais confiança.',
+      ],
+    },
   },
   {
     id: 'ciberseguranca',
@@ -89,7 +201,21 @@ export const serviceLines: ServiceLine[] = [
     target: 'Empresas com exigência elevada de segurança, compliance e gestão contínua de riscos digitais.',
     icon: '🛡️',
     color: 'from-lime-400 to-lime-600',
-    tags: ['Segurança', 'Risco', 'Compliance', 'LGPD', 'Proteção']
+    tags: ['Segurança', 'Risco', 'Compliance', 'LGPD', 'Proteção'],
+    offerDetail: {
+      valueProposition: 'Proteger ativos digitais, garantir conformidade e reduzir exposição a riscos com abordagem integrada e contínua.',
+      metrics: [
+        { value: '-80%', label: 'Redução de Vulnerabilidades' },
+        { value: '+70%', label: 'Conformidade Regulatória' },
+        { value: '-60%', label: 'Tempo de Resposta a Incidentes' },
+      ],
+      differentials: [
+        'Visão integrada: segurança como atributo, não como barreira.',
+        'Experiência em ambientes regulados (LGPD, Bacen, PCI-DSS).',
+        'Automação de controles e monitoramento contínuo.',
+        'Cultura de segurança embarcada nos times de desenvolvimento.',
+      ],
+    },
   },
   {
     id: 'hiperautomacao-rpa',
@@ -99,7 +225,21 @@ export const serviceLines: ServiceLine[] = [
     target: 'Áreas operacionais que precisam escalar processos com menos fricção e maior eficiência.',
     icon: '⚙️',
     color: 'from-cyan-300 to-cyan-500',
-    tags: ['RPA', 'Automação', 'Eficiência', 'Workflow', 'Produtividade']
+    tags: ['RPA', 'Automação', 'Eficiência', 'Workflow', 'Produtividade'],
+    offerDetail: {
+      valueProposition: 'Automatizar processos ponta a ponta, reduzindo esforço manual e aumentando produtividade com governança e controle.',
+      metrics: [
+        { value: '-70%', label: 'Redução de Esforço Manual' },
+        { value: '+50%', label: 'Produtividade Operacional' },
+        { value: '-40%', label: 'Tempo de Ciclo de Processos' },
+      ],
+      differentials: [
+        'Automação inteligente: RPA + IA + orquestração.',
+        'Foco em processos críticos com ROI mensurável.',
+        'Governança e monitoramento contínuo de robôs.',
+        'Experiência em escala enterprise com ambientes complexos.',
+      ],
+    },
   }
 ]
 

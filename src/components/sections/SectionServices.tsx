@@ -1,11 +1,11 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, Layers3, X } from 'lucide-react'
+import { ArrowRight, Layers3, X, CheckCircle2 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { serviceLines } from '../../data/services'
 import { SERVICE_ICONS, SERVICE_VISUALS, DEFAULT_VISUAL } from '../../data/serviceVisuals'
-import { useApp } from '../../context/AppContext'
+import type { ServiceLine } from '../../types'
 
 const CONTRACT_MODELS = [
   { title: 'Squads', desc: 'Times multidisciplinares integrados' },
@@ -116,11 +116,11 @@ function OrbitRing({
 
 function ServiceDetailPanel({
   service,
-  onNavigate,
+  onOfferDetail,
   compact,
 }: {
-  service: (typeof serviceLines)[number]
-  onNavigate: () => void
+  service: ServiceLine
+  onOfferDetail: (id: string) => void
   compact?: boolean
 }) {
   const visual = SERVICE_VISUALS[service.id] ?? DEFAULT_VISUAL
@@ -168,13 +168,15 @@ function ServiceDetailPanel({
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={onNavigate}
-        className="mt-4 flex items-center gap-2 text-sm font-semibold text-foursys-blue hover:text-foursys-cyan transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-blue rounded"
-      >
-        Ver modelos de entrega <ArrowRight size={16} />
-      </button>
+      {service.offerDetail && (
+        <button
+          type="button"
+          onClick={() => onOfferDetail(service.id)}
+          className="mt-4 flex items-center gap-2 text-sm font-semibold text-foursys-blue hover:text-foursys-cyan transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-blue rounded"
+        >
+          Detalhes da Oferta <ArrowRight size={16} />
+        </button>
+      )}
     </>
   )
 }
@@ -184,11 +186,11 @@ function ServiceDetailPanel({
 function MobileBottomSheet({
   service,
   onClose,
-  onNavigate,
+  onOfferDetail,
 }: {
-  service: (typeof serviceLines)[number]
+  service: ServiceLine
   onClose: () => void
-  onNavigate: () => void
+  onOfferDetail: (id: string) => void
 }) {
   const visual = SERVICE_VISUALS[service.id] ?? DEFAULT_VISUAL
   const sheetRef = useRef<HTMLDivElement>(null)
@@ -241,7 +243,148 @@ function MobileBottomSheet({
           <X size={16} className="text-white/70" />
         </button>
 
-        <ServiceDetailPanel service={service} onNavigate={onNavigate} compact />
+        <ServiceDetailPanel service={service} onOfferDetail={onOfferDetail} compact />
+      </motion.div>
+    </motion.div>
+  )
+}
+
+/* ── OfferDetailModal ──────────────────────────────────────────────────────── */
+
+function OfferDetailModal({
+  service,
+  onClose,
+}: {
+  service: ServiceLine
+  onClose: () => void
+}) {
+  const visual = SERVICE_VISUALS[service.id] ?? DEFAULT_VISUAL
+  const Icon = SERVICE_ICONS[service.id] ?? Layers3
+  const detail = service.offerDetail!
+  const modalRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    modalRef.current?.focus()
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', handleEsc)
+    return () => document.removeEventListener('keydown', handleEsc)
+  }, [onClose])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-[110] flex items-center justify-center p-4 md:p-6"
+      onClick={onClose}
+    >
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-md" />
+
+      <motion.div
+        ref={modalRef}
+        tabIndex={-1}
+        initial={{ opacity: 0, scale: 0.92, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 10 }}
+        transition={{ type: 'spring', damping: 26, stiffness: 300 }}
+        onClick={e => e.stopPropagation()}
+        className="relative w-full max-w-2xl rounded-[20px] border overflow-y-auto max-h-[90vh] outline-none"
+        style={{
+          borderColor: `${visual.glow}30`,
+          background: `linear-gradient(160deg, ${visual.glow}10 0%, #1a1b2e 18%, #14152a 100%)`,
+        }}
+        role="dialog"
+        aria-modal="true"
+        aria-label={`Detalhes da oferta: ${service.title}`}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-blue z-10"
+          aria-label="Fechar"
+        >
+          <X size={18} className="text-white/70" />
+        </button>
+
+        <div className="p-6 md:p-8">
+          {/* Header */}
+          <div className="flex items-center gap-3.5 mb-5">
+            <div
+              className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${visual.softBg}`}
+              style={{ boxShadow: `0 0 20px ${visual.glow}30` }}
+            >
+              <Icon size={22} className={visual.text} />
+            </div>
+            <div>
+              <h3 className="text-xl md:text-2xl font-black text-white leading-tight">
+                {service.title}
+              </h3>
+              <p className={`text-xs font-semibold mt-0.5 ${visual.text}`}>
+                Detalhes da Oferta
+              </p>
+            </div>
+          </div>
+
+          {/* Value Proposition */}
+          <div
+            className="rounded-xl border p-4 md:p-5 mb-5"
+            style={{
+              borderColor: `${visual.glow}20`,
+              background: `linear-gradient(135deg, ${visual.glow}08 0%, transparent 60%)`,
+            }}
+          >
+            <p className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-2">
+              Proposta de Valor
+            </p>
+            <p className="text-sm md:text-base text-white/90 leading-relaxed font-medium">
+              {detail.valueProposition}
+            </p>
+          </div>
+
+          {/* KPI Cards */}
+          <div className="grid grid-cols-3 gap-2.5 md:gap-3 mb-5">
+            {detail.metrics.map(metric => (
+              <div
+                key={metric.label}
+                className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-3 md:p-4 text-center"
+              >
+                <div
+                  className="text-2xl md:text-3xl font-black leading-none mb-1"
+                  style={{ color: visual.glow }}
+                >
+                  {metric.value}
+                </div>
+                <div className="text-[9px] md:text-[10px] text-foursys-text-muted uppercase tracking-wider font-semibold leading-tight">
+                  {metric.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Differentials */}
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+              Diferenciais
+            </p>
+            <ul className="space-y-2.5">
+              {detail.differentials.map((diff, i) => (
+                <li key={i} className="flex items-start gap-2.5">
+                  <CheckCircle2
+                    size={16}
+                    className="flex-shrink-0 mt-0.5"
+                    style={{ color: visual.glow }}
+                  />
+                  <span className="text-sm text-foursys-text-muted leading-relaxed">
+                    {diff}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </motion.div>
     </motion.div>
   )
@@ -250,9 +393,9 @@ function MobileBottomSheet({
 /* ── SectionServices ─────────────────────────────────────────────────────────── */
 
 export function SectionServices() {
-  const { navigate } = useApp()
   const [activeServiceId, setActiveServiceId] = useState(serviceLines[0]?.id ?? '')
   const [mobileSheetId, setMobileSheetId] = useState<string | null>(null)
+  const [offerDetailId, setOfferDetailId] = useState<string | null>(null)
   const activeService = serviceLines.find(s => s.id === activeServiceId) ?? serviceLines[0]
   const activeVisual = SERVICE_VISUALS[activeService.id] ?? DEFAULT_VISUAL
   const orbitRef = useRef<HTMLDivElement>(null)
@@ -261,14 +404,18 @@ export function SectionServices() {
     ? serviceLines.find(s => s.id === mobileSheetId) ?? null
     : null
 
+  const offerDetailService = offerDetailId
+    ? serviceLines.find(s => s.id === offerDetailId) ?? null
+    : null
+
   useEffect(() => {
-    if (mobileSheetId) {
+    if (mobileSheetId || offerDetailId) {
       document.body.style.overflow = 'hidden'
       return () => {
         document.body.style.overflow = ''
       }
     }
-  }, [mobileSheetId])
+  }, [mobileSheetId, offerDetailId])
 
   const handleKeyNav = useCallback((e: React.KeyboardEvent, currentId: string) => {
     const ids = serviceLines.map(s => s.id)
@@ -296,10 +443,10 @@ export function SectionServices() {
     buttons?.[nextIdx]?.focus()
   }, [])
 
-  const handleNavigateDelivery = useCallback(() => {
+  const handleOfferDetail = useCallback((id: string) => {
     setMobileSheetId(null)
-    navigate('delivery')
-  }, [navigate])
+    setOfferDetailId(id)
+  }, [])
 
   return (
     <SectionWrapper>
@@ -373,7 +520,7 @@ export function SectionServices() {
                 boxShadow: `0 0 40px ${activeVisual.glow}08`,
               }}
             >
-              <ServiceDetailPanel service={activeService} onNavigate={handleNavigateDelivery} />
+              <ServiceDetailPanel service={activeService} onOfferDetail={handleOfferDetail} />
             </motion.div>
           </AnimatePresence>
         </div>
@@ -423,17 +570,26 @@ export function SectionServices() {
         </div>
       </div>
 
-      {/* Mobile bottom sheet — rendered via portal to escape SectionWrapper transform */}
       {createPortal(
-        <AnimatePresence>
-          {mobileSheetService && (
-            <MobileBottomSheet
-              service={mobileSheetService}
-              onClose={() => setMobileSheetId(null)}
-              onNavigate={handleNavigateDelivery}
-            />
-          )}
-        </AnimatePresence>,
+        <>
+          <AnimatePresence>
+            {mobileSheetService && (
+              <MobileBottomSheet
+                service={mobileSheetService}
+                onClose={() => setMobileSheetId(null)}
+                onOfferDetail={handleOfferDetail}
+              />
+            )}
+          </AnimatePresence>
+          <AnimatePresence>
+            {offerDetailService && (
+              <OfferDetailModal
+                service={offerDetailService}
+                onClose={() => setOfferDetailId(null)}
+              />
+            )}
+          </AnimatePresence>
+        </>,
         document.body,
       )}
     </SectionWrapper>
