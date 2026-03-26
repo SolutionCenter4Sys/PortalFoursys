@@ -1,6 +1,7 @@
-import { useState, useCallback, useRef } from 'react'
-import { motion } from 'framer-motion'
-import { ArrowRight, Layers3 } from 'lucide-react'
+import { useState, useCallback, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowRight, Layers3, X } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { serviceLines } from '../../data/services'
 import { SERVICE_ICONS, SERVICE_VISUALS, DEFAULT_VISUAL } from '../../data/serviceVisuals'
@@ -13,9 +14,10 @@ const CONTRACT_MODELS = [
   { title: 'AMS', desc: 'Sustentação contínua com SLA' },
 ]
 
+/* ── helpers ─────────────────────────────────────────────────────────────────── */
+
 function getLabelPosition(angleDeg: number) {
   const norm = ((angleDeg % 360) + 360) % 360
-
   if (norm > 280 || norm < 70)
     return 'left-[calc(100%+10px)] top-1/2 -translate-y-1/2 text-left'
   if (norm >= 70 && norm <= 110)
@@ -24,6 +26,8 @@ function getLabelPosition(angleDeg: number) {
     return 'right-[calc(100%+10px)] top-1/2 -translate-y-1/2 text-right'
   return 'left-1/2 -translate-x-1/2 bottom-[calc(100%+6px)] text-center'
 }
+
+/* ── OrbitRing ────────────────────────────────────────────────────────────────── */
 
 function OrbitRing({
   activeId,
@@ -40,7 +44,7 @@ function OrbitRing({
 
   return (
     <div
-      className="relative aspect-square max-w-[440px] lg:max-w-[520px] mx-auto"
+      className="relative aspect-square max-w-[340px] lg:max-w-[420px] xl:max-w-[480px] mx-auto"
       role="radiogroup"
       aria-label="Linhas de serviço"
     >
@@ -53,8 +57,8 @@ function OrbitRing({
         style={{ boxShadow: `0 0 40px ${activeVisual.glow}15, inset 0 0 30px rgba(0,0,0,0.3)` }}
       >
         <div className="text-center px-2">
-          <div className="text-xl md:text-2xl lg:text-3xl font-black text-white leading-none">foursys</div>
-          <div className="text-[8px] md:text-[9px] uppercase tracking-[0.28em] text-foursys-text-dim mt-1">
+          <div className="text-lg md:text-xl lg:text-2xl font-black text-white leading-none">foursys</div>
+          <div className="text-[7px] md:text-[8px] uppercase tracking-[0.28em] text-foursys-text-dim mt-1">
             serviços & ofertas
           </div>
         </div>
@@ -84,7 +88,7 @@ function OrbitRing({
             style={{ top: `${y}%`, left: `${x}%` }}
           >
             <span
-              className={`w-11 h-11 lg:w-14 lg:h-14 rounded-full border flex items-center justify-center transition-all duration-300 ${visual.softBg} ${visual.border}`}
+              className={`w-10 h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 rounded-full border flex items-center justify-center transition-all duration-300 ${visual.softBg} ${visual.border}`}
               style={{
                 boxShadow: isActive
                   ? `0 0 0 5px ${visual.glow}30, 0 0 24px ${visual.glow}70`
@@ -92,10 +96,10 @@ function OrbitRing({
                 transform: isActive ? 'scale(1.18)' : 'scale(1)',
               }}
             >
-              <Icon size={18} className={visual.text} />
+              <Icon size={16} className={visual.text} />
             </span>
             <span
-              className={`absolute max-w-[100px] text-[9px] lg:text-[10px] font-semibold leading-tight pointer-events-none transition-colors duration-300 ${labelPos} ${
+              className={`absolute max-w-[90px] lg:max-w-[100px] text-[8px] lg:text-[9px] xl:text-[10px] font-semibold leading-tight pointer-events-none transition-colors duration-300 ${labelPos} ${
                 isActive ? 'text-white' : 'text-foursys-text-muted/70'
               }`}
             >
@@ -108,13 +112,163 @@ function OrbitRing({
   )
 }
 
+/* ── ServiceDetailPanel (shared: side panel + bottom sheet) ──────────────────── */
+
+function ServiceDetailPanel({
+  service,
+  onNavigate,
+  compact,
+}: {
+  service: (typeof serviceLines)[number]
+  onNavigate: () => void
+  compact?: boolean
+}) {
+  const visual = SERVICE_VISUALS[service.id] ?? DEFAULT_VISUAL
+  const Icon = SERVICE_ICONS[service.id] ?? Layers3
+
+  return (
+    <>
+      <div className="flex items-start gap-3 mb-3">
+        <div
+          className={`w-10 h-10 md:w-11 md:h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${visual.softBg}`}
+          style={{ boxShadow: `0 0 16px ${visual.glow}25` }}
+        >
+          <Icon size={18} className={visual.text} />
+        </div>
+        <div className="min-w-0">
+          <h3 className={`${compact ? 'text-lg' : 'text-lg lg:text-xl'} font-black text-white leading-tight`}>
+            {service.title}
+          </h3>
+          <p className={`text-xs font-semibold mt-0.5 transition-colors duration-300 ${visual.text}`}>
+            {service.subtitle}
+          </p>
+        </div>
+      </div>
+
+      <p className="text-foursys-text-muted text-sm leading-relaxed">
+        {service.problem}
+      </p>
+
+      <div className="mt-4 rounded-xl border border-white/[0.08] bg-white/[0.03] p-3.5">
+        <p className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-2">
+          Onde gera valor
+        </p>
+        <p className="text-xs text-foursys-text-muted leading-relaxed mb-3">
+          {service.target}
+        </p>
+        <div className="flex flex-wrap gap-1.5">
+          {service.tags.map(tag => (
+            <span
+              key={tag}
+              className={`px-2 py-0.5 rounded-full text-[10px] border transition-colors duration-300 bg-white/[0.02] ${visual.border} ${visual.text}`}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <button
+        type="button"
+        onClick={onNavigate}
+        className="mt-4 flex items-center gap-2 text-sm font-semibold text-foursys-blue hover:text-foursys-cyan transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-blue rounded"
+      >
+        Ver modelos de entrega <ArrowRight size={16} />
+      </button>
+    </>
+  )
+}
+
+/* ── MobileBottomSheet ───────────────────────────────────────────────────────── */
+
+function MobileBottomSheet({
+  service,
+  onClose,
+  onNavigate,
+}: {
+  service: (typeof serviceLines)[number]
+  onClose: () => void
+  onNavigate: () => void
+}) {
+  const visual = SERVICE_VISUALS[service.id] ?? DEFAULT_VISUAL
+  const sheetRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    sheetRef.current?.focus()
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', handleEsc)
+    return () => document.removeEventListener('keydown', handleEsc)
+  }, [onClose])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-[100] flex items-end justify-center"
+      onClick={onClose}
+    >
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+
+      <motion.div
+        ref={sheetRef}
+        tabIndex={-1}
+        initial={{ y: '100%' }}
+        animate={{ y: 0 }}
+        exit={{ y: '100%' }}
+        transition={{ type: 'spring', damping: 28, stiffness: 300 }}
+        onClick={e => e.stopPropagation()}
+        className="relative w-full max-w-lg rounded-t-[24px] border-t p-5 pb-8 max-h-[85vh] overflow-y-auto outline-none"
+        style={{
+          borderColor: `${visual.glow}35`,
+          background: `linear-gradient(180deg, ${visual.glow}12 0%, #1a1b2e 15%, #14152a 100%)`,
+        }}
+        role="dialog"
+        aria-modal="true"
+        aria-label={service.title}
+      >
+        <div className="w-10 h-1 rounded-full bg-white/20 mx-auto mb-4" />
+
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-blue"
+          aria-label="Fechar"
+        >
+          <X size={16} className="text-white/70" />
+        </button>
+
+        <ServiceDetailPanel service={service} onNavigate={onNavigate} compact />
+      </motion.div>
+    </motion.div>
+  )
+}
+
+/* ── SectionServices ─────────────────────────────────────────────────────────── */
+
 export function SectionServices() {
   const { navigate } = useApp()
   const [activeServiceId, setActiveServiceId] = useState(serviceLines[0]?.id ?? '')
+  const [mobileSheetId, setMobileSheetId] = useState<string | null>(null)
   const activeService = serviceLines.find(s => s.id === activeServiceId) ?? serviceLines[0]
   const activeVisual = SERVICE_VISUALS[activeService.id] ?? DEFAULT_VISUAL
-  const ActiveIcon = SERVICE_ICONS[activeService.id] ?? Layers3
   const orbitRef = useRef<HTMLDivElement>(null)
+
+  const mobileSheetService = mobileSheetId
+    ? serviceLines.find(s => s.id === mobileSheetId) ?? null
+    : null
+
+  useEffect(() => {
+    if (mobileSheetId) {
+      document.body.style.overflow = 'hidden'
+      return () => {
+        document.body.style.overflow = ''
+      }
+    }
+  }, [mobileSheetId])
 
   const handleKeyNav = useCallback((e: React.KeyboardEvent, currentId: string) => {
     const ids = serviceLines.map(s => s.id)
@@ -142,29 +296,35 @@ export function SectionServices() {
     buttons?.[nextIdx]?.focus()
   }, [])
 
+  const handleNavigateDelivery = useCallback(() => {
+    setMobileSheetId(null)
+    navigate('delivery')
+  }, [navigate])
+
   return (
     <SectionWrapper>
-      <div className="px-4 md:px-8 py-6 md:py-10 max-w-7xl mx-auto">
+      <div className="px-4 md:px-6 lg:px-8 py-4 md:py-6 max-w-7xl mx-auto">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mb-8 md:mb-10"
+          className="mb-6 md:mb-8"
         >
-          <div className="flex items-start justify-between flex-wrap gap-4">
-            <div className="max-w-3xl">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-blue mb-2">
+          <div className="flex items-start justify-between flex-wrap gap-3">
+            <div className="max-w-2xl">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-blue mb-1.5">
                 Nossos serviços e ofertas
               </p>
-              <h2 className="text-2xl md:text-4xl font-black text-white leading-none">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white leading-none">
                 Linhas de Serviço
               </h2>
-              <p className="text-foursys-text-muted mt-2 text-base max-w-2xl leading-relaxed">
-                Portfólio integrado de {serviceLines.length} frentes cobrindo toda a jornada tecnológica
-                — da sustentação à inovação com IA.
+              <p className="text-foursys-text-muted mt-1.5 text-sm md:text-base max-w-xl leading-relaxed">
+                Portfólio integrado de {serviceLines.length} frentes cobrindo toda a jornada
+                tecnológica — da sustentação à inovação com IA.
               </p>
             </div>
-            <div className="flex gap-3 flex-wrap">
+            <div className="flex gap-2 flex-wrap">
               {[
                 { value: `${serviceLines.length}`, label: 'frentes' },
                 { value: '360°', label: 'cobertura' },
@@ -172,34 +332,57 @@ export function SectionServices() {
               ].map(stat => (
                 <div
                   key={stat.label}
-                  className="text-center px-4 py-2 rounded-xl bg-foursys-surface/40 border border-white/[0.08]"
+                  className="text-center px-3 py-1.5 rounded-lg bg-foursys-surface/40 border border-white/[0.08]"
                 >
-                  <div className="text-lg font-black text-foursys-blue">{stat.value}</div>
-                  <div className="text-[10px] text-foursys-text-dim uppercase tracking-widest">{stat.label}</div>
+                  <div className="text-base font-black text-foursys-blue">{stat.value}</div>
+                  <div className="text-[9px] text-foursys-text-dim uppercase tracking-widest">{stat.label}</div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="mt-6 h-px bg-gradient-to-r from-foursys-blue/30 via-white/[0.06] to-transparent" />
+          <div className="mt-4 h-px bg-gradient-to-r from-foursys-blue/30 via-white/[0.06] to-transparent" />
         </motion.div>
 
-        {/* Orbit — md+ */}
-        <motion.div
-          ref={orbitRef}
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.1, duration: 0.5 }}
-          className="hidden md:block mb-8 px-12 lg:px-20"
-        >
-          <OrbitRing activeId={activeServiceId} onSelect={setActiveServiceId} onKeyNav={handleKeyNav} />
-        </motion.div>
+        {/* Desktop/Tablet: orbit + side panel */}
+        <div className="hidden md:grid md:grid-cols-[1.1fr_0.9fr] lg:grid-cols-[1.15fr_0.85fr] gap-4 lg:gap-6 items-center mb-6">
+          <motion.div
+            ref={orbitRef}
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className="px-4 lg:px-10 xl:px-14"
+          >
+            <OrbitRing
+              activeId={activeServiceId}
+              onSelect={setActiveServiceId}
+              onKeyNav={handleKeyNav}
+            />
+          </motion.div>
 
-        {/* Grid — mobile */}
-        <div className="grid grid-cols-2 gap-2.5 mb-6 md:hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeService.id}
+              initial={{ opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -16 }}
+              transition={{ duration: 0.25 }}
+              className="rounded-[24px] border p-5 lg:p-6 transition-[border-color,box-shadow] duration-500"
+              style={{
+                borderColor: `${activeVisual.glow}30`,
+                background: `linear-gradient(145deg, ${activeVisual.glow}08 0%, transparent 55%), rgba(255,255,255,0.015)`,
+                boxShadow: `0 0 40px ${activeVisual.glow}08`,
+              }}
+            >
+              <ServiceDetailPanel service={activeService} onNavigate={handleNavigateDelivery} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Mobile: grid cards */}
+        <div className="grid grid-cols-2 gap-2.5 mb-5 md:hidden">
           {serviceLines.map((service, index) => {
             const Icon = SERVICE_ICONS[service.id] ?? Layers3
             const visual = SERVICE_VISUALS[service.id] ?? DEFAULT_VISUAL
-            const isActive = activeService.id === service.id
 
             return (
               <motion.button
@@ -208,23 +391,14 @@ export function SectionServices() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.03 * index }}
-                onClick={() => setActiveServiceId(service.id)}
-                className={`text-left rounded-xl border p-3 transition-all duration-200 ${
-                  isActive
-                    ? `${visual.border} bg-white/[0.07]`
-                    : 'border-white/[0.08] bg-foursys-surface/25'
-                }`}
-                style={isActive ? { boxShadow: `0 0 16px ${visual.glow}20` } : undefined}
+                onClick={() => setMobileSheetId(service.id)}
+                className="text-left rounded-xl border border-white/[0.08] bg-foursys-surface/25 p-3 transition-all duration-200 active:scale-[0.97]"
               >
                 <div className="flex items-center gap-2">
-                  <div
-                    className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${visual.softBg}`}
-                  >
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${visual.softBg}`}>
                     <Icon size={14} className={visual.text} />
                   </div>
-                  <span
-                    className={`text-[11px] font-semibold leading-snug ${isActive ? 'text-white' : 'text-foursys-text-muted'}`}
-                  >
+                  <span className="text-[11px] font-semibold text-foursys-text-muted leading-snug">
                     {service.title}
                   </span>
                 </div>
@@ -233,88 +407,35 @@ export function SectionServices() {
           })}
         </div>
 
-        {/* Detail panel — harmonized with active service color */}
-        <motion.div
-          key={activeService.id}
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="rounded-[24px] md:rounded-[28px] border p-5 md:p-8 mb-6 transition-[border-color,box-shadow] duration-500"
-          style={{
-            borderColor: `${activeVisual.glow}30`,
-            background: `linear-gradient(145deg, ${activeVisual.glow}06 0%, transparent 50%), rgba(255,255,255,0.015)`,
-            boxShadow: `0 0 40px ${activeVisual.glow}08`,
-          }}
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-6">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div
-                  className={`w-11 h-11 md:w-12 md:h-12 rounded-2xl flex items-center justify-center transition-colors duration-300 ${activeVisual.softBg}`}
-                  style={{ boxShadow: `0 0 20px ${activeVisual.glow}25` }}
-                >
-                  <ActiveIcon size={20} className={activeVisual.text} />
-                </div>
-                <div>
-                  <h3 className="text-lg md:text-2xl font-black text-white leading-tight">
-                    {activeService.title}
-                  </h3>
-                  <p className={`text-xs md:text-sm font-semibold mt-0.5 transition-colors duration-300 ${activeVisual.text}`}>
-                    {activeService.subtitle}
-                  </p>
-                </div>
-              </div>
-
-              <p className="text-foursys-text-muted text-sm md:text-base leading-relaxed mt-3 max-w-3xl">
-                {activeService.problem}
-              </p>
-
-              <button
-                type="button"
-                onClick={() => navigate('delivery')}
-                className="mt-5 flex items-center gap-2 text-sm font-semibold text-foursys-blue hover:text-foursys-cyan transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-blue rounded"
-              >
-                Ver modelos de entrega <ArrowRight size={16} />
-              </button>
-            </div>
-
-            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-4 md:p-5">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-                Onde gera valor
-              </p>
-              <p className="text-sm text-foursys-text-muted leading-relaxed mb-4">
-                {activeService.target}
-              </p>
-
-              <div className="flex flex-wrap gap-1.5">
-                {activeService.tags.map(tag => (
-                  <span
-                    key={tag}
-                    className={`px-2 py-0.5 rounded-full text-[10px] border transition-colors duration-300 bg-white/[0.02] ${activeVisual.border} ${activeVisual.text}`}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
         {/* Contract models */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {CONTRACT_MODELS.map(model => (
             <div
               key={model.title}
-              className="text-center px-3 py-3 rounded-xl bg-foursys-surface/20 border border-white/[0.06]"
+              className="text-center px-2 py-2.5 rounded-lg bg-foursys-surface/20 border border-white/[0.06]"
             >
-              <div className="text-[11px] font-bold text-foursys-text uppercase tracking-widest">
+              <div className="text-[10px] font-bold text-foursys-text uppercase tracking-widest">
                 {model.title}
               </div>
-              <div className="text-[10px] text-foursys-text-dim mt-0.5">{model.desc}</div>
+              <div className="text-[9px] text-foursys-text-dim mt-0.5">{model.desc}</div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Mobile bottom sheet — rendered via portal to escape SectionWrapper transform */}
+      {createPortal(
+        <AnimatePresence>
+          {mobileSheetService && (
+            <MobileBottomSheet
+              service={mobileSheetService}
+              onClose={() => setMobileSheetId(null)}
+              onNavigate={handleNavigateDelivery}
+            />
+          )}
+        </AnimatePresence>,
+        document.body,
+      )}
     </SectionWrapper>
   )
 }
