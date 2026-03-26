@@ -2,305 +2,356 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   ArrowRight,
-  GitMerge,
   BarChart3,
-  Monitor,
-  ShieldCheck,
-  CheckCircle,
+  BrainCircuit,
+  CheckCircle2,
   CloudCog,
+  GitMerge,
   Layers3,
-  Package,
-  Zap,
+  Network,
+  ShieldCheck,
   Users,
-  Clock,
+  Workflow,
+  type LucideIcon,
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { serviceLines } from '../../data/services'
 
-// ─── Ícones Lucide por serviço ────────────────────────────────────────────────
-
-const SERVICE_ICONS: Record<string, React.ElementType> = {
-  'modernizacao':     GitMerge,
-  'engenharia-dados': BarChart3,
-  'desenvolvimento':  Monitor,
-  'cyber-security':   ShieldCheck,
-  'quality-assurance':CheckCircle,
-  'cloud-devops':     CloudCog,
-  'salesforce':       Layers3,
-  'fourblock':        Package,
+const SERVICE_ICONS: Record<string, LucideIcon> = {
+  'outsourcing-sustentacao': Users,
+  'modernizacao-legados': GitMerge,
+  'arquitetura-devops': Layers3,
+  'integracoes-open-finance': Network,
+  'engenharia-software-ia': BrainCircuit,
+  'cloud-finops': CloudCog,
+  'dados-analytics': BarChart3,
+  'quality-testes-ia': CheckCircle2,
+  'ciberseguranca': ShieldCheck,
+  'hiperautomacao-rpa': Workflow,
 }
 
-// ─── Cores de destaque por serviço ────────────────────────────────────────────
-
-const SERVICE_ACCENT: Record<string, string> = {
-  'modernizacao':     'from-blue-500/20 to-blue-600/5  border-blue-500/25  text-blue-400',
-  'engenharia-dados': 'from-violet-500/20 to-violet-600/5 border-violet-500/25 text-violet-400',
-  'desenvolvimento':  'from-cyan-500/20 to-cyan-600/5  border-cyan-500/25   text-cyan-400',
-  'cyber-security':   'from-red-500/20 to-red-600/5    border-red-500/25    text-red-400',
-  'quality-assurance':'from-green-500/20 to-green-600/5 border-green-500/25 text-green-400',
-  'cloud-devops':     'from-orange-500/20 to-orange-600/5 border-orange-500/25 text-orange-400',
-  'salesforce':       'from-sky-500/20 to-sky-600/5    border-sky-500/25    text-sky-400',
-  'fourblock':        'from-foursys-blue/20 to-foursys-blue/5 border-foursys-blue/25 text-foursys-blue',
+const SERVICE_VISUALS: Record<string, { text: string; softBg: string; border: string; glow: string }> = {
+  'outsourcing-sustentacao': { text: 'text-indigo-300', softBg: 'bg-indigo-400/15', border: 'border-indigo-400/35', glow: '#31458A' },
+  'modernizacao-legados': { text: 'text-violet-300', softBg: 'bg-violet-400/15', border: 'border-violet-400/35', glow: '#7C3AED' },
+  'arquitetura-devops': { text: 'text-fuchsia-300', softBg: 'bg-fuchsia-400/15', border: 'border-fuchsia-400/35', glow: '#B832C8' },
+  'integracoes-open-finance': { text: 'text-pink-300', softBg: 'bg-pink-400/15', border: 'border-pink-400/35', glow: '#DB2777' },
+  'engenharia-software-ia': { text: 'text-rose-300', softBg: 'bg-rose-400/15', border: 'border-rose-400/35', glow: '#F43F5E' },
+  'cloud-finops': { text: 'text-orange-300', softBg: 'bg-orange-400/15', border: 'border-orange-400/35', glow: '#FB923C' },
+  'dados-analytics': { text: 'text-amber-300', softBg: 'bg-amber-400/15', border: 'border-amber-400/35', glow: '#F59E0B' },
+  'quality-testes-ia': { text: 'text-yellow-200', softBg: 'bg-yellow-300/15', border: 'border-yellow-300/35', glow: '#FACC15' },
+  'ciberseguranca': { text: 'text-lime-200', softBg: 'bg-lime-300/15', border: 'border-lime-300/35', glow: '#A3E635' },
+  'hiperautomacao-rpa': { text: 'text-cyan-200', softBg: 'bg-cyan-300/15', border: 'border-cyan-300/35', glow: '#67E8F9' },
 }
 
-const SERVICE_ICON_BG: Record<string, string> = {
-  'modernizacao':     'bg-blue-500/15 text-blue-400',
-  'engenharia-dados': 'bg-violet-500/15 text-violet-400',
-  'desenvolvimento':  'bg-cyan-500/15 text-cyan-400',
-  'cyber-security':   'bg-red-500/15 text-red-400',
-  'quality-assurance':'bg-green-500/15 text-green-400',
-  'cloud-devops':     'bg-orange-500/15 text-orange-400',
-  'salesforce':       'bg-sky-500/15 text-sky-400',
-  'fourblock':        'bg-foursys-blue/15 text-foursys-blue',
+const ORBIT_POSITIONS: Record<string, { top: string; left: string; align: string }> = {
+  'outsourcing-sustentacao': { top: '19%', left: '22%', align: 'items-end text-right' },
+  'modernizacao-legados': { top: '8%', left: '50%', align: 'items-center text-center' },
+  'arquitetura-devops': { top: '19%', left: '78%', align: 'items-start text-left' },
+  'integracoes-open-finance': { top: '40%', left: '91%', align: 'items-start text-left' },
+  'engenharia-software-ia': { top: '62%', left: '86%', align: 'items-start text-left' },
+  'cloud-finops': { top: '82%', left: '74%', align: 'items-start text-left' },
+  'dados-analytics': { top: '92%', left: '50%', align: 'items-center text-center' },
+  'quality-testes-ia': { top: '82%', left: '26%', align: 'items-end text-right' },
+  'ciberseguranca': { top: '62%', left: '14%', align: 'items-end text-right' },
+  'hiperautomacao-rpa': { top: '40%', left: '9%', align: 'items-end text-right' },
 }
 
-// ─── Categorias de filtro ──────────────────────────────────────────────────────
+const CONTRACT_MODELS = [
+  'Modelos de Contratação Flexíveis',
+  'Squads',
+  'Projetos (Escopo Fechado)',
+  'Alocação',
+  'AMS',
+]
 
-const FILTERS = ['Todos', 'Core', 'IA & Dados', 'Segurança', 'Agilidade', 'Inovação']
+function OrbitNode({
+  service,
+  active,
+  onSelect,
+}: {
+  service: typeof serviceLines[number]
+  active: boolean
+  onSelect: (id: string) => void
+}) {
+  const Icon = SERVICE_ICONS[service.id] ?? Layers3
+  const visual = SERVICE_VISUALS[service.id]
+  const position = ORBIT_POSITIONS[service.id]
 
-const SERVICE_FILTER: Record<string, string> = {
-  'modernizacao':     'Core',
-  'engenharia-dados': 'IA & Dados',
-  'desenvolvimento':  'Core',
-  'cyber-security':   'Segurança',
-  'quality-assurance':'Agilidade',
-  'cloud-devops':     'Core',
-  'salesforce':       'Core',
-  'fourblock':        'Inovação',
-}
-
-// ─── Featured card (hero do AI-Augmented Squad) ───────────────────────────────
-
-function FeaturedServiceCard() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.1 }}
-      className="col-span-full relative overflow-hidden rounded-2xl border border-foursys-blue/20 bg-gradient-to-br from-foursys-blue/10 to-transparent group cursor-pointer"
+    <button
+      type="button"
+      onClick={() => onSelect(service.id)}
+      className={`absolute -translate-x-1/2 -translate-y-1/2 flex flex-col gap-2 ${position.align}`}
+      style={{ top: position.top, left: position.left }}
     >
-      <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] h-full">
-        {/* Conteúdo */}
-        <div className="p-5 md:p-8 flex flex-col justify-between">
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <span className="px-2.5 py-1 rounded-full bg-foursys-blue/20 border border-foursys-blue/30 text-foursys-blue text-[11px] font-bold tracking-widest uppercase">
-                Flagship
-              </span>
-              <span className="px-2.5 py-1 rounded-full bg-white/8 border border-white/10 text-foursys-text-dim text-[11px] font-semibold tracking-wide uppercase">
-                AI-Augmented
-              </span>
-            </div>
-            <h3 className="text-3xl font-black text-white mb-3 leading-tight">
-              AI-Augmented Squad
-            </h3>
-            <p className="text-foursys-text-muted text-base leading-relaxed max-w-xl">
-              Squads humanos amplificados por mais de 20 agentes de IA especializados.
-              Entrega 3–6× mais rápida com governança e rastreabilidade em cada fase — da descoberta ao deploy.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-4 md:gap-8 mt-4 md:mt-6">
-            <div className="flex items-center gap-2">
-              <Zap size={14} className="text-foursys-blue" />
-              <span className="text-sm text-foursys-text-muted">SDD Framework</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Users size={14} className="text-foursys-blue" />
-              <span className="text-sm text-foursys-text-muted">+20 Agentes IA</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock size={14} className="text-foursys-blue" />
-              <span className="text-sm text-foursys-text-muted">Valor em semanas</span>
-            </div>
-            <div className="ml-auto flex items-center gap-1.5 text-foursys-blue text-sm font-semibold group-hover:gap-3 transition-all">
-              Saiba mais <ArrowRight size={15} />
-            </div>
-          </div>
-        </div>
-
-        {/* Imagem */}
-        <div className="relative hidden sm:block sm:w-[300px] md:w-[480px] overflow-hidden">
-          <img
-            src="/images/foursys-human-ai-squad-v10.png"
-            alt="AI-Augmented Squad"
-            className="h-full w-full object-cover object-center opacity-90 group-hover:scale-105 transition-transform duration-700"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-foursys-dark-2/90 via-foursys-dark-2/20 to-transparent" />
-        </div>
-      </div>
-    </motion.div>
+      <span className={`hidden xl:block max-w-[180px] text-[11px] leading-tight ${active ? 'text-white' : 'text-foursys-text-muted'}`}>
+        <strong className="block text-sm">{service.title}</strong>
+        <span>{service.subtitle}</span>
+      </span>
+      <span
+        className={`w-14 h-14 rounded-full border flex items-center justify-center transition-all duration-200 ${visual.softBg} ${visual.border}`}
+        style={{
+          boxShadow: active ? `0 0 0 8px ${visual.glow}22, 0 0 24px ${visual.glow}88` : `0 0 14px ${visual.glow}55`,
+        }}
+      >
+        <Icon size={22} className={visual.text} />
+      </span>
+    </button>
   )
 }
 
-// ─── Card de serviço ──────────────────────────────────────────────────────────
-
-function ServiceCard({
+function CompactServiceCard({
   service,
   index,
+  active,
+  onSelect,
 }: {
   service: typeof serviceLines[number]
   index: number
+  active: boolean
+  onSelect: (id: string) => void
 }) {
-  const Icon     = SERVICE_ICONS[service.id] ?? Layers3
-  const accent   = SERVICE_ACCENT[service.id] ?? 'from-white/5 to-white/0 border-white/10 text-white'
-  const iconBg   = SERVICE_ICON_BG[service.id] ?? 'bg-white/10 text-white'
-  const [, , textCls] = accent.split(' ')
+  const Icon = SERVICE_ICONS[service.id] ?? Layers3
+  const visual = SERVICE_VISUALS[service.id]
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 24 }}
+    <motion.button
+      type="button"
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: 0.1 + index * 0.06 }}
-      className={`group relative rounded-2xl border bg-gradient-to-b ${accent} overflow-hidden hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col`}
+      transition={{ duration: 0.35, delay: 0.08 + index * 0.04 }}
+      onClick={() => onSelect(service.id)}
+      className={`text-left rounded-2xl border p-4 transition-all duration-200 hover:-translate-y-1 ${
+        active ? `${visual.border} bg-white/[0.06]` : 'border-white/[0.08] bg-foursys-surface/25'
+      }`}
     >
-      {/* Linha de destaque superior */}
-      <div className={`h-px w-full bg-gradient-to-r ${accent.split(' ')[0].replace('/20', '/60')} from-current`} />
-
-      <div className="p-6 flex flex-col flex-1">
-        {/* Ícone + badge */}
-        <div className="flex items-start justify-between mb-4">
-          <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${iconBg}`}>
-            <Icon size={18} strokeWidth={1.5} />
-          </div>
-          <span className={`text-[10px] font-bold uppercase tracking-widest ${textCls} opacity-70`}>
-            {SERVICE_FILTER[service.id]}
-          </span>
+      <div className="flex items-start gap-3">
+        <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${visual.softBg}`}>
+          <Icon size={18} className={visual.text} />
         </div>
-
-        {/* Título */}
-        <h3 className="font-bold text-white text-[15px] leading-snug mb-1">
-          {service.title}
-        </h3>
-        <p className={`text-xs font-medium mb-3 ${textCls}`}>{service.subtitle}</p>
-
-        {/* Problema */}
-        <p className="text-sm text-foursys-text-muted leading-relaxed flex-1">
-          {service.problem}
-        </p>
-
-        {/* Para quem */}
-        <div className="mt-4 pt-4 border-t border-white/[0.06]">
-          <p className="text-[11px] text-foursys-text-dim leading-snug">{service.target}</p>
-        </div>
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-1.5 mt-3">
-          {service.tags.slice(0, 4).map(tag => (
-            <span
-              key={tag}
-              className="text-[10px] px-2 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.08] text-foursys-text-dim"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        {/* CTA hover */}
-        <div className={`mt-3 flex items-center gap-1 text-xs font-semibold ${textCls} opacity-0 group-hover:opacity-100 transition-opacity`}>
-          Ver detalhes <ArrowRight size={12} />
+        <div className="min-w-0">
+          <h3 className="text-sm font-bold text-white leading-snug">{service.title}</h3>
+          <p className={`text-xs mt-1 ${visual.text}`}>{service.subtitle}</p>
         </div>
       </div>
-    </motion.article>
+    </motion.button>
   )
 }
-
-// ─── Painel de imagem do Squad slide ─────────────────────────────────────────
-
-function SquadSlidePanel() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.97 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6, delay: 0.3 }}
-      className="col-span-full mt-2 rounded-2xl overflow-hidden border border-white/[0.07]"
-    >
-      <div className="relative">
-        <img
-          src="/images/foursys_ai_augmented_squad_slide_v3.png"
-          alt="AI-Augmented Squad — Problemas x Solução"
-          className="w-full object-cover"
-          style={{ maxHeight: '420px', objectPosition: 'center top' }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-foursys-dark-2/80 via-transparent to-transparent" />
-        <div className="absolute bottom-6 left-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-foursys-blue mb-1">Metodologia</p>
-          <h4 className="text-xl font-black text-white">THE SOLUTION: Foursys AI-Augmented Squad</h4>
-          <p className="text-sm text-foursys-text-muted mt-1">SDD Framework — Metodologia completa com +20 agentes especializados</p>
-        </div>
-      </div>
-    </motion.div>
-  )
-}
-
-// ─── Componente principal ─────────────────────────────────────────────────────
 
 export function SectionServices() {
-  const [filter, setFilter] = useState('Todos')
-
-  const filtered = filter === 'Todos'
-    ? serviceLines
-    : serviceLines.filter(s => SERVICE_FILTER[s.id] === filter)
+  const [activeServiceId, setActiveServiceId] = useState(serviceLines[0]?.id ?? '')
+  const activeService = serviceLines.find(service => service.id === activeServiceId) ?? serviceLines[0]
+  const activeVisual = SERVICE_VISUALS[activeService.id] ?? SERVICE_VISUALS['modernizacao-legados']
+  const ActiveIcon = SERVICE_ICONS[activeService.id] ?? Layers3
 
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-6 md:py-10 max-w-7xl mx-auto">
-
-        {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
           className="mb-10"
         >
-          <div className="flex items-end justify-between flex-wrap gap-4">
-            <div>
+          <div className="flex items-start justify-between flex-wrap gap-4">
+            <div className="max-w-3xl">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-blue mb-2">
-                O que fazemos
+                Nossos serviços e ofertas
               </p>
               <h2 className="text-2xl md:text-4xl font-black text-white leading-none">
                 Linhas de Serviço
               </h2>
-              <p className="text-foursys-text-muted mt-2 text-base max-w-lg leading-relaxed">
-                8 capacidades cobrindo toda a jornada — do core banking legado à IA em produção.
+              <p className="text-foursys-text-muted mt-2 text-base max-w-2xl leading-relaxed">
+                Estruturamos a seção com base no slide de referência, cobrindo as {serviceLines.length} frentes apresentadas em um portfólio integrado de evolução tecnológica.
               </p>
             </div>
-
-            {/* Filtros */}
-            <div className="flex flex-wrap gap-2">
-              {FILTERS.map(f => (
-                <button
-                  key={f}
-                  onClick={() => setFilter(f)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 ${
-                    filter === f
-                      ? 'bg-foursys-blue/20 border border-foursys-blue/40 text-foursys-blue'
-                      : 'bg-white/[0.04] border border-white/[0.08] text-foursys-text-dim hover:text-foursys-text-muted hover:border-white/20'
-                  }`}
-                >
-                  {f}
-                </button>
+            <div className="flex gap-3 flex-wrap">
+              {[
+                { value: `${serviceLines.length}`, label: 'frentes' },
+                { value: '360°', label: 'cobertura' },
+                { value: 'B2B', label: 'execução enterprise' },
+              ].map(stat => (
+                <div key={stat.label} className="text-center px-4 py-2 rounded-xl bg-foursys-surface/40 border border-white/[0.08]">
+                  <div className="text-lg font-black text-foursys-blue">{stat.value}</div>
+                  <div className="text-[10px] text-foursys-text-dim uppercase tracking-widest">{stat.label}</div>
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Divisor */}
           <div className="mt-6 h-px bg-gradient-to-r from-foursys-blue/30 via-white/[0.06] to-transparent" />
         </motion.div>
 
-        {/* ── Grid ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {/* Featured card apenas no filtro "Todos" */}
-          {filter === 'Todos' && <FeaturedServiceCard />}
+        <div className="grid grid-cols-1 xl:grid-cols-[1fr_1.15fr] gap-6 items-start mb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="rounded-[28px] border border-white/[0.08] bg-white/[0.02] p-6 md:p-8"
+          >
+            <p className="text-foursys-text-muted text-lg md:text-xl leading-relaxed max-w-md">
+              Visão estratégica com execução técnica disciplinada e foco em resultados.
+            </p>
+            <p className="text-foursys-text-muted text-lg md:text-xl leading-relaxed max-w-md mt-4">
+              IA aplicada com pragmatismo, governança e retorno mensurável.
+            </p>
 
-          {filtered.map((service, i) => (
-            <ServiceCard key={service.id} service={service} index={i} />
-          ))}
+            <div className="mt-10">
+              <h3 className="text-3xl md:text-5xl font-light leading-tight text-white max-w-xl">
+                Tecnologia bem feita respeita o legado,{' '}
+                <span className="text-foursys-blue">organiza o presente</span>{' '}
+                e constrói o futuro.
+              </h3>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {serviceLines.slice(0, 4).map(service => (
+                <button
+                  key={service.id}
+                  type="button"
+                  onClick={() => setActiveServiceId(service.id)}
+                  className={`rounded-2xl border px-4 py-3 text-left transition-all ${
+                    activeService.id === service.id
+                      ? `${SERVICE_VISUALS[service.id].border} bg-white/[0.06]`
+                      : 'border-white/[0.08] bg-foursys-surface/20'
+                  }`}
+                >
+                  <div className={`text-xs font-bold uppercase tracking-widest ${SERVICE_VISUALS[service.id].text}`}>
+                    foco
+                  </div>
+                  <div className="text-sm font-semibold text-white mt-1">{service.title}</div>
+                </button>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.16 }}
+            className="rounded-[28px] border border-white/[0.08] bg-white/[0.02] p-4 md:p-6"
+          >
+            <div className="relative hidden md:block aspect-square max-w-[620px] mx-auto">
+              <div className="absolute inset-[12%] rounded-full border border-white/10 bg-white/[0.02]" />
+              <div className="absolute inset-[26%] rounded-full border border-white/10 bg-white/[0.03]" />
+              <div className="absolute inset-[36%] rounded-full border border-white/10 bg-foursys-surface/40 shadow-[0_0_60px_rgba(0,0,0,0.35)]" />
+              <div className="absolute inset-[39%] rounded-full bg-[#23243D] border border-white/10 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="text-3xl md:text-4xl font-black text-white">foursys</div>
+                  <div className="text-[10px] uppercase tracking-[0.28em] text-foursys-text-dim mt-1">serviços & ofertas</div>
+                </div>
+              </div>
+
+              {serviceLines.map(service => (
+                <OrbitNode
+                  key={service.id}
+                  service={service}
+                  active={activeService.id === service.id}
+                  onSelect={setActiveServiceId}
+                />
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:hidden">
+              {serviceLines.map((service, index) => (
+                <CompactServiceCard
+                  key={service.id}
+                  service={service}
+                  index={index}
+                  active={activeService.id === service.id}
+                  onSelect={setActiveServiceId}
+                />
+              ))}
+            </div>
+
+            <div className="mt-5 flex flex-wrap justify-between gap-y-2 border-t border-white/[0.08] pt-4">
+              {CONTRACT_MODELS.map((model, index) => (
+                <div key={model} className="flex items-center text-center">
+                  <div className="px-3 md:px-5">
+                    <span className="text-[11px] md:text-xs uppercase tracking-[0.24em] text-foursys-text-muted">
+                      {model}
+                    </span>
+                  </div>
+                  {index < CONTRACT_MODELS.length - 1 && (
+                    <div className="hidden md:block h-10 w-px bg-white/[0.12]" />
+                  )}
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
 
-        {/* ── Slide metodologia ── */}
-        {filter === 'Todos' && <SquadSlidePanel />}
+        <motion.div
+          key={activeService.id}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
+          className="rounded-[28px] border border-white/[0.08] bg-foursys-surface/25 p-6 md:p-7 mb-8"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-6">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${activeVisual.softBg}`}>
+                  <ActiveIcon size={22} className={activeVisual.text} />
+                </div>
+                <div>
+                  <div className={`text-[10px] font-bold uppercase tracking-[0.22em] ${activeVisual.text}`}>
+                    Serviço em destaque
+                  </div>
+                  <h3 className="text-2xl font-black text-white mt-1">{activeService.title}</h3>
+                </div>
+              </div>
 
+              <p className={`text-sm font-semibold ${activeVisual.text}`}>{activeService.subtitle}</p>
+              <p className="text-foursys-text-muted text-base leading-relaxed mt-3 max-w-3xl">
+                {activeService.problem}
+              </p>
+
+              <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-foursys-blue">
+                Explore a oferta <ArrowRight size={16} />
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+                Onde gera valor
+              </p>
+              <p className="text-sm text-foursys-text-muted leading-relaxed mb-4">{activeService.target}</p>
+
+              <div className="flex flex-wrap gap-2">
+                {activeService.tags.map(tag => (
+                  <span
+                    key={tag}
+                    className={`px-2.5 py-1 rounded-full text-[10px] border ${activeVisual.border} ${activeVisual.text} bg-white/[0.02]`}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        <div className="mb-4">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-blue mb-2">
+            Portfólio completo
+          </p>
+          <h3 className="text-xl md:text-2xl font-black text-white">
+            Todas as frentes presentes no slide
+          </h3>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4">
+          {serviceLines.map((service, index) => (
+            <CompactServiceCard
+              key={service.id}
+              service={service}
+              index={index}
+              active={activeService.id === service.id}
+              onSelect={setActiveServiceId}
+            />
+          ))}
+        </div>
       </div>
     </SectionWrapper>
   )

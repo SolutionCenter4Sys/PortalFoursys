@@ -2,84 +2,104 @@ import type { ServiceLine, DeliveryModel } from '../types'
 
 export const serviceLines: ServiceLine[] = [
   {
-    id: 'modernizacao',
-    title: 'Modernização de Sistemas',
-    subtitle: 'Do legado ao futuro sem big-bang',
-    problem: 'Sistemas legados que freiam a inovação e geram risco operacional',
-    target: 'Bancos, seguradoras e empresas com sistemas core críticos',
+    id: 'outsourcing-sustentacao',
+    title: 'Outsourcing & Sustentação',
+    subtitle: 'Continuidade operacional, previsibilidade de custo e governança',
+    problem: 'Assumimos a operação e evolução de ambientes críticos com SLAs, governança e visibilidade executiva para reduzir risco e dar estabilidade ao negócio.',
+    target: 'Empresas que precisam sustentar aplicações críticas com eficiência, controle e menor volatilidade operacional.',
+    icon: '🧩',
+    color: 'from-indigo-500 to-indigo-700',
+    tags: ['AMS', 'Sustentação', 'SLAs', 'Governança', 'Operação Assistida']
+  },
+  {
+    id: 'modernizacao-legados',
+    title: 'Modernização de Legados',
+    subtitle: 'Redução de custo e evolução tecnológica',
+    problem: 'Transformamos plataformas legadas sem ruptura do core, reduzindo obsolescência, custo operacional e dependência de tecnologias limitantes.',
+    target: 'Organizações com sistemas críticos que precisam modernizar com risco controlado e roadmap incremental.',
     icon: '🔄',
-    color: 'from-blue-500 to-blue-700',
-    tags: ['Java', 'COBOL Migration', 'Cloud', 'SDD', 'APIs']
-  },
-  {
-    id: 'engenharia-dados',
-    title: 'Engenharia de Dados e IA',
-    subtitle: 'Dados como ativo estratégico',
-    problem: 'Dados dispersos que não geram insight acionável para o negócio',
-    target: 'Empresas que precisam de analytics avançado e modelos preditivos',
-    icon: '📊',
     color: 'from-violet-500 to-violet-700',
-    tags: ['Databricks', 'AWS', 'Python', 'Machine Learning', 'LLMs']
+    tags: ['Legado', 'Migração', 'Replatform', 'APIs', 'SDD']
   },
   {
-    id: 'desenvolvimento',
-    title: 'Desenvolvimento de Produtos Digitais',
-    subtitle: 'Da ideia ao produto em produção',
-    problem: 'Falta de capacidade interna para construir produtos digitais com velocidade e qualidade',
-    target: 'Empresas que querem lançar ou evoluir produtos digitais B2B ou B2C',
-    icon: '💻',
-    color: 'from-cyan-500 to-cyan-700',
-    tags: ['React', 'Node.js', 'Mobile', 'AWS', 'DevOps']
+    id: 'arquitetura-devops',
+    title: 'Arquitetura & DevOps',
+    subtitle: 'Plataformas resilientes e escaláveis',
+    problem: 'Estruturamos arquiteturas modernas e esteiras de entrega para suportar crescimento, alta disponibilidade e ciclos mais rápidos com segurança.',
+    target: 'Times que precisam ganhar escala e previsibilidade com arquitetura robusta e automação de delivery.',
+    icon: '🏗️',
+    color: 'from-fuchsia-500 to-fuchsia-700',
+    tags: ['Arquitetura', 'DevOps', 'CI/CD', 'Observabilidade', 'Resiliência']
   },
   {
-    id: 'cyber-security',
-    title: 'Cyber Security',
-    subtitle: 'Segurança como habilitadora de negócio',
-    problem: 'Vulnerabilidades em sistemas financeiros e conformidade regulatória (BACEN, LGPD)',
-    target: 'Instituições financeiras com exigências regulatórias e de risco',
-    icon: '🛡️',
-    color: 'from-red-500 to-red-700',
-    tags: ['SAST', 'DAST', 'Pentest', 'LGPD', 'ISO 27001']
+    id: 'integracoes-open-finance',
+    title: 'Integrações via API & Open Finance',
+    subtitle: 'Conectividade, escalabilidade e novos modelos de negócio',
+    problem: 'Conectamos ecossistemas, canais e parceiros por APIs escaláveis, habilitando jornadas integradas e novas oportunidades de negócio digital.',
+    target: 'Empresas que dependem de integração entre plataformas, parceiros e ecossistemas regulados.',
+    icon: '🔗',
+    color: 'from-pink-500 to-pink-700',
+    tags: ['APIs', 'Open Finance', 'Integração', 'Microservices', 'Ecossistemas']
   },
   {
-    id: 'quality-assurance',
-    title: 'Quality & Automation',
-    subtitle: 'Qualidade acelerada por IA',
-    problem: 'Ciclos de teste lentos que bloqueiam releases frequentes',
-    target: 'Times de desenvolvimento que precisam de velocity sem sacrificar qualidade',
+    id: 'engenharia-software-ia',
+    title: 'Design e Engenharia de Software com IA',
+    subtitle: 'Engenharia acelerada com qualidade e controle',
+    problem: 'Aplicamos IA ao ciclo de engenharia para acelerar discovery, desenvolvimento e documentação, sem perder governança, rastreabilidade ou padrão técnico.',
+    target: 'Empresas que querem aumentar throughput de software com qualidade enterprise e uso pragmático de IA.',
+    icon: '🧠',
+    color: 'from-rose-500 to-rose-700',
+    tags: ['IA', 'Software Engineering', 'Discovery', 'Code Assist', 'Governança']
+  },
+  {
+    id: 'cloud-finops',
+    title: 'Cloud & FinOps',
+    subtitle: 'Escala cloud com eficiência financeira',
+    problem: 'Otimizamos ambientes cloud para equilibrar performance, governança e custo, transformando consumo em eficiência mensurável.',
+    target: 'Empresas que já operam em nuvem e precisam melhorar previsibilidade, eficiência e governança financeira.',
+    icon: '☁️',
+    color: 'from-orange-400 to-orange-600',
+    tags: ['Cloud', 'FinOps', 'AWS', 'Azure', 'Otimização de Custos']
+  },
+  {
+    id: 'dados-analytics',
+    title: 'Dados & Analytics',
+    subtitle: 'Inteligência para tomada de decisão',
+    problem: 'Estruturamos dados, analytics e informação gerencial para transformar volume em decisão mais rápida, confiável e orientada por evidência.',
+    target: 'Negócios que precisam elevar maturidade analítica e acelerar decisões com dados confiáveis.',
+    icon: '📊',
+    color: 'from-amber-400 to-amber-600',
+    tags: ['Analytics', 'BI', 'Dados', 'Databricks', 'Inteligência']
+  },
+  {
+    id: 'quality-testes-ia',
+    title: 'Qualidade & Testes com IA',
+    subtitle: 'Menos falhas, mais previsibilidade',
+    problem: 'Elevamos a confiabilidade das entregas com automação, inteligência aplicada a testes e foco em redução de defeitos em produção.',
+    target: 'Times que precisam acelerar releases sem comprometer estabilidade, conformidade e experiência do usuário.',
     icon: '✅',
-    color: 'from-green-500 to-green-700',
-    tags: ['Quality IA', 'Selenium', 'Cypress', 'JMeter', 'AI Testing']
+    color: 'from-yellow-400 to-yellow-600',
+    tags: ['QA', 'Testes', 'IA', 'Automação', 'Confiabilidade']
   },
   {
-    id: 'cloud-devops',
-    title: 'Cloud & DevOps',
-    subtitle: 'Infraestrutura como código, entrega como cultura',
-    problem: 'Infraestrutura cara, lenta de provisionar e difícil de escalar',
-    target: 'Empresas migrando para cloud ou querendo otimizar operações existentes',
-    icon: '☁️',
-    color: 'from-orange-500 to-orange-700',
-    tags: ['AWS', 'Azure', 'Kubernetes', 'Terraform', 'CI/CD']
+    id: 'ciberseguranca',
+    title: 'Cibersegurança',
+    subtitle: 'Proteção, conformidade e gestão de riscos',
+    problem: 'Mitigamos vulnerabilidades e fortalecemos controles para proteger ativos, atender regulações e reduzir exposição a incidentes.',
+    target: 'Empresas com exigência elevada de segurança, compliance e gestão contínua de riscos digitais.',
+    icon: '🛡️',
+    color: 'from-lime-400 to-lime-600',
+    tags: ['Segurança', 'Risco', 'Compliance', 'LGPD', 'Proteção']
   },
   {
-    id: 'salesforce',
-    title: 'Salesforce & CRM',
-    subtitle: 'CRM que realmente funciona para o negócio',
-    problem: 'CRM subutilizado ou mal configurado que não acompanha o processo de vendas real',
-    target: 'Empresas que usam ou querem implantar Salesforce como plataforma de relacionamento',
-    icon: '☁️',
-    color: 'from-sky-500 to-sky-700',
-    tags: ['Salesforce', 'CRM', 'Sales Cloud', 'Service Cloud', 'Marketing Cloud']
-  },
-  {
-    id: 'fourblock',
-    title: 'Fourblock — Produtos em 30 dias',
-    subtitle: 'Produtos prontos, customizados para seu contexto',
-    problem: 'Necessidade de soluções digitais rápidas sem abrir mão de qualidade e governança',
-    target: 'Empresas com urgência de entrega ou precisando validar rapidamente um conceito',
-    icon: '⬛',
-    color: 'from-foursys-blue to-foursys-cyan',
-    tags: ['Blocos pré-built', 'Customização', 'IA integrada', 'Entrega em 30 dias']
+    id: 'hiperautomacao-rpa',
+    title: 'Hiperautomação & RPA',
+    subtitle: 'Eficiência operacional em escala',
+    problem: 'Automatizamos processos ponta a ponta para reduzir esforço manual, eliminar gargalos e ampliar produtividade com controle.',
+    target: 'Áreas operacionais que precisam escalar processos com menos fricção e maior eficiência.',
+    icon: '⚙️',
+    color: 'from-cyan-300 to-cyan-500',
+    tags: ['RPA', 'Automação', 'Eficiência', 'Workflow', 'Produtividade']
   }
 ]
 
