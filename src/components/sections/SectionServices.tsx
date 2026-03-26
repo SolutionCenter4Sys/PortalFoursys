@@ -13,19 +13,50 @@ const CONTRACT_MODELS = [
   { title: 'AMS', desc: 'Sustentação contínua com SLA' },
 ]
 
-function OrbitRing({ activeId, onSelect }: { activeId: string; onSelect: (id: string) => void }) {
+function getLabelPosition(angleDeg: number) {
+  const norm = ((angleDeg % 360) + 360) % 360
+
+  if (norm > 280 || norm < 70)
+    return 'left-[calc(100%+10px)] top-1/2 -translate-y-1/2 text-left'
+  if (norm >= 70 && norm <= 110)
+    return 'left-1/2 -translate-x-1/2 top-[calc(100%+6px)] text-center'
+  if (norm > 110 && norm < 250)
+    return 'right-[calc(100%+10px)] top-1/2 -translate-y-1/2 text-right'
+  return 'left-1/2 -translate-x-1/2 bottom-[calc(100%+6px)] text-center'
+}
+
+function OrbitRing({
+  activeId,
+  onSelect,
+  onKeyNav,
+}: {
+  activeId: string
+  onSelect: (id: string) => void
+  onKeyNav: (e: React.KeyboardEvent, currentId: string) => void
+}) {
   const angleStep = 360 / serviceLines.length
-  const radius = 42
+  const radius = 38
+  const activeVisual = SERVICE_VISUALS[activeId] ?? DEFAULT_VISUAL
 
   return (
-    <div className="relative aspect-square max-w-[520px] mx-auto" role="radiogroup" aria-label="Linhas de serviço">
-      <div className="absolute inset-[8%] rounded-full border border-white/[0.06]" />
-      <div className="absolute inset-[22%] rounded-full border border-white/[0.08] bg-white/[0.02]" />
-      <div className="absolute inset-[36%] rounded-full border border-white/10 bg-foursys-surface/40 shadow-[0_0_60px_rgba(0,0,0,0.35)]" />
-      <div className="absolute inset-[39%] rounded-full bg-[#23243D] border border-white/10 flex items-center justify-center">
+    <div
+      className="relative aspect-square max-w-[440px] lg:max-w-[520px] mx-auto"
+      role="radiogroup"
+      aria-label="Linhas de serviço"
+    >
+      <div className="absolute inset-[6%] rounded-full border border-white/[0.05]" />
+      <div className="absolute inset-[18%] rounded-full border border-white/[0.07] bg-white/[0.015]" />
+      <div className="absolute inset-[32%] rounded-full border border-white/10 bg-foursys-surface/40 shadow-[0_0_60px_rgba(0,0,0,0.35)]" />
+
+      <div
+        className="absolute inset-[35%] rounded-full bg-[#23243D] border border-white/10 flex items-center justify-center transition-all duration-500"
+        style={{ boxShadow: `0 0 40px ${activeVisual.glow}15, inset 0 0 30px rgba(0,0,0,0.3)` }}
+      >
         <div className="text-center px-2">
-          <div className="text-2xl md:text-3xl font-black text-white leading-none">foursys</div>
-          <div className="text-[9px] uppercase tracking-[0.28em] text-foursys-text-dim mt-1">serviços & ofertas</div>
+          <div className="text-xl md:text-2xl lg:text-3xl font-black text-white leading-none">foursys</div>
+          <div className="text-[8px] md:text-[9px] uppercase tracking-[0.28em] text-foursys-text-dim mt-1">
+            serviços & ofertas
+          </div>
         </div>
       </div>
 
@@ -37,6 +68,7 @@ function OrbitRing({ activeId, onSelect }: { activeId: string; onSelect: (id: st
         const x = 50 + radius * Math.cos(angleRad)
         const y = 50 + radius * Math.sin(angleRad)
         const isActive = activeId === service.id
+        const labelPos = getLabelPosition(angleDeg)
 
         return (
           <button
@@ -45,72 +77,34 @@ function OrbitRing({ activeId, onSelect }: { activeId: string; onSelect: (id: st
             role="radio"
             aria-checked={isActive}
             aria-label={service.title}
+            tabIndex={isActive ? 0 : -1}
             onClick={() => onSelect(service.id)}
-            className="absolute -translate-x-1/2 -translate-y-1/2 group focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-blue rounded-full"
+            onKeyDown={e => onKeyNav(e, service.id)}
+            className="absolute -translate-x-1/2 -translate-y-1/2 focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-blue rounded-full z-10"
             style={{ top: `${y}%`, left: `${x}%` }}
           >
             <span
-              className={`w-12 h-12 md:w-14 md:h-14 rounded-full border flex items-center justify-center transition-all duration-200 ${visual.softBg} ${visual.border}`}
+              className={`w-11 h-11 lg:w-14 lg:h-14 rounded-full border flex items-center justify-center transition-all duration-300 ${visual.softBg} ${visual.border}`}
               style={{
                 boxShadow: isActive
-                  ? `0 0 0 6px ${visual.glow}25, 0 0 22px ${visual.glow}80`
-                  : `0 0 12px ${visual.glow}40`,
-                transform: isActive ? 'scale(1.15)' : 'scale(1)',
+                  ? `0 0 0 5px ${visual.glow}30, 0 0 24px ${visual.glow}70`
+                  : `0 0 10px ${visual.glow}30`,
+                transform: isActive ? 'scale(1.18)' : 'scale(1)',
               }}
             >
-              <Icon size={20} className={visual.text} />
+              <Icon size={18} className={visual.text} />
             </span>
             <span
-              className={`absolute left-1/2 -translate-x-1/2 top-full mt-1 whitespace-nowrap text-[10px] font-semibold leading-none transition-opacity pointer-events-none ${
-                isActive ? 'opacity-100 text-white' : 'opacity-0 group-hover:opacity-100 text-foursys-text-muted'
+              className={`absolute max-w-[100px] text-[9px] lg:text-[10px] font-semibold leading-tight pointer-events-none transition-colors duration-300 ${labelPos} ${
+                isActive ? 'text-white' : 'text-foursys-text-muted/70'
               }`}
             >
-              {service.title.length > 22 ? service.title.slice(0, 20) + '\u2026' : service.title}
+              {service.title}
             </span>
           </button>
         )
       })}
     </div>
-  )
-}
-
-function ServiceSelector({
-  service,
-  active,
-  onSelect,
-  onKeyNav,
-}: {
-  service: (typeof serviceLines)[number]
-  active: boolean
-  onSelect: (id: string) => void
-  onKeyNav: (e: React.KeyboardEvent, id: string) => void
-}) {
-  const Icon = SERVICE_ICONS[service.id] ?? Layers3
-  const visual = SERVICE_VISUALS[service.id] ?? DEFAULT_VISUAL
-
-  return (
-    <button
-      type="button"
-      role="option"
-      aria-selected={active}
-      tabIndex={active ? 0 : -1}
-      onClick={() => onSelect(service.id)}
-      onKeyDown={e => onKeyNav(e, service.id)}
-      className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-all duration-150 w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-blue ${
-        active
-          ? `${visual.border} bg-white/[0.06] border`
-          : 'border border-transparent hover:bg-white/[0.03]'
-      }`}
-    >
-      <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${visual.softBg}`}>
-        <Icon size={15} className={visual.text} />
-      </div>
-      <div className="min-w-0">
-        <div className={`text-xs font-semibold leading-snug truncate ${active ? 'text-white' : 'text-foursys-text-muted'}`}>
-          {service.title}
-        </div>
-      </div>
-    </button>
   )
 }
 
@@ -120,7 +114,7 @@ export function SectionServices() {
   const activeService = serviceLines.find(s => s.id === activeServiceId) ?? serviceLines[0]
   const activeVisual = SERVICE_VISUALS[activeService.id] ?? DEFAULT_VISUAL
   const ActiveIcon = SERVICE_ICONS[activeService.id] ?? Layers3
-  const listRef = useRef<HTMLDivElement>(null)
+  const orbitRef = useRef<HTMLDivElement>(null)
 
   const handleKeyNav = useCallback((e: React.KeyboardEvent, currentId: string) => {
     const ids = serviceLines.map(s => s.id)
@@ -144,7 +138,7 @@ export function SectionServices() {
     }
 
     setActiveServiceId(ids[nextIdx])
-    const buttons = listRef.current?.querySelectorAll<HTMLButtonElement>('[role="option"]')
+    const buttons = orbitRef.current?.querySelectorAll<HTMLButtonElement>('[role="radio"]')
     buttons?.[nextIdx]?.focus()
   }, [])
 
@@ -155,7 +149,7 @@ export function SectionServices() {
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mb-10"
+          className="mb-8 md:mb-10"
         >
           <div className="flex items-start justify-between flex-wrap gap-4">
             <div className="max-w-3xl">
@@ -166,7 +160,8 @@ export function SectionServices() {
                 Linhas de Serviço
               </h2>
               <p className="text-foursys-text-muted mt-2 text-base max-w-2xl leading-relaxed">
-                Portfólio integrado de {serviceLines.length} frentes cobrindo toda a jornada tecnológica — da sustentação à inovação com IA.
+                Portfólio integrado de {serviceLines.length} frentes cobrindo toda a jornada tecnológica
+                — da sustentação à inovação com IA.
               </p>
             </div>
             <div className="flex gap-3 flex-wrap">
@@ -175,7 +170,10 @@ export function SectionServices() {
                 { value: '360°', label: 'cobertura' },
                 { value: 'B2B', label: 'enterprise' },
               ].map(stat => (
-                <div key={stat.label} className="text-center px-4 py-2 rounded-xl bg-foursys-surface/40 border border-white/[0.08]">
+                <div
+                  key={stat.label}
+                  className="text-center px-4 py-2 rounded-xl bg-foursys-surface/40 border border-white/[0.08]"
+                >
                   <div className="text-lg font-black text-foursys-blue">{stat.value}</div>
                   <div className="text-[10px] text-foursys-text-dim uppercase tracking-widest">{stat.label}</div>
                 </div>
@@ -185,106 +183,89 @@ export function SectionServices() {
           <div className="mt-6 h-px bg-gradient-to-r from-foursys-blue/30 via-white/[0.06] to-transparent" />
         </motion.div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-[1fr_1.15fr] gap-6 items-start mb-8">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="rounded-[28px] border border-white/[0.08] bg-white/[0.02] p-6 md:p-8"
-          >
-            <p className="text-foursys-text-muted text-lg md:text-xl leading-relaxed max-w-md">
-              Visão estratégica com execução técnica disciplinada e foco em resultados.
-            </p>
-            <p className="text-foursys-text-muted text-lg md:text-xl leading-relaxed max-w-md mt-4">
-              IA aplicada com pragmatismo, governança e retorno mensurável.
-            </p>
+        {/* Orbit — md+ */}
+        <motion.div
+          ref={orbitRef}
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.1, duration: 0.5 }}
+          className="hidden md:block mb-8 px-12 lg:px-20"
+        >
+          <OrbitRing activeId={activeServiceId} onSelect={setActiveServiceId} onKeyNav={handleKeyNav} />
+        </motion.div>
 
-            <div className="mt-8">
-              <h3 className="text-3xl md:text-4xl font-light leading-tight text-white max-w-xl">
-                Tecnologia bem feita respeita o legado,{' '}
-                <span className="text-foursys-blue">organiza o presente</span>{' '}
-                e constrói o futuro.
-              </h3>
-            </div>
+        {/* Grid — mobile */}
+        <div className="grid grid-cols-2 gap-2.5 mb-6 md:hidden">
+          {serviceLines.map((service, index) => {
+            const Icon = SERVICE_ICONS[service.id] ?? Layers3
+            const visual = SERVICE_VISUALS[service.id] ?? DEFAULT_VISUAL
+            const isActive = activeService.id === service.id
 
-            <div ref={listRef} className="mt-8 space-y-1" role="listbox" aria-label="Selecionar linha de serviço">
-              {serviceLines.map(service => (
-                <ServiceSelector
-                  key={service.id}
-                  service={service}
-                  active={activeService.id === service.id}
-                  onSelect={setActiveServiceId}
-                  onKeyNav={handleKeyNav}
-                />
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.16 }}
-            className="rounded-[28px] border border-white/[0.08] bg-white/[0.02] p-4 md:p-6"
-          >
-            <div className="hidden md:block">
-              <OrbitRing activeId={activeServiceId} onSelect={setActiveServiceId} />
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 md:hidden">
-              {serviceLines.map(service => {
-                const Icon = SERVICE_ICONS[service.id] ?? Layers3
-                const visual = SERVICE_VISUALS[service.id] ?? DEFAULT_VISUAL
-                const isActive = activeService.id === service.id
-
-                return (
-                  <button
-                    key={service.id}
-                    type="button"
-                    onClick={() => setActiveServiceId(service.id)}
-                    className={`text-left rounded-2xl border p-3 transition-all ${
-                      isActive ? `${visual.border} bg-white/[0.06]` : 'border-white/[0.08] bg-foursys-surface/25'
-                    }`}
+            return (
+              <motion.button
+                key={service.id}
+                type="button"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.03 * index }}
+                onClick={() => setActiveServiceId(service.id)}
+                className={`text-left rounded-xl border p-3 transition-all duration-200 ${
+                  isActive
+                    ? `${visual.border} bg-white/[0.07]`
+                    : 'border-white/[0.08] bg-foursys-surface/25'
+                }`}
+                style={isActive ? { boxShadow: `0 0 16px ${visual.glow}20` } : undefined}
+              >
+                <div className="flex items-center gap-2">
+                  <div
+                    className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${visual.softBg}`}
                   >
-                    <div className="flex items-center gap-2">
-                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${visual.softBg}`}>
-                        <Icon size={14} className={visual.text} />
-                      </div>
-                      <span className="text-xs font-semibold text-white leading-snug">{service.title}</span>
-                    </div>
-                  </button>
-                )
-              })}
-            </div>
-
-            <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-3 border-t border-white/[0.08] pt-4">
-              {CONTRACT_MODELS.map(model => (
-                <div key={model.title} className="text-center px-2 py-2">
-                  <div className="text-xs font-bold text-foursys-text uppercase tracking-widest">{model.title}</div>
-                  <div className="text-[10px] text-foursys-text-dim mt-0.5">{model.desc}</div>
+                    <Icon size={14} className={visual.text} />
+                  </div>
+                  <span
+                    className={`text-[11px] font-semibold leading-snug ${isActive ? 'text-white' : 'text-foursys-text-muted'}`}
+                  >
+                    {service.title}
+                  </span>
                 </div>
-              ))}
-            </div>
-          </motion.div>
+              </motion.button>
+            )
+          })}
         </div>
 
+        {/* Detail panel — harmonized with active service color */}
         <motion.div
           key={activeService.id}
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35 }}
-          className="rounded-[28px] border border-white/[0.08] bg-foursys-surface/25 p-6 md:p-7"
+          transition={{ duration: 0.3 }}
+          className="rounded-[24px] md:rounded-[28px] border p-5 md:p-8 mb-6 transition-[border-color,box-shadow] duration-500"
+          style={{
+            borderColor: `${activeVisual.glow}30`,
+            background: `linear-gradient(145deg, ${activeVisual.glow}06 0%, transparent 50%), rgba(255,255,255,0.015)`,
+            boxShadow: `0 0 40px ${activeVisual.glow}08`,
+          }}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-6">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${activeVisual.softBg}`}>
-                  <ActiveIcon size={22} className={activeVisual.text} />
+                <div
+                  className={`w-11 h-11 md:w-12 md:h-12 rounded-2xl flex items-center justify-center transition-colors duration-300 ${activeVisual.softBg}`}
+                  style={{ boxShadow: `0 0 20px ${activeVisual.glow}25` }}
+                >
+                  <ActiveIcon size={20} className={activeVisual.text} />
                 </div>
-                <h3 className="text-2xl font-black text-white">{activeService.title}</h3>
+                <div>
+                  <h3 className="text-lg md:text-2xl font-black text-white leading-tight">
+                    {activeService.title}
+                  </h3>
+                  <p className={`text-xs md:text-sm font-semibold mt-0.5 transition-colors duration-300 ${activeVisual.text}`}>
+                    {activeService.subtitle}
+                  </p>
+                </div>
               </div>
 
-              <p className={`text-sm font-semibold ${activeVisual.text}`}>{activeService.subtitle}</p>
-              <p className="text-foursys-text-muted text-base leading-relaxed mt-3 max-w-3xl">
+              <p className="text-foursys-text-muted text-sm md:text-base leading-relaxed mt-3 max-w-3xl">
                 {activeService.problem}
               </p>
 
@@ -297,17 +278,19 @@ export function SectionServices() {
               </button>
             </div>
 
-            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5">
+            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-4 md:p-5">
               <p className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
                 Onde gera valor
               </p>
-              <p className="text-sm text-foursys-text-muted leading-relaxed mb-4">{activeService.target}</p>
+              <p className="text-sm text-foursys-text-muted leading-relaxed mb-4">
+                {activeService.target}
+              </p>
 
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {activeService.tags.map(tag => (
                   <span
                     key={tag}
-                    className={`px-2.5 py-1 rounded-full text-[10px] border ${activeVisual.border} ${activeVisual.text} bg-white/[0.02]`}
+                    className={`px-2 py-0.5 rounded-full text-[10px] border transition-colors duration-300 bg-white/[0.02] ${activeVisual.border} ${activeVisual.text}`}
                   >
                     {tag}
                   </span>
@@ -316,6 +299,21 @@ export function SectionServices() {
             </div>
           </div>
         </motion.div>
+
+        {/* Contract models */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+          {CONTRACT_MODELS.map(model => (
+            <div
+              key={model.title}
+              className="text-center px-3 py-3 rounded-xl bg-foursys-surface/20 border border-white/[0.06]"
+            >
+              <div className="text-[11px] font-bold text-foursys-text uppercase tracking-widest">
+                {model.title}
+              </div>
+              <div className="text-[10px] text-foursys-text-dim mt-0.5">{model.desc}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </SectionWrapper>
   )
