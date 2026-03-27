@@ -25,33 +25,108 @@ const allianceLogos = [
 
 // ─── Chama Foursys ────────────────────────────────────────────────────────────
 
-function FoursysFlame() {
+function FoursysLogo() {
   return (
-    <div className="relative select-none flex items-center justify-center">
+    <div className="relative select-none flex items-center justify-center py-4">
+      {/* Ambient glow */}
       <div
-        className="absolute inset-0 rounded-full pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 60% 70% at 50% 65%, rgba(200,60,0,0.35) 0%, rgba(255,100,0,0.12) 50%, transparent 80%)',
-          filter: 'blur(24px)',
-          transform: 'scale(1.4)',
+            'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255,102,0,0.25) 0%, rgba(255,80,0,0.08) 45%, transparent 75%)',
+          filter: 'blur(30px)',
+          transform: 'scale(1.6)',
         }}
       />
+
+      {/* Stage light beams */}
       <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-40 h-8 rounded-full"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse, rgba(255,80,0,0.55) 0%, transparent 75%)',
-          filter: 'blur(10px)',
+          background:
+            'conic-gradient(from 180deg at 50% 120%, transparent 30%, rgba(255,100,0,0.06) 40%, transparent 50%, rgba(255,100,0,0.04) 60%, transparent 70%)',
+          filter: 'blur(8px)',
+          transform: 'scale(2)',
         }}
       />
-      <motion.img
-        src="/images/foursys-flame.png"
-        alt="Foursys"
-        className="relative z-10 w-56 h-auto drop-shadow-[0_0_32px_rgba(255,80,0,0.6)]"
-        animate={{ y: [0, -6, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        style={{ filter: 'drop-shadow(0 0 28px rgba(255,100,0,0.55))' }}
+
+      {/* Floor reflection */}
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-52 h-10 rounded-full"
+        style={{
+          background: 'radial-gradient(ellipse, rgba(255,80,0,0.4) 0%, transparent 70%)',
+          filter: 'blur(12px)',
+        }}
       />
+
+      {/* Logo */}
+      <motion.div
+        className="relative z-10"
+        animate={{ y: [0, -5, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <svg
+          width="220"
+          height="80"
+          viewBox="0 0 220 80"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="drop-shadow-[0_0_24px_rgba(255,100,0,0.5)]"
+        >
+          <defs>
+            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FF8C00" />
+              <stop offset="50%" stopColor="#FF6600" />
+              <stop offset="100%" stopColor="#CC4400" />
+            </linearGradient>
+            <linearGradient id="logoShine" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#FFB366" />
+              <stop offset="40%" stopColor="#FF6600" />
+              <stop offset="100%" stopColor="#993D00" />
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          {/* Accent line */}
+          <rect x="20" y="16" width="4" height="28" rx="2" fill="url(#logoGrad)" opacity="0.9" />
+
+          {/* Main text: foursys */}
+          <text
+            x="34"
+            y="42"
+            fontFamily="system-ui, -apple-system, sans-serif"
+            fontSize="38"
+            fontWeight="900"
+            letterSpacing="-1"
+            fill="url(#logoShine)"
+            filter="url(#glow)"
+          >
+            foursys
+          </text>
+
+          {/* Tagline */}
+          <text
+            x="36"
+            y="60"
+            fontFamily="system-ui, -apple-system, sans-serif"
+            fontSize="9"
+            fontWeight="600"
+            letterSpacing="5"
+            fill="rgba(255,255,255,0.35)"
+          >
+            DIGITAL SOLUTIONS
+          </text>
+
+          {/* Decorative dot */}
+          <circle cx="198" cy="30" r="4" fill="url(#logoGrad)" opacity="0.7" />
+        </svg>
+      </motion.div>
     </div>
   )
 }
@@ -126,7 +201,7 @@ export function SectionHome() {
             className="flex flex-col items-center justify-center py-8 lg:py-6 cursor-pointer order-1 lg:order-2"
             onClick={() => navigate('identity')}
           >
-            <FoursysFlame />
+            <FoursysLogo />
 
             <motion.div
               initial={{ opacity: 0, y: 10 }}
