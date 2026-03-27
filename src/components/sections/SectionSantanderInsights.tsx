@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { DynIcon } from '../../utils/iconMap'
 import { santanderClient } from '../../data/clients/santander'
 import { useApp } from '../../context/AppContext'
 
@@ -18,7 +19,7 @@ export function SectionSantanderInsights() {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/15 border border-red-500/30 text-red-400 text-sm mb-4">
-            🔍 Percepções Santander
+            Percepções Santander
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-foursys-text mb-4">
             O que identificamos
@@ -37,7 +38,7 @@ export function SectionSantanderInsights() {
               transition={{ delay: i * 0.1 }}
               className="group p-6 rounded-2xl bg-foursys-surface/50 border border-white/10 hover:border-foursys-blue/30 backdrop-blur-md transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="text-3xl mb-4">{p.icon}</div>
+              <div className="mb-4"><DynIcon name={p.icon} size={28} className="text-foursys-blue" /></div>
 
               <h3 className="text-lg font-bold text-foursys-text mb-2">{p.title}</h3>
 
@@ -59,7 +60,7 @@ export function SectionSantanderInsights() {
           className="p-8 rounded-2xl bg-gradient-to-r from-foursys-blue/15 to-foursys-cyan/8 border border-foursys-blue/30"
         >
           <div className="flex items-start gap-4">
-            <div className="text-3xl flex-shrink-0">📋</div>
+            <div className="flex-shrink-0"><DynIcon name="clipboard-list" size={28} className="text-foursys-blue" /></div>
             <div className="flex-1">
               <div className="text-xs font-semibold text-foursys-cyan uppercase tracking-wide mb-2">Material Estratégico Interno</div>
               <h3 className="text-xl font-bold text-foursys-text mb-3">Insights do Material do Valdir</h3>

@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { DynIcon } from '../../utils/iconMap'
 import { useApp } from '../../context/AppContext'
 
 const steps = [
-  { label: 'Desafio', icon: '🎯', content: 'O Santander Housing Investments precisava de um portal centralizado para gestão do portfólio imobiliário, integrando dados de 12 sistemas legados com visibilidade em tempo real.' },
-  { label: 'Solução', icon: '⚡', content: 'Portal web em React com APIs REST Java Spring Boot, API Gateway unificando fontes legadas, dashboards interativos e relatórios automatizados — entregue em squads ágeis Foursys.' },
-  { label: 'Resultado', icon: '🏆', content: 'Tempo de consulta de portfólio reduzido de 3 dias para 10 minutos. 15 relatórios Excel eliminados. 200+ gestores com visibilidade em tempo real.' }
+  { label: 'Desafio', icon: 'target', content: 'O Santander Housing Investments precisava de um portal centralizado para gestão do portfólio imobiliário, integrando dados de 12 sistemas legados com visibilidade em tempo real.' },
+  { label: 'Solução', icon: 'zap', content: 'Portal web em React com APIs REST Java Spring Boot, API Gateway unificando fontes legadas, dashboards interativos e relatórios automatizados — entregue em squads ágeis Foursys.' },
+  { label: 'Resultado', icon: 'trophy', content: 'Tempo de consulta de portfólio reduzido de 3 dias para 10 minutos. 15 relatórios Excel eliminados. 200+ gestores com visibilidade em tempo real.' }
 ]
 
 const techStack = ['React', 'TypeScript', 'Java 17', 'Spring Boot', 'AWS EKS', 'API Gateway', 'PostgreSQL', 'D3.js', 'Jenkins CI/CD']
@@ -23,7 +24,7 @@ export function SectionSHICase() {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
-            🏢 Case Santander
+            Case Santander
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-foursys-text mb-4">
             Portal Imobiliário SHI
@@ -46,7 +47,7 @@ export function SectionSHICase() {
               <div className="absolute -top-3 left-6 px-3 py-1 rounded-full bg-foursys-dark-2 border border-foursys-blue/40 text-xs font-semibold text-foursys-cyan">
                 {step.label}
               </div>
-              <div className="text-3xl mb-4 mt-2">{step.icon}</div>
+              <div className="mb-4 mt-2"><DynIcon name={step.icon} size={28} className="text-foursys-cyan" /></div>
               <p className="text-sm text-foursys-text-muted leading-relaxed">{step.content}</p>
             </motion.div>
           ))}

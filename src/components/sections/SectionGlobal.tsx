@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, Phone } from 'lucide-react'
+import { DynIcon } from '../../utils/iconMap'
 import { SectionWrapper } from '../ui/SectionWrapper'
 
 type Unit = {
@@ -104,10 +105,10 @@ const regions: Region[] = [
 ]
 
 const kpis = [
-  { value: '+2K', label: 'Colaboradores', icon: '👥' },
-  { value: '+500K', label: 'Projetos entregues', icon: '🚀' },
-  { value: '25+', label: 'Anos de mercado', icon: '📅' },
-  { value: '7', label: 'Unidades globais', icon: '🏢' },
+  { value: '+2K', label: 'Colaboradores', icon: 'users' },
+  { value: '+500K', label: 'Projetos entregues', icon: 'rocket' },
+  { value: '25+', label: 'Anos de mercado', icon: 'calendar' },
+  { value: '7', label: 'Unidades globais', icon: 'building' },
 ]
 
 const milestones = [
@@ -227,7 +228,7 @@ export function SectionGlobal() {
           className="mb-8"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-xs mb-3">
-            🌎 Presença Global
+            Presença Global
           </div>
           <div className="flex flex-col lg:flex-row lg:items-end gap-6">
             <div className="flex-1">
@@ -251,7 +252,7 @@ export function SectionGlobal() {
                   transition={{ delay: 0.1 + index * 0.07 }}
                   className="flex flex-col items-center justify-center p-3 rounded-xl bg-foursys-surface/50 border border-white/10 min-w-[80px]"
                 >
-                  <span className="text-lg mb-0.5">{kpi.icon}</span>
+                  <DynIcon name={kpi.icon} size={22} className="text-foursys-blue" />
                   <div className="text-lg font-black text-foursys-cyan leading-none">{kpi.value}</div>
                   <div className="text-[9px] text-foursys-text-dim text-center leading-tight mt-0.5">{kpi.label}</div>
                 </motion.div>

@@ -1,14 +1,15 @@
 import { motion } from 'framer-motion'
 import { Shield } from 'lucide-react'
+import { DynIcon } from '../../utils/iconMap'
 import { SectionWrapper } from '../ui/SectionWrapper'
 
 const capabilities = [
-  { icon: '🔍', title: 'SAST', subtitle: 'Static Application Security Testing', desc: 'Análise de vulnerabilidades no código-fonte antes do deploy, integrada ao pipeline CI/CD.' },
-  { icon: '🕵️', title: 'DAST', subtitle: 'Dynamic Application Security Testing', desc: 'Testes de segurança em aplicações em execução, simulando ataques reais.' },
-  { icon: '🎯', title: 'Pentest', subtitle: 'Penetration Testing', desc: 'Testes de intrusão por especialistas certificados (OSCP, CEH) em sistemas e APIs.' },
-  { icon: '☁️', title: 'Cloud Security', subtitle: 'Segurança em Cloud', desc: 'Hardening, IAM, CIS Benchmarks e monitoramento de configurações em AWS/Azure.' },
-  { icon: '📋', title: 'Compliance', subtitle: 'BACEN · LGPD · ISO 27001', desc: 'Adequação regulatória para o setor financeiro brasileiro e internacional.' },
-  { icon: '🚨', title: 'SOC & SIEM', subtitle: 'Security Operations Center', desc: 'Monitoramento 24/7, detecção de ameaças e resposta a incidentes em tempo real.' }
+  { icon: 'search', title: 'SAST', subtitle: 'Static Application Security Testing', desc: 'Análise de vulnerabilidades no código-fonte antes do deploy, integrada ao pipeline CI/CD.' },
+  { icon: 'scan-eye', title: 'DAST', subtitle: 'Dynamic Application Security Testing', desc: 'Testes de segurança em aplicações em execução, simulando ataques reais.' },
+  { icon: 'target', title: 'Pentest', subtitle: 'Penetration Testing', desc: 'Testes de intrusão por especialistas certificados (OSCP, CEH) em sistemas e APIs.' },
+  { icon: 'cloud', title: 'Cloud Security', subtitle: 'Segurança em Cloud', desc: 'Hardening, IAM, CIS Benchmarks e monitoramento de configurações em AWS/Azure.' },
+  { icon: 'clipboard-list', title: 'Compliance', subtitle: 'BACEN · LGPD · ISO 27001', desc: 'Adequação regulatória para o setor financeiro brasileiro e internacional.' },
+  { icon: 'alert-triangle', title: 'SOC & SIEM', subtitle: 'Security Operations Center', desc: 'Monitoramento 24/7, detecção de ameaças e resposta a incidentes em tempo real.' }
 ]
 
 const regulations = [
@@ -30,7 +31,7 @@ export function SectionCyberSecurity() {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/15 border border-red-500/30 text-red-400 text-sm mb-4">
-            🛡️ Cyber Security
+            Cyber Security
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
             Segurança como habilitadora de negócio
@@ -49,7 +50,9 @@ export function SectionCyberSecurity() {
               transition={{ delay: i * 0.09 }}
               className="p-6 rounded-2xl bg-foursys-surface/50 border border-white/10 hover:border-red-500/25 transition-all duration-300 group"
             >
-              <div className="text-2xl mb-3">{cap.icon}</div>
+              <div className="mb-3">
+                <DynIcon name={cap.icon} size={24} className="text-white/80" />
+              </div>
               <div className="font-bold text-foursys-text text-base">{cap.title}</div>
               <div className="text-xs text-foursys-text-dim mb-3">{cap.subtitle}</div>
               <p className="text-sm text-foursys-text-muted leading-relaxed">{cap.desc}</p>

@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion'
+import { DynIcon } from '../../utils/iconMap'
 import { SectionWrapper } from '../ui/SectionWrapper'
 
 const steps = [
-  { icon: '🔍', title: 'Diagnóstico', desc: 'Mapeamento completo do sistema legado — código, dependências, riscos e oportunidades de modernização.' },
-  { icon: '🏗️', title: 'API Gateway', desc: 'Criação de uma camada de abstração API que expõe as funcionalidades do legado sem modificá-lo.' },
-  { icon: '✂️', title: 'Decomposição', desc: 'Identificação dos módulos de maior valor e risco para extração incremental em microserviços.' },
-  { icon: '🔄', title: 'Migração Gradual', desc: 'Migração módulo a módulo, com o sistema legado 100% operacional durante todo o processo.' },
-  { icon: '☁️', title: 'Cloudificação', desc: 'Deploy dos novos microserviços em Kubernetes/AWS com CI/CD, observabilidade e auto-scaling.' },
-  { icon: '🏁', title: 'Descomissionamento', desc: 'Encerramento seguro do sistema legado após validação completa de todas as funcionalidades migradas.' }
+  { icon: 'search', title: 'Diagnóstico', desc: 'Mapeamento completo do sistema legado — código, dependências, riscos e oportunidades de modernização.' },
+  { icon: 'landmark', title: 'API Gateway', desc: 'Criação de uma camada de abstração API que expõe as funcionalidades do legado sem modificá-lo.' },
+  { icon: 'scissors', title: 'Decomposição', desc: 'Identificação dos módulos de maior valor e risco para extração incremental em microserviços.' },
+  { icon: 'git-merge', title: 'Migração Gradual', desc: 'Migração módulo a módulo, com o sistema legado 100% operacional durante todo o processo.' },
+  { icon: 'cloud', title: 'Cloudificação', desc: 'Deploy dos novos microserviços em Kubernetes/AWS com CI/CD, observabilidade e auto-scaling.' },
+  { icon: 'flag', title: 'Descomissionamento', desc: 'Encerramento seguro do sistema legado após validação completa de todas as funcionalidades migradas.' }
 ]
 
 export function SectionSDD() {
@@ -20,7 +21,7 @@ export function SectionSDD() {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
-            🔄 SDD com Legado
+            SDD com Legado
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
             Modernizar sem parar
@@ -38,7 +39,7 @@ export function SectionSDD() {
             transition={{ delay: 0.2 }}
             className="p-6 rounded-2xl bg-red-500/10 border border-red-500/25"
           >
-            <div className="text-lg font-bold text-red-400 mb-3">❌ Big-Bang Rewrite (problema)</div>
+            <div className="text-lg font-bold text-red-400 mb-3">Big-Bang Rewrite (problema)</div>
             <ul className="space-y-2 text-sm text-foursys-text-dim">
               <li>• Alto risco de falha e downtime</li>
               <li>• Meses ou anos sem entrega de valor</li>
@@ -54,7 +55,7 @@ export function SectionSDD() {
             transition={{ delay: 0.3 }}
             className="p-6 rounded-2xl bg-green-500/10 border border-green-500/25"
           >
-            <div className="text-lg font-bold text-green-400 mb-3">✅ SDD — Foursys (solução)</div>
+            <div className="text-lg font-bold text-green-400 mb-3">SDD — Foursys (solução)</div>
             <ul className="space-y-2 text-sm text-foursys-text-muted">
               <li>• Zero downtime — legado opera durante toda a migração</li>
               <li>• Valor entregue a cada sprint (módulo por módulo)</li>
@@ -83,7 +84,9 @@ export function SectionSDD() {
                 <div className="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-foursys-blue/30 border border-foursys-blue/50 flex items-center justify-center text-xs font-bold text-foursys-cyan">
                   {i + 1}
                 </div>
-                <div className="text-2xl mb-3">{step.icon}</div>
+                <div className="mb-3">
+                  <DynIcon name={step.icon} size={24} className="text-white/80" />
+                </div>
                 <div className="font-semibold text-foursys-text text-sm mb-2">{step.title}</div>
                 <p className="text-xs text-foursys-text-dim leading-relaxed">{step.desc}</p>
               </motion.div>
@@ -97,8 +100,11 @@ export function SectionSDD() {
           transition={{ delay: 0.8 }}
           className="mt-8 p-6 rounded-2xl bg-gradient-to-r from-foursys-blue/15 to-transparent border border-foursys-blue/25"
         >
-          <p className="text-sm text-foursys-text-muted text-center">
-            💡 <strong className="text-foursys-text">Resultado típico com SDD:</strong> sistema legado 100% operacional durante toda a migração, com entrega de valor a cada 2 semanas e custo até 40% menor que o big-bang rewrite.
+          <p className="text-sm text-foursys-text-muted text-center flex flex-wrap items-start justify-center gap-1.5">
+            <DynIcon name="lightbulb" size={18} className="text-foursys-cyan shrink-0 mt-0.5" />
+            <span>
+              <strong className="text-foursys-text">Resultado típico com SDD:</strong> sistema legado 100% operacional durante toda a migração, com entrega de valor a cada 2 semanas e custo até 40% menor que o big-bang rewrite.
+            </span>
           </p>
         </motion.div>
       </div>

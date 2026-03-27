@@ -2,29 +2,30 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ChevronRight, ChevronLeft, Check } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
+import { DynIcon } from '../../utils/iconMap'
 import type { SessionProfile } from '../../types'
 
 // ─── Dados das etapas ────────────────────────────────────────────────────────
 
 const SECTORS = [
-  { id: 'financeiro', label: 'Financeiro', icon: '🏦' },
-  { id: 'saude',      label: 'Saúde',      icon: '🏥' },
-  { id: 'seguros',    label: 'Seguros',    icon: '🛡️' },
-  { id: 'outro',      label: 'Outro',      icon: '🏢' },
+  { id: 'financeiro', label: 'Financeiro', icon: 'landmark' },
+  { id: 'saude',      label: 'Saúde',      icon: 'heart' },
+  { id: 'seguros',    label: 'Seguros',    icon: 'shield-check' },
+  { id: 'outro',      label: 'Outro',      icon: 'building' },
 ] as const
 
 const ROLES = [
-  { id: 'ceo',     label: 'CEO',     icon: '👑' },
-  { id: 'cfo',     label: 'CFO',     icon: '💰' },
-  { id: 'cto',     label: 'CTO',     icon: '⚙️' },
-  { id: 'diretor', label: 'Diretor', icon: '📊' },
-  { id: 'gestor',  label: 'Gestor',  icon: '🎯' },
+  { id: 'ceo',     label: 'CEO',     icon: 'crown' },
+  { id: 'cfo',     label: 'CFO',     icon: 'dollar-sign' },
+  { id: 'cto',     label: 'CTO',     icon: 'settings' },
+  { id: 'diretor', label: 'Diretor', icon: 'bar-chart' },
+  { id: 'gestor',  label: 'Gestor',  icon: 'target' },
 ] as const
 
 const OBJECTIVES = [
-  { id: 'apresentacao', label: 'Apresentação geral', icon: '📋' },
-  { id: 'proposta',     label: 'Proposta específica', icon: '📝' },
-  { id: 'demo',         label: 'Demo técnica',        icon: '🖥️' },
+  { id: 'apresentacao', label: 'Apresentação geral', icon: 'clipboard-list' },
+  { id: 'proposta',     label: 'Proposta específica', icon: 'pencil' },
+  { id: 'demo',         label: 'Demo técnica',        icon: 'monitor' },
 ] as const
 
 // ─── Componente ──────────────────────────────────────────────────────────────
@@ -159,7 +160,7 @@ export function SessionWizard() {
                               : 'bg-white/[0.03] border-white/[0.07] text-foursys-text-muted hover:bg-white/[0.06] hover:border-white/15'
                           }`}
                         >
-                          <span className="text-xl">{opt.icon}</span>
+                          <DynIcon name={opt.icon} size={20} className="text-foursys-text-muted flex-shrink-0" />
                           <span className="text-sm font-semibold">{opt.label}</span>
                           {isSelected && (
                             <Check size={14} className="ml-auto text-foursys-blue flex-shrink-0" />

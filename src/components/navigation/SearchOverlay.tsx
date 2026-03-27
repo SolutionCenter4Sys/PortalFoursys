@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, X } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
+import { DynIcon } from '../../utils/iconMap'
 import type { AppSection } from '../../types'
 
 export function SearchOverlay() {
@@ -85,7 +86,7 @@ export function SearchOverlay() {
                       ${idx === selected ? 'bg-foursys-blue/20' : 'hover:bg-white/5'}
                     `}
                   >
-                    <span className="text-xl flex-shrink-0">{item.icon}</span>
+                    <DynIcon name={item.icon} size={20} className="text-foursys-text-muted flex-shrink-0" />
                     <div>
                       <div className="text-sm font-medium text-foursys-text">{item.label}</div>
                       <div className="text-xs text-foursys-text-dim">{item.category} · {item.description}</div>

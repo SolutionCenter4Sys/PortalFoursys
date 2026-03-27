@@ -11,21 +11,21 @@ export const bradescoClient: ClientConfig = {
       id: 'client-opening',
       label: 'Foursys × Bradesco',
       description: 'Parceria estratégica em evolução digital',
-      icon: '🤝',
+      icon: 'handshake',
       component: 'client-opening',
     },
     {
       id: 'client-insights',
       label: 'Percepções Bradesco',
       description: 'Oportunidades identificadas no ecossistema Bradesco',
-      icon: '🔍',
+      icon: 'search',
       component: 'client-insights',
     },
     {
       id: 'client-cases',
       label: 'Cases no Bradesco',
       description: 'Entregas e resultados dentro do Bradesco',
-      icon: '🏆',
+      icon: 'trophy',
       component: 'client-cases',
     },
   ],
@@ -37,7 +37,7 @@ export const bradescoClient: ClientConfig = {
         'Sistemas legados de alta criticidade que limitam a velocidade de inovação e a integração com novas tecnologias.',
       solution:
         'Modernização progressiva por ondas: encapsulamento, replatforming e refatoração com risco controlado.',
-      icon: '🔄',
+      icon: 'git-merge',
     },
     {
       id: 'ia-operacional',
@@ -46,7 +46,7 @@ export const bradescoClient: ClientConfig = {
         'Oportunidades de automatizar processos operacionais repetitivos com IA para ganho de eficiência e redução de custo.',
       solution:
         'IA First em 4–6 semanas: mapeamento, PoC e business case com ROI estimado para casos priorizados.',
-      icon: '🤖',
+      icon: 'brain-circuit',
     },
     {
       id: 'qualidade',
@@ -55,7 +55,7 @@ export const bradescoClient: ClientConfig = {
         'Ciclos de entrega longos e alta taxa de retrabalho comprometendo time-to-market de novos produtos.',
       solution:
         'AI-Augmented Squads com Quality IA integrado: entregas em semanas com governança embutida.',
-      icon: '⚡',
+      icon: 'zap',
     },
   ],
   cases: [

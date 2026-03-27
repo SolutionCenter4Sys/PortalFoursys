@@ -1,23 +1,24 @@
 import { motion } from 'framer-motion'
 import { Zap } from 'lucide-react'
+import { DynIcon } from '../../utils/iconMap'
 import { SectionWrapper } from '../ui/SectionWrapper'
 
 const blocks = [
-  { icon: '🔐', name: 'AuthBlock', desc: 'Autenticação completa (OAuth2, MFA, SSO) em 3 dias' },
-  { icon: '📊', name: 'DashBlock', desc: 'Dashboard analítico com gráficos e KPIs em 5 dias' },
-  { icon: '🔔', name: 'NotifyBlock', desc: 'Sistema de notificações multicanal (email, SMS, push) em 2 dias' },
-  { icon: '💳', name: 'PayBlock', desc: 'Integração de pagamentos PIX/cartão em 5 dias' },
-  { icon: '🤖', name: 'AIBlock', desc: 'Copiloto IA com RAG e contexto de negócio em 7 dias' },
-  { icon: '📋', name: 'FormBlock', desc: 'Engine de formulários dinâmicos e workflows em 4 dias' },
-  { icon: '🔍', name: 'SearchBlock', desc: 'Busca semântica com vetores em qualquer base de dados' },
-  { icon: '📁', name: 'DocBlock', desc: 'Gestão e assinatura digital de documentos em 5 dias' }
+  { icon: 'lock', name: 'AuthBlock', desc: 'Autenticação completa (OAuth2, MFA, SSO) em 3 dias' },
+  { icon: 'bar-chart', name: 'DashBlock', desc: 'Dashboard analítico com gráficos e KPIs em 5 dias' },
+  { icon: 'bell', name: 'NotifyBlock', desc: 'Sistema de notificações multicanal (email, SMS, push) em 2 dias' },
+  { icon: 'credit-card', name: 'PayBlock', desc: 'Integração de pagamentos PIX/cartão em 5 dias' },
+  { icon: 'brain-circuit', name: 'AIBlock', desc: 'Copiloto IA com RAG e contexto de negócio em 7 dias' },
+  { icon: 'clipboard-list', name: 'FormBlock', desc: 'Engine de formulários dinâmicos e workflows em 4 dias' },
+  { icon: 'search', name: 'SearchBlock', desc: 'Busca semântica com vetores em qualquer base de dados' },
+  { icon: 'folder-open', name: 'DocBlock', desc: 'Gestão e assinatura digital de documentos em 5 dias' }
 ]
 
 const phases = [
-  { week: 'Semana 1', label: 'Discovery + Design', icon: '📐' },
-  { week: 'Semana 2', label: 'Blocos + Integração', icon: '🧱' },
-  { week: 'Semana 3', label: 'Customização + Testes', icon: '🔧' },
-  { week: 'Semana 4', label: 'Deploy + Handover', icon: '🚀' }
+  { week: 'Semana 1', label: 'Discovery + Design', icon: 'ruler' },
+  { week: 'Semana 2', label: 'Blocos + Integração', icon: 'brick-wall' },
+  { week: 'Semana 3', label: 'Customização + Testes', icon: 'wrench' },
+  { week: 'Semana 4', label: 'Deploy + Handover', icon: 'rocket' }
 ]
 
 export function SectionFourblock() {
@@ -30,7 +31,7 @@ export function SectionFourblock() {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
-            ⬛ Fourblock
+            Fourblock
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
             Produtos digitais em{' '}
@@ -82,7 +83,9 @@ export function SectionFourblock() {
                 transition={{ delay: 0.3 + i * 0.07 }}
                 className="p-4 rounded-2xl bg-foursys-surface/50 border border-white/10 hover:border-foursys-blue/30 transition-all duration-200 hover:-translate-y-1"
               >
-                <div className="text-2xl mb-2">{block.icon}</div>
+                <div className="mb-2">
+                  <DynIcon name={block.icon} size={22} className="text-white/80" />
+                </div>
                 <div className="font-bold text-foursys-cyan text-sm mb-1">{block.name}</div>
                 <div className="text-xs text-foursys-text-dim leading-relaxed">{block.desc}</div>
               </motion.div>
@@ -105,8 +108,8 @@ export function SectionFourblock() {
             {phases.map((phase, i) => (
               <div key={phase.week} className="text-center">
                 <div className="relative mb-3">
-                  <div className="w-12 h-12 rounded-2xl bg-foursys-blue/20 border border-foursys-blue/30 flex items-center justify-center text-xl mx-auto">
-                    {phase.icon}
+                  <div className="w-12 h-12 rounded-2xl bg-foursys-blue/20 border border-foursys-blue/30 flex items-center justify-center mx-auto">
+                    <DynIcon name={phase.icon} size={22} className="text-white/80" />
                   </div>
                   {i < phases.length - 1 && (
                     <div className="hidden md:block absolute top-6 left-full w-full h-px bg-gradient-to-r from-foursys-blue/40 to-transparent" />

@@ -270,7 +270,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const getSectionIcon = useCallback(
     (section: AppSection) =>
-      activeNavigationItems.find(n => n.id === section)?.icon ?? '📄',
+      activeNavigationItems.find(n => n.id === section)?.icon ?? 'file-text',
     [activeNavigationItems]
   )
 

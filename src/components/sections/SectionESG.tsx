@@ -2,20 +2,21 @@ import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { useApp } from '../../context/AppContext'
+import { DynIcon } from '../../utils/iconMap'
 
 // ─── Dados FourLives ──────────────────────────────────────────────────────────
 
 const impactStats = [
-  { value: '3.000+', label: 'Vidas impactadas', icon: '❤️' },
-  { value: '1',      label: 'Árvore plantada por profissional/ano', icon: '🌳' },
-  { value: '3',      label: 'Frentes de impacto social', icon: '🎯' },
-  { value: '26',     label: 'Anos de responsabilidade ESG', icon: '📅' },
+  { value: '3.000+', label: 'Vidas impactadas', icon: 'heart' },
+  { value: '1',      label: 'Árvore plantada por profissional/ano', icon: 'tree-pine' },
+  { value: '3',      label: 'Frentes de impacto social', icon: 'target' },
+  { value: '26',     label: 'Anos de responsabilidade ESG', icon: 'calendar' },
 ]
 
 const fronts = [
   {
     id: 'capacitacao',
-    icon: '🎓',
+    icon: 'graduation-cap',
     title: 'Capacitação',
     color: '#FF6600',
     bg: 'from-orange-500/15 to-orange-600/5',
@@ -31,7 +32,7 @@ const fronts = [
   },
   {
     id: 'inclusao',
-    icon: '🤝',
+    icon: 'handshake',
     title: 'Inclusão',
     color: '#8B5CF6',
     bg: 'from-violet-500/15 to-violet-600/5',
@@ -47,7 +48,7 @@ const fronts = [
   },
   {
     id: 'sustentabilidade',
-    icon: '🌱',
+    icon: 'sprout',
     title: 'Sustentabilidade',
     color: '#4ADE80',
     bg: 'from-green-500/15 to-green-600/5',
@@ -106,7 +107,7 @@ export function SectionESG() {
                   transition={{ delay: 0.1 + i * 0.08 }}
                   className="p-4 rounded-xl bg-foursys-surface/40 border border-white/[0.08] text-center min-w-[130px]"
                 >
-                  <div className="text-2xl mb-1">{stat.icon}</div>
+                  <div className="mb-1"><DynIcon name={stat.icon} size={24} className="text-foursys-blue" /></div>
                   <div className="text-xl font-black text-foursys-blue">{stat.value}</div>
                   <div className="text-[10px] text-foursys-text-dim mt-0.5 leading-tight">{stat.label}</div>
                 </motion.div>
@@ -127,7 +128,7 @@ export function SectionESG() {
               transition={{ delay: 0.1 + i * 0.1, duration: 0.4 }}
               className={`p-6 rounded-2xl bg-gradient-to-br ${front.bg} border ${front.border} flex flex-col`}
             >
-              <div className="text-3xl mb-3">{front.icon}</div>
+              <div className="mb-3"><DynIcon name={front.icon} size={28} className="text-white/80" /></div>
               <h3 className="text-lg font-black text-white mb-3">{front.title}</h3>
               <p className="text-sm text-foursys-text-muted leading-relaxed mb-4 flex-1">
                 {front.description}
@@ -157,7 +158,7 @@ export function SectionESG() {
             className="w-full flex items-center justify-between p-5 rounded-xl bg-foursys-surface/30 border border-white/[0.08] hover:border-foursys-blue/30 transition-all duration-300 group"
           >
             <div className="flex items-center gap-3">
-              <span className="text-2xl">🏅</span>
+              <DynIcon name="award" size={24} className="text-foursys-blue" />
               <div className="text-left">
                 <div className="text-sm font-bold text-white">Premiações & Certificações</div>
                 <div className="text-[11px] text-foursys-text-muted mt-0.5">

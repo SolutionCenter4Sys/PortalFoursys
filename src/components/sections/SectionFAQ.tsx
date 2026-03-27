@@ -29,7 +29,7 @@ export function SectionFAQ() {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
-            💬 Perguntas Frequentes
+            Perguntas Frequentes
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
             Sempre prontos para responder

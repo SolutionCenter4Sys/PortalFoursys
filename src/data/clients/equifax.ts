@@ -11,21 +11,21 @@ export const equifaxClient: ClientConfig = {
       id: 'client-opening',
       label: 'Foursys × Equifax',
       description: 'Parceria em dados e inteligência analítica',
-      icon: '🤝',
+      icon: 'handshake',
       component: 'client-opening',
     },
     {
       id: 'client-insights',
       label: 'Percepções Equifax',
       description: 'Oportunidades no ecossistema Equifax',
-      icon: '🔍',
+      icon: 'search',
       component: 'client-insights',
     },
     {
       id: 'client-cases',
       label: 'Cases no Equifax',
       description: 'Projetos e resultados entregues',
-      icon: '🏆',
+      icon: 'trophy',
       component: 'client-cases',
     },
   ],
@@ -37,7 +37,7 @@ export const equifaxClient: ClientConfig = {
         'Volume crescente de dados sensíveis exigindo pipelines robustos, compliance regulatório e rastreabilidade end-to-end.',
       solution:
         'Governança de IA & Dados: catálogo, linhagem, qualidade e compliance com visibilidade em tempo real.',
-      icon: '📊',
+      icon: 'bar-chart',
     },
     {
       id: 'modelos-risco',
@@ -46,7 +46,7 @@ export const equifaxClient: ClientConfig = {
         'Necessidade de modelos mais precisos e auditáveis para scoring de crédito e detecção de fraude.',
       solution:
         'Dados & Inteligência com Databricks: modelos ML em produção com explicabilidade e monitoramento contínuo.',
-      icon: '🛡️',
+      icon: 'shield-check',
     },
     {
       id: 'plataforma-dados',
@@ -55,7 +55,7 @@ export const equifaxClient: ClientConfig = {
         'Silos de dados dispersos limitando a criação de produtos analíticos de alto valor para clientes.',
       solution:
         'Data Lakehouse: camadas Bronze/Silver/Gold com ingestão em tempo real e APIs de consumo padronizadas.',
-      icon: '🔗',
+      icon: 'link',
     },
   ],
   cases: [

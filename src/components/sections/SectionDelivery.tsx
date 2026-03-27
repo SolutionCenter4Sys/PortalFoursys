@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Check, Star } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { deliveryModels } from '../../data/services'
+import { DynIcon } from '../../utils/iconMap'
 
 export function SectionDelivery() {
   return (
@@ -13,7 +14,7 @@ export function SectionDelivery() {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
-            🚀 Estrutura de Delivery
+            Estrutura de Delivery
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
             4 modelos de entrega
@@ -49,10 +50,10 @@ export function SectionDelivery() {
 
               <div className="flex items-center gap-4 mb-5">
                 <div className={`
-                  w-14 h-14 rounded-2xl flex items-center justify-center text-2xl
+                  w-14 h-14 rounded-2xl flex items-center justify-center
                   ${model.highlight ? 'bg-foursys-blue/30 shadow-[0_0_20px_rgba(0,85,179,0.4)]' : 'bg-foursys-surface border border-white/10'}
                 `}>
-                  {model.icon}
+                  <DynIcon name={model.icon} size={24} className="text-white/80" />
                 </div>
                 <div>
                   <h3 className={`text-xl font-bold ${model.highlight ? 'text-foursys-text' : 'text-foursys-text'}`}>
@@ -87,8 +88,11 @@ export function SectionDelivery() {
           transition={{ delay: 0.6 }}
           className="mt-8 p-5 rounded-2xl bg-foursys-surface/30 border border-white/8 text-center"
         >
-          <p className="text-sm text-foursys-text-muted">
-            💡 <strong className="text-foursys-text">Os modelos podem ser combinados.</strong> Um projeto pode começar como Squad e evoluir para Squad+Agentes à medida que automatizamos processos repetitivos do time.
+          <p className="text-sm text-foursys-text-muted flex items-start justify-center gap-2">
+            <DynIcon name="lightbulb" size={18} className="text-foursys-cyan flex-shrink-0 mt-0.5" />
+            <span>
+              <strong className="text-foursys-text">Os modelos podem ser combinados.</strong> Um projeto pode começar como Squad e evoluir para Squad+Agentes à medida que automatizamos processos repetitivos do time.
+            </span>
           </p>
         </motion.div>
       </div>

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { DynIcon } from '../../utils/iconMap'
 import { awards, certifications } from '../../data/awards'
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -47,7 +48,7 @@ export function SectionAwards() {
               }}
             >
               <div className="flex items-start gap-3 mb-3">
-                <span className="text-3xl flex-shrink-0">{award.icon}</span>
+                <DynIcon name={award.icon} size={28} className="flex-shrink-0" style={{ color: award.glow }} />
                 <div>
                   <span
                     className="text-[9px] font-bold uppercase tracking-widest"
@@ -108,7 +109,7 @@ export function SectionAwards() {
                 className="group flex flex-col items-center p-5 rounded-xl bg-foursys-surface/30 border border-white/[0.08] hover:border-foursys-blue/30 transition-all duration-300"
               >
                 <div className="w-16 h-16 rounded-full bg-foursys-blue/10 border-2 border-foursys-blue/20 flex items-center justify-center mb-3 group-hover:border-foursys-blue/40 transition-colors">
-                  <span className="text-2xl">{cert.icon}</span>
+                  <DynIcon name={cert.icon} size={20} className="text-foursys-blue" />
                 </div>
                 <div className="text-sm font-black text-white">{cert.label}</div>
                 <div className="text-[10px] text-foursys-text-dim mt-1 text-center leading-snug">

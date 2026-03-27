@@ -1,18 +1,19 @@
 import { motion } from 'framer-motion'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { DynIcon } from '../../utils/iconMap'
 
 const pillars = [
-  { icon: '🛠️', title: 'Faça acontecer', desc: 'Cultura de execução e mentalidade maker — ideias que viram produto.' },
-  { icon: '🤝', title: 'Comunidade', desc: 'Rede de profissionais, clientes e parceiros comprometidos com inovação real.' },
-  { icon: '🧪', title: 'Experimentação', desc: 'Ambiente seguro para testar novas tecnologias, métodos e modelos de negócio.' },
-  { icon: '🚀', title: 'Aceleração', desc: 'Programas de aceleração para produtos digitais e startups de tecnologia.' }
+  { icon: 'hammer', title: 'Faça acontecer', desc: 'Cultura de execução e mentalidade maker — ideias que viram produto.' },
+  { icon: 'handshake', title: 'Comunidade', desc: 'Rede de profissionais, clientes e parceiros comprometidos com inovação real.' },
+  { icon: 'flask', title: 'Experimentação', desc: 'Ambiente seguro para testar novas tecnologias, métodos e modelos de negócio.' },
+  { icon: 'rocket', title: 'Aceleração', desc: 'Programas de aceleração para produtos digitais e startups de tecnologia.' }
 ]
 
 const activities = [
-  { type: 'Hackathon', freq: 'Trimestral', icon: '⚡', desc: 'Desafios de 48h com times multidisciplinares' },
-  { type: 'Labs Abertos', freq: 'Mensal', icon: '🔬', desc: 'Sessões práticas com as últimas tecnologias' },
-  { type: 'Co-criação', freq: 'Por demanda', icon: '🎨', desc: 'Workshops de design thinking com clientes' },
-  { type: 'Demos Day', freq: 'Semestral', icon: '🎤', desc: 'Apresentação de projetos e inovações' }
+  { type: 'Hackathon', freq: 'Trimestral', icon: 'zap', desc: 'Desafios de 48h com times multidisciplinares' },
+  { type: 'Labs Abertos', freq: 'Mensal', icon: 'flask', desc: 'Sessões práticas com as últimas tecnologias' },
+  { type: 'Co-criação', freq: 'Por demanda', icon: 'palette', desc: 'Workshops de design thinking com clientes' },
+  { type: 'Demos Day', freq: 'Semestral', icon: 'mic', desc: 'Apresentação de projetos e inovações' }
 ]
 
 export function SectionFourmakers() {
@@ -25,7 +26,7 @@ export function SectionFourmakers() {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
-            🛠️ FourMakers
+            FourMakers
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
             Onde a inovação acontece de verdade
@@ -45,7 +46,7 @@ export function SectionFourmakers() {
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-0 right-0 w-64 h-64 bg-foursys-cyan/5 rounded-full blur-3xl" />
           </div>
-          <div className="text-6xl mb-4">🛠️</div>
+          <div className="mb-4"><DynIcon name="hammer" size={48} className="text-foursys-blue" /></div>
           <div className="text-2xl font-black text-foursys-text mb-3">Comunidade · Laboratório · Aceleração</div>
           <p className="text-foursys-text-muted max-w-lg mx-auto">
             Mais de 500 makers ativos. Dezenas de protótipos gerados. Projetos que viraram produtos reais para clientes.
@@ -62,7 +63,7 @@ export function SectionFourmakers() {
               transition={{ delay: 0.3 + i * 0.08 }}
               className="p-5 rounded-2xl bg-foursys-surface/50 border border-white/10 hover:border-foursys-blue/25 transition-all text-center"
             >
-              <div className="text-3xl mb-3">{p.icon}</div>
+              <div className="mb-3"><DynIcon name={p.icon} size={28} className="text-white/80" /></div>
               <div className="font-bold text-foursys-text text-sm mb-2">{p.title}</div>
               <p className="text-xs text-foursys-text-dim leading-relaxed">{p.desc}</p>
             </motion.div>
@@ -82,7 +83,7 @@ export function SectionFourmakers() {
               transition={{ delay: 0.5 + i * 0.1 }}
               className="flex items-center gap-4 p-5 rounded-2xl bg-foursys-surface/50 border border-white/10"
             >
-              <div className="text-3xl flex-shrink-0">{act.icon}</div>
+              <div className="flex-shrink-0"><DynIcon name={act.icon} size={28} className="text-white/80" /></div>
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <span className="font-bold text-foursys-text">{act.type}</span>

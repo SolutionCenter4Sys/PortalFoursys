@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Clock, BarChart2, MapPin, Copy, CheckCheck, ChevronRight, Star, History } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
+import { DynIcon } from '../../utils/iconMap'
 import { getTrailById, trails } from '../../data/trails'
 import { useSessionHistory } from '../../hooks/useSessionHistory'
 import { SessionHistory } from './SessionHistory'
@@ -59,17 +60,17 @@ export function SessionPanel() {
     const date = new Date().toLocaleDateString('pt-BR', { dateStyle: 'long' })
     const interestLabels = state.interestedSections.map(s => getSectionLabel(s as AppSection))
     const profileLine = state.sessionProfile
-      ? `👤 Perfil: ${state.sessionProfile.role?.toUpperCase() ?? '—'} · ${state.sessionProfile.sector ?? '—'} · ${state.sessionProfile.objective ?? '—'}`
+      ? `[Perfil] ${state.sessionProfile.role?.toUpperCase() ?? '—'} · ${state.sessionProfile.sector ?? '—'} · ${state.sessionProfile.objective ?? '—'}`
       : ''
     const lines = [
-      `📋 Apresentação Institucional Foursys`,
-      `📅 Data: ${date}`,
-      `⏱️  Duração: ${formatHMS(elapsed)}`,
-      `📊 Seções apresentadas: ${visitedStats.length}`,
-      currentTrail ? `🗺️  Trilha: ${currentTrail.label}` : '',
+      `Apresentação Institucional Foursys`,
+      `Data: ${date}`,
+      `Duração: ${formatHMS(elapsed)}`,
+      `Seções apresentadas: ${visitedStats.length}`,
+      currentTrail ? `Trilha: ${currentTrail.label}` : '',
       profileLine,
       ``,
-      interestLabels.length > 0 ? `⭐ Interesse demonstrado em: ${interestLabels.join(', ')}` : '',
+      interestLabels.length > 0 ? `Interesse demonstrado em: ${interestLabels.join(', ')}` : '',
       ``,
       `── Seções Apresentadas ──`,
       ...visitedStats.map(s =>
@@ -213,7 +214,7 @@ export function SessionPanel() {
               <div className="px-4 py-3 border-b border-white/[0.06]">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm">{currentTrail.icon}</span>
+                    <DynIcon name={currentTrail.icon} size={16} className="text-foursys-text-muted" />
                     <span className="text-xs font-semibold text-foursys-text">{currentTrail.label}</span>
                   </div>
                   <span className="text-xs text-foursys-text-dim">{trailProgress}/{currentTrail.steps.length}</span>
@@ -264,7 +265,7 @@ export function SessionPanel() {
                       key={s}
                       className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-400/10 border border-amber-400/25 text-amber-300 text-[10px] font-medium"
                     >
-                      <span>{getSectionIcon(s as AppSection)}</span>
+                      <DynIcon name={getSectionIcon(s as AppSection)} size={12} className="text-amber-300" />
                       {getSectionLabel(s as AppSection)}
                     </span>
                   ))}
@@ -298,7 +299,7 @@ export function SessionPanel() {
                             : 'hover:bg-white/[0.04] border border-transparent'
                           }`}
                       >
-                        <span className="text-base flex-shrink-0">{getSectionIcon(stat.section as AppSection)}</span>
+                        <DynIcon name={getSectionIcon(stat.section as AppSection)} size={16} className="text-foursys-text-muted flex-shrink-0" />
                         <div className="flex-1 min-w-0 text-left">
                           <div className="flex items-center justify-between mb-1">
                             <span className={`text-xs font-medium truncate ${isActive ? 'text-foursys-blue' : 'text-foursys-text-muted group-hover:text-foursys-text'}`}>
@@ -356,7 +357,7 @@ export function SessionPanel() {
                       backgroundColor: `${t.colorHex}12`,
                     } : {}}
                   >
-                    <span className="text-sm">{t.icon}</span>
+                    <DynIcon name={t.icon} size={16} className="text-foursys-text-muted" />
                     <div>
                       <div className="text-[10px] font-semibold text-foursys-text leading-tight">{t.label}</div>
                       <div className="text-[9px] text-foursys-text-dim">{t.duration}</div>

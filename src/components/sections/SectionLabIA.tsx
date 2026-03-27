@@ -1,31 +1,32 @@
 import { motion } from 'framer-motion'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { InterestButton } from '../ui/InterestButton'
+import { DynIcon } from '../../utils/iconMap'
 
 const initiatives = [
   {
-    icon: '🤖',
+    icon: 'brain-circuit',
     title: 'Agentes BMAD',
     status: 'Em produção',
     statusColor: 'text-green-400 bg-green-500/15 border-green-500/25',
     desc: 'Framework proprietário de agentes de IA para desenvolvimento de software: do briefing ao código rodando, de forma autônoma e supervisionada.'
   },
   {
-    icon: '⚡',
+    icon: 'zap',
     title: 'Quality IA',
     status: 'Homologado em produção',
     statusColor: 'text-red-400 bg-red-500/15 border-red-500/25',
     desc: 'Automação inteligente de testes com LLMs — geração de casos de teste, análise de impacto e risk scoring em tempo real.'
   },
   {
-    icon: '📊',
+    icon: 'bar-chart',
     title: 'DataSense IA',
     status: 'Beta',
     statusColor: 'text-orange-400 bg-orange-500/15 border-orange-500/25',
     desc: 'Motor de análise de dados financeiros com IA generativa — consulta em linguagem natural para analistas sem SQL.'
   },
   {
-    icon: '🔍',
+    icon: 'search',
     title: 'CodeReview IA',
     status: 'Em produção',
     statusColor: 'text-green-400 bg-green-500/15 border-green-500/25',
@@ -49,7 +50,7 @@ export function SectionLabIA() {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
-            🤖 Lab IA · Inovação
+            Lab IA · Inovação
           </div>
           <div className="flex justify-center mt-2 mb-2">
             <InterestButton section="lab-ia" />
@@ -82,8 +83,12 @@ export function SectionLabIA() {
                 transition={{ delay: 0.3 + i * 0.1 }}
                 className="text-center"
               >
-                <div className={`w-16 h-16 rounded-2xl ${agent.color}/20 border border-white/20 flex items-center justify-center text-2xl mx-auto mb-3 shadow-lg`}>
-                  {i === 0 ? '👤' : i === 1 ? '🤖' : '⚙️'}
+                <div className={`w-16 h-16 rounded-2xl ${agent.color}/20 border border-white/20 flex items-center justify-center mx-auto mb-3 shadow-lg`}>
+                  <DynIcon
+                    name={i === 0 ? 'user' : i === 1 ? 'brain-circuit' : 'settings'}
+                    size={28}
+                    className="text-white/90"
+                  />
                 </div>
                 <div className={`inline-block px-3 py-1 rounded-full text-xs font-bold mb-2 ${agent.color}/20 text-white border border-white/20`}>
                   {agent.role}
@@ -94,8 +99,11 @@ export function SectionLabIA() {
           </div>
 
           <div className="p-4 rounded-xl bg-foursys-blue/10 border border-foursys-blue/20 text-center">
-            <p className="text-sm text-foursys-text-muted">
-              💡 <strong className="text-foursys-text">Resultado:</strong> um profissional humano com agentes IA produz o equivalente a 3-5 profissionais tradicionais, mantendo governança, auditabilidade e qualidade.
+            <p className="text-sm text-foursys-text-muted inline-flex items-start gap-2 text-left max-w-3xl mx-auto">
+              <DynIcon name="lightbulb" size={18} className="text-foursys-cyan flex-shrink-0 mt-0.5" />
+              <span>
+                <strong className="text-foursys-text">Resultado:</strong> um profissional humano com agentes IA produz o equivalente a 3-5 profissionais tradicionais, mantendo governança, auditabilidade e qualidade.
+              </span>
             </p>
           </div>
         </motion.div>
@@ -114,7 +122,9 @@ export function SectionLabIA() {
               className="p-6 rounded-2xl bg-foursys-surface/50 border border-white/10 hover:border-foursys-blue/30 transition-all duration-300"
             >
               <div className="flex items-start gap-4">
-                <div className="text-3xl flex-shrink-0">{init.icon}</div>
+                <div className="flex-shrink-0 flex items-center justify-center">
+                  <DynIcon name={init.icon} size={24} className="text-white/80" />
+                </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
                     <div className="font-bold text-foursys-text">{init.title}</div>

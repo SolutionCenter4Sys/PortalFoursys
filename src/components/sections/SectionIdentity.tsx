@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { kpis } from '../../data/kpis'
+import { DynIcon } from '../../utils/iconMap'
 
 function KPICard({ kpi, delay }: { kpi: typeof kpis[0]; delay: number }) {
   const [count, setCount] = useState(0)
@@ -57,7 +58,7 @@ export function SectionIdentity() {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
-            🌟 Quem Somos
+            Quem Somos
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
             A Foursys em números
@@ -78,19 +79,19 @@ export function SectionIdentity() {
           {[
             {
               title: 'Missão',
-              icon: '🎯',
+              icon: 'target',
               content: 'Ser o parceiro estratégico que transforma a tecnologia em vantagem competitiva real para nossos clientes — com velocidade, qualidade e inovação.',
               gradient: 'from-foursys-blue/20 to-transparent'
             },
             {
               title: 'Visão',
-              icon: '🔭',
+              icon: 'telescope',
               content: 'Ser reconhecidos globalmente como referência em transformação digital no setor financeiro, combinando expertise humana e inteligência artificial.',
               gradient: 'from-foursys-cyan/15 to-transparent'
             },
             {
               title: 'Propósito',
-              icon: '💡',
+              icon: 'lightbulb',
               content: 'Fazer a tecnologia trabalhar de verdade para as pessoas — simplificando o complexo, acelerando o possível e inovando com responsabilidade.',
               gradient: 'from-violet-500/15 to-transparent'
             }
@@ -102,7 +103,9 @@ export function SectionIdentity() {
               transition={{ delay: 0.6 + i * 0.1 }}
               className={`p-6 rounded-2xl bg-gradient-to-b ${item.gradient} border border-white/10 backdrop-blur-md`}
             >
-              <div className="text-2xl mb-3">{item.icon}</div>
+              <div className="mb-3">
+                <DynIcon name={item.icon} size={28} className="text-white/80" />
+              </div>
               <div className="text-sm font-semibold text-foursys-cyan uppercase tracking-widest mb-2">{item.title}</div>
               <p className="text-foursys-text-muted text-sm leading-relaxed">{item.content}</p>
             </motion.div>

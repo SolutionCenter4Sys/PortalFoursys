@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { CheckCircle } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { DynIcon } from '../../utils/iconMap'
 
 const benefits = [
   'Geração automática de casos de teste com LLMs',
@@ -28,7 +29,7 @@ export function SectionQualityIA() {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
-            ⚡ Framework Quality IA
+            Framework Quality IA
           </div>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs mb-4 ml-2">
             ✓ Homologado pelo Santander
@@ -54,11 +55,11 @@ export function SectionQualityIA() {
 
           <div className="grid grid-cols-3 md:grid-cols-5 gap-3 items-center">
             {[
-              { label: 'Repositório\nde Código', icon: '📁', color: 'bg-blue-500/20 border-blue-500/30' },
+              { label: 'Repositório\nde Código', icon: 'folder-open', color: 'bg-blue-500/20 border-blue-500/30' },
               { label: '→', icon: '', color: 'bg-transparent border-transparent', arrow: true },
-              { label: 'Quality IA\nEngine', icon: '🤖', color: 'bg-foursys-blue/30 border-foursys-blue/50', highlight: true },
+              { label: 'Quality IA\nEngine', icon: 'brain-circuit', color: 'bg-foursys-blue/30 border-foursys-blue/50', highlight: true },
               { label: '→', icon: '', color: 'bg-transparent border-transparent', arrow: true },
-              { label: 'CI/CD\nPipeline', icon: '🚀', color: 'bg-green-500/20 border-green-500/30' }
+              { label: 'CI/CD\nPipeline', icon: 'rocket', color: 'bg-green-500/20 border-green-500/30' }
             ].map((item, i) => (
               item.arrow ? (
                 <div key={i} className="text-foursys-text-dim text-2xl text-center hidden md:block">→</div>
@@ -67,7 +68,7 @@ export function SectionQualityIA() {
                   key={i}
                   className={`p-4 rounded-xl border text-center ${item.color} ${item.highlight ? 'shadow-[0_0_30px_rgba(0,85,179,0.3)]' : ''}`}
                 >
-                  <div className="text-2xl mb-2">{item.icon}</div>
+                  <div className="mb-2"><DynIcon name={item.icon} size={24} className={item.highlight ? 'text-foursys-cyan' : 'text-foursys-text-muted'} /></div>
                   <div className={`text-xs font-medium ${item.highlight ? 'text-foursys-cyan' : 'text-foursys-text-muted'} whitespace-pre-line`}>
                     {item.label}
                   </div>

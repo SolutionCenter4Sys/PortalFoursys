@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle2, X } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { InterestButton } from '../ui/InterestButton'
 import { useApp } from '../../context/AppContext'
+import { DynIcon } from '../../utils/iconMap'
 
 // ─── Dados das ofertas flagship ───────────────────────────────────────────────
 
@@ -340,13 +341,15 @@ export function SectionOffersFlag() {
           <h3 className="text-sm font-bold text-foursys-text mb-3 md:mb-4">Como trabalhamos</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {[
-              { title: 'Squads',   desc: 'Times multidisciplinares integrados ao seu time, com governança e métricas.', icon: '👥' },
-              { title: 'Projetos', desc: 'Escopo definido, prazo e entregas claras. Ideal para modernização e migração.', icon: '📋' },
-              { title: 'Alocação', desc: 'Profissionais especializados para demandas de curto ou médio prazo.', icon: '🎯' },
-              { title: 'AMS',      desc: 'Application Management Services com SLAs, NOC e evolução contínua.', icon: '⚙️' },
+              { title: 'Squads',   desc: 'Times multidisciplinares integrados ao seu time, com governança e métricas.', icon: 'users' },
+              { title: 'Projetos', desc: 'Escopo definido, prazo e entregas claras. Ideal para modernização e migração.', icon: 'clipboard-list' },
+              { title: 'Alocação', desc: 'Profissionais especializados para demandas de curto ou médio prazo.', icon: 'target' },
+              { title: 'AMS',      desc: 'Application Management Services com SLAs, NOC e evolução contínua.', icon: 'settings' },
             ].map(model => (
               <div key={model.title} className="flex gap-2.5 md:gap-3">
-                <span className="text-xl md:text-2xl flex-shrink-0">{model.icon}</span>
+                <span className="flex-shrink-0 mt-0.5">
+                  <DynIcon name={model.icon} size={24} className="text-foursys-text-muted" />
+                </span>
                 <div>
                   <div className="text-xs md:text-sm font-bold text-foursys-text mb-0.5 md:mb-1">{model.title}</div>
                   <p className="text-[11px] md:text-xs text-foursys-text-muted leading-relaxed">{model.desc}</p>
