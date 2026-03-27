@@ -85,6 +85,9 @@ export interface TimelineItem {
   title: string
   description: string
   highlight?: boolean
+  icon?: string
+  era?: string
+  kpi?: { value: string; label: string }
 }
 
 export interface OfferDetail {

@@ -42,56 +42,78 @@ export const kpis: KPI[] = [
 export const timeline: TimelineItem[] = [
   {
     year: '1999',
-    title: 'Fundação da Foursys',
-    description: 'Nascemos em São Paulo com foco em desenvolvimento de sistemas e consultoria tecnológica para o mercado financeiro.',
-    highlight: false
+    title: 'Nasce a Foursys em São Paulo',
+    description: 'Consultoria focada em sistemas críticos para o mercado financeiro — onde erro não é opção.',
+    icon: 'rocket',
+    era: 'Origem',
+    kpi: { value: '1º', label: 'cliente financeiro' },
   },
   {
     year: '2005',
-    title: 'Expansão Financeira',
-    description: 'Consolidação como parceiro estratégico dos maiores bancos e seguradoras do Brasil — setores regulados de alta criticidade.',
-    highlight: false
+    title: 'Top-10 bancos do Brasil como clientes',
+    description: 'Consolidação como parceiro estratégico em setores regulados de alta criticidade — bancos, seguradoras e financeiras.',
+    icon: 'landmark',
+    era: 'Origem',
+    kpi: { value: '5+', label: 'grandes bancos' },
   },
   {
     year: '2010',
-    title: 'Centro de Excelência Ágil',
-    description: 'Pioneiros na adoção de metodologias ágeis no Brasil, treinando centenas de equipes em Scrum e XP.',
-    highlight: false
+    title: 'Pioneiros em agilidade no Brasil',
+    description: 'Primeiro centro de excelência ágil do setor, treinando centenas de equipes em Scrum e XP antes de ser mainstream.',
+    icon: 'zap',
+    era: 'Crescimento',
+    kpi: { value: '200+', label: 'equipes treinadas' },
   },
   {
     year: '2015',
-    title: 'Internacionalização — EUA',
-    description: 'Abertura do escritório nos Estados Unidos. Início de projetos para clientes globais.',
-    highlight: true
+    title: 'Escritório nos EUA — operação global',
+    description: 'Expansão internacional com projetos para clientes globais, levando a expertise brasileira para o mercado americano.',
+    highlight: true,
+    icon: 'globe',
+    era: 'Crescimento',
+    kpi: { value: '3', label: 'continentes' },
   },
   {
     year: '2018',
-    title: 'Expansão Europa',
-    description: 'Presença estabelecida na Europa com projetos em Portugal, Espanha e outros países.',
-    highlight: false
+    title: 'Presença na Europa e 12 países',
+    description: 'Operação consolidada em Portugal e Espanha, atendendo projetos em 12 países simultaneamente.',
+    icon: 'globe',
+    era: 'Expansão Global',
+    kpi: { value: '12', label: 'países ativos' },
   },
   {
     year: '2020',
-    title: 'Transformação Digital',
-    description: 'Lançamento do portfólio de serviços de cloud, dados e IA. Parceria estratégica com AWS e Databricks.',
-    highlight: true
+    title: 'Portfólio Cloud, Dados & IA',
+    description: 'Lançamento de novas linhas de serviço em cloud, engenharia de dados e inteligência artificial. Parcerias com AWS e Databricks.',
+    highlight: true,
+    icon: 'cloud',
+    era: 'Expansão Global',
+    kpi: { value: '3x', label: 'crescimento em IA' },
   },
   {
     year: '2022',
-    title: 'Foursys Labs e FourMakers',
-    description: 'Criação do laboratório de inovação e do programa FourMakers para aceleração de produtos digitais.',
-    highlight: false
+    title: 'Lab de Inovação e FourMakers',
+    description: 'Criação do laboratório de inovação para PoCs aceleradas e do programa FourMakers para capacitação e aceleração de produtos.',
+    icon: 'flask',
+    era: 'Inovação',
+    kpi: { value: '30+', label: 'PoCs entregues' },
   },
   {
     year: '2024',
-    title: 'Agentes IA Híbridos',
-    description: 'Pioneiros no Brasil em soluções de agentes IA híbridos — combinando autonomia de IA com expertise humana.',
-    highlight: true
+    title: 'Agentes IA Híbridos — pioneiros no Brasil',
+    description: 'Primeira empresa brasileira a entregar soluções produtivas com agentes IA híbridos, combinando autonomia de IA com expertise humana.',
+    highlight: true,
+    icon: 'brain-circuit',
+    era: 'Inovação',
+    kpi: { value: '1ª', label: 'do Brasil em agentes' },
   },
   {
     year: '2026',
-    title: 'IA First & Quality IA em Escala',
-    description: 'Lançamento da oferta IA First com ROI em 4–6 semanas e homologação do Framework Quality IA em instituições financeiras de grande porte.',
-    highlight: true
-  }
+    title: 'IA First com ROI em 4–6 semanas',
+    description: 'Oferta IA First homologada por grandes instituições financeiras. Framework Quality IA operando em escala com retorno mensurável.',
+    highlight: true,
+    icon: 'star',
+    era: 'Futuro',
+    kpi: { value: '4–6', label: 'semanas para ROI' },
+  },
 ]
