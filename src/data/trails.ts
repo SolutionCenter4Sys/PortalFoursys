@@ -37,6 +37,8 @@ export const trails: Trail[] = [
       { sectionId: 'delivery',       estimatedMinutes: 8  },
       { sectionId: 'lab-ia',         estimatedMinutes: 8  },
       { sectionId: 'cases',          estimatedMinutes: 10 },
+      { sectionId: 'awards',         estimatedMinutes: 4  },
+      { sectionId: 'clients-showcase', estimatedMinutes: 3 },
       { sectionId: 'esg',            estimatedMinutes: 5  },
       { sectionId: 'faq',            estimatedMinutes: 6  },
     ]
@@ -73,8 +75,11 @@ export const trails: Trail[] = [
       { sectionId: 'identity',       estimatedMinutes: 5  },
       { sectionId: 'offers-flagship',estimatedMinutes: 10 },
       { sectionId: 'cases',          estimatedMinutes: 12 },
+      { sectionId: 'awards',         estimatedMinutes: 4  },
+      { sectionId: 'clients-showcase', estimatedMinutes: 3 },
       { sectionId: 'alliances',      estimatedMinutes: 5  },
       { sectionId: 'esg',            estimatedMinutes: 5  },
+      { sectionId: 'insights',       estimatedMinutes: 5  },
       { sectionId: 'faq',            estimatedMinutes: 5  },
     ]
   }

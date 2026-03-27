@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { useApp } from '../../context/AppContext'
 
 // ─── Dados FourLives ──────────────────────────────────────────────────────────
 
@@ -61,16 +63,10 @@ const fronts = [
   },
 ]
 
-const recognitions = [
-  { title: 'Great Place to Work', subtitle: '3,6% turnover — referência no setor', icon: '⭐' },
-  { title: 'Prêmio Agilidade Brasil', subtitle: '2024 e 2025 — premiação consecutiva', icon: '🏆' },
-  { title: '100 Open Startups', subtitle: 'Top ranking 2023 e 2024', icon: '🚀' },
-  { title: 'Colaborar para Inovar', subtitle: '2020, 2022, 2023 e 2024', icon: '🤝' },
-]
-
 // ─── Componente principal ─────────────────────────────────────────────────────
 
 export function SectionESG() {
+  const { navigate } = useApp()
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-6 md:py-10 max-w-6xl mx-auto">
@@ -148,54 +144,29 @@ export function SectionESG() {
           ))}
         </div>
 
-        {/* ── Reconhecimentos ── */}
+        {/* ── CTA Premiações ── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.4 }}
+          className="mt-2 pt-6 border-t border-white/[0.06]"
         >
-          <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-4">
-            Premiações e Reconhecimentos
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {recognitions.map((rec, i) => (
-              <motion.div
-                key={rec.title}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.55 + i * 0.07 }}
-                className="p-4 rounded-xl bg-foursys-surface/30 border border-white/[0.08] flex gap-3 items-start"
-              >
-                <span className="text-xl flex-shrink-0">{rec.icon}</span>
-                <div>
-                  <div className="text-xs font-bold text-foursys-text">{rec.title}</div>
-                  <div className="text-[10px] text-foursys-text-dim mt-0.5 leading-snug">{rec.subtitle}</div>
+          <button
+            type="button"
+            onClick={() => navigate('awards')}
+            className="w-full flex items-center justify-between p-5 rounded-xl bg-foursys-surface/30 border border-white/[0.08] hover:border-foursys-blue/30 transition-all duration-300 group"
+          >
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">🏅</span>
+              <div className="text-left">
+                <div className="text-sm font-bold text-white">Premiações & Certificações</div>
+                <div className="text-[11px] text-foursys-text-muted mt-0.5">
+                  GPTW, Agilidade Brasil, 100 Open Startups, ISO 9001, 27001 e mais
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* ── Certificações ── */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="mt-8 pt-6 border-t border-white/[0.06]"
-        >
-          <p className="text-xs text-foursys-text-dim text-center mb-4 uppercase tracking-[0.14em]">
-            Certificações que reforçam nosso compromisso
-          </p>
-          <div className="flex items-center justify-center gap-6 flex-wrap">
-            {['ISO 9001', 'ISO 27001', 'ISO 27701', 'ISO 14001', 'SAFe', 'GPTW', 'Agilidade Brasil', '100 Open Startups'].map(cert => (
-              <span
-                key={cert}
-                className="text-xs px-3 py-1.5 rounded-full border border-white/[0.1] text-foursys-text-muted font-medium"
-              >
-                {cert}
-              </span>
-            ))}
-          </div>
+              </div>
+            </div>
+            <ArrowRight size={18} className="text-foursys-text-dim group-hover:text-foursys-blue transition-colors" />
+          </button>
         </motion.div>
 
       </div>

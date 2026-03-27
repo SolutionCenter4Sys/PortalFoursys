@@ -182,10 +182,13 @@ export type AppSection =
   | 'alliances'
   // Provas
   | 'cases'
+  | 'awards'
+  | 'clients-showcase'
   | 'capabilities'
   // ESG
   | 'esg'
   // Referência
+  | 'insights'
   | 'faq'
   // Cliente (injetadas dinamicamente)
   | 'client-opening'

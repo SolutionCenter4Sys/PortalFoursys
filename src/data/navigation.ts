@@ -111,6 +111,20 @@ export const navigationItems: NavigationItem[] = [
     description: 'Resultados mensuráveis em Saúde, Financeiro e Seguros',
   },
   {
+    id: 'awards',
+    label: 'Premiações',
+    icon: '🏅',
+    category: 'Provas',
+    description: 'Prêmios, certificações e reconhecimentos que validam nossa entrega',
+  },
+  {
+    id: 'clients-showcase',
+    label: 'Nossos Clientes',
+    icon: '🏢',
+    category: 'Provas',
+    description: 'Empresas que confiam na Foursys em 3 continentes',
+  },
+  {
     id: 'capabilities',
     label: 'Capacidades Técnicas',
     icon: '💡',
@@ -128,6 +142,13 @@ export const navigationItems: NavigationItem[] = [
   },
 
   // ── Referência ─────────────────────────────────────────────────────────────
+  {
+    id: 'insights',
+    label: 'Insights',
+    icon: '📝',
+    category: 'Referência',
+    description: 'Thought leadership e visões estratégicas sobre tecnologia',
+  },
   {
     id: 'faq',
     label: 'Perguntas Frequentes',

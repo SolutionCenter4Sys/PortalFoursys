@@ -20,6 +20,9 @@ import {
   ScanEye,
   Zap,
   Star,
+  Award,
+  Briefcase,
+  FileText,
   type LucideIcon,
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
@@ -43,8 +46,11 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
   'fourmakers':      Hammer,
   'alliances':       Network,
   'cases':           Trophy,
+  'awards':          Award,
+  'clients-showcase': Briefcase,
   'capabilities':    Code2,
   'esg':             Leaf,
+  'insights':        FileText,
   'faq':             HelpCircle,
   // Client sections
   'client-opening':  Building2,

@@ -14,8 +14,11 @@ import { SectionLabIA } from './sections/SectionLabIA'
 import { SectionFourmakers } from './sections/SectionFourmakers'
 import { SectionAlliances } from './sections/SectionAlliances'
 import { SectionCases } from './sections/SectionCases'
+import { SectionAwards } from './sections/SectionAwards'
+import { SectionClients } from './sections/SectionClients'
 import { SectionCapabilities } from './sections/SectionCapabilities'
 import { SectionESG } from './sections/SectionESG'
+import { SectionInsights } from './sections/SectionInsights'
 import { SectionFAQ } from './sections/SectionFAQ'
 // Client sections
 import { SectionClientOpening } from './sections/client/SectionClientOpening'
@@ -53,13 +56,16 @@ export function SectionRenderer() {
       {section === 'alliances'      && <SectionAlliances key="alliances" />}
 
       {/* ── Provas ── */}
-      {section === 'cases'          && <SectionCases key="cases" />}
-      {section === 'capabilities'   && <SectionCapabilities key="capabilities" />}
+      {section === 'cases'              && <SectionCases key="cases" />}
+      {section === 'awards'             && <SectionAwards key="awards" />}
+      {section === 'clients-showcase'   && <SectionClients key="clients-showcase" />}
+      {section === 'capabilities'       && <SectionCapabilities key="capabilities" />}
 
       {/* ── ESG ── */}
       {section === 'esg'            && <SectionESG key="esg" />}
 
       {/* ── Referência ── */}
+      {section === 'insights'       && <SectionInsights key="insights" />}
       {section === 'faq'            && <SectionFAQ key="faq" />}
 
       {/* ── Seções de Cliente (dinâmicas) ── */}

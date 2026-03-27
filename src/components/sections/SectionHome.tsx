@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useCountUp } from '../../hooks/useCountUp'
 import { useApp } from '../../context/AppContext'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { CertificationBadge } from '../ui/CertificationBadge'
 import { clients } from '../../data/clients'
 
 // ─── Dados ────────────────────────────────────────────────────────────────────
@@ -13,8 +14,6 @@ const flagshipOffers = [
   'FourBlox',
   'Quality IA',
 ]
-
-const certifications = ['ISO 9001', 'ISO 27001', 'SAFe', 'GPTW', 'AWS', 'Microsoft']
 
 const allianceLogos = [
   { id: 'microsoft', label: 'Microsoft', color: '#00A4EF' },
@@ -264,12 +263,12 @@ export function SectionHome() {
 
           {/* Certificações */}
           <div className="px-5 md:px-10 py-4 md:py-5 border-b sm:border-b-0 sm:border-r border-white/[0.06]">
-            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-blue mb-2">
+            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-blue mb-3">
               Certificações
             </div>
-            <div className="flex flex-wrap gap-x-3 gap-y-1">
-              {certifications.map(c => (
-                <span key={c} className="text-xs text-foursys-text-muted font-medium">{c}</span>
+            <div className="flex items-center gap-3 flex-wrap">
+              {['ISO 9001', 'ISO 27001', 'ISO 27701', 'ISO 14001'].map(cert => (
+                <CertificationBadge key={cert} label={cert} size="sm" />
               ))}
             </div>
           </div>
