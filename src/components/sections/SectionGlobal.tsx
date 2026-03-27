@@ -111,13 +111,6 @@ const kpis = [
   { value: '7', label: 'Unidades globais', icon: 'building' },
 ]
 
-const milestones = [
-  { year: '2000', label: 'Empresa de software' },
-  { year: '2015', label: 'Agilidade como Cultura' },
-  { year: '2019', label: 'Design Orientado a Dados' },
-  { year: '2022', label: 'Plataforma e Ecossistema Digital' },
-  { year: '2025', label: 'Inovação com Tecnologias Disruptivas' },
-]
 
 function UnitRow({
   unit,
@@ -383,56 +376,6 @@ export function SectionGlobal() {
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="rounded-2xl bg-foursys-surface/40 border border-white/10 p-5 md:p-6"
-        >
-          <p className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-5">
-            Nossa trajetória é de crescimento e adaptação ao mercado global
-          </p>
-
-          <div className="hidden sm:flex items-start">
-            {milestones.map((milestone, index) => (
-              <div key={milestone.year} className="flex-1 relative">
-                {index < milestones.length - 1 && (
-                  <div className="absolute top-[9px] left-1/2 w-full h-px bg-gradient-to-r from-[#FF6600]/70 to-[#FF6600]/20 pointer-events-none" />
-                )}
-                <div className="flex flex-col items-center text-center px-1">
-                  <div
-                    className="w-[18px] h-[18px] rounded-full border-2 border-[#FF6600] bg-foursys-dark-2 z-10 relative mb-2 flex-shrink-0 flex items-center justify-center"
-                    style={{ boxShadow: '0 0 12px rgba(255,102,0,0.5)' }}
-                  >
-                    <div className="w-2 h-2 rounded-full bg-[#FF6600]" />
-                  </div>
-                  <div className="text-sm font-black text-[#FF6600]">{milestone.year}</div>
-                  <div className="text-[10px] text-foursys-text-dim leading-snug mt-1 max-w-[88px]">{milestone.label}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex flex-col gap-4 sm:hidden">
-            {milestones.map((milestone, index) => (
-              <div key={milestone.year} className="flex items-start gap-4 relative">
-                {index < milestones.length - 1 && (
-                  <div className="absolute left-[8px] top-5 bottom-[-16px] w-px bg-gradient-to-b from-[#FF6600]/60 to-transparent" />
-                )}
-                <div
-                  className="w-[18px] h-[18px] rounded-full border-2 border-[#FF6600] bg-foursys-dark-2 flex-shrink-0 flex items-center justify-center z-10"
-                  style={{ boxShadow: '0 0 10px rgba(255,102,0,0.4)' }}
-                >
-                  <div className="w-2 h-2 rounded-full bg-[#FF6600]" />
-                </div>
-                <div>
-                  <div className="text-sm font-black text-[#FF6600]">{milestone.year}</div>
-                  <div className="text-xs text-foursys-text-dim leading-snug">{milestone.label}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </SectionWrapper>
   )

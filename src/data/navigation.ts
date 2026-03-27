@@ -19,18 +19,18 @@ export const navigationItems: NavigationItem[] = [
     description: 'KPIs, missão e posicionamento da Foursys',
   },
   {
-    id: 'timeline',
-    label: 'Nossa Trajetória',
-    icon: 'calendar',
-    category: 'Institucional',
-    description: 'Evolução e marcos históricos — 26 anos de entrega',
-  },
-  {
     id: 'global',
     label: 'Presença Global',
     icon: 'globe',
     category: 'Institucional',
     description: 'Brasil, Estados Unidos e Portugal',
+  },
+  {
+    id: 'timeline',
+    label: 'Nossa Trajetória',
+    icon: 'calendar',
+    category: 'Institucional',
+    description: 'Evolução e marcos históricos — 26 anos de entrega',
   },
 
   // ── Ofertas ────────────────────────────────────────────────────────────────
