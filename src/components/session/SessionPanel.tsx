@@ -79,7 +79,7 @@ export function SessionPanel() {
       ``,
       `── Próximos Passos Sugeridos ──`,
       visitedStats.some(s => s.section === 'offers-flagship')
-        ? `• Agendar demo das ofertas flagship com equipe técnica` : '',
+        ? `• Agendar demo das principais ofertas com equipe técnica` : '',
       visitedStats.some(s => s.section === 'cases')
         ? `• Solicitar relatório completo dos cases apresentados` : '',
       visitedStats.some(s => s.section === 'lab-ia')

@@ -11,7 +11,7 @@ import { DynIcon } from '../../utils/iconMap'
 const flagshipOffers = [
   {
     id: 'ai-squad',
-    badge: 'Flagship',
+    badge: 'Destaque',
     title: 'AI-Augmented Squad',
     tagline: 'Valor em semanas, não em meses.',
     description:
@@ -34,7 +34,7 @@ const flagshipOffers = [
   },
   {
     id: 'modernizacao',
-    badge: 'Flagship',
+    badge: 'Destaque',
     title: 'Modernização de Legado',
     tagline: 'Do core ao cloud, sem trauma.',
     description:
@@ -57,7 +57,7 @@ const flagshipOffers = [
   },
   {
     id: 'ia-first',
-    badge: 'Flagship',
+    badge: 'Destaque',
     title: 'IA First',
     tagline: 'Do piloto ao resultado mensurável em 4–6 semanas.',
     description:
@@ -80,7 +80,7 @@ const flagshipOffers = [
   },
   {
     id: 'fourblox',
-    badge: 'Flagship',
+    badge: 'Destaque',
     title: 'FourBlox',
     tagline: 'Produtos digitais por assinatura, prontos para escalar.',
     description:
@@ -103,7 +103,7 @@ const flagshipOffers = [
   },
   {
     id: 'quality-ia',
-    badge: 'Flagship',
+    badge: 'Destaque',
     title: 'Quality IA',
     tagline: 'QA, certificação e automação com IA — menos falhas, mais previsibilidade.',
     description:
@@ -294,7 +294,7 @@ export function SectionOffersFlag() {
                 Nossas principais ofertas
               </p>
               <h2 className="text-2xl md:text-4xl font-black text-white leading-none">
-                Ofertas Flagship
+                Principais Ofertas
               </h2>
               <p className="text-foursys-text-muted mt-2 text-sm md:text-base max-w-xl leading-relaxed">
                 Impacto comprovado — valor em semanas, governança enterprise e resultado mensurável.

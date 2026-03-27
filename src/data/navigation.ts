@@ -36,7 +36,7 @@ export const navigationItems: NavigationItem[] = [
   // ── Ofertas ────────────────────────────────────────────────────────────────
   {
     id: 'offers-flagship',
-    label: 'Ofertas Flagship',
+    label: 'Principais Ofertas',
     icon: 'rocket',
     category: 'Ofertas',
     description: 'AI-Augmented Squad, Modernização, IA First, FourBlox e Quality IA',
