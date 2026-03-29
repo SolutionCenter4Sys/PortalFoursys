@@ -8,7 +8,7 @@ import {
   CheckCircle2, Calendar, ClipboardList, Wrench, Search, Brain,
   Landmark, Bell, CreditCard, FolderOpen, Pencil, Mic, FlaskConical,
   Palette, Blocks, Ruler, BrickWall, AlertTriangle, Handshake,
-  Sprout, Cpu, TrendingUp, type LucideIcon,
+  Sprout, Cpu, TrendingUp, Headphones, PackageCheck, type LucideIcon,
 } from 'lucide-react'
 
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -76,6 +76,8 @@ const ICON_MAP: Record<string, LucideIcon> = {
   handshake: Handshake,
   cpu: Cpu,
   'trending-up': TrendingUp,
+  headphones: Headphones,
+  'package-check': PackageCheck,
 }
 
 export function getIcon(name: string): LucideIcon {

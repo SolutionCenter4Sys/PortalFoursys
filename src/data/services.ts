@@ -317,5 +317,31 @@ export const deliveryModels: DeliveryModel[] = [
       'Qualidade monitorada por IA continuamente'
     ],
     highlight: true
+  },
+  {
+    id: 'sustentacao-suporte',
+    title: 'Sustentação e Suporte',
+    description: 'Operação contínua de ambientes críticos com SLAs rigorosos, governança proativa e evolução permanente — garantindo estabilidade e previsibilidade para o negócio.',
+    icon: 'headphones',
+    features: [
+      'SLAs contratuais com penalidades e metas claras',
+      'Monitoramento 24×7 com resposta a incidentes',
+      'Gestão de backlog evolutivo e correções priorizadas',
+      'Relatórios gerenciais de disponibilidade e performance',
+      'Transferência de conhecimento e documentação contínua'
+    ]
+  },
+  {
+    id: 'produtos-assinatura',
+    title: 'Produtos Foursys por Assinatura',
+    description: 'Plataformas digitais prontas, customizáveis e mantidas pela Foursys em modelo SaaS. O cliente contrata o resultado, não o esforço — com go-live em semanas e evolução contínua inclusa.',
+    icon: 'package-check',
+    features: [
+      'Plataformas prontas: check-in, gestão de eventos, portais e mais',
+      'Personalização de marca, fluxos e regras de negócio',
+      'Modelo por assinatura mensal sem investimento inicial',
+      'Atualizações, hospedagem e suporte inclusos',
+      'Escalável sob demanda com infraestrutura cloud-native'
+    ]
   }
 ]

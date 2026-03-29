@@ -17,7 +17,7 @@ export function SectionDelivery() {
             Estrutura de Delivery
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
-            4 modelos de entrega
+            6 modelos de entrega
           </h2>
           <p className="text-lg text-foursys-text-muted max-w-2xl mx-auto">
             Cada cliente tem uma necessidade diferente. Escolhemos juntos o modelo que mais gera valor no seu contexto.
