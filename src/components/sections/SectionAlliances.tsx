@@ -43,8 +43,8 @@ export function SectionAlliances() {
               transition={{ delay: i * 0.1 }}
               className={`group relative p-6 md:p-8 rounded-2xl bg-gradient-to-br ${partner.bg} border ${partner.border} flex flex-col items-center text-center hover:-translate-y-1.5 hover:shadow-lg hover:shadow-${partner.id === 'microsoft' ? 'blue' : 'white'}-500/10 transition-all duration-300`}
             >
-              <div className="mb-4 h-12 flex items-center justify-center opacity-90 group-hover:opacity-100 transition-opacity group-hover:scale-110 duration-300">
-                <PartnerLogo id={partner.id} size={partner.id === 'aws' || partner.id === 'sap' ? 20 : partner.id === 'oracle' || partner.id === 'salesforce' ? 18 : 40} />
+              <div className="mb-4 h-16 flex items-center justify-center opacity-90 group-hover:opacity-100 transition-opacity group-hover:scale-110 duration-300">
+                <PartnerLogo id={partner.id} size={40} />
               </div>
               <div className="font-bold text-foursys-text text-sm mb-1">{partner.name}</div>
               <div className="text-xs text-foursys-text-dim">{partner.tagline}</div>
@@ -65,7 +65,7 @@ export function SectionAlliances() {
                 className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-110 duration-300"
                 style={{ backgroundColor: `${alliance.color}15`, border: `1px solid ${alliance.color}33` }}
               >
-                <PartnerLogo id={alliance.id as PartnerId} size={alliance.id === 'aws' || alliance.id === 'sap' ? 14 : alliance.id === 'oracle' || alliance.id === 'salesforce' ? 12 : 28} />
+                <PartnerLogo id={alliance.id as PartnerId} size={22} />
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-3 mb-1 flex-wrap">

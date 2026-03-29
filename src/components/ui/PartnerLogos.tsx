@@ -1,82 +1,90 @@
 interface LogoProps {
   className?: string
   size?: number
-  color?: string
 }
 
-export function MicrosoftLogo({ className = '', size = 24 }: LogoProps) {
+export function MicrosoftLogo({ className = '', size = 32 }: LogoProps) {
   return (
-    <svg viewBox="0 0 23 23" width={size} height={size} className={className} aria-label="Microsoft">
-      <rect x="1" y="1" width="10" height="10" fill="#F25022" />
-      <rect x="12" y="1" width="10" height="10" fill="#7FBA00" />
-      <rect x="1" y="12" width="10" height="10" fill="#00A4EF" />
-      <rect x="12" y="12" width="10" height="10" fill="#FFB900" />
+    <svg viewBox="0 0 21 21" width={size} height={size} className={className} aria-label="Microsoft">
+      <rect x="0" y="0" width="10" height="10" fill="#F25022" rx="1" />
+      <rect x="11" y="0" width="10" height="10" fill="#7FBA00" rx="1" />
+      <rect x="0" y="11" width="10" height="10" fill="#00A4EF" rx="1" />
+      <rect x="11" y="11" width="10" height="10" fill="#FFB900" rx="1" />
     </svg>
   )
 }
 
-export function AwsLogo({ className = '', size = 40 }: LogoProps) {
+export function AwsLogo({ className = '', size = 32 }: LogoProps) {
+  const w = size * 2.2
+  const h = size
   return (
-    <svg viewBox="0 0 80 48" width={size * 2} height={size * 1.2} className={className} aria-label="AWS">
-      <path d="M22.7 21.8c0 .8.1 1.5.3 2 .2.5.5 1.1.8 1.7.1.2.2.4.2.5 0 .2-.1.4-.4.6l-1.2.8c-.2.1-.3.2-.5.2-.2 0-.4-.1-.6-.3-.3-.3-.5-.6-.7-.9-.2-.3-.4-.7-.6-1.1-1.5 1.8-3.4 2.7-5.8 2.7-1.6 0-3-.5-3.9-1.4-1-.9-1.5-2.2-1.5-3.7 0-1.6.6-3 1.8-3.9 1.2-1 2.7-1.5 4.8-1.5.7 0 1.4 0 2.1.1.7.1 1.5.2 2.3.4V16c0-1.5-.3-2.5-1-3.1-.6-.6-1.7-.9-3.2-.9-.7 0-1.4.1-2.1.3-.7.2-1.4.4-2.1.8-.3.2-.6.2-.7.3-.1 0-.2.1-.3.1-.3 0-.4-.2-.4-.6v-1c0-.3 0-.5.1-.7.1-.1.2-.3.5-.4.7-.4 1.5-.7 2.5-.9 1-.3 2-.4 3.1-.4 2.4 0 4.1.5 5.2 1.6 1.1 1.1 1.6 2.7 1.6 4.9v6.4h.1zM16.2 25c.7 0 1.4-.1 2.1-.4.7-.3 1.4-.7 1.9-1.3.3-.4.6-.8.7-1.3.1-.5.2-1.1.2-1.8v-.9c-.6-.1-1.2-.2-1.9-.3-.7-.1-1.3-.1-1.9-.1-1.3 0-2.2.2-2.9.7-.7.5-1 1.2-1 2.1 0 .9.2 1.5.7 2 .5.4 1.2.7 2.1.7v-.4zm12.6 1.8c-.3 0-.6-.1-.7-.2-.2-.1-.3-.4-.4-.8L24 12.5c-.1-.4-.2-.6-.2-.8 0-.3.2-.5.5-.5h1.9c.4 0 .6.1.7.2.2.1.3.4.4.8l2.7 10.5L32.5 12c.1-.4.2-.7.4-.8.2-.1.5-.2.8-.2h1.5c.4 0 .6.1.8.2.2.1.3.4.4.8l2.6 10.7L41.7 12c.1-.4.2-.7.4-.8.2-.1.5-.2.7-.2h1.8c.3 0 .5.2.5.5 0 .1 0 .2-.1.4 0 .1-.1.3-.2.5l-3.8 13.3c-.1.4-.2.7-.4.8-.2.1-.5.2-.7.2h-1.7c-.4 0-.6-.1-.8-.2-.2-.2-.3-.4-.4-.8l-2.5-10.3-2.5 10.3c-.1.4-.2.7-.4.8-.2.2-.5.2-.8.2h-1.6v.1zm20.1.5c-1 0-2-.1-3-.4-.9-.3-1.7-.6-2.2-1-.3-.2-.5-.4-.6-.6 0-.2-.1-.4-.1-.5v-1c0-.4.2-.6.5-.6.1 0 .3 0 .4.1.1.1.3.2.5.3.7.3 1.4.6 2.2.8.8.2 1.5.3 2.3.3 1.2 0 2.2-.2 2.8-.7.6-.5 1-1.1 1-2 0-.6-.2-1-.5-1.4-.4-.4-1-.7-1.9-1l-2.8-.9c-1.4-.4-2.4-1.1-3.1-1.9-.7-.8-1-1.7-1-2.7 0-.8.2-1.5.5-2.1.4-.6.8-1.2 1.4-1.6.6-.4 1.3-.8 2-.1 .8-.2 1.6-.3 2.5-.3.4 0 .9 0 1.4.1.5.1.9.2 1.3.3.4.1.8.3 1.1.4.3.1.6.3.7.4.2.2.4.3.5.5.1.2.1.4.1.7v.9c0 .4-.2.6-.5.6-.2 0-.5-.1-.8-.3-1.2-.5-2.5-.8-3.9-.8-1.1 0-2 .2-2.6.6-.6.4-.9 1-.9 1.8 0 .6.2 1.1.6 1.4.4.4 1.1.7 2.1 1l2.7.9c1.4.4 2.3 1.1 2.9 1.8.6.8.8 1.6.8 2.6 0 .8-.2 1.6-.5 2.2-.4.7-.8 1.2-1.5 1.7-.6.5-1.3.8-2.2 1-.9.3-1.7.4-2.7.4z" fill="#FFF" />
-      <path d="M50.1 33.6c-5.5 4.1-13.5 6.2-20.4 6.2-9.6 0-18.3-3.6-24.9-9.5-.5-.5-.1-1.1.6-.7 7.1 4.1 15.8 6.6 24.9 6.6 6.1 0 12.8-1.3 19-3.9.9-.4 1.7.6.8 1.3z" fill="#FF9900" />
-      <path d="M52.4 31c-.7-.9-4.6-.4-6.4-.2-.5.1-.6-.4-.1-.7 3.1-2.2 8.2-1.6 8.8-.8.6.7-.2 5.8-3.1 8.2-.4.4-.9.2-.7-.3.7-1.7 2.2-5.3 1.5-6.2z" fill="#FF9900" />
+    <svg viewBox="0 0 100 60" width={w} height={h} className={className} aria-label="AWS">
+      <text x="50" y="32" textAnchor="middle" fill="#FFFFFF" fontSize="30" fontWeight="900" fontFamily="'Amazon Ember', Arial, sans-serif" letterSpacing="2">AWS</text>
+      <path d="M20 42c12 6 30 8 48 2" fill="none" stroke="#FF9900" strokeWidth="3.5" strokeLinecap="round" />
+      <path d="M72 38l8 5-10 2" fill="none" stroke="#FF9900" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
 
-export function GoogleCloudLogo({ className = '', size = 24 }: LogoProps) {
+export function GoogleCloudLogo({ className = '', size = 32 }: LogoProps) {
   return (
-    <svg viewBox="0 0 24 24" width={size} height={size} className={className} aria-label="Google Cloud">
-      <path d="M12.19 5.52c2.35-.06 4.6 1.04 6.03 2.95l-2.09 1.63c-.91-1.29-2.39-2.1-3.98-2.13-2.73-.07-5.01 2.13-5.09 4.87-.04 1.33.45 2.62 1.37 3.59.92.97 2.2 1.52 3.53 1.54 1.96.03 3.63-1.12 4.3-2.85h-4.34v-2.46h7.1c.37 2.1-.19 4.26-1.51 5.88-1.32 1.63-3.31 2.6-5.42 2.64-2.09.05-4.1-.77-5.58-2.25-1.49-1.48-2.33-3.49-2.33-5.58C4.17 9.84 7.72 5.64 12.19 5.52z" fill="#4285F4" />
-      <path d="M21.38 10.07l-2.36-1.5c.62.84 1 1.84 1.1 2.87H24l-.01-.04c-.12-.56-.36-1.07-.65-1.48l-1.96.15z" fill="#EA4335" />
+    <svg viewBox="0 0 256 206" width={size * 1.25} height={size} className={className} aria-label="Google Cloud">
+      <path d="M170.252 56.819l22.253-22.253 1.483-9.37C153.437-11.677 88.976-7.496 52.42 33.92 42.267 45.423 34.39 58.958 29.312 73.728l7.973-1.09 44.505-7.34 3.436-3.511s7.473-12.39 20.227-17.147c17.393-6.18 37.59-3.18 37.59-3.18l27.209 15.36z" fill="#EA4335"/>
+      <path d="M224.205 73.918a100.249 100.249 0 00-30.217-38.722l-31.232 31.232a55.515 55.515 0 0120.379 44.037v5.544c15.351 0 27.797 12.446 27.797 27.797 0 15.352-12.446 27.57-27.797 27.57h-55.594l-5.544 5.926v33.34l5.544 5.544h55.594c39.984.376 72.725-31.595 73.1-71.579a72.762 72.762 0 00-31.83-70.69z" fill="#4285F4"/>
+      <path d="M72.248 206.1h55.594v-44.505H72.248a27.388 27.388 0 01-11.46-2.526l-7.936 2.447-22.405 22.253-1.952 7.636a72.243 72.243 0 0043.753 14.695z" fill="#34A853"/>
+      <path d="M72.248 60.785C32.264 61.032-.173 93.924.002 133.908a72.762 72.762 0 0028.493 57.473l32.293-32.293c-14.07-6.376-20.311-22.943-13.935-37.013a27.796 27.796 0 0113.935-13.935l32.293-32.293A72.224 72.224 0 0072.248 60.785z" fill="#FBBC05"/>
     </svg>
   )
 }
 
-export function SapLogo({ className = '', size = 40 }: LogoProps) {
+export function SapLogo({ className = '', size = 32 }: LogoProps) {
+  const w = size * 2
+  const h = size
   return (
-    <svg viewBox="0 0 92 46" width={size * 2} height={size} className={className} aria-label="SAP">
-      <path d="M0 0h92v46H0z" fill="#0FAAFF" rx="4" />
-      <path d="M31.5 33.5h-5.7l-5.3-10.8h-.1l.2 10.8H16V12.9h6l5 10.2h.1l-.2-10.2h4.6v20.6zm12.9-15.8h-4.1c-.1-1.4-1.2-2.3-3-2.3-1.6 0-2.7.7-2.7 1.8 0 1 .7 1.5 2.7 2l2.4.6c3.6.9 5.1 2.4 5.1 5.1 0 3.8-3.2 6.3-7.8 6.3-4.8 0-7.8-2.4-8-6.4h4.4c.2 1.7 1.5 2.7 3.6 2.7 1.8 0 3-.8 3-2 0-1-.7-1.6-2.8-2.2l-2.6-.7c-3.2-.8-4.8-2.6-4.8-5.3 0-3.5 3-5.8 7.3-5.8 4.3 0 7 2.2 7.3 5.9v.3zm17.5 5.4c0 .7-.1 1.4-.1 1.7h-11c.3 2.2 1.7 3.3 4 3.3 1.7 0 3-.7 3.6-1.8h3.8c-.9 3.2-3.9 5.3-7.5 5.3-4.8 0-8-3.2-8-8 0-4.9 3.2-8.2 7.8-8.2 4.9 0 7.4 3.4 7.4 7.7zM57.4 21c-.3-1.8-1.5-3-3.5-3-2 0-3.3 1.1-3.7 3h7.2zm19.8-.5h-3.8c-.1-1.4-1.2-2.3-2.9-2.3-1.6 0-2.6.7-2.6 1.8 0 1 .7 1.5 2.7 2l2.3.5c3.5.8 5.1 2.4 5.1 5.1 0 3.8-3.2 6.3-7.8 6.3-4.7 0-7.7-2.5-8-6.4h4.4c.2 1.7 1.5 2.7 3.6 2.7 1.8 0 3-.8 3-2 0-1-.8-1.6-2.8-2.2l-2.6-.7c-3.1-.8-4.8-2.6-4.8-5.2 0-3.5 3-5.8 7.3-5.8 4.2 0 6.9 2.2 7.2 5.8l.7.4z" fill="#FFF" />
+    <svg viewBox="0 0 100 50" width={w} height={h} className={className} aria-label="SAP">
+      <rect width="100" height="50" rx="5" fill="#0FAAFF" />
+      <text x="50" y="35" textAnchor="middle" fill="#FFFFFF" fontSize="28" fontWeight="900" fontFamily="Arial, sans-serif" letterSpacing="3">SAP</text>
     </svg>
   )
 }
 
-export function OracleLogo({ className = '', size = 24 }: LogoProps) {
+export function OracleLogo({ className = '', size = 32 }: LogoProps) {
+  const w = size * 2.5
+  const h = size
   return (
-    <svg viewBox="0 0 100 28" width={size * 3.5} height={size} className={className} aria-label="Oracle">
-      <path d="M13.9 27.8C6.2 27.8 0 21.6 0 13.9 0 6.2 6.2 0 13.9 0h72.2c7.7 0 13.9 6.2 13.9 13.9 0 7.7-6.2 13.9-13.9 13.9H13.9z" fill="none" stroke="#F80000" strokeWidth="2.5" />
-      <text x="50" y="19.5" textAnchor="middle" fill="#F80000" fontSize="16" fontWeight="bold" fontFamily="Arial, sans-serif">ORACLE</text>
+    <svg viewBox="0 0 120 40" width={w} height={h} className={className} aria-label="Oracle">
+      <text x="60" y="29" textAnchor="middle" fill="#F80000" fontSize="26" fontWeight="900" fontFamily="Arial, sans-serif" letterSpacing="2">ORACLE</text>
     </svg>
   )
 }
 
-export function ServiceNowLogo({ className = '', size = 24 }: LogoProps) {
+export function ServiceNowLogo({ className = '', size = 32 }: LogoProps) {
   return (
-    <svg viewBox="0 0 24 24" width={size} height={size} className={className} aria-label="ServiceNow">
-      <circle cx="12" cy="12" r="11" fill="#62D84E" />
-      <circle cx="12" cy="12" r="4.5" fill="none" stroke="#FFF" strokeWidth="2" />
+    <svg viewBox="0 0 100 100" width={size} height={size} className={className} aria-label="ServiceNow">
+      <circle cx="50" cy="50" r="46" fill="#293E40" stroke="#62D84E" strokeWidth="4" />
+      <circle cx="50" cy="50" r="16" fill="#62D84E" />
+      <circle cx="50" cy="50" r="8" fill="#293E40" />
     </svg>
   )
 }
 
 export function SalesforceLogo({ className = '', size = 32 }: LogoProps) {
+  const w = size * 1.5
+  const h = size
   return (
-    <svg viewBox="0 0 48 32" width={size * 1.5} height={size} className={className} aria-label="Salesforce">
-      <path d="M20 4c2.7 0 5.1 1.1 6.8 2.9C28.5 5.7 30.6 5 33 5c5.5 0 10 4.5 10 10s-4.5 10-10 10c-.7 0-1.3-.1-2-.2C29.5 27 27 28.5 24 28.5c-1.5 0-2.9-.4-4.1-1.1C18.6 29 16.4 30 14 30 9 30 5 26 5 21c0-1.3.3-2.5.8-3.6C4.1 16 3 13.9 3 11.5 3 7.4 6.4 4 10.5 4c1.8 0 3.5.7 4.8 1.8C16.8 4.7 18.3 4 20 4z" fill="#00A1E0" />
-      <text x="24" y="20" textAnchor="middle" fill="#FFF" fontSize="8" fontWeight="bold" fontFamily="Arial, sans-serif">salesforce</text>
+    <svg viewBox="0 0 150 100" width={w} height={h} className={className} aria-label="Salesforce">
+      <path d="M63 12c8.5 0 16 4.2 20.5 10.7C87.5 18 93 16 99 16c18.5 0 33.5 15 33.5 33.5S117.5 83 99 83c-2.5 0-4.9-.3-7.2-.8C88.1 88.3 81.5 92 74 92c-5 0-9.6-1.5-13.4-4.1C57.2 92.5 51.5 95 45 95c-16 0-29-13-29-29 0-4.2.9-8.1 2.5-11.7C12 51 8 44.5 8 37 8 23.2 19.2 12 33 12c5.5 0 10.6 1.8 14.7 4.8C51.5 13.8 57 12 63 12z" fill="#00A1E0" />
+      <text x="58" y="62" textAnchor="middle" fill="#FFFFFF" fontSize="18" fontWeight="700" fontFamily="Arial, sans-serif">salesforce</text>
     </svg>
   )
 }
 
-export function DatabricksLogo({ className = '', size = 24 }: LogoProps) {
+export function DatabricksLogo({ className = '', size = 32 }: LogoProps) {
   return (
-    <svg viewBox="0 0 24 24" width={size} height={size} className={className} aria-label="Databricks">
-      <path d="M12 1L2 6.5v11L12 23l10-5.5v-11L12 1z" fill="none" stroke="#FF3621" strokeWidth="1.5" />
-      <path d="M12 1L2 6.5 12 12l10-5.5L12 1z" fill="#FF3621" opacity=".9" />
-      <path d="M2 6.5v11L12 23V12L2 6.5z" fill="#FF3621" opacity=".6" />
-      <path d="M22 6.5L12 12v11l10-5.5V6.5z" fill="#FF3621" opacity=".3" />
+    <svg viewBox="0 0 36 36" width={size} height={size} className={className} aria-label="Databricks">
+      <path d="M18 2L3 10v4.5l15 8 15-8V10L18 2z" fill="#FF3621" />
+      <path d="M3 14.5v4.5l15 8 15-8v-4.5l-15 8-15-8z" fill="#FF3621" opacity=".7" />
+      <path d="M3 23v4.5L18 36l15-8.5V23l-15 8.5L3 23z" fill="#FF3621" opacity=".45" />
     </svg>
   )
 }
