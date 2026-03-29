@@ -32,6 +32,13 @@ export const navigationItems: NavigationItem[] = [
     category: 'Institucional',
     description: 'Evolução e marcos históricos — 26 anos de entrega',
   },
+  {
+    id: 'why-foursys',
+    label: 'Por que a Foursys?',
+    icon: 'award',
+    category: 'Institucional',
+    description: 'Diferenciais competitivos que nos tornam a escolha certa',
+  },
 
   // ── Ofertas ────────────────────────────────────────────────────────────────
   {
@@ -56,27 +63,6 @@ export const navigationItems: NavigationItem[] = [
     icon: 'package',
     category: 'Serviços',
     description: 'Projetos, Squads, Alocação, AMS e AI-Augmented Squads',
-  },
-  {
-    id: 'sdd-legacy',
-    label: 'Modernização de Legado',
-    icon: 'git-merge',
-    category: 'Serviços',
-    description: 'Do core ao cloud, sem trauma — modernização por ondas',
-  },
-  {
-    id: 'cyber-security',
-    label: 'Cyber Security',
-    icon: 'shield-check',
-    category: 'Serviços',
-    description: 'Resiliência e identidade no centro da proteção',
-  },
-  {
-    id: 'fourblock',
-    label: 'FourBlox',
-    icon: 'blocks',
-    category: 'Serviços',
-    description: 'Produtos digitais por assinatura, prontos para escalar',
   },
 
   // ── Inovação ───────────────────────────────────────────────────────────────

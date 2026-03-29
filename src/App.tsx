@@ -9,13 +9,16 @@ import { SessionWizard } from './components/session/SessionWizard'
 import { SectionRenderer } from './components/SectionRenderer'
 import { ClientSelector } from './components/client/ClientSelector'
 import { useKeyboard } from './hooks/useKeyboard'
+import { useUrlSync } from './hooks/useUrlSync'
 import { useSwipe } from './hooks/useSwipe'
+import { SectionOverview } from './components/navigation/SectionOverview'
 import type { AppSection } from './types'
 
 function AppInner() {
-  const { state, toggleFullscreen, toggleMetricsPanel, toggleMenu, navigate, activeNavigationItems } = useApp()
+  const { state, toggleFullscreen, toggleMetricsPanel, toggleMenu, navigate, activeNavigationItems, toggleOverview } = useApp()
   const mainRef = useRef<HTMLDivElement>(null)
   useKeyboard()
+  useUrlSync()
 
   // Swipe hint — aparece uma única vez na primeira visita em mobile
   const [showSwipeHint, setShowSwipeHint] = useState(() => {
@@ -56,19 +59,30 @@ function AppInner() {
         e.preventDefault()
         toggleMetricsPanel()
       }
+      if (e.key === 'A' && e.ctrlKey && e.shiftKey) {
+        e.preventDefault()
+        toggleOverview()
+      }
     }
     window.addEventListener('keydown', handleKeys)
     return () => window.removeEventListener('keydown', handleKeys)
-  }, [toggleFullscreen, toggleMetricsPanel])
+  }, [toggleFullscreen, toggleMetricsPanel, toggleOverview])
 
   return (
-    <div className="flex h-[100dvh] overflow-hidden bg-foursys-dark-2 pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
+    <div className="flex h-[100dvh] overflow-hidden bg-foursys-dark-2 pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)]">
+
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-foursys-primary focus:text-white focus:text-sm focus:font-semibold"
+      >
+        Pular para o conteúdo
+      </a>
 
       {/* Ambient background */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-60 -left-60 w-[500px] h-[500px] bg-foursys-blue/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-foursys-blue/6 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-foursys-blue/4 rounded-full blur-3xl" />
+        <div className="absolute -top-60 -left-60 w-[500px] h-[500px] bg-foursys-primary/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-foursys-primary/6 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-foursys-primary/4 rounded-full blur-3xl" />
       </div>
 
       {/* Backdrop drawer mobile */}
@@ -92,7 +106,7 @@ function AppInner() {
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden min-w-0 relative w-full">
         <TopBar />
-        <main ref={mainRef} className="flex-1 relative overflow-y-auto overflow-x-hidden">
+        <main ref={mainRef} id="main-content" className="flex-1 relative overflow-y-auto overflow-x-hidden">
           <SectionRenderer />
         </main>
       </div>
@@ -129,6 +143,8 @@ function AppInner() {
           </div>
         </div>
       )}
+
+      <SectionOverview isOpen={state.isOverviewOpen} onClose={toggleOverview} />
     </div>
   )
 }

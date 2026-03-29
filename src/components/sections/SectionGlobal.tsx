@@ -220,7 +220,7 @@ export function SectionGlobal() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-xs mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-xs mb-3">
             Presença Global
           </div>
           <div className="flex flex-col lg:flex-row lg:items-end gap-6">
@@ -245,7 +245,7 @@ export function SectionGlobal() {
                   transition={{ delay: 0.1 + index * 0.07 }}
                   className="flex flex-col items-center justify-center p-3 rounded-xl bg-foursys-surface/50 border border-white/10 min-w-[80px]"
                 >
-                  <DynIcon name={kpi.icon} size={22} className="text-foursys-blue" />
+                  <DynIcon name={kpi.icon} size={22} className="text-foursys-primary" />
                   <div className="text-lg font-black text-foursys-cyan leading-none">{kpi.value}</div>
                   <div className="text-[9px] text-foursys-text-dim text-center leading-tight mt-0.5">{kpi.label}</div>
                 </motion.div>

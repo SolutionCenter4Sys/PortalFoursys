@@ -46,8 +46,8 @@ export const faqItems: FAQItem[] = [
     category: 'Serviços',
     question: 'O que é o Fourblock e como funciona?',
     answer: 'Fourblock é nosso modelo de entrega de produtos digitais em 30 dias. Usamos um catálogo de blocos pré-construídos (autenticação, dashboards, integrações, etc.) que são combinados e customizados para a necessidade específica do cliente. Isso reduz o tempo de desenvolvimento em até 70% sem comprometer qualidade ou governança.',
-    sectionLink: 'fourblock',
-    sectionLabel: 'Ver Fourblock'
+    sectionLink: 'services',
+    sectionLabel: 'Ver Linhas de Serviço'
   },
   {
     id: 'faq-7',
@@ -70,7 +70,7 @@ export const faqItems: FAQItem[] = [
     category: 'Tecnologia',
     question: 'Como a Foursys moderniza sistemas legados sem parar a operação?',
     answer: 'Usamos a abordagem SDD (Software Defined Delivery): modernização incremental, nunca big-bang rewrite. Identificamos os módulos de maior risco e valor, criamos uma camada de API, decompomos gradualmente em microserviços e migramos funcionalidades uma a uma — com a operação legada 100% ativa. O cliente nunca sente o corte.',
-    sectionLink: 'sdd-legacy',
+    sectionLink: 'services',
     sectionLabel: 'Ver Abordagem SDD'
   },
   {

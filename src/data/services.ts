@@ -218,6 +218,30 @@ export const serviceLines: ServiceLine[] = [
     },
   },
   {
+    id: 'fourblox',
+    title: 'FourBlox',
+    subtitle: 'Produtos digitais pré-construídos e escaláveis',
+    problem: 'Combinamos blocos de software pré-construídos e validados com customização para o contexto do cliente — entregando produtos digitais completos em semanas, não meses.',
+    target: 'Empresas que precisam lançar produtos digitais rapidamente, sem abrir mão de qualidade, governança e customização.',
+    icon: 'blocks',
+    color: 'from-emerald-500 to-emerald-700',
+    tags: ['Produtos Digitais', 'Blocos', 'MVP', 'Aceleração', '30 dias'],
+    offerDetail: {
+      valueProposition: 'Entregar produtos digitais completos em 30 dias usando um catálogo de blocos pré-construídos e validados, customizados para o contexto do cliente.',
+      metrics: [
+        { value: '70%', label: 'Menos tempo de dev' },
+        { value: '30d', label: 'Prazo máximo' },
+        { value: '8+', label: 'Blocos disponíveis' },
+      ],
+      differentials: [
+        'Catálogo de blocos prontos: autenticação, dashboards, pagamentos, IA e mais.',
+        'Customização por contexto — não é template, é produto sob medida.',
+        'Garantia de entrega em 30 dias.',
+        'Escalável desde o dia 1 com arquitetura cloud-native.',
+      ],
+    },
+  },
+  {
     id: 'hiperautomacao-rpa',
     title: 'Hiperautomação & RPA',
     subtitle: 'Eficiência operacional em escala',

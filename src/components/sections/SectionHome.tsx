@@ -4,6 +4,7 @@ import { useApp } from '../../context/AppContext'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { CertificationBadge } from '../ui/CertificationBadge'
 import { clients } from '../../data/clients'
+import { heroStats } from '../../data/kpis'
 
 // ─── Dados ────────────────────────────────────────────────────────────────────
 
@@ -174,9 +175,9 @@ function getPainStatement(sector: string | null, role: string | null): string | 
 export function SectionHome() {
   const { navigate, setClient, state } = useApp()
 
-  const kpi1 = useCountUp(26,     1400)
-  const kpi2 = useCountUp(500,    1800)
-  const kpi3 = useCountUp(2000,   1600)
+  const kpi1 = useCountUp(heroStats.years,      1400)
+  const kpi2 = useCountUp(500,                  1800)
+  const kpi3 = useCountUp(2000,                 1600)
 
   const painStatement = getPainStatement(state.sessionProfile?.sector ?? null, state.sessionProfile?.role ?? null)
 
@@ -200,6 +201,9 @@ export function SectionHome() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex flex-col items-center justify-center py-8 lg:py-6 cursor-pointer order-1 lg:order-2"
             onClick={() => navigate('identity')}
+            role="button"
+            tabIndex={0}
+            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate('identity') } }}
           >
             <FoursysLogo />
 
@@ -212,7 +216,7 @@ export function SectionHome() {
               <h1 className="text-lg md:text-xl font-black text-white leading-snug mb-2">
                 Soluções digitais que conectam
                 <br />
-                <span className="text-foursys-blue">estratégia, execução e evolução</span>
+                <span className="text-foursys-primary">estratégia, execução e evolução</span>
               </h1>
 
               {painStatement && (
@@ -220,7 +224,7 @@ export function SectionHome() {
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.0 }}
-                  className="mt-3 px-4 py-2.5 rounded-xl bg-foursys-blue/10 border border-foursys-blue/25 text-foursys-blue text-sm font-semibold leading-snug"
+                  className="mt-3 px-4 py-2.5 rounded-xl bg-foursys-primary/10 border border-foursys-primary/25 text-foursys-primary text-sm font-semibold leading-snug"
                 >
                   "{painStatement}"
                 </motion.div>
@@ -243,7 +247,7 @@ export function SectionHome() {
             className="flex flex-col justify-center px-5 md:px-10 py-6 md:py-8 gap-5 md:gap-7 order-2 lg:order-1 border-t lg:border-t-0 lg:border-r border-white/[0.06]"
           >
             <div>
-              <span className="text-xs font-bold tracking-[0.18em] uppercase text-foursys-blue">
+              <span className="text-xs font-bold tracking-[0.18em] uppercase text-foursys-primary">
                 Fundada em 2000
               </span>
             </div>
@@ -255,7 +259,7 @@ export function SectionHome() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 + i * 0.12, duration: 0.5 }}
-                  className="border-l-[3px] border-foursys-blue pl-3 lg:pl-5"
+                  className="border-l-[3px] border-foursys-primary pl-3 lg:pl-5"
                 >
                   <div className="text-3xl md:text-5xl lg:text-[68px] leading-none font-black text-white tracking-tight tabular-nums">
                     {ref.count}
@@ -274,7 +278,7 @@ export function SectionHome() {
                 transition={{ delay: 0.7 }}
                 className="mt-1"
               >
-                <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-blue mb-2">
+                <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-2">
                   Apresentação por cliente
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -282,7 +286,7 @@ export function SectionHome() {
                     <button
                       key={c.id}
                       onClick={() => setClient(c.id)}
-                      className="text-xs px-3 py-1.5 rounded-lg border border-white/15 text-foursys-text-muted hover:border-foursys-blue/50 hover:text-foursys-blue transition-all duration-200"
+                      className="text-xs px-3 py-1.5 rounded-lg border border-white/15 text-foursys-text-muted hover:border-foursys-primary/50 hover:text-foursys-primary transition-all duration-200"
                     >
                       {c.name}
                     </button>
@@ -299,7 +303,7 @@ export function SectionHome() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="flex flex-col justify-center px-5 md:px-8 py-6 md:py-8 gap-3 md:gap-4 order-3 border-t lg:border-t-0 lg:border-l border-white/[0.06]"
           >
-            <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-foursys-blue mb-1">
+            <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-foursys-primary mb-1">
               Ofertas Flagship
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-1 gap-2 lg:gap-4">
@@ -309,7 +313,7 @@ export function SectionHome() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.25 + i * 0.08, duration: 0.4 }}
-                  className="border-l-[3px] border-foursys-blue pl-3 lg:pl-5 cursor-pointer hover:border-foursys-blue/80 transition-colors"
+                  className="border-l-[3px] border-foursys-primary pl-3 lg:pl-5 cursor-pointer hover:border-foursys-primary/80 transition-colors"
                   onClick={() => navigate('offers-flagship')}
                 >
                   <span className="text-sm md:text-lg font-semibold text-white leading-snug">{offer}</span>
@@ -328,7 +332,7 @@ export function SectionHome() {
         >
           {/* Estrutura de entrega */}
           <div className="px-5 md:px-10 py-4 md:py-5 border-b sm:border-b-0 sm:border-r border-white/[0.06]">
-            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-blue mb-2">
+            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-2">
               Modelos de Entrega
             </div>
             <div className="text-xs md:text-sm text-foursys-text-muted leading-relaxed">
@@ -338,7 +342,7 @@ export function SectionHome() {
 
           {/* Certificações */}
           <div className="px-5 md:px-10 py-4 md:py-5 border-b sm:border-b-0 sm:border-r border-white/[0.06]">
-            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-blue mb-3">
+            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-3">
               Certificações
             </div>
             <div className="flex items-center gap-3 flex-wrap">
@@ -350,7 +354,7 @@ export function SectionHome() {
 
           {/* Alianças */}
           <div className="px-5 md:px-10 py-4 md:py-5">
-            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-blue mb-3">
+            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-3">
               Parceiros Estratégicos
             </div>
             <div className="flex items-center gap-3 flex-wrap">
@@ -369,7 +373,7 @@ export function SectionHome() {
 
         {/* ── Rodapé ── */}
         <div className="text-center text-[10px] md:text-[11px] text-foursys-text-dim py-2.5 border-t border-white/[0.04] tracking-wide px-4">
-          26 anos · 3,6% turnover · 500K+ projetos · Brasil · EUA · Portugal
+          {heroStats.years} anos · {heroStats.turnover} turnover · {heroStats.projects} projetos · Brasil · EUA · Portugal
         </div>
 
       </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Clock, BarChart2, MapPin, Copy, CheckCheck, ChevronRight, Star, History } from 'lucide-react'
+import { X, Clock, BarChart2, MapPin, Copy, CheckCheck, ChevronRight, Star, History, Printer } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { DynIcon } from '../../utils/iconMap'
 import { getTrailById, trails } from '../../data/trails'
@@ -144,11 +144,12 @@ export function SessionPanel() {
             <div className="border-b border-white/[0.06]">
               <div className="flex items-center justify-between px-5 py-3">
                 <div className="flex items-center gap-2.5">
-                  <BarChart2 size={16} className="text-foursys-blue" />
+                  <BarChart2 size={16} className="text-foursys-primary" />
                   <span className="text-sm font-bold text-foursys-text">Analytics da Sessão</span>
                 </div>
                 <button
                   onClick={toggleMetricsPanel}
+                  aria-label="Fechar painel de sessão"
                   className="p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
                 >
                   <X size={15} />
@@ -160,7 +161,7 @@ export function SessionPanel() {
                   onClick={() => setActiveTab('session')}
                   className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-t-lg border-b-2 transition-all ${
                     activeTab === 'session'
-                      ? 'border-foursys-blue text-foursys-blue'
+                      ? 'border-foursys-primary text-foursys-primary'
                       : 'border-transparent text-foursys-text-dim hover:text-foursys-text-muted'
                   }`}
                 >
@@ -171,7 +172,7 @@ export function SessionPanel() {
                   onClick={() => setActiveTab('history')}
                   className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-t-lg border-b-2 transition-all ${
                     activeTab === 'history'
-                      ? 'border-foursys-blue text-foursys-blue'
+                      ? 'border-foursys-primary text-foursys-primary'
                       : 'border-transparent text-foursys-text-dim hover:text-foursys-text-muted'
                   }`}
                 >
@@ -186,13 +187,13 @@ export function SessionPanel() {
             <div className="grid grid-cols-3 gap-2 px-4 py-4 border-b border-white/[0.06]">
               {/* Tempo */}
               <div className="flex flex-col items-center p-3 rounded-xl bg-foursys-dark-3/60 border border-white/[0.05]">
-                <Clock size={13} className="text-foursys-blue mb-1.5" />
+                <Clock size={13} className="text-foursys-primary mb-1.5" />
                 <span className="text-base font-black text-foursys-text font-mono">{formatHMS(elapsed)}</span>
                 <span className="text-[10px] text-foursys-text-dim mt-0.5">Duração</span>
               </div>
               {/* Seções */}
               <div className="flex flex-col items-center p-3 rounded-xl bg-foursys-dark-3/60 border border-white/[0.05]">
-                <MapPin size={13} className="text-foursys-blue mb-1.5" />
+                <MapPin size={13} className="text-foursys-primary mb-1.5" />
                 <span className="text-base font-black text-foursys-text">
                   {visitedStats.length}<span className="text-foursys-text-dim text-xs font-normal">/{activeNavigationItems.length}</span>
                 </span>
@@ -200,7 +201,7 @@ export function SessionPanel() {
               </div>
               {/* Engajamento */}
               <div className="flex flex-col items-center p-3 rounded-xl bg-foursys-dark-3/60 border border-white/[0.05]">
-                <BarChart2 size={13} className="text-foursys-blue mb-1.5" />
+                <BarChart2 size={13} className="text-foursys-primary mb-1.5" />
                 <span className="text-base font-black text-foursys-text">
                   {visitedStats.length > 0 ? Math.round(visitedStats.reduce((a, s) => a + s.totalSeconds, 0) / visitedStats.length) : 0}
                   <span className="text-foursys-text-dim text-xs font-normal">s</span>
@@ -238,12 +239,12 @@ export function SessionPanel() {
                   return (
                     <button
                       onClick={() => navigate(nextStep.sectionId)}
-                      className="mt-2 w-full flex items-center justify-between px-3 py-2 rounded-lg bg-white/[0.04] hover:bg-foursys-blue/10 border border-transparent hover:border-foursys-blue/30 transition-all duration-150 group"
+                      className="mt-2 w-full flex items-center justify-between px-3 py-2 rounded-lg bg-white/[0.04] hover:bg-foursys-primary/10 border border-transparent hover:border-foursys-primary/30 transition-all duration-150 group"
                     >
                       <span className="text-xs text-foursys-text-muted group-hover:text-foursys-text">
                         Próximo: <span className="font-medium">{getSectionLabel(nextStep.sectionId)}</span>
                       </span>
-                      <ChevronRight size={12} className="text-foursys-text-dim group-hover:text-foursys-blue transition-colors" />
+                      <ChevronRight size={12} className="text-foursys-text-dim group-hover:text-foursys-primary transition-colors" />
                     </button>
                   )
                 })()}
@@ -295,14 +296,14 @@ export function SessionPanel() {
                         onClick={() => navigate(stat.section as AppSection)}
                         className={`w-full group flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-150
                           ${isActive
-                            ? 'bg-foursys-blue/10 border border-foursys-blue/25'
+                            ? 'bg-foursys-primary/10 border border-foursys-primary/25'
                             : 'hover:bg-white/[0.04] border border-transparent'
                           }`}
                       >
                         <DynIcon name={getSectionIcon(stat.section as AppSection)} size={16} className="text-foursys-text-muted flex-shrink-0" />
                         <div className="flex-1 min-w-0 text-left">
                           <div className="flex items-center justify-between mb-1">
-                            <span className={`text-xs font-medium truncate ${isActive ? 'text-foursys-blue' : 'text-foursys-text-muted group-hover:text-foursys-text'}`}>
+                            <span className={`text-xs font-medium truncate ${isActive ? 'text-foursys-primary' : 'text-foursys-text-muted group-hover:text-foursys-text'}`}>
                               {getSectionLabel(stat.section as AppSection)}
                             </span>
                             <span className="text-[10px] text-foursys-text-dim ml-2 flex-shrink-0 font-mono">
@@ -367,15 +368,25 @@ export function SessionPanel() {
               </div>
 
               {/* Gerar resumo */}
-              <button
-                onClick={generateSummary}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-foursys-blue/15 border border-foursys-blue/30 hover:bg-foursys-blue/22 hover:border-foursys-blue/50 text-foursys-blue transition-all duration-150 font-semibold text-sm shadow-[0_0_15px_rgba(255,102,0,0.12)]"
-              >
-                {copied
-                  ? <><CheckCheck size={14} /> Copiado!</>
-                  : <><Copy size={14} /> Gerar Resumo da Reunião</>
-                }
-              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={generateSummary}
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-foursys-primary/15 border border-foursys-primary/30 hover:bg-foursys-primary/22 hover:border-foursys-primary/50 text-foursys-primary transition-all duration-150 font-semibold text-sm shadow-[0_0_15px_rgba(255,102,0,0.12)]"
+                >
+                  {copied
+                    ? <><CheckCheck size={14} /> Copiado!</>
+                    : <><Copy size={14} /> Gerar Resumo da Reunião</>
+                  }
+                </button>
+                <button
+                  onClick={() => window.print()}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.05] border border-white/[0.08] text-foursys-text-muted hover:text-foursys-text hover:bg-white/[0.08] transition-all text-xs font-medium"
+                  aria-label="Imprimir apresentação"
+                >
+                  <Printer size={14} />
+                  Imprimir / PDF
+                </button>
+              </div>
             </div>
           </motion.aside>
         </>

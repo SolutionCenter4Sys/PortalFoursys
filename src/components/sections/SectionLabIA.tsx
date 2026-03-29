@@ -35,7 +35,7 @@ const initiatives = [
 ]
 
 const agentTypes = [
-  { role: 'Humano', color: 'bg-foursys-blue', desc: 'Define objetivos, aprova decisões críticas, valida qualidade' },
+  { role: 'Humano', color: 'bg-foursys-primary', desc: 'Define objetivos, aprova decisões críticas, valida qualidade' },
   { role: 'Agente IA', color: 'bg-foursys-cyan', desc: 'Executa tarefas repetitivas, gera código, testa, documenta' },
   { role: 'Sistema', color: 'bg-violet-500', desc: 'APIs, bancos de dados, ferramentas de CI/CD, monitoramento' }
 ]
@@ -49,7 +49,7 @@ export function SectionLabIA() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-sm mb-4">
             Lab IA · Inovação
           </div>
           <div className="flex justify-center mt-2 mb-2">
@@ -68,7 +68,7 @@ export function SectionLabIA() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="mb-10 p-8 rounded-2xl bg-foursys-surface/50 border border-foursys-blue/20"
+          className="mb-10 p-8 rounded-2xl bg-foursys-surface/50 border border-foursys-primary/20"
         >
           <div className="text-sm font-semibold text-foursys-cyan text-center uppercase tracking-widest mb-6">
             Modelo de Agentes Híbridos — Como Funciona
@@ -98,7 +98,7 @@ export function SectionLabIA() {
             ))}
           </div>
 
-          <div className="p-4 rounded-xl bg-foursys-blue/10 border border-foursys-blue/20 text-center">
+          <div className="p-4 rounded-xl bg-foursys-primary/10 border border-foursys-primary/20 text-center">
             <p className="text-sm text-foursys-text-muted inline-flex items-start gap-2 text-left max-w-3xl mx-auto">
               <DynIcon name="lightbulb" size={18} className="text-foursys-cyan flex-shrink-0 mt-0.5" />
               <span>
@@ -119,7 +119,7 @@ export function SectionLabIA() {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 + i * 0.1 }}
-              className="p-6 rounded-2xl bg-foursys-surface/50 border border-white/10 hover:border-foursys-blue/30 transition-all duration-300"
+              className="p-6 rounded-2xl bg-foursys-surface/50 border border-white/10 hover:border-foursys-primary/30 transition-all duration-300"
             >
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 flex items-center justify-center">

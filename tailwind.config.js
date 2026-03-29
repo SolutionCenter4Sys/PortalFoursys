@@ -9,9 +9,9 @@ export default {
       colors: {
         foursys: {
           // === PRIMARY ORANGE (Foursys Brand) ===
-          blue: '#FF6600',         // ⭐ renomeado internamente — agora é o laranja primário
-          'blue-light': '#FF7A00', // hover
-          'blue-dark': '#E55C00',  // active/pressed
+          primary: '#FF6600',
+          'primary-light': '#FF7A00',
+          'primary-dark': '#E55C00',
           // === SECONDARY TECH ACCENT ===
           cyan: '#00C2E0',
           'cyan-light': '#40D4ED',
@@ -25,7 +25,7 @@ export default {
           // === TEXTO ===
           text: '#FFFFFF',
           'text-muted': '#94A3B8',
-          'text-dim': '#64748B',
+          'text-dim': '#8293A7',
           // === FEEDBACK ===
           accent: '#FFB800',       // amber — destaque secundário
           success: '#4ADE80',

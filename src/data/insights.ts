@@ -43,7 +43,7 @@ export const insights: Insight[] = [
     category: 'Modernização',
     date: 'Fev 2026',
     readTime: '5 min',
-    sectionLink: 'sdd-legacy',
+    sectionLink: 'services',
     color: '#06B6D4',
   },
   {
@@ -91,7 +91,7 @@ export const insights: Insight[] = [
     category: 'Segurança',
     date: 'Jan 2026',
     readTime: '4 min',
-    sectionLink: 'cyber-security',
+    sectionLink: 'services',
     color: '#EF4444',
   },
   {

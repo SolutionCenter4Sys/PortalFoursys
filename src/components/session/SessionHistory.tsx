@@ -50,7 +50,7 @@ function RecordCard({ record }: { record: SessionRecord }) {
           <p className="text-[10px] text-foursys-text-dim mt-0.5">{formatDate(record.date)}</p>
         </div>
         {record.profileRole && (
-          <span className="flex-shrink-0 px-2 py-0.5 rounded-full bg-foursys-blue/10 border border-foursys-blue/20 text-foursys-cyan text-[9px] font-semibold">
+          <span className="flex-shrink-0 px-2 py-0.5 rounded-full bg-foursys-primary/10 border border-foursys-primary/20 text-foursys-cyan text-[9px] font-semibold">
             {ROLE_LABELS[record.profileRole] ?? record.profileRole}
             {record.profileSector ? ` · ${SECTOR_LABELS[record.profileSector] ?? record.profileSector}` : ''}
           </span>
@@ -60,11 +60,11 @@ function RecordCard({ record }: { record: SessionRecord }) {
       {/* KPIs */}
       <div className="flex items-center gap-3 mb-2.5">
         <span className="flex items-center gap-1 text-[10px] text-foursys-text-dim">
-          <Clock size={9} className="text-foursys-blue" />
+          <Clock size={9} className="text-foursys-primary" />
           {formatHMS(record.durationSeconds)}
         </span>
         <span className="flex items-center gap-1 text-[10px] text-foursys-text-dim">
-          <MapPin size={9} className="text-foursys-blue" />
+          <MapPin size={9} className="text-foursys-primary" />
           {record.sectionsVisited} seções
         </span>
         {record.interestedSections.length > 0 && (

@@ -81,13 +81,13 @@ export function SectionESG() {
         >
           <div className="flex items-start justify-between flex-wrap gap-6">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-blue mb-2">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-primary mb-2">
                 Propósito e ESG
               </p>
               <h2 className="text-2xl md:text-4xl font-black text-white leading-none mb-3">
                 FourLives
               </h2>
-              <p className="text-lg text-foursys-blue font-semibold mb-2">
+              <p className="text-lg text-foursys-primary font-semibold mb-2">
                 Tecnologia que transforma vidas
               </p>
               <p className="text-foursys-text-muted max-w-xl leading-relaxed text-sm">
@@ -107,8 +107,8 @@ export function SectionESG() {
                   transition={{ delay: 0.1 + i * 0.08 }}
                   className="p-4 rounded-xl bg-foursys-surface/40 border border-white/[0.08] text-center min-w-[130px]"
                 >
-                  <div className="mb-1"><DynIcon name={stat.icon} size={24} className="text-foursys-blue" /></div>
-                  <div className="text-xl font-black text-foursys-blue">{stat.value}</div>
+                  <div className="mb-1"><DynIcon name={stat.icon} size={24} className="text-foursys-primary" /></div>
+                  <div className="text-xl font-black text-foursys-primary">{stat.value}</div>
                   <div className="text-[10px] text-foursys-text-dim mt-0.5 leading-tight">{stat.label}</div>
                 </motion.div>
               ))}
@@ -155,10 +155,10 @@ export function SectionESG() {
           <button
             type="button"
             onClick={() => navigate('awards')}
-            className="w-full flex items-center justify-between p-5 rounded-xl bg-foursys-surface/30 border border-white/[0.08] hover:border-foursys-blue/30 transition-all duration-300 group"
+            className="w-full flex items-center justify-between p-5 rounded-xl bg-foursys-surface/30 border border-white/[0.08] hover:border-foursys-primary/30 transition-all duration-300 group"
           >
             <div className="flex items-center gap-3">
-              <DynIcon name="award" size={24} className="text-foursys-blue" />
+              <DynIcon name="award" size={24} className="text-foursys-primary" />
               <div className="text-left">
                 <div className="text-sm font-bold text-white">Premiações & Certificações</div>
                 <div className="text-[11px] text-foursys-text-muted mt-0.5">
@@ -166,7 +166,7 @@ export function SectionESG() {
                 </div>
               </div>
             </div>
-            <ArrowRight size={18} className="text-foursys-text-dim group-hover:text-foursys-blue transition-colors" />
+            <ArrowRight size={18} className="text-foursys-text-dim group-hover:text-foursys-primary transition-colors" />
           </button>
         </motion.div>
 

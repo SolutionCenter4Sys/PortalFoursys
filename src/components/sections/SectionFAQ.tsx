@@ -28,7 +28,7 @@ export function SectionFAQ() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-sm mb-4">
             Perguntas Frequentes
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
@@ -50,7 +50,7 @@ export function SectionFAQ() {
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Buscar pergunta..."
-            className="w-full px-4 py-3 rounded-xl bg-foursys-surface/60 border border-white/15 text-foursys-text placeholder-foursys-text-dim outline-none focus:border-foursys-blue/50 transition-colors text-sm"
+            className="w-full px-4 py-3 rounded-xl bg-foursys-surface/60 border border-white/15 text-foursys-text placeholder-foursys-text-dim outline-none focus:border-foursys-primary/50 transition-colors text-sm"
           />
         </motion.div>
 
@@ -62,7 +62,7 @@ export function SectionFAQ() {
               onClick={() => setActiveCategory(cat)}
               className={`px-3 py-1.5 rounded-lg text-xs transition-all ${
                 activeCategory === cat
-                  ? 'bg-foursys-blue/30 border border-foursys-blue/50 text-foursys-cyan'
+                  ? 'bg-foursys-primary/30 border border-foursys-primary/50 text-foursys-cyan'
                   : 'border border-white/15 text-foursys-text-muted hover:border-white/30'
               }`}
             >

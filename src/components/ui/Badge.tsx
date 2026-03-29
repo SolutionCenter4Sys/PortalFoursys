@@ -5,7 +5,7 @@ interface BadgeProps {
 }
 
 const variants = {
-  blue: 'bg-foursys-blue/20 text-foursys-cyan border-foursys-blue/30',
+  blue: 'bg-foursys-primary/20 text-foursys-cyan border-foursys-primary/30',
   cyan: 'bg-foursys-cyan/20 text-foursys-cyan border-foursys-cyan/30',
   green: 'bg-green-500/20 text-green-400 border-green-500/30',
   red: 'bg-red-500/20 text-red-400 border-red-500/30',

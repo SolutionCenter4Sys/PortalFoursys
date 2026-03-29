@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react'
 import {
   BarChart3,
+  Blocks,
   BrainCircuit,
   CheckCircle2,
   CloudCog,
@@ -22,6 +23,7 @@ export const SERVICE_ICONS: Record<string, LucideIcon> = {
   'dados-analytics': BarChart3,
   'quality-testes-ia': CheckCircle2,
   'ciberseguranca': ShieldCheck,
+  'fourblox': Blocks,
   'hiperautomacao-rpa': Workflow,
 }
 
@@ -38,6 +40,7 @@ export const SERVICE_VISUALS: Record<
   'dados-analytics': { text: 'text-amber-300', softBg: 'bg-amber-400/15', border: 'border-amber-400/35', glow: '#F59E0B' },
   'quality-testes-ia': { text: 'text-yellow-200', softBg: 'bg-yellow-300/15', border: 'border-yellow-300/35', glow: '#FACC15' },
   'ciberseguranca': { text: 'text-lime-200', softBg: 'bg-lime-300/15', border: 'border-lime-300/35', glow: '#A3E635' },
+  'fourblox': { text: 'text-emerald-200', softBg: 'bg-emerald-300/15', border: 'border-emerald-300/35', glow: '#34D399' },
   'hiperautomacao-rpa': { text: 'text-cyan-200', softBg: 'bg-cyan-300/15', border: 'border-cyan-300/35', glow: '#67E8F9' },
 }
 

@@ -21,7 +21,7 @@ export function SectionAwards() {
           transition={{ duration: 0.4 }}
           className="mb-8 md:mb-10"
         >
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-blue mb-2">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-primary mb-2">
             Provas de resultado
           </p>
           <h2 className="text-2xl md:text-4xl font-black text-white leading-none mb-3">
@@ -106,10 +106,10 @@ export function SectionAwards() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.55 + i * 0.07 }}
-                className="group flex flex-col items-center p-5 rounded-xl bg-foursys-surface/30 border border-white/[0.08] hover:border-foursys-blue/30 transition-all duration-300"
+                className="group flex flex-col items-center p-5 rounded-xl bg-foursys-surface/30 border border-white/[0.08] hover:border-foursys-primary/30 transition-all duration-300"
               >
-                <div className="w-16 h-16 rounded-full bg-foursys-blue/10 border-2 border-foursys-blue/20 flex items-center justify-center mb-3 group-hover:border-foursys-blue/40 transition-colors">
-                  <DynIcon name={cert.icon} size={20} className="text-foursys-blue" />
+                <div className="w-16 h-16 rounded-full bg-foursys-primary/10 border-2 border-foursys-primary/20 flex items-center justify-center mb-3 group-hover:border-foursys-primary/40 transition-colors">
+                  <DynIcon name={cert.icon} size={20} className="text-foursys-primary" />
                 </div>
                 <div className="text-sm font-black text-white">{cert.label}</div>
                 <div className="text-[10px] text-foursys-text-dim mt-1 text-center leading-snug">
@@ -133,7 +133,7 @@ export function SectionAwards() {
             { value: '26', label: 'Anos de Entrega' },
           ].map(stat => (
             <div key={stat.label}>
-              <div className="text-2xl md:text-3xl font-black text-foursys-blue">{stat.value}</div>
+              <div className="text-2xl md:text-3xl font-black text-foursys-primary">{stat.value}</div>
               <div className="text-[10px] text-foursys-text-dim uppercase tracking-widest mt-1">
                 {stat.label}
               </div>

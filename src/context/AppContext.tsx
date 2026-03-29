@@ -28,6 +28,7 @@ const initialState: AppState = {
   interestedSections: [],
   sessionProfile: null,
   isWizardOpen: false,
+  isOverviewOpen: false,
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -172,6 +173,9 @@ function appReducer(state: AppState, action: AppAction): AppState {
     case 'CLOSE_WIZARD':
       return { ...state, isWizardOpen: false }
 
+    case 'TOGGLE_OVERVIEW':
+      return { ...state, isOverviewOpen: !state.isOverviewOpen }
+
     default:
       return state
   }
@@ -195,6 +199,7 @@ interface AppContextValue {
   toggleInterest: (section: AppSection) => void
   setProfile: (profile: SessionProfile) => void
   closeWizard: () => void
+  toggleOverview: () => void
   // Helpers derivados
   getSectionLabel: (section: AppSection) => string
   getSectionIcon: (section: AppSection) => string
@@ -234,6 +239,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const toggleInterest = useCallback((section: AppSection) => dispatch({ type: 'TOGGLE_INTEREST', section }), [])
   const setProfile = useCallback((profile: SessionProfile) => dispatch({ type: 'SET_PROFILE', profile }), [])
   const closeWizard = useCallback(() => dispatch({ type: 'CLOSE_WIZARD' }), [])
+  const toggleOverview = useCallback(() => dispatch({ type: 'TOGGLE_OVERVIEW' }), [])
 
   // Combina navegação base com seções do cliente ativo
   const { activeNavigationItems, activeSectionCategories } = useMemo(() => {
@@ -290,6 +296,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     toggleInterest,
     setProfile,
     closeWizard,
+    toggleOverview,
     getSectionLabel,
     getSectionIcon,
     activeNavigationItems,

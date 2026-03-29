@@ -37,9 +37,9 @@ function KPICard({ kpi, delay }: { kpi: typeof kpis[0]; delay: number }) {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.5 }}
-      className="flex flex-col items-center p-6 rounded-2xl bg-foursys-surface/60 border border-white/10 backdrop-blur-md hover:border-foursys-blue/30 transition-all duration-300 group"
+      className="flex flex-col items-center p-6 rounded-2xl bg-foursys-surface/60 border border-white/10 backdrop-blur-md hover:border-foursys-primary/30 transition-all duration-300 group"
     >
-      <div className="text-3xl md:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-foursys-cyan to-foursys-blue mb-2">
+      <div className="text-3xl md:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-foursys-cyan to-foursys-primary mb-2">
         {count.toLocaleString('pt-BR')}{kpi.suffix}
       </div>
       <div className="text-base font-semibold text-foursys-text mb-1">{kpi.label}</div>
@@ -57,7 +57,7 @@ export function SectionIdentity() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-sm mb-4">
             Quem Somos
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
@@ -81,7 +81,7 @@ export function SectionIdentity() {
               title: 'Missão',
               icon: 'target',
               content: 'Ser o parceiro estratégico que transforma a tecnologia em vantagem competitiva real para nossos clientes — com velocidade, qualidade e inovação.',
-              gradient: 'from-foursys-blue/20 to-transparent'
+              gradient: 'from-foursys-primary/20 to-transparent'
             },
             {
               title: 'Visão',

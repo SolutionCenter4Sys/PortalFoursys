@@ -4,7 +4,7 @@ import { capabilities } from '../../data/cases'
 
 const levelColors = {
   expert: { bar: 'bg-foursys-cyan', label: 'Expert', text: 'text-foursys-cyan' },
-  advanced: { bar: 'bg-foursys-blue', label: 'Avançado', text: 'text-foursys-blue-light' },
+  advanced: { bar: 'bg-foursys-primary', label: 'Avançado', text: 'text-foursys-primary-light' },
   solid: { bar: 'bg-foursys-text-muted', label: 'Sólido', text: 'text-foursys-text-muted' }
 }
 
@@ -23,7 +23,7 @@ export function SectionCapabilities() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-sm mb-4">
             Capacidades Técnicas
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
@@ -51,7 +51,7 @@ export function SectionCapabilities() {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="p-6 rounded-2xl bg-foursys-surface/50 border border-white/10 hover:border-foursys-blue/25 transition-all duration-300"
+              className="p-6 rounded-2xl bg-foursys-surface/50 border border-white/10 hover:border-foursys-primary/25 transition-all duration-300"
             >
               <h3 className="font-bold text-foursys-text mb-4 text-sm uppercase tracking-wide">{area.category}</h3>
 

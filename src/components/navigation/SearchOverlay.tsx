@@ -61,7 +61,7 @@ export function SearchOverlay() {
             transition={{ duration: 0.2 }}
             className="fixed top-16 sm:top-24 left-1/2 -translate-x-1/2 z-50 w-full max-w-xl px-3 sm:px-0"
           >
-            <div className="bg-foursys-dark-2/95 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden shadow-2xl">
+            <div role="dialog" aria-modal="true" className="bg-foursys-dark-2/95 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden shadow-2xl">
               <div className="flex items-center gap-3 p-4 border-b border-white/10">
                 <Search size={18} className="text-foursys-text-muted flex-shrink-0" />
                 <input
@@ -71,7 +71,7 @@ export function SearchOverlay() {
                   placeholder="Buscar seções..."
                   className="flex-1 bg-transparent text-foursys-text placeholder-foursys-text-dim outline-none text-sm"
                 />
-                <button onClick={closeSearch} className="text-foursys-text-dim hover:text-foursys-text">
+                <button onClick={closeSearch} aria-label="Fechar busca" className="text-foursys-text-dim hover:text-foursys-text">
                   <X size={16} />
                 </button>
               </div>
@@ -83,7 +83,7 @@ export function SearchOverlay() {
                     onClick={() => { navigate(item.id as AppSection); closeSearch() }}
                     className={`
                       w-full flex items-center gap-3 px-4 py-3 text-left transition-colors
-                      ${idx === selected ? 'bg-foursys-blue/20' : 'hover:bg-white/5'}
+                      ${idx === selected ? 'bg-foursys-primary/20' : 'hover:bg-white/5'}
                     `}
                   >
                     <DynIcon name={item.icon} size={20} className="text-foursys-text-muted flex-shrink-0" />

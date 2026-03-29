@@ -8,7 +8,7 @@ export const trails: Trail[] = [
     icon: 'zap',
     duration: '25 min',
     audience: 'C-Level com agenda restrita',
-    color: 'foursys-blue',
+    color: 'foursys-primary',
     colorHex: '#FF6600',
     steps: [
       { sectionId: 'home',           estimatedMinutes: 3 },
@@ -56,8 +56,7 @@ export const trails: Trail[] = [
       { sectionId: 'home',           estimatedMinutes: 3  },
       { sectionId: 'offers-flagship',estimatedMinutes: 8  },
       { sectionId: 'lab-ia',         estimatedMinutes: 10 },
-      { sectionId: 'sdd-legacy',     estimatedMinutes: 8  },
-      { sectionId: 'cyber-security', estimatedMinutes: 8  },
+      { sectionId: 'services',       estimatedMinutes: 12 },
       { sectionId: 'capabilities',   estimatedMinutes: 8  },
     ]
   },

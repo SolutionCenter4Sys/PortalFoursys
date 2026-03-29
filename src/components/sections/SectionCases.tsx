@@ -13,6 +13,7 @@ import {
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { InterestButton } from '../ui/InterestButton'
 import { cases } from '../../data/cases'
+import { heroStats } from '../../data/kpis'
 import type { CaseStudy } from '../../types'
 
 // ─── Imagens por case ─────────────────────────────────────────────────────────
@@ -44,7 +45,7 @@ const TYPE_STYLE: Record<string, { badge: string; metric: string; check: string 
 }
 
 function getTypeStyle(type: string) {
-  return TYPE_STYLE[type] ?? { badge: 'bg-foursys-blue/15 text-foursys-blue border-foursys-blue/25', metric: 'text-foursys-blue', check: 'text-foursys-blue' }
+  return TYPE_STYLE[type] ?? { badge: 'bg-foursys-primary/15 text-foursys-primary border-foursys-primary/25', metric: 'text-foursys-primary', check: 'text-foursys-primary' }
 }
 
 // ─── Modal de detalhe ─────────────────────────────────────────────────────────
@@ -66,6 +67,9 @@ function CaseModal({ case: c, onClose }: { case: CaseStudy; onClose: () => void 
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.95, y: 16 }}
         onClick={e => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="case-modal-title"
         className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-t-2xl sm:rounded-2xl max-w-2xl w-full max-h-[90dvh] overflow-hidden flex flex-col"
       >
         {/* Imagem */}
@@ -84,6 +88,7 @@ function CaseModal({ case: c, onClose }: { case: CaseStudy; onClose: () => void 
         <div className="p-7 overflow-y-auto custom-scrollbar flex-1">
           <button
             onClick={onClose}
+            aria-label="Fechar"
             className="absolute top-4 right-4 p-2 rounded-xl hover:bg-white/10 text-foursys-text-muted transition-colors"
           >
             <X size={16} />
@@ -93,7 +98,7 @@ function CaseModal({ case: c, onClose }: { case: CaseStudy; onClose: () => void 
             {c.type}
           </span>
 
-          <h3 className="text-2xl font-black text-white mb-1 leading-tight">{c.title}</h3>
+          <h3 id="case-modal-title" className="text-2xl font-black text-white mb-1 leading-tight">{c.title}</h3>
           <p className="text-sm text-foursys-text-dim mb-5">{c.client} · {c.sector}</p>
 
           {/* Métrica hero */}
@@ -141,6 +146,19 @@ function CaseModal({ case: c, onClose }: { case: CaseStudy; onClose: () => void 
                 ))}
               </div>
             </div>
+
+            {/* Testimonial */}
+            {c.testimonial && (
+              <div className="mt-5 p-5 rounded-xl bg-foursys-primary/[0.05] border border-foursys-primary/15">
+                <p className="text-sm text-foursys-text-muted italic leading-relaxed mb-3">
+                  &ldquo;{c.testimonial.quote}&rdquo;
+                </p>
+                <div className="text-xs">
+                  <span className="font-semibold text-white">{c.testimonial.author}</span>
+                  <span className="text-foursys-text-dim ml-1.5">· {c.testimonial.role}</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </motion.div>
@@ -160,6 +178,9 @@ function FeaturedCaseCard({ c, onClick }: { c: CaseStudy; onClick: () => void })
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1, duration: 0.5 }}
       onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick() } }}
       className="col-span-full relative rounded-2xl border border-white/[0.1] overflow-hidden cursor-pointer group hover:border-white/20 transition-all duration-300"
     >
       <div className="grid grid-cols-1 sm:grid-cols-[1fr_300px] md:grid-cols-[1fr_400px] sm:h-52">
@@ -221,6 +242,9 @@ function CaseCard({ c, index, onClick }: { c: CaseStudy; index: number; onClick:
       transition={{ delay: 0.1 + index * 0.07, duration: 0.4 }}
       layout
       onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick() } }}
       className="group rounded-2xl border border-white/[0.08] bg-foursys-surface/30 overflow-hidden cursor-pointer hover:border-white/[0.16] hover:-translate-y-1 transition-all duration-300 flex flex-col"
     >
       {/* Imagem */}
@@ -298,7 +322,7 @@ export function SectionCases() {
         >
           <div className="flex items-start md:items-end justify-between flex-wrap gap-3">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-blue mb-2">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-primary mb-2">
                 Resultados reais
               </p>
               <h2 className="text-2xl md:text-4xl font-black text-white leading-none">
@@ -318,7 +342,7 @@ export function SectionCases() {
                   onClick={() => setFilter(s)}
                   className={`px-2.5 md:px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 ${
                     filter === s
-                      ? 'bg-foursys-blue/20 border border-foursys-blue/40 text-foursys-blue'
+                      ? 'bg-foursys-primary/20 border border-foursys-primary/40 text-foursys-primary'
                       : 'bg-white/[0.04] border border-white/[0.08] text-foursys-text-dim hover:text-foursys-text-muted hover:border-white/20'
                   }`}
                 >
@@ -328,7 +352,7 @@ export function SectionCases() {
             </div>
           </div>
 
-          <div className="mt-4 md:mt-6 h-px bg-gradient-to-r from-foursys-blue/30 via-white/[0.06] to-transparent" />
+          <div className="mt-4 md:mt-6 h-px bg-gradient-to-r from-foursys-primary/30 via-white/[0.06] to-transparent" />
         </motion.div>
 
         {/* ── Grid ── */}
@@ -351,12 +375,12 @@ export function SectionCases() {
           className="mt-8 md:mt-10 pt-6 md:pt-8 border-t border-white/[0.06] grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
         >
           {[
-            { value: '26+',   label: 'Anos de história' },
-            { value: '500K+', label: 'Projetos entregues' },
-            { value: '99,9%', label: 'SLA entregue' },
-            { value: '3,6%',  label: 'Turnover vs 22% do mercado' },
+            { value: `${heroStats.years}+`,   label: 'Anos de história' },
+            { value: heroStats.projects,       label: 'Projetos entregues' },
+            { value: heroStats.sla,            label: 'SLA entregue' },
+            { value: heroStats.turnover,       label: 'Turnover vs 22% do mercado' },
           ].map((stat, i) => (
-            <div key={i} className="border-l-2 border-foursys-blue/40 pl-4">
+            <div key={i} className="border-l-2 border-foursys-primary/40 pl-4">
               <div className="text-2xl font-black text-white">{stat.value}</div>
               <div className="text-xs text-foursys-text-muted mt-0.5">{stat.label}</div>
             </div>

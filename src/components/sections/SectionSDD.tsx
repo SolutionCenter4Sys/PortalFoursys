@@ -20,7 +20,7 @@ export function SectionSDD() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-sm mb-4">
             SDD com Legado
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
@@ -79,9 +79,9 @@ export function SectionSDD() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 + i * 0.1 }}
-                className="p-5 rounded-2xl bg-foursys-surface/50 border border-white/10 hover:border-foursys-blue/25 transition-colors relative"
+                className="p-5 rounded-2xl bg-foursys-surface/50 border border-white/10 hover:border-foursys-primary/25 transition-colors relative"
               >
-                <div className="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-foursys-blue/30 border border-foursys-blue/50 flex items-center justify-center text-xs font-bold text-foursys-cyan">
+                <div className="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-foursys-primary/30 border border-foursys-primary/50 flex items-center justify-center text-xs font-bold text-foursys-cyan">
                   {i + 1}
                 </div>
                 <div className="mb-3">
@@ -98,7 +98,7 @@ export function SectionSDD() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="mt-8 p-6 rounded-2xl bg-gradient-to-r from-foursys-blue/15 to-transparent border border-foursys-blue/25"
+          className="mt-8 p-6 rounded-2xl bg-gradient-to-r from-foursys-primary/15 to-transparent border border-foursys-primary/25"
         >
           <p className="text-sm text-foursys-text-muted text-center flex flex-wrap items-start justify-center gap-1.5">
             <DynIcon name="lightbulb" size={18} className="text-foursys-cyan shrink-0 mt-0.5" />

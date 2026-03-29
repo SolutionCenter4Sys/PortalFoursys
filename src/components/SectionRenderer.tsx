@@ -1,78 +1,89 @@
+import { lazy, Suspense } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { useApp } from '../context/AppContext'
-import { SectionHome } from './sections/SectionHome'
-import { SectionIdentity } from './sections/SectionIdentity'
-import { SectionTimeline } from './sections/SectionTimeline'
-import { SectionGlobal } from './sections/SectionGlobal'
-import { SectionOffersFlag } from './sections/SectionOffersFlag'
-import { SectionServices } from './sections/SectionServices'
-import { SectionDelivery } from './sections/SectionDelivery'
-import { SectionSDD } from './sections/SectionSDD'
-import { SectionCyberSecurity } from './sections/SectionCyberSecurity'
-import { SectionFourblock } from './sections/SectionFourblock'
-import { SectionLabIA } from './sections/SectionLabIA'
-import { SectionFourmakers } from './sections/SectionFourmakers'
-import { SectionAlliances } from './sections/SectionAlliances'
-import { SectionCases } from './sections/SectionCases'
-import { SectionAwards } from './sections/SectionAwards'
-import { SectionClients } from './sections/SectionClients'
-import { SectionCapabilities } from './sections/SectionCapabilities'
-import { SectionESG } from './sections/SectionESG'
-import { SectionInsights } from './sections/SectionInsights'
-import { SectionFAQ } from './sections/SectionFAQ'
+
+const SectionHome = lazy(() => import('./sections/SectionHome').then(m => ({ default: m.SectionHome })))
+const SectionIdentity = lazy(() => import('./sections/SectionIdentity').then(m => ({ default: m.SectionIdentity })))
+const SectionTimeline = lazy(() => import('./sections/SectionTimeline').then(m => ({ default: m.SectionTimeline })))
+const SectionGlobal = lazy(() => import('./sections/SectionGlobal').then(m => ({ default: m.SectionGlobal })))
+const SectionWhyFoursys = lazy(() => import('./sections/SectionWhyFoursys').then(m => ({ default: m.SectionWhyFoursys })))
+const SectionOffersFlag = lazy(() => import('./sections/SectionOffersFlag').then(m => ({ default: m.SectionOffersFlag })))
+const SectionServices = lazy(() => import('./sections/SectionServices').then(m => ({ default: m.SectionServices })))
+const SectionDelivery = lazy(() => import('./sections/SectionDelivery').then(m => ({ default: m.SectionDelivery })))
+const SectionLabIA = lazy(() => import('./sections/SectionLabIA').then(m => ({ default: m.SectionLabIA })))
+const SectionFourmakers = lazy(() => import('./sections/SectionFourmakers').then(m => ({ default: m.SectionFourmakers })))
+const SectionAlliances = lazy(() => import('./sections/SectionAlliances').then(m => ({ default: m.SectionAlliances })))
+const SectionCases = lazy(() => import('./sections/SectionCases').then(m => ({ default: m.SectionCases })))
+const SectionAwards = lazy(() => import('./sections/SectionAwards').then(m => ({ default: m.SectionAwards })))
+const SectionClients = lazy(() => import('./sections/SectionClients').then(m => ({ default: m.SectionClients })))
+const SectionCapabilities = lazy(() => import('./sections/SectionCapabilities').then(m => ({ default: m.SectionCapabilities })))
+const SectionESG = lazy(() => import('./sections/SectionESG').then(m => ({ default: m.SectionESG })))
+const SectionInsights = lazy(() => import('./sections/SectionInsights').then(m => ({ default: m.SectionInsights })))
+const SectionFAQ = lazy(() => import('./sections/SectionFAQ').then(m => ({ default: m.SectionFAQ })))
 // Client sections
-import { SectionClientOpening } from './sections/client/SectionClientOpening'
-import { SectionClientInsights } from './sections/client/SectionClientInsights'
-import { SectionClientCases } from './sections/client/SectionClientCases'
-import { SectionClientExtra1 } from './sections/client/SectionClientExtra1'
+const SectionClientOpening = lazy(() => import('./sections/client/SectionClientOpening').then(m => ({ default: m.SectionClientOpening })))
+const SectionClientInsights = lazy(() => import('./sections/client/SectionClientInsights').then(m => ({ default: m.SectionClientInsights })))
+const SectionClientCases = lazy(() => import('./sections/client/SectionClientCases').then(m => ({ default: m.SectionClientCases })))
+const SectionClientExtra1 = lazy(() => import('./sections/client/SectionClientExtra1').then(m => ({ default: m.SectionClientExtra1 })))
+
+function SectionSkeleton() {
+  return (
+    <div className="h-full w-full flex items-center justify-center">
+      <div className="flex flex-col items-center gap-3">
+        <div className="w-8 h-8 border-2 border-foursys-primary/30 border-t-foursys-primary rounded-full animate-spin" />
+        <span className="text-xs text-foursys-text-dim">Carregando...</span>
+      </div>
+    </div>
+  )
+}
 
 export function SectionRenderer() {
   const { state } = useApp()
   const section = state.currentSection
 
   return (
-    <AnimatePresence mode="wait">
-      {/* ── Início ── */}
-      {section === 'home'           && <SectionHome key="home" />}
+    <Suspense fallback={<SectionSkeleton />}>
+      <AnimatePresence mode="wait">
+        {/* ── Início ── */}
+        {section === 'home'           && <SectionHome key="home" />}
 
-      {/* ── Institucional ── */}
-      {section === 'identity'       && <SectionIdentity key="identity" />}
-      {section === 'timeline'       && <SectionTimeline key="timeline" />}
-      {section === 'global'         && <SectionGlobal key="global" />}
+        {/* ── Institucional ── */}
+        {section === 'identity'       && <SectionIdentity key="identity" />}
+        {section === 'timeline'       && <SectionTimeline key="timeline" />}
+        {section === 'global'         && <SectionGlobal key="global" />}
+        {section === 'why-foursys'    && <SectionWhyFoursys key="why-foursys" />}
 
-      {/* ── Ofertas ── */}
-      {section === 'offers-flagship' && <SectionOffersFlag key="offers-flagship" />}
+        {/* ── Ofertas ── */}
+        {section === 'offers-flagship' && <SectionOffersFlag key="offers-flagship" />}
 
-      {/* ── Serviços ── */}
-      {section === 'services'       && <SectionServices key="services" />}
-      {section === 'delivery'       && <SectionDelivery key="delivery" />}
-      {section === 'sdd-legacy'     && <SectionSDD key="sdd-legacy" />}
-      {section === 'cyber-security' && <SectionCyberSecurity key="cyber-security" />}
-      {section === 'fourblock'      && <SectionFourblock key="fourblock" />}
+        {/* ── Serviços ── */}
+        {section === 'services'       && <SectionServices key="services" />}
+        {section === 'delivery'       && <SectionDelivery key="delivery" />}
 
-      {/* ── Inovação ── */}
-      {section === 'lab-ia'         && <SectionLabIA key="lab-ia" />}
-      {section === 'fourmakers'     && <SectionFourmakers key="fourmakers" />}
-      {section === 'alliances'      && <SectionAlliances key="alliances" />}
+        {/* ── Inovação ── */}
+        {section === 'lab-ia'         && <SectionLabIA key="lab-ia" />}
+        {section === 'fourmakers'     && <SectionFourmakers key="fourmakers" />}
+        {section === 'alliances'      && <SectionAlliances key="alliances" />}
 
-      {/* ── Provas ── */}
-      {section === 'cases'              && <SectionCases key="cases" />}
-      {section === 'awards'             && <SectionAwards key="awards" />}
-      {section === 'clients-showcase'   && <SectionClients key="clients-showcase" />}
-      {section === 'capabilities'       && <SectionCapabilities key="capabilities" />}
+        {/* ── Provas ── */}
+        {section === 'cases'              && <SectionCases key="cases" />}
+        {section === 'awards'             && <SectionAwards key="awards" />}
+        {section === 'clients-showcase'   && <SectionClients key="clients-showcase" />}
+        {section === 'capabilities'       && <SectionCapabilities key="capabilities" />}
 
-      {/* ── ESG ── */}
-      {section === 'esg'            && <SectionESG key="esg" />}
+        {/* ── ESG ── */}
+        {section === 'esg'            && <SectionESG key="esg" />}
 
-      {/* ── Referência ── */}
-      {section === 'insights'       && <SectionInsights key="insights" />}
-      {section === 'faq'            && <SectionFAQ key="faq" />}
+        {/* ── Referência ── */}
+        {section === 'insights'       && <SectionInsights key="insights" />}
+        {section === 'faq'            && <SectionFAQ key="faq" />}
 
-      {/* ── Seções de Cliente (dinâmicas) ── */}
-      {section === 'client-opening'  && <SectionClientOpening key="client-opening" />}
-      {section === 'client-insights' && <SectionClientInsights key="client-insights" />}
-      {section === 'client-cases'    && <SectionClientCases key="client-cases" />}
-      {section === 'client-extra-1'  && <SectionClientExtra1 key="client-extra-1" />}
-    </AnimatePresence>
+        {/* ── Seções de Cliente (dinâmicas) ── */}
+        {section === 'client-opening'  && <SectionClientOpening key="client-opening" />}
+        {section === 'client-insights' && <SectionClientInsights key="client-insights" />}
+        {section === 'client-cases'    && <SectionClientCases key="client-cases" />}
+        {section === 'client-extra-1'  && <SectionClientExtra1 key="client-extra-1" />}
+      </AnimatePresence>
+    </Suspense>
   )
 }

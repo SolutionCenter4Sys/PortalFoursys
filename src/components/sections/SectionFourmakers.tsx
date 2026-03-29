@@ -25,7 +25,7 @@ export function SectionFourmakers() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-sm mb-4">
             FourMakers
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
@@ -41,12 +41,12 @@ export function SectionFourmakers() {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
-          className="mb-8 md:mb-10 p-5 md:p-10 rounded-2xl bg-gradient-to-br from-foursys-blue/25 via-foursys-blue/10 to-foursys-cyan/10 border border-foursys-blue/30 text-center relative overflow-hidden"
+          className="mb-8 md:mb-10 p-5 md:p-10 rounded-2xl bg-gradient-to-br from-foursys-primary/25 via-foursys-primary/10 to-foursys-cyan/10 border border-foursys-primary/30 text-center relative overflow-hidden"
         >
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-0 right-0 w-64 h-64 bg-foursys-cyan/5 rounded-full blur-3xl" />
           </div>
-          <div className="mb-4"><DynIcon name="hammer" size={48} className="text-foursys-blue" /></div>
+          <div className="mb-4"><DynIcon name="hammer" size={48} className="text-foursys-primary" /></div>
           <div className="text-2xl font-black text-foursys-text mb-3">Comunidade · Laboratório · Aceleração</div>
           <p className="text-foursys-text-muted max-w-lg mx-auto">
             Mais de 500 makers ativos. Dezenas de protótipos gerados. Projetos que viraram produtos reais para clientes.
@@ -61,7 +61,7 @@ export function SectionFourmakers() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 + i * 0.08 }}
-              className="p-5 rounded-2xl bg-foursys-surface/50 border border-white/10 hover:border-foursys-blue/25 transition-all text-center"
+              className="p-5 rounded-2xl bg-foursys-surface/50 border border-white/10 hover:border-foursys-primary/25 transition-all text-center"
             >
               <div className="mb-3"><DynIcon name={p.icon} size={28} className="text-white/80" /></div>
               <div className="font-bold text-foursys-text text-sm mb-2">{p.title}</div>
@@ -87,7 +87,7 @@ export function SectionFourmakers() {
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <span className="font-bold text-foursys-text">{act.type}</span>
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/25 text-foursys-cyan">{act.freq}</span>
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/25 text-foursys-cyan">{act.freq}</span>
                 </div>
                 <p className="text-sm text-foursys-text-dim">{act.desc}</p>
               </div>

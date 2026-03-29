@@ -53,7 +53,7 @@ const flagshipOffers = [
     color: '#8B5CF6',
     bg: 'from-violet-500/15 to-violet-600/5',
     border: 'border-violet-500/30',
-    navigateTo: 'sdd-legacy' as const,
+    navigateTo: 'services' as const,
   },
   {
     id: 'ia-first',
@@ -99,7 +99,7 @@ const flagshipOffers = [
     color: '#4ADE80',
     bg: 'from-green-500/15 to-green-600/5',
     border: 'border-green-500/30',
-    navigateTo: 'fourblock' as const,
+    navigateTo: 'services' as const,
   },
   {
     id: 'quality-ia',
@@ -290,7 +290,7 @@ export function SectionOffersFlag() {
         >
           <div className="flex items-start md:items-end justify-between flex-wrap gap-3">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-blue mb-2">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-primary mb-2">
                 Nossas principais ofertas
               </p>
               <h2 className="text-2xl md:text-4xl font-black text-white leading-none">
@@ -309,14 +309,14 @@ export function SectionOffersFlag() {
                 { value: '500K+', label: 'projetos' },
               ].map(stat => (
                 <div key={stat.label} className="text-center px-3 md:px-4 py-1.5 md:py-2 rounded-xl bg-foursys-surface/40 border border-white/[0.08]">
-                  <div className="text-base md:text-lg font-black text-foursys-blue">{stat.value}</div>
+                  <div className="text-base md:text-lg font-black text-foursys-primary">{stat.value}</div>
                   <div className="text-[10px] text-foursys-text-dim">{stat.label}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="mt-4 md:mt-6 h-px bg-gradient-to-r from-foursys-blue/30 via-white/[0.06] to-transparent" />
+          <div className="mt-4 md:mt-6 h-px bg-gradient-to-r from-foursys-primary/30 via-white/[0.06] to-transparent" />
         </motion.div>
 
         {/* ── Grid de ofertas: 1 col mobile, 2 tablet, 5 desktop ── */}

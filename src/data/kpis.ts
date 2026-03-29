@@ -1,5 +1,14 @@
 import type { KPI, TimelineItem } from '../types'
 
+export const heroStats = {
+  years: 26,
+  projects: '500K+',
+  employees: '2000+',
+  turnover: '3,6%',
+  sla: '99,9%',
+  continents: 3,
+}
+
 export const kpis: KPI[] = [
   {
     value: 25,

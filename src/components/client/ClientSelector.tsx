@@ -84,6 +84,8 @@ export function ClientSelector() {
             exit={{ scale: 0.95, y: 16, opacity: 0 }}
             transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
             onClick={e => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
             className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-t-2xl sm:rounded-2xl w-full max-w-md overflow-hidden"
           >
             {/* Header */}
@@ -103,6 +105,7 @@ export function ClientSelector() {
                 </div>
                 <button
                   onClick={toggleClientSelector}
+                  aria-label="Fechar seletor"
                   className="p-2 rounded-xl hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
                 >
                   <X size={14} />

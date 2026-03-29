@@ -25,7 +25,7 @@ export interface ClientSection {
   label: string
   description: string
   icon: string
-  component: 'client-opening' | 'client-insights' | 'client-cases' | 'client-extra-1' | 'client-extra-2'
+  component: 'client-opening' | 'client-insights' | 'client-cases' | 'client-extra-1'
 }
 
 export interface ClientConfig {
@@ -53,25 +53,6 @@ export interface ClientConfig {
 
 // ─── Shared domain types ──────────────────────────────────────────────────────
 
-export interface Section {
-  id: string
-  title: string
-  subtitle?: string
-  icon: string
-  category: SectionCategory
-  order: number
-}
-
-export type SectionCategory =
-  | 'abertura'
-  | 'institucional'
-  | 'ofertas'
-  | 'servicos'
-  | 'inovacao'
-  | 'provas'
-  | 'esg'
-  | 'faq'
-  | 'cliente'
 
 export interface KPI {
   value: number
@@ -139,6 +120,7 @@ export interface CaseStudy {
   results: string[]
   metric?: { value: string; label: string }
   color: string
+  testimonial?: { quote: string; author: string; role: string }
 }
 
 export interface Capability {
@@ -155,13 +137,6 @@ export interface FAQItem {
   sectionLabel?: string
 }
 
-export interface Perception {
-  id: string
-  title: string
-  description: string
-  solution: string
-  icon: string
-}
 
 // ─── App Sections ─────────────────────────────────────────────────────────────
 
@@ -171,14 +146,12 @@ export type AppSection =
   | 'identity'
   | 'global'
   | 'timeline'
+  | 'why-foursys'
   // Ofertas
   | 'offers-flagship'
   // Serviços
   | 'services'
   | 'delivery'
-  | 'sdd-legacy'
-  | 'cyber-security'
-  | 'fourblock'
   // Inovação
   | 'lab-ia'
   | 'fourmakers'
@@ -198,7 +171,6 @@ export type AppSection =
   | 'client-insights'
   | 'client-cases'
   | 'client-extra-1'
-  | 'client-extra-2'
 
 export interface NavigationItem {
   id: AppSection
@@ -284,6 +256,7 @@ export interface AppState {
   // Perfil da reunião
   sessionProfile: SessionProfile | null
   isWizardOpen: boolean
+  isOverviewOpen: boolean
 }
 
 export type AppAction =
@@ -301,3 +274,4 @@ export type AppAction =
   | { type: 'TOGGLE_INTEREST'; section: AppSection }
   | { type: 'SET_PROFILE'; profile: SessionProfile }
   | { type: 'CLOSE_WIZARD' }
+  | { type: 'TOGGLE_OVERVIEW' }

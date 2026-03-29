@@ -30,12 +30,12 @@ export function SectionFourblock() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-sm mb-4">
             Fourblock
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
             Produtos digitais em{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-foursys-cyan to-foursys-blue">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-foursys-cyan to-foursys-primary">
               30 dias
             </span>
           </h2>
@@ -81,7 +81,7 @@ export function SectionFourblock() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 + i * 0.07 }}
-                className="p-4 rounded-2xl bg-foursys-surface/50 border border-white/10 hover:border-foursys-blue/30 transition-all duration-200 hover:-translate-y-1"
+                className="p-4 rounded-2xl bg-foursys-surface/50 border border-white/10 hover:border-foursys-primary/30 transition-all duration-200 hover:-translate-y-1"
               >
                 <div className="mb-2">
                   <DynIcon name={block.icon} size={22} className="text-white/80" />
@@ -108,11 +108,11 @@ export function SectionFourblock() {
             {phases.map((phase, i) => (
               <div key={phase.week} className="text-center">
                 <div className="relative mb-3">
-                  <div className="w-12 h-12 rounded-2xl bg-foursys-blue/20 border border-foursys-blue/30 flex items-center justify-center mx-auto">
+                  <div className="w-12 h-12 rounded-2xl bg-foursys-primary/20 border border-foursys-primary/30 flex items-center justify-center mx-auto">
                     <DynIcon name={phase.icon} size={22} className="text-white/80" />
                   </div>
                   {i < phases.length - 1 && (
-                    <div className="hidden md:block absolute top-6 left-full w-full h-px bg-gradient-to-r from-foursys-blue/40 to-transparent" />
+                    <div className="hidden md:block absolute top-6 left-full w-full h-px bg-gradient-to-r from-foursys-primary/40 to-transparent" />
                   )}
                 </div>
                 <div className="text-xs text-foursys-cyan font-semibold">{phase.week}</div>

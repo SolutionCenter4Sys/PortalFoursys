@@ -30,7 +30,7 @@ export function SectionClients() {
         >
           <div className="flex items-start justify-between flex-wrap gap-6">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-blue mb-2">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-primary mb-2">
                 Confiança comprovada
               </p>
               <h2 className="text-2xl md:text-4xl font-black text-white leading-none mb-3">
@@ -51,14 +51,14 @@ export function SectionClients() {
                   transition={{ delay: 0.1 + i * 0.06 }}
                   className="p-3 rounded-xl bg-foursys-surface/40 border border-white/[0.08] text-center min-w-[110px]"
                 >
-                  <div className="text-xl font-black text-foursys-blue">{stat.value}</div>
+                  <div className="text-xl font-black text-foursys-primary">{stat.value}</div>
                   <div className="text-[9px] text-foursys-text-dim mt-0.5 uppercase tracking-wider">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
           </div>
 
-          <div className="mt-5 h-px bg-gradient-to-r from-foursys-blue/30 via-white/[0.06] to-transparent" />
+          <div className="mt-5 h-px bg-gradient-to-r from-foursys-primary/30 via-white/[0.06] to-transparent" />
         </motion.div>
 
         {/* Sector filters */}
@@ -73,7 +73,7 @@ export function SectionClients() {
             onClick={() => setActiveSector(null)}
             className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 ${
               activeSector === null
-                ? 'bg-foursys-blue/20 border-foursys-blue/40 text-foursys-blue'
+                ? 'bg-foursys-primary/20 border-foursys-primary/40 text-foursys-primary'
                 : 'border-white/[0.1] text-foursys-text-muted hover:border-white/[0.2]'
             }`}
           >
@@ -86,7 +86,7 @@ export function SectionClients() {
               onClick={() => setActiveSector(sector)}
               className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 ${
                 activeSector === sector
-                  ? 'bg-foursys-blue/20 border-foursys-blue/40 text-foursys-blue'
+                  ? 'bg-foursys-primary/20 border-foursys-primary/40 text-foursys-primary'
                   : 'border-white/[0.1] text-foursys-text-muted hover:border-white/[0.2]'
               }`}
             >

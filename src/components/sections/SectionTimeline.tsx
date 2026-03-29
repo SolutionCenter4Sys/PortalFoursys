@@ -47,7 +47,7 @@ export function SectionTimeline() {
           transition={{ duration: 0.4 }}
           className="text-center mb-8 md:mb-10"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-sm mb-4">
             Nossa Trajetória
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-3">
@@ -69,7 +69,7 @@ export function SectionTimeline() {
             onClick={() => setActiveEra(null)}
             className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 border ${
               !activeEra
-                ? 'bg-foursys-blue/20 border-foursys-blue/40 text-foursys-blue'
+                ? 'bg-foursys-primary/20 border-foursys-primary/40 text-foursys-primary'
                 : 'bg-white/[0.03] border-white/[0.08] text-foursys-text-dim hover:text-foursys-text-muted hover:border-white/15'
             }`}
           >
@@ -102,7 +102,7 @@ export function SectionTimeline() {
         {/* Timeline */}
         <div className="relative">
           {/* Central line */}
-          <div className="absolute left-[23px] md:left-[27px] top-0 bottom-0 w-px bg-gradient-to-b from-foursys-blue/30 via-white/[0.08] to-transparent" />
+          <div className="absolute left-[23px] md:left-[27px] top-0 bottom-0 w-px bg-gradient-to-b from-foursys-primary/30 via-white/[0.08] to-transparent" />
 
           <AnimatePresence mode="popLayout">
             <div className="space-y-4">
@@ -279,7 +279,7 @@ export function SectionTimeline() {
             <button
               type="button"
               onClick={() => navigate('clients-showcase')}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-foursys-blue/15 border border-foursys-blue/30 hover:bg-foursys-blue/25 hover:border-foursys-blue/50 text-foursys-blue text-sm font-semibold transition-all duration-200 group"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-foursys-primary/15 border border-foursys-primary/30 hover:bg-foursys-primary/25 hover:border-foursys-primary/50 text-foursys-primary text-sm font-semibold transition-all duration-200 group"
             >
               Nossos Clientes
               <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />

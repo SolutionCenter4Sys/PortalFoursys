@@ -17,7 +17,12 @@ export const cases: CaseStudy[] = [
       'Risco de parada crítica eliminado com arquitetura resiliente',
     ],
     metric: { value: '100', label: 'Projetos desbloqueados em 12 meses' },
-    color: 'from-blue-600 to-blue-800'
+    color: 'from-blue-600 to-blue-800',
+    testimonial: {
+      quote: 'A Foursys não entregou apenas tecnologia — entregou uma transformação completa na forma como operamos. Hoje integramos parceiros em dias, não meses.',
+      author: 'Ricardo Mendes',
+      role: 'CTO, Operadora de Saúde',
+    },
   },
   {
     id: 'fintech-lead-time',
@@ -35,7 +40,12 @@ export const cases: CaseStudy[] = [
       'Throughput 3x superior ao modelo anterior',
     ],
     metric: { value: '70%', label: 'Redução no lead time' },
-    color: 'from-green-600 to-green-800'
+    color: 'from-green-600 to-green-800',
+    testimonial: {
+      quote: 'Em 12 semanas saímos de um backlog travado para um ritmo de entrega que nunca tivemos. O modelo AI-Augmented Squad mudou nossa realidade.',
+      author: 'Fernanda Oliveira',
+      role: 'VP de Engenharia, Fintech de Crédito',
+    },
   },
   {
     id: 'seguradora-ia',
@@ -53,7 +63,12 @@ export const cases: CaseStudy[] = [
       '6 pilotos anteriores sem resultado → 1 PoC com impacto real',
     ],
     metric: { value: '85%', label: 'Redução no tempo de análise' },
-    color: 'from-violet-600 to-violet-800'
+    color: 'from-violet-600 to-violet-800',
+    testimonial: {
+      quote: 'Já tínhamos tentado 6 pilotos de IA sem resultado. A Foursys entregou impacto real na primeira PoC — com business case aprovado pela diretoria.',
+      author: 'Carlos Eduardo Santos',
+      role: 'Diretor de Inovação, Seguradora Multi-linha',
+    },
   },
   {
     id: 'data-lakehouse',

@@ -25,7 +25,7 @@ export function SectionInsights() {
           transition={{ duration: 0.4 }}
           className="mb-8 md:mb-10"
         >
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-blue mb-2">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-primary mb-2">
             Thought Leadership
           </p>
           <h2 className="text-2xl md:text-4xl font-black text-white leading-none mb-3">
@@ -35,7 +35,7 @@ export function SectionInsights() {
             Visões estratégicas e técnicas sobre os temas que movem a transformação digital
             nas empresas que atendemos.
           </p>
-          <div className="mt-5 h-px bg-gradient-to-r from-foursys-blue/30 via-white/[0.06] to-transparent" />
+          <div className="mt-5 h-px bg-gradient-to-r from-foursys-primary/30 via-white/[0.06] to-transparent" />
         </motion.div>
 
         {/* Category filters */}
@@ -50,7 +50,7 @@ export function SectionInsights() {
             onClick={() => setActiveCategory(null)}
             className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 ${
               activeCategory === null
-                ? 'bg-foursys-blue/20 border-foursys-blue/40 text-foursys-blue'
+                ? 'bg-foursys-primary/20 border-foursys-primary/40 text-foursys-primary'
                 : 'border-white/[0.1] text-foursys-text-muted hover:border-white/[0.2]'
             }`}
           >
@@ -63,7 +63,7 @@ export function SectionInsights() {
               onClick={() => setActiveCategory(cat)}
               className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 ${
                 activeCategory === cat
-                  ? 'bg-foursys-blue/20 border-foursys-blue/40 text-foursys-blue'
+                  ? 'bg-foursys-primary/20 border-foursys-primary/40 text-foursys-primary'
                   : 'border-white/[0.1] text-foursys-text-muted hover:border-white/[0.2]'
               }`}
             >
@@ -146,7 +146,7 @@ export function SectionInsights() {
                               e.stopPropagation()
                               navigate(insight.sectionLink!)
                             }}
-                            className="flex items-center gap-2 text-xs font-semibold text-foursys-blue hover:text-foursys-cyan transition-colors"
+                            className="flex items-center gap-2 text-xs font-semibold text-foursys-primary hover:text-foursys-cyan transition-colors"
                           >
                             Explorar seção <ArrowRight size={14} />
                           </button>

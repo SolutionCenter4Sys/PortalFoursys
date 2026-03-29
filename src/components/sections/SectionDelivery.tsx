@@ -13,7 +13,7 @@ export function SectionDelivery() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-blue/15 border border-foursys-blue/30 text-foursys-cyan text-sm mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-sm mb-4">
             Estrutura de Delivery
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
@@ -34,7 +34,7 @@ export function SectionDelivery() {
               className={`
                 p-7 rounded-2xl border backdrop-blur-md transition-all duration-300
                 ${model.highlight
-                  ? 'bg-gradient-to-br from-foursys-blue/25 to-foursys-cyan/10 border-foursys-blue/50 shadow-[0_0_40px_rgba(0,85,179,0.2)]'
+                  ? 'bg-gradient-to-br from-foursys-primary/25 to-foursys-cyan/10 border-foursys-primary/50 shadow-[0_0_40px_rgba(0,85,179,0.2)]'
                   : 'bg-foursys-surface/50 border-white/10 hover:border-white/20 hover:-translate-y-1'
                 }
               `}
@@ -51,7 +51,7 @@ export function SectionDelivery() {
               <div className="flex items-center gap-4 mb-5">
                 <div className={`
                   w-14 h-14 rounded-2xl flex items-center justify-center
-                  ${model.highlight ? 'bg-foursys-blue/30 shadow-[0_0_20px_rgba(0,85,179,0.4)]' : 'bg-foursys-surface border border-white/10'}
+                  ${model.highlight ? 'bg-foursys-primary/30 shadow-[0_0_20px_rgba(0,85,179,0.4)]' : 'bg-foursys-surface border border-white/10'}
                 `}>
                   <DynIcon name={model.icon} size={24} className="text-white/80" />
                 </div>

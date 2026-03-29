@@ -102,7 +102,7 @@ export function SessionWizard() {
             transition={{ type: 'spring', damping: 24, stiffness: 300 }}
             className="fixed inset-0 z-[70] flex items-end sm:items-center justify-center p-0 sm:p-6"
           >
-            <div className="w-full max-w-md bg-[#111218] border border-white/10 rounded-t-2xl sm:rounded-2xl shadow-2xl overflow-hidden">
+            <div role="dialog" aria-modal="true" aria-labelledby="wizard-title" className="w-full max-w-md bg-[#111218] border border-white/10 rounded-t-2xl sm:rounded-2xl shadow-2xl overflow-hidden">
 
               {/* Header */}
               <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-white/[0.07]">
@@ -112,7 +112,7 @@ export function SessionWizard() {
                       <div
                         key={i}
                         className={`h-1 rounded-full transition-all duration-300 ${
-                          i <= step ? 'bg-foursys-blue w-8' : 'bg-white/15 w-4'
+                          i <= step ? 'bg-foursys-primary w-8' : 'bg-white/15 w-4'
                         }`}
                       />
                     ))}
@@ -139,7 +139,7 @@ export function SessionWizard() {
                   transition={{ duration: 0.22 }}
                   className="px-6 py-5"
                 >
-                  <h2 className="text-xl font-black text-foursys-text mb-0.5">
+                  <h2 id="wizard-title" className="text-xl font-black text-foursys-text mb-0.5">
                     {currentStep.title}
                   </h2>
                   <p className="text-sm text-foursys-text-muted mb-5">
@@ -156,14 +156,14 @@ export function SessionWizard() {
                           whileTap={{ scale: 0.96 }}
                           className={`flex items-center gap-3 px-4 py-3.5 rounded-xl border text-left transition-all duration-150 ${
                             isSelected
-                              ? 'bg-foursys-blue/15 border-foursys-blue/50 text-foursys-text shadow-[0_0_12px_rgba(255,102,0,0.15)]'
+                              ? 'bg-foursys-primary/15 border-foursys-primary/50 text-foursys-text shadow-[0_0_12px_rgba(255,102,0,0.15)]'
                               : 'bg-white/[0.03] border-white/[0.07] text-foursys-text-muted hover:bg-white/[0.06] hover:border-white/15'
                           }`}
                         >
                           <DynIcon name={opt.icon} size={20} className="text-foursys-text-muted flex-shrink-0" />
                           <span className="text-sm font-semibold">{opt.label}</span>
                           {isSelected && (
-                            <Check size={14} className="ml-auto text-foursys-blue flex-shrink-0" />
+                            <Check size={14} className="ml-auto text-foursys-primary flex-shrink-0" />
                           )}
                         </motion.button>
                       )
@@ -196,7 +196,7 @@ export function SessionWizard() {
                     disabled={!currentValue}
                     className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
                       currentValue
-                        ? 'bg-foursys-blue/20 border border-foursys-blue/40 text-foursys-blue hover:bg-foursys-blue/30'
+                        ? 'bg-foursys-primary/20 border border-foursys-primary/40 text-foursys-primary hover:bg-foursys-primary/30'
                         : 'bg-white/[0.03] border border-white/[0.06] text-foursys-text-dim cursor-not-allowed'
                     }`}
                   >

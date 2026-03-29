@@ -1,4 +1,4 @@
-import { Search, Maximize2, Minimize2, ChevronLeft, ChevronRight, BarChart2, X, Building2, Menu } from 'lucide-react'
+import { Search, Maximize2, Minimize2, ChevronLeft, ChevronRight, BarChart2, X, Building2, Menu, LayoutGrid } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { getTrailById } from '../../data/trails'
 import { getClientById } from '../../data/clients'
@@ -14,6 +14,7 @@ export function TopBar() {
     stopTrail,
     toggleClientSelector,
     toggleMenu,
+    toggleOverview,
     activeNavigationItems,
   } = useApp()
 
@@ -28,7 +29,7 @@ export function TopBar() {
     : 0
 
   return (
-    <header className={`
+    <header role="banner" className={`
       flex items-center gap-2 px-3 md:px-4 py-2.5 border-b border-white/[0.06]
       bg-foursys-dark-2/80 backdrop-blur-xl transition-all duration-300 flex-shrink-0
       pt-[max(0.625rem,env(safe-area-inset-top))]
@@ -70,7 +71,7 @@ export function TopBar() {
           <button
             onClick={stopTrail}
             className="hover:opacity-100 opacity-50 transition-opacity ml-0.5"
-            title="Encerrar trilha"
+            aria-label="Encerrar trilha"
           >
             <X size={11} />
           </button>
@@ -101,12 +102,12 @@ export function TopBar() {
           <button
             key={item.id}
             onClick={() => navigate(item.id as AppSection)}
-            title={item.label}
+            aria-label={item.label}
             className={`rounded-full transition-all duration-200 ${
               idx === currentIndex
-                ? 'bg-foursys-blue w-4 h-1.5'
+                ? 'bg-foursys-primary w-4 h-1.5'
                 : state.visitedSections.includes(item.id as AppSection)
-                ? 'bg-foursys-blue/40 w-1.5 h-1.5'
+                ? 'bg-foursys-primary/40 w-1.5 h-1.5'
                 : 'bg-white/15 w-1.5 h-1.5'
             }`}
           />
@@ -121,7 +122,7 @@ export function TopBar() {
         onClick={() => prevSection && navigate(prevSection.id as AppSection)}
         disabled={!prevSection}
         className="min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:p-1.5 flex items-center justify-center rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
-        title="Anterior (←)"
+        aria-label="Anterior (←)"
       >
         <ChevronLeft size={15} />
       </button>
@@ -130,7 +131,7 @@ export function TopBar() {
         onClick={() => nextSection && navigate(nextSection.id as AppSection)}
         disabled={!nextSection}
         className="min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:p-1.5 flex items-center justify-center rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
-        title="Próximo (→)"
+        aria-label="Próximo (→)"
       >
         <ChevronRight size={15} />
       </button>
@@ -142,10 +143,10 @@ export function TopBar() {
         onClick={toggleClientSelector}
         className={`min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:p-1.5 flex items-center justify-center rounded-lg transition-colors ${
           state.activeClientId
-            ? 'bg-foursys-blue/15 text-foursys-blue'
+            ? 'bg-foursys-primary/15 text-foursys-primary'
             : 'hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text'
         }`}
-        title="Selecionar Cliente"
+        aria-label="Selecionar Cliente"
       >
         <Building2 size={15} />
       </button>
@@ -154,7 +155,7 @@ export function TopBar() {
       <button
         onClick={openSearch}
         className="min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:p-1.5 flex items-center justify-center rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
-        title="Buscar (Ctrl+K)"
+        aria-label="Buscar"
       >
         <Search size={15} />
       </button>
@@ -164,19 +165,29 @@ export function TopBar() {
         onClick={toggleMetricsPanel}
         className={`min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:p-1.5 flex items-center justify-center rounded-lg transition-colors ${
           state.isMetricsPanelOpen
-            ? 'bg-foursys-blue/15 text-foursys-blue'
+            ? 'bg-foursys-primary/15 text-foursys-primary'
             : 'hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text'
         }`}
-        title="Analytics da Sessão (Ctrl+Shift+M)"
+        aria-label="Analytics da Sessão"
       >
         <BarChart2 size={15} />
+      </button>
+
+      {/* Agenda — apenas desktop */}
+      <button
+        onClick={toggleOverview}
+        className="hidden md:block p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
+        aria-label="Agenda da apresentação"
+        title="Agenda (Ctrl+Shift+A)"
+      >
+        <LayoutGrid size={15} />
       </button>
 
       {/* Fullscreen — apenas desktop */}
       <button
         onClick={toggleFullscreen}
         className="hidden md:block p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
-        title="Fullscreen (F11)"
+        aria-label={state.isFullscreen ? 'Sair do Fullscreen' : 'Entrar em Fullscreen'}
       >
         {state.isFullscreen ? <Minimize2 size={15} /> : <Maximize2 size={15} />}
       </button>
