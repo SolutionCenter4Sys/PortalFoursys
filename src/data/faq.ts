@@ -78,8 +78,8 @@ export const faqItems: FAQItem[] = [
     category: 'Tecnologia',
     question: 'Como funciona o modelo de Agentes IA Híbridos?',
     answer: 'Agentes híbridos combinam a criatividade e julgamento humano com a velocidade e consistência da IA. Na prática: um analista humano define o objetivo, um agente de IA executa tarefas repetitivas (código boilerplate, testes, documentação, revisão de padrões) e o humano revisa e aprova. Isso multiplica a capacidade individual sem perder governança.',
-    sectionLink: 'lab-ia',
-    sectionLabel: 'Ver Lab IA'
+    sectionLink: 'services',
+    sectionLabel: 'Ver Linhas de Serviço'
   },
   {
     id: 'faq-11',
@@ -94,8 +94,8 @@ export const faqItems: FAQItem[] = [
     category: 'Parceria',
     question: 'O que é o FourMakers?',
     answer: 'FourMakers é nossa comunidade e programa de inovação que conecta clientes, parceiros e nossos profissionais para co-criar soluções e acelerar projetos inovadores. Realizamos eventos, hackathons e laboratórios de co-criação regularmente.',
-    sectionLink: 'fourmakers',
-    sectionLabel: 'Ver FourMakers'
+    sectionLink: 'alliances',
+    sectionLabel: 'Ver Alianças'
   },
   {
     id: 'faq-13',

@@ -31,7 +31,7 @@ export const insights: Insight[] = [
     category: 'IA & Automação',
     date: 'Mar 2026',
     readTime: '4 min',
-    sectionLink: 'lab-ia',
+    sectionLink: 'services',
     color: '#8B5CF6',
   },
   {

@@ -10,8 +10,6 @@ const SectionWhyFoursys = lazy(() => import('./sections/SectionWhyFoursys').then
 const SectionOffersFlag = lazy(() => import('./sections/SectionOffersFlag').then(m => ({ default: m.SectionOffersFlag })))
 const SectionServices = lazy(() => import('./sections/SectionServices').then(m => ({ default: m.SectionServices })))
 const SectionDelivery = lazy(() => import('./sections/SectionDelivery').then(m => ({ default: m.SectionDelivery })))
-const SectionLabIA = lazy(() => import('./sections/SectionLabIA').then(m => ({ default: m.SectionLabIA })))
-const SectionFourmakers = lazy(() => import('./sections/SectionFourmakers').then(m => ({ default: m.SectionFourmakers })))
 const SectionAlliances = lazy(() => import('./sections/SectionAlliances').then(m => ({ default: m.SectionAlliances })))
 const SectionCases = lazy(() => import('./sections/SectionCases').then(m => ({ default: m.SectionCases })))
 const SectionAwards = lazy(() => import('./sections/SectionAwards').then(m => ({ default: m.SectionAwards })))
@@ -53,16 +51,10 @@ export function SectionRenderer() {
         {section === 'global'         && <SectionGlobal key="global" />}
         {section === 'why-foursys'    && <SectionWhyFoursys key="why-foursys" />}
 
-        {/* ── Ofertas ── */}
+        {/* ── Ofertas e Serviços ── */}
         {section === 'offers-flagship' && <SectionOffersFlag key="offers-flagship" />}
-
-        {/* ── Serviços ── */}
         {section === 'services'       && <SectionServices key="services" />}
         {section === 'delivery'       && <SectionDelivery key="delivery" />}
-
-        {/* ── Inovação ── */}
-        {section === 'lab-ia'         && <SectionLabIA key="lab-ia" />}
-        {section === 'fourmakers'     && <SectionFourmakers key="fourmakers" />}
         {section === 'alliances'      && <SectionAlliances key="alliances" />}
 
         {/* ── Provas ── */}

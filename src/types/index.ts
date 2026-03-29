@@ -152,9 +152,6 @@ export type AppSection =
   // Serviços
   | 'services'
   | 'delivery'
-  // Inovação
-  | 'lab-ia'
-  | 'fourmakers'
   | 'alliances'
   // Provas
   | 'cases'

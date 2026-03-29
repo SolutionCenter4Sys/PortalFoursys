@@ -76,7 +76,7 @@ const flagshipOffers = [
     color: '#00C2E0',
     bg: 'from-cyan-500/15 to-cyan-600/5',
     border: 'border-cyan-500/30',
-    navigateTo: 'lab-ia' as const,
+    navigateTo: 'services' as const,
   },
   {
     id: 'fourblox',

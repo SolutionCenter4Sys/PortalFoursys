@@ -35,7 +35,7 @@ export const trails: Trail[] = [
       { sectionId: 'offers-flagship',estimatedMinutes: 10 },
       { sectionId: 'services',       estimatedMinutes: 10 },
       { sectionId: 'delivery',       estimatedMinutes: 8  },
-      { sectionId: 'lab-ia',         estimatedMinutes: 8  },
+      { sectionId: 'alliances',      estimatedMinutes: 6  },
       { sectionId: 'cases',          estimatedMinutes: 10 },
       { sectionId: 'awards',         estimatedMinutes: 4  },
       { sectionId: 'clients-showcase', estimatedMinutes: 3 },
@@ -55,7 +55,7 @@ export const trails: Trail[] = [
     steps: [
       { sectionId: 'home',           estimatedMinutes: 3  },
       { sectionId: 'offers-flagship',estimatedMinutes: 8  },
-      { sectionId: 'lab-ia',         estimatedMinutes: 10 },
+      { sectionId: 'alliances',      estimatedMinutes: 8  },
       { sectionId: 'services',       estimatedMinutes: 12 },
       { sectionId: 'capabilities',   estimatedMinutes: 8  },
     ]

@@ -40,51 +40,33 @@ export const navigationItems: NavigationItem[] = [
     description: 'Diferenciais competitivos que nos tornam a escolha certa',
   },
 
-  // ── Ofertas ────────────────────────────────────────────────────────────────
+  // ── Ofertas e Serviços ─────────────────────────────────────────────────────
   {
     id: 'offers-flagship',
     label: 'Principais Ofertas',
     icon: 'rocket',
-    category: 'Ofertas',
+    category: 'Ofertas e Serviços',
     description: 'AI-Augmented Squad, Modernização, IA First, FourBlox e Quality IA',
   },
-
-  // ── Serviços ───────────────────────────────────────────────────────────────
   {
     id: 'services',
     label: 'Linhas de Serviço',
     icon: 'layout-grid',
-    category: 'Serviços',
+    category: 'Ofertas e Serviços',
     description: 'O que fazemos, para quem e que problema resolve',
   },
   {
     id: 'delivery',
     label: 'Estrutura de Delivery',
     icon: 'package',
-    category: 'Serviços',
+    category: 'Ofertas e Serviços',
     description: 'Projetos, Squads, Alocação, AMS e AI-Augmented Squads',
-  },
-
-  // ── Inovação ───────────────────────────────────────────────────────────────
-  {
-    id: 'lab-ia',
-    label: 'Lab IA + Agentes',
-    icon: 'brain-circuit',
-    category: 'Inovação',
-    description: 'Laboratório de IA e agentes híbridos Foursys',
-  },
-  {
-    id: 'fourmakers',
-    label: 'FourMakers',
-    icon: 'hammer',
-    category: 'Inovação',
-    description: 'Comunidade e programa de inovação aberta',
   },
   {
     id: 'alliances',
     label: 'Alianças Estratégicas',
     icon: 'network',
-    category: 'Inovação',
+    category: 'Ofertas e Serviços',
     description: 'Microsoft, AWS, Google Cloud, SAP, Oracle, Salesforce e mais',
   },
 
@@ -147,9 +129,7 @@ export const navigationItems: NavigationItem[] = [
 export const sectionCategories = [
   'Início',
   'Institucional',
-  'Ofertas',
-  'Serviços',
-  'Inovação',
+  'Ofertas e Serviços',
   'Provas',
   'ESG',
   'Referência',

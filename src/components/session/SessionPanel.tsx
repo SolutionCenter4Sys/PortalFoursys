@@ -82,8 +82,8 @@ export function SessionPanel() {
         ? `• Agendar demo das principais ofertas com equipe técnica` : '',
       visitedStats.some(s => s.section === 'cases')
         ? `• Solicitar relatório completo dos cases apresentados` : '',
-      visitedStats.some(s => s.section === 'lab-ia')
-        ? `• Visita ao Lab IA Foursys — PoC em 4–6 semanas` : '',
+      visitedStats.some(s => s.section === 'services')
+        ? `• Explorar linhas de serviço e ofertas de IA — PoC em 4–6 semanas` : '',
       visitedStats.some(s => s.section === 'client-cases')
         ? `• Compartilhar cases específicos desta apresentação` : '',
       visitedStats.some(s => s.section === 'alliances')

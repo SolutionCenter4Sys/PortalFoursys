@@ -6,8 +6,6 @@ import {
   Globe,
   Rocket,
   LayoutGrid,
-  BrainCircuit,
-  Hammer,
   Network,
   Trophy,
   Code2,
@@ -36,8 +34,6 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
   'offers-flagship': Star,
   'services':        LayoutGrid,
   'delivery':        Rocket,
-  'lab-ia':          BrainCircuit,
-  'fourmakers':      Hammer,
   'alliances':       Network,
   'cases':           Trophy,
   'awards':          Award,
@@ -59,9 +55,7 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
 const CATEGORY_COLORS: Record<string, string> = {
   'Início':       'text-foursys-primary',
   'Institucional':'text-slate-400',
-  'Ofertas':      'text-orange-400',
-  'Serviços':     'text-foursys-primary',
-  'Inovação':     'text-violet-400',
+  'Ofertas e Serviços': 'text-foursys-primary',
   'Provas':       'text-amber-400',
   'ESG':          'text-green-400',
   'Referência':   'text-slate-400',
@@ -146,7 +140,7 @@ export function NavigationMenu() {
           if (items.length === 0) return null
 
           // Para categorias de cliente, usa a cor do cliente ativo
-          const isClientCategory = !['Início', 'Institucional', 'Ofertas', 'Serviços', 'Inovação', 'Provas', 'ESG', 'Referência'].includes(category)
+          const isClientCategory = !['Início', 'Institucional', 'Ofertas e Serviços', 'Provas', 'ESG', 'Referência'].includes(category)
           const categoryColorClass = isClientCategory ? '' : (CATEGORY_COLORS[category] ?? 'text-foursys-text-dim')
 
           return (
