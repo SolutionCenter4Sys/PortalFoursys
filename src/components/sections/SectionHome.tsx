@@ -3,6 +3,7 @@ import { useCountUp } from '../../hooks/useCountUp'
 import { useApp } from '../../context/AppContext'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { CertificationBadge } from '../ui/CertificationBadge'
+import { PartnerLogo, type PartnerId } from '../ui/PartnerLogos'
 import { clients } from '../../data/clients'
 import { heroStats } from '../../data/kpis'
 
@@ -16,12 +17,15 @@ const flagshipOffers = [
   'Quality IA',
 ]
 
-const allianceLogos = [
-  { id: 'microsoft', label: 'Microsoft', color: '#00A4EF' },
-  { id: 'aws',        label: 'AWS',       color: '#FF9900' },
-  { id: 'gcp',        label: 'Google',    color: '#4285F4' },
-  { id: 'databricks', label: 'Databricks',color: '#FF3621' },
-  { id: 'salesforce', label: 'Salesforce',color: '#00A1E0' },
+const allianceLogos: { id: PartnerId; label: string }[] = [
+  { id: 'microsoft',    label: 'Microsoft' },
+  { id: 'aws',          label: 'AWS' },
+  { id: 'google-cloud', label: 'Google Cloud' },
+  { id: 'sap',          label: 'SAP' },
+  { id: 'databricks',   label: 'Databricks' },
+  { id: 'salesforce',   label: 'Salesforce' },
+  { id: 'oracle',       label: 'Oracle' },
+  { id: 'servicenow',   label: 'ServiceNow' },
 ]
 
 // ─── Chama Foursys ────────────────────────────────────────────────────────────
@@ -357,15 +361,16 @@ export function SectionHome() {
             <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-3">
               Parceiros Estratégicos
             </div>
-            <div className="flex items-center gap-3 flex-wrap">
+            <div className="flex items-center gap-4 flex-wrap">
               {allianceLogos.map(a => (
-                <span
+                <div
                   key={a.id}
-                  className="text-sm font-bold tracking-wide"
-                  style={{ color: a.color }}
+                  className="flex items-center gap-1.5 opacity-80 hover:opacity-100 transition-opacity"
+                  title={a.label}
                 >
-                  {a.label}
-                </span>
+                  <PartnerLogo id={a.id} size={a.id === 'aws' || a.id === 'sap' ? 10 : a.id === 'oracle' || a.id === 'salesforce' ? 8 : 18} />
+                  <span className="text-[11px] font-semibold text-foursys-text-muted">{a.label}</span>
+                </div>
               ))}
             </div>
           </div>
