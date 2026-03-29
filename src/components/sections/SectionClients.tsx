@@ -7,7 +7,7 @@ const STATS = [
   { value: '150+', label: 'Clientes Ativos' },
   { value: `${sectors.length}`, label: 'Setores Atendidos' },
   { value: '98%', label: 'NPS Médio' },
-  { value: '12', label: 'Países' },
+  { value: '3', label: 'Países' },
 ]
 
 export function SectionClients() {
@@ -96,22 +96,24 @@ export function SectionClients() {
         </motion.div>
 
         {/* Client Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5 md:gap-3 mb-8">
           {filtered.map((client, i) => (
             <motion.div
               key={client.id}
+              layout
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.04 * i, duration: 0.35 }}
-              className="group flex flex-col items-center justify-center p-5 md:p-6 rounded-xl bg-foursys-surface/25 border border-white/[0.08] hover:border-white/[0.18] transition-all duration-300"
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ delay: Math.min(0.03 * i, 0.5), duration: 0.3 }}
+              className="group flex flex-col items-center justify-center p-4 md:p-5 rounded-xl bg-foursys-surface/25 border border-white/[0.08] hover:border-white/[0.18] hover:bg-foursys-surface/40 transition-all duration-300"
             >
               <span
-                className="text-lg md:text-xl font-black tracking-tight transition-transform duration-300 group-hover:scale-110"
+                className="text-sm md:text-base font-black tracking-tight text-center leading-tight transition-transform duration-300 group-hover:scale-105"
                 style={{ color: client.textColor }}
               >
                 {client.name}
               </span>
-              <span className="text-[9px] text-foursys-text-dim mt-1.5 uppercase tracking-widest">
+              <span className="text-[8px] text-foursys-text-dim mt-1.5 uppercase tracking-widest">
                 {client.sector}
               </span>
             </motion.div>
