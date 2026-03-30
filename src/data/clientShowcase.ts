@@ -8,6 +8,7 @@ export interface ShowcaseClient {
 
 export const showcaseClients: ShowcaseClient[] = [
   // Financeiro
+  { id: 'itau',             name: 'Itaú',                   sector: 'Financeiro', color: '#FF6600', textColor: '#FF6600' },
   { id: 'santander',        name: 'Santander',              sector: 'Financeiro', color: '#EC0000', textColor: '#EC0000' },
   { id: 'bradesco',         name: 'Bradesco',               sector: 'Financeiro', color: '#CC092F', textColor: '#CC092F' },
   { id: 'safra',            name: 'Safra',                  sector: 'Financeiro', color: '#1C3A6B', textColor: '#6699CC' },

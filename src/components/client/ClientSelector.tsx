@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { X, Users, ChevronRight, Building2 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { clients } from '../../data/clients'
+import { ClientLogo } from '../ui/ClientLogos'
 
 // ─── Cores padrão por cliente ─────────────────────────────────────────────────
 
@@ -29,12 +30,12 @@ function ClientCard({
         }
       `}
     >
-      {/* Avatar colorido */}
+      {/* Logo do cliente */}
       <div
-        className="w-12 h-12 rounded-xl flex items-center justify-center text-sm font-black text-white flex-shrink-0"
-        style={{ background: `linear-gradient(135deg, ${color}, ${color}99)` }}
+        className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden"
+        style={{ background: `linear-gradient(135deg, ${color}15, ${color}08)`, border: `1px solid ${color}30` }}
       >
-        {client.name.slice(0, 2).toUpperCase()}
+        <ClientLogo id={client.id} size={16} />
       </div>
 
       {/* Info */}

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useCountUp } from '../../../hooks/useCountUp'
 import { useApp } from '../../../context/AppContext'
 import { SectionWrapper } from '../../ui/SectionWrapper'
+import { ClientLogo } from '../../ui/ClientLogos'
 import { getClientById } from '../../../data/clients'
 
 // ─── Chama Foursys ────────────────────────────────────────────────────────────
@@ -121,19 +122,26 @@ export function SectionClientOpening() {
               <p className="text-sm text-foursys-text-muted">{client.relationship}</p>
             </motion.div>
 
-            {/* Badge do cliente */}
+            {/* Logo + Badge do cliente */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.9 }}
-              className="mt-4 px-4 py-2 rounded-full border text-sm font-bold"
-              style={{
-                borderColor: `${clientColor}60`,
-                backgroundColor: `${clientColor}12`,
-                color: clientColor,
-              }}
+              className="mt-4 flex flex-col items-center gap-3"
             >
-              Apresentação Personalizada · {client.name}
+              <div className="opacity-90">
+                <ClientLogo id={client.id} size={28} />
+              </div>
+              <div
+                className="px-4 py-2 rounded-full border text-sm font-bold"
+                style={{
+                  borderColor: `${clientColor}60`,
+                  backgroundColor: `${clientColor}12`,
+                  color: clientColor,
+                }}
+              >
+                Apresentação Personalizada · {client.name}
+              </div>
             </motion.div>
           </motion.div>
 

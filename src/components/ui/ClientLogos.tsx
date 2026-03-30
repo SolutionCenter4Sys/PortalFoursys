@@ -309,9 +309,19 @@ function SiemensLogo({ size = 48 }: LogoProps) {
   )
 }
 
+function ItauLogo({ size = 48 }: LogoProps) {
+  return (
+    <svg viewBox="0 0 80 40" width={size * 1.6} height={size} aria-label="Itaú">
+      <rect x="8" y="6" width="64" height="28" rx="4" fill="#FF6600" />
+      <text x="40" y="26" textAnchor="middle" fill="#FFFFFF" fontSize="15" fontWeight="900" fontFamily="Arial,sans-serif" letterSpacing="1">itaú</text>
+    </svg>
+  )
+}
+
 type ClientId = string
 
 const LOGO_MAP: Record<ClientId, React.FC<LogoProps>> = {
+  'itau': ItauLogo,
   'santander': SantanderLogo,
   'bradesco': BradescoLogo,
   'safra': SafraLogo,
