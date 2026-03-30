@@ -17,6 +17,39 @@ function rgba(hex: string, a: number) {
   return `rgba(${r},${g},${b},${a})`
 }
 
+// ─── Visual exclusivo Santander (chama original) ────────────────────────────
+
+function SantanderFlame() {
+  return (
+    <div className="relative select-none flex items-center justify-center">
+      <div
+        className="absolute inset-0 rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 60% 70% at 50% 65%, rgba(200,60,0,0.35) 0%, rgba(255,100,0,0.12) 50%, transparent 80%)',
+          filter: 'blur(24px)',
+          transform: 'scale(1.4)',
+        }}
+      />
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-40 h-8 rounded-full"
+        style={{
+          background: 'radial-gradient(ellipse, rgba(255,80,0,0.55) 0%, transparent 75%)',
+          filter: 'blur(10px)',
+        }}
+      />
+      <motion.img
+        src="/images/foursys-flame.png"
+        alt="Santander"
+        className="relative z-10 w-48 h-auto drop-shadow-[0_0_32px_rgba(255,80,0,0.6)]"
+        animate={{ y: [0, -6, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        style={{ filter: 'drop-shadow(0 0 28px rgba(255,100,0,0.55))' }}
+      />
+    </div>
+  )
+}
+
 // ─── Visual Hero dinâmico por cliente ────────────────────────────────────────
 
 function ClientBrandHero({ clientId, color, accent }: { clientId: string; color: string; accent: string }) {
@@ -232,7 +265,10 @@ export function SectionClientOpening() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex flex-col items-center justify-center py-6"
           >
-            <ClientBrandHero clientId={client.id} color={clientColor} accent={client.colors.accent} />
+            {client.id === 'santander'
+              ? <SantanderFlame />
+              : <ClientBrandHero clientId={client.id} color={clientColor} accent={client.colors.accent} />
+            }
 
             <motion.div
               initial={{ opacity: 0, y: 10 }}
