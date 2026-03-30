@@ -1,397 +1,328 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import {
-  X,
-  ArrowRight,
-  CheckCircle2,
-  Building2,
-  TrendingUp,
-  ShieldCheck,
-  Database,
-  Zap,
-} from 'lucide-react'
+import { motion } from 'framer-motion'
+import { ArrowRight, Quote, Shield, Award, CheckCircle2 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
-import { InterestButton } from '../ui/InterestButton'
 import { cases } from '../../data/cases'
-import { heroStats } from '../../data/kpis'
 import type { CaseStudy } from '../../types'
 
-// ─── Imagens por case ─────────────────────────────────────────────────────────
+const HERO_STATS = [
+  { value: '100+', label: 'projetos desbloqueados' },
+  { value: '85%', label: 'redução de tempo médio' },
+  { value: '40%', label: 'redução de custo operacional' },
+  { value: '82%', label: 'previsibilidade de entrega' },
+]
 
-const CASE_IMAGE: Record<string, string> = {
-  'saude-modernizacao': '/images/fourchickin-intro-slide-v3.png',
-  'fintech-lead-time':  '/images/foursys_ai_augmented_squad_slide_v3.png',
-  'seguradora-ia':      '/images/foursys_deliverables_executive_slide.png',
-  'data-lakehouse':     '/images/foursys_requirements_to_start_slide.png',
-  'cyber-compliance':   '/images/foursys_ai_augmented_squads_team_v5.png',
+const SECTOR_COLORS: Record<string, string> = {
+  'Saúde':      'bg-emerald-500/15 text-emerald-400 border-emerald-500/25',
+  'Financeiro': 'bg-blue-500/15 text-blue-400 border-blue-500/25',
+  'Seguros':    'bg-violet-500/15 text-violet-400 border-violet-500/25',
+  'Varejo':     'bg-amber-500/15 text-amber-400 border-amber-500/25',
+  'Indústria':  'bg-indigo-500/15 text-indigo-400 border-indigo-500/25',
 }
 
-const CASE_ICON: Record<string, React.ElementType> = {
-  'saude-modernizacao': Building2,
-  'fintech-lead-time':  Zap,
-  'seguradora-ia':      TrendingUp,
-  'data-lakehouse':     Database,
-  'cyber-compliance':   ShieldCheck,
+const TYPE_COLORS: Record<string, string> = {
+  'Modernização de Legado':    'text-emerald-400',
+  'AI-Augmented Squad':        'text-blue-400',
+  'IA First':                  'text-violet-400',
+  'Engenharia de Dados':       'text-amber-400',
+  'Dados & Inteligência':      'text-amber-400',
+  'Cibersegurança & Zero Trust': 'text-red-400',
+  'Agilidade & Org Design':    'text-indigo-400',
 }
 
-// ─── Cores por tipo ───────────────────────────────────────────────────────────
-
-const TYPE_STYLE: Record<string, { badge: string; metric: string; check: string }> = {
-  'Produto Digital':    { badge: 'bg-red-500/15 text-red-400 border-red-500/25',       metric: 'text-red-400',    check: 'text-red-400' },
-  'Framework / Produto':{ badge: 'bg-blue-500/15 text-blue-400 border-blue-500/25',     metric: 'text-blue-400',   check: 'text-blue-400' },
-  'Engenharia de Dados':{ badge: 'bg-violet-500/15 text-violet-400 border-violet-500/25',metric: 'text-violet-400', check: 'text-violet-400' },
-  'Modernização':       { badge: 'bg-green-500/15 text-green-400 border-green-500/25',  metric: 'text-green-400',  check: 'text-green-400' },
-  'Cyber Security':     { badge: 'bg-orange-500/15 text-orange-400 border-orange-500/25',metric: 'text-orange-400', check: 'text-orange-400' },
-}
-
-function getTypeStyle(type: string) {
-  return TYPE_STYLE[type] ?? { badge: 'bg-foursys-primary/15 text-foursys-primary border-foursys-primary/25', metric: 'text-foursys-primary', check: 'text-foursys-primary' }
-}
-
-// ─── Modal de detalhe ─────────────────────────────────────────────────────────
-
-function CaseModal({ case: c, onClose }: { case: CaseStudy; onClose: () => void }) {
-  const style = getTypeStyle(c.type)
+function CaseFullCard({ c, index }: { c: CaseStudy; index: number }) {
+  const sectorStyle = SECTOR_COLORS[c.sector] ?? 'bg-white/10 text-white/70 border-white/20'
+  const typeColor = TYPE_COLORS[c.type] ?? 'text-foursys-primary'
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6"
-      onClick={onClose}
+    <motion.article
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.1 + index * 0.08, duration: 0.5 }}
+      className="rounded-2xl border border-white/[0.08] bg-foursys-surface/20 overflow-hidden hover:border-white/[0.14] transition-all duration-300"
     >
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
-      <motion.div
-        initial={{ scale: 0.95, y: 16 }}
-        animate={{ scale: 1, y: 0 }}
-        exit={{ scale: 0.95, y: 16 }}
-        onClick={e => e.stopPropagation()}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="case-modal-title"
-        className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-t-2xl sm:rounded-2xl max-w-2xl w-full max-h-[90dvh] overflow-hidden flex flex-col"
-      >
-        {/* Imagem */}
-        {CASE_IMAGE[c.id] && (
-          <div className="relative h-40 overflow-hidden flex-shrink-0">
-            <img
-              src={CASE_IMAGE[c.id]}
-              alt={c.title}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-foursys-dark-2/40 to-foursys-dark-2" />
+      {/* Header */}
+      <div className="p-6 md:p-8 pb-0">
+        <div className="flex items-start justify-between gap-4 mb-4">
+          <div>
+            <p className="text-xs text-foursys-text-dim mb-2">
+              Caso {c.sector} — <span className="text-foursys-text-muted">{c.client}</span>
+            </p>
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${sectorStyle}`}>
+                {c.sector}
+              </span>
+              <span className={`text-xs font-semibold ${typeColor}`}>
+                {c.type}
+              </span>
+            </div>
           </div>
-        )}
-
-        {/* Conteúdo */}
-        <div className="p-7 overflow-y-auto custom-scrollbar flex-1">
-          <button
-            onClick={onClose}
-            aria-label="Fechar"
-            className="absolute top-4 right-4 p-2 rounded-xl hover:bg-white/10 text-foursys-text-muted transition-colors"
-          >
-            <X size={16} />
-          </button>
-
-          <span className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border ${style.badge} mb-4`}>
-            {c.type}
-          </span>
-
-          <h3 id="case-modal-title" className="text-2xl font-black text-white mb-1 leading-tight">{c.title}</h3>
-          <p className="text-sm text-foursys-text-dim mb-5">{c.client} · {c.sector}</p>
-
-          {/* Métrica hero */}
           {c.metric && (
-            <div className="mb-6 p-5 rounded-xl bg-foursys-surface/60 border border-white/[0.06] flex items-center gap-5">
-              <TrendingUp size={20} className={style.metric} />
-              <div>
-                <div className={`text-4xl font-black leading-none ${style.metric}`}>{c.metric.value}</div>
-                <div className="text-sm text-foursys-text-muted mt-0.5">{c.metric.label}</div>
-              </div>
+            <div className="text-right flex-shrink-0">
+              <div className={`text-2xl md:text-3xl font-black ${typeColor}`}>{c.metric.value}</div>
+              <div className="text-[10px] text-foursys-text-dim max-w-[140px]">{c.metric.label}</div>
             </div>
           )}
+        </div>
+      </div>
 
-          <div className="space-y-5">
-            {/* Desafio */}
-            <div>
-              <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-foursys-text-dim mb-2">Desafio</div>
-              <p className="text-sm text-foursys-text-muted leading-relaxed">{c.challenge}</p>
-            </div>
-            {/* Solução */}
-            <div>
-              <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-foursys-text-dim mb-2">Solução</div>
-              <p className="text-sm text-foursys-text-muted leading-relaxed">{c.solution}</p>
-            </div>
-            {/* Resultados */}
-            <div>
-              <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-foursys-text-dim mb-2">Resultados</div>
-              <ul className="space-y-2">
-                {c.results.map(r => (
-                  <li key={r} className="flex items-start gap-2.5 text-sm text-foursys-text-muted">
-                    <CheckCircle2 size={14} className={`${style.check} flex-shrink-0 mt-0.5`} />
-                    {r}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {/* Stack */}
-            <div>
-              <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-foursys-text-dim mb-2">Stack</div>
-              <div className="flex flex-wrap gap-2">
-                {c.stack.map(t => (
-                  <span key={t} className={`text-xs px-2.5 py-1 rounded-lg border ${style.badge}`}>
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
+      {/* Content */}
+      <div className="px-6 md:px-8 pb-6 md:pb-8 space-y-5">
+        <div>
+          <p className="text-sm text-foursys-text-muted leading-relaxed">
+            <span className="font-bold text-white">Desafio:</span>{' '}
+            {c.challenge}
+          </p>
+        </div>
 
-            {/* Testimonial */}
-            {c.testimonial && (
-              <div className="mt-5 p-5 rounded-xl bg-foursys-primary/[0.05] border border-foursys-primary/15">
+        <div>
+          <p className="text-sm text-foursys-text-muted leading-relaxed">
+            <span className="font-bold text-white">Solução:</span>{' '}
+            {c.solution}
+          </p>
+        </div>
+
+        {/* Testimonial */}
+        {c.testimonial && (
+          <div className="p-5 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+            <div className="flex gap-3">
+              <Quote size={20} className="text-foursys-primary/50 flex-shrink-0 mt-0.5" />
+              <div>
                 <p className="text-sm text-foursys-text-muted italic leading-relaxed mb-3">
                   &ldquo;{c.testimonial.quote}&rdquo;
                 </p>
-                <div className="text-xs">
+                <p className="text-xs">
+                  <span className="text-foursys-text-dim">—</span>{' '}
                   <span className="font-semibold text-white">{c.testimonial.author}</span>
-                  <span className="text-foursys-text-dim ml-1.5">· {c.testimonial.role}</span>
-                </div>
+                  <span className="text-foursys-text-dim"> — {c.testimonial.role}</span>
+                </p>
               </div>
-            )}
+            </div>
           </div>
+        )}
+
+        {/* CTA */}
+        <button
+          type="button"
+          className="flex items-center gap-2 text-xs font-semibold text-foursys-primary hover:text-foursys-cyan transition-colors group/cta"
+        >
+          Tenho um desafio parecido
+          <ArrowRight size={14} className="group-hover/cta:translate-x-1 transition-transform" />
+        </button>
+      </div>
+    </motion.article>
+  )
+}
+
+function TestimonialCard({ testimonial, index }: { testimonial: { quote: string; author: string; role: string; sector: string }; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.4 + index * 0.1 }}
+      className="p-5 rounded-xl bg-foursys-surface/30 border border-white/[0.08]"
+    >
+      <p className="text-sm text-foursys-text-muted italic leading-relaxed mb-4">
+        &ldquo;{testimonial.quote}&rdquo;
+      </p>
+      <div className="flex items-center gap-3">
+        <div className="w-9 h-9 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 flex items-center justify-center text-xs font-bold text-foursys-primary">
+          {testimonial.author.charAt(0)}
         </div>
-      </motion.div>
+        <div>
+          <div className="text-xs font-bold text-white">{testimonial.author}</div>
+          <div className="text-[10px] text-foursys-text-dim">{testimonial.role} · {testimonial.sector}</div>
+        </div>
+      </div>
     </motion.div>
   )
 }
 
-// ─── Featured case card ───────────────────────────────────────────────────────
-
-function FeaturedCaseCard({ c, onClick }: { c: CaseStudy; onClick: () => void }) {
-  const style = getTypeStyle(c.type)
-  const Icon  = CASE_ICON[c.id] ?? Building2
-
-  return (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.1, duration: 0.5 }}
-      onClick={onClick}
-      role="button"
-      tabIndex={0}
-      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick() } }}
-      className="col-span-full relative rounded-2xl border border-white/[0.1] overflow-hidden cursor-pointer group hover:border-white/20 transition-all duration-300"
-    >
-      <div className="grid grid-cols-1 sm:grid-cols-[1fr_300px] md:grid-cols-[1fr_400px] sm:h-52">
-        {/* Texto */}
-        <div className="p-8 flex flex-col justify-between">
-          <div>
-            <div className="flex items-center gap-2.5 mb-3">
-              <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border ${style.badge}`}>
-                <Icon size={10} />
-                {c.type}
-              </span>
-              <span className="text-[10px] text-foursys-text-dim">{c.sector}</span>
-            </div>
-            <h3 className="text-2xl font-black text-white leading-tight mb-1">{c.title}</h3>
-            <p className="text-sm text-foursys-text-muted">{c.client}</p>
-          </div>
-
-          <div className="flex items-end gap-8">
-            {c.metric && (
-              <div>
-                <div className={`text-3xl font-black ${style.metric}`}>{c.metric.value}</div>
-                <div className="text-xs text-foursys-text-dim">{c.metric.label}</div>
-              </div>
-            )}
-            <div className={`ml-auto flex items-center gap-1.5 text-sm font-semibold ${style.metric} opacity-0 group-hover:opacity-100 transition-all`}>
-              Ver case completo <ArrowRight size={14} />
-            </div>
-          </div>
-        </div>
-
-        {/* Imagem */}
-        <div className="relative overflow-hidden">
-          {CASE_IMAGE[c.id] ? (
-            <img
-              src={CASE_IMAGE[c.id]}
-              alt={c.title}
-              className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
-            />
-          ) : (
-            <div className="h-full w-full bg-foursys-surface" />
-          )}
-          <div className="absolute inset-0 bg-gradient-to-r from-foursys-dark-2/80 via-foursys-dark-2/20 to-transparent" />
-        </div>
-      </div>
-    </motion.article>
-  )
-}
-
-// ─── Card regular ─────────────────────────────────────────────────────────────
-
-function CaseCard({ c, index, onClick }: { c: CaseStudy; index: number; onClick: () => void }) {
-  const style = getTypeStyle(c.type)
-  const Icon  = CASE_ICON[c.id] ?? Building2
-
-  return (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.1 + index * 0.07, duration: 0.4 }}
-      layout
-      onClick={onClick}
-      role="button"
-      tabIndex={0}
-      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick() } }}
-      className="group rounded-2xl border border-white/[0.08] bg-foursys-surface/30 overflow-hidden cursor-pointer hover:border-white/[0.16] hover:-translate-y-1 transition-all duration-300 flex flex-col"
-    >
-      {/* Imagem */}
-      {CASE_IMAGE[c.id] && (
-        <div className="h-36 relative overflow-hidden flex-shrink-0">
-          <img
-            src={CASE_IMAGE[c.id]}
-            alt={c.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-foursys-dark-2/90 via-foursys-dark-2/20 to-transparent" />
-          <span className={`absolute top-3 left-3 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest border ${style.badge}`}>
-            <Icon size={9} />
-            {c.type}
-          </span>
-        </div>
-      )}
-
-      {/* Conteúdo */}
-      <div className="p-5 flex flex-col flex-1">
-        <p className="text-[10px] text-foursys-text-dim mb-1.5 tracking-wide">{c.sector} · {c.client}</p>
-        <h3 className="font-bold text-white text-sm leading-snug mb-3">{c.title}</h3>
-
-        {/* Métrica */}
-        {c.metric && (
-          <div className="mb-3">
-            <span className={`text-2xl font-black ${style.metric}`}>{c.metric.value}</span>
-            <span className="text-xs text-foursys-text-dim ml-2">{c.metric.label}</span>
-          </div>
-        )}
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-1.5 mt-auto">
-          {c.stack.slice(0, 3).map(t => (
-            <span key={t} className="text-[10px] px-2 py-0.5 rounded-md bg-white/[0.05] border border-white/[0.08] text-foursys-text-dim">
-              {t}
-            </span>
-          ))}
-          {c.stack.length > 3 && (
-            <span className="text-[10px] px-2 py-0.5 rounded-md bg-white/[0.05] border border-white/[0.08] text-foursys-text-dim">
-              +{c.stack.length - 3}
-            </span>
-          )}
-        </div>
-
-        <div className={`mt-3 flex items-center gap-1 text-xs font-semibold ${style.metric} opacity-0 group-hover:opacity-100 transition-opacity`}>
-          Detalhes <ArrowRight size={11} />
-        </div>
-      </div>
-    </motion.article>
-  )
-}
-
-// ─── Componente principal ─────────────────────────────────────────────────────
-
 export function SectionCases() {
-  const [selectedCase, setSelectedCase] = useState<CaseStudy | null>(null)
   const [filter, setFilter] = useState('Todos')
 
-  const sectors  = ['Todos', ...Array.from(new Set(cases.map(c => c.sector)))]
+  const sectors = ['Todos', ...Array.from(new Set(cases.map(c => c.sector)))]
   const filtered = filter === 'Todos' ? cases : cases.filter(c => c.sector === filter)
 
-  const [featured, ...rest] = cases
+  const testimonials = cases
+    .filter(c => c.testimonial)
+    .slice(0, 3)
+    .map(c => ({ ...c.testimonial!, sector: c.sector }))
 
   return (
     <SectionWrapper>
-      <div className="px-4 md:px-8 py-6 md:py-10 max-w-7xl mx-auto">
+      <div className="px-4 md:px-8 py-6 md:py-12 max-w-5xl mx-auto">
 
-        {/* ── Header ── */}
+        {/* Hero */}
         <motion.div
-          initial={{ opacity: 0, y: -16 }}
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="mb-6 md:mb-10"
+          transition={{ duration: 0.5 }}
+          className="mb-10 md:mb-14"
         >
-          <div className="flex items-start md:items-end justify-between flex-wrap gap-3">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-primary mb-2">
-                Resultados reais
-              </p>
-              <h2 className="text-2xl md:text-4xl font-black text-white leading-none">
-                Cases de Sucesso
-              </h2>
-              <p className="text-foursys-text-muted mt-2 text-sm md:text-base max-w-lg leading-relaxed">
-                Projetos entregues com métricas mensuráveis — do core banking à IA em produção.
-              </p>
-            </div>
+          <p className="text-xs text-foursys-text-dim mb-3">+100 empresas transformadas</p>
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-4">
+            Mostre ao seu board que<br />
+            tecnologia entrega ROI —{' '}
+            <span className="text-foursys-primary">em semanas</span>
+          </h2>
+          <p className="text-sm md:text-base text-foursys-text-muted max-w-2xl leading-relaxed">
+            Cada caso segue o formato Problema → Solução → Impacto mensurável.
+            Não contamos histórias — mostramos números.
+          </p>
 
-            {/* Filtros + Interesse */}
-            <div className="flex flex-wrap gap-2 items-center">
-              <InterestButton section="cases" />
-              {sectors.map(s => (
-                <button
-                  key={s}
-                  onClick={() => setFilter(s)}
-                  className={`px-2.5 md:px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 ${
-                    filter === s
-                      ? 'bg-foursys-primary/20 border border-foursys-primary/40 text-foursys-primary'
-                      : 'bg-white/[0.04] border border-white/[0.08] text-foursys-text-dim hover:text-foursys-text-muted hover:border-white/20'
-                  }`}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
+          {/* Stats bar */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8">
+            {HERO_STATS.map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 + i * 0.08 }}
+                className="p-4 rounded-xl bg-foursys-surface/40 border border-white/[0.08] text-center"
+              >
+                <div className="text-xl md:text-2xl font-black text-foursys-primary">{stat.value}</div>
+                <div className="text-[9px] text-foursys-text-dim mt-1 uppercase tracking-wider">{stat.label}</div>
+              </motion.div>
+            ))}
           </div>
-
-          <div className="mt-4 md:mt-6 h-px bg-gradient-to-r from-foursys-primary/30 via-white/[0.06] to-transparent" />
         </motion.div>
 
-        {/* ── Grid ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-          {/* Featured apenas no filtro "Todos" */}
-          {filter === 'Todos' && (
-            <FeaturedCaseCard c={featured} onClick={() => setSelectedCase(featured)} />
-          )}
-
-          {(filter === 'Todos' ? rest : filtered).map((c, i) => (
-            <CaseCard key={c.id} c={c} index={i} onClick={() => setSelectedCase(c)} />
-          ))}
-        </div>
-
-        {/* ── Footer stats ── */}
+        {/* Sector filters */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-          className="mt-8 md:mt-10 pt-6 md:pt-8 border-t border-white/[0.06] grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
+          transition={{ delay: 0.3 }}
+          className="flex flex-wrap gap-2 mb-8"
         >
-          {[
-            { value: `${heroStats.years}+`,   label: 'Anos de história' },
-            { value: heroStats.projects,       label: 'Projetos entregues' },
-            { value: heroStats.sla,            label: 'SLA entregue' },
-            { value: heroStats.turnover,       label: 'Turnover vs 22% do mercado' },
-          ].map((stat, i) => (
-            <div key={i} className="border-l-2 border-foursys-primary/40 pl-4">
-              <div className="text-2xl font-black text-white">{stat.value}</div>
-              <div className="text-xs text-foursys-text-muted mt-0.5">{stat.label}</div>
+          {sectors.map(s => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => setFilter(s)}
+              className={`px-4 py-2 rounded-full text-xs font-semibold border transition-all duration-200 ${
+                filter === s
+                  ? 'bg-foursys-primary/20 border-foursys-primary/40 text-foursys-primary'
+                  : 'border-white/[0.1] text-foursys-text-muted hover:border-white/[0.2] hover:text-white'
+              }`}
+            >
+              {s}
+            </button>
+          ))}
+        </motion.div>
+
+        {/* Cases list */}
+        <div className="space-y-5">
+          {filtered.map((c, i) => (
+            <CaseFullCard key={c.id} c={c} index={i} />
+          ))}
+        </div>
+
+        {/* Certifications banner */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+          className="mt-10 p-5 rounded-xl bg-foursys-surface/30 border border-white/[0.06] flex items-center justify-center gap-4 md:gap-6 flex-wrap"
+        >
+          {['ISO 9001', 'ISO 27001', 'ISO 27701', 'ISO 14001', 'SAFe', 'GPTW'].map(cert => (
+            <div key={cert} className="flex items-center gap-1.5">
+              <Shield size={12} className="text-foursys-primary/60" />
+              <span className="text-[10px] font-semibold text-foursys-text-dim uppercase tracking-wider">{cert}</span>
             </div>
           ))}
         </motion.div>
 
-      </div>
+        {/* Testimonials */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="mt-12 md:mt-16"
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <Award size={16} className="text-foursys-primary" />
+            <p className="text-[10px] font-bold uppercase tracking-wider text-foursys-text-dim">O que dizem</p>
+          </div>
+          <h3 className="text-lg md:text-2xl font-black text-white mb-6">
+            Clientes que recomendam
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {testimonials.map((t, i) => (
+              <TestimonialCard key={i} testimonial={t} index={i} />
+            ))}
+          </div>
+        </motion.div>
 
-      <AnimatePresence>
-        {selectedCase && <CaseModal case={selectedCase} onClose={() => setSelectedCase(null)} />}
-      </AnimatePresence>
+        {/* CTA - Diagnóstico */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="mt-12 md:mt-16 p-6 md:p-10 rounded-2xl bg-gradient-to-br from-foursys-primary/10 via-foursys-surface/50 to-transparent border border-foursys-primary/20"
+        >
+          <div className="max-w-lg mx-auto text-center">
+            <h3 className="text-lg md:text-2xl font-black text-white mb-2">
+              Tem um desafio parecido?
+            </h3>
+            <p className="text-sm text-foursys-text-muted mb-6">
+              45 minutos com um especialista. Sem compromisso.
+            </p>
+
+            <div className="space-y-3 mb-6">
+              <div className="h-10 rounded-lg bg-white/[0.06] border border-white/[0.12] flex items-center px-3">
+                <span className="text-xs text-foursys-text-dim">Seu nome</span>
+              </div>
+              <div className="h-10 rounded-lg bg-white/[0.06] border border-white/[0.12] flex items-center px-3">
+                <span className="text-xs text-foursys-text-dim">E-mail corporativo</span>
+              </div>
+              <div className="h-10 rounded-lg bg-white/[0.06] border border-white/[0.12] flex items-center px-3">
+                <span className="text-xs text-foursys-text-dim">Setor da empresa</span>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              className="w-full h-11 rounded-lg bg-foursys-primary text-white text-sm font-bold hover:bg-foursys-primary/80 transition-colors"
+            >
+              Quero meu diagnóstico gratuito
+            </button>
+
+            <div className="flex items-center justify-center gap-4 mt-4">
+              {[
+                { icon: <Shield size={10} />, label: 'Dados protegidos — LGPD' },
+                { icon: <CheckCircle2 size={10} />, label: 'Resposta em até 24h' },
+                { icon: <CheckCircle2 size={10} />, label: 'Sem compromisso' },
+              ].map(item => (
+                <span key={item.label} className="flex items-center gap-1 text-[9px] text-foursys-text-dim">
+                  {item.icon} {item.label}
+                </span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Final CTA */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7 }}
+          className="mt-12 md:mt-16 text-center"
+        >
+          <p className="text-xs text-foursys-text-dim mb-2">+100 empresas transformadas</p>
+          <h3 className="text-lg md:text-2xl font-black text-white mb-6">
+            Pronto para ser o próximo caso de sucesso?
+          </h3>
+          <div className="flex items-center justify-center gap-3 text-xs text-foursys-text-dim">
+            <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-foursys-primary" /> Diagnóstico gratuito</span>
+            <span>·</span>
+            <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-foursys-primary" /> Resposta em 24h</span>
+            <span>·</span>
+            <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-foursys-primary" /> Sem compromisso</span>
+          </div>
+        </motion.div>
+
+      </div>
     </SectionWrapper>
   )
 }
