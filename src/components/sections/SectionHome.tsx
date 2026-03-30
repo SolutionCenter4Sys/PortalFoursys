@@ -71,8 +71,8 @@ function FoursysLogo() {
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
       >
         <svg
-          width="220"
-          height="80"
+          width="340"
+          height="124"
           viewBox="0 0 220 80"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

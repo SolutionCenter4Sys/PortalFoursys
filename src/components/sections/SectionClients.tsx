@@ -97,7 +97,7 @@ export function SectionClients() {
         </motion.div>
 
         {/* Client Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5 md:gap-3 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4 mb-8">
           {filtered.map((client, i) => (
             <motion.div
               key={client.id}
@@ -106,10 +106,10 @@ export function SectionClients() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ delay: Math.min(0.03 * i, 0.5), duration: 0.3 }}
-              className="group flex flex-col items-center justify-center p-3 md:p-4 rounded-xl bg-foursys-surface/25 border border-white/[0.08] hover:border-white/[0.18] hover:bg-foursys-surface/40 transition-all duration-300 min-h-[80px]"
+              className="group flex flex-col items-center justify-center p-4 md:p-5 rounded-xl bg-foursys-surface/25 border border-white/[0.08] hover:border-white/[0.18] hover:bg-foursys-surface/40 transition-all duration-300 min-h-[100px]"
             >
-              <div className="flex items-center justify-center h-10 opacity-85 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105 overflow-hidden">
-                <ClientLogo id={client.id} size={22} />
+              <div className="flex items-center justify-center h-14 opacity-85 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105 overflow-hidden">
+                <ClientLogo id={client.id} size={34} />
               </div>
               <span className="text-[7px] text-foursys-text-dim mt-2 uppercase tracking-[0.15em]">
                 {client.sector}
