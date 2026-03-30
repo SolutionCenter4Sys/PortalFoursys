@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { ClientLogo } from '../ui/ClientLogos'
 import { showcaseClients, sectors } from '../../data/clientShowcase'
 
 const STATS = [
@@ -105,15 +106,12 @@ export function SectionClients() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ delay: Math.min(0.03 * i, 0.5), duration: 0.3 }}
-              className="group flex flex-col items-center justify-center p-4 md:p-5 rounded-xl bg-foursys-surface/25 border border-white/[0.08] hover:border-white/[0.18] hover:bg-foursys-surface/40 transition-all duration-300"
+              className="group flex flex-col items-center justify-center p-3 md:p-4 rounded-xl bg-foursys-surface/25 border border-white/[0.08] hover:border-white/[0.18] hover:bg-foursys-surface/40 transition-all duration-300 min-h-[80px]"
             >
-              <span
-                className="text-sm md:text-base font-black tracking-tight text-center leading-tight transition-transform duration-300 group-hover:scale-105"
-                style={{ color: client.textColor }}
-              >
-                {client.name}
-              </span>
-              <span className="text-[8px] text-foursys-text-dim mt-1.5 uppercase tracking-widest">
+              <div className="flex items-center justify-center h-10 opacity-85 group-hover:opacity-100 transition-all duration-300 group-hover:scale-105 overflow-hidden">
+                <ClientLogo id={client.id} size={22} />
+              </div>
+              <span className="text-[7px] text-foursys-text-dim mt-2 uppercase tracking-[0.15em]">
                 {client.sector}
               </span>
             </motion.div>
