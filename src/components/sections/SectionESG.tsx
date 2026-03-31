@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowRight, Play, X, ExternalLink, Tv, Accessibility } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { useApp } from '../../context/AppContext'
 import { DynIcon } from '../../utils/iconMap'
@@ -64,10 +65,293 @@ const fronts = [
   },
 ]
 
+// ─── Vídeos FourCamp ──────────────────────────────────────────────────────────
+
+const videos = [
+  {
+    id: 'fourcamp-bomdiasp',
+    youtubeId: 'CmGlSnfF0_U',
+    title: 'FourCamp no Bom Dia SP',
+    subtitle: 'Rede Globo',
+    description:
+      'O programa FourCamp de capacitação tecnológica ganhou destaque no Bom Dia SP da Globo, mostrando como a Foursys transforma vidas por meio da educação em tecnologia.',
+    icon: Tv,
+    color: '#FF6600',
+    accent: '#FF8833',
+    gradient: 'from-orange-600 via-orange-500 to-amber-500',
+    tags: ['Mídia Nacional', 'Capacitação', 'Impacto Social'],
+  },
+  {
+    id: 'fourcamp-pcd',
+    youtubeId: 'M2MyVNDLDTE',
+    title: 'FourCamp PCD',
+    subtitle: 'Programa de Inclusão',
+    description:
+      'O FourCamp PCD é o programa de capacitação e inserção profissional de Pessoas com Deficiência na área de tecnologia — inclusão que gera transformação real.',
+    icon: Accessibility,
+    color: '#8B5CF6',
+    accent: '#A78BFA',
+    gradient: 'from-violet-600 via-purple-500 to-fuchsia-500',
+    tags: ['Inclusão', 'PCD', 'Diversidade'],
+  },
+]
+
+function VideoCard({
+  video,
+  index,
+  onPlay,
+}: {
+  video: (typeof videos)[0]
+  index: number
+  onPlay: (id: string) => void
+}) {
+  const [hovered, setHovered] = useState(false)
+  const Icon = video.icon
+  const thumb = `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.15 + index * 0.12, duration: 0.5 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="group relative rounded-2xl overflow-hidden cursor-pointer"
+      role="button"
+      tabIndex={0}
+      aria-label={`Assistir: ${video.title}`}
+      onClick={() => onPlay(video.id)}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onPlay(video.id) } }}
+    >
+      {/* Thumbnail background */}
+      <div className="absolute inset-0">
+        <img
+          src={thumb}
+          alt=""
+          className="w-full h-full object-cover transition-transform duration-700"
+          style={{ transform: hovered ? 'scale(1.08)' : 'scale(1)' }}
+        />
+      </div>
+
+      {/* Gradient overlays */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
+      <motion.div
+        className="absolute inset-0"
+        animate={{ opacity: hovered ? 0.7 : 0.4 }}
+        transition={{ duration: 0.4 }}
+        style={{
+          background: `linear-gradient(135deg, ${video.color}40, transparent 60%)`,
+        }}
+      />
+
+      {/* Animated top glow line */}
+      <motion.div
+        className="absolute top-0 left-0 right-0 h-[3px]"
+        style={{ background: `linear-gradient(90deg, transparent, ${video.color}, transparent)` }}
+        animate={{ opacity: hovered ? 1 : 0.4, scaleX: hovered ? 1 : 0.5 }}
+        transition={{ duration: 0.4 }}
+      />
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col justify-between p-5 md:p-7 min-h-[280px] md:min-h-[320px]">
+        {/* Top: badge + icon */}
+        <div className="flex items-start justify-between">
+          <div className="flex items-center gap-2">
+            <div
+              className="w-9 h-9 rounded-lg flex items-center justify-center"
+              style={{
+                background: `linear-gradient(135deg, ${video.color}30, ${video.color}10)`,
+                border: `1px solid ${video.color}40`,
+              }}
+            >
+              <Icon size={18} style={{ color: video.color }} />
+            </div>
+            <span
+              className="text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded-full"
+              style={{
+                background: `${video.color}20`,
+                color: video.color,
+                border: `1px solid ${video.color}30`,
+              }}
+            >
+              {video.subtitle}
+            </span>
+          </div>
+          <motion.div
+            animate={{ rotate: hovered ? 15 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <ExternalLink size={16} className="text-white/30" />
+          </motion.div>
+        </div>
+
+        {/* Center: play button */}
+        <div className="flex items-center justify-center">
+          <motion.div
+            className="relative"
+            animate={{
+              scale: hovered ? 1.1 : 1,
+            }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+          >
+            {/* Ripple rings */}
+            {hovered && (
+              <>
+                <motion.div
+                  className="absolute inset-0 rounded-full"
+                  style={{ border: `2px solid ${video.color}` }}
+                  initial={{ scale: 1, opacity: 0.6 }}
+                  animate={{ scale: 2, opacity: 0 }}
+                  transition={{ duration: 1.2, repeat: Infinity }}
+                />
+                <motion.div
+                  className="absolute inset-0 rounded-full"
+                  style={{ border: `2px solid ${video.color}` }}
+                  initial={{ scale: 1, opacity: 0.4 }}
+                  animate={{ scale: 2.5, opacity: 0 }}
+                  transition={{ duration: 1.2, repeat: Infinity, delay: 0.4 }}
+                />
+              </>
+            )}
+
+            {/* Play circle */}
+            <div
+              className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center transition-shadow duration-400"
+              style={{
+                background: `linear-gradient(135deg, ${video.color}, ${video.accent})`,
+                boxShadow: hovered
+                  ? `0 0 40px ${video.color}80, 0 0 80px ${video.color}40`
+                  : `0 0 20px ${video.color}40`,
+              }}
+            >
+              <Play
+                size={28}
+                className="text-white ml-1"
+                fill="white"
+              />
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Bottom: title + description + tags */}
+        <div>
+          <h3 className="text-lg md:text-xl font-black text-white mb-1.5 leading-tight">
+            {video.title}
+          </h3>
+          <p className="text-xs md:text-sm text-white/60 leading-relaxed mb-3 line-clamp-2">
+            {video.description}
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {video.tags.map(tag => (
+              <span
+                key={tag}
+                className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/[0.08] text-white/50"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom glow on hover */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+        animate={{ opacity: hovered ? 1 : 0 }}
+        transition={{ duration: 0.4 }}
+        style={{
+          background: `radial-gradient(ellipse 80% 100% at 50% 100%, ${video.color}25, transparent)`,
+        }}
+      />
+    </motion.div>
+  )
+}
+
+function VideoPlayerModal({
+  video,
+  onClose,
+}: {
+  video: (typeof videos)[0]
+  onClose: () => void
+}) {
+  return (
+    <motion.div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3 md:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Vídeo: ${video.title}`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
+      <div className="absolute inset-0 bg-black/85 backdrop-blur-sm" />
+
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.95, opacity: 0 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        className="relative z-10 w-full max-w-4xl"
+        aria-live="polite"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-3">
+            <div
+              className="w-8 h-8 rounded-lg flex items-center justify-center"
+              style={{
+                background: `${video.color}25`,
+                border: `1px solid ${video.color}40`,
+              }}
+            >
+              <video.icon size={16} style={{ color: video.color }} />
+            </div>
+            <div>
+              <h3 className="text-sm font-bold text-white">{video.title}</h3>
+              <p className="text-[11px] text-white/40">{video.subtitle}</p>
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-10 h-10 rounded-full bg-white/[0.08] hover:bg-white/[0.15] active:scale-95 flex items-center justify-center transition-all min-h-[44px] min-w-[44px]"
+            aria-label="Fechar vídeo"
+          >
+            <X size={18} className="text-white/70" />
+          </button>
+        </div>
+
+        {/* Video embed */}
+        <div
+          className="relative rounded-2xl overflow-hidden border border-white/[0.1]"
+          style={{
+            boxShadow: `0 0 60px ${video.color}20, 0 25px 50px rgba(0,0,0,0.5)`,
+          }}
+        >
+          <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src={`https://www.youtube.com/embed/${video.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
+              title={video.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+}
+
 // ─── Componente principal ─────────────────────────────────────────────────────
 
 export function SectionESG() {
   const { navigate } = useApp()
+  const [activeVideo, setActiveVideo] = useState<string | null>(null)
+
+  const playingVideo = activeVideo ? videos.find(v => v.id === activeVideo) : null
+
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-6 md:py-10 max-w-6xl mx-auto">
@@ -144,6 +428,45 @@ export function SectionESG() {
             </motion.div>
           ))}
         </div>
+
+        {/* ── Vídeos FourCamp ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.4 }}
+          className="mb-8 md:mb-10"
+        >
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-8 h-8 rounded-lg bg-foursys-primary/15 border border-foursys-primary/30 flex items-center justify-center">
+              <Play size={16} className="text-foursys-primary ml-0.5" fill="currentColor" />
+            </div>
+            <div>
+              <h3 className="text-lg font-black text-white">FourCamp na Mídia</h3>
+              <p className="text-[11px] text-foursys-text-dim">Nosso impacto reconhecido em rede nacional</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+            {videos.map((video, i) => (
+              <VideoCard
+                key={video.id}
+                video={video}
+                index={i}
+                onPlay={setActiveVideo}
+              />
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Video player modal */}
+        <AnimatePresence>
+          {playingVideo && (
+            <VideoPlayerModal
+              video={playingVideo}
+              onClose={() => setActiveVideo(null)}
+            />
+          )}
+        </AnimatePresence>
 
         {/* ── CTA Premiações ── */}
         <motion.div
