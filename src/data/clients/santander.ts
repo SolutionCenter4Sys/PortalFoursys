@@ -39,56 +39,76 @@ export const santanderClient: ClientConfig = {
   ],
   insights: [
     {
-      id: 'legado',
-      title: 'Pressão do Legado',
+      id: 'think-value',
+      title: 'Think Value — Modernização e Automação em Escala',
       description:
-        'Sistemas core críticos em COBOL e tecnologias antigas geram risco operacional e impedem a velocidade de inovação exigida pelo mercado.',
+        'O Santander declarou como pilar estratégico "impulsionar eficiência e produtividade com modernização e automação em escala". Com R$ 1,256 trilhão em ativos e 49.661 colaboradores, cada ponto de eficiência representa milhões em resultado.',
       solution:
-        'Modernização progressiva com SDD — sem big-bang rewrite, com continuidade operacional garantida.',
-      icon: 'building',
+        'Modernização progressiva com SDD (sem big-bang rewrite) + Hiperautomação com Agentes IA. Já entregamos 17+ anos de modernização contínua no ecossistema Santander, com zero downtime em migrações.',
+      icon: '⚡',
     },
     {
-      id: 'qualidade',
-      title: 'Gargalo de Qualidade',
+      id: 'think-customer',
+      title: 'Think Customer — Hiperpersonalização com Dados e IA',
       description:
-        'Ciclos de testes manuais lentos que bloqueiam releases frequentes e geram retrabalho — impactando time-to-market.',
+        'O banco busca "experiências hiperpersonalizadas guiadas por dados e antecipação de necessidades" para 73,9 milhões de clientes. A jornada deve ser "fluida e integrada entre os canais" — de lojas físicas ao app.',
       solution:
-        'Framework Quality IA: automação inteligente de testes com IA, já homologado pelo Santander.',
-      icon: 'search',
+        'Data Platform com ingestão multi-fonte para visão 360° do cliente + modelos de IA preditiva para next-best-action. Squads dedicados ao desenvolvimento de canais digitais de alto tráfego com expertise em omnichannel.',
+      icon: '🎯',
     },
     {
-      id: 'dados',
-      title: 'Fragmentação de Dados',
+      id: 'genai',
+      title: 'GenAI como Vantagem Competitiva',
       description:
-        'Dados críticos dispersos em silos sem integração adequada — decisões baseadas em informações parciais ou desatualizadas.',
-      solution: 'Data Lakehouse com Databricks: visão unificada de dados para analytics e IA.',
-      icon: 'bar-chart',
-    },
-    {
-      id: 'velocidade',
-      title: 'Velocidade de Entrega',
-      description:
-        'Demanda de produtos digitais superando a capacidade de entrega interna — backlog crescente e squads sobrecarregados.',
-      solution: 'Squads + Agentes IA Foursys: velocidade 3x superior ao modelo tradicional.',
-      icon: 'zap',
-    },
-    {
-      id: 'seguranca',
-      title: 'Conformidade e Segurança',
-      description:
-        'Exigências regulatórias crescentes (BACEN Res. 4.658, LGPD) com necessidade de auditorias contínuas e gestão de vulnerabilidades.',
+        'O Santander posiciona ser "referência na utilização de GenAI, trazendo vantagem competitiva e melhor experiência para o cliente". IA generativa é prioridade estratégica do Comitê de Tecnologia e Inovação do Conselho.',
       solution:
-        'Portfolio Cyber Security Foursys: SAST, DAST, pentest e compliance regulatório.',
-      icon: 'shield-check',
+        'Método IA First: piloto a produção em 6 semanas, com 85% de conversão. Framework Quality IA (já homologado pelo Santander) demonstra nossa capacidade de entregar IA aplicada no ecossistema do banco.',
+      icon: '🧠',
     },
     {
-      id: 'inovacao',
-      title: 'Inovação com IA',
+      id: 'risco-credito',
+      title: 'Gestão de Risco e Qualidade de Crédito',
       description:
-        'Necessidade de integrar IA generativa e agentes autônomos nos processos internos sem perder controle e governança.',
+        'Com carteira de R$ 708B e NPL Over 90 em 4,0%, o Santander aprimora continuamente a gestão de riscos e capital. O custo de crédito (3,76%) e NPL formation exigem modelos cada vez mais sofisticados de predição.',
       solution:
-        'Laboratório de IA Híbrida Foursys: agentes controlados, auditáveis e com supervisão humana.',
-      icon: 'brain-circuit',
+        'Modelos de ML para scoring e detecção de fraude em tempo real (< 200ms). Analytics preditivo para antecipação de inadimplência. Integração com plataformas de risco para compliance BACEN e Basileia III.',
+      icon: '📊',
+    },
+    {
+      id: 'pme-crescimento',
+      title: 'PMEs — Segmento de Maior Crescimento (+23%)',
+      description:
+        'Pequenas e Médias Empresas cresceram 23% YoY na carteira de crédito, sendo a ambição do Santander "ser o banco de escolha das empresas". Este segmento exige soluções digitais ágeis e escaláveis.',
+      solution:
+        'Plataformas digitais de originação de crédito para PMEs com esteiras automatizadas. APIs de Open Banking para integração com ecossistema de parceiros. Squads especializados em produtos para empresas.',
+      icon: '🚀',
+    },
+    {
+      id: 'think-global',
+      title: 'Think Global — Brasil como Hub de Inovação',
+      description:
+        'O Santander Brasil é posicionado como "centro de inovação para exportar modelos digitais" para o grupo global, alavancando plataformas globais para acelerar inovações e reduzir custos. ROAE de 17,6% comprova a relevância.',
+      solution:
+        'Suporte para desenvolvimento de soluções exportáveis ao grupo global. Squads bilíngues (PT/EN) com experiência em integração com plataformas Santander Global. 17+ anos de conhecimento acumulado do ecossistema.',
+      icon: '🌎',
+    },
+    {
+      id: 'funding-captacao',
+      title: 'Otimização de Funding e Plataforma de Investimentos',
+      description:
+        'Diversificação das captações com foco em pessoa física (PF passou de 50% para 55% do mix). Construção da "melhor plataforma de investimentos do mercado, pautada no relacionamento humano com escala e excelência digital".',
+      solution:
+        'Desenvolvimento de plataformas digitais de investimentos com UX premium. Dashboards de acompanhamento de portfólio em tempo real. Integração de sistemas de CRM para assessores com analytics de recomendação.',
+      icon: '💰',
+    },
+    {
+      id: 'sustentabilidade',
+      title: 'ESG e Finanças Sustentáveis — R$ 50,7B em Carteira',
+      description:
+        'O Santander atingiu R$ 50,7 bilhões em carteira sustentável e nota "A" no CDP. Líder em CBIOs com 41% de market share. ESG é métrica de avaliação dos executivos do Conselho de Administração.',
+      solution:
+        'Plataformas de monitoramento e reporting ESG automatizado. Dashboards de KPIs de sustentabilidade para compliance e comunicação ao mercado. Integração com frameworks SFICS do grupo Santander.',
+      icon: '🌱',
     },
   ],
   cases: [
