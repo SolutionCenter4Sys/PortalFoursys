@@ -13,6 +13,7 @@ import {
 } from 'lucide-react'
 import { useApp } from '../../../context/AppContext'
 import { SectionWrapper } from '../../ui/SectionWrapper'
+import { ClientBackButton } from './ClientBackButton'
 import { getClientById } from '../../../data/clients'
 import type { ClientInsight } from '../../../types'
 import {
@@ -490,6 +491,9 @@ export function SectionClientInsights() {
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-6 md:py-10 max-w-5xl mx-auto">
+        {/* ── Voltar ── */}
+        <ClientBackButton clientName={client.name} color={clientColor} />
+
         {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: -16 }}

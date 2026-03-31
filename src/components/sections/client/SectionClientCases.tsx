@@ -4,6 +4,7 @@ import { X, CheckCircle2, TrendingUp, ArrowRight } from 'lucide-react'
 import { useApp } from '../../../context/AppContext'
 import { SectionWrapper } from '../../ui/SectionWrapper'
 import { InterestButton } from '../../ui/InterestButton'
+import { ClientBackButton } from './ClientBackButton'
 import { getClientById } from '../../../data/clients'
 import type { ClientCase } from '../../../types'
 
@@ -199,6 +200,9 @@ export function SectionClientCases() {
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-6 md:py-10 max-w-6xl mx-auto">
+
+        {/* ── Voltar ── */}
+        <ClientBackButton clientName={client.name} color={clientColor} />
 
         {/* ── Header ── */}
         <motion.div

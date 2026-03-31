@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { ChevronRight } from 'lucide-react'
 import { useCountUp } from '../../../hooks/useCountUp'
 import { useApp } from '../../../context/AppContext'
 import { SectionWrapper } from '../../ui/SectionWrapper'
 import { ClientLogo } from '../../ui/ClientLogos'
+import { DynIcon } from '../../../utils/iconMap'
 import { getClientById } from '../../../data/clients'
 
 // ─── Helpers de cor ──────────────────────────────────────────────────────────
@@ -195,6 +198,120 @@ function ClientBrandHero({ clientId, color, accent }: { clientId: string; color:
   )
 }
 
+// ─── Botão de navegação para seções do cliente ──────────────────────────────
+
+function SectionNavButton({
+  icon,
+  label,
+  description,
+  color,
+  delay,
+  onClick,
+}: {
+  icon: string
+  label: string
+  description: string
+  color: string
+  delay: number
+  onClick: () => void
+}) {
+  const [hovered, setHovered] = useState(false)
+
+  return (
+    <motion.button
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay, duration: 0.4 }}
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="group relative rounded-xl text-left overflow-hidden transition-all duration-300"
+      style={{
+        border: `1px solid ${hovered ? rgba(color, 0.35) : 'rgba(255,255,255,0.06)'}`,
+        background: hovered
+          ? `linear-gradient(135deg, ${rgba(color, 0.1)}, ${rgba(color, 0.03)})`
+          : 'rgba(255,255,255,0.02)',
+      }}
+    >
+      {/* Barra lateral animada */}
+      <motion.div
+        className="absolute left-0 top-0 bottom-0 w-[3px]"
+        animate={{
+          scaleY: hovered ? 1 : 0.4,
+          opacity: hovered ? 1 : 0.5,
+        }}
+        style={{
+          background: `linear-gradient(to bottom, ${color}, ${rgba(color, 0.3)})`,
+          transformOrigin: 'top',
+        }}
+        transition={{ duration: 0.25 }}
+      />
+
+      {/* Glow no hover */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        animate={{ opacity: hovered ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        style={{
+          background: `radial-gradient(circle at 0% 50%, ${rgba(color, 0.12)}, transparent 70%)`,
+        }}
+      />
+
+      <div className="relative flex items-center gap-3.5 pl-5 pr-4 py-3.5">
+        {/* Ícone Lucide */}
+        <motion.div
+          className="flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center"
+          animate={{
+            background: hovered
+              ? `linear-gradient(135deg, ${rgba(color, 0.2)}, ${rgba(color, 0.08)})`
+              : 'rgba(255,255,255,0.04)',
+            borderColor: hovered ? rgba(color, 0.3) : 'rgba(255,255,255,0.06)',
+          }}
+          style={{ border: '1px solid' }}
+          transition={{ duration: 0.25 }}
+        >
+          <DynIcon
+            name={icon}
+            size={16}
+            style={{
+              color: hovered ? color : 'rgba(255,255,255,0.5)',
+              transition: 'color 0.25s ease',
+            }}
+          />
+        </motion.div>
+
+        {/* Texto */}
+        <div className="flex-1 min-w-0">
+          <span
+            className="text-sm font-bold leading-snug block transition-colors duration-200"
+            style={{ color: hovered ? '#fff' : 'rgba(255,255,255,0.85)' }}
+          >
+            {label}
+          </span>
+          <p
+            className="text-[11px] mt-0.5 leading-snug transition-colors duration-200"
+            style={{ color: hovered ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.3)' }}
+          >
+            {description}
+          </p>
+        </div>
+
+        {/* Seta */}
+        <motion.div
+          className="flex-shrink-0"
+          animate={{
+            x: hovered ? 0 : -4,
+            opacity: hovered ? 1 : 0,
+          }}
+          transition={{ duration: 0.2 }}
+        >
+          <ChevronRight size={16} style={{ color }} />
+        </motion.div>
+      </div>
+    </motion.button>
+  )
+}
+
 // ─── Componente principal ─────────────────────────────────────────────────────
 
 export function SectionClientOpening() {
@@ -307,30 +424,25 @@ export function SectionClientOpening() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col justify-center px-8 py-8 gap-4"
+            className="flex flex-col justify-center px-8 py-8 gap-3"
           >
             <div
-              className="text-[10px] font-bold uppercase tracking-[0.18em] mb-1"
+              className="text-[10px] font-bold uppercase tracking-[0.18em] mb-2"
               style={{ color: clientColor }}
             >
               Nesta apresentação
             </div>
 
             {clientSections.map((section, i) => (
-              <motion.button
+              <SectionNavButton
                 key={section.id}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.25 + i * 0.08, duration: 0.4 }}
+                icon={section.icon}
+                label={section.label}
+                description={section.description}
+                color={clientColor}
+                delay={0.25 + i * 0.08}
                 onClick={() => navigate(section.id)}
-                className="border-l-[3px] pl-5 text-left hover:opacity-80 transition-opacity"
-                style={{ borderColor: clientColor }}
-              >
-                <span className="text-lg font-semibold text-white leading-snug">
-                  {section.icon} {section.label}
-                </span>
-                <p className="text-xs text-foursys-text-muted mt-0.5">{section.description}</p>
-              </motion.button>
+              />
             ))}
           </motion.div>
         </div>

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useApp } from '../../../context/AppContext'
 import { SectionWrapper } from '../../ui/SectionWrapper'
 import { InterestButton } from '../../ui/InterestButton'
+import { ClientBackButton } from './ClientBackButton'
 import { getClientById } from '../../../data/clients'
 
 // ─── Tipos para os dados de extra1 do Quality IA ─────────────────────────────
@@ -40,6 +41,9 @@ export function SectionClientExtra1() {
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-6 md:py-10 max-w-5xl mx-auto">
+
+        {/* ── Voltar ── */}
+        <ClientBackButton clientName={client.name} color={clientColor} />
 
         {/* ── Header ── */}
         <motion.div
