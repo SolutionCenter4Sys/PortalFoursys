@@ -85,19 +85,23 @@ export function NavigationMenu() {
 
       {/* ── Header — logo Foursys ── */}
       <div className="px-5 pt-5 pb-4 border-b border-white/[0.06]">
-        <div className="flex items-center gap-3 mb-0.5">
-          <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-black text-white flex-shrink-0"
+        <div className="group relative mb-1.5">
+          <img
+            src="/images/foursys-logo.png"
+            alt="Foursys"
+            className="h-7 w-auto object-contain relative z-10 transition-all duration-400"
             style={{
-              background: 'linear-gradient(135deg, #FF6600, #FF9933)',
-              boxShadow: '0 0 16px rgba(255,102,0,0.45)',
+              filter: 'drop-shadow(0 0 10px rgba(255,102,0,0.35)) drop-shadow(0 0 20px rgba(255,102,0,0.15))',
             }}
-          >
-            F4
-          </div>
-          <span className="text-sm font-bold text-foursys-text tracking-widest">FOURSYS</span>
+          />
+          <div
+            className="absolute -inset-2 rounded-xl pointer-events-none"
+            style={{
+              background: 'radial-gradient(ellipse 80% 80% at 30% 50%, rgba(255,102,0,0.06), transparent 70%)',
+            }}
+          />
         </div>
-        <p className="text-[10px] text-foursys-text-dim pl-11 leading-snug tracking-wide">
+        <p className="text-[10px] text-foursys-text-dim leading-snug tracking-wide">
           Portal Institucional Navegável
         </p>
       </div>

@@ -46,6 +46,31 @@ export function TopBar() {
         <Menu size={18} />
       </button>
 
+      {/* Logo Foursys */}
+      <button
+        onClick={() => navigate('home')}
+        className="group relative flex items-center flex-shrink-0 py-0.5 px-1 rounded-lg transition-all duration-300 hover:bg-white/[0.04]"
+        aria-label="Ir para o início"
+      >
+        <img
+          src="/images/foursys-logo.png"
+          alt="Foursys"
+          className="h-5 md:h-6 w-auto object-contain relative z-10 transition-all duration-300 group-hover:brightness-110"
+          style={{
+            filter: 'drop-shadow(0 0 6px rgba(255,102,0,0.3))',
+          }}
+        />
+        <div
+          className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse at 50% 50%, rgba(255,102,0,0.08), transparent 70%)',
+          }}
+        />
+      </button>
+
+      {/* Separador após logo */}
+      <div className="w-px h-4 bg-white/10 mx-0.5 hidden sm:block flex-shrink-0" />
+
       {/* Breadcrumb */}
       <div className="flex items-center gap-1.5 text-sm min-w-0 flex-1 lg:flex-none">
         <span className="hidden sm:block text-foursys-text-dim text-xs uppercase tracking-widest font-semibold">
