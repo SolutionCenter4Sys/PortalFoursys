@@ -188,6 +188,9 @@ function DrillDownModal({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Análise detalhada: ${insight.title}`}
       onClick={onClose}
     >
       {/* Backdrop */}
@@ -200,6 +203,7 @@ function DrillDownModal({
         exit={{ scale: 0.95, opacity: 0, y: 10 }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         className="relative w-full max-w-3xl max-h-[85vh] overflow-y-auto rounded-2xl border border-white/[0.1] bg-[#0c0c14]"
+        aria-live="polite"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Hero header */}

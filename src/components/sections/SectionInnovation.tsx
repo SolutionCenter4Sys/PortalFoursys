@@ -176,6 +176,9 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Tendência: ${trend.title}`}
       onClick={onClose}
     >
       <div className="absolute inset-0 bg-black/80 backdrop-blur-xl" />
@@ -186,6 +189,7 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
         exit={{ scale: 0.95, y: 20, opacity: 0 }}
         transition={{ duration: 0.4, type: 'spring', stiffness: 200 }}
         onClick={e => e.stopPropagation()}
+        aria-live="polite"
         className="relative z-10 w-full max-w-5xl mx-4 my-8 rounded-3xl overflow-hidden"
         style={{
           background: `linear-gradient(180deg, ${hexToRgba(trend.color, 0.08)} 0%, rgba(10,14,22,0.98) 15%, rgba(10,14,22,0.99) 100%)`,

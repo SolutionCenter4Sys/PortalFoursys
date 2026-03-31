@@ -6,6 +6,7 @@ export const equifaxClient: ClientConfig = {
   colors: { primary: '#003087', accent: '#0057B7' },
   tagline: 'Dados, IA e segurança para decisões mais inteligentes',
   relationship: 'Parceiro em dados, analytics e governança de IA',
+  yearsPartnership: 8,
   sections: [
     {
       id: 'client-opening',
@@ -23,7 +24,7 @@ export const equifaxClient: ClientConfig = {
     },
     {
       id: 'client-cases',
-      label: 'Cases no Equifax',
+      label: 'Cases na Equifax',
       description: 'Projetos e resultados entregues',
       icon: 'trophy',
       component: 'client-cases',
@@ -31,31 +32,58 @@ export const equifaxClient: ClientConfig = {
   ],
   insights: [
     {
-      id: 'dados-governanca',
-      title: 'Governança de Dados com IA',
+      id: 'data-fabric',
+      title: 'Data Fabric — Arquitetura de Dados Unificada',
       description:
-        'Volume crescente de dados sensíveis exigindo pipelines robustos, compliance regulatório e rastreabilidade end-to-end.',
+        'A Equifax processa bilhões de registros de crédito globalmente. No Brasil, a integração de dados de birôs, Cadastro Positivo, Open Finance e fontes alternativas exige uma arquitetura de dados unificada com ingestão em tempo real.',
       solution:
-        'Governança de IA & Dados: catálogo, linhagem, qualidade e compliance com visibilidade em tempo real.',
-      icon: 'bar-chart',
+        'Data Lakehouse com camadas Bronze/Silver/Gold no Databricks. Ingestão em tempo real via Kafka, data quality automatizada e APIs de consumo padronizadas para cada produto de scoring.',
+      icon: '📊',
     },
     {
-      id: 'modelos-risco',
-      title: 'Modelos de Risco e Crédito',
+      id: 'ml-scoring',
+      title: 'Modelos de Scoring com IA Explicável',
       description:
-        'Necessidade de modelos mais precisos e auditáveis para scoring de crédito e detecção de fraude.',
+        'Regulamentação do BACEN exige explicabilidade nos modelos de crédito. Modelos de ML precisam ser auditáveis, reproduzíveis e com monitoramento de drift — sem sacrificar a acurácia que diferencia a Equifax no mercado.',
       solution:
-        'Dados & Inteligência com Databricks: modelos ML em produção com explicabilidade e monitoramento contínuo.',
-      icon: 'shield-check',
+        'MLOps com pipelines reproduzíveis: feature store, versionamento de modelos, monitoramento de drift e SHAP/LIME para explicabilidade. Integração com frameworks regulatórios BACEN e conformidade LGPD.',
+      icon: '🧠',
     },
     {
-      id: 'plataforma-dados',
-      title: 'Plataforma de Dados Unificada',
+      id: 'cadastro-positivo',
+      title: 'Cadastro Positivo e Open Finance',
       description:
-        'Silos de dados dispersos limitando a criação de produtos analíticos de alto valor para clientes.',
+        'Com a universalização do Cadastro Positivo e a evolução do Open Finance, a Equifax precisa enriquecer seus produtos de scoring com dados transacionais em tempo real — processando volumes massivos sem degradar latência.',
       solution:
-        'Data Lakehouse: camadas Bronze/Silver/Gold com ingestão em tempo real e APIs de consumo padronizadas.',
-      icon: 'link',
+        'Pipelines de enriquecimento de dados em streaming com processamento < 500ms. Integração com APIs Open Finance para ingestão de dados consentidos. Modelos de scoring enriquecidos com dados transacionais.',
+      icon: '🔗',
+    },
+    {
+      id: 'fraud-detection',
+      title: 'Detecção de Fraude e Identidade Digital',
+      description:
+        'A Equifax atua em prevenção à fraude com soluções de verificação de identidade. O desafio é combinar velocidade (decisão em < 200ms), acurácia (< 0,01% falso negativo) e experiência do consumidor sem fricção.',
+      solution:
+        'Modelos de detecção de fraude em tempo real com ensemble de ML (gradient boosting + redes neurais). Device fingerprinting, análise comportamental e verificação biométrica integrados em orquestrador decisório.',
+      icon: '🛡️',
+    },
+    {
+      id: 'cloud-migration',
+      title: 'Migração Cloud e Modernização',
+      description:
+        'A Equifax globalmente migrou para Google Cloud. No Brasil, a operação local precisa alinhar-se à estratégia global de cloud mantendo compliance com regulamentação local (dados em território nacional, LGPD, BACEN).',
+      solution:
+        'Estratégia de cloud híbrida com workloads sensíveis em nuvem soberana. Containerização com Kubernetes, IaC com Terraform e GitOps para consistência entre ambientes globais e locais.',
+      icon: '☁️',
+    },
+    {
+      id: 'lgpd-governance',
+      title: 'LGPD e Governança de Dados Sensíveis',
+      description:
+        'Como processadora de dados creditícios de 150+ milhões de brasileiros, a Equifax precisa de governança impecável: catálogo de dados, linhagem, consentimento, anonimização e direito ao esquecimento — tudo auditável.',
+      solution:
+        'Plataforma de governança de dados com catálogo automatizado, linhagem end-to-end, gestão de consentimento e anonimização dinâmica. Dashboards de compliance LGPD para DPO com alertas em tempo real.',
+      icon: '🔒',
     },
   ],
   cases: [
