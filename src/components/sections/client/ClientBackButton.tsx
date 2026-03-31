@@ -19,7 +19,7 @@ export function ClientBackButton({ clientName, color }: { clientName: string; co
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3 }}
       onClick={() => navigate('client-opening')}
-      className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-lg mb-4 transition-all duration-200"
+      className="group inline-flex items-center gap-2 px-3 py-2.5 md:py-1.5 rounded-lg mb-4 transition-all duration-200 min-h-[44px] active:scale-95"
       style={{
         background: hexToRgba(color, 0.08),
         border: `1px solid ${hexToRgba(color, 0.15)}`,
@@ -35,7 +35,7 @@ export function ClientBackButton({ clientName, color }: { clientName: string; co
     >
       <ArrowLeft
         size={14}
-        className="transition-transform duration-200 group-hover:-translate-x-0.5"
+        className="transition-transform duration-200 group-hover:-translate-x-0.5 group-active:-translate-x-1"
         style={{ color }}
       />
       <span className="text-xs font-medium" style={{ color }}>

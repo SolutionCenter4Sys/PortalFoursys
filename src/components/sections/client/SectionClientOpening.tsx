@@ -57,7 +57,7 @@ function SantanderFlame() {
 
 function ClientBrandHero({ clientId, color, accent }: { clientId: string; color: string; accent: string }) {
   return (
-    <div className="relative select-none flex items-center justify-center w-64 h-64">
+    <div className="relative select-none flex items-center justify-center w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64">
       {/* Anel orbital externo */}
       <motion.div
         className="absolute inset-0 rounded-full"
@@ -225,7 +225,7 @@ function SectionNavButton({
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="group relative rounded-xl text-left overflow-hidden transition-all duration-300"
+      className="group relative rounded-xl text-left overflow-hidden transition-all duration-300 active:scale-[0.98] min-h-[44px]"
       style={{
         border: `1px solid ${hovered ? rgba(color, 0.35) : 'rgba(255,255,255,0.06)'}`,
         background: hovered
@@ -336,70 +336,37 @@ export function SectionClientOpening() {
 
   return (
     <SectionWrapper>
-      <div className="h-full flex flex-col overflow-hidden">
+      <div className="h-full flex flex-col overflow-y-auto">
 
-        {/* ── Área principal 3 colunas ── */}
-        <div className="flex-1 grid grid-cols-[2.5fr_3fr_2.5fr]">
+        {/* ── Área principal: 1 coluna mobile → 3 colunas desktop ── */}
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-[2.5fr_3fr_2.5fr]">
 
-          {/* ── Coluna esquerda: KPIs ── */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col justify-center px-10 py-8 gap-7"
-          >
-            <div>
-              <span
-                className="text-xs font-bold tracking-[0.18em] uppercase"
-                style={{ color: clientColor }}
-              >
-                Foursys × {client.name}
-              </span>
-            </div>
-
-            {kpis.map(({ ref, suffix, label }, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + i * 0.12, duration: 0.5 }}
-                className="border-l-[3px] pl-5"
-                style={{ borderColor: clientColor }}
-              >
-                <div className="text-[68px] leading-none font-black text-white tracking-tight tabular-nums">
-                  {ref.count}
-                  <span className="text-4xl">{suffix}</span>
-                </div>
-                <div className="text-sm text-foursys-text-muted mt-1 font-medium">{label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* ── Coluna central: Visual do cliente ── */}
+          {/* ── Coluna central: Visual do cliente (aparece primeiro no mobile) ── */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col items-center justify-center py-6"
+            className="flex flex-col items-center justify-center py-6 lg:py-6 order-1 lg:order-2"
           >
-            {client.id === 'santander'
-              ? <SantanderFlame />
-              : <ClientBrandHero clientId={client.id} color={clientColor} accent={client.colors.accent} />
-            }
+            <div className="scale-75 md:scale-90 lg:scale-100">
+              {client.id === 'santander'
+                ? <SantanderFlame />
+                : <ClientBrandHero clientId={client.id} color={clientColor} accent={client.colors.accent} />
+              }
+            </div>
 
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="mt-2 text-center px-6"
+              className="mt-2 text-center px-4 md:px-6"
             >
-              <h1 className="text-lg font-black text-white leading-snug mb-1">
+              <h1 className="text-base md:text-lg font-black text-white leading-snug mb-1">
                 {client.tagline}
               </h1>
-              <p className="text-sm text-foursys-text-muted">{client.relationship}</p>
+              <p className="text-xs md:text-sm text-foursys-text-muted">{client.relationship}</p>
             </motion.div>
 
-            {/* Badge do cliente */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -407,7 +374,7 @@ export function SectionClientOpening() {
               className="mt-3"
             >
               <div
-                className="px-4 py-2 rounded-full border text-sm font-bold"
+                className="px-3 py-1.5 md:px-4 md:py-2 rounded-full border text-xs md:text-sm font-bold"
                 style={{
                   borderColor: `${clientColor}60`,
                   backgroundColor: `${clientColor}12`,
@@ -419,15 +386,51 @@ export function SectionClientOpening() {
             </motion.div>
           </motion.div>
 
+          {/* ── Coluna esquerda: KPIs ── */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="flex flex-col justify-center px-4 md:px-6 lg:px-10 py-4 lg:py-8 gap-4 lg:gap-7 order-2 lg:order-1"
+          >
+            <div>
+              <span
+                className="text-xs font-bold tracking-[0.18em] uppercase"
+                style={{ color: clientColor }}
+              >
+                Foursys × {client.name}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-3 lg:grid-cols-1 gap-3 lg:gap-7">
+              {kpis.map(({ ref, suffix, label }, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 + i * 0.12, duration: 0.5 }}
+                  className="border-l-[3px] pl-3 lg:pl-5"
+                  style={{ borderColor: clientColor }}
+                >
+                  <div className="text-3xl md:text-5xl lg:text-[68px] leading-none font-black text-white tracking-tight tabular-nums">
+                    {ref.count}
+                    <span className="text-lg md:text-2xl lg:text-4xl">{suffix}</span>
+                  </div>
+                  <div className="text-[10px] md:text-xs lg:text-sm text-foursys-text-muted mt-1 font-medium">{label}</div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
           {/* ── Coluna direita: Seções do cliente ── */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col justify-center px-8 py-8 gap-3"
+            className="flex flex-col justify-center px-4 md:px-6 lg:px-8 py-4 lg:py-8 gap-2 lg:gap-3 order-3"
           >
             <div
-              className="text-[10px] font-bold uppercase tracking-[0.18em] mb-2"
+              className="text-[10px] font-bold uppercase tracking-[0.18em] mb-1 lg:mb-2"
               style={{ color: clientColor }}
             >
               Nesta apresentação
@@ -452,45 +455,42 @@ export function SectionClientOpening() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.5 }}
-          className="grid grid-cols-3 border-t border-white/[0.08]"
+          className="grid grid-cols-1 sm:grid-cols-3 border-t border-white/[0.08]"
         >
-          <div className="px-10 py-5 border-r border-white/[0.06]">
+          <div className="px-4 md:px-6 lg:px-10 py-3 sm:py-5 sm:border-r border-b sm:border-b-0 border-white/[0.06]">
             <div
-              className="text-[10px] font-bold uppercase tracking-[0.16em] mb-2"
+              className="text-[10px] font-bold uppercase tracking-[0.16em] mb-1 sm:mb-2"
               style={{ color: clientColor }}
             >
               Estrutura de Entrega
             </div>
-            <div className="text-sm text-foursys-text-muted leading-relaxed">
-              Projetos · Squads · Alocação
-              <br />+ Agentes · Produtos · AMS
+            <div className="text-xs sm:text-sm text-foursys-text-muted leading-relaxed">
+              Projetos · Squads · Alocação · Agentes · Produtos · AMS
             </div>
           </div>
 
-          <div className="px-10 py-5 border-r border-white/[0.06]">
+          <div className="px-4 md:px-6 lg:px-10 py-3 sm:py-5 sm:border-r border-b sm:border-b-0 border-white/[0.06]">
             <div
-              className="text-[10px] font-bold uppercase tracking-[0.16em] mb-2"
+              className="text-[10px] font-bold uppercase tracking-[0.16em] mb-1 sm:mb-2"
               style={{ color: clientColor }}
             >
               Diferenciais
             </div>
-            <div className="text-sm text-foursys-text-muted leading-relaxed">
-              26 anos · 3,6% turnover · ISO 9001
-              <br />
-              ISO 27001 · SAFe · GPTW
+            <div className="text-xs sm:text-sm text-foursys-text-muted leading-relaxed">
+              26 anos · 3,6% turnover · ISO 9001 · ISO 27001 · SAFe · GPTW
             </div>
           </div>
 
-          <div className="px-10 py-5 flex flex-col justify-center">
+          <div className="px-4 md:px-6 lg:px-10 py-3 sm:py-5 flex flex-col justify-center">
             <div
-              className="text-[10px] font-bold uppercase tracking-[0.16em] mb-2"
+              className="text-[10px] font-bold uppercase tracking-[0.16em] mb-1 sm:mb-2"
               style={{ color: clientColor }}
             >
               Modo de visualização
             </div>
             <button
               onClick={clearClient}
-              className="text-xs text-foursys-text-dim hover:text-foursys-text-muted transition-colors underline underline-offset-2 text-left"
+              className="text-xs text-foursys-text-dim hover:text-foursys-text-muted active:text-white transition-colors underline underline-offset-2 text-left min-h-[44px] flex items-center"
             >
               Voltar para apresentação institucional →
             </button>

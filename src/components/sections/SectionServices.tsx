@@ -346,7 +346,7 @@ function OfferDetailModal({
           </div>
 
           {/* KPI Cards */}
-          <div className="grid grid-cols-3 gap-2.5 md:gap-3 mb-5">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 md:gap-3 mb-5">
             {detail.metrics.map(metric => (
               <div
                 key={metric.label}
