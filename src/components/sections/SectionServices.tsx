@@ -404,22 +404,160 @@ const sddSteps = [
   { icon: 'flag', title: 'Descomissionamento', desc: 'Encerramento seguro do sistema legado após validação completa de todas as funcionalidades migradas.' },
 ]
 
-const cyberCapabilities = [
-  { icon: 'search', title: 'SAST', subtitle: 'Static Application Security Testing', desc: 'Análise de vulnerabilidades no código-fonte antes do deploy, integrada ao pipeline CI/CD.' },
-  { icon: 'scan-eye', title: 'DAST', subtitle: 'Dynamic Application Security Testing', desc: 'Testes de segurança em aplicações em execução, simulando ataques reais.' },
-  { icon: 'target', title: 'Pentest', subtitle: 'Penetration Testing', desc: 'Testes de intrusão por especialistas certificados (OSCP, CEH) em sistemas e APIs.' },
-  { icon: 'cloud', title: 'Cloud Security', subtitle: 'Segurança em Cloud', desc: 'Hardening, IAM, CIS Benchmarks e monitoramento de configurações em AWS/Azure.' },
-  { icon: 'clipboard-list', title: 'Compliance', subtitle: 'BACEN · LGPD · ISO 27001', desc: 'Adequação regulatória para o setor financeiro brasileiro e internacional.' },
-  { icon: 'alert-triangle', title: 'SOC & SIEM', subtitle: 'Security Operations Center', desc: 'Monitoramento 24/7, detecção de ameaças e resposta a incidentes em tempo real.' },
+// ─── Sec4Sys (vertical Foursys de cibersegurança) ────────────────────────────
+
+const sec4sysModels = [
+  {
+    id: 'consulting',
+    title: 'Consulting & Assessment',
+    icon: 'clipboard-list',
+    color: '#EF4444',
+    desc: 'Consultoria e Assessment estratégicos para organizações que desejam fortalecer a gestão de riscos corporativos e cibersegurança, promovendo resiliência e alinhamento às melhores práticas.',
+    items: [
+      'Score/Assessment de Maturidade (NIST)',
+      'Score/Assessment de Arquitetura Segura',
+      'Score de Desenvolvimento Seguro — SDLC',
+      'Score de Privacidade/LGPD',
+      'Assessment de Ransomware',
+      'PDSI / Políticas / Risk Assessment',
+      'Third Party Risk Management Score',
+      'Cultura e conscientização de riscos',
+    ],
+  },
+  {
+    id: 'secaas',
+    title: 'SECaaS',
+    icon: 'cloud',
+    color: '#F97316',
+    desc: 'Soluções de segurança cibernética sob demanda por meio de assinaturas ou contratos personalizados — escaláveis, flexíveis e econômicas.',
+    items: [
+      'AppSec / SDLC',
+      'Pentesting / Ethical Hacking (EHT)',
+      'Pentest de Fraude (Bypass Tests)',
+      'Gestão de Vulnerabilidades',
+      'Operações (DLP, WAF, Antispam, etc.)',
+      'SOC e Resposta a Incidentes',
+      'Gestão de Acesso e Identidade (GIA)',
+      'Arquitetura e requisitos de segurança',
+      'DevSecOps',
+      'Segurança de Redes',
+      'Campanhas de phishing',
+      'Continuidade de negócios / Gestão de Crises',
+      'Governança, Riscos e Compliance (GRC)',
+    ],
+  },
 ]
 
-const cyberRegulations = [
-  { name: 'BACEN Res. 4.658', desc: 'Política de segurança cibernética para IFs' },
-  { name: 'BACEN Res. 4.893', desc: 'Continuidade de negócios e TIBER' },
-  { name: 'LGPD', desc: 'Lei Geral de Proteção de Dados' },
-  { name: 'ISO 27001', desc: 'Sistema de Gestão de Segurança' },
-  { name: 'PCI DSS', desc: 'Segurança para dados de cartão' },
-  { name: 'SOX', desc: 'Sarbanes-Oxley para empresas listadas' },
+const sec4sysPortfolio = [
+  {
+    id: 'seguranca-informacao',
+    title: 'Segurança da Informação',
+    icon: 'shield-check',
+    color: '#EF4444',
+    items: [
+      'Apoio e qualificação para ISO 27001 e ISO 27701',
+      'AppSec (SDLC)',
+      'Arquitetura de referência de SI',
+      'Assessment de Ransomware',
+      'Assessment e apoio evolução maturidade Seguro Cyber',
+      'Assessment Score de arquitetura segura',
+      'Assessment Score de desenvolvimento seguro — SDLC',
+      'Assessment Score de maturidade de SI',
+      'BISO As A Service (Segurança nos Negócios)',
+      'Campanhas de phishing',
+      'CISO As A Service (PDSI, Consulting...)',
+      'Framework de desenvolvimento seguro — DevSecOps',
+      'Gestão de identidade de acesso (IAM)',
+      'Gestão de vulnerabilidade e scanning',
+      'Implementação e Suporte de Ferramentas de Segurança',
+      'Operações (DLP, WAF, Antispam, AM, AV...)',
+      'Pentesting / Ethical Hacking (EHT)',
+      'Plano Diretor de Segurança da Informação (PDSI)',
+      'Políticas e procedimentos de Segurança da Informação',
+      'Programas e treinamentos de conscientização para cibersegurança',
+      'Red Team as a Service',
+      'Score de ferramentas de SI',
+      'Security Champions',
+      'Segurança de redes e em nuvem',
+      'SOC / Resposta a incidentes / Blue team',
+      'Threat Intelligence',
+      'VIP Protection',
+    ],
+  },
+  {
+    id: 'continuidade-negocios',
+    title: 'Continuidade de Negócios e Gestão de Crises',
+    icon: 'life-buoy',
+    color: '#8B5CF6',
+    items: [
+      'Elaboração e Análise de Impacto nos Negócios (BIA)',
+      'Plano de Continuidade de Negócios (PCN)',
+      'Plano de Disaster Recovery (DR)',
+      'Planos de Ação e Resposta a Incidentes (PARI)',
+      'Playbook de Gestão de Crises',
+      'Programas e treinamentos de conscientização para Gestão de Crises',
+      'Simulações e exercícios de crise',
+      'Suporte a Gestão de Crises',
+    ],
+  },
+  {
+    id: 'riscos-corporativos',
+    title: 'Riscos Corporativos',
+    icon: 'alert-triangle',
+    color: '#F59E0B',
+    items: [
+      'Avaliação de Controles Internos e Testes de Efetividade',
+      'Dashboard de apetite e indicadores de riscos',
+      'Governança, Riscos e Compliance (GRC)',
+      'Políticas e governança de Riscos Corporativos',
+      'Programa de Cultura de Riscos',
+      'Programa de Prevenção de Lavagem de Dinheiro (PLD)',
+    ],
+  },
+  {
+    id: 'prevencao-fraudes',
+    title: 'Prevenção de Fraudes',
+    icon: 'scan-eye',
+    color: '#EC4899',
+    items: [
+      'Assessment / Score Maturidade de Fraudes',
+      'Desenvolvimento de Arquitetura e camadas Antifraude',
+      'Fraud Prevention as a Service',
+      'Pentesting de burla de biometria',
+      'Soluções e ferramentas antifraude',
+    ],
+  },
+  {
+    id: 'privacidade-dados',
+    title: 'Privacidade de Dados',
+    icon: 'lock',
+    color: '#06B6D4',
+    items: [
+      'Assessment Score de Proteção e privacidade (LGPD)',
+      'Políticas e procedimentos de Proteção e privacidade de Dados (LGPD)',
+      'Programa de Proteção e privacidade de Dados (LGPD)',
+    ],
+  },
+  {
+    id: 'tprm',
+    title: 'Gestão de Risco de Terceiros (TPRM)',
+    icon: 'users',
+    color: '#10B981',
+    items: [
+      'Assessment de Score 3rd party (TPRM)',
+      'Políticas e procedimentos para Riscos de Terceiros',
+      'Programa de Gestão de Risco de Terceiros',
+    ],
+  },
+]
+
+const sec4sysPillars = [
+  { label: 'Confidencialidade', icon: 'lock' },
+  { label: 'Integridade', icon: 'check-circle' },
+  { label: 'Disponibilidade', icon: 'server' },
+  { label: 'Resiliência', icon: 'shield' },
+  { label: 'Estabilidade', icon: 'activity' },
+  { label: 'Privacidade', icon: 'eye-off' },
 ]
 
 const fourbloxBlocks = [
@@ -439,6 +577,206 @@ const fourbloxPhases = [
   { week: 'Semana 3', label: 'Customização + Testes', icon: 'wrench' },
   { week: 'Semana 4', label: 'Deploy + Handover', icon: 'rocket' },
 ]
+
+function Sec4SysDeepDive() {
+  const [expandedPortfolio, setExpandedPortfolio] = useState<string | null>(null)
+  const [expandedModel, setExpandedModel] = useState<string | null>(null)
+
+  return (
+    <div className="space-y-6">
+      {/* Sec4Sys Hero */}
+      <div className="rounded-xl border border-red-500/25 overflow-hidden">
+        <div className="p-5 bg-gradient-to-r from-red-600/15 via-orange-500/10 to-transparent">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-xl bg-red-500/20 border border-red-500/30 flex items-center justify-center">
+              <Shield size={20} className="text-red-400" />
+            </div>
+            <div>
+              <h4 className="text-base font-black text-white tracking-wide">Sec4Sys</h4>
+              <p className="text-[10px] text-red-400 font-semibold uppercase tracking-[0.15em]">
+                Vertical Foursys de Cibersegurança
+              </p>
+            </div>
+          </div>
+          <p className="text-xs text-foursys-text-muted leading-relaxed">
+            A Sec4Sys é uma vertical de negócios Foursys especializada em riscos corporativos e cibersegurança,
+            auxiliando clientes na definição de estratégia, detecção de ameaças, proteção de dados e mitigação de riscos.
+          </p>
+        </div>
+
+        {/* Pilares */}
+        <div className="px-5 py-3 bg-white/[0.02] border-t border-red-500/15">
+          <div className="flex flex-wrap gap-2 justify-center">
+            {sec4sysPillars.map(p => (
+              <div
+                key={p.label}
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-500/10 border border-red-500/20"
+              >
+                <DynIcon name={p.icon} size={11} className="text-red-400" />
+                <span className="text-[10px] text-red-300 font-medium">{p.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Modelos de Negócio */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          Modelos de Negócio
+        </div>
+        <div className="grid md:grid-cols-2 gap-3">
+          {sec4sysModels.map(model => {
+            const isOpen = expandedModel === model.id
+            return (
+              <div key={model.id} className="rounded-xl border border-white/10 bg-foursys-surface/40 overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setExpandedModel(isOpen ? null : model.id)}
+                  className="w-full p-4 flex items-start gap-3 text-left transition-colors hover:bg-white/[0.03] active:scale-[0.99] min-h-[44px]"
+                >
+                  <div
+                    className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{ background: `${model.color}20`, border: `1px solid ${model.color}35` }}
+                  >
+                    <DynIcon name={model.icon} size={16} style={{ color: model.color }} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2">
+                      <h5 className="text-sm font-bold text-white">{model.title}</h5>
+                      <DynIcon
+                        name={isOpen ? 'chevron-up' : 'chevron-down'}
+                        size={14}
+                        className="text-white/30 flex-shrink-0"
+                      />
+                    </div>
+                    <p className="text-[10px] text-foursys-text-dim leading-relaxed mt-1">{model.desc}</p>
+                  </div>
+                </button>
+                {isOpen && (
+                  <div className="px-4 pb-4 pt-0">
+                    <div className="p-3 rounded-lg bg-white/[0.03] border border-white/[0.06]">
+                      <ul className="space-y-1.5">
+                        {model.items.map(item => (
+                          <li key={item} className="flex items-start gap-2 text-[11px] text-foursys-text-muted">
+                            <CheckCircle2 size={12} className="flex-shrink-0 mt-0.5" style={{ color: model.color }} />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Portfólio Completo */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          Portfólio Sec4Sys
+        </div>
+        <div className="space-y-2">
+          {sec4sysPortfolio.map(area => {
+            const isOpen = expandedPortfolio === area.id
+            return (
+              <div
+                key={area.id}
+                className="rounded-xl border overflow-hidden transition-colors duration-200"
+                style={{
+                  borderColor: isOpen ? `${area.color}40` : 'rgba(255,255,255,0.08)',
+                  background: isOpen
+                    ? `linear-gradient(135deg, ${area.color}08 0%, transparent 60%)`
+                    : 'rgba(255,255,255,0.02)',
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() => setExpandedPortfolio(isOpen ? null : area.id)}
+                  className="w-full px-4 py-3.5 flex items-center gap-3 text-left transition-colors hover:bg-white/[0.03] active:scale-[0.99] min-h-[44px]"
+                >
+                  <div
+                    className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{ background: `${area.color}18`, border: `1px solid ${area.color}30` }}
+                  >
+                    <DynIcon name={area.icon} size={15} style={{ color: area.color }} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h5 className="text-xs font-bold text-white">{area.title}</h5>
+                    <p className="text-[10px] text-foursys-text-dim mt-0.5">
+                      {area.items.length} serviços disponíveis
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <span
+                      className="text-[9px] font-bold px-2 py-0.5 rounded-full"
+                      style={{ background: `${area.color}18`, color: area.color }}
+                    >
+                      {area.items.length}
+                    </span>
+                    <DynIcon
+                      name={isOpen ? 'chevron-up' : 'chevron-down'}
+                      size={14}
+                      className="text-white/30"
+                    />
+                  </div>
+                </button>
+
+                {isOpen && (
+                  <div className="px-4 pb-4">
+                    <div className="p-3 rounded-lg bg-white/[0.02] border border-white/[0.06]">
+                      <div className={`grid ${area.items.length > 8 ? 'md:grid-cols-2' : 'grid-cols-1'} gap-1.5`}>
+                        {area.items.map(item => (
+                          <div
+                            key={item}
+                            className="flex items-start gap-2 text-[11px] text-foursys-text-muted py-1 px-2 rounded-md hover:bg-white/[0.03] transition-colors"
+                          >
+                            <span
+                              className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1"
+                              style={{ background: area.color }}
+                            />
+                            {item}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* CTA Sec4Sys */}
+      <div className="p-4 rounded-xl bg-gradient-to-r from-red-500/12 via-orange-500/8 to-transparent border border-red-500/20">
+        <div className="flex items-center gap-3">
+          <Zap size={18} className="text-red-400 flex-shrink-0" />
+          <div className="flex-1">
+            <p className="text-xs text-foursys-text-muted leading-relaxed">
+              <strong className="text-white">Sec4Sys — Foursys Group.</strong>{' '}
+              Soluções e apoio para estabelecer ou ampliar a maturidade em cibersegurança, prevenção à fraudes,
+              privacidade de dados, continuidade de negócios e gestão de riscos de terceiros.
+            </p>
+          </div>
+        </div>
+        <div className="mt-3 flex items-center gap-2">
+          <a
+            href="https://www.sec4sys.com.br/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-red-400 hover:text-red-300 transition-colors"
+          >
+            Visitar sec4sys.com.br
+            <DynIcon name="external-link" size={12} />
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 function DeepDiveContent({ serviceId }: { serviceId: string }) {
   if (serviceId === 'modernizacao-legados') {
@@ -500,40 +838,7 @@ function DeepDiveContent({ serviceId }: { serviceId: string }) {
   }
 
   if (serviceId === 'ciberseguranca') {
-    return (
-      <div className="space-y-6">
-        <div className="grid md:grid-cols-2 gap-3">
-          {cyberCapabilities.map(cap => (
-            <div key={cap.title} className="p-4 rounded-xl bg-foursys-surface/50 border border-white/10">
-              <div className="mb-2">
-                <DynIcon name={cap.icon} size={18} className="text-white/80" />
-              </div>
-              <div className="font-bold text-foursys-text text-xs">{cap.title}</div>
-              <div className="text-[10px] text-foursys-text-dim mb-1.5">{cap.subtitle}</div>
-              <p className="text-[10px] text-foursys-text-muted leading-relaxed">{cap.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="p-5 rounded-xl bg-gradient-to-r from-red-500/15 to-orange-500/8 border border-red-500/25">
-          <div className="flex items-center gap-2.5 mb-3.5">
-            <Shield size={18} className="text-red-400" />
-            <div>
-              <div className="font-bold text-foursys-text text-sm">Conformidade Regulatória Financeira</div>
-              <div className="text-[10px] text-foursys-text-dim">Frameworks e regulações relevantes</div>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-            {cyberRegulations.map(reg => (
-              <div key={reg.name} className="p-2.5 rounded-lg bg-red-500/10 border border-red-500/20">
-                <div className="font-semibold text-red-400 text-[11px]">{reg.name}</div>
-                <div className="text-[9px] text-foursys-text-dim mt-0.5">{reg.desc}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    )
+    return <Sec4SysDeepDive />
   }
 
   if (serviceId === 'fourblox') {
@@ -642,7 +947,7 @@ function DeepDiveModal({
         exit={{ opacity: 0, scale: 0.95, y: 10 }}
         transition={{ type: 'spring', damping: 26, stiffness: 300 }}
         onClick={e => e.stopPropagation()}
-        className="relative w-full max-w-3xl rounded-[20px] border overflow-y-auto max-h-[90vh] outline-none"
+        className="relative w-full max-w-4xl rounded-[20px] border overflow-y-auto max-h-[90vh] outline-none"
         style={{
           borderColor: `${visual.glow}30`,
           background: `linear-gradient(160deg, ${visual.glow}10 0%, #1a1b2e 18%, #14152a 100%)`,
