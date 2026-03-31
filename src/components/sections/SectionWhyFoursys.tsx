@@ -74,14 +74,6 @@ const COMPARISON: ComparisonRow[] = [
     foursysAdvantage: true,
   },
   {
-    dimension: 'Escala Global',
-    icon: <Globe size={15} />,
-    foursys: { value: '3 países', detail: 'BR + EUA + Portugal, foco LatAm', score: 'mid' },
-    bigFour: { value: '100+ países', detail: 'Presença massiva global', score: 'high' },
-    boutique: { value: '5-20 países', detail: 'Regional ou nicho global', score: 'mid' },
-    foursysAdvantage: false,
-  },
-  {
     dimension: 'Certificações',
     icon: <Award size={15} />,
     foursys: { value: '4 ISOs + SAFe + GPTW', detail: '9001, 27001, 27701, 14001', score: 'high' },
