@@ -4,7 +4,7 @@ import type { AppSection } from '../types'
 
 const VALID_SECTIONS: AppSection[] = [
   'home', 'identity', 'global', 'timeline', 'offers-flagship',
-  'services', 'delivery', 'alliances', 'cases', 'awards',
+  'services', 'delivery', 'alliances', 'innovation', 'cases', 'awards',
   'clients-showcase', 'capabilities', 'esg', 'insights', 'faq',
 ]
 

@@ -153,6 +153,7 @@ export type AppSection =
   | 'services'
   | 'delivery'
   | 'alliances'
+  | 'innovation'
   // Provas
   | 'cases'
   | 'awards'

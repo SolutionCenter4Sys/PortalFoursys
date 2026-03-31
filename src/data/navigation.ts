@@ -69,6 +69,13 @@ export const navigationItems: NavigationItem[] = [
     category: 'Ofertas e Serviços',
     description: 'Microsoft, AWS, Google Cloud, SAP, Oracle, Salesforce e mais',
   },
+  {
+    id: 'innovation',
+    label: 'Inovação',
+    icon: 'sparkles',
+    category: 'Ofertas e Serviços',
+    description: 'Tendências globais em IA, Cloud, CX, Cyber e Data & Analytics',
+  },
 
   // ── Provas ─────────────────────────────────────────────────────────────────
   {
