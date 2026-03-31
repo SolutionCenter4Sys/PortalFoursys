@@ -121,7 +121,7 @@ const ADVANTAGES = [
   },
   {
     title: 'Parceria, não Fornecimento',
-    description: '20+ anos com o mesmo cliente (Itaú, Santander). Não vendemos horas — construímos relacionamento de longo prazo com accountability real.',
+    description: 'Clientes que estão conosco há mais de 20 anos. Não vendemos horas — construímos relacionamento de longo prazo com accountability real.',
     color: '#06B6D4',
     metric: '20+',
     metricLabel: 'anos com mesmo cliente',
@@ -252,8 +252,8 @@ export function SectionWhyFoursys() {
             Por que a Foursys?
           </h2>
           <p className="text-foursys-text-muted max-w-2xl text-sm md:text-base leading-relaxed">
-            Avaliação comparativa contra as principais consultorias globais de tecnologia —
-            Accenture, Deloitte, McKinsey, BCG, KPMG, PwC, EY e boutiques especializadas.
+            Avaliação comparativa contra as principais consultorias globais de tecnologia
+            e boutiques especializadas do mercado.
           </p>
           <div className="mt-5 h-px bg-gradient-to-r from-foursys-primary/30 via-white/[0.06] to-transparent" />
         </motion.div>
