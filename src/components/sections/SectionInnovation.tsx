@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  BrainCircuit, Cloud, Palette, Shield, BarChart3,
+  BrainCircuit, Cloud, Factory, Shield, BarChart3,
   X, ArrowRight, ChevronRight, Sparkles, TrendingUp,
-  Zap, CheckCircle2, ExternalLink, Quote,
+  Zap, CheckCircle2, Quote,
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { innovationTrends } from '../../data/innovation'
@@ -12,7 +12,7 @@ import type { InnovationTrend } from '../../data/innovation'
 const ICON_MAP: Record<string, React.ReactNode> = {
   'brain-circuit': <BrainCircuit />,
   'cloud': <Cloud />,
-  'palette': <Palette />,
+  'factory': <Factory />,
   'shield': <Shield />,
   'bar-chart-3': <BarChart3 />,
 }
@@ -289,53 +289,6 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
             </div>
           </motion.div>
 
-          {/* Leaders deep dive */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <h3 className="text-lg font-black text-white mb-4 flex items-center gap-2">
-              <ExternalLink size={16} style={{ color: trend.color }} />
-              Referências Globais
-            </h3>
-            <div className="space-y-4">
-              {trend.leaders.map((leader, i) => (
-                <motion.div
-                  key={leader.name}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.35 + i * 0.08 }}
-                  className="group/leader p-5 rounded-2xl border transition-all duration-300 hover:border-opacity-40"
-                  style={{
-                    background: `linear-gradient(135deg, ${hexToRgba(trend.color, 0.04)}, transparent)`,
-                    borderColor: hexToRgba(trend.color, 0.1),
-                  }}
-                >
-                  <div className="flex items-start justify-between gap-4 mb-3">
-                    <div className="flex items-center gap-3">
-                      <div
-                        className="w-10 h-10 rounded-xl flex items-center justify-center text-xs font-black text-white"
-                        style={{ background: hexToRgba(trend.color, 0.15), border: `1px solid ${hexToRgba(trend.color, 0.25)}` }}
-                      >
-                        {leader.name.slice(0, 2)}
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-bold text-white">{leader.name}</h4>
-                        <p className="text-[10px] font-bold uppercase tracking-wider" style={{ color: trend.accent }}>
-                          {leader.highlight}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <p className="text-sm text-foursys-text-muted leading-relaxed">
-                    {leader.approach}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
           {/* Foursys position */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -431,12 +384,6 @@ export function SectionInnovation() {
               redefinindo o mercado
             </span>
           </h2>
-
-          <p className="text-foursys-text-muted max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-            Baseado em pesquisa das TOP 20 consultorias globais de tecnologia e inovação.
-            Clique em cada tendência para explorar como os líderes mundiais estão abordando
-            e como a Foursys se posiciona.
-          </p>
 
           <div className="mt-6 flex justify-center">
             <div className="h-px w-48 bg-gradient-to-r from-transparent via-foursys-primary/40 to-transparent" />
