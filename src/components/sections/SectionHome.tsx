@@ -9,11 +9,11 @@ import { heroStats } from '../../data/kpis'
 // ─── Dados ────────────────────────────────────────────────────────────────────
 
 const flagshipOffers = [
-  'AI-Augmented Squad',
+  'AI Squad',
   'Modernização de Legado',
-  'IA First',
+  'AI First',
   'FourBlox',
-  'Quality IA',
+  'Quality AI',
 ]
 
 const allianceLogos: { id: PartnerId; label: string }[] = [
