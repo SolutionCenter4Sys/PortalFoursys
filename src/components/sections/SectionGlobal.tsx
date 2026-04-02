@@ -83,7 +83,7 @@ const regions: Region[] = [
   },
   {
     id: 'europa',
-    flag: '🇵🇹',
+    flag: '🇪🇺',
     region: 'Europa',
     count: '1 unidade',
     colorHex: '#8b5cf6',
@@ -107,8 +107,8 @@ const regions: Region[] = [
 const kpis = [
   { value: '+2K', label: 'Colaboradores', icon: 'users' },
   { value: '+500K', label: 'Projetos entregues', icon: 'rocket' },
-  { value: '25+', label: 'Anos de mercado', icon: 'calendar' },
-  { value: '7', label: 'Unidades globais', icon: 'building' },
+  { value: '26', label: 'Anos de mercado', icon: 'calendar' },
+  { value: '7', label: 'Cidades globais', icon: 'building' },
 ]
 
 

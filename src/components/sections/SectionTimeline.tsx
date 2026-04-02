@@ -51,7 +51,7 @@ export function SectionTimeline() {
             Nossa Trajetória
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-3">
-            De SP para o mundo em 25 anos
+            De SP para o mundo em 26 anos
           </h2>
           <p className="text-base md:text-lg text-foursys-text-muted max-w-2xl mx-auto leading-relaxed">
             A evolução de uma consultoria que transformou o setor financeiro — e não parou por aí.
@@ -271,7 +271,7 @@ export function SectionTimeline() {
         >
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-2">
             <div>
-              <p className="text-sm font-bold text-white">25 anos depois, a missão continua.</p>
+              <p className="text-sm font-bold text-white">26 anos depois, a missão continua.</p>
               <p className="text-xs text-foursys-text-dim mt-0.5">
                 Conheça as empresas que confiam na Foursys para transformar seus negócios.
               </p>
