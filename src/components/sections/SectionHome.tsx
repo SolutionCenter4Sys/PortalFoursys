@@ -4,7 +4,6 @@ import { useApp } from '../../context/AppContext'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { CertificationBadge } from '../ui/CertificationBadge'
 import { PartnerLogo, type PartnerId } from '../ui/PartnerLogos'
-import { clients } from '../../data/clients'
 import { heroStats } from '../../data/kpis'
 
 // ─── Dados ────────────────────────────────────────────────────────────────────
@@ -177,18 +176,18 @@ function getPainStatement(sector: string | null, role: string | null): string | 
 }
 
 export function SectionHome() {
-  const { navigate, setClient, state } = useApp()
+  const { navigate, state } = useApp()
 
   const kpi1 = useCountUp(heroStats.years,      1400)
   const kpi2 = useCountUp(500,                  1800)
-  const kpi3 = useCountUp(2000,                 1600)
+  const kpi3 = useCountUp(7,                    1600)
 
   const painStatement = getPainStatement(state.sessionProfile?.sector ?? null, state.sessionProfile?.role ?? null)
 
   const kpis = [
     { ref: kpi1, suffix: ' anos',  label: 'de história e entrega' },
     { ref: kpi2, suffix: 'K+',     label: 'projetos entregues' },
-    { ref: kpi3, suffix: '+',      label: 'colaboradores em 3 continentes' },
+    { ref: kpi3, suffix: '',       label: 'cidades em 3 continentes' },
   ]
 
   return (
@@ -274,30 +273,6 @@ export function SectionHome() {
               ))}
             </div>
 
-            {/* Clientes disponíveis */}
-            {clients.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.7 }}
-                className="mt-1"
-              >
-                <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-2">
-                  Apresentação por cliente
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {clients.map(c => (
-                    <button
-                      key={c.id}
-                      onClick={() => setClient(c.id)}
-                      className="text-xs px-3 py-1.5 rounded-lg border border-white/15 text-foursys-text-muted hover:border-foursys-primary/50 hover:text-foursys-primary transition-all duration-200"
-                    >
-                      {c.name}
-                    </button>
-                  ))}
-                </div>
-              </motion.div>
-            )}
           </motion.div>
 
           {/* ── Coluna direita: Ofertas Flagship ── */}
@@ -340,7 +315,7 @@ export function SectionHome() {
               Modelos de Entrega
             </div>
             <div className="text-xs md:text-sm text-foursys-text-muted leading-relaxed">
-              Squads · Projetos · Alocação · AMS · AI-Augmented · Produtos
+              Squads · Projetos · Alocação · AMS · Produtos
             </div>
           </div>
 
@@ -350,7 +325,7 @@ export function SectionHome() {
               Certificações
             </div>
             <div className="flex items-center gap-3 flex-wrap">
-              {['ISO 9001', 'ISO 27001', 'ISO 27701', 'ISO 14001'].map(cert => (
+              {['ISO 9001', 'ISO 27001', 'ISO 27701', 'ISO 14001', 'SAFe'].map(cert => (
                 <CertificationBadge key={cert} label={cert} size="sm" />
               ))}
             </div>
