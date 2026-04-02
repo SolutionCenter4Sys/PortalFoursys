@@ -156,6 +156,7 @@ export type AppSection =
   | 'innovation'
   // Provas
   | 'cases'
+  | 'testimonials'
   | 'awards'
   | 'clients-showcase'
   | 'capabilities'

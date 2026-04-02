@@ -13,6 +13,7 @@ const SectionDelivery = lazy(() => import('./sections/SectionDelivery').then(m =
 const SectionAlliances = lazy(() => import('./sections/SectionAlliances').then(m => ({ default: m.SectionAlliances })))
 const SectionInnovation = lazy(() => import('./sections/SectionInnovation').then(m => ({ default: m.SectionInnovation })))
 const SectionCases = lazy(() => import('./sections/SectionCases').then(m => ({ default: m.SectionCases })))
+const SectionTestimonials = lazy(() => import('./sections/SectionTestimonials').then(m => ({ default: m.SectionTestimonials })))
 const SectionAwards = lazy(() => import('./sections/SectionAwards').then(m => ({ default: m.SectionAwards })))
 const SectionClients = lazy(() => import('./sections/SectionClients').then(m => ({ default: m.SectionClients })))
 const SectionCapabilities = lazy(() => import('./sections/SectionCapabilities').then(m => ({ default: m.SectionCapabilities })))
@@ -61,6 +62,7 @@ export function SectionRenderer() {
 
         {/* ── Provas ── */}
         {section === 'cases'              && <SectionCases key="cases" />}
+        {section === 'testimonials'       && <SectionTestimonials key="testimonials" />}
         {section === 'awards'             && <SectionAwards key="awards" />}
         {section === 'clients-showcase'   && <SectionClients key="clients-showcase" />}
         {section === 'capabilities'       && <SectionCapabilities key="capabilities" />}

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, Quote, Shield, Award, CheckCircle2 } from 'lucide-react'
+import { ArrowRight, Quote, Shield, CheckCircle2 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { cases } from '../../data/cases'
 import type { CaseStudy } from '../../types'
@@ -114,40 +114,11 @@ function CaseFullCard({ c, index }: { c: CaseStudy; index: number }) {
   )
 }
 
-function TestimonialCard({ testimonial, index }: { testimonial: { quote: string; author: string; role: string; sector: string }; index: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.4 + index * 0.1 }}
-      className="p-5 rounded-xl bg-foursys-surface/30 border border-white/[0.08]"
-    >
-      <p className="text-sm text-foursys-text-muted italic leading-relaxed mb-4">
-        &ldquo;{testimonial.quote}&rdquo;
-      </p>
-      <div className="flex items-center gap-3">
-        <div className="w-9 h-9 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 flex items-center justify-center text-xs font-bold text-foursys-primary">
-          {testimonial.author.charAt(0)}
-        </div>
-        <div>
-          <div className="text-xs font-bold text-white">{testimonial.author}</div>
-          <div className="text-[10px] text-foursys-text-dim">{testimonial.role} · {testimonial.sector}</div>
-        </div>
-      </div>
-    </motion.div>
-  )
-}
-
 export function SectionCases() {
   const [filter, setFilter] = useState('Todos')
 
   const sectors = ['Todos', ...Array.from(new Set(cases.map(c => c.sector)))]
   const filtered = filter === 'Todos' ? cases : cases.filter(c => c.sector === filter)
-
-  const testimonials = cases
-    .filter(c => c.testimonial)
-    .slice(0, 3)
-    .map(c => ({ ...c.testimonial!, sector: c.sector }))
 
   return (
     <SectionWrapper>
@@ -231,27 +202,6 @@ export function SectionCases() {
               <span className="text-[10px] font-semibold text-foursys-text-dim uppercase tracking-wider">{cert}</span>
             </div>
           ))}
-        </motion.div>
-
-        {/* Testimonials */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="mt-12 md:mt-16"
-        >
-          <div className="flex items-center gap-2 mb-2">
-            <Award size={16} className="text-foursys-primary" />
-            <p className="text-[10px] font-bold uppercase tracking-wider text-foursys-text-dim">O que dizem</p>
-          </div>
-          <h3 className="text-lg md:text-2xl font-black text-white mb-6">
-            Clientes que recomendam
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {testimonials.map((t, i) => (
-              <TestimonialCard key={i} testimonial={t} index={i} />
-            ))}
-          </div>
         </motion.div>
 
         {/* CTA - Diagnóstico */}

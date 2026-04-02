@@ -86,6 +86,13 @@ export const navigationItems: NavigationItem[] = [
     description: 'Resultados mensuráveis em Saúde, Financeiro e Seguros',
   },
   {
+    id: 'testimonials',
+    label: 'Depoimentos',
+    icon: 'message-circle',
+    category: 'Provas',
+    description: 'O que nossos clientes dizem sobre a parceria com a Foursys',
+  },
+  {
     id: 'awards',
     label: 'Premiações',
     icon: 'award',
