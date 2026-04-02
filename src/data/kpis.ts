@@ -50,7 +50,7 @@ export const kpis: KPI[] = [
 
 export const timeline: TimelineItem[] = [
   {
-    year: '1999',
+    year: '2000',
     title: 'Nasce a Foursys em São Paulo',
     description: 'Consultoria focada em sistemas críticos para o mercado financeiro — onde erro não é opção.',
     icon: 'rocket',

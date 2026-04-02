@@ -54,7 +54,7 @@ export function SectionTimeline() {
             De SP para o mundo em 26 anos
           </h2>
           <p className="text-base md:text-lg text-foursys-text-muted max-w-2xl mx-auto leading-relaxed">
-            A evolução de uma consultoria que transformou o setor financeiro — e não parou por aí.
+            A evolução de uma consultoria que transformou os nossos clientes — e não parou por aí.
           </p>
         </motion.div>
 
