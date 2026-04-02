@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Clock, BarChart2, MapPin, Copy, CheckCheck, ChevronRight, Star, History, Printer } from 'lucide-react'
+import { X, Clock, BarChart2, MapPin, Copy, CheckCheck, ChevronRight, Star, History, FileDown } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { DynIcon } from '../../utils/iconMap'
 import { getTrailById, trails } from '../../data/trails'
@@ -29,7 +29,7 @@ function formatShort(seconds: number): string {
 // ─── Componente ──────────────────────────────────────────────────────────────
 
 export function SessionPanel() {
-  const { state, toggleMetricsPanel, getSectionLabel, getSectionIcon, navigate, activeNavigationItems } = useApp()
+  const { state, toggleMetricsPanel, getSectionLabel, getSectionIcon, navigate, activeNavigationItems, toggleExportModal } = useApp()
   const { save } = useSessionHistory()
   const [elapsed, setElapsed] = useState(0)
   const [copied, setCopied] = useState(false)
@@ -379,12 +379,12 @@ export function SessionPanel() {
                   }
                 </button>
                 <button
-                  onClick={() => window.print()}
+                  onClick={() => { toggleMetricsPanel(); toggleExportModal() }}
                   className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.05] border border-white/[0.08] text-foursys-text-muted hover:text-foursys-text hover:bg-white/[0.08] transition-all text-xs font-medium"
-                  aria-label="Imprimir apresentação"
+                  aria-label="Exportar para PDF"
                 >
-                  <Printer size={14} />
-                  Imprimir / PDF
+                  <FileDown size={14} />
+                  Exportar PDF
                 </button>
               </div>
             </div>

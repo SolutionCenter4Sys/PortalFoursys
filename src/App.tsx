@@ -12,6 +12,7 @@ import { useKeyboard } from './hooks/useKeyboard'
 import { useUrlSync } from './hooks/useUrlSync'
 import { useSwipe } from './hooks/useSwipe'
 import { SectionOverview } from './components/navigation/SectionOverview'
+import { ExportPdfModal } from './components/export/ExportPdfModal'
 import type { AppSection } from './types'
 
 function AppInner() {
@@ -145,6 +146,7 @@ function AppInner() {
       )}
 
       <SectionOverview isOpen={state.isOverviewOpen} onClose={toggleOverview} />
+      <ExportPdfModal />
     </div>
   )
 }

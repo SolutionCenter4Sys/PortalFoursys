@@ -255,6 +255,7 @@ export interface AppState {
   sessionProfile: SessionProfile | null
   isWizardOpen: boolean
   isOverviewOpen: boolean
+  isExportModalOpen: boolean
 }
 
 export type AppAction =
@@ -273,3 +274,4 @@ export type AppAction =
   | { type: 'SET_PROFILE'; profile: SessionProfile }
   | { type: 'CLOSE_WIZARD' }
   | { type: 'TOGGLE_OVERVIEW' }
+  | { type: 'TOGGLE_EXPORT_MODAL' }
