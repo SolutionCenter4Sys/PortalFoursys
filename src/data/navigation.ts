@@ -46,7 +46,7 @@ export const navigationItems: NavigationItem[] = [
     label: 'Principais Ofertas',
     icon: 'rocket',
     category: 'Ofertas e Serviços',
-    description: 'AI-Augmented Squad, Modernização, IA First, FourBlox e Quality IA',
+    description: 'AI Squad, Modernização, AI First, FourBlox e Quality AI',
   },
   {
     id: 'services',

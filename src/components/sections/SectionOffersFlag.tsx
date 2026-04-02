@@ -58,7 +58,7 @@ const flagshipOffers = [
   {
     id: 'ia-first',
     badge: 'Destaque',
-    title: 'IA First',
+    title: 'AI First',
     tagline: 'Do piloto ao resultado mensurável em 4–6 semanas.',
     description:
       'Em 4–6 semanas: 2–3 casos priorizados, 1 protótipo e business case com ROI estimado. Para quem quer sair de experimentos de IA e provar valor real.',
@@ -104,7 +104,7 @@ const flagshipOffers = [
   {
     id: 'quality-ia',
     badge: 'Destaque',
-    title: 'Quality IA',
+    title: 'Quality AI',
     tagline: 'QA, certificação e automação com IA — menos falhas, mais previsibilidade.',
     description:
       'Framework de qualidade com IA integrada para geração automática de testes, análise de risco e cobertura inteligente. Homologado por grandes instituições financeiras.',
