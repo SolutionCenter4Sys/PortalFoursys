@@ -121,6 +121,16 @@ export interface CaseStudy {
   metric?: { value: string; label: string }
   color: string
   testimonial?: { quote: string; author: string; role: string }
+  image?: string
+  overview?: string
+  detail?: {
+    context: string
+    delivery: string
+    technicalDetails: string
+    challengesOvercome: string
+    dimensions?: { features?: string; months?: string; hours?: string }
+    keyMetrics?: { value: string; label: string }[]
+  }
 }
 
 export interface Capability {

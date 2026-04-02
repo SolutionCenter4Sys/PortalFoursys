@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { ArrowRight, Quote, Shield, CheckCircle2 } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowRight, X, Quote, Shield, CheckCircle2, ChevronRight, Clock, Layers, Target, Wrench, Trophy } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { cases } from '../../data/cases'
 import type { CaseStudy } from '../../types'
@@ -20,109 +20,329 @@ const SECTOR_COLORS: Record<string, string> = {
   'Indústria':  'bg-indigo-500/15 text-indigo-400 border-indigo-500/25',
 }
 
-const TYPE_COLORS: Record<string, string> = {
-  'Modernização de Legado':    'text-emerald-400',
-  'AI-Augmented Squad':        'text-blue-400',
-  'IA First':                  'text-violet-400',
-  'Engenharia de Dados':       'text-amber-400',
-  'Dados & Inteligência':      'text-amber-400',
-  'Cibersegurança & Zero Trust': 'text-red-400',
-  'Agilidade & Org Design':    'text-indigo-400',
+const TYPE_BADGE: Record<string, string> = {
+  'Modernização de Legado':       'bg-foursys-primary text-white',
+  'AI-Augmented Squad':           'bg-blue-500 text-white',
+  'IA First':                     'bg-violet-500 text-white',
+  'Engenharia de Dados':          'bg-amber-500 text-white',
+  'Dados & Inteligência':         'bg-amber-500 text-white',
+  'Cibersegurança & Zero Trust':  'bg-red-500 text-white',
+  'Agilidade & Org Design':       'bg-indigo-500 text-white',
+  'Automação de Processos':       'bg-orange-500 text-white',
+  'Squad Gerenciada':             'bg-sky-500 text-white',
 }
 
-function CaseFullCard({ c, index }: { c: CaseStudy; index: number }) {
+function CaseCard({ c, index, onOpen }: { c: CaseStudy; index: number; onOpen: () => void }) {
   const sectorStyle = SECTOR_COLORS[c.sector] ?? 'bg-white/10 text-white/70 border-white/20'
-  const typeColor = TYPE_COLORS[c.type] ?? 'text-foursys-primary'
+  const typeBadge = TYPE_BADGE[c.type] ?? 'bg-foursys-primary text-white'
 
   return (
     <motion.article
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.1 + index * 0.08, duration: 0.5 }}
-      className="rounded-2xl border border-white/[0.08] bg-foursys-surface/20 overflow-hidden hover:border-white/[0.14] transition-all duration-300"
+      transition={{ delay: 0.08 + index * 0.06, duration: 0.5 }}
+      onClick={onOpen}
+      className="group cursor-pointer rounded-2xl border border-white/[0.08] bg-foursys-surface/20 overflow-hidden hover:border-white/[0.15] transition-all duration-300 hover:shadow-[0_8px_40px_rgba(255,102,0,0.08)]"
     >
-      {/* Header */}
-      <div className="p-6 md:p-8 pb-0">
-        <div className="flex items-start justify-between gap-4 mb-4">
-          <div>
-            <p className="text-xs text-foursys-text-dim mb-2">
-              Caso {c.sector} — <span className="text-foursys-text-muted">{c.client}</span>
-            </p>
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ${sectorStyle}`}>
-                {c.sector}
-              </span>
-              <span className={`text-xs font-semibold ${typeColor}`}>
-                {c.type}
-              </span>
-            </div>
+      {/* Image area */}
+      <div className="relative h-48 md:h-56 overflow-hidden">
+        {c.image ? (
+          <img
+            src={c.image}
+            alt={c.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-foursys-dark-3 to-foursys-surface flex items-center justify-center">
+            <Trophy size={40} className="text-foursys-primary/20" />
           </div>
-          {c.metric && (
-            <div className="text-right flex-shrink-0">
-              <div className={`text-2xl md:text-3xl font-black ${typeColor}`}>{c.metric.value}</div>
-              <div className="text-[10px] text-foursys-text-dim max-w-[140px]">{c.metric.label}</div>
-            </div>
-          )}
-        </div>
-      </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-      {/* Content */}
-      <div className="px-6 md:px-8 pb-6 md:pb-8 space-y-5">
-        <div>
-          <p className="text-sm text-foursys-text-muted leading-relaxed">
-            <span className="font-bold text-white">Desafio:</span>{' '}
-            {c.challenge}
-          </p>
+        {/* Badges */}
+        <div className="absolute top-4 left-4 flex items-center gap-2">
+          <span className={`inline-flex px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider border ${sectorStyle}`}>
+            {c.sector}
+          </span>
+          <span className={`inline-flex px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider ${typeBadge}`}>
+            {c.type}
+          </span>
         </div>
 
-        <div>
-          <p className="text-sm text-foursys-text-muted leading-relaxed">
-            <span className="font-bold text-white">Solução:</span>{' '}
-            {c.solution}
-          </p>
-        </div>
-
-        {/* Testimonial */}
-        {c.testimonial && (
-          <div className="p-5 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-            <div className="flex gap-3">
-              <Quote size={20} className="text-foursys-primary/50 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="text-sm text-foursys-text-muted italic leading-relaxed mb-3">
-                  &ldquo;{c.testimonial.quote}&rdquo;
-                </p>
-                <p className="text-xs">
-                  <span className="text-foursys-text-dim">—</span>{' '}
-                  <span className="font-semibold text-white">{c.testimonial.author}</span>
-                  <span className="text-foursys-text-dim"> — {c.testimonial.role}</span>
-                </p>
-              </div>
-            </div>
+        {/* Metric overlay */}
+        {c.metric && (
+          <div className="absolute top-4 right-4 text-right">
+            <div className="text-xl font-black text-white drop-shadow-lg">{c.metric.value}</div>
+            <div className="text-[9px] text-white/70 max-w-[120px]">{c.metric.label}</div>
           </div>
         )}
 
-        {/* CTA */}
-        <button
-          type="button"
-          className="flex items-center gap-2 text-xs font-semibold text-foursys-primary hover:text-foursys-cyan transition-colors group/cta"
-        >
-          Tenho um desafio parecido
-          <ArrowRight size={14} className="group-hover/cta:translate-x-1 transition-transform" />
-        </button>
+        {/* Title at bottom of image */}
+        <div className="absolute bottom-0 left-0 right-0 p-5">
+          <h3 className="text-base md:text-lg font-black text-white leading-snug group-hover:text-foursys-primary transition-colors duration-300">
+            {c.title}
+          </h3>
+          <p className="text-[11px] text-white/50 mt-1">{c.client}</p>
+        </div>
+      </div>
+
+      {/* Content area */}
+      <div className="p-5">
+        <p className="text-sm text-foursys-text-muted leading-relaxed line-clamp-3">
+          {c.overview ?? c.challenge}
+        </p>
+
+        <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/[0.06]">
+          <div className="flex flex-wrap gap-1.5">
+            {c.stack.slice(0, 3).map(tech => (
+              <span key={tech} className="text-[9px] px-2 py-0.5 rounded-full bg-white/[0.06] text-foursys-text-dim border border-white/[0.08]">
+                {tech}
+              </span>
+            ))}
+            {c.stack.length > 3 && (
+              <span className="text-[9px] px-2 py-0.5 rounded-full bg-white/[0.06] text-foursys-text-dim">
+                +{c.stack.length - 3}
+              </span>
+            )}
+          </div>
+          <span className="flex items-center gap-1 text-[11px] font-semibold text-foursys-primary group-hover:gap-2 transition-all">
+            Ver case <ChevronRight size={12} />
+          </span>
+        </div>
       </div>
     </motion.article>
   )
 }
 
+function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) {
+  return (
+    <>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm"
+      />
+      <motion.div
+        initial={{ opacity: 0, y: 40, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 40, scale: 0.97 }}
+        transition={{ type: 'spring', damping: 28, stiffness: 300 }}
+        className="fixed inset-4 sm:inset-8 md:inset-y-8 md:left-[10%] md:right-[10%] z-[61] flex flex-col bg-foursys-dark border border-white/[0.08] rounded-2xl shadow-2xl overflow-hidden"
+      >
+        {/* Header image */}
+        <div className="relative h-44 md:h-56 flex-shrink-0 overflow-hidden">
+          {c.image ? (
+            <img src={c.image} alt={c.title} className="w-full h-full object-cover" />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-foursys-dark-3 to-foursys-surface" />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-foursys-dark via-foursys-dark/60 to-transparent" />
+
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-2 rounded-full bg-black/40 hover:bg-black/60 text-white transition-colors"
+            aria-label="Fechar"
+          >
+            <X size={18} />
+          </button>
+
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+            <div className="flex items-center gap-2 mb-2 flex-wrap">
+              <span className={`px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider border ${SECTOR_COLORS[c.sector] ?? 'bg-white/10 text-white/70 border-white/20'}`}>
+                {c.sector}
+              </span>
+              <span className={`px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider ${TYPE_BADGE[c.type] ?? 'bg-foursys-primary text-white'}`}>
+                {c.type}
+              </span>
+            </div>
+            <h2 className="text-xl md:text-3xl font-black text-white">{c.title}</h2>
+            <p className="text-sm text-white/60 mt-1">{c.client}</p>
+          </div>
+        </div>
+
+        {/* Scrollable content */}
+        <div className="flex-1 overflow-y-auto custom-scrollbar">
+          <div className="p-6 md:p-8 space-y-8">
+
+            {/* Key metrics */}
+            {(c.detail?.keyMetrics ?? (c.metric ? [c.metric] : [])).length > 0 && (
+              <div className="grid grid-cols-3 gap-3">
+                {(c.detail?.keyMetrics ?? (c.metric ? [c.metric] : [])).map((m, i) => (
+                  <div key={i} className="p-4 rounded-xl bg-foursys-surface/40 border border-white/[0.08] text-center">
+                    <div className="text-lg md:text-2xl font-black text-foursys-primary">{m.value}</div>
+                    <div className="text-[9px] text-foursys-text-dim mt-1 uppercase tracking-wider">{m.label}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Challenge & Solution */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="p-5 rounded-xl bg-red-500/5 border border-red-500/10">
+                <div className="flex items-center gap-2 mb-3">
+                  <Target size={14} className="text-red-400" />
+                  <span className="text-xs font-bold text-red-400 uppercase tracking-wider">Desafio</span>
+                </div>
+                <p className="text-sm text-foursys-text-muted leading-relaxed">{c.challenge}</p>
+              </div>
+              <div className="p-5 rounded-xl bg-emerald-500/5 border border-emerald-500/10">
+                <div className="flex items-center gap-2 mb-3">
+                  <Wrench size={14} className="text-emerald-400" />
+                  <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">Solução</span>
+                </div>
+                <p className="text-sm text-foursys-text-muted leading-relaxed">{c.solution}</p>
+              </div>
+            </div>
+
+            {/* Detail sections */}
+            {c.detail && (
+              <div className="space-y-5">
+                <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Layers size={14} className="text-foursys-primary" />
+                    <span className="text-xs font-bold text-foursys-primary uppercase tracking-wider">Contexto</span>
+                  </div>
+                  <p className="text-sm text-foursys-text-muted leading-relaxed">{c.detail.context}</p>
+                </div>
+
+                <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                  <div className="flex items-center gap-2 mb-3">
+                    <CheckCircle2 size={14} className="text-emerald-400" />
+                    <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">Entrega</span>
+                  </div>
+                  <p className="text-sm text-foursys-text-muted leading-relaxed">{c.detail.delivery}</p>
+                </div>
+
+                <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Wrench size={14} className="text-sky-400" />
+                    <span className="text-xs font-bold text-sky-400 uppercase tracking-wider">Detalhes Técnicos</span>
+                  </div>
+                  <p className="text-sm text-foursys-text-muted leading-relaxed">{c.detail.technicalDetails}</p>
+                </div>
+
+                <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Shield size={14} className="text-amber-400" />
+                    <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">Desafios Superados</span>
+                  </div>
+                  <p className="text-sm text-foursys-text-muted leading-relaxed">{c.detail.challengesOvercome}</p>
+                </div>
+
+                {c.detail.dimensions && (
+                  <div className="flex flex-wrap gap-3">
+                    {c.detail.dimensions.features && (
+                      <div className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08]">
+                        <Layers size={12} className="text-foursys-primary" />
+                        <span className="text-[11px] text-foursys-text-dim">Features: <span className="text-white font-semibold">{c.detail.dimensions.features}</span></span>
+                      </div>
+                    )}
+                    {c.detail.dimensions.months && (
+                      <div className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08]">
+                        <Clock size={12} className="text-foursys-primary" />
+                        <span className="text-[11px] text-foursys-text-dim">Duração: <span className="text-white font-semibold">{c.detail.dimensions.months} meses</span></span>
+                      </div>
+                    )}
+                    {c.detail.dimensions.hours && (
+                      <div className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08]">
+                        <Clock size={12} className="text-foursys-primary" />
+                        <span className="text-[11px] text-foursys-text-dim">Horas: <span className="text-white font-semibold">{c.detail.dimensions.hours}h</span></span>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Results */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <Trophy size={14} className="text-foursys-primary" />
+                <span className="text-xs font-bold text-foursys-primary uppercase tracking-wider">Resultados</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                {c.results.map((r, i) => (
+                  <div key={i} className="flex items-start gap-2 p-3 rounded-lg bg-white/[0.03]">
+                    <CheckCircle2 size={14} className="text-foursys-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-foursys-text-muted">{r}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Stack */}
+            <div>
+              <span className="text-[10px] font-bold text-foursys-text-dim uppercase tracking-wider">Stack Tecnológica</span>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {c.stack.map(tech => (
+                  <span key={tech} className="text-xs px-3 py-1.5 rounded-lg bg-white/[0.06] text-foursys-text-muted border border-white/[0.08] font-medium">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Testimonial */}
+            {c.testimonial && (
+              <div className="p-6 rounded-xl bg-foursys-primary/5 border border-foursys-primary/15">
+                <div className="flex gap-3">
+                  <Quote size={20} className="text-foursys-primary/50 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm text-foursys-text-muted italic leading-relaxed mb-3">
+                      &ldquo;{c.testimonial.quote}&rdquo;
+                    </p>
+                    <p className="text-xs">
+                      <span className="font-semibold text-white">{c.testimonial.author}</span>
+                      <span className="text-foursys-text-dim"> — {c.testimonial.role}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Footer CTA */}
+        <div className="px-6 md:px-8 py-4 border-t border-white/[0.06] flex items-center justify-between">
+          <button
+            type="button"
+            onClick={onClose}
+            className="text-xs text-foursys-text-dim hover:text-foursys-text transition-colors"
+          >
+            Voltar aos cases
+          </button>
+          <button
+            type="button"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-foursys-primary/15 border border-foursys-primary/30 hover:bg-foursys-primary/25 text-foursys-primary text-sm font-semibold transition-all"
+          >
+            Tenho um desafio parecido
+            <ArrowRight size={14} />
+          </button>
+        </div>
+      </motion.div>
+    </>
+  )
+}
+
 export function SectionCases() {
   const [filter, setFilter] = useState('Todos')
+  const [selectedCase, setSelectedCase] = useState<CaseStudy | null>(null)
 
   const sectors = ['Todos', ...Array.from(new Set(cases.map(c => c.sector)))]
-  const filtered = filter === 'Todos' ? cases : cases.filter(c => c.sector === filter)
+  const types = ['Todos', ...Array.from(new Set(cases.map(c => c.type)))]
+  const [typeFilter, setTypeFilter] = useState('Todos')
+
+  const filtered = cases.filter(c => {
+    if (filter !== 'Todos' && c.sector !== filter) return false
+    if (typeFilter !== 'Todos' && c.type !== typeFilter) return false
+    return true
+  })
 
   return (
     <SectionWrapper>
-      <div className="px-4 md:px-8 py-6 md:py-12 max-w-5xl mx-auto">
+      <div className="px-4 md:px-8 py-6 md:py-12 max-w-6xl mx-auto">
 
         {/* Hero */}
         <motion.div
@@ -142,7 +362,6 @@ export function SectionCases() {
             Não contamos histórias — mostramos números.
           </p>
 
-          {/* Stats bar */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8">
             {HERO_STATS.map((stat, i) => (
               <motion.div
@@ -159,37 +378,62 @@ export function SectionCases() {
           </div>
         </motion.div>
 
-        {/* Sector filters */}
+        {/* Filters */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="flex flex-wrap gap-2 mb-8"
+          className="space-y-3 mb-8"
         >
-          {sectors.map(s => (
-            <button
-              key={s}
-              type="button"
-              onClick={() => setFilter(s)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold border transition-all duration-200 ${
-                filter === s
-                  ? 'bg-foursys-primary/20 border-foursys-primary/40 text-foursys-primary'
-                  : 'border-white/[0.1] text-foursys-text-muted hover:border-white/[0.2] hover:text-white'
-              }`}
-            >
-              {s}
-            </button>
-          ))}
+          <div className="flex flex-wrap gap-2">
+            {sectors.map(s => (
+              <button
+                key={s}
+                type="button"
+                onClick={() => setFilter(s)}
+                className={`px-4 py-2 rounded-full text-xs font-semibold border transition-all duration-200 ${
+                  filter === s
+                    ? 'bg-foursys-primary/20 border-foursys-primary/40 text-foursys-primary'
+                    : 'border-white/[0.1] text-foursys-text-muted hover:border-white/[0.2] hover:text-white'
+                }`}
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {types.map(t => (
+              <button
+                key={t}
+                type="button"
+                onClick={() => setTypeFilter(t)}
+                className={`px-3 py-1.5 rounded-full text-[10px] font-semibold border transition-all duration-200 ${
+                  typeFilter === t
+                    ? 'bg-white/10 border-white/25 text-white'
+                    : 'border-white/[0.06] text-foursys-text-dim hover:border-white/[0.15] hover:text-foursys-text-muted'
+                }`}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
         </motion.div>
 
-        {/* Cases list */}
-        <div className="space-y-5">
+        {/* Cases grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {filtered.map((c, i) => (
-            <CaseFullCard key={c.id} c={c} index={i} />
+            <CaseCard key={c.id} c={c} index={i} onOpen={() => setSelectedCase(c)} />
           ))}
         </div>
 
-        {/* Certifications banner */}
+        {/* Empty state */}
+        {filtered.length === 0 && (
+          <div className="text-center py-16">
+            <p className="text-sm text-foursys-text-dim">Nenhum case encontrado com os filtros selecionados.</p>
+          </div>
+        )}
+
+        {/* Certifications */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -204,55 +448,7 @@ export function SectionCases() {
           ))}
         </motion.div>
 
-        {/* CTA - Diagnóstico */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="mt-12 md:mt-16 p-6 md:p-10 rounded-2xl bg-gradient-to-br from-foursys-primary/10 via-foursys-surface/50 to-transparent border border-foursys-primary/20"
-        >
-          <div className="max-w-lg mx-auto text-center">
-            <h3 className="text-lg md:text-2xl font-black text-white mb-2">
-              Tem um desafio parecido?
-            </h3>
-            <p className="text-sm text-foursys-text-muted mb-6">
-              45 minutos com um especialista. Sem compromisso.
-            </p>
-
-            <div className="space-y-3 mb-6">
-              <div className="h-10 rounded-lg bg-white/[0.06] border border-white/[0.12] flex items-center px-3">
-                <span className="text-xs text-foursys-text-dim">Seu nome</span>
-              </div>
-              <div className="h-10 rounded-lg bg-white/[0.06] border border-white/[0.12] flex items-center px-3">
-                <span className="text-xs text-foursys-text-dim">E-mail corporativo</span>
-              </div>
-              <div className="h-10 rounded-lg bg-white/[0.06] border border-white/[0.12] flex items-center px-3">
-                <span className="text-xs text-foursys-text-dim">Setor da empresa</span>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              className="w-full h-11 rounded-lg bg-foursys-primary text-white text-sm font-bold hover:bg-foursys-primary/80 transition-colors"
-            >
-              Quero meu diagnóstico gratuito
-            </button>
-
-            <div className="flex items-center justify-center gap-4 mt-4">
-              {[
-                { icon: <Shield size={10} />, label: 'Dados protegidos — LGPD' },
-                { icon: <CheckCircle2 size={10} />, label: 'Resposta em até 24h' },
-                { icon: <CheckCircle2 size={10} />, label: 'Sem compromisso' },
-              ].map(item => (
-                <span key={item.label} className="flex items-center gap-1 text-[9px] text-foursys-text-dim">
-                  {item.icon} {item.label}
-                </span>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Final CTA */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -273,6 +469,13 @@ export function SectionCases() {
         </motion.div>
 
       </div>
+
+      {/* Detail modal */}
+      <AnimatePresence>
+        {selectedCase && (
+          <CaseDetailModal c={selectedCase} onClose={() => setSelectedCase(null)} />
+        )}
+      </AnimatePresence>
     </SectionWrapper>
   )
 }
