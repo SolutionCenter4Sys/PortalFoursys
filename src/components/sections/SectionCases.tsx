@@ -30,6 +30,14 @@ const TYPE_BADGE: Record<string, string> = {
   'Agilidade & Org Design':       'bg-indigo-500 text-white',
   'Automação de Processos':       'bg-orange-500 text-white',
   'Squad Gerenciada':             'bg-sky-500 text-white',
+  'Plataforma PEGA':              'bg-teal-500 text-white',
+  'Consultoria de Arquitetura':   'bg-slate-500 text-white',
+  'Produto Digital':              'bg-emerald-500 text-white',
+  'Open Finance':                 'bg-green-500 text-white',
+  'Inovação':                     'bg-yellow-500 text-black',
+  'Meios de Pagamento':           'bg-cyan-500 text-white',
+  'DevOps & Cloud':               'bg-lime-500 text-black',
+  'UX & Design':                  'bg-rose-500 text-white',
 }
 
 function CaseCard({ c, index, onOpen }: { c: CaseStudy; index: number; onOpen: () => void }) {
