@@ -11,14 +11,14 @@ export const heroStats = {
 
 export const kpis: KPI[] = [
   {
-    value: 25,
-    suffix: '+',
+    value: 26,
+    suffix: '',
     label: 'Anos de Mercado',
-    description: 'Transformando negócios desde 1999'
+    description: 'Transformando negócios desde 2000'
   },
   {
-    value: 800,
-    suffix: '+',
+    value: 500,
+    suffix: 'K+',
     label: 'Projetos Entregues',
     description: 'Em múltiplos setores e países'
   },

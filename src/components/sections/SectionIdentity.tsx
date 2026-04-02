@@ -67,7 +67,7 @@ export function SectionIdentity() {
             A Foursys em números
           </h2>
           <p className="text-lg text-foursys-text-muted max-w-2xl mx-auto">
-            Mais de duas décadas transformando o setor financeiro com tecnologia, metodologia e resultados comprovados.
+            Mais de duas décadas transformando negócios com tecnologia, metodologia e resultados comprovados.
           </p>
         </motion.div>
 
