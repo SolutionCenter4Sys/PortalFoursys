@@ -9,6 +9,8 @@ function KPICard({ kpi, delay }: { kpi: typeof kpis[0]; delay: number }) {
   const [started, setStarted] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
+  const hasDecimal = kpi.value % 1 !== 0
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -19,7 +21,8 @@ function KPICard({ kpi, delay }: { kpi: typeof kpis[0]; delay: number }) {
           const animate = (now: number) => {
             const progress = Math.min((now - start) / duration, 1)
             const eased = 1 - Math.pow(1 - progress, 3)
-            setCount(Math.round(kpi.value * eased))
+            const raw = kpi.value * eased
+            setCount(hasDecimal ? Math.round(raw * 10) / 10 : Math.round(raw))
             if (progress < 1) requestAnimationFrame(animate)
           }
           requestAnimationFrame(animate)
@@ -29,7 +32,7 @@ function KPICard({ kpi, delay }: { kpi: typeof kpis[0]; delay: number }) {
     )
     if (ref.current) observer.observe(ref.current)
     return () => observer.disconnect()
-  }, [kpi.value, started])
+  }, [kpi.value, started, hasDecimal])
 
   return (
     <motion.div
@@ -40,7 +43,7 @@ function KPICard({ kpi, delay }: { kpi: typeof kpis[0]; delay: number }) {
       className="flex flex-col items-center p-6 rounded-2xl bg-foursys-surface/60 border border-white/10 backdrop-blur-md hover:border-foursys-primary/30 transition-all duration-300 group"
     >
       <div className="text-3xl md:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-foursys-cyan to-foursys-primary mb-2">
-        {count.toLocaleString('pt-BR')}{kpi.suffix}
+        {hasDecimal ? count.toFixed(1).replace('.', ',') : count.toLocaleString('pt-BR')}{kpi.suffix}
       </div>
       <div className="text-base font-semibold text-foursys-text mb-1">{kpi.label}</div>
       <div className="text-xs text-foursys-text-dim text-center">{kpi.description}</div>

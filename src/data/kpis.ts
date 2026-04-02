@@ -3,7 +3,7 @@ import type { KPI, TimelineItem } from '../types'
 export const heroStats = {
   years: 26,
   projects: '500K+',
-  employees: '2000+',
+  cities: '7',
   turnover: '3,6%',
   sla: '99,9%',
   continents: 3,
@@ -29,16 +29,16 @@ export const kpis: KPI[] = [
     description: 'Incluindo os maiores do Brasil e exterior'
   },
   {
-    value: 12,
+    value: 7,
     suffix: '',
-    label: 'Países com Projetos',
-    description: 'Presença global em 3 continentes'
+    label: 'Cidades com Escritórios',
+    description: 'São Paulo, Barueri, Curitiba, Rio, Boca Raton, Lisboa e Inovabra'
   },
   {
-    value: 1200,
-    suffix: '+',
-    label: 'Profissionais',
-    description: 'Especialistas técnicos e de negócio'
+    value: 3.6,
+    suffix: '%',
+    label: 'Turnover',
+    description: 'Retenção 6x superior à média do mercado de TI'
   },
   {
     value: 98,
@@ -84,11 +84,11 @@ export const timeline: TimelineItem[] = [
   },
   {
     year: '2018',
-    title: 'Presença na Europa e 12 países',
-    description: 'Operação consolidada em Portugal e Espanha, atendendo projetos em 12 países simultaneamente.',
+    title: 'Presença na Europa e expansão global',
+    description: 'Operação consolidada em Portugal, com escritórios em 7 cidades e projetos internacionais em 3 continentes.',
     icon: 'globe',
     era: 'Expansão Global',
-    kpi: { value: '12', label: 'países ativos' },
+    kpi: { value: '7', label: 'cidades' },
   },
   {
     year: '2020',
