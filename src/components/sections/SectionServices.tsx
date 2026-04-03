@@ -749,23 +749,221 @@ const sec4sysPillars = [
   { label: 'Privacidade', icon: 'eye-off' },
 ]
 
-const fourbloxBlocks = [
-  { icon: 'lock', name: 'AuthBlock', desc: 'Autenticação completa (OAuth2, MFA, SSO) em 3 dias' },
-  { icon: 'bar-chart', name: 'DashBlock', desc: 'Dashboard analítico com gráficos e KPIs em 5 dias' },
-  { icon: 'bell', name: 'NotifyBlock', desc: 'Sistema de notificações multicanal (email, SMS, push) em 2 dias' },
-  { icon: 'credit-card', name: 'PayBlock', desc: 'Integração de pagamentos PIX/cartão em 5 dias' },
-  { icon: 'brain-circuit', name: 'AIBlock', desc: 'Copiloto IA com RAG e contexto de negócio em 7 dias' },
-  { icon: 'clipboard-list', name: 'FormBlock', desc: 'Engine de formulários dinâmicos e workflows em 4 dias' },
-  { icon: 'search', name: 'SearchBlock', desc: 'Busca semântica com vetores em qualquer base de dados' },
-  { icon: 'folder-open', name: 'DocBlock', desc: 'Gestão e assinatura digital de documentos em 5 dias' },
+/* ── FourBlox Deep Dive ──────────────────────────────────────────────────── */
+
+const fbProblems = [
+  'Sistemas que não conversam entre si',
+  'Planilhas paralelas fora de controle',
+  'Baixa adoção de ferramentas',
+  'Projetos que nunca terminam',
+  'Alto investimento sem retorno claro',
+  'Soluções genéricas que não atendem à realidade',
 ]
 
-const fourbloxPhases = [
-  { week: 'Semana 1', label: 'Discovery + Design', icon: 'ruler' },
-  { week: 'Semana 2', label: 'Blocos + Integração', icon: 'brick-wall' },
-  { week: 'Semana 3', label: 'Customização + Testes', icon: 'wrench' },
-  { week: 'Semana 4', label: 'Deploy + Handover', icon: 'rocket' },
+const fbSolutionSteps = [
+  'Diagnóstico estruturado',
+  'Desenho personalizado da solução',
+  'Configuração sob medida',
+  'Produção em até 30 dias',
+  'Evolução contínua baseada em dados',
 ]
+
+const fbHowItWorks = [
+  { n: '01', icon: 'search', title: 'Diagnóstico Profundo', desc: 'Mapeamento de dores, usuários, fluxos e necessidades reais.' },
+  { n: '02', icon: 'brain', title: 'Arquitetura da Solução', desc: 'Definição dos blocos (módulos) necessários para resolver o problema.' },
+  { n: '03', icon: 'settings', title: 'Configuração Personalizada', desc: 'Customização inteligente dentro da plataforma modular.' },
+  { n: '04', icon: 'rocket', title: 'Go Live em até 30 dias', desc: 'Entrega em produção com acompanhamento e ajustes finos.' },
+]
+
+const fbDifferentials = [
+  { icon: 'clock', title: 'Produção em 30 dias', desc: 'Sem projetos de 6 a 12 meses.' },
+  { icon: 'file-text', title: 'Modelo por Assinatura', desc: 'Previsibilidade financeira.' },
+  { icon: 'puzzle', title: 'Modularidade Inteligente', desc: 'Você ativa apenas o que gera valor.' },
+  { icon: 'users', title: 'UX Centrada no Usuário', desc: 'Adoção real, não imposição.' },
+  { icon: 'trending-up', title: 'Evolução Contínua', desc: 'A solução cresce com sua empresa.' },
+]
+
+const fbBenefits = [
+  { icon: 'bar-chart-2', label: 'Redução de retrabalho' },
+  { icon: 'zap', label: 'Aumento de eficiência operacional' },
+  { icon: 'eye', label: 'Melhor visibilidade gerencial' },
+  { icon: 'database', label: 'Dados estruturados para decisão' },
+  { icon: 'shield', label: 'Menor risco de investimento' },
+  { icon: 'target', label: 'Time-to-value acelerado' },
+]
+
+const fbSolutions = [
+  { cat: 'Gestão de Pessoas', items: ['Mapa de Alocação Inteligente', 'Performance & OKR Tracker', 'Banco de Talentos Estratégico'] },
+  { cat: 'Operações', items: ['Controle de Demandas & SLA', 'Workflow Personalizado', 'Checkin de Audiências', 'Gestão de Eventos'] },
+  { cat: 'Financeiro', items: ['Gestão de Orçamento por Área', 'Forecast Inteligente', 'Cartão de Crédito Consignado', 'Gestão Orçamentária'] },
+  { cat: 'Comercial', items: ['Pipeline & Performance Comercial', 'Gestão de Comissões', 'Prospecção e Retenção PMEs', 'CRM', 'SDR'] },
+  { cat: 'Projetos', items: ['Gestão de Portfólio de Projetos'] },
+  { cat: 'ESG', items: ['Monitor de Indicadores ESG'] },
+  { cat: 'Dados & Analytics', items: ['Data Hub Executivo'] },
+  { cat: 'Governança', items: ['Gestão de Guarda Compartilhada'] },
+]
+
+const fbKits = [
+  { title: 'Kit Eficiência Operacional', items: ['Controle de Demandas & SLA', 'Workflow Personalizado', 'Data Hub Executivo'] },
+  { title: 'Kit Gestão de Pessoas 360°', items: ['Mapa de Alocação Inteligente', 'Performance & OKR Tracker', 'Banco de Talentos Estratégico'] },
+  { title: 'Kit Performance Comercial', items: ['Forecast Inteligente', 'Pipeline & Performance Comercial', 'Gestão de Comissões'] },
+  { title: 'Kit Governança Executiva', items: ['Gestão de Portfólio de Projetos', 'Monitor de Indicadores ESG', 'Data Hub Executivo'] },
+]
+
+function FourBloxDeepDive() {
+  return (
+    <div className="space-y-7">
+      {/* Proposta de valor */}
+      <div className="p-5 rounded-xl bg-gradient-to-r from-emerald-500/15 to-transparent border border-emerald-500/25">
+        <p className="text-xs text-foursys-text-muted leading-relaxed">
+          <strong className="text-foursys-text">Proposta de Valor:</strong> Chega de projetos intermináveis. O FourBlox é uma plataforma modular de soluções por assinatura que entrega sua solução digital pronta em 30 dias — personalizada, modular e com evolução contínua.
+        </p>
+      </div>
+
+      {/* O Problema */}
+      <div>
+        <div className="text-center mb-3">
+          <span className="text-sm font-bold text-foursys-text">O </span>
+          <span className="text-sm font-bold text-orange-400">Problema</span>
+        </div>
+        <p className="text-[10px] text-foursys-text-dim text-center mb-3">A maioria das empresas enfrenta pelo menos um destes cenários:</p>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+          {fbProblems.map(p => (
+            <div key={p} className="p-3 rounded-xl bg-foursys-surface/50 border border-white/10 flex items-start gap-2">
+              <DynIcon name="alert-triangle" size={12} className="text-orange-400 shrink-0 mt-0.5" />
+              <span className="text-[10px] text-foursys-text-dim">{p}</span>
+            </div>
+          ))}
+        </div>
+        <p className="text-[10px] text-center mt-3">
+          <span className="font-bold text-foursys-text">O problema não é tecnologia.</span>{' '}
+          <span className="font-bold text-orange-400">É falta de personalização com método.</span>
+        </p>
+      </div>
+
+      {/* A Solução */}
+      <div>
+        <div className="text-center mb-3">
+          <span className="text-sm font-bold text-foursys-text">A Solução: </span>
+          <span className="text-sm font-bold text-orange-400">FourBlox</span>
+        </div>
+        <p className="text-[10px] text-foursys-text-dim text-center mb-3">Uma plataforma modular de soluções por assinatura que entrega:</p>
+        <div className="space-y-2">
+          {fbSolutionSteps.map(s => (
+            <div key={s} className="p-3 rounded-xl bg-foursys-surface/50 border border-white/10 flex items-center gap-3">
+              <DynIcon name="check-circle" size={14} className="text-orange-400 shrink-0" />
+              <span className="text-xs font-semibold text-foursys-text">{s}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Como Funciona — 4 etapas */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          Como Funciona — Modelo em 4 etapas
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {fbHowItWorks.map(step => (
+            <div key={step.n} className="p-4 rounded-xl bg-foursys-surface/50 border border-white/10 text-center relative">
+              <div className="absolute top-2 right-2 text-lg font-black text-white/10">{step.n}</div>
+              <div className="w-9 h-9 rounded-xl bg-orange-500/20 border border-orange-500/30 flex items-center justify-center mx-auto mb-2">
+                <DynIcon name={step.icon} size={18} className="text-orange-400" />
+              </div>
+              <div className="font-bold text-foursys-text text-xs mb-1">{step.title}</div>
+              <p className="text-[9px] text-foursys-text-dim leading-relaxed">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Catálogo de Soluções */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          Biblioteca de Soluções — +18 soluções em 9 categorias
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          {fbSolutions.map(cat => (
+            <div key={cat.cat} className="p-3 rounded-xl bg-foursys-surface/50 border border-white/10">
+              <div className="text-[10px] font-bold text-emerald-400 mb-2">{cat.cat}</div>
+              <ul className="space-y-1">
+                {cat.items.map(item => (
+                  <li key={item} className="text-[9px] text-foursys-text-dim flex items-start gap-1">
+                    <span className="text-emerald-400 mt-0.5 shrink-0">•</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Kits Estratégicos */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          Combinações Estratégicas — Kits pré-configurados
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {fbKits.map(kit => (
+            <div key={kit.title} className="p-3 rounded-xl bg-emerald-500/8 border border-emerald-500/20">
+              <div className="text-[10px] font-bold text-emerald-300 mb-2">{kit.title}</div>
+              <ul className="space-y-1">
+                {kit.items.map(item => (
+                  <li key={item} className="text-[9px] text-foursys-text-dim flex items-start gap-1">
+                    <DynIcon name="check" size={10} className="text-emerald-400 shrink-0 mt-0.5" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Diferenciais */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          Diferenciais
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+          {fbDifferentials.map(d => (
+            <div key={d.title} className="p-3 rounded-xl bg-foursys-surface/50 border border-white/10">
+              <DynIcon name={d.icon} size={16} className="text-orange-400 mb-2" />
+              <div className="text-[11px] font-bold text-foursys-text mb-0.5">{d.title}</div>
+              <p className="text-[9px] text-foursys-text-dim">{d.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Benefícios para o Negócio */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          Benefícios para o Negócio
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+          {fbBenefits.map(b => (
+            <div key={b.label} className="p-3 rounded-xl bg-foursys-surface/50 border border-white/10 flex items-center gap-2">
+              <DynIcon name={b.icon} size={14} className="text-emerald-400 shrink-0" />
+              <span className="text-[10px] font-semibold text-foursys-text">{b.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* CTA */}
+      <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-500/15 to-transparent border border-emerald-500/25">
+        <p className="text-xs text-foursys-text-muted text-center flex flex-wrap items-start justify-center gap-1.5">
+          <DynIcon name="zap" size={14} className="text-emerald-400 shrink-0 mt-0.5" />
+          <span>
+            <strong className="text-foursys-text">Pronto para ativar?</strong> Fale com nosso time e coloque em produção em até 30 dias. Personalizado, por assinatura e modular.
+          </span>
+        </p>
+      </div>
+    </div>
+  )
+}
 
 function Sec4SysDeepDive() {
   const [expandedPortfolio, setExpandedPortfolio] = useState<string | null>(null)
@@ -1399,67 +1597,7 @@ function DeepDiveContent({ serviceId }: { serviceId: string }) {
   }
 
   if (serviceId === 'fourblox') {
-    return (
-      <div className="space-y-6">
-        <div className="flex flex-wrap justify-center gap-6 mb-2">
-          {[
-            { value: '70%', label: 'Menos tempo de dev', color: 'text-foursys-cyan' },
-            { value: '30d', label: 'Prazo máximo', color: 'text-green-400' },
-            { value: '∞', label: 'Customização por contexto', color: 'text-violet-400' },
-          ].map(stat => (
-            <div key={stat.label} className="text-center">
-              <div className={`text-2xl font-black ${stat.color} mb-0.5`}>{stat.value}</div>
-              <div className="text-[10px] text-foursys-text-dim">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-
-        <div>
-          <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3 text-center">
-            Catálogo de Blocos Disponíveis
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
-            {fourbloxBlocks.map(block => (
-              <div key={block.name} className="p-3 rounded-xl bg-foursys-surface/50 border border-white/10">
-                <div className="mb-1.5">
-                  <DynIcon name={block.icon} size={16} className="text-white/80" />
-                </div>
-                <div className="font-bold text-foursys-cyan text-[11px] mb-0.5">{block.name}</div>
-                <div className="text-[9px] text-foursys-text-dim leading-relaxed">{block.desc}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="p-5 rounded-xl bg-foursys-surface/40 border border-white/10">
-          <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3 text-center">
-            Como entregamos em 30 dias
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {fourbloxPhases.map((phase, i) => (
-              <div key={phase.week} className="text-center">
-                <div className="relative mb-2">
-                  <div className="w-10 h-10 rounded-xl bg-foursys-primary/20 border border-foursys-primary/30 flex items-center justify-center mx-auto">
-                    <DynIcon name={phase.icon} size={18} className="text-white/80" />
-                  </div>
-                  {i < fourbloxPhases.length - 1 && (
-                    <div className="hidden md:block absolute top-5 left-full w-full h-px bg-gradient-to-r from-foursys-primary/40 to-transparent" />
-                  )}
-                </div>
-                <div className="text-[10px] text-foursys-cyan font-semibold">{phase.week}</div>
-                <div className="text-[9px] text-foursys-text-dim mt-0.5">{phase.label}</div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-4 flex items-center justify-center gap-1.5">
-            <Zap size={14} className="text-foursys-cyan" />
-            <p className="text-xs text-foursys-text-muted">
-              Garantia de entrega em 30 dias ou o cliente não paga pela última semana.
-            </p>
-          </div>
-        </div>
-      </div>
-    )
+    return <FourBloxDeepDive />
   }
 
   return null

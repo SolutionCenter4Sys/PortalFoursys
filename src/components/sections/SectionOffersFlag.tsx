@@ -88,19 +88,22 @@ const flagshipOffers = [
     id: 'fourblox',
     badge: 'Destaque',
     title: 'FourBlox',
-    tagline: 'Produtos digitais por assinatura, prontos para escalar.',
+    tagline: 'Chega de projetos intermináveis. Sua solução digital pronta em 30 dias.',
     description:
-      'Módulos digitais pré-construídos e personalizáveis por assinatura: plataformas de checkin, gestão de eventos, portais corporativos e mais. Go live em 30 dias.',
+      'Plataforma modular de soluções por assinatura com +18 soluções prontas em 9 categorias (Gestão de Pessoas, Operações, Financeiro, Comercial, Projetos, ESG, Dados & Analytics, Governança). Diagnóstico estruturado, desenho personalizado, configuração sob medida e produção em até 30 dias.',
     metrics: [
       { value: '30',    label: 'Dias para go live' },
-      { value: '100%',  label: 'Personalizável' },
+      { value: '18+',   label: 'Soluções disponíveis' },
       { value: 'SaaS',  label: 'Modelo por assinatura' },
     ],
     highlights: [
-      'Módulos prontos — sem desenvolvimento do zero',
-      'Personalização de marca e fluxos de negócio',
-      'Modelo por assinatura com SLA garantido',
-      'Escala sem custo de infraestrutura inicial',
+      'Produção em 30 dias — sem projetos de 6 a 12 meses',
+      'Modelo por assinatura com previsibilidade financeira',
+      'Modularidade inteligente: ative apenas o que gera valor',
+      'UX centrada no usuário: adoção real, não imposição',
+      'Evolução contínua baseada em dados',
+      'Kits pré-configurados para resultados acelerados',
+      '9 categorias e +18 soluções prontas para personalizar',
     ],
     color: '#4ADE80',
     bg: 'from-green-500/15 to-green-600/5',
@@ -382,6 +385,8 @@ export function SectionOffersFlag() {
                 setDeepDiveHint('modernizacao-legados')
               } else if (selectedOffer.id === 'quality-ia') {
                 setDeepDiveHint('quality-testes-ia')
+              } else if (selectedOffer.id === 'fourblox') {
+                setDeepDiveHint('fourblox')
               }
               navigate(selectedOffer.navigateTo)
               setSelectedOffer(null)
