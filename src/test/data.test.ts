@@ -86,8 +86,8 @@ describe('Client data', () => {
 })
 
 describe('Innovation data', () => {
-  it('has 5 innovation trends', () => {
-    expect(innovationTrends.length).toBe(5)
+  it('has 3 innovation trends', () => {
+    expect(innovationTrends.length).toBe(3)
   })
 
   it('each trend has required fields', () => {

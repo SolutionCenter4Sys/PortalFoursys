@@ -6,6 +6,27 @@ import { cases } from '../../data/cases'
 import { useVoiceSearch } from '../../hooks/useVoiceSearch'
 import type { CaseStudy } from '../../types'
 
+function MetricBar({ value, label, index }: { value: string; label: string; index: number }) {
+  const numMatch = value.match(/(\d+)/)
+  const pct = numMatch ? Math.min(parseInt(numMatch[1]), 100) : null
+  return (
+    <div className="p-4 rounded-xl bg-foursys-surface/40 border border-white/[0.08] text-center">
+      <div className="text-lg md:text-2xl font-black text-foursys-primary">{value}</div>
+      <div className="text-[9px] text-foursys-text-dim mt-1 uppercase tracking-wider">{label}</div>
+      {pct !== null && (
+        <div className="mt-2 h-1 bg-white/[0.06] rounded-full overflow-hidden">
+          <motion.div
+            className="h-full bg-gradient-to-r from-foursys-primary to-amber-400 rounded-full"
+            initial={{ width: 0 }}
+            animate={{ width: `${pct}%` }}
+            transition={{ duration: 1, delay: 0.3 + index * 0.15 }}
+          />
+        </div>
+      )}
+    </div>
+  )
+}
+
 function norm(s: string) {
   return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
 }
@@ -192,10 +213,7 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
             {(c.detail?.keyMetrics ?? (c.metric ? [c.metric] : [])).length > 0 && (
               <div className="grid grid-cols-3 gap-3">
                 {(c.detail?.keyMetrics ?? (c.metric ? [c.metric] : [])).map((m, i) => (
-                  <div key={i} className="p-4 rounded-xl bg-foursys-surface/40 border border-white/[0.08] text-center">
-                    <div className="text-lg md:text-2xl font-black text-foursys-primary">{m.value}</div>
-                    <div className="text-[9px] text-foursys-text-dim mt-1 uppercase tracking-wider">{m.label}</div>
-                  </div>
+                  <MetricBar key={i} value={m.value} label={m.label} index={i} />
                 ))}
               </div>
             )}

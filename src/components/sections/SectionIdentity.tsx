@@ -89,7 +89,7 @@ export function SectionIdentity() {
             {
               title: 'Visão',
               icon: 'telescope',
-              content: 'Ser reconhecidos globalmente como referência em transformação digital no setor financeiro, combinando expertise humana e inteligência artificial.',
+              content: 'Ser reconhecidos globalmente como referência em transformação digital e inovação, combinando expertise humana e inteligência artificial.',
               gradient: 'from-foursys-cyan/15 to-transparent'
             },
             {

@@ -1,10 +1,11 @@
 import { useEffect, useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Clock, BarChart2, MapPin, Copy, CheckCheck, ChevronRight, Star, History, FileDown } from 'lucide-react'
+import { X, Clock, BarChart2, MapPin, Copy, CheckCheck, ChevronRight, Star, History, FileDown, Download } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { DynIcon } from '../../utils/iconMap'
 import { getTrailById, trails } from '../../data/trails'
 import { useSessionHistory } from '../../hooks/useSessionHistory'
+import { getCTAClicks } from '../../hooks/useSessionPersistence'
 import { SessionHistory } from './SessionHistory'
 import { getClientById } from '../../data/clients'
 import type { AppSection } from '../../types'
@@ -274,6 +275,61 @@ export function SessionPanel() {
               </div>
             )}
 
+            {/* Alto Interesse — seções com mais de 60s */}
+            {(() => {
+              const highInterest = visitedStats.filter(s => s.totalSeconds >= 60)
+              if (highInterest.length === 0) return null
+              return (
+                <div className="px-4 py-3 border-b border-white/[0.06]">
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <Clock size={11} className="text-emerald-400" />
+                    <span className="text-[10px] font-semibold text-emerald-300/80 uppercase tracking-widest">
+                      Alto Engajamento (&gt;60s)
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {highInterest.map(s => (
+                      <button
+                        key={s.section}
+                        onClick={() => navigate(s.section as AppSection)}
+                        className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-400/10 border border-emerald-400/25 text-emerald-300 text-[10px] font-medium hover:bg-emerald-400/20 transition-colors"
+                      >
+                        <DynIcon name={getSectionIcon(s.section as AppSection)} size={12} className="text-emerald-300" />
+                        {getSectionLabel(s.section as AppSection)} · {formatShort(s.totalSeconds)}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )
+            })()}
+
+            {/* CTAs clicados */}
+            {(() => {
+              const clicks = getCTAClicks()
+              const entries = Object.entries(clicks).sort((a, b) => b[1] - a[1])
+              if (entries.length === 0) return null
+              return (
+                <div className="px-4 py-3 border-b border-white/[0.06]">
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <ChevronRight size={11} className="text-foursys-cyan" />
+                    <span className="text-[10px] font-semibold text-foursys-cyan/80 uppercase tracking-widest">
+                      CTAs Acionados
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {entries.slice(0, 8).map(([label, count]) => (
+                      <span
+                        key={label}
+                        className="px-2 py-0.5 rounded-full bg-foursys-cyan/10 border border-foursys-cyan/20 text-foursys-cyan text-[10px] font-medium"
+                      >
+                        {label} × {count}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )
+            })()}
+
             {/* Lista de seções visitadas */}
             <div className="flex-1 overflow-y-auto custom-scrollbar px-4 py-3">
               <div className="text-[10px] font-semibold text-foursys-text-dim uppercase tracking-widest mb-3">
@@ -375,16 +431,48 @@ export function SessionPanel() {
                 >
                   {copied
                     ? <><CheckCheck size={14} /> Copiado!</>
-                    : <><Copy size={14} /> Gerar Resumo da Reunião</>
+                    : <><Copy size={14} /> Gerar Resumo</>
                   }
                 </button>
                 <button
+                  onClick={() => {
+                    const activeClient = state.activeClientId ? getClientById(state.activeClientId) : null
+                    const data = {
+                      app: 'FoursysPortal',
+                      date: new Date().toISOString(),
+                      duration: formatHMS(elapsed),
+                      durationSeconds: elapsed,
+                      profile: state.sessionProfile,
+                      client: activeClient?.name ?? null,
+                      trail: currentTrail?.label ?? null,
+                      sectionsVisited: visitedStats.map(s => ({
+                        section: getSectionLabel(s.section),
+                        seconds: s.totalSeconds,
+                        visits: s.visitCount,
+                      })),
+                      interests: state.interestedSections.map(s => getSectionLabel(s as AppSection)),
+                    }
+                    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+                    const url = URL.createObjectURL(blob)
+                    const a = document.createElement('a')
+                    a.href = url
+                    a.download = `foursys-sessao-${new Date().toISOString().slice(0, 10)}.json`
+                    a.click()
+                    URL.revokeObjectURL(url)
+                  }}
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-white/[0.05] border border-white/[0.08] text-foursys-text-muted hover:text-foursys-text hover:bg-white/[0.08] transition-all text-xs font-medium"
+                  aria-label="Exportar resumo JSON"
+                  title="Exportar resumo da sessão"
+                >
+                  <Download size={14} />
+                </button>
+                <button
                   onClick={() => { toggleMetricsPanel(); toggleExportModal() }}
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.05] border border-white/[0.08] text-foursys-text-muted hover:text-foursys-text hover:bg-white/[0.08] transition-all text-xs font-medium"
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-white/[0.05] border border-white/[0.08] text-foursys-text-muted hover:text-foursys-text hover:bg-white/[0.08] transition-all text-xs font-medium"
                   aria-label="Exportar para PDF"
+                  title="Exportar para PDF"
                 >
                   <FileDown size={14} />
-                  Exportar PDF
                 </button>
               </div>
             </div>

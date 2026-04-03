@@ -3,7 +3,7 @@ import { useApp } from '../context/AppContext'
 import type { AppSection } from '../types'
 
 export function useKeyboard() {
-  const { state, navigate, toggleFullscreen, openSearch, toggleMenu, activeNavigationItems } = useApp()
+  const { state, navigate, toggleFullscreen, openSearch, toggleMenu, toggleMetricsPanel, toggleOverview, activeNavigationItems } = useApp()
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -20,6 +20,18 @@ export function useKeyboard() {
       if (e.key === 'F11' || (e.key === 'f' && e.ctrlKey)) {
         e.preventDefault()
         toggleFullscreen()
+        return
+      }
+
+      if (e.key === 'M' && e.ctrlKey && e.shiftKey) {
+        e.preventDefault()
+        toggleMetricsPanel()
+        return
+      }
+
+      if (e.key === 'A' && e.ctrlKey && e.shiftKey) {
+        e.preventDefault()
+        toggleOverview()
         return
       }
 
@@ -49,5 +61,5 @@ export function useKeyboard() {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [state.currentSection, state.isFullscreen, navigate, toggleFullscreen, openSearch, toggleMenu, activeNavigationItems])
+  }, [state.currentSection, state.isFullscreen, navigate, toggleFullscreen, openSearch, toggleMenu, toggleMetricsPanel, toggleOverview, activeNavigationItems])
 }

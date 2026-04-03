@@ -11,15 +11,17 @@ import { ClientSelector } from './components/client/ClientSelector'
 import { useKeyboard } from './hooks/useKeyboard'
 import { useUrlSync } from './hooks/useUrlSync'
 import { useSwipe } from './hooks/useSwipe'
+import { useSessionPersistence } from './hooks/useSessionPersistence'
 import { SectionOverview } from './components/navigation/SectionOverview'
 import { ExportPdfModal } from './components/export/ExportPdfModal'
 import type { AppSection } from './types'
 
 function AppInner() {
-  const { state, toggleFullscreen, toggleMetricsPanel, toggleMenu, navigate, activeNavigationItems, toggleOverview } = useApp()
+  const { state, toggleFullscreen, toggleMenu, navigate, activeNavigationItems, toggleOverview } = useApp()
   const mainRef = useRef<HTMLDivElement>(null)
   useKeyboard()
   useUrlSync()
+  useSessionPersistence()
 
   // Swipe hint — aparece uma única vez na primeira visita em mobile
   const [showSwipeHint, setShowSwipeHint] = useState(() => {
@@ -49,25 +51,6 @@ function AppInner() {
       if (prev) navigate(prev.id as AppSection)
     },
   })
-
-  useEffect(() => {
-    const handleKeys = (e: KeyboardEvent) => {
-      if (e.key === 'F11') {
-        e.preventDefault()
-        toggleFullscreen()
-      }
-      if (e.key === 'M' && e.ctrlKey && e.shiftKey) {
-        e.preventDefault()
-        toggleMetricsPanel()
-      }
-      if (e.key === 'A' && e.ctrlKey && e.shiftKey) {
-        e.preventDefault()
-        toggleOverview()
-      }
-    }
-    window.addEventListener('keydown', handleKeys)
-    return () => window.removeEventListener('keydown', handleKeys)
-  }, [toggleFullscreen, toggleMetricsPanel, toggleOverview])
 
   return (
     <div className="flex h-[100dvh] overflow-hidden bg-foursys-dark-2 pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)]">
