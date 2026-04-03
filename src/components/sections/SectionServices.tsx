@@ -394,7 +394,7 @@ function OfferDetailModal({
 
 /* ── Deep-dive content for specific service lines ────────────────────────────── */
 
-const DEEP_DIVE_IDS = ['modernizacao-legados', 'ciberseguranca', 'fourblox', 'ai-augmented-squad'] as const
+const DEEP_DIVE_IDS = ['modernizacao-legados', 'ciberseguranca', 'fourblox', 'ai-augmented-squad', 'quality-testes-ia'] as const
 
 /* ── Modernização de Legados Deep Dive ────────────────────────────────────── */
 
@@ -1193,6 +1193,194 @@ function AISquadDeepDive() {
   )
 }
 
+/* ── Quality AI Deep Dive ────────────────────────────────────────────────── */
+
+const qaShiftLeftSteps = [
+  { icon: 'clipboard-list', title: 'Assessment', desc: 'Documento de assessment, acordos e premissas para alinhamento inicial com o cliente.' },
+  { icon: 'calendar', title: 'Planejamento', desc: 'Plano de testes, cronograma, comunicação definida (reuniões e reports) e validação de ambientes.' },
+  { icon: 'file-text', title: 'Design de Cenários', desc: 'Cenários de teste escritos em BDD/Gherkin (step-by-step), validação funcional e qualidade antecipada.' },
+  { icon: 'database', title: 'Sanity Test & Massa', desc: 'Ambientes validados e massa de dados estruturada com DataForge — sintética e sem vício.' },
+  { icon: 'play', title: 'Testes Manuais', desc: 'Evidências de testes positivos e negativos, evidência de falhas e dashboard de execução.' },
+  { icon: 'repeat', title: 'Automação Funcional', desc: 'Inclusão dos cenários automatizados na regressão com Cypress, Python e Robot Framework.' },
+  { icon: 'activity', title: 'Performance (NFT)', desc: 'Simulação de carga, medição de desempenho, identificação de gargalos e ajustes necessários.' },
+  { icon: 'shield-check', title: 'Certificação GMUD', desc: 'Merge, automação de caminho crítico (2 dias), atestado de qualidade GO/NO GO.' },
+]
+
+const qaTowers = [
+  {
+    title: 'COE — Torre de Excelência',
+    icon: 'award',
+    color: 'text-amber-400',
+    bg: 'bg-amber-500/10',
+    border: 'border-amber-500/25',
+    items: ['Metodologia e Padrões', 'Produtos e Ferramentas', 'Templates e Padrões de Reports', 'Indicadores', 'Eventos, Monitoramento e Sincronização', 'Testes Não-Funcionais (NFT)'],
+  },
+  {
+    title: 'CSC — Torre de Execução',
+    icon: 'settings',
+    color: 'text-cyan-400',
+    bg: 'bg-cyan-500/10',
+    border: 'border-cyan-500/25',
+    items: ['Serviços de QA nas Squads', 'Certificação Patch GMUD', 'Automação de Testes Funcionais', 'Treinamentos, Capacitações e Contingências'],
+  },
+]
+
+const qaGains = [
+  { value: '+10x', label: 'Visibilidade de riscos', desc: 'Visibilidade sobre riscos e evolução da qualidade nas entregas' },
+  { value: '+80%', label: 'Prevenção de falhas', desc: 'Prevenção de falhas críticas evitadas antes de produção' },
+  { value: '+6x', label: 'Aceleração de testes', desc: 'Agente Automatizador: +120 cenários/mês vs 20 manuais' },
+  { value: '+70%', label: 'Cobertura funcional', desc: 'Cobertura de testes funcionais com massa de dados via DataForge' },
+]
+
+const qaAvoids = [
+  'Custos com Retrabalho',
+  'Desperdício de Tempo',
+  'Falta de Visibilidade',
+  'Riscos de Mercado',
+  'Inconsistência de Processos',
+]
+
+const qaRoiItems = [
+  'Prevenção de Falhas Críticas',
+  'Automação Acelerada',
+  'Decisões Inteligentes',
+  'Eficiência Operacional',
+  'Qualidade Contínua',
+  'Agilidade e Confiança',
+]
+
+function QualityAIDeepDive() {
+  return (
+    <div className="space-y-7">
+      {/* Proposta de valor */}
+      <div className="p-5 rounded-xl bg-gradient-to-r from-amber-500/15 to-transparent border border-amber-500/25">
+        <p className="text-xs text-foursys-text-muted leading-relaxed">
+          <strong className="text-foursys-text">Proposta de Valor:</strong> Qualidade no escopo não é custo a mais — é o que evita custo maior. Modelo plug&apos;n&apos;play com duas torres especializadas que garantem qualidade desde o início do projeto, com IA acelerando cada etapa do ciclo de testes.
+        </p>
+      </div>
+
+      {/* Métricas */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {qaGains.map(m => (
+          <div key={m.label} className="text-center p-3 rounded-xl bg-foursys-surface/50 border border-white/10">
+            <div className="text-xl font-black text-amber-400">{m.value}</div>
+            <div className="text-[10px] font-bold text-foursys-text mt-1">{m.label}</div>
+            <div className="text-[9px] text-foursys-text-dim mt-0.5">{m.desc}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Duas Torres */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          Estrutura — Duas Torres Especializadas
+        </div>
+        <div className="grid md:grid-cols-2 gap-4">
+          {qaTowers.map(tower => (
+            <div key={tower.title} className={`p-4 rounded-xl ${tower.bg} border ${tower.border}`}>
+              <div className="flex items-center gap-2 mb-3">
+                <DynIcon name={tower.icon} size={16} className={tower.color} />
+                <span className={`text-xs font-bold ${tower.color}`}>{tower.title}</span>
+              </div>
+              <ul className="space-y-1.5">
+                {tower.items.map(item => (
+                  <li key={item} className="text-[10px] text-foursys-text-dim flex items-start gap-1.5">
+                    <span className={`${tower.color} mt-0.5 shrink-0`}>•</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Framework Shift-Left */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          Framework Shift-Left — Qualidade antecipada em cada etapa
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {qaShiftLeftSteps.map((step, i) => (
+            <div key={step.title} className="p-3 rounded-xl bg-foursys-surface/50 border border-white/10 relative">
+              <div className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-amber-500/30 border border-amber-500/50 flex items-center justify-center text-[9px] font-bold text-amber-300">
+                {i + 1}
+              </div>
+              <div className="mb-2">
+                <DynIcon name={step.icon} size={16} className="text-white/80" />
+              </div>
+              <div className="font-semibold text-foursys-text text-[11px] mb-1">{step.title}</div>
+              <p className="text-[9px] text-foursys-text-dim leading-relaxed">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Aceleradores com IA */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          Aceleração com IA
+        </div>
+        <div className="grid md:grid-cols-3 gap-3">
+          {[
+            { title: 'Agente Automatizador', icon: 'bot', desc: 'QA Funcional gera +120 cenários/mês (vs 20 manuais). Prompts estruturados e cURL para testes instantâneos de status codes e estruturas.' },
+            { title: 'DataForge', icon: 'database', desc: 'Geração de massa sintética integrada em 1 dia, sem vício de dados. Suporte a testes funcionais e regressivos com escalabilidade.' },
+            { title: 'Analista Gherkin', icon: 'file-code', desc: 'Cenários de testes padrão Gherkin (positivos, negativos, regressivos) com fácil compreensão para negócios e integração com automação.' },
+          ].map(a => (
+            <div key={a.title} className="p-4 rounded-xl bg-amber-500/8 border border-amber-500/20">
+              <div className="flex items-center gap-2 mb-2">
+                <DynIcon name={a.icon} size={16} className="text-amber-400" />
+                <span className="text-xs font-bold text-amber-300">{a.title}</span>
+              </div>
+              <p className="text-[10px] text-foursys-text-dim leading-relaxed">{a.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ROI e Riscos evitados */}
+      <div className="grid md:grid-cols-2 gap-4">
+        <div className="p-4 rounded-xl bg-green-500/8 border border-green-500/20">
+          <div className="text-[10px] font-bold uppercase tracking-widest text-green-400 mb-3">
+            Seu Sucesso é Nosso Foco (ROI)
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            {qaRoiItems.map(item => (
+              <div key={item} className="flex items-start gap-1.5">
+                <DynIcon name="check-circle" size={12} className="text-green-400 shrink-0 mt-0.5" />
+                <span className="text-[10px] text-foursys-text-dim">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="p-4 rounded-xl bg-red-500/8 border border-red-500/20">
+          <div className="text-[10px] font-bold uppercase tracking-widest text-red-400 mb-3">
+            O Que Você Evita Conosco
+          </div>
+          <ul className="space-y-2">
+            {qaAvoids.map(item => (
+              <li key={item} className="flex items-start gap-1.5">
+                <DynIcon name="x-circle" size={12} className="text-red-400 shrink-0 mt-0.5" />
+                <span className="text-[10px] text-foursys-text-dim">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Governança */}
+      <div className="p-4 rounded-xl bg-gradient-to-r from-amber-500/15 to-transparent border border-amber-500/25">
+        <p className="text-xs text-foursys-text-muted text-center flex flex-wrap items-start justify-center gap-1.5">
+          <DynIcon name="bar-chart-2" size={14} className="text-amber-400 shrink-0 mt-0.5" />
+          <span>
+            <strong className="text-foursys-text">Governança de Qualidade:</strong> Metodologias, padrões, indicadores, templates, treinamentos, monitoramentos e ferramentas — com dashboards de 5+ indicadores para tomada de decisão.
+          </span>
+        </p>
+      </div>
+    </div>
+  )
+}
+
 function DeepDiveContent({ serviceId }: { serviceId: string }) {
   if (serviceId === 'modernizacao-legados') {
     return <ModernizacaoDeepDive />
@@ -1204,6 +1392,10 @@ function DeepDiveContent({ serviceId }: { serviceId: string }) {
 
   if (serviceId === 'ai-augmented-squad') {
     return <AISquadDeepDive />
+  }
+
+  if (serviceId === 'quality-testes-ia') {
+    return <QualityAIDeepDive />
   }
 
   if (serviceId === 'fourblox') {

@@ -111,24 +111,27 @@ const flagshipOffers = [
     id: 'quality-ia',
     badge: 'Destaque',
     title: 'Quality AI',
-    tagline: 'QA, certificação e automação com IA — menos falhas, mais previsibilidade.',
+    tagline: 'Qualidade no escopo não é custo a mais — é o que evita custo maior.',
     description:
-      'Framework de qualidade com IA integrada para geração automática de testes, análise de risco e cobertura inteligente. Homologado por grandes instituições financeiras.',
+      'Prática de Qualidade de Software com duas torres: COE (Excelência — metodologia, padrões, ferramentas, indicadores) e CSC (Operação — QA nas squads, certificação GMUD, automação funcional). Framework Shift-Left com Agente Automatizador que gera +120 cenários/mês vs 20 manuais.',
     metrics: [
-      { value: '78%', label: 'Aumento de cobertura' },
-      { value: '60%', label: 'Redução de defeitos' },
-      { value: '3x',  label: 'Velocidade de release' },
+      { value: '+10x', label: 'Visibilidade de riscos' },
+      { value: '+80%', label: 'Prevenção falhas críticas' },
+      { value: '+6x',  label: 'Aceleração de testes' },
     ],
     highlights: [
-      'Geração automática de casos de teste com LLMs',
-      'Análise de risco e priorização por impacto',
-      'Integração nativa com CI/CD (Jenkins, GitHub Actions)',
-      'Já homologado em ambientes bancários de alta criticidade',
+      'Duas torres: COE (Excelência) + CSC (Operação) — plug\'n\'play',
+      'Framework Shift-Left: qualidade antecipada desde design de cenários',
+      'Agente Automatizador: +120 cenários/mês (6x mais que manual)',
+      'DataForge: massa sintética integrada em 1 dia, sem vício de dados',
+      'Cenários BDD/Gherkin com cobertura de testes +70%',
+      'Dashboards com 5+ indicadores (Planejado vs Executado, Defeitos, Status)',
+      'Certificação GMUD com automação de caminho crítico em 2 dias',
     ],
     color: '#F59E0B',
     bg: 'from-amber-500/15 to-amber-600/5',
     border: 'border-amber-500/30',
-    navigateTo: 'capabilities' as const,
+    navigateTo: 'services' as const,
   },
 ]
 
@@ -377,6 +380,8 @@ export function SectionOffersFlag() {
                 setDeepDiveHint('ai-augmented-squad')
               } else if (selectedOffer.id === 'modernizacao') {
                 setDeepDiveHint('modernizacao-legados')
+              } else if (selectedOffer.id === 'quality-ia') {
+                setDeepDiveHint('quality-testes-ia')
               }
               navigate(selectedOffer.navigateTo)
               setSelectedOffer(null)
