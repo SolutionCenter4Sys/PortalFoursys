@@ -128,8 +128,12 @@ export interface CaseStudy {
     delivery: string
     technicalDetails: string
     challengesOvercome: string
+    successFactors?: string
+    businessImpact?: string[]
     dimensions?: { features?: string; months?: string; hours?: string }
     keyMetrics?: { value: string; label: string }[]
+    profiles?: string[]
+    responsibles?: string[]
   }
 }
 
