@@ -25,7 +25,7 @@ export default {
           // === TEXTO ===
           text: '#FFFFFF',
           'text-muted': '#94A3B8',
-          'text-dim': '#8293A7',
+          'text-dim': '#9AACBF',
           // === FEEDBACK ===
           accent: '#FFB800',       // amber — destaque secundário
           success: '#4ADE80',

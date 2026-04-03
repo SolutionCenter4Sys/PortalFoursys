@@ -123,6 +123,7 @@ export function SessionWizard() {
                 </div>
                 <button
                   onClick={closeWizard}
+                  aria-label="Fechar"
                   className="p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
                 >
                   <X size={15} />

@@ -223,6 +223,7 @@ function DrillDownModal({
           {/* Close */}
           <button
             onClick={onClose}
+            aria-label="Fechar"
             className="absolute top-4 right-4 p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors z-20"
           >
             <X size={16} />

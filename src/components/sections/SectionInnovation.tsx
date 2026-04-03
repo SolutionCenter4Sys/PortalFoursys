@@ -6,6 +6,7 @@ import {
   Zap, CheckCircle2, Quote,
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { useFocusTrap } from '../../hooks/useFocusTrap'
 import { innovationTrends } from '../../data/innovation'
 import type { InnovationTrend } from '../../data/innovation'
 
@@ -168,6 +169,8 @@ function TrendCard({ trend, index, onClick }: { trend: InnovationTrend; index: n
 // ─── Drill-Down Modal ────────────────────────────────────────────────────────
 
 function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: () => void }) {
+  const trapRef = useFocusTrap(true)
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -188,6 +191,7 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
         transition={{ duration: 0.4, type: 'spring', stiffness: 200 }}
         onClick={e => e.stopPropagation()}
         aria-live="polite"
+        ref={trapRef}
         className="relative z-10 w-full max-w-5xl mx-4 my-8 rounded-3xl overflow-hidden"
         style={{
           background: `linear-gradient(180deg, ${hexToRgba(trend.color, 0.08)} 0%, rgba(10,14,22,0.98) 15%, rgba(10,14,22,0.99) 100%)`,
@@ -207,6 +211,7 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
             <button
               type="button"
               onClick={onClose}
+              aria-label="Fechar"
               className="p-2.5 rounded-xl bg-white/[0.06] border border-white/[0.1] hover:bg-white/[0.12] transition-colors"
             >
               <X size={18} className="text-white/70" />

@@ -14,6 +14,7 @@ import { useSwipe } from './hooks/useSwipe'
 import { useSessionPersistence } from './hooks/useSessionPersistence'
 import { SectionOverview } from './components/navigation/SectionOverview'
 import { ExportPdfModal } from './components/export/ExportPdfModal'
+import { OnboardingTour } from './components/ui/OnboardingTour'
 import type { AppSection } from './types'
 
 function AppInner() {
@@ -122,7 +123,7 @@ function AppInner() {
           <button
             type="button"
             onClick={toggleFullscreen}
-            className="text-xs text-white/30 hover:text-white/60 transition-colors select-none bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-lg cursor-pointer"
+            className="text-xs text-foursys-text-dim hover:text-white/60 transition-colors select-none bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-lg cursor-pointer"
           >
             ESC para sair do modo apresentação
           </button>
@@ -131,6 +132,7 @@ function AppInner() {
 
       <SectionOverview isOpen={state.isOverviewOpen} onClose={toggleOverview} />
       <ExportPdfModal />
+      <OnboardingTour />
     </div>
   )
 }

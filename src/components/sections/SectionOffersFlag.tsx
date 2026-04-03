@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle2, X } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { InterestButton } from '../ui/InterestButton'
 import { useApp } from '../../context/AppContext'
+import { useFocusTrap } from '../../hooks/useFocusTrap'
 import { DynIcon } from '../../utils/iconMap'
 
 // ─── Dados das ofertas flagship ───────────────────────────────────────────────
@@ -149,16 +150,22 @@ function OfferModal({
   onClose: () => void
   onNavigate: () => void
 }) {
+  const trapRef = useFocusTrap(true)
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label={offer.title}
       onClick={onClose}
     >
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
       <motion.div
+        ref={trapRef}
         initial={{ scale: 0.95, y: 16 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.95, y: 16 }}
@@ -171,6 +178,7 @@ function OfferModal({
         >
           <button
             onClick={onClose}
+            aria-label="Fechar"
             className="absolute top-4 right-4 p-2 rounded-xl hover:bg-white/10 text-foursys-text-muted transition-colors"
           >
             <X size={16} />
