@@ -350,11 +350,6 @@ export function SectionHome() {
           </div>
         </motion.div>
 
-        {/* ── Rodapé ── */}
-        <div className="text-center text-[10px] md:text-[11px] text-foursys-text-dim py-2.5 border-t border-white/[0.04] tracking-wide px-4">
-          {heroStats.years} anos · {heroStats.turnover} turnover · {heroStats.projects} projetos · Brasil · EUA · Portugal
-        </div>
-
       </div>
     </SectionWrapper>
   )
