@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Search, X, ArrowRight } from 'lucide-react'
+import { Search, X, ArrowRight, Mic } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { DynIcon } from '../../utils/iconMap'
 import { search, buildSearchIndex, type SearchEntry, type SearchResultKind } from '../../utils/searchIndex'
+import { useVoiceSearch } from '../../hooks/useVoiceSearch'
 import type { AppSection } from '../../types'
 
 const KIND_LABEL: Record<SearchResultKind, string> = {
@@ -101,6 +102,8 @@ export function SearchOverlay() {
   const inputRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLDivElement>(null)
 
+  const voice = useVoiceSearch(setQuery)
+
   useEffect(() => { buildSearchIndex() }, [])
 
   const results: SearchEntry[] = useMemo(() => {
@@ -137,8 +140,10 @@ export function SearchOverlay() {
       setQuery('')
       setSelected(0)
       setTimeout(() => inputRef.current?.focus(), 100)
+    } else {
+      voice.stop()
     }
-  }, [state.isSearchOpen])
+  }, [state.isSearchOpen]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     setSelected(0)
@@ -189,14 +194,32 @@ export function SearchOverlay() {
 
               {/* Search input */}
               <div className="flex items-center gap-3 p-4 border-b border-white/10">
-                <Search size={18} className="text-foursys-primary flex-shrink-0" />
+                <Search size={18} className={`flex-shrink-0 ${voice.status === 'listening' ? 'text-red-400' : 'text-foursys-primary'}`} />
                 <input
                   ref={inputRef}
                   value={query}
                   onChange={e => setQuery(e.target.value)}
-                  placeholder="Buscar qualquer coisa — sessões, cases, FAQ, clientes, serviços..."
+                  placeholder={voice.status === 'listening' ? 'Ouvindo...' : 'Buscar qualquer coisa — sessões, cases, FAQ, clientes, serviços...'}
                   className="flex-1 bg-transparent text-foursys-text placeholder-foursys-text-dim outline-none text-sm"
                 />
+                {voice.isSupported && (
+                  <button
+                    onClick={voice.toggle}
+                    aria-label={voice.status === 'listening' ? 'Parar busca por voz' : 'Buscar por voz'}
+                    className={`relative flex-shrink-0 p-2 rounded-xl transition-all duration-200 ${
+                      voice.status === 'listening'
+                        ? 'bg-red-500/20 border border-red-500/50 text-red-400'
+                        : voice.status === 'error'
+                          ? 'bg-yellow-500/10 border border-yellow-500/30 text-yellow-400'
+                          : 'hover:bg-white/[0.06] text-foursys-text-dim hover:text-foursys-text border border-transparent'
+                    }`}
+                  >
+                    {voice.status === 'listening' && (
+                      <span className="absolute inset-0 rounded-xl border-2 border-red-400/60 animate-ping" />
+                    )}
+                    <Mic size={16} className="relative z-10" />
+                  </button>
+                )}
                 {query && (
                   <span className="text-[10px] text-foursys-text-dim bg-white/[0.06] px-2 py-0.5 rounded-full font-mono">
                     {results.length}
@@ -291,10 +314,13 @@ export function SearchOverlay() {
 
               {/* Footer */}
               <div className="px-4 py-2.5 border-t border-white/10 flex items-center justify-between">
-                <div className="flex gap-4 text-[10px] text-foursys-text-dim">
+                <div className="flex gap-3 text-[10px] text-foursys-text-dim flex-wrap">
                   <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08] font-mono text-[9px]">↑↓</kbd> navegar</span>
                   <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08] font-mono text-[9px]">Enter</kbd> ir</span>
                   <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08] font-mono text-[9px]">Esc</kbd> fechar</span>
+                  {voice.isSupported && (
+                    <span className="flex items-center gap-1"><Mic size={10} className="text-foursys-text-dim" /> voz</span>
+                  )}
                 </div>
                 {!query.trim() && (
                   <span className="text-[10px] text-foursys-text-dim/50">
