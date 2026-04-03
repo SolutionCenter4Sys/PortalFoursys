@@ -104,7 +104,7 @@ export const navigationItems: NavigationItem[] = [
     label: 'Nossos Clientes',
     icon: 'briefcase',
     category: 'Provas',
-    description: 'Empresas que confiam na Foursys em 2 continentes',
+    description: 'Empresas que confiam na Foursys em 3 regiões do globo',
   },
   {
     id: 'capabilities',

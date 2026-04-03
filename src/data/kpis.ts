@@ -6,7 +6,7 @@ export const heroStats = {
   cities: '7',
   turnover: '3,6%',
   sla: '99,9%',
-  continents: 2,
+  continents: 3,
 }
 
 export const kpis: KPI[] = [
@@ -80,12 +80,12 @@ export const timeline: TimelineItem[] = [
     highlight: true,
     icon: 'globe',
     era: 'Crescimento',
-    kpi: { value: '2', label: 'continentes' },
+    kpi: { value: '3', label: 'regiões do globo' },
   },
   {
     year: '2018',
     title: 'Presença na Europa e expansão global',
-    description: 'Operação consolidada em Portugal, com escritórios em 7 cidades e projetos internacionais em 2 continentes.',
+    description: 'Operação consolidada em Portugal, com escritórios em 7 cidades e projetos internacionais em 3 regiões do globo.',
     icon: 'globe',
     era: 'Expansão Global',
     kpi: { value: '7', label: 'cidades' },

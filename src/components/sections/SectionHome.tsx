@@ -187,7 +187,7 @@ export function SectionHome() {
   const kpis = [
     { ref: kpi1, suffix: ' anos',  label: 'de história e entrega' },
     { ref: kpi2, suffix: 'K+',     label: 'projetos entregues' },
-    { ref: kpi3, suffix: '',       label: 'cidades em 2 continentes' },
+    { ref: kpi3, suffix: '',       label: 'cidades em 3 regiões do globo' },
   ]
 
   return (
