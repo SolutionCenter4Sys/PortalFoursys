@@ -101,9 +101,7 @@ function OrbitRing({
               <Icon size={16} className={visual.text} />
             </span>
             <span
-              className={`absolute max-w-[90px] lg:max-w-[100px] text-[8px] lg:text-[9px] xl:text-[10px] font-semibold leading-tight pointer-events-none transition-colors duration-300 ${labelPos} ${
-                isActive ? 'text-white' : 'text-foursys-text-muted/70'
-              }`}
+              className={`absolute max-w-[100px] lg:max-w-[110px] text-[9px] lg:text-[10px] xl:text-[11px] font-bold leading-tight pointer-events-none text-white/90 ${labelPos}`}
             >
               {service.title}
             </span>
