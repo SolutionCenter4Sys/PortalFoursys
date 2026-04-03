@@ -7,9 +7,8 @@ import type { ShowcaseClient } from '../../data/clientShowcase'
 
 const STATS = [
   { value: '150+', label: 'Clientes Ativos', icon: '🏢' },
-  { value: `${sectors.length}`, label: 'Setores Atendidos', icon: '📊' },
   { value: '98%', label: 'NPS Médio', icon: '⭐' },
-  { value: '3', label: 'Países', icon: '🌎' },
+  { value: '3', label: 'Regiões no Globo', icon: '🌎' },
 ]
 
 function ClientCard({ client, index }: { client: ShowcaseClient; index: number }) {
@@ -85,7 +84,7 @@ function ClientCard({ client, index }: { client: ShowcaseClient; index: number }
             transition: 'filter 0.4s ease',
           }}
         >
-          <ClientLogo id={client.id} size={48} />
+          <ClientLogo id={client.id} size={64} />
         </motion.div>
 
         <motion.span
@@ -139,7 +138,7 @@ export function SectionClients() {
               </h2>
               <p className="text-foursys-text-muted max-w-xl text-sm md:text-base leading-relaxed">
                 Parceiros estratégicos de longo prazo que estão definindo o futuro de seus setores
-                no Brasil e no mundo.
+                no mundo.
               </p>
             </div>
 
