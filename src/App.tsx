@@ -135,13 +135,14 @@ function AppInner() {
 
       {/* Fullscreen hint */}
       {state.isFullscreen && (
-        <div
-          className="fixed inset-0 z-30 cursor-pointer"
-          onClick={toggleFullscreen}
-        >
-          <div className="absolute bottom-4 right-4 text-xs text-white/30 select-none">
-            Clique ou pressione ESC para sair do modo apresentação
-          </div>
+        <div className="fixed bottom-4 right-4 z-30 flex items-center gap-2 pointer-events-auto">
+          <button
+            type="button"
+            onClick={toggleFullscreen}
+            className="text-xs text-white/30 hover:text-white/60 transition-colors select-none bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-lg cursor-pointer"
+          >
+            ESC para sair do modo apresentação
+          </button>
         </div>
       )}
 

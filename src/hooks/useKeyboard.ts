@@ -24,18 +24,22 @@ export function useKeyboard() {
       }
 
       if (e.key === 'Escape') {
-        toggleMenu()
+        if (state.isFullscreen) {
+          toggleFullscreen()
+        } else {
+          toggleMenu()
+        }
         return
       }
 
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      if (e.key === 'ArrowRight') {
         e.preventDefault()
         const next = activeNavigationItems[idx + 1]
         if (next) navigate(next.id as AppSection)
         return
       }
 
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      if (e.key === 'ArrowLeft') {
         e.preventDefault()
         const prev = activeNavigationItems[idx - 1]
         if (prev) navigate(prev.id as AppSection)
@@ -45,5 +49,5 @@ export function useKeyboard() {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [state.currentSection, navigate, toggleFullscreen, openSearch, toggleMenu, activeNavigationItems])
+  }, [state.currentSection, state.isFullscreen, navigate, toggleFullscreen, openSearch, toggleMenu, activeNavigationItems])
 }
