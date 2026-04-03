@@ -54,7 +54,7 @@ function AppInner() {
   })
 
   return (
-    <div className="flex h-[100dvh] overflow-hidden bg-foursys-dark-2 pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)]">
+    <div className="flex h-[100dvh] overflow-hidden bg-foursys-dark-2 pt-[env(safe-area-inset-top)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] landscape-compact">
 
       <a
         href="#main-content"
@@ -91,7 +91,7 @@ function AppInner() {
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden min-w-0 relative w-full">
         <TopBar />
-        <main ref={mainRef} id="main-content" className="flex-1 relative overflow-y-auto overflow-x-hidden">
+        <main ref={mainRef} id="main-content" className="flex-1 relative overflow-y-auto overflow-x-hidden overscroll-contain">
           <SectionRenderer />
         </main>
       </div>

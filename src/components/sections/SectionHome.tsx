@@ -75,7 +75,7 @@ function FoursysLogo() {
           viewBox="0 0 220 80"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="drop-shadow-[0_0_24px_rgba(255,100,0,0.5)]"
+          className="max-w-full h-auto drop-shadow-[0_0_24px_rgba(255,100,0,0.5)]"
         >
           <defs>
             <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -202,7 +202,7 @@ export function SectionHome() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col items-center justify-center py-8 lg:py-6 cursor-pointer order-1 lg:order-2"
+            className="section-hero flex flex-col items-center justify-center py-8 lg:py-6 cursor-pointer order-1 lg:order-2"
             onClick={() => navigate('identity')}
             role="button"
             tabIndex={0}

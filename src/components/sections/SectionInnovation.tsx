@@ -176,7 +176,7 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain"
       role="dialog"
       aria-modal="true"
       aria-label={`Tendência: ${trend.title}`}
@@ -398,7 +398,7 @@ export function SectionInnovation() {
         </motion.div>
 
         {/* Trends grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 mb-12">
+        <div className="grid grid-cols-1 tablet:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 mb-12">
           {innovationTrends.map((trend, i) => (
             <TrendCard key={trend.id} trend={trend} index={i} onClick={() => setActiveTrend(trend)} />
           ))}

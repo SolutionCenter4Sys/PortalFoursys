@@ -223,7 +223,7 @@ function MobileBottomSheet({
         exit={{ y: '100%' }}
         transition={{ type: 'spring', damping: 28, stiffness: 300 }}
         onClick={e => e.stopPropagation()}
-        className="relative w-full max-w-lg rounded-t-[24px] border-t p-5 pb-8 max-h-[85vh] overflow-y-auto outline-none"
+        className="relative w-full max-w-lg rounded-t-[24px] border-t p-5 pb-[max(2rem,env(safe-area-inset-bottom))] max-h-[85vh] overflow-y-auto overscroll-contain outline-none"
         style={{
           borderColor: `${visual.glow}35`,
           background: `linear-gradient(180deg, ${visual.glow}12 0%, #1a1b2e 15%, #14152a 100%)`,
@@ -291,7 +291,7 @@ function OfferDetailModal({
         exit={{ opacity: 0, scale: 0.95, y: 10 }}
         transition={{ type: 'spring', damping: 26, stiffness: 300 }}
         onClick={e => e.stopPropagation()}
-        className="relative w-full max-w-2xl rounded-[20px] border overflow-y-auto max-h-[90vh] outline-none"
+        className="relative w-full max-w-2xl rounded-[20px] border overflow-y-auto overscroll-contain max-h-[90vh] outline-none"
         style={{
           borderColor: `${visual.glow}30`,
           background: `linear-gradient(160deg, ${visual.glow}10 0%, #1a1b2e 18%, #14152a 100%)`,
@@ -1640,7 +1640,7 @@ function DeepDiveModal({
         exit={{ opacity: 0, scale: 0.95, y: 10 }}
         transition={{ type: 'spring', damping: 26, stiffness: 300 }}
         onClick={e => e.stopPropagation()}
-        className="relative w-full max-w-4xl rounded-[20px] border overflow-y-auto max-h-[90vh] outline-none"
+        className="relative w-full max-w-4xl rounded-[20px] border overflow-y-auto overscroll-contain max-h-[90vh] outline-none"
         style={{
           borderColor: `${visual.glow}30`,
           background: `linear-gradient(160deg, ${visual.glow}10 0%, #1a1b2e 18%, #14152a 100%)`,

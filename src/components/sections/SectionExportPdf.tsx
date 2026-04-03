@@ -256,7 +256,7 @@ export function SectionExportPdf() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
+        <div className="grid grid-cols-1 tablet:grid-cols-[1fr_320px] lg:grid-cols-[1fr_320px] gap-6">
 
           {/* Left — Selection area */}
           <motion.div
@@ -286,7 +286,7 @@ export function SectionExportPdf() {
             </div>
 
             {/* Section list */}
-            <div className="max-h-[55vh] overflow-y-auto custom-scrollbar px-5 py-4">
+            <div className="max-h-[55dvh] overflow-y-auto custom-scrollbar px-5 py-4">
               <div className="space-y-5">
                 {groupedSections.map((group, gi) => {
                   const isFullCat = isCategoryFullySelected(group.category)
@@ -458,7 +458,7 @@ export function SectionExportPdf() {
                   </p>
                 </div>
               ) : (
-                <div className="space-y-2 max-h-[30vh] overflow-y-auto custom-scrollbar">
+                <div className="space-y-2 max-h-[30dvh] overflow-y-auto custom-scrollbar">
                   {availableItems
                     .filter(item => selectedSections.has(item.id))
                     .map(item => {

@@ -6,6 +6,11 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '375px',
+        'tablet': '820px',
+        '3xl': '1920px',
+      },
       colors: {
         foursys: {
           // === PRIMARY ORANGE (Foursys Brand) ===

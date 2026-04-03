@@ -424,7 +424,7 @@ export function SessionPanel() {
               </div>
 
               {/* Gerar resumo */}
-              <div className="flex gap-2">
+              <div className="flex gap-2 pb-[env(safe-area-inset-bottom)]">
                 <button
                   onClick={generateSummary}
                   className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-foursys-primary/15 border border-foursys-primary/30 hover:bg-foursys-primary/22 hover:border-foursys-primary/50 text-foursys-primary transition-all duration-150 font-semibold text-sm shadow-[0_0_15px_rgba(255,102,0,0.12)]"

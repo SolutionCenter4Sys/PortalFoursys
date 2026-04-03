@@ -25,6 +25,13 @@
     flex-direction: column;
     overflow: hidden;
   }
+
+  @supports (padding: env(safe-area-inset-top)) {
+    .safe-top { padding-top: env(safe-area-inset-top); }
+    .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+    .safe-left { padding-left: env(safe-area-inset-left); }
+    .safe-right { padding-right: env(safe-area-inset-right); }
+  }
 }
 
 @layer utilities {
@@ -48,6 +55,11 @@
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 102, 0, 0.55);
+  }
+
+  .overscroll-contain {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -122,5 +134,34 @@
     content: " (" attr(href) ")";
     font-size: 0.8em;
     color: #666;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .landscape-compact .section-hero {
+    min-height: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .landscape-compact .section-hero h1 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .landscape-compact .section-hero h2 {
+    font-size: 1.125rem;
+  }
+}
+
+@media (orientation: landscape) {
+  .landscape-grid-adapt {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .tablet-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

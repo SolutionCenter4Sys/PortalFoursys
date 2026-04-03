@@ -231,7 +231,7 @@ export function SearchOverlay() {
               </div>
 
               {/* Results */}
-              <div ref={listRef} className="max-h-[60vh] overflow-y-auto custom-scrollbar">
+              <div ref={listRef} className="max-h-[60dvh] overflow-y-auto custom-scrollbar">
                 {results.length === 0 && query.trim() && (
                   <div className="px-6 py-10 text-center">
                     <Search size={28} className="mx-auto text-foursys-text-dim/30 mb-2" />
