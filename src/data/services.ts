@@ -122,6 +122,33 @@ export const serviceLines: ServiceLine[] = [
     },
   },
   {
+    id: 'ai-augmented-squad',
+    title: 'AI-Augmented Squad',
+    subtitle: 'Times humanos + IA com framework SDD e governança enterprise',
+    problem: 'Squads tradicionais sofrem com atrasos, falta de padronização de código, baixa cobertura de testes, qualidade inconsistente, retrabalho, escassez de profissionais e ausência de documentação. O AI-Augmented Squad resolve estes problemas com times humanos amplificados por mais de 20 agentes de IA especializados em cada fase do processo.',
+    target: 'Empresas que precisam acelerar entregas com qualidade enterprise, reduzir lead time e eliminar gargalos de squads tradicionais com uso pragmático de IA.',
+    icon: 'brain-circuit',
+    color: 'from-orange-500 to-orange-700',
+    tags: ['AI-Augmented', 'Squad', 'SDD', 'Agentes IA', 'Framework', 'Governança'],
+    offerDetail: {
+      valueProposition: 'Squad operacional Humano + IA com PO, AI Engineer, Desenvolvedores e QA amplificados por mais de 20 agentes especializados. Framework SDD proprietário (Discovery → Design → Desenvolvimento → Qualidade → Deploy), documentação completa (C4, ADRs, specs de API), dashboards de performance em tempo real e agentes treinados na stack, domínio e regras de negócio do cliente — sem lock-in.',
+      metrics: [
+        { value: '80%', label: 'Ganho de Produtividade' },
+        { value: '65%', label: 'Redução de Lead Time' },
+        { value: '70%', label: 'Queda de Retrabalho' },
+      ],
+      differentials: [
+        'Framework SDD (OpenSpec) com agentes especializados em cada fase do ciclo.',
+        'Documentação completa: diagramas C4, ADRs, user stories, especificações de API e testes.',
+        'Dashboards em tempo real: velocidade, burndown, custos, taxa de aceitação de IA, qualidade de código.',
+        'Agentes treinados na stack, domínio e regras de negócio do cliente — não genéricos.',
+        'Cloud isolada e criptografada por cliente com conformidade GDPR & EU AI Act.',
+        'Autonomia total do cliente: código aberto para evolução contínua, sem dependência.',
+        'Dois modelos de implantação: ambiente do cliente ou ambiente Foursys.',
+      ],
+    },
+  },
+  {
     id: 'cloud-finops',
     title: 'Cloud & FinOps',
     subtitle: 'Escala cloud com eficiência financeira',

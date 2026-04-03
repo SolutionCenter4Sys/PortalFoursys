@@ -393,7 +393,7 @@ function OfferDetailModal({
 
 /* ── Deep-dive content for specific service lines ────────────────────────────── */
 
-const DEEP_DIVE_IDS = ['modernizacao-legados', 'ciberseguranca', 'fourblox'] as const
+const DEEP_DIVE_IDS = ['modernizacao-legados', 'ciberseguranca', 'fourblox', 'ai-augmented-squad'] as const
 
 const sddSteps = [
   { icon: 'search', title: 'Diagnóstico', desc: 'Mapeamento completo do sistema legado — código, dependências, riscos e oportunidades de modernização.' },
@@ -778,6 +778,232 @@ function Sec4SysDeepDive() {
   )
 }
 
+/* ── AI-Augmented Squad Deep Dive ─────────────────────────────────────────── */
+
+const sddPhases = [
+  { icon: 'search', title: 'Discovery', desc: 'Análise de contexto, mapeamento de stack e domínio, definição de agentes especializados.' },
+  { icon: 'palette', title: 'Design', desc: 'Diagramas C4, ADRs, user stories, especificações de API e arquitetura de referência.' },
+  { icon: 'code', title: 'Desenvolvimento', desc: 'Codificação acelerada por agentes treinados na stack e regras de negócio do cliente.' },
+  { icon: 'check-circle', title: 'Qualidade', desc: 'Testes automatizados por IA, análise de cobertura e validação de aceitação.' },
+  { icon: 'rocket', title: 'Deploy', desc: 'CI/CD integrado, rollout seguro e monitoramento pós-deploy com observabilidade.' },
+]
+
+const squadDeliverables = [
+  { icon: 'users', title: 'Squad Operacional', desc: 'PO, AI Engineer, Desenvolvedores e QA amplificados por 20+ agentes.', color: '#FF6600' },
+  { icon: 'book-open', title: 'Documentação Completa', desc: 'Diagramas C4, ADRs, user stories, specs de API e testes.', color: '#8B5CF6' },
+  { icon: 'bar-chart', title: 'Dashboards em Tempo Real', desc: 'Velocidade, burndown, custos, taxa de aceitação de IA, qualidade de código.', color: '#00C2E0' },
+  { icon: 'brain', title: 'Agentes Customizados', desc: 'Treinados na stack, domínio e regras de negócio do cliente. Não genéricos.', color: '#4ADE80' },
+  { icon: 'shield', title: 'Governança & Segurança', desc: 'Cloud isolada, GDPR & EU AI Act, VPN dedicada, tenant segregado.', color: '#EF4444' },
+  { icon: 'unlock', title: 'Autonomia do Cliente', desc: 'Total domínio sobre o código. Aberto para evolução. Sem lock-in.', color: '#F59E0B' },
+]
+
+const squadProblems = [
+  'Atrasos em projetos e perda de time-to-market',
+  'Falta de padronização de código',
+  'Baixa cobertura de testes',
+  'Qualidade inconsistente e retrabalho',
+  'Escassez de profissionais qualificados',
+  'Turnover e perda de conhecimento',
+  'Ausência de documentação',
+  'Baixa visibilidade do progresso',
+]
+
+const squadCases = [
+  {
+    title: 'Workstream Orquestrador com IA',
+    sector: 'Financeiro',
+    result: '80% ganho de produtividade',
+    details: '12 meses, 5 squads (40+ FTE), 500+ features',
+    metrics: [
+      { value: '65%', label: 'Redução de lead time' },
+      { value: '70%', label: 'Queda de retrabalho' },
+      { value: '80%', label: 'Ganho produtividade' },
+    ],
+  },
+  {
+    title: 'Governança e Auditoria de TI',
+    sector: 'Banco Internacional',
+    result: '100+ apontamentos resolvidos',
+    details: '18 meses, 8 FTE + 10 Agentes, COBIT/ISO 27001/NIST',
+    metrics: [
+      { value: '60%', label: 'Redução backlog auditoria' },
+      { value: '30%', label: 'Planos no prazo' },
+      { value: '40%', label: 'Menos reincidência' },
+    ],
+  },
+  {
+    title: 'Módulo Analytics eHealth',
+    sector: 'Saúde Digital',
+    result: 'Projeto de 14 meses feito em 5',
+    details: '80 features, 8.400h (vs 18.000h estimadas)',
+    metrics: [
+      { value: '300%', label: 'Produtividade admin' },
+      { value: '400%', label: 'Aumento de uso' },
+      { value: '75%', label: 'Redução navegação' },
+    ],
+  },
+]
+
+function AISquadDeepDive() {
+  const [expandedCase, setExpandedCase] = useState<number | null>(null)
+
+  return (
+    <div className="space-y-6">
+      {/* Problemas vs Solução */}
+      <div className="grid md:grid-cols-2 gap-4">
+        <div className="p-5 rounded-xl bg-red-500/10 border border-red-500/25">
+          <div className="text-sm font-bold text-red-400 mb-2.5">Squads Tradicionais (problemas)</div>
+          <ul className="space-y-1.5 text-xs text-foursys-text-dim">
+            {squadProblems.map(p => (
+              <li key={p}>• {p}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="p-5 rounded-xl bg-orange-500/10 border border-orange-500/25">
+          <div className="text-sm font-bold text-orange-400 mb-2.5">AI-Augmented Squad (solução)</div>
+          <ul className="space-y-1.5 text-xs text-foursys-text-muted">
+            <li>• Times humanos + 20+ agentes IA especializados</li>
+            <li>• Framework SDD com agentes por fase do ciclo</li>
+            <li>• Documentação automática e completa</li>
+            <li>• Dashboards de performance em tempo real</li>
+            <li>• Agentes treinados na stack e domínio do cliente</li>
+            <li>• Cloud isolada, GDPR & EU AI Act compliance</li>
+            <li>• Código aberto, sem lock-in</li>
+            <li>• Dois modelos: ambiente cliente ou Foursys</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Framework SDD */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          Framework SDD — Fases do Processo
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+          {sddPhases.map((phase, i) => (
+            <div key={phase.title} className="p-4 rounded-xl bg-foursys-surface/50 border border-orange-500/15 relative">
+              <div className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-orange-500/30 border border-orange-500/50 flex items-center justify-center text-[9px] font-bold text-orange-300">
+                {i + 1}
+              </div>
+              <div className="mb-2">
+                <DynIcon name={phase.icon} size={18} className="text-orange-300" />
+              </div>
+              <div className="font-semibold text-foursys-text text-xs mb-1">{phase.title}</div>
+              <p className="text-[10px] text-foursys-text-dim leading-relaxed">{phase.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Entregáveis */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          O que você recebe
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5">
+          {squadDeliverables.map(d => (
+            <div key={d.title} className="p-3.5 rounded-xl bg-foursys-surface/40 border border-white/10">
+              <div className="mb-1.5">
+                <DynIcon name={d.icon} size={16} style={{ color: d.color }} />
+              </div>
+              <div className="font-bold text-xs text-white mb-0.5">{d.title}</div>
+              <div className="text-[10px] text-foursys-text-dim leading-relaxed">{d.desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Cases comprovados */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          Cases Comprovados
+        </div>
+        <div className="space-y-2.5">
+          {squadCases.map((c, i) => {
+            const isOpen = expandedCase === i
+            return (
+              <div key={c.title} className="rounded-xl border border-orange-500/20 overflow-hidden bg-foursys-surface/30">
+                <button
+                  type="button"
+                  onClick={() => setExpandedCase(isOpen ? null : i)}
+                  className="w-full p-4 flex items-start gap-3 text-left hover:bg-white/[0.03] transition-colors min-h-[44px]"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-orange-500/20 border border-orange-500/35 flex items-center justify-center flex-shrink-0">
+                    <Zap size={16} className="text-orange-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2">
+                      <h5 className="text-sm font-bold text-white">{c.title}</h5>
+                      <DynIcon name={isOpen ? 'chevron-up' : 'chevron-down'} size={14} className="text-white/30 flex-shrink-0" />
+                    </div>
+                    <p className="text-[10px] text-orange-400 font-semibold mt-0.5">{c.sector} — {c.result}</p>
+                  </div>
+                </button>
+                {isOpen && (
+                  <div className="px-4 pb-4 space-y-3">
+                    <p className="text-[11px] text-foursys-text-dim">{c.details}</p>
+                    <div className="grid grid-cols-3 gap-2">
+                      {c.metrics.map(m => (
+                        <div key={m.label} className="text-center p-2.5 rounded-lg bg-orange-500/10 border border-orange-500/20">
+                          <div className="text-lg font-black text-orange-400">{m.value}</div>
+                          <div className="text-[9px] text-foursys-text-dim mt-0.5">{m.label}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Requisitos */}
+      <div className="grid md:grid-cols-2 gap-4">
+        <div className="p-4 rounded-xl border border-white/10 bg-foursys-surface/30">
+          <div className="flex items-center gap-2 mb-2.5">
+            <DynIcon name="building" size={16} className="text-foursys-cyan" />
+            <span className="text-xs font-bold text-white">Ambiente do Cliente</span>
+          </div>
+          <ul className="space-y-1.5 text-[10px] text-foursys-text-dim">
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-foursys-cyan mt-0.5 flex-shrink-0" /> Repositório Git com permissões para o squad</li>
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-foursys-cyan mt-0.5 flex-shrink-0" /> Pipeline de CI/CD definido ou co-criado</li>
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-foursys-cyan mt-0.5 flex-shrink-0" /> Ambientes Dev / Staging / Produção</li>
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-foursys-cyan mt-0.5 flex-shrink-0" /> VPN ou acesso seguro de rede</li>
+          </ul>
+        </div>
+        <div className="p-4 rounded-xl border border-orange-500/20 bg-orange-500/5">
+          <div className="flex items-center gap-2 mb-2.5">
+            <DynIcon name="server" size={16} className="text-orange-400" />
+            <span className="text-xs font-bold text-white">Ambiente Foursys</span>
+          </div>
+          <ul className="space-y-1.5 text-[10px] text-foursys-text-dim">
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-orange-400 mt-0.5 flex-shrink-0" /> Cloud isolada e criptografada por cliente</li>
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-orange-400 mt-0.5 flex-shrink-0" /> VPN dedicada ao codebase</li>
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-orange-400 mt-0.5 flex-shrink-0" /> Conformidade GDPR & EU AI Act</li>
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-orange-400 mt-0.5 flex-shrink-0" /> Stack de monitoramento e observabilidade inclusa</li>
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-orange-400 mt-0.5 flex-shrink-0" /> IDE compatível com BMAD/OpenSpecLLM</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* CTA */}
+      <div className="p-4 rounded-xl bg-gradient-to-r from-orange-500/12 via-amber-500/8 to-transparent border border-orange-500/20">
+        <div className="flex items-center gap-3">
+          <Zap size={18} className="text-orange-400 flex-shrink-0" />
+          <div className="flex-1">
+            <p className="text-xs text-foursys-text-muted leading-relaxed">
+              <strong className="text-white">AI-Augmented Squad — Foursys.</strong>{' '}
+              Resultados comprovados: até 80% de ganho de produtividade, 65% de redução de lead time
+              e 70% de queda de retrabalho com governança enterprise e zero lock-in.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function DeepDiveContent({ serviceId }: { serviceId: string }) {
   if (serviceId === 'modernizacao-legados') {
     return (
@@ -839,6 +1065,10 @@ function DeepDiveContent({ serviceId }: { serviceId: string }) {
 
   if (serviceId === 'ciberseguranca') {
     return <Sec4SysDeepDive />
+  }
+
+  if (serviceId === 'ai-augmented-squad') {
+    return <AISquadDeepDive />
   }
 
   if (serviceId === 'fourblox') {
