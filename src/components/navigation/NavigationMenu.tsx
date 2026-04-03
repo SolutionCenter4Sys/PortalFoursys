@@ -18,6 +18,7 @@ import {
   Award,
   Briefcase,
   FileText,
+  Mic,
   type LucideIcon,
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
@@ -133,7 +134,7 @@ export function NavigationMenu() {
         >
           <Search size={13} className="flex-shrink-0" />
           <span>Buscar seção...</span>
-          <span className="ml-auto text-[10px] bg-white/10 rounded px-1.5 py-0.5 font-mono">⌘K</span>
+          <Mic size={13} className="ml-auto text-foursys-text-dim" />
         </button>
       </div>
 

@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown, ArrowRight } from 'lucide-react'
+import { ChevronDown, ArrowRight, Search, Mic, MicOff, X } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { faqItems } from '../../data/faq'
 import { useApp } from '../../context/AppContext'
+import { useVoiceSearch } from '../../hooks/useVoiceSearch'
 import type { AppSection } from '../../types'
 
 const categories = ['Todos', 'Institucional', 'Serviços', 'Tecnologia', 'Parceria', 'Santander', 'Comercial']
@@ -13,6 +14,11 @@ export function SectionFAQ() {
   const [openId, setOpenId] = useState<string | null>(null)
   const [activeCategory, setActiveCategory] = useState('Todos')
   const [search, setSearch] = useState('')
+
+  const onVoiceResult = useCallback((transcript: string) => {
+    setSearch(transcript)
+  }, [])
+  const voice = useVoiceSearch(onVoiceResult)
 
   const filtered = faqItems.filter(item => {
     const matchCategory = activeCategory === 'Todos' || item.category === activeCategory
@@ -46,12 +52,48 @@ export function SectionFAQ() {
           transition={{ delay: 0.2 }}
           className="mb-5"
         >
-          <input
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            placeholder="Buscar pergunta..."
-            className="w-full px-4 py-3 rounded-xl bg-foursys-surface/60 border border-white/15 text-foursys-text placeholder-foursys-text-dim outline-none focus:border-foursys-primary/50 transition-colors text-sm"
-          />
+          <div className={`flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-200 ${
+            voice.status === 'listening'
+              ? 'border-foursys-primary/50 bg-foursys-primary/5 shadow-[0_0_20px_rgba(255,102,0,0.12)]'
+              : 'border-white/[0.1] bg-foursys-surface/60 focus-within:border-foursys-primary/50'
+          }`}>
+            <Search size={16} className="text-foursys-text-dim shrink-0" />
+            <input
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              placeholder={voice.status === 'listening' ? 'Ouvindo...' : 'Buscar pergunta...'}
+              className="flex-1 bg-transparent text-sm text-foursys-text placeholder-foursys-text-dim outline-none"
+            />
+            {search && (
+              <button
+                type="button"
+                onClick={() => setSearch('')}
+                className="p-1 rounded-full hover:bg-white/10 text-foursys-text-dim hover:text-white transition-colors"
+                aria-label="Limpar busca"
+              >
+                <X size={14} />
+              </button>
+            )}
+            {voice.isSupported && (
+              <button
+                type="button"
+                onClick={voice.toggle}
+                className={`p-1.5 rounded-full transition-all ${
+                  voice.status === 'listening'
+                    ? 'bg-foursys-primary/20 text-foursys-primary animate-pulse'
+                    : voice.status === 'error'
+                      ? 'text-red-400'
+                      : 'text-foursys-text-dim hover:text-white hover:bg-white/10'
+                }`}
+                aria-label={voice.status === 'listening' ? 'Parar gravação' : 'Buscar por voz'}
+              >
+                {voice.status === 'listening' ? <MicOff size={16} /> : <Mic size={16} />}
+              </button>
+            )}
+          </div>
+          {voice.status === 'listening' && (
+            <p className="text-[10px] text-foursys-primary mt-1.5 ml-1 animate-pulse">Ouvindo... fale o termo que deseja buscar</p>
+          )}
         </motion.div>
 
         {/* Category filter */}
