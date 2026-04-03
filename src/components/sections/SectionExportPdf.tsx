@@ -61,7 +61,7 @@ const SECTION_SUBITEMS: Partial<Record<AppSection, SubItem[]>> = {
 }
 
 export function SectionExportPdf() {
-  const { state, getSectionLabel, navigate: appNavigate } = useApp()
+  const { getSectionLabel, navigate: appNavigate } = useApp()
 
   const [selectedSections, setSelectedSections] = useState<Set<AppSection>>(new Set())
   const [selectedSubItems, setSelectedSubItems] = useState<Set<string>>(new Set())
