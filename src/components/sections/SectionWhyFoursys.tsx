@@ -18,7 +18,7 @@ const DIFFERENTIALS = [
   { icon: <Users size={20} />, stat: '3,6%', label: 'Turnover', context: 'vs. 22% da média do mercado' },
   { icon: <Calendar size={20} />, stat: '26', label: 'Anos de entrega', context: 'Fundada em 2000' },
   { icon: <ShieldCheck size={20} />, stat: '4', label: 'Certificações ISO', context: '9001 · 27001 · 27701 · 14001' },
-  { icon: <Globe size={20} />, stat: '3', label: 'Continentes', context: 'Brasil · EUA · Portugal' },
+  { icon: <Globe size={20} />, stat: '3', label: 'Regiões do Globo', context: 'Brasil · EUA · Portugal' },
   { icon: <Network size={20} />, stat: '6+', label: 'Parcerias tier-1', context: 'Microsoft · AWS · Google · SAP' },
   { icon: <TrendingUp size={20} />, stat: '500K+', label: 'Projetos entregues', context: 'Todos os modelos de delivery' },
 ]
