@@ -261,4 +261,52 @@ export const innovationTrends: InnovationTrend[] = [
       futureOutlook: 'Data Fabric e Data Mesh se tornam complementares. IA generativa aplicada a analytics ("ask your data") democratiza insights. Synthetic data resolve desafios de privacidade em treinamento de modelos.',
     },
   },
+  {
+    id: 'ai-robotics',
+    title: 'IA & Robótica',
+    tagline: 'Inteligência física — da fábrica ao mundo real',
+    description: 'Robôs humanoides, cobots com IA, veículos autônomos e robótica cirúrgica estão criando a era da "Physical AI", onde a inteligência artificial ganha corpo, mãos e mobilidade.',
+    icon: 'bot',
+    color: '#EC4899',
+    accent: '#F472B6',
+    gradient: 'from-pink-600/40 via-fuchsia-800/20 to-transparent',
+    leaders: [
+      {
+        name: 'NVIDIA',
+        approach: 'Plataforma Isaac para robótica (simulação, treino e deploy). Foundation model GR00T para humanoides. Cosmos para geração de dados sintéticos. Jetson para inferência de IA na borda. Ecossistema de parceiros inclui FANUC, ABB, KUKA, Yaskawa, Figure AI e Agility Robotics.',
+        highlight: 'Isaac + GR00T: infraestrutura de IA para toda a indústria robótica',
+      },
+      {
+        name: 'Tesla (Optimus)',
+        approach: '8.000 unidades acumuladas em deploy nas próprias fábricas (jan/2026). Venda ao público prevista para 2027. Usa pipeline de visão computacional do FSD (Full Self-Driving) para manipulação generalista. Objetivo: robô utilitário de US$ 20-30 mil para tarefas domésticas e industriais.',
+        highlight: '8.000 Optimus em produção, venda pública em 2027',
+      },
+      {
+        name: 'Unitree',
+        approach: 'Líder mundial em vendas de humanoides: 5.500 unidades em 2025. Modelo mais acessível do mercado a partir de US$ 5.900. Estratégia de democratização da robótica humanoide com produção em escala na China.',
+        highlight: '5.500 unidades, a partir de US$ 5.900',
+      },
+    ],
+    foursysPosition: 'A Foursys monitora ativamente o ecossistema de Physical AI e posiciona-se como parceira de integração para empresas que desejam incorporar robótica inteligente em suas operações — desde automação de warehouse até RPA avançado com agentes físicos, conectando plataformas NVIDIA Isaac, cobots industriais e soluções FourBlox para orquestração.',
+    keyCapabilities: [
+      'Integração de Cobots com Sistemas Enterprise',
+      'Plataformas NVIDIA Isaac & Omniverse',
+      'Automação Inteligente de Warehouse',
+      'RPA Avançado com Agentes Físicos',
+      'Digital Twins para Simulação Robótica',
+      'Orquestração via FourBlox',
+    ],
+    stats: [
+      { value: '50K+', label: 'Humanoides previstos 2026' },
+      { value: '700%', label: 'Crescimento embarques 2025→2026' },
+      { value: '$39B', label: 'Valuation Figure AI' },
+      { value: '2.5B', label: 'Robôs projetados 2035' },
+    ],
+    deepDive: {
+      overview: 'A convergência de IA generativa com robótica está criando a era da "Physical AI" — máquinas que não apenas pensam, mas agem no mundo físico. Em 2025, os embarques globais de robôs humanoides ultrapassaram 14.500 unidades, e a projeção para 2026 é de mais de 50.000 — um crescimento de 700%. A China domina 90% dos embarques, mas os EUA lideram em investimento e valuations. O mercado se divide em cinco segmentos: Robôs Humanoides (Unitree, AgiBot, Tesla Optimus, Figure AI, UBTECH, Agility Robotics, Fourier, Sanctuary AI, Apptronik), Robótica Industrial (FANUC, ABB, KUKA, Yaskawa, Universal Robots), Infraestrutura de IA para Robótica (NVIDIA Isaac, GR00T, Cosmos, Jetson), Robótica Autônoma e Logística (Boston Dynamics, Amazon Robotics, Waymo), e Robótica Cirúrgica (Intuitive Surgical, Medtronic).',
+      whyItMatters: 'A robótica com IA resolve o problema fundamental de escassez de mão de obra em manufatura, logística, saúde e serviços. FANUC tem mais de 1 milhão de robôs instalados globalmente. Amazon opera +750 mil robôs em seus armazéns. Intuitive Surgical já realizou +9 milhões de cirurgias robóticas. Figure AI alcançou valuation de US$ 39 bilhões após captar US$ 1 bilhão em 2025. A NVIDIA conecta todo o ecossistema com sua plataforma Isaac, fornecendo simulação (Omniverse), modelos foundation (GR00T), dados sintéticos (Cosmos) e inferência na borda (Jetson) para os principais fabricantes do mundo.',
+      marketSize: 'O mercado global de robótica inteligente deve ultrapassar US$ 260 bilhões até 2030. Robôs humanoides, que em 2025 geraram ~US$ 200 milhões, devem alcançar US$ 38 bilhões até 2035. Robótica industrial (FANUC, ABB, KUKA, Yaskawa) já movimenta US$ 55B/ano. Cobots (Universal Robots) crescem 30% ao ano. Robótica cirúrgica (Intuitive, Medtronic) projeta US$ 18B até 2028. A projeção é de 2,5 bilhões de robôs no mundo até 2035.',
+      futureOutlook: 'Robôs humanoides generalistas (Tesla Optimus, Figure AI) chegarão ao consumidor a partir de 2027-2028. Cobots com IA generativa entenderão instruções em linguagem natural. Cirurgia robótica autônoma (Intuitive, Medtronic + NVIDIA) reduzirá erros médicos. Digital Twins com NVIDIA Omniverse permitirão testar robôs inteiros em simulação antes do deploy físico. A NVIDIA se consolida como a "plataforma das plataformas" — fornecendo infraestrutura de IA para praticamente todos os fabricantes de robôs do planeta.',
+    },
+  },
 ]

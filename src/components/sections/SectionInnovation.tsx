@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  BrainCircuit, Cloud, Factory, Shield, BarChart3,
+  BrainCircuit, Cloud, Factory, Shield, BarChart3, Bot,
   X, ArrowRight, ChevronRight, Sparkles, TrendingUp,
   Zap, CheckCircle2, Quote,
 } from 'lucide-react'
@@ -15,6 +15,7 @@ const ICON_MAP: Record<string, React.ReactNode> = {
   'factory': <Factory />,
   'shield': <Shield />,
   'bar-chart-3': <BarChart3 />,
+  'bot': <Bot />,
 }
 
 function hexToRgba(hex: string, a: number) {
@@ -400,7 +401,7 @@ export function SectionInnovation() {
             <TrendCard key={trend.id} trend={trend} index={i} onClick={() => setActiveTrend(trend)} />
           ))}
         </div>
-        <div className="grid md:grid-cols-2 gap-5 md:gap-6 max-w-4xl mx-auto mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 mb-12">
           {innovationTrends.slice(3).map((trend, i) => (
             <TrendCard key={trend.id} trend={trend} index={i + 3} onClick={() => setActiveTrend(trend)} />
           ))}
