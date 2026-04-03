@@ -329,7 +329,7 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
           >
             <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
               <div className="flex items-center gap-2 mb-3">
-                <BarChart3 size={14} style={{ color: trend.color }} />
+                <TrendingUp size={14} style={{ color: trend.color }} />
                 <h4 className="text-xs font-bold uppercase tracking-wider" style={{ color: trend.color }}>Tamanho do Mercado</h4>
               </div>
               <p className="text-sm text-foursys-text-muted leading-relaxed">{trend.deepDive.marketSize}</p>
