@@ -74,53 +74,6 @@ export const innovationTrends: InnovationTrend[] = [
     },
   },
   {
-    id: 'cloud-native',
-    title: 'Cloud-Native & Multicloud',
-    tagline: 'Infraestrutura que acompanha a velocidade do negócio',
-    description: 'Arquiteturas cloud-native, microsserviços, event-driven e estratégias multicloud são o alicerce da transformação digital moderna.',
-    icon: 'cloud',
-    color: '#06B6D4',
-    accent: '#22D3EE',
-    gradient: 'from-cyan-600/40 via-teal-800/20 to-transparent',
-    leaders: [
-      {
-        name: 'Deloitte',
-        approach: 'Líder no Gartner Magic Quadrant para Cloud IT Transformation por 5 anos consecutivos. Deloitte Fabric com 800+ clientes e 92% de renovação. Especialistas em migração de workloads regulados.',
-        highlight: 'Gartner Leader 5 anos, 92% renewal rate',
-      },
-      {
-        name: 'Capgemini',
-        approach: 'Cloud Center of Excellence com mais de 30.000 profissionais cloud. Parcerias premium com AWS, Azure e GCP. Framework RISE para migração SAP to cloud com zero downtime.',
-        highlight: '30.000+ profissionais cloud dedicados',
-      },
-      {
-        name: 'TCS',
-        approach: 'TCS Cloud Counsel — plataforma de advisory com IA para otimização de custos cloud. Expertise em multicloud para indústrias reguladas. Maior equipe de profissionais certificados em cloud da Ásia.',
-        highlight: 'Cloud Counsel: IA para otimização de custos',
-      },
-    ],
-    foursysPosition: 'Arquiteturas cloud-native com microsserviços, event-driven e infraestrutura elástica. Parceria direta com Microsoft Azure, AWS e Google Cloud. Especialistas em migração de sistemas legados para cloud sem downtime.',
-    keyCapabilities: [
-      'Migração Legacy-to-Cloud',
-      'Kubernetes & Containers',
-      'Serverless & Event-Driven',
-      'FinOps & Otimização de Custos',
-      'Multicloud Governance',
-    ],
-    stats: [
-      { value: '$832B', label: 'Mercado Cloud 2025' },
-      { value: '92%', label: 'Workloads em cloud até 2028' },
-      { value: 'Zero', label: 'Downtime em migrações Foursys' },
-      { value: '40%', label: 'Redução média TCO' },
-    ],
-    deepDive: {
-      overview: 'Cloud-native não é apenas "mover para a nuvem". É repensar arquitetura, operações e cultura para extrair máximo valor da elasticidade, automação e escala global que plataformas cloud oferecem.',
-      whyItMatters: 'O IDC projeta que 92% dos workloads estarão em cloud até 2028. Empresas com estratégia multicloud reduzem vendor lock-in em 60% e melhoram resiliência. Mas 67% das migrações excedem orçamento — planejamento é crítico.',
-      marketSize: 'O mercado global de cloud computing alcançou US$ 832 bilhões em 2025 e deve ultrapassar US$ 1.2 trilhão até 2028. Cloud-native applications representam o segmento de maior crescimento.',
-      futureOutlook: 'Edge computing + cloud cria infraestrutura distribuída inteligente. FinOps se torna obrigatório para controlar custos. Sovereign cloud ganha força em setores regulados (financeiro, saúde, governo).',
-    },
-  },
-  {
     id: 'industry-iot',
     title: 'Industry 4.0 & IoT',
     tagline: 'Fábricas inteligentes e operações conectadas',
