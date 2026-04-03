@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  BrainCircuit, Factory, Shield, BarChart3, Bot,
+  BrainCircuit, Factory, Bot,
   X, ArrowRight, ChevronRight, Sparkles, TrendingUp,
   Zap, CheckCircle2, Quote,
 } from 'lucide-react'
@@ -12,8 +12,6 @@ import type { InnovationTrend } from '../../data/innovation'
 const ICON_MAP: Record<string, React.ReactNode> = {
   'brain-circuit': <BrainCircuit />,
   'factory': <Factory />,
-  'shield': <Shield />,
-  'bar-chart-3': <BarChart3 />,
   'bot': <Bot />,
 }
 
@@ -396,13 +394,8 @@ export function SectionInnovation() {
 
         {/* Trends grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 mb-12">
-          {innovationTrends.slice(0, 3).map((trend, i) => (
+          {innovationTrends.map((trend, i) => (
             <TrendCard key={trend.id} trend={trend} index={i} onClick={() => setActiveTrend(trend)} />
-          ))}
-        </div>
-        <div className="grid md:grid-cols-2 gap-5 md:gap-6 max-w-4xl mx-auto mb-12">
-          {innovationTrends.slice(3).map((trend, i) => (
-            <TrendCard key={trend.id} trend={trend} index={i + 3} onClick={() => setActiveTrend(trend)} />
           ))}
         </div>
 
