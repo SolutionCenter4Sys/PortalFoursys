@@ -1,12 +1,33 @@
-import { useState } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, X, Quote, Shield, CheckCircle2, ChevronRight, Clock, Layers, Target, Wrench, Trophy } from 'lucide-react'
+import { ArrowRight, X, Quote, Shield, CheckCircle2, ChevronRight, Clock, Layers, Target, Wrench, Trophy, Search, Mic, MicOff } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { cases } from '../../data/cases'
+import { useVoiceSearch } from '../../hooks/useVoiceSearch'
 import type { CaseStudy } from '../../types'
 
+function norm(s: string) {
+  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+}
+
+function caseMatchesQuery(c: CaseStudy, q: string): boolean {
+  const n = norm(q)
+  const fields = [
+    c.title, c.client, c.sector, c.type, c.challenge, c.solution,
+    c.overview ?? '',
+    ...(c.results ?? []),
+    ...(c.stack ?? []),
+    c.detail?.context ?? '',
+    c.detail?.delivery ?? '',
+    c.detail?.technicalDetails ?? '',
+    c.detail?.challengesOvercome ?? '',
+    c.testimonial?.quote ?? '',
+  ]
+  return fields.some(f => norm(f).includes(n))
+}
+
 const HERO_STATS = [
-  { value: '100+', label: 'projetos desbloqueados' },
+  { value: '150+', label: 'clientes satisfeitos' },
   { value: '85%', label: 'redução de tempo médio' },
   { value: '40%', label: 'redução de custo operacional' },
   { value: '82%', label: 'previsibilidade de entrega' },
@@ -337,6 +358,13 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
 export function SectionCases() {
   const [filter, setFilter] = useState('Todos')
   const [selectedCase, setSelectedCase] = useState<CaseStudy | null>(null)
+  const [searchQuery, setSearchQuery] = useState('')
+  const searchInputRef = useRef<HTMLInputElement>(null)
+
+  const onVoiceResult = useCallback((transcript: string) => {
+    setSearchQuery(transcript)
+  }, [])
+  const voice = useVoiceSearch(onVoiceResult)
 
   const sectors = ['Todos', ...Array.from(new Set(cases.map(c => c.sector)))]
   const types = ['Todos', ...Array.from(new Set(cases.map(c => c.type)))]
@@ -345,8 +373,16 @@ export function SectionCases() {
   const filtered = cases.filter(c => {
     if (filter !== 'Todos' && c.sector !== filter) return false
     if (typeFilter !== 'Todos' && c.type !== typeFilter) return false
+    if (searchQuery.trim() && !caseMatchesQuery(c, searchQuery.trim())) return false
     return true
   })
+
+  useEffect(() => {
+    if (searchQuery.trim()) {
+      setFilter('Todos')
+      setTypeFilter('Todos')
+    }
+  }, [searchQuery])
 
   return (
     <SectionWrapper>
@@ -359,7 +395,7 @@ export function SectionCases() {
           transition={{ duration: 0.5 }}
           className="mb-10 md:mb-14"
         >
-          <p className="text-xs text-foursys-text-dim mb-3">+100 empresas transformadas</p>
+          <p className="text-xs text-foursys-text-dim mb-3">+150 clientes satisfeitos</p>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-4">
             Mostre ao seu board que<br />
             tecnologia entrega ROI —{' '}
@@ -384,6 +420,64 @@ export function SectionCases() {
               </motion.div>
             ))}
           </div>
+        </motion.div>
+
+        {/* Search bar */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.25 }}
+          className="mb-6"
+        >
+          <div className={`flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-200 ${
+            voice.status === 'listening'
+              ? 'border-foursys-primary/50 bg-foursys-primary/5 shadow-[0_0_20px_rgba(255,102,0,0.12)]'
+              : 'border-white/[0.1] bg-foursys-surface/30 focus-within:border-white/[0.25]'
+          }`}>
+            <Search size={16} className="text-foursys-text-dim shrink-0" />
+            <input
+              ref={searchInputRef}
+              type="text"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              placeholder="Buscar cases por termo-chave..."
+              className="flex-1 bg-transparent text-sm text-white placeholder-foursys-text-dim outline-none"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                className="p-1 rounded-full hover:bg-white/10 text-foursys-text-dim hover:text-white transition-colors"
+                aria-label="Limpar busca"
+              >
+                <X size={14} />
+              </button>
+            )}
+            {voice.isSupported && (
+              <button
+                type="button"
+                onClick={voice.toggle}
+                className={`p-1.5 rounded-full transition-all ${
+                  voice.status === 'listening'
+                    ? 'bg-foursys-primary/20 text-foursys-primary animate-pulse'
+                    : voice.status === 'error'
+                      ? 'text-red-400'
+                      : 'text-foursys-text-dim hover:text-white hover:bg-white/10'
+                }`}
+                aria-label={voice.status === 'listening' ? 'Parar gravação' : 'Buscar por voz'}
+              >
+                {voice.status === 'listening' ? <MicOff size={16} /> : <Mic size={16} />}
+              </button>
+            )}
+          </div>
+          {voice.status === 'listening' && (
+            <p className="text-[10px] text-foursys-primary mt-1.5 ml-1 animate-pulse">Ouvindo... fale o termo que deseja buscar</p>
+          )}
+          {searchQuery.trim() && (
+            <p className="text-[10px] text-foursys-text-dim mt-1.5 ml-1">
+              {filtered.length} {filtered.length === 1 ? 'case encontrado' : 'cases encontrados'} para &ldquo;{searchQuery.trim()}&rdquo;
+            </p>
+          )}
         </motion.div>
 
         {/* Filters */}
@@ -463,7 +557,7 @@ export function SectionCases() {
           transition={{ delay: 0.7 }}
           className="mt-12 md:mt-16 text-center"
         >
-          <p className="text-xs text-foursys-text-dim mb-2">+100 empresas transformadas</p>
+          <p className="text-xs text-foursys-text-dim mb-2">+150 clientes satisfeitos</p>
           <h3 className="text-lg md:text-2xl font-black text-white mb-6">
             Pronto para ser o próximo caso de sucesso?
           </h3>
