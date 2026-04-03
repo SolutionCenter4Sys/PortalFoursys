@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import {
   Users, Calendar, ShieldCheck, Globe, Network, TrendingUp,
-  Zap, DollarSign, Clock, Heart,
+  Zap, Euro, Clock, Heart,
   CheckCircle2, XCircle, Minus, Award, Building2, Target,
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
@@ -34,10 +34,10 @@ interface ComparisonRow {
 const COMPARISON: ComparisonRow[] = [
   {
     dimension: 'Custo / Hora',
-    icon: <DollarSign size={15} />,
-    foursys: { value: 'US$ 20-45/h', detail: 'Nearshore competitivo com qualidade enterprise', score: 'high' },
-    bigFour: { value: 'US$ 200-500+/h', detail: 'Premium global, custos elevados', score: 'low' },
-    boutique: { value: 'US$ 150-400/h', detail: 'Variável conforme especialidade', score: 'mid' },
+    icon: <Euro size={15} />,
+    foursys: { value: '€ 17-39/h', detail: 'Nearshore competitivo com qualidade enterprise', score: 'high' },
+    bigFour: { value: '€ 172-430+/h', detail: 'Premium global, custos elevados', score: 'low' },
+    boutique: { value: '€ 129-344/h', detail: 'Variável conforme especialidade', score: 'mid' },
     foursysAdvantage: true,
   },
   {
