@@ -6,6 +6,7 @@ import {
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { navigationItems, sectionCategories } from '../../data/navigation'
+import { cases } from '../../data/cases'
 import { exportSectionsToPdf, type PdfExportProgress } from '../../utils/pdfExport'
 import { DynIcon } from '../../utils/iconMap'
 import { SectionWrapper } from '../ui/SectionWrapper'
@@ -17,7 +18,7 @@ interface SubItem {
   sectionId: AppSection
 }
 
-const SECTION_SUBITEMS: Partial<Record<AppSection, SubItem[]>> = {
+const STATIC_SUBITEMS: Partial<Record<AppSection, SubItem[]>> = {
   'home': [
     { id: 'home-hero', label: 'Hero e KPIs', sectionId: 'home' },
     { id: 'home-offers', label: 'Ofertas Flagship', sectionId: 'home' },
@@ -43,10 +44,6 @@ const SECTION_SUBITEMS: Partial<Record<AppSection, SubItem[]>> = {
     { id: 'svc-agile', label: 'Agilidade & Design Org.', sectionId: 'services' },
     { id: 'svc-qa', label: 'Quality Assurance', sectionId: 'services' },
   ],
-  'cases': [
-    { id: 'cases-cards', label: 'Cards de Cases', sectionId: 'cases' },
-    { id: 'cases-certs', label: 'Certificações', sectionId: 'cases' },
-  ],
   'global': [
     { id: 'global-map', label: 'Mapa Interativo', sectionId: 'global' },
     { id: 'global-brasil', label: 'Região Brasil', sectionId: 'global' },
@@ -58,6 +55,17 @@ const SECTION_SUBITEMS: Partial<Record<AppSection, SubItem[]>> = {
     { id: 'esg-social', label: 'Impacto Social', sectionId: 'esg' },
     { id: 'esg-sustent', label: 'Sustentabilidade', sectionId: 'esg' },
   ],
+}
+
+const CASE_SUBITEMS: SubItem[] = cases.map(c => ({
+  id: `case-${c.id}`,
+  label: `${c.title} — ${c.client}`,
+  sectionId: 'cases' as AppSection,
+}))
+
+const SECTION_SUBITEMS: Partial<Record<AppSection, SubItem[]>> = {
+  ...STATIC_SUBITEMS,
+  'cases': CASE_SUBITEMS,
 }
 
 export function SectionExportPdf() {
