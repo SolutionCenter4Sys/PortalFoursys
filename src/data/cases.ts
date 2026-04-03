@@ -1655,9 +1655,14 @@ export const capabilities: Capability[] = [
     technologies: [
       { name: 'AWS', level: 'expert' },
       { name: 'Azure', level: 'advanced' },
+      { name: 'GCP (Google Cloud)', level: 'solid' },
       { name: 'Kubernetes', level: 'expert' },
+      { name: 'Docker', level: 'expert' },
       { name: 'Terraform', level: 'advanced' },
-      { name: 'Docker', level: 'expert' }
+      { name: 'Ansible', level: 'solid' },
+      { name: 'OpenShift', level: 'solid' },
+      { name: 'Istio / Service Mesh', level: 'solid' },
+      { name: 'Serverless (Lambda/Functions)', level: 'advanced' }
     ]
   },
   {
@@ -1665,19 +1670,29 @@ export const capabilities: Capability[] = [
     technologies: [
       { name: 'React / Next.js', level: 'expert' },
       { name: 'TypeScript', level: 'expert' },
+      { name: 'Angular', level: 'advanced' },
+      { name: 'Vue.js / Nuxt', level: 'solid' },
       { name: 'React Native', level: 'advanced' },
       { name: 'Flutter', level: 'solid' },
-      { name: 'Angular', level: 'advanced' }
+      { name: 'Swift / SwiftUI', level: 'solid' },
+      { name: 'Kotlin (Android)', level: 'solid' },
+      { name: 'Micro Frontends', level: 'advanced' },
+      { name: 'Storybook / Design Systems', level: 'advanced' }
     ]
   },
   {
     category: 'Backend & APIs',
     technologies: [
       { name: 'Java / Spring Boot', level: 'expert' },
+      { name: '.NET / C#', level: 'expert' },
       { name: 'Node.js', level: 'expert' },
       { name: 'Python', level: 'advanced' },
       { name: 'Go', level: 'solid' },
-      { name: 'GraphQL / REST', level: 'expert' }
+      { name: 'Rust', level: 'solid' },
+      { name: 'GraphQL / REST', level: 'expert' },
+      { name: 'gRPC', level: 'solid' },
+      { name: 'Kafka / RabbitMQ', level: 'advanced' },
+      { name: 'Microservices Architecture', level: 'expert' }
     ]
   },
   {
@@ -1687,7 +1702,15 @@ export const capabilities: Capability[] = [
       { name: 'Apache Spark', level: 'advanced' },
       { name: 'Python / Pandas', level: 'expert' },
       { name: 'LLMs / OpenAI', level: 'advanced' },
-      { name: 'Power BI / Looker', level: 'advanced' }
+      { name: 'LangChain / RAG', level: 'advanced' },
+      { name: 'Power BI / Looker', level: 'advanced' },
+      { name: 'Snowflake', level: 'solid' },
+      { name: 'dbt (Data Build Tool)', level: 'solid' },
+      { name: 'Airflow / Prefect', level: 'advanced' },
+      { name: 'MLflow / Kubeflow', level: 'solid' },
+      { name: 'Azure AI / Cognitive Services', level: 'advanced' },
+      { name: 'TensorFlow / PyTorch', level: 'solid' },
+      { name: 'Vector DBs (Pinecone/Weaviate)', level: 'solid' }
     ]
   },
   {
@@ -1697,17 +1720,45 @@ export const capabilities: Capability[] = [
       { name: 'Pentest', level: 'advanced' },
       { name: 'OWASP / BACEN', level: 'expert' },
       { name: 'SonarQube', level: 'expert' },
-      { name: 'SIEM / SOC', level: 'advanced' }
+      { name: 'SIEM / SOC', level: 'advanced' },
+      { name: 'HashiCorp Vault', level: 'solid' },
+      { name: 'Snyk', level: 'advanced' },
+      { name: 'WAF', level: 'advanced' },
+      { name: 'Zero Trust Architecture', level: 'solid' },
+      { name: 'DevSecOps Toolchain', level: 'advanced' }
     ]
   },
   {
     category: 'Qualidade & DevOps',
     technologies: [
       { name: 'CI/CD (Jenkins/GH Actions)', level: 'expert' },
+      { name: 'GitLab CI/CD', level: 'advanced' },
+      { name: 'ArgoCD / GitOps', level: 'solid' },
       { name: 'Quality IA Framework', level: 'expert' },
       { name: 'Selenium / Cypress', level: 'expert' },
+      { name: 'Playwright', level: 'advanced' },
+      { name: 'Appium', level: 'advanced' },
+      { name: 'k6 / JMeter', level: 'advanced' },
       { name: 'Scrum / SAFe', level: 'expert' },
+      { name: 'Observabilidade (Datadog/Grafana)', level: 'advanced' },
       { name: 'BMAD Agents', level: 'expert' }
+    ]
+  },
+  {
+    category: 'Low-Code / No-Code',
+    technologies: [
+      { name: 'Power Platform', level: 'advanced' },
+      { name: 'OutSystems', level: 'solid' },
+      { name: 'Mendix', level: 'solid' },
+      { name: 'FourBlox', level: 'expert' }
+    ]
+  },
+  {
+    category: 'RPA & Automação',
+    technologies: [
+      { name: 'UiPath', level: 'advanced' },
+      { name: 'Power Automate', level: 'advanced' },
+      { name: 'Automation Anywhere', level: 'solid' }
     ]
   }
 ]
