@@ -20,6 +20,7 @@ const SectionCapabilities = lazy(() => import('./sections/SectionCapabilities').
 const SectionESG = lazy(() => import('./sections/SectionESG').then(m => ({ default: m.SectionESG })))
 const SectionInsights = lazy(() => import('./sections/SectionInsights').then(m => ({ default: m.SectionInsights })))
 const SectionFAQ = lazy(() => import('./sections/SectionFAQ').then(m => ({ default: m.SectionFAQ })))
+const SectionExportPdf = lazy(() => import('./sections/SectionExportPdf').then(m => ({ default: m.SectionExportPdf })))
 // Client sections
 const SectionClientOpening = lazy(() => import('./sections/client/SectionClientOpening').then(m => ({ default: m.SectionClientOpening })))
 const SectionClientInsights = lazy(() => import('./sections/client/SectionClientInsights').then(m => ({ default: m.SectionClientInsights })))
@@ -73,6 +74,7 @@ export function SectionRenderer() {
         {/* ── Referência ── */}
         {section === 'insights'       && <SectionInsights key="insights" />}
         {section === 'faq'            && <SectionFAQ key="faq" />}
+        {section === 'export-pdf'     && <SectionExportPdf key="export-pdf" />}
 
         {/* ── Seções de Cliente (dinâmicas) ── */}
         {section === 'client-opening'  && <SectionClientOpening key="client-opening" />}

@@ -175,6 +175,7 @@ export type AppSection =
   // Referência
   | 'insights'
   | 'faq'
+  | 'export-pdf'
   // Cliente (injetadas dinamicamente)
   | 'client-opening'
   | 'client-insights'

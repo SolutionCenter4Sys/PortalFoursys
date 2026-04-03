@@ -6,7 +6,7 @@ const VALID_SECTIONS: AppSection[] = [
   'home', 'identity', 'global', 'timeline', 'why-foursys',
   'offers-flagship', 'services', 'delivery', 'alliances', 'innovation',
   'cases', 'testimonials', 'awards', 'clients-showcase', 'capabilities', 'esg',
-  'insights', 'faq',
+  'insights', 'faq', 'export-pdf',
 ]
 
 export function useUrlSync() {

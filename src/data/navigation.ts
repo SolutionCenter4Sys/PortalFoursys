@@ -138,6 +138,13 @@ export const navigationItems: NavigationItem[] = [
     category: 'Referência',
     description: 'Perguntas clássicas e como respondemos',
   },
+  {
+    id: 'export-pdf',
+    label: 'Exportar para PDF',
+    icon: 'file-down',
+    category: 'Referência',
+    description: 'Selecione sessões, subsessões ou itens específicos para gerar um PDF',
+  },
 ]
 
 export const sectionCategories = [
