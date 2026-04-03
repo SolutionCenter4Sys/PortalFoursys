@@ -139,7 +139,12 @@ export function SearchOverlay() {
     if (state.isSearchOpen) {
       setQuery('')
       setSelected(0)
-      setTimeout(() => inputRef.current?.focus(), 100)
+      setTimeout(() => {
+        inputRef.current?.focus()
+        if (state.searchVoiceOnOpen && voice.isSupported && voice.status !== 'listening') {
+          voice.start()
+        }
+      }, 200)
     } else {
       voice.stop()
     }

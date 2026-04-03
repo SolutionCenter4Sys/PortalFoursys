@@ -153,7 +153,7 @@ export function TopBar() {
 
       {/* Search */}
       <button
-        onClick={openSearch}
+        onClick={() => openSearch()}
         className="min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:p-1.5 flex items-center justify-center rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
         aria-label="Buscar"
       >

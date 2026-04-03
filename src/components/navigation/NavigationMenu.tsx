@@ -128,14 +128,22 @@ export function NavigationMenu() {
 
       {/* ── Search ── */}
       <div className="px-3 py-3 border-b border-white/[0.06]">
-        <button
-          onClick={openSearch}
-          className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.07] text-foursys-text-dim hover:text-foursys-text-muted hover:border-foursys-primary/30 transition-all duration-150 text-xs"
-        >
-          <Search size={13} className="flex-shrink-0" />
-          <span>Buscar seção...</span>
-          <Mic size={13} className="ml-auto text-foursys-text-dim" />
-        </button>
+        <div className="flex items-center gap-1">
+          <button
+            onClick={() => openSearch()}
+            className="flex-1 flex items-center gap-2.5 px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.07] text-foursys-text-dim hover:text-foursys-text-muted hover:border-foursys-primary/30 transition-all duration-150 text-xs"
+          >
+            <Search size={13} className="flex-shrink-0" />
+            <span>Buscar seção...</span>
+          </button>
+          <button
+            onClick={() => openSearch(true)}
+            aria-label="Buscar por voz"
+            className="flex-shrink-0 p-2 rounded-lg bg-white/[0.04] border border-white/[0.07] text-foursys-text-dim hover:text-foursys-primary hover:border-foursys-primary/30 transition-all duration-150"
+          >
+            <Mic size={13} />
+          </button>
+        </div>
       </div>
 
       {/* ── Navigation ── */}

@@ -273,13 +273,14 @@ export interface AppState {
   isOverviewOpen: boolean
   isExportModalOpen: boolean
   deepDiveHint: string | null
+  searchVoiceOnOpen: boolean
 }
 
 export type AppAction =
   | { type: 'NAVIGATE'; section: AppSection; timestamp: number }
   | { type: 'TOGGLE_FULLSCREEN' }
   | { type: 'TOGGLE_MENU' }
-  | { type: 'OPEN_SEARCH' }
+  | { type: 'OPEN_SEARCH'; voice?: boolean }
   | { type: 'CLOSE_SEARCH' }
   | { type: 'START_TRAIL'; trailId: string; firstSection: AppSection; timestamp: number }
   | { type: 'STOP_TRAIL' }

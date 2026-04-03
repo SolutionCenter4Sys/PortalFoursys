@@ -31,6 +31,7 @@ const initialState: AppState = {
   isOverviewOpen: false,
   isExportModalOpen: false,
   deepDiveHint: null,
+  searchVoiceOnOpen: false,
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -115,10 +116,10 @@ function appReducer(state: AppState, action: AppAction): AppState {
       return { ...state, isMenuOpen: !state.isMenuOpen, isSearchOpen: false }
 
     case 'OPEN_SEARCH':
-      return { ...state, isSearchOpen: true, isMenuOpen: false }
+      return { ...state, isSearchOpen: true, isMenuOpen: false, searchVoiceOnOpen: action.voice ?? false }
 
     case 'CLOSE_SEARCH':
-      return { ...state, isSearchOpen: false }
+      return { ...state, isSearchOpen: false, searchVoiceOnOpen: false }
 
     case 'TOGGLE_METRICS_PANEL':
       return { ...state, isMetricsPanelOpen: !state.isMetricsPanelOpen }
@@ -199,7 +200,7 @@ interface AppContextValue {
   navigate: (section: AppSection) => void
   toggleFullscreen: () => void
   toggleMenu: () => void
-  openSearch: () => void
+  openSearch: (voice?: boolean) => void
   closeSearch: () => void
   startTrail: (trailId: string) => void
   stopTrail: () => void
@@ -300,7 +301,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     navigate,
     toggleFullscreen: () => dispatch({ type: 'TOGGLE_FULLSCREEN' }),
     toggleMenu:       () => dispatch({ type: 'TOGGLE_MENU' }),
-    openSearch:       () => dispatch({ type: 'OPEN_SEARCH' }),
+    openSearch:       (voice?: boolean) => dispatch({ type: 'OPEN_SEARCH', voice }),
     closeSearch:      () => dispatch({ type: 'CLOSE_SEARCH' }),
     startTrail,
     stopTrail:        () => dispatch({ type: 'STOP_TRAIL' }),

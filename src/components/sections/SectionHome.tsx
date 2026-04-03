@@ -336,14 +336,14 @@ export function SectionHome() {
             <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-3">
               Parceiros Estratégicos
             </div>
-            <div className="flex items-center gap-5 flex-wrap">
+            <div className="flex items-center gap-6 md:gap-8 flex-wrap">
               {allianceLogos.map(a => (
                 <div
                   key={a.id}
-                  className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity duration-200"
+                  className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity duration-200"
                   title={a.label}
                 >
-                  <PartnerLogo id={a.id} size={14} />
+                  <PartnerLogo id={a.id} size={22} />
                 </div>
               ))}
             </div>
