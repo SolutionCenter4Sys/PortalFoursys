@@ -1,8 +1,7 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import {
   Users, Calendar, ShieldCheck, Globe, Network, TrendingUp,
-  ChevronDown, ChevronUp, Zap, DollarSign, Clock, Heart,
+  Zap, DollarSign, Clock, Heart,
   CheckCircle2, XCircle, Minus, Award, Building2, Target,
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
@@ -17,7 +16,7 @@ function hexToRgba(hex: string, a: number) {
 const DIFFERENTIALS = [
   { icon: <Users size={20} />, stat: '3,6%', label: 'Turnover', context: 'vs. 22% da média do mercado' },
   { icon: <Calendar size={20} />, stat: '26', label: 'Anos de entrega', context: 'Fundada em 2000' },
-  { icon: <ShieldCheck size={20} />, stat: '4', label: 'Certificações ISO', context: '9001 · 27001 · 27701 · 14001' },
+  { icon: <ShieldCheck size={20} />, stat: '6', label: 'Certificações', context: 'ISO 9001 · 27001 · 27701 · 14001 · SAFe · GPTW' },
   { icon: <Globe size={20} />, stat: '3', label: 'Regiões do Globo', context: 'Brasil · EUA · Portugal' },
   { icon: <Network size={20} />, stat: '6+', label: 'Parcerias tier-1', context: 'Microsoft · AWS · Google · SAP' },
   { icon: <TrendingUp size={20} />, stat: '500K+', label: 'Projetos entregues', context: 'Todos os modelos de delivery' },
@@ -36,7 +35,7 @@ const COMPARISON: ComparisonRow[] = [
   {
     dimension: 'Custo / Hora',
     icon: <DollarSign size={15} />,
-    foursys: { value: 'R$ 120-250/h', detail: 'Competitivo para o mercado BR/LatAm', score: 'high' },
+    foursys: { value: 'US$ 20-45/h', detail: 'Nearshore competitivo com qualidade enterprise', score: 'high' },
     bigFour: { value: 'US$ 200-500+/h', detail: 'Premium global, custos elevados', score: 'low' },
     boutique: { value: 'US$ 150-400/h', detail: 'Variável conforme especialidade', score: 'mid' },
     foursysAdvantage: true,
@@ -131,9 +130,6 @@ const ADVANTAGES = [
 // ─── Components ──────────────────────────────────────────────────────────────
 
 function ComparisonTable() {
-  const [expanded, setExpanded] = useState(false)
-  const visible = expanded ? COMPARISON : COMPARISON.slice(0, 5)
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -155,78 +151,60 @@ function ComparisonTable() {
 
       {/* Rows */}
       <div className="space-y-2">
-        <AnimatePresence>
-          {visible.map((row, i) => (
-            <motion.div
-              key={row.dimension}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ delay: 0.05 * i, duration: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-[1.8fr_1fr_1fr_1fr] gap-2 md:gap-2 p-3 md:p-4 rounded-xl border transition-all duration-300 hover:border-white/[0.15]"
-              style={{
-                background: row.foursysAdvantage
-                  ? 'linear-gradient(90deg, rgba(255,102,0,0.04), transparent 30%)'
-                  : 'rgba(255,255,255,0.01)',
-                borderColor: row.foursysAdvantage ? 'rgba(255,102,0,0.12)' : 'rgba(255,255,255,0.06)',
-              }}
-            >
-              {/* Dimension */}
-              <div className="flex items-center gap-2.5">
-                <div className="text-foursys-text-dim">{row.icon}</div>
-                <span className="text-sm font-bold text-white">{row.dimension}</span>
-                {row.foursysAdvantage && (
-                  <span className="hidden md:inline text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-foursys-primary/15 text-foursys-primary border border-foursys-primary/25">
-                    Vantagem
-                  </span>
-                )}
-              </div>
+        {COMPARISON.map((row, i) => (
+          <motion.div
+            key={row.dimension}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.05 * i, duration: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-[1.8fr_1fr_1fr_1fr] gap-2 md:gap-2 p-3 md:p-4 rounded-xl border transition-all duration-300 hover:border-white/[0.15]"
+            style={{
+              background: row.foursysAdvantage
+                ? 'linear-gradient(90deg, rgba(255,102,0,0.04), transparent 30%)'
+                : 'rgba(255,255,255,0.01)',
+              borderColor: row.foursysAdvantage ? 'rgba(255,102,0,0.12)' : 'rgba(255,255,255,0.06)',
+            }}
+          >
+            {/* Dimension */}
+            <div className="flex items-center gap-2.5">
+              <div className="text-foursys-text-dim">{row.icon}</div>
+              <span className="text-sm font-bold text-white">{row.dimension}</span>
+              {row.foursysAdvantage && (
+                <span className="hidden md:inline text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-foursys-primary/15 text-foursys-primary border border-foursys-primary/25">
+                  Vantagem
+                </span>
+              )}
+            </div>
 
-              {/* Foursys */}
-              <div className="flex items-center gap-2 md:justify-center pl-6 md:pl-0">
-                {SCORE_ICON[row.foursys.score]}
-                <div className="md:text-center">
-                  <div className="text-xs font-bold text-foursys-primary">{row.foursys.value}</div>
-                  <div className="text-[9px] text-foursys-text-dim hidden lg:block">{row.foursys.detail}</div>
-                </div>
+            {/* Foursys */}
+            <div className="flex items-center gap-2 md:justify-center pl-6 md:pl-0">
+              {SCORE_ICON[row.foursys.score]}
+              <div className="md:text-center">
+                <div className="text-xs font-bold text-foursys-primary">{row.foursys.value}</div>
+                <div className="text-[9px] text-foursys-text-dim hidden lg:block">{row.foursys.detail}</div>
               </div>
+            </div>
 
-              {/* Big Four */}
-              <div className="flex items-center gap-2 md:justify-center pl-6 md:pl-0">
-                {SCORE_ICON[row.bigFour.score]}
-                <div className="md:text-center">
-                  <div className="text-xs font-semibold text-foursys-text-muted">{row.bigFour.value}</div>
-                  <div className="text-[9px] text-foursys-text-dim hidden lg:block">{row.bigFour.detail}</div>
-                </div>
+            {/* Big Four */}
+            <div className="flex items-center gap-2 md:justify-center pl-6 md:pl-0">
+              {SCORE_ICON[row.bigFour.score]}
+              <div className="md:text-center">
+                <div className="text-xs font-semibold text-foursys-text-muted">{row.bigFour.value}</div>
+                <div className="text-[9px] text-foursys-text-dim hidden lg:block">{row.bigFour.detail}</div>
               </div>
+            </div>
 
-              {/* Boutique */}
-              <div className="flex items-center gap-2 md:justify-center pl-6 md:pl-0">
-                {SCORE_ICON[row.boutique.score]}
-                <div className="md:text-center">
-                  <div className="text-xs font-semibold text-foursys-text-muted">{row.boutique.value}</div>
-                  <div className="text-[9px] text-foursys-text-dim hidden lg:block">{row.boutique.detail}</div>
-                </div>
+            {/* Boutique */}
+            <div className="flex items-center gap-2 md:justify-center pl-6 md:pl-0">
+              {SCORE_ICON[row.boutique.score]}
+              <div className="md:text-center">
+                <div className="text-xs font-semibold text-foursys-text-muted">{row.boutique.value}</div>
+                <div className="text-[9px] text-foursys-text-dim hidden lg:block">{row.boutique.detail}</div>
               </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
+            </div>
+          </motion.div>
+        ))}
       </div>
-
-      {/* Expand/collapse */}
-      {COMPARISON.length > 5 && (
-        <button
-          type="button"
-          onClick={() => setExpanded(!expanded)}
-          className="mt-3 mx-auto flex items-center gap-1.5 text-xs font-bold text-foursys-primary hover:text-foursys-cyan transition-colors"
-        >
-          {expanded ? (
-            <>Ver menos <ChevronUp size={14} /></>
-          ) : (
-            <>Ver todas as {COMPARISON.length} dimensões <ChevronDown size={14} /></>
-          )}
-        </button>
-      )}
     </motion.div>
   )
 }
@@ -366,8 +344,8 @@ export function SectionWhyFoursys() {
         >
           <p className="text-sm md:text-base text-foursys-text-muted leading-relaxed max-w-3xl mx-auto">
             <span className="text-foursys-primary font-black">A Foursys entrega o calibre de uma consultoria global</span>{' '}
-            com a agilidade, proximidade e custo-benefício que só uma empresa brasileira com{' '}
-            <span className="text-white font-bold">26 anos de história, 3,6% de turnover e 4 certificações ISO</span>{' '}
+            com a agilidade, proximidade e custo-benefício que só uma empresa global com{' '}
+            <span className="text-white font-bold">26 anos de história, 3,6% de turnover e 6 certificações</span>{' '}
             pode oferecer. Não competimos em escala — competimos em profundidade, resultado e confiança.
           </p>
         </motion.div>
