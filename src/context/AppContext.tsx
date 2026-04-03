@@ -30,6 +30,7 @@ const initialState: AppState = {
   isWizardOpen: false,
   isOverviewOpen: false,
   isExportModalOpen: false,
+  deepDiveHint: null,
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -180,6 +181,12 @@ function appReducer(state: AppState, action: AppAction): AppState {
     case 'TOGGLE_EXPORT_MODAL':
       return { ...state, isExportModalOpen: !state.isExportModalOpen }
 
+    case 'SET_DEEP_DIVE_HINT':
+      return { ...state, deepDiveHint: action.serviceId }
+
+    case 'CLEAR_DEEP_DIVE_HINT':
+      return { ...state, deepDiveHint: null }
+
     default:
       return state
   }
@@ -205,6 +212,8 @@ interface AppContextValue {
   closeWizard: () => void
   toggleOverview: () => void
   toggleExportModal: () => void
+  setDeepDiveHint: (serviceId: string) => void
+  clearDeepDiveHint: () => void
   // Helpers derivados
   getSectionLabel: (section: AppSection) => string
   getSectionIcon: (section: AppSection) => string
@@ -304,6 +313,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     closeWizard,
     toggleOverview,
     toggleExportModal,
+    setDeepDiveHint: (serviceId: string) => dispatch({ type: 'SET_DEEP_DIVE_HINT', serviceId }),
+    clearDeepDiveHint: () => dispatch({ type: 'CLEAR_DEEP_DIVE_HINT' }),
     getSectionLabel,
     getSectionIcon,
     activeNavigationItems,

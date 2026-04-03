@@ -6,6 +6,7 @@ import { SectionWrapper } from '../ui/SectionWrapper'
 import { DynIcon } from '../../utils/iconMap'
 import { serviceLines } from '../../data/services'
 import { SERVICE_ICONS, SERVICE_VISUALS, DEFAULT_VISUAL } from '../../data/serviceVisuals'
+import { useApp } from '../../context/AppContext'
 import type { ServiceLine } from '../../types'
 
 const CONTRACT_MODELS = [
@@ -1227,6 +1228,7 @@ function DeepDiveModal({
 /* ── SectionServices ─────────────────────────────────────────────────────────── */
 
 export function SectionServices() {
+  const { state, clearDeepDiveHint } = useApp()
   const [activeServiceId, setActiveServiceId] = useState(serviceLines[0]?.id ?? '')
   const [mobileSheetId, setMobileSheetId] = useState<string | null>(null)
   const [offerDetailId, setOfferDetailId] = useState<string | null>(null)
@@ -1234,6 +1236,21 @@ export function SectionServices() {
   const activeService = serviceLines.find(s => s.id === activeServiceId) ?? serviceLines[0]
   const activeVisual = SERVICE_VISUALS[activeService.id] ?? DEFAULT_VISUAL
   const orbitRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (state.deepDiveHint) {
+      const targetService = serviceLines.find(s => s.id === state.deepDiveHint)
+      if (targetService) {
+        setActiveServiceId(targetService.id)
+        if ((DEEP_DIVE_IDS as readonly string[]).includes(targetService.id)) {
+          setDeepDiveId(targetService.id)
+        } else {
+          setOfferDetailId(targetService.id)
+        }
+      }
+      clearDeepDiveHint()
+    }
+  }, [state.deepDiveHint, clearDeepDiveHint])
 
   const mobileSheetService = mobileSheetId
     ? serviceLines.find(s => s.id === mobileSheetId) ?? null

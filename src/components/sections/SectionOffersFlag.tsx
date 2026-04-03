@@ -277,7 +277,7 @@ function OfferCard({
 // ─── Componente principal ─────────────────────────────────────────────────────
 
 export function SectionOffersFlag() {
-  const { navigate } = useApp()
+  const { navigate, setDeepDiveHint } = useApp()
   const [selectedOffer, setSelectedOffer] = useState<(typeof flagshipOffers)[0] | null>(null)
 
   return (
@@ -370,6 +370,9 @@ export function SectionOffersFlag() {
             offer={selectedOffer}
             onClose={() => setSelectedOffer(null)}
             onNavigate={() => {
+              if (selectedOffer.id === 'ai-squad') {
+                setDeepDiveHint('ai-augmented-squad')
+              }
               navigate(selectedOffer.navigateTo)
               setSelectedOffer(null)
             }}

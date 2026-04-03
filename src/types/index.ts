@@ -272,6 +272,7 @@ export interface AppState {
   isWizardOpen: boolean
   isOverviewOpen: boolean
   isExportModalOpen: boolean
+  deepDiveHint: string | null
 }
 
 export type AppAction =
@@ -291,3 +292,5 @@ export type AppAction =
   | { type: 'CLOSE_WIZARD' }
   | { type: 'TOGGLE_OVERVIEW' }
   | { type: 'TOGGLE_EXPORT_MODAL' }
+  | { type: 'SET_DEEP_DIVE_HINT'; serviceId: string }
+  | { type: 'CLEAR_DEEP_DIVE_HINT' }
