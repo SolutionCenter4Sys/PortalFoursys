@@ -396,14 +396,202 @@ function OfferDetailModal({
 
 const DEEP_DIVE_IDS = ['modernizacao-legados', 'ciberseguranca', 'fourblox', 'ai-augmented-squad'] as const
 
-const sddSteps = [
-  { icon: 'search', title: 'Diagnóstico', desc: 'Mapeamento completo do sistema legado — código, dependências, riscos e oportunidades de modernização.' },
-  { icon: 'landmark', title: 'API Gateway', desc: 'Criação de uma camada de abstração API que expõe as funcionalidades do legado sem modificá-lo.' },
-  { icon: 'scissors', title: 'Decomposição', desc: 'Identificação dos módulos de maior valor e risco para extração incremental em microserviços.' },
-  { icon: 'git-merge', title: 'Migração Gradual', desc: 'Migração módulo a módulo, com o sistema legado 100% operacional durante todo o processo.' },
-  { icon: 'cloud', title: 'Cloudificação', desc: 'Deploy dos novos microserviços em Kubernetes/AWS com CI/CD, observabilidade e auto-scaling.' },
-  { icon: 'flag', title: 'Descomissionamento', desc: 'Encerramento seguro do sistema legado após validação completa de todas as funcionalidades migradas.' },
+/* ── Modernização de Legados Deep Dive ────────────────────────────────────── */
+
+const modMethodSteps = [
+  { icon: 'clipboard-list', title: 'Assessment & Inventário', desc: 'Varredura de código, identificação de regras de negócio e geração de documentação base com 4AI.' },
+  { icon: 'layout', title: 'Setup Arquitetura Target', desc: 'SPEC de Engenharia e Arquitetura (Front + Back), definições de DevOps, infra e cloud, padrões de design e componentes.' },
+  { icon: 'code', title: 'Construir & Testar', desc: 'Codificação acelerada com SPEC padrão, testes unitários, DataForge para massa de dados, testes funcionais e não-funcionais.' },
+  { icon: 'shield-check', title: 'QA & Certificação', desc: 'IA CodeCompare, matriz de rastreabilidade, testes de carga, performance, segurança e SonarQube.' },
+  { icon: 'check-circle', title: 'Homologação', desc: 'Critérios de aceite pré-definidos, certificação do caminho crítico e monitoramento de métricas.' },
+  { icon: 'rocket', title: 'Produção & Hyper Care', desc: 'Deploy, Hyper Care + sustentação com ciclos de release escaláveis de 6 semanas.' },
 ]
+
+const modAccelerators = [
+  { title: 'Extrator de Regras', icon: 'scan', desc: 'Varredura de código identificando regras de negócio e gerando documentação base — COBOL, VB6, .NET, Java (Spring, Struts, SpringBoot), Angular, React e Vue.' },
+  { title: 'Conversor de Código', icon: 'shuffle', desc: 'Conversão via acelerador de VB6 para .NET Core ou Java Spring Boot (backend) e Angular ou React (frontend), com documentação integrada à esteira DevOps.' },
+  { title: 'Certificação', icon: 'badge-check', desc: 'Geração de testes unitários e cenários de testes funcionais (Gherkin) a partir dos pontos de alteração, garantindo pleno funcionamento após a transformação.' },
+]
+
+const modContractModels = [
+  {
+    title: 'Essencial',
+    items: ['Assessment e Inventário', 'Setup da Arquitetura Target', 'Modernização do Sistema', 'Testes Unitários e Integrados', 'Testes Regressivos e Certificação'],
+  },
+  {
+    title: 'Estratégica',
+    items: ['Assessment e Inventário', 'Setup da Arquitetura Target', 'Re-Design e UX da Aplicação', 'Migração de Banco de Dados', 'DevOps', 'Modernização do Sistema', 'Testes Unitários e Integrados', 'Testes Regressivos e Certificação'],
+  },
+  {
+    title: 'Evolução',
+    items: ['Assessment e Inventário', 'Setup da Arquitetura Target', 'Re-Design da Aplicação', 'Migração de Banco de Dados', 'DevOps', 'Modernização do Sistema', 'Testes Unitários e Integrados', 'Cyber Security e Performance', 'Testes Regressivos e Certificação', 'Homologação e Convivência', 'Monitoramento'],
+  },
+]
+
+const modCases = [
+  { title: 'Instituição Financeira (EUA)', result: 'Migração de monolito para microserviços Python, DevOps, conteinerização e orquestração — maior escalabilidade, integração via APIs e redução no tempo de execução.', metrics: [{ v: '+4M', l: 'Linhas de código' }, { v: '12', l: 'Meses de projeto' }] },
+  { title: 'Seguradora', result: 'Migração de mainframe COBOL e Visual Age para .NET e React com IA para transpiração de código — redução de custo de infraestrutura e adição de funcionalidades estratégicas.', metrics: [{ v: '+2M', l: 'Linhas de código' }, { v: '20%', l: 'Aumento de negócios' }] },
+  { title: 'Risk Score (Global)', result: 'Retirada do AS400 para Java com IA e migração para Cloud EUA — produto se tornou global, instalação reduziu de 12 para 3 meses.', metrics: [{ v: '+2Bi', l: 'Novos negócios no 1o ano' }, { v: '600K', l: 'Linhas de código' }] },
+]
+
+const modImpacts = [
+  'Redução de custos operacionais e facilidade de manutenção',
+  'Ampliação da capacidade de inovação',
+  'Melhor experiência do cliente',
+  'Melhora de desempenho e escalabilidade',
+  'Aumento na segurança e confiabilidade',
+  'Redução na complexidade dos projetos',
+  'Redução de falhas em integrações sistêmicas',
+  'Impulso no movimento "Move to Cloud"',
+]
+
+function ModernizacaoDeepDive() {
+  return (
+    <div className="space-y-7">
+      {/* Proposta de valor */}
+      <div className="p-5 rounded-xl bg-gradient-to-r from-violet-500/15 to-transparent border border-violet-500/25">
+        <p className="text-xs text-foursys-text-muted leading-relaxed">
+          <strong className="text-foursys-text">Proposta de Valor:</strong> A Foursys oferece a única solução de modernização de legados que combina transformação tecnológica, segurança avançada e capacitação humana em uma abordagem integrada — garantindo que seus sistemas não apenas funcionem melhor hoje, mas sejam a base para a inovação de amanhã.
+        </p>
+      </div>
+
+      {/* Métricas */}
+      <div className="grid grid-cols-3 gap-3">
+        {[
+          { value: '+30%', label: 'Redução de Custos', color: 'text-green-400' },
+          { value: '+70%', label: 'Aceleração Time to Mkt', color: 'text-cyan-400' },
+          { value: '+60%', label: 'Segurança de Código', color: 'text-violet-400' },
+        ].map(m => (
+          <div key={m.label} className="text-center p-3 rounded-xl bg-foursys-surface/50 border border-white/10">
+            <div className={`text-xl font-black ${m.color}`}>{m.value}</div>
+            <div className="text-[10px] text-foursys-text-dim mt-1">{m.label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Aceleradores 4AI */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          Aceleradores 4AI
+        </div>
+        <div className="grid md:grid-cols-3 gap-3">
+          {modAccelerators.map(a => (
+            <div key={a.title} className="p-4 rounded-xl bg-violet-500/8 border border-violet-500/20">
+              <div className="flex items-center gap-2 mb-2">
+                <DynIcon name={a.icon} size={16} className="text-violet-400" />
+                <span className="text-xs font-bold text-violet-300">{a.title}</span>
+              </div>
+              <p className="text-[10px] text-foursys-text-dim leading-relaxed">{a.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Metodologia passo a passo */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          Metodologia — Ciclos de 6 semanas com automação IA + supervisão humana (50/50)
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          {modMethodSteps.map((step, i) => (
+            <div key={step.title} className="p-4 rounded-xl bg-foursys-surface/50 border border-white/10 relative">
+              <div className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-violet-500/30 border border-violet-500/50 flex items-center justify-center text-[9px] font-bold text-violet-300">
+                {i + 1}
+              </div>
+              <div className="mb-2">
+                <DynIcon name={step.icon} size={18} className="text-white/80" />
+              </div>
+              <div className="font-semibold text-foursys-text text-xs mb-1">{step.title}</div>
+              <p className="text-[10px] text-foursys-text-dim leading-relaxed">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Modelos de Contratação */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          Modelos de Contratação
+        </div>
+        <div className="grid md:grid-cols-3 gap-3">
+          {modContractModels.map((model, idx) => (
+            <div key={model.title} className={`p-4 rounded-xl border ${idx === 2 ? 'bg-violet-500/12 border-violet-500/30' : 'bg-foursys-surface/50 border-white/10'}`}>
+              <div className={`text-xs font-bold mb-3 ${idx === 2 ? 'text-violet-300' : 'text-foursys-text'}`}>
+                {model.title}
+              </div>
+              <ul className="space-y-1.5">
+                {model.items.map(item => (
+                  <li key={item} className="text-[10px] text-foursys-text-dim flex items-start gap-1.5">
+                    <span className="text-violet-400 mt-0.5 shrink-0">•</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Cases */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          Cases e Resultados Comprovados
+        </div>
+        <div className="grid md:grid-cols-3 gap-3">
+          {modCases.map(c => (
+            <div key={c.title} className="p-4 rounded-xl bg-foursys-surface/50 border border-white/10">
+              <div className="text-xs font-bold text-foursys-text mb-2">{c.title}</div>
+              <p className="text-[10px] text-foursys-text-dim leading-relaxed mb-3">{c.result}</p>
+              <div className="flex gap-3">
+                {c.metrics.map(m => (
+                  <div key={m.l} className="text-center">
+                    <div className="text-sm font-black text-violet-400">{m.v}</div>
+                    <div className="text-[9px] text-foursys-text-dim">{m.l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Impacto Esperado */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
+          Impacto Esperado
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          {modImpacts.map(impact => (
+            <div key={impact} className="p-3 rounded-xl bg-green-500/8 border border-green-500/20 flex items-start gap-2">
+              <DynIcon name="check-circle" size={12} className="text-green-400 shrink-0 mt-0.5" />
+              <span className="text-[10px] text-foursys-text-dim leading-relaxed">{impact}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Próximos Passos */}
+      <div className="p-4 rounded-xl bg-gradient-to-r from-violet-500/15 to-transparent border border-violet-500/25">
+        <div className="text-[10px] font-bold uppercase tracking-widest text-violet-300 mb-3">
+          Próximos Passos em 3 Etapas
+        </div>
+        <div className="grid grid-cols-3 gap-3">
+          {[
+            { n: '1', title: 'POT / POC', desc: 'Mapeamos uma amostra do legado e geramos documentação e aplicação em stack target com padrões Clean Code.' },
+            { n: '2', title: 'Negociação', desc: 'Definição conjunta do modelo, proposta com escopo, roadmap, estratégia, responsabilidades e investimento.' },
+            { n: '3', title: 'Contratação', desc: 'Assinatura contratual, kick-off para alinhar expectativas, apresentar equipe e início formal das atividades.' },
+          ].map(s => (
+            <div key={s.n} className="text-center">
+              <div className="w-7 h-7 rounded-full bg-violet-500/30 border border-violet-500/50 flex items-center justify-center text-xs font-bold text-violet-300 mx-auto mb-2">{s.n}</div>
+              <div className="text-xs font-bold text-foursys-text mb-1">{s.title}</div>
+              <p className="text-[10px] text-foursys-text-dim leading-relaxed">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
 
 // ─── Sec4Sys (vertical Foursys de cibersegurança) ────────────────────────────
 
@@ -1007,61 +1195,7 @@ function AISquadDeepDive() {
 
 function DeepDiveContent({ serviceId }: { serviceId: string }) {
   if (serviceId === 'modernizacao-legados') {
-    return (
-      <div className="space-y-6">
-        <div className="grid md:grid-cols-2 gap-4">
-          <div className="p-5 rounded-xl bg-red-500/10 border border-red-500/25">
-            <div className="text-sm font-bold text-red-400 mb-2.5">Big-Bang Rewrite (problema)</div>
-            <ul className="space-y-1.5 text-xs text-foursys-text-dim">
-              <li>• Alto risco de falha e downtime</li>
-              <li>• Meses ou anos sem entrega de valor</li>
-              <li>• Custo imprevisível e scope creep</li>
-              <li>• Perda de conhecimento do negócio no código legado</li>
-              <li>• Dependência de fases de "big bang" deploy</li>
-            </ul>
-          </div>
-          <div className="p-5 rounded-xl bg-green-500/10 border border-green-500/25">
-            <div className="text-sm font-bold text-green-400 mb-2.5">SDD — Foursys (solução)</div>
-            <ul className="space-y-1.5 text-xs text-foursys-text-muted">
-              <li>• Zero downtime — legado opera durante toda a migração</li>
-              <li>• Valor entregue a cada sprint (módulo por módulo)</li>
-              <li>• Custo controlado e previsível por fase</li>
-              <li>• Conhecimento de negócio preservado e evoluído</li>
-              <li>• Rollback possível a qualquer momento</li>
-            </ul>
-          </div>
-        </div>
-
-        <div>
-          <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-            A jornada SDD passo a passo
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {sddSteps.map((step, i) => (
-              <div key={step.title} className="p-4 rounded-xl bg-foursys-surface/50 border border-white/10 relative">
-                <div className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-foursys-primary/30 border border-foursys-primary/50 flex items-center justify-center text-[9px] font-bold text-foursys-cyan">
-                  {i + 1}
-                </div>
-                <div className="mb-2">
-                  <DynIcon name={step.icon} size={18} className="text-white/80" />
-                </div>
-                <div className="font-semibold text-foursys-text text-xs mb-1">{step.title}</div>
-                <p className="text-[10px] text-foursys-text-dim leading-relaxed">{step.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="p-4 rounded-xl bg-gradient-to-r from-foursys-primary/15 to-transparent border border-foursys-primary/25">
-          <p className="text-xs text-foursys-text-muted text-center flex flex-wrap items-start justify-center gap-1.5">
-            <DynIcon name="lightbulb" size={14} className="text-foursys-cyan shrink-0 mt-0.5" />
-            <span>
-              <strong className="text-foursys-text">Resultado típico:</strong> sistema legado 100% operacional durante toda a migração, com entrega de valor a cada 2 semanas e custo até 40% menor que o big-bang rewrite.
-            </span>
-          </p>
-        </div>
-      </div>
-    )
+    return <ModernizacaoDeepDive />
   }
 
   if (serviceId === 'ciberseguranca') {

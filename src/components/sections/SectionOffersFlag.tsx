@@ -39,19 +39,22 @@ const flagshipOffers = [
     id: 'modernizacao',
     badge: 'Destaque',
     title: 'Modernização de Legado',
-    tagline: 'Do core ao cloud, sem trauma.',
+    tagline: 'Do legado ao cloud, sem trauma.',
     description:
-      'Plano por ondas (encapsular → replatform → refatorar) com caso piloto e métricas. Para CIO/CTO de empresas com sistemas críticos que precisam modernizar com risco controlado.',
+      'Solução integrada com aceleradores 4AI (Extrator de Regras, Conversor de Código, Certificação) que combina transformação tecnológica, segurança avançada e capacitação humana. Ciclos de release de 6 semanas com automação IA + supervisão humana (50/50).',
     metrics: [
       { value: '+30%', label: 'Redução de custos' },
       { value: '+70%', label: 'Aceleração time-to-market' },
       { value: '+60%', label: 'Segurança de código' },
     ],
     highlights: [
-      'Metodologia por ondas — sem big-bang rewrite',
-      'Continuidade operacional garantida durante migração',
-      'Piloto em 12 semanas com métricas de ROI',
-      'Compatible com qualquer stack legado',
+      'Aceleradores 4AI: extração de regras, conversão de código e certificação',
+      'Cobertura: COBOL, VB6, .NET, Java, Angular, React, Vue',
+      'Automação 50/50: IA + supervisão humana em cada ciclo',
+      'Ciclos de release escaláveis de 6 semanas',
+      '3 modelos: Essencial, Estratégica e Evolução',
+      'Segurança, observabilidade e FinOps integrados',
+      'POC/POT com amostra real do legado antes da contratação',
     ],
     color: '#8B5CF6',
     bg: 'from-violet-500/15 to-violet-600/5',
@@ -372,6 +375,8 @@ export function SectionOffersFlag() {
             onNavigate={() => {
               if (selectedOffer.id === 'ai-squad') {
                 setDeepDiveHint('ai-augmented-squad')
+              } else if (selectedOffer.id === 'modernizacao') {
+                setDeepDiveHint('modernizacao-legados')
               }
               navigate(selectedOffer.navigateTo)
               setSelectedOffer(null)
