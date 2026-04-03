@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { DynIcon } from '../../utils/iconMap'
-import { awards, certifications } from '../../data/awards'
+import { awards } from '../../data/awards'
 
 const CATEGORY_LABELS: Record<string, string> = {
   premio: 'Premiações',
@@ -90,46 +90,15 @@ export function SectionAwards() {
           ))}
         </div>
 
-        {/* Certifications */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.4 }}
-        >
-          <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-5">
-            Certificações que reforçam nosso compromisso
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {certifications.map((cert, i) => (
-              <motion.div
-                key={cert.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.55 + i * 0.07 }}
-                className="group flex flex-col items-center p-5 rounded-xl bg-foursys-surface/30 border border-white/[0.08] hover:border-foursys-primary/30 transition-all duration-300"
-              >
-                <div className="w-16 h-16 rounded-full bg-foursys-primary/10 border-2 border-foursys-primary/20 flex items-center justify-center mb-3 group-hover:border-foursys-primary/40 transition-colors">
-                  <DynIcon name={cert.icon} size={20} className="text-foursys-primary" />
-                </div>
-                <div className="text-sm font-black text-white">{cert.label}</div>
-                <div className="text-[10px] text-foursys-text-dim mt-1 text-center leading-snug">
-                  {cert.fullName}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
         {/* Bottom stats */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="mt-8 pt-6 border-t border-white/[0.06] grid grid-cols-3 gap-4 text-center"
+          transition={{ delay: 0.5 }}
+          className="mt-8 pt-6 border-t border-white/[0.06] grid grid-cols-2 gap-4 text-center"
         >
           {[
             { value: `${awards.length}+`, label: 'Premiações' },
-            { value: `${certifications.length}`, label: 'Certificações ISO' },
             { value: '26', label: 'Anos de Entrega' },
           ].map(stat => (
             <div key={stat.label}>

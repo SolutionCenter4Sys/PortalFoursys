@@ -26,13 +26,6 @@ function caseMatchesQuery(c: CaseStudy, q: string): boolean {
   return fields.some(f => norm(f).includes(n))
 }
 
-const HERO_STATS = [
-  { value: '150+', label: 'clientes satisfeitos' },
-  { value: '85%', label: 'redução de tempo médio' },
-  { value: '40%', label: 'redução de custo operacional' },
-  { value: '82%', label: 'previsibilidade de entrega' },
-]
-
 const SECTOR_COLORS: Record<string, string> = {
   'Saúde':      'bg-emerald-500/15 text-emerald-400 border-emerald-500/25',
   'Financeiro': 'bg-blue-500/15 text-blue-400 border-blue-500/25',
@@ -406,20 +399,7 @@ export function SectionCases() {
             Não contamos histórias — mostramos números.
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8">
-            {HERO_STATS.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 + i * 0.08 }}
-                className="p-4 rounded-xl bg-foursys-surface/40 border border-white/[0.08] text-center"
-              >
-                <div className="text-xl md:text-2xl font-black text-foursys-primary">{stat.value}</div>
-                <div className="text-[9px] text-foursys-text-dim mt-1 uppercase tracking-wider">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
+          
         </motion.div>
 
         {/* Search bar */}
