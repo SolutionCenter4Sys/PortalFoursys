@@ -5,7 +5,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-1',
     category: 'Institucional',
     question: 'O que é a Foursys e qual é o diferencial dela?',
-    answer: 'A Foursys é uma empresa de tecnologia com 26 anos de mercado, especializada em transformação digital para setores regulados. Nosso diferencial está na combinação de expertise técnica profunda, metodologia ágil consolidada com governança enterprise, e agentes de IA híbridos que aceleram a entrega de projetos complexos. 3,6% de turnover e 500K+ projetos entregues confirmam nossa consistência.',
+    answer: 'A Foursys é uma empresa de tecnologia com 26 anos de mercado, especializada em transformação digital para setores regulados. Nosso diferencial está na combinação de expertise técnica profunda, metodologia ágil consolidada com governança enterprise, e agentes de IA híbridos que aceleram a entrega de projetos complexos. 3,6% de turnover e 50K+ projetos entregues confirmam nossa consistência.',
     sectionLink: 'identity',
     sectionLabel: 'Ver Quem Somos'
   },

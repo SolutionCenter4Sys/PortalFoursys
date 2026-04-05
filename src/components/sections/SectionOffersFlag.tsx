@@ -324,7 +324,7 @@ export function SectionOffersFlag() {
               {[
                 { value: '26', label: 'anos' },
                 { value: '3,6%', label: 'turnover' },
-                { value: '500K+', label: 'projetos' },
+                { value: '50K+', label: 'projetos' },
               ].map(stat => (
                 <div key={stat.label} className="text-center px-3 md:px-4 py-1.5 md:py-2 rounded-xl bg-foursys-surface/40 border border-white/[0.08]">
                   <div className="text-base md:text-lg font-black text-foursys-primary">{stat.value}</div>

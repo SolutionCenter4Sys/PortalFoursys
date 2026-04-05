@@ -2,7 +2,7 @@ import type { KPI, TimelineItem } from '../types'
 
 export const heroStats = {
   years: 26,
-  projects: '500K+',
+  projects: '50K+',
   cities: '7',
   turnover: '3,6%',
   sla: '99,9%',
@@ -17,7 +17,7 @@ export const kpis: KPI[] = [
     description: 'Transformando negócios desde 2000'
   },
   {
-    value: 500,
+    value: 50,
     suffix: 'K+',
     label: 'Projetos Entregues',
     description: 'Em múltiplos setores e países'
