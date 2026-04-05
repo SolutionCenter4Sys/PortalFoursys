@@ -1,8 +1,9 @@
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   Users, Calendar, ShieldCheck, Globe, Network, TrendingUp,
   Zap, Euro, Clock, Heart,
-  CheckCircle2, XCircle, Minus, Award, Building2, Target,
+  CheckCircle2, XCircle, Minus, Award, Building2, Target, ChevronDown,
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 
@@ -212,6 +213,8 @@ function ComparisonTable() {
 // ─── Main ────────────────────────────────────────────────────────────────────
 
 export function SectionWhyFoursys() {
+  const [showComparison, setShowComparison] = useState(false)
+
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-6 md:py-10 max-w-7xl mx-auto">
@@ -260,44 +263,16 @@ export function SectionWhyFoursys() {
           ))}
         </motion.div>
 
-        {/* Comparison Table */}
-        <ComparisonTable />
-
-        {/* Score summary bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="mt-6 p-4 rounded-xl border border-foursys-primary/15 bg-foursys-primary/[0.03] flex flex-wrap items-center justify-center gap-6"
-        >
-          <div className="flex items-center gap-2 text-xs">
-            <CheckCircle2 size={13} className="text-emerald-400" />
-            <span className="text-foursys-text-muted">Vantagem clara</span>
-          </div>
-          <div className="flex items-center gap-2 text-xs">
-            <Minus size={13} className="text-amber-400" />
-            <span className="text-foursys-text-muted">Paridade</span>
-          </div>
-          <div className="flex items-center gap-2 text-xs">
-            <XCircle size={13} className="text-red-400/70" />
-            <span className="text-foursys-text-muted">Desvantagem</span>
-          </div>
-          <div className="h-4 w-px bg-white/10 hidden md:block" />
-          <div className="text-xs font-bold text-foursys-primary">
-            Foursys lidera em {COMPARISON.filter(c => c.foursysAdvantage).length} de {COMPARISON.length} dimensões
-          </div>
-        </motion.div>
-
-        {/* Why we win section */}
+        {/* Where Foursys stands out */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="mt-12"
+          transition={{ delay: 0.3 }}
+          className="mb-10"
         >
           <h3 className="text-lg font-black text-white mb-6 flex items-center gap-2">
             <Zap size={18} className="text-foursys-primary" />
-            Onde a Foursys supera as globais
+            Onde a Foursys se Destaca
           </h3>
 
           <div className="grid md:grid-cols-2 gap-4 md:gap-5">
@@ -306,14 +281,13 @@ export function SectionWhyFoursys() {
                 key={adv.title}
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.65 + i * 0.08, duration: 0.4 }}
+                transition={{ delay: 0.35 + i * 0.08, duration: 0.4 }}
                 className="group relative p-6 rounded-2xl overflow-hidden border transition-all duration-400 hover:border-opacity-40"
                 style={{
                   background: `linear-gradient(145deg, ${hexToRgba(adv.color, 0.06)}, transparent 60%)`,
                   borderColor: hexToRgba(adv.color, 0.12),
                 }}
               >
-                {/* Top accent */}
                 <div
                   className="absolute top-0 left-0 right-0 h-[2px] opacity-50 group-hover:opacity-100 transition-opacity duration-300"
                   style={{ background: `linear-gradient(90deg, ${adv.color}, transparent)` }}
@@ -339,8 +313,8 @@ export function SectionWhyFoursys() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.9 }}
-          className="mt-10 p-6 md:p-8 rounded-2xl border border-foursys-primary/20 bg-foursys-primary/[0.04] text-center"
+          transition={{ delay: 0.7 }}
+          className="p-6 md:p-8 rounded-2xl border border-foursys-primary/20 bg-foursys-primary/[0.04] text-center"
         >
           <p className="text-sm md:text-base text-foursys-text-muted leading-relaxed max-w-3xl mx-auto">
             <span className="text-foursys-primary font-black">A Foursys entrega o calibre de uma consultoria global</span>{' '}
@@ -348,6 +322,67 @@ export function SectionWhyFoursys() {
             <span className="text-white font-bold">26 anos de história, 3,6% de turnover e 6 certificações</span>{' '}
             pode oferecer. Não competimos em escala — competimos em profundidade, resultado e confiança.
           </p>
+        </motion.div>
+
+        {/* Collapsible Comparison Table */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="mt-10"
+        >
+          <button
+            onClick={() => setShowComparison(prev => !prev)}
+            className="w-full flex items-center justify-between gap-3 p-4 rounded-xl border border-white/[0.08] bg-foursys-surface/30 hover:border-foursys-primary/25 transition-all duration-300 group"
+          >
+            <div className="flex items-center gap-2.5">
+              <Target size={18} className="text-foursys-primary" />
+              <span className="text-sm font-black text-white">Foursys vs. Consultorias Globais</span>
+              <span className="text-[9px] font-bold uppercase tracking-wider text-foursys-text-dim hidden md:inline">
+                — Comparativo detalhado em {COMPARISON.length} dimensões
+              </span>
+            </div>
+            <ChevronDown
+              size={18}
+              className={`text-foursys-primary transition-transform duration-300 ${showComparison ? 'rotate-180' : ''}`}
+            />
+          </button>
+
+          <AnimatePresence>
+            {showComparison && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.35, ease: 'easeInOut' }}
+                className="overflow-hidden"
+              >
+                <div className="pt-5">
+                  <ComparisonTable />
+
+                  {/* Score summary bar */}
+                  <div className="mt-6 p-4 rounded-xl border border-foursys-primary/15 bg-foursys-primary/[0.03] flex flex-wrap items-center justify-center gap-6">
+                    <div className="flex items-center gap-2 text-xs">
+                      <CheckCircle2 size={13} className="text-emerald-400" />
+                      <span className="text-foursys-text-muted">Vantagem clara</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs">
+                      <Minus size={13} className="text-amber-400" />
+                      <span className="text-foursys-text-muted">Paridade</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs">
+                      <XCircle size={13} className="text-red-400/70" />
+                      <span className="text-foursys-text-muted">Desvantagem</span>
+                    </div>
+                    <div className="h-4 w-px bg-white/10 hidden md:block" />
+                    <div className="text-xs font-bold text-foursys-primary">
+                      Foursys lidera em {COMPARISON.filter(c => c.foursysAdvantage).length} de {COMPARISON.length} dimensões
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       </div>
     </SectionWrapper>
