@@ -361,6 +361,8 @@ export function SectionOffersFlag() {
                 setDeepDiveHint('ai-augmented-squad')
               } else if (selectedOffer.id === 'modernizacao') {
                 setDeepDiveHint('modernizacao-legados')
+              } else if (selectedOffer.id === 'ciberseguranca') {
+                setDeepDiveHint('ciberseguranca')
               } else if (selectedOffer.id === 'quality-ia') {
                 setDeepDiveHint('quality-testes-ia')
               } else if (selectedOffer.id === 'fourblox') {

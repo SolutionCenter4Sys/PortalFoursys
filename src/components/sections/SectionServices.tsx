@@ -1572,7 +1572,7 @@ function DeepDiveModal({
 /* ── SectionServices ─────────────────────────────────────────────────────────── */
 
 export function SectionServices() {
-  const { state, clearDeepDiveHint } = useApp()
+  const { state, clearDeepDiveHint, navigate } = useApp()
   const [activeServiceId, setActiveServiceId] = useState(serviceLines[0]?.id ?? '')
   const [mobileSheetId, setMobileSheetId] = useState<string | null>(null)
   const [offerDetailId, setOfferDetailId] = useState<string | null>(null)
@@ -1580,9 +1580,13 @@ export function SectionServices() {
   const activeService = serviceLines.find(s => s.id === activeServiceId) ?? serviceLines[0]
   const activeVisual = SERVICE_VISUALS[activeService.id] ?? DEFAULT_VISUAL
   const orbitRef = useRef<HTMLDivElement>(null)
+  const returnSectionRef = useRef<string | null>(null)
 
   useEffect(() => {
     if (state.deepDiveHint) {
+      if (state.previousSection && state.previousSection !== 'services') {
+        returnSectionRef.current = state.previousSection
+      }
       const targetService = serviceLines.find(s => s.id === state.deepDiveHint)
       if (targetService) {
         setActiveServiceId(targetService.id)
@@ -1594,7 +1598,7 @@ export function SectionServices() {
       }
       clearDeepDiveHint()
     }
-  }, [state.deepDiveHint, clearDeepDiveHint])
+  }, [state.deepDiveHint, clearDeepDiveHint, state.previousSection])
 
   const mobileSheetService = mobileSheetId
     ? serviceLines.find(s => s.id === mobileSheetId) ?? null
@@ -1651,6 +1655,16 @@ export function SectionServices() {
       setOfferDetailId(id)
     }
   }, [])
+
+  const handleCloseAndReturn = useCallback(() => {
+    setDeepDiveId(null)
+    setOfferDetailId(null)
+    const returnTo = returnSectionRef.current
+    if (returnTo) {
+      returnSectionRef.current = null
+      navigate(returnTo as Parameters<typeof navigate>[0])
+    }
+  }, [navigate])
 
   return (
     <SectionWrapper>
@@ -1789,7 +1803,7 @@ export function SectionServices() {
             {offerDetailService && (
               <OfferDetailModal
                 service={offerDetailService}
-                onClose={() => setOfferDetailId(null)}
+                onClose={handleCloseAndReturn}
               />
             )}
           </AnimatePresence>
@@ -1797,7 +1811,7 @@ export function SectionServices() {
             {deepDiveService && (
               <DeepDiveModal
                 service={deepDiveService}
-                onClose={() => setDeepDiveId(null)}
+                onClose={handleCloseAndReturn}
               />
             )}
           </AnimatePresence>
