@@ -1178,85 +1178,25 @@ const squadDeliverables = [
   { icon: 'book-open', title: 'Documentação Completa', desc: 'Diagramas C4, ADRs, user stories, specs de API e testes.', color: '#8B5CF6' },
   { icon: 'bar-chart', title: 'Dashboards em Tempo Real', desc: 'Velocidade, burndown, custos, taxa de aceitação de IA, qualidade de código.', color: '#00C2E0' },
   { icon: 'brain', title: 'Agentes Customizados', desc: 'Treinados na stack, domínio e regras de negócio do cliente. Não genéricos.', color: '#4ADE80' },
-  { icon: 'shield', title: 'Governança & Segurança', desc: 'Cloud isolada, GDPR & EU AI Act, VPN dedicada, tenant segregado.', color: '#EF4444' },
   { icon: 'unlock', title: 'Autonomia do Cliente', desc: 'Total domínio sobre o código. Aberto para evolução. Sem lock-in.', color: '#F59E0B' },
 ]
 
-const squadProblems = [
-  'Atrasos em projetos e perda de time-to-market',
-  'Falta de padronização de código',
-  'Baixa cobertura de testes',
-  'Qualidade inconsistente e retrabalho',
-  'Escassez de profissionais qualificados',
-  'Turnover e perda de conhecimento',
-  'Ausência de documentação',
-  'Baixa visibilidade do progresso',
-]
-
-const squadCases = [
-  {
-    title: 'Workstream Orquestrador com IA',
-    sector: 'Financeiro',
-    result: '80% ganho de produtividade',
-    details: '12 meses, 5 squads (40+ FTE), 500+ features',
-    metrics: [
-      { value: '65%', label: 'Redução de lead time' },
-      { value: '70%', label: 'Queda de retrabalho' },
-      { value: '80%', label: 'Ganho produtividade' },
-    ],
-  },
-  {
-    title: 'Governança e Auditoria de TI',
-    sector: 'Banco Internacional',
-    result: '100+ apontamentos resolvidos',
-    details: '18 meses, 8 FTE + 10 Agentes, COBIT/ISO 27001/NIST',
-    metrics: [
-      { value: '60%', label: 'Redução backlog auditoria' },
-      { value: '30%', label: 'Planos no prazo' },
-      { value: '40%', label: 'Menos reincidência' },
-    ],
-  },
-  {
-    title: 'Módulo Analytics eHealth',
-    sector: 'Saúde Digital',
-    result: 'Projeto de 14 meses feito em 5',
-    details: '80 features, 8.400h (vs 18.000h estimadas)',
-    metrics: [
-      { value: '300%', label: 'Produtividade admin' },
-      { value: '400%', label: 'Aumento de uso' },
-      { value: '75%', label: 'Redução navegação' },
-    ],
-  },
-]
 
 function AISquadDeepDive() {
-  const [expandedCase, setExpandedCase] = useState<number | null>(null)
-
   return (
     <div className="space-y-6">
-      {/* Problemas vs Solução */}
-      <div className="grid md:grid-cols-2 gap-4">
-        <div className="p-5 rounded-xl bg-red-500/10 border border-red-500/25">
-          <div className="text-sm font-bold text-red-400 mb-2.5">Squads Tradicionais (problemas)</div>
-          <ul className="space-y-1.5 text-xs text-foursys-text-dim">
-            {squadProblems.map(p => (
-              <li key={p}>• {p}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="p-5 rounded-xl bg-orange-500/10 border border-orange-500/25">
-          <div className="text-sm font-bold text-orange-400 mb-2.5">AI Squad (solução)</div>
-          <ul className="space-y-1.5 text-xs text-foursys-text-muted">
-            <li>• Times humanos + 20+ agentes IA especializados</li>
-            <li>• Framework SDD com agentes por fase do ciclo</li>
-            <li>• Documentação automática e completa</li>
-            <li>• Dashboards de performance em tempo real</li>
-            <li>• Agentes treinados na stack e domínio do cliente</li>
-            <li>• Cloud isolada, GDPR & EU AI Act compliance</li>
-            <li>• Código aberto, sem lock-in</li>
-            <li>• Dois modelos: ambiente cliente ou Foursys</li>
-          </ul>
-        </div>
+      {/* AI Squad (solução) */}
+      <div className="p-5 rounded-xl bg-orange-500/10 border border-orange-500/25">
+        <div className="text-sm font-bold text-orange-400 mb-2.5">AI Squad (solução)</div>
+        <ul className="space-y-1.5 text-xs text-foursys-text-muted">
+          <li>• Times humanos + 20+ agentes IA especializados</li>
+          <li>• Framework SDD com agentes por fase do ciclo</li>
+          <li>• Documentação automática e completa</li>
+          <li>• Dashboards de performance em tempo real</li>
+          <li>• Agentes treinados na stack e domínio do cliente</li>
+          <li>• Código aberto, sem lock-in</li>
+          <li>• Dois modelos: ambiente cliente ou Foursys</li>
+        </ul>
       </div>
 
       {/* Framework SDD */}
@@ -1298,51 +1238,6 @@ function AISquadDeepDive() {
         </div>
       </div>
 
-      {/* Cases comprovados */}
-      <div>
-        <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          Cases Comprovados
-        </div>
-        <div className="space-y-2.5">
-          {squadCases.map((c, i) => {
-            const isOpen = expandedCase === i
-            return (
-              <div key={c.title} className="rounded-xl border border-orange-500/20 overflow-hidden bg-foursys-surface/30">
-                <button
-                  type="button"
-                  onClick={() => setExpandedCase(isOpen ? null : i)}
-                  className="w-full p-4 flex items-start gap-3 text-left hover:bg-white/[0.03] transition-colors min-h-[44px]"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-orange-500/20 border border-orange-500/35 flex items-center justify-center flex-shrink-0">
-                    <Zap size={16} className="text-orange-400" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-2">
-                      <h5 className="text-sm font-bold text-white">{c.title}</h5>
-                      <DynIcon name={isOpen ? 'chevron-up' : 'chevron-down'} size={14} className="text-white/30 flex-shrink-0" />
-                    </div>
-                    <p className="text-[10px] text-orange-400 font-semibold mt-0.5">{c.sector} — {c.result}</p>
-                  </div>
-                </button>
-                {isOpen && (
-                  <div className="px-4 pb-4 space-y-3">
-                    <p className="text-[11px] text-foursys-text-dim">{c.details}</p>
-                    <div className="grid grid-cols-3 gap-2">
-                      {c.metrics.map(m => (
-                        <div key={m.label} className="text-center p-2.5 rounded-lg bg-orange-500/10 border border-orange-500/20">
-                          <div className="text-lg font-black text-orange-400">{m.value}</div>
-                          <div className="text-[9px] text-foursys-text-dim mt-0.5">{m.label}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            )
-          })}
-        </div>
-      </div>
-
       {/* Requisitos */}
       <div className="grid md:grid-cols-2 gap-4">
         <div className="p-4 rounded-xl border border-white/10 bg-foursys-surface/30">
@@ -1372,19 +1267,6 @@ function AISquadDeepDive() {
         </div>
       </div>
 
-      {/* CTA */}
-      <div className="p-4 rounded-xl bg-gradient-to-r from-orange-500/12 via-amber-500/8 to-transparent border border-orange-500/20">
-        <div className="flex items-center gap-3">
-          <Zap size={18} className="text-orange-400 flex-shrink-0" />
-          <div className="flex-1">
-            <p className="text-xs text-foursys-text-muted leading-relaxed">
-              <strong className="text-white">AI Squad — Foursys.</strong>{' '}
-              Resultados comprovados: até 80% de ganho de produtividade, 65% de redução de lead time
-              e 70% de queda de retrabalho com governança enterprise e zero lock-in.
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
   )
 }
