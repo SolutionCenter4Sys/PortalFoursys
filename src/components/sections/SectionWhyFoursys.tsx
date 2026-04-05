@@ -18,7 +18,7 @@ const DIFFERENTIALS = [
   { icon: <Calendar size={20} />, stat: '26', label: 'Anos de entrega', context: 'Fundada em 2000' },
   { icon: <ShieldCheck size={20} />, stat: '6', label: 'Certificações', context: 'ISO 9001 · 27001 · 27701 · 14001 · SAFe · GPTW' },
   { icon: <Globe size={20} />, stat: '3', label: 'Regiões do Globo', context: 'Brasil · EUA · Portugal' },
-  { icon: <Network size={20} />, stat: '6+', label: 'Parcerias tier-1', context: 'Microsoft · AWS · Google · SAP' },
+  { icon: <Network size={20} />, stat: '9+', label: 'Alianças estratégicas', context: 'Microsoft · AWS · Google · Adobe' },
   { icon: <TrendingUp size={20} />, stat: '500K+', label: 'Projetos entregues', context: 'Todos os modelos de delivery' },
 ]
 

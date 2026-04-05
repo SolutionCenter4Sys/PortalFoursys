@@ -37,48 +37,6 @@ export function GoogleCloudLogo({ className = '', size = 32 }: LogoProps) {
   )
 }
 
-export function SapLogo({ className = '', size = 32 }: LogoProps) {
-  const w = size * 2
-  const h = size
-  return (
-    <svg viewBox="0 0 100 50" width={w} height={h} className={className} aria-label="SAP">
-      <rect width="100" height="50" rx="5" fill="#0FAAFF" />
-      <text x="50" y="35" textAnchor="middle" fill="#FFFFFF" fontSize="28" fontWeight="900" fontFamily="Arial, sans-serif" letterSpacing="3">SAP</text>
-    </svg>
-  )
-}
-
-export function OracleLogo({ className = '', size = 32 }: LogoProps) {
-  const w = size * 2.5
-  const h = size
-  return (
-    <svg viewBox="0 0 120 40" width={w} height={h} className={className} aria-label="Oracle">
-      <text x="60" y="29" textAnchor="middle" fill="#F80000" fontSize="26" fontWeight="900" fontFamily="Arial, sans-serif" letterSpacing="2">ORACLE</text>
-    </svg>
-  )
-}
-
-export function ServiceNowLogo({ className = '', size = 32 }: LogoProps) {
-  return (
-    <svg viewBox="0 0 100 100" width={size} height={size} className={className} aria-label="ServiceNow">
-      <circle cx="50" cy="50" r="46" fill="#293E40" stroke="#62D84E" strokeWidth="4" />
-      <circle cx="50" cy="50" r="16" fill="#62D84E" />
-      <circle cx="50" cy="50" r="8" fill="#293E40" />
-    </svg>
-  )
-}
-
-export function SalesforceLogo({ className = '', size = 32 }: LogoProps) {
-  const w = size * 1.5
-  const h = size
-  return (
-    <svg viewBox="0 0 150 100" width={w} height={h} className={className} aria-label="Salesforce">
-      <path d="M63 12c8.5 0 16 4.2 20.5 10.7C87.5 18 93 16 99 16c18.5 0 33.5 15 33.5 33.5S117.5 83 99 83c-2.5 0-4.9-.3-7.2-.8C88.1 88.3 81.5 92 74 92c-5 0-9.6-1.5-13.4-4.1C57.2 92.5 51.5 95 45 95c-16 0-29-13-29-29 0-4.2.9-8.1 2.5-11.7C12 51 8 44.5 8 37 8 23.2 19.2 12 33 12c5.5 0 10.6 1.8 14.7 4.8C51.5 13.8 57 12 63 12z" fill="#00A1E0" />
-      <text x="58" y="62" textAnchor="middle" fill="#FFFFFF" fontSize="18" fontWeight="700" fontFamily="Arial, sans-serif">salesforce</text>
-    </svg>
-  )
-}
-
 export function DatabricksLogo({ className = '', size = 32 }: LogoProps) {
   return (
     <svg viewBox="0 0 36 36" width={size} height={size} className={className} aria-label="Databricks">
@@ -89,17 +47,84 @@ export function DatabricksLogo({ className = '', size = 32 }: LogoProps) {
   )
 }
 
-export type PartnerId = 'microsoft' | 'aws' | 'google-cloud' | 'sap' | 'oracle' | 'servicenow' | 'salesforce' | 'databricks'
+export function AdobeLogo({ className = '', size = 32 }: LogoProps) {
+  return (
+    <svg viewBox="0 0 40 40" width={size} height={size} className={className} aria-label="Adobe">
+      <path d="M16 4H4v32L16 4z" fill="#FF0000" />
+      <path d="M24 4h12v32L24 4z" fill="#FF0000" />
+      <path d="M20 17l8 19h-6l-2.4-6H14l6-13z" fill="#FF0000" />
+    </svg>
+  )
+}
+
+export function DigibeeLogo({ className = '', size = 32 }: LogoProps) {
+  const w = size * 1.8
+  const h = size
+  return (
+    <svg viewBox="0 0 120 40" width={w} height={h} className={className} aria-label="Digibee">
+      <circle cx="14" cy="20" r="8" fill="#00D4AA" opacity="0.9" />
+      <circle cx="14" cy="20" r="4" fill="#009977" />
+      <text x="30" y="26" fill="#00D4AA" fontSize="18" fontWeight="700" fontFamily="system-ui, sans-serif" letterSpacing="0.5">Digibee</text>
+    </svg>
+  )
+}
+
+export function IntelLogo({ className = '', size = 32 }: LogoProps) {
+  const w = size * 1.8
+  const h = size
+  return (
+    <svg viewBox="0 0 100 40" width={w} height={h} className={className} aria-label="Intel">
+      <circle cx="82" cy="8" r="4" fill="#0071C5" />
+      <text x="50" y="30" textAnchor="middle" fill="#0071C5" fontSize="26" fontWeight="400" fontFamily="system-ui, sans-serif" fontStyle="italic" letterSpacing="-0.5">intel</text>
+    </svg>
+  )
+}
+
+export function PegaLogo({ className = '', size = 32 }: LogoProps) {
+  const w = size * 1.8
+  const h = size
+  return (
+    <svg viewBox="0 0 100 40" width={w} height={h} className={className} aria-label="Pega">
+      <text x="50" y="30" textAnchor="middle" fill="#FFFFFF" fontSize="24" fontWeight="700" fontFamily="system-ui, sans-serif" fontStyle="italic" letterSpacing="1">Pega</text>
+    </svg>
+  )
+}
+
+export function SnowflakeLogo({ className = '', size = 32 }: LogoProps) {
+  return (
+    <svg viewBox="0 0 36 36" width={size} height={size} className={className} aria-label="Snowflake">
+      <g fill="#29B5E8" stroke="#29B5E8" strokeWidth="1.5">
+        <line x1="18" y1="2" x2="18" y2="34" />
+        <line x1="4" y1="10" x2="32" y2="26" />
+        <line x1="4" y1="26" x2="32" y2="10" />
+        <line x1="14" y1="1" x2="18" y2="5" />
+        <line x1="22" y1="1" x2="18" y2="5" />
+        <line x1="14" y1="35" x2="18" y2="31" />
+        <line x1="22" y1="35" x2="18" y2="31" />
+        <circle cx="18" cy="18" r="3" fill="#29B5E8" stroke="none" />
+        <circle cx="18" cy="6" r="2" stroke="none" />
+        <circle cx="18" cy="30" r="2" stroke="none" />
+        <circle cx="7" cy="11.5" r="2" stroke="none" />
+        <circle cx="29" cy="24.5" r="2" stroke="none" />
+        <circle cx="7" cy="24.5" r="2" stroke="none" />
+        <circle cx="29" cy="11.5" r="2" stroke="none" />
+      </g>
+    </svg>
+  )
+}
+
+export type PartnerId = 'microsoft' | 'aws' | 'google-cloud' | 'databricks' | 'adobe' | 'digibee' | 'intel' | 'pega' | 'snowflake'
 
 const LOGO_MAP: Record<PartnerId, React.FC<LogoProps>> = {
   'microsoft': MicrosoftLogo,
   'aws': AwsLogo,
   'google-cloud': GoogleCloudLogo,
-  'sap': SapLogo,
-  'oracle': OracleLogo,
-  'servicenow': ServiceNowLogo,
-  'salesforce': SalesforceLogo,
   'databricks': DatabricksLogo,
+  'adobe': AdobeLogo,
+  'digibee': DigibeeLogo,
+  'intel': IntelLogo,
+  'pega': PegaLogo,
+  'snowflake': SnowflakeLogo,
 }
 
 export function PartnerLogo({ id, ...props }: LogoProps & { id: PartnerId }) {

@@ -4,14 +4,15 @@ import { alliances } from '../../data/alliances'
 import { PartnerLogo, type PartnerId } from '../ui/PartnerLogos'
 
 const partnerCards: { id: PartnerId; name: string; tagline: string; color: string; bg: string; border: string }[] = [
-  { id: 'microsoft',     name: 'Microsoft',          tagline: 'Azure · Copilot · 365',       color: '#00A4EF', bg: 'from-blue-400/15 to-blue-500/5',   border: 'border-blue-400/30' },
-  { id: 'aws',           name: 'Amazon Web Services', tagline: 'Cloud · AI · Data',           color: '#FF9900', bg: 'from-amber-500/15 to-amber-600/5', border: 'border-amber-500/30' },
-  { id: 'google-cloud',  name: 'Google Cloud',        tagline: 'BigQuery · Vertex AI · GKE',  color: '#4285F4', bg: 'from-blue-500/15 to-blue-600/5',   border: 'border-blue-500/30' },
-  { id: 'sap',           name: 'SAP',                 tagline: 'S/4HANA · BTP · ERP',         color: '#0FAAFF', bg: 'from-sky-500/15 to-sky-600/5',     border: 'border-sky-500/30' },
-  { id: 'oracle',        name: 'Oracle',              tagline: 'OCI · Database · ERP',         color: '#F80000', bg: 'from-red-600/15 to-red-700/5',     border: 'border-red-600/30' },
-  { id: 'servicenow',    name: 'ServiceNow',          tagline: 'ITSM · HRSD · Automação',     color: '#62D84E', bg: 'from-green-400/15 to-green-500/5', border: 'border-green-400/30' },
-  { id: 'salesforce',    name: 'Salesforce',          tagline: 'CRM · Sales · Service Cloud', color: '#00A1E0', bg: 'from-sky-500/15 to-sky-600/5',     border: 'border-sky-500/30' },
-  { id: 'databricks',    name: 'Databricks',          tagline: 'Data Lakehouse · ML · AI',    color: '#FF3621', bg: 'from-red-500/15 to-red-600/5',     border: 'border-red-500/30' },
+  { id: 'adobe',         name: 'Adobe',               tagline: 'Experience · Creative · DX',   color: '#FF0000', bg: 'from-red-500/15 to-red-600/5',     border: 'border-red-500/30' },
+  { id: 'aws',           name: 'Amazon Web Services', tagline: 'Cloud · AI · Data',            color: '#FF9900', bg: 'from-amber-500/15 to-amber-600/5', border: 'border-amber-500/30' },
+  { id: 'databricks',    name: 'Databricks',          tagline: 'Data Lakehouse · ML · AI',     color: '#FF3621', bg: 'from-red-500/15 to-red-600/5',     border: 'border-red-500/30' },
+  { id: 'digibee',       name: 'Digibee',             tagline: 'iPaaS · Integração · APIs',    color: '#00D4AA', bg: 'from-emerald-400/15 to-emerald-500/5', border: 'border-emerald-400/30' },
+  { id: 'google-cloud',  name: 'Google Cloud',        tagline: 'BigQuery · Vertex AI · GKE',   color: '#4285F4', bg: 'from-blue-500/15 to-blue-600/5',   border: 'border-blue-500/30' },
+  { id: 'intel',         name: 'Intel',               tagline: 'AI · Edge · Infraestrutura',   color: '#0071C5', bg: 'from-blue-600/15 to-blue-700/5',   border: 'border-blue-600/30' },
+  { id: 'microsoft',     name: 'Microsoft',           tagline: 'Azure · Copilot · 365',        color: '#00A4EF', bg: 'from-blue-400/15 to-blue-500/5',   border: 'border-blue-400/30' },
+  { id: 'pega',          name: 'Pega',                tagline: 'BPM · Low-Code · CRM',         color: '#FFFFFF', bg: 'from-gray-400/15 to-gray-500/5',   border: 'border-gray-400/30' },
+  { id: 'snowflake',     name: 'Snowflake',           tagline: 'Data Cloud · Analytics · AI',  color: '#29B5E8', bg: 'from-cyan-400/15 to-cyan-500/5',   border: 'border-cyan-400/30' },
 ]
 
 export function SectionAlliances() {

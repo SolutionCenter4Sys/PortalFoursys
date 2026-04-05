@@ -17,21 +17,22 @@ const flagshipOffers = [
 ]
 
 const allianceLogos: { id: PartnerId; label: string }[] = [
-  { id: 'microsoft',    label: 'Microsoft' },
+  { id: 'adobe',        label: 'Adobe' },
   { id: 'aws',          label: 'AWS' },
-  { id: 'google-cloud', label: 'Google Cloud' },
-  { id: 'sap',          label: 'SAP' },
   { id: 'databricks',   label: 'Databricks' },
-  { id: 'salesforce',   label: 'Salesforce' },
-  { id: 'oracle',       label: 'Oracle' },
-  { id: 'servicenow',   label: 'ServiceNow' },
+  { id: 'digibee',      label: 'Digibee' },
+  { id: 'google-cloud', label: 'Google Cloud' },
+  { id: 'intel',        label: 'Intel' },
+  { id: 'microsoft',    label: 'Microsoft' },
+  { id: 'pega',         label: 'Pega' },
+  { id: 'snowflake',    label: 'Snowflake' },
 ]
 
 // ─── Chama Foursys ────────────────────────────────────────────────────────────
 
 function FoursysLogo() {
   return (
-    <div className="relative select-none flex items-center justify-center py-4">
+    <div className="relative select-none flex items-center justify-center py-2 lg:py-3">
       {/* Ambient glow */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -70,8 +71,8 @@ function FoursysLogo() {
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
       >
         <svg
-          width="340"
-          height="124"
+          width="280"
+          height="102"
           viewBox="0 0 220 80"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -202,7 +203,7 @@ export function SectionHome() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="section-hero flex flex-col items-center justify-center py-8 lg:py-6 cursor-pointer order-1 lg:order-2"
+            className="section-hero flex flex-col items-center justify-center py-4 lg:py-3 cursor-pointer order-1 lg:order-2"
             onClick={() => navigate('identity')}
             role="button"
             tabIndex={0}
@@ -214,7 +215,7 @@ export function SectionHome() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="mt-4 text-center px-6"
+              className="mt-2 text-center px-6"
             >
               <h1 className="text-lg md:text-xl font-black text-white leading-snug mb-2">
                 Soluções digitais que conectam
@@ -247,7 +248,7 @@ export function SectionHome() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col justify-center px-5 md:px-10 py-6 md:py-8 gap-5 md:gap-7 order-2 lg:order-1 border-t lg:border-t-0 lg:border-r border-white/[0.06]"
+            className="flex flex-col justify-center px-5 md:px-8 py-4 md:py-5 gap-3 md:gap-5 order-2 lg:order-1 border-t lg:border-t-0 lg:border-r border-white/[0.06]"
           >
             <div>
               <span className="text-xs font-bold tracking-[0.18em] uppercase text-foursys-primary">
@@ -255,7 +256,7 @@ export function SectionHome() {
               </span>
             </div>
 
-            <div className="grid grid-cols-3 lg:grid-cols-1 gap-4 lg:gap-7">
+            <div className="grid grid-cols-3 lg:grid-cols-1 gap-4 lg:gap-5">
               {kpis.map(({ ref, suffix, label }, i) => (
                 <motion.div
                   key={i}
@@ -264,7 +265,7 @@ export function SectionHome() {
                   transition={{ delay: 0.2 + i * 0.12, duration: 0.5 }}
                   className="border-l-[3px] border-foursys-primary pl-3 lg:pl-5"
                 >
-                  <div className="text-3xl md:text-5xl lg:text-[68px] leading-none font-black text-white tracking-tight tabular-nums">
+                  <div className="text-3xl md:text-5xl lg:text-[56px] leading-none font-black text-white tracking-tight tabular-nums">
                     {ref.count}
                     <span className="text-xl md:text-2xl lg:text-4xl">{suffix}</span>
                   </div>
@@ -280,12 +281,12 @@ export function SectionHome() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col justify-center px-5 md:px-8 py-6 md:py-8 gap-3 md:gap-4 order-3 border-t lg:border-t-0 lg:border-l border-white/[0.06]"
+            className="flex flex-col justify-center px-5 md:px-8 py-4 md:py-5 gap-2 md:gap-3 order-3 border-t lg:border-t-0 lg:border-l border-white/[0.06]"
           >
             <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-foursys-primary mb-1">
               Ofertas Flagship
             </div>
-            <div className="grid grid-cols-2 lg:grid-cols-1 gap-2 lg:gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-1 gap-2 lg:gap-3">
               {flagshipOffers.map((offer, i) => (
                 <motion.div
                   key={i}
@@ -310,7 +311,7 @@ export function SectionHome() {
           className="grid grid-cols-1 sm:grid-cols-3 border-t border-white/[0.08]"
         >
           {/* Estrutura de entrega */}
-          <div className="px-5 md:px-10 py-4 md:py-5 border-b sm:border-b-0 sm:border-r border-white/[0.06]">
+          <div className="px-5 md:px-8 py-3 md:py-4 border-b sm:border-b-0 sm:border-r border-white/[0.06]">
             <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-2">
               Modelos de Entrega
             </div>
@@ -320,8 +321,8 @@ export function SectionHome() {
           </div>
 
           {/* Certificações */}
-          <div className="px-5 md:px-10 py-4 md:py-5 border-b sm:border-b-0 sm:border-r border-white/[0.06]">
-            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-3">
+          <div className="px-5 md:px-8 py-3 md:py-4 border-b sm:border-b-0 sm:border-r border-white/[0.06]">
+            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-2">
               Certificações
             </div>
             <div className="flex items-center gap-3 flex-wrap">
@@ -332,18 +333,18 @@ export function SectionHome() {
           </div>
 
           {/* Alianças */}
-          <div className="px-5 md:px-10 py-4 md:py-5">
-            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-3">
-              Parceiros Estratégicos
+          <div className="px-5 md:px-8 py-3 md:py-4">
+            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-2">
+              Alianças Estratégicas
             </div>
-            <div className="flex items-center gap-6 md:gap-8 flex-wrap">
+            <div className="flex items-center gap-4 md:gap-5 flex-wrap">
               {allianceLogos.map(a => (
                 <div
                   key={a.id}
                   className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity duration-200"
                   title={a.label}
                 >
-                  <PartnerLogo id={a.id} size={22} />
+                  <PartnerLogo id={a.id} size={18} />
                 </div>
               ))}
             </div>

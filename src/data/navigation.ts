@@ -67,7 +67,7 @@ export const navigationItems: NavigationItem[] = [
     label: 'Alianças Estratégicas',
     icon: 'network',
     category: 'Ofertas e Serviços',
-    description: 'Microsoft, AWS, Google Cloud, SAP, Oracle, Salesforce e mais',
+    description: 'Adobe, AWS, Databricks, Digibee, Google Cloud, Intel, Microsoft, Pega, Snowflake',
   },
   {
     id: 'innovation',
