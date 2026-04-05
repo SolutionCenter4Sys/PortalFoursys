@@ -336,9 +336,8 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
                     <p className="text-sm text-foursys-text-muted italic leading-relaxed mb-3">
                       &ldquo;{c.testimonial.quote}&rdquo;
                     </p>
-                    <p className="text-xs">
-                      <span className="font-semibold text-white">{c.testimonial.author}</span>
-                      <span className="text-foursys-text-dim"> — {c.testimonial.role}</span>
+                    <p className="text-xs font-semibold text-white">
+                      {c.testimonial.role}
                     </p>
                   </div>
                 </div>
