@@ -11,7 +11,7 @@ import { heroStats } from '../../data/kpis'
 const flagshipOffers = [
   'AI Squad',
   'Modernização de Legado',
-  'AI First',
+  'Cibersegurança',
   'FourBlox',
   'Quality AI',
 ]
@@ -284,7 +284,7 @@ export function SectionHome() {
             className="flex flex-col justify-center px-5 md:px-8 py-4 md:py-5 gap-2 md:gap-3 order-3 border-t lg:border-t-0 lg:border-l border-white/[0.06]"
           >
             <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-foursys-primary mb-1">
-              Ofertas Flagship
+              Principais Ofertas
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-1 gap-2 lg:gap-3">
               {flagshipOffers.map((offer, i) => (
