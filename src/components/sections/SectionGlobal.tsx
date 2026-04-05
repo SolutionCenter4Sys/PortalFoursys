@@ -44,8 +44,8 @@ const regions: Region[] = [
     bg: 'from-green-500/15 to-green-600/5',
     border: 'border-green-500/30',
     textCls: 'text-green-400',
-    summary: 'Base principal da operação Foursys, com presença estratégica no Sudeste e no Sul para sustentar delivery, relacionamento e inovação.',
-    spotlight: 'Hub central de execução com squads locais, proximidade comercial e capacidade de expansão nacional.',
+    summary: 'Base principal da operação Foursys, com presença estratégica no Sudeste e no Sul. A partir do Brasil, atendemos também toda a América do Sul.',
+    spotlight: 'Hub central de execução com squads locais, proximidade comercial e capacidade de expansão para toda a América do Sul.',
     marker: { top: '69%', left: '36.5%' },
     stats: [
       { label: 'Escritórios', value: '5 bases ativas' },
@@ -53,8 +53,8 @@ const regions: Region[] = [
       { label: 'Projetos', value: 'Delivery contínuo e squads dedicados' },
     ],
     units: [
-      { name: 'Sede Barueri', city: 'Barueri – SP', address: 'Av. Tamboré, 267 · Torre Norte, 9º andar', phone: '(11) 4134 – 2222', main: true },
-      { name: 'Unidade Paulista', city: 'São Paulo – SP', address: 'Av. Paulista, 1912 · Consolação, 15º andar', phone: '(11) 4861 – 8560' },
+      { name: 'Alphaville', city: 'Barueri – SP', address: 'Av. Tamboré, 267 · Torre Norte, 9º andar', phone: '(11) 4134 – 2222', main: true },
+      { name: 'Paulista', city: 'São Paulo – SP', address: 'Av. Paulista, 1912 · Consolação, 15º andar', phone: '(11) 4861 – 8560' },
       { name: 'Inovabra Habitat', city: 'São Paulo – SP', address: 'Av. Angélica, 2529 · Bela Vista' },
       { name: 'Operação Sul', city: 'Curitiba – PR', address: 'R. Comendador Araújo, 499 · Batel, 10º andar', phone: '(41) 2106 – 6709' },
       { name: 'Operação Rio', city: 'Rio de Janeiro – RJ', address: 'Av. Presidente Vargas, 3131 · Cidade Nova, Sala 604' },
@@ -69,8 +69,8 @@ const regions: Region[] = [
     bg: 'from-blue-500/15 to-blue-600/5',
     border: 'border-blue-500/30',
     textCls: 'text-blue-400',
-    summary: 'Operação posicionada nas Américas para ampliar o alcance internacional da marca e apoiar frentes de relacionamento global.',
-    spotlight: 'Ponto de apoio internacional com proximidade geográfica para contas globais e modelos de entrega nearshore.',
+    summary: 'A partir da base nos Estados Unidos, atendemos toda a América do Norte — incluindo Canadá e México — ampliando o alcance internacional da marca.',
+    spotlight: 'Ponto de apoio para toda a América do Norte, com proximidade geográfica para contas globais e modelos de entrega nearshore.',
     marker: { top: '45%', left: '21.5%' },
     stats: [
       { label: 'Escritórios', value: '1 base internacional' },
@@ -90,8 +90,8 @@ const regions: Region[] = [
     bg: 'from-violet-500/15 to-violet-600/5',
     border: 'border-violet-500/30',
     textCls: 'text-violet-400',
-    summary: 'Presença europeia voltada à conexão com o mercado internacional e ao fortalecimento institucional em uma praça estratégica.',
-    spotlight: 'Base de relacionamento para iniciativas no exterior, com posicionamento premium e abertura para novas oportunidades.',
+    summary: 'A partir da base em Portugal, atendemos toda a Europa — fortalecendo a conexão com o mercado internacional e o posicionamento institucional.',
+    spotlight: 'Base estratégica para atender toda a Europa, com posicionamento premium e abertura para novas oportunidades no continente.',
     marker: { top: '31%', left: '48.2%' },
     stats: [
       { label: 'Escritórios', value: '1 base em Lisboa' },
