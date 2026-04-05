@@ -53,17 +53,17 @@ export const faqItems: FAQItem[] = [
     id: 'faq-7',
     category: 'Tecnologia',
     question: 'Quais tecnologias a Foursys domina?',
-    answer: 'Nossa stack cobre toda a cadeia tecnológica: Cloud (AWS, Azure, Kubernetes), Frontend (React, Angular, React Native), Backend (Java/Spring Boot, Node.js, Python), Dados (Databricks, Spark, LLMs), Segurança (SAST, DAST, pentest, BACEN compliance) e DevOps (CI/CD, Quality AI). Temos mais de 200 profissionais certificados em diversas tecnologias.',
+    answer: 'Nossa stack cobre toda a cadeia tecnológica: Cloud (AWS, Azure, Kubernetes), Frontend (React, Angular, React Native), Backend (Java/Spring Boot, Node.js, Python), Dados (Databricks, Spark, LLMs), Segurança (SAST, DAST, pentest, BACEN compliance) e DevOps (CI/CD, Qualidade & Testes com IA). Temos mais de 200 profissionais certificados em diversas tecnologias.',
     sectionLink: 'capabilities',
     sectionLabel: 'Ver Capacidades Técnicas'
   },
   {
     id: 'faq-8',
     category: 'Tecnologia',
-    question: 'O que é o Framework Quality AI e como ele funciona?',
-    answer: 'Quality AI é nosso framework proprietário de automação inteligente de testes, já homologado pelo Santander para uso corporativo. Ele usa LLMs para gerar automaticamente casos de teste, identificar riscos de regressão e sugerir análises de impacto de mudança. Resultado prático: redução de 60% nos defeitos em produção e ciclos de release 3x mais rápidos.',
+    question: 'O que é o Framework Qualidade & Testes com IA e como ele funciona?',
+    answer: 'Qualidade & Testes com IA é nosso framework proprietário de automação inteligente de testes, já homologado pelo Santander para uso corporativo. Ele usa LLMs para gerar automaticamente casos de teste, identificar riscos de regressão e sugerir análises de impacto de mudança. Resultado prático: redução de 60% nos defeitos em produção e ciclos de release 3x mais rápidos.',
     sectionLink: 'quality-ia',
-    sectionLabel: 'Ver Framework Quality AI'
+    sectionLabel: 'Ver Framework Qualidade & Testes com IA'
   },
   {
     id: 'faq-9',

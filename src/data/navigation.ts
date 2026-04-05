@@ -46,7 +46,7 @@ export const navigationItems: NavigationItem[] = [
     label: 'Principais Ofertas',
     icon: 'rocket',
     category: 'Ofertas e Serviços',
-    description: 'AI Squad, Modernização, AI First, FourBlox e Quality AI',
+    description: 'AI Squad, Modernização, Cibersegurança, FourBlox e Qualidade & Testes com IA',
   },
   {
     id: 'services',
@@ -60,7 +60,7 @@ export const navigationItems: NavigationItem[] = [
     label: 'Estrutura de Delivery',
     icon: 'package',
     category: 'Ofertas e Serviços',
-    description: 'Projetos, Squads, Alocação, AMS e AI-Augmented Squads',
+    description: 'Projetos, Squads, Alocação, AMS e AI Squads',
   },
   {
     id: 'alliances',

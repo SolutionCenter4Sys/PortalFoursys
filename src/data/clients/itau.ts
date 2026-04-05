@@ -146,7 +146,7 @@ export const itauClient: ClientConfig = {
       id: 'itau-squads-dedicados',
       title: '+300 Profissionais Dedicados',
       sector: 'Financeiro',
-      type: 'AI-Augmented Squad',
+      type: 'AI Squad',
       challenge: 'Demanda crescente por profissionais especializados em todas as frentes bancárias, com necessidade de retenção e conhecimento acumulado do negócio.',
       solution: 'Modelo de squads dedicados com +300 profissionais, cobrindo todas as áreas do ecossistema Itaú com turnover inferior a 4%.',
       stack: ['React', 'Java', 'Node.js', 'Angular', 'COBOL', 'Python', 'AWS', 'Azure'],

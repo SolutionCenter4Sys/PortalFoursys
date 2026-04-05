@@ -13,7 +13,7 @@ const flagshipOffers = [
   'Modernização de Legado',
   'Cibersegurança',
   'FourBlox',
-  'Quality AI',
+  'Qualidade & Testes com IA',
 ]
 
 const allianceLogos: { id: PartnerId; label: string }[] = [

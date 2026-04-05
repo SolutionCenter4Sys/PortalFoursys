@@ -11,7 +11,7 @@ const flagshipOffers = [
   {
     id: 'ai-squad',
     badge: 'Destaque',
-    title: 'AI-Augmented Squad',
+    title: 'AI Squad',
     tagline: 'Valor em semanas, não em meses.',
     description:
       'Squad operacional Humano + IA com mais de 20 agentes especializados por fase (Discovery → Design → Desenvolvimento → Qualidade → Deploy). Framework SDD proprietário, documentação completa (C4, ADRs, specs de API), dashboards de performance em tempo real e agentes treinados na sua stack e domínio.',
@@ -61,26 +61,26 @@ const flagshipOffers = [
     navigateTo: 'services' as const,
   },
   {
-    id: 'ia-first',
+    id: 'ciberseguranca',
     badge: 'Destaque',
-    title: 'AI First',
-    tagline: 'Do piloto ao resultado mensurável em 4–6 semanas.',
+    title: 'Cibersegurança',
+    tagline: 'Proteção, conformidade e gestão de riscos digitais.',
     description:
-      'Em 4–6 semanas: 2–3 casos priorizados, 1 protótipo e business case com ROI estimado. Para quem quer sair de experimentos de IA e provar valor real.',
+      'Mitigamos vulnerabilidades e fortalecemos controles para proteger ativos, atender regulações e reduzir exposição a incidentes. Abordagem integrada com automação de controles e monitoramento contínuo.',
     metrics: [
-      { value: '+50%', label: 'Produtividade dos times' },
-      { value: '+35%', label: 'Aceleração do desenvolvimento' },
-      { value: '-20%', label: 'Custo por funcionalidade' },
+      { value: '-80%', label: 'Redução de vulnerabilidades' },
+      { value: '+70%', label: 'Conformidade regulatória' },
+      { value: '-60%', label: 'Tempo de resposta a incidentes' },
     ],
     highlights: [
-      'Diagnóstico de oportunidades em 1 semana',
-      'PoC funcional com dados reais do cliente',
-      'Business case com ROI calculado e validado',
-      'Roadmap de escala pós-PoC',
+      'Visão integrada: segurança como atributo, não como barreira',
+      'Experiência em ambientes regulados (LGPD, Bacen, PCI-DSS)',
+      'Automação de controles e monitoramento contínuo',
+      'Cultura de segurança embarcada nos times de desenvolvimento',
     ],
-    color: '#00C2E0',
-    bg: 'from-cyan-500/15 to-cyan-600/5',
-    border: 'border-cyan-500/30',
+    color: '#84CC16',
+    bg: 'from-lime-500/15 to-lime-600/5',
+    border: 'border-lime-500/30',
     navigateTo: 'services' as const,
   },
   {
@@ -112,7 +112,7 @@ const flagshipOffers = [
   {
     id: 'quality-ia',
     badge: 'Destaque',
-    title: 'Quality AI',
+    title: 'Qualidade & Testes com IA',
     tagline: 'Qualidade no escopo não é custo a mais — é o que evita custo maior.',
     description:
       'Prática de Qualidade de Software com duas torres: COE (Excelência — metodologia, padrões, ferramentas, indicadores) e CSC (Operação — QA nas squads, certificação GMUD, automação funcional). Framework Shift-Left com Agente Automatizador que gera +120 cenários/mês vs 20 manuais.',

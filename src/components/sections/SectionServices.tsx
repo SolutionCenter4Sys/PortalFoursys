@@ -1163,7 +1163,7 @@ function Sec4SysDeepDive() {
   )
 }
 
-/* ── AI-Augmented Squad Deep Dive ─────────────────────────────────────────── */
+/* ── AI Squad Deep Dive ─────────────────────────────────────────── */
 
 const sddPhases = [
   { icon: 'search', title: 'Discovery', desc: 'Análise de contexto, mapeamento de stack e domínio, definição de agentes especializados.' },
@@ -1245,7 +1245,7 @@ function AISquadDeepDive() {
           </ul>
         </div>
         <div className="p-5 rounded-xl bg-orange-500/10 border border-orange-500/25">
-          <div className="text-sm font-bold text-orange-400 mb-2.5">AI-Augmented Squad (solução)</div>
+          <div className="text-sm font-bold text-orange-400 mb-2.5">AI Squad (solução)</div>
           <ul className="space-y-1.5 text-xs text-foursys-text-muted">
             <li>• Times humanos + 20+ agentes IA especializados</li>
             <li>• Framework SDD com agentes por fase do ciclo</li>
@@ -1378,7 +1378,7 @@ function AISquadDeepDive() {
           <Zap size={18} className="text-orange-400 flex-shrink-0" />
           <div className="flex-1">
             <p className="text-xs text-foursys-text-muted leading-relaxed">
-              <strong className="text-white">AI-Augmented Squad — Foursys.</strong>{' '}
+              <strong className="text-white">AI Squad — Foursys.</strong>{' '}
               Resultados comprovados: até 80% de ganho de produtividade, 65% de redução de lead time
               e 70% de queda de retrabalho com governança enterprise e zero lock-in.
             </p>
@@ -1389,7 +1389,7 @@ function AISquadDeepDive() {
   )
 }
 
-/* ── Quality AI Deep Dive ────────────────────────────────────────────────── */
+/* ── Qualidade & Testes com IA Deep Dive ──────────────────────────────── */
 
 const qaShiftLeftSteps = [
   { icon: 'clipboard-list', title: 'Assessment', desc: 'Documento de assessment, acordos e premissas para alinhamento inicial com o cliente.' },

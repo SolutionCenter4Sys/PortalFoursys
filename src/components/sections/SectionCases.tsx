@@ -57,7 +57,7 @@ const SECTOR_COLORS: Record<string, string> = {
 
 const TYPE_BADGE: Record<string, string> = {
   'Modernização de Legado':       'bg-foursys-primary text-white',
-  'AI-Augmented Squad':           'bg-blue-500 text-white',
+  'AI Squad':                      'bg-blue-500 text-white',
   'IA First':                     'bg-violet-500 text-white',
   'Engenharia de Dados':          'bg-amber-500 text-white',
   'Dados & Inteligência':         'bg-amber-500 text-white',

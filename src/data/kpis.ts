@@ -118,8 +118,8 @@ export const timeline: TimelineItem[] = [
   },
   {
     year: '2026',
-    title: 'AI First com ROI em 4–6 semanas',
-    description: 'Oferta AI First homologada por grandes corporações de setores regulados. Framework Quality AI operando em escala com retorno mensurável.',
+    title: 'Cibersegurança e Qualidade & Testes com IA',
+    description: 'Oferta de Cibersegurança com proteção e conformidade para setores regulados. Framework Qualidade & Testes com IA operando em escala com retorno mensurável.',
     highlight: true,
     icon: 'star',
     era: 'Futuro',

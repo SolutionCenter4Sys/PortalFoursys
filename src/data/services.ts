@@ -133,13 +133,13 @@ export const serviceLines: ServiceLine[] = [
   },
   {
     id: 'ai-augmented-squad',
-    title: 'AI-Augmented Squad',
+    title: 'AI Squad',
     subtitle: 'Times humanos + IA com framework SDD e governança enterprise',
-    problem: 'Squads tradicionais sofrem com atrasos, falta de padronização de código, baixa cobertura de testes, qualidade inconsistente, retrabalho, escassez de profissionais e ausência de documentação. O AI-Augmented Squad resolve estes problemas com times humanos amplificados por mais de 20 agentes de IA especializados em cada fase do processo.',
+    problem: 'Squads tradicionais sofrem com atrasos, falta de padronização de código, baixa cobertura de testes, qualidade inconsistente, retrabalho, escassez de profissionais e ausência de documentação. O AI Squad resolve estes problemas com times humanos amplificados por mais de 20 agentes de IA especializados em cada fase do processo.',
     target: 'Empresas que precisam acelerar entregas com qualidade enterprise, reduzir lead time e eliminar gargalos de squads tradicionais com uso pragmático de IA.',
     icon: 'brain-circuit',
     color: 'from-orange-500 to-orange-700',
-    tags: ['AI-Augmented', 'Squad', 'SDD', 'Agentes IA', 'Framework', 'Governança'],
+    tags: ['AI Squad', 'SDD', 'Agentes IA', 'Framework', 'Governança'],
     offerDetail: {
       valueProposition: 'Squad operacional Humano + IA com PO, AI Engineer, Desenvolvedores e QA amplificados por mais de 20 agentes especializados. Framework SDD proprietário (Discovery → Design → Desenvolvimento → Qualidade → Deploy), documentação completa (C4, ADRs, specs de API), dashboards de performance em tempo real e agentes treinados na stack, domínio e regras de negócio do cliente — sem lock-in.',
       metrics: [

@@ -33,9 +33,9 @@ const STATIC_SUBITEMS: Partial<Record<AppSection, SubItem[]>> = {
   'offers-flagship': [
     { id: 'offers-ai-squad', label: 'AI Squad', sectionId: 'offers-flagship' },
     { id: 'offers-legacy', label: 'Modernização de Legado', sectionId: 'offers-flagship' },
-    { id: 'offers-ai-first', label: 'AI First', sectionId: 'offers-flagship' },
+    { id: 'offers-ciberseguranca', label: 'Cibersegurança', sectionId: 'offers-flagship' },
     { id: 'offers-fourblox', label: 'FourBlox', sectionId: 'offers-flagship' },
-    { id: 'offers-quality', label: 'Quality AI', sectionId: 'offers-flagship' },
+    { id: 'offers-quality', label: 'Qualidade & Testes com IA', sectionId: 'offers-flagship' },
   ],
   'services': [
     { id: 'svc-dev', label: 'Desenvolvimento & Modernização', sectionId: 'services' },

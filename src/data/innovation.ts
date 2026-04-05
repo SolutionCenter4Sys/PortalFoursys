@@ -64,7 +64,7 @@ export const innovationTrends: InnovationTrend[] = [
       { value: '$184B', label: 'Mercado GenAI 2030' },
       { value: '85%', label: 'Conversão piloto→prod Foursys' },
       { value: '6 sem', label: 'Piloto a ROI mensurável' },
-      { value: '3x', label: 'Velocidade com AI-Augmented' },
+      { value: '3x', label: 'Velocidade com AI Squad' },
     ],
     deepDive: {
       overview: 'A IA Generativa evoluiu de chatbots experimentais para agentes autônomos que executam fluxos de trabalho complexos. Em 2026, empresas que não adotaram IA generativa em produção estão 2-3 anos atrás dos líderes de seus setores.',
