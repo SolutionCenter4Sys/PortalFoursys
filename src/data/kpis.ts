@@ -26,7 +26,7 @@ export const kpis: KPI[] = [
     value: 150,
     suffix: '+',
     label: 'Clientes Atendidos',
-    description: 'Incluindo os maiores do Brasil e exterior'
+    description: 'Incluindo os maiores líderes globais de cada segmento'
   },
   {
     value: 7,

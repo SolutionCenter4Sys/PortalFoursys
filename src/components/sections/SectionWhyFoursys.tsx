@@ -282,7 +282,7 @@ export function SectionWhyFoursys() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.35 + i * 0.08, duration: 0.4 }}
-                className="group relative p-6 rounded-2xl overflow-hidden border transition-all duration-400 hover:border-opacity-40"
+                className="group relative p-6 rounded-2xl overflow-hidden border transition-all duration-400 hover:border-opacity-40 flex flex-col h-full justify-between"
                 style={{
                   background: `linear-gradient(145deg, ${hexToRgba(adv.color, 0.06)}, transparent 60%)`,
                   borderColor: hexToRgba(adv.color, 0.12),
@@ -293,7 +293,7 @@ export function SectionWhyFoursys() {
                   style={{ background: `linear-gradient(90deg, ${adv.color}, transparent)` }}
                 />
 
-                <div className="flex items-start justify-between gap-4 mb-3">
+                <div className="flex items-start justify-between gap-4 mb-4 min-h-[56px]">
                   <h4 className="text-sm font-black text-white">{adv.title}</h4>
                   <div className="text-right flex-shrink-0">
                     <div className="text-xl font-black" style={{ color: adv.color }}>{adv.metric}</div>

@@ -7,7 +7,7 @@ import { SectionWrapper } from '../ui/SectionWrapper'
 type Unit = {
   name: string
   city: string
-  address: string
+  address?: string
   phone?: string
   main?: boolean
 }
@@ -39,7 +39,7 @@ const regions: Region[] = [
     id: 'brasil',
     flag: '🇧🇷',
     region: 'Brasil',
-    count: '5 unidades',
+    count: '6 unidades',
     colorHex: '#22c55e',
     bg: 'from-green-500/15 to-green-600/5',
     border: 'border-green-500/30',
@@ -48,7 +48,7 @@ const regions: Region[] = [
     spotlight: 'Hub central de execução com squads locais, proximidade comercial e capacidade de expansão para toda a América do Sul.',
     marker: { top: '69%', left: '36.5%' },
     stats: [
-      { label: 'Escritórios', value: '5 bases ativas' },
+      { label: 'Escritórios', value: '6 bases ativas' },
       { label: 'Clientes', value: 'Atuação enterprise nacional' },
       { label: 'Projetos', value: 'Delivery contínuo e squads dedicados' },
     ],
@@ -58,6 +58,7 @@ const regions: Region[] = [
       { name: 'Inovabra Habitat', city: 'São Paulo – SP', address: 'Av. Angélica, 2529 · Bela Vista' },
       { name: 'Operação Sul', city: 'Curitiba – PR', address: 'R. Comendador Araújo, 499 · Batel, 10º andar', phone: '(41) 2106 – 6709' },
       { name: 'Operação Rio', city: 'Rio de Janeiro – RJ', address: 'Av. Presidente Vargas, 3131 · Cidade Nova, Sala 604' },
+      { name: 'Operação Belo Horizonte', city: 'Belo Horizonte – MG' },
     ],
   },
   {
@@ -106,9 +107,9 @@ const regions: Region[] = [
 
 const kpis = [
   { value: '+2K', label: 'Colaboradores', icon: 'users' },
-  { value: '+500K', label: 'Projetos entregues', icon: 'rocket' },
+  { value: '+50K', label: 'Projetos entregues', icon: 'rocket' },
   { value: '26', label: 'Anos de mercado', icon: 'calendar' },
-  { value: '7', label: 'Cidades globais', icon: 'building' },
+  { value: '8', label: 'Cidades globais', icon: 'building' },
 ]
 
 
@@ -145,7 +146,9 @@ function UnitRow({
           <MapPin size={9} className="text-foursys-text-dim/50 flex-shrink-0" />
           <span className="text-[10px] text-foursys-text-dim leading-snug">{unit.city}</span>
         </div>
-        <div className="text-[10px] text-foursys-text-dim/60 leading-relaxed mt-0.5">{unit.address}</div>
+        {unit.address && (
+          <div className="text-[10px] text-foursys-text-dim/60 leading-relaxed mt-0.5">{unit.address}</div>
+        )}
         {unit.phone && (
           <div className="flex items-center gap-1 mt-0.5">
             <Phone size={8} className="text-foursys-text-dim/40 flex-shrink-0" />
@@ -167,16 +170,19 @@ function RegionMapMarker({
   onSelect: (regionId: string) => void
 }) {
   return (
-    <motion.button
-      type="button"
-      aria-label={`Ver detalhes da região ${region.region}`}
-      onClick={() => onSelect(region.id)}
-      whileHover={{ scale: 1.06 }}
-      whileTap={{ scale: 0.95 }}
-      className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2"
+    <div
+      className="absolute -translate-x-1/2 -translate-y-1/2 z-10"
       style={{ top: region.marker.top, left: region.marker.left }}
     >
-      <span className="relative flex items-center justify-center">
+      <motion.button
+        type="button"
+        aria-label={`Ver detalhes da região ${region.region}`}
+        onClick={() => onSelect(region.id)}
+        whileHover={{ scale: 1.06 }}
+        whileTap={{ scale: 0.95 }}
+        className="flex flex-col items-center gap-2"
+      >
+        <span className="relative flex items-center justify-center">
         <span
           className="absolute inset-0 rounded-full animate-ping"
           style={{ backgroundColor: `${region.colorHex}30`, transform: 'scale(1.9)' }}
@@ -200,7 +206,8 @@ function RegionMapMarker({
       >
         {region.region}
       </span>
-    </motion.button>
+      </motion.button>
+    </div>
   )
 }
 

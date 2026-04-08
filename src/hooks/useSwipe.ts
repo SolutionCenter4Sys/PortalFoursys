@@ -43,25 +43,11 @@ export function useSwipe(
       handleEnd(e.changedTouches[0].clientX, e.changedTouches[0].clientY)
     }
 
-    function onPointerDown(e: PointerEvent) {
-      if (e.pointerType === 'touch') return
-      handleStart(e.clientX, e.clientY)
-    }
-
-    function onPointerUp(e: PointerEvent) {
-      if (e.pointerType === 'touch') return
-      handleEnd(e.clientX, e.clientY)
-    }
-
     el.addEventListener('touchstart', onTouchStart, { passive: true })
     el.addEventListener('touchend', onTouchEnd, { passive: true })
-    el.addEventListener('pointerdown', onPointerDown)
-    el.addEventListener('pointerup', onPointerUp)
     return () => {
       el.removeEventListener('touchstart', onTouchStart)
       el.removeEventListener('touchend', onTouchEnd)
-      el.removeEventListener('pointerdown', onPointerDown)
-      el.removeEventListener('pointerup', onPointerUp)
     }
   }, [elementRef, onSwipeLeft, onSwipeRight, minDistance, maxVertical])
 }
