@@ -22,6 +22,7 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
+import { useTheme } from '../../context/ThemeContext'
 import { getClientById } from '../../data/clients'
 import type { AppSection } from '../../types'
 
@@ -74,6 +75,7 @@ export function NavigationMenu() {
     activeSectionCategories,
   } = useApp()
 
+  const { isDark } = useTheme()
   const activeClient = state.activeClientId ? getClientById(state.activeClientId) : null
 
   function handleNavigate(id: string) {
@@ -88,11 +90,11 @@ export function NavigationMenu() {
       <div className="px-5 pt-5 pb-4" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
         <div className="group relative mb-1.5">
           <img
-            src="/images/foursys-logo.png"
+            src={isDark ? '/images/foursys-logo.png' : '/images/foursys-logo-dark.png'}
             alt="Foursys"
             className="h-7 w-auto object-contain relative z-10 transition-all duration-400"
             style={{
-              filter: 'drop-shadow(0 0 10px rgba(255,102,0,0.35)) drop-shadow(0 0 20px rgba(255,102,0,0.15))',
+              filter: isDark ? 'drop-shadow(0 0 10px rgba(255,102,0,0.35)) drop-shadow(0 0 20px rgba(255,102,0,0.15))' : 'none',
             }}
           />
           <div
