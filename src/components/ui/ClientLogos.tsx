@@ -126,29 +126,11 @@ function BvLogo({ size = 48 }: LogoProps) {
   )
 }
 
-function DaycovalLogo({ size = 48 }: LogoProps) {
-  return (
-    <svg viewBox="0 0 140 40" width={size * 3} height={size} aria-label="Banco Daycoval">
-      <text x="70" y="17" textAnchor="middle" fill="#6699CC" fontSize="8" fontWeight="400" fontFamily="Arial,sans-serif">Banco</text>
-      <text x="70" y="30" textAnchor="middle" fill="#6699CC" fontSize="13" fontWeight="700" fontFamily="Arial,sans-serif">Daycoval</text>
-    </svg>
-  )
-}
-
 function NextLogo({ size = 48 }: LogoProps) {
   return (
     <svg viewBox="0 0 80 40" width={size * 1.6} height={size} aria-label="Next">
       <path d="M15 12l8 10-8 10" fill="none" stroke="#00C853" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
       <text x="50" y="27" textAnchor="middle" fill="#00C853" fontSize="14" fontWeight="700" fontFamily="Arial,sans-serif">next</text>
-    </svg>
-  )
-}
-
-function PortoLogo({ size = 48 }: LogoProps) {
-  return (
-    <svg viewBox="0 0 120 40" width={size * 2.5} height={size} aria-label="Porto Seguro">
-      <text x="60" y="18" textAnchor="middle" fill="#5B9BD5" fontSize="13" fontWeight="800" fontFamily="Arial,sans-serif">Porto</text>
-      <text x="60" y="32" textAnchor="middle" fill="#5B9BD5" fontSize="9" fontWeight="400" fontFamily="Arial,sans-serif">Seguro</text>
     </svg>
   )
 }
@@ -187,15 +169,6 @@ function YouseLogo({ size = 48 }: LogoProps) {
   return (
     <svg viewBox="0 0 80 40" width={size * 1.6} height={size} aria-label="Youse">
       <text x="40" y="27" textAnchor="middle" fill="#A66CC8" fontSize="16" fontWeight="800" fontFamily="Arial,sans-serif" letterSpacing="1">youse</text>
-    </svg>
-  )
-}
-
-function BmgSegLogo({ size = 48 }: LogoProps) {
-  return (
-    <svg viewBox="0 0 100 40" width={size * 2} height={size} aria-label="BMG Seguros">
-      <text x="50" y="18" textAnchor="middle" fill="#FF6600" fontSize="14" fontWeight="900" fontFamily="Arial,sans-serif">bmg</text>
-      <text x="50" y="30" textAnchor="middle" fill="#FF6600" fontSize="7" fontWeight="700" fontFamily="Arial,sans-serif">Seguros</text>
     </svg>
   )
 }
@@ -301,6 +274,75 @@ function SyngentaLogo({ size = 48 }: LogoProps) {
   )
 }
 
+function OrizonLogo({ size = 48 }: LogoProps) {
+  return (
+    <svg viewBox="0 0 120 40" width={size * 2.5} height={size} aria-label="Orizon">
+      <circle cx="20" cy="20" r="10" fill="none" stroke="#26A69A" strokeWidth="2" />
+      <path d="M15 20h10M20 15v10" stroke="#26A69A" strokeWidth="1.5" strokeLinecap="round" />
+      <text x="72" y="25" textAnchor="middle" fill="#26A69A" fontSize="14" fontWeight="700" fontFamily="Arial,sans-serif" letterSpacing="1">Orizon</text>
+    </svg>
+  )
+}
+
+function TecbanLogo({ size = 48 }: LogoProps) {
+  return (
+    <svg viewBox="0 0 100 40" width={size * 2} height={size} aria-label="TecBan">
+      <rect x="8" y="10" width="20" height="20" rx="3" fill="#003DA5" opacity="0.2" />
+      <text x="18" y="25" textAnchor="middle" fill="#5B9BD5" fontSize="10" fontWeight="900" fontFamily="Arial,sans-serif">T</text>
+      <text x="62" y="25" textAnchor="middle" fill="#5B9BD5" fontSize="13" fontWeight="700" fontFamily="Arial,sans-serif">TecBan</text>
+    </svg>
+  )
+}
+
+function FisFidelityLogo({ size = 48 }: LogoProps) {
+  return (
+    <svg viewBox="0 0 120 40" width={size * 2.5} height={size} aria-label="FIS-Fidelity">
+      <text x="60" y="18" textAnchor="middle" fill="#5B9BD5" fontSize="16" fontWeight="900" fontFamily="Arial,sans-serif" letterSpacing="3">FIS</text>
+      <text x="60" y="30" textAnchor="middle" fill="#5B9BD5" fontSize="7" fontWeight="400" fontFamily="Arial,sans-serif" letterSpacing="1">Fidelity</text>
+    </svg>
+  )
+}
+
+function BancoSumitomoLogo({ size = 48 }: LogoProps) {
+  return (
+    <svg viewBox="0 0 140 40" width={size * 3} height={size} aria-label="Banco Sumitomo">
+      <rect x="5" y="12" width="16" height="16" rx="2" fill="#009B3A" opacity="0.2" />
+      <text x="13" y="24" textAnchor="middle" fill="#4CAF50" fontSize="9" fontWeight="900" fontFamily="Arial,sans-serif">S</text>
+      <text x="80" y="18" textAnchor="middle" fill="#4CAF50" fontSize="8" fontWeight="400" fontFamily="Arial,sans-serif">Banco</text>
+      <text x="80" y="30" textAnchor="middle" fill="#4CAF50" fontSize="11" fontWeight="700" fontFamily="Arial,sans-serif">Sumitomo</text>
+    </svg>
+  )
+}
+
+function PasaLogo({ size = 48 }: LogoProps) {
+  return (
+    <svg viewBox="0 0 80 40" width={size * 1.6} height={size} aria-label="PASA">
+      <text x="40" y="27" textAnchor="middle" fill="#5B9BD5" fontSize="18" fontWeight="900" fontFamily="Arial,sans-serif" letterSpacing="3">PASA</text>
+    </svg>
+  )
+}
+
+function StellantisLogo({ size = 48 }: LogoProps) {
+  return (
+    <svg viewBox="0 0 150 40" width={size * 3.2} height={size} aria-label="Stellantis Financiamentos">
+      <path d="M15 12l5 8-5 8M25 12l-5 8 5 8" fill="none" stroke="#7986CB" strokeWidth="1.5" strokeLinecap="round" />
+      <text x="85" y="18" textAnchor="middle" fill="#7986CB" fontSize="11" fontWeight="800" fontFamily="Arial,sans-serif" letterSpacing="1">STELLANTIS</text>
+      <text x="85" y="30" textAnchor="middle" fill="#7986CB" fontSize="6" fontWeight="400" fontFamily="Arial,sans-serif" letterSpacing="0.5">Financiamentos</text>
+    </svg>
+  )
+}
+
+function DubaiLogo({ size = 48 }: LogoProps) {
+  return (
+    <svg viewBox="0 0 130 40" width={size * 2.8} height={size} aria-label="Dubai Construtora">
+      <path d="M12 30V14l8-6 8 6v16" fill="none" stroke="#D4A017" strokeWidth="1.5" strokeLinejoin="round" />
+      <rect x="17" y="20" width="6" height="10" fill="#D4A017" opacity="0.2" />
+      <text x="78" y="18" textAnchor="middle" fill="#D4A017" fontSize="12" fontWeight="800" fontFamily="Arial,sans-serif">Dubai</text>
+      <text x="78" y="30" textAnchor="middle" fill="#D4A017" fontSize="7" fontWeight="400" fontFamily="Arial,sans-serif">Construtora</text>
+    </svg>
+  )
+}
+
 function SiemensLogo({ size = 48 }: LogoProps) {
   return (
     <svg viewBox="0 0 100 40" width={size * 2} height={size} aria-label="Siemens">
@@ -321,35 +363,39 @@ function ItauLogo({ size = 48 }: LogoProps) {
 type ClientId = string
 
 const LOGO_MAP: Record<ClientId, React.FC<LogoProps>> = {
-  'itau': ItauLogo,
-  'santander': SantanderLogo,
   'bradesco': BradescoLogo,
+  'santander': SantanderLogo,
+  'itau': ItauLogo,
   'safra': SafraLogo,
+  'btg': BtgLogo,
+  'mufg': MufgLogo,
+  'bv': BvLogo,
+  'andbank': AndbankLogo,
+  'banco-sumitomo': BancoSumitomoLogo,
+  'stellantis': StellantisLogo,
   'abc-brasil': AbcBrasilLogo,
   'bmg': BmgLogo,
-  'mufg': MufgLogo,
-  'btg': BtgLogo,
-  'andbank': AndbankLogo,
   'caixa-vida': CaixaVidaLogo,
   'banco-volkswagen': BancoVwLogo,
   'safra-national': SafraNatLogo,
   'caixa-consorcios': CaixaConsLogo,
-  'bv': BvLogo,
-  'banco-daycoval': DaycovalLogo,
   'next': NextLogo,
-  'porto': PortoLogo,
   'tokio-marine': TokioLogo,
   'bradesco-seguros': BradescoSegLogo,
   'sompo': SompoLogo,
   'youse': YouseLogo,
-  'bmg-seguros': BmgSegLogo,
   'hdi': HdiLogo,
+  'orizon': OrizonLogo,
+  'pasa': PasaLogo,
   'profarma': ProfarmaLogo,
   'dasa': DasaLogo,
+  'tecban': TecbanLogo,
+  'fis-fidelity': FisFidelityLogo,
   'equifax': EquifaxLogo,
   'totvs': TotvsLogo,
   'csu-digital': CsuLogo,
   'mercado-eletro': MercadoEletroLogo,
+  'dubai': DubaiLogo,
   'natura': NaturaLogo,
   'vw-caminhoes': VwCamLogo,
   'abinbev': AbinbevLogo,
