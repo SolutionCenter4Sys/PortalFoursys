@@ -109,7 +109,7 @@ const kpis = [
   { value: '+2K', label: 'Colaboradores', icon: 'users' },
   { value: '+50K', label: 'Projetos entregues', icon: 'rocket' },
   { value: '26', label: 'Anos de mercado', icon: 'calendar' },
-  { value: '8', label: 'Cidades globais', icon: 'building' },
+  { value: '7', label: 'Cidades globais', icon: 'building' },
 ]
 
 
