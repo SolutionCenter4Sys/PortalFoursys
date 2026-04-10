@@ -180,8 +180,8 @@ export function SectionHome() {
   const { navigate, state } = useApp()
 
   const kpi1 = useCountUp(heroStats.years,      1400)
-  const kpi2 = useCountUp(50,                   1800)
-  const kpi3 = useCountUp(7,                    1600)
+  const kpi2 = useCountUp(30,                   1800)
+  const kpi3 = useCountUp(8,                    1600)
 
   const painStatement = getPainStatement(state.sessionProfile?.sector ?? null, state.sessionProfile?.role ?? null)
 
