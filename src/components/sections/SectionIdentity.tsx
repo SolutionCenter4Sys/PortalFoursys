@@ -83,7 +83,7 @@ export function SectionIdentity() {
             {
               title: 'Missão',
               icon: 'target',
-              content: 'Ser o parceiro estratégico que transforma a tecnologia em vantagem competitiva real para nossos clientes — com velocidade, qualidade e inovação.',
+              content: 'Ser o parceiro estratégico que transforma a tecnologia em vantagem competitiva real para nossos clientes — com velocidade, qualidade, inovação e governança.',
               gradient: 'from-foursys-primary/20 to-transparent'
             },
             {
