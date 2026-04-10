@@ -82,10 +82,10 @@ export function NavigationMenu() {
   }
 
   return (
-    <aside aria-label="Menu principal" className="w-64 flex-shrink-0 h-full flex flex-col bg-foursys-dark border-r border-white/[0.06] overflow-hidden z-10">
+    <aside aria-label="Menu principal" className="w-64 flex-shrink-0 h-full flex flex-col bg-foursys-dark overflow-hidden z-10" style={{ borderRight: '1px solid var(--border-subtle)' }}>
 
       {/* ── Header — logo Foursys ── */}
-      <div className="px-5 pt-5 pb-4 border-b border-white/[0.06]">
+      <div className="px-5 pt-5 pb-4" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
         <div className="group relative mb-1.5">
           <img
             src="/images/foursys-logo.png"
@@ -108,14 +108,14 @@ export function NavigationMenu() {
       </div>
 
       {/* ── Seletor de cliente ── */}
-      <div className="px-3 py-2 border-b border-white/[0.06]">
+      <div className="px-3 py-2" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
         <button
           onClick={toggleClientSelector}
           className={`
             w-full flex items-center gap-2.5 px-3 py-2 rounded-lg border text-xs transition-all duration-150
             ${state.activeClientId
               ? 'bg-foursys-primary/10 border-foursys-primary/30 text-foursys-primary'
-              : 'bg-white/[0.04] border-white/[0.07] text-foursys-text-dim hover:text-foursys-text-muted hover:border-foursys-primary/30'
+              : 'bg-foursys-surface/40 border-foursys-dark-4/50 text-foursys-text-dim hover:text-foursys-text-muted hover:border-foursys-primary/30'
             }
           `}
         >
@@ -127,11 +127,11 @@ export function NavigationMenu() {
       </div>
 
       {/* ── Search ── */}
-      <div className="px-3 py-3 border-b border-white/[0.06]">
+      <div className="px-3 py-3" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
         <div className="flex items-center gap-1">
           <button
             onClick={() => openSearch()}
-            className="flex-1 flex items-center gap-2.5 px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.07] text-foursys-text-dim hover:text-foursys-text-muted hover:border-foursys-primary/30 transition-all duration-150 text-xs"
+            className="flex-1 flex items-center gap-2.5 px-3 py-2 rounded-lg bg-foursys-surface/40 border border-foursys-dark-4/50 text-foursys-text-dim hover:text-foursys-text-muted hover:border-foursys-primary/30 transition-all duration-150 text-xs"
           >
             <Search size={13} className="flex-shrink-0" />
             <span>Buscar seção...</span>
@@ -139,7 +139,7 @@ export function NavigationMenu() {
           <button
             onClick={() => openSearch(true)}
             aria-label="Buscar por voz"
-            className="flex-shrink-0 p-2 rounded-lg bg-white/[0.04] border border-white/[0.07] text-foursys-text-dim hover:text-foursys-primary hover:border-foursys-primary/30 transition-all duration-150"
+            className="flex-shrink-0 p-2 rounded-lg bg-foursys-surface/40 border border-foursys-dark-4/50 text-foursys-text-dim hover:text-foursys-primary hover:border-foursys-primary/30 transition-all duration-150"
           >
             <Mic size={13} />
           </button>
@@ -178,7 +178,7 @@ export function NavigationMenu() {
                         w-full flex items-center gap-2.5 px-3 py-[7px] text-left transition-all duration-150 text-[13px] relative group
                         ${isActive
                           ? 'bg-foursys-primary/10 text-foursys-primary rounded-r-lg border-l-2 border-foursys-primary'
-                          : 'text-foursys-text-muted hover:bg-white/[0.04] hover:text-foursys-text rounded-lg border-l-2 border-transparent'
+                          : 'text-foursys-text-muted hover:bg-foursys-dark-4/30 hover:text-foursys-text rounded-lg border-l-2 border-transparent'
                         }
                       `}
                     >
@@ -205,7 +205,7 @@ export function NavigationMenu() {
       </nav>
 
       {/* ── Footer ── */}
-      <div className="px-4 py-3 border-t border-white/[0.06]">
+      <div className="px-4 py-3" style={{ borderTop: '1px solid var(--border-subtle)' }}>
         <p className="text-[9px] text-foursys-text-dim text-center leading-relaxed tracking-wide hidden lg:block">
           ← → navegar &nbsp;·&nbsp; F11 apresentação &nbsp;·&nbsp; ⌃⇧M métricas
         </p>

@@ -3,6 +3,62 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --c-primary: 255 102 0;
+    --c-primary-light: 255 122 0;
+    --c-primary-dark: 229 92 0;
+    --c-cyan: 0 194 224;
+    --c-cyan-light: 64 212 237;
+    --c-dark: 6 11 20;
+    --c-dark-2: 12 16 33;
+    --c-dark-3: 22 29 46;
+    --c-dark-4: 30 42 58;
+    --c-surface: 22 29 46;
+    --c-surface-2: 30 42 58;
+    --c-text: 255 255 255;
+    --c-text-muted: 148 163 184;
+    --c-text-dim: 154 172 191;
+    --c-accent: 255 184 0;
+    --c-success: 74 222 128;
+    --c-warning: 251 191 36;
+
+    --glass-bg: rgba(22, 29, 46, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --hover-bg: rgba(255, 255, 255, 0.08);
+    --glow-color: rgba(255, 102, 0, 0.35);
+    --body-bg: #060B14;
+    --body-color: #FFFFFF;
+  }
+
+  [data-theme="light"] {
+    --c-primary: 234 88 0;
+    --c-primary-light: 255 122 0;
+    --c-primary-dark: 204 68 0;
+    --c-cyan: 8 145 178;
+    --c-cyan-light: 6 182 212;
+    --c-dark: 241 245 249;
+    --c-dark-2: 248 250 252;
+    --c-dark-3: 255 255 255;
+    --c-dark-4: 226 232 240;
+    --c-surface: 255 255 255;
+    --c-surface-2: 241 245 249;
+    --c-text: 15 23 42;
+    --c-text-muted: 71 85 105;
+    --c-text-dim: 100 116 139;
+    --c-accent: 217 119 6;
+    --c-success: 22 163 74;
+    --c-warning: 217 119 6;
+
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(15, 23, 42, 0.08);
+    --border-subtle: rgba(15, 23, 42, 0.08);
+    --hover-bg: rgba(15, 23, 42, 0.05);
+    --glow-color: rgba(255, 102, 0, 0.15);
+    --body-bg: #F8FAFC;
+    --body-color: #0F172A;
+  }
+
   * {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
@@ -13,10 +69,11 @@
     padding: 0;
     height: 100%;
     overflow: hidden;
-    background: #060B14;
-    color: #FFFFFF;
+    background: var(--body-bg);
+    color: var(--body-color);
     font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   #root {
@@ -37,7 +94,7 @@
 @layer utilities {
   .custom-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 102, 0, 0.3) transparent;
+    scrollbar-color: rgba(var(--c-primary), 0.3) transparent;
   }
 
   .custom-scrollbar::-webkit-scrollbar {
@@ -49,12 +106,12 @@
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(255, 102, 0, 0.3);
+    background: rgba(var(--c-primary), 0.3);
     border-radius: 2px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 102, 0, 0.55);
+    background: rgba(var(--c-primary), 0.55);
   }
 
   .overscroll-contain {
@@ -65,34 +122,34 @@
 
 /* Gradient text utility — laranja Foursys */
 .gradient-text {
-  background: linear-gradient(135deg, #FF6600, #FF9933);
+  background: linear-gradient(135deg, rgb(var(--c-primary)), rgb(var(--c-primary-light)));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Glassmorphism — superfície escura CheckIn v2.0 */
+/* Glassmorphism — adapta ao tema */
 .glass {
-  background: rgba(22, 29, 46, 0.6);
+  background: var(--glass-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
 }
 
 /* Orange glow border — identidade Foursys */
 .glow-border {
-  box-shadow: 0 0 0 1px rgba(255, 102, 0, 0.45),
-              0 0 20px rgba(255, 102, 0, 0.2),
-              0 0 40px rgba(255, 102, 0, 0.1);
+  box-shadow: 0 0 0 1px rgba(var(--c-primary), 0.45),
+              0 0 20px rgba(var(--c-primary), 0.2),
+              0 0 40px rgba(var(--c-primary), 0.1);
 }
 
 /* Shadow glow — hero CTAs */
 .shadow-glow-orange {
-  box-shadow: 0 0 20px rgba(255, 102, 0, 0.25);
+  box-shadow: 0 0 20px rgba(var(--c-primary), 0.25);
 }
 
 .shadow-glow-orange-sm {
-  box-shadow: 0 0 10px rgba(255, 102, 0, 0.18);
+  box-shadow: 0 0 10px rgba(var(--c-primary), 0.18);
 }
 
 /* Focus styles — acessibilidade */
@@ -100,6 +157,40 @@
   .focus-ring {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foursys-primary focus-visible:ring-offset-2 focus-visible:ring-offset-foursys-dark-2;
   }
+}
+
+/* Light mode: remap white-based transparencies to dark equivalents */
+[data-theme="light"] .border-white\/\[0\.06\],
+[data-theme="light"] .border-white\/\[0\.08\] {
+  border-color: var(--border-subtle);
+}
+
+[data-theme="light"] .bg-white\/\[0\.04\],
+[data-theme="light"] .bg-white\/\[0\.015\] {
+  background-color: rgba(15, 23, 42, 0.03);
+}
+
+[data-theme="light"] .hover\:bg-white\/8:hover {
+  background-color: var(--hover-bg);
+}
+
+[data-theme="light"] .bg-white\/15,
+[data-theme="light"] .bg-white\/10 {
+  background-color: rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .bg-black\/60 {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .text-white {
+  color: rgb(var(--c-text));
+}
+
+[data-theme="light"] .bg-foursys-primary .text-white,
+[data-theme="light"] .bg-gradient-foursys .text-white,
+[data-theme="light"] [style*="background"] .text-white {
+  color: #FFFFFF;
 }
 
 /* Print styles */

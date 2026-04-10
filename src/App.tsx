@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { AppProvider, useApp } from './context/AppContext'
+import { ThemeProvider, useTheme } from './context/ThemeContext'
 import { TopBar } from './components/navigation/TopBar'
 import { NavigationMenu } from './components/navigation/NavigationMenu'
 import { SearchOverlay } from './components/navigation/SearchOverlay'
@@ -19,6 +20,7 @@ import type { AppSection } from './types'
 
 function AppInner() {
   const { state, toggleFullscreen, toggleMenu, navigate, activeNavigationItems, toggleOverview } = useApp()
+  const { isDark } = useTheme()
   const mainRef = useRef<HTMLDivElement>(null)
   useKeyboard()
   useUrlSync()
@@ -54,7 +56,7 @@ function AppInner() {
   })
 
   return (
-    <div className="flex h-[100dvh] overflow-hidden bg-foursys-dark-2 pt-[env(safe-area-inset-top)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] landscape-compact">
+    <div className={`flex h-[100dvh] overflow-hidden bg-foursys-dark-2 pt-[env(safe-area-inset-top)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] landscape-compact transition-colors duration-300`}>
 
       <a
         href="#main-content"
@@ -64,11 +66,13 @@ function AppInner() {
       </a>
 
       {/* Ambient background */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-60 -left-60 w-[500px] h-[500px] bg-foursys-primary/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-foursys-primary/6 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-foursys-primary/4 rounded-full blur-3xl" />
-      </div>
+      {isDark && (
+        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute -top-60 -left-60 w-[500px] h-[500px] bg-foursys-primary/10 rounded-full blur-3xl" />
+          <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-foursys-primary/6 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-foursys-primary/4 rounded-full blur-3xl" />
+        </div>
+      )}
 
       {/* Backdrop drawer mobile */}
       {state.isMenuOpen && (
@@ -139,9 +143,11 @@ function AppInner() {
 
 function App() {
   return (
-    <AppProvider>
-      <AppInner />
-    </AppProvider>
+    <ThemeProvider>
+      <AppProvider>
+        <AppInner />
+      </AppProvider>
+    </ThemeProvider>
   )
 }
 

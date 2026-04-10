@@ -13,28 +13,23 @@ export default {
       },
       colors: {
         foursys: {
-          // === PRIMARY ORANGE (Foursys Brand) ===
-          primary: '#FF6600',
-          'primary-light': '#FF7A00',
-          'primary-dark': '#E55C00',
-          // === SECONDARY TECH ACCENT ===
-          cyan: '#00C2E0',
-          'cyan-light': '#40D4ED',
-          // === DARK BACKGROUNDS (CheckIn v2.0) ===
-          dark: '#060B14',         // sidebar/nav — quase preto
-          'dark-2': '#0C1021',     // ⭐ fundo principal
-          'dark-3': '#161D2E',     // ⭐ surface cards
-          'dark-4': '#1E2A3A',     // surface raised/hover
-          surface: '#161D2E',
-          'surface-2': '#1E2A3A',
-          // === TEXTO ===
-          text: '#FFFFFF',
-          'text-muted': '#94A3B8',
-          'text-dim': '#9AACBF',
-          // === FEEDBACK ===
-          accent: '#FFB800',       // amber — destaque secundário
-          success: '#4ADE80',
-          warning: '#FBBF24',
+          primary:       'rgb(var(--c-primary) / <alpha-value>)',
+          'primary-light':'rgb(var(--c-primary-light) / <alpha-value>)',
+          'primary-dark': 'rgb(var(--c-primary-dark) / <alpha-value>)',
+          cyan:          'rgb(var(--c-cyan) / <alpha-value>)',
+          'cyan-light':  'rgb(var(--c-cyan-light) / <alpha-value>)',
+          dark:          'rgb(var(--c-dark) / <alpha-value>)',
+          'dark-2':      'rgb(var(--c-dark-2) / <alpha-value>)',
+          'dark-3':      'rgb(var(--c-dark-3) / <alpha-value>)',
+          'dark-4':      'rgb(var(--c-dark-4) / <alpha-value>)',
+          surface:       'rgb(var(--c-surface) / <alpha-value>)',
+          'surface-2':   'rgb(var(--c-surface-2) / <alpha-value>)',
+          text:          'rgb(var(--c-text) / <alpha-value>)',
+          'text-muted':  'rgb(var(--c-text-muted) / <alpha-value>)',
+          'text-dim':    'rgb(var(--c-text-dim) / <alpha-value>)',
+          accent:        'rgb(var(--c-accent) / <alpha-value>)',
+          success:       'rgb(var(--c-success) / <alpha-value>)',
+          warning:       'rgb(var(--c-warning) / <alpha-value>)',
         }
       },
       fontFamily: {

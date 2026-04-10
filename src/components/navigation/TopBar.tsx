@@ -1,5 +1,6 @@
-import { Search, Maximize2, Minimize2, ChevronLeft, ChevronRight, BarChart2, X, Building2, Menu, LayoutGrid } from 'lucide-react'
+import { Search, Maximize2, Minimize2, ChevronLeft, ChevronRight, BarChart2, X, Building2, Menu, LayoutGrid, Sun, Moon } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
+import { useTheme } from '../../context/ThemeContext'
 import { getTrailById } from '../../data/trails'
 import { getClientById } from '../../data/clients'
 import type { AppSection } from '../../types'
@@ -17,6 +18,7 @@ export function TopBar() {
     toggleOverview,
     activeNavigationItems,
   } = useApp()
+  const { toggleTheme, isDark } = useTheme()
 
   const currentNav    = activeNavigationItems.find(n => n.id === state.currentSection)
   const currentIndex  = activeNavigationItems.findIndex(n => n.id === state.currentSection)
@@ -30,11 +32,12 @@ export function TopBar() {
 
   return (
     <header role="banner" className={`
-      flex items-center gap-2 px-3 md:px-4 py-2.5 border-b border-white/[0.06]
+      flex items-center gap-2 px-3 md:px-4 py-2.5 border-b
       bg-foursys-dark-2/80 backdrop-blur-xl transition-all duration-300 flex-shrink-0
       pt-[max(0.625rem,env(safe-area-inset-top))]
       ${state.isFullscreen ? 'opacity-0 pointer-events-none' : 'opacity-100'}
-    `}>
+    `} style={{ borderColor: 'var(--border-subtle)' }}>
+
 
       {/* Hambúrguer — visível apenas em mobile */}
       <button
@@ -183,10 +186,20 @@ export function TopBar() {
         <LayoutGrid size={15} />
       </button>
 
+      {/* Theme toggle */}
+      <button
+        onClick={toggleTheme}
+        className="min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:p-1.5 flex items-center justify-center rounded-lg hover:bg-foursys-primary/10 text-foursys-text-dim hover:text-foursys-primary transition-colors"
+        aria-label={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
+        title={isDark ? 'Modo Claro' : 'Modo Escuro'}
+      >
+        {isDark ? <Sun size={15} /> : <Moon size={15} />}
+      </button>
+
       {/* Fullscreen — apenas desktop */}
       <button
         onClick={toggleFullscreen}
-        className="hidden md:block p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
+        className="hidden md:block p-1.5 rounded-lg hover:bg-foursys-text-dim/10 text-foursys-text-dim hover:text-foursys-text transition-colors"
         aria-label={state.isFullscreen ? 'Sair do Fullscreen' : 'Entrar em Fullscreen'}
       >
         {state.isFullscreen ? <Minimize2 size={15} /> : <Maximize2 size={15} />}
