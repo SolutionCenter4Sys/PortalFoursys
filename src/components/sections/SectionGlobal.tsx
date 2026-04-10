@@ -103,6 +103,27 @@ const regions: Region[] = [
       { name: 'Unidade Europa', city: 'Lisboa – Portugal', address: 'Av. da Liberdade, 110', phone: 'Tel: 1269 – 046' },
     ],
   },
+  {
+    id: 'oriente-medio',
+    flag: '🇮🇱',
+    region: 'Oriente Médio',
+    count: '1 unidade',
+    colorHex: '#f59e0b',
+    bg: 'from-amber-500/15 to-amber-600/5',
+    border: 'border-amber-500/30',
+    textCls: 'text-amber-400',
+    summary: 'A partir da base em Tel Aviv, a Foursys expande sua atuação para o Oriente Médio — região estratégica em inovação e tecnologia.',
+    spotlight: 'Hub de inovação no Oriente Médio, com acesso a um dos ecossistemas de startups mais dinâmicos do mundo.',
+    marker: { top: '38%', left: '57%' },
+    stats: [
+      { label: 'Escritórios', value: '1 base em Tel Aviv' },
+      { label: 'Clientes', value: 'Expansão para mercado MENA' },
+      { label: 'Projetos', value: 'Iniciativas de inovação e tecnologia' },
+    ],
+    units: [
+      { name: 'Unidade Oriente Médio', city: 'Tel Aviv – Israel' },
+    ],
+  },
 ]
 
 const kpis = [
@@ -239,7 +260,7 @@ export function SectionGlobal() {
                 </span>
               </h2>
               <p className="text-sm text-foursys-text-muted mt-2 max-w-2xl">
-                Agora com mapa visual da presença Foursys: clique nos pontos para explorar Brasil, Estados Unidos e Europa com suas bases e contexto de atuação.
+                Agora com mapa visual da presença Foursys: clique nos pontos para explorar Brasil, Estados Unidos, Europa e Oriente Médio com suas bases e contexto de atuação.
               </p>
             </div>
 

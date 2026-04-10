@@ -6,7 +6,7 @@ export const heroStats = {
   cities: '8',
   turnover: '3,6%',
   sla: '99,9%',
-  continents: 3,
+  continents: 4,
 }
 
 export const kpis: KPI[] = [
