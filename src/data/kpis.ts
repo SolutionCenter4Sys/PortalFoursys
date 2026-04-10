@@ -3,7 +3,7 @@ import type { KPI, TimelineItem } from '../types'
 export const heroStats = {
   years: 26,
   projects: '30K+',
-  cities: '7',
+  cities: '8',
   turnover: '3,6%',
   sla: '99,9%',
   continents: 3,
@@ -29,10 +29,10 @@ export const kpis: KPI[] = [
     description: 'Incluindo os maiores líderes globais de cada segmento'
   },
   {
-    value: 7,
+    value: 8,
     suffix: '',
     label: 'Cidades com Escritórios',
-    description: 'São Paulo, Barueri, Curitiba, Rio, Boca Raton, Lisboa e Inovabra'
+    description: 'São Paulo, Barueri, Curitiba, Rio, Boca Raton, Lisboa, Inovabra e Tel Aviv'
   },
   {
     value: 3.6,
