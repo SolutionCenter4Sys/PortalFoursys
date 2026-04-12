@@ -2,20 +2,37 @@ import { useState, useCallback, useRef, useEffect } from 'react'
 
 export type VoiceStatus = 'idle' | 'listening' | 'error'
 
+const MAX_LISTEN_MS = 12_000
+
 function getSpeechRecognition(): SpeechRecognitionConstructor | null {
   if (typeof window === 'undefined') return null
   return window.SpeechRecognition ?? window.webkitSpeechRecognition ?? null
 }
 
+function isIOS(): boolean {
+  if (typeof navigator === 'undefined') return false
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+}
+
 export function useVoiceSearch(onResult: (transcript: string) => void) {
   const [status, setStatus] = useState<VoiceStatus>('idle')
   const recognitionRef = useRef<SpeechRecognition | null>(null)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const isSupported = getSpeechRecognition() !== null
 
+  const clearSafetyTimeout = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = null
+    }
+  }, [])
+
   const stop = useCallback(() => {
+    clearSafetyTimeout()
     recognitionRef.current?.stop()
     setStatus('idle')
-  }, [])
+  }, [clearSafetyTimeout])
 
   const start = useCallback(() => {
     const SpeechRecognitionCtor = getSpeechRecognition()
@@ -27,15 +44,20 @@ export function useVoiceSearch(onResult: (transcript: string) => void) {
     if (recognitionRef.current) {
       recognitionRef.current.abort()
     }
+    clearSafetyTimeout()
 
+    const ios = isIOS()
     const recognition = new SpeechRecognitionCtor()
     recognition.lang = 'pt-BR'
-    recognition.interimResults = true
+    recognition.interimResults = !ios
     recognition.continuous = false
     recognition.maxAlternatives = 1
 
     recognition.onstart = () => {
       setStatus('listening')
+      timeoutRef.current = setTimeout(() => {
+        recognitionRef.current?.stop()
+      }, MAX_LISTEN_MS)
     }
 
     recognition.onresult = (event: SpeechRecognitionEvent) => {
@@ -46,9 +68,17 @@ export function useVoiceSearch(onResult: (transcript: string) => void) {
       onResult(transcript)
     }
 
+    recognition.onspeechend = () => {
+      recognitionRef.current?.stop()
+    }
+
     recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+      clearSafetyTimeout()
       if (event.error === 'aborted' || event.error === 'no-speech') {
         setStatus('idle')
+      } else if (event.error === 'not-allowed') {
+        setStatus('error')
+        setTimeout(() => setStatus('idle'), 4000)
       } else {
         setStatus('error')
         setTimeout(() => setStatus('idle'), 3000)
@@ -56,6 +86,7 @@ export function useVoiceSearch(onResult: (transcript: string) => void) {
     }
 
     recognition.onend = () => {
+      clearSafetyTimeout()
       setStatus('idle')
       recognitionRef.current = null
     }
@@ -65,10 +96,11 @@ export function useVoiceSearch(onResult: (transcript: string) => void) {
     try {
       recognition.start()
     } catch {
+      clearSafetyTimeout()
       setStatus('error')
       setTimeout(() => setStatus('idle'), 3000)
     }
-  }, [onResult])
+  }, [onResult, clearSafetyTimeout])
 
   const toggle = useCallback(() => {
     if (status === 'listening') {
@@ -80,10 +112,11 @@ export function useVoiceSearch(onResult: (transcript: string) => void) {
 
   useEffect(() => {
     return () => {
+      clearSafetyTimeout()
       recognitionRef.current?.abort()
       recognitionRef.current = null
     }
-  }, [])
+  }, [clearSafetyTimeout])
 
   return { status, isSupported, start, stop, toggle }
 }
