@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Gisely Grillo Marques | Veolia WaterTech</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-new { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 180px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .summary-stat { text-align: center; padding: 20px; }
+        .summary-stat .number { font-size: 36px; font-weight: 800; color: var(--primary); }
+        .summary-stat .desc { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px 14px; text-align: left; font-size: 14px; border-bottom: 1px solid var(--border); }
+        th { background: #f8f9ff; color: var(--primary); font-weight: 600; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Gisely Grillo Marques</h1>
+                <h2>CIO — Veolia WaterTech</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Utilities | Sao Paulo - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 1,1 BI a R$ 2 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 100,1 MM a R$ 200 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Será mantido</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- RESUMO EXECUTIVO -->
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="grid-3">
+                <div class="summary-stat">
+                    <div class="number">20</div>
+                    <div class="desc">Temas com investimento ativo nos próximos 12 meses</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number">15</div>
+                    <div class="desc">Projetos SEM fornecedor definido (oportunidade)</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number">9</div>
+                    <div class="desc">Ofertas Foursys com fit identificado</div>
+                </div>
+            </div>
+            <div class="alert-box" style="margin-top:20px">
+                <strong>Timing:</strong> Maiores investimentos planejados para o <strong>3º trimestre</strong> de 2026.
+                Modelo de compra: <strong>RFP/concorrência estruturada entre fornecedores qualificados</strong>
+            </div>
+        </div>
+
+        <!-- PERFIL DO CIO E EMPRESA -->
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia do CIO</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Membro: assento permanente, com voto.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">30 a 49</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DISTRIBUIÇÃO DO ORÇAMENTO -->
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#3949ab">20%</div></div></div><div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div><div class="bar"><div class="bar-label">Operação Cloud</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div><div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div><div class="bar"><div class="bar-label">Inovação/P&amp;D</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div><div class="bar"><div class="bar-label">Capacitação</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div><div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#9fa8da">1%</div></div></div><div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#9fa8da">1%</div></div></div>
+            </div>
+        </div>
+
+        <!-- DESAFIOS E PRIORIDADES -->
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 6 Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div><div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos e operações para ganho de eficiência</div></div><div class="timeline-item"><div class="timeline-dot"></div><div>Elevar a experiência de clientes e colaboradores (CX/EX)</div></div><div class="timeline-item"><div class="timeline-dot"></div><div>Integrar equipes de TI e negócios para acelerar a entrega de valor</div></div><div class="timeline-item"><div class="timeline-dot"></div><div>Orquestrar transformação digital</div></div><div class="timeline-item"><div class="timeline-dot"></div><div>Provar valor e ROI sob pressão de custos</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div style="margin-bottom:20px">
+                        <span class="tag tag-priority">IA Generativa</span><span class="tag tag-priority">CRM</span><span class="tag tag-priority">ERP</span>
+                    </div>
+                    <h4 style="margin-bottom:12px;color:var(--primary);margin-top:20px">Temas que Precisam de Maturidade</h4>
+                    <div>
+                        <span class="tag tag-new">Cibersegurança</span><span class="tag tag-new">Gestão de dados</span><span class="tag tag-new">IA Generativa</span><span class="tag tag-new">APIs e integração</span><span class="tag tag-new">Realidade estendida (VR/AR/MR)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAPA DE INVESTIMENTOS -->
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos Ativos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento (verde = continuidade / azul = investimento inicial):</p>
+            <div><span class="tag tag-active">Infraestrutura de redes</span><span class="tag tag-active">Armazenamento, backup e imutabilidade</span><span class="tag tag-active">Conectividade e telecom</span><span class="tag tag-active">Nuvem pública</span><span class="tag tag-active">Nuvem Privada e híbrida</span><span class="tag tag-active">Cibersegurança</span><span class="tag tag-active">Gestão de dados</span><span class="tag tag-active">IA / ML</span><span class="tag tag-active">IA Generativa</span><span class="tag tag-active">APIs e integração</span><span class="tag tag-active">CRM</span><span class="tag tag-active">ERP</span><span class="tag tag-active">HCM</span><span class="tag tag-active">Low-code / no-code</span><span class="tag tag-active">Desenvolvimento e modernização de legados</span><span class="tag tag-new">Automação de processos / RPA</span><span class="tag tag-new">Hiperautomação</span><span class="tag tag-active">Workplace e end-user computing</span><span class="tag tag-active">Mobile apps / superapps</span><span class="tag tag-active">Sistemas core</span></div>
+        </div>
+
+        <!-- OPORTUNIDADES SEM FORNECEDOR -->
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong> — janela de oportunidade para a Foursys:</p>
+            <div><span class="tag tag-opportunity">Infraestrutura de redes</span><span class="tag tag-opportunity">Armazenamento, backup e imutabilidade</span><span class="tag tag-opportunity">Conectividade e telecom</span><span class="tag tag-opportunity">Nuvem pública</span><span class="tag tag-opportunity">Nuvem Privada e híbrida</span><span class="tag tag-opportunity">Cibersegurança</span><span class="tag tag-opportunity">Gestão de dados</span><span class="tag tag-opportunity">IA / ML</span><span class="tag tag-opportunity">IA Generativa</span><span class="tag tag-opportunity">APIs e integração</span><span class="tag tag-opportunity">CRM</span><span class="tag tag-opportunity">ERP</span><span class="tag tag-opportunity">Automação de processos / RPA</span><span class="tag tag-opportunity">Hiperautomação</span><span class="tag tag-opportunity">Mobile apps / superapps</span></div>
+            <div style="margin-top:20px"><h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria):</h4><div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">HCM</span></div></div>
+        </div>
+
+        <!-- ANÁLISE DA EMPRESA -->
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Veolia WaterTech</h3>
+            <p style="margin-bottom:20px;line-height:1.8">Veolia Water Technologies &amp; Solutions - líder global em tratamento de água industrial e municipal. Opera em 130 países com 10.000+ colaboradores. 350+ tecnologias patenteadas. No Brasil: projeto EPAR de Vitória (pioneiro em reúso de larga escala), Hubgrade (plataforma digital com IA/ML). Faturamento R$ 1,1 a R$ 2 BI.</p>
+            
+            <div class="info-card" style="margin-bottom:12px">
+                <div class="label">Abrangência</div>
+                <div class="value">Global</div>
+            </div>
+            <div class="info-card" style="margin-bottom:12px">
+                <div class="label">Categoria</div>
+                <div class="value">Privada</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Perspectiva de Faturamento</div>
+                <div class="value">Crescimento</div>
+            </div>
+        </div>
+
+        <!-- BENCHMARK CONCORRENTES -->
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark: O Que os Concorrentes Estão Fazendo</h3>
+            
+            <div class="competitor-card">
+                <h4>Xylem</h4>
+                <p>23 mil colaboradores, 150 países, 8.300+ patentes. Forte em IoT para monitoramento de água, IA para detecção de vazamentos, plataformas digitais para utilities e analytics preditivo para manutenção de infraestrutura hídrica.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>SUEZ Water Technologies</h4>
+                <p>Fábrica em Sorocaba-SP (PROflex). Plataformas digitais para gestão de água, automação de processos de tratamento, analytics para otimização de consumo e soluções de reúso com monitoramento inteligente.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Grundfos</h4>
+                <p>Especialista em bombas e soluções de água. Forte em IoT industrial, digital twins para sistemas hídricos, manutenção preditiva com IA e plataformas cloud para gestão de ativos.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>BRK Ambiental</h4>
+                <p>Maior empresa privada de saneamento do Brasil. Investimento em smart metering, IoT para monitoramento de redes, IA para detecção de perdas e plataformas digitais para atendimento ao consumidor.</p>
+            </div>
+            <div class="insight-box" style="margin-top:20px"><h4>Gap Analysis vs Concorrentes</h4><p>Xylem e Grundfos lideram em IoT e digital twins para utilities. Veolia pode se diferenciar no Brasil com: integração de IA Generativa para documentação técnica e engenharia, CRM para gestão de projetos e clientes, automação de processos operacionais (RPA/hiperautomação), APIs para integração de Hubgrade com sistemas de clientes, e modernização de legados operacionais.</p></div>
+        </div>
+
+        <!-- CULTURA DE INOVAÇÃO -->
+        <div class="section">
+            <h3><span class="icon">&#128161;</span> Maturidade e Cultura de Inovação</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Maturidade de Inovação</div>
+                        <div class="value">Emergente: diretrizes básicas, cada área toca sua agenda</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI na Inovação</div>
+                        <div class="value">Habilitadora: lidera plataformas, dados/DevOps e arquitetura para inovação.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Origem do Budget de Inovação</div>
+                        <div class="value">TI + unidades de negócios</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">% do Orçamento para Inovação</div>
+                        <div class="value">De 10% a 20%</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Adoção Ágil</div>
+                        <div class="value">Toda a TI: projetos e operações</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Profissionais Dedicados a Inovação</div>
+                        <div class="value">Não</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Dificuldade com Talentos</div>
+                        <div class="value">Não</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Gaps de Soft Skills</div>
+                        <div class="value">Visão de negócio;Product sense;Comunicação;Gestão de conflitos e negociação;Liderança e influência;Gestão de tempo e priorização;Apetite a risco/experimentação</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PREFERÊNCIAS DE FORNECEDOR -->
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preco</span><span class="tag tag-active">TCO_horizonte_3_anos</span><span class="tag tag-active">SLAdisponibilidade</span><span class="tag tag-active">Suporte técnico</span><span class="tag tag-active">TMA</span><span class="tag tag-active">Referências e cases BR</span><span class="tag tag-active">Segurança e compliance</span><span class="tag tag-active">Flexibilidade contratual</span><span class="tag tag-active">Customização e configuração</span><span class="tag tag-active">Abordagem consultiva</span><span class="tag tag-active">Capacitação do time</span><span class="tag tag-active">Ecossistema de parceiros (implementação)</span><span class="tag tag-active">Capilaridade/cobertura regional</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Integrador / empresa de serviços (SI);Consultoria especializada;MSP / outsourcing gerenciado;Fornecedor com cobertura global</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">
+                            Projeto: 8 temas | 
+                            Co-gerenciado: 5 temas | 
+                            Serv. Gerenciado: 0 temas
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OFERTAS FOURSYS RECOMENDADAS -->
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Gisely Grillo Marques</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas do CIO. Ordenado por relevância.</p>
+            
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 34</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Alinhado com prioridade: IA Generativa</li><li>Sem fornecedor definido em: IA Generativa</li><li>Sem fornecedor definido em: IA / ML</li><li>Alinhado com prioridade: IA</li></ul>
+                </div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 24</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Sem fornecedor definido em: APIs e integração</li><li>Alinhado com prioridade: ERP</li><li>Sem fornecedor definido em: ERP</li><li>Alinhado com prioridade: Integração</li></ul>
+                </div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Dados &amp; Inteligência Artificial</h4>
+                    <span class="score-badge">Score: 16</span>
+                </div>
+                <p>Estratégia de dados, data lakes, data mesh, analytics, BI, inteligência preditiva e prescritiva. Fundação de dados e governança.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Alinhado com prioridade: BI</li><li>Sem fornecedor definido em: Gestão de dados</li><li>Alinhado com prioridade: Gestão de dados</li><li>Sem fornecedor definido em: Armazenamento, backup e imutabilidade</li></ul>
+                </div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Agilidade &amp; Org Design</h4>
+                    <span class="score-badge">Score: 11</span>
+                </div>
+                <p>Desenho de modelos operacionais ágeis, otimização de fluxo de valor, coaching em liderança ágil e transformação organizacional.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Alinhado com prioridade: Transformação</li><li>Sem fornecedor definido em: Gestão de dados</li><li>Alinhado com prioridade: Gestão</li></ul>
+                </div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 10</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Sem fornecedor definido em: Mobile apps / superapps</li><li>Sem fornecedor definido em: Automação de processos / RPA</li></ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESTRATÉGIA DE ABORDAGEM -->
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Gisely Grillo Marques tem como top prioridades <strong>IA Generativa;CRM;ERP</strong>, 
+                iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados 
+                nessas áreas com menor risco. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 15 projetos definidos sem fornecedor: Infraestrutura de redes, Armazenamento, backup e imutabilidade, Conectividade e telecom, Nuvem pública, Nuvem Privada e híbrida. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação.</p>
+            </div>
+            
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; Modernização de Legado; Dados & Inteligência Artificial. 
+                A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), 
+                parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p>1. O setor de <strong>Utilities</strong> está passando por transformação digital acelerada com IA e automação. 
+                Concorrentes já investem em plataformas digitais proprietárias e IA para otimização.<br>
+                2. Xylem e Grundfos lideram em IoT e digital twins para utilities. Veolia pode se diferenciar no Brasil com: integração de IA Generativa para documentação técnica e engenharia, CRM para gestão de projetos e clientes, automação de processos operacionais (RPA/hiperautomação), APIs para integração de Hubg<br>
+                3. O orçamento de TI está com perspectiva de <strong>Será mantido</strong>, 
+                e o maior investimento será no <strong>3º trimestre</strong> — planejar approach comercial para 30-60 dias antes.</p>
+            </div>
+        </div>
+    </div>
+    
+        <!-- PERFIL PESSOAL & RAPPORT -->
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal & Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Cidade / Região</div>
+                        <div class="value">São Paulo, SP — atua como CIO para toda a América Latina na Veolia Water Technologies & Solutions</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Tempo de Experiência</div>
+                        <div class="value">33+ anos de carreira profissional, com 15+ anos em papéis de liderança empresarial</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Trajetória Marcante</div>
+                        <div class="value">Construiu carreira em grandes multinacionais da indústria: Alcoa Alumínio, Novelis (7 anos como IT Director South America) e SUEZ antes da aquisição pela Veolia.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Especialidades</div>
+                        <div class="value">Transformação digital, estratégia de TI, processos operacionais sustentáveis, gestão de OPEX/CAPEX e participação em comitês globais de tecnologia.</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Causa Pessoal: Mulheres em TI</div>
+                        <div class="value">Membro ativa do MCIO Brasil (grupo de mulheres CIOs fundado por Ione Coco). Defensora fervorosa da inclusão feminina em TI. Frase marcante: defende "abrir os olhos de jovens mulheres para que tenham autonomia de escolher seus caminhos e quebrar ciclos históricos".</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Palestrante & Eventos</div>
+                        <div class="value">Presença frequente no IT Forum (Trancoso 2024, Salvador 2023). Participa de painéis sobre diversidade e liderança feminina em tecnologia.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Programas Internacionais</div>
+                        <div class="value">Participação em programas de liderança internacionais e comitês globais de tecnologia dentro do grupo Veolia.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn: 500+ conexões, 9.100+ seguidores. Publicações sobre liderança, diversidade e transformação digital.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-box" style="margin-top:16px">
+                <h4>Dicas para Conversa Amistosa</h4>
+                <p>1. <strong>Empoderamento Feminino:</strong> A causa de mulheres em TI é claramente uma paixão pessoal. Demonstrar que a Foursys valoriza diversidade é um diferencial.<br>
+                2. <strong>MCIO Brasil:</strong> Pergunte sobre a experiência no grupo de mulheres CIOs — é um tema que ela abraça com entusiasmo e orgulho.<br>
+                3. <strong>Sustentabilidade:</strong> Trabalhando na Veolia (líder mundial em soluções ambientais), sustentabilidade é parte da sua rotina. Bom tema de conversa: green IT e impacto ambiental da tecnologia.<br>
+                4. <strong>Indústria Pesada:</strong> Sua trajetória em Alcoa e Novelis (alumínio) demonstra resiliência em ambientes predominantemente masculinos — reconhecer essa jornada gera empatia.<br>
+                5. <strong>Liderança LatAm:</strong> Como CIO para toda a América Latina, pergunte sobre os desafios de liderar equipes multiculturais em diferentes países.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CTO/CIO - Diego Neufert | Multilab (Grupo NC)</title>
+    <style>
+        :root { --primary: #1a237e; --primary-light: #3949ab; --accent: #00b894; --accent-orange: #e17055; --bg: #f5f6fa; --card-bg: #ffffff; --text: #2d3436; --text-light: #636e72; --border: #dfe6e9; --shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; } .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .summary-stat { text-align: center; padding: 20px; }
+        .summary-stat .number { font-size: 36px; font-weight: 800; color: var(--primary); }
+        .summary-stat .desc { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Diego Neufert</h1>
+                <h2>CTO / CIO (NC Tech) — Multilab Farma (Grupo NC)</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Farmacêutico | São Jerônimo - RS</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Experiência</div>
+                    <div class="value">35+ anos</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Investimento 2025</div>
+                    <div class="value">R$ 50 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Novas Vagas</div>
+                    <div class="value">~100 posições</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="alert-box">
+                <strong>Expansão em curso:</strong> A Multilab Farma está investindo <strong>R$ 50 milhões em expansão</strong> em 2025, com abertura de ~100 vagas. Com 35+ anos no mercado e complexo industrial no Rio Grande do Sul, está em fase de crescimento acelerado dentro do Grupo NC (parte do grupo desde 2018). Anderson Barreto é o Diretor de Operações Industriais.
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Multilab Farma</h3>
+            <p style="margin-bottom:20px;line-height:1.8">A Multilab é uma empresa farmacêutica brasileira com mais de 35 anos de experiência, sediada em São Jerônimo-RS. Possui complexo industrial dedicado a pesquisa, desenvolvimento e produção. Parte do Grupo NC desde 2018, está em fase de expansão significativa com R$ 50M de investimento e ~100 novas contratações. Compartilha CNPJ com a Nova Química, indicando forte integração operacional.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Sede</div>
+                        <div class="value">São Jerônimo, RS</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Dir. Operações Industriais</div>
+                        <div class="value">Anderson Barreto</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">No Grupo NC desde</div>
+                        <div class="value">2018</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Liderança TI</div>
+                        <div class="value">Diego Neufert (CTO/CIO NC Tech)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidade: Expansão Industrial</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Com R$ 50M de investimento e ~100 novas vagas, a Multilab está em <strong>fase de expansão industrial</strong>. Isto cria demandas significativas de TI:</p>
+            <div>
+                <span class="tag tag-opportunity">Automação de novas linhas de produção</span>
+                <span class="tag tag-opportunity">Integração de sistemas com Grupo NC</span>
+                <span class="tag tag-opportunity">IoT para novo complexo industrial</span>
+                <span class="tag tag-opportunity">ERP/SAP para novas operações</span>
+                <span class="tag tag-opportunity">Infraestrutura de TI para expansão</span>
+                <span class="tag tag-opportunity">Cibersegurança para novas instalações</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 90</span>
+                </div>
+                <p>Infraestrutura de TI para expansão industrial, cloud, DevOps e plataformas para novas operações.</p>
+                <div class="reasons"><strong>Por que oferecer:</strong><ul><li>Expansão de R$ 50M demanda nova infraestrutura de TI</li><li>100 novos colaboradores precisam de workplace digital</li><li>Integração de RS com ecossistema NC em SP</li></ul></div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 85</span>
+                </div>
+                <p>Integração dos sistemas Multilab com EMS/Nova Química via APIs e iPaaS.</p>
+                <div class="reasons"><strong>Por que oferecer:</strong><ul><li>Desde 2018 no Grupo NC — integração pode estar em andamento</li><li>Compartilha CNPJ com Nova Química — sistemas precisam ser unificados</li><li>Complexo industrial remoto (RS) exige integração robusta</li></ul></div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 78</span>
+                </div>
+                <p>IA para automação industrial, controle de qualidade e otimização de produção.</p>
+                <div class="reasons"><strong>Por que oferecer:</strong><ul><li>Novas linhas de produção são candidatas a Indústria 4.0</li><li>IA para controle de qualidade farmacêutico</li><li>Automação de processos em escala</li></ul></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>A Multilab está investindo R$ 50M em expansão — <strong>janela de oportunidade clara</strong>. Abordar via Diego Neufert com foco em infraestrutura de TI para a nova expansão e integração do complexo de RS com o ecossistema digital do Grupo NC em SP.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Timing Crítico</h4>
+                <p>A expansão da Multilab é <strong>agora</strong> — 2025 é o ano dos investimentos e contratações. A demanda por TI acompanha a expansão industrial. Ação comercial imediata é recomendada.</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | Grupo NC</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CTO/CIO - Diego Neufert | Germed Pharma (Grupo NC)</title>
+    <style>
+        :root { --primary: #1a237e; --primary-light: #3949ab; --accent: #00b894; --accent-orange: #e17055; --bg: #f5f6fa; --card-bg: #ffffff; --text: #2d3436; --text-light: #636e72; --border: #dfe6e9; --shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; } .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-new { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .summary-stat { text-align: center; padding: 20px; }
+        .summary-stat .number { font-size: 36px; font-weight: 800; color: var(--primary); }
+        .summary-stat .desc { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Diego Neufert</h1>
+                <h2>CTO / CIO (NC Tech) — Germed Pharma (Grupo NC)</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Farmacêutico (multinacional brasileira) | Campinas - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Perfil</div>
+                    <div class="value">Multinacional 100% BR</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Colaboradores</div>
+                    <div class="value">201 a 500</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">CEO</div>
+                    <div class="value">Cosme Santos</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="alert-box">
+                <strong>Contexto:</strong> A Germed Pharma é a <strong>multinacional 100% brasileira</strong> do Grupo NC. Criada em 2002 como linha de produtos, evoluiu para um dos laboratórios farmacêuticos do grupo. Foco em genéricos de alta qualidade com presença internacional. A TI é gerida pela <strong>NC Tech</strong> sob liderança de Diego Neufert.
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Germed Pharma</h3>
+            <p style="margin-bottom:20px;line-height:1.8">A Germed Pharma é uma multinacional 100% brasileira focada em medicamentos genéricos. Fundada em 2002 como linha de produtos da EMS, cresceu para se tornar um laboratório independente dentro do Grupo NC. Com 201 a 500 colaboradores e sede em Campinas-SP, a Germed se diferencia pela qualidade e pela abrangência internacional.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Sede</div>
+                        <div class="value">Campinas, SP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">CEO</div>
+                        <div class="value">Cosme Santos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Fundação</div>
+                        <div class="value">2002</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Segmento</div>
+                        <div class="value">Medicamentos genéricos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Diferencial</div>
+                        <div class="value">Multinacional 100% brasileira com presença internacional</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Liderança TI</div>
+                        <div class="value">Diego Neufert (CTO/CIO NC Tech)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Áreas Tecnológicas Prioritárias</h3>
+            <div>
+                <span class="tag tag-active">IA para controle de qualidade</span>
+                <span class="tag tag-active">Automação de registros regulatórios</span>
+                <span class="tag tag-active">ERP / SAP integrado ao grupo</span>
+                <span class="tag tag-active">Supply chain internacional</span>
+                <span class="tag tag-active">Rastreabilidade de medicamentos</span>
+                <span class="tag tag-active">Comércio exterior digital</span>
+                <span class="tag tag-active">Cloud & infraestrutura</span>
+                <span class="tag tag-active">Cibersegurança / LGPD</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark: Concorrentes no Segmento de Genéricos</h3>
+            <div class="competitor-card">
+                <h4>Eurofarma (Genéricos)</h4>
+                <p>Um dos maiores players de genéricos do Brasil. Forte investimento em Indústria 4.0, automação de fábricas, IA para P&D e expansão digital na América Latina.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Sandoz (Novartis)</h4>
+                <p>Líder global em genéricos. Plataformas digitais globais, analytics avançado para supply chain, e IA para previsão de demanda.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Teva Pharmaceutical</h4>
+                <p>Maior fabricante de genéricos do mundo. Investimento massivo em digitalização, plataformas cloud-native e IA para otimização de portfólio.</p>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 88</span>
+                </div>
+                <p>Integração dos sistemas Germed com ecossistema EMS/Grupo NC. APIs para comércio exterior e supply chain internacional.</p>
+                <div class="reasons"><strong>Por que oferecer:</strong><ul><li>Multinacional brasileira precisa de integração global</li><li>Unificação de dados com EMS e demais empresas NC</li><li>Supply chain internacional exige integração robusta</li></ul></div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 82</span>
+                </div>
+                <p>IA para controle de qualidade de genéricos, automação de registros ANVISA e otimização de processos produtivos.</p>
+                <div class="reasons"><strong>Por que oferecer:</strong><ul><li>Controle de qualidade é crítico para genéricos</li><li>Automação de processos regulatórios</li><li>IA para previsão de demanda internacional</li></ul></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>A Germed é a porta de entrada para o mercado internacional do Grupo NC. Abordar via Diego Neufert com foco em <strong>integração de supply chain internacional</strong> e <strong>automação de processos regulatórios</strong> para múltiplos países. Cases de integração multipaís são o diferencial.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade</h4>
+                <p>Com a expansão internacional do Grupo NC (México, EUA, Sérvia), a Germed como multinacional brasileira precisa de <strong>plataformas integradas</strong> que suportem operação multipaís com conformidade regulatória local.</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | Grupo NC</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

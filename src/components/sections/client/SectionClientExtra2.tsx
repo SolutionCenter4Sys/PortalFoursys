@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion'
-import { MapPin, Building2, TrendingUp, Users } from 'lucide-react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { MapPin, Building2, TrendingUp, Users, X, ChevronRight, FileText } from 'lucide-react'
 import { useApp } from '../../../context/AppContext'
 import { useLanguage } from '../../../i18n'
 import { SectionWrapper } from '../../ui/SectionWrapper'
@@ -7,7 +8,12 @@ import { InterestButton } from '../../ui/InterestButton'
 import { ClientBackButton } from './ClientBackButton'
 import { getClientById } from '../../../data/clients'
 
-interface SocialContact {
+export interface BriefingFile {
+  label: string
+  file: string
+}
+
+export interface SocialContact {
   name: string
   role: string
   company: string
@@ -17,6 +23,7 @@ interface SocialContact {
   opportunities: number
   topOffer: string
   topScore: number
+  briefingFiles?: BriefingFile[]
 }
 
 interface SocialSellingContent {
@@ -48,6 +55,7 @@ function getScoreColor(score: number) {
 export function SectionClientExtra2() {
   const { state } = useApp()
   const { t } = useLanguage()
+  const [selectedContact, setSelectedContact] = useState<SocialContact | null>(null)
   const client = state.activeClientId ? getClientById(state.activeClientId) : null
 
   if (!client?.extra2) return null
@@ -126,6 +134,7 @@ export function SectionClientExtra2() {
           {contacts.map((contact, i) => {
             const oppColor = getOpportunityColor(contact.opportunities)
             const scoreColor = getScoreColor(contact.topScore)
+            const hasBriefing = contact.briefingFiles && contact.briefingFiles.length > 0
 
             return (
               <motion.div
@@ -133,7 +142,8 @@ export function SectionClientExtra2() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 + i * 0.04, duration: 0.4 }}
-                className="p-5 rounded-2xl border border-white/[0.08] bg-foursys-surface/30 hover:border-white/20 hover:bg-foursys-surface/50 transition-all duration-300"
+                className={`p-5 rounded-2xl border border-white/[0.08] bg-foursys-surface/30 hover:border-white/20 hover:bg-foursys-surface/50 transition-all duration-300 ${hasBriefing ? 'cursor-pointer group' : ''}`}
+                onClick={() => hasBriefing && setSelectedContact(contact)}
               >
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div className="min-w-0">
@@ -145,11 +155,20 @@ export function SectionClientExtra2() {
                       </span>
                     </div>
                   </div>
-                  <div
-                    className="px-2 py-0.5 rounded-full text-[10px] font-bold flex-shrink-0"
-                    style={{ backgroundColor: `${scoreColor}20`, color: scoreColor, border: `1px solid ${scoreColor}40` }}
-                  >
-                    {contact.topScore}
+                  <div className="flex items-center gap-2">
+                    {hasBriefing && (
+                      <div className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-white/5 text-foursys-text-muted border border-white/10 group-hover:border-white/30 group-hover:text-white transition-colors">
+                        <FileText size={9} />
+                        <span>{t('clientSections.extra2.briefing')}</span>
+                        <ChevronRight size={9} className="group-hover:translate-x-0.5 transition-transform" />
+                      </div>
+                    )}
+                    <div
+                      className="px-2 py-0.5 rounded-full text-[10px] font-bold flex-shrink-0"
+                      style={{ backgroundColor: `${scoreColor}20`, color: scoreColor, border: `1px solid ${scoreColor}40` }}
+                    >
+                      {contact.topScore}
+                    </div>
                   </div>
                 </div>
 
@@ -192,7 +211,111 @@ export function SectionClientExtra2() {
             )
           })}
         </div>
+
+        <AnimatePresence>
+          {selectedContact && (
+            <ContactBriefingModal
+              contact={selectedContact}
+              clientColor={clientColor}
+              onClose={() => setSelectedContact(null)}
+            />
+          )}
+        </AnimatePresence>
       </div>
     </SectionWrapper>
+  )
+}
+
+function ContactBriefingModal({
+  contact,
+  clientColor,
+  onClose,
+}: {
+  contact: SocialContact
+  clientColor: string
+  onClose: () => void
+}) {
+  const { t } = useLanguage()
+  const files = contact.briefingFiles ?? []
+  const [activeFile, setActiveFile] = useState(0)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
+      onClick={onClose}
+    >
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        transition={{ duration: 0.3, type: 'spring', damping: 25 }}
+        className="relative w-full max-w-6xl h-[90vh] rounded-2xl border border-white/[0.12] bg-foursys-bg overflow-hidden flex flex-col shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.08] bg-foursys-surface/50">
+          <div className="flex items-center gap-3 min-w-0">
+            <div
+              className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
+              style={{ backgroundColor: `${clientColor}20`, color: clientColor }}
+            >
+              {contact.name.charAt(0)}
+            </div>
+            <div className="min-w-0">
+              <h3 className="text-sm font-bold text-white truncate">{contact.name}</h3>
+              <p className="text-xs text-foursys-text-muted truncate">
+                {contact.role} · {contact.company}
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={onClose}
+            className="p-2 rounded-lg hover:bg-white/10 text-foursys-text-muted hover:text-white transition-colors flex-shrink-0"
+          >
+            <X size={18} />
+          </button>
+        </div>
+
+        {files.length > 1 && (
+          <div className="flex items-center gap-1 px-4 py-2 border-b border-white/[0.08] bg-foursys-surface/30 overflow-x-auto">
+            {files.map((f, i) => (
+              <button
+                key={f.file}
+                onClick={() => setActiveFile(i)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
+                  activeFile === i
+                    ? 'text-white'
+                    : 'text-foursys-text-muted hover:text-white hover:bg-white/5'
+                }`}
+                style={activeFile === i ? { backgroundColor: `${clientColor}30`, color: clientColor } : undefined}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <div className="flex-1 min-h-0">
+          {files.length > 0 ? (
+            <iframe
+              key={files[activeFile].file}
+              src={`/briefings/itforum/${files[activeFile].file}`}
+              className="w-full h-full border-0"
+              title={`${t('clientSections.extra2.briefing')} — ${contact.name}`}
+            />
+          ) : (
+            <div className="flex items-center justify-center h-full text-foursys-text-muted text-sm">
+              {t('common.loading')}
+            </div>
+          )}
+        </div>
+      </motion.div>
+    </motion.div>
   )
 }

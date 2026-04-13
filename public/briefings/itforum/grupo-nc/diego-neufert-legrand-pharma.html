@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CTO/CIO - Diego Neufert | Legrand Pharma (Grupo NC)</title>
+    <style>
+        :root { --primary: #1a237e; --primary-light: #3949ab; --accent: #00b894; --accent-orange: #e17055; --bg: #f5f6fa; --card-bg: #ffffff; --text: #2d3436; --text-light: #636e72; --border: #dfe6e9; --shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; } .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-new { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .summary-stat { text-align: center; padding: 20px; }
+        .summary-stat .number { font-size: 36px; font-weight: 800; color: var(--primary); }
+        .summary-stat .desc { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Diego Neufert</h1>
+                <h2>CTO / CIO (NC Tech) — Legrand Pharma (Grupo NC)</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Farmacêutico | Hortolândia - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Ranking Nacional</div>
+                    <div class="value">10º maior laboratório</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">TI Centralizada</div>
+                    <div class="value">NC Tech</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="alert-box">
+                <strong>Contexto:</strong> A Legrand Pharma é o <strong>10º maior laboratório farmacêutico do Brasil</strong>. Conquistou 26 posições no ranking entre 2009 e 2014. A TI é centralizada via <strong>NC Tech</strong>, liderada por Diego Neufert. A Ofta (oftalmologia) é uma unidade de negócio da Legrand.
+            </div>
+            <div class="grid-3">
+                <div class="summary-stat">
+                    <div class="number">10º</div>
+                    <div class="desc">Maior laboratório do Brasil</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number">26</div>
+                    <div class="desc">Posições conquistadas no ranking (2009-2014)</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number">NC Tech</div>
+                    <div class="desc">TI centralizada do Grupo NC</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Legrand Pharma</h3>
+            <p style="margin-bottom:20px;line-height:1.8">A Legrand Pharma é um dos pilares do Grupo NC, posicionada como o 10º maior laboratório farmacêutico do Brasil. Atua com medicamentos de marca, similares e genéricos. A Ofta Vision Health, focada em oftalmologia, opera como unidade de negócio da Legrand. Sede em Hortolândia-SP, com operações industriais integradas ao complexo do Grupo NC.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Sede</div>
+                        <div class="value">Hortolândia, SP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Segmentos</div>
+                        <div class="value">Medicamentos de marca, similares, genéricos e oftalmologia (Ofta)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Liderança TI</div>
+                        <div class="value">Diego Neufert (CTO/CIO) — via NC Tech centralizada</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Grupo</div>
+                        <div class="value">Grupo NC — Faturamento R$ 22 BI (2025)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Áreas Tecnológicas Prioritárias</h3>
+            <div>
+                <span class="tag tag-active">IA para P&D farmacêutico</span>
+                <span class="tag tag-active">Farmacovigilância digital</span>
+                <span class="tag tag-active">Automação industrial</span>
+                <span class="tag tag-active">SAP / ERP</span>
+                <span class="tag tag-active">Supply chain digital</span>
+                <span class="tag tag-active">IoT industrial</span>
+                <span class="tag tag-active">Cibersegurança</span>
+                <span class="tag tag-active">Cloud & DevOps</span>
+                <span class="tag tag-active">Sistemas regulatórios (ANVISA)</span>
+                <span class="tag tag-active">Ciência de dados</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark: Concorrentes Diretos</h3>
+            <div class="competitor-card">
+                <h4>Medley (Sanofi)</h4>
+                <p>Maior laboratório de genéricos do Brasil, parte do grupo francês Sanofi. Forte investimento em digitalização de processos regulatórios, analytics para demanda e IA para supply chain global.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Prati-Donaduzzi</h4>
+                <p>Forte presença em genéricos. Investimento em automação de fábricas, sistemas de qualidade integrados e digitalização de processos de produção.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Cristália</h4>
+                <p>Referência em P&D nacional. Investimento em laboratórios digitais, automação de pesquisa e integração de dados de ensaios clínicos.</p>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 90</span>
+                </div>
+                <p>IA para farmacovigilância, automação de processos regulatórios e otimização de P&D farmacêutico.</p>
+                <div class="reasons"><strong>Por que oferecer:</strong><ul><li>IA central na estratégia NC Tech</li><li>Farmacovigilância com IA é tendência prioritária no setor</li><li>Automação de registros ANVISA</li></ul></div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 85</span>
+                </div>
+                <p>Integração de sistemas Legrand+Ofta com ecossistema EMS/Grupo NC via APIs e iPaaS (Digibee).</p>
+                <div class="reasons"><strong>Por que oferecer:</strong><ul><li>Integração entre múltiplas unidades de negócio</li><li>Unificação de dados entre Legrand e Ofta</li><li>Modernização de sistemas de produção</li></ul></div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 75</span>
+                </div>
+                <p>Proteção de dados sensíveis farmacêuticos, conformidade LGPD/ANVISA, segurança de propriedade intelectual.</p>
+                <div class="reasons"><strong>Por que oferecer:</strong><ul><li>Dados sensíveis de pacientes e fórmulas</li><li>Conformidade regulatória rigorosa</li><li>Proteção contra espionagem industrial</li></ul></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Abordar via Diego Neufert na NC Tech, posicionando soluções para o ecossistema Legrand+Ofta. Destacar cases de integração de sistemas em grupos farmacêuticos e IA para farmacovigilância. A Legrand cresceu 26 posições no ranking — demonstrar como a tecnologia pode sustentar e ampliar esse crescimento.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade</h4>
+                <p>A Legrand, como 10º maior lab do Brasil, tem ambição de continuar subindo no ranking. Tecnologia é o acelerador. Com a NC Tech centralizando a TI, uma parceria com a Foursys pode impactar Legrand, Ofta e todo o ecossistema NC Farma simultaneamente.</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | Grupo NC</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

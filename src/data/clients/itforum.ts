@@ -206,6 +206,7 @@ export const itforumClient: ClientConfig = {
           opportunities: 25,
           topOffer: 'AI Squad',
           topScore: 48,
+          briefingFiles: [{ label: 'OMNI', file: 'alessandro-miranda-fernandes.html' }],
         },
         {
           name: 'Djalma Brighenti Junior',
@@ -217,6 +218,7 @@ export const itforumClient: ClientConfig = {
           opportunities: 0,
           topOffer: 'Modernização de Legado',
           topScore: 12,
+          briefingFiles: [{ label: 'Ford', file: 'djalma-brighenti-junior.html' }],
         },
         {
           name: 'Gisely Grillo Marques',
@@ -228,6 +230,7 @@ export const itforumClient: ClientConfig = {
           opportunities: 15,
           topOffer: 'AI Squad',
           topScore: 34,
+          briefingFiles: [{ label: 'Veolia WaterTech', file: 'gisely-grillo-marques.html' }],
         },
         {
           name: 'Juliano De Conti',
@@ -239,6 +242,7 @@ export const itforumClient: ClientConfig = {
           opportunities: 5,
           topOffer: 'AI Squad',
           topScore: 24,
+          briefingFiles: [{ label: 'Total Express', file: 'juliano-de-conti.html' }],
         },
         {
           name: 'Leonardo Franco de Moura',
@@ -250,6 +254,7 @@ export const itforumClient: ClientConfig = {
           opportunities: 6,
           topOffer: 'AI Squad',
           topScore: 19,
+          briefingFiles: [{ label: 'Multilog', file: 'leonardo-franco-de-moura.html' }],
         },
         {
           name: 'Marcelo Boratino Ortega',
@@ -261,6 +266,7 @@ export const itforumClient: ClientConfig = {
           opportunities: 6,
           topOffer: 'AI Squad',
           topScore: 48,
+          briefingFiles: [{ label: 'MOTZ', file: 'marcelo-boratino-ortega.html' }],
         },
         {
           name: 'André Mena Ávila',
@@ -272,6 +278,7 @@ export const itforumClient: ClientConfig = {
           opportunities: 4,
           topOffer: 'AI Squad',
           topScore: 15,
+          briefingFiles: [{ label: 'Hospital de Clínicas', file: 'andre-mena-avila.html' }],
         },
         {
           name: 'Marcos Roberto Pasin',
@@ -283,6 +290,7 @@ export const itforumClient: ClientConfig = {
           opportunities: 13,
           topOffer: 'AI Squad',
           topScore: 37,
+          briefingFiles: [{ label: 'Grupo ADCOS', file: 'marcos-roberto-pasin.html' }],
         },
         {
           name: 'Alexandre Falsarella Ricoy',
@@ -294,6 +302,7 @@ export const itforumClient: ClientConfig = {
           opportunities: 5,
           topOffer: 'AI Squad',
           topScore: 18,
+          briefingFiles: [{ label: 'Bertoldo Transportes', file: 'alexandre-falsarella-ricoy.html' }],
         },
         {
           name: 'Diego Neufert',
@@ -305,6 +314,17 @@ export const itforumClient: ClientConfig = {
           opportunities: 60,
           topOffer: 'AI Squad',
           topScore: 95,
+          briefingFiles: [
+            { label: 'EMS', file: 'grupo-nc/diego-neufert-ems.html' },
+            { label: 'Germed Pharma', file: 'grupo-nc/diego-neufert-germed-pharma.html' },
+            { label: 'Legrand Pharma', file: 'grupo-nc/diego-neufert-legrand-pharma.html' },
+            { label: 'Multilab', file: 'grupo-nc/diego-neufert-multilab.html' },
+            { label: 'Nova Química', file: 'grupo-nc/diego-neufert-nova-quimica.html' },
+            { label: 'Novamed', file: 'grupo-nc/diego-neufert-novamed.html' },
+            { label: 'Ofta Vision', file: 'grupo-nc/diego-neufert-ofta-vision.html' },
+            { label: 'Underskin', file: 'grupo-nc/diego-neufert-underskin.html' },
+            { label: 'ADS Energias', file: 'grupo-nc/ads-energias-renovaveis.html' },
+          ],
         },
         {
           name: 'Franco Pasquali',
@@ -316,6 +336,7 @@ export const itforumClient: ClientConfig = {
           opportunities: 0,
           topOffer: 'Modernização de Legado',
           topScore: 75,
+          briefingFiles: [{ label: '3Z Realty', file: 'grupo-nc/franco-pasquali.html' }],
         },
         {
           name: 'Odnir Finotti',
@@ -327,6 +348,7 @@ export const itforumClient: ClientConfig = {
           opportunities: 0,
           topOffer: 'AI Squad',
           topScore: 90,
+          briefingFiles: [{ label: 'Bionovis', file: 'grupo-nc/odnir-finotti.html' }],
         },
         {
           name: 'Vinzenz Ploerer',
@@ -338,6 +360,7 @@ export const itforumClient: ClientConfig = {
           opportunities: 0,
           topOffer: 'AI Squad',
           topScore: 75,
+          briefingFiles: [{ label: 'Brace Pharma', file: 'grupo-nc/vinzenz-ploerer.html' }],
         },
         {
           name: 'Oliver Stanisavljević',
@@ -349,6 +372,7 @@ export const itforumClient: ClientConfig = {
           opportunities: 0,
           topOffer: 'Modernização de Legado',
           topScore: 92,
+          briefingFiles: [{ label: 'Galenika', file: 'grupo-nc/oliver-stanisavljevic.html' }],
         },
       ],
     },
@@ -560,6 +584,7 @@ const itforumClientEn: ClientConfig = {
           opportunities: 25,
           topOffer: 'AI Squad',
           topScore: 48,
+          briefingFiles: [{ label: 'OMNI', file: 'alessandro-miranda-fernandes.html' }],
         },
         {
           name: 'Djalma Brighenti Junior',
@@ -571,6 +596,7 @@ const itforumClientEn: ClientConfig = {
           opportunities: 0,
           topOffer: 'Legacy Modernization',
           topScore: 12,
+          briefingFiles: [{ label: 'Ford', file: 'djalma-brighenti-junior.html' }],
         },
         {
           name: 'Gisely Grillo Marques',
@@ -582,6 +608,7 @@ const itforumClientEn: ClientConfig = {
           opportunities: 15,
           topOffer: 'AI Squad',
           topScore: 34,
+          briefingFiles: [{ label: 'Veolia WaterTech', file: 'gisely-grillo-marques.html' }],
         },
         {
           name: 'Juliano De Conti',
@@ -593,6 +620,7 @@ const itforumClientEn: ClientConfig = {
           opportunities: 5,
           topOffer: 'AI Squad',
           topScore: 24,
+          briefingFiles: [{ label: 'Total Express', file: 'juliano-de-conti.html' }],
         },
         {
           name: 'Leonardo Franco de Moura',
@@ -604,6 +632,7 @@ const itforumClientEn: ClientConfig = {
           opportunities: 6,
           topOffer: 'AI Squad',
           topScore: 19,
+          briefingFiles: [{ label: 'Multilog', file: 'leonardo-franco-de-moura.html' }],
         },
         {
           name: 'Marcelo Boratino Ortega',
@@ -615,6 +644,7 @@ const itforumClientEn: ClientConfig = {
           opportunities: 6,
           topOffer: 'AI Squad',
           topScore: 48,
+          briefingFiles: [{ label: 'MOTZ', file: 'marcelo-boratino-ortega.html' }],
         },
         {
           name: 'André Mena Ávila',
@@ -626,6 +656,7 @@ const itforumClientEn: ClientConfig = {
           opportunities: 4,
           topOffer: 'AI Squad',
           topScore: 15,
+          briefingFiles: [{ label: 'Hospital de Clínicas', file: 'andre-mena-avila.html' }],
         },
         {
           name: 'Marcos Roberto Pasin',
@@ -637,6 +668,7 @@ const itforumClientEn: ClientConfig = {
           opportunities: 13,
           topOffer: 'AI Squad',
           topScore: 37,
+          briefingFiles: [{ label: 'Grupo ADCOS', file: 'marcos-roberto-pasin.html' }],
         },
         {
           name: 'Alexandre Falsarella Ricoy',
@@ -648,6 +680,7 @@ const itforumClientEn: ClientConfig = {
           opportunities: 5,
           topOffer: 'AI Squad',
           topScore: 18,
+          briefingFiles: [{ label: 'Bertoldo Transportes', file: 'alexandre-falsarella-ricoy.html' }],
         },
         {
           name: 'Diego Neufert',
@@ -659,6 +692,17 @@ const itforumClientEn: ClientConfig = {
           opportunities: 60,
           topOffer: 'AI Squad',
           topScore: 95,
+          briefingFiles: [
+            { label: 'EMS', file: 'grupo-nc/diego-neufert-ems.html' },
+            { label: 'Germed Pharma', file: 'grupo-nc/diego-neufert-germed-pharma.html' },
+            { label: 'Legrand Pharma', file: 'grupo-nc/diego-neufert-legrand-pharma.html' },
+            { label: 'Multilab', file: 'grupo-nc/diego-neufert-multilab.html' },
+            { label: 'Nova Química', file: 'grupo-nc/diego-neufert-nova-quimica.html' },
+            { label: 'Novamed', file: 'grupo-nc/diego-neufert-novamed.html' },
+            { label: 'Ofta Vision', file: 'grupo-nc/diego-neufert-ofta-vision.html' },
+            { label: 'Underskin', file: 'grupo-nc/diego-neufert-underskin.html' },
+            { label: 'ADS Energias', file: 'grupo-nc/ads-energias-renovaveis.html' },
+          ],
         },
         {
           name: 'Franco Pasquali',
@@ -670,6 +714,7 @@ const itforumClientEn: ClientConfig = {
           opportunities: 0,
           topOffer: 'Legacy Modernization',
           topScore: 75,
+          briefingFiles: [{ label: '3Z Realty', file: 'grupo-nc/franco-pasquali.html' }],
         },
         {
           name: 'Odnir Finotti',
@@ -681,6 +726,7 @@ const itforumClientEn: ClientConfig = {
           opportunities: 0,
           topOffer: 'AI Squad',
           topScore: 90,
+          briefingFiles: [{ label: 'Bionovis', file: 'grupo-nc/odnir-finotti.html' }],
         },
         {
           name: 'Vinzenz Ploerer',
@@ -692,6 +738,7 @@ const itforumClientEn: ClientConfig = {
           opportunities: 0,
           topOffer: 'AI Squad',
           topScore: 75,
+          briefingFiles: [{ label: 'Brace Pharma', file: 'grupo-nc/vinzenz-ploerer.html' }],
         },
         {
           name: 'Oliver Stanisavljević',
@@ -703,6 +750,7 @@ const itforumClientEn: ClientConfig = {
           opportunities: 0,
           topOffer: 'Legacy Modernization',
           topScore: 92,
+          briefingFiles: [{ label: 'Galenika', file: 'grupo-nc/oliver-stanisavljevic.html' }],
         },
       ],
     },

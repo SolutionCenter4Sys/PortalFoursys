@@ -449,6 +449,7 @@ export const pt = {
       totalOpportunities: 'Oportunidades',
       avgScore: 'Score médio',
       projects: 'proj.',
+      briefing: 'Briefing',
     },
   },
   search: {
