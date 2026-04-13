@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MapPin, Building2, TrendingUp, Users, X, ChevronRight, FileText } from 'lucide-react'
+import { MapPin, Building2, TrendingUp, Users, X, ChevronRight, FileText, Search, Mic, MicOff } from 'lucide-react'
 import { useApp } from '../../../context/AppContext'
 import { useLanguage } from '../../../i18n'
+import { useVoiceSearch } from '../../../hooks/useVoiceSearch'
 import { SectionWrapper } from '../../ui/SectionWrapper'
 import { InterestButton } from '../../ui/InterestButton'
 import { ClientBackButton } from './ClientBackButton'
@@ -52,10 +53,28 @@ function getScoreColor(score: number) {
   return '#6b7280'
 }
 
+function norm(s: string) {
+  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+}
+
+function contactMatchesQuery(c: SocialContact, q: string): boolean {
+  const n = norm(q)
+  return [c.name, c.role, c.company, c.sector, c.city, c.revenue, c.topOffer]
+    .some(f => norm(f).includes(n))
+}
+
 export function SectionClientExtra2() {
   const { state } = useApp()
-  const { t } = useLanguage()
+  const { lang, t } = useLanguage()
   const [selectedContact, setSelectedContact] = useState<SocialContact | null>(null)
+  const [search, setSearch] = useState('')
+
+  const speechLang = lang === 'en' ? 'en-US' : 'pt-BR'
+  const onVoiceResult = useCallback((transcript: string) => {
+    setSearch(transcript)
+  }, [])
+  const voice = useVoiceSearch(onVoiceResult, speechLang)
+
   const client = state.activeClientId ? getClientById(state.activeClientId) : null
 
   if (!client?.extra2) return null
@@ -76,6 +95,11 @@ export function SectionClientExtra2() {
   const { contacts } = content
   const totalOpportunities = contacts.reduce((sum, c) => sum + c.opportunities, 0)
   const avgScore = Math.round(contacts.reduce((sum, c) => sum + c.topScore, 0) / contacts.length)
+
+  const filtered = useMemo(() => {
+    if (!search.trim()) return contacts
+    return contacts.filter(c => contactMatchesQuery(c, search.trim()))
+  }, [contacts, search])
 
   return (
     <SectionWrapper>
@@ -130,8 +154,73 @@ export function SectionClientExtra2() {
           </div>
         </motion.div>
 
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="mb-5"
+        >
+          <div className={`flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-200 ${
+            voice.status === 'listening'
+              ? 'border-foursys-primary/50 bg-foursys-primary/5 shadow-[0_0_20px_rgba(255,102,0,0.12)]'
+              : 'border-white/[0.1] bg-foursys-surface/60 focus-within:border-foursys-primary/50'
+          }`}>
+            <Search size={16} className="text-foursys-text-dim shrink-0" />
+            <input
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              placeholder={voice.status === 'listening'
+                ? t('common.listening')
+                : (lang === 'pt' ? 'Buscar contato por nome, empresa, setor, cidade...' : 'Search contact by name, company, sector, city...')}
+              className="flex-1 bg-transparent text-sm text-foursys-text placeholder-foursys-text-dim outline-none"
+            />
+            {search && (
+              <button
+                type="button"
+                onClick={() => setSearch('')}
+                className="p-1 rounded-full hover:bg-white/10 text-foursys-text-dim hover:text-white transition-colors"
+                aria-label={t('common.clearSearch')}
+              >
+                <X size={14} />
+              </button>
+            )}
+            {voice.isSupported && (
+              <button
+                type="button"
+                onClick={voice.toggle}
+                className={`p-1.5 rounded-full transition-all ${
+                  voice.status === 'listening'
+                    ? 'bg-foursys-primary/20 text-foursys-primary animate-pulse'
+                    : voice.status === 'error'
+                      ? 'text-red-400'
+                      : 'text-foursys-text-dim hover:text-white hover:bg-white/10'
+                }`}
+                aria-label={voice.status === 'listening'
+                  ? (lang === 'pt' ? 'Parar gravação' : 'Stop recording')
+                  : t('common.voiceSearch')}
+              >
+                {voice.status === 'listening' ? <MicOff size={16} /> : <Mic size={16} />}
+              </button>
+            )}
+          </div>
+          {voice.status === 'listening' && (
+            <p className="text-[10px] text-foursys-primary mt-1.5 ml-1 animate-pulse">
+              {lang === 'pt' ? 'Ouvindo... fale o nome, empresa ou setor que deseja buscar' : 'Listening... say the name, company, or sector you want to search'}
+            </p>
+          )}
+          {search && (
+            <p className="text-[11px] text-foursys-text-muted mt-2 ml-1">
+              {filtered.length === 0
+                ? (lang === 'pt' ? 'Nenhum contato encontrado' : 'No contacts found')
+                : (lang === 'pt'
+                    ? `${filtered.length} de ${contacts.length} contatos`
+                    : `${filtered.length} of ${contacts.length} contacts`)}
+            </p>
+          )}
+        </motion.div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {contacts.map((contact, i) => {
+          {filtered.map((contact, i) => {
             const oppColor = getOpportunityColor(contact.opportunities)
             const scoreColor = getScoreColor(contact.topScore)
             const hasBriefing = contact.briefingFiles && contact.briefingFiles.length > 0
