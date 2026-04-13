@@ -419,7 +419,7 @@ function ContactBriefingModal({
   clientColor: string
   onClose: () => void
 }) {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const files = contact.briefingFiles ?? []
   const [activeFile, setActiveFile] = useState(0)
 
