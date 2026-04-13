@@ -33,6 +33,7 @@ export function SectionWrapper({ children, className = '' }: SectionWrapperProps
       exit="exit"
       transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
       aria-live="polite"
+      data-section-capture
       className={`h-full w-full overflow-y-auto stealth-scrollbar ${className}`}
     >
       {children}

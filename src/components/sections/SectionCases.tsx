@@ -120,7 +120,8 @@ function CaseCard({ c, index, onOpen }: { c: CaseStudy; index: number; onOpen: (
             <Trophy size={40} className="text-foursys-primary/20" />
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
         {/* Badges */}
         <div className="absolute top-4 left-4 flex items-center gap-2">
