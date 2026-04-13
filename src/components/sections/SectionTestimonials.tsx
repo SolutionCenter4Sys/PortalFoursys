@@ -8,10 +8,15 @@ import { useLanguage } from '../../i18n'
 
 const SECTOR_ACCENT: Record<string, { bg: string; text: string; border: string; dot: string }> = {
   'Saúde':      { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20', dot: 'bg-emerald-400' },
+  'Healthcare': { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20', dot: 'bg-emerald-400' },
   'Financeiro': { bg: 'bg-blue-500/10',    text: 'text-blue-400',    border: 'border-blue-500/20',    dot: 'bg-blue-400' },
+  'Financial':  { bg: 'bg-blue-500/10',    text: 'text-blue-400',    border: 'border-blue-500/20',    dot: 'bg-blue-400' },
   'Seguros':    { bg: 'bg-violet-500/10',   text: 'text-violet-400',  border: 'border-violet-500/20',  dot: 'bg-violet-400' },
+  'Insurance':  { bg: 'bg-violet-500/10',   text: 'text-violet-400',  border: 'border-violet-500/20',  dot: 'bg-violet-400' },
   'Varejo':     { bg: 'bg-amber-500/10',    text: 'text-amber-400',   border: 'border-amber-500/20',   dot: 'bg-amber-400' },
+  'Retail':     { bg: 'bg-amber-500/10',    text: 'text-amber-400',   border: 'border-amber-500/20',   dot: 'bg-amber-400' },
   'Indústria':  { bg: 'bg-indigo-500/10',   text: 'text-indigo-400',  border: 'border-indigo-500/20',  dot: 'bg-indigo-400' },
+  'Industry':   { bg: 'bg-indigo-500/10',   text: 'text-indigo-400',  border: 'border-indigo-500/20',  dot: 'bg-indigo-400' },
 }
 
 const DEFAULT_ACCENT = { bg: 'bg-foursys-primary/10', text: 'text-foursys-primary', border: 'border-foursys-primary/20', dot: 'bg-foursys-primary' }
@@ -78,7 +83,7 @@ export function SectionTestimonials() {
               {[1, 2, 3, 4, 5].map(s => (
                 <Star key={s} size={14} className="fill-amber-400 text-amber-400" />
               ))}
-              <span className="text-xs text-foursys-text-dim ml-1">Satisfação</span>
+              <span className="text-xs text-foursys-text-dim ml-1">{t('testimonials.satisfaction')}</span>
             </div>
           </div>
         </motion.div>
@@ -161,7 +166,7 @@ export function SectionTestimonials() {
                 <div className="mt-5 pt-4 border-t border-white/[0.06]">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-[10px] text-foursys-text-dim uppercase tracking-wider mb-0.5">Case relacionado</div>
+                      <div className="text-[10px] text-foursys-text-dim uppercase tracking-wider mb-0.5">{t('testimonials.relatedCase')}</div>
                       <div className="text-xs font-semibold text-foursys-text-muted">{item.caseTitle}</div>
                       <div className="text-[10px] text-foursys-text-dim">{item.caseType}</div>
                     </div>
@@ -170,7 +175,7 @@ export function SectionTestimonials() {
                       onClick={() => navigate('cases')}
                       className="flex items-center gap-1 text-[11px] font-semibold text-foursys-primary hover:text-foursys-cyan transition-colors group/link"
                     >
-                      Ver case
+                      {t('testimonials.viewCase')}
                       <ArrowRight size={12} className="group-hover/link:translate-x-0.5 transition-transform" />
                     </button>
                   </div>
@@ -188,14 +193,14 @@ export function SectionTestimonials() {
           className="mt-12 md:mt-16 text-center"
         >
           <p className="text-sm text-foursys-text-muted mb-4">
-            Quer ser o próximo a recomendar?
+            {t('testimonials.ctaQuestion')}
           </p>
           <button
             type="button"
             onClick={() => navigate('cases')}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-foursys-primary/15 border border-foursys-primary/30 hover:bg-foursys-primary/25 hover:border-foursys-primary/50 text-foursys-primary font-semibold text-sm transition-all duration-200"
           >
-            Ver todos os Cases de Sucesso
+            {t('testimonials.ctaButton')}
             <ArrowRight size={16} />
           </button>
         </motion.div>

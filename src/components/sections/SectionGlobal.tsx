@@ -41,7 +41,7 @@ const REGION_STYLES: Omit<Region, 'region' | 'count' | 'summary' | 'spotlight' |
   { id: 'brasil', flag: '🇧🇷', colorHex: '#22c55e', bg: 'from-green-500/15 to-green-600/5', border: 'border-green-500/30', textCls: 'text-green-400', marker: { top: '69%', left: '36.5%' } },
   { id: 'eua', flag: '🇺🇸', colorHex: '#3b82f6', bg: 'from-blue-500/15 to-blue-600/5', border: 'border-blue-500/30', textCls: 'text-blue-400', marker: { top: '45%', left: '21.5%' } },
   { id: 'europa', flag: '🇪🇺', colorHex: '#8b5cf6', bg: 'from-violet-500/15 to-violet-600/5', border: 'border-violet-500/30', textCls: 'text-violet-400', marker: { top: '31%', left: '48.2%' } },
-  { id: 'oriente-medio', flag: '🇮🇱', colorHex: '#f59e0b', bg: 'from-amber-500/15 to-amber-600/5', border: 'border-amber-500/30', textCls: 'text-amber-400', marker: { top: '38%', left: '57%' } },
+  { id: 'oriente-medio', flag: '🌍', colorHex: '#f59e0b', bg: 'from-amber-500/15 to-amber-600/5', border: 'border-amber-500/30', textCls: 'text-amber-400', marker: { top: '38%', left: '57%' } },
 ]
 
 const SHARED_UNITS: Record<string, Unit[]> = {
@@ -93,7 +93,7 @@ const CONTENT: Record<string, RegionContent[]> = {
         { label: 'Projetos', value: 'Iniciativas estratégicas internacionais' },
       ],
       units: [
-        { name: 'Unidade Europa', city: 'Lisboa – Portugal', address: 'Av. da Liberdade, 110' },
+        { name: 'Unidade Europa', city: 'Lisboa – Portugal', address: 'Av. da Liberdade, 110 · 1250-096 Lisboa' },
       ],
     },
     {
@@ -150,7 +150,7 @@ const CONTENT: Record<string, RegionContent[]> = {
         { label: 'Projects', value: 'International strategic initiatives' },
       ],
       units: [
-        { name: 'Europe Office', city: 'Lisbon – Portugal', address: 'Av. da Liberdade, 110' },
+        { name: 'Europe Office', city: 'Lisbon – Portugal', address: 'Av. da Liberdade, 110 · 1250-096 Lisbon' },
       ],
     },
     {

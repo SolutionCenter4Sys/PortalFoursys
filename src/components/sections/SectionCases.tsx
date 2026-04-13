@@ -95,6 +95,7 @@ const TYPE_BADGE: Record<string, string> = {
 }
 
 function CaseCard({ c, index, onOpen }: { c: CaseStudy; index: number; onOpen: () => void }) {
+  const { t } = useLanguage()
   const sectorStyle = SECTOR_COLORS[c.sector] ?? 'bg-white/10 text-white/70 border-white/20'
   const typeBadge = TYPE_BADGE[c.type] ?? 'bg-foursys-primary text-white'
 
@@ -168,7 +169,7 @@ function CaseCard({ c, index, onOpen }: { c: CaseStudy; index: number; onOpen: (
             )}
           </div>
           <span className="flex items-center gap-1 text-[11px] font-semibold text-foursys-primary group-hover:gap-2 transition-all">
-            Ver case <ChevronRight size={12} />
+            {t('cases.viewCase')} <ChevronRight size={12} />
           </span>
         </div>
       </div>
@@ -312,7 +313,7 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
                     {c.detail.dimensions.hours && (
                       <div className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08]">
                         <Clock size={12} className="text-foursys-primary" />
-                        <span className="text-[11px] text-foursys-text-dim">Horas: <span className="text-white font-semibold">{c.detail.dimensions.hours}h</span></span>
+                        <span className="text-[11px] text-foursys-text-dim">{t('cases.hours')}: <span className="text-white font-semibold">{c.detail.dimensions.hours}h</span></span>
                       </div>
                     )}
                   </div>
@@ -577,16 +578,16 @@ export function SectionCases() {
           transition={{ delay: 0.7 }}
           className="mt-12 md:mt-16 text-center"
         >
-          <p className="text-xs text-foursys-text-dim mb-2">+150 clientes satisfeitos</p>
+          <p className="text-xs text-foursys-text-dim mb-2">{t('cases.satisfiedClients')}</p>
           <h3 className="text-lg md:text-2xl font-black text-white mb-6">
-            Pronto para ser o próximo caso de sucesso?
+            {t('cases.ctaQuestion')}
           </h3>
           <div className="flex items-center justify-center gap-3 text-xs text-foursys-text-dim">
             <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-foursys-primary" /> {t('cases.freeDiagnosis')}</span>
             <span>·</span>
-            <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-foursys-primary" /> Resposta em 24h</span>
+            <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-foursys-primary" /> {t('cases.responseTime')}</span>
             <span>·</span>
-            <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-foursys-primary" /> Sem compromisso</span>
+            <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-foursys-primary" /> {t('cases.noCommitment')}</span>
           </div>
         </motion.div>
 

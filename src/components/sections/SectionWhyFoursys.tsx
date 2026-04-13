@@ -441,11 +441,11 @@ export function SectionWhyFoursys() {
                   style={{ background: `linear-gradient(90deg, ${adv.color}, transparent)` }}
                 />
 
-                <div className="flex items-start justify-between gap-4 mb-4 min-h-[56px]">
-                  <h4 className="text-sm font-black text-white">{adv.title}</h4>
+                <div className="flex items-start justify-between gap-3 mb-4 min-h-[56px]">
+                  <h4 className="text-sm font-black text-white flex-1 min-w-0">{adv.title}</h4>
                   <div className="text-right flex-shrink-0">
                     <div className="text-xl font-black" style={{ color: adv.color }}>{adv.metric}</div>
-                    <div className="text-[8px] text-foursys-text-dim uppercase tracking-wider max-w-[100px]">{adv.metricLabel}</div>
+                    <div className="text-[8px] text-foursys-text-dim uppercase tracking-wider whitespace-nowrap">{adv.metricLabel}</div>
                   </div>
                 </div>
 

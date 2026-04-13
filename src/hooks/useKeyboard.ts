@@ -1,9 +1,53 @@
-import { useEffect } from 'react'
+import { useEffect, useCallback } from 'react'
 import { useApp } from '../context/AppContext'
 import type { AppSection } from '../types'
 
+function requestNativeFullscreen() {
+  const el = document.documentElement as HTMLElement & { webkitRequestFullscreen?: () => Promise<void> }
+  if (el.requestFullscreen) return el.requestFullscreen()
+  if (el.webkitRequestFullscreen) return el.webkitRequestFullscreen()
+  return Promise.resolve()
+}
+
+function exitNativeFullscreen() {
+  const doc = document as Document & { webkitExitFullscreen?: () => Promise<void> }
+  if (document.fullscreenElement || (doc as any).webkitFullscreenElement) {
+    if (doc.exitFullscreen) return doc.exitFullscreen()
+    if (doc.webkitExitFullscreen) return doc.webkitExitFullscreen()
+  }
+  return Promise.resolve()
+}
+
+function isNativeFullscreen(): boolean {
+  return !!(document.fullscreenElement || (document as any).webkitFullscreenElement)
+}
+
 export function useKeyboard() {
   const { state, navigate, toggleFullscreen, openSearch, toggleMenu, toggleMetricsPanel, toggleOverview, activeNavigationItems } = useApp()
+
+  const handleToggleFullscreen = useCallback(async () => {
+    if (isNativeFullscreen()) {
+      await exitNativeFullscreen()
+    } else {
+      await requestNativeFullscreen()
+    }
+    toggleFullscreen()
+  }, [toggleFullscreen])
+
+  useEffect(() => {
+    const onFullscreenChange = () => {
+      const native = isNativeFullscreen()
+      if (native !== state.isFullscreen) {
+        toggleFullscreen()
+      }
+    }
+    document.addEventListener('fullscreenchange', onFullscreenChange)
+    document.addEventListener('webkitfullscreenchange', onFullscreenChange)
+    return () => {
+      document.removeEventListener('fullscreenchange', onFullscreenChange)
+      document.removeEventListener('webkitfullscreenchange', onFullscreenChange)
+    }
+  }, [state.isFullscreen, toggleFullscreen])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -19,7 +63,7 @@ export function useKeyboard() {
 
       if (e.key === 'F11' || (e.key === 'f' && e.ctrlKey)) {
         e.preventDefault()
-        toggleFullscreen()
+        handleToggleFullscreen()
         return
       }
 
@@ -37,7 +81,7 @@ export function useKeyboard() {
 
       if (e.key === 'Escape') {
         if (state.isFullscreen) {
-          toggleFullscreen()
+          handleToggleFullscreen()
         } else {
           toggleMenu()
         }
@@ -61,5 +105,5 @@ export function useKeyboard() {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [state.currentSection, state.isFullscreen, navigate, toggleFullscreen, openSearch, toggleMenu, toggleMetricsPanel, toggleOverview, activeNavigationItems])
+  }, [state.currentSection, state.isFullscreen, navigate, handleToggleFullscreen, openSearch, toggleMenu, toggleMetricsPanel, toggleOverview, activeNavigationItems])
 }
