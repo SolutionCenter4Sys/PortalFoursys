@@ -7,21 +7,21 @@ import { itauClient, getItauClient } from './itau'
 import { itforumClient, getItforumClient } from './itforum'
 
 export const clients: ClientConfig[] = [
-  itauClient,
+  itforumClient,
   santanderClient,
   bradescoClient,
   equifaxClient,
-  itforumClient,
+  itauClient,
 ]
 
 export function getAllClients(lang?: Language): ClientConfig[] {
   const l = lang ?? 'pt'
   return [
-    getItauClient(l),
+    getItforumClient(l),
     getSantanderClient(l),
     getBradescoClient(l),
     getEquifaxClient(l),
-    getItforumClient(l),
+    getItauClient(l),
   ]
 }
 

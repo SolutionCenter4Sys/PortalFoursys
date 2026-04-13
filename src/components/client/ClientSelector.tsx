@@ -165,7 +165,7 @@ export function ClientSelector() {
             </div>
 
             {/* Body – scrollable */}
-            <div className="flex-1 min-h-0 overflow-y-auto p-5 space-y-3 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+            <div className="flex-1 min-h-0 overflow-y-auto p-5 space-y-3 stealth-scrollbar">
               {filtered.length === 0 ? (
                 <div className="text-center py-8">
                   <p className="text-xs text-foursys-text-dim">
