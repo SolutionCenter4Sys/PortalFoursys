@@ -13,6 +13,10 @@ const typeIcons: Record<InsightType, React.ReactNode> = {
   'Caso de Sucesso': <Award size={12} />,
   'Podcast': <Mic size={12} />,
   'Webinar': <Video size={12} />,
+  'Article': <BookOpen size={12} />,
+  'Research': <SearchIcon size={12} />,
+  'Report': <FileText size={12} />,
+  'Case Study': <Award size={12} />,
 }
 
 const badgeStyles: Record<string, string> = {
