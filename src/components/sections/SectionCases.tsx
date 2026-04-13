@@ -231,7 +231,7 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
         </div>
 
         {/* Scrollable content */}
-        <div className="flex-1 overflow-y-auto overscroll-contain custom-scrollbar">
+        <div className="flex-1 overflow-y-auto overscroll-contain stealth-scrollbar">
           <div className="p-6 md:p-8 space-y-8">
 
             {/* Key metrics */}

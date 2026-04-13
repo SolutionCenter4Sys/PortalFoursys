@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   BrainCircuit, Factory, Bot,
@@ -8,7 +8,7 @@ import {
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { useLanguage } from '../../i18n'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
-import { innovationTrends } from '../../data/innovation'
+import { getInnovationTrends } from '../../data/innovation'
 import type { InnovationTrend } from '../../data/innovation'
 
 const ICON_MAP: Record<string, React.ReactNode> = {
@@ -360,6 +360,7 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
 
 export function SectionInnovation() {
   const { t, lang } = useLanguage()
+  const trends = useMemo(() => getInnovationTrends(lang), [lang])
   const [activeTrend, setActiveTrend] = useState<InnovationTrend | null>(null)
 
   return (
@@ -403,7 +404,7 @@ export function SectionInnovation() {
 
         {/* Trends grid */}
         <div className="grid grid-cols-1 tablet:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 mb-12">
-          {innovationTrends.map((trend, i) => (
+          {trends.map((trend, i) => (
             <TrendCard key={trend.id} trend={trend} index={i} onClick={() => setActiveTrend(trend)} />
           ))}
         </div>

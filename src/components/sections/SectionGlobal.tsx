@@ -41,7 +41,7 @@ const REGION_STYLES: Omit<Region, 'region' | 'count' | 'summary' | 'spotlight' |
   { id: 'brasil', flag: '🇧🇷', colorHex: '#22c55e', bg: 'from-green-500/15 to-green-600/5', border: 'border-green-500/30', textCls: 'text-green-400', marker: { top: '69%', left: '36.5%' } },
   { id: 'eua', flag: '🇺🇸', colorHex: '#3b82f6', bg: 'from-blue-500/15 to-blue-600/5', border: 'border-blue-500/30', textCls: 'text-blue-400', marker: { top: '45%', left: '21.5%' } },
   { id: 'europa', flag: '🇪🇺', colorHex: '#8b5cf6', bg: 'from-violet-500/15 to-violet-600/5', border: 'border-violet-500/30', textCls: 'text-violet-400', marker: { top: '31%', left: '48.2%' } },
-  { id: 'oriente-medio', flag: '🌍', colorHex: '#f59e0b', bg: 'from-amber-500/15 to-amber-600/5', border: 'border-amber-500/30', textCls: 'text-amber-400', marker: { top: '38%', left: '57%' } },
+  { id: 'oriente-medio', flag: 'ME', colorHex: '#f59e0b', bg: 'from-amber-500/15 to-amber-600/5', border: 'border-amber-500/30', textCls: 'text-amber-400', marker: { top: '38%', left: '57%' } },
 ]
 
 const SHARED_UNITS: Record<string, Unit[]> = {
@@ -395,7 +395,7 @@ export function SectionGlobal() {
             <div className="flex items-start justify-between gap-4 mb-4">
               <div>
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-3xl">{activeRegion.flag}</span>
+                  <span className={`text-3xl ${/^[A-Z]{2,3}$/.test(activeRegion.flag) ? `font-black ${activeRegion.textCls}` : ''}`}>{activeRegion.flag}</span>
                   <div>
                     <div className={`text-sm font-black uppercase tracking-[0.22em] ${activeRegion.textCls}`}>
                       {activeRegion.region}

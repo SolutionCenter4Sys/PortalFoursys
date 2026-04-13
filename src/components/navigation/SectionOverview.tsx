@@ -56,7 +56,7 @@ export function SectionOverview({ isOpen, onClose }: SectionOverviewProps) {
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto custom-scrollbar px-6 py-5">
+            <div className="flex-1 overflow-y-auto stealth-scrollbar px-6 py-5">
               {activeSectionCategories.map(category => {
                 const items = activeNavigationItems.filter(n => n.category === category)
                 if (items.length === 0) return null

@@ -33,7 +33,7 @@ export function SectionWrapper({ children, className = '' }: SectionWrapperProps
       exit="exit"
       transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
       aria-live="polite"
-      className={`h-full w-full overflow-y-auto custom-scrollbar ${className}`}
+      className={`h-full w-full overflow-y-auto stealth-scrollbar ${className}`}
     >
       {children}
     </motion.div>

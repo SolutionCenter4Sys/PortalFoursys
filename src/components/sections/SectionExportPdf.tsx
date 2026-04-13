@@ -329,7 +329,7 @@ export function SectionExportPdf() {
             </div>
 
             {/* Section list */}
-            <div className="max-h-[55dvh] overflow-y-auto custom-scrollbar px-5 py-4">
+            <div className="max-h-[55dvh] overflow-y-auto stealth-scrollbar px-5 py-4">
               <div className="space-y-5">
                 {groupedSections.map((group, gi) => {
                   const isFullCat = isCategoryFullySelected(group.category)
@@ -503,7 +503,7 @@ export function SectionExportPdf() {
                   </p>
                 </div>
               ) : (
-                <div className="space-y-2 max-h-[30dvh] overflow-y-auto custom-scrollbar">
+                <div className="space-y-2 max-h-[30dvh] overflow-y-auto stealth-scrollbar">
                   {availableItems
                     .filter(item => selectedSections.has(item.id))
                     .map(item => {

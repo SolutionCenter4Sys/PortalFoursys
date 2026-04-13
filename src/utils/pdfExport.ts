@@ -1,4 +1,5 @@
-import html2pdf from 'html2pdf.js'
+import html2canvas from 'html2canvas'
+import { jsPDF } from 'jspdf'
 import type { AppSection } from '../types'
 
 export interface PdfExportProgress {
@@ -26,7 +27,7 @@ export async function exportSectionsToPdf(
   const currentSectionBackup = sectionIds[0]
 
   try {
-    const containers: HTMLElement[] = []
+    const captures: { imgData: string; width: number; height: number; label: string }[] = []
 
     for (let i = 0; i < sectionIds.length; i++) {
       const sectionId = sectionIds[i]
@@ -34,62 +35,80 @@ export async function exportSectionsToPdf(
 
       onProgress({ current: i + 1, total, currentSection: label, status: 'preparing' })
       navigateToSection(sectionId)
-      await waitForRender(1200)
+      await waitForRender(1500)
 
-      neutralizeAnimations(mainContent)
-      await waitForRender(300)
+      forceVisibility(mainContent)
+      await waitForRender(400)
 
       onProgress({ current: i + 1, total, currentSection: label, status: 'capturing' })
-      const container = buildCaptureContainer(mainContent, label)
-      containers.push(container)
 
-      restoreAnimations(mainContent)
+      const canvas = await html2canvas(mainContent, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#0d1117',
+        windowWidth: 1100,
+        scrollX: -window.scrollX,
+        scrollY: -window.scrollY,
+      })
+
+      captures.push({
+        imgData: canvas.toDataURL('image/jpeg', 0.92),
+        width: canvas.width,
+        height: canvas.height,
+        label,
+      })
+
+      restoreVisibility(mainContent)
     }
 
     onProgress({ current: total, total, currentSection: '', status: 'building' })
 
-    const wrapper = document.createElement('div')
-    wrapper.style.cssText = 'position: fixed; left: 0; top: 0; width: 1100px; z-index: -1; opacity: 0; pointer-events: none;'
-    containers.forEach((c, idx) => {
-      c.style.position = 'relative'
-      c.style.left = '0'
-      if (idx > 0) {
-        c.style.pageBreakBefore = 'always'
-        c.classList.add('html2pdf__page-break')
-      }
-      wrapper.appendChild(c)
+    const pdf = new jsPDF({
+      orientation: 'landscape',
+      unit: 'mm',
+      format: 'a4',
     })
-    document.body.appendChild(wrapper)
 
-    await waitForRender(200)
+    const pageW = pdf.internal.pageSize.getWidth()
+    const pageH = pdf.internal.pageSize.getHeight()
+    const margin = 10
+    const headerH = 6
+
+    for (let i = 0; i < captures.length; i++) {
+      if (i > 0) pdf.addPage()
+
+      const { imgData, width, height, label } = captures[i]
+
+      pdf.setFontSize(8)
+      pdf.setTextColor(255, 102, 0)
+      pdf.text(label, margin, margin + 3)
+      pdf.setDrawColor(255, 102, 0)
+      pdf.setLineWidth(0.3)
+      pdf.line(margin, margin + headerH, pageW - margin, margin + headerH)
+
+      const contentW = pageW - margin * 2
+      const contentH = pageH - margin * 2 - headerH
+      const imgAspect = width / height
+      const slotAspect = contentW / contentH
+
+      let drawW: number, drawH: number
+      if (imgAspect > slotAspect) {
+        drawW = contentW
+        drawH = contentW / imgAspect
+      } else {
+        drawH = contentH
+        drawW = contentH * imgAspect
+      }
+
+      const x = margin + (contentW - drawW) / 2
+      const y = margin + headerH + 2
+
+      pdf.addImage(imgData, 'JPEG', x, y, drawW, Math.min(drawH, contentH))
+    }
 
     const date = new Date().toLocaleDateString('pt-BR').replace(/\//g, '-')
-
-    await html2pdf()
-      .set({
-        margin: [10, 10, 10, 10] as [number, number, number, number],
-        filename: `Foursys_Portal_${date}.pdf`,
-        image: { type: 'jpeg' as const, quality: 0.95 },
-        html2canvas: {
-          scale: 2,
-          useCORS: true,
-          logging: false,
-          backgroundColor: '#0d1117',
-          width: 1100,
-          windowWidth: 1100,
-          scrollX: 0,
-          scrollY: 0,
-        },
-        jsPDF: {
-          unit: 'mm',
-          format: 'a4',
-          orientation: 'landscape' as const,
-        },
-      })
-      .from(wrapper)
-      .save()
-
-    document.body.removeChild(wrapper)
+    pdf.save(`Foursys_Portal_${date}.pdf`)
 
     onProgress({ current: total, total, currentSection: '', status: 'done' })
   } catch (err) {
@@ -100,85 +119,33 @@ export async function exportSectionsToPdf(
   }
 }
 
-function neutralizeAnimations(root: HTMLElement) {
+function forceVisibility(root: HTMLElement) {
   root.querySelectorAll('[style]').forEach(el => {
-    const htmlEl = el as HTMLElement
-    if (htmlEl.style.opacity !== '' && parseFloat(htmlEl.style.opacity) < 1) {
-      htmlEl.dataset.pdfOrigOpacity = htmlEl.style.opacity
-      htmlEl.style.opacity = '1'
+    const h = el as HTMLElement
+    const op = h.style.opacity
+    if (op !== '' && parseFloat(op) < 1) {
+      h.dataset.pdfOp = op
+      h.style.opacity = '1'
     }
-    if (htmlEl.style.transform && htmlEl.style.transform !== 'none') {
-      htmlEl.dataset.pdfOrigTransform = htmlEl.style.transform
-      htmlEl.style.transform = 'none'
+    const tr = h.style.transform
+    if (tr && tr !== 'none') {
+      h.dataset.pdfTr = tr
+      h.style.transform = 'none'
     }
   })
 }
 
-function restoreAnimations(root: HTMLElement) {
-  root.querySelectorAll('[data-pdf-orig-opacity]').forEach(el => {
-    const htmlEl = el as HTMLElement
-    htmlEl.style.opacity = htmlEl.dataset.pdfOrigOpacity ?? ''
-    delete htmlEl.dataset.pdfOrigOpacity
+function restoreVisibility(root: HTMLElement) {
+  root.querySelectorAll('[data-pdf-op]').forEach(el => {
+    const h = el as HTMLElement
+    h.style.opacity = h.dataset.pdfOp ?? ''
+    delete h.dataset.pdfOp
   })
-  root.querySelectorAll('[data-pdf-orig-transform]').forEach(el => {
-    const htmlEl = el as HTMLElement
-    htmlEl.style.transform = htmlEl.dataset.pdfOrigTransform ?? ''
-    delete htmlEl.dataset.pdfOrigTransform
+  root.querySelectorAll('[data-pdf-tr]').forEach(el => {
+    const h = el as HTMLElement
+    h.style.transform = h.dataset.pdfTr ?? ''
+    delete h.dataset.pdfTr
   })
-}
-
-function buildCaptureContainer(mainContent: HTMLElement, label: string): HTMLElement {
-  const container = document.createElement('div')
-  container.style.cssText = `
-    width: 1100px;
-    padding: 40px;
-    background: #0d1117;
-    color: #e6edf3;
-    font-family: 'Inter', sans-serif;
-  `
-
-  const header = document.createElement('div')
-  header.style.cssText = `
-    margin-bottom: 24px;
-    padding-bottom: 16px;
-    border-bottom: 2px solid #FF6600;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  `
-  header.innerHTML = `
-    <div style="font-size: 22px; font-weight: 700; color: #FF6600;">${label}</div>
-    <div style="font-size: 12px; color: #8b949e;">Foursys Portal Institucional</div>
-  `
-  container.appendChild(header)
-
-  const contentClone = mainContent.cloneNode(true) as HTMLElement
-  contentClone.style.cssText = `
-    overflow: visible;
-    height: auto;
-    max-height: none;
-  `
-  contentClone.removeAttribute('id')
-
-  contentClone.querySelectorAll('[style]').forEach(el => {
-    const htmlEl = el as HTMLElement
-    if (htmlEl.style.opacity !== '' && parseFloat(htmlEl.style.opacity) < 1) {
-      htmlEl.style.opacity = '1'
-    }
-    if (htmlEl.style.transform && htmlEl.style.transform !== 'none') {
-      htmlEl.style.transform = 'none'
-    }
-    if (htmlEl.style.animation) {
-      htmlEl.style.animation = 'none'
-    }
-  })
-
-  contentClone.querySelectorAll('.animate-spin, .animate-pulse, .animate-bounce').forEach(el => {
-    el.classList.remove('animate-spin', 'animate-pulse', 'animate-bounce')
-  })
-
-  container.appendChild(contentClone)
-  return container
 }
 
 function waitForRender(ms: number): Promise<void> {

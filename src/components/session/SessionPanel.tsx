@@ -334,7 +334,7 @@ export function SessionPanel() {
             })()}
 
             {/* Lista de seções visitadas */}
-            <div className="flex-1 overflow-y-auto custom-scrollbar px-4 py-3">
+            <div className="flex-1 overflow-y-auto stealth-scrollbar px-4 py-3">
               <div className="text-[10px] font-semibold text-foursys-text-dim uppercase tracking-widest mb-3">
                 {t('session.timePerSection')}
               </div>
@@ -390,7 +390,7 @@ export function SessionPanel() {
             </>)}
 
             {activeTab === 'history' && (
-              <div className="flex-1 overflow-y-auto custom-scrollbar px-4 py-3">
+              <div className="flex-1 overflow-y-auto stealth-scrollbar px-4 py-3">
                 <SessionHistory />
               </div>
             )}

@@ -39,7 +39,7 @@ function CaseModal({
         exit={{ scale: 0.95, y: 16 }}
         onClick={e => e.stopPropagation()}
         aria-live="polite"
-        className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-t-2xl sm:rounded-2xl max-w-2xl w-full max-h-[90dvh] overflow-y-auto custom-scrollbar"
+        className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-t-2xl sm:rounded-2xl max-w-2xl w-full max-h-[90dvh] overflow-y-auto stealth-scrollbar"
       >
         {/* Header do modal */}
         <div
