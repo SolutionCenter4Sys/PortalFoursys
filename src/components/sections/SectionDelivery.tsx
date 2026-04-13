@@ -1,12 +1,14 @@
+import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Check, Star } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { useLanguage } from '../../i18n'
-import { deliveryModels } from '../../data/services'
+import { getDeliveryModels } from '../../data/services'
 import { DynIcon } from '../../utils/iconMap'
 
 export function SectionDelivery() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
+  const deliveryModels = useMemo(() => getDeliveryModels(lang), [lang])
 
   return (
     <SectionWrapper>

@@ -93,7 +93,7 @@ const CONTENT: Record<string, RegionContent[]> = {
         { label: 'Projetos', value: 'Iniciativas estratégicas internacionais' },
       ],
       units: [
-        { name: 'Unidade Europa', city: 'Lisboa – Portugal', address: 'Av. da Liberdade, 110', phone: 'Tel: 1269 – 046' },
+        { name: 'Unidade Europa', city: 'Lisboa – Portugal', address: 'Av. da Liberdade, 110' },
       ],
     },
     {
@@ -150,7 +150,7 @@ const CONTENT: Record<string, RegionContent[]> = {
         { label: 'Projects', value: 'International strategic initiatives' },
       ],
       units: [
-        { name: 'Europe Office', city: 'Lisbon – Portugal', address: 'Av. da Liberdade, 110', phone: 'Tel: 1269 – 046' },
+        { name: 'Europe Office', city: 'Lisbon – Portugal', address: 'Av. da Liberdade, 110' },
       ],
     },
     {

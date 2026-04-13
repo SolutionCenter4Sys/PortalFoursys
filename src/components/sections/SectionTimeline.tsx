@@ -4,7 +4,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { DynIcon } from '../../utils/iconMap'
 import { useLanguage } from '../../i18n'
-import { timeline } from '../../data/kpis'
+import { getTimeline } from '../../data/kpis'
 import { useApp } from '../../context/AppContext'
 
 const ERA_STYLES: Record<string, { color: string; glow: string; bg: string; border: string }> = {
@@ -26,9 +26,11 @@ const DEFAULT_ERA = { color: '#FF6600', glow: 'rgba(255,102,0,0.3)', bg: 'from-w
 
 export function SectionTimeline() {
   const { navigate } = useApp()
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const [expandedIdx, setExpandedIdx] = useState<number | null>(null)
   const [activeEra, setActiveEra] = useState<string | null>(null)
+
+  const timeline = useMemo(() => getTimeline(lang), [lang])
 
   const eras = useMemo(() => {
     const seen = new Set<string>()
@@ -39,7 +41,7 @@ export function SectionTimeline() {
         seen.add(e)
         return true
       })
-  }, [])
+  }, [timeline])
 
   const filteredTimeline = activeEra
     ? timeline.filter(t => t.era === activeEra)

@@ -151,10 +151,10 @@ const timelinePt: TimelineItem[] = [
   {
     year: '2023',
     title: 'Presença na Europa — Lisboa',
-    description: 'Abertura do escritório em Lisboa, Portugal, consolidando a presença da Foursys em 3 regiões do globo e ampliando o alcance para o mercado europeu.',
+    description: 'Abertura do escritório em Lisboa, Portugal, consolidando a presença da Foursys em 4 regiões do globo e ampliando o alcance para o mercado europeu.',
     icon: 'globe',
     era: 'Expansão Global',
-    kpi: { value: '3', label: 'regiões do globo' },
+    kpi: { value: '4', label: 'regiões do globo' },
   },
   {
     year: '2024',
@@ -230,10 +230,10 @@ const timelineEn: TimelineItem[] = [
   {
     year: '2023',
     title: 'European presence — Lisbon',
-    description: 'Opening of the Lisbon, Portugal office, consolidating Foursys presence across 3 global regions and expanding reach to the European market.',
+    description: 'Opening of the Lisbon, Portugal office, consolidating Foursys presence across 4 global regions and expanding reach to the European market.',
     icon: 'globe',
     era: 'Global Expansion',
-    kpi: { value: '3', label: 'global regions' },
+    kpi: { value: '4', label: 'global regions' },
   },
   {
     year: '2024',

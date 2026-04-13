@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Clock, ChevronDown, ChevronUp, BookOpen, Mic, Video, FileText, Award, Search as SearchIcon } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
-import { insights, insightCategories, type Insight, type InsightType } from '../../data/insights'
+import { getInsights, getInsightCategories, type Insight, type InsightType } from '../../data/insights'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 
@@ -167,6 +167,8 @@ function InsightCard({ insight, index, featured = false }: { insight: Insight; i
 
 export function SectionInsights() {
   const { t, lang } = useLanguage()
+  const insights = useMemo(() => getInsights(lang), [lang])
+  const insightCategories = useMemo(() => getInsightCategories(lang), [lang])
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
 
   const featured = insights.filter(i => i.featured)

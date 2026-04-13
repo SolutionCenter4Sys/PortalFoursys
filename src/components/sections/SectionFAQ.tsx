@@ -1,18 +1,18 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, ArrowRight, Search, Mic, MicOff, X } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
-import { faqItems } from '../../data/faq'
+import { getFaqItems } from '../../data/faq'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import { useVoiceSearch } from '../../hooks/useVoiceSearch'
 import type { AppSection } from '../../types'
 
-const categoryKeys = ['Todos', 'Institucional', 'Serviços', 'Tecnologia', 'Parceria', 'Santander', 'Comercial']
-
 export function SectionFAQ() {
   const { navigate } = useApp()
   const { t, lang } = useLanguage()
+  const faqItems = useMemo(() => getFaqItems(lang), [lang])
+  const categoryKeys = useMemo(() => ['Todos', ...Array.from(new Set(faqItems.map(i => i.category)))], [faqItems])
   const [openId, setOpenId] = useState<string | null>(null)
   const [activeCategory, setActiveCategory] = useState('Todos')
   const [search, setSearch] = useState('')

@@ -78,7 +78,7 @@ export const en = {
       cases: 'Measurable results in Healthcare, Financial and Insurance',
       testimonials: 'What our clients say about partnering with Foursys',
       awards: 'Awards, certifications and recognitions that validate our delivery',
-      clientsShowcase: 'Companies that trust Foursys across 3 regions worldwide',
+      clientsShowcase: 'Companies that trust Foursys across 4 regions worldwide',
       capabilities: 'Stack, methods and expertise by area',
       esg: 'Technology that transforms lives — social impact and sustainability',
       insights: 'Thought leadership and strategic technology perspectives',
@@ -291,10 +291,14 @@ export const en = {
     nps: 'NPS',
     regions: 'Regions',
     filterAll: 'All',
+    subtitle: 'Long-term strategic partners shaping the future of their industries worldwide.',
+    ctaMain: 'Over {count} companies trust Foursys to lead their digital transformation journeys.',
+    ctaSub: 'We are not vendors — we are long-term strategic partners.',
   },
   awards: {
     badge: 'Awards',
     title: 'Recognitions that validate our delivery',
+    awardsSubtitle: 'Awards earned throughout our history that celebrate dedication, innovation, teamwork and commitment to the Foursys way of being.',
     categories: {
       awards: 'Awards',
       culture: 'Culture & People',

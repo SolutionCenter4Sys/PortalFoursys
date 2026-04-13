@@ -1,11 +1,13 @@
+import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { DynIcon } from '../../utils/iconMap'
-import { awards } from '../../data/awards'
+import { getAwards } from '../../data/awards'
 import { useLanguage } from '../../i18n'
 
 export function SectionAwards() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
+  const awards = useMemo(() => getAwards(lang), [lang])
 
   const CATEGORY_LABELS: Record<string, string> = {
     premio: t('awards.categories.awards'),
@@ -31,8 +33,7 @@ export function SectionAwards() {
             {t('awards.title')}
           </h2>
           <p className="text-foursys-text-muted max-w-2xl text-sm md:text-base leading-relaxed">
-            Prêmios conquistados ao longo da nossa história que celebram dedicação, inovação,
-            trabalho em equipe e compromisso com o jeito de ser Foursys.
+            {t('awards.awardsSubtitle')}
           </p>
           <div className="mt-5 h-px bg-gradient-to-r from-amber-500/30 via-white/[0.06] to-transparent" />
         </motion.div>

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Layers3, X, CheckCircle2, Shield, Zap } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { DynIcon } from '../../utils/iconMap'
-import { serviceLines } from '../../data/services'
+import { getServiceLines } from '../../data/services'
 import { SERVICE_ICONS, SERVICE_VISUALS, DEFAULT_VISUAL } from '../../data/serviceVisuals'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
@@ -43,10 +43,12 @@ function OrbitRing({
   activeId,
   onSelect,
   onKeyNav,
+  serviceLines,
 }: {
   activeId: string
   onSelect: (id: string) => void
   onKeyNav: (e: React.KeyboardEvent, currentId: string) => void
+  serviceLines: ServiceLine[]
 }) {
   const { t, lang } = useLanguage()
   const angleStep = 360 / serviceLines.length
@@ -1587,6 +1589,7 @@ function DeepDiveModal({
 export function SectionServices() {
   const { state, clearDeepDiveHint, navigate } = useApp()
   const { t, lang } = useLanguage()
+  const serviceLines = useMemo(() => getServiceLines(lang), [lang])
   const contractModels = useMemo(
     () => lang === 'pt' ? CONTRACT_MODELS_PT : CONTRACT_MODELS_EN,
     [lang]
@@ -1738,6 +1741,7 @@ export function SectionServices() {
               activeId={activeServiceId}
               onSelect={setActiveServiceId}
               onKeyNav={handleKeyNav}
+              serviceLines={serviceLines}
             />
           </motion.div>
 

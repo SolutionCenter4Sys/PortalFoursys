@@ -1,7 +1,8 @@
+import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { useLanguage } from '../../i18n'
-import { capabilities } from '../../data/cases'
+import { getCapabilities } from '../../data/cases'
 
 const levelColors = {
   expert: { bar: 'bg-foursys-cyan', labelKey: 'capabilities.levels.expert', text: 'text-foursys-cyan' },
@@ -16,7 +17,8 @@ const levelWidth = {
 }
 
 export function SectionCapabilities() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
+  const capabilities = useMemo(() => getCapabilities(lang), [lang])
 
   return (
     <SectionWrapper>

@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Quote, MessageCircle, Star, ArrowRight } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
-import { cases } from '../../data/cases'
+import { getCases } from '../../data/cases'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 
@@ -16,21 +16,21 @@ const SECTOR_ACCENT: Record<string, { bg: string; text: string; border: string; 
 
 const DEFAULT_ACCENT = { bg: 'bg-foursys-primary/10', text: 'text-foursys-primary', border: 'border-foursys-primary/20', dot: 'bg-foursys-primary' }
 
-const testimonials = cases
-  .filter(c => c.testimonial)
-  .map(c => ({
-    quote: c.testimonial!.quote,
-    author: c.testimonial!.author,
-    role: c.testimonial!.role,
-    sector: c.sector,
-    caseTitle: c.title,
-    caseType: c.type,
-    metric: c.metric,
-  }))
-
 export function SectionTestimonials() {
   const { navigate } = useApp()
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
+  const cases = useMemo(() => getCases(lang), [lang])
+  const testimonials = useMemo(() => cases
+    .filter(c => c.testimonial)
+    .map(c => ({
+      quote: c.testimonial!.quote,
+      author: c.testimonial!.author,
+      role: c.testimonial!.role,
+      sector: c.sector,
+      caseTitle: c.title,
+      caseType: c.type,
+      metric: c.metric,
+    })), [cases])
   const [activeSector, setActiveSector] = useState('Todos')
   const sectors = ['Todos', ...Array.from(new Set(testimonials.map(tm => tm.sector)))]
   const filtered = activeSector === 'Todos' ? testimonials : testimonials.filter(tm => tm.sector === activeSector)

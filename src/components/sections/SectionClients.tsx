@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { ClientLogo } from '../ui/ClientLogos'
-import { showcaseClients, sectors } from '../../data/clientShowcase'
+import { getShowcaseClients, getSectors } from '../../data/clientShowcase'
 import type { ShowcaseClient } from '../../data/clientShowcase'
 import { useLanguage } from '../../i18n'
 
@@ -106,13 +106,15 @@ function ClientCard({ client, index }: { client: ShowcaseClient; index: number }
 }
 
 export function SectionClients() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
+  const showcaseClients = useMemo(() => getShowcaseClients(lang), [lang])
+  const sectors = useMemo(() => getSectors(lang), [lang])
   const [activeSector, setActiveSector] = useState<string | null>(null)
 
   const STATS = [
     { value: '150+', label: t('clients.activeClients'), icon: '🏢' },
     { value: '98%', label: t('clients.nps'), icon: '⭐' },
-    { value: '3', label: t('clients.regions'), icon: '🌎' },
+    { value: '4', label: t('clients.regions'), icon: '🌎' },
   ]
 
   const filtered = activeSector
@@ -139,8 +141,7 @@ export function SectionClients() {
                 {t('clients.title')}
               </h2>
               <p className="text-foursys-text-muted max-w-xl text-sm md:text-base leading-relaxed">
-                Parceiros estratégicos de longo prazo que estão definindo o futuro de seus setores
-                no mundo.
+                {t('clients.subtitle')}
               </p>
             </div>
 
@@ -222,10 +223,14 @@ export function SectionClients() {
         >
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-foursys-primary/40 to-transparent" />
           <p className="text-sm text-foursys-text-muted leading-relaxed max-w-lg mx-auto">
-            Mais de <span className="text-foursys-primary font-black">150 empresas</span> confiam na Foursys para conduzir suas jornadas de transformação digital.
+            {lang === 'pt' ? (
+              <>Mais de <span className="text-foursys-primary font-black">150 empresas</span> confiam na Foursys para conduzir suas jornadas de transformação digital.</>
+            ) : (
+              <>Over <span className="text-foursys-primary font-black">150 companies</span> trust Foursys to lead their digital transformation journeys.</>
+            )}
           </p>
           <p className="text-xs text-foursys-text-dim mt-2 font-semibold">
-            Não somos fornecedores — somos parceiros estratégicos de longo prazo.
+            {t('clients.ctaSub')}
           </p>
         </motion.div>
       </div>

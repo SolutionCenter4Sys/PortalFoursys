@@ -7,7 +7,7 @@ import {
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import { navigationItems, sectionCategories } from '../../data/navigation'
-import { cases } from '../../data/cases'
+import { getCases } from '../../data/cases'
 import { exportSectionsToPdf, type PdfExportProgress } from '../../utils/pdfExport'
 import { DynIcon } from '../../utils/iconMap'
 import { SectionWrapper } from '../ui/SectionWrapper'
@@ -98,15 +98,10 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
   },
 }
 
-const CASE_SUBITEMS: SubItem[] = cases.map(c => ({
-  id: `case-${c.id}`,
-  label: `${c.title} — ${c.client}`,
-  sectionId: 'cases' as AppSection,
-}))
-
 export function SectionExportPdf() {
   const { getSectionLabel, navigate: appNavigate } = useApp()
   const { t, lang } = useLanguage()
+  const cases = useMemo(() => getCases(lang), [lang])
 
   const [selectedSections, setSelectedSections] = useState<Set<AppSection>>(new Set())
   const [selectedSubItems, setSelectedSubItems] = useState<Set<string>>(new Set())
@@ -115,10 +110,16 @@ export function SectionExportPdf() {
 
   const isGenerating = progress !== null && progress.status !== 'done' && progress.status !== 'error'
 
+  const CASE_SUBITEMS: SubItem[] = useMemo(() => cases.map(c => ({
+    id: `case-${c.id}`,
+    label: `${c.title} — ${c.client}`,
+    sectionId: 'cases' as AppSection,
+  })), [cases])
+
   const sectionSubitems = useMemo<Partial<Record<AppSection, SubItem[]>>>(() => ({
     ...STATIC_SUBITEMS_I18N[lang],
     'cases': CASE_SUBITEMS,
-  }), [lang])
+  }), [lang, CASE_SUBITEMS])
 
   const availableItems = useMemo(() => {
     return navigationItems.filter(item => item.id !== 'export-pdf')

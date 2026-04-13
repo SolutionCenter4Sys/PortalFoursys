@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { useLanguage } from '../../i18n'
-import { kpis } from '../../data/kpis'
+import { getKpis } from '../../data/kpis'
+import type { KPI } from '../../types'
 import { DynIcon } from '../../utils/iconMap'
 
-function KPICard({ kpi, delay }: { kpi: typeof kpis[0]; delay: number }) {
+function KPICard({ kpi, delay }: { kpi: KPI; delay: number }) {
   const [count, setCount] = useState(0)
   const [started, setStarted] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -53,7 +54,8 @@ function KPICard({ kpi, delay }: { kpi: typeof kpis[0]; delay: number }) {
 }
 
 export function SectionIdentity() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
+  const kpis = useMemo(() => getKpis(lang), [lang])
 
   return (
     <SectionWrapper>

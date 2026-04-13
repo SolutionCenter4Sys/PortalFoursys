@@ -105,7 +105,7 @@ const navigationItemsPt: NavigationItem[] = [
     label: 'Nossos Clientes',
     icon: 'briefcase',
     category: 'Provas',
-    description: 'Empresas que confiam na Foursys em 3 regiões do globo',
+    description: 'Empresas que confiam na Foursys em 4 regiões do globo',
   },
   {
     id: 'capabilities',
@@ -252,7 +252,7 @@ const navigationItemsEn: NavigationItem[] = [
     label: 'Our Clients',
     icon: 'briefcase',
     category: 'Proof Points',
-    description: 'Companies that trust Foursys across 3 regions worldwide',
+    description: 'Companies that trust Foursys across 4 regions worldwide',
   },
   {
     id: 'capabilities',

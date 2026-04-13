@@ -1,8 +1,8 @@
-import { useState, useCallback, useRef, useEffect } from 'react'
+import { useState, useCallback, useRef, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, X, Quote, Shield, CheckCircle2, ChevronRight, Clock, Layers, Target, Wrench, Trophy, Search, Mic, MicOff } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
-import { cases } from '../../data/cases'
+import { getCases } from '../../data/cases'
 import { useVoiceSearch } from '../../hooks/useVoiceSearch'
 import { useLanguage } from '../../i18n'
 import type { CaseStudy } from '../../types'
@@ -390,7 +390,8 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
 }
 
 export function SectionCases() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
+  const cases = useMemo(() => getCases(lang), [lang])
   const [filter, setFilter] = useState('Todos')
   const [selectedCase, setSelectedCase] = useState<CaseStudy | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
