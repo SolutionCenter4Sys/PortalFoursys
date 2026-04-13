@@ -1,4 +1,5 @@
 import type { ClientConfig } from '../../types'
+import type { Language } from '../../i18n/types'
 
 export const equifaxClient: ClientConfig = {
   id: 'equifax',
@@ -98,4 +99,108 @@ export const equifaxClient: ClientConfig = {
       results: ['Case em preparação — entre em contato para detalhes'],
     },
   ],
+}
+
+const equifaxClientEn: ClientConfig = {
+  id: 'equifax',
+  name: 'Equifax',
+  colors: { primary: '#003087', accent: '#0057B7' },
+  tagline: 'Data, AI, and security for smarter decisions',
+  relationship: 'Partner in data, analytics, and AI governance',
+  yearsPartnership: 8,
+  sections: [
+    {
+      id: 'client-opening',
+      label: 'Foursys × Equifax',
+      description: 'Partnership in data and analytical intelligence',
+      icon: 'handshake',
+      component: 'client-opening',
+    },
+    {
+      id: 'client-insights',
+      label: 'Equifax Insights',
+      description: 'Opportunities in the Equifax ecosystem',
+      icon: 'search',
+      component: 'client-insights',
+    },
+    {
+      id: 'client-cases',
+      label: 'Equifax Cases',
+      description: 'Projects and delivered results',
+      icon: 'trophy',
+      component: 'client-cases',
+    },
+  ],
+  insights: [
+    {
+      id: 'data-fabric',
+      title: 'Data Fabric — Unified Data Architecture',
+      description:
+        'Equifax processes billions of credit records globally. In Brazil, integrating data from credit bureaus, Cadastro Positivo, Open Finance, and alternative sources requires a unified data architecture with real-time ingestion.',
+      solution:
+        'Data Lakehouse with Bronze/Silver/Gold layers on Databricks. Real-time ingestion via Kafka, automated data quality, and standardized consumption APIs for each scoring product.',
+      icon: '📊',
+    },
+    {
+      id: 'ml-scoring',
+      title: 'Scoring Models with Explainable AI',
+      description:
+        'BACEN regulations require explainability in credit models. ML models must be auditable, reproducible, and drift-monitored — without sacrificing the accuracy that differentiates Equifax in the market.',
+      solution:
+        'MLOps with reproducible pipelines: feature store, model versioning, drift monitoring, and SHAP/LIME for explainability. Integration with BACEN regulatory frameworks and LGPD compliance.',
+      icon: '🧠',
+    },
+    {
+      id: 'cadastro-positivo',
+      title: 'Positive Credit Registry and Open Finance',
+      description:
+        'With the universalization of Cadastro Positivo and the evolution of Open Finance, Equifax needs to enrich its scoring products with real-time transactional data — processing massive volumes without degrading latency.',
+      solution:
+        'Streaming data enrichment pipelines with < 500ms processing. Integration with Open Finance APIs for consented data ingestion. Scoring models enriched with transactional data.',
+      icon: '🔗',
+    },
+    {
+      id: 'fraud-detection',
+      title: 'Fraud Detection and Digital Identity',
+      description:
+        'Equifax operates in fraud prevention with identity verification solutions. The challenge is combining speed (< 200ms decision), accuracy (< 0.01% false negative), and frictionless consumer experience.',
+      solution:
+        'Real-time fraud detection models with ML ensemble (gradient boosting + neural networks). Device fingerprinting, behavioral analysis, and biometric verification integrated into a decision orchestrator.',
+      icon: '🛡️',
+    },
+    {
+      id: 'cloud-migration',
+      title: 'Cloud Migration and Modernization',
+      description:
+        'Equifax globally migrated to Google Cloud. In Brazil, the local operation must align with the global cloud strategy while maintaining compliance with local regulations (data residency, LGPD, BACEN).',
+      solution:
+        'Hybrid cloud strategy with sensitive workloads on sovereign cloud. Containerization with Kubernetes, IaC with Terraform, and GitOps for consistency across global and local environments.',
+      icon: '☁️',
+    },
+    {
+      id: 'lgpd-governance',
+      title: 'LGPD and Sensitive Data Governance',
+      description:
+        'As a processor of credit data for 150+ million Brazilians, Equifax needs impeccable governance: data catalog, lineage, consent, anonymization, and right to be forgotten — all auditable.',
+      solution:
+        'Data governance platform with automated catalog, end-to-end lineage, consent management, and dynamic anonymization. LGPD compliance dashboards for DPO with real-time alerts.',
+      icon: '🔒',
+    },
+  ],
+  cases: [
+    {
+      id: 'equifax-case-1',
+      title: 'Coming Soon',
+      sector: 'Data & Analytics',
+      type: 'In Progress',
+      challenge: 'Case details will be added soon.',
+      solution: 'Information being prepared.',
+      stack: [],
+      results: ['Case in preparation — contact us for details'],
+    },
+  ],
+}
+
+export function getEquifaxClient(lang: Language = 'pt'): ClientConfig {
+  return lang === 'en' ? equifaxClientEn : equifaxClient
 }

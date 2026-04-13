@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Users, Calendar, ShieldCheck, Globe, Network, TrendingUp,
@@ -6,6 +6,7 @@ import {
   CheckCircle2, XCircle, Minus, Award, Building2, Target, ChevronDown,
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { useLanguage } from '../../i18n'
 
 function hexToRgba(hex: string, a: number) {
   const h = hex.replace('#', '')
@@ -14,13 +15,22 @@ function hexToRgba(hex: string, a: number) {
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-const DIFFERENTIALS = [
+const DIFFERENTIALS_PT = [
   { icon: <Users size={20} />, stat: '3,6%', label: 'Turnover', context: 'vs. 22% da média do mercado' },
   { icon: <Calendar size={20} />, stat: '26', label: 'Anos de entrega', context: 'Fundada em 2000' },
   { icon: <ShieldCheck size={20} />, stat: '6', label: 'Certificações', context: 'ISO 9001 · 27001 · 27701 · 14001 · SAFe · GPTW' },
   { icon: <Globe size={20} />, stat: '3', label: 'Regiões do Globo', context: 'Brasil · EUA · Portugal' },
   { icon: <Network size={20} />, stat: '9+', label: 'Alianças estratégicas', context: 'Microsoft · AWS · Google · Adobe' },
   { icon: <TrendingUp size={20} />, stat: '30K+', label: 'Projetos entregues', context: 'Todos os modelos de delivery' },
+]
+
+const DIFFERENTIALS_EN = [
+  { icon: <Users size={20} />, stat: '3.6%', label: 'Turnover', context: 'vs. 22% market average' },
+  { icon: <Calendar size={20} />, stat: '26', label: 'Years of delivery', context: 'Founded in 2000' },
+  { icon: <ShieldCheck size={20} />, stat: '6', label: 'Certifications', context: 'ISO 9001 · 27001 · 27701 · 14001 · SAFe · GPTW' },
+  { icon: <Globe size={20} />, stat: '3', label: 'Global Regions', context: 'Brazil · USA · Portugal' },
+  { icon: <Network size={20} />, stat: '9+', label: 'Strategic alliances', context: 'Microsoft · AWS · Google · Adobe' },
+  { icon: <TrendingUp size={20} />, stat: '30K+', label: 'Projects delivered', context: 'All delivery models' },
 ]
 
 interface ComparisonRow {
@@ -32,7 +42,7 @@ interface ComparisonRow {
   foursysAdvantage: boolean
 }
 
-const COMPARISON: ComparisonRow[] = [
+const COMPARISON_PT: ComparisonRow[] = [
   {
     dimension: 'Custo / Hora',
     icon: <Euro size={15} />,
@@ -91,13 +101,80 @@ const COMPARISON: ComparisonRow[] = [
   },
 ]
 
+const COMPARISON_EN: ComparisonRow[] = [
+  {
+    dimension: 'Cost / Hour',
+    icon: <Euro size={15} />,
+    foursys: { value: '€ 17-39/h', detail: 'Competitive nearshore with enterprise quality', score: 'high' },
+    bigFour: { value: '€ 172-430+/h', detail: 'Global premium, high costs', score: 'low' },
+    boutique: { value: '€ 129-344/h', detail: 'Variable depending on specialty', score: 'mid' },
+    foursysAdvantage: true,
+  },
+  {
+    dimension: 'Team Turnover',
+    icon: <Heart size={15} />,
+    foursys: { value: '3.6%', detail: 'GPTW + retention culture', score: 'high' },
+    bigFour: { value: '15-22%', detail: 'High rotation, knowledge loss', score: 'low' },
+    boutique: { value: '10-18%', detail: 'Variable, firm-dependent', score: 'mid' },
+    foursysAdvantage: true,
+  },
+  {
+    dimension: 'Client Proximity',
+    icon: <Target size={15} />,
+    foursys: { value: 'Dedicated', detail: 'Fixed squads, 20+ years with same client', score: 'high' },
+    bigFour: { value: 'Rotating', detail: 'Mass offshoring, teams vary', score: 'low' },
+    boutique: { value: 'Moderate', detail: 'Project-focused, not partnership', score: 'mid' },
+    foursysAdvantage: true,
+  },
+  {
+    dimension: 'Delivery Speed',
+    icon: <Zap size={15} />,
+    foursys: { value: '6 weeks', detail: 'Pilot to production with AI First', score: 'high' },
+    bigFour: { value: '3-6 months', detail: 'Complex bureaucratic processes', score: 'low' },
+    boutique: { value: '2-4 months', detail: 'More agile than Big Four', score: 'mid' },
+    foursysAdvantage: true,
+  },
+  {
+    dimension: 'Industry Knowledge',
+    icon: <Building2 size={15} />,
+    foursys: { value: 'Deep', detail: 'Financial, Insurance, Healthcare — 26 years', score: 'high' },
+    bigFour: { value: 'Broad', detail: 'Horizontal — all industries', score: 'mid' },
+    boutique: { value: 'Niche', detail: 'Narrow focus, 1-2 industries', score: 'mid' },
+    foursysAdvantage: true,
+  },
+  {
+    dimension: 'Certifications',
+    icon: <Award size={15} />,
+    foursys: { value: '4 ISOs + SAFe + GPTW', detail: '9001, 27001, 27701, 14001', score: 'high' },
+    bigFour: { value: 'Multiple', detail: 'Extensive certifications', score: 'high' },
+    boutique: { value: '1-2 ISOs', detail: 'Limited certifications', score: 'low' },
+    foursysAdvantage: false,
+  },
+  {
+    dimension: 'Time-to-Value with AI',
+    icon: <Clock size={15} />,
+    foursys: { value: '85% conversion', detail: 'Pilot → Production in 6 weeks', score: 'high' },
+    bigFour: { value: '30-40%', detail: 'Most stay in "eternal pilot"', score: 'low' },
+    boutique: { value: '50-60%', detail: 'Better than Big Four, smaller scale', score: 'mid' },
+    foursysAdvantage: true,
+  },
+]
+
 const SCORE_ICON = {
   high: <CheckCircle2 size={13} className="text-emerald-400" />,
   mid: <Minus size={13} className="text-amber-400" />,
   low: <XCircle size={13} className="text-red-400/70" />,
 }
 
-const ADVANTAGES = [
+interface Advantage {
+  title: string
+  description: string
+  color: string
+  metric: string
+  metricLabel: string
+}
+
+const ADVANTAGES_PT: Advantage[] = [
   {
     title: 'Custo-Benefício Superior',
     description: 'Entrega qualidade equivalente às Big Four a uma fração do custo. Nosso modelo nearshore + squads dedicados elimina o overhead de offshoring global.',
@@ -128,9 +205,53 @@ const ADVANTAGES = [
   },
 ]
 
+const ADVANTAGES_EN: Advantage[] = [
+  {
+    title: 'Superior Cost-Benefit',
+    description: 'Delivers quality equivalent to Big Four at a fraction of the cost. Our nearshore + dedicated squads model eliminates global offshoring overhead.',
+    color: '#10B981',
+    metric: '60-70%',
+    metricLabel: 'lower cost vs Big Four',
+  },
+  {
+    title: 'Knowledge Continuity',
+    description: 'With 3.6% turnover (vs 22% market average), our professionals accumulate years of knowledge about the client\'s business. Zero context loss.',
+    color: '#8B5CF6',
+    metric: '6x',
+    metricLabel: 'lower rotation',
+  },
+  {
+    title: 'AI That Leaves the Pilot',
+    description: 'While 70% of AI projects from large consultancies stay in eternal pilot, our AI First method converts 85% to production in 6 weeks.',
+    color: '#F59E0B',
+    metric: '85%',
+    metricLabel: 'pilot → production',
+  },
+  {
+    title: 'Partnership, Not Supply',
+    description: 'Clients who have been with us for over 20 years. We don\'t sell hours — we build long-term relationships with real accountability.',
+    color: '#06B6D4',
+    metric: '20+',
+    metricLabel: 'years with same client',
+  },
+]
+
 // ─── Components ──────────────────────────────────────────────────────────────
 
-function ComparisonTable() {
+function ComparisonTable({ rows }: { rows: ComparisonRow[] }) {
+  const { t, lang } = useLanguage()
+  const labels = useMemo(() => lang === 'pt' ? {
+    title: 'Foursys vs. Consultorias Globais',
+    dimension: 'Dimensão',
+    bigFour: 'Big Four / Globais',
+    boutiques: 'Boutiques',
+  } : {
+    title: 'Foursys vs. Global Consultancies',
+    dimension: 'Dimension',
+    bigFour: 'Big Four / Global',
+    boutiques: 'Boutiques',
+  }, [lang])
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -139,20 +260,20 @@ function ComparisonTable() {
     >
       <h3 className="text-lg font-black text-white mb-5 flex items-center gap-2">
         <Target size={18} className="text-foursys-primary" />
-        Foursys vs. Consultorias Globais
+        {labels.title}
       </h3>
 
       {/* Table header */}
       <div className="hidden md:grid grid-cols-[1.8fr_1fr_1fr_1fr] gap-2 mb-2 px-4">
-        <div className="text-[9px] font-bold uppercase tracking-wider text-foursys-text-dim">Dimensão</div>
+        <div className="text-[9px] font-bold uppercase tracking-wider text-foursys-text-dim">{labels.dimension}</div>
         <div className="text-[9px] font-bold uppercase tracking-wider text-foursys-primary text-center">Foursys</div>
-        <div className="text-[9px] font-bold uppercase tracking-wider text-foursys-text-dim text-center">Big Four / Globais</div>
-        <div className="text-[9px] font-bold uppercase tracking-wider text-foursys-text-dim text-center">Boutiques</div>
+        <div className="text-[9px] font-bold uppercase tracking-wider text-foursys-text-dim text-center">{labels.bigFour}</div>
+        <div className="text-[9px] font-bold uppercase tracking-wider text-foursys-text-dim text-center">{labels.boutiques}</div>
       </div>
 
       {/* Rows */}
       <div className="space-y-2">
-        {COMPARISON.map((row, i) => (
+        {rows.map((row, i) => (
           <motion.div
             key={row.dimension}
             initial={{ opacity: 0, y: 10 }}
@@ -172,7 +293,7 @@ function ComparisonTable() {
               <span className="text-sm font-bold text-white">{row.dimension}</span>
               {row.foursysAdvantage && (
                 <span className="hidden md:inline text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-foursys-primary/15 text-foursys-primary border border-foursys-primary/25">
-                  Vantagem
+                  {t('whyFoursys.advantage')}
                 </span>
               )}
             </div>
@@ -214,6 +335,34 @@ function ComparisonTable() {
 
 export function SectionWhyFoursys() {
   const [showComparison, setShowComparison] = useState(false)
+  const { t, lang } = useLanguage()
+  const differentials = useMemo(() => lang === 'pt' ? DIFFERENTIALS_PT : DIFFERENTIALS_EN, [lang])
+  const comparison = useMemo(() => lang === 'pt' ? COMPARISON_PT : COMPARISON_EN, [lang])
+  const advantages = useMemo(() => lang === 'pt' ? ADVANTAGES_PT : ADVANTAGES_EN, [lang])
+
+  const uiLabels = useMemo(() => lang === 'pt' ? {
+    tableTitle: 'Foursys vs. Consultorias Globais',
+    detailedComparison: `— Comparativo detalhado em ${comparison.length} dimensões`,
+    clearAdvantage: 'Vantagem clara',
+    parity: 'Paridade',
+    disadvantage: 'Desvantagem',
+    leadsIn: `Foursys lidera em ${comparison.filter(c => c.foursysAdvantage).length} de ${comparison.length} dimensões`,
+    ctaPart1: 'A Foursys entrega o calibre de uma consultoria global',
+    ctaPart2: 'com a agilidade, proximidade e custo-benefício que só uma empresa global com',
+    ctaStats: '26 anos de história, 3,6% de turnover e 6 certificações',
+    ctaPart3: 'pode oferecer. Não competimos em escala — competimos em profundidade, resultado e confiança.',
+  } : {
+    tableTitle: 'Foursys vs. Global Consultancies',
+    detailedComparison: `— Detailed comparison across ${comparison.length} dimensions`,
+    clearAdvantage: 'Clear advantage',
+    parity: 'Parity',
+    disadvantage: 'Disadvantage',
+    leadsIn: `Foursys leads in ${comparison.filter(c => c.foursysAdvantage).length} of ${comparison.length} dimensions`,
+    ctaPart1: 'Foursys delivers the caliber of a global consultancy',
+    ctaPart2: 'with the agility, proximity and cost-benefit that only a company with',
+    ctaStats: '26 years of history, 3.6% turnover and 6 certifications',
+    ctaPart3: 'can offer. We don\'t compete on scale — we compete on depth, results and trust.',
+  }, [lang, comparison])
 
   return (
     <SectionWrapper>
@@ -227,14 +376,13 @@ export function SectionWhyFoursys() {
           className="mb-8 md:mb-10"
         >
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-primary mb-2">
-            Benchmarking Competitivo
+            {t('whyFoursys.badge')}
           </p>
           <h2 className="text-2xl md:text-4xl font-black text-white leading-none mb-3">
-            Por que a Foursys?
+            {t('whyFoursys.title')}
           </h2>
           <p className="text-foursys-text-muted max-w-2xl text-sm md:text-base leading-relaxed">
-            Avaliação comparativa contra as principais consultorias globais de tecnologia
-            e boutiques especializadas do mercado.
+            {t('whyFoursys.subtitle')}
           </p>
           <div className="mt-5 h-px bg-gradient-to-r from-foursys-primary/30 via-white/[0.06] to-transparent" />
         </motion.div>
@@ -246,7 +394,7 @@ export function SectionWhyFoursys() {
           transition={{ delay: 0.15, duration: 0.4 }}
           className="grid grid-cols-3 md:grid-cols-6 gap-3 mb-10"
         >
-          {DIFFERENTIALS.map((d, i) => (
+          {differentials.map((d, i) => (
             <motion.div
               key={d.label}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -272,11 +420,11 @@ export function SectionWhyFoursys() {
         >
           <h3 className="text-lg font-black text-white mb-6 flex items-center gap-2">
             <Zap size={18} className="text-foursys-primary" />
-            Onde a Foursys se Destaca
+            {t('whyFoursys.title')}
           </h3>
 
           <div className="grid md:grid-cols-2 gap-4 md:gap-5">
-            {ADVANTAGES.map((adv, i) => (
+            {advantages.map((adv, i) => (
               <motion.div
                 key={adv.title}
                 initial={{ opacity: 0, y: 16 }}
@@ -317,10 +465,10 @@ export function SectionWhyFoursys() {
           className="p-6 md:p-8 rounded-2xl border border-foursys-primary/20 bg-foursys-primary/[0.04] text-center"
         >
           <p className="text-sm md:text-base text-foursys-text-muted leading-relaxed max-w-3xl mx-auto">
-            <span className="text-foursys-primary font-black">A Foursys entrega o calibre de uma consultoria global</span>{' '}
-            com a agilidade, proximidade e custo-benefício que só uma empresa global com{' '}
-            <span className="text-white font-bold">26 anos de história, 3,6% de turnover e 6 certificações</span>{' '}
-            pode oferecer. Não competimos em escala — competimos em profundidade, resultado e confiança.
+            <span className="text-foursys-primary font-black">{uiLabels.ctaPart1}</span>{' '}
+            {uiLabels.ctaPart2}{' '}
+            <span className="text-white font-bold">{uiLabels.ctaStats}</span>{' '}
+            {uiLabels.ctaPart3}
           </p>
         </motion.div>
 
@@ -337,9 +485,9 @@ export function SectionWhyFoursys() {
           >
             <div className="flex items-center gap-2.5">
               <Target size={18} className="text-foursys-primary" />
-              <span className="text-sm font-black text-white">Foursys vs. Consultorias Globais</span>
+              <span className="text-sm font-black text-white">{uiLabels.tableTitle}</span>
               <span className="text-[9px] font-bold uppercase tracking-wider text-foursys-text-dim hidden md:inline">
-                — Comparativo detalhado em {COMPARISON.length} dimensões
+                {uiLabels.detailedComparison}
               </span>
             </div>
             <ChevronDown
@@ -358,25 +506,25 @@ export function SectionWhyFoursys() {
                 className="overflow-hidden"
               >
                 <div className="pt-5">
-                  <ComparisonTable />
+                  <ComparisonTable rows={comparison} />
 
                   {/* Score summary bar */}
                   <div className="mt-6 p-4 rounded-xl border border-foursys-primary/15 bg-foursys-primary/[0.03] flex flex-wrap items-center justify-center gap-6">
                     <div className="flex items-center gap-2 text-xs">
                       <CheckCircle2 size={13} className="text-emerald-400" />
-                      <span className="text-foursys-text-muted">Vantagem clara</span>
+                      <span className="text-foursys-text-muted">{uiLabels.clearAdvantage}</span>
                     </div>
                     <div className="flex items-center gap-2 text-xs">
                       <Minus size={13} className="text-amber-400" />
-                      <span className="text-foursys-text-muted">Paridade</span>
+                      <span className="text-foursys-text-muted">{uiLabels.parity}</span>
                     </div>
                     <div className="flex items-center gap-2 text-xs">
                       <XCircle size={13} className="text-red-400/70" />
-                      <span className="text-foursys-text-muted">Desvantagem</span>
+                      <span className="text-foursys-text-muted">{uiLabels.disadvantage}</span>
                     </div>
                     <div className="h-4 w-px bg-white/10 hidden md:block" />
                     <div className="text-xs font-bold text-foursys-primary">
-                      Foursys lidera em {COMPARISON.filter(c => c.foursysAdvantage).length} de {COMPARISON.length} dimensões
+                      {uiLabels.leadsIn}
                     </div>
                   </div>
                 </div>

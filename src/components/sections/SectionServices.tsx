@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from 'react'
+import { useState, useCallback, useRef, useEffect, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Layers3, X, CheckCircle2, Shield, Zap } from 'lucide-react'
@@ -7,13 +7,21 @@ import { DynIcon } from '../../utils/iconMap'
 import { serviceLines } from '../../data/services'
 import { SERVICE_ICONS, SERVICE_VISUALS, DEFAULT_VISUAL } from '../../data/serviceVisuals'
 import { useApp } from '../../context/AppContext'
+import { useLanguage } from '../../i18n'
 import type { ServiceLine } from '../../types'
 
-const CONTRACT_MODELS = [
+const CONTRACT_MODELS_PT = [
   { title: 'Squads', desc: 'Times multidisciplinares integrados' },
   { title: 'Projetos', desc: 'Escopo fechado com entregas claras' },
   { title: 'Alocação', desc: 'Especialistas sob demanda' },
   { title: 'AMS', desc: 'Sustentação contínua com SLA' },
+]
+
+const CONTRACT_MODELS_EN = [
+  { title: 'Squads', desc: 'Integrated multidisciplinary teams' },
+  { title: 'Projects', desc: 'Fixed scope with clear deliverables' },
+  { title: 'Staff Aug', desc: 'On-demand specialists' },
+  { title: 'AMS', desc: 'Ongoing support with SLA' },
 ]
 
 /* ── helpers ─────────────────────────────────────────────────────────────────── */
@@ -40,6 +48,7 @@ function OrbitRing({
   onSelect: (id: string) => void
   onKeyNav: (e: React.KeyboardEvent, currentId: string) => void
 }) {
+  const { t, lang } = useLanguage()
   const angleStep = 360 / serviceLines.length
   const radius = 38
   const activeVisual = SERVICE_VISUALS[activeId] ?? DEFAULT_VISUAL
@@ -48,7 +57,7 @@ function OrbitRing({
     <div
       className="relative aspect-square max-w-[340px] lg:max-w-[420px] xl:max-w-[480px] mx-auto"
       role="radiogroup"
-      aria-label="Linhas de serviço"
+      aria-label={t('services.title')}
     >
       <div className="absolute inset-[6%] rounded-full border border-white/[0.05]" />
       <div className="absolute inset-[18%] rounded-full border border-white/[0.07] bg-white/[0.015]" />
@@ -61,7 +70,7 @@ function OrbitRing({
         <div className="text-center px-2">
           <div className="text-lg md:text-xl lg:text-2xl font-black text-white leading-none">foursys</div>
           <div className="text-[7px] md:text-[8px] uppercase tracking-[0.28em] text-foursys-text-dim mt-1">
-            serviços & ofertas
+            {lang === 'pt' ? 'serviços & ofertas' : 'services & solutions'}
           </div>
         </div>
       </div>
@@ -123,6 +132,7 @@ function ServiceDetailPanel({
   onOfferDetail: (id: string) => void
   compact?: boolean
 }) {
+  const { t } = useLanguage()
   const visual = SERVICE_VISUALS[service.id] ?? DEFAULT_VISUAL
   const Icon = SERVICE_ICONS[service.id] ?? Layers3
 
@@ -151,7 +161,7 @@ function ServiceDetailPanel({
 
       <div className="mt-4 rounded-xl border border-white/[0.08] bg-white/[0.03] p-3.5">
         <p className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-2">
-          Onde gera valor
+          {t('services.valueGeneration')}
         </p>
         <p className="text-xs text-foursys-text-muted leading-relaxed mb-3">
           {service.target}
@@ -174,7 +184,7 @@ function ServiceDetailPanel({
           onClick={() => onOfferDetail(service.id)}
           className="mt-4 flex items-center gap-2 text-sm font-semibold text-foursys-primary hover:text-foursys-cyan transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-primary rounded"
         >
-          Detalhes da Oferta <ArrowRight size={16} />
+          {t('services.offerDetails')} <ArrowRight size={16} />
         </button>
       )}
     </>
@@ -192,6 +202,7 @@ function MobileBottomSheet({
   onClose: () => void
   onOfferDetail: (id: string) => void
 }) {
+  const { t } = useLanguage()
   const visual = SERVICE_VISUALS[service.id] ?? DEFAULT_VISUAL
   const sheetRef = useRef<HTMLDivElement>(null)
 
@@ -238,7 +249,7 @@ function MobileBottomSheet({
           type="button"
           onClick={onClose}
           className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-primary"
-          aria-label="Fechar"
+          aria-label={t('common.close')}
         >
           <X size={16} className="text-white/70" />
         </button>
@@ -258,6 +269,7 @@ function OfferDetailModal({
   service: ServiceLine
   onClose: () => void
 }) {
+  const { t, lang } = useLanguage()
   const visual = SERVICE_VISUALS[service.id] ?? DEFAULT_VISUAL
   const Icon = SERVICE_ICONS[service.id] ?? Layers3
   const detail = service.offerDetail!
@@ -304,7 +316,7 @@ function OfferDetailModal({
           type="button"
           onClick={onClose}
           className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-primary z-10"
-          aria-label="Fechar"
+          aria-label={t('common.close')}
         >
           <X size={18} className="text-white/70" />
         </button>
@@ -323,7 +335,7 @@ function OfferDetailModal({
                 {service.title}
               </h3>
               <p className={`text-xs font-semibold mt-0.5 ${visual.text}`}>
-                Detalhes da Oferta
+                {t('services.offerDetails')}
               </p>
             </div>
           </div>
@@ -337,7 +349,7 @@ function OfferDetailModal({
             }}
           >
             <p className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-2">
-              Proposta de Valor
+              {lang === 'pt' ? 'Proposta de Valor' : 'Value Proposition'}
             </p>
             <p className="text-sm md:text-base text-white/90 leading-relaxed font-medium">
               {detail.valueProposition}
@@ -367,7 +379,7 @@ function OfferDetailModal({
           {/* Differentials */}
           <div>
             <p className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-              Diferenciais
+              {lang === 'pt' ? 'Diferenciais' : 'Differentials'}
             </p>
             <ul className="space-y-2.5">
               {detail.differentials.map((diff, i) => (
@@ -1490,6 +1502,7 @@ function DeepDiveModal({
   service: ServiceLine
   onClose: () => void
 }) {
+  const { t } = useLanguage()
   const visual = SERVICE_VISUALS[service.id] ?? DEFAULT_VISUAL
   const Icon = SERVICE_ICONS[service.id] ?? Layers3
   const modalRef = useRef<HTMLDivElement>(null)
@@ -1535,7 +1548,7 @@ function DeepDiveModal({
           type="button"
           onClick={onClose}
           className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-primary z-10"
-          aria-label="Fechar"
+          aria-label={t('common.close')}
         >
           <X size={18} className="text-white/70" />
         </button>
@@ -1573,6 +1586,11 @@ function DeepDiveModal({
 
 export function SectionServices() {
   const { state, clearDeepDiveHint, navigate } = useApp()
+  const { t, lang } = useLanguage()
+  const contractModels = useMemo(
+    () => lang === 'pt' ? CONTRACT_MODELS_PT : CONTRACT_MODELS_EN,
+    [lang]
+  )
   const [activeServiceId, setActiveServiceId] = useState(serviceLines[0]?.id ?? '')
   const [mobileSheetId, setMobileSheetId] = useState<string | null>(null)
   const [offerDetailId, setOfferDetailId] = useState<string | null>(null)
@@ -1679,20 +1697,19 @@ export function SectionServices() {
           <div className="flex items-start justify-between flex-wrap gap-3">
             <div className="max-w-2xl">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-primary mb-1.5">
-                Nossos serviços e ofertas
+                {t('services.badge')}
               </p>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white leading-none">
-                Linhas de Serviço
+                {t('services.title')}
               </h2>
               <p className="text-foursys-text-muted mt-1.5 text-sm md:text-base max-w-xl leading-relaxed">
-                Portfólio integrado de {serviceLines.length} frentes cobrindo toda a jornada
-                tecnológica — da sustentação à inovação com IA.
+                {t('services.subtitle')}
               </p>
             </div>
             <div className="flex gap-2 flex-wrap">
               {[
-                { value: `${serviceLines.length}`, label: 'frentes' },
-                { value: '360°', label: 'cobertura' },
+                { value: `${serviceLines.length}`, label: lang === 'pt' ? 'frentes' : 'fronts' },
+                { value: '360°', label: lang === 'pt' ? 'cobertura' : 'coverage' },
                 { value: 'B2B', label: 'enterprise' },
               ].map(stat => (
                 <div
@@ -1774,7 +1791,7 @@ export function SectionServices() {
 
         {/* Contract models */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-          {CONTRACT_MODELS.map(model => (
+          {contractModels.map(model => (
             <div
               key={model.title}
               className="text-center px-2 py-2.5 rounded-lg bg-foursys-surface/20 border border-white/[0.06]"

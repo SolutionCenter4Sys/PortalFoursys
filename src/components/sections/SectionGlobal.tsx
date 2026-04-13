@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { MapPin, Phone } from 'lucide-react'
 import { DynIcon } from '../../utils/iconMap'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { useLanguage } from '../../i18n'
 
 type Unit = {
   name: string
@@ -34,114 +35,156 @@ type Region = {
   units: Unit[]
 }
 
-const regions: Region[] = [
-  {
-    id: 'brasil',
-    flag: '🇧🇷',
-    region: 'Brasil',
-    count: '6 unidades',
-    colorHex: '#22c55e',
-    bg: 'from-green-500/15 to-green-600/5',
-    border: 'border-green-500/30',
-    textCls: 'text-green-400',
-    summary: 'Base principal da operação Foursys, com presença estratégica no Sudeste e no Sul. A partir do Brasil, atendemos também toda a América do Sul.',
-    spotlight: 'Hub central de execução com squads locais, proximidade comercial e capacidade de expansão para toda a América do Sul.',
-    marker: { top: '69%', left: '36.5%' },
-    stats: [
-      { label: 'Escritórios', value: '6 bases ativas' },
-      { label: 'Clientes', value: 'Atuação enterprise nacional' },
-      { label: 'Projetos', value: 'Delivery contínuo e squads dedicados' },
-    ],
-    units: [
-      { name: 'Alphaville', city: 'Barueri – SP', address: 'Av. Tamboré, 267 · Torre Norte, 9º andar', phone: '(11) 4134 – 2222', main: true },
-      { name: 'Paulista', city: 'São Paulo – SP', address: 'Av. Paulista, 1912 · Consolação, 15º andar', phone: '(11) 4861 – 8560' },
-      { name: 'Inovabra Habitat', city: 'São Paulo – SP', address: 'Av. Angélica, 2529 · Bela Vista' },
-      { name: 'Operação Sul', city: 'Curitiba – PR', address: 'R. Comendador Araújo, 499 · Batel, 10º andar', phone: '(41) 2106 – 6709' },
-      { name: 'Operação Rio', city: 'Rio de Janeiro – RJ', address: 'Av. Presidente Vargas, 3131 · Cidade Nova, Sala 604' },
-      { name: 'Operação Belo Horizonte', city: 'Belo Horizonte – MG' },
-    ],
-  },
-  {
-    id: 'eua',
-    flag: '🇺🇸',
-    region: 'Estados Unidos',
-    count: '1 unidade',
-    colorHex: '#3b82f6',
-    bg: 'from-blue-500/15 to-blue-600/5',
-    border: 'border-blue-500/30',
-    textCls: 'text-blue-400',
-    summary: 'A partir da base nos Estados Unidos, atendemos toda a América do Norte — incluindo Canadá e México — ampliando o alcance internacional da marca.',
-    spotlight: 'Ponto de apoio para toda a América do Norte, com proximidade geográfica para contas globais e modelos de entrega nearshore.',
-    marker: { top: '45%', left: '21.5%' },
-    stats: [
-      { label: 'Escritórios', value: '1 base internacional' },
-      { label: 'Clientes', value: 'Expansão para contas globais' },
-      { label: 'Projetos', value: 'Frentes nearshore e cross-border' },
-    ],
-    units: [
-      { name: 'Unidade Estados Unidos', city: 'Flórida – EUA', address: '980 N. Federal Highway #110 · Boca Raton, FL 33432' },
-    ],
-  },
-  {
-    id: 'europa',
-    flag: '🇪🇺',
-    region: 'Europa',
-    count: '1 unidade',
-    colorHex: '#8b5cf6',
-    bg: 'from-violet-500/15 to-violet-600/5',
-    border: 'border-violet-500/30',
-    textCls: 'text-violet-400',
-    summary: 'A partir da base em Portugal, atendemos toda a Europa — fortalecendo a conexão com o mercado internacional e o posicionamento institucional.',
-    spotlight: 'Base estratégica para atender toda a Europa, com posicionamento premium e abertura para novas oportunidades no continente.',
-    marker: { top: '31%', left: '48.2%' },
-    stats: [
-      { label: 'Escritórios', value: '1 base em Lisboa' },
-      { label: 'Clientes', value: 'Parcerias e expansão regional' },
-      { label: 'Projetos', value: 'Iniciativas estratégicas internacionais' },
-    ],
-    units: [
-      { name: 'Unidade Europa', city: 'Lisboa – Portugal', address: 'Av. da Liberdade, 110', phone: 'Tel: 1269 – 046' },
-    ],
-  },
-  {
-    id: 'oriente-medio',
-    flag: '🇮🇱',
-    region: 'Oriente Médio',
-    count: '1 unidade',
-    colorHex: '#f59e0b',
-    bg: 'from-amber-500/15 to-amber-600/5',
-    border: 'border-amber-500/30',
-    textCls: 'text-amber-400',
-    summary: 'A partir da base em Tel Aviv, a Foursys expande sua atuação para o Oriente Médio — região estratégica em inovação e tecnologia.',
-    spotlight: 'Hub de inovação no Oriente Médio, com acesso a um dos ecossistemas de startups mais dinâmicos do mundo.',
-    marker: { top: '38%', left: '57%' },
-    stats: [
-      { label: 'Escritórios', value: '1 base em Tel Aviv' },
-      { label: 'Clientes', value: 'Expansão para mercado MENA' },
-      { label: 'Projetos', value: 'Iniciativas de inovação e tecnologia' },
-    ],
-    units: [
-      { name: 'Unidade Oriente Médio', city: 'Tel Aviv – Israel' },
-    ],
-  },
+type RegionContent = Pick<Region, 'region' | 'count' | 'summary' | 'spotlight' | 'stats' | 'units'>
+
+const REGION_STYLES: Omit<Region, 'region' | 'count' | 'summary' | 'spotlight' | 'stats' | 'units'>[] = [
+  { id: 'brasil', flag: '🇧🇷', colorHex: '#22c55e', bg: 'from-green-500/15 to-green-600/5', border: 'border-green-500/30', textCls: 'text-green-400', marker: { top: '69%', left: '36.5%' } },
+  { id: 'eua', flag: '🇺🇸', colorHex: '#3b82f6', bg: 'from-blue-500/15 to-blue-600/5', border: 'border-blue-500/30', textCls: 'text-blue-400', marker: { top: '45%', left: '21.5%' } },
+  { id: 'europa', flag: '🇪🇺', colorHex: '#8b5cf6', bg: 'from-violet-500/15 to-violet-600/5', border: 'border-violet-500/30', textCls: 'text-violet-400', marker: { top: '31%', left: '48.2%' } },
+  { id: 'oriente-medio', flag: '🇮🇱', colorHex: '#f59e0b', bg: 'from-amber-500/15 to-amber-600/5', border: 'border-amber-500/30', textCls: 'text-amber-400', marker: { top: '38%', left: '57%' } },
 ]
 
-const kpis = [
-  { value: '+2K', label: 'Colaboradores', icon: 'users' },
-  { value: '+30K', label: 'Projetos entregues', icon: 'rocket' },
-  { value: '26', label: 'Anos de mercado', icon: 'calendar' },
-  { value: '8', label: 'Cidades globais', icon: 'building' },
-]
+const SHARED_UNITS: Record<string, Unit[]> = {
+  brasil: [
+    { name: 'Alphaville', city: 'Barueri – SP', address: 'Av. Tamboré, 267 · Torre Norte, 9º andar', phone: '(11) 4134 – 2222', main: true },
+    { name: 'Paulista', city: 'São Paulo – SP', address: 'Av. Paulista, 1912 · Consolação, 15º andar', phone: '(11) 4861 – 8560' },
+    { name: 'Inovabra Habitat', city: 'São Paulo – SP', address: 'Av. Angélica, 2529 · Bela Vista' },
+  ],
+}
+
+const CONTENT: Record<string, RegionContent[]> = {
+  pt: [
+    {
+      region: 'Brasil', count: '6 unidades',
+      summary: 'Base principal da operação Foursys, com presença estratégica no Sudeste e no Sul. A partir do Brasil, atendemos também toda a América do Sul.',
+      spotlight: 'Hub central de execução com squads locais, proximidade comercial e capacidade de expansão para toda a América do Sul.',
+      stats: [
+        { label: 'Escritórios', value: '6 bases ativas' },
+        { label: 'Clientes', value: 'Atuação enterprise nacional' },
+        { label: 'Projetos', value: 'Delivery contínuo e squads dedicados' },
+      ],
+      units: [
+        ...SHARED_UNITS.brasil,
+        { name: 'Operação Sul', city: 'Curitiba – PR', address: 'R. Comendador Araújo, 499 · Batel, 10º andar', phone: '(41) 2106 – 6709' },
+        { name: 'Operação Rio', city: 'Rio de Janeiro – RJ', address: 'Av. Presidente Vargas, 3131 · Cidade Nova, Sala 604' },
+        { name: 'Operação Belo Horizonte', city: 'Belo Horizonte – MG' },
+      ],
+    },
+    {
+      region: 'Estados Unidos', count: '1 unidade',
+      summary: 'A partir da base nos Estados Unidos, atendemos toda a América do Norte — incluindo Canadá e México — ampliando o alcance internacional da marca.',
+      spotlight: 'Ponto de apoio para toda a América do Norte, com proximidade geográfica para contas globais e modelos de entrega nearshore.',
+      stats: [
+        { label: 'Escritórios', value: '1 base internacional' },
+        { label: 'Clientes', value: 'Expansão para contas globais' },
+        { label: 'Projetos', value: 'Frentes nearshore e cross-border' },
+      ],
+      units: [
+        { name: 'Unidade Estados Unidos', city: 'Flórida – EUA', address: '980 N. Federal Highway #110 · Boca Raton, FL 33432' },
+      ],
+    },
+    {
+      region: 'Europa', count: '1 unidade',
+      summary: 'A partir da base em Portugal, atendemos toda a Europa — fortalecendo a conexão com o mercado internacional e o posicionamento institucional.',
+      spotlight: 'Base estratégica para atender toda a Europa, com posicionamento premium e abertura para novas oportunidades no continente.',
+      stats: [
+        { label: 'Escritórios', value: '1 base em Lisboa' },
+        { label: 'Clientes', value: 'Parcerias e expansão regional' },
+        { label: 'Projetos', value: 'Iniciativas estratégicas internacionais' },
+      ],
+      units: [
+        { name: 'Unidade Europa', city: 'Lisboa – Portugal', address: 'Av. da Liberdade, 110', phone: 'Tel: 1269 – 046' },
+      ],
+    },
+    {
+      region: 'Oriente Médio', count: '1 unidade',
+      summary: 'A partir da base em Tel Aviv, a Foursys expande sua atuação para o Oriente Médio — região estratégica em inovação e tecnologia.',
+      spotlight: 'Hub de inovação no Oriente Médio, com acesso a um dos ecossistemas de startups mais dinâmicos do mundo.',
+      stats: [
+        { label: 'Escritórios', value: '1 base em Tel Aviv' },
+        { label: 'Clientes', value: 'Expansão para mercado MENA' },
+        { label: 'Projetos', value: 'Iniciativas de inovação e tecnologia' },
+      ],
+      units: [
+        { name: 'Unidade Oriente Médio', city: 'Tel Aviv – Israel' },
+      ],
+    },
+  ],
+  en: [
+    {
+      region: 'Brazil', count: '6 units',
+      summary: 'Main hub of Foursys operations, with strategic presence in Southeast and South Brazil. From Brazil, we also serve all of South America.',
+      spotlight: 'Central execution hub with local squads, commercial proximity and capacity to expand across all of South America.',
+      stats: [
+        { label: 'Offices', value: '6 active locations' },
+        { label: 'Clients', value: 'National enterprise coverage' },
+        { label: 'Projects', value: 'Continuous delivery and dedicated squads' },
+      ],
+      units: [
+        ...SHARED_UNITS.brasil,
+        { name: 'Southern Operations', city: 'Curitiba – PR', address: 'R. Comendador Araújo, 499 · Batel, 10º andar', phone: '(41) 2106 – 6709' },
+        { name: 'Rio Operations', city: 'Rio de Janeiro – RJ', address: 'Av. Presidente Vargas, 3131 · Cidade Nova, Sala 604' },
+        { name: 'Belo Horizonte Operations', city: 'Belo Horizonte – MG' },
+      ],
+    },
+    {
+      region: 'United States', count: '1 unit',
+      summary: 'From our US base, we serve all of North America — including Canada and Mexico — expanding the international reach of the brand.',
+      spotlight: 'Support base for all of North America, with geographic proximity for global accounts and nearshore delivery models.',
+      stats: [
+        { label: 'Offices', value: '1 international location' },
+        { label: 'Clients', value: 'Expansion to global accounts' },
+        { label: 'Projects', value: 'Nearshore and cross-border initiatives' },
+      ],
+      units: [
+        { name: 'United States Office', city: 'Florida – USA', address: '980 N. Federal Highway #110 · Boca Raton, FL 33432' },
+      ],
+    },
+    {
+      region: 'Europe', count: '1 unit',
+      summary: 'From our base in Portugal, we serve all of Europe — strengthening connections with the international market and institutional positioning.',
+      spotlight: 'Strategic base to serve all of Europe, with premium positioning and openness to new opportunities across the continent.',
+      stats: [
+        { label: 'Offices', value: '1 location in Lisbon' },
+        { label: 'Clients', value: 'Partnerships and regional expansion' },
+        { label: 'Projects', value: 'International strategic initiatives' },
+      ],
+      units: [
+        { name: 'Europe Office', city: 'Lisbon – Portugal', address: 'Av. da Liberdade, 110', phone: 'Tel: 1269 – 046' },
+      ],
+    },
+    {
+      region: 'Middle East', count: '1 unit',
+      summary: 'From our base in Tel Aviv, Foursys expands its operations to the Middle East — a region strategic for innovation and technology.',
+      spotlight: 'Innovation hub in the Middle East, with access to one of the most dynamic startup ecosystems in the world.',
+      stats: [
+        { label: 'Offices', value: '1 location in Tel Aviv' },
+        { label: 'Clients', value: 'Expansion to MENA market' },
+        { label: 'Projects', value: 'Innovation and technology initiatives' },
+      ],
+      units: [
+        { name: 'Middle East Office', city: 'Tel Aviv – Israel' },
+      ],
+    },
+  ],
+}
+
+function getRegions(lang: string): Region[] {
+  const content = CONTENT[lang] ?? CONTENT.pt
+  return REGION_STYLES.map((style, i) => ({ ...style, ...content[i] }))
+}
 
 
 function UnitRow({
   unit,
   colorHex,
   textCls,
+  hqLabel,
 }: {
   unit: Unit
   colorHex: string
   textCls: string
+  hqLabel: string
 }) {
   return (
     <div className="flex gap-3 py-2.5 border-b border-white/[0.05] last:border-0">
@@ -159,7 +202,7 @@ function UnitRow({
               className="text-[9px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider border"
               style={{ color: colorHex, borderColor: `${colorHex}50`, backgroundColor: `${colorHex}18` }}
             >
-              Sede
+              {hqLabel}
             </span>
           )}
         </div>
@@ -185,10 +228,12 @@ function RegionMapMarker({
   region,
   isActive,
   onSelect,
+  ariaLabel,
 }: {
   region: Region
   isActive: boolean
   onSelect: (regionId: string) => void
+  ariaLabel: string
 }) {
   return (
     <div
@@ -197,7 +242,7 @@ function RegionMapMarker({
     >
       <motion.button
         type="button"
-        aria-label={`Ver detalhes da região ${region.region}`}
+        aria-label={`${ariaLabel} ${region.region}`}
         onClick={() => onSelect(region.id)}
         whileHover={{ scale: 1.06 }}
         whileTap={{ scale: 0.95 }}
@@ -233,12 +278,21 @@ function RegionMapMarker({
 }
 
 export function SectionGlobal() {
+  const { t, lang } = useLanguage()
+  const regions = useMemo(() => getRegions(lang), [lang])
   const [activeRegionId, setActiveRegionId] = useState(regions[0].id)
 
   const activeRegion = useMemo(
     () => regions.find(region => region.id === activeRegionId) ?? regions[0],
-    [activeRegionId]
+    [activeRegionId, regions]
   )
+
+  const globalKpis = [
+    { value: '+2K', label: t('global.kpis.collaborators'), icon: 'users' },
+    { value: '+30K', label: t('global.kpis.projectsDelivered'), icon: 'rocket' },
+    { value: '26', label: t('global.kpis.yearsInMarket'), icon: 'calendar' },
+    { value: '8', label: t('global.kpis.globalCities'), icon: 'building' },
+  ]
 
   return (
     <SectionWrapper>
@@ -249,23 +303,23 @@ export function SectionGlobal() {
           className="mb-8"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-xs mb-3">
-            Presença Global
+            {t('global.badge')}
           </div>
           <div className="flex flex-col lg:flex-row lg:items-end gap-6">
             <div className="flex-1">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-foursys-text leading-tight">
-                Transformando negócios pelo mundo{' '}
+                {t('global.title')}{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6600] to-[#FF9933]">
-                  com excelência e inovação
+                  {t('global.titleHighlight')}
                 </span>
               </h2>
               <p className="text-sm text-foursys-text-muted mt-2 max-w-2xl">
-                Agora com mapa visual da presença Foursys: clique nos pontos para explorar Brasil, Estados Unidos, Europa e Oriente Médio com suas bases e contexto de atuação.
+                {t('global.subtitle')}
               </p>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-3 flex-shrink-0">
-              {kpis.map((kpi, index) => (
+              {globalKpis.map((kpi, index) => (
                 <motion.div
                   key={kpi.label}
                   initial={{ opacity: 0, scale: 0.85 }}
@@ -293,7 +347,7 @@ export function SectionGlobal() {
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,102,0,0.12),transparent_55%)] pointer-events-none" />
               <img
                 src="/images/foursys-global-map.png"
-                alt="Mapa-múndi com destaque para a presença global da Foursys"
+                alt={t('global.mapAlt')}
                 className="block w-full h-auto"
               />
 
@@ -303,13 +357,14 @@ export function SectionGlobal() {
                   region={region}
                   isActive={activeRegion.id === region.id}
                   onSelect={setActiveRegionId}
+                  ariaLabel={t('global.seeRegionDetails')}
                 />
               ))}
             </div>
 
             <div className="flex flex-wrap items-center gap-2 p-4 border-t border-white/10 bg-foursys-surface/25">
               <span className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mr-2">
-                Regiões ativas
+                {t('global.activeRegions')}
               </span>
               {regions.map(region => (
                 <button
@@ -367,7 +422,7 @@ export function SectionGlobal() {
               style={{ borderColor: `${activeRegion.colorHex}30`, backgroundColor: `${activeRegion.colorHex}0f` }}
             >
               <p className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-2">
-                Destaque regional
+                {t('global.regionalHighlight')}
               </p>
               <p className="text-sm text-foursys-text leading-relaxed">{activeRegion.spotlight}</p>
             </div>
@@ -388,7 +443,7 @@ export function SectionGlobal() {
 
             <div>
               <p className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-                Bases e escritórios
+                {t('global.basesAndOffices')}
               </p>
               <div className="rounded-2xl border border-white/10 bg-foursys-surface/25 px-4">
                 {activeRegion.units.map(unit => (
@@ -397,6 +452,7 @@ export function SectionGlobal() {
                     unit={unit}
                     colorHex={activeRegion.colorHex}
                     textCls={activeRegion.textCls}
+                    hqLabel={t('common.hq')}
                   />
                 ))}
               </div>

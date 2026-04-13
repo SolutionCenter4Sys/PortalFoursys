@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { useLanguage } from '../../i18n'
 import { kpis } from '../../data/kpis'
 import { DynIcon } from '../../utils/iconMap'
 
@@ -52,6 +53,8 @@ function KPICard({ kpi, delay }: { kpi: typeof kpis[0]; delay: number }) {
 }
 
 export function SectionIdentity() {
+  const { t } = useLanguage()
+
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-6 md:py-12 max-w-6xl mx-auto">
@@ -61,13 +64,13 @@ export function SectionIdentity() {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-sm mb-4">
-            Quem Somos
+            {t('identity.badge')}
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
-            A Foursys em números
+            {t('identity.title')}
           </h2>
           <p className="text-lg text-foursys-text-muted max-w-2xl mx-auto">
-            Mais de duas décadas transformando negócios com tecnologia, metodologia e resultados comprovados.
+            {t('identity.subtitle')}
           </p>
         </motion.div>
 
@@ -81,21 +84,21 @@ export function SectionIdentity() {
         <div className="grid md:grid-cols-3 gap-6">
           {[
             {
-              title: 'Missão',
+              title: t('identity.mission.title'),
               icon: 'target',
-              content: 'Ser o parceiro estratégico que transforma a tecnologia em vantagem competitiva real para nossos clientes — com velocidade, qualidade, inovação e governança.',
+              content: t('identity.mission.content'),
               gradient: 'from-foursys-primary/20 to-transparent'
             },
             {
-              title: 'Visão',
+              title: t('identity.vision.title'),
               icon: 'telescope',
-              content: 'Ser reconhecidos globalmente como referência em transformação digital e inovação, combinando expertise humana e inteligência artificial.',
+              content: t('identity.vision.content'),
               gradient: 'from-foursys-cyan/15 to-transparent'
             },
             {
-              title: 'Propósito',
+              title: t('identity.purpose.title'),
               icon: 'lightbulb',
-              content: 'Fazer a tecnologia trabalhar de verdade para as pessoas — simplificando o complexo, acelerando o possível e inovando com responsabilidade.',
+              content: t('identity.purpose.content'),
               gradient: 'from-violet-500/15 to-transparent'
             }
           ].map((item, i) => (

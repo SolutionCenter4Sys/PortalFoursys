@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { alliances } from '../../data/alliances'
 import { PartnerLogo, type PartnerId } from '../ui/PartnerLogos'
+import { useLanguage } from '../../i18n'
 
 const partnerCards: { id: PartnerId; name: string; tagline: string; color: string; bg: string; border: string }[] = [
   { id: 'adobe',         name: 'Adobe',               tagline: 'Experience · Creative · DX',   color: '#FF0000', bg: 'from-red-500/15 to-red-600/5',     border: 'border-red-500/30' },
@@ -16,6 +17,8 @@ const partnerCards: { id: PartnerId; name: string; tagline: string; color: strin
 ]
 
 export function SectionAlliances() {
+  const { t } = useLanguage()
+
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-6 md:py-12 max-w-5xl mx-auto">
@@ -25,13 +28,13 @@ export function SectionAlliances() {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-sm mb-4">
-            🤝 Alianças Estratégicas
+            🤝 {t('alliances.badge')}
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
-            Parceiros das maiores plataformas
+            {t('alliances.title')}
           </h2>
           <p className="text-lg text-foursys-text-muted max-w-2xl mx-auto">
-            Parcerias certificadas que nos dão acesso a tecnologias de ponta, suporte prioritário e capacidade de co-desenvolver soluções para o cliente.
+            {t('alliances.subtitle')}
           </p>
         </motion.div>
 

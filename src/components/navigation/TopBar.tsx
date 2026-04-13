@@ -1,6 +1,7 @@
 import { Search, Maximize2, Minimize2, ChevronLeft, ChevronRight, BarChart2, X, Building2, Menu, LayoutGrid, Sun, Moon } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { useTheme } from '../../context/ThemeContext'
+import { useLanguage } from '../../i18n'
 import { getTrailById } from '../../data/trails'
 import { getClientById } from '../../data/clients'
 import type { AppSection } from '../../types'
@@ -19,6 +20,7 @@ export function TopBar() {
     activeNavigationItems,
   } = useApp()
   const { toggleTheme, isDark } = useTheme()
+  const { lang, setLang, t } = useLanguage()
 
   const currentNav    = activeNavigationItems.find(n => n.id === state.currentSection)
   const currentIndex  = activeNavigationItems.findIndex(n => n.id === state.currentSection)
@@ -44,7 +46,7 @@ export function TopBar() {
         onClick={toggleMenu}
         className="lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors flex-shrink-0"
         title="Menu"
-        aria-label="Abrir menu"
+        aria-label={t('nav.openMenu')}
       >
         <Menu size={18} />
       </button>
@@ -74,7 +76,7 @@ export function TopBar() {
           <button
             onClick={stopTrail}
             className="hover:opacity-100 opacity-50 transition-opacity ml-0.5"
-            aria-label="Encerrar trilha"
+            aria-label={t('topbar.stopTrail')}
           >
             <X size={11} />
           </button>
@@ -125,7 +127,7 @@ export function TopBar() {
         onClick={() => prevSection && navigate(prevSection.id as AppSection)}
         disabled={!prevSection}
         className="min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:p-1.5 flex items-center justify-center rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
-        aria-label="Anterior (←)"
+        aria-label={`${t('common.previous')} (←)`}
       >
         <ChevronLeft size={15} />
       </button>
@@ -134,7 +136,7 @@ export function TopBar() {
         onClick={() => nextSection && navigate(nextSection.id as AppSection)}
         disabled={!nextSection}
         className="min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:p-1.5 flex items-center justify-center rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
-        aria-label="Próximo (→)"
+        aria-label={`${t('common.next')} (→)`}
       >
         <ChevronRight size={15} />
       </button>
@@ -149,7 +151,7 @@ export function TopBar() {
             ? 'bg-foursys-primary/15 text-foursys-primary'
             : 'hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text'
         }`}
-        aria-label="Selecionar Cliente"
+        aria-label={t('topbar.clientMode')}
       >
         <Building2 size={15} />
       </button>
@@ -158,7 +160,7 @@ export function TopBar() {
       <button
         onClick={() => openSearch()}
         className="min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:p-1.5 flex items-center justify-center rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
-        aria-label="Buscar"
+        aria-label={t('topbar.search')}
       >
         <Search size={15} />
       </button>
@@ -171,7 +173,7 @@ export function TopBar() {
             ? 'bg-foursys-primary/15 text-foursys-primary'
             : 'hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text'
         }`}
-        aria-label="Analytics da Sessão"
+        aria-label={t('topbar.analytics')}
       >
         <BarChart2 size={15} />
       </button>
@@ -180,8 +182,8 @@ export function TopBar() {
       <button
         onClick={toggleOverview}
         className="hidden md:block p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
-        aria-label="Agenda da apresentação"
-        title="Agenda (Ctrl+Shift+A)"
+        aria-label={t('topbar.agenda')}
+        title={t('topbar.agenda')}
       >
         <LayoutGrid size={15} />
       </button>
@@ -190,17 +192,27 @@ export function TopBar() {
       <button
         onClick={toggleTheme}
         className="min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:p-1.5 flex items-center justify-center rounded-lg hover:bg-foursys-primary/10 text-foursys-text-dim hover:text-foursys-primary transition-colors"
-        aria-label={isDark ? 'Ativar modo claro' : 'Ativar modo escuro'}
-        title={isDark ? 'Modo Claro' : 'Modo Escuro'}
+        aria-label={isDark ? t('topbar.lightMode') : t('topbar.darkMode')}
+        title={isDark ? t('topbar.lightMode') : t('topbar.darkMode')}
       >
         {isDark ? <Sun size={15} /> : <Moon size={15} />}
+      </button>
+
+      {/* Language toggle */}
+      <button
+        onClick={() => setLang(lang === 'pt' ? 'en' : 'pt')}
+        className="min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 md:px-2 md:py-1.5 flex items-center justify-center rounded-lg hover:bg-foursys-primary/10 text-foursys-text-dim hover:text-foursys-primary transition-colors text-xs font-bold tracking-wide"
+        aria-label={lang === 'pt' ? 'Switch to English' : 'Mudar para Português'}
+        title={lang === 'pt' ? 'English' : 'Português'}
+      >
+        {lang === 'pt' ? 'EN' : 'PT'}
       </button>
 
       {/* Fullscreen — apenas desktop */}
       <button
         onClick={toggleFullscreen}
         className="hidden md:block p-1.5 rounded-lg hover:bg-foursys-text-dim/10 text-foursys-text-dim hover:text-foursys-text transition-colors"
-        aria-label={state.isFullscreen ? 'Sair do Fullscreen' : 'Entrar em Fullscreen'}
+        aria-label={state.isFullscreen ? t('topbar.exitFullscreen') : t('topbar.fullscreen')}
       >
         {state.isFullscreen ? <Minimize2 size={15} /> : <Maximize2 size={15} />}
       </button>

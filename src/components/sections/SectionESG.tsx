@@ -1,110 +1,143 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Play, X, ExternalLink, Tv, Accessibility } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { useApp } from '../../context/AppContext'
+import { useLanguage } from '../../i18n'
 import { DynIcon } from '../../utils/iconMap'
 
-// ─── Dados FourLives ──────────────────────────────────────────────────────────
+// ─── Types ────────────────────────────────────────────────────────────────────
 
-const impactStats = [
-  { value: '3.000+', label: 'Vidas impactadas', icon: 'heart' },
-  { value: '1',      label: 'Árvore plantada por profissional/ano', icon: 'tree-pine' },
-  { value: '3',      label: 'Frentes de impacto social', icon: 'target' },
-  { value: '26',     label: 'Anos de responsabilidade ESG', icon: 'calendar' },
-]
+interface VideoItem {
+  id: string
+  youtubeId: string
+  title: string
+  subtitle: string
+  description: string
+  icon: typeof Tv
+  color: string
+  accent: string
+  gradient: string
+  tags: string[]
+}
 
-const fronts = [
-  {
-    id: 'capacitacao',
-    icon: 'graduation-cap',
-    title: 'Capacitação',
-    color: '#FF6600',
-    bg: 'from-orange-500/15 to-orange-600/5',
-    border: 'border-orange-500/30',
-    description:
-      'Programas de educação tecnológica para comunidades de baixa renda, formando profissionais para o mercado de TI. Mais de 500 jovens capacitados em programação e infraestrutura cloud.',
-    highlights: [
-      '500+ jovens capacitados em TI',
-      'Parceria com institutos de ensino',
-      'Certificação profissional incluída',
-      'Taxa de empregabilidade de 80%+',
-    ],
-  },
-  {
-    id: 'inclusao',
-    icon: 'handshake',
-    title: 'Inclusão',
-    color: '#8B5CF6',
-    bg: 'from-violet-500/15 to-violet-600/5',
-    border: 'border-violet-500/30',
-    description:
-      'Iniciativas de diversidade e inclusão para ampliar oportunidades de grupos sub-representados na tecnologia. Metas de diversidade de gênero, raça e PcD em todas as contratações.',
-    highlights: [
-      '40%+ mulheres em posições tech',
-      'Programa de mentoria para PCDs',
-      'Comitê de diversidade ativo',
-      'Parceria com comunidades LGBTQIA+',
-    ],
-  },
-  {
-    id: 'sustentabilidade',
-    icon: 'sprout',
-    title: 'Sustentabilidade',
-    color: '#4ADE80',
-    bg: 'from-green-500/15 to-green-600/5',
-    border: 'border-green-500/30',
-    description:
-      'Plantio de uma árvore por profissional a cada ano e metas de redução de pegada de carbono nas operações. Uso de energia renovável em todos os escritórios brasileiros.',
-    highlights: [
-      '2.000+ árvores plantadas por ano',
-      'Energia 100% renovável nos escritórios',
-      'Meta carbono neutro até 2030',
-      'Redução de 30% de resíduos em 3 anos',
-    ],
-  },
-]
+// ─── i18n Data ────────────────────────────────────────────────────────────────
 
-// ─── Vídeos FourCamp ──────────────────────────────────────────────────────────
+const impactStatsI18n: Record<'pt' | 'en', { value: string; label: string; icon: string }[]> = {
+  pt: [
+    { value: '3.000+', label: 'Vidas impactadas', icon: 'heart' },
+    { value: '1',      label: 'Árvore plantada por profissional/ano', icon: 'tree-pine' },
+    { value: '3',      label: 'Frentes de impacto social', icon: 'target' },
+    { value: '26',     label: 'Anos de responsabilidade ESG', icon: 'calendar' },
+  ],
+  en: [
+    { value: '3,000+', label: 'Lives impacted', icon: 'heart' },
+    { value: '1',      label: 'Tree planted per professional/year', icon: 'tree-pine' },
+    { value: '3',      label: 'Social impact fronts', icon: 'target' },
+    { value: '26',     label: 'Years of ESG responsibility', icon: 'calendar' },
+  ],
+}
 
-const videos = [
-  {
-    id: 'fourcamp-bomdiasp',
-    youtubeId: 'CmGlSnfF0_U',
-    title: 'FourCamp no Bom Dia SP',
-    subtitle: 'Rede Globo',
-    description:
-      'O programa FourCamp de capacitação tecnológica ganhou destaque no Bom Dia SP da Globo, mostrando como a Foursys transforma vidas por meio da educação em tecnologia.',
-    icon: Tv,
-    color: '#FF6600',
-    accent: '#FF8833',
-    gradient: 'from-orange-600 via-orange-500 to-amber-500',
-    tags: ['Mídia Nacional', 'Capacitação', 'Impacto Social'],
-  },
-  {
-    id: 'fourcamp-pcd',
-    youtubeId: 'M2MyVNDLDTE',
-    title: 'FourCamp PCD',
-    subtitle: 'Programa de Inclusão',
-    description:
-      'O FourCamp PCD é o programa de capacitação e inserção profissional de Pessoas com Deficiência na área de tecnologia — inclusão que gera transformação real.',
-    icon: Accessibility,
-    color: '#8B5CF6',
-    accent: '#A78BFA',
-    gradient: 'from-violet-600 via-purple-500 to-fuchsia-500',
-    tags: ['Inclusão', 'PCD', 'Diversidade'],
-  },
-]
+const frontsI18n: Record<'pt' | 'en', { id: string; icon: string; title: string; color: string; bg: string; border: string; description: string; highlights: string[] }[]> = {
+  pt: [
+    {
+      id: 'capacitacao', icon: 'graduation-cap', title: 'Capacitação', color: '#FF6600',
+      bg: 'from-orange-500/15 to-orange-600/5', border: 'border-orange-500/30',
+      description: 'Programas de educação tecnológica para comunidades de baixa renda, formando profissionais para o mercado de TI. Mais de 500 jovens capacitados em programação e infraestrutura cloud.',
+      highlights: ['500+ jovens capacitados em TI', 'Parceria com institutos de ensino', 'Certificação profissional incluída', 'Taxa de empregabilidade de 80%+'],
+    },
+    {
+      id: 'inclusao', icon: 'handshake', title: 'Inclusão', color: '#8B5CF6',
+      bg: 'from-violet-500/15 to-violet-600/5', border: 'border-violet-500/30',
+      description: 'Iniciativas de diversidade e inclusão para ampliar oportunidades de grupos sub-representados na tecnologia. Metas de diversidade de gênero, raça e PcD em todas as contratações.',
+      highlights: ['40%+ mulheres em posições tech', 'Programa de mentoria para PCDs', 'Comitê de diversidade ativo', 'Parceria com comunidades LGBTQIA+'],
+    },
+    {
+      id: 'sustentabilidade', icon: 'sprout', title: 'Sustentabilidade', color: '#4ADE80',
+      bg: 'from-green-500/15 to-green-600/5', border: 'border-green-500/30',
+      description: 'Plantio de uma árvore por profissional a cada ano e metas de redução de pegada de carbono nas operações. Uso de energia renovável em todos os escritórios brasileiros.',
+      highlights: ['2.000+ árvores plantadas por ano', 'Energia 100% renovável nos escritórios', 'Meta carbono neutro até 2030', 'Redução de 30% de resíduos em 3 anos'],
+    },
+  ],
+  en: [
+    {
+      id: 'capacitacao', icon: 'graduation-cap', title: 'Training', color: '#FF6600',
+      bg: 'from-orange-500/15 to-orange-600/5', border: 'border-orange-500/30',
+      description: 'Technology education programs for underserved communities, training professionals for the IT market. Over 500 young people trained in programming and cloud infrastructure.',
+      highlights: ['500+ youth trained in IT', 'Partnerships with educational institutions', 'Professional certification included', '80%+ employability rate'],
+    },
+    {
+      id: 'inclusao', icon: 'handshake', title: 'Inclusion', color: '#8B5CF6',
+      bg: 'from-violet-500/15 to-violet-600/5', border: 'border-violet-500/30',
+      description: 'Diversity and inclusion initiatives to expand opportunities for underrepresented groups in technology. Gender, race, and disability diversity targets across all hiring.',
+      highlights: ['40%+ women in tech positions', 'Mentorship program for people with disabilities', 'Active diversity committee', 'Partnership with LGBTQIA+ communities'],
+    },
+    {
+      id: 'sustentabilidade', icon: 'sprout', title: 'Sustainability', color: '#4ADE80',
+      bg: 'from-green-500/15 to-green-600/5', border: 'border-green-500/30',
+      description: 'One tree planted per professional each year and carbon footprint reduction targets in operations. Renewable energy used in all Brazilian offices.',
+      highlights: ['2,000+ trees planted per year', '100% renewable energy in offices', 'Carbon neutral goal by 2030', '30% waste reduction in 3 years'],
+    },
+  ],
+}
+
+const videosI18n: Record<'pt' | 'en', VideoItem[]> = {
+  pt: [
+    {
+      id: 'fourcamp-bomdiasp', youtubeId: 'CmGlSnfF0_U',
+      title: 'FourCamp no Bom Dia SP', subtitle: 'Rede Globo',
+      description: 'O programa FourCamp de capacitação tecnológica ganhou destaque no Bom Dia SP da Globo, mostrando como a Foursys transforma vidas por meio da educação em tecnologia.',
+      icon: Tv, color: '#FF6600', accent: '#FF8833', gradient: 'from-orange-600 via-orange-500 to-amber-500',
+      tags: ['Mídia Nacional', 'Capacitação', 'Impacto Social'],
+    },
+    {
+      id: 'fourcamp-pcd', youtubeId: 'M2MyVNDLDTE',
+      title: 'FourCamp PCD', subtitle: 'Programa de Inclusão',
+      description: 'O FourCamp PCD é o programa de capacitação e inserção profissional de Pessoas com Deficiência na área de tecnologia — inclusão que gera transformação real.',
+      icon: Accessibility, color: '#8B5CF6', accent: '#A78BFA', gradient: 'from-violet-600 via-purple-500 to-fuchsia-500',
+      tags: ['Inclusão', 'PCD', 'Diversidade'],
+    },
+  ],
+  en: [
+    {
+      id: 'fourcamp-bomdiasp', youtubeId: 'CmGlSnfF0_U',
+      title: 'FourCamp on Bom Dia SP', subtitle: 'Globo Network',
+      description: 'The FourCamp technology training program was featured on Globo\'s Bom Dia SP, showcasing how Foursys transforms lives through technology education.',
+      icon: Tv, color: '#FF6600', accent: '#FF8833', gradient: 'from-orange-600 via-orange-500 to-amber-500',
+      tags: ['National Media', 'Training', 'Social Impact'],
+    },
+    {
+      id: 'fourcamp-pcd', youtubeId: 'M2MyVNDLDTE',
+      title: 'FourCamp PwD', subtitle: 'Inclusion Program',
+      description: 'FourCamp PwD is the training and professional integration program for People with Disabilities in technology — inclusion that drives real transformation.',
+      icon: Accessibility, color: '#8B5CF6', accent: '#A78BFA', gradient: 'from-violet-600 via-purple-500 to-fuchsia-500',
+      tags: ['Inclusion', 'PwD', 'Diversity'],
+    },
+  ],
+}
+
+const mediaLabelsI18n = {
+  pt: { title: 'FourCamp na Mídia', subtitle: 'Nosso impacto reconhecido em rede nacional' },
+  en: { title: 'FourCamp in the Media', subtitle: 'Our impact recognized on national broadcast' },
+}
+
+const ctaLabelsI18n = {
+  pt: { title: 'Premiações & Certificações', subtitle: 'GPTW, Agilidade Brasil, 100 Open Startups, ISO 9001, 27001 e mais' },
+  en: { title: 'Awards & Certifications', subtitle: 'GPTW, Agilidade Brasil, 100 Open Startups, ISO 9001, 27001 and more' },
+}
+
+// ─── Video Card ───────────────────────────────────────────────────────────────
 
 function VideoCard({
   video,
   index,
   onPlay,
 }: {
-  video: (typeof videos)[0]
+  video: VideoItem
   index: number
   onPlay: (id: string) => void
 }) {
+  const { lang } = useLanguage()
   const [hovered, setHovered] = useState(false)
   const Icon = video.icon
   const thumb = `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`
@@ -119,7 +152,7 @@ function VideoCard({
       className="group relative rounded-2xl overflow-hidden cursor-pointer"
       role="button"
       tabIndex={0}
-      aria-label={`Assistir: ${video.title}`}
+      aria-label={`${lang === 'pt' ? 'Assistir' : 'Watch'}: ${video.title}`}
       onClick={() => onPlay(video.id)}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onPlay(video.id) } }}
     >
@@ -271,15 +304,17 @@ function VideoPlayerModal({
   video,
   onClose,
 }: {
-  video: (typeof videos)[0]
+  video: VideoItem
   onClose: () => void
 }) {
+  const { t, lang } = useLanguage()
+
   return (
     <motion.div
       className="fixed inset-0 z-[100] flex items-center justify-center p-3 md:p-6"
       role="dialog"
       aria-modal="true"
-      aria-label={`Vídeo: ${video.title}`}
+      aria-label={`${lang === 'pt' ? 'Vídeo' : 'Video'}: ${video.title}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -316,7 +351,7 @@ function VideoPlayerModal({
           <button
             onClick={onClose}
             className="w-10 h-10 rounded-full bg-white/[0.08] hover:bg-white/[0.15] active:scale-95 flex items-center justify-center transition-all min-h-[44px] min-w-[44px]"
-            aria-label="Fechar vídeo"
+            aria-label={t('common.close')}
           >
             <X size={18} className="text-white/70" />
           </button>
@@ -348,7 +383,14 @@ function VideoPlayerModal({
 
 export function SectionESG() {
   const { navigate } = useApp()
+  const { t, lang } = useLanguage()
   const [activeVideo, setActiveVideo] = useState<string | null>(null)
+
+  const impactStats = useMemo(() => impactStatsI18n[lang], [lang])
+  const fronts = useMemo(() => frontsI18n[lang], [lang])
+  const videos = useMemo(() => videosI18n[lang], [lang])
+  const mediaLabels = useMemo(() => mediaLabelsI18n[lang], [lang])
+  const ctaLabels = useMemo(() => ctaLabelsI18n[lang], [lang])
 
   const playingVideo = activeVideo ? videos.find(v => v.id === activeVideo) : null
 
@@ -366,18 +408,16 @@ export function SectionESG() {
           <div className="flex items-start justify-between flex-wrap gap-6">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-primary mb-2">
-                Propósito e ESG
+                {t('esg.badge')}
               </p>
               <h2 className="text-2xl md:text-4xl font-black text-white leading-none mb-3">
                 FourLives
               </h2>
               <p className="text-lg text-foursys-primary font-semibold mb-2">
-                Tecnologia que transforma vidas
+                {t('esg.title')}
               </p>
               <p className="text-foursys-text-muted max-w-xl leading-relaxed text-sm">
-                Para a Foursys, tecnologia é meio, não fim. O FourLives é nosso programa de impacto social que conecta
-                capacitação, inclusão e sustentabilidade — porque escolher um parceiro de tecnologia também é escolher
-                um parceiro de propósito.
+                {t('esg.subtitle')}
               </p>
             </div>
 
@@ -441,8 +481,8 @@ export function SectionESG() {
               <Play size={16} className="text-foursys-primary ml-0.5" fill="currentColor" />
             </div>
             <div>
-              <h3 className="text-lg font-black text-white">FourCamp na Mídia</h3>
-              <p className="text-[11px] text-foursys-text-dim">Nosso impacto reconhecido em rede nacional</p>
+              <h3 className="text-lg font-black text-white">{mediaLabels.title}</h3>
+              <p className="text-[11px] text-foursys-text-dim">{mediaLabels.subtitle}</p>
             </div>
           </div>
 
@@ -483,9 +523,9 @@ export function SectionESG() {
             <div className="flex items-center gap-3">
               <DynIcon name="award" size={24} className="text-foursys-primary" />
               <div className="text-left">
-                <div className="text-sm font-bold text-white">Premiações & Certificações</div>
+                <div className="text-sm font-bold text-white">{ctaLabels.title}</div>
                 <div className="text-[11px] text-foursys-text-muted mt-0.5">
-                  GPTW, Agilidade Brasil, 100 Open Startups, ISO 9001, 27001 e mais
+                  {ctaLabels.subtitle}
                 </div>
               </div>
             </div>

@@ -1,4 +1,5 @@
 import type { ClientConfig } from '../../types'
+import type { Language } from '../../i18n/types'
 
 export const itauClient: ClientConfig = {
   id: 'itau',
@@ -197,4 +198,207 @@ export const itauClient: ClientConfig = {
       ],
     },
   },
+}
+
+const itauClientEn: ClientConfig = {
+  id: 'itau',
+  name: 'Itaú',
+  colors: { primary: '#FF6600', accent: '#FF8833' },
+  tagline: 'Building the bank of the future together since 2006',
+  relationship: 'Strategic partnership — 20 years working on high-complexity projects',
+  yearsPartnership: 20,
+  sections: [
+    {
+      id: 'client-opening',
+      label: 'Foursys × Itaú',
+      description: 'Strategic partnership since 2006',
+      icon: 'handshake',
+      component: 'client-opening',
+    },
+    {
+      id: 'client-insights',
+      label: 'Ecosystem Mastery',
+      description: 'Full coverage of banking domains',
+      icon: 'search',
+      component: 'client-insights',
+    },
+    {
+      id: 'client-extra-1',
+      label: 'Future-Ready',
+      description: 'Security, Innovation & AI, Scalability',
+      icon: 'rocket',
+      component: 'client-extra-1',
+    },
+    {
+      id: 'client-cases',
+      label: 'Itaú Cases',
+      description: 'Deliveries within the Itaú ecosystem',
+      icon: 'building',
+      component: 'client-cases',
+    },
+  ],
+  insights: [
+    {
+      id: 'cobranca-dda',
+      title: 'Collections & DDA',
+      description: 'Banking collection systems and DDA (Authorized Direct Debit) with high-volume processing and SPB integration.',
+      solution: '300+ specialized professionals with complete mastery of business rules and operational workflows.',
+      icon: 'file-text',
+    },
+    {
+      id: 'riscos',
+      title: 'Risk Management',
+      description: 'Credit risk, market risk, and operational risk modeling with regulatory models (BACEN, Basel III).',
+      solution: 'Dedicated teams with deep knowledge of risk models and regulatory frameworks.',
+      icon: 'shield-check',
+    },
+    {
+      id: 'cartoes',
+      title: 'Cards',
+      description: 'Card issuance platform, transaction processing, loyalty programs, and card portfolio management.',
+      solution: 'Teams specialized in high-performance processing and card network integration.',
+      icon: 'credit-card',
+    },
+    {
+      id: 'cash-pagamentos',
+      title: 'Cash & Payments',
+      description: 'Cash management systems, instant payments (PIX), collections, and bank reconciliation.',
+      solution: 'Experience in mission-critical systems with 99.99% SLA and 24/7 processing.',
+      icon: 'banknote',
+    },
+    {
+      id: 'emprestimos-credito',
+      title: 'Loans & Credit',
+      description: 'Credit origination platforms, simulation, contracting, and full loan lifecycle management.',
+      solution: 'Credit pipeline modernization with automation and AI for real-time decision making.',
+      icon: 'trending-up',
+    },
+    {
+      id: 'core-banking',
+      title: 'Core Banking & Mainframe',
+      description: 'Mission-critical mainframe infrastructure, batch processing, COBOL, and integration with distributed systems.',
+      solution: 'Team with deep mainframe mastery and incremental modernization strategies with zero downtime.',
+      icon: 'server',
+    },
+    {
+      id: 'comex',
+      title: 'Foreign Trade & FX',
+      description: 'Foreign trade operations, foreign exchange, international remittances, and international regulatory compliance.',
+      solution: 'Specialized knowledge in FX regulation and market systems integration.',
+      icon: 'globe',
+    },
+    {
+      id: 'antifraudes',
+      title: 'Anti-Fraud & Security',
+      description: 'Fraud detection and prevention systems, real-time transaction monitoring, and AI anti-fraud models.',
+      solution: 'Implementation of AI/ML models for fraud detection with < 200ms latency.',
+      icon: 'lock',
+    },
+    {
+      id: 'canais',
+      title: 'Digital Channels',
+      description: 'Mobile apps, internet banking, ATMs, Open Banking APIs, and omnichannel customer experience.',
+      solution: 'Full-stack teams experienced in developing high-traffic digital channels.',
+      icon: 'smartphone',
+    },
+    {
+      id: 'recebiveis',
+      title: 'Receivables & Acquiring',
+      description: 'Receivables registration, anticipation, acquiring, and integration with payments infrastructure.',
+      solution: 'Specialists in receivables regulation and registry integration.',
+      icon: 'receipt',
+    },
+  ],
+  cases: [
+    {
+      id: 'itau-modernizacao-core',
+      title: 'Core Banking Modernization',
+      sector: 'Financial',
+      type: 'Legacy Modernization',
+      challenge: 'Core systems in COBOL over 20 years old, blocking integration with new digital channels and open banking. Growing operational risk.',
+      solution: 'Core encapsulation strategy via APIs, incremental migration of critical domains, and distributed services layer implementation.',
+      stack: ['Java 21', 'Spring Boot', 'AWS', 'Kafka', 'API Gateway', 'COBOL', 'DB2'],
+      results: [
+        'Core banking accessible via APIs for digital channels',
+        'Zero downtime throughout the entire modernization',
+        'New product integration time reduced by 80%',
+        'Open Banking compliance delivered on schedule',
+      ],
+      metric: { value: '+450', label: 'Projects executed in the ecosystem' },
+    },
+    {
+      id: 'itau-antifraude-ia',
+      title: 'AI-Powered Anti-Fraud Platform',
+      sector: 'Financial',
+      type: 'AI First',
+      challenge: 'Growing volume of fraud attempts on digital channels. Rule-based models could not keep up with attack sophistication.',
+      solution: 'Development of ML models for real-time fraud detection with < 200ms latency and integration into the transactional pipeline.',
+      stack: ['Python', 'TensorFlow', 'AWS SageMaker', 'Kafka Streams', 'Redis', 'Databricks'],
+      results: [
+        'Fraud detection in under 200ms',
+        '65% reduction in false positives',
+        'BRL 120M in fraud prevented in the first year',
+        'Self-adaptive model with continuous retraining',
+      ],
+      metric: { value: 'BRL 120M', label: 'In fraud prevented' },
+    },
+    {
+      id: 'itau-squads-dedicados',
+      title: '300+ Dedicated Professionals',
+      sector: 'Financial',
+      type: 'AI Squad',
+      challenge: 'Growing demand for specialized professionals across all banking domains, requiring retention and accumulated business knowledge.',
+      solution: 'Dedicated squad model with 300+ professionals, covering all areas of the Itaú ecosystem with turnover below 4%.',
+      stack: ['React', 'Java', 'Node.js', 'Angular', 'COBOL', 'Python', 'AWS', 'Azure'],
+      results: [
+        '300+ professionals specialized in the Itaú ecosystem',
+        '2MM+ service hours delivered with excellence',
+        '3.6% turnover vs 22% industry average',
+        'Full coverage of all banking domains',
+      ],
+      metric: { value: '2MM+', label: 'Service hours delivered' },
+    },
+  ],
+  extra1: {
+    title: 'Future-Ready',
+    subtitle: 'Capabilities that ensure continuous evolution of the Itaú ecosystem',
+    content: {
+      phases: [
+        {
+          id: 'seguranca',
+          title: 'Security & Compliance',
+          description: 'Compliance with BACEN, LGPD, PCI-DSS, and cybersecurity frameworks. SAST, DAST, and SOC integrated into the development pipeline.',
+          icon: 'shield-check',
+        },
+        {
+          id: 'inovacao-ia',
+          title: 'Innovation & AI',
+          description: 'AI Agents, predictive models, intelligent automation, and hyperautomation applied to banking processes with governance and auditability.',
+          icon: 'brain-circuit',
+        },
+        {
+          id: 'escalabilidade',
+          title: 'Scalability',
+          description: 'Cloud-native architectures, microservices, event-driven, and elastic infrastructure to support digital ecosystem growth.',
+          icon: 'rocket',
+        },
+        {
+          id: 'transformacao',
+          title: 'Digital Transformation',
+          description: 'Together we build the bank of the future — modernization, open banking, digital channels, and next-generation customer experience.',
+          icon: 'zap',
+        },
+      ],
+      metrics: [
+        { value: '+300', label: 'Dedicated professionals' },
+        { value: '+2MM', label: 'Service hours' },
+        { value: '+450', label: 'Projects executed' },
+        { value: '20', label: 'Years of partnership' },
+      ],
+    },
+  },
+}
+
+export function getItauClient(lang: Language = 'pt'): ClientConfig {
+  return lang === 'en' ? itauClientEn : itauClient
 }

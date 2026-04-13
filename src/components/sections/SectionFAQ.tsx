@@ -4,13 +4,15 @@ import { ChevronDown, ArrowRight, Search, Mic, MicOff, X } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { faqItems } from '../../data/faq'
 import { useApp } from '../../context/AppContext'
+import { useLanguage } from '../../i18n'
 import { useVoiceSearch } from '../../hooks/useVoiceSearch'
 import type { AppSection } from '../../types'
 
-const categories = ['Todos', 'Institucional', 'Serviços', 'Tecnologia', 'Parceria', 'Santander', 'Comercial']
+const categoryKeys = ['Todos', 'Institucional', 'Serviços', 'Tecnologia', 'Parceria', 'Santander', 'Comercial']
 
 export function SectionFAQ() {
   const { navigate } = useApp()
+  const { t, lang } = useLanguage()
   const [openId, setOpenId] = useState<string | null>(null)
   const [activeCategory, setActiveCategory] = useState('Todos')
   const [search, setSearch] = useState('')
@@ -19,6 +21,14 @@ export function SectionFAQ() {
     setSearch(transcript)
   }, [])
   const voice = useVoiceSearch(onVoiceResult)
+
+  const categoryLabels: Record<string, string> = {
+    'Todos': t('faq.categories.all'),
+    'Institucional': t('faq.categories.institucional'),
+    'Serviços': t('faq.categories.servicos'),
+    'Tecnologia': t('faq.categories.tecnologia'),
+    'Comercial': t('faq.categories.comercial'),
+  }
 
   const filtered = faqItems.filter(item => {
     const matchCategory = activeCategory === 'Todos' || item.category === activeCategory
@@ -35,13 +45,15 @@ export function SectionFAQ() {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-sm mb-4">
-            Perguntas Frequentes
+            {t('faq.badge')}
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
-            Sempre prontos para responder
+            {t('faq.title')}
           </h2>
           <p className="text-lg text-foursys-text-muted max-w-2xl mx-auto">
-            Perguntas que os clientes sempre fazem — e as respostas que todo mundo na Foursys deve saber de cor.
+            {lang === 'pt'
+              ? 'Perguntas que os clientes sempre fazem — e as respostas que todo mundo na Foursys deve saber de cor.'
+              : 'Questions clients always ask — and the answers everyone at Foursys should know by heart.'}
           </p>
         </motion.div>
 
@@ -61,7 +73,7 @@ export function SectionFAQ() {
             <input
               value={search}
               onChange={e => setSearch(e.target.value)}
-              placeholder={voice.status === 'listening' ? 'Ouvindo...' : 'Buscar pergunta...'}
+              placeholder={voice.status === 'listening' ? t('common.listening') : t('faq.searchPlaceholder')}
               className="flex-1 bg-transparent text-sm text-foursys-text placeholder-foursys-text-dim outline-none"
             />
             {search && (
@@ -69,7 +81,7 @@ export function SectionFAQ() {
                 type="button"
                 onClick={() => setSearch('')}
                 className="p-1 rounded-full hover:bg-white/10 text-foursys-text-dim hover:text-white transition-colors"
-                aria-label="Limpar busca"
+                aria-label={t('common.clearSearch')}
               >
                 <X size={14} />
               </button>
@@ -85,20 +97,24 @@ export function SectionFAQ() {
                       ? 'text-red-400'
                       : 'text-foursys-text-dim hover:text-white hover:bg-white/10'
                 }`}
-                aria-label={voice.status === 'listening' ? 'Parar gravação' : 'Buscar por voz'}
+                aria-label={voice.status === 'listening'
+                  ? (lang === 'pt' ? 'Parar gravação' : 'Stop recording')
+                  : t('common.voiceSearch')}
               >
                 {voice.status === 'listening' ? <MicOff size={16} /> : <Mic size={16} />}
               </button>
             )}
           </div>
           {voice.status === 'listening' && (
-            <p className="text-[10px] text-foursys-primary mt-1.5 ml-1 animate-pulse">Ouvindo... fale o termo que deseja buscar</p>
+            <p className="text-[10px] text-foursys-primary mt-1.5 ml-1 animate-pulse">
+              {lang === 'pt' ? 'Ouvindo... fale o termo que deseja buscar' : 'Listening... say the term you want to search'}
+            </p>
           )}
         </motion.div>
 
         {/* Category filter */}
         <div className="flex flex-wrap gap-2 mb-8">
-          {categories.map(cat => (
+          {categoryKeys.map(cat => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
@@ -108,7 +124,7 @@ export function SectionFAQ() {
                   : 'border border-white/15 text-foursys-text-muted hover:border-white/30'
               }`}
             >
-              {cat}
+              {categoryLabels[cat] || cat}
             </button>
           ))}
         </div>
@@ -167,7 +183,9 @@ export function SectionFAQ() {
 
         {filtered.length === 0 && (
           <div className="text-center py-12 text-foursys-text-dim">
-            Nenhuma pergunta encontrada para "{search}"
+            {lang === 'pt'
+              ? `Nenhuma pergunta encontrada para "${search}"`
+              : `No questions found for "${search}"`}
           </div>
         )}
       </div>

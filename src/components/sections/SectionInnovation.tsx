@@ -6,6 +6,7 @@ import {
   Zap, CheckCircle2, Quote,
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { useLanguage } from '../../i18n'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
 import { innovationTrends } from '../../data/innovation'
 import type { InnovationTrend } from '../../data/innovation'
@@ -27,6 +28,7 @@ function hexToRgba(hex: string, a: number) {
 // ─── Trend Card ──────────────────────────────────────────────────────────────
 
 function TrendCard({ trend, index, onClick }: { trend: InnovationTrend; index: number; onClick: () => void }) {
+  const { t } = useLanguage()
   const [hovered, setHovered] = useState(false)
 
   return (
@@ -145,7 +147,7 @@ function TrendCard({ trend, index, onClick }: { trend: InnovationTrend; index: n
 
         {/* CTA */}
         <div className="flex items-center gap-2 text-sm font-bold transition-all duration-300" style={{ color: trend.color }}>
-          Explorar tendência
+          {t('innovation.exploreTrend')}
           <motion.div animate={{ x: hovered ? 4 : 0 }} transition={{ duration: 0.2 }}>
             <ChevronRight size={16} />
           </motion.div>
@@ -169,6 +171,7 @@ function TrendCard({ trend, index, onClick }: { trend: InnovationTrend; index: n
 // ─── Drill-Down Modal ────────────────────────────────────────────────────────
 
 function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: () => void }) {
+  const { t, lang } = useLanguage()
   const trapRef = useFocusTrap(true)
 
   return (
@@ -179,7 +182,7 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
       className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain"
       role="dialog"
       aria-modal="true"
-      aria-label={`Tendência: ${trend.title}`}
+      aria-label={`${lang === 'pt' ? 'Tendência' : 'Trend'}: ${trend.title}`}
       onClick={onClose}
     >
       <div className="absolute inset-0 bg-black/80 backdrop-blur-xl" />
@@ -211,7 +214,7 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
             <button
               type="button"
               onClick={onClose}
-              aria-label="Fechar"
+              aria-label={t('common.close')}
               className="p-2.5 rounded-xl bg-white/[0.06] border border-white/[0.1] hover:bg-white/[0.12] transition-colors"
             >
               <X size={18} className="text-white/70" />
@@ -238,7 +241,7 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
               </div>
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.18em]" style={{ color: trend.color }}>
-                  Tendência de Inovação
+                  {lang === 'pt' ? 'Tendência de Inovação' : 'Innovation Trend'}
                 </p>
                 <h2 className="text-2xl md:text-3xl font-black text-white leading-tight">
                   {trend.title}
@@ -283,14 +286,14 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
             <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
               <div className="flex items-center gap-2 mb-3">
                 <Sparkles size={14} style={{ color: trend.color }} />
-                <h4 className="text-xs font-bold uppercase tracking-wider" style={{ color: trend.color }}>Visão Geral</h4>
+                <h4 className="text-xs font-bold uppercase tracking-wider" style={{ color: trend.color }}>{t('innovation.overview')}</h4>
               </div>
               <p className="text-sm text-foursys-text-muted leading-relaxed">{trend.deepDive.overview}</p>
             </div>
             <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
               <div className="flex items-center gap-2 mb-3">
                 <TrendingUp size={14} style={{ color: trend.color }} />
-                <h4 className="text-xs font-bold uppercase tracking-wider" style={{ color: trend.color }}>Por que importa</h4>
+                <h4 className="text-xs font-bold uppercase tracking-wider" style={{ color: trend.color }}>{t('innovation.whyItMatters')}</h4>
               </div>
               <p className="text-sm text-foursys-text-muted leading-relaxed">{trend.deepDive.whyItMatters}</p>
             </div>
@@ -310,7 +313,7 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
             <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, transparent, #FF6600, transparent)' }} />
             <div className="flex items-center gap-3 mb-4">
               <Zap size={18} className="text-foursys-primary" />
-              <h3 className="text-lg font-black text-white">Posicionamento Foursys</h3>
+              <h3 className="text-lg font-black text-white">{t('innovation.foursysPosition')}</h3>
             </div>
             <p className="text-sm text-foursys-text-muted leading-relaxed mb-5">
               {trend.foursysPosition}
@@ -335,14 +338,14 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
             <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
               <div className="flex items-center gap-2 mb-3">
                 <TrendingUp size={14} style={{ color: trend.color }} />
-                <h4 className="text-xs font-bold uppercase tracking-wider" style={{ color: trend.color }}>Tamanho do Mercado</h4>
+                <h4 className="text-xs font-bold uppercase tracking-wider" style={{ color: trend.color }}>{t('innovation.marketSize')}</h4>
               </div>
               <p className="text-sm text-foursys-text-muted leading-relaxed">{trend.deepDive.marketSize}</p>
             </div>
             <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
               <div className="flex items-center gap-2 mb-3">
                 <Quote size={14} style={{ color: trend.color }} />
-                <h4 className="text-xs font-bold uppercase tracking-wider" style={{ color: trend.color }}>Perspectiva Futura</h4>
+                <h4 className="text-xs font-bold uppercase tracking-wider" style={{ color: trend.color }}>{t('innovation.futureOutlook')}</h4>
               </div>
               <p className="text-sm text-foursys-text-muted leading-relaxed">{trend.deepDive.futureOutlook}</p>
             </div>
@@ -356,6 +359,7 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
 // ─── Main Section ────────────────────────────────────────────────────────────
 
 export function SectionInnovation() {
+  const { t, lang } = useLanguage()
   const [activeTrend, setActiveTrend] = useState<InnovationTrend | null>(null)
 
   return (
@@ -380,17 +384,17 @@ export function SectionInnovation() {
           >
             <Sparkles size={14} className="text-foursys-primary" />
             <span className="text-xs font-bold uppercase tracking-[0.15em] text-foursys-primary">
-              Radar de Inovação 2026
+              {t('innovation.badge')}
             </span>
           </motion.div>
 
           <h2 className="text-3xl md:text-5xl font-black text-white leading-tight mb-4">
-            Tendências que estão
-            <br />
-            <span className="bg-gradient-to-r from-foursys-primary via-amber-400 to-foursys-primary bg-clip-text text-transparent">
-              redefinindo o mercado
-            </span>
+            {t('innovation.title')}
           </h2>
+
+          <p className="text-sm md:text-base text-foursys-text-muted max-w-2xl mx-auto leading-relaxed">
+            {t('innovation.subtitle')}
+          </p>
 
           <div className="mt-6 flex justify-center">
             <div className="h-px w-48 bg-gradient-to-r from-transparent via-foursys-primary/40 to-transparent" />
@@ -413,13 +417,19 @@ export function SectionInnovation() {
         >
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px bg-gradient-to-r from-transparent via-foursys-primary/40 to-transparent" />
           <p className="text-sm text-foursys-text-muted leading-relaxed max-w-xl mx-auto">
-            A Foursys combina o <span className="text-foursys-primary font-black">melhor das referências globais</span> com
-            a agilidade, proximidade e custo-benefício que só uma empresa brasileira com{' '}
-            <span className="text-white font-bold">26 anos de história</span> pode oferecer.
+            {lang === 'pt' ? (
+              <>A Foursys combina o <span className="text-foursys-primary font-black">melhor das referências globais</span> com
+              a agilidade, proximidade e custo-benefício que só uma empresa brasileira com{' '}
+              <span className="text-white font-bold">26 anos de história</span> pode oferecer.</>
+            ) : (
+              <>Foursys combines the <span className="text-foursys-primary font-black">best of global references</span> with
+              the agility, proximity and cost-effectiveness that only a Brazilian company with{' '}
+              <span className="text-white font-bold">26 years of history</span> can offer.</>
+            )}
           </p>
           <div className="mt-4 inline-flex items-center gap-2 text-xs font-bold text-foursys-primary">
             <ArrowRight size={14} />
-            Fale com nossos especialistas
+            {lang === 'pt' ? 'Fale com nossos especialistas' : 'Talk to our specialists'}
           </div>
         </motion.div>
       </div>

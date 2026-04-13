@@ -1,3 +1,5 @@
+import type { Language } from '../i18n/types'
+
 export interface InnovationLeader {
   name: string
   approach: string
@@ -25,7 +27,7 @@ export interface InnovationTrend {
   }
 }
 
-export const innovationTrends: InnovationTrend[] = [
+const innovationTrendsPt: InnovationTrend[] = [
   {
     id: 'gen-ai-agents',
     title: 'IA Generativa & Agentes Autônomos',
@@ -169,3 +171,154 @@ export const innovationTrends: InnovationTrend[] = [
     },
   },
 ]
+
+const innovationTrendsEn: InnovationTrend[] = [
+  {
+    id: 'gen-ai-agents',
+    title: 'Generative AI & Autonomous Agents',
+    tagline: 'The intelligence revolution that executes',
+    description: 'Language models, autonomous agents, and cognitive automation are redefining how companies operate, make decisions, and deliver value.',
+    icon: 'brain-circuit',
+    color: '#8B5CF6',
+    accent: '#C084FC',
+    gradient: 'from-violet-600/40 via-purple-800/20 to-transparent',
+    leaders: [
+      {
+        name: 'Accenture',
+        approach: 'GenAI Platform Factory — proprietary platform that reduces generative AI deployment time by 30%. Over 45,000 professionals dedicated to data & AI, with US$3B invested in AI over the past 3 years.',
+        highlight: '30% reduction in GenAI deployment',
+      },
+      {
+        name: 'McKinsey (QuantumBlack)',
+        approach: 'QuantumBlack division leads AI projects with premium rates (US$300-500+/h). Demonstrated 40% warehouse efficiency gains. "AI at Scale" model for industrializing AI projects.',
+        highlight: '40% operational efficiency gain',
+      },
+      {
+        name: 'Cognizant',
+        approach: 'Recognized by Fortune as "Most Innovative" 4 years in a row. AI Builder for AI adoption and scaling. 65 AI patents from the AI Lab. AI embedded in 100% of consulting delivery.',
+        highlight: '65 AI patents, Fortune Most Innovative 4x',
+      },
+    ],
+    foursysPosition: 'AI First Method: from pilot to measurable ROI in 6 weeks. Hybrid AI Lab with controlled, auditable agents with human oversight. 85% pilot-to-production conversion rate.',
+    keyCapabilities: [
+      'Autonomous Agents with Governance',
+      'Enterprise RAG & Fine-tuning',
+      'Cognitive Process Automation',
+      'Generative AI for Code & QA',
+      'Hyperautomation with LLMs',
+    ],
+    stats: [
+      { value: '$184B', label: 'GenAI Market 2030' },
+      { value: '85%', label: 'Foursys pilot→prod conversion' },
+      { value: '6 wks', label: 'Pilot to measurable ROI' },
+      { value: '3x', label: 'Speed with AI Squad' },
+    ],
+    deepDive: {
+      overview: 'Generative AI has evolved from experimental chatbots to autonomous agents that execute complex workflows. In 2026, companies that have not adopted generative AI in production are 2-3 years behind the leaders in their industries.',
+      whyItMatters: 'According to Gartner, 80% of enterprises will have deployed AI agents by 2028. The differentiator is no longer "having AI," but having governance, auditability, and measurable results. The "eternal pilot" approach is costing billions in missed opportunities.',
+      marketSize: 'The global generative AI market is projected to reach US$184 billion by 2030 (36% CAGR). Autonomous agents represent the fastest-growing segment, with a projection of US$47B by 2028.',
+      futureOutlook: 'Multi-modal agents (text, image, code, voice) integrated with ERPs and CRMs will become the standard. Human oversight remains critical. Companies need governance frameworks to scale safely.',
+    },
+  },
+  {
+    id: 'industry-iot',
+    title: 'Industry 4.0 & IoT',
+    tagline: 'Smart factories and connected operations',
+    description: 'Smart manufacturing, digital twins, IoT sensors, and industrial automation are transforming entire production chains with real-time data.',
+    icon: 'factory',
+    color: '#F43F5E',
+    accent: '#FB7185',
+    gradient: 'from-rose-600/40 via-pink-800/20 to-transparent',
+    leaders: [
+      {
+        name: 'Siemens (MindSphere)',
+        approach: 'MindSphere platform connects industrial assets to the cloud. Digital twins for simulation and optimization of entire factories before physical deployment. Global leader in industrial automation.',
+        highlight: 'Digital Twins for entire factories',
+      },
+      {
+        name: 'Roland Berger',
+        approach: 'Leading European strategic consultancy for Industry 4.0. Digital maturity framework for manufacturing. Strong in automotive and pharmaceutical supply chain transformation.',
+        highlight: 'European leader in industrial strategy',
+      },
+      {
+        name: 'NTT Data',
+        approach: 'IoT innovation centers in Japan, Europe, and the USA. End-to-end smart factory solutions with edge computing, predictive analytics, and OT-IT integration for large-scale industries.',
+        highlight: 'Edge + IoT for smart factories',
+      },
+    ],
+    foursysPosition: 'Integration of industrial systems with cloud platforms, real-time operational monitoring dashboards, and manufacturing process automation with AI and predictive analytics.',
+    keyCapabilities: [
+      'OT-IT Industrial Integration',
+      'Real-time Operational Dashboards',
+      'Predictive Analytics & Maintenance',
+      'AI-Powered Manufacturing Automation',
+      'Edge Computing & IoT Gateways',
+    ],
+    stats: [
+      { value: '$377B', label: 'Industry 4.0 Market 2029' },
+      { value: '30%', label: 'Downtime reduction with IoT' },
+      { value: '25%', label: 'Average productivity gain' },
+      { value: '75B', label: 'IoT devices by 2030' },
+    ],
+    deepDive: {
+      overview: 'Industry 4.0 represents the convergence of industrial automation with digital technologies — IoT, AI, cloud, robotics, and digital twins. Smart factories use real-time data to optimize production, quality, and maintenance.',
+      whyItMatters: 'According to McKinsey, factories that implement Industry 4.0 reduce downtime by 30-50%, increase productivity by 20-30%, and reduce quality costs by up to 35%. Industrial competitiveness depends directly on digital maturity.',
+      marketSize: 'The global Industry 4.0 market is projected to reach US$377 billion by 2029 (20.7% CAGR). Industrial IoT accounts for US$110B, digital twins US$48B, and collaborative robotics US$12B of this total.',
+      futureOutlook: 'Autonomous factories with generative AI for production planning. Private 5G enables ultra-low-latency IoT. Digital twins evolve from simulation to autonomous operation with AI.',
+    },
+  },
+  {
+    id: 'ai-robotics',
+    title: 'AI & Robotics',
+    tagline: 'Physical intelligence — from factory to the real world',
+    description: 'Humanoid robots, AI-powered cobots, autonomous vehicles, and surgical robotics are creating the era of "Physical AI," where artificial intelligence gains a body, hands, and mobility.',
+    icon: 'bot',
+    color: '#EC4899',
+    accent: '#F472B6',
+    gradient: 'from-pink-600/40 via-fuchsia-800/20 to-transparent',
+    leaders: [
+      {
+        name: 'NVIDIA',
+        approach: 'Isaac platform for robotics (simulation, training, and deployment). GR00T foundation model for humanoids. Cosmos for synthetic data generation. Jetson for edge AI inference. Partner ecosystem includes FANUC, ABB, KUKA, Yaskawa, Figure AI, and Agility Robotics.',
+        highlight: 'Isaac + GR00T: AI infrastructure for the entire robotics industry',
+      },
+      {
+        name: 'Tesla (Optimus)',
+        approach: '8,000 cumulative units deployed in its own factories (Jan/2026). Public sale planned for 2027. Uses FSD (Full Self-Driving) computer vision pipeline for generalist manipulation. Goal: US$20-30K utility robot for household and industrial tasks.',
+        highlight: '8,000 Optimus in production, public sale in 2027',
+      },
+      {
+        name: 'Unitree',
+        approach: 'Global leader in humanoid sales: 5,500 units in 2025. Most affordable model on the market starting at US$5,900. Strategy of democratizing humanoid robotics with large-scale production in China.',
+        highlight: '5,500 units, starting at US$5,900',
+      },
+    ],
+    foursysPosition: 'Foursys actively monitors the Physical AI ecosystem and positions itself as an integration partner for companies looking to incorporate intelligent robotics into their operations — from warehouse automation to advanced RPA with physical agents, connecting NVIDIA Isaac platforms, industrial cobots, and FourBlox solutions for orchestration.',
+    keyCapabilities: [
+      'Enterprise Systems Cobot Integration',
+      'NVIDIA Isaac & Omniverse Platforms',
+      'Intelligent Warehouse Automation',
+      'Advanced RPA with Physical Agents',
+      'Digital Twins for Robotic Simulation',
+      'Orchestration via FourBlox',
+    ],
+    stats: [
+      { value: '50K+', label: 'Humanoids forecast 2026' },
+      { value: '700%', label: 'Shipment growth 2025→2026' },
+      { value: '$39B', label: 'Figure AI Valuation' },
+      { value: '2.5B', label: 'Robots projected 2035' },
+    ],
+    deepDive: {
+      overview: 'The convergence of generative AI with robotics is creating the era of "Physical AI" — machines that not only think but act in the physical world. In 2025, global humanoid robot shipments surpassed 14,500 units, and the projection for 2026 is over 50,000 — a 700% growth. China dominates 90% of shipments, but the US leads in investment and valuations. The market is divided into five segments: Humanoid Robots (Unitree, AgiBot, Tesla Optimus, Figure AI, UBTECH, Agility Robotics, Fourier, Sanctuary AI, Apptronik), Industrial Robotics (FANUC, ABB, KUKA, Yaskawa, Universal Robots), AI Infrastructure for Robotics (NVIDIA Isaac, GR00T, Cosmos, Jetson), Autonomous and Logistics Robotics (Boston Dynamics, Amazon Robotics, Waymo), and Surgical Robotics (Intuitive Surgical, Medtronic).',
+      whyItMatters: 'AI-powered robotics solves the fundamental problem of labor shortages in manufacturing, logistics, healthcare, and services. FANUC has over 1 million robots installed globally. Amazon operates 750,000+ robots in its warehouses. Intuitive Surgical has performed 9+ million robotic surgeries. Figure AI reached a US$39 billion valuation after raising US$1 billion in 2025. NVIDIA connects the entire ecosystem with its Isaac platform, providing simulation (Omniverse), foundation models (GR00T), synthetic data (Cosmos), and edge inference (Jetson) for the world\'s leading manufacturers.',
+      marketSize: 'The global intelligent robotics market is expected to surpass US$260 billion by 2030. Humanoid robots, which generated ~US$200 million in 2025, are projected to reach US$38 billion by 2035. Industrial robotics (FANUC, ABB, KUKA, Yaskawa) already moves US$55B/year. Cobots (Universal Robots) grow 30% annually. Surgical robotics (Intuitive, Medtronic) projects US$18B by 2028. The projection is 2.5 billion robots worldwide by 2035.',
+      futureOutlook: 'Generalist humanoid robots (Tesla Optimus, Figure AI) will reach consumers starting in 2027-2028. Cobots with generative AI will understand natural language instructions. Autonomous robotic surgery (Intuitive, Medtronic + NVIDIA) will reduce medical errors. Digital Twins with NVIDIA Omniverse will allow testing entire robots in simulation before physical deployment. NVIDIA consolidates as the "platform of platforms" — providing AI infrastructure for virtually every robot manufacturer on the planet.',
+    },
+  },
+]
+
+export function getInnovationTrends(lang: Language): InnovationTrend[] {
+  return lang === 'en' ? innovationTrendsEn : innovationTrendsPt
+}
+
+export const innovationTrends = innovationTrendsPt

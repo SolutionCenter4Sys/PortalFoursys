@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { AppProvider, useApp } from './context/AppContext'
 import { ThemeProvider, useTheme } from './context/ThemeContext'
+import { LanguageProvider, useLanguage } from './i18n'
 import { TopBar } from './components/navigation/TopBar'
 import { NavigationMenu } from './components/navigation/NavigationMenu'
 import { SearchOverlay } from './components/navigation/SearchOverlay'
@@ -21,6 +22,7 @@ import type { AppSection } from './types'
 function AppInner() {
   const { state, toggleFullscreen, toggleMenu, navigate, activeNavigationItems, toggleOverview } = useApp()
   const { isDark } = useTheme()
+  const { t } = useLanguage()
   const mainRef = useRef<HTMLDivElement>(null)
   useKeyboard()
   useUrlSync()
@@ -62,7 +64,7 @@ function AppInner() {
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-foursys-primary focus:text-white focus:text-sm focus:font-semibold"
       >
-        Pular para o conteúdo
+        {t('common.skipToContent')}
       </a>
 
       {/* Ambient background */}
@@ -116,7 +118,7 @@ function AppInner() {
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.4 }}
           >
-            <span>← Deslize para navegar →</span>
+            <span>{t('common.swipeHint')}</span>
           </motion.div>
         )}
       </AnimatePresence>
@@ -129,7 +131,7 @@ function AppInner() {
             onClick={toggleFullscreen}
             className="text-xs text-foursys-text-dim hover:text-white/60 transition-colors select-none bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-lg cursor-pointer"
           >
-            ESC para sair do modo apresentação
+            {t('common.escFullscreen')}
           </button>
         </div>
       )}
@@ -143,11 +145,13 @@ function AppInner() {
 
 function App() {
   return (
-    <ThemeProvider>
-      <AppProvider>
-        <AppInner />
-      </AppProvider>
-    </ThemeProvider>
+    <LanguageProvider>
+      <ThemeProvider>
+        <AppProvider>
+          <AppInner />
+        </AppProvider>
+      </ThemeProvider>
+    </LanguageProvider>
   )
 }
 

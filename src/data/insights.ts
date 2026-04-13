@@ -1,7 +1,13 @@
 import type { AppSection } from '../types'
+import type { Language } from '../i18n/types'
 
-export type InsightType = 'Artigo' | 'Pesquisa' | 'Relatório' | 'Caso de Sucesso' | 'Podcast' | 'Webinar'
-export type InsightBadge = 'Novo' | 'Em destaque' | 'Urgente' | 'Gravação' | 'Pesquisa 2026' | 'Relatório 2026' | 'Caso Real'
+export type InsightType =
+  | 'Artigo' | 'Pesquisa' | 'Relatório' | 'Caso de Sucesso' | 'Podcast' | 'Webinar'
+  | 'Article' | 'Research' | 'Report' | 'Case Study'
+
+export type InsightBadge =
+  | 'Novo' | 'Em destaque' | 'Urgente' | 'Gravação' | 'Pesquisa 2026' | 'Relatório 2026' | 'Caso Real'
+  | 'New' | 'Featured' | 'Urgent' | 'Recording' | 'Research 2026' | 'Report 2026' | 'Real Case'
 
 export interface InsightAuthor {
   name: string
@@ -25,7 +31,7 @@ export interface Insight {
   gradient: string
 }
 
-export const insightCategories = [
+const insightCategoriesPt = [
   'Inteligência Artificial',
   'Squads & Agilidade',
   'Modernização de Legado',
@@ -34,7 +40,22 @@ export const insightCategories = [
   'Dados & Analytics',
 ]
 
-export const insights: Insight[] = [
+const insightCategoriesEn = [
+  'Artificial Intelligence',
+  'Squads & Agility',
+  'Legacy Modernization',
+  'Cybersecurity',
+  'Cloud & FinOps',
+  'Data & Analytics',
+]
+
+export function getInsightCategories(lang: Language): string[] {
+  return lang === 'en' ? insightCategoriesEn : insightCategoriesPt
+}
+
+export const insightCategories = insightCategoriesPt
+
+const insightsPt: Insight[] = [
   // ── Featured ──
   {
     id: 'ia-first-roi',
@@ -271,3 +292,247 @@ export const insights: Insight[] = [
     gradient: 'from-blue-500/20 via-slate-800/10 to-transparent',
   },
 ]
+
+const insightsEn: Insight[] = [
+  // ── Featured ──
+  {
+    id: 'ia-first-roi',
+    title: 'AI First: how to move from pilot to measurable ROI in 6 weeks',
+    excerpt: 'Most Brazilian companies have 3 to 6 AI projects stuck in eternal pilot mode. Discover the method Foursys uses to turn experiments into real results with a validated business case.',
+    content: 'AI adoption in Brazilian companies faces a paradox: investment is growing, but pilots are not converting to production. Foursys\'s AI First method solves this with a 6-week framework that includes use case discovery, ROI validation, implementation with guardrails, and operational handoff. In 2025, we applied the method across 14 clients with an 85% success rate in converting pilots to production.',
+    category: 'Artificial Intelligence',
+    type: 'Research',
+    badge: 'New',
+    featured: true,
+    date: 'Feb 15, 2026',
+    readTime: '8 min',
+    author: { name: 'Rafael Moura', role: 'Principal Architect, AI & Data' },
+    sectionLink: 'offers-flagship',
+    color: '#8B5CF6',
+    gradient: 'from-violet-600/30 via-indigo-800/20 to-transparent',
+  },
+  {
+    id: 'modernizacao-ondas',
+    title: 'Modernization without big bang: the wave strategy that saves the core system without paralyzing the business',
+    excerpt: 'CTOs face a classic dilemma: the legacy system blocks innovation, but a total replacement would risk critical downtime. The wave approach resolves this impasse with a 12-week pilot and controlled risk.',
+    content: '"Big bang" modernization fails in 70% of cases by underestimating dependencies, legacy data, and organizational resistance. Our SDD (Strangler-Driven Design) approach decomposes the legacy into business domains, prioritizes by impact and risk, and modernizes in incremental 12-week waves. Each wave delivers measurable value without disrupting critical operations. Across 3 financial sector clients, the approach reduced project risk by 60% and accelerated time-to-market by 45%.',
+    category: 'Legacy Modernization',
+    type: 'Article',
+    badge: 'Featured',
+    featured: true,
+    date: 'Feb 8, 2026',
+    readTime: '6 min',
+    author: { name: 'Camila Ferreira', role: 'Lead Architect, Modernization' },
+    sectionLink: 'services',
+    color: '#06B6D4',
+    gradient: 'from-cyan-600/30 via-slate-800/20 to-transparent',
+  },
+
+  // ── Grid ──
+  {
+    id: 'turnover-squads',
+    title: 'Why our 3.6% turnover rate transforms your digital product delivery',
+    excerpt: 'The average IT industry turnover is 22%. Our squad keeps the same professionals for years. Understand how this directly impacts the speed, quality, and cost of your backlog.',
+    content: 'IT professional turnover in Brazil reached 22% in 2025, generating an estimated rehiring cost of R$45,000 per position. At Foursys, our 3.6% turnover translates into stable squads that accumulate domain knowledge, reduce onboarding time, and deliver with increasing predictability. Clients with Foursys squads for over 12 months report +40% velocity and -30% defects compared to the start of operations.',
+    category: 'Squads & Agility',
+    type: 'Article',
+    date: 'Jan 2026',
+    readTime: '5 min',
+    author: { name: 'Lucas Martins', role: 'Head of Squads & Delivery' },
+    sectionLink: 'offers-flagship',
+    color: '#3B82F6',
+    gradient: 'from-blue-600/20 via-slate-800/10 to-transparent',
+  },
+  {
+    id: 'lead-time-case',
+    title: '70% lead time reduction: what happens when a well-calibrated squad enters your workflow',
+    excerpt: 'A credit fintech with an 8-month backlog saw its lead time drop 70% in 60 days. It wasn\'t magic: it was process, governance, and the right teams.',
+    content: 'The fintech was facing an average lead time of 42 days per feature and a backlog of 240+ items. In 60 days, we deployed a dedicated squad with Kanban practices, WIP limits, pair programming, and weekly retrospectives. Lead time dropped to 12 days and the backlog was reduced by 65%. The key was combining lean processes with senior professionals who didn\'t need extensive ramp-up.',
+    category: 'Squads & Agility',
+    type: 'Case Study',
+    badge: 'Real Case',
+    date: 'Jan 2026',
+    readTime: '4 min',
+    author: { name: 'Fernanda Alves', role: 'Agile Coach' },
+    sectionLink: 'cases',
+    color: '#3B82F6',
+    gradient: 'from-blue-500/20 via-slate-800/10 to-transparent',
+  },
+  {
+    id: 'governanca-ia-2026',
+    title: 'AI Governance in 2026: what changes with Brazilian regulation and how to prepare',
+    excerpt: 'Brazil\'s AI regulatory framework is advancing. Companies that don\'t structure governance now will face costly rework and regulatory exposure. This practical guide covers the 5 essential steps.',
+    content: 'AI regulation in Brazil is advancing with Bill 2338/2023 and BACEN and CVM regulations. Companies using AI in automated decisions need to structure governance before enforcement begins. The 5 steps: (1) inventory of models in production, (2) risk classification, (3) bias and explainability documentation, (4) training data audit, (5) continuous monitoring framework. Proactive organizations will gain a competitive advantage; reactive ones will face 3x higher compliance costs.',
+    category: 'Artificial Intelligence',
+    type: 'Report',
+    badge: 'Report 2026',
+    date: 'Dec 2025',
+    readTime: '7 min',
+    author: { name: 'Patricia Costa', role: 'Head of Governance & Compliance' },
+    sectionLink: 'services',
+    color: '#8B5CF6',
+    gradient: 'from-violet-500/20 via-slate-800/10 to-transparent',
+  },
+  {
+    id: 'agentes-ia-producao',
+    title: 'AI agents in production: what actually works (and what still fails) in enterprise environments',
+    excerpt: 'We tested autonomous agents in 12 enterprise environments in Brazil. The results reveal where the technology already delivers real value and where expectations still exceed reality.',
+    content: 'We deployed AI agents in 12 enterprise environments between 2024 and 2025. Results: triage and classification agents achieve 90%+ accuracy; code review agents detect 60% more vulnerabilities; L1 support agents resolve 45% of tickets without escalation. However, autonomous agents in complex business decisions still fail in 35% of cases due to lack of context and adequate guardrails. The conclusion: agents work for well-defined tasks; full autonomy is still premature.',
+    category: 'Artificial Intelligence',
+    type: 'Research',
+    date: 'Nov 2025',
+    readTime: '6 min',
+    author: { name: 'Rafael Moura', role: 'Principal Architect, AI & Data' },
+    sectionLink: 'services',
+    color: '#8B5CF6',
+    gradient: 'from-purple-500/20 via-slate-800/10 to-transparent',
+  },
+  {
+    id: 'zero-trust-regulados',
+    title: 'Zero Trust in regulated sectors: why banks and healthcare providers can no longer wait',
+    excerpt: 'Attacks on critical infrastructure grew 340% in Brazil in 2025. Healthcare and financial organizations are the most frequent targets.',
+    content: 'The cybersecurity landscape in Brazil reached a critical level in 2025: infrastructure attacks grew 340%, targeting financial and healthcare institutions. Zero Trust architecture — "never trust, always verify" — is no longer a differentiator but a regulatory obligation. At Foursys, we implement Zero Trust with microsegmentation, adaptive identity, end-to-end encryption, and continuous monitoring. Across 5 financial sector implementations, we reduced the attack surface by 85% and intrusion detection time from 72h to 15min.',
+    category: 'Cybersecurity',
+    type: 'Article',
+    badge: 'Urgent',
+    date: 'Dec 2025',
+    readTime: '5 min',
+    author: { name: 'André Santos', role: 'Lead Security Architect' },
+    sectionLink: 'services',
+    color: '#EF4444',
+    gradient: 'from-red-600/20 via-slate-800/10 to-transparent',
+  },
+  {
+    id: 'lgpd-multas-2026',
+    title: 'LGPD 2026: the fines have arrived and companies are still not ready',
+    excerpt: 'The ANPD issued R$180M in fines in the second half of 2025. The profile of penalized companies reveals a clear pattern — and how to avoid it.',
+    content: 'The ANPD intensified enforcement in 2025, issuing R$180M in fines. The profile of penalized companies: those that treated LGPD as a legal project without IT integration. The most common failures: (1) no personal data inventory, (2) generic consent, (3) lack of an effective DPO, (4) incidents not reported within 72h. The structured privacy program we implemented with 8 clients includes data discovery, consent automation, incident management, and continuous training.',
+    category: 'Cybersecurity',
+    type: 'Report',
+    date: 'Nov 2025',
+    readTime: '5 min',
+    author: { name: 'André Santos', role: 'Lead Security Architect' },
+    sectionLink: 'services',
+    color: '#EF4444',
+    gradient: 'from-red-500/20 via-slate-800/10 to-transparent',
+  },
+  {
+    id: 'finops-ia-custo',
+    title: 'FinOps for AI: how to control inference costs before they destroy your project\'s ROI',
+    excerpt: 'Companies adopting AI at scale discover, too late, that inference costs can exceed the initial budget by 4x.',
+    content: 'The inference cost of AI models in production is the new villain of corporate ROI. Companies that scaled GPT-4, Claude, and Gemini without consumption governance saw costs explode 4x above plan. The FinOps for AI framework we implement includes: (1) measurement by use case, (2) prompt optimization, (3) intelligent caching, (4) model routing (use a smaller model when possible), (5) consumption dashboards per squad. Across 8 clients, we reduced inference costs by 55% without quality loss.',
+    category: 'Cloud & FinOps',
+    type: 'Article',
+    date: 'Oct 2025',
+    readTime: '5 min',
+    author: { name: 'Diego Souza', role: 'Cloud Architect & FinOps Lead' },
+    sectionLink: 'services',
+    color: '#F97316',
+    gradient: 'from-orange-500/20 via-slate-800/10 to-transparent',
+  },
+  {
+    id: 'multicloud-estrategia',
+    title: 'Multicloud: when the strategy of not depending on a single vendor becomes an operational nightmare',
+    excerpt: 'Multicloud is the right answer for many companies, but the wrong implementation creates exponential complexity.',
+    content: 'Multicloud is present in 78% of Fortune 500 companies, but only 23% consider their implementation "successful." The problem: operational complexity, skill gap, networking costs, and security inconsistency. The strategy that works is not "everything on every cloud" — it\'s "right workload on the right cloud." At Foursys, we assess workloads, define placement criteria (cost, latency, compliance, skills), and implement an orchestration layer that simplifies day-2 operations.',
+    category: 'Cloud & FinOps',
+    type: 'Article',
+    date: 'Oct 2025',
+    readTime: '4 min',
+    author: { name: 'Diego Souza', role: 'Cloud Architect & FinOps Lead' },
+    sectionLink: 'services',
+    color: '#F97316',
+    gradient: 'from-amber-500/20 via-slate-800/10 to-transparent',
+  },
+  {
+    id: 'data-mesh-brasil',
+    title: 'Data Mesh in Brazil: lessons from 3 real implementations in mid-size companies',
+    excerpt: 'Data Mesh is no longer just big tech theory — it\'s reaching the mid-market. We documented 3 implementations with context, challenges, and results.',
+    content: 'Data Mesh proposes decentralizing data ownership to business domains, treating data as a product. We implemented it in 3 mid-size companies (retail, healthcare, and financial) and documented the results. Key learnings: (1) start with 2-3 domains, not all; (2) the self-service platform is critical; (3) federated governance needs real enforcement; (4) cultural change is harder than technical change. Results: +60% data access speed and -40% pipeline rework.',
+    category: 'Data & Analytics',
+    type: 'Research',
+    date: 'Sep 2025',
+    readTime: '6 min',
+    author: { name: 'Juliana Reis', role: 'Data Architecture Lead' },
+    sectionLink: 'services',
+    color: '#F59E0B',
+    gradient: 'from-yellow-500/20 via-slate-800/10 to-transparent',
+  },
+  {
+    id: 'observabilidade-case',
+    title: 'Observability in critical systems: from reactive to proactive control in 90 days',
+    excerpt: 'A healthcare provider with 2M members had a 99.2% SLA. In 90 days, it reached 99.97%. Here\'s how.',
+    content: 'The healthcare provider faced frequent degradations in authorization and claims processing systems, with a 99.2% SLA and 4h MTTR. In 90 days, we implemented a complete observability stack: metrics (Prometheus/Grafana), logs (ELK), traces (Jaeger), intelligent alerts, and automated runbooks. The SLA rose to 99.97%, MTTR dropped to 18 minutes, and the operations team shifted from reactive to proactive mode, detecting anomalies before user impact.',
+    category: 'Data & Analytics',
+    type: 'Case Study',
+    badge: 'Real Case',
+    date: 'Sep 2025',
+    readTime: '5 min',
+    author: { name: 'Carlos Mendes', role: 'SRE & Observability Lead' },
+    sectionLink: 'cases',
+    color: '#F59E0B',
+    gradient: 'from-amber-600/20 via-slate-800/10 to-transparent',
+  },
+  {
+    id: 'dilemas-cto-2026',
+    title: 'The 5 CTO dilemmas of 2026: AI, teams, legacy, cost, and speed',
+    excerpt: 'We interviewed 42 CTOs from companies with R$200M+ revenue. The emerging patterns reveal a tech leadership profile under unprecedented pressure.',
+    content: 'We interviewed 42 CTOs from Brazilian companies with revenue above R$200M. The 5 most cited dilemmas: (1) "Adopt AI fast vs. adopt with governance," (2) "Build internal teams vs. hire specialized squads," (3) "Modernize legacy vs. maintain stability," (4) "Invest in cloud vs. control costs," (5) "Deliver fast vs. deliver with quality." The research reveals that successful CTOs don\'t resolve these dilemmas — they manage the tension between them with adaptive decision frameworks.',
+    category: 'Squads & Agility',
+    type: 'Research',
+    badge: 'Research 2026',
+    date: 'Aug 2025',
+    readTime: '7 min',
+    author: { name: 'Marcos Oliveira', role: 'VP of Strategy & Innovation' },
+    color: '#3B82F6',
+    gradient: 'from-blue-600/20 via-slate-800/10 to-transparent',
+  },
+  {
+    id: 'podcast-transformacao',
+    title: 'Podcast: Digital transformation without trauma — how Foursys drives change in conservative companies',
+    excerpt: 'Our Principal Architect discusses why 70% of digital transformations fail, the role of change management, and how to create a product culture in traditional companies.',
+    content: 'In this episode of Foursys Talks podcast, Rafael Moura and Marcos Oliveira discuss failure patterns in digital transformation and how Foursys\'s approach — combining technology, processes, and change management — achieves success rates 3x higher than the industry average. Topics covered: organizational resistance, success metrics beyond the technical, executive sponsorship, and the difference between "doing digital" and "being digital."',
+    category: 'Squads & Agility',
+    type: 'Podcast',
+    date: 'Aug 2025',
+    readTime: '32 min',
+    author: { name: 'Rafael Moura', role: 'Principal Architect, AI & Data' },
+    color: '#10B981',
+    gradient: 'from-emerald-500/20 via-slate-800/10 to-transparent',
+  },
+  {
+    id: 'webinar-ia-saude',
+    title: 'Webinar: AI applied in healthcare providers — authorization, fraud, and member journey',
+    excerpt: 'Three real AI use cases in the healthcare sector: claims triage with 85% time reduction, fraud detection, and journey personalization.',
+    content: 'Webinar recording with 3 real cases: (1) AI-automated claims triage — 85% reduction in analysis time and 30% in operational costs. (2) Medical claims fraud detection with anomaly model — R$12M in fraud identified in 6 months. (3) Member journey personalization with provider network recommendations based on profile, history, and geolocation. Full recording with Q&A available.',
+    category: 'Artificial Intelligence',
+    type: 'Webinar',
+    badge: 'Recording',
+    date: 'Jul 2025',
+    readTime: '45 min',
+    author: { name: 'Patricia Costa', role: 'Head of Governance & Compliance' },
+    sectionLink: 'services',
+    color: '#8B5CF6',
+    gradient: 'from-violet-600/20 via-slate-800/10 to-transparent',
+  },
+  {
+    id: 'safe-pratica',
+    title: 'SAFe in practice: what the numbers from 2 years of adoption reveal about agility at scale',
+    excerpt: 'We followed the SAFe journey of 3 clients for 2 years. Delivery velocity, predictability, team satisfaction, and financial impact — all documented.',
+    content: 'We implemented SAFe in 3 large enterprise clients (financial, insurance, and telecom) and followed them for 24 months. Consolidated results: delivery velocity +35%, predictability +48%, team satisfaction +22 NPS points, time-to-market -40%. Main challenges: resistance from mid-level leaders, excessive ceremonies at the start, and difficulty integrating infrastructure teams into the agile flow. The key to success: customizing SAFe to context without losing the fundamental principles.',
+    category: 'Squads & Agility',
+    type: 'Research',
+    date: 'Jul 2025',
+    readTime: '6 min',
+    author: { name: 'Fernanda Alves', role: 'Agile Coach' },
+    sectionLink: 'services',
+    color: '#3B82F6',
+    gradient: 'from-blue-500/20 via-slate-800/10 to-transparent',
+  },
+]
+
+export function getInsights(lang: Language): Insight[] {
+  return lang === 'en' ? insightsEn : insightsPt
+}
+
+export const insights = insightsPt

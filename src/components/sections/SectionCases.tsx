@@ -4,6 +4,7 @@ import { ArrowRight, X, Quote, Shield, CheckCircle2, ChevronRight, Clock, Layers
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { cases } from '../../data/cases'
 import { useVoiceSearch } from '../../hooks/useVoiceSearch'
+import { useLanguage } from '../../i18n'
 import type { CaseStudy } from '../../types'
 
 function MetricBar({ value, label, index }: { value: string; label: string; index: number }) {
@@ -49,28 +50,46 @@ function caseMatchesQuery(c: CaseStudy, q: string): boolean {
 
 const SECTOR_COLORS: Record<string, string> = {
   'Saúde':      'bg-emerald-500/15 text-emerald-400 border-emerald-500/25',
+  'Healthcare': 'bg-emerald-500/15 text-emerald-400 border-emerald-500/25',
   'Financeiro': 'bg-blue-500/15 text-blue-400 border-blue-500/25',
+  'Financial':  'bg-blue-500/15 text-blue-400 border-blue-500/25',
   'Seguros':    'bg-violet-500/15 text-violet-400 border-violet-500/25',
+  'Insurance':  'bg-violet-500/15 text-violet-400 border-violet-500/25',
   'Varejo':     'bg-amber-500/15 text-amber-400 border-amber-500/25',
+  'Retail':     'bg-amber-500/15 text-amber-400 border-amber-500/25',
   'Indústria':  'bg-indigo-500/15 text-indigo-400 border-indigo-500/25',
+  'Industry':   'bg-indigo-500/15 text-indigo-400 border-indigo-500/25',
 }
 
 const TYPE_BADGE: Record<string, string> = {
   'Modernização de Legado':       'bg-foursys-primary text-white',
+  'Legacy Modernization':         'bg-foursys-primary text-white',
   'AI Squad':                      'bg-blue-500 text-white',
   'IA First':                     'bg-violet-500 text-white',
+  'AI First':                     'bg-violet-500 text-white',
   'Engenharia de Dados':          'bg-amber-500 text-white',
+  'Data Engineering':             'bg-amber-500 text-white',
   'Dados & Inteligência':         'bg-amber-500 text-white',
+  'Data & Intelligence':          'bg-amber-500 text-white',
   'Cibersegurança & Zero Trust':  'bg-red-500 text-white',
+  'Cybersecurity & Zero Trust':   'bg-red-500 text-white',
   'Agilidade & Org Design':       'bg-indigo-500 text-white',
+  'Agility & Org Design':        'bg-indigo-500 text-white',
   'Automação de Processos':       'bg-orange-500 text-white',
+  'Process Automation':           'bg-orange-500 text-white',
   'Squad Gerenciada':             'bg-sky-500 text-white',
+  'Managed Squad':                'bg-sky-500 text-white',
   'Plataforma PEGA':              'bg-teal-500 text-white',
+  'PEGA Platform':                'bg-teal-500 text-white',
   'Consultoria de Arquitetura':   'bg-slate-500 text-white',
+  'Architecture Consulting':      'bg-slate-500 text-white',
   'Produto Digital':              'bg-emerald-500 text-white',
+  'Digital Product':              'bg-emerald-500 text-white',
   'Open Finance':                 'bg-green-500 text-white',
   'Inovação':                     'bg-yellow-500 text-black',
+  'Innovation':                   'bg-yellow-500 text-black',
   'Meios de Pagamento':           'bg-cyan-500 text-white',
+  'Payment Methods':              'bg-cyan-500 text-white',
   'DevOps & Cloud':               'bg-lime-500 text-black',
   'UX & Design':                  'bg-rose-500 text-white',
 }
@@ -158,6 +177,8 @@ function CaseCard({ c, index, onOpen }: { c: CaseStudy; index: number; onOpen: (
 }
 
 function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) {
+  const { t } = useLanguage()
+
   return (
     <>
       <motion.div
@@ -189,7 +210,7 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
           <button
             onClick={onClose}
             className="absolute top-4 right-4 p-2 rounded-full bg-black/40 hover:bg-black/60 text-white transition-colors"
-            aria-label="Fechar"
+            aria-label={t('common.close')}
           >
             <X size={18} />
           </button>
@@ -226,14 +247,14 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
               <div className="p-5 rounded-xl bg-red-500/5 border border-red-500/10">
                 <div className="flex items-center gap-2 mb-3">
                   <Target size={14} className="text-red-400" />
-                  <span className="text-xs font-bold text-red-400 uppercase tracking-wider">Desafio</span>
+                  <span className="text-xs font-bold text-red-400 uppercase tracking-wider">{t('cases.challenge')}</span>
                 </div>
                 <p className="text-sm text-foursys-text-muted leading-relaxed">{c.challenge}</p>
               </div>
               <div className="p-5 rounded-xl bg-emerald-500/5 border border-emerald-500/10">
                 <div className="flex items-center gap-2 mb-3">
                   <Wrench size={14} className="text-emerald-400" />
-                  <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">Solução</span>
+                  <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">{t('cases.solution')}</span>
                 </div>
                 <p className="text-sm text-foursys-text-muted leading-relaxed">{c.solution}</p>
               </div>
@@ -245,7 +266,7 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
                 <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
                   <div className="flex items-center gap-2 mb-3">
                     <Layers size={14} className="text-foursys-primary" />
-                    <span className="text-xs font-bold text-foursys-primary uppercase tracking-wider">Contexto</span>
+                    <span className="text-xs font-bold text-foursys-primary uppercase tracking-wider">{t('cases.context')}</span>
                   </div>
                   <p className="text-sm text-foursys-text-muted leading-relaxed">{c.detail.context}</p>
                 </div>
@@ -253,7 +274,7 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
                 <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
                   <div className="flex items-center gap-2 mb-3">
                     <CheckCircle2 size={14} className="text-emerald-400" />
-                    <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">Entrega</span>
+                    <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">{t('cases.deliveryLabel')}</span>
                   </div>
                   <p className="text-sm text-foursys-text-muted leading-relaxed">{c.detail.delivery}</p>
                 </div>
@@ -261,7 +282,7 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
                 <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
                   <div className="flex items-center gap-2 mb-3">
                     <Wrench size={14} className="text-sky-400" />
-                    <span className="text-xs font-bold text-sky-400 uppercase tracking-wider">Detalhes Técnicos</span>
+                    <span className="text-xs font-bold text-sky-400 uppercase tracking-wider">{t('cases.technicalDetails')}</span>
                   </div>
                   <p className="text-sm text-foursys-text-muted leading-relaxed">{c.detail.technicalDetails}</p>
                 </div>
@@ -269,7 +290,7 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
                 <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.06]">
                   <div className="flex items-center gap-2 mb-3">
                     <Shield size={14} className="text-amber-400" />
-                    <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">Desafios Superados</span>
+                    <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">{t('cases.challengesOvercome')}</span>
                   </div>
                   <p className="text-sm text-foursys-text-muted leading-relaxed">{c.detail.challengesOvercome}</p>
                 </div>
@@ -279,13 +300,13 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
                     {c.detail.dimensions.features && (
                       <div className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08]">
                         <Layers size={12} className="text-foursys-primary" />
-                        <span className="text-[11px] text-foursys-text-dim">Features: <span className="text-white font-semibold">{c.detail.dimensions.features}</span></span>
+                        <span className="text-[11px] text-foursys-text-dim">{t('cases.features')}: <span className="text-white font-semibold">{c.detail.dimensions.features}</span></span>
                       </div>
                     )}
                     {c.detail.dimensions.months && (
                       <div className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.08]">
                         <Clock size={12} className="text-foursys-primary" />
-                        <span className="text-[11px] text-foursys-text-dim">Duração: <span className="text-white font-semibold">{c.detail.dimensions.months} meses</span></span>
+                        <span className="text-[11px] text-foursys-text-dim">{t('cases.duration')}: <span className="text-white font-semibold">{c.detail.dimensions.months}</span></span>
                       </div>
                     )}
                     {c.detail.dimensions.hours && (
@@ -303,7 +324,7 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Trophy size={14} className="text-foursys-primary" />
-                <span className="text-xs font-bold text-foursys-primary uppercase tracking-wider">Resultados</span>
+                <span className="text-xs font-bold text-foursys-primary uppercase tracking-wider">{t('cases.results')}</span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {c.results.map((r, i) => (
@@ -317,7 +338,7 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
 
             {/* Stack */}
             <div>
-              <span className="text-[10px] font-bold text-foursys-text-dim uppercase tracking-wider">Stack Tecnológica</span>
+              <span className="text-[10px] font-bold text-foursys-text-dim uppercase tracking-wider">{t('cases.techStack')}</span>
               <div className="flex flex-wrap gap-2 mt-2">
                 {c.stack.map(tech => (
                   <span key={tech} className="text-xs px-3 py-1.5 rounded-lg bg-white/[0.06] text-foursys-text-muted border border-white/[0.08] font-medium">
@@ -353,13 +374,13 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
             onClick={onClose}
             className="text-xs text-foursys-text-dim hover:text-foursys-text transition-colors"
           >
-            Voltar aos cases
+            {t('cases.backToCases')}
           </button>
           <button
             type="button"
             className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-foursys-primary/15 border border-foursys-primary/30 hover:bg-foursys-primary/25 text-foursys-primary text-sm font-semibold transition-all"
           >
-            Tenho um desafio parecido
+            {t('cases.similarChallenge')}
             <ArrowRight size={14} />
           </button>
         </div>
@@ -369,6 +390,7 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
 }
 
 export function SectionCases() {
+  const { t } = useLanguage()
   const [filter, setFilter] = useState('Todos')
   const [selectedCase, setSelectedCase] = useState<CaseStudy | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
@@ -408,15 +430,12 @@ export function SectionCases() {
           transition={{ duration: 0.5 }}
           className="mb-10 md:mb-14"
         >
-          <p className="text-xs text-foursys-text-dim mb-3">+150 clientes satisfeitos</p>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-primary mb-2">{t('cases.badge')}</p>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-4">
-            Mostre ao seu board que<br />
-            tecnologia entrega ROI —{' '}
-            <span className="text-foursys-primary">em semanas</span>
+            {t('cases.title')}
           </h2>
           <p className="text-sm md:text-base text-foursys-text-muted max-w-2xl leading-relaxed">
-            Cada caso segue o formato Problema → Solução → Impacto mensurável.
-            Não contamos histórias — mostramos números.
+            {t('cases.subtitle')}
           </p>
 
           
@@ -440,7 +459,7 @@ export function SectionCases() {
               type="text"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              placeholder="Buscar cases por termo-chave..."
+              placeholder={t('cases.searchPlaceholder')}
               className="flex-1 bg-transparent text-sm text-white placeholder-foursys-text-dim outline-none"
             />
             {searchQuery && (
@@ -448,7 +467,7 @@ export function SectionCases() {
                 type="button"
                 onClick={() => setSearchQuery('')}
                 className="p-1 rounded-full hover:bg-white/10 text-foursys-text-dim hover:text-white transition-colors"
-                aria-label="Limpar busca"
+                aria-label={t('common.clearSearch')}
               >
                 <X size={14} />
               </button>
@@ -464,18 +483,18 @@ export function SectionCases() {
                       ? 'text-red-400'
                       : 'text-foursys-text-dim hover:text-white hover:bg-white/10'
                 }`}
-                aria-label={voice.status === 'listening' ? 'Parar gravação' : 'Buscar por voz'}
+                aria-label={voice.status === 'listening' ? t('common.listening') : t('common.voiceSearch')}
               >
                 {voice.status === 'listening' ? <MicOff size={16} /> : <Mic size={16} />}
               </button>
             )}
           </div>
           {voice.status === 'listening' && (
-            <p className="text-[10px] text-foursys-primary mt-1.5 ml-1 animate-pulse">Ouvindo... fale o termo que deseja buscar</p>
+            <p className="text-[10px] text-foursys-primary mt-1.5 ml-1 animate-pulse">{t('common.listening')}</p>
           )}
           {searchQuery.trim() && (
             <p className="text-[10px] text-foursys-text-dim mt-1.5 ml-1">
-              {filtered.length} {filtered.length === 1 ? 'case encontrado' : 'cases encontrados'} para &ldquo;{searchQuery.trim()}&rdquo;
+              {filtered.length} {t('cases.casesFound')} &ldquo;{searchQuery.trim()}&rdquo;
             </p>
           )}
         </motion.div>
@@ -499,23 +518,23 @@ export function SectionCases() {
                     : 'border-white/[0.1] text-foursys-text-muted hover:border-white/[0.2] hover:text-white'
                 }`}
               >
-                {s}
+                {s === 'Todos' ? t('common.allFilter') : s}
               </button>
             ))}
           </div>
           <div className="flex flex-wrap gap-2">
-            {types.map(t => (
+            {types.map(tp => (
               <button
-                key={t}
+                key={tp}
                 type="button"
-                onClick={() => setTypeFilter(t)}
+                onClick={() => setTypeFilter(tp)}
                 className={`px-3 py-1.5 rounded-full text-[10px] font-semibold border transition-all duration-200 ${
-                  typeFilter === t
+                  typeFilter === tp
                     ? 'bg-white/10 border-white/25 text-white'
                     : 'border-white/[0.06] text-foursys-text-dim hover:border-white/[0.15] hover:text-foursys-text-muted'
                 }`}
               >
-                {t}
+                {tp === 'Todos' ? t('common.allFilter') : tp}
               </button>
             ))}
           </div>
@@ -531,7 +550,7 @@ export function SectionCases() {
         {/* Empty state */}
         {filtered.length === 0 && (
           <div className="text-center py-16">
-            <p className="text-sm text-foursys-text-dim">Nenhum case encontrado com os filtros selecionados.</p>
+            <p className="text-sm text-foursys-text-dim">{t('cases.noResults')}</p>
           </div>
         )}
 
@@ -562,7 +581,7 @@ export function SectionCases() {
             Pronto para ser o próximo caso de sucesso?
           </h3>
           <div className="flex items-center justify-center gap-3 text-xs text-foursys-text-dim">
-            <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-foursys-primary" /> Diagnóstico gratuito</span>
+            <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-foursys-primary" /> {t('cases.freeDiagnosis')}</span>
             <span>·</span>
             <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-foursys-primary" /> Resposta em 24h</span>
             <span>·</span>

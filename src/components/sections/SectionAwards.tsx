@@ -2,14 +2,17 @@ import { motion } from 'framer-motion'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { DynIcon } from '../../utils/iconMap'
 import { awards } from '../../data/awards'
-
-const CATEGORY_LABELS: Record<string, string> = {
-  premio: 'Premiações',
-  cultura: 'Cultura & Pessoas',
-  inovacao: 'Inovação Aberta',
-}
+import { useLanguage } from '../../i18n'
 
 export function SectionAwards() {
+  const { t } = useLanguage()
+
+  const CATEGORY_LABELS: Record<string, string> = {
+    premio: t('awards.categories.awards'),
+    cultura: t('awards.categories.culture'),
+    inovacao: t('awards.categories.openInnovation'),
+  }
+
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-6 md:py-10 max-w-6xl mx-auto">
@@ -22,10 +25,10 @@ export function SectionAwards() {
           className="mb-8 md:mb-10"
         >
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-primary mb-2">
-            Provas de resultado
+            {t('awards.badge')}
           </p>
           <h2 className="text-2xl md:text-4xl font-black text-white leading-none mb-3">
-            Premiações & Reconhecimentos
+            {t('awards.title')}
           </h2>
           <p className="text-foursys-text-muted max-w-2xl text-sm md:text-base leading-relaxed">
             Prêmios conquistados ao longo da nossa história que celebram dedicação, inovação,
@@ -98,8 +101,8 @@ export function SectionAwards() {
           className="mt-8 pt-6 border-t border-white/[0.06] grid grid-cols-2 gap-4 text-center"
         >
           {[
-            { value: `${awards.length}+`, label: 'Premiações' },
-            { value: '26', label: 'Anos de Entrega' },
+            { value: `${awards.length}+`, label: t('awards.categories.awards') },
+            { value: '26', label: t('awards.title') },
           ].map(stat => (
             <div key={stat.label}>
               <div className="text-2xl md:text-3xl font-black text-foursys-primary">{stat.value}</div>

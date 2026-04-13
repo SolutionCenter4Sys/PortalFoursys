@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Clock, BarChart2, MapPin, Copy, CheckCheck, ChevronRight, Star, History, FileDown, Download } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
+import { useLanguage } from '../../i18n'
 import { DynIcon } from '../../utils/iconMap'
 import { getTrailById, trails } from '../../data/trails'
 import { useSessionHistory } from '../../hooks/useSessionHistory'
@@ -31,6 +32,7 @@ function formatShort(seconds: number): string {
 
 export function SessionPanel() {
   const { state, toggleMetricsPanel, getSectionLabel, getSectionIcon, navigate, activeNavigationItems, toggleExportModal } = useApp()
+  const { t, lang } = useLanguage()
   const { save } = useSessionHistory()
   const [elapsed, setElapsed] = useState(0)
   const [copied, setCopied] = useState(false)
@@ -58,39 +60,40 @@ export function SessionPanel() {
   const maxSeconds = visitedStats.length > 0 ? visitedStats[0].totalSeconds : 1
 
   const generateSummary = useCallback(() => {
-    const date = new Date().toLocaleDateString('pt-BR', { dateStyle: 'long' })
+    const dateFmt = lang === 'pt' ? 'pt-BR' : 'en-US'
+    const date = new Date().toLocaleDateString(dateFmt, { dateStyle: 'long' })
     const interestLabels = state.interestedSections.map(s => getSectionLabel(s as AppSection))
     const profileLine = state.sessionProfile
-      ? `[Perfil] ${state.sessionProfile.role?.toUpperCase() ?? '—'} · ${state.sessionProfile.sector ?? '—'} · ${state.sessionProfile.objective ?? '—'}`
+      ? `[${t('session.summaryProfile')}] ${state.sessionProfile.role?.toUpperCase() ?? '—'} · ${state.sessionProfile.sector ?? '—'} · ${state.sessionProfile.objective ?? '—'}`
       : ''
     const lines = [
-      `Apresentação Institucional Foursys`,
-      `Data: ${date}`,
-      `Duração: ${formatHMS(elapsed)}`,
-      `Seções apresentadas: ${visitedStats.length}`,
-      currentTrail ? `Trilha: ${currentTrail.label}` : '',
+      t('session.summaryTitle'),
+      `${t('session.summaryDate')}: ${date}`,
+      `${t('session.summaryDuration')}: ${formatHMS(elapsed)}`,
+      `${t('session.summaryPresented')}: ${visitedStats.length}`,
+      currentTrail ? `${t('session.summaryTrail')}: ${currentTrail.label}` : '',
       profileLine,
       ``,
-      interestLabels.length > 0 ? `Interesse demonstrado em: ${interestLabels.join(', ')}` : '',
+      interestLabels.length > 0 ? `${t('session.summaryInterest')}: ${interestLabels.join(', ')}` : '',
       ``,
-      `── Seções Apresentadas ──`,
+      `── ${t('session.summarySectionsPresented')} ──`,
       ...visitedStats.map(s =>
         `${getSectionIcon(s.section)} ${getSectionLabel(s.section)} — ${formatShort(s.totalSeconds)}`
       ),
       ``,
-      `── Próximos Passos Sugeridos ──`,
+      t('session.summaryNextSteps'),
       visitedStats.some(s => s.section === 'offers-flagship')
-        ? `• Agendar demo das principais ofertas com equipe técnica` : '',
+        ? `• ${t('session.summaryStepOffers')}` : '',
       visitedStats.some(s => s.section === 'cases')
-        ? `• Solicitar relatório completo dos cases apresentados` : '',
+        ? `• ${t('session.summaryStepCases')}` : '',
       visitedStats.some(s => s.section === 'services')
-        ? `• Explorar linhas de serviço e ofertas de IA — PoC em 4–6 semanas` : '',
+        ? `• ${t('session.summaryStepServices')}` : '',
       visitedStats.some(s => s.section === 'client-cases')
-        ? `• Compartilhar cases específicos desta apresentação` : '',
+        ? `• ${t('session.summaryStepClientCases')}` : '',
       visitedStats.some(s => s.section === 'alliances')
-        ? `• Enviar proposta de co-selling com alianças estratégicas` : '',
+        ? `• ${t('session.summaryStepAlliances')}` : '',
       ``,
-      `Gerado pelo FoursysPortal — ${new Date().toLocaleTimeString('pt-BR')}`,
+      `${t('session.summaryGenerated')} — ${new Date().toLocaleTimeString(dateFmt)}`,
     ].filter(l => l !== undefined && l !== null && l !== '')
 
     navigator.clipboard.writeText(lines.join('\n'))
@@ -117,7 +120,7 @@ export function SessionPanel() {
       topSections,
       interestedSections: state.interestedSections,
     })
-  }, [elapsed, visitedStats, currentTrail, getSectionIcon, getSectionLabel, state.interestedSections, state.sessionProfile, state.activeClientId, state.currentTrailId, save])
+  }, [elapsed, visitedStats, currentTrail, getSectionIcon, getSectionLabel, state.interestedSections, state.sessionProfile, state.activeClientId, state.currentTrailId, save, t, lang])
 
   return (
     <AnimatePresence>
@@ -146,11 +149,11 @@ export function SessionPanel() {
               <div className="flex items-center justify-between px-5 py-3">
                 <div className="flex items-center gap-2.5">
                   <BarChart2 size={16} className="text-foursys-primary" />
-                  <span className="text-sm font-bold text-foursys-text">Analytics da Sessão</span>
+                  <span className="text-sm font-bold text-foursys-text">{t('session.analytics')}</span>
                 </div>
                 <button
                   onClick={toggleMetricsPanel}
-                  aria-label="Fechar painel de sessão"
+                  aria-label={t('session.closePanel')}
                   className="p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
                 >
                   <X size={15} />
@@ -167,7 +170,7 @@ export function SessionPanel() {
                   }`}
                 >
                   <BarChart2 size={11} />
-                  Sessão
+                  {t('session.sessionTab')}
                 </button>
                 <button
                   onClick={() => setActiveTab('history')}
@@ -178,7 +181,7 @@ export function SessionPanel() {
                   }`}
                 >
                   <History size={11} />
-                  Histórico
+                  {t('session.historyTab')}
                 </button>
               </div>
             </div>
@@ -190,7 +193,7 @@ export function SessionPanel() {
               <div className="flex flex-col items-center p-3 rounded-xl bg-foursys-dark-3/60 border border-white/[0.05]">
                 <Clock size={13} className="text-foursys-primary mb-1.5" />
                 <span className="text-base font-black text-foursys-text font-mono">{formatHMS(elapsed)}</span>
-                <span className="text-[10px] text-foursys-text-dim mt-0.5">Duração</span>
+                <span className="text-[10px] text-foursys-text-dim mt-0.5">{t('session.duration')}</span>
               </div>
               {/* Seções */}
               <div className="flex flex-col items-center p-3 rounded-xl bg-foursys-dark-3/60 border border-white/[0.05]">
@@ -198,7 +201,7 @@ export function SessionPanel() {
                 <span className="text-base font-black text-foursys-text">
                   {visitedStats.length}<span className="text-foursys-text-dim text-xs font-normal">/{activeNavigationItems.length}</span>
                 </span>
-                <span className="text-[10px] text-foursys-text-dim mt-0.5">Seções</span>
+                <span className="text-[10px] text-foursys-text-dim mt-0.5">{t('session.sections')}</span>
               </div>
               {/* Engajamento */}
               <div className="flex flex-col items-center p-3 rounded-xl bg-foursys-dark-3/60 border border-white/[0.05]">
@@ -207,7 +210,7 @@ export function SessionPanel() {
                   {visitedStats.length > 0 ? Math.round(visitedStats.reduce((a, s) => a + s.totalSeconds, 0) / visitedStats.length) : 0}
                   <span className="text-foursys-text-dim text-xs font-normal">s</span>
                 </span>
-                <span className="text-[10px] text-foursys-text-dim mt-0.5">Média/seção</span>
+                <span className="text-[10px] text-foursys-text-dim mt-0.5">{t('session.avgPerSection')}</span>
               </div>
             </div>
 
@@ -243,7 +246,7 @@ export function SessionPanel() {
                       className="mt-2 w-full flex items-center justify-between px-3 py-2 rounded-lg bg-white/[0.04] hover:bg-foursys-primary/10 border border-transparent hover:border-foursys-primary/30 transition-all duration-150 group"
                     >
                       <span className="text-xs text-foursys-text-muted group-hover:text-foursys-text">
-                        Próximo: <span className="font-medium">{getSectionLabel(nextStep.sectionId)}</span>
+                        {t('session.next')} <span className="font-medium">{getSectionLabel(nextStep.sectionId)}</span>
                       </span>
                       <ChevronRight size={12} className="text-foursys-text-dim group-hover:text-foursys-primary transition-colors" />
                     </button>
@@ -258,7 +261,7 @@ export function SessionPanel() {
                 <div className="flex items-center gap-1.5 mb-2">
                   <Star size={11} className="fill-amber-400 text-amber-400" />
                   <span className="text-[10px] font-semibold text-amber-300/80 uppercase tracking-widest">
-                    Interesses Marcados
+                    {t('session.interests')}
                   </span>
                 </div>
                 <div className="flex flex-wrap gap-1.5">
@@ -284,7 +287,7 @@ export function SessionPanel() {
                   <div className="flex items-center gap-1.5 mb-2">
                     <Clock size={11} className="text-emerald-400" />
                     <span className="text-[10px] font-semibold text-emerald-300/80 uppercase tracking-widest">
-                      Alto Engajamento (&gt;60s)
+                      {t('session.highEngagement')} (&gt;60s)
                     </span>
                   </div>
                   <div className="flex flex-wrap gap-1.5">
@@ -313,7 +316,7 @@ export function SessionPanel() {
                   <div className="flex items-center gap-1.5 mb-2">
                     <ChevronRight size={11} className="text-foursys-cyan" />
                     <span className="text-[10px] font-semibold text-foursys-cyan/80 uppercase tracking-widest">
-                      CTAs Acionados
+                      {t('session.ctasTriggered')}
                     </span>
                   </div>
                   <div className="flex flex-wrap gap-1.5">
@@ -333,12 +336,12 @@ export function SessionPanel() {
             {/* Lista de seções visitadas */}
             <div className="flex-1 overflow-y-auto custom-scrollbar px-4 py-3">
               <div className="text-[10px] font-semibold text-foursys-text-dim uppercase tracking-widest mb-3">
-                Tempo por Seção
+                {t('session.timePerSection')}
               </div>
 
               {visitedStats.length === 0 ? (
                 <p className="text-xs text-foursys-text-dim text-center py-8">
-                  Navegue entre seções para acumular dados
+                  {t('session.navigateHint')}
                 </p>
               ) : (
                 <div className="space-y-2">
@@ -395,29 +398,29 @@ export function SessionPanel() {
             {/* Footer — trilhas disponíveis */}
             <div className="px-4 py-3 border-t border-white/[0.06]">
               <div className="text-[10px] font-semibold text-foursys-text-dim uppercase tracking-widest mb-2">
-                Trilhas Disponíveis
+                {t('session.availableTrails')}
               </div>
               <div className="grid grid-cols-2 gap-1.5 mb-3">
-                {trails.map(t => (
+                {trails.map(tr => (
                   <button
-                    key={t.id}
+                    key={tr.id}
                     onClick={() => {
                       toggleMetricsPanel()
                     }}
                     className={`flex items-center gap-2 px-2.5 py-2 rounded-lg text-left transition-all duration-150
-                      ${state.currentTrailId === t.id
+                      ${state.currentTrailId === tr.id
                         ? 'border'
                         : 'bg-white/[0.03] hover:bg-white/[0.06] border border-transparent'
                       }`}
-                    style={state.currentTrailId === t.id ? {
-                      borderColor: `${t.colorHex}50`,
-                      backgroundColor: `${t.colorHex}12`,
+                    style={state.currentTrailId === tr.id ? {
+                      borderColor: `${tr.colorHex}50`,
+                      backgroundColor: `${tr.colorHex}12`,
                     } : {}}
                   >
-                    <DynIcon name={t.icon} size={16} className="text-foursys-text-muted" />
+                    <DynIcon name={tr.icon} size={16} className="text-foursys-text-muted" />
                     <div>
-                      <div className="text-[10px] font-semibold text-foursys-text leading-tight">{t.label}</div>
-                      <div className="text-[9px] text-foursys-text-dim">{t.duration}</div>
+                      <div className="text-[10px] font-semibold text-foursys-text leading-tight">{tr.label}</div>
+                      <div className="text-[9px] text-foursys-text-dim">{tr.duration}</div>
                     </div>
                   </button>
                 ))}
@@ -430,8 +433,8 @@ export function SessionPanel() {
                   className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-foursys-primary/15 border border-foursys-primary/30 hover:bg-foursys-primary/22 hover:border-foursys-primary/50 text-foursys-primary transition-all duration-150 font-semibold text-sm shadow-[0_0_15px_rgba(255,102,0,0.12)]"
                 >
                   {copied
-                    ? <><CheckCheck size={14} /> Copiado!</>
-                    : <><Copy size={14} /> Gerar Resumo</>
+                    ? <><CheckCheck size={14} /> {t('session.copied')}</>
+                    : <><Copy size={14} /> {t('session.generateSummary')}</>
                   }
                 </button>
                 <button
@@ -461,16 +464,16 @@ export function SessionPanel() {
                     URL.revokeObjectURL(url)
                   }}
                   className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-white/[0.05] border border-white/[0.08] text-foursys-text-muted hover:text-foursys-text hover:bg-white/[0.08] transition-all text-xs font-medium"
-                  aria-label="Exportar resumo JSON"
-                  title="Exportar resumo da sessão"
+                  aria-label={t('session.exportJson')}
+                  title={t('session.exportSessionTitle')}
                 >
                   <Download size={14} />
                 </button>
                 <button
                   onClick={() => { toggleMetricsPanel(); toggleExportModal() }}
                   className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-white/[0.05] border border-white/[0.08] text-foursys-text-muted hover:text-foursys-text hover:bg-white/[0.08] transition-all text-xs font-medium"
-                  aria-label="Exportar para PDF"
-                  title="Exportar para PDF"
+                  aria-label={t('session.exportPdfAria')}
+                  title={t('session.exportPdfAria')}
                 >
                   <FileDown size={14} />
                 </button>

@@ -25,7 +25,7 @@ export interface ClientSection {
   label: string
   description: string
   icon: string
-  component: 'client-opening' | 'client-insights' | 'client-cases' | 'client-extra-1'
+  component: 'client-opening' | 'client-insights' | 'client-cases' | 'client-extra-1' | 'client-extra-2'
 }
 
 export interface ClientConfig {
@@ -185,6 +185,7 @@ export type AppSection =
   | 'client-insights'
   | 'client-cases'
   | 'client-extra-1'
+  | 'client-extra-2'
 
 export interface NavigationItem {
   id: AppSection

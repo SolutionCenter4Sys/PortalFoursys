@@ -3,21 +3,30 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { DynIcon } from '../../utils/iconMap'
+import { useLanguage } from '../../i18n'
 import { timeline } from '../../data/kpis'
 import { useApp } from '../../context/AppContext'
 
 const ERA_STYLES: Record<string, { color: string; glow: string; bg: string; border: string }> = {
-  Origem:          { color: '#FF6600', glow: 'rgba(255,102,0,0.4)',  bg: 'from-orange-500/12 to-orange-600/4', border: 'border-orange-500/25' },
-  Crescimento:     { color: '#00C2E0', glow: 'rgba(0,194,224,0.4)',  bg: 'from-cyan-500/12 to-cyan-600/4',     border: 'border-cyan-500/25' },
+  // PT
+  Origem:            { color: '#FF6600', glow: 'rgba(255,102,0,0.4)',  bg: 'from-orange-500/12 to-orange-600/4', border: 'border-orange-500/25' },
+  Crescimento:       { color: '#00C2E0', glow: 'rgba(0,194,224,0.4)',  bg: 'from-cyan-500/12 to-cyan-600/4',     border: 'border-cyan-500/25' },
   'Expansão Global': { color: '#8B5CF6', glow: 'rgba(139,92,246,0.4)', bg: 'from-violet-500/12 to-violet-600/4', border: 'border-violet-500/25' },
-  Inovação:        { color: '#4ADE80', glow: 'rgba(74,222,128,0.4)', bg: 'from-green-500/12 to-green-600/4',   border: 'border-green-500/25' },
-  Futuro:          { color: '#FACC15', glow: 'rgba(250,204,21,0.4)', bg: 'from-yellow-500/12 to-yellow-600/4', border: 'border-yellow-500/25' },
+  Inovação:          { color: '#4ADE80', glow: 'rgba(74,222,128,0.4)', bg: 'from-green-500/12 to-green-600/4',   border: 'border-green-500/25' },
+  Futuro:            { color: '#FACC15', glow: 'rgba(250,204,21,0.4)', bg: 'from-yellow-500/12 to-yellow-600/4', border: 'border-yellow-500/25' },
+  // EN
+  Origin:              { color: '#FF6600', glow: 'rgba(255,102,0,0.4)',  bg: 'from-orange-500/12 to-orange-600/4', border: 'border-orange-500/25' },
+  Growth:              { color: '#00C2E0', glow: 'rgba(0,194,224,0.4)',  bg: 'from-cyan-500/12 to-cyan-600/4',     border: 'border-cyan-500/25' },
+  'Global Expansion':  { color: '#8B5CF6', glow: 'rgba(139,92,246,0.4)', bg: 'from-violet-500/12 to-violet-600/4', border: 'border-violet-500/25' },
+  Innovation:          { color: '#4ADE80', glow: 'rgba(74,222,128,0.4)', bg: 'from-green-500/12 to-green-600/4',   border: 'border-green-500/25' },
+  Future:              { color: '#FACC15', glow: 'rgba(250,204,21,0.4)', bg: 'from-yellow-500/12 to-yellow-600/4', border: 'border-yellow-500/25' },
 }
 
 const DEFAULT_ERA = { color: '#FF6600', glow: 'rgba(255,102,0,0.3)', bg: 'from-white/5 to-transparent', border: 'border-white/10' }
 
 export function SectionTimeline() {
   const { navigate } = useApp()
+  const { t } = useLanguage()
   const [expandedIdx, setExpandedIdx] = useState<number | null>(null)
   const [activeEra, setActiveEra] = useState<string | null>(null)
 
@@ -48,13 +57,13 @@ export function SectionTimeline() {
           className="text-center mb-8 md:mb-10"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-sm mb-4">
-            Nossa Trajetória
+            {t('timeline.badge')}
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-3">
-            De SP para o mundo em 26 anos
+            {t('timeline.title')}
           </h2>
           <p className="text-base md:text-lg text-foursys-text-muted max-w-2xl mx-auto leading-relaxed">
-            A evolução de uma consultoria que transformou os nossos clientes — e não parou por aí.
+            {t('timeline.subtitle')}
           </p>
         </motion.div>
 
@@ -73,7 +82,7 @@ export function SectionTimeline() {
                 : 'bg-white/[0.03] border-white/[0.08] text-foursys-text-dim hover:text-foursys-text-muted hover:border-white/15'
             }`}
           >
-            Todas
+            {t('common.all')}
           </button>
           {eras.map(era => {
             const style = ERA_STYLES[era] ?? DEFAULT_ERA
@@ -271,9 +280,9 @@ export function SectionTimeline() {
         >
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-2">
             <div>
-              <p className="text-sm font-bold text-white">26 anos depois, a missão continua.</p>
+              <p className="text-sm font-bold text-white">{t('timeline.ctaTitle')}</p>
               <p className="text-xs text-foursys-text-dim mt-0.5">
-                Conheça as empresas que confiam na Foursys para transformar seus negócios.
+                {t('timeline.ctaSubtitle')}
               </p>
             </div>
             <button
@@ -281,7 +290,7 @@ export function SectionTimeline() {
               onClick={() => navigate('clients-showcase')}
               className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-foursys-primary/15 border border-foursys-primary/30 hover:bg-foursys-primary/25 hover:border-foursys-primary/50 text-foursys-primary text-sm font-semibold transition-all duration-200 group"
             >
-              Nossos Clientes
+              {t('timeline.ctaButton')}
               <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
             </button>
           </div>

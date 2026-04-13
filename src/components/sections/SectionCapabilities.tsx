@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { useLanguage } from '../../i18n'
 import { capabilities } from '../../data/cases'
 
 const levelColors = {
-  expert: { bar: 'bg-foursys-cyan', label: 'Expert', text: 'text-foursys-cyan' },
-  advanced: { bar: 'bg-foursys-primary', label: 'Avançado', text: 'text-foursys-primary-light' },
-  solid: { bar: 'bg-foursys-text-muted', label: 'Sólido', text: 'text-foursys-text-muted' }
+  expert: { bar: 'bg-foursys-cyan', labelKey: 'capabilities.levels.expert', text: 'text-foursys-cyan' },
+  advanced: { bar: 'bg-foursys-primary', labelKey: 'capabilities.levels.advanced', text: 'text-foursys-primary-light' },
+  solid: { bar: 'bg-foursys-text-muted', labelKey: 'capabilities.levels.solid', text: 'text-foursys-text-muted' }
 }
 
 const levelWidth = {
@@ -15,6 +16,8 @@ const levelWidth = {
 }
 
 export function SectionCapabilities() {
+  const { t } = useLanguage()
+
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-6 md:py-12 max-w-6xl mx-auto">
@@ -24,13 +27,13 @@ export function SectionCapabilities() {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-sm mb-4">
-            Capacidades Técnicas
+            {t('capabilities.badge')}
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
-            Stack e expertise por área
+            {t('capabilities.title')}
           </h2>
           <p className="text-lg text-foursys-text-muted max-w-2xl mx-auto">
-            Nossa capacidade técnica mapeada por área — com nível de proficiência comprovado em projetos reais.
+            {t('capabilities.subtitle')}
           </p>
         </motion.div>
 
@@ -39,7 +42,7 @@ export function SectionCapabilities() {
           {Object.entries(levelColors).map(([key, val]) => (
             <div key={key} className="flex items-center gap-2">
               <div className={`w-3 h-3 rounded-full ${val.bar}`} />
-              <span className={`text-xs ${val.text}`}>{val.label}</span>
+              <span className={`text-xs ${val.text}`}>{t(val.labelKey)}</span>
             </div>
           ))}
         </div>
@@ -60,7 +63,7 @@ export function SectionCapabilities() {
                   <div key={tech.name}>
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-sm text-foursys-text-muted">{tech.name}</span>
-                      <span className={`text-xs ${levelColors[tech.level].text}`}>{levelColors[tech.level].label}</span>
+                      <span className={`text-xs ${levelColors[tech.level].text}`}>{t(levelColors[tech.level].labelKey)}</span>
                     </div>
                     <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
                       <motion.div
@@ -84,7 +87,7 @@ export function SectionCapabilities() {
           className="mt-8 p-5 rounded-2xl bg-foursys-surface/30 border border-white/8 text-center"
         >
           <p className="text-sm text-foursys-text-muted">
-            200+ certificações técnicas · Plano de capacitação contínua · Times dedicados por especialidade
+            {t('capabilities.footer')}
           </p>
         </motion.div>
       </div>

@@ -1,13 +1,31 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, CheckCircle2, X } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { InterestButton } from '../ui/InterestButton'
 import { useApp } from '../../context/AppContext'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
+import { useLanguage } from '../../i18n'
+
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+interface FlagshipOffer {
+  id: string
+  badge: string
+  title: string
+  tagline: string
+  description: string
+  metrics: { value: string; label: string }[]
+  highlights: string[]
+  color: string
+  bg: string
+  border: string
+  navigateTo: 'services'
+}
+
 // ─── Dados das ofertas flagship ───────────────────────────────────────────────
 
-const flagshipOffers = [
+const FLAGSHIP_OFFERS_PT: FlagshipOffer[] = [
   {
     id: 'ai-squad',
     badge: 'Destaque',
@@ -137,6 +155,136 @@ const flagshipOffers = [
   },
 ]
 
+const FLAGSHIP_OFFERS_EN: FlagshipOffer[] = [
+  {
+    id: 'ai-squad',
+    badge: 'Featured',
+    title: 'AI Squad',
+    tagline: 'Value in weeks, not months.',
+    description:
+      'Human + AI operational squad with over 20 specialized agents per phase (Discovery → Design → Development → Quality → Deploy). Proprietary SDD Framework, complete documentation (C4, ADRs, API specs), real-time performance dashboards and agents trained on your stack and domain.',
+    metrics: [
+      { value: '65%', label: 'Lead time reduction' },
+      { value: '80%', label: 'Productivity gain' },
+      { value: '70%', label: 'Rework reduction' },
+    ],
+    highlights: [
+      'Squad: PO, AI Engineer, Devs and QA amplified by 20+ AI agents',
+      'SDD Framework (OpenSpec) with agents per cycle phase',
+      'Complete documentation: C4, ADRs, user stories, API specs and tests',
+      'Dashboards: velocity, burndown, costs, AI acceptance rate',
+      'Agents trained on the client\'s stack, domain and business rules',
+      'GDPR & EU AI Act compliance, isolated cloud per client',
+      'Full autonomy: open code for evolution, no lock-in',
+    ],
+    color: '#FF6600',
+    bg: 'from-orange-500/15 to-orange-600/5',
+    border: 'border-orange-500/30',
+    navigateTo: 'services' as const,
+  },
+  {
+    id: 'modernizacao',
+    badge: 'Featured',
+    title: 'Legacy Modernization',
+    tagline: 'From legacy to cloud, trauma-free.',
+    description:
+      'Integrated solution with 4AI accelerators (Rule Extractor, Code Converter, Certification) combining technology transformation, advanced security and human upskilling. 6-week release cycles with AI automation + human supervision (50/50).',
+    metrics: [
+      { value: '+30%', label: 'Cost reduction' },
+      { value: '+70%', label: 'Time-to-market acceleration' },
+      { value: '+60%', label: 'Code security' },
+    ],
+    highlights: [
+      '4AI Accelerators: rule extraction, code conversion and certification',
+      'Coverage: COBOL, VB6, .NET, Java, Angular, React, Vue',
+      '50/50 Automation: AI + human supervision in each cycle',
+      'Scalable 6-week release cycles',
+      '3 models: Essential, Strategic and Evolution',
+      'Integrated security, observability and FinOps',
+      'POC/POT with real legacy sample before contracting',
+    ],
+    color: '#8B5CF6',
+    bg: 'from-violet-500/15 to-violet-600/5',
+    border: 'border-violet-500/30',
+    navigateTo: 'services' as const,
+  },
+  {
+    id: 'ciberseguranca',
+    badge: 'Featured',
+    title: 'Cybersecurity',
+    tagline: 'Protection, compliance and digital risk management.',
+    description:
+      'We mitigate vulnerabilities and strengthen controls to protect assets, meet regulations and reduce incident exposure. Integrated approach with control automation and continuous monitoring.',
+    metrics: [
+      { value: '-80%', label: 'Vulnerability reduction' },
+      { value: '+70%', label: 'Regulatory compliance' },
+      { value: '-60%', label: 'Incident response time' },
+    ],
+    highlights: [
+      'Integrated vision: security as an attribute, not a barrier',
+      'Experience in regulated environments (LGPD, Bacen, PCI-DSS)',
+      'Control automation and continuous monitoring',
+      'Security culture embedded in development teams',
+    ],
+    color: '#84CC16',
+    bg: 'from-lime-500/15 to-lime-600/5',
+    border: 'border-lime-500/30',
+    navigateTo: 'services' as const,
+  },
+  {
+    id: 'fourblox',
+    badge: 'Featured',
+    title: 'FourBlox',
+    tagline: 'No more endless projects. Your digital solution ready in 30 days.',
+    description:
+      'Modular subscription-based solution platform with 18+ ready solutions across 9 categories (People Management, Operations, Finance, Sales, Projects, ESG, Data & Analytics, Governance). Structured diagnosis, custom design, tailored configuration and production in up to 30 days.',
+    metrics: [
+      { value: '30',    label: 'Days to go live' },
+      { value: '18+',   label: 'Solutions available' },
+      { value: 'SaaS',  label: 'Subscription model' },
+    ],
+    highlights: [
+      'Production in 30 days — no 6 to 12-month projects',
+      'Subscription model with financial predictability',
+      'Smart modularity: activate only what creates value',
+      'User-centered UX: real adoption, not imposition',
+      'Continuous evolution based on data',
+      'Pre-configured kits for accelerated results',
+      '9 categories and 18+ solutions ready to customize',
+    ],
+    color: '#4ADE80',
+    bg: 'from-green-500/15 to-green-600/5',
+    border: 'border-green-500/30',
+    navigateTo: 'services' as const,
+  },
+  {
+    id: 'quality-ia',
+    badge: 'Featured',
+    title: 'Quality & AI Testing',
+    tagline: 'Quality in scope isn\'t an extra cost — it\'s what prevents greater cost.',
+    description:
+      'Software Quality practice with two towers: COE (Excellence — methodology, standards, tools, indicators) and CSC (Operations — QA in squads, GMUD certification, functional automation). Shift-Left Framework with Automator Agent generating 120+ scenarios/month vs 20 manual.',
+    metrics: [
+      { value: '+10x', label: 'Risk visibility' },
+      { value: '+80%', label: 'Critical failure prevention' },
+      { value: '+6x',  label: 'Test acceleration' },
+    ],
+    highlights: [
+      'Two towers: COE (Excellence) + CSC (Operations) — plug\'n\'play',
+      'Shift-Left Framework: quality anticipated from scenario design',
+      'Automator Agent: 120+ scenarios/month (6x more than manual)',
+      'DataForge: synthetic data integrated in 1 day, no data bias',
+      'BDD/Gherkin scenarios with 70%+ test coverage',
+      'Dashboards with 5+ indicators (Planned vs Executed, Defects, Status)',
+      'GMUD certification with critical path automation in 2 days',
+    ],
+    color: '#F59E0B',
+    bg: 'from-amber-500/15 to-amber-600/5',
+    border: 'border-amber-500/30',
+    navigateTo: 'services' as const,
+  },
+]
+
 // ─── Modal de detalhe da oferta ───────────────────────────────────────────────
 
 function OfferModal({
@@ -144,11 +292,12 @@ function OfferModal({
   onClose,
   onNavigate,
 }: {
-  offer: (typeof flagshipOffers)[0]
+  offer: FlagshipOffer
   onClose: () => void
   onNavigate: () => void
 }) {
   const trapRef = useFocusTrap(true)
+  const { t } = useLanguage()
 
   return (
     <motion.div
@@ -176,7 +325,7 @@ function OfferModal({
         >
           <button
             onClick={onClose}
-            aria-label="Fechar"
+            aria-label={t('common.close')}
             className="absolute top-4 right-4 p-2 rounded-xl hover:bg-white/10 text-foursys-text-muted transition-colors"
           >
             <X size={16} />
@@ -223,7 +372,7 @@ function OfferModal({
             className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-sm transition-all hover:opacity-90"
             style={{ backgroundColor: `${offer.color}20`, color: offer.color, border: `1px solid ${offer.color}40` }}
           >
-            Ver detalhes completos <ArrowRight size={14} />
+            {t('common.seeDetails')} <ArrowRight size={14} />
           </button>
         </div>
       </motion.div>
@@ -238,10 +387,12 @@ function OfferCard({
   index,
   onClick,
 }: {
-  offer: (typeof flagshipOffers)[0]
+  offer: FlagshipOffer
   index: number
   onClick: () => void
 }) {
+  const { t } = useLanguage()
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -283,7 +434,7 @@ function OfferCard({
         className="flex items-center gap-1 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity"
         style={{ color: offer.color }}
       >
-        Saiba mais <ArrowRight size={12} />
+        {t('common.seeMore')} <ArrowRight size={12} />
       </div>
     </motion.div>
   )
@@ -293,7 +444,12 @@ function OfferCard({
 
 export function SectionOffersFlag() {
   const { navigate, setDeepDiveHint } = useApp()
-  const [selectedOffer, setSelectedOffer] = useState<(typeof flagshipOffers)[0] | null>(null)
+  const { t, lang } = useLanguage()
+  const flagshipOffers = useMemo(
+    () => lang === 'pt' ? FLAGSHIP_OFFERS_PT : FLAGSHIP_OFFERS_EN,
+    [lang]
+  )
+  const [selectedOffer, setSelectedOffer] = useState<FlagshipOffer | null>(null)
 
   return (
     <SectionWrapper>
@@ -309,22 +465,22 @@ export function SectionOffersFlag() {
           <div className="flex items-start md:items-end justify-between flex-wrap gap-3">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-primary mb-2">
-                Nossas principais ofertas
+                {t('offersFlag.badge')}
               </p>
               <h2 className="text-2xl md:text-4xl font-black text-white leading-none">
-                Principais Ofertas
+                {t('offersFlag.title')}
               </h2>
               <p className="text-foursys-text-muted mt-2 text-sm md:text-base max-w-xl leading-relaxed">
-                Impacto comprovado — valor em semanas, governança enterprise e resultado mensurável.
+                {t('offersFlag.subtitle')}
               </p>
             </div>
 
             <div className="flex items-center gap-2 md:gap-3 flex-wrap">
               <InterestButton section="offers-flagship" />
               {[
-                { value: '26', label: 'anos' },
+                { value: '26', label: t('common.years') },
                 { value: '3,6%', label: 'turnover' },
-                { value: '30K+', label: 'projetos' },
+                { value: '30K+', label: t('common.projects') },
               ].map(stat => (
                 <div key={stat.label} className="text-center px-3 md:px-4 py-1.5 md:py-2 rounded-xl bg-foursys-surface/40 border border-white/[0.08]">
                   <div className="text-base md:text-lg font-black text-foursys-primary">{stat.value}</div>

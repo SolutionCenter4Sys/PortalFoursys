@@ -1,6 +1,7 @@
 import type { FAQItem } from '../types'
+import type { Language } from '../i18n/types'
 
-export const faqItems: FAQItem[] = [
+const faqItemsPt: FAQItem[] = [
   {
     id: 'faq-1',
     category: 'Institucional',
@@ -122,3 +123,132 @@ export const faqItems: FAQItem[] = [
     sectionLabel: 'Ver Modelos de Delivery'
   }
 ]
+
+const faqItemsEn: FAQItem[] = [
+  {
+    id: 'faq-1',
+    category: 'About Us',
+    question: 'What is Foursys and what sets it apart?',
+    answer: 'Foursys is a technology company with 26 years of market experience, specializing in digital transformation for regulated industries. Our differentiator lies in the combination of deep technical expertise, consolidated agile methodology with enterprise governance, and hybrid AI agents that accelerate the delivery of complex projects. A 3.6% turnover rate and 30K+ delivered projects confirm our consistency.',
+    sectionLink: 'identity',
+    sectionLabel: 'See About Us'
+  },
+  {
+    id: 'faq-2',
+    category: 'About Us',
+    question: 'Does Foursys have experience with major banks?',
+    answer: 'Yes. Foursys has 26 years of experience working with the largest banks and insurance companies in Brazil and abroad. Our portfolio includes core banking projects, legacy system modernization, data engineering, AI-powered quality assurance, and cybersecurity — always in mission-critical environments and regulated industries.',
+    sectionLink: 'cases',
+    sectionLabel: 'See Case Studies'
+  },
+  {
+    id: 'faq-3',
+    category: 'About Us',
+    question: 'Is Foursys a domestic company or does it have a global presence?',
+    answer: 'We have a global presence with offices in 8 cities: Barueri (headquarters), São Paulo (Paulista and Inovabra Habitat), Curitiba, Rio de Janeiro, Lisbon (Portugal), Boca Raton (USA), and Tel Aviv (Israel). We operate across 4 global regions with both remote and on-site delivery capabilities.',
+    sectionLink: 'global',
+    sectionLabel: 'See Global Presence'
+  },
+  {
+    id: 'faq-4',
+    category: 'Services',
+    question: 'What types of services does Foursys offer?',
+    answer: 'We offer 8 main service lines: System Modernization, Data Engineering & AI, Digital Product Development, Cyber Security, Quality & Automation, Cloud & DevOps, Salesforce & CRM, and Fourblock (products in 30 days). Each line has dedicated teams and proprietary methodologies.',
+    sectionLink: 'services',
+    sectionLabel: 'See Service Lines'
+  },
+  {
+    id: 'faq-5',
+    category: 'Services',
+    question: 'How does Foursys\'s delivery structure work?',
+    answer: 'We work with 4 models: (1) Project — defined scope and timeline; (2) Dedicated Squad — an exclusive team for a set period; (3) Staff Augmentation — professionals integrated into the client\'s team; (4) Squad + AI Agents — our most advanced model, where professionals are amplified by AI agents, achieving 3x the delivery speed of a traditional squad.',
+    sectionLink: 'delivery',
+    sectionLabel: 'See Delivery Structure'
+  },
+  {
+    id: 'faq-6',
+    category: 'Services',
+    question: 'What is Fourblock and how does it work?',
+    answer: 'Fourblock is our model for delivering digital products in 30 days. We use a catalog of pre-built blocks (authentication, dashboards, integrations, etc.) that are combined and customized to the client\'s specific needs. This reduces development time by up to 70% without compromising quality or governance.',
+    sectionLink: 'services',
+    sectionLabel: 'See Service Lines'
+  },
+  {
+    id: 'faq-7',
+    category: 'Technology',
+    question: 'What technologies does Foursys specialize in?',
+    answer: 'Our stack covers the entire technology chain: Cloud (AWS, Azure, Kubernetes), Frontend (React, Angular, React Native), Backend (Java/Spring Boot, Node.js, Python), Data (Databricks, Spark, LLMs), Security (SAST, DAST, pentesting, BACEN compliance), and DevOps (CI/CD, AI-Powered Quality & Testing). We have over 200 professionals certified in various technologies.',
+    sectionLink: 'capabilities',
+    sectionLabel: 'See Technical Capabilities'
+  },
+  {
+    id: 'faq-8',
+    category: 'Technology',
+    question: 'What is the AI-Powered Quality & Testing Framework and how does it work?',
+    answer: 'AI-Powered Quality & Testing is our proprietary intelligent test automation framework, already approved by Santander for corporate use. It uses LLMs to automatically generate test cases, identify regression risks, and suggest change impact analyses. Practical results: 60% reduction in production defects and 3x faster release cycles.',
+    sectionLink: 'quality-ia',
+    sectionLabel: 'See AI-Powered Quality & Testing Framework'
+  },
+  {
+    id: 'faq-9',
+    category: 'Technology',
+    question: 'How does Foursys modernize legacy systems without halting operations?',
+    answer: 'We use the SDD (Software Defined Delivery) approach: incremental modernization, never big-bang rewrite. We identify the highest-risk and highest-value modules, create an API layer, gradually decompose into microservices, and migrate functionalities one by one — with the legacy operation 100% active. The client never experiences downtime.',
+    sectionLink: 'services',
+    sectionLabel: 'See SDD Approach'
+  },
+  {
+    id: 'faq-10',
+    category: 'Technology',
+    question: 'How do Hybrid AI Agents work?',
+    answer: 'Hybrid agents combine human creativity and judgment with AI speed and consistency. In practice: a human analyst defines the objective, an AI agent performs repetitive tasks (boilerplate code, testing, documentation, standards review), and the human reviews and approves. This multiplies individual capacity without sacrificing governance.',
+    sectionLink: 'services',
+    sectionLabel: 'See Service Lines'
+  },
+  {
+    id: 'faq-11',
+    category: 'Partnerships',
+    question: 'What are Foursys\'s strategic alliances?',
+    answer: 'We are certified partners of AWS, Databricks, Salesforce, and Pega. Each alliance gives us access to advanced training, privileged technical support, solution co-development, and credentials that increase client confidence in project execution on their respective platforms.',
+    sectionLink: 'alliances',
+    sectionLabel: 'See Alliances'
+  },
+  {
+    id: 'faq-12',
+    category: 'Partnerships',
+    question: 'What is FourMakers?',
+    answer: 'FourMakers is our community and innovation program that connects clients, partners, and our professionals to co-create solutions and accelerate innovative projects. We regularly host events, hackathons, and co-creation labs.',
+    sectionLink: 'alliances',
+    sectionLabel: 'See Alliances'
+  },
+  {
+    id: 'faq-13',
+    category: 'Santander',
+    question: 'What has Foursys delivered for Santander?',
+    answer: 'We have a significant track record with Santander: the SHI Real Estate Portal (complete digitalization of the real estate portfolio), the Quality AI Framework (approved and in corporate use), as well as ongoing projects in modernization, data, and security. Santander has been a strategic client for over 15 years.',
+    sectionLink: 'shi-case',
+    sectionLabel: 'See SHI Case Study'
+  },
+  {
+    id: 'faq-14',
+    category: 'Santander',
+    question: 'How can Foursys help with Santander\'s current priorities?',
+    answer: 'We have identified 6 critical areas where we can act immediately: legacy modernization (SDD), quality and automation (Quality AI), data engineering (Databricks), delivery speed (Squad+AI), regulatory compliance (Cyber Security BACEN), and AI innovation (Foursys Lab). We can discuss which one is most urgent for you.',
+    sectionLink: 'santander-insights',
+    sectionLabel: 'See Santander Insights'
+  },
+  {
+    id: 'faq-15',
+    category: 'Sales',
+    question: 'What is Foursys\'s engagement process?',
+    answer: 'The process is simple and fast: (1) Scoping meeting — 1 hour to understand the need; (2) Technical and commercial proposal — within 5 business days; (3) Project kickoff — within 2 weeks after signing. For staff augmentation, we can make professionals available within 1 week.',
+    sectionLink: 'delivery',
+    sectionLabel: 'See Delivery Models'
+  }
+]
+
+export const faqItems = faqItemsPt
+
+export function getFaqItems(lang: Language): FAQItem[] {
+  return lang === 'en' ? faqItemsEn : faqItemsPt
+}

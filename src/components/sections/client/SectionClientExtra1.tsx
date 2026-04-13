@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
+import { ExternalLink } from 'lucide-react'
 import { useApp } from '../../../context/AppContext'
+import { useLanguage } from '../../../i18n'
 import { SectionWrapper } from '../../ui/SectionWrapper'
 import { InterestButton } from '../../ui/InterestButton'
 import { ClientBackButton } from './ClientBackButton'
@@ -24,19 +26,56 @@ interface QualityIAContent {
   metrics: QualityMetric[]
 }
 
+// ─── Tipos para conteúdo de links (ex.: IT Forum) ───────────────────────────
+
+interface LinkItem {
+  title: string
+  url: string
+  description: string
+  icon: string
+}
+
+interface EventInfo {
+  name: string
+  dates: string
+  location: string
+  city: string
+}
+
+interface LinksContent {
+  links: LinkItem[]
+  eventInfo?: EventInfo
+}
+
+function isLinksContent(c: unknown): c is LinksContent {
+  return (
+    typeof c === 'object' &&
+    c !== null &&
+    'links' in c &&
+    Array.isArray((c as LinksContent).links)
+  )
+}
+
+function isQualityContent(c: unknown): c is QualityIAContent {
+  return (
+    typeof c === 'object' &&
+    c !== null &&
+    'metrics' in c &&
+    Array.isArray((c as QualityIAContent).metrics)
+  )
+}
+
 // ─── Componente principal ─────────────────────────────────────────────────────
 
 export function SectionClientExtra1() {
   const { state } = useApp()
+  const { t } = useLanguage()
   const client = state.activeClientId ? getClientById(state.activeClientId) : null
 
   if (!client?.extra1) return null
 
   const { title, subtitle, content } = client.extra1
   const clientColor = client.colors.primary
-
-  // Tenta interpretar como Quality IA content
-  const qaContent = content as QualityIAContent | null
 
   return (
     <SectionWrapper>
@@ -73,11 +112,72 @@ export function SectionClientExtra1() {
           />
         </motion.div>
 
-        {qaContent?.metrics && (
+        {/* ── Links + Event Info (IT Forum style) ── */}
+        {isLinksContent(content) && (
           <>
-            {/* ── Métricas ── */}
+            {content.eventInfo && (
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="mb-8 p-6 rounded-2xl border border-white/[0.08] bg-foursys-surface/40"
+                style={{ borderLeftWidth: 3, borderLeftColor: clientColor }}
+              >
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                  {[
+                    { label: '📅', value: content.eventInfo.dates },
+                    { label: '📍', value: content.eventInfo.location },
+                    { label: '🏙️', value: content.eventInfo.city },
+                    { label: '🎯', value: content.eventInfo.name.split(' — ')[0] || content.eventInfo.name },
+                  ].map((item, i) => (
+                    <div key={i}>
+                      <div className="text-2xl mb-1">{item.label}</div>
+                      <div className="text-xs text-foursys-text-muted leading-snug">{item.value}</div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {content.links.map((link, i) => (
+                <motion.a
+                  key={link.url}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 + i * 0.07, duration: 0.4 }}
+                  className="group p-5 rounded-2xl border border-white/[0.08] bg-foursys-surface/30 hover:border-white/20 hover:bg-foursys-surface/50 transition-all duration-300 flex gap-4 items-start cursor-pointer"
+                >
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
+                    style={{ backgroundColor: `${clientColor}15`, border: `1px solid ${clientColor}30` }}
+                  >
+                    {link.icon}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="text-sm font-bold text-foursys-text truncate">{link.title}</h3>
+                      <ExternalLink
+                        size={12}
+                        className="text-foursys-text-muted opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0"
+                      />
+                    </div>
+                    <p className="text-xs text-foursys-text-muted leading-relaxed">{link.description}</p>
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* ── Quality IA content (phases + metrics) ── */}
+        {isQualityContent(content) && (
+          <>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10">
-              {qaContent.metrics.map((m, i) => (
+              {content.metrics.map((m, i) => (
                 <motion.div
                   key={m.label}
                   initial={{ opacity: 0, y: 16 }}
@@ -93,10 +193,9 @@ export function SectionClientExtra1() {
               ))}
             </div>
 
-            {/* ── Fases ── */}
-            {qaContent.phases && (
+            {content.phases && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-                {qaContent.phases.map((phase, i) => (
+                {content.phases.map((phase, i) => (
                   <motion.div
                     key={phase.id}
                     initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
@@ -116,7 +215,7 @@ export function SectionClientExtra1() {
                           className="text-[10px] font-bold uppercase tracking-widest"
                           style={{ color: clientColor }}
                         >
-                          Fase {i + 1}
+                          {t('clientSections.extra1.phase')} {i + 1}
                         </span>
                       </div>
                       <h3 className="text-sm font-bold text-foursys-text mb-2">{phase.title}</h3>
@@ -129,10 +228,10 @@ export function SectionClientExtra1() {
           </>
         )}
 
-        {/* Fallback se não houver content estruturado */}
-        {!qaContent && (
+        {/* Fallback */}
+        {!isLinksContent(content) && !isQualityContent(content) && (
           <div className="flex items-center justify-center h-48 text-foursys-text-muted text-sm">
-            Conteúdo específico sendo preparado.
+            {t('clientSections.extra1.emptyState')}
           </div>
         )}
       </div>

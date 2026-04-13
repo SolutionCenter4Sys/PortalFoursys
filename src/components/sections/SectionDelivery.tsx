@@ -1,10 +1,13 @@
 import { motion } from 'framer-motion'
 import { Check, Star } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { useLanguage } from '../../i18n'
 import { deliveryModels } from '../../data/services'
 import { DynIcon } from '../../utils/iconMap'
 
 export function SectionDelivery() {
+  const { t } = useLanguage()
+
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-6 md:py-12 max-w-6xl mx-auto">
@@ -14,13 +17,13 @@ export function SectionDelivery() {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-sm mb-4">
-            Estrutura de Delivery
+            {t('delivery.badge')}
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-foursys-text mb-4">
-            6 modelos de entrega
+            {t('delivery.title')}
           </h2>
           <p className="text-lg text-foursys-text-muted max-w-2xl mx-auto">
-            Cada cliente tem uma necessidade diferente. Escolhemos juntos o modelo que mais gera valor no seu contexto.
+            {t('delivery.subtitle')}
           </p>
         </motion.div>
 
@@ -43,7 +46,7 @@ export function SectionDelivery() {
                 <div className="flex items-center gap-2 mb-4">
                   <Star size={14} className="text-foursys-cyan fill-foursys-cyan" />
                   <span className="text-xs font-semibold text-foursys-cyan uppercase tracking-widest">
-                    Nosso diferencial
+                    {t('delivery.highlight')}
                   </span>
                 </div>
               )}
@@ -91,7 +94,7 @@ export function SectionDelivery() {
           <p className="text-sm text-foursys-text-muted flex items-start justify-center gap-2">
             <DynIcon name="lightbulb" size={18} className="text-foursys-cyan flex-shrink-0 mt-0.5" />
             <span>
-              <strong className="text-foursys-text">Os modelos podem ser combinados.</strong> Um projeto pode começar como Squad e evoluir para Squad+Agentes à medida que automatizamos processos repetitivos do time.
+              <strong className="text-foursys-text">{t('delivery.note')}</strong> {t('delivery.noteDetail')}
             </span>
           </p>
         </motion.div>

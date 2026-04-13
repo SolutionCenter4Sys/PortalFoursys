@@ -1,6 +1,7 @@
 import { createContext, useContext, useReducer, useCallback, useMemo, type ReactNode } from 'react'
 import type { AppState, AppAction, AppSection, SectionStat, NavigationItem, SessionProfile } from '../types'
-import { navigationItems, sectionCategories } from '../data/navigation'
+import { getNavigationItems, getSectionCategories } from '../data/navigation'
+import { useLanguage } from '../i18n'
 import { getTrailById } from '../data/trails'
 import { getClientById } from '../data/clients'
 
@@ -226,6 +227,7 @@ interface AppContextValue {
 const AppContext = createContext<AppContextValue | null>(null)
 
 export function AppProvider({ children }: { children: ReactNode }) {
+  const { lang } = useLanguage()
   const [state, dispatch] = useReducer(appReducer, initialState)
 
   const navigate = useCallback(
@@ -259,12 +261,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   // Combina navegação base com seções do cliente ativo
   const { activeNavigationItems, activeSectionCategories } = useMemo(() => {
+    const navItems = getNavigationItems(lang)
+    const categories = getSectionCategories(lang)
     const client = state.activeClientId ? getClientById(state.activeClientId) : null
 
     if (!client) {
       return {
-        activeNavigationItems: navigationItems,
-        activeSectionCategories: sectionCategories,
+        activeNavigationItems: navItems,
+        activeSectionCategories: categories,
       }
     }
 
@@ -279,10 +283,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const clientCategory = client.name
 
     return {
-      activeNavigationItems: [...navigationItems, ...clientNavItems],
-      activeSectionCategories: [...sectionCategories, clientCategory],
+      activeNavigationItems: [...navItems, ...clientNavItems],
+      activeSectionCategories: [...categories, clientCategory],
     }
-  }, [state.activeClientId])
+  }, [state.activeClientId, lang])
 
   const getSectionLabel = useCallback(
     (section: AppSection) =>

@@ -1,37 +1,27 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ChevronRight, ChevronLeft, Check } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
+import { useLanguage } from '../../i18n'
 import { DynIcon } from '../../utils/iconMap'
 import type { SessionProfile } from '../../types'
 
 // ─── Dados das etapas ────────────────────────────────────────────────────────
 
-const SECTORS = [
-  { id: 'financeiro', label: 'Financeiro', icon: 'landmark' },
-  { id: 'saude',      label: 'Saúde',      icon: 'heart' },
-  { id: 'seguros',    label: 'Seguros',    icon: 'shield-check' },
-  { id: 'outro',      label: 'Outro',      icon: 'building' },
-] as const
+const SECTOR_IDS = ['financeiro', 'saude', 'seguros', 'outro'] as const
+const SECTOR_ICONS = { financeiro: 'landmark', saude: 'heart', seguros: 'shield-check', outro: 'building' } as const
 
-const ROLES = [
-  { id: 'ceo',     label: 'CEO',     icon: 'crown' },
-  { id: 'cfo',     label: 'CFO',     icon: 'dollar-sign' },
-  { id: 'cto',     label: 'CTO',     icon: 'settings' },
-  { id: 'diretor', label: 'Diretor', icon: 'bar-chart' },
-  { id: 'gestor',  label: 'Gestor',  icon: 'target' },
-] as const
+const ROLE_IDS = ['ceo', 'cfo', 'cto', 'diretor', 'gestor'] as const
+const ROLE_ICONS = { ceo: 'crown', cfo: 'dollar-sign', cto: 'settings', diretor: 'bar-chart', gestor: 'target' } as const
 
-const OBJECTIVES = [
-  { id: 'apresentacao', label: 'Apresentação geral', icon: 'clipboard-list' },
-  { id: 'proposta',     label: 'Proposta específica', icon: 'pencil' },
-  { id: 'demo',         label: 'Demo técnica',        icon: 'monitor' },
-] as const
+const OBJECTIVE_IDS = ['apresentacao', 'proposta', 'demo'] as const
+const OBJECTIVE_ICONS = { apresentacao: 'clipboard-list', proposta: 'pencil', demo: 'monitor' } as const
 
 // ─── Componente ──────────────────────────────────────────────────────────────
 
 export function SessionWizard() {
   const { state, setProfile, closeWizard } = useApp()
+  const { t } = useLanguage()
   const [step, setStep] = useState(0)
   const [profile, setLocalProfile] = useState<SessionProfile>({
     sector: null,
@@ -39,28 +29,28 @@ export function SessionWizard() {
     objective: null,
   })
 
-  if (!state.isWizardOpen) return null
-
-  const steps = [
+  const steps = useMemo(() => [
     {
-      title: 'Setor do cliente',
-      subtitle: 'Qual é o segmento da empresa participante?',
+      title: t('wizard.sectorTitle'),
+      subtitle: t('wizard.sectorSubtitle'),
       field: 'sector' as const,
-      options: SECTORS,
+      options: SECTOR_IDS.map(id => ({ id, label: t(`wizard.sectors.${id}`), icon: SECTOR_ICONS[id] })),
     },
     {
-      title: 'Perfil do executivo',
-      subtitle: 'Quem está presente nesta reunião?',
+      title: t('wizard.roleTitle'),
+      subtitle: t('wizard.roleSubtitle'),
       field: 'role' as const,
-      options: ROLES,
+      options: ROLE_IDS.map(id => ({ id, label: t(`wizard.roles.${id}`), icon: ROLE_ICONS[id] })),
     },
     {
-      title: 'Objetivo da reunião',
-      subtitle: 'Qual é o foco desta apresentação?',
+      title: t('wizard.objectiveTitle'),
+      subtitle: t('wizard.objectiveSubtitle'),
       field: 'objective' as const,
-      options: OBJECTIVES,
+      options: OBJECTIVE_IDS.map(id => ({ id, label: t(`wizard.objectives.${id}`), icon: OBJECTIVE_ICONS[id] })),
     },
-  ]
+  ], [t])
+
+  if (!state.isWizardOpen) return null
 
   const currentStep = steps[step]
   const currentValue = profile[currentStep.field]
@@ -118,12 +108,12 @@ export function SessionWizard() {
                     ))}
                   </div>
                   <p className="text-[10px] text-foursys-text-dim mt-1">
-                    Etapa {step + 1} de {steps.length}
+                    {t('wizard.stepOf').replace('{step}', String(step + 1)).replace('{total}', String(steps.length))}
                   </p>
                 </div>
                 <button
                   onClick={closeWizard}
-                  aria-label="Fechar"
+                  aria-label={t('wizard.close')}
                   className="p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
                 >
                   <X size={15} />
@@ -179,7 +169,7 @@ export function SessionWizard() {
                   onClick={closeWizard}
                   className="text-xs text-foursys-text-dim hover:text-foursys-text-muted transition-colors"
                 >
-                  Pular configuração
+                  {t('wizard.skipSetup')}
                 </button>
 
                 <div className="flex items-center gap-2">
@@ -189,7 +179,7 @@ export function SessionWizard() {
                       className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white/[0.05] border border-white/[0.08] text-foursys-text-muted hover:text-foursys-text text-xs font-medium transition-all"
                     >
                       <ChevronLeft size={13} />
-                      Voltar
+                      {t('wizard.back')}
                     </button>
                   )}
                   <button
@@ -201,7 +191,7 @@ export function SessionWizard() {
                         : 'bg-white/[0.03] border border-white/[0.06] text-foursys-text-dim cursor-not-allowed'
                     }`}
                   >
-                    {isLast ? 'Confirmar' : 'Próximo'}
+                    {isLast ? t('wizard.confirm') : t('wizard.next')}
                     {!isLast && <ChevronRight size={13} />}
                     {isLast && <Check size={13} />}
                   </button>

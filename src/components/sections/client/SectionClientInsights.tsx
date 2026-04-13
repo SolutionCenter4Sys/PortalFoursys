@@ -12,6 +12,7 @@ import {
   Zap,
 } from 'lucide-react'
 import { useApp } from '../../../context/AppContext'
+import { useLanguage } from '../../../i18n'
 import { SectionWrapper } from '../../ui/SectionWrapper'
 import { ClientBackButton } from './ClientBackButton'
 import { getClientById } from '../../../data/clients'
@@ -42,6 +43,7 @@ function SantanderStrategicHero({
   ctx: SantanderStrategicContext
   color: string
 }) {
+  const { t } = useLanguage()
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -153,7 +155,7 @@ function SantanderStrategicHero({
         <div className="flex items-center gap-2 mb-3">
           <BarChart3 size={14} style={{ color }} />
           <span className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color }}>
-            Destaques do Resultado
+            {t('clientSections.insights.resultsHighlights')}
           </span>
         </div>
         <div className="grid sm:grid-cols-2 gap-x-6 gap-y-1.5">
@@ -182,6 +184,7 @@ function DrillDownModal({
   color: string
   onClose: () => void
 }) {
+  const { t } = useLanguage()
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -190,7 +193,7 @@ function DrillDownModal({
       className="fixed inset-0 z-[100] flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
-      aria-label={`Análise detalhada: ${insight.title}`}
+      aria-label={`${t('clientSections.insights.detailedAnalysis')}: ${insight.title}`}
       onClick={onClose}
     >
       {/* Backdrop */}
@@ -223,7 +226,7 @@ function DrillDownModal({
           {/* Close */}
           <button
             onClick={onClose}
-            aria-label="Fechar"
+            aria-label={t('common.close')}
             className="absolute top-4 right-4 p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors z-20"
           >
             <X size={16} />
@@ -271,7 +274,7 @@ function DrillDownModal({
             <div className="flex items-center gap-2 mb-3">
               <Target size={16} style={{ color }} />
               <h3 className="text-sm font-bold text-white uppercase tracking-[0.1em]">
-                Contexto Estratégico
+                {t('clientSections.insights.strategicContext')}
               </h3>
             </div>
             <p className="text-sm text-foursys-text-muted leading-relaxed">
@@ -293,7 +296,7 @@ function DrillDownModal({
                 className="text-[10px] font-bold uppercase tracking-[0.14em]"
                 style={{ color }}
               >
-                O Desafio
+                {t('clientSections.insights.theChallenge')}
               </span>
             </div>
             <p className="text-sm text-foursys-text-muted leading-relaxed">
@@ -306,7 +309,7 @@ function DrillDownModal({
             <div className="flex items-center gap-2 mb-3">
               <TrendingUp size={16} style={{ color }} />
               <h3 className="text-sm font-bold text-white uppercase tracking-[0.1em]">
-                Abordagem Foursys
+                {t('clientSections.insights.foursysApproach')}
               </h3>
             </div>
             <div className="grid gap-2">
@@ -345,7 +348,7 @@ function DrillDownModal({
                 className="text-sm font-bold uppercase tracking-[0.1em]"
                 style={{ color }}
               >
-                Impacto Esperado
+                {t('clientSections.insights.expectedImpact')}
               </h3>
             </div>
             <div className="space-y-2">
@@ -384,6 +387,7 @@ function InsightCard({
   hasDrillDown: boolean
   onDrillDown: () => void
 }) {
+  const { t } = useLanguage()
   const [expanded, setExpanded] = useState(false)
 
   return (
@@ -442,7 +446,7 @@ function InsightCard({
                 className="text-[10px] font-bold uppercase tracking-[0.14em] mb-2"
                 style={{ color: clientColor }}
               >
-                Resposta Foursys
+                {t('clientSections.insights.foursysResponse')}
               </div>
               <p className="text-sm text-foursys-text-muted leading-relaxed">
                 {insight.solution}
@@ -462,7 +466,7 @@ function InsightCard({
                   }}
                 >
                   <BarChart3 size={12} />
-                  Ver análise completa
+                  {t('clientSections.insights.seeFullAnalysis')}
                   <ArrowRight size={12} />
                 </button>
               )}
@@ -478,6 +482,7 @@ function InsightCard({
 
 export function SectionClientInsights() {
   const { state } = useApp()
+  const { t } = useLanguage()
   const client = state.activeClientId ? getClientById(state.activeClientId) : null
   const [activeDrillDown, setActiveDrillDown] = useState<{
     insight: ClientInsight
@@ -514,13 +519,13 @@ export function SectionClientInsights() {
           </span>
           <h2 className="text-2xl md:text-4xl font-black text-white leading-none mb-3">
             {isSantander
-              ? 'Conhecemos seus desafios'
-              : `Percepções ${client.name}`}
+              ? t('clientSections.insights.santanderTitle')
+              : t('clientSections.insights.title').replace('{client}', client.name)}
           </h2>
           <p className="text-foursys-text-muted text-base max-w-2xl leading-relaxed">
             {isSantander
-              ? 'Análise estratégica baseada na Apresentação Institucional 4T25 do Santander Brasil — sabemos como impulsionar os resultados que vocês precisam.'
-              : `O que identificamos nas operações e no contexto do ${client.name} — dores reais com respostas concretas.`}
+              ? t('clientSections.insights.santanderSubtitle')
+              : t('clientSections.insights.subtitle').replace('{client}', client.name)}
           </p>
           <div
             className="mt-6 h-px bg-gradient-to-r from-transparent via-transparent to-transparent"
@@ -548,11 +553,11 @@ export function SectionClientInsights() {
                 <div className="flex items-center gap-3">
                   <Zap size={16} style={{ color: clientColor }} />
                   <h3 className="text-lg font-black text-white">
-                    Como podemos impulsionar cada pilar
+                    {t('clientSections.insights.howWeBoost')}
                   </h3>
                 </div>
                 <p className="text-xs text-foursys-text-dim mt-1 ml-7">
-                  Clique em cada desafio para ver a análise completa com dados, abordagem e impacto esperado.
+                  {t('clientSections.insights.clickToAnalyze')}
                 </p>
               </motion.div>
             )}
@@ -585,19 +590,19 @@ export function SectionClientInsights() {
             >
               <h3 className="text-sm font-bold text-foursys-text mb-3">
                 {isSantander
-                  ? 'Nossa posição privilegiada'
-                  : `Nossa abordagem para ${client.name}`}
+                  ? t('clientSections.insights.santanderSummaryTitle')
+                  : t('clientSections.insights.summaryTitle').replace('{client}', client.name)}
               </h3>
               <p className="text-sm text-foursys-text-muted leading-relaxed">
                 {isSantander
-                  ? 'Com 17+ anos dentro do ecossistema Santander, a Foursys tem uma posição única: combinamos conhecimento profundo do negócio bancário, domínio técnico do legado e capacidade de inovação com IA. Cada percepção acima foi mapeada diretamente a partir dos pilares estratégicos declarados na apresentação institucional 4T25 — não vendemos tecnologia genérica, entregamos aceleração dos resultados que o Santander já traçou.'
-                  : `Cada percepção listada acima foi identificada a partir de experiências reais nos projetos do ${client.name}. Nossa proposta não é vender tecnologia genérica — é resolver os problemas específicos que impedem a velocidade, a qualidade e a inovação do ${client.name}.`}
+                  ? t('clientSections.insights.santanderSummary')
+                  : t('clientSections.insights.genericSummary').replace(/\{client\}/g, client.name)}
               </p>
             </motion.div>
           </>
         ) : (
           <div className="flex items-center justify-center h-64 text-foursys-text-muted text-sm">
-            Percepções em preparação. Entre em contato para detalhes.
+            {t('clientSections.insights.emptyState')}
           </div>
         )}
       </div>

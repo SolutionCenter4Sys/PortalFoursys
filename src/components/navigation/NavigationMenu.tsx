@@ -23,6 +23,7 @@ import {
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { useTheme } from '../../context/ThemeContext'
+import { useLanguage } from '../../i18n'
 import { getClientById } from '../../data/clients'
 import type { AppSection } from '../../types'
 
@@ -61,6 +62,11 @@ const CATEGORY_COLORS: Record<string, string> = {
   'Provas':       'text-amber-400',
   'ESG':          'text-green-400',
   'Referência':   'text-slate-400',
+  'Home':         'text-foursys-primary',
+  'About Us':     'text-slate-400',
+  'Solutions & Services': 'text-foursys-primary',
+  'Proof Points': 'text-amber-400',
+  'Reference':    'text-slate-400',
 }
 
 // ─── Componente ──────────────────────────────────────────────────────────────
@@ -76,6 +82,7 @@ export function NavigationMenu() {
   } = useApp()
 
   const { isDark } = useTheme()
+  const { t } = useLanguage()
   const activeClient = state.activeClientId ? getClientById(state.activeClientId) : null
 
   function handleNavigate(id: string) {
@@ -105,7 +112,7 @@ export function NavigationMenu() {
           />
         </div>
         <p className="text-[10px] text-foursys-text-dim leading-snug tracking-wide">
-          Portal Institucional Navegável
+          {t('nav.tagline')}
         </p>
       </div>
 
@@ -123,7 +130,7 @@ export function NavigationMenu() {
         >
           <Building2 size={13} className="flex-shrink-0" />
           <span className="truncate">
-            {activeClient ? `Apresentação: ${activeClient.name}` : 'Selecionar cliente...'}
+            {activeClient ? `${t('nav.presentationPrefix')} ${activeClient.name}` : t('nav.selectClient')}
           </span>
         </button>
       </div>
@@ -136,11 +143,11 @@ export function NavigationMenu() {
             className="flex-1 flex items-center gap-2.5 px-3 py-2 rounded-lg bg-foursys-surface/40 border border-foursys-dark-4/50 text-foursys-text-dim hover:text-foursys-text-muted hover:border-foursys-primary/30 transition-all duration-150 text-xs"
           >
             <Search size={13} className="flex-shrink-0" />
-            <span>Buscar seção...</span>
+            <span>{t('nav.searchSection')}</span>
           </button>
           <button
             onClick={() => openSearch(true)}
-            aria-label="Buscar por voz"
+            aria-label={t('common.voiceSearch')}
             className="flex-shrink-0 p-2 rounded-lg bg-foursys-surface/40 border border-foursys-dark-4/50 text-foursys-text-dim hover:text-foursys-primary hover:border-foursys-primary/30 transition-all duration-150"
           >
             <Mic size={13} />
@@ -155,7 +162,8 @@ export function NavigationMenu() {
           if (items.length === 0) return null
 
           // Para categorias de cliente, usa a cor do cliente ativo
-          const isClientCategory = !['Início', 'Institucional', 'Ofertas e Serviços', 'Provas', 'ESG', 'Referência'].includes(category)
+          const coreCategories = ['Início', 'Institucional', 'Ofertas e Serviços', 'Provas', 'ESG', 'Referência', 'Home', 'About Us', 'Solutions & Services', 'Proof Points', 'Reference']
+          const isClientCategory = !coreCategories.includes(category)
           const categoryColorClass = isClientCategory ? '' : (CATEGORY_COLORS[category] ?? 'text-foursys-text-dim')
 
           return (
@@ -209,10 +217,10 @@ export function NavigationMenu() {
       {/* ── Footer ── */}
       <div className="px-4 py-3" style={{ borderTop: '1px solid var(--border-subtle)' }}>
         <p className="text-[9px] text-foursys-text-dim text-center leading-relaxed tracking-wide hidden lg:block">
-          ← → navegar &nbsp;·&nbsp; F11 apresentação &nbsp;·&nbsp; ⌃⇧M métricas
+          {t('nav.footerDesktop')}
         </p>
         <p className="text-[9px] text-foursys-text-dim text-center leading-relaxed tracking-wide lg:hidden">
-          Deslize para navegar entre seções
+          {t('nav.footerMobile')}
         </p>
       </div>
     </aside>

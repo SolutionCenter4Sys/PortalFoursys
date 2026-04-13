@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { useApp } from '../context/AppContext'
+import { useLanguage } from '../i18n'
 
 const SectionHome = lazy(() => import('./sections/SectionHome').then(m => ({ default: m.SectionHome })))
 const SectionIdentity = lazy(() => import('./sections/SectionIdentity').then(m => ({ default: m.SectionIdentity })))
@@ -26,13 +27,15 @@ const SectionClientOpening = lazy(() => import('./sections/client/SectionClientO
 const SectionClientInsights = lazy(() => import('./sections/client/SectionClientInsights').then(m => ({ default: m.SectionClientInsights })))
 const SectionClientCases = lazy(() => import('./sections/client/SectionClientCases').then(m => ({ default: m.SectionClientCases })))
 const SectionClientExtra1 = lazy(() => import('./sections/client/SectionClientExtra1').then(m => ({ default: m.SectionClientExtra1 })))
+const SectionClientExtra2 = lazy(() => import('./sections/client/SectionClientExtra2').then(m => ({ default: m.SectionClientExtra2 })))
 
 function SectionSkeleton() {
+  const { t } = useLanguage()
   return (
     <div className="h-full w-full flex items-center justify-center">
       <div className="flex flex-col items-center gap-3">
         <div className="w-8 h-8 border-2 border-foursys-primary/30 border-t-foursys-primary rounded-full animate-spin" />
-        <span className="text-xs text-foursys-text-dim">Carregando...</span>
+        <span className="text-xs text-foursys-text-dim">{t('common.loading')}</span>
       </div>
     </div>
   )
@@ -81,6 +84,7 @@ export function SectionRenderer() {
         {section === 'client-insights' && <SectionClientInsights key="client-insights" />}
         {section === 'client-cases'    && <SectionClientCases key="client-cases" />}
         {section === 'client-extra-1'  && <SectionClientExtra1 key="client-extra-1" />}
+        {section === 'client-extra-2'  && <SectionClientExtra2 key="client-extra-2" />}
       </AnimatePresence>
     </Suspense>
   )

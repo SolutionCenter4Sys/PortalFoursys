@@ -1,6 +1,7 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ChevronRight, ChevronLeft, Sparkles } from 'lucide-react'
+import { useLanguage } from '../../i18n'
 
 const STORAGE_KEY = 'foursysportal_onboarding_v1'
 
@@ -10,35 +11,20 @@ interface TourStep {
   target: string
 }
 
-const TOUR_STEPS: TourStep[] = [
-  {
-    title: 'Navegação por Seções',
-    description: 'Use o menu lateral para navegar entre todas as seções da apresentação institucional. Cada categoria agrupa seções relacionadas.',
-    target: 'menu',
-  },
-  {
-    title: 'Busca Inteligente',
-    description: 'Pressione Ctrl+K ou clique no ícone de busca para encontrar qualquer conteúdo. A busca aceita comando de voz!',
-    target: 'search',
-  },
-  {
-    title: 'Navegação por Gestos',
-    description: 'No mobile, deslize para esquerda ou direita para navegar entre seções. No desktop, use as setas do teclado.',
-    target: 'swipe',
-  },
-  {
-    title: 'Analytics da Sessão',
-    description: 'Pressione Ctrl+Shift+M para abrir o painel de analytics. Acompanhe tempo por seção, interesses e gere resumos da reunião.',
-    target: 'analytics',
-  },
-  {
-    title: 'Modo Apresentação',
-    description: 'Pressione F11 para entrar no modo tela cheia, ideal para apresentações. Pressione ESC para sair.',
-    target: 'fullscreen',
-  },
-]
+const TOUR_TARGETS = ['menu', 'search', 'swipe', 'analytics', 'fullscreen'] as const
+const TOUR_STEP_KEYS = ['navigation', 'search', 'gestures', 'analytics', 'fullscreen'] as const
 
 export function OnboardingTour() {
+  const { t } = useLanguage()
+
+  const TOUR_STEPS: TourStep[] = useMemo(() =>
+    TOUR_TARGETS.map((target, i) => ({
+      title: t(`onboarding.steps.${TOUR_STEP_KEYS[i]}.title`),
+      description: t(`onboarding.steps.${TOUR_STEP_KEYS[i]}.description`),
+      target,
+    })),
+    [t],
+  )
   const [isVisible, setIsVisible] = useState(false)
   const [currentStep, setCurrentStep] = useState(0)
 
@@ -88,13 +74,13 @@ export function OnboardingTour() {
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             role="dialog"
             aria-modal="true"
-            aria-label="Tour de boas-vindas"
+            aria-label={t('onboarding.tourLabel')}
             className="fixed z-[201] bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-md rounded-2xl border border-white/[0.1] bg-foursys-dark-3 shadow-2xl overflow-hidden"
           >
             <div className="relative p-6">
               <button
                 onClick={dismiss}
-                aria-label="Fechar tour"
+                aria-label={t('onboarding.closeTour')}
                 className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-white/[0.08] text-foursys-text-dim hover:text-foursys-text transition-colors"
               >
                 <X size={14} />
@@ -103,7 +89,7 @@ export function OnboardingTour() {
               <div className="flex items-center gap-2 mb-3">
                 <Sparkles size={16} className="text-foursys-primary" />
                 <span className="text-[10px] font-semibold text-foursys-primary uppercase tracking-widest">
-                  Dica {currentStep + 1}/{TOUR_STEPS.length}
+                  {t('onboarding.tip')} {currentStep + 1}/{TOUR_STEPS.length}
                 </span>
               </div>
 
@@ -139,7 +125,7 @@ export function OnboardingTour() {
                       className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium text-foursys-text-muted hover:text-foursys-text hover:bg-white/[0.06] transition-colors"
                     >
                       <ChevronLeft size={12} />
-                      Anterior
+                      {t('common.previous')}
                     </button>
                   )}
                   <button
@@ -147,9 +133,9 @@ export function OnboardingTour() {
                     className="flex items-center gap-1 px-4 py-1.5 rounded-lg text-xs font-semibold bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-primary hover:bg-foursys-primary/25 transition-colors"
                   >
                     {currentStep < TOUR_STEPS.length - 1 ? (
-                      <>Próximo <ChevronRight size={12} /></>
+                      <>{t('common.next')} <ChevronRight size={12} /></>
                     ) : (
-                      'Começar!'
+                      t('common.start')
                     )}
                   </button>
                 </div>

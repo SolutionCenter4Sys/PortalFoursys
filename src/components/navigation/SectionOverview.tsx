@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Check } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
+import { useLanguage } from '../../i18n'
 import { DynIcon } from '../../utils/iconMap'
 import type { AppSection } from '../../types'
 
@@ -11,6 +12,7 @@ interface SectionOverviewProps {
 
 export function SectionOverview({ isOpen, onClose }: SectionOverviewProps) {
   const { navigate, state, activeNavigationItems, activeSectionCategories } = useApp()
+  const { t } = useLanguage()
 
   function handleNavigate(sectionId: string) {
     navigate(sectionId as AppSection)
@@ -40,9 +42,9 @@ export function SectionOverview({ isOpen, onClose }: SectionOverviewProps) {
           >
             <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06]">
               <div>
-                <h2 className="text-lg font-black text-white">Agenda da Apresentação</h2>
+                <h2 className="text-lg font-black text-white">{t('overview.title')}</h2>
                 <p className="text-xs text-foursys-text-muted mt-0.5">
-                  {state.visitedSections.length} de {activeNavigationItems.length} seções visitadas
+                  {t('overview.progress').replace('{visited}', String(state.visitedSections.length)).replace('{total}', String(activeNavigationItems.length))}
                 </p>
               </div>
               <button

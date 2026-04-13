@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, CheckCircle2, TrendingUp, ArrowRight } from 'lucide-react'
 import { useApp } from '../../../context/AppContext'
+import { useLanguage } from '../../../i18n'
 import { SectionWrapper } from '../../ui/SectionWrapper'
 import { InterestButton } from '../../ui/InterestButton'
 import { ClientBackButton } from './ClientBackButton'
@@ -19,6 +20,7 @@ function CaseModal({
   clientColor: string
   onClose: () => void
 }) {
+  const { t } = useLanguage()
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -46,7 +48,7 @@ function CaseModal({
         >
           <button
             onClick={onClose}
-            aria-label="Fechar"
+            aria-label={t('common.close')}
             className="absolute top-4 right-4 p-2 rounded-xl hover:bg-white/10 text-foursys-text-muted transition-colors"
           >
             <X size={16} />
@@ -78,17 +80,17 @@ function CaseModal({
           )}
 
           <div>
-            <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-foursys-text-dim mb-2">Desafio</div>
+            <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-foursys-text-dim mb-2">{t('cases.challenge')}</div>
             <p className="text-sm text-foursys-text-muted leading-relaxed">{clientCase.challenge}</p>
           </div>
 
           <div>
-            <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-foursys-text-dim mb-2">Solução</div>
+            <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-foursys-text-dim mb-2">{t('cases.solution')}</div>
             <p className="text-sm text-foursys-text-muted leading-relaxed">{clientCase.solution}</p>
           </div>
 
           <div>
-            <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-foursys-text-dim mb-2">Resultados</div>
+            <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-foursys-text-dim mb-2">{t('cases.results')}</div>
             <ul className="space-y-2">
               {clientCase.results.map(r => (
                 <li key={r} className="flex items-start gap-2.5 text-sm text-foursys-text-muted">
@@ -101,7 +103,7 @@ function CaseModal({
 
           {clientCase.stack.length > 0 && (
             <div>
-              <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-foursys-text-dim mb-2">Stack</div>
+              <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-foursys-text-dim mb-2">{t('cases.techStack')}</div>
               <div className="flex flex-wrap gap-2">
                 {clientCase.stack.map(t => (
                   <span
@@ -134,6 +136,7 @@ function ClientCaseCard({
   clientColor: string
   onClick: () => void
 }) {
+  const { t } = useLanguage()
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -184,7 +187,7 @@ function ClientCaseCard({
         className="mt-4 flex items-center gap-1 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity"
         style={{ color: clientColor }}
       >
-        Ver case completo <ArrowRight size={12} />
+        {t('clientSections.cases.seeFullCase')} <ArrowRight size={12} />
       </div>
     </motion.div>
   )
@@ -194,6 +197,7 @@ function ClientCaseCard({
 
 export function SectionClientCases() {
   const { state } = useApp()
+  const { t } = useLanguage()
   const [selectedCase, setSelectedCase] = useState<ClientCase | null>(null)
   const client = state.activeClientId ? getClientById(state.activeClientId) : null
 
@@ -223,10 +227,10 @@ export function SectionClientCases() {
             {client.name}
           </span>
           <h2 className="text-2xl md:text-4xl font-black text-white leading-none mb-3">
-            Cases no {client.name}
+            {t('clientSections.cases.title').replace('{client}', client.name)}
           </h2>
           <p className="text-foursys-text-muted text-base max-w-2xl leading-relaxed">
-            Projetos entregues dentro do ecossistema {client.name} — com métricas reais e impacto mensurável.
+            {t('clientSections.cases.subtitle').replace('{client}', client.name)}
           </p>
           <div className="mt-4">
             <InterestButton section="client-cases" />
@@ -253,7 +257,7 @@ export function SectionClientCases() {
           </div>
         ) : (
           <div className="flex items-center justify-center h-64 text-foursys-text-muted text-sm">
-            Cases em preparação. Entre em contato para detalhes.
+            {t('clientSections.cases.emptyState')}
           </div>
         )}
       </div>

@@ -1,4 +1,5 @@
 import type { ClientConfig } from '../../types'
+import type { Language } from '../../i18n/types'
 
 // ─── Dados estratégicos extraídos da Apresentação Institucional 4T25 ────────
 
@@ -95,6 +96,88 @@ export const santanderStrategicContext: SantanderStrategicContext = {
     'Custo de crédito em 3,76% com NPL Over 90 em 4,0% — gestão de risco como prioridade',
     '92% dos colaboradores realizaram treinamentos — eNPS de 79 pontos',
   ],
+}
+
+const santanderStrategicContextEn: SantanderStrategicContext = {
+  reportTitle: 'Institutional Presentation Q4 2025',
+  period: 'Q4 2025 (BRGAAP)',
+  kpis: [
+    { value: 'BRL 1.256T', label: 'Total Assets', delta: '' },
+    { value: 'BRL 708B', label: 'Credit Portfolio', delta: '' },
+    { value: 'BRL 670B', label: 'Client Funding', delta: '' },
+    { value: 'BRL 4.1B', label: 'Net Income Q4 2025', delta: '' },
+    { value: '17.6%', label: 'ROAE', delta: 'Stable vs Q3 2025' },
+    { value: '73.9M', label: 'Total Clients', delta: '' },
+    { value: '49,661', label: 'Employees', delta: '' },
+    { value: '15.4%', label: 'Basel Index', delta: '+1.1 p.p. vs Q4 2024' },
+  ],
+  strategyPillars: [
+    {
+      id: 'think-value',
+      title: 'Think Value',
+      subtitle: 'Efficiency and Productivity',
+      icon: '⚡',
+      color: '#CC0000',
+      points: [
+        'Drive efficiency and productivity through modernization and automation at scale',
+        'Continuous improvement of risk and capital management focused on profitability',
+        'Funding mix optimization and revenue diversification',
+      ],
+    },
+    {
+      id: 'think-customer',
+      title: 'Think Customer',
+      subtitle: 'Experience and Personalization',
+      icon: '🎯',
+      color: '#FF3333',
+      points: [
+        'Hyper-personalized experiences driven by data and anticipation of needs',
+        'Seamless and integrated customer journey across channels',
+        'Simpler and more targeted product offerings',
+      ],
+    },
+    {
+      id: 'think-global',
+      title: 'Think Global',
+      subtitle: 'Innovation and Scalability',
+      icon: '🌎',
+      color: '#FF6644',
+      points: [
+        'Leverage global platforms to accelerate innovation and reduce costs',
+        'Reference in GenAI adoption, delivering competitive advantage',
+        'Brazil as an innovation hub to export digital models',
+      ],
+    },
+  ],
+  segmentation: [
+    { segment: 'Private Banking', description: 'Investments above BRL 10 million' },
+    { segment: 'Select', description: 'Income above BRL 7K or investments from BRL 100K' },
+    { segment: 'Santander Retail', description: 'Monthly income below BRL 7K' },
+    { segment: 'SCIB / Corporate', description: 'Revenue above BRL 200 million' },
+    { segment: 'Companies E3', description: 'Revenue from BRL 30M to BRL 200M' },
+    { segment: 'Companies E2', description: 'Revenue from BRL 3M to BRL 30M' },
+    { segment: 'Companies E1 / SMEs', description: 'Revenue up to BRL 3 million' },
+  ],
+  creditMix: [
+    { label: 'Retail', percentage: '38%' },
+    { label: 'Large Corporates', percentage: '35%' },
+    { label: 'SMEs', percentage: '13%' },
+    { label: 'Consumer Finance', percentage: '13%' },
+  ],
+  highlights: [
+    'Managerial net income of BRL 15.6 billion in 2025 (+12.6% YoY)',
+    'SMEs with 23% credit portfolio growth — fastest-growing segment',
+    'NPS of 49 points in the Business segment — ambition to be the bank of choice',
+    'BRL 50.7 billion in sustainable portfolio — "A" CDP rating and CBIO leader (41%)',
+    'Fees grew 3.5% YoY — insurance (+14.7%) and asset management (+25.3%) stood out',
+    'CET1 at 11.6% and Basel Index at 15.4% — solid capitalization',
+    'Cost of credit at 3.76% with NPL Over 90 at 4.0% — risk management as a priority',
+    '92% of employees completed training — eNPS of 79 points',
+  ],
+}
+
+export function getSantanderStrategicContext(lang: Language = 'pt'): SantanderStrategicContext {
+  return lang === 'en' ? santanderStrategicContextEn : santanderStrategicContext
 }
 
 // ─── Drill-down data per insight ────────────────────────────────────────────
@@ -304,6 +387,207 @@ export const santanderDrillDowns: SantanderDrillDown[] = [
   },
 ]
 
+const santanderDrillDownsEn: SantanderDrillDown[] = [
+  {
+    insightId: 'think-value',
+    heroStat: { value: 'BRL 1.256T', label: 'in Assets to Modernize' },
+    context:
+      'The "One Santander" strategy positions Think Value as the efficiency pillar: modernize legacy systems and automate operations at scale for 49,661 employees and 1,685 service points. Each percentage point of operational efficiency represents hundreds of millions in results.',
+    challenge:
+      'Core systems on legacy technologies generate operational risk and block innovation speed. The need to maintain 24/7 operations while modernizing requires a zero-downtime approach.',
+    foursysApproach: [
+      'Progressive modernization with SDD — no big-bang rewrite, guaranteed operational continuity',
+      'Hyperautomation with AI Agents for repetitive, high-volume processes',
+      'DevOps and CI/CD for continuous delivery pipelines with quality',
+      '17+ years of experience in the Santander ecosystem — deep legacy knowledge',
+    ],
+    expectedImpact: [
+      '30-40% reduction in legacy system maintenance costs',
+      '3x increase in new product release velocity',
+      'Elimination of manual processes costing > BRL 50M/year',
+    ],
+    relevantKpis: [
+      { value: '49,661', label: 'Employees impacted' },
+      { value: '1,685', label: 'Stores and service points' },
+      { value: '17+', label: 'Years of Foursys partnership' },
+    ],
+  },
+  {
+    insightId: 'think-customer',
+    heroStat: { value: '73.9M', label: 'Clients to Hyper-Personalize' },
+    context:
+      'Santander seeks hyper-personalized experiences for 73.9 million clients, with a seamless journey from app to branch teller. The bank serves from Private Banking (> BRL 10M in investments) to SMEs with revenue up to BRL 3 million — each profile requires a different experience.',
+    challenge:
+      'Customer data fragmented in silos. Digital and physical channels disconnected. Need to anticipate needs and offer simpler, more targeted products for each segment.',
+    foursysApproach: [
+      'Data Platform with multi-source ingestion for 360° customer view',
+      'Predictive AI models for next-best-action and needs anticipation',
+      'Squads dedicated to high-traffic digital channels with omnichannel expertise',
+      'UX research and design systems for consistent cross-channel experiences',
+    ],
+    expectedImpact: [
+      '15-20% increase in targeted offer conversion',
+      '40% reduction in churn from offer misalignment',
+      'NPS above 55 points in the Business segment (current: 49)',
+    ],
+    relevantKpis: [
+      { value: '73.9M', label: 'Total clients' },
+      { value: '49', label: 'Business NPS (Q4 2025)' },
+      { value: '7', label: 'Customer segments' },
+    ],
+  },
+  {
+    insightId: 'genai',
+    heroStat: { value: 'GenAI', label: 'Innovation Committee Priority' },
+    context:
+      'Santander declared being a "reference in GenAI utilization" as a competitive advantage. The Board\'s Technology and Innovation Committee directly oversees this agenda. The global bank invested in AI platforms that can be leveraged locally.',
+    challenge:
+      'Transform GenAI pilots into production solutions with governance, security, and compliance. Ensure measurable ROI in each use case while maintaining control over sensitive data from 73.9 million clients.',
+    foursysApproach: [
+      'AI First method: pilot to production in 6 weeks, with 85% conversion',
+      'Quality AI Framework (already approved by Santander) as proof of capability',
+      'Supervised AI Agents with complete governance and auditability',
+      'Expertise in LLMs applied to financial processes with BACEN compliance',
+    ],
+    expectedImpact: [
+      '85% of AI pilots converted to production (vs 25% market average)',
+      '60% reduction in operating costs for AI-automated processes',
+      'AI governance framework replicable for the global group',
+    ],
+    relevantKpis: [
+      { value: '85%', label: 'Pilot → production conversion' },
+      { value: '6 wks', label: 'Average pilot time' },
+      { value: '100%', label: 'Quality AI approved' },
+    ],
+  },
+  {
+    insightId: 'risco-credito',
+    heroStat: { value: 'BRL 708B', label: 'Portfolio to Protect' },
+    context:
+      'With BRL 708 billion in expanded credit portfolio, NPL Over 90 at 4.0%, and cost of credit at 3.76%, risk management is a strategic pillar. The bank concentrates 18% of the portfolio in the top 100 borrowers, requiring sophisticated analysis models.',
+    challenge:
+      'Need for more sophisticated predictive models for delinquency anticipation. NPL formation at 1.17% requires real-time monitoring. Compliance with Basel III and constantly evolving BACEN regulations.',
+    foursysApproach: [
+      'ML models for real-time scoring and fraud detection (< 200ms)',
+      'Predictive analytics for delinquency anticipation with alternative data',
+      'Integration with risk platforms for BACEN and Basel III compliance',
+      'Executive credit risk dashboards with segment-level drill-down',
+    ],
+    expectedImpact: [
+      '0.2 p.p. reduction in cost of credit — savings of > BRL 1.4B/year',
+      '30% more delinquency cases detected early',
+      'Automated regulatory compliance with 50% reduction in audit findings',
+    ],
+    relevantKpis: [
+      { value: '4.0%', label: 'NPL Over 90' },
+      { value: '3.76%', label: 'Cost of Credit' },
+      { value: '15.4%', label: 'Basel Index' },
+    ],
+  },
+  {
+    insightId: 'pme-crescimento',
+    heroStat: { value: '+23%', label: 'SME Growth YoY' },
+    context:
+      'Small and Medium Enterprises are the fastest-growing segment: +23% YoY in credit portfolio, reaching BRL 94.8 billion. The declared ambition is to "be the bank of choice for companies," with an NPS of 49 points already achieved and multiple awards in 2025.',
+    challenge:
+      'Scale digital solutions for millions of SMEs with different profiles (E1, E2, E3, and Digital Companies). Offer fast credit origination integrated with the partner ecosystem via Open Banking.',
+    foursysApproach: [
+      'Digital credit origination platforms with automated analysis pipelines',
+      'Open Banking APIs for partner ecosystem integration',
+      'Squads specialized in digital journeys for E1, E2, E3 segments',
+      'CRM integrated with propensity analytics for cross-sell/up-sell',
+    ],
+    expectedImpact: [
+      '70% reduction in credit approval time for SMEs',
+      '25% increase in active SME base on digital channel',
+      'Sustained 20%+ SME portfolio growth for 3 years',
+    ],
+    relevantKpis: [
+      { value: 'BRL 94.8B', label: 'SME Portfolio' },
+      { value: '+23%', label: 'YoY Growth' },
+      { value: '49', label: 'Business NPS' },
+    ],
+  },
+  {
+    insightId: 'think-global',
+    heroStat: { value: '€ 14.1B', label: 'Santander Global Profit' },
+    context:
+      'Santander Brazil is positioned as an "innovation hub to export digital models" to the global group, which operates in 10+ countries with €1 trillion in assets and 180 million clients. Brazil\'s 17.6% ROAE surpasses the global average, confirming its strategic relevance.',
+    challenge:
+      'Develop solutions that meet global standards for export. Integrate with global platforms while maintaining compliance with local regulations. Bilingual communication and process adaptation.',
+    foursysApproach: [
+      'Development of solutions adhering to Santander group global standards',
+      'Bilingual squads (PT/EN) with multi-country integration experience',
+      '17+ years of accumulated knowledge in the Santander Brazil ecosystem',
+      'Cloud-native architectures and reusable global APIs',
+    ],
+    expectedImpact: [
+      'Brazilian solutions exported to 3+ group countries within 12 months',
+      '40% reduction in time-to-market for global platform adaptation',
+      'Brazil recognized as a top-3 innovation hub within the global group',
+    ],
+    relevantKpis: [
+      { value: '17.6%', label: 'Brazil ROAE' },
+      { value: '180M', label: 'Global Group Clients' },
+      { value: '€ 148B', label: 'Global Market Cap' },
+    ],
+  },
+  {
+    insightId: 'funding-captacao',
+    heroStat: { value: 'BRL 670B', label: 'in Client Funding' },
+    context:
+      'Santander diversifies funding with a focus on retail (55% of mix, +5 p.p. vs 2023). Building the "best investment platform in the market" is a declared goal — focused on human relationships, scale, and digital excellence.',
+    challenge:
+      'Create investment platforms that combine the digital sophistication of neo-banks with the premium human service of Private Banking. Scale the Select experience to capture market share in the high-income segment.',
+    foursysApproach: [
+      'Digital investment platforms with premium UX and performance',
+      'Real-time portfolio dashboards with market analytics',
+      'CRM integrated with recommendation analytics for advisors',
+      'Mobile-first with seamless and secure transaction experience',
+    ],
+    expectedImpact: [
+      '20% increase in net investment funding via digital',
+      '50% reduction in setup time for new investment products',
+      'Digital NPS 15+ points above market benchmark',
+    ],
+    relevantKpis: [
+      { value: 'BRL 670B', label: 'Total Funding' },
+      { value: '55%', label: 'Retail Mix' },
+      { value: '+3.5%', label: 'Fees YoY' },
+    ],
+  },
+  {
+    insightId: 'sustentabilidade',
+    heroStat: { value: 'BRL 50.7B', label: 'Sustainable Portfolio' },
+    context:
+      'Santander achieved an "A" rating on CDP (Carbon Disclosure Project), leads CBIOs with 41% market share, and has ESG as an executive evaluation metric. Prospera Santander Microfinance reached BRL 3.5B in portfolio with 1.2 million active clients.',
+    challenge:
+      'Automate ESG reporting for regulators and investors. Integrate SFICS (Sustainable Finance System) classification into credit processes. Scale microfinance with technology.',
+    foursysApproach: [
+      'Automated ESG monitoring and reporting platforms',
+      'Sustainability KPI dashboards for C-Level and investors',
+      'Integration with Santander group SFICS framework',
+      'Digital origination systems for microfinance with inclusive scoring',
+    ],
+    expectedImpact: [
+      '80% reduction in ESG report generation time',
+      '30% growth in microfinance portfolio via digital channel',
+      'Maintained "A" CDP rating with automated compliance',
+    ],
+    relevantKpis: [
+      { value: 'BRL 50.7B', label: 'Sustainable Portfolio' },
+      { value: '41%', label: 'CBIO Market Share' },
+      { value: 'A', label: 'CDP Rating' },
+    ],
+  },
+]
+
+export function getSantanderDrillDowns(lang: Language = 'pt'): SantanderDrillDown[] {
+  return lang === 'en' ? santanderDrillDownsEn : santanderDrillDowns
+}
+
+// ─── Client Config ──────────────────────────────────────────────────────────
+
 export const santanderClient: ClientConfig = {
   id: 'santander',
   name: 'Santander',
@@ -491,4 +775,197 @@ export const santanderClient: ClientConfig = {
       ],
     },
   },
+}
+
+const santanderClientEn: ClientConfig = {
+  id: 'santander',
+  name: 'Santander',
+  colors: { primary: '#CC0000', accent: '#FF3333' },
+  tagline: 'Building the digital future together for over 17 years',
+  relationship: 'Strategic technology partner — 17+ years of continuous delivery',
+  yearsPartnership: 17,
+  sections: [
+    {
+      id: 'client-opening',
+      label: 'Foursys × Santander',
+      description: 'Long-standing strategic partnership',
+      icon: 'handshake',
+      component: 'client-opening',
+    },
+    {
+      id: 'client-insights',
+      label: 'Santander Insights',
+      description: 'What we identified across Santander projects',
+      icon: 'search',
+      component: 'client-insights',
+    },
+    {
+      id: 'client-extra-1',
+      label: 'Quality AI Framework',
+      description: 'Plugin approved by Santander',
+      icon: 'zap',
+      component: 'client-extra-1',
+    },
+    {
+      id: 'client-cases',
+      label: 'Santander Cases',
+      description: 'Deliveries within the Santander ecosystem',
+      icon: 'building',
+      component: 'client-cases',
+    },
+  ],
+  insights: [
+    {
+      id: 'think-value',
+      title: 'Think Value — Modernization and Automation at Scale',
+      description:
+        'Santander declared as a strategic pillar to "drive efficiency and productivity through modernization and automation at scale." With BRL 1.256 trillion in assets and 49,661 employees, each efficiency point represents millions in results.',
+      solution:
+        'Progressive modernization with SDD (no big-bang rewrite) + Hyperautomation with AI Agents. We have delivered 17+ years of continuous modernization in the Santander ecosystem, with zero downtime in migrations.',
+      icon: '⚡',
+    },
+    {
+      id: 'think-customer',
+      title: 'Think Customer — Hyper-Personalization with Data and AI',
+      description:
+        'The bank seeks "hyper-personalized experiences driven by data and anticipation of needs" for 73.9 million clients. The journey must be "seamless and integrated across channels" — from physical stores to the app.',
+      solution:
+        'Data Platform with multi-source ingestion for 360° customer view + predictive AI models for next-best-action. Squads dedicated to high-traffic digital channel development with omnichannel expertise.',
+      icon: '🎯',
+    },
+    {
+      id: 'genai',
+      title: 'GenAI as a Competitive Advantage',
+      description:
+        'Santander positions itself as a "reference in GenAI utilization, delivering competitive advantage and better customer experience." Generative AI is a strategic priority of the Board\'s Technology and Innovation Committee.',
+      solution:
+        'AI First method: pilot to production in 6 weeks, with 85% conversion. Quality AI Framework (already approved by Santander) demonstrates our ability to deliver applied AI within the bank\'s ecosystem.',
+      icon: '🧠',
+    },
+    {
+      id: 'risco-credito',
+      title: 'Risk Management and Credit Quality',
+      description:
+        'With a BRL 708B portfolio and NPL Over 90 at 4.0%, Santander continuously improves risk and capital management. The cost of credit (3.76%) and NPL formation require increasingly sophisticated prediction models.',
+      solution:
+        'ML models for real-time scoring and fraud detection (< 200ms). Predictive analytics for delinquency anticipation. Integration with risk platforms for BACEN and Basel III compliance.',
+      icon: '📊',
+    },
+    {
+      id: 'pme-crescimento',
+      title: 'SMEs — Fastest-Growing Segment (+23%)',
+      description:
+        'Small and Medium Enterprises grew 23% YoY in credit portfolio, with Santander\'s ambition being "to be the bank of choice for companies." This segment demands agile and scalable digital solutions.',
+      solution:
+        'Digital credit origination platforms for SMEs with automated pipelines. Open Banking APIs for partner ecosystem integration. Squads specialized in business products.',
+      icon: '🚀',
+    },
+    {
+      id: 'think-global',
+      title: 'Think Global — Brazil as an Innovation Hub',
+      description:
+        'Santander Brazil is positioned as an "innovation hub to export digital models" to the global group, leveraging global platforms to accelerate innovation and reduce costs. 17.6% ROAE confirms its relevance.',
+      solution:
+        'Support for developing exportable solutions to the global group. Bilingual squads (PT/EN) with experience integrating with Santander Global platforms. 17+ years of accumulated ecosystem knowledge.',
+      icon: '🌎',
+    },
+    {
+      id: 'funding-captacao',
+      title: 'Funding Optimization and Investment Platform',
+      description:
+        'Funding diversification focused on retail (retail went from 50% to 55% of mix). Building the "best investment platform in the market, grounded in human relationships with scale and digital excellence."',
+      solution:
+        'Development of digital investment platforms with premium UX. Real-time portfolio tracking dashboards. CRM system integration for advisors with recommendation analytics.',
+      icon: '💰',
+    },
+    {
+      id: 'sustentabilidade',
+      title: 'ESG and Sustainable Finance — BRL 50.7B Portfolio',
+      description:
+        'Santander reached BRL 50.7 billion in sustainable portfolio and an "A" CDP rating. CBIO leader with 41% market share. ESG is an evaluation metric for Board executives.',
+      solution:
+        'Automated ESG monitoring and reporting platforms. Sustainability KPI dashboards for compliance and market communication. Integration with Santander group SFICS frameworks.',
+      icon: '🌱',
+    },
+  ],
+  cases: [
+    {
+      id: 'shi-portal',
+      title: 'SHI Real Estate Portal',
+      sector: 'Financial / Real Estate',
+      type: 'Digital Product',
+      challenge:
+        'Santander needed a centralized portal for SHI real estate portfolio management, integrating data from multiple legacy sources and providing real-time executive dashboards.',
+      solution:
+        'Web portal development with React, REST APIs in Java Spring Boot, legacy system integration via API Gateway layer, and interactive dashboards with D3.js.',
+      stack: ['React', 'Java Spring Boot', 'AWS', 'API Gateway', 'PostgreSQL', 'D3.js'],
+      results: [
+        'Portfolio query time reduced from 3 days to 10 minutes',
+        'Real-time visibility of 100% of portfolio properties',
+        'Elimination of 15 manual Excel reports',
+        'Immediate adoption by 200+ bank managers',
+      ],
+      metric: { value: '99%', label: 'Reduction in query time' },
+    },
+    {
+      id: 'quality-ia-impl',
+      title: 'Quality AI Framework',
+      sector: 'Financial',
+      type: 'Framework / Product',
+      challenge:
+        'Santander\'s QA team performed mostly manual tests, generating 6-week release cycles and a high defect rate in production.',
+      solution:
+        'Development of the Quality AI Framework: an intelligent test automation plugin that uses AI for automatic test case generation, risk identification, and impact analysis.',
+      stack: ['Python', 'LLMs', 'Selenium', 'Jenkins', 'SonarQube', 'Jira Integration'],
+      results: [
+        'Release cycle reduced from 6 weeks to 2 weeks',
+        '78% increase in automated test coverage',
+        '60% reduction in production defects',
+        'Framework approved by Santander for corporate use',
+      ],
+      metric: { value: '3x', label: 'Faster release velocity' },
+    },
+  ],
+  extra1: {
+    title: 'Quality AI Framework',
+    subtitle: 'Intelligent test automation plugin — approved by Santander',
+    content: {
+      phases: [
+        {
+          id: 'analise',
+          title: 'Intelligent Analysis',
+          description: 'AI analyzes the code and automatically identifies the highest risk and impact points for test prioritization.',
+          icon: 'search',
+        },
+        {
+          id: 'geracao',
+          title: 'Test Case Generation',
+          description: 'LLMs automatically generate test cases based on code changes, bug history, and business rules.',
+          icon: 'zap',
+        },
+        {
+          id: 'execucao',
+          title: 'Parallel Execution',
+          description: 'Parallel test execution with intelligent orchestration — reducing validation cycle time by up to 70%.',
+          icon: 'rocket',
+        },
+        {
+          id: 'relatorio',
+          title: 'Executive Report',
+          description: 'Real-time dashboard with quality score, coverage, risk, and recommendations prioritized by impact.',
+          icon: 'bar-chart',
+        },
+      ],
+      metrics: [
+        { value: '78%', label: 'Coverage increase' },
+        { value: '3x', label: 'Release velocity' },
+        { value: '60%', label: 'Defect reduction' },
+        { value: '100%', label: 'Santander approved' },
+      ],
+    },
+  },
+}
+
+export function getSantanderClient(lang: Language = 'pt'): ClientConfig {
+  return lang === 'en' ? santanderClientEn : santanderClient
 }

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
 import { useCountUp } from '../../../hooks/useCountUp'
 import { useApp } from '../../../context/AppContext'
+import { useLanguage } from '../../../i18n'
 import { SectionWrapper } from '../../ui/SectionWrapper'
 import { ClientLogo } from '../../ui/ClientLogos'
 import { DynIcon } from '../../../utils/iconMap'
@@ -316,6 +317,7 @@ function SectionNavButton({
 
 export function SectionClientOpening() {
   const { state, navigate, clearClient } = useApp()
+  const { t } = useLanguage()
   const client = state.activeClientId ? getClientById(state.activeClientId) : null
 
   const kpi1 = useCountUp(26,    1400)
@@ -327,9 +329,9 @@ export function SectionClientOpening() {
   const clientColor = client.colors.primary
 
   const kpis = [
-    { ref: kpi1, suffix: ' anos',  label: 'de história Foursys' },
-    { ref: kpi2, suffix: 'K+',     label: 'projetos entregues' },
-    { ref: kpi3, suffix: '+',      label: `anos com ${client.name}` },
+    { ref: kpi1, suffix: ` ${t('common.years')}`,  label: t('clientSections.opening.foursysHistory') },
+    { ref: kpi2, suffix: 'K+',     label: t('clientSections.opening.projectsDelivered') },
+    { ref: kpi3, suffix: '+',      label: t('clientSections.opening.yearsWith').replace('{client}', client.name) },
   ]
 
   const clientSections = client.sections.slice(1)
@@ -381,7 +383,7 @@ export function SectionClientOpening() {
                   color: clientColor,
                 }}
               >
-                Apresentação Personalizada · {client.name}
+                {t('clientSections.opening.customPresentation').replace('{client}', client.name)}
               </div>
             </motion.div>
           </motion.div>
@@ -433,7 +435,7 @@ export function SectionClientOpening() {
               className="text-[10px] font-bold uppercase tracking-[0.18em] mb-1 lg:mb-2"
               style={{ color: clientColor }}
             >
-              Nesta apresentação
+              {t('clientSections.opening.inThisPresentation')}
             </div>
 
             {clientSections.map((section, i) => (
@@ -462,10 +464,10 @@ export function SectionClientOpening() {
               className="text-[10px] font-bold uppercase tracking-[0.16em] mb-1 sm:mb-2"
               style={{ color: clientColor }}
             >
-              Estrutura de Entrega
+              {t('clientSections.opening.deliveryStructure')}
             </div>
             <div className="text-xs sm:text-sm text-foursys-text-muted leading-relaxed">
-              Projetos · Squads · Alocação · Agentes · Produtos · AMS
+              {t('clientSections.opening.deliveryItems')}
             </div>
           </div>
 
@@ -474,10 +476,10 @@ export function SectionClientOpening() {
               className="text-[10px] font-bold uppercase tracking-[0.16em] mb-1 sm:mb-2"
               style={{ color: clientColor }}
             >
-              Diferenciais
+              {t('clientSections.opening.differentials')}
             </div>
             <div className="text-xs sm:text-sm text-foursys-text-muted leading-relaxed">
-              26 anos · 3,6% turnover · ISO 9001 · ISO 27001 · SAFe · GPTW
+              {t('clientSections.opening.differentialsList')}
             </div>
           </div>
 
@@ -486,13 +488,13 @@ export function SectionClientOpening() {
               className="text-[10px] font-bold uppercase tracking-[0.16em] mb-1 sm:mb-2"
               style={{ color: clientColor }}
             >
-              Modo de visualização
+              {t('clientSections.opening.viewMode')}
             </div>
             <button
               onClick={clearClient}
               className="text-xs text-foursys-text-dim hover:text-foursys-text-muted active:text-white transition-colors underline underline-offset-2 text-left min-h-[44px] flex items-center"
             >
-              Voltar para apresentação institucional →
+              {t('clientSections.opening.backToInstitutional')}
             </button>
           </div>
         </motion.div>

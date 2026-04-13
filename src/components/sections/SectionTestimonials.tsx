@@ -4,6 +4,7 @@ import { Quote, MessageCircle, Star, ArrowRight } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { cases } from '../../data/cases'
 import { useApp } from '../../context/AppContext'
+import { useLanguage } from '../../i18n'
 
 const SECTOR_ACCENT: Record<string, { bg: string; text: string; border: string; dot: string }> = {
   'Saúde':      { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20', dot: 'bg-emerald-400' },
@@ -29,9 +30,10 @@ const testimonials = cases
 
 export function SectionTestimonials() {
   const { navigate } = useApp()
+  const { t } = useLanguage()
   const [activeSector, setActiveSector] = useState('Todos')
-  const sectors = ['Todos', ...Array.from(new Set(testimonials.map(t => t.sector)))]
-  const filtered = activeSector === 'Todos' ? testimonials : testimonials.filter(t => t.sector === activeSector)
+  const sectors = ['Todos', ...Array.from(new Set(testimonials.map(tm => tm.sector)))]
+  const filtered = activeSector === 'Todos' ? testimonials : testimonials.filter(tm => tm.sector === activeSector)
 
   return (
     <SectionWrapper>
@@ -46,15 +48,13 @@ export function SectionTestimonials() {
         >
           <div className="flex items-center gap-2 mb-3">
             <MessageCircle size={16} className="text-foursys-primary" />
-            <p className="text-xs text-foursys-text-dim uppercase tracking-wider font-bold">Depoimentos de Clientes</p>
+            <p className="text-xs text-foursys-text-dim uppercase tracking-wider font-bold">{t('testimonials.badge')}</p>
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-4">
-            Quem já viveu a experiência{' '}
-            <span className="text-foursys-primary">recomenda</span>
+            {t('testimonials.title')}
           </h2>
           <p className="text-sm md:text-base text-foursys-text-muted max-w-2xl leading-relaxed">
-            Depoimentos reais de líderes que confiaram na Foursys para transformar seus negócios.
-            Cada voz representa um projeto com resultados mensuráveis.
+            {t('testimonials.subtitle')}
           </p>
 
           {/* Stats */}
@@ -71,7 +71,7 @@ export function SectionTestimonials() {
                 ))}
               </div>
               <span className="text-xs text-foursys-text-dim">
-                <span className="text-white font-bold">{testimonials.length}</span> depoimentos
+                <span className="text-white font-bold">{testimonials.length}</span> {t('testimonials.count')}
               </span>
             </div>
             <div className="flex items-center gap-1">
@@ -101,19 +101,19 @@ export function SectionTestimonials() {
                   : 'border-white/[0.1] text-foursys-text-muted hover:border-white/[0.2] hover:text-white'
               }`}
             >
-              {s}
+              {s === 'Todos' ? t('testimonials.filterAll') : s}
             </button>
           ))}
         </motion.div>
 
         {/* Testimonials grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {filtered.map((t, i) => {
-            const accent = SECTOR_ACCENT[t.sector] ?? DEFAULT_ACCENT
+          {filtered.map((item, i) => {
+            const accent = SECTOR_ACCENT[item.sector] ?? DEFAULT_ACCENT
 
             return (
               <motion.article
-                key={`${t.author}-${t.sector}`}
+                key={`${item.author}-${item.sector}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 + i * 0.08, duration: 0.5 }}
@@ -128,12 +128,12 @@ export function SectionTestimonials() {
                 <div className="flex items-center gap-2 mb-5">
                   <span className={`w-2 h-2 rounded-full ${accent.dot}`} />
                   <span className={`text-[10px] font-bold uppercase tracking-wider ${accent.text}`}>
-                    {t.sector}
+                    {item.sector}
                   </span>
-                  {t.metric && (
+                  {item.metric && (
                     <>
                       <span className="text-foursys-text-dim/30">·</span>
-                      <span className={`text-[10px] font-bold ${accent.text}`}>{t.metric.value} {t.metric.label}</span>
+                      <span className={`text-[10px] font-bold ${accent.text}`}>{item.metric.value} {item.metric.label}</span>
                     </>
                   )}
                 </div>
@@ -142,18 +142,18 @@ export function SectionTestimonials() {
                 <div className="relative z-10 mb-6">
                   <Quote size={18} className="text-foursys-primary/40 mb-3" />
                   <p className="text-sm md:text-base text-foursys-text-muted italic leading-relaxed">
-                    {t.quote}
+                    {item.quote}
                   </p>
                 </div>
 
                 {/* Author */}
                 <div className="flex items-center gap-3 relative z-10">
                   <div className={`w-11 h-11 rounded-full ${accent.bg} border ${accent.border} flex items-center justify-center text-sm font-bold ${accent.text}`}>
-                    {t.author.charAt(0)}
+                    {item.author.charAt(0)}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-sm font-bold text-white">{t.author}</div>
-                    <div className="text-[11px] text-foursys-text-dim">{t.role}</div>
+                    <div className="text-sm font-bold text-white">{item.author}</div>
+                    <div className="text-[11px] text-foursys-text-dim">{item.role}</div>
                   </div>
                 </div>
 
@@ -162,8 +162,8 @@ export function SectionTestimonials() {
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="text-[10px] text-foursys-text-dim uppercase tracking-wider mb-0.5">Case relacionado</div>
-                      <div className="text-xs font-semibold text-foursys-text-muted">{t.caseTitle}</div>
-                      <div className="text-[10px] text-foursys-text-dim">{t.caseType}</div>
+                      <div className="text-xs font-semibold text-foursys-text-muted">{item.caseTitle}</div>
+                      <div className="text-[10px] text-foursys-text-dim">{item.caseType}</div>
                     </div>
                     <button
                       type="button"

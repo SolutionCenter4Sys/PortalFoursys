@@ -5,6 +5,7 @@ import {
   AlertCircle, Loader2, ChevronDown, FileText, Layers,
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
+import { useLanguage } from '../../i18n'
 import { navigationItems, sectionCategories } from '../../data/navigation'
 import { cases } from '../../data/cases'
 import { exportSectionsToPdf, type PdfExportProgress } from '../../utils/pdfExport'
@@ -18,43 +19,83 @@ interface SubItem {
   sectionId: AppSection
 }
 
-const STATIC_SUBITEMS: Partial<Record<AppSection, SubItem[]>> = {
-  'home': [
-    { id: 'home-hero', label: 'Hero e KPIs', sectionId: 'home' },
-    { id: 'home-offers', label: 'Ofertas Flagship', sectionId: 'home' },
-    { id: 'home-delivery', label: 'Modelos de Entrega', sectionId: 'home' },
-    { id: 'home-certs', label: 'Certificações', sectionId: 'home' },
-  ],
-  'identity': [
-    { id: 'identity-kpis', label: 'Big Numbers', sectionId: 'identity' },
-    { id: 'identity-mission', label: 'Missão, Visão e Valores', sectionId: 'identity' },
-    { id: 'identity-timeline', label: 'Linha do Tempo', sectionId: 'identity' },
-  ],
-  'offers-flagship': [
-    { id: 'offers-ai-squad', label: 'AI Squad', sectionId: 'offers-flagship' },
-    { id: 'offers-legacy', label: 'Modernização de Legado', sectionId: 'offers-flagship' },
-    { id: 'offers-ciberseguranca', label: 'Cibersegurança', sectionId: 'offers-flagship' },
-    { id: 'offers-fourblox', label: 'FourBlox', sectionId: 'offers-flagship' },
-    { id: 'offers-quality', label: 'Qualidade & Testes com IA', sectionId: 'offers-flagship' },
-  ],
-  'services': [
-    { id: 'svc-dev', label: 'Desenvolvimento & Modernização', sectionId: 'services' },
-    { id: 'svc-data', label: 'Dados & Inteligência', sectionId: 'services' },
-    { id: 'svc-cyber', label: 'Cibersegurança', sectionId: 'services' },
-    { id: 'svc-agile', label: 'Agilidade & Design Org.', sectionId: 'services' },
-    { id: 'svc-qa', label: 'Quality Assurance', sectionId: 'services' },
-  ],
-  'global': [
-    { id: 'global-map', label: 'Mapa Interativo', sectionId: 'global' },
-    { id: 'global-brasil', label: 'Região Brasil', sectionId: 'global' },
-    { id: 'global-eua', label: 'Região EUA', sectionId: 'global' },
-    { id: 'global-europa', label: 'Região Europa', sectionId: 'global' },
-  ],
-  'esg': [
-    { id: 'esg-fourlives', label: 'FourLives', sectionId: 'esg' },
-    { id: 'esg-social', label: 'Impacto Social', sectionId: 'esg' },
-    { id: 'esg-sustent', label: 'Sustentabilidade', sectionId: 'esg' },
-  ],
+const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubItem[]>>> = {
+  pt: {
+    'home': [
+      { id: 'home-hero', label: 'Hero e KPIs', sectionId: 'home' },
+      { id: 'home-offers', label: 'Ofertas Flagship', sectionId: 'home' },
+      { id: 'home-delivery', label: 'Modelos de Entrega', sectionId: 'home' },
+      { id: 'home-certs', label: 'Certificações', sectionId: 'home' },
+    ],
+    'identity': [
+      { id: 'identity-kpis', label: 'Big Numbers', sectionId: 'identity' },
+      { id: 'identity-mission', label: 'Missão, Visão e Valores', sectionId: 'identity' },
+      { id: 'identity-timeline', label: 'Linha do Tempo', sectionId: 'identity' },
+    ],
+    'offers-flagship': [
+      { id: 'offers-ai-squad', label: 'AI Squad', sectionId: 'offers-flagship' },
+      { id: 'offers-legacy', label: 'Modernização de Legado', sectionId: 'offers-flagship' },
+      { id: 'offers-ciberseguranca', label: 'Cibersegurança', sectionId: 'offers-flagship' },
+      { id: 'offers-fourblox', label: 'FourBlox', sectionId: 'offers-flagship' },
+      { id: 'offers-quality', label: 'Qualidade & Testes com IA', sectionId: 'offers-flagship' },
+    ],
+    'services': [
+      { id: 'svc-dev', label: 'Desenvolvimento & Modernização', sectionId: 'services' },
+      { id: 'svc-data', label: 'Dados & Inteligência', sectionId: 'services' },
+      { id: 'svc-cyber', label: 'Cibersegurança', sectionId: 'services' },
+      { id: 'svc-agile', label: 'Agilidade & Design Org.', sectionId: 'services' },
+      { id: 'svc-qa', label: 'Quality Assurance', sectionId: 'services' },
+    ],
+    'global': [
+      { id: 'global-map', label: 'Mapa Interativo', sectionId: 'global' },
+      { id: 'global-brasil', label: 'Região Brasil', sectionId: 'global' },
+      { id: 'global-eua', label: 'Região EUA', sectionId: 'global' },
+      { id: 'global-europa', label: 'Região Europa', sectionId: 'global' },
+    ],
+    'esg': [
+      { id: 'esg-fourlives', label: 'FourLives', sectionId: 'esg' },
+      { id: 'esg-social', label: 'Impacto Social', sectionId: 'esg' },
+      { id: 'esg-sustent', label: 'Sustentabilidade', sectionId: 'esg' },
+    ],
+  },
+  en: {
+    'home': [
+      { id: 'home-hero', label: 'Hero and KPIs', sectionId: 'home' },
+      { id: 'home-offers', label: 'Flagship Offers', sectionId: 'home' },
+      { id: 'home-delivery', label: 'Delivery Models', sectionId: 'home' },
+      { id: 'home-certs', label: 'Certifications', sectionId: 'home' },
+    ],
+    'identity': [
+      { id: 'identity-kpis', label: 'Big Numbers', sectionId: 'identity' },
+      { id: 'identity-mission', label: 'Mission, Vision and Values', sectionId: 'identity' },
+      { id: 'identity-timeline', label: 'Timeline', sectionId: 'identity' },
+    ],
+    'offers-flagship': [
+      { id: 'offers-ai-squad', label: 'AI Squad', sectionId: 'offers-flagship' },
+      { id: 'offers-legacy', label: 'Legacy Modernization', sectionId: 'offers-flagship' },
+      { id: 'offers-ciberseguranca', label: 'Cybersecurity', sectionId: 'offers-flagship' },
+      { id: 'offers-fourblox', label: 'FourBlox', sectionId: 'offers-flagship' },
+      { id: 'offers-quality', label: 'Quality & AI Testing', sectionId: 'offers-flagship' },
+    ],
+    'services': [
+      { id: 'svc-dev', label: 'Development & Modernization', sectionId: 'services' },
+      { id: 'svc-data', label: 'Data & Intelligence', sectionId: 'services' },
+      { id: 'svc-cyber', label: 'Cybersecurity', sectionId: 'services' },
+      { id: 'svc-agile', label: 'Agility & Org. Design', sectionId: 'services' },
+      { id: 'svc-qa', label: 'Quality Assurance', sectionId: 'services' },
+    ],
+    'global': [
+      { id: 'global-map', label: 'Interactive Map', sectionId: 'global' },
+      { id: 'global-brasil', label: 'Brazil Region', sectionId: 'global' },
+      { id: 'global-eua', label: 'USA Region', sectionId: 'global' },
+      { id: 'global-europa', label: 'Europe Region', sectionId: 'global' },
+    ],
+    'esg': [
+      { id: 'esg-fourlives', label: 'FourLives', sectionId: 'esg' },
+      { id: 'esg-social', label: 'Social Impact', sectionId: 'esg' },
+      { id: 'esg-sustent', label: 'Sustainability', sectionId: 'esg' },
+    ],
+  },
 }
 
 const CASE_SUBITEMS: SubItem[] = cases.map(c => ({
@@ -63,13 +104,9 @@ const CASE_SUBITEMS: SubItem[] = cases.map(c => ({
   sectionId: 'cases' as AppSection,
 }))
 
-const SECTION_SUBITEMS: Partial<Record<AppSection, SubItem[]>> = {
-  ...STATIC_SUBITEMS,
-  'cases': CASE_SUBITEMS,
-}
-
 export function SectionExportPdf() {
   const { getSectionLabel, navigate: appNavigate } = useApp()
+  const { t, lang } = useLanguage()
 
   const [selectedSections, setSelectedSections] = useState<Set<AppSection>>(new Set())
   const [selectedSubItems, setSelectedSubItems] = useState<Set<string>>(new Set())
@@ -77,6 +114,11 @@ export function SectionExportPdf() {
   const [progress, setProgress] = useState<PdfExportProgress | null>(null)
 
   const isGenerating = progress !== null && progress.status !== 'done' && progress.status !== 'error'
+
+  const sectionSubitems = useMemo<Partial<Record<AppSection, SubItem[]>>>(() => ({
+    ...STATIC_SUBITEMS_I18N[lang],
+    'cases': CASE_SUBITEMS,
+  }), [lang])
 
   const availableItems = useMemo(() => {
     return navigationItems.filter(item => item.id !== 'export-pdf')
@@ -98,7 +140,7 @@ export function SectionExportPdf() {
       const next = new Set(prev)
       if (next.has(sectionId)) {
         next.delete(sectionId)
-        const subs = SECTION_SUBITEMS[sectionId]
+        const subs = sectionSubitems[sectionId]
         if (subs) {
           setSelectedSubItems(p => {
             const n = new Set(p)
@@ -108,7 +150,7 @@ export function SectionExportPdf() {
         }
       } else {
         next.add(sectionId)
-        const subs = SECTION_SUBITEMS[sectionId]
+        const subs = sectionSubitems[sectionId]
         if (subs) {
           setSelectedSubItems(p => {
             const n = new Set(p)
@@ -119,7 +161,7 @@ export function SectionExportPdf() {
       }
       return next
     })
-  }, [])
+  }, [sectionSubitems])
 
   const toggleSubItem = useCallback((subItem: SubItem) => {
     setSelectedSubItems(prev => {
@@ -148,7 +190,7 @@ export function SectionExportPdf() {
       if (allSelected) {
         categoryIds.forEach(id => {
           next.delete(id)
-          const subs = SECTION_SUBITEMS[id]
+          const subs = sectionSubitems[id]
           if (subs) {
             setSelectedSubItems(p => {
               const n = new Set(p)
@@ -160,7 +202,7 @@ export function SectionExportPdf() {
       } else {
         categoryIds.forEach(id => {
           next.add(id)
-          const subs = SECTION_SUBITEMS[id]
+          const subs = sectionSubitems[id]
           if (subs) {
             setSelectedSubItems(p => {
               const n = new Set(p)
@@ -172,7 +214,7 @@ export function SectionExportPdf() {
       }
       return next
     })
-  }, [availableItems, selectedSections])
+  }, [availableItems, selectedSections, sectionSubitems])
 
   const toggleExpand = useCallback((sectionId: AppSection) => {
     setExpandedSections(prev => {
@@ -188,10 +230,10 @@ export function SectionExportPdf() {
     setSelectedSections(new Set(allIds))
     const allSubs = new Set<string>()
     allIds.forEach(id => {
-      SECTION_SUBITEMS[id]?.forEach(s => allSubs.add(s.id))
+      sectionSubitems[id]?.forEach(s => allSubs.add(s.id))
     })
     setSelectedSubItems(allSubs)
-  }, [availableItems])
+  }, [availableItems, sectionSubitems])
 
   const clearSelection = useCallback(() => {
     setSelectedSections(new Set())
@@ -229,7 +271,7 @@ export function SectionExportPdf() {
   const progressPct = progress ? Math.round((progress.current / progress.total) * 100) : 0
 
   const totalSubItemsSelected = selectedSubItems.size
-  const totalSelectedDisplay = selectedSections.size + (totalSubItemsSelected > 0 ? ` (+${totalSubItemsSelected} subitens)` : '')
+  const totalSelectedDisplay = selectedSections.size + (totalSubItemsSelected > 0 ? ` (+${totalSubItemsSelected} ${lang === 'pt' ? 'subitens' : 'sub-items'})` : '')
 
   return (
     <SectionWrapper>
@@ -243,16 +285,16 @@ export function SectionExportPdf() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-xs mb-3">
             <FileDown size={14} />
-            Exportar Conteúdo
+            {t('exportPdf.badge')}
           </div>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-foursys-text leading-tight mb-2">
-            Exportar para{' '}
+            {lang === 'pt' ? 'Exportar para' : 'Export to'}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6600] to-[#FF9933]">
               PDF
             </span>
           </h2>
           <p className="text-sm text-foursys-text-muted max-w-2xl">
-            Selecione categorias, sessões individuais ou subitens específicos para gerar um documento PDF personalizado com o conteúdo do portal.
+            {t('exportPdf.subtitle')}
           </p>
         </motion.div>
 
@@ -274,14 +316,14 @@ export function SectionExportPdf() {
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-semibold bg-foursys-primary/10 text-foursys-primary hover:bg-foursys-primary/20 border border-foursys-primary/20 transition-all disabled:opacity-40"
                 >
                   {allSelected ? (
-                    <><X size={12} /> Limpar</>
+                    <><X size={12} /> {t('exportPdf.clearAll')}</>
                   ) : (
-                    <><CheckCheck size={12} /> Todas</>
+                    <><CheckCheck size={12} /> {t('exportPdf.selectAll')}</>
                   )}
                 </button>
               </div>
               <span className="text-[11px] text-foursys-text-dim font-medium">
-                {totalSelectedDisplay} selecionado{selectedSections.size !== 1 ? 's' : ''}
+                {totalSelectedDisplay} {t('exportPdf.selected')}
               </span>
             </div>
 
@@ -328,7 +370,7 @@ export function SectionExportPdf() {
                       <div className="space-y-1 ml-1">
                         {group.items.map(item => {
                           const isSelected = selectedSections.has(item.id)
-                          const subItems = SECTION_SUBITEMS[item.id]
+                          const subItems = sectionSubitems[item.id]
                           const isExpanded = expandedSections.has(item.id)
                           const hasSubItems = subItems && subItems.length > 0
 
@@ -374,7 +416,7 @@ export function SectionExportPdf() {
                                   <button
                                     onClick={() => toggleExpand(item.id)}
                                     className="flex-shrink-0 p-1 rounded-lg hover:bg-white/[0.06] text-foursys-text-dim hover:text-foursys-text-muted transition-colors"
-                                    aria-label="Expandir subitens"
+                                    aria-label={lang === 'pt' ? 'Expandir subitens' : 'Expand sub-items'}
                                   >
                                     <ChevronDown size={14} className={`transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
                                   </button>
@@ -445,8 +487,10 @@ export function SectionExportPdf() {
                   <FileText size={18} className="text-foursys-primary" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-foursys-text">Resumo da Exportação</h3>
-                  <p className="text-[10px] text-foursys-text-dim">Conteúdo que será incluído no PDF</p>
+                  <h3 className="text-sm font-bold text-foursys-text">{t('exportPdf.exportSummary')}</h3>
+                  <p className="text-[10px] text-foursys-text-dim">
+                    {lang === 'pt' ? 'Conteúdo que será incluído no PDF' : 'Content that will be included in the PDF'}
+                  </p>
                 </div>
               </div>
 
@@ -454,7 +498,7 @@ export function SectionExportPdf() {
                 <div className="text-center py-6">
                   <Layers size={32} className="mx-auto text-foursys-text-dim/30 mb-2" />
                   <p className="text-xs text-foursys-text-dim">
-                    Selecione pelo menos uma sessão para exportar
+                    {lang === 'pt' ? 'Selecione pelo menos uma sessão para exportar' : 'Select at least one section to export'}
                   </p>
                 </div>
               ) : (
@@ -462,7 +506,7 @@ export function SectionExportPdf() {
                   {availableItems
                     .filter(item => selectedSections.has(item.id))
                     .map(item => {
-                      const subs = SECTION_SUBITEMS[item.id]
+                      const subs = sectionSubitems[item.id]
                       const selectedSubs = subs?.filter(s => selectedSubItems.has(s.id)) ?? []
 
                       return (
@@ -489,12 +533,16 @@ export function SectionExportPdf() {
               <div className="flex items-center gap-4 mt-4 pt-3 border-t border-white/[0.06]">
                 <div className="text-center flex-1">
                   <div className="text-lg font-black text-foursys-primary">{selectedSections.size}</div>
-                  <div className="text-[9px] text-foursys-text-dim uppercase tracking-wider">Sessões</div>
+                  <div className="text-[9px] text-foursys-text-dim uppercase tracking-wider">
+                    {lang === 'pt' ? 'Sessões' : 'Sections'}
+                  </div>
                 </div>
                 <div className="w-px h-8 bg-white/[0.06]" />
                 <div className="text-center flex-1">
                   <div className="text-lg font-black text-foursys-cyan">{totalSubItemsSelected}</div>
-                  <div className="text-[9px] text-foursys-text-dim uppercase tracking-wider">Subitens</div>
+                  <div className="text-[9px] text-foursys-text-dim uppercase tracking-wider">
+                    {lang === 'pt' ? 'Subitens' : 'Sub-items'}
+                  </div>
                 </div>
                 <div className="w-px h-8 bg-white/[0.06]" />
                 <div className="text-center flex-1">
@@ -503,7 +551,9 @@ export function SectionExportPdf() {
                       g.items.some(i => selectedSections.has(i.id))
                     ).length}
                   </div>
-                  <div className="text-[9px] text-foursys-text-dim uppercase tracking-wider">Categorias</div>
+                  <div className="text-[9px] text-foursys-text-dim uppercase tracking-wider">
+                    {lang === 'pt' ? 'Categorias' : 'Categories'}
+                  </div>
                 </div>
               </div>
             </div>
@@ -514,9 +564,9 @@ export function SectionExportPdf() {
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-[11px] text-foursys-text-muted font-medium flex items-center gap-1.5">
                     <Loader2 size={12} className="animate-spin text-foursys-primary" />
-                    {progress.status === 'preparing' && `Preparando: ${progress.currentSection}`}
-                    {progress.status === 'capturing' && `Capturando: ${progress.currentSection}`}
-                    {progress.status === 'building' && 'Montando PDF...'}
+                    {progress.status === 'preparing' && `${t('exportPdf.preparing')} ${progress.currentSection}`}
+                    {progress.status === 'capturing' && `${t('exportPdf.capturing')} ${progress.currentSection}`}
+                    {progress.status === 'building' && t('exportPdf.assembling')}
                   </span>
                   <span className="text-[10px] text-foursys-text-dim font-mono">
                     {progress.current}/{progress.total}
@@ -539,7 +589,7 @@ export function SectionExportPdf() {
               <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
                 <CheckCheck size={16} className="text-emerald-400" />
                 <span className="text-xs text-emerald-300 font-medium">
-                  PDF gerado com sucesso! O download começou automaticamente.
+                  {t('exportPdf.success')}
                 </span>
               </div>
             )}
@@ -549,7 +599,7 @@ export function SectionExportPdf() {
               <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20">
                 <AlertCircle size={16} className="text-red-400" />
                 <span className="text-xs text-red-300 font-medium">
-                  Erro ao gerar PDF. Tente novamente.
+                  {t('exportPdf.error')}
                 </span>
               </div>
             )}
@@ -561,15 +611,17 @@ export function SectionExportPdf() {
               className="w-full flex items-center justify-center gap-2.5 px-5 py-4 rounded-2xl font-bold text-sm transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed bg-gradient-to-r from-foursys-primary/20 to-orange-500/10 border border-foursys-primary/30 hover:from-foursys-primary/30 hover:to-orange-500/20 hover:border-foursys-primary/50 text-foursys-primary shadow-[0_0_30px_rgba(255,102,0,0.12)]"
             >
               {isGenerating ? (
-                <><Loader2 size={18} className="animate-spin" /> Gerando PDF...</>
+                <><Loader2 size={18} className="animate-spin" /> {t('exportPdf.generatePdf')}</>
               ) : (
-                <><FileDown size={18} /> Gerar PDF — {selectedSections.size} seção{selectedSections.size !== 1 ? 'ões' : ''}</>
+                <><FileDown size={18} /> {t('exportPdf.generatePdf')} — {selectedSections.size} {lang === 'pt' ? (selectedSections.size !== 1 ? 'seções' : 'seção') : (selectedSections.size !== 1 ? 'sections' : 'section')}</>
               )}
             </button>
 
             {/* Hint */}
             <p className="text-[10px] text-foursys-text-dim/60 text-center leading-relaxed px-2">
-              O PDF será gerado no formato A4 paisagem, capturando o conteúdo visual de cada sessão selecionada.
+              {lang === 'pt'
+                ? 'O PDF será gerado no formato A4 paisagem, capturando o conteúdo visual de cada sessão selecionada.'
+                : 'The PDF will be generated in A4 landscape format, capturing the visual content of each selected section.'}
             </p>
           </motion.div>
         </div>

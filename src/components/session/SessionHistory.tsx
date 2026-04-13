@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Trash2, Clock, MapPin, Star, User } from 'lucide-react'
 import { useSessionHistory } from '../../hooks/useSessionHistory'
+import { useLanguage } from '../../i18n'
 import type { SessionRecord } from '../../types'
 
 // ─── Utilidades ──────────────────────────────────────────────────────────────
@@ -15,8 +16,8 @@ function formatHMS(totalSeconds: number): string {
   return `${s}s`
 }
 
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('pt-BR', {
+function formatDate(iso: string, locale: string): string {
+  return new Date(iso).toLocaleDateString(locale, {
     day: '2-digit',
     month: 'short',
     year: 'numeric',
@@ -25,16 +26,12 @@ function formatDate(iso: string): string {
   })
 }
 
-const ROLE_LABELS: Record<string, string> = {
-  ceo: 'CEO', cfo: 'CFO', cto: 'CTO', diretor: 'Diretor', gestor: 'Gestor',
-}
-const SECTOR_LABELS: Record<string, string> = {
-  financeiro: 'Financeiro', saude: 'Saúde', seguros: 'Seguros', outro: 'Outro',
-}
-
 // ─── Card de uma sessão ───────────────────────────────────────────────────────
 
 function RecordCard({ record }: { record: SessionRecord }) {
+  const { t, lang } = useLanguage()
+  const locale = lang === 'pt' ? 'pt-BR' : 'en-US'
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }}
@@ -45,14 +42,14 @@ function RecordCard({ record }: { record: SessionRecord }) {
       <div className="flex items-start justify-between gap-2 mb-2.5">
         <div>
           <p className="text-xs font-semibold text-foursys-text leading-tight">
-            {record.clientName ?? 'Institucional'}
+            {record.clientName ?? t('sessionHistory.institutional')}
           </p>
-          <p className="text-[10px] text-foursys-text-dim mt-0.5">{formatDate(record.date)}</p>
+          <p className="text-[10px] text-foursys-text-dim mt-0.5">{formatDate(record.date, locale)}</p>
         </div>
         {record.profileRole && (
           <span className="flex-shrink-0 px-2 py-0.5 rounded-full bg-foursys-primary/10 border border-foursys-primary/20 text-foursys-cyan text-[9px] font-semibold">
-            {ROLE_LABELS[record.profileRole] ?? record.profileRole}
-            {record.profileSector ? ` · ${SECTOR_LABELS[record.profileSector] ?? record.profileSector}` : ''}
+            {t(`sessionHistory.roles.${record.profileRole}`)}
+            {record.profileSector ? ` · ${t(`sessionHistory.sectors.${record.profileSector}`)}` : ''}
           </span>
         )}
       </div>
@@ -65,12 +62,12 @@ function RecordCard({ record }: { record: SessionRecord }) {
         </span>
         <span className="flex items-center gap-1 text-[10px] text-foursys-text-dim">
           <MapPin size={9} className="text-foursys-primary" />
-          {record.sectionsVisited} seções
+          {record.sectionsVisited} {t('sessionHistory.sections')}
         </span>
         {record.interestedSections.length > 0 && (
           <span className="flex items-center gap-1 text-[10px] text-amber-300/70">
             <Star size={9} className="fill-amber-400 text-amber-400" />
-            {record.interestedSections.length} interesse{record.interestedSections.length > 1 ? 's' : ''}
+            {record.interestedSections.length} {record.interestedSections.length > 1 ? t('sessionHistory.interests') : t('sessionHistory.interest')}
           </span>
         )}
       </div>
@@ -95,6 +92,7 @@ function RecordCard({ record }: { record: SessionRecord }) {
 // ─── Componente principal ─────────────────────────────────────────────────────
 
 export function SessionHistory() {
+  const { t } = useLanguage()
   const { load, clear } = useSessionHistory()
   const [records, setRecords] = useState<SessionRecord[]>([])
 
@@ -112,9 +110,9 @@ export function SessionHistory() {
       <div className="flex flex-col items-center justify-center py-12 text-center">
         <User size={28} className="text-foursys-text-dim mb-3" />
         <p className="text-xs text-foursys-text-dim">
-          Nenhuma sessão salva ainda.
+          {t('sessionHistory.noSessionsYet')}
           <br />
-          Gere um resumo para registrar a primeira.
+          {t('sessionHistory.generateToSave')}
         </p>
       </div>
     )
@@ -124,14 +122,14 @@ export function SessionHistory() {
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between mb-1">
         <span className="text-[10px] font-semibold text-foursys-text-dim uppercase tracking-widest">
-          {records.length} sessão{records.length > 1 ? 'ões' : ''} salva{records.length > 1 ? 's' : ''}
+          {records.length} {records.length > 1 ? t('sessionHistory.sessionsSaved') : t('sessionHistory.sessionSaved')}
         </span>
         <button
           onClick={handleClear}
           className="flex items-center gap-1 text-[10px] text-foursys-text-dim hover:text-red-400 transition-colors"
         >
           <Trash2 size={10} />
-          Limpar histórico
+          {t('sessionHistory.clearHistory')}
         </button>
       </div>
       {records.map(r => (

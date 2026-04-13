@@ -1,20 +1,13 @@
 import { motion } from 'framer-motion'
 import { useCountUp } from '../../hooks/useCountUp'
 import { useApp } from '../../context/AppContext'
+import { useLanguage } from '../../i18n'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { CertificationBadge } from '../ui/CertificationBadge'
 import { PartnerLogo, type PartnerId } from '../ui/PartnerLogos'
 import { heroStats } from '../../data/kpis'
 
 // ─── Dados ────────────────────────────────────────────────────────────────────
-
-const flagshipOffers = [
-  'AI Squad',
-  'Modernização de Legado',
-  'Cibersegurança',
-  'FourBlox',
-  'Qualidade & Testes com IA',
-]
 
 const allianceLogos: { id: PartnerId; label: string }[] = [
   { id: 'adobe',        label: 'Adobe' },
@@ -140,55 +133,43 @@ function FoursysLogo() {
 
 // ─── Frases de dor contextualizadas ─────────────────────────────────────────
 
-const PAIN_STATEMENTS: Record<string, Record<string, string>> = {
-  financeiro: {
-    ceo: 'Velocidade de entrega travada por legado?',
-    cfo: 'Custo de operação digital fora de controle?',
-    cto: 'Dívida técnica impedindo escala?',
-    diretor: 'Time de TI pressionado por demanda crescente?',
-    gestor: 'Processos manuais consumindo capacidade do time?',
-    default: 'Transformação digital com segurança e escala?',
-  },
-  saude: {
-    ceo: 'Operação clínica fragmentada em sistemas legados?',
-    cfo: 'Custos invisíveis na jornada do paciente?',
-    cto: 'Dados de saúde sem integração nem governança?',
-    diretor: 'Conformidade regulatória difícil de garantir?',
-    gestor: 'Fluxos clínicos lentos por processos não automatizados?',
-    default: 'Inovação em saúde com segurança e compliance?',
-  },
-  seguros: {
-    ceo: 'Time-to-market de novos produtos em anos, não meses?',
-    cfo: 'Fraude e sinistro consumindo margem?',
-    cto: 'Core de seguros difícil de evoluir?',
-    diretor: 'Experiência do segurado abaixo das expectativas?',
-    gestor: 'Subscrição e emissão lentas por processos manuais?',
-    default: 'Modernização de seguros com agilidade e controle?',
-  },
-  outro: {
-    default: 'Como acelerar entregas digitais sem perder governança?',
-  },
-}
-
-function getPainStatement(sector: string | null, role: string | null): string | null {
+function getPainStatement(sector: string | null, role: string | null, t: (key: string) => string): string | null {
   if (!sector) return null
-  const sectorMap = PAIN_STATEMENTS[sector] ?? PAIN_STATEMENTS['outro']
-  return (role && sectorMap[role]) ? sectorMap[role] : sectorMap['default'] ?? null
+  const sectorKey = ['financeiro', 'saude', 'seguros'].includes(sector) ? sector : 'outro'
+  if (role) {
+    const key = `home.painStatements.${sectorKey}.${role}`
+    const result = t(key)
+    if (result !== key) return result
+  }
+  const defaultKey = `home.painStatements.${sectorKey}.default`
+  const defaultResult = t(defaultKey)
+  if (defaultResult !== defaultKey) return defaultResult
+  const fallback = t('home.painStatements.outro.default')
+  return fallback !== 'home.painStatements.outro.default' ? fallback : null
 }
 
 export function SectionHome() {
   const { navigate, state } = useApp()
+  const { t } = useLanguage()
 
   const kpi1 = useCountUp(heroStats.years,      1400)
   const kpi2 = useCountUp(30,                   1800)
   const kpi3 = useCountUp(8,                    1600)
 
-  const painStatement = getPainStatement(state.sessionProfile?.sector ?? null, state.sessionProfile?.role ?? null)
+  const painStatement = getPainStatement(state.sessionProfile?.sector ?? null, state.sessionProfile?.role ?? null, t)
+
+  const flagshipOffers = [
+    t('home.offers.aiSquad'),
+    t('home.offers.legacyModernization'),
+    t('home.offers.cybersecurity'),
+    t('home.offers.fourBlox'),
+    t('home.offers.qaWithAI'),
+  ]
 
   const kpis = [
-    { ref: kpi1, suffix: ' anos',  label: 'de história e entrega' },
-    { ref: kpi2, suffix: 'K+',     label: 'projetos entregues' },
-    { ref: kpi3, suffix: '',       label: 'cidades em 4 regiões do globo' },
+    { ref: kpi1, suffix: ` ${t('common.years')}`,  label: t('home.kpiYears') },
+    { ref: kpi2, suffix: 'K+',     label: t('home.kpiProjects') },
+    { ref: kpi3, suffix: '',       label: t('home.kpiCities') },
   ]
 
   return (
@@ -218,9 +199,9 @@ export function SectionHome() {
               className="mt-2 text-center px-6"
             >
               <h1 className="text-lg md:text-xl font-black text-white leading-snug mb-2">
-                Soluções digitais que conectam
+                {t('home.headline')}
                 <br />
-                <span className="text-foursys-primary">estratégia, execução e evolução</span>
+                <span className="text-foursys-primary">{t('home.headlineHighlight')}</span>
               </h1>
 
               {painStatement && (
@@ -238,7 +219,7 @@ export function SectionHome() {
                 className="text-xs font-semibold tracking-[0.22em] uppercase mt-3 hidden lg:block"
                 style={{ color: 'rgba(255,255,255,0.35)' }}
               >
-                clique para começar
+                {t('home.clickToStart')}
               </div>
             </motion.div>
           </motion.div>
@@ -252,7 +233,7 @@ export function SectionHome() {
           >
             <div>
               <span className="text-xs font-bold tracking-[0.18em] uppercase text-foursys-primary">
-                Fundada em 2000
+                {t('home.foundedIn')}
               </span>
             </div>
 
@@ -284,7 +265,7 @@ export function SectionHome() {
             className="flex flex-col justify-center px-5 md:px-8 py-4 md:py-5 gap-2 md:gap-3 order-3 border-t lg:border-t-0 lg:border-l border-white/[0.06]"
           >
             <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-foursys-primary mb-1">
-              Principais Ofertas
+              {t('home.mainOffers')}
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-1 gap-2 lg:gap-3">
               {flagshipOffers.map((offer, i) => (
@@ -313,17 +294,17 @@ export function SectionHome() {
           {/* Estrutura de entrega */}
           <div className="px-5 md:px-8 py-3 md:py-4 border-b sm:border-b-0 sm:border-r border-white/[0.06]">
             <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-2">
-              Modelos de Entrega
+              {t('home.deliveryModels')}
             </div>
             <div className="text-xs md:text-sm text-foursys-text-muted leading-relaxed">
-              Squads · Projetos · Alocação · AMS · Produtos
+              {t('home.deliveryList')}
             </div>
           </div>
 
           {/* Certificações */}
           <div className="px-5 md:px-8 py-3 md:py-4 border-b sm:border-b-0 sm:border-r border-white/[0.06]">
             <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-2">
-              Certificações
+              {t('home.certifications')}
             </div>
             <div className="flex items-center gap-3 flex-wrap">
               {['ISO 9001', 'ISO 27001', 'ISO 27701', 'ISO 14001', 'SAFe'].map(cert => (
@@ -335,7 +316,7 @@ export function SectionHome() {
           {/* Alianças */}
           <div className="px-5 md:px-8 py-3 md:py-4">
             <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-2">
-              Alianças Estratégicas
+              {t('home.strategicAlliances')}
             </div>
             <div className="flex items-center gap-4 md:gap-5 flex-wrap">
               {allianceLogos.map(a => (

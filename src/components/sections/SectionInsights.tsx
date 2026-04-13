@@ -4,6 +4,7 @@ import { ArrowRight, Clock, ChevronDown, ChevronUp, BookOpen, Mic, Video, FileTe
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { insights, insightCategories, type Insight, type InsightType } from '../../data/insights'
 import { useApp } from '../../context/AppContext'
+import { useLanguage } from '../../i18n'
 
 const typeIcons: Record<InsightType, React.ReactNode> = {
   'Artigo': <BookOpen size={12} />,
@@ -26,7 +27,26 @@ const badgeStyles: Record<string, string> = {
 
 function InsightCard({ insight, index, featured = false }: { insight: Insight; index: number; featured?: boolean }) {
   const { navigate } = useApp()
+  const { t, lang } = useLanguage()
   const [expanded, setExpanded] = useState(false)
+
+  const typeLabel = (type: InsightType): string => {
+    const map: Record<string, string> = {
+      'Artigo': t('insights.types.article'),
+      'Pesquisa': t('insights.types.research'),
+      'Relatório': t('insights.types.report'),
+      'White Paper': t('insights.types.whitepaper'),
+    }
+    return map[type] ?? type
+  }
+
+  const badgeLabel = (badge: string): string => {
+    const map: Record<string, string> = {
+      'Novo': t('insights.badges.new'),
+      'Em destaque': t('insights.badges.featured'),
+    }
+    return map[badge] ?? badge
+  }
 
   return (
     <motion.article
@@ -44,7 +64,7 @@ function InsightCard({ insight, index, featured = false }: { insight: Insight; i
         <div className="relative z-10 flex items-center gap-2 flex-wrap">
           {insight.badge && (
             <span className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${badgeStyles[insight.badge] ?? 'bg-white/10 text-white/70 border-white/20'}`}>
-              {insight.badge}
+              {badgeLabel(insight.badge)}
             </span>
           )}
           <span
@@ -52,7 +72,7 @@ function InsightCard({ insight, index, featured = false }: { insight: Insight; i
             style={{ color: insight.color }}
           >
             {typeIcons[insight.type]}
-            {insight.type}
+            {typeLabel(insight.type)}
           </span>
           <span className="text-[9px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/[0.06] text-foursys-text-muted border border-white/[0.08]">
             {insight.category}
@@ -80,7 +100,7 @@ function InsightCard({ insight, index, featured = false }: { insight: Insight; i
             <span>{insight.date}</span>
             <span>·</span>
             <span className="flex items-center gap-1">
-              <Clock size={10} /> {insight.readTime} de leitura
+              <Clock size={10} /> {insight.readTime} {t('insights.readTime')}
             </span>
           </div>
 
@@ -129,7 +149,7 @@ function InsightCard({ insight, index, featured = false }: { insight: Insight; i
                     onClick={() => navigate(insight.sectionLink!)}
                     className="flex items-center gap-2 text-xs font-semibold text-foursys-primary hover:text-foursys-cyan transition-colors"
                   >
-                    Explorar seção <ArrowRight size={14} />
+                    {lang === 'pt' ? 'Explorar seção' : 'Explore section'} <ArrowRight size={14} />
                   </button>
                 )}
               </div>
@@ -142,6 +162,7 @@ function InsightCard({ insight, index, featured = false }: { insight: Insight; i
 }
 
 export function SectionInsights() {
+  const { t, lang } = useLanguage()
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
 
   const featured = insights.filter(i => i.featured)
@@ -161,15 +182,13 @@ export function SectionInsights() {
           className="text-center mb-10 md:mb-14"
         >
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-foursys-primary mb-3">
-            Foursys Insights
+            {t('insights.badge')}
           </p>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-4">
-            O que pensamos.<br />
-            <span className="text-foursys-text-muted">O que vemos acontecer.</span>
+            {t('insights.title')}
           </h2>
           <p className="text-sm md:text-base text-foursys-text-muted max-w-2xl mx-auto leading-relaxed">
-            Pesquisas, artigos, podcasts e casos reais sobre IA, transformação digital,
-            squads, cibersegurança e cloud — escritos por quem implementa, não por quem apenas teoriza.
+            {t('insights.subtitle')}
           </p>
         </motion.div>
 
@@ -189,7 +208,7 @@ export function SectionInsights() {
                 : 'border-white/[0.1] text-foursys-text-muted hover:border-white/[0.2] hover:text-white'
             }`}
           >
-            Todos
+            {t('common.allFilter')}
           </button>
           {insightCategories.map(cat => (
             <button
@@ -217,9 +236,11 @@ export function SectionInsights() {
           >
             <h3 className="text-sm font-bold text-foursys-text-muted uppercase tracking-wider mb-4 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-foursys-primary" />
-              Em destaque
+              {t('insights.badges.featured')}
             </h3>
-            <p className="text-xs text-foursys-text-dim mb-5">Leituras recomendadas</p>
+            <p className="text-xs text-foursys-text-dim mb-5">
+              {lang === 'pt' ? 'Leituras recomendadas' : 'Recommended reads'}
+            </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
               {featured.map((insight, i) => (
                 <InsightCard key={insight.id} insight={insight} index={i} featured />
@@ -241,7 +262,7 @@ export function SectionInsights() {
           className="flex items-center justify-between mb-5"
         >
           <span className="text-sm text-foursys-text-dim">
-            {regular.length + (activeCategory ? 0 : featured.length)} publicações
+            {regular.length + (activeCategory ? 0 : featured.length)} {lang === 'pt' ? 'publicações' : 'publications'}
           </span>
           {activeCategory && (
             <button
@@ -249,7 +270,7 @@ export function SectionInsights() {
               onClick={() => setActiveCategory(null)}
               className="text-xs text-foursys-primary hover:text-foursys-cyan transition-colors flex items-center gap-1"
             >
-              Ver todos <ArrowRight size={12} />
+              {lang === 'pt' ? 'Ver todos' : 'View all'} <ArrowRight size={12} />
             </button>
           )}
         </motion.div>
@@ -269,24 +290,28 @@ export function SectionInsights() {
           className="mt-12 md:mt-16 p-6 md:p-10 rounded-2xl bg-gradient-to-br from-foursys-primary/10 via-foursys-surface/50 to-transparent border border-foursys-primary/20 text-center"
         >
           <h3 className="text-lg md:text-2xl font-black text-white mb-2">
-            Newsletter Foursys
+            {lang === 'pt' ? 'Newsletter Foursys' : 'Foursys Newsletter'}
           </h3>
           <p className="text-sm text-foursys-text-muted max-w-md mx-auto mb-5">
-            Receba os melhores insights direto no seu e-mail. Publicações quinzenais sobre IA, transformação digital, liderança tech e casos reais.
+            {lang === 'pt'
+              ? 'Receba os melhores insights direto no seu e-mail. Publicações quinzenais sobre IA, transformação digital, liderança tech e casos reais.'
+              : 'Get the best insights straight to your inbox. Biweekly publications on AI, digital transformation, tech leadership and real cases.'}
           </p>
           <div className="flex items-center gap-3 max-w-md mx-auto">
             <div className="flex-1 h-10 rounded-lg bg-white/[0.06] border border-white/[0.12] flex items-center px-3">
-              <span className="text-xs text-foursys-text-dim">seu@email.com</span>
+              <span className="text-xs text-foursys-text-dim">{lang === 'pt' ? 'seu@email.com' : 'your@email.com'}</span>
             </div>
             <button
               type="button"
               className="h-10 px-5 rounded-lg bg-foursys-primary text-white text-xs font-bold hover:bg-foursys-primary/80 transition-colors flex-shrink-0"
             >
-              Quero receber
+              {lang === 'pt' ? 'Quero receber' : 'Subscribe'}
             </button>
           </div>
           <p className="text-[10px] text-foursys-text-dim mt-3">
-            Sem spam. Cancele a qualquer momento. LGPD compliant.
+            {lang === 'pt'
+              ? 'Sem spam. Cancele a qualquer momento. LGPD compliant.'
+              : 'No spam. Cancel anytime. LGPD/GDPR compliant.'}
           </p>
         </motion.div>
 

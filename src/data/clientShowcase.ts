@@ -1,3 +1,5 @@
+import type { Language } from '../i18n/types'
+
 export interface ShowcaseClient {
   id: string
   name: string
@@ -6,7 +8,17 @@ export interface ShowcaseClient {
   textColor: string
 }
 
-export const showcaseClients: ShowcaseClient[] = [
+const sectorTranslations: Record<string, string> = {
+  'Financeiro': 'Financial',
+  'Seguros': 'Insurance',
+  'Saúde': 'Healthcare',
+  'Tecnologia': 'Technology',
+  'Pagamentos': 'Payments',
+  'Indústria': 'Industry',
+  'Construção': 'Construction',
+}
+
+const showcaseClientsPt: ShowcaseClient[] = [
   // Financeiro
   { id: 'bradesco',         name: 'Bradesco',               sector: 'Financeiro', color: '#CC092F', textColor: '#CC092F' },
   { id: 'santander',        name: 'Santander',              sector: 'Financeiro', color: '#EC0000', textColor: '#EC0000' },
@@ -56,4 +68,20 @@ export const showcaseClients: ShowcaseClient[] = [
   { id: 'siemens',          name: 'Siemens',                sector: 'Indústria', color: '#009999', textColor: '#26C6DA' },
 ]
 
-export const sectors = [...new Set(showcaseClients.map(c => c.sector))]
+const showcaseClientsEn: ShowcaseClient[] = showcaseClientsPt.map(client => ({
+  ...client,
+  sector: sectorTranslations[client.sector] ?? client.sector,
+}))
+
+export const showcaseClients = showcaseClientsPt
+
+export function getShowcaseClients(lang: Language): ShowcaseClient[] {
+  return lang === 'en' ? showcaseClientsEn : showcaseClientsPt
+}
+
+export const sectors = [...new Set(showcaseClientsPt.map(c => c.sector))]
+
+export function getSectors(lang: Language): string[] {
+  const clients = getShowcaseClients(lang)
+  return [...new Set(clients.map(c => c.sector))]
+}

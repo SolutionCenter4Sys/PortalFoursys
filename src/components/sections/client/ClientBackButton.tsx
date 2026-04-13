@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion'
 import { ArrowLeft } from 'lucide-react'
 import { useApp } from '../../../context/AppContext'
+import { useLanguage } from '../../../i18n'
 
 export function ClientBackButton({ clientName, color }: { clientName: string; color: string }) {
   const { navigate } = useApp()
+  const { t } = useLanguage()
 
   function hexToRgba(hex: string, a: number) {
     const h = hex.replace('#', '')
@@ -39,7 +41,7 @@ export function ClientBackButton({ clientName, color }: { clientName: string; co
         style={{ color }}
       />
       <span className="text-xs font-medium" style={{ color }}>
-        Voltar para {clientName}
+        {t('clientSections.backTo')} {clientName}
       </span>
     </motion.button>
   )

@@ -15,7 +15,7 @@ function isIOS(): boolean {
     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 }
 
-export function useVoiceSearch(onResult: (transcript: string) => void) {
+export function useVoiceSearch(onResult: (transcript: string) => void, speechLang: 'pt-BR' | 'en-US' = 'pt-BR') {
   const [status, setStatus] = useState<VoiceStatus>('idle')
   const recognitionRef = useRef<SpeechRecognition | null>(null)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -48,7 +48,7 @@ export function useVoiceSearch(onResult: (transcript: string) => void) {
 
     const ios = isIOS()
     const recognition = new SpeechRecognitionCtor()
-    recognition.lang = 'pt-BR'
+    recognition.lang = speechLang
     recognition.interimResults = !ios
     recognition.continuous = false
     recognition.maxAlternatives = 1
@@ -100,7 +100,7 @@ export function useVoiceSearch(onResult: (transcript: string) => void) {
       setStatus('error')
       setTimeout(() => setStatus('idle'), 3000)
     }
-  }, [onResult, clearSafetyTimeout])
+  }, [onResult, clearSafetyTimeout, speechLang])
 
   const toggle = useCallback(() => {
     if (status === 'listening') {

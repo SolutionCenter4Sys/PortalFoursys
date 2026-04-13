@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { X, Users, ChevronRight, Building2 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { clients } from '../../data/clients'
+import { useLanguage } from '../../i18n'
 import { ClientLogo } from '../ui/ClientLogos'
 
 // ─── Cores padrão por cliente ─────────────────────────────────────────────────
@@ -15,6 +16,7 @@ function ClientCard({
   isActive: boolean
   onSelect: () => void
 }) {
+  const { t } = useLanguage()
   const color = client.colors.primary
 
   return (
@@ -47,13 +49,13 @@ function ClientCard({
               className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border"
               style={{ color, backgroundColor: `${color}15`, borderColor: `${color}40` }}
             >
-              Ativo
+              {t('clientSelector.active')}
             </span>
           )}
         </div>
         <p className="text-xs text-foursys-text-muted truncate">{client.tagline}</p>
         <p className="text-[10px] text-foursys-text-dim mt-0.5">
-          {client.sections.length} seções personalizadas
+          {client.sections.length} {t('clientSelector.customSections')}
         </p>
       </div>
 
@@ -65,6 +67,7 @@ function ClientCard({
 // ─── Componente principal ─────────────────────────────────────────────────────
 
 export function ClientSelector() {
+  const { t } = useLanguage()
   const { state, setClient, clearClient, toggleClientSelector } = useApp()
 
   return (
@@ -100,13 +103,13 @@ export function ClientSelector() {
                     <Building2 size={14} style={{ color: '#FF6600' }} />
                   </div>
                   <div>
-                    <h2 className="text-sm font-bold text-foursys-text">Selecionar Cliente</h2>
-                    <p className="text-[10px] text-foursys-text-dim">Apresentação personalizada</p>
+                    <h2 className="text-sm font-bold text-foursys-text">{t('clientSelector.title')}</h2>
+                    <p className="text-[10px] text-foursys-text-dim">{t('clientSelector.subtitle')}</p>
                   </div>
                 </div>
                 <button
                   onClick={toggleClientSelector}
-                  aria-label="Fechar seletor"
+                  aria-label={t('clientSelector.closeSelector')}
                   className="p-2 rounded-xl hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors"
                 >
                   <X size={14} />
@@ -117,7 +120,7 @@ export function ClientSelector() {
             {/* Body */}
             <div className="p-5 space-y-3">
               <p className="text-xs text-foursys-text-muted mb-4">
-                Escolha um cliente para ativar seções específicas e personalizadas na apresentação.
+                {t('clientSelector.description')}
               </p>
 
               {clients.map(client => (
@@ -141,7 +144,7 @@ export function ClientSelector() {
               <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between">
                 <div className="flex items-center gap-2 text-xs text-foursys-text-dim">
                   <Users size={11} />
-                  <span>{clients.length} clientes disponíveis</span>
+                  <span>{clients.length} {t('clientSelector.availableClients')}</span>
                 </div>
 
                 {state.activeClientId && (
@@ -149,7 +152,7 @@ export function ClientSelector() {
                     onClick={clearClient}
                     className="text-xs text-foursys-text-dim hover:text-foursys-text-muted transition-colors underline underline-offset-2"
                   >
-                    Voltar ao institucional
+                    {t('clientSelector.backToInstitutional')}
                   </button>
                 )}
               </div>

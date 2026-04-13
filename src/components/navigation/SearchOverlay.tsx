@@ -2,25 +2,26 @@ import { useState, useEffect, useRef, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, X, ArrowRight, Mic } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
+import { useLanguage } from '../../i18n'
 import { DynIcon } from '../../utils/iconMap'
 import { search, buildSearchIndex, type SearchEntry, type SearchResultKind } from '../../utils/searchIndex'
 import { useVoiceSearch } from '../../hooks/useVoiceSearch'
 import type { AppSection } from '../../types'
 
-const KIND_LABEL: Record<SearchResultKind, string> = {
-  section: 'Sessão',
-  faq: 'FAQ',
-  case: 'Case',
-  service: 'Serviço',
-  delivery: 'Delivery',
-  insight: 'Insight',
-  award: 'Premiação',
-  certification: 'Certificação',
-  alliance: 'Aliança',
-  innovation: 'Inovação',
-  kpi: 'KPI',
-  timeline: 'Trajetória',
-  client: 'Cliente',
+const KIND_LABEL_KEY: Record<SearchResultKind, string> = {
+  section: 'search.kinds.section',
+  faq: 'search.kinds.faq',
+  case: 'search.kinds.case',
+  service: 'search.kinds.service',
+  delivery: 'search.kinds.service',
+  insight: 'search.kinds.insight',
+  award: 'search.kinds.award',
+  certification: 'search.kinds.award',
+  alliance: 'search.kinds.service',
+  innovation: 'search.kinds.section',
+  kpi: 'search.kinds.kpi',
+  timeline: 'search.kinds.timeline',
+  client: 'search.kinds.client',
 }
 
 const KIND_COLOR: Record<SearchResultKind, string> = {
@@ -97,6 +98,7 @@ function highlightMatch(text: string, query: string): JSX.Element {
 
 export function SearchOverlay() {
   const { state, navigate, closeSearch, activeNavigationItems } = useApp()
+  const { t } = useLanguage()
   const [query, setQuery] = useState('')
   const [selected, setSelected] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -204,7 +206,7 @@ export function SearchOverlay() {
                   ref={inputRef}
                   value={query}
                   onChange={e => setQuery(e.target.value)}
-                  placeholder={voice.status === 'listening' ? 'Ouvindo...' : 'Buscar qualquer coisa — sessões, cases, FAQ, clientes, serviços...'}
+                  placeholder={voice.status === 'listening' ? t('common.listening') : t('search.placeholder')}
                   className="flex-1 bg-transparent text-foursys-text placeholder-foursys-text-dim outline-none text-sm"
                 />
                 {voice.isSupported && (
@@ -241,10 +243,7 @@ export function SearchOverlay() {
                   <div className="px-6 py-10 text-center">
                     <Search size={28} className="mx-auto text-foursys-text-dim/30 mb-2" />
                     <p className="text-sm text-foursys-text-dim">
-                      Nenhum resultado para "<span className="text-foursys-text font-medium">{query}</span>"
-                    </p>
-                    <p className="text-xs text-foursys-text-dim/60 mt-1">
-                      Tente outros termos como "Modernização", "Santander", "ISO" ou "AI"
+                      {t('search.emptyState')}
                     </p>
                   </div>
                 )}
@@ -298,7 +297,7 @@ export function SearchOverlay() {
 
                           {query.trim() && (
                             <span className={`flex-shrink-0 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${KIND_COLOR[item.kind]}`}>
-                              {KIND_LABEL[item.kind]}
+                              {t(KIND_LABEL_KEY[item.kind])}
                             </span>
                           )}
 
@@ -320,16 +319,16 @@ export function SearchOverlay() {
               {/* Footer */}
               <div className="px-4 py-2.5 border-t border-white/10 flex items-center justify-between">
                 <div className="flex gap-3 text-[10px] text-foursys-text-dim flex-wrap">
-                  <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08] font-mono text-[9px]">↑↓</kbd> navegar</span>
-                  <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08] font-mono text-[9px]">Enter</kbd> ir</span>
-                  <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08] font-mono text-[9px]">Esc</kbd> fechar</span>
+                  <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08] font-mono text-[9px]">↑↓</kbd> {t('search.navigate')}</span>
+                  <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08] font-mono text-[9px]">Enter</kbd> {t('search.go')}</span>
+                  <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08] font-mono text-[9px]">Esc</kbd> {t('search.closeLabel')}</span>
                   {voice.isSupported && (
                     <span className="flex items-center gap-1"><Mic size={10} className="text-foursys-text-dim" /> voz</span>
                   )}
                 </div>
                 {!query.trim() && (
                   <span className="text-[10px] text-foursys-text-dim/50">
-                    Busca em {buildSearchIndex().length} itens
+                    {t('search.searchingIn')} {buildSearchIndex().length} {t('search.items')}
                   </span>
                 )}
               </div>

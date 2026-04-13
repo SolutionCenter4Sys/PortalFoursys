@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { X, FileDown, Check, Minus, CheckCheck, AlertCircle, Loader2 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { useExportPdf } from '../../hooks/useExportPdf'
+import { useLanguage } from '../../i18n'
 import { DynIcon } from '../../utils/iconMap'
 
 export function ExportPdfModal() {
@@ -21,6 +22,7 @@ export function ExportPdfModal() {
     generatePdf,
     resetProgress,
   } = useExportPdf()
+  const { t } = useLanguage()
 
   useEffect(() => {
     if (!state.isExportModalOpen) {
@@ -60,7 +62,7 @@ export function ExportPdfModal() {
           <motion.div
             role="dialog"
             aria-modal="true"
-            aria-label="Exportar para PDF"
+            aria-label={t('exportPdf.title')}
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -74,16 +76,16 @@ export function ExportPdfModal() {
                   <FileDown size={18} className="text-foursys-primary" />
                 </div>
                 <div>
-                  <h2 className="text-sm font-bold text-foursys-text">Exportar para PDF</h2>
+                  <h2 className="text-sm font-bold text-foursys-text">{t('exportPdf.title')}</h2>
                   <p className="text-[11px] text-foursys-text-dim mt-0.5">
-                    Selecione as seções que deseja incluir
+                    {t('exportPdf.selectSections')}
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => !isGenerating && toggleExportModal()}
                 disabled={isGenerating}
-                aria-label="Fechar"
+                aria-label={t('common.close')}
                 className="p-1.5 rounded-lg hover:bg-white/8 text-foursys-text-dim hover:text-foursys-text transition-colors disabled:opacity-40"
               >
                 <X size={16} />
@@ -99,14 +101,14 @@ export function ExportPdfModal() {
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-semibold bg-foursys-primary/10 text-foursys-primary hover:bg-foursys-primary/20 border border-foursys-primary/20 transition-all disabled:opacity-40"
                 >
                   {allSelected ? (
-                    <><X size={12} /> Limpar Seleção</>
+                    <><X size={12} /> {t('exportPdf.clearSelection')}</>
                   ) : (
-                    <><CheckCheck size={12} /> Selecionar Todas</>
+                    <><CheckCheck size={12} /> {t('exportPdf.selectAllSections')}</>
                   )}
                 </button>
               </div>
               <span className="text-[11px] text-foursys-text-dim font-medium">
-                {selectedSections.size} seção{selectedSections.size !== 1 ? 'ões' : ''} selecionada{selectedSections.size !== 1 ? 's' : ''}
+                {selectedSections.size} {selectedSections.size !== 1 ? t('exportPdf.sectionsCount') : t('exportPdf.sectionCount')} {selectedSections.size !== 1 ? t('exportPdf.selectedPlural') : t('exportPdf.selectedSingular')}
               </span>
             </div>
 
@@ -192,9 +194,9 @@ export function ExportPdfModal() {
                   <div className="flex items-center justify-between mb-1.5">
                     <span className="text-[11px] text-foursys-text-muted font-medium flex items-center gap-1.5">
                       <Loader2 size={12} className="animate-spin text-foursys-primary" />
-                      {progress.status === 'preparing' && `Preparando: ${progress.currentSection}`}
-                      {progress.status === 'capturing' && `Capturando: ${progress.currentSection}`}
-                      {progress.status === 'building' && 'Montando PDF...'}
+                      {progress.status === 'preparing' && `${t('exportPdf.preparingSection')}: ${progress.currentSection}`}
+                      {progress.status === 'capturing' && `${t('exportPdf.capturingSection')}: ${progress.currentSection}`}
+                      {progress.status === 'building' && t('exportPdf.assembling')}
                     </span>
                     <span className="text-[10px] text-foursys-text-dim font-mono">
                       {progress.current}/{progress.total}
@@ -217,7 +219,7 @@ export function ExportPdfModal() {
                 <div className="mb-3 flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
                   <CheckCheck size={14} className="text-emerald-400" />
                   <span className="text-[11px] text-emerald-300 font-medium">
-                    PDF gerado com sucesso! O download começou automaticamente.
+                    {t('exportPdf.successMessage')}
                   </span>
                 </div>
               )}
@@ -227,7 +229,7 @@ export function ExportPdfModal() {
                 <div className="mb-3 flex items-center gap-2 px-3 py-2 rounded-lg bg-red-500/10 border border-red-500/20">
                   <AlertCircle size={14} className="text-red-400" />
                   <span className="text-[11px] text-red-300 font-medium">
-                    Erro ao gerar PDF. Tente novamente.
+                    {t('exportPdf.errorMessage')}
                   </span>
                 </div>
               )}
@@ -238,9 +240,9 @@ export function ExportPdfModal() {
                 className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-semibold text-sm transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed bg-foursys-primary/15 border border-foursys-primary/30 hover:bg-foursys-primary/25 hover:border-foursys-primary/50 text-foursys-primary shadow-[0_0_20px_rgba(255,102,0,0.1)]"
               >
                 {isGenerating ? (
-                  <><Loader2 size={16} className="animate-spin" /> Gerando PDF...</>
+                  <><Loader2 size={16} className="animate-spin" /> {t('exportPdf.generating')}</>
                 ) : (
-                  <><FileDown size={16} /> Gerar PDF — {selectedSections.size} seção{selectedSections.size !== 1 ? 'ões' : ''}</>
+                  <><FileDown size={16} /> {t('exportPdf.generateButton')} — {selectedSections.size} {selectedSections.size !== 1 ? t('exportPdf.sectionsCount') : t('exportPdf.sectionCount')}</>
                 )}
               </button>
             </div>

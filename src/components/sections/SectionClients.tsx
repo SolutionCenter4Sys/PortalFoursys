@@ -4,12 +4,7 @@ import { SectionWrapper } from '../ui/SectionWrapper'
 import { ClientLogo } from '../ui/ClientLogos'
 import { showcaseClients, sectors } from '../../data/clientShowcase'
 import type { ShowcaseClient } from '../../data/clientShowcase'
-
-const STATS = [
-  { value: '150+', label: 'Clientes Ativos', icon: '🏢' },
-  { value: '98%', label: 'NPS Médio', icon: '⭐' },
-  { value: '3', label: 'Regiões no Globo', icon: '🌎' },
-]
+import { useLanguage } from '../../i18n'
 
 function ClientCard({ client, index }: { client: ShowcaseClient; index: number }) {
   const [hovered, setHovered] = useState(false)
@@ -111,7 +106,14 @@ function ClientCard({ client, index }: { client: ShowcaseClient; index: number }
 }
 
 export function SectionClients() {
+  const { t } = useLanguage()
   const [activeSector, setActiveSector] = useState<string | null>(null)
+
+  const STATS = [
+    { value: '150+', label: t('clients.activeClients'), icon: '🏢' },
+    { value: '98%', label: t('clients.nps'), icon: '⭐' },
+    { value: '3', label: t('clients.regions'), icon: '🌎' },
+  ]
 
   const filtered = activeSector
     ? showcaseClients.filter(c => c.sector === activeSector)
@@ -131,10 +133,10 @@ export function SectionClients() {
           <div className="flex items-start justify-between flex-wrap gap-6">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-primary mb-2">
-                Confiança comprovada
+                {t('clients.badge')}
               </p>
               <h2 className="text-2xl md:text-4xl font-black text-white leading-none mb-3">
-                Empresas que confiam na Foursys
+                {t('clients.title')}
               </h2>
               <p className="text-foursys-text-muted max-w-xl text-sm md:text-base leading-relaxed">
                 Parceiros estratégicos de longo prazo que estão definindo o futuro de seus setores
@@ -181,7 +183,7 @@ export function SectionClients() {
                 : 'border-white/[0.1] text-foursys-text-muted hover:border-white/[0.25] hover:text-white'
             }`}
           >
-            Todos
+            {t('clients.filterAll')}
           </button>
           {sectors.map(sector => (
             <button

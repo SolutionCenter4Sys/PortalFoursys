@@ -1,6 +1,7 @@
 import type { Alliance } from '../types'
+import type { Language } from '../i18n/types'
 
-export const alliances: Alliance[] = [
+const alliancesPt: Alliance[] = [
   {
     id: 'adobe',
     name: 'Adobe',
@@ -83,3 +84,93 @@ export const alliances: Alliance[] = [
     bgColor: '#001A28'
   },
 ]
+
+const alliancesEn: Alliance[] = [
+  {
+    id: 'adobe',
+    name: 'Adobe',
+    logo: 'Adobe',
+    level: 'Solution Partner',
+    description: 'Partnership for digital experience solutions with Adobe Experience Cloud, Creative Cloud and marketing data personalization and analytics platforms.',
+    color: '#FF0000',
+    bgColor: '#1A0000'
+  },
+  {
+    id: 'aws',
+    name: 'Amazon Web Services',
+    logo: 'AWS',
+    level: 'Select Consulting Partner',
+    description: 'Partnership for cloud, data, AI and infrastructure modernization projects. Certifications in architecture, development, machine learning and AWS operations.',
+    color: '#FF9900',
+    bgColor: '#1A1000'
+  },
+  {
+    id: 'databricks',
+    name: 'Databricks',
+    logo: 'Databricks',
+    level: 'Advanced Partner',
+    description: 'Data Lakehouse implementation, data engineering and AI/ML projects with the Databricks platform. Case studies in major financial institutions and insurers.',
+    color: '#FF3621',
+    bgColor: '#1A0800'
+  },
+  {
+    id: 'digibee',
+    name: 'Digibee',
+    logo: 'Digibee',
+    level: 'Integration Partner',
+    description: 'Integration platform as a service (iPaaS) to connect legacy and modern systems. Data flow and API automation at enterprise scale.',
+    color: '#00D4AA',
+    bgColor: '#001A14'
+  },
+  {
+    id: 'google-cloud',
+    name: 'Google Cloud',
+    logo: 'Google Cloud',
+    level: 'Strategic Partner',
+    description: 'Data, analytics and AI projects with Google Cloud Platform. BigQuery, Vertex AI and cloud-native application modernization solutions.',
+    color: '#4285F4',
+    bgColor: '#001028'
+  },
+  {
+    id: 'intel',
+    name: 'Intel',
+    logo: 'Intel',
+    level: 'Technology Partner',
+    description: 'Technology partnership for AI workload optimization, edge computing and high-performance infrastructure with Intel processors and platforms.',
+    color: '#0071C5',
+    bgColor: '#001028'
+  },
+  {
+    id: 'microsoft',
+    name: 'Microsoft',
+    logo: 'Microsoft',
+    level: 'Strategic Partner',
+    description: 'Strategic partnership for Azure solutions, Microsoft 365, Copilot and workload modernization. Certifications in Azure Architecture, DevOps and AI/ML.',
+    color: '#00A4EF',
+    bgColor: '#001A2E'
+  },
+  {
+    id: 'pega',
+    name: 'Pega',
+    logo: 'Pega',
+    level: 'Consulting Partner',
+    description: 'Implementation of intelligent automation, CRM and BPM solutions with Pega Platform. Low-code for digital transformation of complex processes.',
+    color: '#FFFFFF',
+    bgColor: '#1A1A1A'
+  },
+  {
+    id: 'snowflake',
+    name: 'Snowflake',
+    logo: 'Snowflake',
+    level: 'Select Partner',
+    description: 'Data Cloud implementation for analytics, data sharing and data engineering. Modern data warehouse solutions and data governance at scale.',
+    color: '#29B5E8',
+    bgColor: '#001A28'
+  },
+]
+
+export const alliances = alliancesPt
+
+export function getAlliances(lang: Language): Alliance[] {
+  return lang === 'en' ? alliancesEn : alliancesPt
+}

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Star } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
+import { useLanguage } from '../../i18n'
 import type { AppSection } from '../../types'
 
 interface InterestButtonProps {
@@ -10,12 +11,13 @@ interface InterestButtonProps {
 
 export function InterestButton({ section, className = '' }: InterestButtonProps) {
   const { state, toggleInterest } = useApp()
+  const { t } = useLanguage()
   const isMarked = state.interestedSections.includes(section)
 
   return (
     <motion.button
       onClick={() => toggleInterest(section)}
-      title={isMarked ? 'Remover interesse' : 'Marcar interesse'}
+      title={isMarked ? t('interest.remove') : t('interest.mark')}
       className={`group relative flex items-center gap-1.5 px-3 py-2.5 md:px-2.5 md:py-1.5 min-h-[44px] md:min-h-0 rounded-full text-xs font-medium transition-all ${
         isMarked
           ? 'bg-amber-400/20 text-amber-300 border border-amber-400/40'
@@ -33,7 +35,7 @@ export function InterestButton({ section, className = '' }: InterestButtonProps)
           className={isMarked ? 'fill-amber-400 text-amber-400' : 'text-current'}
         />
       </motion.div>
-      <span>{isMarked ? 'Interesse marcado' : 'Marcar interesse'}</span>
+      <span>{isMarked ? t('interest.marked') : t('interest.mark')}</span>
     </motion.button>
   )
 }
