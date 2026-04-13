@@ -1,9 +1,14 @@
+import { useState, useMemo, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Users, ChevronRight, Building2 } from 'lucide-react'
+import { X, Users, ChevronRight, Building2, Search } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { clients } from '../../data/clients'
 import { useLanguage } from '../../i18n'
 import { ClientLogo } from '../ui/ClientLogos'
+
+function norm(s: string) {
+  return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+}
 
 // ─── Cores padrão por cliente ─────────────────────────────────────────────────
 
@@ -67,8 +72,25 @@ function ClientCard({
 // ─── Componente principal ─────────────────────────────────────────────────────
 
 export function ClientSelector() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const { state, setClient, clearClient, toggleClientSelector } = useApp()
+  const [search, setSearch] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (state.isClientSelectorOpen) {
+      setSearch('')
+      setTimeout(() => inputRef.current?.focus(), 150)
+    }
+  }, [state.isClientSelectorOpen])
+
+  const filtered = useMemo(() => {
+    if (!search.trim()) return clients
+    const q = norm(search.trim())
+    return clients.filter(c =>
+      norm(c.name).includes(q) || norm(c.tagline).includes(q)
+    )
+  }, [search])
 
   return (
     <AnimatePresence>
@@ -90,11 +112,11 @@ export function ClientSelector() {
             onClick={e => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
-            className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-t-2xl sm:rounded-2xl w-full max-w-md overflow-hidden"
+            className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-t-2xl sm:rounded-2xl w-full max-w-md flex flex-col max-h-[90vh] sm:max-h-[85vh] overflow-hidden"
           >
             {/* Header */}
-            <div className="px-6 pt-6 pb-5 border-b border-white/[0.06]">
-              <div className="flex items-center justify-between">
+            <div className="px-6 pt-6 pb-4 border-b border-white/[0.06] flex-shrink-0">
+              <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
                   <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center"
@@ -115,36 +137,70 @@ export function ClientSelector() {
                   <X size={14} />
                 </button>
               </div>
-            </div>
 
-            {/* Body */}
-            <div className="p-5 space-y-3">
-              <p className="text-xs text-foursys-text-muted mb-4">
+              <p className="text-xs text-foursys-text-muted mb-3">
                 {t('clientSelector.description')}
               </p>
 
-              {clients.map(client => (
-                <ClientCard
-                  key={client.id}
-                  client={client}
-                  isActive={state.activeClientId === client.id}
-                  onSelect={() => {
-                    if (state.activeClientId === client.id) {
-                      clearClient()
-                    } else {
-                      setClient(client.id)
-                    }
-                  }}
+              {/* Search */}
+              <div className="relative">
+                <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-foursys-text-dim" />
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={search}
+                  onChange={e => setSearch(e.target.value)}
+                  placeholder={lang === 'pt' ? 'Buscar cliente...' : 'Search client...'}
+                  className="w-full pl-9 pr-8 py-2 bg-foursys-surface/40 border border-white/[0.08] rounded-lg text-xs text-foursys-text placeholder:text-foursys-text-dim focus:outline-none focus:border-foursys-primary/50 transition-colors"
                 />
-              ))}
+                {search && (
+                  <button
+                    onClick={() => setSearch('')}
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-foursys-text-dim hover:text-foursys-text"
+                  >
+                    <X size={12} />
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Body – scrollable */}
+            <div className="flex-1 min-h-0 overflow-y-auto p-5 space-y-3 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+              {filtered.length === 0 ? (
+                <div className="text-center py-8">
+                  <p className="text-xs text-foursys-text-dim">
+                    {lang === 'pt' ? 'Nenhum cliente encontrado.' : 'No clients found.'}
+                  </p>
+                </div>
+              ) : (
+                filtered.map(client => (
+                  <ClientCard
+                    key={client.id}
+                    client={client}
+                    isActive={state.activeClientId === client.id}
+                    onSelect={() => {
+                      if (state.activeClientId === client.id) {
+                        clearClient()
+                      } else {
+                        setClient(client.id)
+                      }
+                    }}
+                  />
+                ))
+              )}
             </div>
 
             {/* Footer */}
-            <div className="px-5 pb-5">
+            <div className="px-5 pb-5 flex-shrink-0">
               <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between">
                 <div className="flex items-center gap-2 text-xs text-foursys-text-dim">
                   <Users size={11} />
-                  <span>{clients.length} {t('clientSelector.availableClients')}</span>
+                  <span>
+                    {filtered.length !== clients.length
+                      ? `${filtered.length}/${clients.length}`
+                      : clients.length
+                    } {t('clientSelector.availableClients')}
+                  </span>
                 </div>
 
                 {state.activeClientId && (
