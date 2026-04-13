@@ -16,20 +16,6 @@ export const itforumClient: ClientConfig = {
       component: 'client-opening',
     },
     {
-      id: 'client-insights',
-      label: 'Agenda e Vertentes',
-      description: 'Temas, palestrantes e sessões do evento',
-      icon: 'presentation',
-      component: 'client-insights',
-    },
-    {
-      id: 'client-cases',
-      label: 'Oportunidades Foursys',
-      description: 'Cases alinhados às vertentes do evento',
-      icon: 'target',
-      component: 'client-cases',
-    },
-    {
       id: 'client-extra-1',
       label: 'Links e Recursos',
       description: 'Acesso direto ao site, agenda e inscrição',
@@ -44,97 +30,8 @@ export const itforumClient: ClientConfig = {
       component: 'client-extra-2',
     },
   ],
-  insights: [
-    {
-      id: 'track-leadership',
-      title: 'Liderança Estratégica',
-      description:
-        'CIOs e executivos de TI precisam exercer uma liderança estratégica capaz de inspirar equipes e antecipar a evolução de seus papéis. Explore o desenvolvimento de pessoas, a evolução das expectativas sobre liderança em TI e as principais tendências que moldam o futuro de CIOs.',
-      solution:
-        'A Foursys entrega modelos de operação que conectam times humanos e agentes de IA, elevando a produtividade sem perder governança — alinhado à demanda de CIOs por resultados mensuráveis com equipes enxutas.',
-      icon: '🎯',
-    },
-    {
-      id: 'track-business-value',
-      title: 'Valor de Negócios da TI e Estratégia',
-      description:
-        'Frameworks para maximizar o impacto da TI, alinhamento estratégico e governança eficaz. Modelos operacionais que conectam iniciativas tecnológicas a resultados de negócios mensuráveis, garantindo que a TI seja um motor de crescimento.',
-      solution:
-        'FourBlox e AI Squad são modelos que transformam a TI de centro de custo para centro de valor — entrega acelerada com governança integrada e ROI comprovado em 4 a 6 semanas.',
-      icon: '📊',
-    },
-    {
-      id: 'track-ai',
-      title: 'IA, Aplicações Inteligentes e Tendências Emergentes',
-      description:
-        'Inteligência artificial e aplicações inteligentes estão redefinindo o potencial das organizações. Descubra novidades em IA, automação e tendências emergentes, e como essas inovações podem aumentar a eficiência e criar novas oportunidades.',
-      solution:
-        'AI Squad da Foursys combina profissionais humanos e agentes de IA em squads híbridos. Qualidade & Testes com IA entrega automação de testes com ROI mensurável em semanas.',
-      icon: '🤖',
-    },
-    {
-      id: 'track-security',
-      title: 'Cibersegurança e Gestão de Risco',
-      description:
-        'Conferência Gartner Segurança & Gestão de Risco também em SP (4–5 ago 2026). Proteção, conformidade e resiliência para setores regulados — prioridade absoluta para CIOs em 2026.',
-      solution:
-        'Oferta Cibersegurança da Foursys com proteção e conformidade para setores regulados. Framework operando em escala com monitoramento contínuo e resposta a incidentes.',
-      icon: '🛡️',
-    },
-    {
-      id: 'speakers',
-      title: 'Palestrantes Confirmados',
-      description:
-        'Alvaro Mello (Managing VP), Anderson Cunha (Sr Director Advisory), Denis Torii (VP Analyst), Henrique Cecci (Sr Director Analyst) e Luis Mangi (VP Advisory) do Gartner. Keynotes inspiradores com insights práticos para decisões tecnológicas.',
-      solution:
-        'Aproveite as reuniões individuais (one-on-one) de 30 min com analistas Gartner. Inscreva-se com antecedência no Conference Navigator para garantir seu slot.',
-      icon: '🎤',
-    },
-    {
-      id: 'networking',
-      title: 'Networking e Experiência',
-      description:
-        'Mesas-redondas, workshops, CIO Circle (programa exclusivo para CIOs), espaço de exposições com provedores de soluções e recepções diárias para networking. Pré-inscrição via Conference Navigator.',
-      solution:
-        'Posicione a Foursys como referência nos corredores: AI Squad, Modernização de Legado e Cibersegurança são temas-chave das vertentes. Identifique prospects em setores regulados (Financeiro, Saúde, Seguros).',
-      icon: '🤝',
-    },
-  ],
-  cases: [
-    {
-      id: 'itforum-case-ai-squad',
-      title: 'AI Squad — Equipes Híbridas Humano + IA',
-      sector: 'Tecnologia',
-      type: 'Oferta Estratégica',
-      challenge: 'CIOs precisam acelerar entregas digitais com equipes enxutas e orçamento pressionado.',
-      solution: 'Squads híbridos combinando profissionais humanos e agentes de IA com governança integrada.',
-      stack: ['AI Agents', 'LLM', 'RAG', 'Governance', 'DevOps'],
-      results: ['ROI mensurável em 4–6 semanas', 'Aceleração de 3x na entrega', 'Governança end-to-end'],
-      metric: { value: '3x', label: 'velocidade de entrega' },
-    },
-    {
-      id: 'itforum-case-modernization',
-      title: 'Modernização de Legado para Setores Regulados',
-      sector: 'Financeiro',
-      type: 'Case Referência',
-      challenge: 'Sistemas legados travando inovação em bancos e seguradoras.',
-      solution: 'Estratégia de modernização incremental: strangler pattern, containerização e cloud híbrida.',
-      stack: ['Kubernetes', 'AWS', 'Terraform', 'Java', 'React'],
-      results: ['70% redução de incidentes', 'Time-to-market 2x mais rápido', 'Compliance mantido'],
-      metric: { value: '70%', label: 'menos incidentes' },
-    },
-    {
-      id: 'itforum-case-qa-ai',
-      title: 'Qualidade & Testes com IA',
-      sector: 'Saúde',
-      type: 'Oferta Estratégica',
-      challenge: 'Cobertura de testes insuficiente e ciclos de QA longos impactando releases.',
-      solution: 'Framework de testes automatizados com IA generativa para criação, execução e manutenção de cenários.',
-      stack: ['AI Testing', 'Playwright', 'Cypress', 'Gen AI', 'CI/CD'],
-      results: ['80% automação de testes', 'Redução de 60% no ciclo de QA', 'Zero regressões críticas'],
-      metric: { value: '60%', label: 'redução no ciclo QA' },
-    },
-  ],
+  insights: [],
+  cases: [],
   extra1: {
     title: 'Links e Recursos do Evento',
     subtitle: 'Acesso rápido ao site oficial, agenda, inscrição e eventos relacionados',
@@ -394,20 +291,6 @@ const itforumClientEn: ClientConfig = {
       component: 'client-opening',
     },
     {
-      id: 'client-insights',
-      label: 'Agenda & Tracks',
-      description: 'Topics, speakers, and event sessions',
-      icon: 'presentation',
-      component: 'client-insights',
-    },
-    {
-      id: 'client-cases',
-      label: 'Foursys Opportunities',
-      description: 'Cases aligned with event tracks',
-      icon: 'target',
-      component: 'client-cases',
-    },
-    {
       id: 'client-extra-1',
       label: 'Links & Resources',
       description: 'Direct access to website, agenda, and registration',
@@ -422,97 +305,8 @@ const itforumClientEn: ClientConfig = {
       component: 'client-extra-2',
     },
   ],
-  insights: [
-    {
-      id: 'track-leadership',
-      title: 'Strategic Leadership',
-      description:
-        'CIOs and IT executives must exercise strategic leadership that inspires teams and anticipates the evolution of their roles. Explore people development, evolving expectations for IT leadership, and key trends shaping the future of CIOs.',
-      solution:
-        'Foursys delivers operating models that connect human teams and AI agents, boosting productivity without losing governance — aligned with CIOs\' demand for measurable results with lean teams.',
-      icon: '🎯',
-    },
-    {
-      id: 'track-business-value',
-      title: 'IT Business Value and Strategy',
-      description:
-        'Frameworks to maximize IT impact, strategic alignment, and effective governance. Operating models that connect technology initiatives to measurable business outcomes, ensuring IT is a growth engine.',
-      solution:
-        'FourBlox and AI Squad are models that transform IT from a cost center to a value center — accelerated delivery with integrated governance and proven ROI in 4 to 6 weeks.',
-      icon: '📊',
-    },
-    {
-      id: 'track-ai',
-      title: 'AI, Intelligent Applications & Emerging Trends',
-      description:
-        'Artificial intelligence and intelligent applications are redefining organizational potential. Discover the latest in AI, automation, and emerging trends, and how these innovations can boost efficiency and create new opportunities.',
-      solution:
-        'Foursys AI Squad combines human professionals and AI agents in hybrid squads. Quality & AI Testing delivers test automation with measurable ROI in weeks.',
-      icon: '🤖',
-    },
-    {
-      id: 'track-security',
-      title: 'Cybersecurity and Risk Management',
-      description:
-        'Gartner Security & Risk Management Conference also in SP (Aug 4–5, 2026). Protection, compliance, and resilience for regulated industries — a top priority for CIOs in 2026.',
-      solution:
-        'Foursys Cybersecurity offering with protection and compliance for regulated industries. Framework operating at scale with continuous monitoring and incident response.',
-      icon: '🛡️',
-    },
-    {
-      id: 'speakers',
-      title: 'Confirmed Speakers',
-      description:
-        'Alvaro Mello (Managing VP), Anderson Cunha (Sr Director Advisory), Denis Torii (VP Analyst), Henrique Cecci (Sr Director Analyst), and Luis Mangi (VP Advisory) from Gartner. Inspiring keynotes with practical insights for technology decisions.',
-      solution:
-        'Take advantage of 30-minute one-on-one meetings with Gartner analysts. Register early on Conference Navigator to secure your slot.',
-      icon: '🎤',
-    },
-    {
-      id: 'networking',
-      title: 'Networking & Experience',
-      description:
-        'Roundtables, workshops, CIO Circle (exclusive program for CIOs), exhibition space with solution providers, and daily receptions for networking. Pre-register via Conference Navigator.',
-      solution:
-        'Position Foursys as a reference in the corridors: AI Squad, Legacy Modernization, and Cybersecurity are key topics aligned with the tracks. Identify prospects in regulated industries (Financial, Healthcare, Insurance).',
-      icon: '🤝',
-    },
-  ],
-  cases: [
-    {
-      id: 'itforum-case-ai-squad',
-      title: 'AI Squad — Human + AI Hybrid Teams',
-      sector: 'Technology',
-      type: 'Strategic Offering',
-      challenge: 'CIOs need to accelerate digital delivery with lean teams and tight budgets.',
-      solution: 'Hybrid squads combining human professionals and AI agents with integrated governance.',
-      stack: ['AI Agents', 'LLM', 'RAG', 'Governance', 'DevOps'],
-      results: ['Measurable ROI in 4–6 weeks', '3x delivery acceleration', 'End-to-end governance'],
-      metric: { value: '3x', label: 'delivery speed' },
-    },
-    {
-      id: 'itforum-case-modernization',
-      title: 'Legacy Modernization for Regulated Industries',
-      sector: 'Financial',
-      type: 'Reference Case',
-      challenge: 'Legacy systems blocking innovation in banks and insurers.',
-      solution: 'Incremental modernization strategy: strangler pattern, containerization, and hybrid cloud.',
-      stack: ['Kubernetes', 'AWS', 'Terraform', 'Java', 'React'],
-      results: ['70% incident reduction', '2x faster time-to-market', 'Compliance maintained'],
-      metric: { value: '70%', label: 'fewer incidents' },
-    },
-    {
-      id: 'itforum-case-qa-ai',
-      title: 'Quality & AI Testing',
-      sector: 'Healthcare',
-      type: 'Strategic Offering',
-      challenge: 'Insufficient test coverage and long QA cycles impacting releases.',
-      solution: 'AI-powered automated testing framework for scenario creation, execution, and maintenance.',
-      stack: ['AI Testing', 'Playwright', 'Cypress', 'Gen AI', 'CI/CD'],
-      results: ['80% test automation', '60% QA cycle reduction', 'Zero critical regressions'],
-      metric: { value: '60%', label: 'QA cycle reduction' },
-    },
-  ],
+  insights: [],
+  cases: [],
   extra1: {
     title: 'Event Links & Resources',
     subtitle: 'Quick access to the official site, agenda, registration, and related events',
