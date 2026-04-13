@@ -2,13 +2,13 @@ import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   FileDown, Check, Minus, CheckCheck, X,
-  AlertCircle, Loader2, ChevronDown, FileText, Layers,
+  AlertCircle, Loader2, ChevronDown, FileText, Layers, FileCode2,
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import { navigationItems, sectionCategories } from '../../data/navigation'
 import { getCases } from '../../data/cases'
-import { exportSectionsToPdf, type PdfExportProgress } from '../../utils/pdfExport'
+import { exportSectionsToPdf, exportSectionsToHtml, type PdfExportProgress } from '../../utils/pdfExport'
 import { DynIcon } from '../../utils/iconMap'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import type { AppSection, NavigationItem } from '../../types'
@@ -253,20 +253,20 @@ export function SectionExportPdf() {
     return some && !all
   }, [availableItems, selectedSections])
 
+  const orderedSelected = useMemo(() =>
+    availableItems.filter(item => selectedSections.has(item.id)).map(item => item.id),
+    [availableItems, selectedSections]
+  )
+
   const generatePdf = useCallback(async () => {
-    if (selectedSections.size === 0 || isGenerating) return
+    if (orderedSelected.length === 0 || isGenerating) return
+    await exportSectionsToPdf(orderedSelected, getSectionLabel, appNavigate, setProgress)
+  }, [orderedSelected, isGenerating, getSectionLabel, appNavigate])
 
-    const orderedSections = availableItems
-      .filter(item => selectedSections.has(item.id))
-      .map(item => item.id)
-
-    await exportSectionsToPdf(
-      orderedSections,
-      getSectionLabel,
-      appNavigate,
-      setProgress
-    )
-  }, [selectedSections, isGenerating, availableItems, getSectionLabel, appNavigate])
+  const generateHtml = useCallback(async () => {
+    if (orderedSelected.length === 0 || isGenerating) return
+    await exportSectionsToHtml(orderedSelected, getSectionLabel, appNavigate, setProgress, lang)
+  }, [orderedSelected, isGenerating, getSectionLabel, appNavigate, lang])
 
   const allSelected = availableItems.every(item => selectedSections.has(item.id))
   const progressPct = progress ? Math.round((progress.current / progress.total) * 100) : 0
@@ -605,7 +605,7 @@ export function SectionExportPdf() {
               </div>
             )}
 
-            {/* Generate button */}
+            {/* Generate PDF button */}
             <button
               onClick={generatePdf}
               disabled={selectedSections.size === 0 || isGenerating}
@@ -618,11 +618,21 @@ export function SectionExportPdf() {
               )}
             </button>
 
+            {/* Generate HTML button */}
+            <button
+              onClick={generateHtml}
+              disabled={selectedSections.size === 0 || isGenerating}
+              className="w-full flex items-center justify-center gap-2.5 px-5 py-3.5 rounded-2xl font-bold text-sm transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed bg-white/[0.04] border border-white/[0.10] hover:bg-white/[0.08] hover:border-white/[0.18] text-foursys-text-muted"
+            >
+              <FileCode2 size={18} />
+              {lang === 'pt' ? 'Gerar HTML' : 'Generate HTML'} — {selectedSections.size} {lang === 'pt' ? (selectedSections.size !== 1 ? 'seções' : 'seção') : (selectedSections.size !== 1 ? 'sections' : 'section')}
+            </button>
+
             {/* Hint */}
             <p className="text-[10px] text-foursys-text-dim/60 text-center leading-relaxed px-2">
               {lang === 'pt'
-                ? 'O PDF será gerado no formato A4 paisagem, capturando o conteúdo visual de cada sessão selecionada.'
-                : 'The PDF will be generated in A4 landscape format, capturing the visual content of each selected section.'}
+                ? 'O PDF é gerado direto no formato A4 paisagem. O HTML abre uma pré-visualização no navegador com opção de imprimir como PDF.'
+                : 'PDF is generated directly in A4 landscape format. HTML opens a browser preview with an option to print as PDF.'}
             </p>
           </motion.div>
         </div>
