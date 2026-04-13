@@ -156,7 +156,7 @@ export function NavigationMenu() {
       </div>
 
       {/* ── Navigation ── */}
-      <nav className="flex-1 overflow-y-auto overscroll-contain custom-scrollbar px-2 py-3 space-y-5">
+      <nav className="flex-1 overflow-y-auto overscroll-contain stealth-scrollbar px-2 py-3 space-y-5">
         {activeSectionCategories.map(category => {
           const items = activeNavigationItems.filter(n => n.category === category)
           if (items.length === 0) return null
