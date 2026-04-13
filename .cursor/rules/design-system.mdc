@@ -1,0 +1,140 @@
+---
+description: Design System e padrões visuais do Portal Foursys
+globs: ["src/**/*.tsx", "src/**/*.css"]
+---
+
+# Design System — Portal Foursys
+
+Regras obrigatórias para manter consistência visual em todas as evoluções da aplicação.
+
+---
+
+## 1. Scrollbars
+
+**Regra**: Toda área com `overflow-y-auto` ou `overflow-x-auto` DEVE usar a classe `stealth-scrollbar`.
+
+- **NUNCA** usar scrollbar nativa do browser
+- **NUNCA** usar `custom-scrollbar` (legado — só manter onde já existe fora de áreas de conteúdo principal)
+- **NUNCA** usar classes Tailwind `scrollbar-thin`, `scrollbar-thumb-*`, `scrollbar-track-*`
+- **SEMPRE** aplicar `stealth-scrollbar` em containers de scroll
+
+### Comportamento esperado
+- Scrollbar **invisível** por padrão — sem distração visual
+- Ao **hover** no container: thumb fino (3px) aparece com `rgba(255,255,255,0.12)`
+- Ao **hover** no próprio thumb: opacidade sobe para `rgba(255,255,255,0.25)`
+- Transição suave de 0.3s
+
+### Exemplo correto
+```tsx
+<div className="flex-1 overflow-y-auto stealth-scrollbar">
+  {/* conteúdo */}
+</div>
+```
+
+### Exemplo ERRADO
+```tsx
+// ❌ scrollbar nativa
+<div className="overflow-y-auto">
+
+// ❌ classes Tailwind de scrollbar
+<div className="overflow-y-auto scrollbar-thin scrollbar-thumb-white/10">
+
+// ❌ inline styles de scrollbar
+<div style={{ scrollbarWidth: 'thin' }}>
+```
+
+---
+
+## 2. Paleta de Cores
+
+Usar SEMPRE os tokens Tailwind `foursys-*` definidos em `tailwind.config.js`. Nunca hardcodar hex.
+
+| Token               | Uso                            |
+|----------------------|--------------------------------|
+| `foursys-primary`    | CTAs, badges, destaques        |
+| `foursys-cyan`       | Links, labels secundários      |
+| `foursys-dark`       | Background principal           |
+| `foursys-dark-2`     | Modais, painéis elevados       |
+| `foursys-surface`    | Cards, containers              |
+| `foursys-text`       | Texto principal (branco/preto) |
+| `foursys-text-muted` | Texto secundário               |
+| `foursys-text-dim`   | Texto terciário, labels        |
+
+### Opacidade em bordas e backgrounds
+- Bordas sutis: `border-white/[0.08]` a `border-white/[0.12]`
+- Hover em bordas: `hover:border-white/20`
+- Background glass: `bg-foursys-surface/30` a `bg-foursys-surface/60`
+- Backdrop: `backdrop-blur-md` ou `backdrop-blur-sm`
+
+---
+
+## 3. Tipografia
+
+- **Font family**: `Inter` (via `font-sans`)
+- **Títulos de seção**: `text-2xl md:text-4xl lg:text-5xl font-black`
+- **Subtítulos**: `text-lg text-foursys-text-muted`
+- **Badges**: `text-xs font-bold uppercase tracking-widest` ou `tracking-[0.18em]`
+- **Labels pequenos**: `text-[10px] text-foursys-text-dim uppercase tracking-wider`
+
+---
+
+## 4. Componentes de Container
+
+### Cards
+```
+rounded-2xl border border-white/[0.08] bg-foursys-surface/30 backdrop-blur-md
+hover:border-white/[0.15] transition-all duration-300
+```
+
+### Modais/Dialogs
+```
+bg-foursys-dark-2 border border-white/[0.12] rounded-2xl
+```
+
+### Badges
+```
+px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/30 text-foursys-cyan text-sm
+```
+
+---
+
+## 5. Internacionalização (i18n)
+
+- **NUNCA** importar o export default de arquivos de dados (ex: `import { cases } from '../../data/cases'`)
+- **SEMPRE** importar a função getter e usar com `useMemo`:
+  ```tsx
+  import { getCases } from '../../data/cases'
+  const cases = useMemo(() => getCases(lang), [lang])
+  ```
+- Textos de UI devem usar `t('chave')` via `useLanguage()`
+- Se um texto contém JSX inline (ex: `<span>`), usar ternário `lang === 'pt' ? ... : ...`
+
+---
+
+## 6. Animações e Transições
+
+- Entrada de componentes: `initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}`
+- Duração padrão: `duration: 0.3` a `0.5`
+- Delay escalonado em listas: `delay: index * 0.06` a `0.12`
+- Transitions CSS: `transition-all duration-300`
+
+---
+
+## 7. Responsividade
+
+### Breakpoints
+| Token    | Largura  |
+|----------|----------|
+| `xs`     | 375px    |
+| `sm`     | 640px    |
+| `md`     | 768px    |
+| `tablet` | 820px    |
+| `lg`     | 1024px   |
+| `xl`     | 1280px   |
+| `3xl`    | 1920px   |
+
+### Padrões
+- Mobile-first (padrões mobile, `md:` para desktop)
+- Grid responsivo: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3`
+- Padding: `px-4 md:px-8`
+- Max-width: `max-w-6xl mx-auto`
