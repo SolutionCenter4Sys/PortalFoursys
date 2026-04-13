@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing Diretora TI - Karla Leite Fonseca | Equiplex</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-new { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .summary-stat { text-align: center; padding: 20px; }
+        .summary-stat .number { font-size: 36px; font-weight: 800; color: var(--primary); }
+        .summary-stat .desc { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Karla Leite Fonseca</h1>
+                <h2>Diretora de TI — Equiplex Indústria Farmacêutica</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Indústria farmacêutica e cosméticos | Goiânia - GO</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 800-900 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 15,1-20 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Será mantido</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="grid-3">
+                <div class="summary-stat">
+                    <div class="number">14</div>
+                    <div class="desc">Temas com investimento (ativo + inicial) nos próximos 12 meses</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number" style="color:#e65100">5</div>
+                    <div class="desc">Projetos SEM fornecedor definido (oportunidade)</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number">5</div>
+                    <div class="desc">Ofertas Foursys com fit identificado</div>
+                </div>
+            </div>
+            <div class="alert-box" style="margin-top:20px">
+                <strong>&#128293; Contexto Estratégico:</strong> Empresa em <strong>transformação digital inicial</strong> — maturidade de inovação "Inicial" com 10 temas que precisam de maturidade. A TI é pequena (10-29 profissionais) mas poderosa: Karla tem <strong>assento permanente com voto</strong> no conselho e reporta ao CEO. Empresa completou 40 anos e está entrando no mercado de genéricos — momento de inflexão. Modelo de compra: <strong>Direto com fornecedor / Híbrido por categoria</strong>.
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil da Diretora de TI e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Membro: assento permanente, com voto</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Co-decisão TI + Negócios</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">500 a 999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">10 a 29 profissionais — equipe enxuta, alta dependência de parceiros</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Coprotagonista: co-lidera estratégia e orçamento, influencia metas de negócio</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#1a237e">18%</div></div></div>
+                <div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#1a237e">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#5c6bc0">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#7986cb">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Inovação/P&D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#7986cb">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#c5cae9">1%</div></div></div>
+                <div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#c5cae9">1%</div></div></div>
+            </div>
+            <div class="alert-box" style="margin-top:16px">
+                <strong>Atenção:</strong> Apenas <strong>1% em cibersegurança</strong> (~R$ 150-200 mil) — muito abaixo do recomendado para indústria farmacêutica regulada. E <strong>0% oficialmente para inovação</strong> (embora 10% do orçamento vá para P&D/transformação digital). Oportunidade de reposicionar investimentos.
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 6 Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança e escalabilidade de IA/ML e IA Generativa</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos e operações para ganho de eficiência</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fomentação da cultura de inovação na área de TI e organização</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer processos e políticas de governança/compliance</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar complexidade dos dados e qualidade da informação</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar equipes de TI e negócios para acelerar entrega de valor</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div style="margin-bottom:20px">
+                        <span class="tag tag-priority">Nuvem Privada e Híbrida</span>
+                        <span class="tag tag-priority">IA Generativa</span>
+                        <span class="tag tag-priority">ERP</span>
+                    </div>
+                    <h4 style="margin-bottom:12px;color:var(--primary);margin-top:20px">Temas que Precisam de Maturidade (10!)</h4>
+                    <div>
+                        <span class="tag tag-new">Nuvem Privada</span>
+                        <span class="tag tag-new">Cibersegurança</span>
+                        <span class="tag tag-new">Gestão de dados</span>
+                        <span class="tag tag-new">IA / ML</span>
+                        <span class="tag tag-new">IA Generativa</span>
+                        <span class="tag tag-new">CRM</span>
+                        <span class="tag tag-new">ERP</span>
+                        <span class="tag tag-new">Low-code / No-code</span>
+                        <span class="tag tag-new">RPA</span>
+                        <span class="tag tag-new">IoT / Edge Computing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Verde = continuidade de investimento | Azul = investimento inicial previsto:</p>
+            <div>
+                <span class="tag tag-active">Nuvem Pública</span>
+                <span class="tag tag-active">Nuvem Privada/Híbrida</span>
+                <span class="tag tag-active">Desenvolvimento e Modernização de Legados</span>
+                <span class="tag tag-new">Cibersegurança</span>
+                <span class="tag tag-new">Disaster Recovery</span>
+                <span class="tag tag-new">Segurança de Dados (LGPD/DLP)</span>
+                <span class="tag tag-new">Gestão de Dados</span>
+                <span class="tag tag-new">IA / ML</span>
+                <span class="tag tag-new">IA Generativa</span>
+                <span class="tag tag-new">ERP</span>
+                <span class="tag tag-new">Low-code / No-code</span>
+                <span class="tag tag-new">Automação / RPA</span>
+                <span class="tag tag-new">IoT / Edge Computing</span>
+                <span class="tag tag-new">ITSM/ESM e Service Desk</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div>
+                <span class="tag tag-opportunity">Nuvem Pública</span>
+                <span class="tag tag-opportunity">Nuvem Privada e Híbrida</span>
+                <span class="tag tag-opportunity">IA / ML</span>
+                <span class="tag tag-opportunity">IA Generativa</span>
+                <span class="tag tag-opportunity">ITSM/ESM e Service Desk</span>
+            </div>
+            <div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria/assessment):</h4>
+                <div style="margin-top:8px">
+                    <span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Disaster Recovery</span>
+                    <span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Segurança de Dados (LGPD/DLP)</span>
+                    <span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Gestão de Dados</span>
+                    <span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Low-code / No-code</span>
+                    <span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Automação / RPA</span>
+                    <span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IoT / Edge Computing</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Equiplex Indústria Farmacêutica</h3>
+            <p style="margin-bottom:20px;line-height:1.8">A Equiplex é líder nacional em volume de medicamentos injetáveis, comercializando mais de 300 milhões de doses por ano (dados IQVIA). Fundada em 1986 em Goiânia (GO), a empresa completou 40 anos em fevereiro de 2026 e está em momento de inflexão estratégica: prepara ingresso no mercado de genéricos e similares, com inauguração de laboratório de P&amp;D em setembro de 2024 (investimento de R$ 5 milhões) e primeiros lançamentos previstos para 2027. Produtos principais: soluções parenterais (cloreto de sódio 0,9%, glicose, ringer lactato). Também opera a marca Mediplex (equipos, bolsas) e a distribuidora Hospdrogas. Atuação consolidada nas regiões Sul, Sudeste e Centro-Oeste, com crescimento no Norte e Nordeste.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Regional (América Latina)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Público-privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Estabilidade — com potencial de crescimento via genéricos (2027+)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Momento Estratégico</div>
+                        <div class="value">Expansão para genéricos e similares — novo lab de P&D inaugurado em 2024</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark: O Que os Concorrentes Estão Fazendo</h3>
+            <div class="competitor-card">
+                <h4>EMS</h4>
+                <p>Maior fabricante de genéricos do Brasil. Forte investimento em automação industrial (Indústria 4.0), rastreabilidade digital de medicamentos, IA para controle de qualidade e plataformas de dados para gestão da cadeia de suprimentos. Orçamento de TI expressivo proporcional ao faturamento de R$ 20+ bilhões.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Eurofarma</h4>
+                <p>Segunda maior farmacêutica do Brasil. Investimentos em transformação digital com fábricas inteligentes, sistemas de rastreabilidade SNCM, cloud computing e analytics avançado. Programa de inovação aberta com startups. Forte em compliance regulatório (ANVISA, FDA).</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Cristália</h4>
+                <p>Referência em injetáveis e anestésicos. Investimentos em automação de linhas de produção, sistemas integrados de qualidade (LIMS), e plataformas de gestão hospitalar. Laboratórios com tecnologia avançada de controle de qualidade.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Aché</h4>
+                <p>Forte em genéricos e similares. Investimentos em plataformas digitais para relacionamento médico, IA para farmacovigilância, e modernização de ERP. Centro de inovação e parcerias com startups de healthtech.</p>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>Gap Analysis vs Concorrentes</h4>
+                <p>A Equiplex está significativamente atrás dos concorrentes em maturidade digital. Enquanto EMS e Eurofarma já operam com fábricas inteligentes, IA e cloud, a Equiplex ainda está em fase inicial de investimento em praticamente todos os temas digitais. O gap é especialmente crítico em: (1) Cibersegurança — apenas 1% do orçamento vs padrão de 8-12% na indústria regulada; (2) ERP — investimento inicial previsto, concorrentes já modernizaram; (3) IA/ML — concorrentes usam em controle de qualidade e supply chain; (4) Rastreabilidade e compliance (LGPD/SNCM) — requisito regulatório urgente. A entrada no mercado de genéricos tornará esses gaps ainda mais críticos.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128161;</span> Maturidade e Cultura de Inovação</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Maturidade de Inovação</div>
+                        <div class="value">Inicial: iniciativas pontuais, sem processo/documentação</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI na Inovação</div>
+                        <div class="value">Gestora: gera, incuba e/ou gerencia a maioria dos projetos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Origem do Budget de Inovação</div>
+                        <div class="value">TI (exclusivamente)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">% do Orçamento para Inovação</div>
+                        <div class="value">0% (não investimos hoje) — gap crítico</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Adoção Ágil</div>
+                        <div class="value">Pilotos: iniciativas pontuais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Dificuldade com Talentos</div>
+                        <div class="value">Sim, em ambas (contratação e engajamento)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Visão do Time Atual</div>
+                        <div class="value">Abaixo do esperado — oportunidade de alocação/outsourcing</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Gaps de Soft Skills</div>
+                        <div class="value">Visão de negócio; Pensamento crítico; Aprendizagem ativa; Criatividade; Proatividade; Gestão de tempo; Apetite a risco</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Crédito/Financiamento</span>
+                        <span class="tag tag-active">ROI estimado</span>
+                        <span class="tag tag-active">TCO 3 anos</span>
+                        <span class="tag tag-active">Suporte técnico</span>
+                        <span class="tag tag-active">TMA</span>
+                        <span class="tag tag-active">Referências e cases BR</span>
+                        <span class="tag tag-active">Segurança e compliance</span>
+                        <span class="tag tag-active">Roadmap e inovação</span>
+                        <span class="tag tag-active">Flexibilidade contratual</span>
+                        <span class="tag tag-active">Abordagem consultiva</span>
+                        <span class="tag tag-active">Capacitação do time</span>
+                        <span class="tag tag-active">Ecossistema de parceiros</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI; Consultoria especializada; Start-up/Scale-up; MSP/Outsourcing gerenciado; Especialista setorial/regulatório</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">
+                            Projeto: 9 temas |
+                            Co-gerenciado: 3 temas |
+                            Alocação: 1 tema
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Karla Leite Fonseca</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Empresa em estágio inicial de transformação digital — alta receptividade a parceiros.</p>
+            
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 90</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>IA/ML e IA Generativa SEM fornecedor definido — oportunidade direta (investimento inicial previsto)</li>
+                        <li>IA/ML e IA Gen são Top 6 desafio E Top 3 prioridade (IA Gen)</li>
+                        <li>Modelo: Co-gerenciado — fit com AI Squad que complementa time interno</li>
+                        <li>Time de TI enxuto (10-29) e "abaixo do esperado" — AI Squad como multiplicador de capacidade</li>
+                        <li>Automatização de processos é desafio Top 6 — IA como catalisador</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 80</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>ERP é Top 3 prioridade com investimento inicial previsto (modelo Projeto)</li>
+                        <li>Desenvolvimento e modernização com investimento ativo (modelo Co-gerenciado)</li>
+                        <li>Entrada no mercado de genéricos exige modernização de sistemas de produção e qualidade</li>
+                        <li>Parceria Digibee para integração — relevante para conectar lab P&D, produção e distribuição (Hospdrogas)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 75</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>Apenas 1% do orçamento em cibersegurança — gap crítico para indústria regulada (ANVISA)</li>
+                        <li>Investimento inicial previsto em Cibersegurança, Disaster Recovery e Segurança de Dados</li>
+                        <li>Governança/compliance é Top 6 desafio — LGPD e rastreabilidade farmacêutica são obrigatórias</li>
+                        <li>Foursys com ISO 27001/27701 — diferencial certificado para setor regulado</li>
+                        <li>DR e Segurança de dados sem projeto definido — oportunidade de assessment</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 72</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>Nuvem Pública e Privada/Híbrida SEM fornecedor definido — Top 3 prioridade (Nuvem Privada)</li>
+                        <li>Empresa ainda fortemente on-prem (45% do orçamento) — migração cloud é necessidade</li>
+                        <li>ITSM/ESM SEM fornecedor — complementar com observabilidade e service management</li>
+                        <li>Modelo: Alocação (Nuvem) e Projeto (Nuvem Privada) — fit com Engenharia Digital</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 58</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>Low-code/No-code com investimento inicial previsto — FourBlox como alternativa de aceleração</li>
+                        <li>RPA com investimento inicial — componentes reutilizáveis aceleram automação</li>
+                        <li>Time de TI enxuto — FourBlox reduz necessidade de desenvolvimento customizado</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Karla Leite Fonseca é uma diretora de TI com <strong>poder real de decisão</strong> (voto no conselho, co-decisão com negócios) numa empresa em <strong>momento de inflexão</strong> — 40 anos de história, entrando no mercado de genéricos. A TI é muito enxuta (10-29 profissionais) e o time está "abaixo do esperado", criando <strong>dependência natural de parceiros externos</strong>. Iniciar a conversa sobre como a Foursys pode ser o parceiro estratégico para a transformação digital que a Equiplex precisa para competir no mercado de genéricos contra EMS e Eurofarma. Karla valoriza <strong>abordagem consultiva e capacitação do time</strong> — oferecer um assessment gratuito dos gaps tecnológicos.</p>
+            </div>
+            
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A Equiplex possui <strong>5 projetos sem fornecedor</strong> e <strong>6 sem projeto definido</strong> — total de 11 oportunidades abertas. Os investimentos são <strong>iniciais</strong> (não continuidade), ou seja, estão <strong>começando do zero</strong> — quem entrar primeiro define a arquitetura. A empresa compra por <strong>direto/híbrido</strong>, não RFP — processo mais ágil e menos burocrático. O budget de TI é modesto (R$ 15-20 MM), mas a forte dependência de parceiros (15% em consultoria/outsourcing) significa que a Foursys pode capturar parcela significativa. <strong>IA Generativa e ERP</strong> são as prioridades mais urgentes.</p>
+            </div>
+            
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>(1) <strong>AI Squad como "equipe estendida de IA"</strong> — para um time de 10-29 pessoas, o AI Squad é um multiplicador de capacidade sem contratação; (2) <strong>ISO 27001/27701</strong> — certificações de segurança essenciais para indústria farmacêutica regulada pela ANVISA; (3) <strong>Experiência setorial em saúde/pharma</strong> — cases e conhecimento regulatório; (4) <strong>Parceria Digibee</strong> — integração de sistemas para conectar produção, qualidade, P&D e distribuição (Hospdrogas); (5) <strong>Modelo flexível (Projeto + Co-gerenciado)</strong> — exatamente os modelos que Karla prefere.</p>
+            </div>
+            
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p>1. A <strong>Equiplex</strong> está entrando no mercado de genéricos — isso exige modernização de TI para rastreabilidade (SNCM/ANVISA), controle de qualidade digital e compliance regulatório.<br>
+                2. Concorrentes como <strong>EMS e Eurofarma já operam com fábricas inteligentes</strong> e IA — a Equiplex precisa acelerar para não perder competitividade no novo segmento de genéricos.<br>
+                3. O <strong>time de TI está abaixo do esperado</strong> com gaps em 7 soft skills — Karla precisa de parceiro que além de entregar tecnologia, <strong>transfira conhecimento</strong> e desenvolva o time.<br>
+                4. Karla valoriza <strong>crédito/financiamento e flexibilidade contratual</strong> como critérios de alta relevância — oferecer modelos de pagamento facilitado pode ser diferencial.<br>
+                5. <strong>10 temas que precisam de maturidade</strong> — oportunidade de venda consultiva com roadmap de maturidade digital. Posicionar a Foursys como parceiro de jornada, não apenas projeto pontual.</p>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Cargo e Responsabilidade</div>
+                        <div class="value">Diretora de TI com abrangência regional (LATAM). Membro com voto no conselho — poder de influência significativo para o porte da empresa.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Cidade / Região</div>
+                        <div class="value">Goiânia / Aparecida de Goiânia, GO — polo farmacêutico do Centro-Oeste</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Estilo de Liderança Inferido</div>
+                        <div class="value">Pragmática e orientada a resultados — lidera TI como gestora de inovação com recursos limitados. Time enxuto exige priorização constante.</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Fontes de Conhecimento</div>
+                        <div class="value">Eventos presenciais e digitais; Comunidades de CIOs; Fornecedores e parceiros; Especialistas/Mentores; Cursos e certificações; Webinars e podcasts</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Desafio Pessoal</div>
+                        <div class="value">Liderar transformação digital com equipe pequena e orçamento modesto numa empresa de tradição industrial de 40 anos — requer resiliência e visão estratégica.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">Dados insuficientes — perfil profissional não localizado publicamente. Requer pesquisa adicional via LinkedIn ou contato direto.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:16px">
+                <h4>Dicas para Conversa Amistosa</h4>
+                <p>1. <strong>Transformação em empresa tradicional:</strong> Perguntar sobre os desafios de liderar transformação digital numa empresa de 40 anos com cultura industrial — é um tema que gera identificação e demonstra empatia.<br>
+                2. <strong>Goiânia e o polo farmacêutico:</strong> O Centro-Oeste está se consolidando como polo farmacêutico — conversar sobre o ecossistema local e as oportunidades da região.<br>
+                3. <strong>Equipe enxuta, grandes ambições:</strong> Reconhecer o desafio de fazer muito com pouco. A Foursys pode ser apresentada como "extensão natural do time" — não apenas fornecedor.<br>
+                4. <strong>Entrada nos genéricos:</strong> A Equiplex está vivendo um dos momentos mais importantes da sua história (genéricos). Demonstrar interesse nessa jornada e como a tecnologia será fundamental.<br>
+                5. <strong>Comunidades de CIOs:</strong> Karla participa de comunidades de CIOs — perguntar quais e oferecer conexões com outros líderes de TI do portfólio Foursys pode agregar valor.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Andre Ricardo Campos | Martin Brower</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-new { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .summary-stat { text-align: center; padding: 20px; }
+        .summary-stat .number { font-size: 36px; font-weight: 800; color: var(--primary); }
+        .summary-stat .desc { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">André Ricardo Campos</h1>
+                <h2>CIO Latam — Martin Brower</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Transporte e Logística (Foodservice) | São Paulo - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">Acima de R$ 15 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 50,1-80 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value" style="color:#00b894">Crescerá +30%!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="grid-3">
+                <div class="summary-stat">
+                    <div class="number">18</div>
+                    <div class="desc">Temas com investimento ativo nos próximos 12 meses</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number" style="color:#e65100">2</div>
+                    <div class="desc">Projetos SEM fornecedor definido</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number">5</div>
+                    <div class="desc">Ofertas Foursys com fit identificado</div>
+                </div>
+            </div>
+            <div class="alert-box" style="margin-top:20px">
+                <strong>&#128293; Destaque:</strong> Orçamento de TI com <strong>crescimento de mais de 30%</strong> — um dos maiores crescimentos entre os CIOs pesquisados. André é CIO novo na empresa (desde novembro 2024), com planos ambiciosos de <strong>IA e democratização de dados</strong>. Ex-CIO do Assaí Atacadista e ex-Field CTO da Digibee — conhece o ecossistema Foursys/Digibee. Compra por <strong>RFP/concorrência estruturada</strong>. Modelo de alocação de profissionais predominante.
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma vice-presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Membro: assento permanente, com voto</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais (global)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">100 a 199 profissionais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+                <div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#3949ab">20%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#7986cb">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Inovação/P&D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#c5cae9">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#c5cae9">5%</div></div></div>
+            </div>
+            <div class="alert-box" style="margin-top:16px">
+                <strong>Destaque:</strong> 50% do orçamento em <strong>software e infra on-prem</strong> — empresa com forte base local. André planeja ampliar IA e dados, o que deve rebalancear investimentos para nuvem e analytics. Com <strong>crescimento de 30%+</strong> no orçamento, haverá budget significativo para novos projetos.
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Desenvolver/ampliar iniciativas de sustentabilidade e Green IT</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer processos e políticas de governança/compliance</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar sistemas legados</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Orquestrar transformação digital</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Otimizar custos e eficiência (FinOps/SecFinOps)</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div style="margin-bottom:20px">
+                        <span class="tag tag-priority">IA / ML</span>
+                        <span class="tag tag-priority">Low-code / No-code</span>
+                        <span class="tag tag-priority">Automação / RPA</span>
+                    </div>
+                    <h4 style="margin-bottom:12px;color:var(--primary);margin-top:20px">Temas que Precisam de Maturidade</h4>
+                    <div>
+                        <span class="tag tag-new">CRM</span>
+                        <span class="tag tag-new">ERP</span>
+                        <span class="tag tag-new">Low-code / No-code</span>
+                        <span class="tag tag-new">Automação / RPA</span>
+                        <span class="tag tag-new">Hiperautomação</span>
+                        <span class="tag tag-new">Sistemas Core</span>
+                        <span class="tag tag-new">ITSM/ESM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos Ativos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento (verde = continuidade de investimento):</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+                <span class="tag tag-active">Conectividade e Telecom</span>
+                <span class="tag tag-active">Nuvem Pública</span>
+                <span class="tag tag-active">Disaster Recovery</span>
+                <span class="tag tag-active">Segurança de Dados (LGPD/DLP)</span>
+                <span class="tag tag-active">Gestão de Dados</span>
+                <span class="tag tag-active">IA / ML</span>
+                <span class="tag tag-active">IA Generativa</span>
+                <span class="tag tag-active">APIs e Integração</span>
+                <span class="tag tag-active">ERP</span>
+                <span class="tag tag-active">BPM</span>
+                <span class="tag tag-active">Desenvolvimento e Modernização de Legados</span>
+                <span class="tag tag-active">Automação / RPA</span>
+                <span class="tag tag-active">Hiperautomação</span>
+                <span class="tag tag-active">Mobile Apps / Superapps</span>
+                <span class="tag tag-active">IoT / Edge Computing</span>
+                <span class="tag tag-active">Sistemas Core</span>
+                <span class="tag tag-active">ITSM/ESM e Service Desk</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Projetos com definição mas <strong>sem fornecedor selecionado</strong>:</p>
+            <div>
+                <span class="tag tag-opportunity">Nuvem Pública</span>
+                <span class="tag tag-opportunity">Disaster Recovery / Continuidade de Negócios</span>
+            </div>
+            <div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria):</h4>
+                <div style="margin-top:8px">
+                    <span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA Generativa</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Martin Brower</h3>
+            <p style="margin-bottom:20px;line-height:1.8">A Martin Brower é uma das maiores operadoras logísticas de foodservice do mundo, presente no Brasil desde 1982. Distribuidora exclusiva de grandes redes como McDonald's, Bob's, Subway, KFC, Pizza Hut, Domino's e Giraffas. Faturamento de mais de R$ 1 bilhão no primeiro semestre de 2024, com projeção de R$ 3 bilhões anuais. Opera com 6 centros de distribuição e 11 pontos de cross-docking, servindo mais de 4.500 restaurantes com 30.000+ entregas mensais (~16 milhões de caixas/ano). A empresa oferece integração vertical com quatro segmentos: SupplyChain|MB, ProCargo|MB, ProFoods|MB e TradeLog|MB. Reinveste ~25% do Ebitda anualmente em operações. O Brasil representa 95% dos negócios na América Latina. André Campos é CIO desde novembro de 2024, com foco em IA para otimização de rotas, previsão de demanda e democratização de dados.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global — operações em múltiplos países</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento — orçamento TI crescerá mais de 30%</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Clientes Principais</div>
+                        <div class="value">McDonald's, Bob's, Subway, KFC, Pizza Hut, Domino's, Giraffas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark: O Que os Concorrentes Estão Fazendo</h3>
+            <div class="competitor-card">
+                <h4>HAVI Group (Global)</h4>
+                <p>Principal concorrente global em logística foodservice. Forte investimento em analytics de supply chain, IA para previsão de demanda, plataformas de rastreabilidade e sustentabilidade. Atua em 100+ países com foco em gestão de cadeia fria e otimização de last-mile delivery.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Fast&Food / FBD (Brasil)</h4>
+                <p>Concorrentes locais no mercado brasileiro de logística foodservice. Operam com modelos de distribuição regional, com foco em custos competitivos e cobertura em mercados secundários. Investimentos menores em tecnologia, mas com agilidade operacional.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>DHL Supply Chain (Brasil)</h4>
+                <p>Maior operador logístico global. Forte investimento em robótica de armazém, digital twins para centros de distribuição, IoT para monitoramento de cadeia fria e IA para otimização de rotas. Plataforma Resilience360 para gestão de riscos em supply chain. Referência em tecnologia logística.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Axis Logística (LATAM)</h4>
+                <p>Controlada por Arcos Dorados (maior franqueada McDonald's do mundo). Opera logística para McDonald's na Argentina, Chile, México e Venezuela. Investimentos em plataformas digitais de supply chain e rastreabilidade. Competidor direto na região LATAM.</p>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>Gap Analysis vs Concorrentes</h4>
+                <p>A Martin Brower é líder no Brasil mas precisa acelerar em: (1) <strong>IA/ML para otimização de rotas e previsão de demanda</strong> — DHL e HAVI já operam com IA embarcada em operações logísticas; (2) <strong>Automação e RPA</strong> — processos operacionais ainda dependem de intervenção manual em muitos pontos; (3) <strong>Modernização de legados</strong> — sistemas core e ERP precisam de atualização para suportar crescimento de 30%; (4) <strong>IoT para cadeia fria</strong> — monitoramento inteligente de temperatura e qualidade em tempo real é padrão no setor.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128161;</span> Maturidade e Cultura de Inovação</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Maturidade de Inovação</div>
+                        <div class="value">Escalonada: portfólio integrado empresa-toda, funding recorrente, OKRs corporativos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI na Inovação</div>
+                        <div class="value">Gestora: gera, incuba e/ou gerencia a maioria dos projetos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Origem do Budget de Inovação</div>
+                        <div class="value">TI + unidades de negócios</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">% do Orçamento para Inovação</div>
+                        <div class="value">De 10% a 20% (~R$ 5-16 MM com crescimento)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Adoção Ágil</div>
+                        <div class="value">Empresa inteira: TI, negócio e gestão de portfólio</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Profissionais Dedicados a Inovação</div>
+                        <div class="value">Parcialmente (inovação + outras funções)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Dificuldade com Talentos</div>
+                        <div class="value">Sim, em ambas — escassez de perfis, disputa salarial, flexibilidade, senioridade</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Gaps de Soft Skills</div>
+                        <div class="value">Product sense; Pensamento crítico; Adaptabilidade; Criatividade; Proatividade; Gestão de tempo; Apetite a risco</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">ROI estimado</span>
+                        <span class="tag tag-active">TCO 3 anos</span>
+                        <span class="tag tag-active">SLA/Disponibilidade</span>
+                        <span class="tag tag-active">Suporte técnico</span>
+                        <span class="tag tag-active">Referências e cases BR</span>
+                        <span class="tag tag-active">Liderança e solidez</span>
+                        <span class="tag tag-active">Integração e APIs</span>
+                        <span class="tag tag-active">Flexibilidade contratual</span>
+                        <span class="tag tag-active">Ecossistema de parceiros</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI; SI/Integrador; Consultoria especializada; Start-up/Scale-up; MSP; Especialista setorial; Fornecedor global</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">
+                            Alocação de profissionais: 10 temas |
+                            Co-gerenciado: 6 temas |
+                            Projeto: 2 temas
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para André Ricardo Campos</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit. André é ex-Field CTO da Digibee (parceira Foursys) — conhece o ecossistema. Modelo predominante de alocação de profissionais.</p>
+            
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 75</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>IA/ML é Top 3 prioridade de investimento — investimento ativo com fornecedor selecionado</li>
+                        <li>IA Generativa sem projeto definido — oportunidade de consultoria/definição</li>
+                        <li>André planeja ampliar IA em rotas, previsão de demanda e gestão de estoque</li>
+                        <li>Hiperautomação com investimento ativo — fit com inteligência preditiva</li>
+                        <li>Modelo: Projeto para IA — fit com entrega Foursys</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 70</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>Modernização de legados é Top 5 desafio estratégico declarado</li>
+                        <li>ERP com investimento ativo e precisa de maturidade — modelo Alocação</li>
+                        <li>APIs e Integração com investimento ativo — modelo Alocação</li>
+                        <li>André é ex-Digibee (Field CTO) — já conhece e confia na plataforma, parceira Foursys</li>
+                        <li>Sistemas core com investimento ativo e precisa de maturidade</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 62</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>Nuvem Pública SEM fornecedor definido — modelo Co-gerenciado</li>
+                        <li>Disaster Recovery SEM fornecedor definido — modelo Co-gerenciado</li>
+                        <li>50% do orçamento on-prem — jornada cloud por vir</li>
+                        <li>Orquestrar transformação digital é desafio estratégico</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 58</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>Low-code/No-code é Top 3 prioridade — precisa de maturidade</li>
+                        <li>Automação/RPA é Top 3 prioridade — precisa de maturidade</li>
+                        <li>FourBlox como alternativa a plataformas low-code tradicionais</li>
+                        <li>Desafio de otimizar custos (FinOps) — FourBlox reduz custo de desenvolvimento</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 52</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>Segurança de dados (LGPD/DLP) com investimento ativo</li>
+                        <li>10% do orçamento em cibersegurança (~R$ 5-8 MM)</li>
+                        <li>Governança/compliance é desafio estratégico — LGPD para dados de clientes foodservice</li>
+                        <li>Disaster Recovery SEM fornecedor — complementar com continuidade de negócios</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>André Campos é um <strong>CIO de alto perfil</strong> — premiado como "100 Líderes de TI mais Inovadores", ex-CIO do Assaí Atacadista, ex-Field CTO da <strong>Digibee</strong> (parceira Foursys!). Ele já <strong>conhece o ecossistema Digibee/iPaaS</strong>, o que facilita enormemente a entrada. Iniciar a conversa mencionando a <strong>parceria Foursys-Digibee</strong> e como o AI Squad pode acelerar seus planos de IA para otimização de rotas e previsão de demanda. André valoriza <strong>referências e cases BR, integração e APIs, e ecossistema de parceiros</strong> — posicionar a Foursys como extensão do ecossistema que ele já conhece. O modelo predominante de <strong>alocação de profissionais</strong> é ideal para a Foursys.</p>
+            </div>
+            
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>O orçamento de TI <strong>crescerá mais de 30%</strong> (de R$ 50-80 MM para potencialmente R$ 65-104 MM) — há budget novo significativo. André é CIO novo (desde nov/2024) e está definindo seus fornecedores e parceiros estratégicos — <strong>janela de entrada antes que os contratos se consolidem</strong>. A <strong>IA Generativa</strong> não tem nem projeto definido ainda — oportunidade de ajudá-lo a construir a visão e roadmap. <strong>Nuvem Pública e Disaster Recovery</strong> sem fornecedor, modelo Co-gerenciado. O modelo de compra é <strong>RFP estruturada</strong> — a Foursys precisa se posicionar rapidamente como candidata qualificada.</p>
+            </div>
+            
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>(1) <strong>Conexão Digibee</strong> — André é ex-Field CTO da Digibee, parceira Foursys. Este é o atalho mais forte para a entrada; (2) <strong>AI Squad</strong> — produto proprietário para acelerar IA em logística (rotas, demanda, estoque); (3) <strong>Modelo de Alocação</strong> — 10 dos 18 temas usam alocação, modelo core da Foursys; (4) <strong>24 anos de mercado, 41.000+ projetos</strong> — liderança e solidez é critério de alta relevância para André; (5) <strong>Cases em logística e varejo</strong> — experiência no Assaí Atacadista cria conexão natural.</p>
+            </div>
+            
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p>1. A <strong>Martin Brower</strong> distribui para mais de 4.500 restaurantes — otimização de rotas com IA pode gerar economias de milhões em combustível e tempo.<br>
+                2. André planeja <strong>democratizar dados</strong> — permitir que áreas de negócio gerem seus próprios relatórios. Foursys pode ajudar com plataformas de self-service analytics e gestão de dados.<br>
+                3. O orçamento <strong>crescerá 30%+</strong> — é o momento de propor projetos maiores e contratos de longo prazo antes que outros fornecedores ocupem esse espaço.<br>
+                4. André tem experiência no <strong>Assaí Atacadista</strong> (varejo/logística) — perguntar sobre os aprendizados que está trazendo para a Martin Brower gera rapport e demonstra interesse na trajetória dele.<br>
+                5. <strong>Sustentabilidade/Green IT</strong> é desafio estratégico novo — a logística tem forte impacto ambiental. Demonstrar como tecnologia pode reduzir pegada de carbono (otimização de rotas, eficiência energética em CDs).</p>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Origem e Trajetória</div>
+                        <div class="value">Cresceu em Araraquara/SP. Queria ser publicitário, descobriu tecnologia pela computação gráfica na Unicamp. Senac, Ciência da Computação, Mestrado em Engenharia de Software.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Carreira Profissional</div>
+                        <div class="value">Cambridge Technology (Nova Economia) → Software houses → Assaí Atacadista (CIO, 2012-2020) → Digibee (Field CTO) → Amcor → Martin Brower (CIO Latam, desde nov/2024)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Cidade / Região</div>
+                        <div class="value">São Paulo, SP — nascido em Araraquara/SP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Reconhecimentos</div>
+                        <div class="value">"CIO Award" e "100 Líderes de TI mais Inovadores". Board member certificado IBGC em Governança. Alumnus Singularity University.</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn ativo: linkedin.com/in/andrecampos. Publica sobre tecnologia, IA, transformação digital e inovação. Artigos e entrevistas na Decision Report e IT Forum.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Conexão com Digibee</div>
+                        <div class="value">Ex-Field CTO da Digibee — conhece profundamente a plataforma iPaaS e seu ecossistema. No Assaí, usou Digibee para automação de processos de distribuição de lucros.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Interesses Profissionais</div>
+                        <div class="value">Tecnologia, Transformação Digital, Inovação, IA, Cibersegurança, Governança Corporativa</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Fontes de Conhecimento</div>
+                        <div class="value">Eventos presenciais; Comunidades de CIOs; Fornecedores e parceiros; Consultorias; Especialistas/Mentores; Pesquisas de mercado; Cooperação com universidades</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:16px">
+                <h4>Dicas para Conversa Amistosa</h4>
+                <p>1. <strong>Conexão Digibee:</strong> Pergunte sobre a experiência como Field CTO da Digibee e como a visão de iPaaS influencia sua abordagem na Martin Brower — é uma ponte natural para falar da parceria Foursys-Digibee.<br>
+                2. <strong>Da publicidade para a TI:</strong> André queria ser publicitário e descobriu tecnologia pela computação gráfica — é uma história pessoal interessante que ele gosta de contar (compartilhou na entrevista à Decision Report).<br>
+                3. <strong>Prêmio CIO Award:</strong> Parabenizar pelos reconhecimentos (CIO Award, 100 Líderes Inovadores) demonstra que você pesquisou e valoriza a trajetória dele.<br>
+                4. <strong>Assaí → Martin Brower:</strong> A transição de varejo atacadista para logística foodservice tem muitas sinergias. Pergunte sobre como a experiência no Assaí (que operava com 200+ lojas) se traduz na gestão de 4.500+ restaurantes.<br>
+                5. <strong>Araraquara e o Interior de SP:</strong> André começou a carreira no interior de São Paulo — conversar sobre a jornada do interior para a liderança de TI em multinacional cria conexão pessoal e demonstra interesse genuíno.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

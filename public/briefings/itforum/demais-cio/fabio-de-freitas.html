@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing VP TI - Fabio de Freitas | Stellantis South America</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-new { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .summary-stat { text-align: center; padding: 20px; }
+        .summary-stat .number { font-size: 36px; font-weight: 800; color: var(--primary); }
+        .summary-stat .desc { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Fábio de Freitas</h1>
+                <h2>Vice-presidente de ICT e Inovação Digital — Stellantis South America</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Indústria automotiva | Betim - MG</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">Acima de R$ 15 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 500,1 MM a R$ 1 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva Orçamento</div>
+                    <div class="value">Será mantido</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="grid-3">
+                <div class="summary-stat">
+                    <div class="number">21</div>
+                    <div class="desc">Temas com investimento ativo nos próximos 12 meses</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number" style="color:#e65100">8</div>
+                    <div class="desc">Projetos SEM fornecedor definido (oportunidade)</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number">5</div>
+                    <div class="desc">Ofertas Foursys com fit identificado</div>
+                </div>
+            </div>
+            <div class="alert-box" style="margin-top:20px">
+                <strong>&#128293; Alerta de Oportunidade:</strong> A Stellantis possui <strong>8 projetos com definição mas SEM fornecedor selecionado</strong>, incluindo IA/ML, IA Generativa, Cibersegurança e Modernização de Legados — janela de oportunidade excepcional para a Foursys.
+                Modelo de compra: <strong>RFP/concorrência estruturada entre fornecedores qualificados</strong>. Investimento de R$ 32 bilhões na América do Sul até 2030.
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do VP de TI e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma vice-presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência (Herlander Zola, COO América do Sul)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Observador fixo: presença permanente, sem voto</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Co-decisão TI + Negócios</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">200 ou mais profissionais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#1a237e">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#1a237e">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#7986cb">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#9fa8da">7%</div></div></div>
+                <div class="bar"><div class="bar-label">Inovação/P&D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#c5cae9">3%</div></div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 6 Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fomentação da cultura de inovação na área de TI e organização</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar complexidade dos dados e qualidade da informação</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar infraestrutura e redes</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar sistemas legados</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Otimizar custos e eficiência (FinOps/SecFinOps)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div style="margin-bottom:20px">
+                        <span class="tag tag-priority">Infraestrutura de redes</span>
+                        <span class="tag tag-priority">Cibersegurança</span>
+                        <span class="tag tag-priority">Sistemas core</span>
+                    </div>
+                    <h4 style="margin-bottom:12px;color:var(--primary);margin-top:20px">Temas que Precisam de Maturidade</h4>
+                    <div>
+                        <span class="tag tag-new">Hiperautomação</span>
+                        <span class="tag tag-new">IoT / Edge Computing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos Ativos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento (verde = continuidade de investimento):</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+                <span class="tag tag-active">Armazenamento/Backup</span>
+                <span class="tag tag-active">Conectividade e Telecom</span>
+                <span class="tag tag-active">Nuvem Pública</span>
+                <span class="tag tag-active">Nuvem Privada/Híbrida</span>
+                <span class="tag tag-active">Cibersegurança</span>
+                <span class="tag tag-active">Disaster Recovery</span>
+                <span class="tag tag-active">Segurança de Dados (LGPD/DLP)</span>
+                <span class="tag tag-active">Gestão de Dados</span>
+                <span class="tag tag-active">IA / ML</span>
+                <span class="tag tag-active">IA Generativa</span>
+                <span class="tag tag-active">APIs e Integração</span>
+                <span class="tag tag-active">ERP</span>
+                <span class="tag tag-active">Desenvolvimento e Modernização de Legados</span>
+                <span class="tag tag-active">Workplace / End-User Computing</span>
+                <span class="tag tag-active">Mobile Apps / Superapps</span>
+                <span class="tag tag-active">Realidade Estendida (VR/AR/MR)</span>
+                <span class="tag tag-active">CPaaS / UCaaS / CCaaS</span>
+                <span class="tag tag-active">IoT / Edge Computing</span>
+                <span class="tag tag-active">Sustentabilidade / Green IT</span>
+                <span class="tag tag-active">ITSM/ESM e Service Desk</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong> — janela de oportunidade para a Foursys:</p>
+            <div>
+                <span class="tag tag-opportunity">Infraestrutura de redes</span>
+                <span class="tag tag-opportunity">Conectividade e Telecom</span>
+                <span class="tag tag-opportunity">Cibersegurança</span>
+                <span class="tag tag-opportunity">IA / ML</span>
+                <span class="tag tag-opportunity">IA Generativa</span>
+                <span class="tag tag-opportunity">Desenvolvimento e Modernização de Legados</span>
+                <span class="tag tag-opportunity">Workplace e End-User Computing</span>
+                <span class="tag tag-opportunity">CPaaS / UCaaS / CCaaS</span>
+            </div>
+            <div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria):</h4>
+                <div style="margin-top:8px">
+                    <span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IoT / Edge Computing</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Stellantis South America</h3>
+            <p style="margin-bottom:20px;line-height:1.8">A Stellantis é o maior grupo automotivo da América do Sul, resultado da fusão entre FCA (Fiat Chrysler) e PSA (Peugeot Citroën) em 2021. Opera marcas como Fiat, Jeep, Peugeot, Citroën, Ram e Alfa Romeo. Anunciou R$ 32 bilhões em investimentos na região entre 2025 e 2030, o maior aporte da história do setor automotivo na América do Sul. Inaugurou em Betim (MG) o maior Centro de Desenvolvimento de Produto &amp; Mobilidade Híbrida-Flex da América Latina, com 400 engenheiros. Pioneira na tecnologia Bio-Hybrid (motor 1.3 Turbo Flex + motor elétrico) e REEV Flex (primeiro veículo elétrico com extensor de autonomia adaptado para etanol do mundo). Receita global de €153,5 bilhões em 2025. Vencedora do Prêmio Automotive Business 2024 em Indústria 4.0 pelo case de IA na gestão de energia da manufatura (IIoT). Plataformas tecnológicas proprietárias: STLA Brain, STLA SmartCockpit e STLA AutoDrive, com 5 milhões de assinantes globais de serviços conectados.</p>
+            
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Regional (América Latina)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Volátil/incerto — impacto de encargos extraordinários em 2025</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">CEO América do Sul</div>
+                        <div class="value">Herlander Zola (desde outubro 2025, sucedendo Emanuele Cappellano)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark: O Que os Concorrentes Estão Fazendo</h3>
+            
+            <div class="competitor-card">
+                <h4>Volkswagen</h4>
+                <p>Investindo R$ 16 bilhões no Brasil até 2028. R$ 304 milhões de crédito do BNDES para transformação digital de quatro fábricas, com automação avançada, IoT, robótica e computação em nuvem. Plataforma CARIAD para software automotivo, ecossistema digital com apps conectados e uso intensivo de IA em linhas de produção e supply chain. Forte presença em Indústria 4.0 e fábricas inteligentes.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Toyota</h4>
+                <p>Referência em lean manufacturing e pioneira em Indústria 4.0 aplicada à qualidade. Investimentos em IA para controle de qualidade em produção, IoT em fábricas e plataformas digitais para experiência do consumidor. Líder em veículos híbridos no Brasil com tecnologia consolidada. Abordagem conservadora mas eficaz em transformação digital, priorizando eficiência operacional.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>General Motors (GM)</h4>
+                <p>Plataforma Ultifi para veículos definidos por software. Investimentos em digital twins, IA generativa para design e engenharia, e transformação digital da cadeia de suprimentos. Parceria com Google para IA embarcada (Google built-in). Forte presença em conectividade veicular com OnStar e serviços conectados.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>BYD / Montadoras Chinesas</h4>
+                <p>Crescimento acelerado no Brasil com tecnologia elétrica nativa e preços competitivos. Investimento em fábrica própria em Camaçari-BA. IA e digitalização como DNA da empresa, com integração vertical completa (baterias, software, manufatura). Desafio disruptivo para todas as montadoras tradicionais no mercado brasileiro.</p>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>Gap Analysis vs Concorrentes</h4>
+                <p>A Stellantis lidera em investimentos regionais (R$ 32 bi vs R$ 16 bi da VW), porém a tecnologia Bio-Hybrid ainda está em ramp-up. Oportunidades de melhoria: (1) Modernização de sistemas legados herdados da fusão FCA+PSA — integração de plataformas ainda em andamento; (2) Cibersegurança para veículos conectados e fábricas inteligentes — BYD e GM já possuem soluções integradas; (3) IA/ML e IA Generativa em escala — VW avança com CARIAD e GM com Ultifi; (4) Gestão de dados unificada entre marcas e operações regionais.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128161;</span> Maturidade e Cultura de Inovação</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Maturidade de Inovação</div>
+                        <div class="value">Estruturada: processo formal, funil/lab, métricas de resultado</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI na Inovação</div>
+                        <div class="value">Gestora: gera, incuba e/ou gerencia a maioria dos projetos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Origem do Budget de Inovação</div>
+                        <div class="value">TI + unidades de negócios</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">% do Orçamento para Inovação</div>
+                        <div class="value">De 1% a 10%</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Adoção Ágil</div>
+                        <div class="value">Alguns projetos: adoção parcial por times/áreas</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Profissionais Dedicados a Inovação</div>
+                        <div class="value">Sim — equipe dedicada exclusivamente</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Dificuldade com Talentos</div>
+                        <div class="value">Não — porém com desafios de disputa salarial e senioridade escassa</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Gaps de Soft Skills no Time</div>
+                        <div class="value">Comunicação; Liderança e influência; Criatividade e inovação</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+                        <span class="tag tag-active">ROI estimado</span>
+                        <span class="tag tag-active">SLA/Disponibilidade</span>
+                        <span class="tag tag-active">Suporte técnico</span>
+                        <span class="tag tag-active">TMA</span>
+                        <span class="tag tag-active">Liderança e solidez</span>
+                        <span class="tag tag-active">Segurança e compliance</span>
+                        <span class="tag tag-active">Integração e APIs</span>
+                        <span class="tag tag-active">Roadmap e inovação</span>
+                        <span class="tag tag-active">Flexibilidade contratual</span>
+                        <span class="tag tag-active">Capacitação do time</span>
+                        <span class="tag tag-active">Capilaridade regional</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI; Integrador/SI; Consultoria especializada; Start-up/Scale-up; ISV de nicho; MSP/Outsourcing gerenciado; Hiperscaler; Especialista setorial; Fornecedor global</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">
+                            Co-gerenciado: 12 temas | 
+                            Projeto: 6 temas | 
+                            Serv. Gerenciado: 2 temas |
+                            Interno: 1 tema
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Fábio de Freitas</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 92</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>IA/ML e IA Generativa SEM fornecedor definido — oportunidade direta</li>
+                        <li>Modelo de contratação: Co-gerenciado (IA/ML) e Projeto (IA Generativa) — alinhado com AI Squad</li>
+                        <li>TI como Gestora de inovação — receptiva a soluções avançadas de IA</li>
+                        <li>Desafio: fomentação da cultura de inovação — AI Squad pode ser catalisador</li>
+                        <li>Stellantis já utiliza IA em manufatura (Prêmio Ind. 4.0) — base para escalar</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 88</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>Cibersegurança é Top 3 prioridade de investimento e Top 6 desafio estratégico</li>
+                        <li>Projeto definido SEM fornecedor selecionado — oportunidade de RFP</li>
+                        <li>Modelo: Serviço Gerenciado (MSP/AMS/NOC/SOC) — fit com oferta Foursys</li>
+                        <li>Foursys com ISO 27001 e 27701 — diferencial certificado</li>
+                        <li>10% do orçamento de TI em cibersegurança (~R$ 50-100 MM)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 85</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>Modernização de legados é desafio estratégico Top 6 — herança da fusão FCA+PSA</li>
+                        <li>Desenvolvimento e modernização SEM fornecedor definido</li>
+                        <li>Modelo: Projeto (implementação/consultoria) — fit direto</li>
+                        <li>Parceria Digibee para integração — relevante para unificar plataformas multi-marca</li>
+                        <li>APIs e integração já com fornecedor, mas modernização de legados é a base</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 75</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>Infraestrutura de redes é Top 3 prioridade — SEM fornecedor definido</li>
+                        <li>Modelo: Co-gerenciado — abertura para parceiro em engenharia digital</li>
+                        <li>Desafio de modernizar infraestrutura e redes alinhado com Engenharia Digital</li>
+                        <li>Nuvem pública/privada com investimento ativo — complementar</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 65</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>Desenvolvimento e modernização SEM fornecedor — FourBlox acelera entregas</li>
+                        <li>Desafio de otimizar custos e eficiência (FinOps) — FourBlox reduz custos de dev</li>
+                        <li>Stellantis opera múltiplas marcas — componentes reutilizáveis geram economia de escala</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Fábio de Freitas possui <strong>8 projetos definidos sem fornecedor</strong>, incluindo IA/ML, IA Generativa, Cibersegurança e Modernização de Legados. Iniciar a conversa destacando a capacidade da Foursys em atender múltiplas frentes simultaneamente via modelo de Squads. Mencionar a experiência setorial automotiva (case Ford no portfólio) e as certificações ISO 27001/27701, fundamentais para o setor. A Stellantis compra por <strong>RFP/concorrência estruturada</strong> — posicionar a Foursys como candidata qualificada em múltiplos processos de RFP simultaneamente.</p>
+            </div>
+            
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A Stellantis está em pleno ciclo de investimento de R$ 32 bilhões e possui 8 projetos de TI sem fornecedor definido. As áreas de <strong>IA/ML, IA Generativa e Cibersegurança</strong> são as mais urgentes — o modelo de contratação prevê Co-gerenciamento e Serviço Gerenciado, modelos nos quais a Foursys tem forte atuação. O fato de a TI participar como co-decisora junto aos negócios facilita a entrada via valor agregado, não apenas preço. Timing ideal: <strong>os projetos já estão definidos e aguardam seleção de fornecedor</strong>.</p>
+            </div>
+            
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conta, destacar: (1) <strong>AI Squad</strong> — produto proprietário que acelera desenvolvimento com IA, diferencial vs consultorias tradicionais; (2) <strong>ISO 27001/27701</strong> — certificações de segurança e privacidade, critério de alta relevância para Fábio; (3) <strong>Parceria Digibee</strong> — integração de ecossistemas multi-marca (Fiat, Jeep, Peugeot, etc.); (4) <strong>Modelo Co-gerenciado</strong> — preferência declarada do executivo, fit perfeito com modelo Foursys; (5) <strong>24 anos de mercado</strong> e 41.000+ projetos — solidez e liderança, critério de alta relevância.</p>
+            </div>
+            
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p>1. A <strong>Stellantis</strong> está no maior ciclo de investimento da história do setor automotivo na América do Sul (R$ 32 bi até 2030). A TI é peça-chave na transformação para veículos conectados e elétricos.<br>
+                2. A fusão FCA+PSA gerou uma necessidade massiva de <strong>integração e modernização de sistemas legados</strong> entre marcas — este é um pain point real e duradouro.<br>
+                3. A <strong>cibersegurança</strong> para veículos conectados (5 milhões de assinantes de serviços conectados) e fábricas inteligentes (IIoT) é uma prioridade crescente no setor.<br>
+                4. Fábio valoriza muito <strong>liderança e solidez, segurança e compliance, e roadmap e inovação</strong> em fornecedores — posicionar a Foursys como parceiro estratégico de longo prazo, não apenas executor.<br>
+                5. Orçamento de TI entre R$ 500 MM e R$ 1 BI com <strong>perspectiva estável</strong> — oportunidade de contratos recorrentes e de longo prazo no modelo co-gerenciado.</p>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Sistemas e Administração de Informação (UNA), Gestão Estratégica de Informação (UFMG), Gestão Estratégica de TI e Comunicação (UFSC), Executive MBA (Fundação Dom Cabral)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Trajetória na Stellantis</div>
+                        <div class="value">Iniciou como Head de TI para Vendas, Digital Marketing, CRM, BI/Analytics, Manufatura, Pós-Vendas e RH. Promovido a VP de ICT e Inovação Digital em junho de 2024, sucedendo André Souza.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Cidade / Região</div>
+                        <div class="value">Betim / Belo Horizonte, MG — coração da operação Stellantis na América do Sul</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Estilo de Liderança</div>
+                        <div class="value">Ambidestra: equilibra inovação e eficiência operacional. Co-decisão com negócios.</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Experiência</div>
+                        <div class="value">20+ anos em Tecnologia da Informação, com carreira construída dentro da Stellantis/FCA. Promoção recente a VP demonstra reconhecimento interno.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">Perfil ativo no LinkedIn (linkedin.com/in/fabio-de-freitas-5b762a33). Presença na comunicação institucional da Stellantis Media.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Fontes de Conhecimento</div>
+                        <div class="value">Eventos e conferências digitais; Fornecedores e parceiros; Consultorias; Especialistas/Mentores; Webinars e podcasts; Cooperação com universidades</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Formação Diversificada</div>
+                        <div class="value">Estudou em 4 instituições diferentes (UNA, UFMG, UFSC, FDC) — demonstra busca contínua por conhecimento e visão multidisciplinar.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-box" style="margin-top:16px">
+                <h4>Dicas para Conversa Amistosa</h4>
+                <p>1. <strong>Promoção recente a VP:</strong> Parabenizar pela promoção a Vice-Presidente em 2024 é um icebreaker natural — demonstra reconhecimento da trajetória e abre diálogo sobre novos desafios do cargo.<br>
+                2. <strong>Minas Gerais e a Indústria Automotiva:</strong> Betim é o berço da Fiat no Brasil — conversar sobre a importância da região para o setor automotivo e a transformação que a Stellantis está liderando localmente.<br>
+                3. <strong>Fundação Dom Cabral:</strong> O MBA na FDC é um selo de prestígio empresarial em MG. Perguntar sobre a experiência na FDC e como influenciou sua visão de liderança em TI.<br>
+                4. <strong>Inovação e Cultura:</strong> Fábio lidera a cultura de inovação como desafio principal — demonstrar interesse genuíno em como ele está transformando a cultura de TI na Stellantis, especialmente pós-fusão FCA+PSA.<br>
+                5. <strong>Universidades e Conhecimento:</strong> Ele valoriza cooperação com universidades como fonte de conhecimento — mencionar parcerias acadêmicas ou programas de pesquisa pode criar conexão intelectual.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MapPin, Building2, TrendingUp, Users, X, ChevronRight, FileText, Search, Mic, MicOff } from 'lucide-react'
+import { MapPin, Building2, TrendingUp, Users, X, ChevronRight, FileText, Search, Mic, MicOff, Tag } from 'lucide-react'
 import { useApp } from '../../../context/AppContext'
 import { useLanguage } from '../../../i18n'
 import { useVoiceSearch } from '../../../hooks/useVoiceSearch'
@@ -25,6 +25,7 @@ export interface SocialContact {
   topOffer: string
   topScore: number
   briefingFiles?: BriefingFile[]
+  tag?: string
 }
 
 interface SocialSellingContent {
@@ -59,7 +60,7 @@ function norm(s: string) {
 
 function contactMatchesQuery(c: SocialContact, q: string): boolean {
   const n = norm(q)
-  return [c.name, c.role, c.company, c.sector, c.city, c.revenue, c.topOffer]
+  return [c.name, c.role, c.company, c.sector, c.city, c.revenue, c.topOffer, c.tag ?? '']
     .some(f => norm(f).includes(n))
 }
 
@@ -68,6 +69,7 @@ export function SectionClientExtra2() {
   const { lang, t } = useLanguage()
   const [selectedContact, setSelectedContact] = useState<SocialContact | null>(null)
   const [search, setSearch] = useState('')
+  const [activeTag, setActiveTag] = useState<string | null>(null)
 
   const speechLang = lang === 'en' ? 'en-US' : 'pt-BR'
   const onVoiceResult = useCallback((transcript: string) => {
@@ -96,10 +98,18 @@ export function SectionClientExtra2() {
   const totalOpportunities = contacts.reduce((sum, c) => sum + c.opportunities, 0)
   const avgScore = Math.round(contacts.reduce((sum, c) => sum + c.topScore, 0) / contacts.length)
 
+  const tags = useMemo(() => {
+    const set = new Set<string>()
+    contacts.forEach(c => { if (c.tag) set.add(c.tag) })
+    return Array.from(set).sort()
+  }, [contacts])
+
   const filtered = useMemo(() => {
-    if (!search.trim()) return contacts
-    return contacts.filter(c => contactMatchesQuery(c, search.trim()))
-  }, [contacts, search])
+    let result = contacts
+    if (activeTag) result = result.filter(c => c.tag === activeTag)
+    if (search.trim()) result = result.filter(c => contactMatchesQuery(c, search.trim()))
+    return result
+  }, [contacts, search, activeTag])
 
   return (
     <SectionWrapper>
@@ -218,6 +228,35 @@ export function SectionClientExtra2() {
             </p>
           )}
         </motion.div>
+
+        {tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-5">
+            <button
+              onClick={() => setActiveTag(null)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 ${
+                activeTag === null
+                  ? 'bg-foursys-primary/30 border border-foursys-primary/50 text-foursys-primary'
+                  : 'border border-white/[0.1] text-foursys-text-muted hover:border-white/30 hover:text-white'
+              }`}
+            >
+              <Tag size={12} />
+              {lang === 'pt' ? 'Todos' : 'All'}
+            </button>
+            {tags.map(tag => (
+              <button
+                key={tag}
+                onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                  activeTag === tag
+                    ? 'bg-foursys-primary/30 border border-foursys-primary/50 text-foursys-primary'
+                    : 'border border-white/[0.1] text-foursys-text-muted hover:border-white/30 hover:text-white'
+                }`}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filtered.map((contact, i) => {
