@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, X, Quote, Shield, CheckCircle2, ChevronRight, Clock, Layers, Target, Wrench, Trophy, Search, Mic, MicOff } from 'lucide-react'
+import { X, Quote, Shield, CheckCircle2, ChevronRight, Clock, Layers, Target, Wrench, Trophy, Search, Mic, MicOff } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { getCases } from '../../data/cases'
 import { useVoiceSearch } from '../../hooks/useVoiceSearch'
@@ -378,13 +378,6 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
             className="text-xs text-foursys-text-dim hover:text-foursys-text transition-colors"
           >
             {t('cases.backToCases')}
-          </button>
-          <button
-            type="button"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-foursys-primary/15 border border-foursys-primary/30 hover:bg-foursys-primary/25 text-foursys-primary text-sm font-semibold transition-all"
-          >
-            {t('cases.similarChallenge')}
-            <ArrowRight size={14} />
           </button>
         </div>
       </motion.div>
