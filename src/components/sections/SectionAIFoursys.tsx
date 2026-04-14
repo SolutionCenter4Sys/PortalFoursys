@@ -25,7 +25,6 @@ const MINT = '#89BAB1'
 
 interface ResultItem {
   icon: React.ReactNode
-  metric: string
   title: { pt: string; en: string }
   desc: { pt: string; en: string }
   color: string
@@ -51,56 +50,48 @@ interface HowItem {
 const RESULTS: ResultItem[] = [
   {
     icon: <Users size={20} />,
-    metric: '+60%',
     title: { pt: 'Performance nas Equipes', en: 'Team Performance' },
     desc: { pt: 'Equipes humano+IA com até 60% mais produtividade', en: 'Human+AI teams with up to 60% more productivity' },
     color: ORANGE,
   },
   {
     icon: <Rocket size={20} />,
-    metric: '7 meses',
     title: { pt: 'Redução do Time-to-Market', en: 'Time-to-Market Reduction' },
     desc: { pt: 'ROI mediano em 7 meses para deploys de agentes', en: 'Median 7-month ROI for agent deployments' },
     color: '#60A5FA',
   },
   {
     icon: <DollarSign size={20} />,
-    metric: '540%',
     title: { pt: 'Redução de Custo', en: 'Cost Reduction' },
     desc: { pt: 'ROI médio em 18 meses para implementações maduras', en: 'Average ROI in 18 months for mature implementations' },
     color: '#34D399',
   },
   {
     icon: <Lightbulb size={20} />,
-    metric: '72%',
     title: { pt: 'Inovação Aplicada', en: 'Applied Innovation' },
     desc: { pt: 'Das empresas já estão em produção ou piloto com IA Agêntica', en: 'Of enterprises are in production or piloting Agentic AI' },
     color: '#FBBF24',
   },
   {
     icon: <GraduationCap size={20} />,
-    metric: '14x',
     title: { pt: 'Profissionais Capacitados', en: 'Skilled Professionals' },
     desc: { pt: 'Crescimento médio dos times de IA enterprise (de 6 para 14)', en: 'Average growth of enterprise AI teams (from 6 to 14)' },
     color: '#A78BFA',
   },
   {
     icon: <BookOpen size={20} />,
-    metric: '42%',
     title: { pt: 'Retenção de Conhecimento', en: 'Knowledge Retention' },
     desc: { pt: 'Das Fortune 500 já operam AI Agents em produção', en: 'Of Fortune 500 companies now run AI Agents in production' },
     color: MINT,
   },
   {
     icon: <Layers size={20} />,
-    metric: '82%',
     title: { pt: 'Padronização e Consistência', en: 'Standardization & Consistency' },
     desc: { pt: 'Redução de tempo em auditorias com governança unificada', en: 'Reduction in audit time with unified governance' },
     color: '#F472B6',
   },
   {
     icon: <Shield size={20} />,
-    metric: '$1.28B',
     title: { pt: 'Segurança e Compliance', en: 'Security & Compliance' },
     desc: { pt: 'Mercado global de AI Governance em 2026', en: 'Global AI Governance market in 2026' },
     color: '#FB923C',
@@ -256,7 +247,6 @@ function ResultCard({ item, index, lang }: { item: ResultItem; index: number; la
           >
             {item.icon}
           </div>
-          <span className="text-2xl font-black" style={{ color: item.color }}>{item.metric}</span>
         </div>
         <h4 className="text-sm font-bold text-white mb-1">{item.title[lang as 'pt' | 'en']}</h4>
         <p className="text-xs text-foursys-text-muted leading-relaxed">{item.desc[lang as 'pt' | 'en']}</p>
