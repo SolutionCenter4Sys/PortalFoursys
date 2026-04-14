@@ -101,7 +101,15 @@ export function SectionClientExtra2() {
   const tags = useMemo(() => {
     const set = new Set<string>()
     contacts.forEach(c => { if (c.tag) set.add(c.tag) })
-    return Array.from(set).sort()
+    const preferred = ['Reunião Foursys', 'Foursys Meeting', 'Demais CIO', 'Other CIOs', 'Grupo NC', 'NC Group']
+    return Array.from(set).sort((a, b) => {
+      const ia = preferred.indexOf(a)
+      const ib = preferred.indexOf(b)
+      if (ia !== -1 && ib !== -1) return ia - ib
+      if (ia !== -1) return -1
+      if (ib !== -1) return 1
+      return a.localeCompare(b)
+    })
   }, [contacts])
 
   const tagCounts = useMemo(() => {
