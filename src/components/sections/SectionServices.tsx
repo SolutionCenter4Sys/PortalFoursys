@@ -1088,25 +1088,33 @@ const fbKitsEn = [
   { title: 'Executive Governance Kit', items: ['Project Portfolio Management', 'ESG Indicator Monitor', 'Executive Data Hub'] },
 ]
 
-function FourBloxDeepDive() {
+function FourBloxDeepDive({ lang }: { lang: string }) {
+  const problems = lang === 'en' ? fbProblemsEn : fbProblems
+  const solutionSteps = lang === 'en' ? fbSolutionStepsEn : fbSolutionSteps
+  const howItWorks = lang === 'en' ? fbHowItWorksEn : fbHowItWorks
+  const differentials = lang === 'en' ? fbDifferentialsEn : fbDifferentials
+  const benefits = lang === 'en' ? fbBenefitsEn : fbBenefits
+  const solutions = lang === 'en' ? fbSolutionsEn : fbSolutions
+  const kits = lang === 'en' ? fbKitsEn : fbKits
+
   return (
     <div className="space-y-7">
       {/* Proposta de valor */}
       <div className="p-5 rounded-xl bg-gradient-to-r from-emerald-500/15 to-transparent border border-emerald-500/25">
         <p className="text-xs text-foursys-text-muted leading-relaxed">
-          <strong className="text-foursys-text">Proposta de Valor:</strong> Chega de projetos intermináveis. O FourBlox é uma plataforma modular de soluções por assinatura que entrega sua solução digital pronta em 30 dias — personalizada, modular e com evolução contínua.
+          <strong className="text-foursys-text">{lang === 'pt' ? 'Proposta de Valor:' : 'Value Proposition:'}</strong> {lang === 'pt' ? 'Chega de projetos intermináveis. O FourBlox é uma plataforma modular de soluções por assinatura que entrega sua solução digital pronta em 30 dias — personalizada, modular e com evolução contínua.' : 'No more endless projects. FourBlox is a modular subscription-based platform that delivers your digital solution ready in 30 days — customized, modular, and with continuous evolution.'}
         </p>
       </div>
 
       {/* O Problema */}
       <div>
         <div className="text-center mb-3">
-          <span className="text-sm font-bold text-foursys-text">O </span>
-          <span className="text-sm font-bold text-orange-400">Problema</span>
+          <span className="text-sm font-bold text-foursys-text">{lang === 'pt' ? 'O ' : 'The '}</span>
+          <span className="text-sm font-bold text-orange-400">{lang === 'pt' ? 'Problema' : 'Problem'}</span>
         </div>
-        <p className="text-[10px] text-foursys-text-dim text-center mb-3">A maioria das empresas enfrenta pelo menos um destes cenários:</p>
+        <p className="text-[10px] text-foursys-text-dim text-center mb-3">{lang === 'pt' ? 'A maioria das empresas enfrenta pelo menos um destes cenários:' : 'Most companies face at least one of these scenarios:'}</p>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-          {fbProblems.map(p => (
+          {problems.map(p => (
             <div key={p} className="p-3 rounded-xl bg-foursys-surface/50 border border-white/10 flex items-start gap-2">
               <DynIcon name="alert-triangle" size={12} className="text-orange-400 shrink-0 mt-0.5" />
               <span className="text-[10px] text-foursys-text-dim">{p}</span>
@@ -1114,20 +1122,20 @@ function FourBloxDeepDive() {
           ))}
         </div>
         <p className="text-[10px] text-center mt-3">
-          <span className="font-bold text-foursys-text">O problema não é tecnologia.</span>{' '}
-          <span className="font-bold text-orange-400">É falta de personalização com método.</span>
+          <span className="font-bold text-foursys-text">{lang === 'pt' ? 'O problema não é tecnologia.' : 'The problem isn\'t technology.'}</span>{' '}
+          <span className="font-bold text-orange-400">{lang === 'pt' ? 'É falta de personalização com método.' : 'It\'s the lack of customization with method.'}</span>
         </p>
       </div>
 
       {/* A Solução */}
       <div>
         <div className="text-center mb-3">
-          <span className="text-sm font-bold text-foursys-text">A Solução: </span>
+          <span className="text-sm font-bold text-foursys-text">{lang === 'pt' ? 'A Solução: ' : 'The Solution: '}</span>
           <span className="text-sm font-bold text-orange-400">FourBlox</span>
         </div>
-        <p className="text-[10px] text-foursys-text-dim text-center mb-3">Uma plataforma modular de soluções por assinatura que entrega:</p>
+        <p className="text-[10px] text-foursys-text-dim text-center mb-3">{lang === 'pt' ? 'Uma plataforma modular de soluções por assinatura que entrega:' : 'A modular subscription-based solution platform that delivers:'}</p>
         <div className="space-y-2">
-          {fbSolutionSteps.map(s => (
+          {solutionSteps.map(s => (
             <div key={s} className="p-3 rounded-xl bg-foursys-surface/50 border border-white/10 flex items-center gap-3">
               <DynIcon name="check-circle" size={14} className="text-orange-400 shrink-0" />
               <span className="text-xs font-semibold text-foursys-text">{s}</span>
@@ -1139,10 +1147,10 @@ function FourBloxDeepDive() {
       {/* Como Funciona — 4 etapas */}
       <div>
         <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          Como Funciona — Modelo em 4 etapas
+          {lang === 'pt' ? 'Como Funciona — Modelo em 4 etapas' : 'How It Works — 4-Step Model'}
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {fbHowItWorks.map(step => (
+          {howItWorks.map(step => (
             <div key={step.n} className="p-4 rounded-xl bg-foursys-surface/50 border border-white/10 text-center relative">
               <div className="absolute top-2 right-2 text-lg font-black text-white/10">{step.n}</div>
               <div className="w-9 h-9 rounded-xl bg-orange-500/20 border border-orange-500/30 flex items-center justify-center mx-auto mb-2">
@@ -1158,10 +1166,10 @@ function FourBloxDeepDive() {
       {/* Catálogo de Soluções */}
       <div>
         <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          Biblioteca de Soluções — +18 soluções em 9 categorias
+          {lang === 'pt' ? 'Biblioteca de Soluções — +18 soluções em 9 categorias' : 'Solution Library — 18+ solutions in 9 categories'}
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-          {fbSolutions.map(cat => (
+          {solutions.map(cat => (
             <div key={cat.cat} className="p-3 rounded-xl bg-foursys-surface/50 border border-white/10">
               <div className="text-[10px] font-bold text-emerald-400 mb-2">{cat.cat}</div>
               <ul className="space-y-1">
@@ -1180,10 +1188,10 @@ function FourBloxDeepDive() {
       {/* Kits Estratégicos */}
       <div>
         <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          Combinações Estratégicas — Kits pré-configurados
+          {lang === 'pt' ? 'Combinações Estratégicas — Kits pré-configurados' : 'Strategic Combinations — Pre-configured Kits'}
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {fbKits.map(kit => (
+          {kits.map(kit => (
             <div key={kit.title} className="p-3 rounded-xl bg-emerald-500/8 border border-emerald-500/20">
               <div className="text-[10px] font-bold text-emerald-300 mb-2">{kit.title}</div>
               <ul className="space-y-1">
@@ -1202,10 +1210,10 @@ function FourBloxDeepDive() {
       {/* Diferenciais */}
       <div>
         <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          Diferenciais
+          {lang === 'pt' ? 'Diferenciais' : 'Differentials'}
         </div>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-          {fbDifferentials.map(d => (
+          {differentials.map(d => (
             <div key={d.title} className="p-3 rounded-xl bg-foursys-surface/50 border border-white/10">
               <DynIcon name={d.icon} size={16} className="text-orange-400 mb-2" />
               <div className="text-[11px] font-bold text-foursys-text mb-0.5">{d.title}</div>
@@ -1218,10 +1226,10 @@ function FourBloxDeepDive() {
       {/* Benefícios para o Negócio */}
       <div>
         <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          Benefícios para o Negócio
+          {lang === 'pt' ? 'Benefícios para o Negócio' : 'Business Benefits'}
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-          {fbBenefits.map(b => (
+          {benefits.map(b => (
             <div key={b.label} className="p-3 rounded-xl bg-foursys-surface/50 border border-white/10 flex items-center gap-2">
               <DynIcon name={b.icon} size={14} className="text-emerald-400 shrink-0" />
               <span className="text-[10px] font-semibold text-foursys-text">{b.label}</span>
@@ -1235,7 +1243,7 @@ function FourBloxDeepDive() {
         <p className="text-xs text-foursys-text-muted text-center flex flex-wrap items-start justify-center gap-1.5">
           <DynIcon name="zap" size={14} className="text-emerald-400 shrink-0 mt-0.5" />
           <span>
-            <strong className="text-foursys-text">Pronto para ativar?</strong> Fale com nosso time e coloque em produção em até 30 dias. Personalizado, por assinatura e modular.
+            <strong className="text-foursys-text">{lang === 'pt' ? 'Pronto para ativar?' : 'Ready to activate?'}</strong> {lang === 'pt' ? 'Fale com nosso time e coloque em produção em até 30 dias. Personalizado, por assinatura e modular.' : 'Talk to our team and go live in up to 30 days. Customized, subscription-based, and modular.'}
           </span>
         </p>
       </div>
