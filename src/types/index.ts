@@ -168,6 +168,7 @@ export type AppSection =
   | 'delivery'
   | 'alliances'
   | 'innovation'
+  | 'ai-foursys'
   // Provas
   | 'cases'
   | 'testimonials'

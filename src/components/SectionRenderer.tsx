@@ -13,6 +13,7 @@ const SectionServices = lazy(() => import('./sections/SectionServices').then(m =
 const SectionDelivery = lazy(() => import('./sections/SectionDelivery').then(m => ({ default: m.SectionDelivery })))
 const SectionAlliances = lazy(() => import('./sections/SectionAlliances').then(m => ({ default: m.SectionAlliances })))
 const SectionInnovation = lazy(() => import('./sections/SectionInnovation').then(m => ({ default: m.SectionInnovation })))
+const SectionAIFoursys = lazy(() => import('./sections/SectionAIFoursys').then(m => ({ default: m.SectionAIFoursys })))
 const SectionCases = lazy(() => import('./sections/SectionCases').then(m => ({ default: m.SectionCases })))
 const SectionTestimonials = lazy(() => import('./sections/SectionTestimonials').then(m => ({ default: m.SectionTestimonials })))
 const SectionAwards = lazy(() => import('./sections/SectionAwards').then(m => ({ default: m.SectionAwards })))
@@ -63,6 +64,7 @@ export function SectionRenderer() {
         {section === 'delivery'       && <SectionDelivery key="delivery" />}
         {section === 'alliances'      && <SectionAlliances key="alliances" />}
         {section === 'innovation'     && <SectionInnovation key="innovation" />}
+        {section === 'ai-foursys'    && <SectionAIFoursys key="ai-foursys" />}
 
         {/* ── Provas ── */}
         {section === 'cases'              && <SectionCases key="cases" />}

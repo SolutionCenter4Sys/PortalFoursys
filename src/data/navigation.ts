@@ -77,6 +77,13 @@ const navigationItemsPt: NavigationItem[] = [
     category: 'Ofertas e Serviços',
     description: 'Tendências globais em IA, Cloud, CX, Cyber e Data & Analytics',
   },
+  {
+    id: 'ai-foursys',
+    label: 'IA na Foursys',
+    icon: 'brain-circuit',
+    category: 'Ofertas e Serviços',
+    description: 'AI Squads, Agentes de IA, Governança e Framework',
+  },
 
   // ── Provas ─────────────────────────────────────────────────────────────────
   {
@@ -223,6 +230,13 @@ const navigationItemsEn: NavigationItem[] = [
     icon: 'sparkles',
     category: 'Solutions & Services',
     description: 'Global trends in AI, Cloud, CX, Cyber and Data & Analytics',
+  },
+  {
+    id: 'ai-foursys',
+    label: 'AI at Foursys',
+    icon: 'brain-circuit',
+    category: 'Solutions & Services',
+    description: 'AI Squads, AI Agents, Governance and Framework',
   },
 
   // ── Proof Points ───────────────────────────────────────────────────────────
