@@ -29,18 +29,23 @@ const badgeStyles: Record<string, string> = {
   'Caso Real': 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
 }
 
-const categoryImages: Record<string, string> = {
-  'Inteligência Artificial': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=480&q=70&auto=format',
-  'Artificial Intelligence': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=480&q=70&auto=format',
-  'Squads & Agilidade': 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=480&q=70&auto=format',
-  'Squads & Agility': 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=480&q=70&auto=format',
-  'Modernização de Legado': 'https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=480&q=70&auto=format',
-  'Legacy Modernization': 'https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=480&q=70&auto=format',
-  'Cibersegurança': 'https://images.unsplash.com/photo-1563986768609-322da13575f2?w=480&q=70&auto=format',
-  'Cybersecurity': 'https://images.unsplash.com/photo-1563986768609-322da13575f2?w=480&q=70&auto=format',
-  'Cloud & FinOps': 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=480&q=70&auto=format',
-  'Dados & Analytics': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=480&q=70&auto=format',
-  'Data & Analytics': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=480&q=70&auto=format',
+const insightImages: Record<string, string> = {
+  'ia-first-roi':          'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=480&q=70&auto=format',
+  'modernizacao-ondas':    'https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=480&q=70&auto=format',
+  'turnover-squads':       'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=480&q=70&auto=format',
+  'lead-time-case':        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=480&q=70&auto=format',
+  'governanca-ia-2026':    'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=480&q=70&auto=format',
+  'agentes-ia-producao':   'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=480&q=70&auto=format',
+  'zero-trust-regulados':  'https://images.unsplash.com/photo-1563986768609-322da13575f2?w=480&q=70&auto=format',
+  'lgpd-multas-2026':      'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=480&q=70&auto=format',
+  'finops-ia-custo':       'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=480&q=70&auto=format',
+  'multicloud-estrategia': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=480&q=70&auto=format',
+  'data-mesh-brasil':      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=480&q=70&auto=format',
+  'observabilidade-case':  'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=480&q=70&auto=format',
+  'dilemas-cto-2026':      'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=480&q=70&auto=format',
+  'podcast-transformacao':  'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=480&q=70&auto=format',
+  'webinar-ia-saude':      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=480&q=70&auto=format',
+  'safe-pratica':          'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=480&q=70&auto=format',
 }
 
 function InsightCard({ insight, index, featured = false }: { insight: Insight; index: number; featured?: boolean }) {
@@ -78,9 +83,9 @@ function InsightCard({ insight, index, featured = false }: { insight: Insight; i
       <div
         className={`relative overflow-hidden ${featured ? 'h-36 md:h-44' : 'h-24 md:h-28'} flex items-end p-5`}
       >
-        {categoryImages[insight.category] && (
+        {insightImages[insight.id] && (
           <img
-            src={categoryImages[insight.category]}
+            src={insightImages[insight.id]}
             alt=""
             loading="lazy"
             className="absolute inset-0 w-full h-full object-cover opacity-30"
