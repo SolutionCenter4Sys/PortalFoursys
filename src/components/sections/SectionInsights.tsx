@@ -29,6 +29,20 @@ const badgeStyles: Record<string, string> = {
   'Caso Real': 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
 }
 
+const categoryImages: Record<string, string> = {
+  'Inteligência Artificial': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=480&q=70&auto=format',
+  'Artificial Intelligence': 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=480&q=70&auto=format',
+  'Squads & Agilidade': 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=480&q=70&auto=format',
+  'Squads & Agility': 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=480&q=70&auto=format',
+  'Modernização de Legado': 'https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=480&q=70&auto=format',
+  'Legacy Modernization': 'https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?w=480&q=70&auto=format',
+  'Cibersegurança': 'https://images.unsplash.com/photo-1563986768609-322da13575f2?w=480&q=70&auto=format',
+  'Cybersecurity': 'https://images.unsplash.com/photo-1563986768609-322da13575f2?w=480&q=70&auto=format',
+  'Cloud & FinOps': 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=480&q=70&auto=format',
+  'Dados & Analytics': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=480&q=70&auto=format',
+  'Data & Analytics': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=480&q=70&auto=format',
+}
+
 function InsightCard({ insight, index, featured = false }: { insight: Insight; index: number; featured?: boolean }) {
   const { navigate, setDeepDiveHint } = useApp()
   const { t, lang } = useLanguage()
@@ -60,11 +74,20 @@ function InsightCard({ insight, index, featured = false }: { insight: Insight; i
       className={`group rounded-2xl border border-white/[0.08] overflow-hidden hover:border-white/[0.16] transition-all duration-300 ${featured ? 'flex flex-col' : ''}`}
       style={{ background: `linear-gradient(160deg, ${insight.color}08 0%, transparent 40%), rgba(255,255,255,0.015)` }}
     >
-      {/* Gradient banner */}
+      {/* Image banner */}
       <div
-        className={`relative bg-gradient-to-br ${insight.gradient} ${featured ? 'h-44 md:h-56' : 'h-32 md:h-36'} flex items-end p-5`}
+        className={`relative overflow-hidden ${featured ? 'h-36 md:h-44' : 'h-24 md:h-28'} flex items-end p-5`}
       >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.04),transparent_60%)]" />
+        {categoryImages[insight.category] && (
+          <img
+            src={categoryImages[insight.category]}
+            alt=""
+            loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover opacity-30"
+          />
+        )}
+        <div className={`absolute inset-0 bg-gradient-to-br ${insight.gradient}`} />
+        <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,12,20,0.95)] via-[rgba(10,12,20,0.4)] to-transparent" />
         <div className="relative z-10 flex items-center gap-2 flex-wrap">
           {insight.badge && (
             <span className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${badgeStyles[insight.badge] ?? 'bg-white/10 text-white/70 border-white/20'}`}>
