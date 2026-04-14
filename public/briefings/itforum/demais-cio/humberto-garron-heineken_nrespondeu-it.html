@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Humberto Garron | HEINEKEN</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Humberto Garron</h1>
+                <h2>CIO — HEINEKEN Brasil</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Bens de Consumo (Bebidas) | São Paulo, SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Receita Global</div>
+                    <div class="value">€ 16,9 BI (2025)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Market Share BR</div>
+                    <div class="value">21,3%</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Modelos IA Ativos</div>
+                    <div class="value">35+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: HEINEKEN Brasil</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">O <strong>Grupo HEINEKEN Brasil</strong> é a segunda maior cervejaria do país, com <strong>21,3% de market share</strong> e mais de <strong>13 mil colaboradores</strong> distribuídos em <strong>15 unidades produtivas</strong> e <strong>30 centros de distribuição</strong>. Parte do grupo holandês HEINEKEN N.V. (receita global de €16,9 bilhões em 2025), a operação brasileira é o <strong>maior mercado da companhia em volume de vendas</strong> desde 2019. O portfólio inclui 22 marcas de cerveja — com destaque para Heineken, Amstel, Tiger e Devassa — e 6 bebidas não alcoólicas. Em 2024, a operação brasileira registrou seu <strong>melhor resultado da série histórica</strong>, com a marca Heineken crescendo em dois dígitos pelo 11º ano consecutivo. No entanto, 2025 trouxe desafios: queda de volume em dígito médio e receita em dígito baixo no Brasil, influenciada por queda na renda real e retração do mercado cervejeiro. Em março/2026, a nova fábrica de <strong>Passos (MG)</strong> já havia produzido 300 milhões de latas em apenas 4 meses. A estratégia global <strong>EverGreen 2030</strong> prioriza crescimento de marcas premium, aceleração de produtividade em escala e sustentabilidade (meta Net Zero até 2040). A empresa opera com <strong>35+ modelos de IA ativos</strong> desde 2021 e adota infraestrutura <strong>SAP S/4HANA em nuvem híbrida (Microsoft Azure)</strong> com segurança baseada em <strong>Microsoft Sentinel e Defender</strong>.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global (presente em 70+ países)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Multinacional — Capital Aberto (Euronext Amsterdam)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento global de 2-6% em lucro operacional (2026)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores Brasil</div>
+                        <div class="value">13.000+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Humberto Garron é um executivo de tecnologia com perfil <strong>único e diferenciado</strong>: ex-concertista de piano profissional nos EUA, combina sensibilidade criativa com visão estratégica de negócios. Com MBA pela <strong>FGV EAESP</strong> e <strong>Fundação Dom Cabral</strong>, Garron construiu uma sólida carreira em transformação digital no setor de bens de consumo, sendo reconhecido como <strong>Executivo de TI do Ano 2024</strong> (IT Forum, categoria Indústria de Alimentos, Bebidas e Fumos). Seu track record inclui <strong>+R$ 400 milhões em economias via automação e IA</strong>, crescimento de 10% a.a. em vendas por digitalização, e redução de 60% em operações logísticas. Na HEINEKEN, assume o desafio de escalar a operação de <strong>35+ modelos de IA</strong> em produção, consolidar a infraestrutura em <strong>nuvem híbrida Azure/SAP S/4HANA</strong> e impulsionar a estratégia <strong>EverGreen 2030</strong> em um mercado brasileiro sob pressão de volume.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar IA/ML em produção: de 35 para centenas de modelos ativos com governança</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar operações de trade marketing e supply chain para reduzir custos</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer cibersegurança em ambiente multi-cloud e IoT industrial</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar dados end-to-end: fábricas, logística, vendas e pontos de venda</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Sustentar crescimento digital (e-commerce +30%) com plataformas escaláveis</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Alinhar TI à estratégia ESG/Net Zero com rastreabilidade de dados ambientais</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento</h4>
+                    <div style="margin-bottom:16px">
+                        <span class="tag tag-priority">Inteligência Artificial &amp; Analytics</span>
+                        <span class="tag tag-priority">Nuvem Híbrida (Azure/SAP)</span>
+                        <span class="tag tag-priority">Cibersegurança</span>
+                        <span class="tag tag-priority">Automação de Processos</span>
+                        <span class="tag tag-priority">E-commerce &amp; Plataformas B2B</span>
+                    </div>
+                    <h4 style="margin-bottom:12px;color:var(--primary);margin-top:20px">Tecnologias em Operação</h4>
+                    <div>
+                        <span class="tag tag-active">SAP S/4HANA</span>
+                        <span class="tag tag-active">Microsoft Azure</span>
+                        <span class="tag tag-active">Microsoft Sentinel (SIEM)</span>
+                        <span class="tag tag-active">Microsoft 365 Defender</span>
+                        <span class="tag tag-active">35+ Modelos IA (ML)</span>
+                        <span class="tag tag-active">Heishop (B2B Platform)</span>
+                        <span class="tag tag-active">Control Tower Logística</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Áreas que devem receber investimento nos próximos 12 meses, com base no perfil da empresa e tendências do setor:</p>
+            <div>
+                <span class="tag tag-opportunity">IA Generativa &amp; Agentes Autônomos</span>
+                <span class="tag tag-opportunity">MLOps &amp; Governança de IA</span>
+                <span class="tag tag-opportunity">Migração SAP S/4HANA Cloud</span>
+                <span class="tag tag-opportunity">Cybersecurity (SOC/SIEM)</span>
+                <span class="tag tag-opportunity">Data Lake &amp; Analytics Avançado</span>
+                <span class="tag tag-opportunity">Automação RPA/Hiperautomação</span>
+                <span class="tag tag-opportunity">E-commerce &amp; Retail Media</span>
+                <span class="tag tag-opportunity">IoT Industrial (Fábricas)</span>
+                <span class="tag tag-opportunity">Sustentabilidade Digital (ESG Tech)</span>
+                <span class="tag tag-opportunity">Integração de Dados (API/iPaaS)</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas — Janelas Abertas</h3>
+            <div class="alert-box">
+                <strong>A demanda por IA na HEINEKEN já supera a capacidade interna de implementação.</strong> A empresa declarou publicamente que a fila de projetos de IA é maior que sua capacidade de entrega — parceiros externos são essenciais.
+            </div>
+            <div class="grid-2">
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Agentes Autônomos de IA</h4>
+                        <span class="score-badge">Alta Prioridade</span>
+                    </div>
+                    <div class="reasons">
+                        <p style="font-size:14px;color:var(--text-light)">HEINEKEN declarou que aposta em "agentes autônomos capazes de operar em tempo real" como próximo passo. Precisam de parceiro para desenvolver e escalar.</p>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Governança &amp; MLOps para 35+ Modelos</h4>
+                        <span class="score-badge">Alta Prioridade</span>
+                    </div>
+                    <div class="reasons">
+                        <p style="font-size:14px;color:var(--text-light)">Com 35+ modelos de IA ativos em múltiplas áreas (produção, vendas, RH, finanças), a governança e operação desses modelos se torna crítica para evitar drift e garantir compliance.</p>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Integração de Dados End-to-End</h4>
+                        <span class="score-badge">Média-Alta</span>
+                    </div>
+                    <div class="reasons">
+                        <p style="font-size:14px;color:var(--text-light)">Dados de 15 fábricas, 30 CDs, 300 mil clientes B2B e operação de varejo precisam fluir integrados. Oportunidade para iPaaS e middleware de integração.</p>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Automação de Supply Chain &amp; Trade</h4>
+                        <span class="score-badge">Média-Alta</span>
+                    </div>
+                    <div class="reasons">
+                        <p style="font-size:14px;color:var(--text-light)">Control Tower em Itu já reduziu estadias em 75%. Próximo passo é hiperautomação de processos logísticos e trade marketing com IA preditiva.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Humberto Garron</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas na HEINEKEN. Ordenado por relevância estratégica.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. AI Squad — Desenvolvimento e Escalabilidade de IA</h4>
+                    <span class="score-badge">Fit 95%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>HEINEKEN tem 35+ modelos e demanda superando capacidade interna — precisa de parceiro para escalar</li>
+                        <li>Experiência do Garron com IA em BAT (R$ 400M em savings) mostra que ele valoriza resultados mensuráveis</li>
+                        <li>Foco em agentes autônomos de IA alinha com capacidade do AI Squad Foursys</li>
+                        <li>Suporte a MLOps, governança e compliance de modelos em produção</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. Sec4Sys — Cibersegurança e Gestão de Riscos</h4>
+                    <span class="score-badge">Fit 90%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>HEINEKEN já opera com Microsoft Sentinel/Defender mas precisa expandir cobertura para IoT industrial e supply chain</li>
+                        <li>Certificações ISO 27001/27701 da Foursys alinham com requisitos de multinacional europeia (GDPR/LGPD)</li>
+                        <li>Vertical Sec4Sys oferece TPRM (gestão de riscos de terceiros) — crítico para cadeia de 300 mil clientes B2B</li>
+                        <li>Continuidade de negócios e prevenção de fraudes são imperativos para operação de grande escala</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. Squads de Desenvolvimento — Plataformas Digitais e E-commerce</h4>
+                    <span class="score-badge">Fit 85%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Canal digital cresceu 30% em 2024; Heishop atende 300 mil clientes — demanda evolução contínua</li>
+                        <li>Retail media, cupons, cross-category e campanhas sazonais exigem desenvolvimento ágil</li>
+                        <li>Modelo de squads da Foursys permite escala flexível conforme sazonalidade do setor de bebidas</li>
+                        <li>Experiência Foursys com Salesforce pode potencializar CRM e programa de fidelidade</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. Integração &amp; APIs (Parceria Digibee)</h4>
+                    <span class="score-badge">Fit 82%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>HEINEKEN migrou dados de múltiplos ERPs para plataforma centralizada — integração é dor constante</li>
+                        <li>15 fábricas + 30 CDs + e-commerce + 300 mil PDVs = cenário complexo de integração</li>
+                        <li>Parceria Foursys/Digibee oferece iPaaS para conectar SAP S/4HANA com ecossistema de IA e analytics</li>
+                        <li>Redução de custos de integração vs. desenvolvimento custom</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>5. AMS — Application Management Services (SAP &amp; Legado)</h4>
+                    <span class="score-badge">Fit 78%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Operação crítica em SAP S/4HANA requer suporte contínuo e evolução</li>
+                        <li>Programa "Digital Backbone" demanda manutenção e evolução constante</li>
+                        <li>Modelo flexível de AMS da Foursys permite absorver picos de demanda</li>
+                        <li>Experiência com ambiente Azure alinhada à infraestrutura HEINEKEN</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Humberto Garron é um executivo que <strong>fala a linguagem dos resultados</strong>: R$ 400M em savings, 10% de crescimento em vendas, 60% de redução operacional. Iniciar a conversa com <strong>métricas concretas</strong> de cases Foursys em bens de consumo/CPG. Mencionar que a Foursys tem AI Squad proprietário e que empresas similares aceleraram entrega de modelos de IA em 3x com squads dedicados. Garron foi premiado Executivo de TI do Ano 2024 — reconhecer essa conquista gera rapport imediato.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A HEINEKEN declarou publicamente que a <strong>demanda por projetos de IA supera a capacidade interna</strong>. Com 35+ modelos ativos e planos de expandir para agentes autônomos, a empresa precisa de parceiro de IA com capacidade de entrega imediata. A Foursys pode entrar como aceleradora, oferecendo squads de IA prontos para operar dentro do ecossistema Azure/SAP da HEINEKEN. Segundo momento de urgência: a pressão de custos (volume caindo no Brasil em 2025-2026) exige automação agressiva — oportunidade para RPA/hiperautomação.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>AI Squad proprietário</strong> — capacidade de entregar modelos de IA e agentes autônomos em velocidade; (2) <strong>Sec4Sys com ISO 27001/27701</strong> — compliance nativo para multinacional europeia com exposição a GDPR/LGPD; (3) <strong>Parceria Digibee</strong> — iPaaS para integrar SAP S/4HANA com ecossistema de IA e e-commerce; (4) <strong>Modelo flexível</strong> (Squads + AMS + Projetos) — adaptável à sazonalidade de bens de consumo. Garron vem de ambiente onde implementou plataforma omnichannel B2B (Conecta) — a experiência Foursys em desenvolvimento de plataformas digitais é relevante.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. A fila de IA é maior que a capacidade:</strong> A HEINEKEN declarou que a demanda por aplicações de IA já supera a capacidade de implementação. Com 35+ modelos ativos em produção, logística, vendas e RH, o próximo desafio é governança em escala (MLOps) e evolução para agentes autônomos. O AI Squad Foursys pode ser o parceiro para destravar essa fila.</p>
+                <p style="margin-bottom:12px"><strong>2. Pressão de volume exige eficiência radical:</strong> Volume de cerveja caiu em dígito médio no Brasil em 2025 e 4,7% no 1T2026. Com margens pressionadas, a automação de processos (supply chain, trade, backoffice) é vital. Garron já demonstrou capacidade de gerar R$ 400M em savings via automação — ele buscará replicar na HEINEKEN.</p>
+                <p style="margin-bottom:12px"><strong>3. E-commerce é vetor de crescimento:</strong> Heishop atende 300 mil clientes B2B 24h/dia. Canal digital cresceu 30% em 2024. Retail media e personalização são as próximas fronteiras — squads ágeis de desenvolvimento podem acelerar essa evolução.</p>
+                <p style="margin-bottom:12px"><strong>4. Nova fábrica de Passos = nova infra de TI:</strong> A fábrica inaugurada em nov/2025 em Passos (MG) produziu 300M de latas em 4 meses. Nova planta significa nova demanda por integração, IoT, segurança e automação industrial — janela de oportunidade para serviços de infraestrutura e integração.</p>
+                <p><strong>5. ESG como imperativo tecnológico:</strong> Metas ambiciosas de Net Zero até 2040, 43% de formatos retornáveis e rastreabilidade de emissões exigem plataforma de dados ESG robusta. Heineken Spin já fatura R$ 265M — a tecnologia é habilitadora do negócio de sustentabilidade.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Ambev (AB InBev) — Líder com 63% de Market Share</h4>
+                <p><strong>Segmento:</strong> Cervejas, refrigerantes e bebidas não alcoólicas | <strong>Receita BR:</strong> ~R$ 80+ bilhões (2024)</p>
+                <p>Dominante em capilaridade logística e portfólio diversificado. Em 2026, superou concorrência com crescimento de 3,8% em vendas vs. 1,5% do setor. Investimentos massivos em IA preditiva para precificação dinâmica, digital twins para fábricas e plataforma BEES (marketplace B2B que processa bilhões em pedidos). Aposta forte em cervejas premium e super premium para proteger margens.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Grupo Petrópolis — 11% de Market Share</h4>
+                <p><strong>Segmento:</strong> Cervejas populares e mainstream | <strong>Marcas:</strong> Itaipava, Crystal, Petra, TNT Energy</p>
+                <p>Terceira maior cervejaria do Brasil. Posicionamento agressivo em preço com marcas populares. Menor investimento em transformação digital comparado a Ambev e HEINEKEN. Recente reestruturação e foco em eficiência operacional. Representa ameaça no segmento econômico, onde HEINEKEN enfraqueceu em 2025.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Diageo / Pernod Ricard — Concorrentes em Premium/Spirits</h4>
+                <p><strong>Segmento:</strong> Destilados premium, ready-to-drink | <strong>Abrangência:</strong> Global</p>
+                <p>Competem com HEINEKEN na disputa pelo "share of throat" do consumidor premium. Investimentos significativos em DTC (direct-to-consumer) digital, personalização por IA e retail media. O crescimento do segmento de spirits e RTDs pressiona o mercado de cervejas premium onde a HEINEKEN concentra sua estratégia de valor.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Cervejarias Artesanais e Regionais</h4>
+                <p><strong>Segmento:</strong> Cervejas artesanais e especiais | <strong>Crescimento:</strong> Acelerado nas capitais</p>
+                <p>Fragmentam o mercado premium nas capitais com produtos diferenciados e experiências locais. O consumidor brasileiro está mais exigente e escolhe bebidas por ocasião. Desafiam HEINEKEN a investir em personalização, rastreabilidade e experiências digitais nos pontos de venda.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>A Ambev tem vantagem significativa em maturidade digital com a plataforma BEES e precificação por IA. A HEINEKEN precisa acelerar para não ampliar o gap. Os principais gaps identificados: (1) <strong>Governança de IA em escala</strong> — 35 modelos ativos mas sem MLOps robusto para escalar para centenas; (2) <strong>Integração de dados fragmentados</strong> — dados de 15 fábricas, 30 CDs e 300 mil clientes ainda em múltiplos sistemas; (3) <strong>Automação além de IA</strong> — processos de backoffice, jurídico e RH ainda com potencial de automação via RPA/hiperautomação; (4) <strong>Retail media e personalização</strong> — Ambev avança com BEES enquanto Heishop pode evoluir. A Foursys pode se posicionar como parceira para fechar esses gaps com AI Squad (MLOps e agentes), Digibee (integração), squads de desenvolvimento (Heishop/retail media) e Sec4Sys (segurança da cadeia de IA).</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CIO — HEINEKEN Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">São Paulo, SP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Background Único</div>
+                        <div class="value">Ex-concertista e pianista profissional nos EUA antes de migrar para carreira em tecnologia</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">MBA — FGV EAESP (2010-2011) | MBA — Fundação Dom Cabral (2017-2018) | Graduação em Tecnologia e Música</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reconhecimentos</div>
+                        <div class="value">Executivo de TI do Ano 2024 — IT Forum (categoria Indústria de Alimentos, Bebidas e Fumos)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória Anterior</div>
+                        <div class="value">16+ anos na BAT (Souza Cruz/British American Tobacco): de Regional SAP Manager a Head de IDT LATAM South. Liderou digitalização com R$ 400M+ em savings</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Complementar</div>
+                        <div class="value">Passou por consultoria alemã especializada em fusões e aquisições — visão de negócios além da TI</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Estilo de Liderança</div>
+                        <div class="value">Orientado a resultados mensuráveis. Conecta tecnologia a KPIs de negócio (vendas, savings, eficiência)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconheça o prêmio de Executivo de TI do Ano:</strong> Garron recebeu o prêmio do IT Forum em 2024 na categoria Alimentos, Bebidas e Fumos. Mencionar isso naturalmente ("soube da sua premiação no IT Forum") demonstra preparo e cria conexão imediata. Ele se orgulha dos resultados concretos que levaram ao reconhecimento.</p>
+                <p style="margin-bottom:10px"><strong>2. Explore o ângulo da música:</strong> Garron é um ex-pianista concertista que participou de campeonatos nos EUA. Se houver abertura, perguntar "ouvi que você tem um background artístico interessante" pode gerar uma conversa mais pessoal e diferenciada. Ele ainda toca piano para a família — demonstra sensibilidade e disciplina.</p>
+                <p style="margin-bottom:10px"><strong>3. Fale em números, não em promessas:</strong> Garron gerou R$ 400M em savings, 10% de crescimento em vendas, 60% de redução operacional. Ele é orientado a ROI. Apresente cases Foursys com métricas concretas: "aceleramos entrega de modelos de IA em X% para empresa Y do setor de consumo".</p>
+                <p style="margin-bottom:10px"><strong>4. Conecte-se pela visão de IA como motor de vendas:</strong> Diferente de CIOs focados apenas em eficiência, Garron usou IA para impulsionar VENDAS (plataforma Conecta, automação de trade). Mostrar que a Foursys entende IA como ferramenta de receita, não só de custo, ressoará com sua filosofia.</p>
+                <p><strong>5. Posicione-se como acelerador, não substituto:</strong> Garron construiu equipes internas fortes na BAT e certamente fará o mesmo na HEINEKEN. A abordagem deve ser de parceiro que ACELERA a capacidade interna, não que a substitui. "Entramos para destravar a fila de projetos de IA que supera a capacidade interna" é o posicionamento ideal.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Diretoria / C-Level</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte Provável</div>
+                        <div class="value">VP de Digital &amp; Tecnologia ou CEO Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget) — track record de decisões autônomas em projetos de IA</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência em M&amp;A/Negociação</div>
+                        <div class="value">Background em consultoria de fusões e aquisições — negociador sofisticado</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores da Empresa</div>
+                        <div class="value">13.000+ (Brasil) | 85.000 (Global)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Unidades Produtivas</div>
+                        <div class="value">15 fábricas + 30 centros de distribuição no Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Maturidade Digital</div>
+                        <div class="value">Alta: 35+ modelos IA ativos, SAP S/4HANA Cloud, Control Tower, e-commerce B2B consolidado</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Coprotagonista: TI é motor de vendas e eficiência, não apenas suporte operacional</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Nuvem (Azure/SaaS)</div><div class="bar-track"><div class="bar-fill" style="width:28%;background:#1a237e">28%</div></div></div>
+                <div class="bar"><div class="bar-label">IA &amp; Analytics</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#1a237e">18%</div></div></div>
+                <div class="bar"><div class="bar-label">SAP S/4HANA &amp; ERP</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">12%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas &amp; Capacitação</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+                <div class="bar"><div class="bar-label">E-commerce &amp; Digital</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+                <div class="bar"><div class="bar-label">Infra On-Prem (Fábricas)</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:4%;background:#9fa8da">4%</div></div></div>
+            </div>
+            <p style="margin-top:16px;font-size:12px;color:var(--text-light);text-align:center;font-style:italic">* Estimativa baseada em perfil tecnológico declarado (SAP S/4HANA Cloud, Azure, 35+ modelos IA). Dados exatos não disponíveis publicamente.</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância (Inferidos)</h4>
+                    <div>
+                        <span class="tag tag-active">ROI comprovado / Métricas de resultado</span>
+                        <span class="tag tag-active">Capacidade de entrega ágil</span>
+                        <span class="tag tag-active">Especialização em IA e dados</span>
+                        <span class="tag tag-active">Flexibilidade de modelo (Squads/Projetos)</span>
+                        <span class="tag tag-active">Certificações de segurança</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Parceiros ágeis com capacidade de entrega rápida e resultados mensuráveis — não apenas grandes consultorias</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Modelo de Contratação Provável</div>
+                        <div class="value">Squads dedicados ou projetos com escopo definido e KPIs de resultado</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Risco a Endereçar</div>
+                        <div class="value">Garron vem de ambiente (BAT) onde construiu capacidade interna forte — demonstrar valor complementar, não dependência</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127793;</span> HEINEKEN &amp; ESG — Oportunidade Tecnológica</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Meta Net Zero (Escopos 1 e 2)</div>
+                        <div class="value">2030</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Meta Net Zero (Cadeia Completa)</div>
+                        <div class="value">2040</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Heineken Spin (Sustentabilidade)</div>
+                        <div class="value">Faturou R$ 265 milhões em 2024</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Programa Volte Sempre</div>
+                        <div class="value">9,13 milhões de garrafas recicladas em 2024 (parceria Ambipar)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Energia Renovável</div>
+                        <div class="value">45 mil contratos — R$ 23M em economia desde 2021</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Meta Embalagens Recicláveis</div>
+                        <div class="value">99% até 2030</div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert-box" style="margin-top:16px">
+                <strong>Oportunidade ESG Tech:</strong> Metas ambiciosas de rastreabilidade, emissões e economia circular demandam plataforma de dados ESG robusta. A Foursys pode posicionar serviços de integração de dados ambientais, dashboards de compliance ESG e automação de reporting para atender requisitos regulatórios europeus e brasileiros.
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

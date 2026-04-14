@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Andre Petenussi | LOCALIZA</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Andre Petenussi</h1>
+                <h2>CTO — LOCALIZA&amp;Co</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Transporte e Logística (Locação de Veículos) | Belo Horizonte, MG</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 41,8 BI (2025)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Frota</div>
+                    <div class="value">658 mil+ veículos</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescimento acelerado</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: LOCALIZA&amp;Co</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Localiza&amp;Co</strong> é a maior plataforma de mobilidade da América Latina e líder absoluta no mercado brasileiro de locação de veículos, com sede em Belo Horizonte (MG). Fundada em 1973, a empresa opera nos segmentos de aluguel de carros (Rent a Car), gestão e terceirização de frotas e venda de seminovos. Em 2022, concluiu a fusão com a Unidas, consolidando sua posição dominante. Em 2025, a Localiza registrou <strong>receita líquida de R$ 41,8 bilhões</strong> (+12,1% anual), <strong>EBITDA consolidado de R$ 13,8 bilhões</strong> (+15,4%), <strong>lucro líquido ajustado de R$ 3,4 bilhões</strong> e vendeu 296.452 veículos no segmento de seminovos. A empresa conta com <strong>mais de 23 mil colaboradores</strong>, <strong>954 pontos de atendimento</strong> em <strong>7 países</strong> sul-americanos e atende <strong>8 milhões de clientes</strong>. No campo tecnológico, a Localiza opera o <strong>LocalizaLabs</strong>, hub de inovação com mais de 1.700 profissionais de tecnologia, e tornou-se a primeira empresa do Brasil a integrar um app nativo ao <strong>ChatGPT da OpenAI</strong>. A empresa adota estratégia <strong>"AI-first"</strong> e migrou sua infraestrutura para a <strong>AWS</strong>.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">América do Sul (7 países)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Capital aberto (B3: RENT3)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento sustentado (+12% a.a.)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">23.000+ (1.700+ em tecnologia)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Andre Petenussi é o <strong>CTO da Localiza&amp;Co</strong> desde fevereiro de 2019, liderando uma das maiores operações de tecnologia do setor de mobilidade na América Latina. A empresa opera sob estratégia <strong>"AI-first"</strong>, com o hub <strong>LocalizaLabs</strong> reunindo mais de 1.700 profissionais de tecnologia. A Localiza migrou sua infraestrutura para <strong>AWS</strong>, adotou <strong>GitHub Copilot</strong> em escala (ganho de 21% em produtividade), e desenvolveu uma <strong>arquitetura multiagentes</strong> para orquestração de IAs. Petenussi é <strong>tricampeão do Prêmio Executivo de TI do Ano</strong> pelo IT Forum. Abordagem ideal: parceria de alto valor em <strong>IA generativa, dados e cibersegurança</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar IA generativa com governança e uso responsável em toda a operação</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Consolidar estratégia "AI-first" e ampliar automação de processos corporativos</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer cibersegurança e conformidade LGPD em plataforma de escala continental</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Atrair e reter talentos qualificados em tecnologia e IA</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Otimizar custos de cloud após migração completa para AWS</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar dados end-to-end entre aluguel, frotas, seminovos e mobilidade</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Inteligência Artificial Generativa</span>
+                        <span class="tag tag-priority">Plataforma de Dados &amp; Analytics</span>
+                        <span class="tag tag-priority">Cibersegurança &amp; LGPD</span>
+                        <span class="tag tag-priority">Cloud (AWS) &amp; DevOps</span>
+                        <span class="tag tag-priority">Experiência Digital do Cliente</span>
+                        <span class="tag tag-priority">Automação &amp; Hiperautomação</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses, baseado em declarações públicas e movimentações da empresa:</p>
+            <div>
+                <span class="tag tag-active">IA Generativa (GitHub Copilot, Agentes IA)</span>
+                <span class="tag tag-active">ChatGPT Integration (OpenAI)</span>
+                <span class="tag tag-active">Arquitetura Multiagentes (ADA)</span>
+                <span class="tag tag-active">AWS Cloud Migration</span>
+                <span class="tag tag-active">Assistente Virtual "Liza" (WhatsApp/Voz)</span>
+                <span class="tag tag-active">Fast (Retirada Digital Bluetooth)</span>
+                <span class="tag tag-active">Privacidade de Dados (LGPD/Securiti.ai)</span>
+                <span class="tag tag-active">DevOps &amp; CI/CD</span>
+                <span class="tag tag-active">Data Platform &amp; Analytics</span>
+                <span class="tag tag-opportunity">Cibersegurança avançada</span>
+                <span class="tag tag-opportunity">MLOps &amp; Governança de IA</span>
+                <span class="tag tag-opportunity">Integração de dados cross-business</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <div class="alert-box">
+                <strong>&#9888; Atenção:</strong> A Localiza possui maturidade tecnológica elevada e forte time interno (LocalizaLabs, 1.700+ profissionais). A empresa já tem parceiros definidos em cloud (AWS), IA generativa de código (GitHub/Microsoft) e integração ao ChatGPT (OpenAI). Porém, existem janelas abertas em áreas complementares de alto valor.
+            </div>
+            <div class="grid-2">
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 1</div>
+                    <div class="value">Governança &amp; MLOps para IA em escala — a empresa escala centenas de modelos e agentes de IA, mas ainda precisa de frameworks robustos de governança, monitoramento e compliance de IA</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 2</div>
+                    <div class="value">Cibersegurança avançada — o ataque cibernético de 2022 expôs vulnerabilidades; com 8 milhões de clientes e dados sensíveis (CNH, cartão), a proteção precisa ser contínua</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 3</div>
+                    <div class="value">Automação de processos corporativos (RPA/Hiperautomação) — além do desenvolvimento de software, há espaço para automação inteligente em operações, financeiro e supply chain</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 4</div>
+                    <div class="value">Alocação de squads especializados — com 1.700+ profissionais internos e demanda crescente, a necessidade de times complementares de alta performance é constante</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Andre Petenussi</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Dados &amp; Inteligência Artificial</h4>
+                    <span class="score-badge">Fit: 95%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>A Localiza opera estratégia "AI-first" e está escalando centenas de modelos e agentes de IA — precisa de parceiros com expertise em governança e MLOps</li>
+                        <li>Foursys oferece fundação de dados, estratégia de IA, IA generativa e hiperautomação — complementar ao que a Localiza já construiu internamente</li>
+                        <li>A arquitetura multiagentes (ADA) e o Copilot Agent Mode mostram necessidade de inteligência preditiva e orquestração avançada</li>
+                        <li>Petenussi declarou que manter-se atualizado em IA enquanto garante linha estratégica é seu principal desafio</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Fit: 90%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Incidente cibernético em 2022 demonstra superfície de ataque significativa — plataforma com 8 milhões de clientes e dados sensíveis (CNH, cartão de crédito)</li>
+                        <li>Conformidade LGPD exige monitoramento contínuo — automação de 80% das respostas com Securiti.ai indica maturidade, mas também exposição a riscos</li>
+                        <li>Foursys possui certificações ISO 27001 e ISO 27701, diretamente relevantes para segurança e privacidade de dados</li>
+                        <li>Operação em 7 países requer frameworks de segurança multi-jurisdição</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital (Squads &amp; AMS)</h4>
+                    <span class="score-badge">Fit: 85%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>LocalizaLabs tem 1.700+ profissionais, mas a empresa declara dificuldade em atrair e reter talentos qualificados em tecnologia</li>
+                        <li>Com 2,9 milhões de linhas de código editadas com IA e crescimento contínuo, a demanda por squads complementares é alta</li>
+                        <li>Foursys oferece modelo flexível (Squads, Projetos, AMS) que se adapta às necessidades sazonais e de projeto</li>
+                        <li>Experiência com modernização de plataformas e sustentação crítica é diferencial para operação 24/7</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Agilidade &amp; Org Design</h4>
+                    <span class="score-badge">Fit: 75%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Pós-fusão com Unidas (2022-2024), a integração de processos e culturas ainda demanda maturidade ágil contínua</li>
+                        <li>Gestão de portfólio e fluxo de valor são críticos com 1.700+ profissionais de tecnologia</li>
+                        <li>Foursys oferece otimização de fluxo de valor, modelo operacional ágil e capacitação em liderança</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Andre Petenussi é um líder técnico de alta maturidade com estratégia "AI-first" consolidada. A conversa deve abrir com <strong>reconhecimento genuíno das conquistas</strong> (tricampeão Executivo de TI, integração pioneira com ChatGPT, 21% de produtividade com Copilot) e posicionar a Foursys como parceira que <strong>complementa e acelera</strong> o que ele já construiu — não como quem traz algo novo do zero. O tom ideal é de <strong>peer-to-peer técnico</strong>, trazendo insights de mercado e cases de IA em escala que agreguem à sua visão.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A Localiza está em plena fase de <strong>escalamento de IA generativa</strong> — de projetos piloto para operação enterprise. O "Movimento Inteligência Artificial" e a arquitetura multiagentes (ADA) demonstram que a empresa está pronta para o próximo nível, mas precisa de <strong>governança, MLOps e segurança de IA em escala</strong>. Simultaneamente, a atração de talentos é declaradamente um desafio, abrindo porta para <strong>squads especializados</strong>. A Foursys pode entrar pelo eixo de <strong>Dados &amp; IA + Cibersegurança</strong>, áreas onde complementa o time interno sem competir com ele.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>25 anos de mercado</strong> com presença global (Brasil, EUA, Europa); (2) <strong>Certificações ISO 27001/27701</strong> diretamente relevantes para a agenda de cibersegurança e LGPD; (3) <strong>Pilar de Dados &amp; IA</strong> com expertise em governança de IA, hiperautomação e inteligência preditiva; (4) <strong>Modelo flexível de entrega</strong> (Squads, Projetos, AMS) para complementar o LocalizaLabs sem redundância; (5) <strong>Great Place to Work</strong> (5x consecutivo) — relevante para um CTO que valoriza cultura e retenção de talentos.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. O próximo salto de IA exige governança enterprise:</strong> A Localiza evoluiu de chatbots para arquitetura multiagentes (sistema ADA com LangGraph/LangChain) e modo agente do Copilot. Com 2,9 milhões de linhas de código editadas por IA, o desafio agora é governança, auditabilidade e compliance de IA em escala — área onde a Foursys pode agregar com frameworks de MLOps e governança.</p>
+                <p style="margin-bottom:12px"><strong>2. Cibersegurança é risco real, não teórico:</strong> O ataque cibernético de janeiro de 2022 causou interrupção parcial de sistemas. Com 8 milhões de clientes, operação 24/7 em 954 pontos e dados sensíveis (CNH, cartão), cibersegurança é prioridade contínua. As certificações ISO 27001/27701 da Foursys são argumentos diretos.</p>
+                <p style="margin-bottom:12px"><strong>3. Guerra por talentos de tecnologia:</strong> Petenussi declarou publicamente que atrair e reter talentos qualificados é um dos maiores desafios. O LocalizaLabs tem 1.700+ profissionais, mas a demanda cresce com a estratégia "AI-first". Squads Foursys são solução imediata para escalar capacidade sem comprometer a cultura interna.</p>
+                <p style="margin-bottom:12px"><strong>4. Receita de R$ 41,8 bi justifica investimento em tecnologia de ponta:</strong> Com crescimento de 12% e margens EBITDA de 68-76%, a Localiza tem musculatura financeira para investir. O ROI do Copilot (21% de produtividade, R$ 23 mi/ano no Fast) mostra que Petenussi sabe medir valor — a Foursys precisa entrar com proposta de valor quantificável.</p>
+                <p><strong>5. Integração pós-fusão ainda em andamento:</strong> A fusão Localiza+Unidas (2022) ainda gera demandas de integração de sistemas, dados e processos. A experiência da Foursys em modernização de ecossistemas e integração de dados é diretamente aplicável.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Movida (Brasil)</h4>
+                <p><strong>Segmento:</strong> Aluguel de carros, gestão de frotas e seminovos | <strong>Receita:</strong> R$ 14,7 bilhões (2025)</p>
+                <p>Segunda maior locadora do Brasil e principal rival independente da Localiza. Em 2025, registrou receita recorde com crescimento de aluguel de 17,1% e ROIC de 16,6% (recorde histórico). Margens EBITDA de 67,4% em Rent-a-Car e 75,9% em GTF. Desafio: escala significativamente menor que a Localiza e menor investimento em tecnologia e inovação digital. Foco em estratégia de preços competitivos e ganho de market share.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Unidas (Brasil — integrada à Localiza)</h4>
+                <p><strong>Segmento:</strong> Aluguel de carros, gestão de frotas (leves e pesados) e seminovos | <strong>Receita:</strong> R$ 7,3 bilhões (2025)</p>
+                <p>Adquirida pela Localiza em 2022 com aprovação do CADE sob restrições. Opera com 160 lojas e frota de 115 mil veículos. Apesar da integração, mantém operação parcialmente independente por exigência regulatória. O processo de fusão tecnológica entre Localiza e Unidas ainda está em curso — gerando demanda contínua de integração de sistemas e dados.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Turbi (Brasil — disruptor digital)</h4>
+                <p><strong>Segmento:</strong> Locação 100% digital por aplicativo | <strong>Frota:</strong> ~4.800 veículos premium</p>
+                <p>Startup fundada em 2017 que opera modelo self-service puro — sem filas, sem chaves físicas, sem papelada. Todo o processo é feito via app (reserva, abertura, pagamento). Operação 24/7, mas limitada à Grande São Paulo. Representa o futuro do setor e pressiona a Localiza a acelerar sua digitalização (serviço "Fast" é resposta direta a esse modelo). Potencial de expansão geográfica é ameaça de médio prazo.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Players globais (Hertz, Avis, Europcar)</h4>
+                <p><strong>Segmento:</strong> Locação internacional com presença limitada no Brasil | <strong>Escala:</strong> Global</p>
+                <p>Grandes locadoras internacionais que competem marginalmente no mercado brasileiro, principalmente em aeroportos e turismo internacional. Investem pesado em digitalização e IA nos mercados domésticos (EUA, Europa). A expansão da Localiza para 7 países sul-americanos a posiciona para competir cada vez mais com esses players na região.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>A Localiza é líder indiscutível do setor no Brasil, com receita 2,8x maior que a Movida e investimento tecnológico incomparável. Porém, essa liderança cria pressão para <strong>manter a vanguarda</strong>: (1) A Turbi prova que o modelo 100% digital é viável — a Localiza precisa acelerar o "Fast" para todas as 954 agências; (2) A <strong>integração pós-fusão com Unidas</strong> gera demanda contínua de modernização e unificação de dados; (3) Concorrentes globais investem em <strong>IA preditiva para precificação dinâmica e manutenção preditiva</strong> — a Localiza precisa avançar nessas frentes. A Foursys pode se posicionar como parceira para acelerar a <strong>governança de IA em escala</strong>, <strong>integração de dados cross-business</strong> e <strong>cibersegurança enterprise</strong>, áreas onde o time interno precisa de reforço qualificado.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CTO (Chief Technology Officer) — Localiza&amp;Co (desde fev/2019)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Belo Horizonte, MG</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação</div>
+                        <div class="value">Engenharia Elétrica (Universidade Católica de Santos), Columbia Business School, MIT Professional Education</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Origem Profissional</div>
+                        <div class="value">Começou a programar aos 12 anos em Santos. Aos 14, criava sistemas para locadoras de VHS — empreendedor nato desde a adolescência</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória</div>
+                        <div class="value">Submarino, B2W Digital, Wal-Mart, Oppa (fundador), Kanlo (fundador), Netshoes (CTO), Localiza&amp;Co (CTO)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Prêmios &amp; Reconhecimentos</div>
+                        <div class="value">Tricampeão do Prêmio Executivo de TI do Ano (IT Forum) — 2024 (Serviços Diversos) e 2025 (Transporte e Logística)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Temas de Interesse Público</div>
+                        <div class="value">IA generativa em escala, estratégia "AI-first", plataforma de mobilidade, transformação digital, cultura de inovação</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Visão Declarada</div>
+                        <div class="value">"Criar a maior plataforma de mobilidade do mundo" — tecnologia como core strategy, não como suporte</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Comece pela jornada empreendedora:</strong> Petenussi começou programando aos 12 anos e fundou startups (Oppa, Kanlo) antes de liderar grandes corporações. Reconhecer essa trajetória do "maker ao CTO" cria conexão genuína — ele não é um executivo de PowerPoint, é um técnico que subiu.</p>
+                <p style="margin-bottom:10px"><strong>2. Reconheça o tricampeonato no IT Forum:</strong> Ser premiado três anos seguidos como Executivo de TI do Ano é raro e significativo. Mencionar casualmente que acompanha o trabalho dele através do IT Forum demonstra preparo e respeito sem parecer bajulação.</p>
+                <p style="margin-bottom:10px"><strong>3. Fale a linguagem técnica de IA:</strong> Petenussi entende de arquitetura multiagentes, LangChain, GitHub Copilot Agent Mode e MLOps. A conversa precisa ter profundidade técnica — termos genéricos como "transformação digital" não vão engajá-lo. Traga referências concretas a frameworks, ferramentas e métricas.</p>
+                <p style="margin-bottom:10px"><strong>4. Posicione como parceiro de escala, não de conhecimento:</strong> Ele já sabe o que quer fazer — o desafio é ter gente qualificada suficiente para executar. A Foursys deve se apresentar como extensão de capacidade do LocalizaLabs, não como consultora que vai "ensinar".</p>
+                <p><strong>5. Referencie o case do ChatGPT/OpenAI:</strong> A Localiza foi a primeira empresa brasileira a integrar um app ao ChatGPT — mencionar que acompanhou essa inovação e perguntar sobre os próximos passos demonstra interesse real e abre portas para discutir a evolução da arquitetura de IA.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CTO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Diretoria Executiva de Tecnologia</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporta ao CEO (estrutura de diretoria)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Estilo de Liderança</div>
+                        <div class="value">Técnico-estratégico: combina profundidade técnica com visão de negócio. Hands-on em IA e arquitetura.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Decisor principal para tecnologia — budget próprio de TI significativo</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores Totais</div>
+                        <div class="value">23.000+ (empresa)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de Tecnologia (LocalizaLabs)</div>
+                        <div class="value">1.700+ profissionais dedicados</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hub de Inovação</div>
+                        <div class="value">LocalizaLabs — 4.800m², capacidade p/ 1.000 pessoas, inaugurado em 2023 em BH</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Core business: tecnologia é estratégia central da empresa, não área de suporte. "AI-first" é mandato corporativo.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Stack Tecnológico Identificado</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">AWS (Cloud principal)</div><div class="bar-track"><div class="bar-fill" style="width:90%;background:#1a237e">Core</div></div></div>
+                <div class="bar"><div class="bar-label">GitHub Copilot (Microsoft)</div><div class="bar-track"><div class="bar-fill" style="width:85%;background:#1a237e">Prod</div></div></div>
+                <div class="bar"><div class="bar-label">OpenAI / ChatGPT</div><div class="bar-track"><div class="bar-fill" style="width:80%;background:#3949ab">Prod</div></div></div>
+                <div class="bar"><div class="bar-label">LangChain / LangGraph</div><div class="bar-track"><div class="bar-fill" style="width:70%;background:#3949ab">Prod</div></div></div>
+                <div class="bar"><div class="bar-label">FastAPI (Python)</div><div class="bar-track"><div class="bar-fill" style="width:70%;background:#5c6bc0">Prod</div></div></div>
+                <div class="bar"><div class="bar-label">C# / .NET</div><div class="bar-track"><div class="bar-fill" style="width:75%;background:#5c6bc0">Core</div></div></div>
+                <div class="bar"><div class="bar-label">Python</div><div class="bar-track"><div class="bar-fill" style="width:75%;background:#7986cb">Core</div></div></div>
+                <div class="bar"><div class="bar-label">TypeScript</div><div class="bar-track"><div class="bar-fill" style="width:70%;background:#7986cb">Core</div></div></div>
+                <div class="bar"><div class="bar-label">Securiti.ai (LGPD)</div><div class="bar-track"><div class="bar-fill" style="width:60%;background:#9fa8da">Prod</div></div></div>
+                <div class="bar"><div class="bar-label">JetBrains IDEs</div><div class="bar-track"><div class="bar-fill" style="width:55%;background:#9fa8da">Dev</div></div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Profundidade técnica e expertise comprovada</span>
+                        <span class="tag tag-active">Capacidade de escalar rapidamente</span>
+                        <span class="tag tag-active">Cultura de inovação e mindset ágil</span>
+                        <span class="tag tag-active">Certificações de segurança e qualidade</span>
+                        <span class="tag tag-active">ROI mensurável e comprovado</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Parceiro técnico de alta performance — não consultorias genéricas. Prefere empresas que entendem de código e entregam resultado mensurável.</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Squads dedicados e projetos com métricas claras — a Localiza mede tudo (NPS de ferramentas: 52, produtividade: 21%, adoção: 450 usuários/semana)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

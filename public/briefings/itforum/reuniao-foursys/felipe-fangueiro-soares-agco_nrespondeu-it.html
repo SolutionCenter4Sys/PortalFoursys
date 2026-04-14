@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Felipe Fangueiro Soares | AGCO</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Felipe Fangueiro Soares</h1>
+                <h2>CIO / Diretor de TI — AGCO</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Agronegócio e Serviços Relacionados | Canoas - RS</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">Dados não disponíveis</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">Dados não disponíveis</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Receita Global</div>
+                    <div class="value">US$ 10,1 BI (2025)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: AGCO</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>AGCO Corporation</strong> é uma das maiores fabricantes de máquinas e equipamentos agrícolas do mundo, com sede global em Duluth, Georgia (EUA) e forte presença no Brasil através das marcas <strong>Massey Ferguson</strong>, <strong>Valtra</strong> e <strong>Fendt</strong>. Em 2025, a companhia registrou vendas líquidas globais de <strong>US$ 10,1 bilhões</strong> (queda de 13,5% vs. 2024), com a América do Sul recuando 7,7% no acumulado. No entanto, no 4º trimestre de 2025, a AGCO reverteu prejuízos e lucrou <strong>US$ 95,5 milhões</strong>. Para 2026, a empresa projeta receita entre <strong>US$ 10,4 e US$ 10,7 bilhões</strong>, com o Brasil visto como motor de crescimento global — impulsionado por expansão de área cultivada, renovação de frota e adoção crescente de tecnologia. A AGCO investiu <strong>R$ 19 milhões</strong> em Jundiaí (SP) para o Centro de Excelência de Transmissões Reman e a nova sede da AGCO Academy. Na frente digital, a empresa aplica <strong>inteligência artificial</strong> na produção de tratores "sob medida" em Mogi das Cruzes (SP), na usinagem automatizada de motores e no controle de qualidade por visão computacional. A plataforma <strong>PTx</strong> (joint venture com Trimble) para agricultura de precisão atingiu quase US$ 1 bilhão em vendas, com meta de dobrar até 2029.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global — Operações em mais de 40 países</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Multinacional de capital aberto (NYSE: AGCO)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Retomada em 2026 — Brasil como motor de crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Marcas no Brasil</div>
+                        <div class="value">Massey Ferguson, Valtra e Fendt</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa líder do setor de <strong>Agronegócio e Serviços Relacionados</strong> com abrangência <strong>global</strong>. A AGCO lidera o mercado brasileiro de tratores (com ~9.500 unidades vendidas em período de referência) e está em plena transformação digital, aplicando IA na manufatura e investindo pesadamente em agricultura de precisão via plataforma PTx. O Brasil é considerado o principal vetor de crescimento para 2026, com a empresa saindo de um ciclo de três anos de queda de receita. Felipe Fangueiro Soares, como CIO/Diretor de TI para a América do Sul, lidera iniciativas de BI, integração de dados e transformação digital que foram reconhecidas e replicadas globalmente — incluindo a plataforma Qlik e o DDI (Data Dealer Integration).</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar IA industrial em múltiplas fábricas (Mogi das Cruzes, Canoas, Jundiaí) com governança unificada</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar dados de 390+ pontos de venda (rede de concessionárias) em tempo real</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Acelerar adoção de agricultura de precisão via plataforma PTx (meta: dobrar receita até 2029)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar sistemas legados e unificar plataformas de diferentes marcas (Massey, Valtra, Fendt)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer cibersegurança em ambiente IoT/OT (máquinas conectadas no campo)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir custos operacionais com automação em cenário de receita em recuperação</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Inteligência Artificial / ML na Manufatura</span>
+                        <span class="tag tag-priority">Agricultura de Precisão (PTx / IoT)</span>
+                        <span class="tag tag-priority">Integração de Dados & BI</span>
+                        <span class="tag tag-active">Modernização de Sistemas Legados</span>
+                        <span class="tag tag-active">Cibersegurança IT/OT</span>
+                        <span class="tag tag-opportunity">Cloud & Infraestrutura Híbrida</span>
+                        <span class="tag tag-opportunity">Capacitação Técnica (AGCO Academy)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Áreas de investimento identificadas com base no perfil da empresa, setor e movimentos estratégicos recentes:</p>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">IA / Machine Learning</div><div class="bar-track"><div class="bar-fill" style="width:92%;background:#1a237e">92%</div></div></div>
+                <div class="bar"><div class="bar-label">Agricultura de Precisão / IoT</div><div class="bar-track"><div class="bar-fill" style="width:90%;background:#1a237e">90%</div></div></div>
+                <div class="bar"><div class="bar-label">Integração de Dados / APIs</div><div class="bar-track"><div class="bar-fill" style="width:85%;background:#3949ab">85%</div></div></div>
+                <div class="bar"><div class="bar-label">Business Intelligence</div><div class="bar-track"><div class="bar-fill" style="width:80%;background:#3949ab">80%</div></div></div>
+                <div class="bar"><div class="bar-label">Modernização de Legado</div><div class="bar-track"><div class="bar-fill" style="width:78%;background:#5c6bc0">78%</div></div></div>
+                <div class="bar"><div class="bar-label">Cloud & Infraestrutura</div><div class="bar-track"><div class="bar-fill" style="width:72%;background:#5c6bc0">72%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança IT/OT</div><div class="bar-track"><div class="bar-fill" style="width:70%;background:#7986cb">70%</div></div></div>
+                <div class="bar"><div class="bar-label">Automação de Processos</div><div class="bar-track"><div class="bar-fill" style="width:68%;background:#9fa8da">68%</div></div></div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Felipe Fangueiro Soares</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas da AGCO. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>🤖 AI Squad — Aceleração com Inteligência Artificial</h4>
+                    <span class="score-badge">Score: 95/100</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li><strong>Fit direto:</strong> A AGCO já aplica IA em manufatura (tratores sob medida, usinagem de motores, controle de qualidade por visão computacional) — precisa escalar e governar esses modelos</li>
+                        <li>Potencial para acelerar os ~240h/mês de economia identificados na validação de configurações de tratores para outras linhas de produção</li>
+                        <li>Oportunidade de IA generativa aplicada a atendimento técnico da rede de concessionárias (390+ pontos)</li>
+                        <li>Complementa a estratégia PTx de agricultura de precisão com modelos preditivos e analytics avançado</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>🔄 Engenharia Digital — Integração &amp; Dados</h4>
+                    <span class="score-badge">Score: 90/100</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li><strong>Fit direto:</strong> Felipe liderou a plataforma DDI que integra dados de concessionárias — há espaço para expandir com APIs modernas e event-driven architecture</li>
+                        <li>Parceria Foursys + Digibee é ideal para conectar sistemas legados de diferentes marcas (Massey, Valtra, Fendt) sem reescrever tudo</li>
+                        <li>Necessidade de integrar dados de IoT (máquinas no campo) com sistemas corporativos (ERP, BI, CRM)</li>
+                        <li>Evolução da plataforma Qlik para analytics em tempo real com streaming de dados</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>🏗️ Modernização de Legado</h4>
+                    <span class="score-badge">Score: 82/100</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li><strong>Fit direto:</strong> A AGCO opera múltiplas marcas com sistemas distintos (Solutions, Linx, Consystem, CGI) que precisam convergir</li>
+                        <li>Fábricas em diferentes cidades com sistemas heterogêneos — oportunidade de unificação de plataformas MES/ERP</li>
+                        <li>Modernização incremental sem parar a produção — abordagem strangler pattern com Digibee</li>
+                        <li>Redução de custos operacionais alinhada com momento de recuperação de receita da AGCO</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>🔐 Cibersegurança — IT/OT Convergence</h4>
+                    <span class="score-badge">Score: 75/100</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Máquinas conectadas no campo (IoT) expandem superfície de ataque — convergência IT/OT é crítica</li>
+                        <li>Rede de 390+ concessionárias com acesso a sistemas centrais requer governança de acesso robusta</li>
+                        <li>Certificações ISO 27001/27701 da Foursys agregam credibilidade em ambiente regulado de indústria</li>
+                        <li>Proteção de propriedade intelectual (algoritmos de IA, patentes de agricultura de precisão)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Felipe Fangueiro Soares é reconhecido por ter levado projetos brasileiros de BI e integração de dados para escala global dentro da AGCO. Iniciar a conversa reconhecendo essa conquista e mostrando como a Foursys pode ser parceira na próxima onda de escalabilidade — <strong>IA industrial e integração IoT</strong>. Citar que a AGCO economiza ~240h/mês com IA em configuração de tratores e perguntar: "Como vocês planejam escalar isso para as demais linhas e fábricas?" O AI Squad Foursys e a parceria com Digibee são respostas diretas para esse desafio.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A AGCO está em momento de retomada após 3 anos de queda de receita, projetando US$ 10,4-10,7 bi para 2026. O Brasil é o principal motor de crescimento, e a empresa precisa <strong>fazer mais com menos</strong> — escalar IA, integrar dados de concessionárias e modernizar legados sem aumentar proporcionalmente o investimento. Há janela concreta para posicionar squads de IA e integração como aceleradores de eficiência com payback rápido.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>AI Squad proprietário</strong> — equipe especializada em escalar IA industrial, com experiência em manufatura e visão computacional; (2) <strong>Parceria Digibee</strong> — integração de sistemas legados heterogêneos sem rewrite, ideal para conectar as diferentes marcas e concessionárias da AGCO; (3) <strong>Modelo flexível de squads</strong> — permite começar pequeno e escalar conforme resultados, alinhado com momento de cautela da AGCO; (4) <strong>24 anos de experiência</strong> e 41.000+ projetos entregues — estabilidade e confiabilidade para uma multinacional que exige parceiros robustos.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. IA já gera valor, mas precisa escalar:</strong> A AGCO já aplica IA em configuração de tratores (240h/mês economizadas), usinagem de motores e controle de qualidade visual. O próximo passo é escalar esses modelos para todas as fábricas e marcas simultaneamente — exigindo MLOps, governança de modelos e infraestrutura que o AI Squad Foursys pode acelerar.</p>
+                <p style="margin-bottom:12px"><strong>2. Integração de concessionárias é dor conhecida:</strong> Felipe liderou o DDI (Data Dealer Integration) cobrindo 40% das 390 concessionárias. Há 60% ainda por integrar, usando sistemas heterogêneos (Solutions, Linx, Consystem, CGI). A Digibee é a resposta perfeita para essa fragmentação — integração low-code, rápida e sem reescrever sistemas legados.</p>
+                <p style="margin-bottom:12px"><strong>3. PTx é aposta bilionária — dados são o diferencial:</strong> A joint venture com Trimble para agricultura de precisão atingiu quase US$ 1 bi e quer dobrar até 2029. A capacidade de coletar, processar e monetizar dados de máquinas no campo (IoT/telemetria) será o diferencial competitivo — área onde engenharia de dados e IA são essenciais.</p>
+                <p style="margin-bottom:12px"><strong>4. Momento de cautela favorece modelo de squads:</strong> Com receita em recuperação e o Brasil como aposta principal, a AGCO busca eficiência. O modelo de squads dedicados (vs. contratos fixos grandes) permite iniciar com escopo controlado e demonstrar valor rapidamente — modelo ideal para o momento.</p>
+                <p><strong>5. Projetos brasileiros viram referência global:</strong> Felipe tem histórico de projetos locais que escalam globalmente (Qlik, DDI). Posicionar a Foursys como parceira que ajuda a criar a "próxima exportação de sucesso" para a sede da AGCO — IA na manufatura ou integração de dados avançada — é um gatilho poderoso de engajamento.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>John Deere (Deere &amp; Company)</h4>
+                <p><strong>Segmento:</strong> Máquinas agrícolas, construção e florestal | <strong>Receita:</strong> ~US$ 51 bilhões (2024)</p>
+                <p>Líder global em tecnologia agrícola, a John Deere é referência em agricultura de precisão e autonomia. Investiu mais de US$ 1 bilhão em aquisições de startups de AgTech (Blue River Technology, Bear Flag Robotics). Possui a plataforma <strong>John Deere Operations Center</strong> para gestão de dados de fazendas e está avançando em tratores 100% autônomos. No Brasil, é a terceira em tratores mas forte em colheitadeiras, com foco em máquinas de alta tecnologia e conectividade embarcada.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>CNH Industrial (Case IH / New Holland)</h4>
+                <p><strong>Segmento:</strong> Máquinas agrícolas e de construção | <strong>Receita:</strong> ~US$ 24 bilhões (2024)</p>
+                <p>Principal rival direto da AGCO no Brasil, a CNH lidera o mercado de colheitadeiras com as marcas Case IH e New Holland. Vendeu ~5.100 tratores vs. ~9.500 da AGCO em período de referência. Investiu na plataforma <strong>PLM Connect</strong> para agricultura digital e na parceria com Raven Industries para pulverização autônoma. Recentemente separou-se da Iveco para focar exclusivamente em máquinas agrícolas e de construção, intensificando investimentos em inovação.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Jacto</h4>
+                <p><strong>Segmento:</strong> Pulverizadores, plantadeiras e equipamentos de horticultura | <strong>Receita:</strong> ~R$ 5 bilhões (estimativa)</p>
+                <p>Empresa brasileira de Pompeia (SP) fundada em 1948, é líder em pulverizadores agrícolas. Forte atuação em equipamentos de aplicação de defensivos com tecnologia embarcada, incluindo <strong>pulverização por sensor (Uniport Star)</strong> que reduz uso de insumos em até 60%. Investiu em hub de inovação e parcerias com startups para agricultura digital. Concorre com a AGCO em implementos e equipamentos complementares.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>STARA</h4>
+                <p><strong>Segmento:</strong> Implementos agrícolas e agricultura de precisão | <strong>Receita:</strong> ~R$ 3 bilhões (estimativa)</p>
+                <p>Fabricante brasileira de Não-Me-Toque (RS) que se posiciona como líder em inovação e agricultura de precisão. Desenvolveu o <strong>Telemetria STARA</strong> para monitoramento remoto de máquinas e o sistema de piloto automático integrado. Possui forte presença no Sul do Brasil e tem investido em eletrificação de implementos e conectividade de frota. Concorre no nicho de plantadeiras e pulverizadores de alta tecnologia.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Os concorrentes da AGCO estão investindo fortemente em <strong>plataformas digitais proprietárias</strong> (John Deere Operations Center, CNH PLM Connect) e <strong>autonomia de máquinas</strong>. A AGCO avança com a plataforma PTx e IA na manufatura, mas pode ter gaps em: (1) <strong>Integração end-to-end de dados de campo com fábricas e concessionárias</strong> — enquanto John Deere tem ecossistema fechado, a AGCO opera marcas distintas com dados fragmentados; (2) <strong>Governança e escalabilidade de modelos de IA</strong> — os pilotos brasileiros de IA são promissores mas ainda isolados; (3) <strong>Modernização da camada de sistemas corporativos</strong> — as concessionárias usam 4+ sistemas diferentes que limitam a velocidade de integração; (4) <strong>Cibersegurança de IoT agrícola</strong> — com máquinas cada vez mais conectadas, a superfície de ataque cresce e exige convergência IT/OT. A Foursys pode se posicionar como parceira para fechar esses gaps com AI Squad (escalabilidade de IA), Digibee (integração de legados) e squads de engenharia digital (dados e analytics).</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CIO / Diretor de TI — AGCO América do Sul</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Canoas, RS</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Anterior</div>
+                        <div class="value">Gerente de TI na Dell do Brasil — migrou para AGCO após aposentadoria de André Correa</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reconhecimento</div>
+                        <div class="value">3º lugar — Prêmio Executivo de TI do Ano 2018 (categoria Agronegócio)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Liderança</div>
+                        <div class="value">Líder que transforma projetos locais em referências globais — Qlik BI e DDI foram replicados em Atlanta e outros países</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Foco Tecnológico</div>
+                        <div class="value">Business Intelligence, integração de dados, transformação digital orientada a resultados mensuráveis</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconheça o impacto global dos projetos brasileiros:</strong> Felipe tem orgulho documentado de que projetos liderados no Brasil (Qlik BI, DDI) foram adotados pela matriz em Atlanta e replicados mundialmente. Mencionar esse feito logo no início demonstra que você fez a lição de casa e valoriza conquistas reais.</p>
+                <p style="margin-bottom:10px"><strong>2. Fale a linguagem do agronegócio:</strong> Ele atua num setor com dinâmicas próprias — safra, commodities, clima, logística rural. Demonstrar conhecimento sobre os desafios específicos do agro digital (conectividade no campo, sazonalidade, rede de concessionárias) gera credibilidade imediata e diferencia de fornecedores genéricos de TI.</p>
+                <p style="margin-bottom:10px"><strong>3. Conecte-se pelo tema de dados como ativo estratégico:</strong> O histórico de Felipe mostra obsessão por integração e inteligência de dados — desde BI com Qlik até integração de concessionárias com DDI. Compartilhar um insight ou case sobre como dados integrados geraram ROI mensurável em indústria similar ativa interesse genuíno.</p>
+                <p style="margin-bottom:10px"><strong>4. Valorize o perfil "builder" dele:</strong> Felipe veio da Dell (empresa de TI) para uma empresa de agro — é um líder que constrói capabilities de TI em contextos não-tech. Posicione a Foursys como parceira que potencializa "builders" — trazendo expertise que complementa a visão dele, não que compete com ela.</p>
+                <p><strong>5. Use o momento de retomada da AGCO como catalisador:</strong> Após 3 anos de queda, 2026 é o ano da recuperação. Este é o momento em que CIOs ganham espaço para investir em inovação — "agora que a casa está arrumada, que tal escalar o que já funciona?" é uma narrativa que ressoa com líderes no perfil de Felipe.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo de Atuação</div>
+                        <div class="value">Diretor de TI para AGCO América do Sul</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Tempo na Empresa</div>
+                        <div class="value">10+ anos (projetos documentados desde 2013)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Principais Conquistas</div>
+                        <div class="value">Implementação Qlik BI (expandida globalmente), Plataforma DDI (integração de concessionárias), Prêmio Executivo de TI 2018</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Background</div>
+                        <div class="value">Ex-Dell do Brasil (Gerente de TI) — transição de empresa de tecnologia para líder de TI em agronegócio</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Estilo de Gestão</div>
+                        <div class="value">Orientado a resultados mensuráveis, com foco em projetos que possam escalar do local ao global</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Fábricas sob Gestão de TI</div>
+                        <div class="value">Canoas (RS), Mogi das Cruzes (SP), Jundiaí (SP), Campinas (SP) — múltiplas unidades industriais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Rede de Concessionárias</div>
+                        <div class="value">390+ pontos de venda no Brasil — 40% integrados via DDI, 60% em expansão</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Tecnologias-Chave</div>
+                        <div class="value">Qlik (BI), SAP (ERP), Atlassian ALM, IA/ML, IoT industrial, plataforma PTx</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

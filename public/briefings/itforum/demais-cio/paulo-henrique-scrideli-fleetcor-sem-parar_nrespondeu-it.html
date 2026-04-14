@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Paulo Henrique Scrideli | FLEETCOR (SEM PARAR)</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Paulo Henrique Scrideli</h1>
+                <h2>VP Sênior de Tecnologia e Digital — FLEETCOR (SEM PARAR)</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Serviços Financeiros (Mobilidade/Pagamentos) | São Paulo, SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento Brasil</div>
+                    <div class="value">R$ 1 BI+ (2024)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Corpay Global</div>
+                    <div class="value">US$ 3,97 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescimento &gt; 20%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: FLEETCOR / SEM PARAR</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">O <strong>Sem Parar</strong> é o maior ecossistema de mobilidade e pagamentos automáticos do Brasil, controlado pela <strong>Corpay</strong> (antiga FleetCor Technologies), multinacional americana listada na NYSE presente em cerca de 200 países. O Brasil representa a <strong>segunda maior operação da Corpay no planeta</strong>. Em 2024, a empresa faturou <strong>R$ 1 bilhão</strong>, com expectativa de crescimento superior a 20% em 2025. Opera com mais de <strong>7,1 milhões de tags ativas</strong> (incluindo 1,3 milhão em veículos comerciais e 230 mil clientes CNPJ), <strong>700 mil caminhoneiros cadastrados</strong> e presença em <strong>12 mil postos de combustíveis</strong> (~25% do total nacional). Em fevereiro de 2025, recebeu autorização do Banco Central para atuar como <strong>instituição de pagamento</strong> (emissor de moeda eletrônica, pós-pago e credenciador), com capital social de <strong>R$ 2,016 bilhões</strong>. Em março de 2024, adquiriu participação majoritária na <strong>Zapay</strong>, alcançando 9 milhões de motoristas atendidos. Em março de 2026, lançou o <strong>Sem Parar Mais</strong>, cartão de crédito próprio integrado à tag com acesso a 130 milhões de estabelecimentos globais. A empresa opera um <strong>SuperApp</strong> com carteira digital, NFC, gestão de débitos veiculares (IPVA, multas, licenciamento), cashback e seguros.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Nacional (Corpay: Global — ~200 países)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada — Subsidiária de multinacional (NYSE: CPAY)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento acelerado (&gt;20% a.a.)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">~3.000 (Brasil) | 11.200 (Corpay Global)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Serviços Financeiros (Mobilidade/Pagamentos)</strong> em plena transformação de <strong>empresa de tags de pedágio para ecossistema fintech completo</strong>. Recentemente obteve licença de instituição de pagamento do Banco Central, lançou cartão de crédito próprio e opera um SuperApp integrado. O VP de Tecnologia, Paulo Scrideli, é reconhecido pela comunidade (Prêmio Executivo de TI 2024 — Serviços Financeiros) e lidera uma cultura forte de inovação com IA através da <strong>Comunidade Turbo AI</strong>. A empresa está em fase de escala agressiva, combinando crescimento orgânico (+20% a.a.) com aquisições estratégicas (Zapay) e expansão de produtos financeiros.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar IA/ML em operações de atendimento, vendas e retenção (Comunidade Turbo AI)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Consolidar a transformação em instituição de pagamento regulada pelo Banco Central</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar ecossistema expandido: tag + cartão de crédito + SuperApp + Zapay</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Garantir segurança e compliance para operações financeiras em escala (9M+ motoristas)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar infraestrutura para suportar crescimento &gt;20% a.a. com alta disponibilidade</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Expandir plataforma de gestão de débitos veiculares para clientes corporativos</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Inteligência Artificial / ML</span>
+                        <span class="tag tag-priority">Plataformas de Pagamento Digital</span>
+                        <span class="tag tag-priority">Cibersegurança & Compliance</span>
+                        <span class="tag tag-priority">Integração de Sistemas & APIs</span>
+                        <span class="tag tag-priority">Cloud & Escalabilidade</span>
+                    </div>
+                    <div style="margin-top:20px">
+                        <h4 style="margin-bottom:12px;color:var(--primary)">Marcos Recentes</h4>
+                        <div>
+                            <span class="tag tag-active">Licença IP — Banco Central (Fev/2025)</span>
+                            <span class="tag tag-active">Prêmio Exec. TI 2024 — Serv. Financeiros</span>
+                            <span class="tag tag-active">Cartão Sem Parar Mais (Mar/2026)</span>
+                            <span class="tag tag-active">Aquisição Zapay (Mar/2024)</span>
+                            <span class="tag tag-active">SuperApp com NFC lançado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses, inferidos a partir de movimentos estratégicos e declarações públicas:</p>
+            <div>
+                <span class="tag tag-opportunity">IA Generativa e ML em Atendimento</span>
+                <span class="tag tag-opportunity">Plataforma de Instituição de Pagamento</span>
+                <span class="tag tag-opportunity">Integração de Ecossistema (APIs/Microserviços)</span>
+                <span class="tag tag-opportunity">Gestão de Débitos Veiculares Corporativa</span>
+                <span class="tag tag-opportunity">Carteira Digital & SuperApp</span>
+                <span class="tag tag-opportunity">Cibersegurança Financeira</span>
+                <span class="tag tag-opportunity">Data & Analytics</span>
+                <span class="tag tag-opportunity">Infraestrutura Cloud Escalável</span>
+                <span class="tag tag-opportunity">Automação de Processos (RPA/IA)</span>
+                <span class="tag tag-opportunity">Open Finance / Pix</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <div class="alert-box">
+                <strong>Contexto de Alta Demanda:</strong> A empresa está em plena expansão de escopo (de tag de pedágio para ecossistema fintech), crescendo &gt;20% a.a. com licença de IP recém-obtida. Isso cria demandas massivas por integração, segurança, escalabilidade e automação — áreas onde parceiros tecnológicos são essenciais.
+            </div>
+            <div class="grid-2">
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 1</div>
+                    <div class="value">Integração de sistemas legados com nova plataforma de pagamentos (IP regulada)</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 2</div>
+                    <div class="value">Escalabilidade de IA — da Comunidade Turbo AI para produção enterprise</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 3</div>
+                    <div class="value">Segurança e compliance para operações financeiras (PCI-DSS, LGPD, BC)</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 4</div>
+                    <div class="value">Automação de processos corporativos e backoffice em escala</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Paulo Scrideli</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>AI Squad — Aceleração com Inteligência Artificial</h4>
+                    <span class="score-badge">Fit: 95%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Scrideli é campeão de IA internamente (Comunidade Turbo AI, prêmio nacional)</li>
+                        <li>Empresa precisa escalar IA de "guilda interna" para produção enterprise em atendimento, vendas e retenção</li>
+                        <li>Demanda por MLOps, governança de modelos e deployment em escala</li>
+                        <li>Foursys AI Squad pode acelerar o pipeline de casos de uso identificados pela Turbo AI</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Squads Ágeis — Desenvolvimento de Plataformas</h4>
+                    <span class="score-badge">Fit: 90%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Modelo de squads já é cultura na Sem Parar (inspirado no Spotify)</li>
+                        <li>Demanda massiva por desenvolvimento: SuperApp, cartão de crédito, plataforma IP, gestão de débitos</li>
+                        <li>Crescimento &gt;20% exige capacidade incremental de engenharia sem perder agilidade</li>
+                        <li>Foursys com 24 anos e 41.000+ projetos é parceiro escalável e confiável</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Digibee — Integração e APIs</h4>
+                    <span class="score-badge">Fit: 88%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Integração crítica: tag + Zapay + SuperApp + cartão + parceiros (Santander, postos, estacionamentos)</li>
+                        <li>Regulação do BC como IP exige integrações robustas com sistemas financeiros</li>
+                        <li>12 mil postos, milhares de estacionamentos e centenas de parceiros = complexidade de APIs</li>
+                        <li>Digibee é solução brasileira, ágil e escalável para integração enterprise</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Cybersecurity & Compliance</h4>
+                    <span class="score-badge">Fit: 85%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Operação financeira regulada pelo BC com dados de 9M+ motoristas</li>
+                        <li>Cartão de crédito próprio exige conformidade PCI-DSS, LGPD e normas do BC</li>
+                        <li>Certificações Foursys (ISO 27001/27701) demonstram maturidade em segurança</li>
+                        <li>Proteção de dados transacionais em escala (pedágios, combustível, pagamentos)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Automação Inteligente (RPA + IA)</h4>
+                    <span class="score-badge">Fit: 82%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Plataforma de gestão de débitos veiculares em lançamento — alto volume de processos repetitivos</li>
+                        <li>Multas já superam pedágios em volume transacional — automação é imperativo operacional</li>
+                        <li>Identificação de condutores, processamento de infrações e conciliação financeira</li>
+                        <li>Operação com 3.000 colaboradores pode ganhar eficiência significativa com automação</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Paulo Scrideli é um CIO orientado a inovação e reconhecido pelo mercado (Prêmio Executivo de TI 2024). A <strong>Comunidade Turbo AI</strong> é seu projeto de orgulho. Iniciar a conversa reconhecendo essa conquista e apresentando como a Foursys pode ajudar a <strong>escalar a IA da fase de "comunidade e aprendizado" para produção enterprise</strong> — com AI Squad, MLOps e governança de modelos. Mencionar cases de IA em serviços financeiros e demonstrar profundidade técnica.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A Sem Parar está vivendo uma <strong>transformação de escopo sem precedentes</strong>: de empresa de tags para instituição de pagamento com cartão de crédito, SuperApp e carteira digital. Isso gera demanda imediata por: (1) integração de sistemas heterogêneos, (2) segurança financeira em escala, (3) squads de desenvolvimento para novos produtos, e (4) automação de processos de backoffice. Perspectiva de crescimento: <strong>acima de 20% a.a.</strong> — o orçamento de TI deve acompanhar ou superar esse ritmo.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>AI Squad proprietário</strong> — alinhado com a cultura de IA do Scrideli; (2) <strong>Parceria Digibee</strong> — integração é dor crítica no ecossistema expandido; (3) <strong>ISO 27001/27701</strong> — credenciais essenciais para uma IP regulada pelo BC; (4) <strong>Modelo flexível de squads ágeis</strong> — compatível com o modelo Spotify que a Sem Parar já adota; (5) <strong>24 anos e 41.000+ projetos</strong> em serviços financeiros e tecnologia.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. De tag para banco: a metamorfose do Sem Parar:</strong> A licença de IP do Banco Central (Fev/2025) e o lançamento do cartão de crédito Sem Parar Mais (Mar/2026) sinalizam que a empresa está se posicionando como fintech de mobilidade. Isso exige uma infraestrutura de TI completamente diferente — sistemas bancários core, compliance regulatório, prevenção a fraudes e gestão de risco de crédito. A Foursys pode ser parceira nessa jornada de "upgrade" tecnológico.</p>
+                <p style="margin-bottom:12px"><strong>2. IA é a língua nativa de Scrideli:</strong> Ele criou a Comunidade Turbo AI, ganhou prêmio nacional por isso e está expandindo IA para atendimento, vendas e retenção. O desafio agora é escalar: MLOps, governança de modelos, infraestrutura de inferência e integração de IA com processos de negócio. Falar de IA com profundidade técnica é a forma mais rápida de ganhar credibilidade com este CIO.</p>
+                <p style="margin-bottom:12px"><strong>3. Ecossistema fragmentado pede integração:</strong> Tags + Zapay + SuperApp + cartão de crédito + 12 mil postos + milhares de estacionamentos + parceiros bancários (Santander). Cada aquisição e novo produto adiciona complexidade de integração. A parceria Foursys-Digibee resolve exatamente essa dor com uma plataforma de integração low-code escalável.</p>
+                <p style="margin-bottom:12px"><strong>4. Volume transacional exige automação:</strong> Transações de multas já superam pedágios no mercado brasileiro. Com 9 milhões de motoristas e nova plataforma de gestão de débitos corporativa em lançamento, o volume de processos manuais (identificação de condutores, conciliação, notificações) é insustentável sem automação inteligente.</p>
+                <p><strong>5. Modelo de squads é ponto de conexão cultural:</strong> A Sem Parar adota modelo de squads inspirado no Spotify, com colaboração multidisciplinar entre TI e negócios. Scrideli valoriza autonomia de equipes e atua como facilitador. O modelo de squads ágeis da Foursys é culturalmente compatível — enfatizar isso como diferencial de integração com o time existente.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Veloe (Elopar — Bradesco + Banco do Brasil)</h4>
+                <p><strong>Segmento:</strong> Tags de pedágio, mobilidade e gestão de frota | <strong>Fundação:</strong> 2018</p>
+                <p>Joint venture dos dois maiores bancos públicos do Brasil. Funciona em 100% das rodovias com pedágio, aceita veículos leves e pesados. Planos a partir de R$ 14,90/mês com opção pré-paga sem mensalidade. Em 2025-2026, firmou parceria com <strong>PwC Brasil</strong> para um Programa de Inteligência de Dados e Governança (24 meses), focado em gestão, proteção e uso estratégico de dados. Mantém parceria renovada com <strong>C6 Bank</strong> (C6 Tag) até 2027. Vantagem competitiva: backing financeiro de Bradesco e BB, com investimento agressivo em dados e governança.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>ConectCar (Itaú + Porto Seguro)</h4>
+                <p><strong>Segmento:</strong> Tags de pedágio e estacionamentos | <strong>Menor mensalidade do mercado:</strong> R$ 9,90/mês</p>
+                <p>Uma das empresas mais tradicionais do mercado, com joint venture entre Itaú Unibanco e Porto Seguro. Oferece plano completo sem taxa de adesão nem frete, com uso ilimitado em 100% das rodovias e mais de 1.000 estacionamentos. Parceria estratégica com <strong>Mercado Pago</strong> para distribuição via marketplace. Posicionamento agressivo em preço como diferencial competitivo, enquanto os bancos controladores garantem musculatura financeira para investimentos em tecnologia.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>C6 Tag / C6 Bank</h4>
+                <p><strong>Segmento:</strong> Tag digital integrada a banco digital | <strong>Mensalidade:</strong> R$ 8/mês (isenção para cartões premium)</p>
+                <p>Adesivo de pagamento automático que funciona em 100% dos pedágios e mais de 400 estacionamentos, operado via parceria com Veloe. O diferencial é a integração nativa com o ecossistema C6 Bank — conta digital, cartão de crédito, investimentos e cashback. Isenção de mensalidade para clientes dos cartões C6 Carbon, Platinum e Empresas. Representa a tendência de <strong>fintechs digitais entrando no mercado de mobilidade</strong> — exatamente o mesmo movimento que o Sem Parar faz na direção oposta (mobilidade para fintech).</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Mercado Pago (MercadoLibre)</h4>
+                <p><strong>Segmento:</strong> Fintech/Pagamentos com tag de pedágio (via ConectCar) | <strong>Ecossistema:</strong> 50M+ usuários</p>
+                <p>O maior ecossistema de pagamentos digitais da América Latina oferece tag de pedágio em parceria com ConectCar, integrada à sua carteira digital. Com mais de 50 milhões de usuários ativos no Brasil, representa a ameaça de uma <strong>super-app de pagamentos</strong> entrando no mercado de mobilidade com base de clientes massiva, crédito integrado e custo marginal zero de aquisição de clientes.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>O mercado de mobilidade e pagamentos está convergindo: empresas de tag viram fintechs (Sem Parar), fintechs viram empresas de mobilidade (C6, Mercado Pago), e bancos tradicionais investem via JVs (Veloe/ConectCar). A Sem Parar tem a <strong>maior base de usuários</strong> (9M) e o <strong>ecossistema mais completo</strong>, mas enfrenta: (1) <strong>Pressão de preço</strong> — é a tag mais cara do mercado vs. ConectCar a R$9,90; (2) <strong>Concorrência de ecossistemas bancários</strong> integrados (C6, Itaú, Bradesco/BB) com custo de aquisição zero; (3) <strong>Necessidade de monetizar além do pedágio</strong> — cartão de crédito, conta digital e gestão de frotas. A Foursys pode se posicionar como parceira para acelerar a integração de ecossistema, automação de processos financeiros e escalabilidade de IA — as três frentes onde a Sem Parar precisa se mover mais rápido que concorrentes com backing bancário.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Vice-Presidente Sênior de Tecnologia e Digital — Corpay Brasil (Sem Parar)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">São Paulo, SP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Tempo na Empresa</div>
+                        <div class="value">~10 anos na Corpay/Sem Parar — profundo conhecimento do negócio e cultura</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação</div>
+                        <div class="value">Engenharia Mecânica | 30+ anos de experiência em tecnologia</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória Anterior</div>
+                        <div class="value">Universo Online, Tivit, GVT, Telefônica — perfil telco/tech de alta escala</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reconhecimento</div>
+                        <div class="value">Vencedor do Prêmio Executivo de TI do Ano 2024 (Serviços Financeiros) — IT Forum. Membro do Technology Advisory Board da CIONET Brasil (desde Ago/2025).</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Abra pela Comunidade Turbo AI:</strong> Esse é o projeto de orgulho pessoal de Scrideli — uma "guilda" de IA que ele criou e que ganhou prêmio nacional. Pergunte como a comunidade evoluiu desde o prêmio, quais novos cases surgiram e como ele está escalando. Isso demonstra que você pesquisou e gera conexão imediata.</p>
+                <p style="margin-bottom:10px"><strong>2. Fale a linguagem de squads e autonomia:</strong> Scrideli transformou o modelo de TI da Sem Parar de "pedido e entrega" para squads ágeis com autonomia. Ele se define como "facilitador". Posicione a Foursys como extensão natural desse modelo — squads que se integram à cultura existente, não que a substituem.</p>
+                <p style="margin-bottom:10px"><strong>3. Reconheça a transformação monumental:</strong> A Sem Parar está passando de empresa de pedágio para instituição financeira regulada com cartão de crédito próprio. Mencionar que você entende a complexidade dessa jornada (regulação BC, PCI-DSS, gestão de risco) mostra maturidade e empatia com os desafios do CIO.</p>
+                <p style="margin-bottom:10px"><strong>4. Conecte-se pelo background de engenharia e telco:</strong> Scrideli é engenheiro mecânico com passagem por GVT e Telefônica. Ele pensa em escala, resiliência e arquitetura de sistemas distribuídos. Use linguagem técnica — ele aprecia profundidade e não tolera superficialidade comercial.</p>
+                <p><strong>5. Mencione o CIONET e o ecossistema CIO:</strong> Ele é membro do Technology Advisory Board da CIONET Brasil. Referenciar tendências discutidas nesse fórum ou cases de outros membros pode criar vínculo profissional e demonstrar que a Foursys circula nos mesmos ambientes de decisão.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">VP Sênior — equivale a C-Level na estrutura Corpay</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte à presidência da Corpay Brasil / Corpay Global</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo</div>
+                        <div class="value">CIO + CTO + Digital — controla tecnologia, inovação e transformação digital</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão</div>
+                        <div class="value">Alto — lidera squads, define roadmap tecnológico e prioriza investimentos</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores (Brasil)</div>
+                        <div class="value">~3.000</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Base de Clientes</div>
+                        <div class="value">9M+ motoristas | 230K+ CNPJ | 700K caminhoneiros</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Modelo de TI</div>
+                        <div class="value">Squads ágeis multidisciplinares (modelo Spotify) — TI co-lidera com Negócios</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Negócio</div>
+                        <div class="value">Protagonista — TI é o produto (plataforma digital de pagamentos e mobilidade)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Cloud & Infraestrutura</div><div class="bar-track"><div class="bar-fill" style="width:28%;background:#1a237e">28%</div></div></div>
+                <div class="bar"><div class="bar-label">Desenvolvimento de Produto</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas & Squads</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#3949ab">18%</div></div></div>
+                <div class="bar"><div class="bar-label">IA & Data Analytics</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">12%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança & Compliance</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+                <div class="bar"><div class="bar-label">Integração & APIs</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Capacitação & Inovação</div><div class="bar-track"><div class="bar-fill" style="width:4%;background:#9fa8da">4%</div></div></div>
+            </div>
+            <p style="margin-top:16px;font-size:12px;color:var(--text-light);text-align:center;font-style:italic">* Estimativa baseada em perfil da empresa, movimentos estratégicos e benchmarks do setor de serviços financeiros/fintech. Dados declarados não disponíveis.</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância (Inferidos)</h4>
+                    <div>
+                        <span class="tag tag-active">Expertise técnica em IA/ML</span>
+                        <span class="tag tag-active">Cultura ágil e modelo de squads</span>
+                        <span class="tag tag-active">Capacidade de escala rápida</span>
+                        <span class="tag tag-active">Experiência em serviços financeiros</span>
+                        <span class="tag tag-active">Segurança e compliance (ISO/PCI)</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Parceiro tecnológico com profundidade técnica, cultura ágil e capacidade de integração com squads internos. Valoriza inovação e autonomia.</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Estilo de Relacionamento</div>
+                        <div class="value">Scrideli é engenheiro, técnico, facilitador. Prefere profundidade a pitch comercial. Espera que fornecedores sejam extensão natural do time — não "entregadores de escopo".</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

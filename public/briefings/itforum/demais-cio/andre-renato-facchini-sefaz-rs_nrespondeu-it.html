@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Andre Renato Facchini | SEFAZ-RS</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Andre Renato Facchini</h1>
+                <h2>Diretor de TIC (CIO) — SEFAZ-RS</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Governo e Setor Público | Porto Alegre, RS</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Orçamento Estadual</div>
+                    <div class="value">R$ 92,7 BI (2026)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Receita ICMS</div>
+                    <div class="value">R$ 55,6 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Modernização Ativa</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Organização: SEFAZ-RS</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Secretaria da Fazenda do Estado do Rio Grande do Sul (SEFAZ-RS)</strong> é o órgão responsável pela administração tributária, gestão financeira, contabilidade pública e serviços de TI e certificação digital do estado. Com sede em Porto Alegre, opera em todo o Rio Grande do Sul com aproximadamente <strong>3.000 servidores</strong>. Em 2025, consolidou uma intensa transformação digital: o Portal e-CAC registrou mais de <strong>161 mil serviços</strong> solicitados, o Plantão Fiscal Virtual atendeu <strong>141 mil demandas</strong> (satisfação 4,5/5), e os canais WhatsApp alcançaram <strong>64 mil seguidores</strong>. O Programa <strong>Receita Orientada a Dados (ROD)</strong>, com investimento de <strong>R$ 40 milhões</strong> via Profisco, já desenvolveu <strong>34 soluções analíticas</strong>, incluindo o Controle Contínuo de Transações (CCT) com alertas em até 5 minutos pós-emissão de NF-e. A SEFAZ-RS lidera nacionalmente o desenvolvimento do <strong>Sistema de Apuração Assistida do IBS</strong> para a Reforma Tributária, selecionado pelo Comitê Gestor e desenvolvido em parceria com a PROCERGS. Em agosto de 2025, completou a <strong>migração do datacenter para nuvem</strong>, e firmou parceria com o <strong>Centro de IA da USP</strong> para precificação com LLMs, gerando economia superior a <strong>R$ 700 milhões</strong> aos cofres públicos.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Estadual (Rio Grande do Sul)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Governo Estadual — Administração Direta</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva Orçamentária</div>
+                        <div class="value">Crescimento de 6,14% na receita (2026 vs 2025)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">~3.000 servidores</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Organização do setor <strong>Governo e Setor Público</strong> com abrangência <strong>Estadual</strong>, em plena transformação digital e na vanguarda da implementação da <strong>Reforma Tributária (IBS/CBS)</strong>. A SEFAZ-RS possui forte orientação a dados e IA, com projetos como o AIRA (IA para controle de despesas) e o ROD (Receita Orientada a Dados). A contratação de TI segue modelo de <strong>licitação pública</strong>, com forte dependência da <strong>PROCERGS</strong> como braço tecnológico do estado. A migração para nuvem foi completada em 2025, abrindo novas demandas de modernização de aplicações, segurança e integração.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Reforma Tributária:</strong> Implementação do Sistema de Apuração Assistida do IBS/CBS — processando ~70 bilhões de transações/ano nacionalmente</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Escalar IA e Automação:</strong> Projeto AIRA para automatizar 348 mil processos/ano de controle de despesa pública com redes de agentes inteligentes</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Modernização pós-Nuvem:</strong> Adequar aplicações legadas ao novo ambiente cloud após migração do datacenter em agosto/2025</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Cibersegurança e LGPD:</strong> Fortalecer políticas de segurança, gestão de riscos e conformidade com LGPD em ambiente migrado</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Dados como Ativo Estratégico:</strong> Expandir o Programa ROD — 34 soluções analíticas ativas, com potencial para dezenas mais</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Experiência do Cidadão:</strong> Consolidar canais digitais (e-CAC, WhatsApp, Portal) com atendimento centrado no usuário</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Reforma Tributária (IBS/CBS)</span>
+                        <span class="tag tag-priority">Inteligência Artificial e Analytics</span>
+                        <span class="tag tag-priority">Modernização de Sistemas</span>
+                        <span class="tag tag-priority">Cibersegurança</span>
+                        <span class="tag tag-priority">Infraestrutura em Nuvem</span>
+                        <span class="tag tag-priority">Automação de Processos</span>
+                    </div>
+                    <h4 style="margin-top:20px;margin-bottom:12px;color:var(--primary)">Tecnologias em Destaque</h4>
+                    <div>
+                        <span class="tag tag-active">IA Generativa / LLMs</span>
+                        <span class="tag tag-active">Machine Learning</span>
+                        <span class="tag tag-active">Agentes Inteligentes (AIRA)</span>
+                        <span class="tag tag-active">Cloud Computing</span>
+                        <span class="tag tag-active">Microsoft 365</span>
+                        <span class="tag tag-active">Business Intelligence</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Projetos e iniciativas que demandarão investimento e parceiros de tecnologia nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-opportunity">Sistema de Apuração IBS/CBS — Evolução e Escala Nacional</span>
+                <span class="tag tag-opportunity">Projeto AIRA — IA para Controle de Despesas</span>
+                <span class="tag tag-opportunity">Programa ROD — Expansão de Soluções Analíticas</span>
+                <span class="tag tag-opportunity">Precificação com IA/LLMs — Parceria USP</span>
+                <span class="tag tag-opportunity">Modernização de Aplicações para Nuvem</span>
+                <span class="tag tag-opportunity">Licenciamento Microsoft 365 (Pregão 2026)</span>
+                <span class="tag tag-opportunity">Segurança da Informação e Compliance LGPD</span>
+                <span class="tag tag-opportunity">Novos Documentos Fiscais Eletrônicos (NFGas, NFAg)</span>
+                <span class="tag tag-opportunity">Evolução dos Canais Digitais (e-CAC, WhatsApp, Portal)</span>
+                <span class="tag tag-opportunity">Governança de Dados e Data Quality</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <div class="alert-box">
+                <strong>Atenção:</strong> A SEFAZ-RS opera via licitação pública e tem a PROCERGS como parceira tecnológica principal. Porém, existem janelas claras de entrada via pregão eletrônico, subcontratação pela PROCERGS, e projetos especiais que demandam expertise que o setor público não possui internamente.
+            </div>
+            <div class="grid-2">
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Reforma Tributária — Sistemas IBS/CBS</h4>
+                        <span class="score-badge">Alta Prioridade</span>
+                    </div>
+                    <div class="reasons">
+                        <p style="color:var(--text-light);font-size:14px">A SEFAZ-RS lidera o piloto nacional de apuração do IBS. O sistema processará 70 bilhões de transações/ano e demandará evolução contínua, integração com sistemas existentes e escalabilidade massiva.</p>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Projeto AIRA — Agentes de IA</h4>
+                        <span class="score-badge">Alta Prioridade</span>
+                    </div>
+                    <div class="reasons">
+                        <p style="color:var(--text-light);font-size:14px">Automação de 348 mil processos/ano usando redes de agentes inteligentes. Projeto em fase inicial com forte potencial de expansão e necessidade de especialistas em IA/ML.</p>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Modernização Cloud-Native</h4>
+                        <span class="score-badge">Média-Alta</span>
+                    </div>
+                    <div class="reasons">
+                        <p style="color:var(--text-light);font-size:14px">Migração para nuvem completada em ago/2025, mas aplicações legadas ainda precisam de modernização (refactoring, containerização, CI/CD). Gap natural pós-migração.</p>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Analytics e Data Engineering</h4>
+                        <span class="score-badge">Média-Alta</span>
+                    </div>
+                    <div class="reasons">
+                        <p style="color:var(--text-light);font-size:14px">O Programa ROD tem 34 soluções ativas e potencial para dezenas mais. Demanda contínua por engenharia de dados, modelagem analítica e visualização para a Receita Estadual.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Andre Renato Facchini</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Dados &amp; Inteligência Artificial</h4>
+                    <span class="score-badge">Fit 95%</span>
+                </div>
+                <div class="reasons">
+                    <p style="color:var(--text-light);font-size:14px;margin-bottom:8px">A SEFAZ-RS tem 3 projetos simultâneos de IA (AIRA, ROD, Precificação USP) e está expandindo o uso de LLMs e agentes inteligentes.</p>
+                    <ul>
+                        <li>Governança de dados e fundação de dados corporativa para o Programa ROD</li>
+                        <li>Engenharia de IA e Machine Learning para expansão do AIRA</li>
+                        <li>IA Generativa e LLMs para novos casos de uso fiscais</li>
+                        <li>Inteligência preditiva para detecção de fraudes e evasão fiscal</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital — Modernização de Ecossistemas</h4>
+                    <span class="score-badge">Fit 90%</span>
+                </div>
+                <div class="reasons">
+                    <p style="color:var(--text-light);font-size:14px;margin-bottom:8px">Pós-migração cloud, a SEFAZ-RS precisa modernizar aplicações legadas e construir novos sistemas para a Reforma Tributária.</p>
+                    <ul>
+                        <li>Modernização de sistemas fiscais para ambiente cloud-native</li>
+                        <li>Squads de desenvolvimento para evolução do Sistema IBS/CBS</li>
+                        <li>Integração de sistemas via APIs (experiência Digibee)</li>
+                        <li>Application Management Services (AMS) para sistemas críticos</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Cibersegurança &amp; Privacidade</h4>
+                    <span class="score-badge">Fit 85%</span>
+                </div>
+                <div class="reasons">
+                    <p style="color:var(--text-light);font-size:14px;margin-bottom:8px">Ambiente recém-migrado para nuvem com dados fiscais sensíveis de milhões de contribuintes exige segurança reforçada.</p>
+                    <ul>
+                        <li>Assessment de segurança do novo ambiente cloud</li>
+                        <li>Adequação à LGPD para dados fiscais e pessoais</li>
+                        <li>Gestão de riscos e políticas de segurança da informação</li>
+                        <li>Certificações ISO 27001/27701 da Foursys como diferencial</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Estratégia &amp; Inovação — Governança de TI</h4>
+                    <span class="score-badge">Fit 75%</span>
+                </div>
+                <div class="reasons">
+                    <p style="color:var(--text-light);font-size:14px;margin-bottom:8px">Facchini coordena comitês estaduais de governança de TI e busca alinhar tecnologia à estratégia fazendária.</p>
+                    <ul>
+                        <li>Planejamento Estratégico de TIC (PDTI)</li>
+                        <li>Governança de IA e frameworks de compliance</li>
+                        <li>Modelos operacionais ágeis para órgãos públicos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Andre Renato Facchini tem como prioridade máxima a <strong>implementação da Reforma Tributária (IBS/CBS)</strong> e a <strong>escalabilidade de projetos de IA</strong> (AIRA e ROD). Iniciar a conversa demonstrando expertise da Foursys em <strong>engenharia de dados, IA/ML e modernização de sistemas</strong>, conectando diretamente com os projetos em andamento. Mencionar que a Foursys possui experiência com <strong>squads especializados</strong> que podem acelerar entregas sem onerar a equipe interna da SEFAZ-RS. Reforçar as <strong>certificações ISO 27001/27701</strong> — diferencial crucial para um órgão que gerencia dados fiscais de milhões de contribuintes.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A SEFAZ-RS lidera o <strong>piloto nacional do IBS</strong> e precisa escalar o sistema para processar <strong>70 bilhões de transações/ano</strong> em todo o país. Paralelamente, o projeto <strong>AIRA</strong> está em fase inicial e demanda especialistas em <strong>redes de agentes de IA</strong> — exatamente o tipo de competência que a Foursys domina com seu AI Squad. A migração para nuvem (completada em ago/2025) abriu uma <strong>janela natural de modernização</strong> de aplicações legadas que ainda não foi endereçada integralmente.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>AI Squad proprietário</strong> — capacidade de entregar projetos de IA com aceleração, ideal para AIRA e ROD; (2) <strong>Certificações ISO 27001/27701</strong> — credencial de segurança essencial para dados fiscais; (3) <strong>Experiência em modernização de ecossistemas</strong> — refactoring de legado para cloud; (4) <strong>Modelo flexível de squads</strong> — complementa a equipe interna sem competir com a PROCERGS; (5) <strong>Parceria Digibee</strong> — integração de sistemas via APIs, crítico para conectar sistemas fiscais com o novo IBS.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. Reforma Tributária é a maior transformação fiscal em 30 anos:</strong> A SEFAZ-RS foi escolhida para liderar o piloto nacional do IBS, com 82 empresas em teste desde janeiro/2026. O sistema precisará escalar de teste para produção nacional — uma oportunidade massiva de engenharia de software, dados e infraestrutura que a Foursys pode endereçar com squads dedicados.</p>
+                <p style="margin-bottom:12px"><strong>2. O projeto AIRA é pioneiro em agentes de IA no governo:</strong> Automatizar 348 mil processos/ano de controle de despesa pública usando "Arquitetura Inteligente de Redes de Agentes" é exatamente o tipo de projeto onde o AI Squad da Foursys pode agregar valor imediato — especialmente em MLOps, orquestração de agentes e governança de IA.</p>
+                <p style="margin-bottom:12px"><strong>3. R$ 700 milhões economizados com IA comprovam ROI:</strong> A parceria com a USP para precificação via LLMs já gerou R$ 700 MI em economia. Este é um case poderoso para expandir IA para outras áreas da SEFAZ — e a Foursys pode ser a parceira para escalar essa visão.</p>
+                <p style="margin-bottom:12px"><strong>4. Migração cloud recém-concluída abre gap de modernização:</strong> O datacenter migrou em agosto/2025, mas aplicações legadas ainda rodam como lift-and-shift. O próximo passo natural é refactoring para cloud-native — containerização, microsserviços, CI/CD — onde squads especializados podem acelerar sem conflito com a PROCERGS.</p>
+                <p><strong>5. Facchini é engenheiro, auditor fiscal e ITIL — perfil técnico-gerencial:</strong> Ele valoriza dados concretos, metodologia e governança. A abordagem ideal é apresentar métricas de resultado, frameworks comprovados e cases de sucesso com órgãos públicos — evitando discursos genéricos de vendas.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Organizações Comparáveis</h3>
+            <div class="competitor-card">
+                <h4>SEFAZ-SP (Secretaria da Fazenda de São Paulo)</h4>
+                <p><strong>Segmento:</strong> Administração Tributária Estadual | <strong>Arrecadação ICMS:</strong> ~R$ 200 bilhões/ano</p>
+                <p>Maior arrecadadora estadual do Brasil, referência em nota fiscal eletrônica e sistemas tributários. Pioneira em IA para fiscalização e detecção de fraudes fiscais. Investimentos massivos em analytics e data lake tributário. Serve como benchmark aspiracional para a SEFAZ-RS em termos de maturidade digital.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>SEFAZ-CE (Secretaria da Fazenda do Ceará)</h4>
+                <p><strong>Segmento:</strong> Administração Tributária Estadual | <strong>Destaque:</strong> Governança Digital</p>
+                <p>Referência nacional em governo digital com a plataforma "Atendimento Ágil" baseada em IA e automação, que inspirou outros estados (Sergipe, Rondônia, Mato Grosso). Possui PDTI 2026-2027 estruturado e organização de TI em células temáticas. Está à frente na governança de dados e inovação em atendimento ao contribuinte.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Receita Federal do Brasil</h4>
+                <p><strong>Segmento:</strong> Administração Tributária Federal | <strong>Destaque:</strong> IA em Escala</p>
+                <p>Benchmark nacional em uso de IA para fiscalização, com a "malha fina" como caso de uso consolidado. A SEFAZ-RS se inspira nesse modelo para criar sua própria "malha fiscal de controle" com o projeto AIRA. Investimentos pesados em analytics, cruzamento de dados e automação de processos fiscais.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>SEFAZ-MG (Secretaria de Fazenda de Minas Gerais)</h4>
+                <p><strong>Segmento:</strong> Administração Tributária Estadual | <strong>Destaque:</strong> Portal IBS</p>
+                <p>Junto com o Ceará, co-desenvolveu o Portal de Serviços da Reforma Tributária para implementar o IBS, com autenticação via Gov.br. Planejamento de chatbot e serviços de peticionamento. Compete com a SEFAZ-RS pela liderança na implementação tecnológica da reforma tributária.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Comparando com os benchmarks, a SEFAZ-RS se destaca pelo <strong>pioneirismo no piloto do IBS e no uso de agentes de IA (AIRA)</strong>, mas pode ter gaps em: (1) <strong>Maturidade de governança de dados</strong> — a SEFAZ-SP tem data lake tributário mais consolidado; (2) <strong>Atendimento digital via IA</strong> — a SEFAZ-CE está à frente com chatbots e automação de atendimento; (3) <strong>Modernização de aplicações cloud-native</strong> — a migração foi recente e o refactoring ainda é incipiente; (4) <strong>MLOps e operacionalização de IA</strong> — os projetos de IA estão em fase inicial, sem pipeline maduro de deploy e monitoramento de modelos. A Foursys pode se posicionar como parceira para <strong>acelerar a maturidade digital</strong> em todas essas frentes, trazendo expertise que o setor público tipicamente não consegue reter internamente.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Diretor de Tecnologia da Informação e Comunicação (CIO) — SEFAZ-RS (desde janeiro/2019)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Porto Alegre, RS</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação</div>
+                        <div class="value">Engenheiro Eletricista | Auditor Fiscal do Estado do RS</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Certificações</div>
+                        <div class="value">ITIL 4® — Gestão de Serviços de TI</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência</div>
+                        <div class="value">+25 anos em gestão de tecnologia</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Posições em Comitês</div>
+                        <div class="value">Coordenador COGEF-TI | Membro CETIC e CGTIC estaduais | Comissão de TI, IA e Cybersegurança da Board Academy Br</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Lidere pelo impacto da Reforma Tributária:</strong> Andre está na linha de frente do maior projeto tributário do Brasil em 30 anos. Demonstrar conhecimento sobre o piloto do IBS (82 empresas, 70 bilhões de transações) mostra preparo e gera conexão imediata com sua realidade diária.</p>
+                <p style="margin-bottom:10px"><strong>2. Fale a linguagem de engenheiro:</strong> Andre é engenheiro eletricista e auditor fiscal — perfil analítico que valoriza dados, métricas e metodologia. Apresente cases com números concretos de ROI, tempo de entrega e resultados mensuráveis. Evite abstrações.</p>
+                <p style="margin-bottom:10px"><strong>3. Reconheça o pioneirismo do AIRA:</strong> O projeto de "Arquitetura Inteligente de Redes de Agentes" é vanguarda no governo brasileiro. Mencionar que conhece o projeto e oferecer perspectivas sobre orquestração de agentes de IA demonstra sofisticação técnica e respeito pelo trabalho dele.</p>
+                <p style="margin-bottom:10px"><strong>4. Posicione-se como complemento à PROCERGS, não como substituto:</strong> A PROCERGS é o braço tecnológico do estado e parceira histórica da SEFAZ-RS. A abordagem da Foursys deve ser de <strong>complementaridade</strong> — trazer expertise especializada (IA, segurança, modernização) que a PROCERGS não tem capacidade de atender sozinha.</p>
+                <p><strong>5. Conecte-se pelo ITIL e governança:</strong> Andre tem certificação ITIL 4 e coordena comitês de governança de TI. Demonstrar maturidade em ITSM, governança de IA e frameworks de compliance cria um vínculo técnico-gerencial imediato. Ele valoriza processo e estrutura.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Diretor de Departamento — Equivalente a Diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Secretário da Fazenda do RS</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Comitês</div>
+                        <div class="value">Alta: Coordenador COGEF-TI, membro titular CETIC e CGTIC, Comissão de TI/IA/Cyber Board Academy Br</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão</div>
+                        <div class="value">Decisor técnico — define especificações e termos de referência para licitações de TI</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Servidores da SEFAZ</div>
+                        <div class="value">~3.000</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">~3.000 internos + milhões de contribuintes (portais)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Parceiro Tecnológico Principal</div>
+                        <div class="value">PROCERGS — Empresa pública de TI do RS</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: TI como viabilizadora da transformação digital da administração tributária</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Estimativa de Distribuição de Investimentos de TI</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Reforma Tributária (IBS/CBS)</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+                <div class="bar"><div class="bar-label">IA, Analytics e Dados (ROD/AIRA)</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+                <div class="bar"><div class="bar-label">Infraestrutura e Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#3949ab">18%</div></div></div>
+                <div class="bar"><div class="bar-label">Sistemas e Desenvolvimento</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Licenciamento (MS 365, etc.)</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#7986cb">7%</div></div></div>
+                <div class="bar"><div class="bar-label">Suporte e Operação</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+            </div>
+            <p style="margin-top:16px;color:var(--text-light);font-size:12px;text-align:center"><em>* Estimativa baseada em projetos identificados publicamente. Distribuição real pode variar.</em></p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Contratação</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Modelo de Contratação</h4>
+                    <div>
+                        <span class="tag tag-active">Licitação Pública (Pregão Eletrônico)</span>
+                        <span class="tag tag-active">Contratos via PROCERGS</span>
+                        <span class="tag tag-active">Termos de Cooperação Técnica</span>
+                        <span class="tag tag-active">Registro de Preços</span>
+                    </div>
+                    <h4 style="margin-top:16px;margin-bottom:12px;color:var(--primary)">Critérios Valorizados</h4>
+                    <div>
+                        <span class="tag tag-active">Expertise técnica comprovada</span>
+                        <span class="tag tag-active">Preço competitivo</span>
+                        <span class="tag tag-active">Metodologia e governança</span>
+                        <span class="tag tag-active">Certificações (ISO, ITIL)</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Empresas com expertise especializada que complementem a PROCERGS — IA, cibersegurança, modernização de sistemas</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Portais de Compras</div>
+                        <div class="value">Compras Eletrônicas RS (compras.rs.gov.br) | Portal do Fornecedor RS</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Pré-requisito</div>
+                        <div class="value">Credenciamento no Portal do Fornecedor RS obrigatório para participar de licitações estaduais</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

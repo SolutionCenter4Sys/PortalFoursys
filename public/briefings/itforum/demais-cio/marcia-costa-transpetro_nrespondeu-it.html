@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Marcia Costa | TRANSPETRO</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Marcia Costa</h1>
+                <h2>CIO — TRANSPETRO (Petrobras Transporte S.A.)</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Química, Petroquímica, Óleo e Gás (Logística de Petróleo) | Rio de Janeiro, RJ</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 13,88 BI (2024)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Investimento 2025-2029</div>
+                    <div class="value">R$ 2,4 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Expansão Multimodal</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: TRANSPETRO</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Transpetro (Petrobras Transporte S.A.)</strong> é a maior empresa de logística multimodal de petróleo, derivados e biocombustíveis da América Latina. Subsidiária integral da Petrobras, opera uma malha de aproximadamente <strong>8.500 km de oleodutos e gasodutos</strong>, <strong>48 terminais</strong> (21 terrestres e 27 aquaviários) e uma frota de <strong>33 navios</strong>. Em 2024, a empresa registrou faturamento de <strong>R$ 13,88 bilhões</strong> (+7,8% vs. 2023), lucro líquido de <strong>R$ 866 milhões</strong> (+74%) e EBITDA ajustado de <strong>R$ 5,15 bilhões</strong>. A Transpetro está em plena fase de expansão com o <strong>Programa TP 25</strong> — aquisição de 25 novas embarcações — e investimentos de R$ 2,4 bilhões até 2029, incluindo entrada em novos modais (rodoviário, navegação interior com barcaças) e construção de terminais na região Centro-Oeste. No campo tecnológico, a empresa implementou soluções de <strong>IA para otimização de dutos</strong> (aumento de 63% na movimentação de combustíveis), desenvolveu o <strong>Profeta</strong> (IA para gestão de estoques com ganho de 290% de produtividade) e está ampliando monitoramento remoto em tempo real de motores e bombas em oleodutos.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Nacional (operações em todo o Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Economia Mista (Subsidiária da Petrobras)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento — Expansão multimodal e renovação de frota</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">5.685 empregados</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Óleo &amp; Gás / Logística de Petróleo</strong> com abrangência <strong>Nacional</strong>, subsidiária da Petrobras. A CIO Marcia Costa definiu <strong>4 pilares estratégicos de TI: Conectividade, Cibersegurança, Integração de Processos e Inteligência Artificial</strong>. A empresa opera infraestrutura crítica de energia (dutos, terminais, navios) e está em ciclo de investimento agressivo (R$ 2,4 bi até 2029). A transformação digital é alavanca-chave para ganhos de eficiência operacional, segurança e descarbonização. Com 32+ anos de experiência em TI e infraestrutura, Marcia traz visão pragmática de "gerar o máximo valor em menor prazo".</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar IA/ML em operações críticas de dutos, terminais e frota marítima</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Elevar maturidade de cibersegurança em ambientes industriais OT/IT convergentes</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Garantir conectividade robusta em infraestrutura distribuída (8.500 km de dutos)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar processos end-to-end entre dutos, terminais, navios e novos modais</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar sistemas legados alinhando ao ecossistema SAP S/4HANA da Petrobras</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Suportar expansão multimodal (rodoviário, barcaças) com TI escalável</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">4 Pilares Estratégicos de TI (declarados pela CIO)</h4>
+                    <div>
+                        <span class="tag tag-priority">Conectividade</span>
+                        <span class="tag tag-priority">Cibersegurança</span>
+                        <span class="tag tag-priority">Integração de Processos</span>
+                        <span class="tag tag-priority">Inteligência Artificial</span>
+                    </div>
+                    <h4 style="margin-top:20px;margin-bottom:12px;color:var(--primary)">Investimentos Ativos em Tecnologia</h4>
+                    <div>
+                        <span class="tag tag-active">IA para otimização de dutos</span>
+                        <span class="tag tag-active">Monitoramento remoto IoT</span>
+                        <span class="tag tag-active">Plataforma Ellevo (ITSM)</span>
+                        <span class="tag tag-active">IA generativa (em implementação)</span>
+                        <span class="tag tag-active">Eficiência energética com IA</span>
+                        <span class="tag tag-active">Profeta (IA para estoques)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses com base nas declarações da CIO e plano estratégico:</p>
+            <div>
+                <span class="tag tag-active">Inteligência Artificial / IA Generativa</span>
+                <span class="tag tag-active">Cibersegurança Industrial (OT/IT)</span>
+                <span class="tag tag-active">Conectividade de infraestrutura</span>
+                <span class="tag tag-active">Integração de processos (ERP/sistemas)</span>
+                <span class="tag tag-active">Monitoramento remoto / IoT</span>
+                <span class="tag tag-active">Automação de processos (RPA/IA)</span>
+                <span class="tag tag-active">Eficiência energética</span>
+                <span class="tag tag-opportunity">Modernização de service desk / ITSM</span>
+                <span class="tag tag-opportunity">Governança de dados e IA</span>
+                <span class="tag tag-opportunity">Suporte a novos modais logísticos</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <div class="alert-box">
+                <strong>&#9888; Janela de Oportunidade:</strong> A Transpetro está em ciclo de expansão (R$ 2,4 bi em investimentos) com 4 pilares estratégicos de TI claramente definidos. A CIO busca "gerar o máximo valor em menor prazo" — abordagem ideal é demonstrar entrega rápida de valor com parceiros especializados.
+            </div>
+            <div class="grid-2">
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 1 — IA &amp; Automação</div>
+                    <div class="value">Escalar casos de IA (Profeta, otimização de dutos) para toda a operação. A CIO já validou IA com resultados concretos — próximo passo é governança e escala.</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 2 — Cibersegurança OT/IT</div>
+                    <div class="value">Convergência de ambientes industriais (SCADA, sensores de dutos) com TI corporativa exige estratégia integrada de segurança. Pilar estratégico declarado pela CIO.</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 3 — Integração de Processos</div>
+                    <div class="value">Integração end-to-end entre dutos, terminais, navios e novos modais (rodoviário, barcaças). Ecossistema SAP S/4HANA da Petrobras como backbone.</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 4 — Modernização &amp; ITSM</div>
+                    <div class="value">Já adotou Ellevo para service desk. Potencial para expandir automação de atendimento, gestão de incidentes e integração com monitoramento IoT.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Marcia Costa</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>&#129302; Dados &amp; Inteligência Artificial</h4>
+                    <span class="score-badge">Fit: 95%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li><strong>IA Generativa &amp; Hiperautomação:</strong> A Transpetro está implementando IA generativa — o AI Squad da Foursys pode acelerar casos de uso em manutenção preditiva, otimização logística e gestão de estoques</li>
+                        <li><strong>Estratégia de Dados:</strong> Governança responsável de IA é prioridade declarada pela CIO — Foursys oferece framework de governança de dados e IA</li>
+                        <li><strong>Inteligência Preditiva:</strong> Expandir o modelo do Profeta (290% de ganho de produtividade) para outros processos operacionais</li>
+                        <li><strong>Case direto:</strong> IA para otimização de dutos já provou ROI (63% de aumento em movimentação) — escalar requer parceiro especializado</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>&#128274; Cibersegurança</h4>
+                    <span class="score-badge">Fit: 92%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li><strong>Segurança OT/IT:</strong> Infraestrutura crítica (dutos, terminais, SCADA) requer estratégia integrada de cibersegurança — pilar estratégico da CIO</li>
+                        <li><strong>Certificações ISO 27001/27701:</strong> Diferencial direto para empresa de economia mista com rígidos requisitos de compliance</li>
+                        <li><strong>LGPD &amp; Privacidade:</strong> Transpetro já possui diretrizes de segurança para terceiros — Foursys pode fortalecer programa de privacidade</li>
+                        <li><strong>Prevenção de Fraudes:</strong> Operação de grande escala com múltiplos terminais e modais requer monitoramento contínuo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>&#128268; Engenharia Digital — Integração &amp; Modernização</h4>
+                    <span class="score-badge">Fit: 88%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li><strong>Integração de Processos:</strong> Pilar estratégico da CIO — conectar dutos, terminais, navios e novos modais em plataforma unificada</li>
+                        <li><strong>Modernização de Sistemas:</strong> Ecossistema SAP S/4HANA (Petrobras) como backbone — integração via APIs e middlewares</li>
+                        <li><strong>Sustentação/AMS:</strong> Com 5.685 funcionários e operação 24/7, suporte contínuo a sistemas críticos é essencial</li>
+                        <li><strong>Plataformas Digitais:</strong> Novas modalidades logísticas (rodoviário, barcaças) precisam de sistemas de gestão e monitoramento</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>&#128736; Automação Inteligente (RPA + IA)</h4>
+                    <span class="score-badge">Fit: 85%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li><strong>Automação de Processos:</strong> Ellevo reduziu 25% dos tickets e 50% em RH — potencial para expandir automação com RPA + IA</li>
+                        <li><strong>Eficiência Operacional:</strong> CIO busca "máximo valor em menor prazo" — automação inteligente entrega resultados rápidos</li>
+                        <li><strong>Service Desk Inteligente:</strong> Integrar monitoramento IoT com gestão de incidentes automatizada</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Marcia Costa tem como pilares estratégicos <strong>Conectividade, Cibersegurança, Integração de Processos e IA</strong>. Iniciar a conversa reconhecendo os resultados concretos já alcançados pela Transpetro com IA (63% de aumento na movimentação de dutos, Profeta com 290% de produtividade) e posicionar a Foursys como parceira para escalar esses resultados. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos, com ênfase em cases de infraestrutura crítica e setor de energia.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A Transpetro está em ciclo de investimento de <strong>R$ 2,4 bilhões até 2029</strong>, com expansão para novos modais e renovação de frota. Os 4 pilares de TI da CIO estão todos alinhados ao portfólio Foursys. A empresa já validou IA com resultados concretos — o próximo passo é escala e governança, exatamente onde a Foursys pode entrar. Perspectiva de faturamento: <strong>Crescimento ativo</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>AI Squad proprietário</strong> — aceleração de IA com governança integrada, ideal para escalar os cases existentes da Transpetro; (2) <strong>Certificações ISO 27001/27701</strong> — diferencial direto para cibersegurança em infraestrutura crítica de empresa de economia mista; (3) <strong>Engenharia Digital e Integração</strong> — capacidade de integrar sistemas legados com SAP S/4HANA e novos modais; (4) <strong>Modelo flexível de entrega</strong> (Squads, Projetos, AMS) — atende à busca da CIO por "máximo valor em menor prazo".</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. IA já provou ROI — hora de escalar:</strong> A Transpetro validou IA em dois cases de sucesso (otimização de dutos +63%, Profeta +290% produtividade). O desafio agora é governança e escala para toda operação — exatamente a proposta de valor do AI Squad Foursys com framework de governança de IA responsável.</p>
+                <p style="margin-bottom:12px"><strong>2. Infraestrutura crítica exige cibersegurança especializada:</strong> Com 8.500 km de dutos, 48 terminais e operação 24/7 de transporte de petróleo, a convergência OT/IT é um vetor de risco imenso. A CIO listou cibersegurança como pilar estratégico — as certificações ISO 27001/27701 da Foursys são credencial direta.</p>
+                <p style="margin-bottom:12px"><strong>3. Expansão multimodal gera demanda de TI:</strong> A entrada em rodoviário e navegação interior (18 barcaças + 18 empurradores) requer novos sistemas de gestão, rastreamento e integração. São greenfield projects que precisam de parceiro ágil para implementação.</p>
+                <p style="margin-bottom:12px"><strong>4. Ecossistema Petrobras é oportunidade e desafio:</strong> A migração para SAP S/4HANA na Petrobras impacta diretamente a Transpetro. Integração de sistemas, dados e processos entre controladora e subsidiária é um projeto complexo e contínuo.</p>
+                <p><strong>5. Eficiência energética é agenda ESG corporativa:</strong> A IA reduziu 3% nos custos de energia em dutos e a frota marítima cortou 8,3% em GEE. A agenda ESG da Petrobras pressiona Transpetro a ampliar esses resultados — IA e automação são as alavancas.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes no Setor</h3>
+            <div class="competitor-card">
+                <h4>TAG — Transportadora Associada de Gás</h4>
+                <p><strong>Segmento:</strong> Transporte de gás natural por dutos | <strong>Investimento:</strong> R$ 5,3 bilhões até 2028</p>
+                <p>Opera malha de 4.500 km de gasodutos no Brasil. Controlada pela Engie, está investindo fortemente em expansão de infraestrutura e digitalização de operações. Principal concorrente em gasodutos, com foco em gás natural e bioenergia.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>NTS — Nova Transportadora do Sudeste</h4>
+                <p><strong>Segmento:</strong> Transporte de gás natural na região Sudeste | <strong>Receita:</strong> ~R$ 4 bilhões (2024)</p>
+                <p>Privatizada em 2017, opera 2.048 km de gasodutos no Sudeste brasileiro. Investimentos em modernização de infraestrutura, digitalização e manutenção preditiva. Concorre diretamente na malha de gasodutos do Sudeste.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>TBG — Transportadora Brasileira Gasoduto Bolívia-Brasil</h4>
+                <p><strong>Segmento:</strong> Transporte de gás natural importado | <strong>Infraestrutura:</strong> 2.593 km de gasoduto</p>
+                <p>Opera o Gasoduto Bolívia-Brasil (GASBOL), maior gasoduto da América Latina. Formou parceria com TAG e NTS para compartilhamento do Portal de Oferta de Capacidade (POC), representando 79% da entrega de gás natural do país.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Logum Logística</h4>
+                <p><strong>Segmento:</strong> Transporte multimodal de etanol por dutos | <strong>Infraestrutura:</strong> Dutoviário + ferroviário + hidroviário</p>
+                <p>Joint venture entre Petrobras, Copersucar, Raízen e outras empresas para transporte de etanol. Opera infraestrutura multimodal e representa concorrência específica no segmento de biocombustíveis, onde a Transpetro está expandindo presença.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Os concorrentes da Transpetro estão investindo em <strong>digitalização de operações</strong> e <strong>manutenção preditiva</strong>, mas a Transpetro tem vantagem competitiva por já ter validado IA com resultados concretos. Os gaps identificados são: (1) <strong>Governança de IA em escala</strong> — a Transpetro precisa escalar dezenas de modelos de IA simultaneamente com framework de governança responsável; (2) <strong>Integração multimodal completa</strong> — a entrada em rodoviário e navegação interior requer integração de sistemas que não existe hoje; (3) <strong>Cibersegurança convergente OT/IT</strong> — concorrentes privatizados (TAG, NTS) estão investindo pesado, e a Transpetro precisa manter paridade; (4) <strong>Automação de processos corporativos</strong> — o sucesso com Ellevo (25% redução de tickets) indica potencial inexplorado em automação inteligente. A Foursys pode se posicionar como parceira para acelerar essas frentes com squads especializados em IA, automação, cibersegurança e integração.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CIO (Diretora de Tecnologia da Informação) — Transpetro, desde outubro de 2023</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Rio de Janeiro, RJ</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência</div>
+                        <div class="value">32+ anos em tecnologia e infraestrutura. Extensa carreira na Vale (IT Analyst → Executive Manager of Infrastructure Technology Services → Diretora Regional de Tecnologia)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Engenharia Elétrica (UFRJ) | MBA Telecom (UFF) | MBA Gestão Empresarial (Fundação Dom Cabral) | Gestão de Projetos (IETEC)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Certificações</div>
+                        <div class="value">COBIT | ITIL</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Visão Declarada</div>
+                        <div class="value">"Nosso desafio é priorizar ações de TI e gerar o máximo valor em menor prazo" — foco pragmático em resultados rápidos e mensuráveis</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconheça os resultados concretos de IA:</strong> Marcia já provou IA com números impressionantes (63% movimentação de dutos, 290% produtividade com Profeta). Começar reconhecendo esses feitos demonstra que você fez o dever de casa e respeita o trabalho dela.</p>
+                <p style="margin-bottom:10px"><strong>2. Fale a linguagem de infraestrutura:</strong> Com 32 anos de carreira em infraestrutura (Vale e agora Transpetro), Marcia tem DNA técnico forte. Evite buzzwords vazios — demonstre conhecimento real de conectividade, OT/IT e ambientes industriais.</p>
+                <p style="margin-bottom:10px"><strong>3. Conecte-se pela visão pragmática:</strong> Sua frase-chave é "máximo valor em menor prazo". Posicione-se mostrando como a Foursys entrega resultados rápidos com squads focados, não grandes programas de consultoria longos e caros.</p>
+                <p style="margin-bottom:10px"><strong>4. Valorize a trajetória Vale → Transpetro:</strong> A transição de uma multinacional de mineração para logística de petróleo mostra versatilidade. Referencie a complexidade de ambientes industriais em ambas empresas como ponto de conexão.</p>
+                <p><strong>5. Aborde a agenda ESG como diferencial:</strong> A Transpetro está usando IA para reduzir emissões e consumo energético. Vincular tecnologia à sustentabilidade é uma pauta que ressoa tanto com a CIO quanto com a governança corporativa da Petrobras.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil da CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria (reporta à Diretoria Executiva)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Diretoria Executiva / Presidência (estrutura de estatal)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Governança</div>
+                        <div class="value">Sujeita a regras de licitação e compliance de empresa de economia mista (Lei 13.303)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão</div>
+                        <div class="value">Aprovadora dentro de budget, com processos de aquisição regulados</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">5.685 empregados (total da empresa)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Background Técnico</div>
+                        <div class="value">Engenheira Elétrica com certificações COBIT e ITIL — perfil técnico-gerencial</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Foco Atual</div>
+                        <div class="value">4 pilares: Conectividade, Cibersegurança, Integração de Processos, IA</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: TI como alavanca para eficiência operacional e descarbonização</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Cases de TI da Transpetro (Resultados Comprovados)</h3>
+            <div class="chart-container" style="max-width:100%">
+                <div class="grid-2">
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">&#129302; IA — Otimização de Dutos (OSVAT)</div>
+                        <div class="value" style="font-size:14px">+63% no potencial de movimentação de combustíveis | -3% em custos de energia | Economia de R$ 200 mil/ano | Eficiência de bombeio: 91,7% → 93,5%</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">&#129302; IA — Profeta (Gestão de Estoques)</div>
+                        <div class="value" style="font-size:14px">+290% de produtividade em 3 meses | Robôs de IA para gerenciar estoques de materiais | Avaliou metade dos materiais da empresa</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">&#128187; Plataforma Ellevo (ITSM)</div>
+                        <div class="value" style="font-size:14px">-25% em tickets | 94% de entregas no prazo | -50% em recursos humanos | -30% em custos | Satisfação > 95%</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">&#127757; Eficiência Marítima (ESG)</div>
+                        <div class="value" style="font-size:14px">-8,3% em emissões de GEE (2023) | Apêndices de casco, tintas anti-incrustantes, otimização de máquinas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Considerações para Fornecedores</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Fatores Críticos de Sucesso</h4>
+                    <div>
+                        <span class="tag tag-active">Resultados rápidos e mensuráveis</span>
+                        <span class="tag tag-active">Compliance com Lei 13.303</span>
+                        <span class="tag tag-active">Experiência em infraestrutura crítica</span>
+                        <span class="tag tag-active">Certificações de segurança</span>
+                        <span class="tag tag-active">Flexibilidade de modelo de entrega</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Modelo de Contratação</div>
+                        <div class="value">Empresa de economia mista — processos de licitação e credenciamento regulados pela Lei das Estatais (13.303/2016)</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Atenção</div>
+                        <div class="value">Subsidiária da Petrobras — pode seguir contratos-quadro e fornecedores credenciados do grupo Petrobras</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

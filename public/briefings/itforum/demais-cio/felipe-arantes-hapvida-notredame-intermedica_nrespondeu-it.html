@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Felipe Arantes | HAPVIDA NOTREDAME INTERMÉDICA</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Felipe Arantes</h1>
+                <h2>Diretor de Tecnologia e Inovação — HAPVIDA NOTREDAME INTERMÉDICA</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Saúde | São Paulo, SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Receita (2025)</div>
+                    <div class="value">R$ 30,9 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Beneficiários</div>
+                    <div class="value">~16 Milhões</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Consolidação pós-fusão</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: HAPVIDA NOTREDAME INTERMÉDICA</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Hapvida NotreDame Intermédica</strong> é o maior ecossistema de saúde da América Latina, resultado da fusão aprovada pelo CADE em 2022. Com sede em São Paulo, a empresa encerrou 2025 com <strong>receita líquida de R$ 30,9 bilhões</strong> (+6,6% anual) e atende cerca de <strong>16 milhões de beneficiários</strong> em saúde e odontologia. Opera um modelo verticalizado com <strong>832 unidades próprias</strong>, incluindo 86 hospitais, 78 pronto-atendimentos, 352 clínicas e 294 unidades de diagnóstico. A integração pós-fusão foi concluída em 2025, unificando sistemas, processos e marcas — permitindo acessar sinergias antes indisponíveis. A empresa realizou <strong>R$ 900 milhões em investimentos</strong> em expansão de infraestrutura em 2025, abrindo mais de mil novos leitos. No campo tecnológico, destaca-se por possuir <strong>150+ projetos de IA em andamento</strong> com mais de 200 modelos, dos quais 39 a 90 já estão integrados à rotina assistencial diária. Realiza <strong>700 mil teleconsultas mensais</strong> e elevou a resolutividade em pronto-socorro de 38% para 75% em até 15 minutos. Para 2026, foca em previsibilidade assistencial, produtividade da rede própria e consistência comercial, iniciando um ciclo mais eficiente e previsível.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Nacional — todas as regiões do Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Empresa de capital aberto (B3: HAPV3)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Consolidação com foco em rentabilidade</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">68.000+ (além de 28 mil médicos e 22 mil dentistas)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Saúde Suplementar</strong> com abrangência <strong>Nacional</strong>, em fase de consolidação pós-fusão entre Hapvida e NotreDame Intermédica. A integração tecnológica e operacional foi concluída em 2025, abrindo espaço para ganhos de eficiência e escala em 2026. Com <strong>EBITDA ajustado de R$ 3,3 bilhões</strong> (margem de 10,9%), a empresa enfrenta pressão de sinistralidade (75,5% no 4T25) e busca ativamente soluções de IA, automação e integração de dados para otimizar custos operacionais e melhorar a experiência do paciente. A alavancagem permanece controlada em 1,3x EBITDA, com <strong>R$ 9,8 bilhões em caixa</strong> — indicando capacidade robusta de investimento em tecnologia.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar IA assistencial e operacional — de 90 modelos ativos para centenas, com governança</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir sinistralidade com analytics preditivo e medicina preventiva digital</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar dados end-to-end de 832 unidades em plataforma unificada pós-fusão</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos administrativos (autorizações, auditoria, faturamento)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer cibersegurança e conformidade LGPD para dados sensíveis de saúde</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Evoluir telemedicina e jornada digital do paciente em escala nacional</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Inteligência Artificial &amp; Analytics</span>
+                        <span class="tag tag-priority">Integração de Dados pós-fusão</span>
+                        <span class="tag tag-priority">Automação de Processos</span>
+                        <span class="tag tag-priority">Telemedicina &amp; Jornada Digital</span>
+                        <span class="tag tag-priority">Cibersegurança &amp; LGPD</span>
+                    </div>
+                    <h4 style="margin-top:20px;margin-bottom:12px;color:var(--primary)">Temas de Investimento Ativo</h4>
+                    <div>
+                        <span class="tag tag-active">IA aplicada à saúde (150+ projetos)</span>
+                        <span class="tag tag-active">Plataforma de telemedicina</span>
+                        <span class="tag tag-active">Prontuário eletrônico integrado</span>
+                        <span class="tag tag-active">Expansão de infraestrutura (R$ 900 MM)</span>
+                        <span class="tag tag-active">Programa Novos Talentos em TI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses com base em sinais públicos:</p>
+            <div>
+                <span class="tag tag-active">Inteligência Artificial Assistencial</span>
+                <span class="tag tag-active">IA Generativa &amp; Agentes Inteligentes</span>
+                <span class="tag tag-active">Automação de Processos (RPA/IA)</span>
+                <span class="tag tag-active">Analytics Preditivo de Sinistralidade</span>
+                <span class="tag tag-active">Integração de Sistemas pós-fusão</span>
+                <span class="tag tag-active">Telemedicina e Telessaúde</span>
+                <span class="tag tag-active">Prontuário Eletrônico Unificado</span>
+                <span class="tag tag-active">Infraestrutura Cloud &amp; Dados</span>
+                <span class="tag tag-active">Cibersegurança &amp; LGPD</span>
+                <span class="tag tag-active">Jornada Digital do Paciente</span>
+                <span class="tag tag-opportunity">Interoperabilidade de dados de saúde</span>
+                <span class="tag tag-opportunity">DevOps &amp; MLOps em escala</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades de Alta Prioridade</h3>
+            <div class="alert-box">
+                <strong>Janela Estratégica:</strong> A Hapvida concluiu a integração pós-fusão em 2025 e está entrando em um novo ciclo de investimentos em eficiência operacional e tecnologia. Com 150+ projetos de IA em diferentes estágios, há demanda evidente por parceiros que acelerem a industrialização e governança desses modelos.
+            </div>
+            <div class="grid-2">
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade #1</div>
+                    <div class="value">Governança e MLOps para escalar 200+ modelos de IA — a empresa possui modelos em vários estágios sem framework padronizado de produtização</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade #2</div>
+                    <div class="value">Automação inteligente de processos administrativos — autorizações, auditoria de sinistros e faturamento com IA para reduzir sinistralidade de 75,5%</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade #3</div>
+                    <div class="value">Integração de dados e APIs entre 832 unidades — conectar sistemas legados de Hapvida e NotreDame em plataforma unificada</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade #4</div>
+                    <div class="value">Cibersegurança e conformidade LGPD — proteção de dados sensíveis de saúde de 16 milhões de beneficiários em ambiente pós-fusão</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Felipe Arantes</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>AI Squad — Aceleração com IA</h4>
+                    <span class="score-badge">Fit: 95%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>150+ projetos de IA em andamento precisam de governança, MLOps e industrialização</li>
+                        <li>Demanda por IA agentiva e generativa no setor saúde está em aceleração em 2026</li>
+                        <li>Necessidade de escalar de ~90 modelos ativos para centenas com consistência e monitoramento</li>
+                        <li>Felipe Arantes tem background em inovação digital — perfil receptivo a soluções de IA avançada</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Integração &amp; APIs (parceria Digibee)</h4>
+                    <span class="score-badge">Fit: 92%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Fusão de dois grandes ecossistemas demanda integração massiva de sistemas legados</li>
+                        <li>832 unidades em todo o Brasil com sistemas heterogêneos para unificar</li>
+                        <li>Necessidade de interoperabilidade de dados de saúde (prontuário, agendamento, faturamento)</li>
+                        <li>Digibee é plataforma iPaaS cloud-native ideal para integrações de alta complexidade no setor saúde</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Squads de Desenvolvimento &amp; Automação</h4>
+                    <span class="score-badge">Fit: 90%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Automação de processos administrativos (autorizações, auditoria, faturamento) é prioridade para reduzir sinistralidade</li>
+                        <li>Felipe Arantes tem experiência com squads e metodologia ágil (implementou na Azul e Carrefour)</li>
+                        <li>Modelo de squads dedicados permite escalar capacidade de entrega sem sobrecarga da equipe interna</li>
+                        <li>Oportunidade de automatizar processos com IA que processam contas 10x mais rápido com 98% de eficiência</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Cibersegurança &amp; Conformidade (ISO 27001/27701)</h4>
+                    <span class="score-badge">Fit: 85%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Dados sensíveis de saúde de 16 milhões de beneficiários exigem proteção rigorosa sob LGPD</li>
+                        <li>Ambiente pós-fusão cria superfície de ataque ampliada com sistemas heterogêneos</li>
+                        <li>Certificações ISO 27001/27701 da Foursys são diferencial direto para o setor de saúde</li>
+                        <li>Regulação ANS e LGPD exigem compliance robusto — oportunidade de consultoria especializada</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Gestão de Dados &amp; Analytics</h4>
+                    <span class="score-badge">Fit: 82%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Analytics preditivo de sinistralidade é chave para reduzir a taxa de 75,5% e melhorar margens</li>
+                        <li>Predição de eventos clínicos e identificação de grupos de risco requerem plataformas de dados maduras</li>
+                        <li>Integração de dados de 832 unidades exige governança de dados centralizada</li>
+                        <li>Oportunidade de construir data lake/lakehouse unificado pós-fusão</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Felipe Arantes lidera 150+ projetos de IA com foco em saúde assistencial e operacional. Iniciar a conversa demonstrando como a Foursys pode acelerar a <strong>industrialização e governança de modelos de IA em escala</strong> — tema central para quem já passou da fase de experimentação e precisa produtizar. Mencionar o AI Squad proprietário da Foursys e cases de MLOps em ambientes regulados. A experiência dele com squads ágeis (Azul, Carrefour) torna a linguagem de squads e delivery contínuo natural e receptiva.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A Hapvida está em um ponto de inflexão: concluiu a integração pós-fusão e agora precisa extrair valor de escala. Com <strong>sinistralidade de 75,5%</strong> pressionando margens e <strong>R$ 9,8 bilhões em caixa</strong>, há orçamento e urgência para investir em automação inteligente, integração de sistemas e analytics preditivo. A janela é agora — antes que novos contratos com fornecedores de ciclo longo sejam fechados para o ciclo 2026-2027.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>AI Squad</strong> — capacidade comprovada de industrializar IA em ambientes regulados; (2) <strong>Parceria Digibee</strong> — integração de sistemas legados em escala, essencial para a unificação pós-fusão; (3) <strong>Certificações ISO 27001/27701</strong> — diferencial crítico no setor de saúde com dados sensíveis sob LGPD; (4) <strong>Modelo flexível de squads</strong> — Felipe já conhece e valoriza esse modelo; (5) <strong>24 anos de mercado com 41.000+ projetos</strong> — maturidade e confiabilidade para um ecossistema de 16 milhões de beneficiários.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. Sinistralidade é o KPI que decide orçamentos:</strong> Com 75,5% no 4T25, cada ponto percentual de redução representa centenas de milhões em economia. Posicionar soluções de IA preditiva e automação de auditoria como ferramentas diretas de redução de sinistralidade conecta a Foursys ao objetivo financeiro #1 da empresa.</p>
+                <p style="margin-bottom:12px"><strong>2. De 150 projetos de IA para valor de escala:</strong> A Hapvida tem volume impressionante de iniciativas de IA (150+ projetos, 200+ modelos), mas a industrialização — levar de piloto para produção com monitoramento, drift detection e governança — é o gargalo natural. O AI Squad da Foursys endereça exatamente essa dor.</p>
+                <p style="margin-bottom:12px"><strong>3. Fusão completada = momento de capturar sinergias:</strong> Com 16 vice-presidências reduzidas para 8 e operações unificadas, 2026 é o primeiro ano em que a empresa pode realmente capturar sinergias tecnológicas. Integração de dados e sistemas legados entre Hapvida e NotreDame é prioridade — a Digibee é a ferramenta ideal para isso.</p>
+                <p style="margin-bottom:12px"><strong>4. Telemedicina em escala nacional exige infraestrutura robusta:</strong> Com 700 mil teleconsultas mensais e meta de aumentar resolutividade, a plataforma digital precisa de escalabilidade, segurança e integração com prontuário — áreas onde squads de desenvolvimento especializados fazem diferença.</p>
+                <p><strong>5. Concorrência acirrada da Amil:</strong> A Amil ganhou 874 mil novos beneficiários em 2025 enquanto a Hapvida perdeu clientes em novembro. A resposta competitiva passa por experiência digital superior do paciente — jornada digital fluida, app, telemedicina e personalização com IA.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Amil (UnitedHealth Group)</h4>
+                <p><strong>Segmento:</strong> Saúde suplementar premium e popular | <strong>Lucro Líquido:</strong> R$ 5,4 bilhões (2025)</p>
+                <p>Maior operadora em lucro líquido do Brasil, com forte avanço em planos populares de entrada em SP e RJ. Ganhou 874 mil novos beneficiários em 2025, avançando diretamente sobre o mercado da Hapvida. Beneficia-se do grupo UnitedHealth para investimentos em tecnologia e analytics avançado. Estratégia agressiva de precificação em mercados-chave.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>SulAmérica (Rede D'Or)</h4>
+                <p><strong>Segmento:</strong> Saúde suplementar corporativa e individual | <strong>Lucro Líquido:</strong> R$ 3,4 bilhões (2025)</p>
+                <p>Integrada à Rede D'Or desde 2022, beneficia-se da maior rede hospitalar privada da América Latina. Modelo verticalizado com hospitais, labs e clínicas próprios do grupo. Investimento massivo em transformação digital com Kleber Linhares como VP de Tecnologia. Forte presença em planos corporativos de grande porte e seguros de saúde premium.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Bradesco Saúde</h4>
+                <p><strong>Segmento:</strong> Saúde suplementar premium | <strong>Lucro Líquido:</strong> R$ 3,1 bilhões (2025)</p>
+                <p>Rede credenciada premium com hospitais como Albert Einstein e Sírio-Libanês. Não possui rede própria, operando com modelo de reembolso e rede referenciada. Forte em planos corporativos de alto ticket. Investimentos em digitalização da jornada do beneficiário e telemedicina. Beneficia-se da capilaridade e marca do grupo Bradesco.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Unimed (Sistema Cooperativo)</h4>
+                <p><strong>Segmento:</strong> Saúde suplementar cooperativa | <strong>Receita combinada:</strong> ~R$ 70 bilhões (sistema)</p>
+                <p>Maior sistema cooperativo de saúde do mundo, com presença em 83% dos municípios brasileiros. Estrutura descentralizada com 340+ cooperativas independentes. Investimentos em integração tecnológica entre cooperativas (Unimed Digital), mas fragmentação limita velocidade de inovação. Forte fidelidade médica pelo modelo cooperativo.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Os concorrentes da Hapvida estão investindo fortemente em <strong>verticalização digital</strong> (Rede D'Or/SulAmérica com infraestrutura integrada), <strong>analytics avançado</strong> (Amil com expertise UnitedHealth) e <strong>experiência premium do paciente</strong> (Bradesco). A Hapvida tem vantagem na escala de IA (150+ projetos), mas apresenta gaps potenciais em: (1) <strong>Industrialização de modelos de IA</strong> — muitos projetos em andamento sem framework padronizado de MLOps; (2) <strong>Integração de dados pós-fusão</strong> — 832 unidades com sistemas legados heterogêneos; (3) <strong>Experiência digital do paciente</strong> — a Amil está ganhando clientes com jornada digital mais fluida; (4) <strong>Automação inteligente de back-office</strong> — faturamento, autorizações e auditoria de sinistros ainda com alto componente manual. A Foursys pode se posicionar como parceira de aceleração nessas quatro frentes com AI Squad, Digibee, squads de desenvolvimento e consultoria em segurança.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Diretor de Tecnologia e Inovação — Grupo Hapvida NotreDame Intermédica (desde nov/2021)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Total</div>
+                        <div class="value">17+ anos em TI, com passagens por Carrefour Brasil e Azul Linhas Aéreas</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Background Técnico</div>
+                        <div class="value">Metodologias ágeis (Tribes/Squads), transformação digital, RPA, produtos digitais mobile, planejamento estratégico de TI</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Anterior — Carrefour Brasil</div>
+                        <div class="value">Gerente de TI Sênior (2020-2021): Liderou times de SuperApp, plataforma Loyalty e produtos Mobile com metodologia ágil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Anterior — Azul Linhas Aéreas</div>
+                        <div class="value">Head de Planejamento Estratégico de TI (2016-2020): Implantou metodologia ágil, formou Tribes e Squads, liderou projetos de automação (RPA) e governança de TI</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Temas de Interesse Público</div>
+                        <div class="value">Liderança e inovação corporativa no setor de saúde, gestão de TI estratégica, transformação digital em escala</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Fale a linguagem de squads e agilidade:</strong> Felipe implementou Tribes e Squads na Azul, liderou times ágeis no Carrefour e agora escala 150+ projetos de IA na Hapvida. Ele conhece profundamente o modelo — use termos como "squad dedicado", "delivery contínuo" e "escalabilidade" para gerar conexão imediata.</p>
+                <p style="margin-bottom:10px"><strong>2. Reconheça a magnitude da integração pós-fusão:</strong> Unificar dois ecossistemas tecnológicos gigantes (Hapvida + NotreDame) é um feito raro no mercado brasileiro. Demonstrar admiração genuína pelo desafio e perguntar sobre os aprendizados cria um rapport autêntico — líderes de TI raramente recebem reconhecimento por esse tipo de trabalho invisível.</p>
+                <p style="margin-bottom:10px"><strong>3. Conecte-se pela trajetória em aviação:</strong> Felipe passou 8+ anos na Azul — setor onde precisão, eficiência e escala são imperativos. Fazer paralelos entre a complexidade operacional da aviação e da saúde (ambas lidam com vidas, regulação pesada e operação 24/7) demonstra sofisticação e compreensão do seu perfil.</p>
+                <p style="margin-bottom:10px"><strong>4. Aborde inovação com dados concretos:</strong> Ele é Diretor de Tecnologia <em>e Inovação</em> — o título duplo indica que valoriza avanço tecnológico, não apenas manutenção. Traga benchmarks e tendências concretas de IA no setor de saúde (como IA agentiva processando faturamento 10x mais rápido) para ativar seu interesse por inovação.</p>
+                <p><strong>5. Demonstre conhecimento do setor de saúde:</strong> Mencione a pressão de sinistralidade, o avanço da Amil em mercados-chave e a tendência de IA agentiva na saúde. Mostrar que você entende os desafios específicos do setor — e não está fazendo uma abordagem genérica — diferencia imediatamente a Foursys de outros fornecedores.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Líder de TI e Posição de Tecnologia</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Diretoria de Tecnologia e Inovação</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">VP de Tecnologia (superior direto)</div>
+                        <div class="value">Kleber Linhares — Vice-Presidente Executivo de TI</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo de Atuação</div>
+                        <div class="value">Tecnologia e Inovação — abrange IA, digital, transformação e inovação aplicada</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Modelo de Gestão</div>
+                        <div class="value">Ágil — Tribes, Squads e delivery contínuo (implementado pessoalmente em posições anteriores)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores da Empresa</div>
+                        <div class="value">68.000+ (operação) + 28 mil médicos + 22 mil dentistas</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI (Beneficiários)</div>
+                        <div class="value">~16 milhões de beneficiários na plataforma digital</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Unidades Atendidas por TI</div>
+                        <div class="value">832 unidades próprias em todas as regiões do Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: IA e digital são pilares declarados pelo CEO para eficiência operacional e competitividade</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Indicadores Financeiros Chave</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Receita Líquida (2025)</div><div class="bar-track"><div class="bar-fill" style="width:100%;background:#1a237e">R$ 30,9 BI</div></div></div>
+                <div class="bar"><div class="bar-label">EBITDA Ajustado (2025)</div><div class="bar-track"><div class="bar-fill" style="width:35%;background:#1a237e">R$ 3,3 BI</div></div></div>
+                <div class="bar"><div class="bar-label">Investimentos Expansão (2025)</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">R$ 900 MM</div></div></div>
+                <div class="bar"><div class="bar-label">Caixa Disponível</div><div class="bar-track"><div class="bar-fill" style="width:50%;background:#3949ab">R$ 9,8 BI</div></div></div>
+                <div class="bar"><div class="bar-label">Sinistralidade (4T25)</div><div class="bar-track"><div class="bar-fill" style="width:75%;background:#e17055">75,5%</div></div></div>
+                <div class="bar"><div class="bar-label">Margem EBITDA (2025)</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#5c6bc0">10,9%</div></div></div>
+                <div class="bar"><div class="bar-label">Alavancagem (Dívida/EBITDA)</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#00b894">1,3x</div></div></div>
+                <div class="bar"><div class="bar-label">Crescimento Receita (YoY)</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#00b894">+6,6%</div></div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Contexto de Fornecedores &amp; Parcerias</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Parcerias Tecnológicas Conhecidas</h4>
+                    <div>
+                        <span class="tag tag-active">Oracle (Data & AI Forum)</span>
+                        <span class="tag tag-active">Plataformas de IA em saúde</span>
+                        <span class="tag tag-active">Parceiros de telemedicina</span>
+                    </div>
+                    <h4 style="margin-top:16px;margin-bottom:12px;color:var(--primary)">Critérios Prováveis de Seleção</h4>
+                    <div>
+                        <span class="tag tag-active">Expertise em saúde/regulação</span>
+                        <span class="tag tag-active">Capacidade de escala nacional</span>
+                        <span class="tag tag-active">Metodologia ágil comprovada</span>
+                        <span class="tag tag-active">Relação custo-eficiência</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Parceiro com expertise comprovada em IA, integração de sistemas e capacidade de entrega ágil em escala</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Modelo de Contratação Provável</div>
+                        <div class="value">Squads dedicados / Projetos com escopo definido — Felipe tem histórico de valorizar modelos ágeis de entrega</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Ponto de Atenção</div>
+                        <div class="value">VP de TI (Kleber Linhares) pode ser decisor final — Felipe é influenciador-chave e potencial sponsor técnico</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

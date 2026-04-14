@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Eduardo Magalhães Barbosa | KINROSS</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Eduardo Magalhães Barbosa</h1>
+                <h2>Gerente Sênior de TI, RH e Suprimentos — KINROSS BRASIL MINERAÇÃO</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Mineração | Belo Horizonte - MG</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Receita Global</div>
+                    <div class="value">US$ 7,05 BI (2025)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">1% a 2% da receita</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescimento Recorde</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: KINROSS BRASIL MINERAÇÃO</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Kinross Gold Corporation</strong> é uma das maiores produtoras de ouro do mundo, com sede em Toronto, Canadá. No Brasil, opera através da <strong>Kinross Brasil Mineração</strong>, responsável pela mina <strong>Morro do Ouro em Paracatu (MG)</strong> — a maior mina de ouro do país — e mantém escritório corporativo em <strong>Belo Horizonte</strong>. Em 2025, Paracatu produziu <strong>601,3 mil onças de ouro</strong> (+13,8% vs. 2024), marcando o oitavo ano consecutivo acima de 500 mil onças. Globalmente, a Kinross entregou <strong>2 milhões de onças equivalentes</strong>, com receita de <strong>US$ 7,05 bilhões</strong> (+37%), lucro líquido de <strong>US$ 2,39 bilhões</strong> (+152%) e fluxo de caixa livre recorde de <strong>US$ 2,5 bilhões</strong>. As mineradoras canadenses controlam cerca de 50% da produção de ouro no Brasil, com a Kinross liderando com 22-25% do total nacional. Em janeiro de 2026, <strong>Rodrigo Gomides</strong> assumiu a presidência da operação brasileira. Para 2026, a empresa planeja investir <strong>US$ 235 milhões em capex</strong> em Paracatu e ampliar a exploração regional, com aproximadamente <strong>700 mil onças adicionadas às reservas</strong> em 2025.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global (Américas, África, Oriente Médio)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Multinacional — Capital Aberto (NYSE: KGC / TSX: K)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Forte Crescimento — Receita +37% em 2025</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores Brasil</div>
+                        <div class="value">~1.800 diretos + 3.000-4.000 terceirizados</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Eduardo Magalhães Barbosa é um executivo com <strong>mais de 31 anos de experiência</strong> em TI, RH e Supply Chain. Lidera as áreas de Tecnologia, Recursos Humanos e Suprimentos na Kinross Brasil. Foi reconhecido no <strong>ranking IT Leaders 2015 (#2 geral)</strong> na categoria Agronegócio/Mineração. A Kinross vive seu melhor momento financeiro com lucro recorde e forte investimento em expansão, o que cria oportunidades para modernização tecnológica e digital. O orçamento de TI da empresa está entre <strong>1% e 2% da receita</strong>, representando um potencial significativo dado o volume de faturamento global.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernização de sistemas legados e unificação de plataformas (substituição de planilhas por CapEx360)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção de IA e Data Science para otimização de operações minerárias e manutenção preditiva</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Automação de processos operacionais e administrativos (Mineração 4.0)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integração de dados entre mina, planta, supply chain e escritório corporativo</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Cibersegurança e proteção de infraestrutura crítica (OT/IT convergence)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Gestão de mudança com nova liderança presidencial (Rodrigo Gomides em jan/2026)</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Prioridades de Investimento Setorial</h4>
+                    <div style="margin-bottom:16px">
+                        <span class="tag tag-priority">IA e Data Science</span>
+                        <span class="tag tag-priority">Automação Industrial</span>
+                        <span class="tag tag-priority">Integração de Sistemas</span>
+                    </div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Tendências do Setor Mineração 2026</h4>
+                    <div>
+                        <span class="tag tag-active">Veículos Autônomos</span>
+                        <span class="tag tag-active">Drones de Monitoramento</span>
+                        <span class="tag tag-active">Digital Twins</span>
+                        <span class="tag tag-active">Manutenção Preditiva</span>
+                        <span class="tag tag-active">ESG &amp; Sustentabilidade</span>
+                        <span class="tag tag-active">Monitoramento Ambiental</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses com base no perfil da empresa e tendências do setor:</p>
+            <div>
+                <span class="tag tag-opportunity">CapEx em Equipamentos — US$ 95 MM</span>
+                <span class="tag tag-opportunity">Instalações Fabris — US$ 25 MM</span>
+                <span class="tag tag-opportunity">Instalações de Rejeitos — US$ 55 MM</span>
+                <span class="tag tag-opportunity">Exploração Regional — US$ 60 MM</span>
+                <span class="tag tag-active">Plataformas Digitais de Mina</span>
+                <span class="tag tag-active">IA e Data Science</span>
+                <span class="tag tag-active">Digital Workplace</span>
+                <span class="tag tag-active">CapEx360 — Governança de Capital</span>
+                <span class="tag tag-active">Automação e Veículos Autônomos</span>
+                <span class="tag tag-active">Monitoramento por Drones</span>
+                <span class="tag tag-active">Sustentabilidade e Redução de Emissões</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <div class="alert-box">
+                <strong>Momento de alta para a Kinross:</strong> Com lucro recorde (+152%), fluxo de caixa livre de US$ 2,5 bi e nova liderança no Brasil, há janela de oportunidade para novos investimentos em tecnologia e transformação digital.
+            </div>
+            <div class="grid-2">
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Integração de Sistemas Legados</h4>
+                        <span class="score-badge">ALTA</span>
+                    </div>
+                    <div class="reasons">
+                        <p style="font-size:14px;color:var(--text-light)">A Kinross recentemente substituiu sistemas legados pelo CapEx360 para governança de capital. Há potencial para expandir a integração com JD Edwards, OneStream e outros sistemas operacionais.</p>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Automação de Processos (RPA/IA)</h4>
+                        <span class="score-badge">ALTA</span>
+                    </div>
+                    <div class="reasons">
+                        <p style="font-size:14px;color:var(--text-light)">Eduardo lidera TI, RH e Suprimentos — três áreas com alto potencial de automação. A convergência dessas responsabilidades cria oportunidade para soluções integradas de automação.</p>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>IA e Analytics para Operações</h4>
+                        <span class="score-badge">MÉDIA-ALTA</span>
+                    </div>
+                    <div class="reasons">
+                        <p style="font-size:14px;color:var(--text-light)">A Kinross já investe em IA/Data Science (programa de estágios, plataformas digitais de mina). Há espaço para aceleração com squads especializados em modelos preditivos e otimização de lavra.</p>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Cibersegurança OT/IT</h4>
+                        <span class="score-badge">MÉDIA</span>
+                    </div>
+                    <div class="reasons">
+                        <p style="font-size:14px;color:var(--text-light)">Convergência de redes operacionais (OT) com TI corporativa é desafio crítico na mineração. Veículos autônomos e drones ampliam a superfície de ataque e demandam segurança especializada.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Eduardo Magalhães Barbosa</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. Squads de Integração &amp; APIs (Digibee)</h4>
+                    <span class="score-badge">Score 9.2</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>A Kinross precisa integrar sistemas legados (JD Edwards, OneStream, CapEx360) com plataformas digitais de mina</li>
+                        <li>Parceria Foursys + Digibee oferece integração low-code com velocidade de implementação</li>
+                        <li>Eduardo gerencia TI e Suprimentos — integração entre ERP e supply chain é prioridade direta</li>
+                        <li>Modelo de entrega por squads reduz dependência de equipe interna limitada</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. AI Squad — Automação Inteligente</h4>
+                    <span class="score-badge">Score 8.8</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Kinross já investe em IA e Data Science — AI Squad Foursys pode acelerar entrega de modelos preditivos</li>
+                        <li>Automação de processos de RH, Suprimentos e operações minerárias com IA</li>
+                        <li>Setor mineração projeta aumento de 20%+ em orçamento de IA nos próximos 12 meses (EY)</li>
+                        <li>Experiência Foursys com IA aplicada a operações industriais e supply chain</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. Automação de Processos (RPA + Hyperautomation)</h4>
+                    <span class="score-badge">Score 8.5</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Eduardo acumula gestão de TI, RH e Suprimentos — processos transversais com alto potencial de automação</li>
+                        <li>Processos de contratação, onboarding, compras e gestão de terceirizados podem ser automatizados</li>
+                        <li>Kinross tem 3.000-4.000 terceirizados — gestão desse volume demanda automação robusta</li>
+                        <li>ROI rápido e comprovável para justificar expansão de orçamento de TI</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. Cibersegurança — Assessment e Monitoramento</h4>
+                    <span class="score-badge">Score 7.8</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Convergência OT/IT na mineração exige segurança especializada para redes operacionais</li>
+                        <li>Veículos autônomos e drones ampliam superfície de ataque digital</li>
+                        <li>Certificações Foursys ISO 27001/27701 posicionam como parceiro qualificado</li>
+                        <li>Infraestrutura crítica minerária é alvo prioritário de ameaças cibernéticas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>5. Projetos de Modernização &amp; Cloud</h4>
+                    <span class="score-badge">Score 7.5</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Substituição de planilhas e processos manuais por plataformas integradas (já iniciada com CapEx360)</li>
+                        <li>Modernização do digital workplace para equipes distribuídas entre Paracatu e BH</li>
+                        <li>Modelo Foursys de squads, projetos ou AMS permite flexibilidade de entrega</li>
+                        <li>Experiência de 24 anos com 41.000+ projetos garante redução de riscos na implementação</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Eduardo é um executivo multifuncional com visão integrada de <strong>TI, RH e Supply Chain</strong>. Iniciar a conversa demonstrando como a Foursys pode resolver desafios transversais — não apenas de tecnologia, mas de processos que conectam pessoas, suprimentos e operações. Referenciar o <strong>reconhecimento dele no IT Leaders 2015</strong> como ponto de rapport e demonstrar que a Foursys entende o perfil estratégico da função dele. Destacar cases em mineração e indústria pesada com automação, integração e IA aplicada.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A Kinross vive seu melhor momento financeiro com <strong>lucro recorde de US$ 2,39 bilhões</strong> e planeja investir <strong>US$ 235 milhões em Paracatu em 2026</strong>. Com nova presidência no Brasil (Rodrigo Gomides), há janela para propostas de transformação digital. O perfil multifuncional de Eduardo — controlando TI, RH e Suprimentos — permite uma entrada única: automação de processos que cruzam todas as três áreas, com ROI mensurável.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: Parceria com <strong>Digibee</strong> para integração de sistemas legados (JD Edwards, OneStream), <strong>AI Squad proprietário</strong> para acelerar adoção de IA em operações, certificações <strong>ISO 27001/27701</strong> para segurança de infraestrutura crítica, e modelo flexível de entrega (Squads, Projetos, AMS) que se adapta ao porte e ritmo da operação minerária.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. Momento financeiro excepcional cria janela de investimento:</strong> Com lucro +152% e fluxo de caixa livre de US$ 2,5 bi, a Kinross tem capital disponível para modernização tecnológica. Historicamente, o orçamento de TI é 1-2% da receita — com receita de US$ 7 bi, mesmo 1% representa US$ 70 milhões. É o momento de propor projetos de alto impacto.</p>
+                <p style="margin-bottom:12px"><strong>2. Perfil multifuncional é vantagem competitiva:</strong> Eduardo lidera TI, RH e Suprimentos simultaneamente. Isso é raro e indica visão integrada de processos. Soluções que automatizam o ciclo completo — desde contratação e onboarding (RH), passando por compras e logística (Suprimentos), até monitoramento e operações (TI) — terão fit superior.</p>
+                <p style="margin-bottom:12px"><strong>3. Substituição de legados já começou:</strong> A implementação do CapEx360 (concluída em 4,5 meses) mostra que a Kinross está aberta a modernização rápida. A dor anterior — planilhas, falta de visibilidade, ausência de reporting centralizado — provavelmente existe em outras áreas. Use isso como prova de que a abordagem de squads ágeis funciona.</p>
+                <p style="margin-bottom:12px"><strong>4. Mineração 4.0 exige parceiro de tecnologia:</strong> A Kinross opera veículos autônomos, drones e plataformas digitais de mina. Integrar essas tecnologias com os sistemas corporativos (ERP, HR, Supply Chain) requer capacidade de middleware e APIs — exatamente onde a parceria Foursys + Digibee se destaca.</p>
+                <p><strong>5. Nova liderança busca resultados rápidos:</strong> Rodrigo Gomides assumiu a presidência em janeiro de 2026. Novos presidentes tipicamente buscam projetos com ROI rápido e visível para demonstrar resultados. Propostas de automação com retorno em 3-6 meses são ideais para este momento político da organização.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>AngloGold Ashanti (África do Sul / Global)</h4>
+                <p><strong>Segmento:</strong> Mineração de ouro — segunda maior produtora no Brasil (~13% do total) | <strong>Receita:</strong> ~US$ 5,5 bilhões (2024)</p>
+                <p>Principal competidora da Kinross no Brasil. Recentemente vendeu a mina Serra Grande (GO) para a Aura Minerals. Investe em automação de minas subterrâneas, monitoramento remoto e plataformas digitais. Foco em redução de custos operacionais via tecnologia e consolidação de portfólio em ativos de alto retorno.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Aura Minerals (Canadá / Brasil)</h4>
+                <p><strong>Segmento:</strong> Mineração de ouro e metais preciosos — em forte expansão | <strong>Receita:</strong> ~US$ 600 milhões (2025)</p>
+                <p>Produção recorde de 82,1 mil onças no 1T26. Adquiriu a mina Serra Grande da AngloGold por US$ 76 milhões. Opera seis minas ativas nas Américas. Empresa em crescimento acelerado com foco em eficiência operacional e expansão via aquisições — representa ameaça crescente ao market share da Kinross.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Jaguar Mining (Canadá / Brasil)</h4>
+                <p><strong>Segmento:</strong> Mineração de ouro em Minas Gerais | <strong>Receita:</strong> ~US$ 200-300 milhões</p>
+                <p>Operações concentradas em MG, com minas subterrâneas. Menor escala que a Kinross, mas compete diretamente por talentos e recursos na região. Investe em automação subterrânea e segurança operacional. Presença regional forte cria competição por mão de obra qualificada em Minas Gerais.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Vale S.A. (Brasil)</h4>
+                <p><strong>Segmento:</strong> Mineração diversificada (minério de ferro, cobre, níquel) | <strong>Receita:</strong> ~US$ 42 bilhões (2024)</p>
+                <p>Maior mineradora do Brasil e referência em tecnologia de mineração. Lidera em automação com minas autônomas (Carajás S11D), drones, IA e monitoramento de barragens em tempo real. Embora não compita diretamente em ouro, é benchmark tecnológico do setor e compete por talentos de TI. Parceira histórica de consultorias globais.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Os concorrentes da Kinross estão investindo fortemente em <strong>automação de operações minerárias</strong> (Vale com minas autônomas em Carajás), <strong>plataformas digitais integradas</strong> e <strong>IA aplicada à produção</strong>. A Kinross avança com CapEx360, IA/Data Science e veículos autônomos, mas pode ter gaps em: (1) <strong>Integração end-to-end</strong> entre sistemas operacionais de mina e corporativos (JD Edwards, OneStream); (2) <strong>Automação de processos administrativos</strong> — RH, Suprimentos e compliance — que ainda podem depender de processos manuais; (3) <strong>Governança de dados e IA</strong> em escala, especialmente para consolidar insights de múltiplas fontes (geologia, produção, supply chain, financeiro). A Foursys pode se posicionar como parceira para acelerar essas frentes com squads especializados em IA, automação e integração via Digibee.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Gerente Sênior de TI, RH e Suprimentos — Kinross Brasil Mineração</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Belo Horizonte, MG (operações em Paracatu, MG)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência</div>
+                        <div class="value">+31 anos em TI, RH e Supply Chain — executivo multifuncional raro no mercado</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reconhecimentos</div>
+                        <div class="value">IT Leaders 2015 — #2 no ranking geral, categoria Agronegócio/Mineração</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Carreira na Kinross</div>
+                        <div class="value">IT Director South America (2011-2017), IT Manager Brazil (2007-2009), atual Gerente SR TI/RH/Suprimentos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Temas de Interesse</div>
+                        <div class="value">Transformação digital, inovação, diversidade &amp; inclusão, ESG, Programa de Mentoria Feminina</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconheça o perfil multifuncional:</strong> Eduardo é raro — lidera TI, RH e Suprimentos simultaneamente. Começar reconhecendo essa visão integrada demonstra que você pesquisou e entende a complexidade da função dele. Pergunte como ele equilibra as três áreas e onde vê mais sinergia.</p>
+                <p style="margin-bottom:10px"><strong>2. Referencie o IT Leaders 2015:</strong> Ele foi #2 no ranking nacional. Mencionar esse reconhecimento cria vínculo imediato e mostra que você valoriza a trajetória dele — não apenas o cargo atual. "Eduardo, vi que você foi destaque no IT Leaders — como a função de TI na mineração evoluiu desde então?"</p>
+                <p style="margin-bottom:10px"><strong>3. Conecte-se pelo tema de diversidade:</strong> Eduardo coordena o Programa de Diversidade, Equidade e Inclusão da Kinross desde 2020, incluindo Mentoria Feminina e parcerias com SENAI para mulheres. Mostrar interesse genuíno nesses temas cria conexão pessoal e demonstra alinhamento de valores.</p>
+                <p style="margin-bottom:10px"><strong>4. Fale sobre o momento da Kinross:</strong> A empresa bate recordes consecutivos. Demonstrar que você acompanha o desempenho — produção de 601 mil onças, lucro recorde, nova presidência — mostra preparo e gera confiança. "A Kinross está em um momento excepcional; como a TI acompanha esse ritmo de crescimento?"</p>
+                <p><strong>5. Explore a visão de supply chain digital:</strong> Com a responsabilidade de Suprimentos, Eduardo tem dores práticas que TI resolve: gestão de 3.000+ terceirizados, compras, logística para Paracatu. Pergunte sobre os maiores desafios de supply chain — isso abre porta para automação e integração.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Executivo e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Gerência Sênior — reporta à diretoria/presidência Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo de Atuação</div>
+                        <div class="value">Tríplice: Tecnologia da Informação + Recursos Humanos + Suprimentos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Responsabilidade Social</div>
+                        <div class="value">Responsável pela conformidade SA 8000 (responsabilidade social) e Programa D&amp;I</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão</div>
+                        <div class="value">Decisor direto em TI, RH e Suprimentos — influenciador em investimentos operacionais</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores Diretos (Brasil)</div>
+                        <div class="value">~1.800 empregados diretos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Terceirizados</div>
+                        <div class="value">3.000 a 4.000 trabalhadores terceirizados</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI</div>
+                        <div class="value">Habilitadora de operações e transformação digital — integrada com RH e Supply Chain</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Sistemas Principais</div>
+                        <div class="value">JD Edwards (ERP), OneStream (financeiro), CapEx360 (governança de capital)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+                <div class="bar"><div class="bar-label">Software On-Prem (ERP/JDE)</div><div class="bar-track"><div class="bar-fill" style="width:22%;background:#1a237e">22%</div></div></div>
+                <div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#3949ab">18%</div></div></div>
+                <div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">12%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas (TI)</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#9fa8da">3%</div></div></div>
+            </div>
+            <p style="margin-top:16px;font-size:12px;color:var(--text-light);text-align:center"><em>* Distribuição estimada com base no perfil da empresa e referências do setor de mineração. Orçamento de TI entre 1-2% da receita (~US$ 70-140 MM).</em></p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências e Contexto de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Fatores Relevantes para Decisão</h4>
+                    <div>
+                        <span class="tag tag-active">Experiência no setor de mineração</span>
+                        <span class="tag tag-active">Capacidade de integração com JD Edwards</span>
+                        <span class="tag tag-active">Velocidade de implementação</span>
+                        <span class="tag tag-active">ROI comprovável</span>
+                        <span class="tag tag-active">Modelo flexível de entrega</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Contexto de Compra</div>
+                        <div class="value">Multinacional com processos de procurement globais — decisões locais para escopo Brasil</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Histórico de Parceiros</div>
+                        <div class="value">Caprivi Solutions (CapEx360), JD Edwards (Oracle), OneStream — preferência por soluções especializadas em mineração</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

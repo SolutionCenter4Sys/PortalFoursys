@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Karine Chaves Santos | JUNTO SEGUROS</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Karine Chaves Santos</h1>
+                <h2>CTIO (Chief Technology and Innovation Officer) — JUNTO SEGUROS</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Seguradoras | Curitiba - PR</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Prêmio Direto</div>
+                    <div class="value">R$ 1 BI (2025)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Lucro Líquido</div>
+                    <div class="value">R$ 168,4 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescimento +55,8%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: JUNTO SEGUROS</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Junto Seguros</strong> é a <strong>líder do mercado de Seguro Garantia no Brasil</strong> pelo quarto ano consecutivo (dados SUSEP), com sede em Curitiba (PR). Fundada em 1992 como JMalucelli Seguradora, adotou a marca Junto Seguros em 2018. Integra o Grupo JMalucelli e conta com a <strong>Travelers (EUA)</strong> como sócia com 43% de participação desde 2010. Em 2025, a empresa alcançou resultados históricos: lucro líquido de <strong>R$ 168,4 milhões</strong> (+55,8%), prêmio direto de <strong>R$ 1 bilhão</strong> em Seguro Garantia e patrimônio líquido de <strong>R$ 755,4 milhões</strong> (+13%). Possui mais de <strong>2,2 milhões de apólices emitidas</strong>, atende <strong>108 mil empresas</strong> e opera com <strong>7 mil corretores parceiros</strong>. A Junto é reconhecida pelo 4º ano consecutivo entre as <strong>100+ Inovadoras em TI</strong> pelo IT Fórum (10ª posição em 2025, avançando 4 posições). Pioneira na emissão de apólices digitais desde 2008, a empresa lançou em 2025 o <strong>LLOBO</strong>, motor de IA Generativa para otimização de processos, e reformulou suas apólices digitais com princípios de <strong>Visual Law</strong>. Atua também na Colômbia através da controlada Cardinal.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Nacional (com presença na Colômbia)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada (Grupo JMalucelli + Travelers 43%)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento acelerado (+55,8% em lucro 2025)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">200 a 500</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Seguros</strong> com abrangência <strong>Nacional</strong>, líder absoluta em Seguro Garantia no Brasil. Karine Chaves Santos ocupa o cargo de <strong>CTIO</strong> desde novembro de 2021, liderando equipes que representam <strong>~23% da empresa</strong> — abrangendo tecnologia, produtos digitais, dados e IA. A Junto vive um momento de forte crescimento financeiro e aceleração tecnológica com IA Generativa (LLOBO), plataformas digitais e Open Insurance. A empresa é reconhecida como uma das 10 mais inovadoras em TI no Brasil e busca consolidar-se como referência em insurtech no setor de garantias.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar IA Generativa (LLOBO) para toda a cadeia de valor — da subscrição ao atendimento ao corretor</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adaptar-se ao Open Insurance (SISS) e integração com ecossistemas digitais de seguros</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos end-to-end: cotação, emissão, sinistro e renovação</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer cibersegurança e proteção de dados em ambiente 100% digital</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Expandir plataformas digitais para assessorias e novos canais de distribuição</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Manter liderança de mercado frente à concorrência cada vez mais digital (Pottencial, insurtechs)</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">IA Generativa / GenAI</span>
+                        <span class="tag tag-priority">Plataformas Digitais e APIs</span>
+                        <span class="tag tag-priority">Data Analytics &amp; BI</span>
+                        <span class="tag tag-priority">Open Insurance</span>
+                        <span class="tag tag-priority">Cibersegurança</span>
+                        <span class="tag tag-priority">Automação de Processos</span>
+                    </div>
+                    <div style="margin-top:20px">
+                        <h4 style="margin-bottom:12px;color:var(--primary)">Posição no Ranking TI</h4>
+                        <div class="info-card">
+                            <div class="label">IT Fórum — 100+ Inovadoras em TI</div>
+                            <div class="value">10ª posição (2025) — 4º ano consecutivo no ranking</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses com base nas iniciativas públicas da empresa:</p>
+            <div>
+                <span class="tag tag-active">IA Generativa (LLOBO — expansão para corretores)</span>
+                <span class="tag tag-active">Plataforma digital para assessorias</span>
+                <span class="tag tag-active">Automação de crédito e subscrição com IA</span>
+                <span class="tag tag-active">Open Insurance / APIs de integração</span>
+                <span class="tag tag-active">Apólice digital com Visual Law</span>
+                <span class="tag tag-active">Data Analytics para precificação</span>
+                <span class="tag tag-opportunity">Seguro embarcado (embedded insurance)</span>
+                <span class="tag tag-opportunity">Microsseguros e novos produtos digitais</span>
+                <span class="tag tag-opportunity">Ciberseguros</span>
+                <span class="tag tag-opportunity">Infraestrutura cloud-native</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <div class="alert-box">
+                <strong>Alta probabilidade de demanda por parceiro tecnológico.</strong> A Junto Seguros está em plena expansão de suas plataformas digitais e escalando IA Generativa. Com equipe de TI representando ~23% da empresa e crescimento acelerado, há necessidade de parceiros especializados para sustentar o ritmo de inovação.
+            </div>
+            <div class="grid-2">
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Escalabilidade de IA / GenAI</h4>
+                        <span class="score-badge">Muito Alta</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>LLOBO precisa escalar para corretores parceiros e novos casos de uso</li>
+                            <li>Governança e MLOps para modelos em produção</li>
+                            <li>Integração de IA com processos de negócio existentes</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Integração e APIs (Open Insurance)</h4>
+                        <span class="score-badge">Alta</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Open Insurance exige integrações robustas e padronizadas</li>
+                            <li>Plataforma de assessorias precisa de APIs escaláveis</li>
+                            <li>Integração com sistemas de corretoras e parceiros</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Automação de Processos</h4>
+                        <span class="score-badge">Alta</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>95% de aumento em análises de crédito automatizadas — foco em expandir</li>
+                            <li>Aprovação em menos de 10 segundos — padronizar para outros processos</li>
+                            <li>R$ 55 bilhões em limites aprovados automaticamente (2023)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Modernização e Cloud</h4>
+                        <span class="score-badge">Média-Alta</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Suportar crescimento de 55,8% com infraestrutura escalável</li>
+                            <li>Migração e modernização de sistemas legados</li>
+                            <li>Plataformas cloud-native para novas aplicações</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Karine Chaves Santos</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. AI Squad — Aceleração com IA</h4>
+                    <span class="score-badge">Fit 95%</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;color:var(--text)">Squads especializados em IA/ML para escalar o LLOBO e criar novos casos de uso de GenAI na cadeia de seguros.</p>
+                    <ul>
+                        <li>Escalabilidade do LLOBO para corretores e novos processos (subscrição, sinistros, precificação)</li>
+                        <li>MLOps e governança de modelos de IA em produção</li>
+                        <li>Automação inteligente de análise de crédito e documentos com IA</li>
+                        <li>Cases em setor financeiro e seguros — ambiente regulado</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. Integração &amp; APIs (Parceria Digibee)</h4>
+                    <span class="score-badge">Fit 90%</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;color:var(--text)">Plataforma de integração low-code para acelerar Open Insurance e conectar ecossistema de parceiros.</p>
+                    <ul>
+                        <li>Integração Open Insurance (SISS) com padrões SUSEP/regulatórios</li>
+                        <li>APIs para plataforma de assessorias e corretores parceiros</li>
+                        <li>Conectividade com sistemas legados e ERPs de clientes corporativos</li>
+                        <li>Redução de tempo de integração de meses para semanas</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. Squads de Desenvolvimento — Produtos Digitais</h4>
+                    <span class="score-badge">Fit 88%</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;color:var(--text)">Squads ágeis para acelerar o desenvolvimento de plataformas digitais e novos produtos de seguros.</p>
+                    <ul>
+                        <li>Evolução da plataforma digital de assessorias (módulos futuros: dashboards, pagamentos)</li>
+                        <li>Desenvolvimento de produtos embedded insurance e microsseguros</li>
+                        <li>Apólice digital com Visual Law — evolução contínua da experiência do usuário</li>
+                        <li>Modelo flexível: squads dedicados ou por projeto</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. Data &amp; Analytics</h4>
+                    <span class="score-badge">Fit 82%</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;color:var(--text)">Engenharia de dados e analytics para suportar decisões de precificação, risco e expansão comercial.</p>
+                    <ul>
+                        <li>Data lake/lakehouse para consolidar dados de 2,2 milhões de apólices</li>
+                        <li>Modelos preditivos de sinistralidade e precificação dinâmica</li>
+                        <li>Dashboards executivos para 108 mil empresas atendidas</li>
+                        <li>Governança de dados para compliance regulatório (SUSEP, LGPD)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>5. Cibersegurança &amp; Compliance</h4>
+                    <span class="score-badge">Fit 78%</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;color:var(--text)">Proteção de ambientes digitais e conformidade regulatória para operação 100% digital.</p>
+                    <ul>
+                        <li>Segurança de APIs e plataformas digitais expostas a parceiros</li>
+                        <li>LGPD e compliance SUSEP para dados sensíveis de segurados</li>
+                        <li>Certificações ISO 27001/27701 da Foursys como diferencial</li>
+                        <li>Proteção contra fraudes digitais em emissão automatizada de apólices</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Karine Chaves é uma líder orientada à inovação que posicionou a Junto Seguros entre as <strong>10 mais inovadoras em TI do Brasil</strong>. Iniciar a conversa reconhecendo essa conquista e demonstrando conhecimento sobre o <strong>LLOBO</strong> e a jornada de GenAI da empresa. Apresentar cases Foursys de <strong>escalabilidade de IA em ambientes regulados</strong> (setor financeiro/seguros) e como o AI Squad pode acelerar a expansão do LLOBO para corretores e novos processos. A parceria Digibee para integrações é um diferencial direto para o desafio de Open Insurance.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A Junto Seguros cresce <strong>55,8% em lucro</strong> e está expandindo agressivamente suas plataformas digitais. A equipe de tecnologia representa ~23% da empresa, mas o ritmo de crescimento exige parceiros externos para sustentar a velocidade de inovação. O lançamento do LLOBO, a nova plataforma de assessorias e a adaptação ao Open Insurance criam <strong>múltiplas janelas de oportunidade simultâneas</strong> para squads de desenvolvimento, IA e integração.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>AI Squad proprietário</strong> — experiência em escalar IA em produção com governança, essencial para o LLOBO; (2) <strong>Parceria Digibee</strong> — plataforma low-code de integração ideal para Open Insurance e APIs de corretores; (3) <strong>Certificações ISO 27001/27701</strong> — segurança e privacidade de dados para ambiente regulado de seguros; (4) <strong>24 anos e 41.000+ projetos</strong> — maturidade e escala para sustentar o crescimento acelerado da Junto.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. LLOBO é o coração da estratégia digital:</strong> O motor de GenAI da Junto já automatiza análise documental, extração de dados contratuais e crédito. O próximo passo é disponibilizá-lo para 7 mil corretores parceiros — isso exige escalabilidade, MLOps e APIs robustas. A Foursys pode ser a parceira que acelera essa expansão com squads especializados em IA.</p>
+                <p style="margin-bottom:12px"><strong>2. Open Insurance é imperativo regulatório:</strong> O amadurecimento do SISS exige que a Junto construa integrações padronizadas com todo o ecossistema de seguros. A parceria Foursys + Digibee oferece uma solução pronta para esse desafio, reduzindo tempo de integração drasticamente.</p>
+                <p style="margin-bottom:12px"><strong>3. Crescimento de 55,8% pressiona a capacidade de TI:</strong> Com lucro saltando de R$ 108 MM para R$ 168,4 MM e prêmio direto de R$ 1 BI, a Junto precisa escalar sua infraestrutura e equipe de desenvolvimento. Squads externos especializados são a forma mais rápida de atender essa demanda sem onerar o headcount fixo.</p>
+                <p style="margin-bottom:12px"><strong>4. Concorrência digital se intensifica:</strong> A Pottencial lançou IA para cotações com redução de 80% no tempo. Insurtechs como 88i avançam com modelos nativamente digitais. A Junto precisa manter sua vantagem competitiva com velocidade de inovação — parceiros como a Foursys são multiplicadores dessa capacidade.</p>
+                <p><strong>5. Karine valoriza diversidade e inovação:</strong> Ela é co-autora de livros sobre "Mulheres na Tecnologia", mentora pelo MCIO e Conselheiras do Brasil. A abordagem deve refletir esses valores — demonstrar a cultura de inovação e diversidade da Foursys pode criar conexão pessoal genuína.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Pottencial Seguradora</h4>
+                <p><strong>Segmento:</strong> Seguro Garantia, Aluguel, Riscos de Engenharia | <strong>Prêmios:</strong> R$ 771,4 MM (2024) | <strong>Market share:</strong> ~15%</p>
+                <p>Principal concorrente direta. Posiciona-se como "insurtech com DNA tecnológico" e lançou IA para cotações que reduz em <strong>80%</strong> o tempo do corretor. Oferece mais de 60 modalidades de Seguro Garantia. Rating A+ (Fitch) e NPS 83. Investe fortemente em automação, regulação de sinistros com IA e Portal do Parceiro digital. Reivindicou liderança por 7 anos — disputa direta com a Junto.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Swiss Re Corporate Solutions</h4>
+                <p><strong>Segmento:</strong> Seguros corporativos e resseguros | <strong>Receita global:</strong> ~US$ 41 bilhões (grupo)</p>
+                <p>Gigante global de resseguros com presença relevante em Seguro Garantia no Brasil. Diferencia-se pela sofisticação em análise de risco e modelos atuariais avançados. Investe em plataformas digitais globais, analytics preditivo e parcerias com insurtechs. Representa uma ameaça pelo poder financeiro e tecnológico global, embora tenha menor capilaridade local que a Junto.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Chubb Seguros</h4>
+                <p><strong>Segmento:</strong> Seguros corporativos, garantia e linhas comerciais | <strong>Receita global:</strong> ~US$ 54 bilhões (grupo)</p>
+                <p>Maior seguradora de propriedade e casualty do mundo. Opera no Brasil com foco em seguros corporativos e Seguro Garantia. Forte investimento global em plataformas digitais, automação de subscrição e IA para precificação. Abordagem enterprise com foco em grandes contas — pode competir com a Junto em clientes de maior porte.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Tokio Marine Seguradora</h4>
+                <p><strong>Segmento:</strong> Multi-ramos (auto, vida, garantia, empresarial) | <strong>Prêmios Brasil:</strong> ~R$ 13 bilhões (2024)</p>
+                <p>Uma das maiores seguradoras do Brasil com forte presença em múltiplos ramos. Investimentos significativos em transformação digital, plataformas de cotação online e atendimento omnichannel. Embora Seguro Garantia não seja seu core, sua escala e investimento tecnológico a tornam competidora relevante em determinados nichos.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>A concorrência está investindo pesado em IA e automação: a Pottencial já oferece cotação com IA (80% mais rápida), e gigantes globais como Swiss Re e Chubb trazem plataformas digitais sofisticadas. A Junto lidera com o LLOBO e a apólice digital, mas enfrenta gaps em: (1) <strong>Escalabilidade do LLOBO para o ecossistema de corretores</strong> — precisa de MLOps e APIs robustas para 7 mil parceiros; (2) <strong>Open Insurance end-to-end</strong> — integrações padronizadas que ainda estão em construção; (3) <strong>Infraestrutura cloud-native</strong> para suportar o crescimento acelerado sem gargalos; (4) <strong>Analytics avançado de sinistralidade</strong> para competir com os modelos atuariais sofisticados da Swiss Re e Chubb. A Foursys pode se posicionar como parceira estratégica para fechar esses gaps com AI Squad, Digibee e squads de desenvolvimento ágil.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CTIO (Chief Technology and Innovation Officer) — Junto Seguros (desde Nov/2021)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Curitiba, PR</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Mestrado em Ciência da Computação (Recuperação de Informação)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência</div>
+                        <div class="value">+25 anos em TI — Internet, E-commerce, Telecom, Serviços de TI</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Empresas Anteriores</div>
+                        <div class="value">TIVIT, Telefónica, UOL Group, entre outras</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Eventos</div>
+                        <div class="value">IT Forum Trancoso 2024, IT Forum Salvador 2023, CQCS Inovação 2025 (Protagonismo Feminino 2.0)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Afiliações</div>
+                        <div class="value">Membro do MCIO, Conselheiras do Brasil, co-autora de "Mulheres na Tecnologia"</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Visão Declarada</div>
+                        <div class="value">"Referência é apoiada no conhecimento, não no cargo" — lidera pela competência técnica e inovação</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconheça a conquista do ranking IT Fórum:</strong> A Junto Seguros está entre as 10 mais inovadoras em TI do Brasil — 4º ano consecutivo. Mencionar esse feito demonstra que você fez a lição de casa e valoriza o trabalho da Karine como CTIO responsável por essa transformação.</p>
+                <p style="margin-bottom:10px"><strong>2. Fale sobre o LLOBO com propriedade:</strong> Poucos executivos têm um produto de IA com nome e identidade própria. Perguntar sobre a evolução do LLOBO e os próximos casos de uso demonstra interesse genuíno e abre espaço para posicionar o AI Squad como acelerador.</p>
+                <p style="margin-bottom:10px"><strong>3. Conecte-se pelo tema de diversidade e liderança feminina:</strong> Karine é co-autora de livros sobre mulheres na tecnologia, mentora e palestrante sobre protagonismo feminino. Reconhecer essa causa com autenticidade — sem ser superficial — cria vínculo pessoal forte.</p>
+                <p style="margin-bottom:10px"><strong>4. Referencie sua trajetória diversa:</strong> TIVIT, Telefónica, UOL — ela vem de ambientes de alta escala e velocidade. Posicione a Foursys como parceira que entende esse ritmo e pode operar com a agilidade que ela está acostumada.</p>
+                <p><strong>5. Compartilhe visão sobre o futuro do seguro digital:</strong> Open Insurance, embedded insurance, IA para precificação — Karine é uma CTIO que pensa em produto e inovação, não apenas em infraestrutura. Uma conversa sobre tendências do setor (não apenas venda de serviços) gera engajamento intelectual e confiança.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil da CTIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Diretoria C-Level (CTIO)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo de Liderança</div>
+                        <div class="value">~23% da empresa: Tecnologia, Produtos Digitais, Dados e IA</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Alta — responsável pela estratégia tecnológica e inovação</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Tempo no Cargo</div>
+                        <div class="value">Desde novembro de 2021 (~4,5 anos)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores da Empresa</div>
+                        <div class="value">200 a 500</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Empresas Atendidas</div>
+                        <div class="value">108.000+</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Corretores Parceiros</div>
+                        <div class="value">7.000+</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Protagonista: TI lidera a inovação e a estratégia de produto da empresa</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Indicadores Financeiros da Junto Seguros</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Lucro 2025 (R$ MM)</div><div class="bar-track"><div class="bar-fill" style="width:85%;background:#1a237e">R$ 168,4</div></div></div>
+                <div class="bar"><div class="bar-label">Lucro 2024 (R$ MM)</div><div class="bar-track"><div class="bar-fill" style="width:55%;background:#3949ab">R$ 108,0</div></div></div>
+                <div class="bar"><div class="bar-label">Prêmio Direto (R$ BI)</div><div class="bar-track"><div class="bar-fill" style="width:90%;background:#1a237e">R$ 1,0</div></div></div>
+                <div class="bar"><div class="bar-label">Patrimônio Líquido (R$ MM)</div><div class="bar-track"><div class="bar-fill" style="width:75%;background:#3949ab">R$ 755,4</div></div></div>
+                <div class="bar"><div class="bar-label">Market Share Seg. Garantia</div><div class="bar-track"><div class="bar-fill" style="width:65%;background:#5c6bc0">16%</div></div></div>
+                <div class="bar"><div class="bar-label">Apólices Emitidas (MM)</div><div class="bar-track"><div class="bar-fill" style="width:80%;background:#7986cb">2,2+</div></div></div>
+                <div class="bar"><div class="bar-label">Crescimento Lucro YoY</div><div class="bar-track"><div class="bar-fill" style="width:56%;background:#00b894">+55,8%</div></div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências e Perfil de Contratação</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios Prováveis de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Inovação e capacidade em IA</span>
+                        <span class="tag tag-active">Velocidade de entrega</span>
+                        <span class="tag tag-active">Experiência em setor regulado</span>
+                        <span class="tag tag-active">Capacidade de integração</span>
+                        <span class="tag tag-active">Cultura e valores alinhados</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Empresa de TI com expertise em IA, produtos digitais e capacidade de inovação — parceira estratégica, não apenas body shop</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Provável</div>
+                        <div class="value">Squads dedicados / Projetos com entrega definida / Parceria de inovação</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

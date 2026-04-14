@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Rodrigo Bonfim | BNP PARIBAS - CETELEM</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Rodrigo Bonfim</h1>
+                <h2>CIO / Diretor de TI — BNP PARIBAS - CETELEM</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Bancos | São Paulo, SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 1 BI a R$ 5 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 100 MM a R$ 300 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Reestruturação</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: BNP PARIBAS - CETELEM</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">O <strong>Banco Cetelem</strong> é a operação brasileira de crédito ao consumidor do grupo francês <strong>BNP Paribas</strong>, um dos maiores bancos do mundo com presença em 68 países. No Brasil desde 1998, o Cetelem construiu expertise em <strong>crédito consignado</strong>, <strong>cartões de crédito</strong>, <strong>financiamentos</strong> e <strong>seguros</strong>, atendendo aposentados/pensionistas do INSS, servidores públicos e militares. Em 2022-2023, o banco passou por uma reestruturação significativa: o BNP Paribas Personal Finance conduziu revisão estratégica global, resultando na <strong>incorporação do Banco Cetelem ao Banco BNP Paribas Brasil S.A.</strong>, aprovada pelo Banco Central em agosto de 2023. A operação de crédito ao consumidor está em fase de encerramento progressivo, enquanto o BNP Paribas Brasil fortalece suas linhas de <strong>Corporate &amp; Institutional Banking (CIB)</strong>. Em setembro de 2025, o BNP Paribas anunciou aporte de <strong>R$ 773 milhões</strong> na operação brasileira — o maior desde 2019 — sinalizando um novo ciclo de crescimento focado em clientes corporativos e infraestrutura. A <strong>BNP Paribas Cardif Brasil</strong> (seguros) lidera a transformação digital com APIs nativas em nuvem processando mais de <strong>1 milhão de transações/mês</strong> com 99,5% de disponibilidade.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global (Grupo BNP Paribas — 68 países)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada — Subsidiária de banco francês</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Negócio</div>
+                        <div class="value">Reestruturação: migração de consumer finance para CIB</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores (Brasil)</div>
+                        <div class="value">1.000 a 5.000</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor <strong>Bancário</strong> em fase de <strong>reestruturação profunda</strong>. O Banco Cetelem foi incorporado ao BNP Paribas Brasil, encerrando progressivamente operações de crédito ao consumidor. O foco estratégico migra para <strong>Corporate &amp; Institutional Banking</strong>, com aporte recente de R$ 773 milhões. O CIO Rodrigo Bonfim é reconhecido por sua expertise em <strong>cibersegurança</strong>, <strong>API Management</strong> e <strong>integração digital</strong>. Momento crítico: toda a infraestrutura de TI do legado Cetelem precisa ser <strong>consolidada, migrada ou descomissionada</strong>, enquanto a nova operação CIB exige plataformas modernas e seguras.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Consolidação de sistemas pós-incorporação (legado Cetelem → BNP Paribas Brasil)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Cibersegurança e compliance regulatório (Banco Central, LGPD, GDPR do grupo)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernização de APIs e arquitetura de integração para Open Banking/Open Finance</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Descomissionamento seguro de plataformas de consumer finance</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Suportar nova operação CIB com infraestrutura escalável e cloud-native</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Governança de dados e migração de informações entre entidades legais</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Cibersegurança &amp; Compliance</span>
+                        <span class="tag tag-priority">Integração de Sistemas / APIs</span>
+                        <span class="tag tag-priority">Cloud &amp; Modernização de Infraestrutura</span>
+                    </div>
+                    <h4 style="margin-top:20px;margin-bottom:12px;color:var(--primary)">Áreas de Atenção</h4>
+                    <div>
+                        <span class="tag tag-opportunity">Open Finance / Open Banking</span>
+                        <span class="tag tag-opportunity">Automação de Processos (RPA/IA)</span>
+                        <span class="tag tag-opportunity">Data Governance &amp; Analytics</span>
+                        <span class="tag tag-active">API Management (Axway)</span>
+                        <span class="tag tag-active">DevSecOps</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que devem receber investimento nos próximos 12 meses, considerando a reestruturação em curso:</p>
+            <div>
+                <span class="tag tag-priority">Consolidação de infraestrutura pós-merger</span>
+                <span class="tag tag-priority">Migração e descomissionamento de sistemas legado</span>
+                <span class="tag tag-priority">Plataforma de cibersegurança unificada</span>
+                <span class="tag tag-opportunity">APIs nativas em nuvem (Cardif já em produção)</span>
+                <span class="tag tag-opportunity">Open Finance — adequação regulatória</span>
+                <span class="tag tag-opportunity">Automação de processos operacionais</span>
+                <span class="tag tag-active">Governança de dados (LGPD/GDPR)</span>
+                <span class="tag tag-active">Observabilidade e monitoramento</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <div class="alert-box">
+                <strong>⚠ Momento de alta oportunidade:</strong> A incorporação do Cetelem ao BNP Paribas Brasil cria uma janela rara de necessidades em TI — consolidação de sistemas, migração de dados, descomissionamento de plataformas legado e construção de novas capacidades para a operação CIB. CIOs em processos de merger/incorporação precisam de parceiros ágeis e confiáveis.
+            </div>
+            <div class="grid-2">
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade #1</div>
+                    <div class="value">Consolidação e migração de sistemas legado Cetelem → plataforma unificada BNP Paribas Brasil</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade #2</div>
+                    <div class="value">Fortalecimento de cibersegurança durante e após a transição (DevSecOps, SIEM, SOC)</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade #3</div>
+                    <div class="value">Evolução da estratégia de APIs para Open Finance e integração com parceiros CIB</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade #4</div>
+                    <div class="value">Automação de processos operacionais remanescentes e gestão de dados regulatórios</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Rodrigo Bonfim</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. Squads de Cibersegurança &amp; DevSecOps</h4>
+                    <span class="score-badge">Score: 95/100</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Rodrigo Bonfim tem mais de 15 anos de foco em segurança da informação — este é seu tema #1</li>
+                        <li>Incorporação requer revisão completa de perímetro de segurança entre duas entidades jurídicas</li>
+                        <li>Certificações ISO 27001/27701 da Foursys alinham diretamente com exigências do grupo BNP Paribas</li>
+                        <li>Necessidade de integrar equipes de segurança e unificar políticas de proteção</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. Integração de Sistemas &amp; API Management</h4>
+                    <span class="score-badge">Score: 90/100</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Cetelem já utiliza Axway AMPLIFY API Management — Bonfim conhece o valor de APIs</li>
+                        <li>BNP Paribas Cardif processa 1M+ transações/mês via APIs cloud-native — modelo a replicar</li>
+                        <li>Parceria Foursys-Digibee para integração/iPaaS acelera consolidação pós-merger</li>
+                        <li>Open Finance exige APIs padronizadas e governadas para compliance regulatório</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. Modernização &amp; Cloud Migration</h4>
+                    <span class="score-badge">Score: 85/100</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Descomissionamento de plataformas Cetelem exige migração planejada para cloud/nova infra</li>
+                        <li>Nova operação CIB demanda infraestrutura cloud-native, escalável e resiliente</li>
+                        <li>Foursys pode acelerar migração com squads especializados e menor risco operacional</li>
+                        <li>Aporte de R$ 773 milhões sinaliza budget disponível para modernização</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. AI Squad — Automação Inteligente</h4>
+                    <span class="score-badge">Score: 78/100</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Processos operacionais remanescentes do Cetelem podem ser automatizados com IA/RPA</li>
+                        <li>Governança de dados entre entidades legais pode ser acelerada com IA</li>
+                        <li>Setor bancário demanda automação regulatória (relatórios BACEN, compliance)</li>
+                        <li>Foursys AI Squad pode entregar PoCs rápidos de automação com ROI mensurável</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Rodrigo Bonfim é apaixonado por <strong>cibersegurança</strong> e dedica mais de 15 anos ao tema. Iniciar a conversa apresentando as certificações <strong>ISO 27001/27701 da Foursys</strong> e cases de como ajudamos bancos em processos de consolidação pós-merger a manter a segurança durante a transição. Mencionar a experiência com DevSecOps e squads de segurança embarcados. Ele valorizará profundamente um parceiro que entende que segurança deve ser incorporada desde o início em todas as aplicações — princípio que ele mesmo aplica no Cetelem.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A <strong>incorporação do Banco Cetelem ao BNP Paribas Brasil</strong> cria uma janela única de necessidades em TI. O aporte de <strong>R$ 773 milhões</strong> (set/2025) confirma investimentos robustos. Áreas críticas: consolidação de sistemas, migração de dados entre entidades legais, descomissionamento seguro de plataformas legado, e construção de capacidades CIB. A Foursys pode se posicionar como <strong>parceira de execução</strong> neste momento transformacional.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>Certificações ISO 27001/27701</strong> — essenciais para o perfil security-first do CIO; (2) <strong>Parceria Digibee</strong> — integração/iPaaS complementar ao Axway que ele já usa; (3) <strong>Experiência em setor bancário</strong> — compliance BACEN, LGPD, regulatório; (4) <strong>AI Squad</strong> — automação inteligente para processos operacionais; (5) <strong>24 anos e 41.000+ projetos</strong> — maturidade e escala para um banco global.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. Incorporação = oportunidade de "TI greenfield" parcial:</strong> A fusão Cetelem → BNP Paribas Brasil exige decisões sobre o que migrar, o que reconstruir e o que descomissionar. O CIO está no epicentro dessas decisões. Parceiros que entendem a complexidade de mergers bancários (dados regulatórios, contratos, sistemas legado) terão vantagem.</p>
+                <p style="margin-bottom:12px"><strong>2. Bonfim é um CIO security-first:</strong> Todas as aplicações no Cetelem contaram com arquitetos de segurança desde o início. Ele capacita desenvolvedores para verificação de código e identificação de falhas. Qualquer proposta da Foursys precisa ter segurança como componente transversal, não como add-on.</p>
+                <p style="margin-bottom:12px"><strong>3. APIs são estratégicas e já maduras:</strong> O Cetelem implementou Axway AMPLIFY para API Management em menos de 1 mês, demonstrando agilidade. A Cardif Brasil já processa 1M+ transações/mês via APIs cloud-native. A conversa sobre integração pode ser sofisticada — Bonfim conhece o tema profundamente.</p>
+                <p style="margin-bottom:12px"><strong>4. Aporte de R$ 773 milhões confirma investimento:</strong> O maior aporte desde 2019 na operação brasileira sinaliza compromisso de longo prazo e budget disponível. A reestruturação não é redução — é reposicionamento estratégico com capital fresco.</p>
+                <p><strong>5. Regulatório como motor de investimento:</strong> Open Finance, Pix, LGPD, resoluções BACEN — o setor bancário brasileiro tem pressão regulatória constante. Cada nova regulação é uma demanda de TI. Posicionar a Foursys como parceira que entende o ritmo regulatório do BACEN é diferencial.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Banco BMG</h4>
+                <p><strong>Segmento:</strong> Crédito consignado e banco digital | <strong>Ativos:</strong> ~R$ 25 bilhões</p>
+                <p>Principal concorrente direto no segmento de consignado INSS e servidores públicos. O BMG se transformou em banco digital com o <strong>banco digital BMG</strong> e investiu fortemente em tecnologia com marketplace de serviços financeiros. Presença massiva em correspondentes bancários com mais de 20.000 pontos. Adquiriu fintechs e investiu em plataforma de Open Finance para ampliar canais digitais.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Banco Pan</h4>
+                <p><strong>Segmento:</strong> Crédito consignado, veículos e banco digital | <strong>Ativos:</strong> ~R$ 45 bilhões</p>
+                <p>Controlado pelo BTG Pactual, o Banco Pan transformou-se num dos maiores bancos digitais do Brasil com mais de 25 milhões de clientes. Oferece consignado com taxas a partir de 1,69% a.m. Investiu fortemente em <strong>plataforma 100% digital</strong>, contratação online e aprovação em minutos. Expandiu para marketplace, seguros e investimentos, usando tecnologia como diferencial competitivo.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Banco Bradesco (Losango)</h4>
+                <p><strong>Segmento:</strong> Crédito ao consumidor, consignado e financiamentos | <strong>Ativos:</strong> ~R$ 1,9 trilhão (grupo)</p>
+                <p>Através da <strong>Losango</strong>, o Bradesco compete no crédito ao consumidor e financiamentos no ponto de venda — mesmo território histórico do Cetelem. Com escala massiva, o Bradesco investe bilhões em tecnologia anualmente, incluindo IA (BIA — inteligência artificial própria), cloud computing e Open Finance. A Losango oferece crédito pessoal e consignado com forte presença em varejo e parcerias com redes de lojas.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>BV (Banco Votorantim)</h4>
+                <p><strong>Segmento:</strong> Crédito ao consumidor, veículos e energia solar | <strong>Ativos:</strong> ~R$ 100 bilhões</p>
+                <p>Joint venture entre Votorantim e Banco do Brasil, o BV reposicionou-se como banco digital focado em <strong>crédito sustentável</strong> (líder em financiamento de energia solar) e financiamento de veículos. Investiu pesado em Banking as a Service (BaaS), Open Finance e experiência digital. Modelo de parcerias B2B para distribuição de crédito via APIs — semelhante à estratégia histórica do Cetelem.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Os concorrentes do Cetelem investiram fortemente em <strong>plataformas digitais nativas</strong> (Pan, BV), <strong>Open Finance</strong> (Bradesco, BV), <strong>IA aplicada a crédito</strong> (Bradesco BIA) e <strong>marketplaces de serviços financeiros</strong> (BMG, Pan). Com a reestruturação em curso, o BNP Paribas Brasil tem gaps potenciais em: (1) <strong>Plataforma digital unificada</strong> — sistemas Cetelem estão sendo encerrados, nova operação CIB precisa de stack moderno; (2) <strong>Automação de processos bancários</strong> — concorrentes automatizaram jornadas end-to-end, enquanto a transição pode criar processos manuais temporários; (3) <strong>Open Finance avançado</strong> — além do compliance básico, APIs para ecossistema de parceiros CIB; (4) <strong>Analytics e IA</strong> — dados de risco e crédito corporativo requerem modelos sofisticados. A Foursys pode se posicionar como parceira para acelerar a construção das capacidades digitais da nova operação CIB, trazendo squads especializados em integração (Digibee), segurança (ISO 27001) e IA.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CIO / Diretor de TI — BNP Paribas - Cetelem</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">São Paulo, SP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Tempo na Função</div>
+                        <div class="value">CIO de longa data no Cetelem, acompanhando todo o processo de incorporação ao BNP Paribas Brasil</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Eventos</div>
+                        <div class="value">IT Forum Salvador — painel sobre resiliência cibernética; case publicado com Axway sobre API Management</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Temas de Interesse Público</div>
+                        <div class="value">Cibersegurança, API Management, Open Banking, integração digital, resiliência cibernética</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Paixão Declarada</div>
+                        <div class="value">"Apaixonado por segurança da informação" — 15+ anos dedicados a estratégias de cibersegurança</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Lidere pela cibersegurança — é sua paixão:</strong> Rodrigo se define como apaixonado por segurança da informação. Abrir a conversa com um insight sobre ameaças recentes ao setor bancário ou uma tendência de DevSecOps criará conexão imediata. Mencione as certificações ISO 27001/27701 da Foursys logo no início.</p>
+                <p style="margin-bottom:10px"><strong>2. Reconheça a complexidade da incorporação:</strong> Gerenciar a TI durante uma incorporação bancária é um dos desafios mais complexos para um CIO. Demonstrar empatia e conhecimento sobre as dificuldades de consolidação de sistemas, migração de dados regulatórios e gestão de stakeholders globais mostra preparo.</p>
+                <p style="margin-bottom:10px"><strong>3. Fale a linguagem de APIs:</strong> Bonfim implementou Axway AMPLIFY no Cetelem e conhece profundamente API Management. Ao mencionar a parceria Foursys-Digibee, posicione como complementar (não substituto) ao Axway — iPaaS para integração de processos, APIs para exposição de serviços.</p>
+                <p style="margin-bottom:10px"><strong>4. Referencie o IT Forum Salvador:</strong> Ele participou de painel sobre resiliência cibernética no IT Forum. Mencionar que acompanhou sua participação ou conhece os temas discutidos cria vínculo pessoal e profissional, mostrando que você fez o dever de casa.</p>
+                <p><strong>5. Posicione-se como parceiro de transição:</strong> Em momentos de reestruturação, CIOs buscam parceiros que tragam estabilidade e execução, não complexidade. Enfatize o modelo de squads da Foursys — equipes prontas, que embarcam rápido e entregam com autonomia. Ele precisa de mãos confiáveis, não de mais estratégia.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria executiva</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte à presidência / CEO local e CIO global do grupo BNP Paribas</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Dupla Governança</div>
+                        <div class="value">Sujeito a políticas globais do grupo (Paris) e regulação local (BACEN, LGPD)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão</div>
+                        <div class="value">Decisor técnico com influência em orçamento — aprovações maiores passam pelo grupo</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores (Empresa)</div>
+                        <div class="value">1.000 a 5.000 (operação Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 5.000</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">50 a 200 (estimativa considerando reestruturação)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI na Reestruturação</div>
+                        <div class="value">Protagonista: TI lidera a consolidação de sistemas, migração de dados e construção da nova plataforma CIB</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Cibersegurança &amp; Compliance</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+                <div class="bar"><div class="bar-label">Integração / APIs / Middleware</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+                <div class="bar"><div class="bar-label">Infra / Cloud</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#3949ab">20%</div></div></div>
+                <div class="bar"><div class="bar-label">Operação &amp; Sustentação</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas &amp; Consultoria</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Software / Licenciamento</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#7986cb">7%</div></div></div>
+                <div class="bar"><div class="bar-label">Capacitação / Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#9fa8da">3%</div></div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Expertise em Segurança</span>
+                        <span class="tag tag-active">Certificações (ISO 27001)</span>
+                        <span class="tag tag-active">Experiência no Setor Bancário</span>
+                        <span class="tag tag-active">Agilidade de Entrega</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Empresa de TI com maturidade em segurança, compliance bancário e capacidade de execução rápida</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Squads dedicados / Projetos com escopo definido — sujeito a procurement global do grupo BNP Paribas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

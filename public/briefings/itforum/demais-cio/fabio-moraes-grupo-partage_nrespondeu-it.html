@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Fabio Moraes | GRUPO PARTAGE</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Fabio Moraes</h1>
+                <h2>CIO — GRUPO PARTAGE</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Holdings e Grupos Empresariais | São Paulo, SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">~R$ 3 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Shoppings</div>
+                    <div class="value">14 em operação + 2 greenfields</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Expansão acelerada</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: GRUPO PARTAGE</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">O <strong>Grupo Partage</strong> é uma holding brasileira fundada em 1997 pela família Dellape Baptista, uma das famílias fundadoras da farmacêutica Aché. Iniciou suas atividades com empreendimentos imobiliários corporativos Triple A em São Paulo (Faria Lima e Paulista) e ingressou no mercado de shopping centers em 2010 com a aquisição do Partage Shopping São Gonçalo (RJ). Atualmente opera <strong>14 shopping centers</strong> e <strong>10 torres corporativas</strong> em todas as cinco regiões do Brasil, totalizando <strong>508 mil m² de ABL</strong> (Área Bruta Locável), com passagem anual de mais de <strong>41 milhões de visitantes</strong> e <strong>9,5 milhões de veículos</strong>. Os empreendimentos movimentam cerca de <strong>R$ 3 bilhões por ano</strong>. A empresa está em plena fase de expansão com dois projetos greenfield em construção: <strong>Partage Brasília</strong> (inauguração prevista para 2026) e <strong>Partage São Paulo</strong> (2026–2027), marcando o retorno estratégico às grandes capitais. No campo tecnológico, a Partage concluiu em setembro de 2025 a implementação do <strong>SAP S/4HANA Cloud</strong> via programa Rise with SAP, substituindo sistemas fragmentados por uma plataforma integrada com redução esperada de <strong>40% no tempo de execução de processos</strong>. Para 2026, planeja pilotos com <strong>IA generativa Joule</strong> (SAP) e um projeto de <strong>analytics corporativo</strong> para cruzar dados de vendas, performance de lojistas e campanhas de marketing.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Nacional — 5 regiões do Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada (Capital Fechado)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento — 2 novos shoppings em construção</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">800+ (grupo total)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>O Grupo Partage vive um momento de <strong>transformação e expansão simultâneas</strong>. Acabou de concluir a implementação do SAP S/4HANA Cloud (set/2025) e agora precisa escalar a plataforma, incorporar os novos empreendimentos (Brasília e São Paulo) e avançar em IA e analytics. O CIO Fabio Moraes chegou em 2025 trazendo experiência de larga escala da ALLOS (58 shoppings) e tem como missão transformar a TI de área de suporte em <strong>parceira estratégica do negócio</strong>. A empresa está em fase de maturação tecnológica — saiu de sistemas fragmentados para um ERP integrado e agora precisa de camadas de inteligência (dados, IA, automação) sobre essa base. Este é o momento ideal para apresentar parceiros que acelerem essa segunda onda de transformação.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar e integrar novos empreendimentos (Brasília/SP) ao SAP S/4HANA sem aumento proporcional de equipe</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Estruturar analytics corporativo para cruzar vendas, performance de lojistas e campanhas de marketing</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Implementar IA generativa (Joule/SAP) para automação de contratos e pedidos</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Consolidar governança de dados após migração para plataforma unificada</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Posicionar TI como business partner — criar valor além do operacional</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer cibersegurança em ambiente cloud-first com múltiplos empreendimentos</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">SAP S/4HANA — Evolução e novos módulos</span>
+                        <span class="tag tag-priority">Analytics &amp; Business Intelligence</span>
+                        <span class="tag tag-priority">IA Generativa (Joule/SAP)</span>
+                        <span class="tag tag-priority">Integração de dados entre empreendimentos</span>
+                        <span class="tag tag-priority">Infraestrutura Cloud</span>
+                    </div>
+                    <h4 style="margin-top:24px;margin-bottom:12px;color:var(--primary)">Iniciativas Confirmadas</h4>
+                    <div>
+                        <span class="tag tag-active">SAP S/4HANA Cloud — Go-live concluído (set/2025)</span>
+                        <span class="tag tag-active">Assistente virtual Microsoft Teams — Em produção</span>
+                        <span class="tag tag-active">Piloto IA Joule — Planejado para 2026</span>
+                        <span class="tag tag-active">Analytics corporativo — Em estruturação</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses com base nas declarações públicas e projetos em andamento:</p>
+            <div>
+                <span class="tag tag-active">ERP / SAP S/4HANA (evolução)</span>
+                <span class="tag tag-active">IA Generativa</span>
+                <span class="tag tag-active">Analytics &amp; BI</span>
+                <span class="tag tag-active">Cloud (infraestrutura)</span>
+                <span class="tag tag-opportunity">Integração de dados</span>
+                <span class="tag tag-opportunity">Automação de processos</span>
+                <span class="tag tag-opportunity">Cibersegurança</span>
+                <span class="tag tag-opportunity">Gestão de contratos</span>
+                <span class="tag tag-opportunity">Plataforma de dados para lojistas</span>
+                <span class="tag tag-opportunity">Experiência digital do consumidor</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades sem Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Com base na pesquisa, os seguintes projetos estão em fase inicial ou de estruturação, sem fornecedor publicamente confirmado:</p>
+            <div class="alert-box">
+                <strong>&#9888; Analytics Corporativo:</strong> Projeto em estruturação para cruzar dados de vendas, performance de lojistas e campanhas de marketing. Não há fornecedor de BI/analytics publicamente anunciado — janela aberta para posicionar a Foursys.
+            </div>
+            <div class="alert-box">
+                <strong>&#9888; Integração de Dados entre Empreendimentos:</strong> Com 14 shoppings + 2 novos em construção, a necessidade de integração end-to-end é crítica. O SAP resolve a camada ERP, mas a integração de dados operacionais (fluxo de visitantes, estacionamento, segurança, HVAC) ainda representa oportunidade.
+            </div>
+            <div class="alert-box">
+                <strong>&#9888; Automação de Contratos e Pedidos (IA):</strong> Planejado como piloto com Joule/SAP em 2026, mas a implementação completa pode exigir parceiro de integração e customização.
+            </div>
+            <div class="alert-box">
+                <strong>&#9888; Experiência Digital do Consumidor:</strong> Concorrentes como ALLOS e Multiplan investem em apps, loyalty e dados de consumo. A Partage ainda não tem plataforma digital voltada ao consumidor publicamente anunciada.
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Fabio Moraes</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. Dados &amp; Inteligência Artificial — Analytics Corporativo</h4>
+                    <span class="score-badge">Fit: 95%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>A Partage está estruturando projeto de analytics corporativo (vendas, lojistas, campanhas) — sem fornecedor definido</li>
+                        <li>Foursys oferece estratégia de dados, fundação corporativa e inteligência preditiva</li>
+                        <li>Experiência com dados de varejo e plataformas de BI sobre SAP</li>
+                        <li>Possibilidade de entregar dashboards executivos com KPIs por empreendimento</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. Dados &amp; IA — IA Generativa e Hiperautomação</h4>
+                    <span class="score-badge">Fit: 90%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Piloto com Joule/SAP planejado para 2026 — a Partage precisará de parceiro para implementação e expansão</li>
+                        <li>Foursys tem squad de IA generativa e hiperautomação no portfólio</li>
+                        <li>Oportunidade de ir além do Joule: chatbots para lojistas, automação de contratos, análise preditiva de ocupação</li>
+                        <li>Fabio já implementou IA na ALLOS — sabe o valor e procurará acelerar na Partage</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. Engenharia Digital — Integração e Plataformas</h4>
+                    <span class="score-badge">Fit: 85%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>14 shoppings + 2 novos precisam de integração de dados operacionais além do SAP</li>
+                        <li>Foursys atua com modernização de ecossistemas e construção de plataformas</li>
+                        <li>Parceria Foursys + Digibee pode resolver integração de APIs entre empreendimentos</li>
+                        <li>Necessidade de escalar sem aumento proporcional de equipe — modelo de squads é ideal</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. Cibersegurança — Proteção Cloud-First</h4>
+                    <span class="score-badge">Fit: 75%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Migração para SAP S/4HANA Cloud amplia superfície de ataque</li>
+                        <li>Dados de lojistas e consumidores exigem conformidade com LGPD</li>
+                        <li>Certificações Foursys ISO 27001/27701 demonstram credibilidade</li>
+                        <li>Múltiplos empreendimentos = múltiplos pontos de entrada para ameaças</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>5. Agilidade &amp; Org Design — Modelo Operacional de TI</h4>
+                    <span class="score-badge">Fit: 70%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Fabio quer posicionar TI como business partner — exige redesenho organizacional</li>
+                        <li>Transição de TI operacional para TI estratégica demanda novo modelo de governança</li>
+                        <li>Foursys oferece otimização de fluxo de valor e alinhamento estratégico</li>
+                        <li>Experiência em varejo e real estate pode acelerar a maturação</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Fabio Moraes acabou de concluir uma implementação SAP S/4HANA Cloud e agora está estruturando a <strong>segunda onda de transformação: analytics, IA e integração</strong>. O gancho ideal é abrir a conversa reconhecendo a conquista do go-live do SAP e perguntar como ele planeja extrair valor dos dados agora integrados. Posicionar a Foursys como parceira que acelera a camada de inteligência sobre o ERP — analytics corporativo, IA generativa e integração entre empreendimentos. Mencionar a experiência da Foursys com o studio de Dados &amp; IA e cases em varejo/real estate.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>O projeto de <strong>analytics corporativo</strong> está em estruturação e não tem fornecedor anunciado. Os pilotos de <strong>IA generativa com Joule</strong> estão planejados para 2026 e exigirão parceiro de implementação. Com <strong>2 novos shoppings em construção</strong> (Brasília e São Paulo), a demanda por integração e escalabilidade será crescente ao longo de 2026-2027. Este é o timing perfeito para entrar como parceiro tecnológico.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>Studio de Dados &amp; IA</strong> com capacidade de entregar desde fundação de dados até IA generativa e hiperautomação; (2) <strong>Modelo de squads</strong> que permite escalar sem aumentar headcount fixo — exatamente o que a Partage precisa para incorporar novos empreendimentos; (3) <strong>Parceria Digibee</strong> para integração de APIs entre shoppings; (4) <strong>Certificações ISO 27001/27701</strong> para segurança em ambiente cloud-first; (5) <strong>24 anos de experiência</strong> com 41.000+ projetos demonstra solidez e confiança.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. Pós-SAP é o momento mais crítico:</strong> A Partage investiu 14 meses na implementação do S/4HANA Cloud. O erro mais comum após um go-live de ERP é não investir na camada de inteligência — analytics, IA e automação sobre os dados agora integrados. A Foursys pode ser o parceiro que transforma dados unificados em vantagem competitiva real.</p>
+                <p style="margin-bottom:12px"><strong>2. Fabio conhece escala — use isso a seu favor:</strong> Ele gerenciou TI de 58 shoppings na ALLOS com 170+ profissionais. Na Partage, tem uma operação menor (14 shoppings, ~800 colaboradores) mas em rápida expansão. Ele sabe o que funciona em escala e buscará parceiros que entreguem essa experiência sem o overhead de uma equipe grande.</p>
+                <p style="margin-bottom:12px"><strong>3. Analytics para lojistas é diferencial competitivo:</strong> Concorrentes como ALLOS já possuem plataforma digital avançada (ALLOSTech). A Partage precisa equiparar essa capacidade para atrair e reter lojistas — dashboards de vendas, fluxo e performance são o mínimo esperado pelo mercado.</p>
+                <p style="margin-bottom:12px"><strong>4. Dois shoppings novos = laboratório de inovação:</strong> O Partage Brasília e Partage São Paulo podem nascer digital-first. É mais fácil implementar analytics, IoT e experiência digital do consumidor em empreendimentos novos do que retrofitar os existentes — oportunidade para projetos-referência.</p>
+                <p><strong>5. Capital fechado = decisão ágil:</strong> Diferente de concorrentes listados na B3 (ALLOS, Multiplan, Iguatemi), o Grupo Partage é de capital fechado. Isso significa ciclos de decisão potencialmente mais rápidos e menos burocracia para aprovar investimentos — desde que o business case seja sólido.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>ALLOS (Brasil)</h4>
+                <p><strong>Segmento:</strong> Shopping centers — maior operadora da América Latina | <strong>Vendas totais:</strong> R$ 47 bilhões/ano | <strong>Market Cap:</strong> R$ 13,9 bilhões</p>
+                <p>Resultado da fusão entre brMalls e Aliansce Sonae em 2023, opera 58 shoppings com mais de 13 mil lojas. Criou a plataforma <strong>ALLOSTech</strong> com soluções digitais integradas. Primeira do setor a integrar o ISE B3 (índice de sustentabilidade). Em abril de 2026, fechou parceria com Kinea para fundo imobiliário de R$ 2 bilhões. Fortíssima presença digital e de dados — é o benchmark direto que Fabio Moraes conhece intimamente por ter sido CIO lá.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Multiplan (Brasil)</h4>
+                <p><strong>Segmento:</strong> Shopping centers premium | <strong>Shoppings:</strong> 20 | <strong>Market Cap:</strong> R$ 15,4 bilhões (maior do setor)</p>
+                <p>Foco em público de alta renda no Sudeste e Sul. Maior market cap do setor reflete qualidade do portfólio e gestão. Investe em dados de consumo, geolocalização e análise de fluxo para otimização de mix de lojas. Modelo de gestão integrada com desenvolvimento imobiliário próprio — incluindo residencial e corporativo ao redor dos shoppings.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Iguatemi (Brasil)</h4>
+                <p><strong>Segmento:</strong> Shopping centers de luxo e alta renda | <strong>Shoppings:</strong> 16 | <strong>Vendas:</strong> R$ 18+ bilhões/ano</p>
+                <p>Posicionamento premium no Sudeste e Sul. Em 2024, adquiriu o icônico Shopping RioSul (RJ) em parceria com BB Premium Malls e Combrashop. Forte investimento em experiência digital do consumidor, programa de fidelidade e plataforma de e-commerce integrada. Referência em curadoria de marcas e experiência de compra.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>JHSF (Brasil)</h4>
+                <p><strong>Segmento:</strong> Shopping centers de ultra-luxo | <strong>Shoppings:</strong> 7 | <strong>Foco:</strong> Sudeste e Sul</p>
+                <p>Menor entre os principais competidores, mas com posicionamento ultra-premium (Cidade Jardim, Catarina Fashion Outlet). Diversificação em hotelaria de luxo (Fasano), aviação executiva (São Paulo Catarina Aeroporto Executivo) e incorporação residencial. Modelo integrado de lifestyle que vai além do shopping.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>O Grupo Partage está tecnologicamente atrás dos concorrentes listados em bolsa, mas isso é uma <strong>oportunidade, não uma fraqueza</strong>. Com a base SAP S/4HANA recém-implementada, a Partage pode saltar etapas que concorrentes percorreram ao longo de anos. Os principais gaps identificados são: (1) <strong>Plataforma de analytics para lojistas</strong> — ALLOS já tem ALLOSTech, Multiplan usa geolocalização e dados de consumo; a Partage ainda está estruturando; (2) <strong>Experiência digital do consumidor</strong> — sem app ou programa de fidelidade público, enquanto concorrentes investem pesado; (3) <strong>Integração IoT operacional</strong> — dados de fluxo de visitantes, estacionamento e facilities management ainda não estão conectados ao ERP; (4) <strong>Automação de processos</strong> — a redução de 40% prometida pelo SAP precisa de camadas de automação inteligente para se materializar. A Foursys pode ser o parceiro que fecha esses gaps com squads de Dados &amp; IA, Engenharia Digital e Integração.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CIO (Chief Information Officer) — Grupo Partage</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">São Paulo, SP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Tecnólogo em Processamento de Dados — PUC-Rio | MBA em Gestão de Projetos — UFRJ</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Anterior Relevante</div>
+                        <div class="value">CIO da ALLOS (58 shoppings, 170+ profissionais de TI) — liderou fusão tecnológica brMalls + Aliansce Sonae</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória</div>
+                        <div class="value">ALLOS → Aliansce Sonae → Ernst & Young → Concremat → Casa & Vídeo → Unimed Rio → Intelig Telecom</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Atividade Complementar</div>
+                        <div class="value">Conselheiro da Netglobe Tech for Hybrid Workplace — estratégia de portfólio, cultura e inovação</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconheça a conquista do SAP S/4HANA:</strong> A implementação de um ERP cloud em 14 meses (jul/2024 a set/2025) é uma conquista significativa. Abrir reconhecendo esse feito demonstra que você fez a lição de casa e cria uma conexão positiva imediata.</p>
+                <p style="margin-bottom:10px"><strong>2. Conecte-se pela experiência na ALLOS:</strong> Fabio liderou a unificação tecnológica da maior operadora de shoppings da América Latina. Pergunte sobre os aprendizados dessa fusão e como ele está aplicando na Partage — ele terá prazer em compartilhar e isso revela as prioridades reais dele.</p>
+                <p style="margin-bottom:10px"><strong>3. Fale sobre "business partnering":</strong> Ele declarou publicamente que quer posicionar TI como criadora de valor, não apenas como suporte. Use essa linguagem: "Como a TI está gerando receita para os shoppings?" — isso mostra alinhamento com a visão dele.</p>
+                <p style="margin-bottom:10px"><strong>4. Traga dados do setor de shopping centers:</strong> Mencione que 76% das empresas de varejo utilizarão IA até 2026 e como os concorrentes (ALLOS, Multiplan) estão investindo em dados e experiência digital. Isso cria urgência sem ser agressivo.</p>
+                <p><strong>5. Valorize o momento de expansão:</strong> A Partage está inaugurando shoppings em Brasília e São Paulo — mercados competitivos. Pergunte como a tecnologia pode ser diferencial nesses novos empreendimentos. Shoppings greenfield são canvas em branco para inovação — ele certamente está pensando nisso.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria (C-Level)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência em TI</div>
+                        <div class="value">~20 anos em posições de liderança tecnológica</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Gestão</div>
+                        <div class="value">Transformacional — foco em integrar TI ao negócio e gerar valor estratégico</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Domínio Setorial</div>
+                        <div class="value">Especialista em shopping centers — ALLOS (58), Aliansce Sonae (39), agora Partage (14)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores do Grupo</div>
+                        <div class="value">800+ (grupo total)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Empreendimentos sob Gestão de TI</div>
+                        <div class="value">14 shoppings + 10 torres corporativas + 2 greenfields</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">ERP Principal</div>
+                        <div class="value">SAP S/4HANA Cloud (Rise with SAP) — go-live set/2025</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Em transição: de suporte operacional para business partner estratégico</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Stack Tecnológico Identificado</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">SAP S/4HANA Cloud</div><div class="bar-track"><div class="bar-fill" style="width:95%;background:#1a237e">Core ERP</div></div></div>
+                <div class="bar"><div class="bar-label">Microsoft Teams</div><div class="bar-track"><div class="bar-fill" style="width:80%;background:#1a237e">Colaboração + Bot</div></div></div>
+                <div class="bar"><div class="bar-label">Rise with SAP</div><div class="bar-track"><div class="bar-fill" style="width:75%;background:#3949ab">Plataforma Cloud</div></div></div>
+                <div class="bar"><div class="bar-label">SAP Joule (IA)</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#3949ab">Piloto 2026</div></div></div>
+                <div class="bar"><div class="bar-label">Analytics/BI</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#5c6bc0">Em estruturação</div></div></div>
+                <div class="bar"><div class="bar-label">Integração de APIs</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#7986cb">Oportunidade</div></div></div>
+                <div class="bar"><div class="bar-label">Experiência Digital</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#9fa8da">Gap</div></div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios Inferidos de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Experiência no setor de real estate/shopping centers</span>
+                        <span class="tag tag-active">Capacidade de escalar com modelo de squads</span>
+                        <span class="tag tag-active">Expertise em SAP e ecossistema cloud</span>
+                        <span class="tag tag-active">Entrega de valor de negócio (não apenas técnico)</span>
+                        <span class="tag tag-active">Dados &amp; Analytics como competência core</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Parceiro estratégico com experiência em varejo/real estate e capacidade de entregar desde estratégia de dados até implementação</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Provável</div>
+                        <div class="value">Squads dedicados ou projetos com escopo definido — valoriza eficiência e ROI mensurável</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

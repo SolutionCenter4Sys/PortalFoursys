@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Edilson Oliveira Fonseca | MRS LOGÍSTICA</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Edilson Oliveira Fonseca</h1>
+                <h2>Gerente Geral de Transformação Digital — MRS LOGÍSTICA</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Transporte e Logística (Ferrovia) | Rio de Janeiro, RJ</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 7,6 BI (2025)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Investimento TI/Inovação</div>
+                    <div class="value">R$ 3,4 BI Capex Total</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescimento Acelerado</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: MRS LOGÍSTICA</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>MRS Logística S.A.</strong> é uma das maiores operadoras de logística ferroviária do Brasil, concessionária da Malha Regional Sudeste da antiga Rede Ferroviária Federal. Fundada em 1996, opera <strong>1.643 km de malha ferroviária</strong> conectando os estados de Minas Gerais, Rio de Janeiro e São Paulo — o corredor industrial mais relevante do país. Seus acionistas incluem <strong>Vale, CSN, Usiminas e Gerdau</strong>. Em 2025, a MRS atingiu recordes históricos: receita operacional líquida de <strong>R$ 7,6 bilhões</strong> (+8%), lucro líquido de <strong>R$ 1,6 bilhão</strong> (+9,9%), EBITDA de <strong>R$ 4 bilhões</strong> (margem de 52,4%) e volume transportado de <strong>213 milhões de toneladas</strong> (+5,2%). A empresa investiu R$ 3,4 bilhões (+18,7%) e renovou sua concessão por mais 30 anos. No campo tecnológico, a MRS é referência em inovação ferroviária: migrou para <strong>SAP S/4HANA Cloud</strong>, adotou <strong>SAP Analytics Cloud</strong> (2025), opera trens não-tripulados com <strong>IoT</strong>, utiliza <strong>visão computacional e IA</strong> para inspeção de via, e mantém mais de <strong>100 projetos de inovação</strong> com 50+ parcerias com startups e universidades. Vencedora de <strong>6 categorias no Prêmio ANTT Destaques 2025</strong>.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Nacional (MG, RJ, SP)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada (Capital Fechado)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento — recordes consecutivos 2023→2024→2025</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">~6.400 funcionários</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Transporte e Logística (Ferrovia)</strong> com abrangência <strong>Nacional</strong>, operando o corredor logístico mais estratégico do Brasil. A MRS está em plena <strong>transformação digital</strong>, liderada por Edilson Fonseca, com migração para SAP S/4HANA Cloud, adoção de IA/IoT em operações e investimentos recordes de R$ 3,4 bilhões. Concessão renovada por 30 anos garante horizonte de longo prazo para investimentos em tecnologia. Acionistas de peso (Vale, CSN, Usiminas, Gerdau) asseguram governança e demanda cativa de carga pesada.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar IA/ML e visão computacional em toda a malha ferroviária de 1.643 km</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Consolidar migração SAP S/4HANA Cloud e extrair valor do SAP Analytics Cloud</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar operações ferroviárias com IoT e trens não-tripulados</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer cibersegurança em infraestrutura crítica (OT/IT convergence)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar dados operacionais ponta-a-ponta para previsibilidade logística</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Manter competitividade frente a Rumo e VLI em inovação tecnológica</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Inteligência Artificial / ML</span>
+                        <span class="tag tag-priority">IoT & Sensoriamento</span>
+                        <span class="tag tag-priority">Cloud (SAP S/4HANA)</span>
+                        <span class="tag tag-priority">Manutenção Preditiva</span>
+                        <span class="tag tag-priority">Cibersegurança OT/IT</span>
+                        <span class="tag tag-priority">Analytics & Big Data</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses, baseados nas iniciativas ativas da MRS:</p>
+            <div>
+                <span class="tag tag-active">SAP S/4HANA Cloud (Fase 3+)</span>
+                <span class="tag tag-active">SAP Analytics Cloud</span>
+                <span class="tag tag-active">IA para Inspeção de Via</span>
+                <span class="tag tag-active">Visão Computacional (dtLabs)</span>
+                <span class="tag tag-active">IoT — Trens Não-Tripulados</span>
+                <span class="tag tag-active">Manutenção Baseada em Condição (CBM)</span>
+                <span class="tag tag-active">Sensoriamento (Ultrassom, RFID, Track Star)</span>
+                <span class="tag tag-active">Open MRS — Inovação Aberta</span>
+                <span class="tag tag-active">Módulos Fotovoltaicos em Locomotivas</span>
+                <span class="tag tag-active">Simulador de Locomotivas</span>
+                <span class="tag tag-opportunity">Integração de Dados End-to-End</span>
+                <span class="tag tag-opportunity">Plataforma Digital Preditiva</span>
+                <span class="tag tag-opportunity">Segurança Cibernética OT</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <div class="alert-box">
+                <strong>⚡ Janela Estratégica:</strong> A MRS está na 3ª fase da migração SAP S/4HANA e expandindo capacidades de IA/Analytics. Com R$ 29 milhões captados em fomento e R$ 23 milhões via Lei do Bem, há apetite comprovado para parcerias tecnológicas. Mais de 50 parcerias ativas com startups e universidades demonstram cultura aberta a novos fornecedores.
+            </div>
+            <div class="grid-2">
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 1</div>
+                    <div class="value">Governança e MLOps para escalar IA — a MRS possui dezenas de modelos de IA operacionais mas precisa de framework unificado de governança e deployment</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 2</div>
+                    <div class="value">Integração de dados OT/IT — convergência entre sensores operacionais (IoT, RFID, Track Star) e sistemas corporativos (SAP) ainda em evolução</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 3</div>
+                    <div class="value">Cibersegurança para infraestrutura crítica — operação de trens não-tripulados e IoT em escala exigem segurança OT especializada</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 4</div>
+                    <div class="value">Automação de processos corporativos (RPA/Hyperautomation) — potencial pós-migração SAP S/4HANA para digitalizar processos back-office</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Edilson Fonseca</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>AI Squad — Governança e Aceleração com IA</h4>
+                    <span class="score-badge">Fit: 95%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>MRS possui 100+ projetos de inovação, muitos envolvendo IA — precisa de governança e MLOps para escalar</li>
+                        <li>Parceria com SAP para IA na ferrovia demanda capacidade de integração e deployment de modelos</li>
+                        <li>AI Squad pode acelerar projetos do programa Open MRS e Inovar com metodologia estruturada</li>
+                        <li>Experiência em IA generativa aplicada a processos operacionais e corporativos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Squads de Desenvolvimento — SAP & Integração</h4>
+                    <span class="score-badge">Fit: 90%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Migração SAP S/4HANA na 3ª fase com 800+ customizações exige squads especializados</li>
+                        <li>Adoção do SAP Analytics Cloud (jul/2025) requer desenvolvimento de dashboards e integrações</li>
+                        <li>Parceria Digibee da Foursys é ideal para integrar sistemas satélites ao novo SAP</li>
+                        <li>Mais de 6.500 funcionários impactados pela migração — escala que demanda reforço</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Cibersegurança & Compliance (ISO 27001/27701)</h4>
+                    <span class="score-badge">Fit: 85%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Operação de trens não-tripulados com IoT e 4G LTE cria superfície de ataque crítica</li>
+                        <li>Infraestrutura ferroviária é alvo de alto risco — convergência OT/IT exige segurança especializada</li>
+                        <li>Certificações ISO 27001/27701 da Foursys são diferencial direto para infraestrutura crítica</li>
+                        <li>Acionistas de grande porte (Vale, CSN) impõem padrões rigorosos de governança de segurança</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Automação e Hyperautomation (RPA + IA)</h4>
+                    <span class="score-badge">Fit: 80%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Pós-migração SAP S/4HANA abre oportunidade para automatizar processos corporativos</li>
+                        <li>Dimensionamento operacional automatizado (já em uso) pode ser expandido com RPA</li>
+                        <li>Redução de custos operacionais é prioridade — margem EBITDA de 52,4% pode ser ampliada</li>
+                        <li>Experiência Foursys em automação inteligente complementa a base SAP instalada</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Data & Analytics — Plataforma Preditiva</h4>
+                    <span class="score-badge">Fit: 78%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>MRS usa Big Data para manutenção preditiva mas precisa de plataforma unificada de analytics</li>
+                        <li>SAP Analytics Cloud é a base — complementar com engenharia de dados avançada</li>
+                        <li>Previsibilidade logística ponta-a-ponta é objetivo declarado da transformação digital</li>
+                        <li>Dados de sensores (ultrassom, RFID, Track Star, câmeras IP) precisam de data pipeline robusto</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Edilson Fonseca lidera a transformação digital da MRS com foco em <strong>IA, IoT e SAP Cloud</strong>. Iniciar a conversa demonstrando como a Foursys acelera projetos de IA com governança (AI Squad) e como cases de integração SAP S/4HANA em empresas de infraestrutura reduziram time-to-value. Reforçar o track record da Foursys com 24 anos de experiência, 41.000+ projetos e modelo flexível de squads.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A MRS está na <strong>3ª fase da migração SAP S/4HANA</strong>, acaba de adotar o <strong>SAP Analytics Cloud</strong> e tem <strong>52 experimentos de inovação em andamento</strong>. A empresa captou R$ 29 milhões em fomento e mantém 50+ parcerias com startups — está aberta a novos parceiros tecnológicos. Investimento total de <strong>R$ 3,4 bilhões em 2025</strong> (+18,7%) confirma apetite por tecnologia.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: <strong>(1)</strong> AI Squad proprietário — ideal para governar e escalar os 100+ projetos de inovação da MRS; <strong>(2)</strong> Parceria com Digibee para integração — resolver as 800+ customizações do legado SAP; <strong>(3)</strong> Certificações ISO 27001/27701 — essenciais para segurança de infraestrutura crítica ferroviária; <strong>(4)</strong> Modelo flexível de Squads que escala conforme a demanda sem lock-in.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. Transformação digital como motor de competitividade:</strong> A MRS compete com Rumo (receita 82% maior) e VLI (31% maior). A vantagem competitiva via tecnologia — IA na inspeção de via, trens autônomos, manutenção preditiva — é o que permite à MRS superar rivais em eficiência operacional com malha menor.</p>
+                <p style="margin-bottom:12px"><strong>2. SAP é o coração da transformação:</strong> A migração para S/4HANA Cloud envolve 6.500+ funcionários, 800 customizações legadas e está na 3ª fase. Há espaço para squads de apoio em desenvolvimento ABAP/Fiori, integração e change management. A adoção recente do SAP Analytics Cloud (jul/2025) cria demanda imediata.</p>
+                <p style="margin-bottom:12px"><strong>3. IoT/OT em escala exige segurança cibernética robusta:</strong> Trens não-tripulados operando via IoT/4G LTE, centenas de sensores de ultrassom e câmeras IP com IA criam uma superfície de ataque massiva. A convergência OT/IT é crítica e a MRS provavelmente precisa de consultoria especializada neste tema.</p>
+                <p style="margin-bottom:12px"><strong>4. Cultura de inovação aberta favorece novos parceiros:</strong> Com programas como Open MRS (inovação aberta) e Inovar (inovação interna), 3.400+ pessoas submetendo ideias e 50+ parcerias ativas, a MRS tem DNA colaborativo. A Foursys pode se posicionar como parceira estratégica de longo prazo, não apenas fornecedora.</p>
+                <p><strong>5. Concessão de 30 anos = horizonte longo de investimento:</strong> A renovação da concessão por mais 30 anos garante previsibilidade de investimentos em tecnologia. Contratos de médio/longo prazo com a MRS têm fundamento sólido — diferente de empresas com horizonte curto de planejamento.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Rumo Logística (Grupo Cosan)</h4>
+                <p><strong>Segmento:</strong> Logística ferroviária — grãos, açúcar, fertilizantes, combustíveis | <strong>Receita:</strong> R$ 13,8 bilhões (2025)</p>
+                <p>Maior operadora ferroviária do Brasil. Investiu R$ 6,1 bilhões em infraestrutura em 2025 e está construindo a Ferrovia de Mato Grosso (80% concluída). Em tecnologia, desenvolveu o <strong>RUTI Maquinista</strong> (app com IA da Microsoft que reduziu tempo de resposta de 4 min para 3 seg), o <strong>Trip Optimizer</strong> (condução semiautônoma, -5% diesel, adotado em 90% das viagens) e o <strong>PTC 2.0</strong> (monitoramento de tráfego). EBITDA de R$ 8 bilhões com margem de 58%.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>VLI Logística (controlada pela Vale)</h4>
+                <p><strong>Segmento:</strong> Logística ferroviária multimodal — minério, siderurgia, agrícola, cimento | <strong>Receita:</strong> R$ 9,95 bilhões (2025)</p>
+                <p>Segunda maior operadora e <strong>1º lugar no Prêmio Valor Inovação 2025</strong> (categoria Transporte/Logística, pela 3ª vez). Investiu R$ 90+ milhões em P&D em 2024, mantém hub com 115 profissionais de tecnologia e 900 colaboradores em programas de inovação. Utiliza IoT, IA, machine learning, big data, robótica, realidade aumentada/virtual e gêmeos digitais. EBITDA de R$ 5,26 bilhões (margem recorde de 52,9%).</p>
+            </div>
+            <div class="competitor-card">
+                <h4>TLSA — Transnordestina Logística</h4>
+                <p><strong>Segmento:</strong> Logística ferroviária — Nordeste brasileiro | <strong>Receita:</strong> Em ramp-up (projeto em construção)</p>
+                <p>Controlada pelo CSN (mesmo acionista da MRS), a Ferrovia Transnordestina é o maior projeto ferroviário greenfield do Brasil, com 1.753 km planejados ligando o Piauí ao Ceará e Pernambuco. Foco em grãos e minérios do Nordeste. Embora não seja concorrente direto na malha Sudeste, compete por atenção de investimento do acionista CSN.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>FTC / Ferroeste e Novos Entrantes</h4>
+                <p><strong>Segmento:</strong> Ferrovias regionais e novos autorizatários | <strong>Receita:</strong> Variada</p>
+                <p>A abertura do mercado ferroviário por autorização (não mais apenas concessão) pode ampliar o número de operadores para até 15 empresas. Rumo já solicitou construir uma "segunda ferradura" ao Porto de Santos — trecho operado pela MRS — representando ameaça direta à sua posição estratégica no acesso ao maior porto da América Latina.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Os concorrentes diretos da MRS investem pesadamente em tecnologia: a Rumo usa <strong>IA da Microsoft</strong> (Copilot Studio) e a VLI foi premiada como <strong>empresa mais inovadora do setor</strong> com hub de 115 profissionais de tech. A MRS tem projetos avançados (IoT autônomo, visão computacional, SAP Cloud), mas apresenta gaps potenciais em: <strong>(1) Plataforma unificada de dados</strong> — dados de sensores, SAP e operações ainda fragmentados; <strong>(2) Governança de IA</strong> — 100+ projetos sem framework unificado de MLOps; <strong>(3) Cibersegurança OT</strong> — trens autônomos e IoT industrial sem proteção dedicada documentada; <strong>(4) Automação corporativa</strong> — foco em IA operacional, mas processos de back-office ainda subautomatizados. A Foursys pode preencher esses gaps com AI Squad, integração via Digibee, e squads SAP especializados.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Gerente Geral de Transformação Digital — MRS Logística S.A.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Juiz de Fora, MG (sede operacional) / Rio de Janeiro, RJ</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência</div>
+                        <div class="value">+16 anos no setor ferroviário. Carreira integralmente na MRS desde 2015, com passagem anterior pela USIMINAS</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória na MRS</div>
+                        <div class="value">Ger. de Pátios/Terminais (2016) → Ger. Eng. Operações (2019) → Ger. Soluções Digitais (2023) → Ger. Geral Transf. Digital (2024)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil Profissional</div>
+                        <div class="value">Executivo com DNA operacional que migrou para tecnologia — entende profundamente o chão de fábrica/trilho e aplica digital para resolver dores reais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Temas de Interesse</div>
+                        <div class="value">Inovação aberta, IoT industrial, IA aplicada a operações, transformação digital em infraestrutura</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconheça sua trajetória do operacional ao digital:</strong> Edilson saiu da gestão de pátios e terminais para liderar a transformação digital de uma empresa de R$ 7,6 bi. Mencionar que valoriza líderes que "conhecem o trilho" e aplicam tecnologia para resolver problemas reais gera conexão imediata.</p>
+                <p style="margin-bottom:10px"><strong>2. Fale a linguagem da ferrovia, não apenas de TI:</strong> Termos como "transit time", "tonelada útil por km (TKU)", "bitola", "manutenção baseada em condição" demonstram que você entende o negócio dele — não está vendendo tecnologia genérica.</p>
+                <p style="margin-bottom:10px"><strong>3. Mencione os recordes recentes da MRS:</strong> 6 prêmios ANTT 2025, receita recorde de R$ 7,6 bi, 213 milhões de toneladas transportadas. Demonstrar conhecimento do momentum da empresa mostra preparo e respeito profissional.</p>
+                <p style="margin-bottom:10px"><strong>4. Conecte-se pelo tema de inovação aberta:</strong> A MRS mantém programas Open MRS e Inovar com 3.400+ pessoas submetendo ideias. Edilson valoriza parceiros que trazem inovação, não apenas execução — posicione a Foursys como parceira de co-criação.</p>
+                <p><strong>5. Pergunte sobre a migração SAP:</strong> É o projeto mais complexo e transformador sob sua gestão (6.500 funcionários impactados, 800 customizações). Demonstrar interesse genuíno neste desafio e compartilhar learnings de outras migrações SAP cria vínculo técnico-profissional.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Executivo e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Gerência Geral — equivale a diretoria funcional</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo</div>
+                        <div class="value">Transformação Digital, Soluções Digitais, Inovação</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão</div>
+                        <div class="value">Líder de transformação digital com influência sobre aquisições de tecnologia e parcerias de inovação</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cultura de Compra</div>
+                        <div class="value">Inovação aberta — 50+ parcerias ativas com startups/universidades, R$ 29M em fomento captado</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores da Empresa</div>
+                        <div class="value">~6.400 funcionários</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários Impactados pela Transf. Digital</div>
+                        <div class="value">6.500+ (migração SAP)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de Inovação/Digital</div>
+                        <div class="value">52 experimentos ativos, 3.400+ pessoas submetendo ideias, equipe dedicada de soluções digitais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Coprotagonista: transformação digital é pilar estratégico da MRS, com investimentos recordes e concessão de 30 anos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição de Investimentos em Tecnologia (Estimativa)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">SAP / ERP Cloud</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+                <div class="bar"><div class="bar-label">IoT / Sensoriamento / OT</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+                <div class="bar"><div class="bar-label">IA / Machine Learning</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#3949ab">18%</div></div></div>
+                <div class="bar"><div class="bar-label">Infraestrutura / Redes</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Analytics / Big Data</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Inovação Aberta / P&D</div><div class="bar-track"><div class="bar-fill" style="width:4%;background:#7986cb">4%</div></div></div>
+                <div class="bar"><div class="bar-label">Capacitação / Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#9fa8da">3%</div></div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências e Modelo de Parceria</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Inovação & Co-criação</span>
+                        <span class="tag tag-active">Expertise Setorial (Indústria/Logística)</span>
+                        <span class="tag tag-active">Track Record em SAP</span>
+                        <span class="tag tag-active">Capacidade de Escalar</span>
+                        <span class="tag tag-active">Flexibilidade de Modelo</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Parceiro Buscado</div>
+                        <div class="value">Empresa de tecnologia com capacidade de inovação, não apenas body shop — 50+ parcerias ativas indicam preferência por parceiros especializados</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação</div>
+                        <div class="value">Inovação aberta (Open MRS), projetos com fomento (Lei do Bem), parcerias de co-desenvolvimento</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

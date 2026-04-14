@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Fabio Mota | MOTIVA (GRUPO CCR)</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Fabio Mota</h1>
+                <h2>Diretor de Tecnologia e Digital (CIO) — MOTIVA (Grupo CCR)</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Transporte e Logística (Concessionária) | São Paulo, SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 15,3 BI (2025)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Investimento Digital</div>
+                    <div class="value">R$ 500 MM (2024)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescimento Acelerado</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: MOTIVA (Grupo CCR)</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Motiva</strong> é a nova marca do Grupo CCR, uma das maiores empresas de infraestrutura de mobilidade do Brasil e da América Latina. A empresa opera <strong>37 concessões</strong> nos segmentos de rodovias, mobilidade urbana (trilhos) e aeroportos, estando presente em <strong>13 estados brasileiros</strong>. Em 2025, a Motiva registrou resultados recordes: receita líquida ajustada de <strong>R$ 15,3 bilhões</strong> (+5,2%), EBITDA ajustado de <strong>R$ 9,5 bilhões</strong> (+15%), e lucro líquido de <strong>R$ 3,27 bilhões</strong> — crescimento de <strong>162,6%</strong> em relação a 2024. A margem EBITDA expandiu 5,3 p.p., chegando a 62,3%. Os investimentos alcançaram o recorde de <strong>R$ 8,7 bilhões</strong> em 2025 (R$ 6,5 bi em rodovias, R$ 1,3 bi em trilhos, R$ 780 mi em aeroportos). A empresa projeta <strong>R$ 46 bilhões em investimentos</strong> nos próximos anos e conquistou recentemente a concessão da rodovia Fernão Dias (BR-381), com R$ 9,5 bilhões em investimentos previstos para 15 anos. Em tecnologia, investiu <strong>R$ 500 milhões em transformação digital em 2024</strong>, criou pela primeira vez uma Diretoria de Tecnologia e Digital, lançou a "Jornada de IA Generativa" em parceria com a EY (R$ 10 milhões iniciais, 10+ MVPs), e planeja mais de <strong>R$ 1 bilhão em inovação até 2035</strong>.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Nacional — 13 estados em todas as regiões do Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Capital Aberto (B3: MOTV3, ex-CCRO3)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Forte Crescimento — Lucro +162,6% em 2025</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">Mais de 17.000</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Fabio Mota assumiu a Diretoria de Tecnologia e Digital da Motiva em <strong>março de 2026</strong>, substituindo Cristiane Gomes que criou a área em 2024. Executivo de peso com 16 anos no Grupo Cosan/Raízen (VP de Serviços e Tecnologia), ele traz experiência comprovada em <strong>transformação digital, IA, analytics e centros de serviços compartilhados</strong> em escala de multinacional. Sua missão é consolidar a arquitetura tecnológica que suporte as 37 concessões (rodovias, trilhos, aeroportos) e escalar a estratégia de IA Generativa e eficiência operacional. A Motiva está em momento de <strong>aceleração digital</strong>: R$ 500 milhões investidos em 2024, meta de ratio opex/receita abaixo de 30% até 2030, e plano de R$ 1 bilhão em inovação até 2035. Fabio chega para dar velocidade a essa agenda, com foco em Indústria 5.0, IoT e infraestrutura inteligente.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar IA Generativa para operações — consolidar CoE de IA e ampliar os 10+ MVPs em produção</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Unificar arquitetura tecnológica entre 37 concessões heterogêneas (rodovias, trilhos, aeroportos)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Atingir meta de eficiência operacional: ratio opex/receita de 38% em 2025, abaixo de 30% até 2030</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar e onboardar novas concessões (Fernão Dias, R$ 9,5 bi) à plataforma digital</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer cibersegurança OT/IT para infraestrutura crítica de mobilidade</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Construir e reter time de tecnologia — mais de 60 posições especializadas a preencher</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Inteligência Artificial / IA Generativa</span>
+                        <span class="tag tag-priority">IoT e Smart Mobility</span>
+                        <span class="tag tag-priority">Big Data e Analytics</span>
+                        <span class="tag tag-priority">Cibersegurança OT/IT</span>
+                        <span class="tag tag-priority">Modernização de Infraestrutura (Cloud)</span>
+                        <span class="tag tag-priority">Automação e Robotização</span>
+                    </div>
+                    <h4 style="margin-top:20px;margin-bottom:12px;color:var(--primary)">Parceiros Tecnológicos Conhecidos</h4>
+                    <div>
+                        <span class="tag tag-active">EY (IA Generativa)</span>
+                        <span class="tag tag-active">Accenture (Reestruturação TI)</span>
+                        <span class="tag tag-active">TIM (Conectividade Rodovias)</span>
+                        <span class="tag tag-active">MIT (Letramento Digital)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses com base nas declarações públicas e plano estratégico 2035:</p>
+            <div>
+                <span class="tag tag-opportunity">IA Generativa e Centro de Competência (CoE)</span>
+                <span class="tag tag-opportunity">IoT para Rodovias Inteligentes</span>
+                <span class="tag tag-opportunity">Big Data e Analytics Operacional</span>
+                <span class="tag tag-opportunity">Automação e Robotização de Processos</span>
+                <span class="tag tag-opportunity">Modernização de Cloud e Infraestrutura</span>
+                <span class="tag tag-opportunity">Cibersegurança para Infraestrutura Crítica</span>
+                <span class="tag tag-opportunity">Conectividade 4G/5G nas Concessões</span>
+                <span class="tag tag-opportunity">Digital Twins para Manutenção Preditiva</span>
+                <span class="tag tag-opportunity">Plataforma de Experiência do Usuário</span>
+                <span class="tag tag-opportunity">Integração de Novos Ativos (Fernão Dias)</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades sem Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Fabio Mota acaba de assumir a posição (março/2026), criando uma <strong>janela de oportunidade única</strong>. Novo CIO tipicamente reavalia fornecedores e abre espaço para novos parceiros.</p>
+            <div class="alert-box">
+                <strong>&#9888; Momento Crítico:</strong> A troca de liderança de Cristiane Gomes para Fabio Mota significa que contratos e parcerias estão sendo reavaliados. Fabio traz suas próprias referências (Microsoft, startups via Pulse Hub) da Raízen, mas a complexidade multi-modal da Motiva (rodovias + trilhos + aeroportos) exigirá novos parceiros especializados.
+            </div>
+            <div class="grid-2">
+                <div class="info-card">
+                    <div class="label">Oportunidade Alta</div>
+                    <div class="value">Governança e escalabilidade de IA — CoE em estruturação precisa de framework, MLOps e squads especializados</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Oportunidade Alta</div>
+                    <div class="value">Integração de dados entre concessões — 37 operações heterogêneas sem plataforma unificada</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Oportunidade Média</div>
+                    <div class="value">Automação de processos corporativos — eficiência operacional é KPI central (opex/receita &lt;30%)</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Oportunidade Média</div>
+                    <div class="value">Cibersegurança OT/IT — infraestrutura crítica de mobilidade exige frameworks especializados</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Fabio Mota</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>AI Squad &amp; Governança de IA</h4>
+                    <span class="score-badge">Fit: 95%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Motiva está estruturando Centro de Competência em IA (CoE) — precisa de squads especializados para escalar os 10+ MVPs de IA Generativa</li>
+                        <li>Fabio Mota liderou transformação de dados e IA na Raízen — conhece e valoriza equipes especializadas em analytics e ML</li>
+                        <li>O AI Squad Foursys pode acelerar a jornada de IA com MLOps, governança e frameworks de compliance</li>
+                        <li>Meta de eficiência operacional (opex/receita &lt;30%) depende diretamente de automação e IA em escala</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Squads de Desenvolvimento &amp; Integração (Digibee)</h4>
+                    <span class="score-badge">Fit: 90%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>37 concessões heterogêneas (rodovias, trilhos, aeroportos) precisam de integração end-to-end de dados e sistemas</li>
+                        <li>Onboarding de novas concessões como Fernão Dias (R$ 9,5 bi) requer integrações rápidas e seguras</li>
+                        <li>Parceria Foursys-Digibee é diferencial para iPaaS e APIs em ambiente multi-vertical</li>
+                        <li>Fabio tem experiência com migração para cloud na Raízen (Microsoft) — entende valor de plataformas de integração</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Automação Inteligente de Processos (RPA + IA)</h4>
+                    <span class="score-badge">Fit: 88%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Meta agressiva de redução de opex/receita de 38% para abaixo de 30% até 2030 — automação é alavanca central</li>
+                        <li>Centros de Serviços Compartilhados são a especialidade de Fabio (CSC na Raízen) — automação escala esse modelo</li>
+                        <li>Robotização e automação estão entre as tecnologias prioritárias declaradas pela empresa</li>
+                        <li>Foursys pode entregar squads de automação com IA embarcada para processos operacionais e corporativos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Cibersegurança &amp; Compliance</h4>
+                    <span class="score-badge">Fit: 82%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Infraestrutura crítica de mobilidade (rodovias, metrôs, aeroportos) exige cibersegurança robusta OT/IT</li>
+                        <li>Nova área de "Infraestrutura e Operações de Cibersegurança" criada na reestruturação da Diretoria</li>
+                        <li>Certificações ISO 27001/27701 da Foursys são diferencial direto para um setor regulado</li>
+                        <li>Mais de 60 posições de TI a preencher — consultoria especializada complementa gaps do time</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>AMS &amp; Sustentação de Aplicações</h4>
+                    <span class="score-badge">Fit: 78%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Parque tecnológico heterogêneo de 37 concessões requer sustentação e evolução constante</li>
+                        <li>Modelo flexível Foursys (Squads, Projetos, AMS) permite absorver demandas variáveis de cada concessão</li>
+                        <li>Fabio conhece o modelo de CSC e valorizará parceiro que opere com eficiência e governança</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Fabio Mota é um executivo de transformação digital com DNA de inovação — VP de Serviços e Tecnologia na Raízen, diretor do Pulse Hub de Inovação, conselheiro da CIONET. Iniciar a conversa reconhecendo sua trajetória e conectando com o <strong>desafio único de unificar tecnologia em 37 concessões multi-modais</strong>. Demonstrar cases Foursys de integração de dados em escala, IA aplicada e automação — temas que são o core da agenda dele. A abordagem deve ser de <strong>parceiro estratégico de tecnologia</strong>, não de body shop.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente — Timing Perfeito</h4>
+                <p>Fabio assumiu em <strong>março/2026</strong> — está nos primeiros 30-60 dias de gestão, fase em que CIOs tipicamente (1) avaliam o landscape tecnológico, (2) identificam gaps críticos, (3) selecionam novos parceiros. A Motiva tem mais de <strong>60 posições de TI em aberto</strong>, o Centro de Competência em IA ainda está em estruturação, e a integração da Fernão Dias (R$ 9,5 bi) é iminente. Este é o melhor momento para posicionar a Foursys como parceira estratégica.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>AI Squad proprietário</strong> — aceleração com IA é a prioridade #1 da Motiva; (2) <strong>Parceria Digibee</strong> — integração de 37 concessões heterogêneas precisa de iPaaS robusto; (3) <strong>Certificações ISO 27001/27701</strong> — infraestrutura crítica de mobilidade exige compliance de segurança; (4) <strong>Modelo flexível de entrega</strong> (Squads, Projetos, AMS) — permite escalar conforme as 37 operações demandem. A Foursys se diferencia de consultorias tradicionais (EY, Accenture — já contratadas) pelo foco em <strong>execução técnica com velocidade de squad</strong>.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. O novo CIO quer imprimir sua marca rapidamente:</strong> Fabio vem da Raízen, onde liderou migração para cloud (200+ apps para Microsoft Azure), criou o Pulse Hub de Inovação e democratizou dados. Ele vai querer replicar esse DNA na Motiva — oferecer squads prontos para execução rápida é exatamente o que ele precisa nos primeiros 90 dias.</p>
+                <p style="margin-bottom:12px"><strong>2. A meta de eficiência é agressiva e pública:</strong> A Motiva prometeu ao mercado reduzir opex/receita para menos de 30% até 2030 (atualmente ~38%). Tecnologia deve entregar 2-3 pontos percentuais dessa redução. Fabio está sob pressão para mostrar ROI rápido em automação e IA — a Foursys pode entregar quick wins com squads de automação inteligente.</p>
+                <p style="margin-bottom:12px"><strong>3. A complexidade multi-modal é o grande diferencial da Motiva — e seu maior desafio de TI:</strong> Operar rodovias, trilhos e aeroportos simultaneamente gera heterogeneidade tecnológica extrema. Cada concessão tem seus sistemas legados, sensores IoT, câmeras e processos. Integrar tudo em uma plataforma unificada de dados é o projeto de infraestrutura mais ambicioso do setor — e onde a Foursys pode brilhar com Digibee.</p>
+                <p style="margin-bottom:12px"><strong>4. Concorrentes como Arteris já usam IA em rodovias:</strong> A Arteris implementou IA com 1.500 câmeras para contagem de veículos e prevenção de acidentes, com economia de 80% em escala. A Motiva precisa acelerar para não ficar atrás — demonstrar cases de IA aplicada em operações é um gatilho de urgência na conversa.</p>
+                <p><strong>5. A conquista da Fernão Dias é uma mini-empresa para integrar:</strong> A concessão de R$ 9,5 bilhões da Fernão Dias (BR-381) será assumida entre abril e maio de 2026 — praticamente agora. Isso significa um projeto urgente de integração tecnológica: sistemas de pedágio, câmeras, sensores, ERPs, processos operacionais. É um projeto pronto para um squad Foursys de integração.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>EcoRodovias</h4>
+                <p><strong>Segmento:</strong> Concessões rodoviárias | <strong>Receita:</strong> R$ 7,4 bilhões (2025) | <strong>Concessões:</strong> 13</p>
+                <p>Segunda maior operadora de rodovias do Brasil. Receita cresceu 15% em 2025, com margem EBITDA de 75,2%. Opera 13 concessões com forte presença de veículos pesados (até 82% do pedágio). Foco em expansão via leilões e eficiência operacional. Menor investimento declarado em transformação digital em comparação à Motiva, o que pode indicar gap tecnológico ou abordagem mais conservadora.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Arteris (Brookfield/Abertis)</h4>
+                <p><strong>Segmento:</strong> Concessões rodoviárias | <strong>Receita:</strong> ~R$ 5 bilhões (est. 2024) | <strong>Concessões:</strong> 7 rodovias, 3.600 km</p>
+                <p>Operadora controlada pela canadense Brookfield, com 7 concessões rodoviárias. Implementou IA com mais de 1.500 câmeras para contagem de veículos e prevenção de acidentes, gerando economia de até 80% na operação. Parceria com a Programmers para soluções digitais. Perdeu a concessão da Fernão Dias para a Motiva no leilão de dez/2025, demonstrando competição acirrada entre as duas.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Grupo EPR (Equipav + Perfin)</h4>
+                <p><strong>Segmento:</strong> Concessões rodoviárias | <strong>Receita:</strong> R$ 1,22 bilhão (2024) | <strong>Concessões:</strong> 6, 3.000+ km</p>
+                <p>Novo player em rápida expansão: reverteu prejuízo de R$ 19,7 mi (2023) para lucro de R$ 452,3 mi (2024). Opera principalmente em Minas Gerais e Paraná. Modelo de project finance agressivo com R$ 38 bilhões em investimentos contratados e R$ 9 bilhões captados. Foco em infraestrutura rodoviária; menor presença em tecnologia e digitalização comparado à Motiva.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Rumo (Cosan) — Benchmark em Logística</h4>
+                <p><strong>Segmento:</strong> Logística ferroviária e portuária | <strong>Receita:</strong> ~R$ 12 bilhões (2024)</p>
+                <p>Maior operadora ferroviária do Brasil, do Grupo Cosan (onde Fabio Mota trabalhou 16 anos). Forte investimento em tecnologia com automação de terminais, IoT em locomotivas e analytics de cadeia logística. Fabio conhece intimamente a operação Cosan — referências e comparações com a Rumo podem ser gatilhos de rapport na conversa.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>A Motiva lidera o setor em ambição digital (R$ 500 mi investidos, CoE de IA, parceria EY/Accenture), mas concorrentes como <strong>Arteris já executam IA em operações</strong> (1.500 câmeras com IA). Os gaps da Motiva incluem: (1) <strong>Execução de IA em escala</strong> — tem estratégia e MVPs, mas precisa de squads para levar à produção; (2) <strong>Integração de dados multi-modal</strong> — nenhum concorrente opera rodovias + trilhos + aeroportos simultaneamente, criando complexidade única; (3) <strong>Cibersegurança OT</strong> para infraestrutura crítica de mobilidade pública; (4) <strong>Automação de processos</strong> para atingir a meta agressiva de eficiência. A Foursys pode se posicionar exatamente nesses gaps, complementando as consultorias estratégicas (EY, Accenture) com <strong>execução técnica especializada em squads</strong>.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Diretor de Tecnologia e Digital (CIO) — Motiva (Grupo CCR)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Anterior (Destaque)</div>
+                        <div class="value">16 anos no Grupo Cosan/Raízen — VP de Serviços e Tecnologia, VP de Centro de Serviços Compartilhados, Diretor de TI</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação</div>
+                        <div class="value">Engenharia Mecânica (FEI), MBA Administração (FGV). Programas executivos em Stanford, INSEAD, UC Berkeley, IESE, Tel Aviv University</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Premiação</div>
+                        <div class="value">Executivo de TI do Ano — Categoria Agronegócio (quando na Raízen)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Atividades Paralelas</div>
+                        <div class="value">Diretor do Pulse Hub de Inovação, Conselheiro Assessor da CIONET Brasil, Professor na FGV e Pecege</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">LinkedIn</div>
+                        <div class="value">22.500+ seguidores — perfil ativo com publicações sobre IA, transformação digital e inovação</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Visão Declarada</div>
+                        <div class="value">"Conectar tecnologia e negócio para crescimento e eficiência" — foco em mediação, tradução e alinhamento entre TI e negócios</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Estilo de Liderança</div>
+                        <div class="value">Defende "letramento mútuo" entre TI e negócios, democratização de dados e inovação aberta via startups</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconheça a trajetória excepcional:</strong> Fabio tem 20+ anos de carreira, passou por Accenture, Cosan, Raízen e agora Motiva. Mencionar que acompanha sua trajetória (premiação como Executivo de TI do Ano, criação do Pulse Hub) demonstra preparo e cria conexão genuína.</p>
+                <p style="margin-bottom:10px"><strong>2. Conecte pela Raízen/Cosan:</strong> Se a Foursys tem cases no setor de energia, agro ou na própria Raízen/Cosan, essa é a ponte mais natural. Fabio conhece intimamente essa operação e referências compartilhadas criam vínculo imediato.</p>
+                <p style="margin-bottom:10px"><strong>3. Fale a língua da inovação aberta:</strong> Como diretor do Pulse Hub de Inovação, Fabio valoriza ecossistemas de startups e inovação colaborativa. Posicionar a Foursys como parte desse ecossistema (não como fornecedor tradicional) ressoa com seu mindset. Mencione o AI Squad como exemplo de inovação aplicada.</p>
+                <p style="margin-bottom:10px"><strong>4. Aborde o desafio multi-modal como diferenciador:</strong> Nenhum outro player opera rodovias + trilhos + aeroportos. Perguntar "como está sendo unificar a tecnologia entre esses três mundos?" demonstra compreensão profunda do desafio e abre espaço para apresentar soluções de integração.</p>
+                <p><strong>5. Traga dados de eficiência:</strong> Fabio foi VP de Centro de Serviços Compartilhados — eficiência está no seu DNA. Apresentar dados concretos de ROI de automação e IA (ex: "redução de X% em processos operacionais") é mais impactante do que promessas genéricas. Ele valoriza resultados mensuráveis.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Diretoria — primeiro C-level de Tecnologia e Digital da empresa</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO (posição criada com assento no comitê executivo)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Data de Ingresso</div>
+                        <div class="value">Março de 2026 — primeiros 30-60 dias na posição</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão</div>
+                        <div class="value">Alta autonomia — responsável por toda a estratégia tecnológica das 37 concessões</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores da Empresa</div>
+                        <div class="value">Mais de 17.000</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Posições de TI em Aberto</div>
+                        <div class="value">60+ posições especializadas a preencher</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Estrutura da Diretoria</div>
+                        <div class="value">8 subdivisões incluindo: IA/Analytics, Infraestrutura, Cibersegurança, Produtos Digitais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Protagonista: TI passou de backoffice para habilitador estratégico transversal entre todas as plataformas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Investimentos em Tecnologia (Estimativa %)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">IA / Analytics / Big Data</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+                <div class="bar"><div class="bar-label">Infraestrutura / Cloud</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+                <div class="bar"><div class="bar-label">IoT / Smart Mobility</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#3949ab">18%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">12%</div></div></div>
+                <div class="bar"><div class="bar-label">Automação / RPA</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas / Capacitação</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+                <div class="bar"><div class="bar-label">Conectividade (4G/5G)</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria / Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#9fa8da">2%</div></div></div>
+            </div>
+            <p style="margin-top:16px;font-size:12px;color:var(--text-light);text-align:center">* Estimativa baseada em declarações públicas e plano estratégico 2035 da Motiva. Investimento total em digital: R$ 500 MM (2024), com plano de R$ 1 BI+ até 2035.</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor (Perfil Estimado)</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Expertise técnica comprovada</span>
+                        <span class="tag tag-active">Capacidade de execução em escala</span>
+                        <span class="tag tag-active">Inovação e tecnologia de ponta</span>
+                        <span class="tag tag-active">Resultados mensuráveis (ROI)</span>
+                        <span class="tag tag-active">Agilidade e flexibilidade</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Parceiro estratégico de tecnologia com DNA de inovação — não body shop. Fabio valoriza ecossistemas de startups e inovação aberta (criou o Pulse Hub).</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Squads especializados com entrega por resultado. Na Raízen, utilizou modelo de parceiros estratégicos de longo prazo com métricas de performance.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Andre Davico Schneiter | SUCAFINA</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Andre Davico Schneiter</h1>
+                <h2>CTO / Líder de Tecnologia — SUCAFINA</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Agronegócio e Serviços Relacionados (Trading de Café) | São Paulo, SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento Global</div>
+                    <div class="value">US$ 3–5 BI (est.)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Colaboradores</div>
+                    <div class="value">+1.500 globais</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Presença</div>
+                    <div class="value">44 países</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: SUCAFINA</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Sucafina</strong> é uma das maiores traders de café do mundo, fundada em 1977 em Genebra (Suíça), com tradição familiar no setor de commodities desde 1905. Opera no modelo <strong>"Farm to Roaster"</strong>, atuando em toda a cadeia do café — da fazenda ao torrefador. No Brasil, opera como <strong>Sucafina Brasil Ind., Com. e Exp. Ltda.</strong> (antiga Finacafé, rebrandada em 2017), com escritórios em Santos e Varginha (MG), sendo um dos principais exportadores de café arábica do país. A empresa possui <strong>+1.500 colaboradores</strong> de 60 nacionalidades, <strong>64 localizações em 44 países</strong>, 64 estações de lavagem e parcerias com mais de <strong>200.000 produtores rurais</strong>. Em termos de inovação, a Sucafina investiu na <strong>Agrosmart</strong> (plataforma de IA para agricultura digital, +100.000 agricultores em 9 países), na <strong>Csmart</strong> (reconhecimento de imagem com IA para classificação de café verde), firmou parceria com a <strong>Farmer Connect</strong> (rastreabilidade blockchain via IBM Food Trust) e usa a plataforma <strong>Komgo</strong> como agente digital para compliance de trade finance sustentável em facility de US$ 500 milhões. Recentemente, digitalizou logística oceânica com a <strong>Cargoo</strong>, reduzindo em 60% o tempo de envio de instruções de embarque e automatizando 70% do volume de shipping.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global — 64 localizações em 44 países</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada (Grupo familiar suíço)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Sede Global</div>
+                        <div class="value">Genebra, Suíça</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Modelo de Negócio</div>
+                        <div class="value">Farm to Roaster — verticalizado da origem ao torrefador</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">+1.500 (60 nacionalidades)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Produtores Parceiros</div>
+                        <div class="value">+200.000 grower partners</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>A Sucafina é uma das maiores traders globais de café, operando no setor de <strong>Agronegócio e Serviços Relacionados</strong> com abrangência <strong>Global</strong>. André Schneiter, com 30+ anos de experiência em tecnologia corporativa (PwC, IBM, Odebrecht, COFCO International), traz um perfil altamente qualificado para liderar a transformação digital da empresa. O momento é crítico: o setor enfrenta o prazo do <strong>EUDR (Regulamento Europeu Anti-Desmatamento) em dezembro de 2026</strong>, exigindo rastreabilidade completa com geolocalização de cada lote de café. A Sucafina já possui iniciativas em blockchain, IA e digitalização de logística, mas a integração end-to-end e a conformidade regulatória representam desafios urgentes onde a Foursys pode atuar como aceleradora.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Conformidade EUDR — rastreabilidade completa da cadeia de café com geolocalização até dezembro/2026</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integração de dados entre 44 países e 64 localizações em plataforma unificada</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalabilidade de IA/ML — expandir Agrosmart, Csmart e modelos preditivos para toda a operação</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Digitalização de trade finance e compliance ESG em operações de US$ 500M+</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernização de ERP e sistemas legados para operações de trading global</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Cibersegurança e proteção de dados em cadeia de suprimentos multi-país</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento Estimadas</h4>
+                    <div>
+                        <span class="tag tag-priority">Rastreabilidade &amp; Compliance EUDR</span>
+                        <span class="tag tag-priority">Integração de Dados &amp; APIs</span>
+                        <span class="tag tag-priority">IA &amp; Analytics para Supply Chain</span>
+                        <span class="tag tag-priority">Digitalização de Logística</span>
+                        <span class="tag tag-priority">Modernização de ERP</span>
+                        <span class="tag tag-priority">Cibersegurança</span>
+                    </div>
+                    <div class="alert-box" style="margin-top:16px">
+                        <strong>Contexto regulatório urgente:</strong> O EUDR (EU Deforestation Regulation) entra em vigor em dez/2026, impactando US$ 7 bilhões em exportações brasileiras de café para a UE. Exige GPS de cada fazenda, verificação de não-desmatamento e rastreabilidade completa do lote.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos Tecnológicos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que devem receber investimento com base no contexto do setor e nas iniciativas da empresa:</p>
+            <div>
+                <span class="tag tag-active">Blockchain &amp; Rastreabilidade</span>
+                <span class="tag tag-active">IA para Classificação de Café (Csmart)</span>
+                <span class="tag tag-active">Agricultura Digital (Agrosmart)</span>
+                <span class="tag tag-active">Trade Finance Digital (Komgo)</span>
+                <span class="tag tag-active">Logística Digital (Cargoo)</span>
+                <span class="tag tag-opportunity">Plataforma de Dados Unificada</span>
+                <span class="tag tag-opportunity">ERP / Modernização de Sistemas</span>
+                <span class="tag tag-opportunity">Integração via APIs</span>
+                <span class="tag tag-opportunity">Compliance &amp; ESG Reporting</span>
+                <span class="tag tag-opportunity">Cibersegurança Supply Chain</span>
+                <span class="tag tag-opportunity">Automação de Processos (RPA/IA)</span>
+                <span class="tag tag-opportunity">Cloud &amp; Infraestrutura</span>
+            </div>
+            <p style="margin-top:12px;font-size:12px;color:var(--text-light)"><span class="tag tag-active" style="font-size:11px">Verde</span> = Investimentos confirmados/em andamento &nbsp; <span class="tag tag-opportunity" style="font-size:11px">Laranja</span> = Oportunidades identificadas por análise</p>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Quentes Identificadas</h3>
+            <div class="alert-box">
+                <strong>Janela de oportunidade:</strong> André Schneiter acabou de sair da COFCO International (março/2026), onde liderou como Global CTO a transformação digital em 30+ países com implementação de SAP S/4HANA, Ariba e SuccessFactors. Ao assumir posição na Sucafina, provavelmente buscará replicar e evoluir esse playbook — criando demanda imediata por parceiros de implementação.
+            </div>
+            <div class="grid-2">
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Compliance EUDR &amp; Rastreabilidade</h4>
+                        <span class="score-badge">Urgência Máxima</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Deadline EUDR em dezembro/2026 — menos de 9 meses</li>
+                            <li>Exige integração de dados geoespaciais, cadastros rurais e certificações</li>
+                            <li>Sucafina já tem blockchain (Farmer Connect) mas precisa escalar para +200.000 produtores</li>
+                            <li>Foursys pode acelerar com engenharia de dados e integração via APIs</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Integração de Dados Multi-País</h4>
+                        <span class="score-badge">Alta Prioridade</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>64 localizações em 44 países geram silos de dados críticos</li>
+                            <li>André implementou SAP em 30+ países na COFCO — conhece a complexidade</li>
+                            <li>Parceria Foursys-Digibee ideal para iPaaS e integração de sistemas legados</li>
+                            <li>Demanda por plataforma unificada de dados para decisões de trading</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Andre Schneiter</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. Engenharia de Dados &amp; Integração (Digibee)</h4>
+                    <span class="score-badge">Fit 95%</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Construção de data pipelines e integração de sistemas via iPaaS Digibee para conectar operações em 44 países.</p>
+                    <ul>
+                        <li>Integração entre sistemas de trading, logística, finance e compliance ESG</li>
+                        <li>APIs para conectar Agrosmart, Csmart, Komgo e plataformas de rastreabilidade</li>
+                        <li>André conhece a dor: liderou integração SAP em 30+ países na COFCO</li>
+                        <li>Modelo de squads especializados reduz time-to-value</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. Dados &amp; Inteligência Artificial</h4>
+                    <span class="score-badge">Fit 90%</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Estratégia de dados corporativa, inteligência preditiva e IA generativa para operações de trading e supply chain.</p>
+                    <ul>
+                        <li>Fundação de dados para unificar informações de +200.000 produtores</li>
+                        <li>Modelos preditivos para precificação de café e gestão de risco de commodities</li>
+                        <li>IA generativa para análise de documentos de compliance e contratos</li>
+                        <li>Expansão dos modelos de IA já adotados (Agrosmart, Csmart) para novas áreas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. Engenharia Digital — Modernização de Plataformas</h4>
+                    <span class="score-badge">Fit 85%</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Modernização de ecossistemas legados, design de plataformas digitais e sustentação contínua.</p>
+                    <ul>
+                        <li>Migração de sistemas legados da Finacafé para arquitetura moderna</li>
+                        <li>Plataforma de rastreabilidade EUDR com integração a dados geoespaciais e CAR</li>
+                        <li>Portal unificado de sustentabilidade e ESG reporting para stakeholders e financiadores</li>
+                        <li>Sustentação e evolução contínua das plataformas digitais existentes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. Cibersegurança &amp; Privacidade</h4>
+                    <span class="score-badge">Fit 80%</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Segurança da informação, privacidade (LGPD/GDPR) e gestão de riscos para operações globais.</p>
+                    <ul>
+                        <li>Operação em 44 países exige compliance com múltiplas regulamentações (GDPR, LGPD)</li>
+                        <li>Cadeia de suprimentos com +200.000 produtores é vetor de risco cibernético</li>
+                        <li>Certificações ISO 27001/27701 da Foursys são diferencial direto</li>
+                        <li>Trade finance digital (US$ 500M+) demanda segurança de nível bancário</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>5. Agilidade &amp; Org Design</h4>
+                    <span class="score-badge">Fit 75%</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Desenho de modelos operacionais ágeis para TI e otimização de fluxo de valor em empresa de trading.</p>
+                    <ul>
+                        <li>André está montando/reestruturando a área de tecnologia — momento ideal para org design</li>
+                        <li>Modelo de squads para projetos de transformação digital em múltiplas geografias</li>
+                        <li>Capacitação em liderança tecnológica para times locais em mercados emergentes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>André Schneiter acabou de deixar a COFCO International após 9 anos como Global CTO, onde liderou a transformação digital com SAP S/4HANA em 30+ países. Ao assumir posição na Sucafina, estará em <strong>"modo construção"</strong>: avaliando o landscape tecnológico, definindo roadmap e selecionando parceiros. Iniciar a conversa demonstrando <strong>experiência da Foursys com integração de dados multi-país (Digibee)</strong>, <strong>engenharia de IA para agronegócio</strong> e <strong>compliance regulatório (EUDR)</strong>. André valoriza tecnologia como "motor da agricultura moderna" — usar essa linguagem.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente — EUDR Compliance</h4>
+                <p>O Regulamento Europeu Anti-Desmatamento (EUDR) entra em vigor em <strong>dezembro de 2026</strong>, impactando diretamente US$ 7 bilhões em exportações brasileiras de café para a UE. A Sucafina precisa rastrear cada lote com coordenadas GPS, verificar não-desmatamento e gerar relatórios de compliance para +200.000 produtores parceiros. Isso exige <strong>integração de dados geoespaciais, APIs com bases governamentais (CAR, PRODES) e plataforma de reporting ESG</strong> — áreas onde a Foursys pode entregar valor imediato com squads especializados.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>Parceria Digibee</strong> — iPaaS ideal para integrar sistemas em 44 países sem substituir legados; (2) <strong>AI Squad</strong> — aceleração com IA para modelos preditivos e IA generativa no agro; (3) <strong>Certificações ISO 27001/27701 + ISO 14001</strong> — segurança, privacidade E gestão ambiental (diferencial único para empresa do agro); (4) <strong>25 anos de experiência</strong> com presença global (Brasil, EUA, Europa) — match com a pegada da Sucafina.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. EUDR é o tema #1 do setor:</strong> Em dezembro/2026, traders que não comprovarem rastreabilidade terão café barrado na UE. A Sucafina, como uma das maiores traders globais, precisa de plataforma de compliance que integre dados de +200.000 produtores com bases governamentais. Demonstrar conhecimento desse regulamento abre portas instantaneamente.</p>
+                <p style="margin-bottom:12px"><strong>2. André conhece transformação em escala global:</strong> Na COFCO, implementou SAP S/4HANA, Ariba e SuccessFactors em 30+ países. Ele entende a complexidade de integração multi-país e buscará parceiros que falem essa linguagem. Não venda features — venda experiência de implementação global.</p>
+                <p style="margin-bottom:12px"><strong>3. Sucafina já aposta em IA e blockchain:</strong> Investimentos em Agrosmart, Csmart e Farmer Connect mostram apetite por inovação. O desafio agora é escalar essas iniciativas e integrá-las em plataforma coesa. Posicione a Foursys como parceira de integração e escalabilidade, não de experimentação.</p>
+                <p style="margin-bottom:12px"><strong>4. Sustentabilidade é core business, não ESG de fachada:</strong> A Sucafina fechou facility de US$ 700M sustainability-linked, com KPIs atrelados a certificação de produtores e agricultura regenerativa. Reporting de sustentabilidade é requisito financeiro — dados de ESG alimentam os covenants bancários.</p>
+                <p><strong>5. Concorrentes estão se digitalizando rapidamente:</strong> Expocacer lançou Coffee Chain (blockchain), Timbro entrou no mercado com foco em tracking digital, e COFCO (ex-empresa do André) implementou SAP em escala global. A Sucafina precisa manter paridade competitiva e pode se beneficiar do benchmark que André traz da COFCO.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Neumann Kaffee Gruppe — NKG (Alemanha)</h4>
+                <p><strong>Segmento:</strong> Maior sourcing de café do mundo (~10% da demanda global) | <strong>Presença:</strong> 27 países</p>
+                <p>Líder global em sourcing de café verde. Investe em plataformas digitais de rastreabilidade e programas de sustentabilidade em escala. Forte presença na origem (África, Ásia, América Latina) com centros de qualidade e labs sensoriais. Modelo verticalizado que compete diretamente com o "Farm to Roaster" da Sucafina.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Louis Dreyfus Company — LDC (França)</h4>
+                <p><strong>Segmento:</strong> Trading de commodities agrícolas diversificado | <strong>Receita:</strong> ~US$ 50+ bilhões (grupo)</p>
+                <p>Uma das quatro maiores traders agrícolas do mundo (ABCD). Divisão de café compete diretamente com a Sucafina em mercados-chave como Uganda (8,6% de market share) e Brasil. Investiu fortemente em plataforma digital própria e parcerias de trade finance digital. Escala massiva e diversificação de commodities são vantagens competitivas.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>ECOM Agroindustrial (Suíça)</h4>
+                <p><strong>Segmento:</strong> Trading de café, cacau e algodão | <strong>Presença:</strong> 40+ países</p>
+                <p>Trader de commodities soft com forte presença na origem. Possui a <strong>SMS (Sustainable Management Services)</strong>, subsidiária de sustentabilidade que oferece rastreabilidade e certificação. Investiu em tecnologia de monitoramento de fazendas via satélite e sensores IoT. Modelo integrado que pressiona a Sucafina a investir em tecnologia para manter paridade.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Volcafe / ED&amp;F Man (Suíça/Reino Unido)</h4>
+                <p><strong>Segmento:</strong> Trading de café (subsidiária da ED&amp;F Man) | <strong>Presença:</strong> Global</p>
+                <p>Divisão de café da ED&amp;F Man Holdings. Consolidou operações nos EUA recentemente. Foco em café specialty e sustainable sourcing. Concorre em mercados de nicho de alta qualidade onde rastreabilidade e storytelling digital (narrativa do produtor) são diferenciais competitivos.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Olam International (Singapura)</h4>
+                <p><strong>Segmento:</strong> Trading de commodities agrícolas e alimentos | <strong>Receita:</strong> ~US$ 35+ bilhões (grupo)</p>
+                <p>Gigante de commodities que compete com a Sucafina no café (7,1% de market share em Uganda). Pioneira em plataformas digitais de rastreabilidade (AtSource) que oferece transparência total da cadeia. Modelo de "co-investimento" com produtores rurais e forte apelo ESG para clientes institucionais.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Os concorrentes da Sucafina estão investindo pesadamente em <strong>plataformas digitais de rastreabilidade</strong> (Olam AtSource, ECOM SMS, Expocacer Coffee Chain), <strong>compliance EUDR automatizado</strong> e <strong>IA para previsão de safra e precificação</strong>. A Sucafina tem iniciativas fragmentadas (Agrosmart, Csmart, Farmer Connect, Komgo, Cargoo) mas ainda não possui uma <strong>plataforma integrada end-to-end</strong>. Os principais gaps são: (1) <strong>Plataforma unificada de dados</strong> que conecte todas as iniciativas digitais existentes; (2) <strong>Automação de compliance EUDR</strong> com integração a bases governamentais brasileiras (CAR, PRODES, IBAMA); (3) <strong>Modernização de ERP/sistemas core</strong> — André fez isso na COFCO com SAP e provavelmente buscará evolução similar; (4) <strong>Cibersegurança multi-jurisdicional</strong> para operações de trade finance digital. A Foursys pode se posicionar como integradora de ecossistemas digitais com Digibee, aceleradora de IA com AI Squad e garantidora de segurança/compliance com certificações ISO.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Nome Completo</div>
+                        <div class="value">Andre Davico Schneiter (André Schneiter)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Anterior</div>
+                        <div class="value">Global CTO — COFCO International (2016–2026, ~9 anos)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Anterior</div>
+                        <div class="value">CIO Odebrecht (6 anos) → Consulting Partner IBM (7 anos) → Senior Manager PwC (11 anos)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Total</div>
+                        <div class="value">30+ anos em tecnologia corporativa e consultoria</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação</div>
+                        <div class="value">Administração (PUC-Rio), MBA (BSP - Business School SP), CTO Programme (Cambridge Judge Business School)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">São Paulo, SP (base brasileira)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Estilo de Liderança</div>
+                        <div class="value">Reconhecido por "competência técnica aliada a liderança humanizada" — pares destacam sua abordagem colaborativa</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Visão Declarada</div>
+                        <div class="value">"Tecnologia é o motor da agricultura moderna" — conecta inovação tech a impacto no agronegócio</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconheça sua trajetória COFCO → Sucafina:</strong> André liderou uma das maiores transformações digitais do agronegócio global (SAP em 30+ países na COFCO). Demonstrar que você conhece essa jornada e o desafio de "começar de novo" em uma empresa menor e mais ágil gera conexão imediata e mostra preparo.</p>
+                <p style="margin-bottom:10px"><strong>2. Fale a linguagem do agronegócio, não só de TI:</strong> André vem de 9 anos em trading de commodities agrícolas. Ele pensa em "safras", "logística de origem", "compliance de desflorestamento" e "trade finance". Conectar tecnologia a esses termos mostra que você entende o negócio dele, não apenas vende soluções genéricas.</p>
+                <p style="margin-bottom:10px"><strong>3. Aborde o EUDR como oportunidade, não como problema:</strong> Enquanto o mercado trata o EUDR como custo regulatório, posicione como vantagem competitiva: traders que automatizarem compliance primeiro terão diferenciação comercial com torrefadores europeus premium. André, como estrategista, vai apreciar essa perspectiva.</p>
+                <p style="margin-bottom:10px"><strong>4. Valorize liderança humanizada:</strong> Colegas de André destacam sua liderança humanizada e colaborativa. Evite abordagem de "hard sell". Priorize construção de relacionamento, troca de insights e posicionamento como parceiro de longo prazo. Ele construiu carreira com parceiros que confia, não com vendedores.</p>
+                <p><strong>5. Mencione a formação em Cambridge:</strong> André completou o CTO Programme na Cambridge Judge Business School — programa de elite para executivos de tecnologia. Demonstrar respeito por essa formação e trazer insights de nível executivo (não operacional) à conversa mostra que você está no mesmo nível de discussão que ele valoriza.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Executivo e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil Profissional</div>
+                        <div class="value">CTO com background em consultoria Big4 e experiência como CIO de conglomerado</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Expertise Principal</div>
+                        <div class="value">Integração de sistemas multi-país, otimização de infraestrutura de dados, transformação digital em agronegócio</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Internacional</div>
+                        <div class="value">30+ países gerenciados na COFCO, vivência na Suíça, programas em Cambridge (UK) e UC (EUA)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão Estimado</div>
+                        <div class="value">Alto — como CTO/CIO em empresa de ~1.500 colaboradores, é decisor direto de investimentos em tecnologia</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Setores de Experiência</div>
+                        <div class="value">Agronegócio/Commodities (COFCO, Sucafina), Construção/Infraestrutura (Odebrecht), Consultoria (IBM, PwC)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Tecnologias Conhecidas</div>
+                        <div class="value">SAP S/4HANA, SAP Ariba, SuccessFactors, Cloud, Data Analytics, IA/ML, integrações corporativas</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI (Sucafina)</div>
+                        <div class="value">Estimada: 30-80 profissionais (empresa de ~1.500 colaboradores globais)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Negócio</div>
+                        <div class="value">Estratégico: em trading de commodities, tecnologia é diferencial competitivo em velocidade de decisão e compliance</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada de Investimentos TI</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Integração &amp; Dados</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+                <div class="bar"><div class="bar-label">Cloud &amp; Infraestrutura</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+                <div class="bar"><div class="bar-label">ERP &amp; Sistemas Core</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#3949ab">18%</div></div></div>
+                <div class="bar"><div class="bar-label">IA &amp; Analytics</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Logística Digital</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#7986cb">7%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas &amp; Capacitação</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+            </div>
+            <p style="margin-top:12px;font-size:12px;color:var(--text-light);text-align:center">* Distribuição estimada com base nas prioridades do setor e perfil da empresa. Não declarada oficialmente.</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor (Estimadas)</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância (baseados no perfil)</h4>
+                    <div>
+                        <span class="tag tag-active">Experiência em Agronegócio / Commodities</span>
+                        <span class="tag tag-active">Capacidade de Entrega Global</span>
+                        <span class="tag tag-active">Expertise em Integração de Dados</span>
+                        <span class="tag tag-active">Certificações de Segurança e Qualidade</span>
+                        <span class="tag tag-active">Modelo Flexível (Squads, Projetos)</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Empresa de tecnologia com experiência global e capacidade de execução em múltiplas geografias. Background em Big4 sugere preferência por parceiros com metodologia e governança.</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Contexto de Decisão</div>
+                        <div class="value">Executivo em transição recente — provável fase de avaliação de landscape tecnológico e seleção de novos parceiros estratégicos. Janela ideal para posicionamento.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Fernando Ferreira Barbosa | SANEAGO</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Fernando Ferreira Barbosa</h1>
+                <h2>Líder de TI — SANEAGO</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Infraestrutura (Saneamento) | Goiânia - GO</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 3 BI a R$ 5 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Lucro Líquido 2025</div>
+                    <div class="value">R$ 669,7 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescimento</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: SANEAGO</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>SANEAGO (Saneamento de Goiás S.A.)</strong> é uma Sociedade de Economia Mista vinculada ao Governo do Estado de Goiás, responsável pelo abastecimento de água e esgotamento sanitário em <strong>223 dos 246 municípios goianos</strong>, atendendo mais de <strong>6 milhões de habitantes</strong>. Em 2025, a empresa registrou <strong>lucro líquido recorde de R$ 669,7 milhões</strong>, com investimentos totais de <strong>R$ 1 bilhão</strong> (alta de 51,6% sobre 2024). Os índices de cobertura atingiram <strong>98,31% em água</strong> e <strong>75,09% em esgoto</strong>. A empresa possui um plano estratégico de CAPEX de <strong>R$ 5,58 bilhões para 2025-2029</strong>, sendo R$ 1,15 bilhão previsto para 2026. Em março de 2026, o leilão de PPPs de R$ 6,2 bilhões para ampliar esgotamento em 216 municípios foi cancelado por falta de propostas qualificadas, sinalizando que a empresa seguirá investindo diretamente e buscando alternativas de parceria. A SANEAGO está em processo ativo de transformação digital, tendo lançado em 2025 serviços 100% online na Agência Virtual e visitado benchmarks de digitalização documental.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Estadual — Goiás (223 municípios)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Economia Mista (Governo de Goiás)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento — receita +R$ 247 MM em 2025 vs 2024</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">~5.300 funcionários</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Infraestrutura (Saneamento)</strong> com abrangência <strong>Estadual</strong>, atendendo mais de 6 milhões de pessoas em Goiás. A SANEAGO está num momento crítico de <strong>universalização dos serviços</strong> (Marco Legal do Saneamento — meta 2033), com investimentos bilionários planejados e necessidade urgente de <strong>modernização tecnológica</strong> para ganhar escala e eficiência operacional. O cancelamento do leilão de PPPs em março/2026 reforça que a empresa precisará investir diretamente em tecnologia e automação para cumprir metas regulatórias.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Universalização do saneamento até 2033 (Marco Legal — Lei 14.026/2020)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Digitalização de processos operacionais e atendimento ao cliente</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Redução de perdas de água (índice de perdas é desafio crítico do setor)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernização de infraestrutura de TI legada (empresa pública com sistemas antigos)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Automação e telemetria de redes de água e esgoto</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Conformidade regulatória e governança de dados (LGPD/CVM)</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Prioridades de Investimento em TI</h4>
+                    <div>
+                        <span class="tag tag-priority">IoT / Telemetria</span>
+                        <span class="tag tag-priority">Digitalização de Processos</span>
+                        <span class="tag tag-priority">Automação Operacional</span>
+                        <span class="tag tag-priority">Cibersegurança</span>
+                        <span class="tag tag-priority">Nuvem e Modernização</span>
+                        <span class="tag tag-priority">BI e Analytics</span>
+                    </div>
+                    <div style="margin-top:20px">
+                        <h4 style="margin-bottom:12px;color:var(--primary)">Contexto Regulatório</h4>
+                        <div class="alert-box">
+                            <strong>Marco Legal do Saneamento:</strong> A Lei 14.026/2020 exige universalização de 99% em água e 90% em esgoto até 2033. A SANEAGO está em 98,31% (água) e 75,09% (esgoto) — precisa acelerar significativamente o esgotamento sanitário.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Áreas de investimento previstas com base no plano estratégico CAPEX 2025-2029 (R$ 5,58 BI) e tendências do setor:</p>
+            <div>
+                <span class="tag tag-opportunity">Infraestrutura de Esgotamento Sanitário</span>
+                <span class="tag tag-opportunity">Hidrômetros Inteligentes / IoT</span>
+                <span class="tag tag-opportunity">Sistemas de Telemetria</span>
+                <span class="tag tag-opportunity">Digitalização do Atendimento</span>
+                <span class="tag tag-opportunity">Automação de Processos (RPA/BPM)</span>
+                <span class="tag tag-opportunity">Modernização de ERP/Sistemas Legados</span>
+                <span class="tag tag-opportunity">Analytics e BI Operacional</span>
+                <span class="tag tag-opportunity">Cibersegurança e LGPD</span>
+                <span class="tag tag-opportunity">Migração para Nuvem</span>
+                <span class="tag tag-opportunity">GIS / Geoprocessamento</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <div class="alert-box">
+                <strong>Leilão de PPPs cancelado em março/2026:</strong> O fracasso do leilão de R$ 6,2 bilhões para esgotamento sanitário em 216 municípios indica que a SANEAGO precisará investir diretamente em eficiência operacional e tecnologia para cumprir as metas do Marco Legal. Isso amplifica a necessidade de parceiros de tecnologia.
+            </div>
+            <div class="grid-2">
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Digitalização de Processos</h4>
+                        <span class="score-badge">Alta Prioridade</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Agência Virtual lançada em 2025 com serviços online — sinal de maturidade inicial</li>
+                            <li>Visita à ALEGO para benchmark de digitalização documental</li>
+                            <li>Empresa pública com grande volume de processos manuais a automatizar</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>IoT e Telemetria</h4>
+                        <span class="score-badge">Alta Prioridade</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Sabesp investindo R$ 3,8 BI em hidrômetros inteligentes — benchmark para SANEAGO</li>
+                            <li>Redução de perdas de água é meta regulatória e financeira crítica</li>
+                            <li>Monitoramento de 223 municípios demanda automação em escala</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Fernando Ferreira Barbosa</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. Automação de Processos (RPA + BPM + IA)</h4>
+                    <span class="score-badge">Fit: 95%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Empresa pública com centenas de processos manuais em atendimento, faturamento, fiscalização e operação</li>
+                        <li>Agência Virtual recém-lançada demanda automação backend para escalar</li>
+                        <li>Parceria Foursys + Digibee pode integrar sistemas legados sem substituí-los</li>
+                        <li>Digitalização documental é prioridade declarada (visita à ALEGO para benchmark)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. Modernização e Integração de Sistemas (APIs / iPaaS)</h4>
+                    <span class="score-badge">Fit: 90%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Empresa de economia mista com múltiplos sistemas legados desconectados</li>
+                        <li>Necessidade de integrar ERP, GIS, sistemas de telemetria, faturamento e CRM</li>
+                        <li>Digibee como plataforma iPaaS pode conectar sistemas sem reescrever código</li>
+                        <li>Abertura de capital (RI ativo) exige dados confiáveis e integrados</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. Squads de Desenvolvimento e Sustentação</h4>
+                    <span class="score-badge">Fit: 88%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Volume de projetos simultâneos (CAPEX R$ 1,15 BI em 2026) exige capacidade extra de TI</li>
+                        <li>Desafio de contratação de talentos em Goiânia vs grandes centros</li>
+                        <li>Modelo de Squads Foursys permite escalar equipe sem concurso público</li>
+                        <li>Sustentação de sistemas críticos (faturamento, operação) com SLA garantido</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. BI, Analytics e Data Platform</h4>
+                    <span class="score-badge">Fit: 85%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Operação em 223 municípios gera volume massivo de dados operacionais</li>
+                        <li>Monitoramento de KPIs regulatórios (perdas, cobertura, qualidade) exige dashboards em tempo real</li>
+                        <li>Empresa com RI ativo — investidores demandam transparência e dados confiáveis</li>
+                        <li>IA para predição de vazamentos e otimização de redes é tendência do setor</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>5. Cibersegurança e Conformidade (LGPD/CVM)</h4>
+                    <span class="score-badge">Fit: 82%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Empresa de economia mista com dados de 6 milhões de clientes — LGPD é obrigatória</li>
+                        <li>Abertura de capital exige conformidade CVM e governança de dados</li>
+                        <li>Certificações ISO 27001/27701 da Foursys são diferencial direto</li>
+                        <li>Expansão de IoT e telemetria amplia superfície de ataque cibernético</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Abrir a conversa pelo tema <strong>universalização e eficiência operacional</strong>. A SANEAGO está num momento decisivo: precisa atingir 90% de cobertura de esgoto até 2033 (hoje em 75%), o leilão de PPPs fracassou, e o investimento direto em tecnologia é o caminho que resta. Demonstrar como a Foursys ajudou outras empresas de infraestrutura a <strong>automatizar processos, integrar sistemas legados e escalar operações</strong> com menor custo. Cases de digitalização em empresas públicas e utilities são especialmente relevantes.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>O <strong>cancelamento do leilão de PPPs de R$ 6,2 bilhões</strong> em março/2026 é um gatilho poderoso. Sem parceiros privados para expandir esgoto, a SANEAGO precisará investir diretamente em <strong>eficiência operacional via tecnologia</strong>. O CAPEX previsto de <strong>R$ 1,15 bilhão para 2026</strong> inclui necessariamente componentes de TI. A janela de oportunidade está aberta agora.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>Experiência com empresas públicas e de economia mista</strong> — entendimento de processos licitatórios e compliance; (2) <strong>Parceria Digibee</strong> para integração de sistemas legados sem necessidade de substituição; (3) <strong>AI Squad</strong> para automação inteligente de processos operacionais; (4) <strong>Modelo flexível</strong> de contratação (Squads, Projetos, AMS) que se adapta a modelos de compra do setor público.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. O benchmark Sabesp é irresistível:</strong> A Sabesp está investindo R$ 3,8 bilhões em hidrômetros inteligentes com a Vivo e usando IA para detectar vazamentos com 42% mais eficiência. Mencionar esse benchmark mostra visão de mercado e cria urgência — "sua concorrente regulatória está se digitalizando aceleradamente".</p>
+                <p style="margin-bottom:12px"><strong>2. Marco Legal do Saneamento cria deadline real:</strong> A meta de 90% de esgoto até 2033 não é aspiracional, é regulatória. Com 75,09% hoje, a SANEAGO precisa acelerar. Tecnologia (telemetria, automação, IA) é o único caminho para fazer mais com o orçamento disponível.</p>
+                <p style="margin-bottom:12px"><strong>3. Fracasso do leilão de PPPs muda o jogo:</strong> Sem parceiros privados para os R$ 6,2 bilhões em esgoto, a SANEAGO terá que investir diretamente e buscar eficiência. Isso aumenta a demanda por automação, analytics e modernização de sistemas — exatamente o portfólio Foursys.</p>
+                <p style="margin-bottom:12px"><strong>4. Empresa com RI ativo exige governança de dados:</strong> A SANEAGO possui área de Relações com Investidores ativa, publica relatórios trimestrais e está sujeita à CVM. Isso demanda dados integrados, dashboards confiáveis e conformidade — áreas onde a Foursys pode agregar valor imediato.</p>
+                <p><strong>5. Digitalização do atendimento é porta de entrada:</strong> A Agência Virtual lançada em 2025 mostra apetite por digitalização. A próxima etapa natural é automatizar o backend (faturamento, ordens de serviço, fiscalização), integrar canais (WhatsApp, app, portal) e usar analytics para melhorar a experiência de 6 milhões de clientes.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes / Setor</h3>
+            <div class="competitor-card">
+                <h4>SABESP (São Paulo)</h4>
+                <p><strong>Segmento:</strong> Saneamento — maior do Brasil | <strong>Receita:</strong> ~R$ 25 bilhões (2024)</p>
+                <p>Referência nacional e internacional em saneamento. Privatizada em julho/2024 com a Equatorial como parceira estratégica. Investindo <strong>R$ 70 bilhões até 2029</strong> em universalização. Pioneira em IoT (4,4 milhões de hidrômetros inteligentes), IA para detecção de vazamentos, atendimento via WhatsApp com IA generativa, e sensores inteligentes em redes de esgoto. É o benchmark tecnológico mais relevante para a SANEAGO.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Aegea Saneamento</h4>
+                <p><strong>Segmento:</strong> Concessões privadas de saneamento | <strong>Receita:</strong> ~R$ 8 bilhões (2024)</p>
+                <p>Maior empresa privada de saneamento do Brasil, atendendo 31 milhões de pessoas em 507 municípios. Investiu fortemente em tecnologia com plataformas de monitoramento remoto, gestão de perdas com IoT e digitalização de processos. Concorre indiretamente com a SANEAGO por benchmarks de eficiência e pode eventualmente disputar concessões em Goiás.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Iguá Saneamento</h4>
+                <p><strong>Segmento:</strong> Concessões e PPPs de saneamento | <strong>Receita:</strong> ~R$ 3,5 bilhões (2024)</p>
+                <p>Empresa focada em concessões e PPPs, presente em 39 municípios em 6 estados. Investiu R$ 2,3 bilhões entre 2019-2023. Destaca-se por programas de inovação aberta e uso de analytics para gestão de perdas. Poderia ter sido interessada no leilão de PPPs da SANEAGO (cancelado).</p>
+            </div>
+            <div class="competitor-card">
+                <h4>BRK Ambiental</h4>
+                <p><strong>Segmento:</strong> Concessões de saneamento | <strong>Receita:</strong> ~R$ 5 bilhões (2024)</p>
+                <p>Controlada pelo fundo Brookfield, opera em 13 estados com 16 milhões de pessoas atendidas. Investiu em plataformas digitais de monitoramento operacional, telemetria e otimização de processos. Foco em eficiência e redução de custos operacionais via tecnologia.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Os concorrentes da SANEAGO (especialmente Sabesp e Aegea) estão investindo pesadamente em <strong>IoT, IA para detecção de perdas, telemetria em tempo real e atendimento digital com IA generativa</strong>. A SANEAGO está no início dessa jornada (Agência Virtual básica, digitalização documental incipiente). Os principais gaps identificados são: (1) <strong>Falta de plataforma integrada de dados operacionais</strong> para monitorar 223 municípios em tempo real; (2) <strong>Sistemas legados desconectados</strong> entre operação, faturamento e atendimento; (3) <strong>Automação de processos</strong> ainda manual em áreas como fiscalização, ordens de serviço e compliance; (4) <strong>Analytics e IA</strong> inexistentes para predição de perdas e otimização de rede. A Foursys pode se posicionar como parceira de aceleração digital, trazendo experiência de integração (Digibee), squads ágeis e AI Squad para fechar esses gaps rapidamente.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo</div>
+                        <div class="value">Liderança de TI — SANEAGO</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Goiânia, GO</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Contexto</div>
+                        <div class="value">Profissional de TI em empresa de saneamento de economia mista com 5.300+ colaboradores</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Participação em Eventos</div>
+                        <div class="value">IT Forum ATI Trancoso 2026 — demonstra interesse em networking e tendências de TI</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil Provável</div>
+                        <div class="value">Gestor de TI em empresa pública — valoriza estabilidade, compliance e parceiros confiáveis</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Temas de Interesse</div>
+                        <div class="value">Digitalização de processos, modernização de sistemas legados, eficiência operacional</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Valorize o momento de crescimento da SANEAGO:</strong> Lucro recorde de R$ 669M, investimentos de R$ 1 bilhão — reconhecer esses resultados mostra que você fez a lição de casa e gera conexão positiva.</p>
+                <p style="margin-bottom:10px"><strong>2. Demonstre empatia com desafios do setor público:</strong> Processos licitatórios, concursos, burocracia — entender essas restrições e apresentar modelos de contratação flexíveis (credenciamento, pregão) diferencia a Foursys de fornecedores que não entendem o setor.</p>
+                <p style="margin-bottom:10px"><strong>3. Use o benchmark da Sabesp com cuidado:</strong> Mencione a modernização da Sabesp como inspiração, não como comparação negativa. O tom é "veja o que é possível" e não "vocês estão atrasados".</p>
+                <p style="margin-bottom:10px"><strong>4. Conecte tecnologia a impacto social:</strong> Saneamento é saúde pública. Líderes de TI neste setor frequentemente se motivam pelo impacto social do seu trabalho. Conectar tecnologia a "mais pessoas com água tratada e esgoto" ressoa emocionalmente.</p>
+                <p><strong>5. Conheça Goiânia:</strong> Se possível, faça uma referência leve à cidade — a capital goiana cresce rapidamente e é polo de agronegócio e tecnologia. Demonstrar interesse pela região mostra respeito e facilita o rapport pessoal.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Líder de TI e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Tipo de Empresa</div>
+                        <div class="value">Economia Mista — Governo do Estado de Goiás</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Modelo de Compra</div>
+                        <div class="value">Licitação (Lei 14.133/2021) — Pregão, Credenciamento, Contratação Direta</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Área de Atendimento</div>
+                        <div class="value">223 municípios em Goiás — 6 milhões de habitantes</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Estrutura de TI</div>
+                        <div class="value">Superintendência de TI com assessoria dedicada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">~5.300 funcionários (empresa inteira)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Regulador</div>
+                        <div class="value">AGR (Agência Goiana de Regulação) + CVM (capital aberto)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">CAPEX 2026</div>
+                        <div class="value">R$ 1,15 bilhão planejado</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI</div>
+                        <div class="value">Em transformação — de suporte para habilitadora da universalização</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada de Investimento TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+                <div class="bar"><div class="bar-label">Software/Licenças</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+                <div class="bar"><div class="bar-label">Operação/Sustentação</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#3949ab">20%</div></div></div>
+                <div class="bar"><div class="bar-label">Projetos/Desenvolvimento</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas (TI)</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#7986cb">3%</div></div></div>
+                <div class="bar"><div class="bar-label">Capacitação</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#9fa8da">2%</div></div></div>
+            </div>
+            <p style="margin-top:16px;font-size:12px;color:var(--text-light);text-align:center">* Estimativa baseada em perfil típico de empresas de economia mista do setor de saneamento</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor (Perfil Setor Público)</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Conformidade com licitações</span>
+                        <span class="tag tag-active">Experiência no setor público</span>
+                        <span class="tag tag-active">Referências e cases similares</span>
+                        <span class="tag tag-active">Preço competitivo</span>
+                        <span class="tag tag-active">Capacidade de escala</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Empresa de TI com experiência em setor público, conformidade licitatória e capacidade de atender demandas de larga escala</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação</div>
+                        <div class="value">Licitação pública (pregão eletrônico, credenciamento, contratos de prestação de serviços)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Eduardo Gomes | JBS S.A.</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Eduardo Gomes</h1>
+                <h2>Diretor de TI — JBS S.A.</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Indústria Alimentícia (Proteína Animal) | São Paulo, SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">US$ 86,2 BI (2025)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Colaboradores</div>
+                    <div class="value">280.000+</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescimento (+12% a.a.)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: JBS S.A.</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>JBS S.A.</strong> é a maior empresa de proteína animal do mundo e uma das maiores companhias de alimentos globais, com sede em São Paulo (SP). Fundada em 1953 em Anápolis (GO), a empresa opera em mais de <strong>20 países</strong>, com <strong>250+ unidades produtivas</strong> e presença comercial em <strong>180+ países</strong>. Em 2025, registrou receita recorde de <strong>US$ 86,2 bilhões</strong> (+12% anual), lucro líquido de <strong>US$ 2 bilhões</strong> (+15%) e EBITDA ajustado de <strong>US$ 6,8 bilhões</strong> (margem de 7,9%). Para 2026, planeja investir <strong>US$ 2,4 bilhões</strong> — US$ 1,4 bi em expansão e US$ 1 bi em manutenção de plantas. A JBS opera marcas icônicas como Friboi, Seara, Swift, Pilgrim's Pride e Moy Park. No campo tecnológico, a empresa está em plena migração global para <strong>SAP S/4HANA</strong> (com Syskoplan Reply/cbs), implementou <strong>IA para classificação de couro bovino</strong> com a Mindhive Global (processando 360 peles/hora com 91%+ de precisão), utiliza <strong>blockchain</strong> para rastreabilidade da cadeia bovina (Plataforma Pecuária Transparente) e possui compromisso de <strong>emissões líquidas zero até 2040</strong>. A empresa sofreu ataques de ransomware significativos em 2021 (grupo REvil, pagamento de US$ 11 milhões) e em 2026 (grupo Coinbasecartel, 3 TB de dados), tornando cibersegurança uma prioridade crítica.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global — 20+ países, 180+ mercados</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Capital aberto (JBSS3 — B3 | NYSE — dupla listagem em andamento)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento — Receita recorde, investimento de US$ 2,4 bi em 2026</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">280.000+ (158.000 no Brasil — maior empregadora do país)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>A JBS é a <strong>maior empresa de proteína animal do mundo</strong>, com faturamento de US$ 86,2 bilhões e operações em 20+ países. Eduardo Gomes atua como <strong>Diretor de TI</strong> desde agosto de 2022, com mais de 14 anos de experiência na empresa. A JBS está em um momento de <strong>transformação tecnológica acelerada</strong>: migração global SAP S/4HANA, adoção de IA em operações industriais, reforço massivo de cibersegurança (pós-ataques ransomware) e digitalização da cadeia de rastreabilidade ESG. A escala da operação — 250+ plantas, 280 mil colaboradores, operação 24/7 — torna cada projeto de TI um desafio de magnitude global.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Cibersegurança pós-incidentes críticos:</strong> Dois ataques ransomware (2021 e 2026) exigem arquitetura Zero Trust, SOC 24/7 e proteção de ambientes OT/IoT industriais</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Migração SAP S/4HANA global:</strong> Transição de ECC 6.0 para S/4HANA em ondas — 60+ entidades legais já migradas na América do Norte; ondas restantes até fim de 2026</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Escalar IA em operações industriais:</strong> Expandir IA de classificação de couro para outras linhas de produção (aves, suínos, processados) em 250+ plantas</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Rastreabilidade e compliance ESG:</strong> Blockchain para cadeia bovina, Leather ID em 8 países, cumprimento de EUDR (regulamento europeu de desmatamento)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Integração de dados multi-geografia:</strong> Consolidar dados de 250+ plantas em 20+ países com governança unificada</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Automação de processos corporativos:</strong> RPA e IA para supply chain, logística e operações financeiras de escala global</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento</h4>
+                    <div style="margin-bottom:16px">
+                        <span class="tag tag-priority">Cibersegurança &amp; Zero Trust</span>
+                        <span class="tag tag-priority">SAP S/4HANA Migration</span>
+                        <span class="tag tag-priority">IA Industrial / Machine Vision</span>
+                    </div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Temas Estratégicos em Andamento</h4>
+                    <div>
+                        <span class="tag tag-active">Blockchain &amp; Rastreabilidade</span>
+                        <span class="tag tag-active">IoT Industrial (OT/IT)</span>
+                        <span class="tag tag-active">Cloud Híbrida</span>
+                        <span class="tag tag-active">Analytics &amp; BW/4HANA</span>
+                        <span class="tag tag-active">Automação Logística</span>
+                        <span class="tag tag-active">Compliance ESG Digital</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses — baseado em iniciativas públicas e contexto do setor:</p>
+            <div>
+                <span class="tag tag-opportunity">Cibersegurança (SOC, SIEM, Zero Trust)</span>
+                <span class="tag tag-opportunity">SAP S/4HANA — Ondas LatAm/APAC</span>
+                <span class="tag tag-opportunity">IA / Machine Vision Industrial</span>
+                <span class="tag tag-opportunity">Rastreabilidade Blockchain (EUDR)</span>
+                <span class="tag tag-opportunity">Cloud Híbrida &amp; Infraestrutura</span>
+                <span class="tag tag-opportunity">IoT / Automação de Plantas</span>
+                <span class="tag tag-opportunity">BW/4HANA &amp; Analytics</span>
+                <span class="tag tag-opportunity">Integração de Dados Global</span>
+                <span class="tag tag-opportunity">Automação de Processos (RPA)</span>
+                <span class="tag tag-opportunity">Compliance &amp; LGPD</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades sem Fornecedor Definido</h3>
+            <div class="alert-box">
+                <strong>⚠ Janela crítica de cibersegurança:</strong> A JBS sofreu um novo ataque hacker em 2026 (grupo Coinbasecartel, 3 TB de dados roubados). Este incidente recente cria uma janela urgente para reforço de segurança — possivelmente com fornecedores complementares ou substitutos aos atuais.
+            </div>
+            <div class="alert-box">
+                <strong>⚠ SAP S/4HANA — Ondas restantes:</strong> A primeira onda (América do Norte) foi liderada por Syskoplan Reply/cbs. Ondas para América Latina, Brasil e outras regiões podem abrir espaço para parceiros locais com conhecimento SAP e presença regional.
+            </div>
+            <div class="alert-box">
+                <strong>⚠ IA Industrial em escala:</strong> A parceria com Mindhive Global cobre couros, mas a expansão de IA para outras linhas de produção (aves, suínos, processados — marcas Seara, Friboi, Pilgrim's) demandará novos parceiros especializados em Machine Vision e MLOps.
+            </div>
+            <div class="alert-box">
+                <strong>⚠ Compliance EUDR / Rastreabilidade:</strong> O regulamento europeu de desmatamento (EUDR) entra em vigor em 2025/2026 e exige rastreabilidade end-to-end com evidências digitais. Integrações, automação de compliance e dashboards de governança são demandas abertas.
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Eduardo Gomes</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. Cibersegurança &amp; Compliance (ISO 27001/27701)</h4>
+                    <span class="score-badge">Fit: 98%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>JBS sofreu 2 ataques ransomware significativos — demanda urgente e recorrente por reforço de segurança</li>
+                        <li>Foursys possui certificações ISO 27001 e ISO 27701 — credenciais alinhadas à criticidade do cenário</li>
+                        <li>Oportunidade para SOC, SIEM, gestão de vulnerabilidades, Security Assessment e arquitetura Zero Trust</li>
+                        <li>Compliance LGPD para 280 mil colaboradores e dados sensíveis de cadeia de suprimentos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. Squads de Desenvolvimento SAP &amp; Integração</h4>
+                    <span class="score-badge">Fit: 92%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Migração SAP S/4HANA em ondas — ondas LatAm/Brasil podem demandar parceiro local com expertise SAP</li>
+                        <li>120+ FIORI apps já implementadas na onda 1 — expansão requer squads de desenvolvimento contínuo</li>
+                        <li>Integração SAP com sistemas legados, IoT industrial e plataformas de rastreabilidade</li>
+                        <li>Modelo de squads Foursys se encaixa em entregas por ondas com escopo bem definido</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. AI Squad — IA &amp; Automação Inteligente</h4>
+                    <span class="score-badge">Fit: 90%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>JBS já usa IA em classificação de couros — próximo passo é escalar para outras linhas de produção</li>
+                        <li>AI Squad Foursys pode acelerar MLOps, governança de modelos e pipelines de dados industriais</li>
+                        <li>Automação inteligente de processos corporativos (supply chain, logística, financeiro)</li>
+                        <li>IA generativa aplicada a compliance ESG, análise de contratos e documentação regulatória</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. Integração &amp; APIs (Parceria Digibee)</h4>
+                    <span class="score-badge">Fit: 88%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>250+ plantas em 20+ países geram desafio massivo de integração de sistemas</li>
+                        <li>Migração SAP S/4HANA requer middleware robusto para conectar sistemas legados</li>
+                        <li>Rastreabilidade blockchain precisa integrar dados de fazendas, plantas e distribuidores</li>
+                        <li>Digibee como iPaaS cloud-native é ideal para cenários multi-geografia e multi-sistema</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>5. AMS — Sustentação e Evolução de Aplicações</h4>
+                    <span class="score-badge">Fit: 85%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Operação 24/7 em 20+ países exige sustentação ininterrupta de sistemas críticos</li>
+                        <li>Coexistência SAP ECC + S/4HANA durante a migração demanda suporte especializado em ambos</li>
+                        <li>Modelo AMS Foursys com SLAs robustos e experiência de 24 anos em sustentação corporativa</li>
+                        <li>Oportunidade de entrada com AMS para depois expandir para projetos estratégicos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Iniciar a conversa pelo tema de <strong>cibersegurança</strong> — a JBS sofreu um ataque ransomware recente em 2026 e pagou US$ 11 milhões em 2021. As certificações ISO 27001/27701 da Foursys são um diferencial imediato. Complementar com cases de <strong>migração SAP S/4HANA</strong> e <strong>integração de sistemas multi-planta</strong>, demonstrando experiência em operações de grande escala. Reforçar a experiência de 24 anos, 41.000+ projetos e modelo flexível de entrega.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p><strong>Cibersegurança pós-ataque 2026</strong> é a janela mais urgente — empresas que sofreram incidentes recentes tendem a reavaliar fornecedores e ampliar investimentos em segurança. A <strong>migração SAP S/4HANA</strong> com ondas pendentes para LatAm/Brasil é a segunda oportunidade de maior potencial, dado o deadline do fim de suporte ao SAP ECC em 2027. A perspectiva de faturamento é de <strong>crescimento acelerado</strong> (US$ 86,2 bi em 2025, +12%), o que sustenta orçamento robusto de TI.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>Certificações ISO 27001/27701</strong> — credenciais que a JBS precisa urgentemente em seus fornecedores de TI após os incidentes de segurança; (2) <strong>AI Squad proprietário</strong> — capacidade de escalar IA para além da classificação de couros; (3) <strong>Parceria Digibee</strong> — iPaaS ideal para integrar 250+ plantas em 20+ países; (4) <strong>Modelo flexível</strong> — squads, projetos e AMS adaptáveis à escala e complexidade da JBS; (5) <strong>Presença local + capacidade global</strong> — parceiro brasileiro com escala para suportar operação multinacional.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. Cibersegurança é o elefante na sala:</strong> A JBS pagou US$ 11 milhões em resgate ao grupo REvil em 2021 e sofreu novo ataque em 2026 com 3 TB de dados roubados. Eduardo Gomes certamente está sob pressão para demonstrar reforço de segurança ao conselho. Abordar este tema com empatia e soluções concretas gera conexão imediata.</p>
+                <p style="margin-bottom:12px"><strong>2. SAP S/4HANA com deadline em 2027:</strong> A JBS opera em SAP ECC 6.0 global e já migrou 60+ entidades na América do Norte. Com o fim do suporte da SAP ao ECC programado para 2027, as ondas restantes (Brasil, LatAm, APAC) são urgentes. A Foursys pode se posicionar como parceira local para as ondas brasileiras.</p>
+                <p style="margin-bottom:12px"><strong>3. IA industrial como diferenciação competitiva:</strong> A JBS já classificou couros com IA (360 peles/hora, 91%+ precisão). O próximo passo natural é expandir Machine Vision e automação inteligente para linhas de aves (Seara), suínos e processados — oportunidade para o AI Squad Foursys.</p>
+                <p style="margin-bottom:12px"><strong>4. EUDR exige rastreabilidade digital end-to-end:</strong> O regulamento europeu de desmatamento exige evidências digitais de toda a cadeia produtiva. A JBS já investe em blockchain (PPT) e Leather ID, mas a integração de dados entre fazendas, plantas e exportação demanda plataformas de integração robustas — fit perfeito para Digibee.</p>
+                <p><strong>5. Escala monstruosa = oportunidade recorrente:</strong> Com 250+ plantas, 280 mil funcionários e US$ 86 bilhões de receita, cada projeto de TI na JBS é multiplicado por dezenas de unidades. Um piloto bem-sucedido em uma planta pode se tornar um rollout para 250+ unidades — modelo de receita recorrente ideal para a Foursys.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>BRF / MBRF (Brasil)</h4>
+                <p><strong>Segmento:</strong> Aves e suínos (Sadia, Perdigão) | <strong>Receita:</strong> ~R$ 57 bilhões (2024) | <strong>Valor de mercado:</strong> R$ 33,6 bi</p>
+                <p>Após fusão operacional com Marfrig (que detém 50,06% das ações), a MBRF implementou IA com IBM Watson para resequenciamento dinâmico de rotas logísticas em 2.500+ caminhões, alcançando 7% de entregas mais rápidas e 5% menos atrasos. Também usa Machine Learning para cálculo de peso médio de abate com IoT. Melhores margens operacionais do setor (EBITDA 15%, margem bruta 26,2%).</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Marfrig (Brasil)</h4>
+                <p><strong>Segmento:</strong> Bovinos e hambúrgueres (maior produtora mundial) | <strong>Receita:</strong> ~R$ 130 bilhões (2024) | <strong>Valor de mercado:</strong> R$ 19,6 bi</p>
+                <p>Focada em bovinos e maior produtora mundial de hambúrgueres. Controla 50,06% da BRF, criando a MBRF. Migrou para alimentos processados e produtos de valor agregado. Vendeu ativos de bovinos na América do Sul para a Minerva por R$ 7,5 bilhões. Investimentos em otimização de supply chain e eficiência operacional via tecnologia.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Minerva Foods (Brasil)</h4>
+                <p><strong>Segmento:</strong> Carne bovina in natura para exportação | <strong>Receita:</strong> ~R$ 30 bilhões (2024) | <strong>Valor de mercado:</strong> R$ 5 bi</p>
+                <p>Forte exportadora de carne bovina na América do Sul. Adquiriu ativos da Marfrig por R$ 7,5 bilhões, ampliando capacidade produtiva. Investe em rastreabilidade digital com RFID e IoT para controle de origem e qualidade, conectando dados da fazenda ao processamento. Presença menor em TI avançada comparada à JBS e BRF.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Tyson Foods (EUA)</h4>
+                <p><strong>Segmento:</strong> Proteína diversificada (bovinos, aves, suínos, preparados) | <strong>Receita:</strong> ~US$ 53 bilhões (2024)</p>
+                <p>Principal concorrente global da JBS nos EUA. Investimentos pesados em automação de plantas com robótica e Machine Vision para inspeção de qualidade. Parceria estratégica com Microsoft Azure para plataforma de dados e analytics. Programa de IA generativa para otimização de formulação de produtos e previsão de demanda.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Os concorrentes da JBS estão avançando em frentes específicas: a <strong>MBRF usa IBM Watson</strong> para logística inteligente, a <strong>Minerva investe em RFID/IoT</strong> para rastreabilidade, e a <strong>Tyson Foods tem parceria com Microsoft Azure</strong> para analytics avançados. A JBS lidera em escala, mas pode ter gaps em: (1) <strong>Integração de dados unificada</strong> entre 250+ plantas em 20 países — oportunidade para iPaaS (Digibee); (2) <strong>Cibersegurança industrial (OT/IoT)</strong> — com operações 24/7 e ataques recentes, proteção de ambientes operacionais é crítica; (3) <strong>Automação de processos corporativos</strong> com IA além da manufatura — RH, financeiro, compliance, jurídico para 280 mil colaboradores; (4) <strong>Governança de dados e IA em multi-geografia</strong> — escalar modelos de ML com governança centralizada em operações distribuídas globalmente.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Diretor de TI — JBS S.A. (desde agosto/2022)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">São Paulo, SP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória na JBS</div>
+                        <div class="value">14+ anos na empresa — IT Manager desde jan/2012, promovido a Diretor de TI em ago/2022. Conhecimento profundo da operação e dos sistemas legados.</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação</div>
+                        <div class="value">MBA em Gestão de Negócios — FIA (2013-2015). Perfil que une visão técnica e de negócio.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Rede Profissional</div>
+                        <div class="value">LinkedIn: 500+ conexões, ~9.700 seguidores — perfil de influência no ecossistema de TI</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Estilo de Liderança Provável</div>
+                        <div class="value">Líder "de dentro" — cresceu na empresa, conhece cada processo. Valoriza parceiros que entendem a complexidade da operação, não apenas tecnologia.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconheça a trajetória de 14 anos na JBS:</strong> Eduardo não é um CIO de mercado que veio de fora — ele cresceu dentro da JBS, desde IT Manager até Diretor. Demonstrar respeito por essa trajetória e pelo conhecimento profundo que ele tem da operação cria vínculo e credibilidade imediata.</p>
+                <p style="margin-bottom:10px"><strong>2. Conecte-se pelo desafio da escala:</strong> Poucos profissionais de TI no Brasil gerenciam operações na escala da JBS (250+ plantas, 20+ países, 280 mil pessoas). Compartilhe cases de projetos de grande escala e demonstre que a Foursys entende os desafios únicos de operações multinacionais massivas.</p>
+                <p style="margin-bottom:10px"><strong>3. Aborde cibersegurança com empatia, não com medo:</strong> A JBS sofreu ataques públicos e dolorosos. Em vez de "vender medo", posicione-se como parceiro que pode ajudar a construir resiliência — reconheça que ataques acontecem com as melhores empresas e foque em como responder e prevenir melhor.</p>
+                <p style="margin-bottom:10px"><strong>4. Valorize o MBA em Gestão de Negócios (FIA):</strong> Sua formação pela FIA mostra que Eduardo pensa em TI como habilitador de negócio, não apenas como área técnica. Use linguagem de ROI, eficiência operacional e impacto no negócio — evite jargão excessivamente técnico.</p>
+                <p><strong>5. Mencione o momento excepcional da JBS:</strong> Receita recorde de US$ 86,2 bi, investimento de US$ 2,4 bi em 2026, expansão global. Reconhecer esse momentum positivo mostra preparo e respeito pelo negócio — Eduardo certamente tem orgulho de fazer parte dessa história de crescimento.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Diretor de TI e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Diretoria — reporta à alta liderança executiva</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Tempo no Cargo</div>
+                        <div class="value">Diretor desde ago/2022 (~3,5 anos) | Na JBS há 14+ anos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo de Responsabilidade</div>
+                        <div class="value">TI corporativa — sistemas, infraestrutura, segurança, projetos de transformação digital</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão</div>
+                        <div class="value">Diretoria com autonomia para aquisições dentro do budget aprovado</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores da Empresa</div>
+                        <div class="value">280.000+ globais | 158.000 no Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Unidades Produtivas</div>
+                        <div class="value">250+ plantas industriais em 20+ países</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Complexidade Tecnológica</div>
+                        <div class="value">SAP ECC + S/4HANA em coexistência | 2.800+ usuários migrados | 120+ FIORI apps | BW/4HANA</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégico — TI é habilitadora de rastreabilidade ESG, automação industrial e compliance global</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Estimativa de Distribuição do Orçamento de TI</h3>
+            <p style="margin-bottom:16px;color:var(--text-light);font-style:italic">Estimativa baseada no porte da empresa (US$ 86,2 bi receita), setor de atuação e iniciativas públicas. Valores proporcionais.</p>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">SAP &amp; ERP (licenças + migração)</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+                <div class="bar"><div class="bar-label">Infraestrutura &amp; Cloud</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Operação &amp; Sustentação</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Desenvolvimento &amp; Projetos</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+                <div class="bar"><div class="bar-label">IA &amp; Automação</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#5c6bc0">7%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas &amp; Capacitação</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria &amp; Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#9fa8da">3%</div></div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor (Inferidas)</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios Prováveis de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Escala &amp; capacidade de atendimento global</span>
+                        <span class="tag tag-active">Experiência em operações industriais 24/7</span>
+                        <span class="tag tag-active">Certificações de segurança (ISO 27001)</span>
+                        <span class="tag tag-active">Expertise SAP S/4HANA</span>
+                        <span class="tag tag-active">Custo-benefício e eficiência</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Empresas com capacidade de entrega em escala, presença local no Brasil e expertise comprovada em operações industriais de grande porte</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Fornecedores de TI Conhecidos</div>
+                        <div class="value">Syskoplan Reply (SAP), cbs Consulting (SAP), smartShift (automação SAP), Mindhive Global (IA/Machine Vision)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

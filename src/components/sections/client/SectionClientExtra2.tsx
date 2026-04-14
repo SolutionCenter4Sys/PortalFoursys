@@ -344,9 +344,15 @@ export function SectionClientExtra2() {
                       {contact.city}
                     </span>
                     {(contact.tag === 'Reunião Foursys' || contact.tag === 'Foursys Meeting' || contact.tag === 'Demais CIO' || contact.tag === 'Other CIOs') && (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/20">
-                        ✓ {lang === 'pt' ? 'Respondeu IT Fórum' : 'Replied IT Forum'}
-                      </span>
+                      contact.briefingFiles?.[0]?.file?.includes('_nrespondeu-it') ? (
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                          {lang === 'pt' ? 'Não Respondeu IT Fórum' : 'Did Not Reply IT Forum'}
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                          ✓ {lang === 'pt' ? 'Respondeu IT Fórum' : 'Replied IT Forum'}
+                        </span>
+                      )
                     )}
                   </div>
 

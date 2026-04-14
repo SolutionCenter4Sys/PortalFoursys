@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Alexandre Fontes | VELOE</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Alexandre Fontes</h1>
+                <h2>Superintendente de Tecnologia, Operações e Clientes (COO/CTO) — VELOE</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Serviços Financeiros (Mobilidade/Pagamentos) | Barueri, SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 6,6 BI (2024)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Projeção 2025</div>
+                    <div class="value">R$ 8,5 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Hipercrescimento (+22%)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: VELOE</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Veloe</strong> é uma empresa de mobilidade e gestão de frotas criada em <strong>2018</strong> pelo <strong>Banco do Brasil</strong> e <strong>Bradesco</strong>, operando sob a holding <strong>EloPar</strong> (que também controla Alelo, Livelo e Elo). Com sede em Barueri (SP), a empresa oferece tags de pagamento automático aceitas em <strong>100% das rodovias pedagiadas</strong> e mais de <strong>2.600 estabelecimentos comerciais</strong> (estacionamentos, shoppings, aeroportos). A Veloe evoluiu de uma simples operadora de tags para um <strong>hub completo de mobilidade e serviços financeiros</strong>: 70% de sua receita já vem da plataforma <strong>Veloe Go</strong>, focada em gestão de frotas e fretes para empresas. Em 2024, o faturamento atingiu <strong>R$ 6,6 bilhões</strong> (+22% anual), com projeção de <strong>R$ 8,5 bilhões para 2025</strong>. A base inclui mais de <strong>3 milhões de tags ativas (PF)</strong> e <strong>6.900 clientes pessoa jurídica</strong>. A empresa opera com parcerias white-label com mais de <strong>20 bancos</strong> (C6 Bank, Banrisul, BB, Bradesco) e firmou parceria estratégica com a <strong>Vibra (Petrobras)</strong> para abastecimento de frotas, projetando R$ 100 milhões mensais em transações. No campo tecnológico, a Veloe lançou o <strong>Leo</strong>, assistente de IA generativa (Microsoft Azure OpenAI), e o <strong>PO Assist</strong>, que acelerou o desenvolvimento de produtos em 66%. Em abril de 2026, iniciou um <strong>Programa de Inteligência de Dados e Governança</strong> com a PwC Brasil, com duração de 24 meses.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Nacional (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada (Grupo EloPar — BB + Bradesco)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Hipercrescimento (+22% a.a.)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">~258 (diretos) + ecossistema de parceiros</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>A Veloe está em plena transformação de <strong>operadora de tags</strong> para <strong>plataforma de serviços financeiros de mobilidade</strong>. Com faturamento de R$ 6,6 bilhões e crescimento acelerado de 22%, a empresa enfrenta desafios críticos de <strong>escalabilidade tecnológica, governança de dados e cibersegurança</strong> — áreas onde precisa de parceiros especializados. O recém-lançado programa com PwC (dados/governança) e a forte dependência do ecossistema Microsoft Azure indicam abertura para novos fornecedores de tecnologia. Alexandre Fontes, com perfil híbrido COO/CTO e 25+ anos de experiência, busca <strong>eficiência operacional com tecnologia</strong> — perfil ideal para a proposta de valor Foursys.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios Identificados</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar plataforma Veloe Go para suportar crescimento de 22%+ sem degradar performance</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Implementar governança de dados robusta (programa PwC de 24 meses recém-iniciado)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Expandir IA generativa além do Leo — integrar em processos core de negócio e antifraude</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Garantir cibersegurança e conformidade LGPD para milhões de transações financeiras diárias</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar ecossistema de 20+ bancos parceiros (white-label) com APIs confiáveis e escaláveis</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Operacionalizar parceria Vibra (Frota+) — meta de R$ 100 MM/mês em transações</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Áreas Prioritárias de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">IA Generativa &amp; Automação</span>
+                        <span class="tag tag-priority">Governança e Qualidade de Dados</span>
+                        <span class="tag tag-priority">Cibersegurança &amp; LGPD</span>
+                        <span class="tag tag-priority">Integração e APIs (White-label)</span>
+                        <span class="tag tag-priority">Plataforma de Gestão de Frotas</span>
+                    </div>
+                    <h4 style="margin-top:20px;margin-bottom:12px;color:var(--primary)">Investimentos Confirmados (2026)</h4>
+                    <div>
+                        <span class="tag tag-active">Programa PwC — Dados &amp; Governança (24 meses)</span>
+                        <span class="tag tag-active">Microsoft Azure OpenAI (Leo + PO Assist)</span>
+                        <span class="tag tag-active">Parceria Vibra — Plataforma Frota+</span>
+                        <span class="tag tag-active">Expansão White-label (20+ bancos)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos e Iniciativas Tecnológicas</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Projetos e investimentos em tecnologia identificados na Veloe (2024–2026):</p>
+            <div class="grid-2">
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">IA Generativa — Assistente Leo</div>
+                    <div class="value">Atendimento 24h no portal Minha Frota. Cobre 1.000+ FAQs. Reduz 30% dos chamados. Stack: Microsoft Azure OpenAI.</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">IA Interna — PO Assist</div>
+                    <div class="value">LLM para Product Owners, Devs e QAs. Acelerou desenvolvimento de produtos em 66%. Análise de contestações com redução de 70% em custos.</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Programa de Dados — PwC Brasil</div>
+                    <div class="value">Governança, privacidade, qualidade de dados e MDM/RDM. Duração: 24 meses (início abr/2026). Inclui comitês e cultura data-driven.</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Plataforma Frota+ (Vibra)</div>
+                    <div class="value">Hub integrado de gestão de frotas + abastecimento em 8.300 postos Petrobras. Meta: R$ 100 MM/mês e 25 MM litros/mês em 36 meses.</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">IA Preditiva — Tags</div>
+                    <div class="value">Previsão de falhas em tags com 65% de assertividade. Lembretes inteligentes que reduziram atrasos em pagamentos em 30%.</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Expansão White-label</div>
+                    <div class="value">Integração com 20+ bancos (C6 Bank, Banrisul, BB, Bradesco). Requer APIs robustas, segurança e escalabilidade de plataforma.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas — Janelas de Entrada</h3>
+            <div class="alert-box">
+                <strong>&#9888; Atenção:</strong> A Veloe tem programa de dados com PwC (consultoria), mas ainda precisa de <strong>parceiros de implementação tecnológica</strong> para execução. A PwC faz estratégia e governança — a Foursys pode ser o braço de <strong>engenharia, automação e desenvolvimento</strong>.
+            </div>
+            <div class="grid-2">
+                <div class="info-card" style="margin-bottom:12px;border-left-color:var(--accent-orange)">
+                    <div class="label">🔥 Oportunidade 1 — Engenharia de Dados</div>
+                    <div class="value">PwC definirá a estratégia de dados, mas a implementação de pipelines, MDM, data quality e plataforma de dados exige squads de engenharia especializados. Janela: próximos 6-12 meses.</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px;border-left-color:var(--accent-orange)">
+                    <div class="label">🔥 Oportunidade 2 — Automação e IA</div>
+                    <div class="value">A Veloe já usa IA (Leo, PO Assist) mas de forma pontual. Escalar IA generativa para antifraude, precificação dinâmica e otimização de rotas requer squads dedicados.</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px;border-left-color:var(--accent-orange)">
+                    <div class="label">🔥 Oportunidade 3 — Integração de Ecossistema</div>
+                    <div class="value">20+ bancos parceiros + Vibra + 2.600 estabelecimentos. A camada de integração/APIs é crítica e provavelmente subdimensionada para o ritmo de crescimento.</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px;border-left-color:var(--accent-orange)">
+                    <div class="label">🔥 Oportunidade 4 — Cibersegurança</div>
+                    <div class="value">Como fintech com milhões de transações, a Veloe precisa de segurança de nível bancário. Conformidade LGPD, BACEN e proteção de dados de pagamento são mandatórios.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Alexandre Fontes</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas da Veloe. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. Dados &amp; Inteligência Artificial</h4>
+                    <span class="score-badge">Fit: 95%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li><strong>Fundação de Dados e Inteligência Corporativa:</strong> Complementa diretamente o programa PwC — Foursys implementa os pipelines, MDM e plataforma de dados que a PwC está desenhando.</li>
+                        <li><strong>IA Generativa e Hiperautomação:</strong> Escalar o Leo e PO Assist para outros processos (antifraude, precificação, roteirização inteligente).</li>
+                        <li><strong>Inteligência Preditiva:</strong> Evoluir o modelo de previsão de falhas em tags (hoje 65%) e expandir para previsão de churn, inadimplência e demanda.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. Engenharia Digital — Squads de Alta Performance</h4>
+                    <span class="score-badge">Fit: 90%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li><strong>Construção de Plataformas:</strong> Veloe Go é o coração do negócio (70% da receita). Requer evolução contínua com squads dedicados e acelerador de IA.</li>
+                        <li><strong>Modernização e Integração:</strong> 20+ integrações bancárias white-label exigem APIs robustas, versionamento e monitoramento — expertise Foursys com Digibee.</li>
+                        <li><strong>AMS/Sustentação:</strong> Com ~258 colaboradores e crescimento de 22%, a Veloe precisa de parceiros para sustentar e evoluir sistemas existentes.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. Cibersegurança</h4>
+                    <span class="score-badge">Fit: 85%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li><strong>Segurança da Informação:</strong> Certificações ISO 27001/27701 da Foursys alinham diretamente com requisitos BACEN e LGPD para fintechs.</li>
+                        <li><strong>Prevenção de Fraudes:</strong> Milhões de transações diárias de pedágio/abastecimento são alvo constante de fraudes — Foursys pode implementar soluções de detecção com IA.</li>
+                        <li><strong>Privacidade de Dados:</strong> Programa PwC trata governança, mas a implementação de controles técnicos de privacidade (DPIA, anonimização, consentimento) é oportunidade Foursys.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. Agilidade &amp; Org Design</h4>
+                    <span class="score-badge">Fit: 75%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li><strong>Otimização do Fluxo de Valor:</strong> Com hipercrescimento e equipe enxuta (~258 pessoas), a Veloe precisa otimizar fluxos para escalar sem perder velocidade.</li>
+                        <li><strong>Alinhamento Estratégico:</strong> Múltiplos stakeholders (BB, Bradesco, Vibra, 20+ bancos) exigem governança ágil e gestão de portfólio robusta.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Alexandre Fontes acaba de iniciar o <strong>Programa de Dados com PwC</strong> (abr/2026). A PwC entrega estratégia e governança — mas <strong>quem vai implementar?</strong> Posicionar a Foursys como o <strong>braço de engenharia e implementação</strong> do programa: pipelines de dados, MDM, data quality, plataforma analítica. Reforçar o studio de <strong>Dados &amp; IA</strong> e cases em serviços financeiros. Mencionar a experiência com squads acelerados por IA — alinhado com o DNA de inovação que a Veloe já demonstra (Leo, PO Assist).</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A Veloe está em <strong>hipercrescimento</strong> (R$ 6,6 BI → R$ 8,5 BI) com equipe de apenas ~258 pessoas. Isto significa necessidade urgente de <strong>parceiros de tecnologia para escalar</strong>. O programa PwC confirma que dados e governança são prioridade #1. A parceria com Vibra (Frota+) gera demanda massiva de integração. E as 20+ parcerias bancárias white-label exigem APIs e segurança que a equipe interna não consegue absorver sozinha. <strong>Janela de oportunidade: próximos 3-6 meses</strong> (fase de implementação do programa PwC).</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>Studio de Dados &amp; IA</strong> com expertise em fundação de dados, MDM e IA generativa — complemento perfeito à PwC; (2) <strong>Certificações ISO 27001/27701</strong> — requisito para fintechs sob regulação BACEN; (3) <strong>Squads de alta performance com acelerador de IA</strong> — modelo ideal para empresa enxuta em hipercrescimento; (4) <strong>Parceria Digibee</strong> — solução de integração/APIs ideal para ecossistema de 20+ bancos; (5) <strong>25 anos de experiência</strong> em serviços financeiros e bancos (BB e Bradesco são acionistas da Veloe).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. O programa PwC precisa de um executor:</strong> A PwC definirá estratégia de dados e governança em 24 meses. Mas a implementação técnica (pipelines, MDM, data quality, plataforma analítica) requer squads de engenharia. A Foursys pode se posicionar como parceira de execução — "PwC desenha, Foursys constrói".</p>
+                <p style="margin-bottom:12px"><strong>2. Alexandre conhece a concorrência por dentro:</strong> Ele trabalhou na ConectCar (2012-2016) antes de ir para a Veloe. Sabe exatamente o que o concorrente faz e onde precisa se diferenciar. Valoriza parceiros que entendem o setor de mobilidade e meios de pagamento.</p>
+                <p style="margin-bottom:12px"><strong>3. 70% da receita vem de B2B (Veloe Go):</strong> A narrativa pública da Veloe é sobre tags de pedágio, mas o core business é gestão de frotas corporativas. Qualquer abordagem deve focar em <strong>plataforma B2B, integração empresarial e analytics de frota</strong> — não em PF.</p>
+                <p style="margin-bottom:12px"><strong>4. Crescimento vs. equipe enxuta = dependência de parceiros:</strong> Com 258 colaboradores e faturamento de R$ 6,6 BI, a Veloe tem um dos maiores ratios de receita/funcionário do setor. Isso só é possível com forte terceirização. A Foursys pode ser um desses parceiros estratégicos.</p>
+                <p><strong>5. Ecossistema bancário é diferencial e risco:</strong> Ser controlada por BB e Bradesco traz solidez, mas também burocracia e exigências regulatórias de nível bancário. Fornecedores com certificações ISO e experiência em bancos têm vantagem competitiva direta.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Sem Parar (Fleetcor / IGAH Ventures)</h4>
+                <p><strong>Segmento:</strong> Pagamento automático, mobilidade e seguros | <strong>Market Share:</strong> ~60% do mercado de tags (8 milhões de tags ativas)</p>
+                <p>Líder absoluto do mercado brasileiro com 8 milhões de tags ativas e presença em 8 mil pontos urbanos. Evoluiu para um SuperApp com 30+ serviços (seguros, cashback, abastecimento, drive-thru). Rede urbana cresceu 32% nos últimos 3 anos. 40% dos gastos dos clientes já ocorrem fora do pedágio. Divisão de seguros cresceu 50% em 2025. Forte investimento em experiência do usuário e ecossistema de serviços adjacentes.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>ConectCar (Itaú 50% + Porto Seguro 50%)</h4>
+                <p><strong>Segmento:</strong> Tags de pedágio, VPO e gestão de frotas | <strong>Posição:</strong> Challenger com foco em custo-benefício</p>
+                <p>Fundada em 2012, adquirida por Itaú e Porto Seguro. Posicionamento agressivo em preço (plano sem mensalidade). Forte em Vale-Pedágio Obrigatório (VPO) e soluções para transportadoras. Homologada ANTT com tecnologia 100% digital. Aposta em Free Flow e no segmento B2B com gestão centralizada de frotas. Alexandre Fontes conhece a empresa intimamente — foi Gerente de Engenharia e Operações lá de 2012 a 2016.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>C6 Taggy / Tag Itaú / NuStop</h4>
+                <p><strong>Segmento:</strong> Tags de pedágio embarcadas em ecossistemas bancários | <strong>Posição:</strong> Entrantes com força de distribuição</p>
+                <p>Fintechs e bancos digitais entrando no mercado de tags alavancando suas bases de clientes existentes. A C6 Taggy é, ironicamente, white-label da própria Veloe — demonstrando que a competição é complexa e a Veloe atua como infraestrutura para alguns de seus "concorrentes". O Tag Itaú compete diretamente via ConectCar. Nubank entrou com NuStop buscando capturar o público jovem e digital.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Mercado Pago (Mercado Livre) / Zul+ Digital</h4>
+                <p><strong>Segmento:</strong> Tags de pedágio integradas a super apps | <strong>Posição:</strong> Disruptores com ecossistema digital</p>
+                <p>Mercado Pago oferece tag integrada ao ecossistema Mercado Livre com cashback. Zul+ Digital foca em soluções digitais sem tag física. Ambos representam a ameaça de players de tecnologia com grandes bases de usuários entrando no mercado de mobilidade — forçando a Veloe a investir em inovação e experiência digital.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>O principal concorrente (Sem Parar) lidera com SuperApp de 30+ serviços e experiência de usuário superior. A Veloe precisa competir em <strong>três frentes</strong>: (1) <strong>Plataforma B2B/Frotas</strong> — onde já lidera com 70% da receita, mas precisa escalar integração com Vibra e bancos; (2) <strong>Dados e Inteligência</strong> — o programa PwC é estratégico, mas a execução técnica exige engenheiros de dados que a equipe enxuta não tem; (3) <strong>Segurança e Compliance</strong> — como fintech regulada pelo BACEN com milhões de transações, precisa de segurança de nível bancário que vá além do que a TI interna cobre. A Foursys pode se posicionar como <strong>parceira de implementação tecnológica</strong> nas três frentes, complementando a consultoria estratégica da PwC com <strong>squads especializados em dados, IA, integração e cibersegurança</strong>.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Superintendente de Tecnologia, Operações e Clientes (COO/CTO) — Veloe</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Barueri, SP (Alameda Xingu, 512)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil Triplo</div>
+                        <div class="value">Acumula funções de COO, CTO e gestão de CX — visão integrada de tecnologia, operações e experiência do cliente</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência</div>
+                        <div class="value">25+ anos em tecnologia, operações e negócios. 20 anos em posições de gestão. Na Veloe desde 2016.</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Passagem pela Concorrência</div>
+                        <div class="value">Ex-Gerente de Engenharia e Operações na ConectCar (2012-2016) — conhece o concorrente por dentro</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Especialidades Declaradas</div>
+                        <div class="value">ITS (Sistemas Inteligentes de Transporte), transformação digital, operacionalização de startups, gestão de pessoas</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Conquista Notável</div>
+                        <div class="value">Viabilizou o primeiro projeto piloto Free Flow junto à ARTESP em Jundiaí/SP. Manteve selo RA 1000 (Reclame Aqui) na Veloe.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Visão de Negócio</div>
+                        <div class="value">"O cliente é ativo estratégico" — foco em customer-centricity e multicanalidade humanizada</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Fale de operações, não só de tecnologia:</strong> Alexandre é COO/CTO — ele pensa em tecnologia como ferramenta para resultado operacional. Não aborde com jargão técnico puro; conecte cada solução a métricas de negócio (SLA, uptime, custo por transação, NPS).</p>
+                <p style="margin-bottom:10px"><strong>2. Reconheça a jornada de tag para plataforma:</strong> A Veloe evoluiu de "tag de pedágio" para plataforma de R$ 6,6 BI. Demonstrar que você entende essa transformação e os desafios de escalar uma fintech mostra preparo e gera conexão.</p>
+                <p style="margin-bottom:10px"><strong>3. Conecte-se pelo tema customer-centricity:</strong> Ele é obcecado por experiência do cliente (selo RA 1000, canais humanizados). Mencionar como a Foursys pode ajudar a escalar o Leo (IA generativa) sem perder a qualidade do atendimento ativa interesse genuíno.</p>
+                <p style="margin-bottom:10px"><strong>4. Use a referência ao Free Flow de Jundiaí:</strong> Alexandre viabilizou o primeiro Free Flow da ARTESP. Mencionar que acompanha a expansão do Free Flow (de &lt;1% para 6,3% das transações em 2026) mostra conhecimento do setor e cria vínculo profissional.</p>
+                <p><strong>5. Não mencione a ConectCar negativamente:</strong> Ele trabalhou lá 4 anos. Respeite a trajetória. Em vez disso, destaque como a Foursys pode ajudar a Veloe a se diferenciar pela tecnologia e dados — não pela crítica ao concorrente.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Executivo e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Superintendência (equivale a C-Level na estrutura Veloe/Alelo)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Diretoria Veloe / Conselho EloPar (BB + Bradesco)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo de Responsabilidade</div>
+                        <div class="value">Tecnologia + Operações + Customer Experience (visão end-to-end)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão</div>
+                        <div class="value">Alto — COO/CTO com autonomia sobre stack tecnológico e operações</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores Veloe</div>
+                        <div class="value">~258 (equipe enxuta para R$ 6,6 BI em receita)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Base de Clientes</div>
+                        <div class="value">3 MM+ tags PF + 6.900 empresas PJ + 20+ bancos white-label</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Stack Tecnológico Principal</div>
+                        <div class="value">Microsoft Azure (OpenAI, cloud), PwC (dados/governança), integração com ANTT/ARTESP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Negócio</div>
+                        <div class="value">Core — a tecnologia É o produto (plataforma digital de pagamentos e gestão de frotas)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada do Orçamento de TI (%)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light);font-size:13px"><em>Estimativa baseada em pesquisa pública — a Veloe não divulga breakdown de orçamento de TI. Inferido a partir de investimentos confirmados e perfil de negócio (fintech/plataforma digital).</em></p>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Cloud (Azure / Infraestrutura)</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+                <div class="bar"><div class="bar-label">Desenvolvimento de Software</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+                <div class="bar"><div class="bar-label">Dados &amp; Analytics / IA</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Operações e Suporte</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança &amp; Compliance</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+                <div class="bar"><div class="bar-label">Integração / APIs</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#5c6bc0">7%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria (PwC e outros)</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#7986cb">3%</div></div></div>
+                <div class="bar"><div class="bar-label">Capacitação / Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#9fa8da">2%</div></div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor (Estimativas)</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios Prováveis de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Expertise em Serviços Financeiros</span>
+                        <span class="tag tag-active">Capacidade de Escalar Rápido (Squads)</span>
+                        <span class="tag tag-active">Certificações de Segurança (ISO)</span>
+                        <span class="tag tag-active">Experiência com Azure / Microsoft</span>
+                        <span class="tag tag-active">Integração e APIs</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Empresa de tecnologia com expertise em dados, IA e fintech. Capacidade de montar squads ágeis e escalar rapidamente.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Modelo de Contratação Provável</div>
+                        <div class="value">Squads dedicados + projetos específicos. Valoriza parceiros que entendem o negócio e entregam resultado, não apenas horas.</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Fornecedores Conhecidos</div>
+                        <div class="value">Microsoft (Azure/OpenAI), PwC Brasil (consultoria de dados), Vibra (parceria Frota+)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>
