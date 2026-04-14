@@ -5,13 +5,20 @@ alwaysApply: true
 
 # Git Push e Monitoramento de Deploy
 
-Após concluir alterações em código, sempre executar:
+Após concluir qualquer alteração em código, executar obrigatoriamente:
 
-1. `git add` dos arquivos alterados
-2. `git commit` com mensagem descritiva seguindo conventional commits
-3. `git push origin main`
-4. Monitorar o deploy via `gh run list --limit 1` e `gh run view <run-id>`
-5. Aguardar até o status ser `completed/success` antes de concluir a tarefa
-6. Se o deploy falhar, investigar com `gh run view --job=<job-id>` e corrigir
+## 1. Commit e Push
+- O repo git está em `C:\Cursor_Codigo\FoursysPortal\PortalFoursys` (usar como working_directory)
+- Shell é PowerShell — não usar `&&`, heredoc ou sintaxe bash. Executar comandos separados
+- `git add <arquivos>`
+- `git commit -m "tipo: mensagem curta"` seguindo conventional commits (fix, feat, refactor, docs, style)
+- `git push origin main`
 
-O workflow de deploy é **Azure Static Web Apps CI/CD** e leva ~2 minutos.
+## 2. Monitorar Deploy Azure
+- Verificar status: `gh run list --repo SolutionCenter4Sys/PortalFoursys --limit 1`
+- Pipeline: **Azure Static Web Apps CI/CD** (~2 min)
+- Aguardar com polling (30s, depois 60s) até status `completed/success`
+- Se falhar: `gh run view <run-id> --repo SolutionCenter4Sys/PortalFoursys --log-failed`, corrigir e refazer push
+
+## 3. Reportar ao Usuário
+- Confirmar commit hash, status do deploy e tempo de execução

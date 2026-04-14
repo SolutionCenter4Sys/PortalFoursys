@@ -596,7 +596,7 @@ export function SectionAIFoursys() {
           </motion.div>
 
           <h2 className="text-3xl md:text-5xl font-black text-white leading-tight mb-4">
-            {t('sections.titles.aifoursys')}
+            {t('nav.sections.aifoursys')}
           </h2>
 
           <p className="text-sm md:text-base text-foursys-text-muted max-w-2xl mx-auto leading-relaxed">
