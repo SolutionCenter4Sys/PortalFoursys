@@ -274,11 +274,12 @@ export interface AppState {
   isOverviewOpen: boolean
   isExportModalOpen: boolean
   deepDiveHint: string | null
+  detailId: string | null
   searchVoiceOnOpen: boolean
 }
 
 export type AppAction =
-  | { type: 'NAVIGATE'; section: AppSection; timestamp: number }
+  | { type: 'NAVIGATE'; section: AppSection; timestamp: number; detailId?: string }
   | { type: 'TOGGLE_FULLSCREEN' }
   | { type: 'TOGGLE_MENU' }
   | { type: 'OPEN_SEARCH'; voice?: boolean }
@@ -296,3 +297,4 @@ export type AppAction =
   | { type: 'TOGGLE_EXPORT_MODAL' }
   | { type: 'SET_DEEP_DIVE_HINT'; serviceId: string }
   | { type: 'CLEAR_DEEP_DIVE_HINT' }
+  | { type: 'CLEAR_DETAIL_ID' }

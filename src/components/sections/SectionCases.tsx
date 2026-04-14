@@ -5,6 +5,7 @@ import { SectionWrapper } from '../ui/SectionWrapper'
 import { getCases } from '../../data/cases'
 import { useVoiceSearch } from '../../hooks/useVoiceSearch'
 import { useLanguage } from '../../i18n'
+import { useApp } from '../../context/AppContext'
 import type { CaseStudy } from '../../types'
 
 function MetricBar({ value, label, index }: { value: string; label: string; index: number }) {
@@ -393,11 +394,20 @@ function CaseDetailModal({ c, onClose }: { c: CaseStudy; onClose: () => void }) 
 
 export function SectionCases() {
   const { t, lang } = useLanguage()
+  const { state: appState, clearDetailId } = useApp()
   const cases = useMemo(() => getCases(lang), [lang])
   const [filter, setFilter] = useState('Todos')
   const [selectedCase, setSelectedCase] = useState<CaseStudy | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
   const searchInputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (appState.detailId) {
+      const target = cases.find(c => c.id === appState.detailId)
+      if (target) setSelectedCase(target)
+      clearDetailId()
+    }
+  }, [appState.detailId, cases, clearDetailId])
 
   const onVoiceResult = useCallback((transcript: string) => {
     setSearchQuery(transcript)

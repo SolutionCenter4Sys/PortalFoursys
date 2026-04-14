@@ -430,7 +430,7 @@ export function SectionInnovation() {
           </p>
           <div className="mt-4 inline-flex items-center gap-2 text-xs font-bold text-foursys-primary">
             <ArrowRight size={14} />
-            {lang === 'pt' ? 'Fale com nossos especialistas' : 'Talk to our specialists'}
+            {lang === 'pt' ? 'Inovação aplicada aos seus desafios' : 'Innovation applied to your challenges'}
           </div>
         </motion.div>
       </div>

@@ -419,10 +419,25 @@ const modMethodSteps = [
   { icon: 'rocket', title: 'Produção & Hyper Care', desc: 'Deploy, Hyper Care + sustentação com ciclos de release escaláveis de 6 semanas.' },
 ]
 
+const modMethodStepsEn = [
+  { icon: 'clipboard-list', title: 'Assessment & Inventory', desc: 'Code scanning, business rule identification and baseline documentation generation with 4AI.' },
+  { icon: 'layout', title: 'Target Architecture Setup', desc: 'Engineering & Architecture SPEC (Front + Back), DevOps, infrastructure and cloud definitions, design patterns and components.' },
+  { icon: 'code', title: 'Build & Test', desc: 'Accelerated coding with standard SPEC, unit tests, DataForge for test data, functional and non-functional testing.' },
+  { icon: 'shield-check', title: 'QA & Certification', desc: 'AI CodeCompare, traceability matrix, load testing, performance, security and SonarQube.' },
+  { icon: 'check-circle', title: 'User Acceptance', desc: 'Pre-defined acceptance criteria, critical path certification and metrics monitoring.' },
+  { icon: 'rocket', title: 'Production & Hyper Care', desc: 'Deployment, Hyper Care + support with scalable 6-week release cycles.' },
+]
+
 const modAccelerators = [
   { title: 'Extrator de Regras', icon: 'scan', desc: 'Varredura de código identificando regras de negócio e gerando documentação base — COBOL, VB6, .NET, Java (Spring, Struts, SpringBoot), Angular, React e Vue.' },
   { title: 'Conversor de Código', icon: 'shuffle', desc: 'Conversão via acelerador de VB6 para .NET Core ou Java Spring Boot (backend) e Angular ou React (frontend), com documentação integrada à esteira DevOps.' },
   { title: 'Certificação', icon: 'badge-check', desc: 'Geração de testes unitários e cenários de testes funcionais (Gherkin) a partir dos pontos de alteração, garantindo pleno funcionamento após a transformação.' },
+]
+
+const modAcceleratorsEn = [
+  { title: 'Rule Extractor', icon: 'scan', desc: 'Code scanning that identifies business rules and generates baseline documentation — COBOL, VB6, .NET, Java (Spring, Struts, SpringBoot), Angular, React and Vue.' },
+  { title: 'Code Converter', icon: 'shuffle', desc: 'Accelerated conversion from VB6 to .NET Core or Java Spring Boot (backend) and Angular or React (frontend), with documentation integrated into the DevOps pipeline.' },
+  { title: 'Certification', icon: 'badge-check', desc: 'Generation of unit tests and functional test scenarios (Gherkin) from change points, ensuring full functionality after transformation.' },
 ]
 
 const modContractModels = [
@@ -440,10 +455,31 @@ const modContractModels = [
   },
 ]
 
+const modContractModelsEn = [
+  {
+    title: 'Essential',
+    items: ['Assessment and Inventory', 'Target Architecture Setup', 'System Modernization', 'Unit and Integration Tests', 'Regression Testing and Certification'],
+  },
+  {
+    title: 'Strategic',
+    items: ['Assessment and Inventory', 'Target Architecture Setup', 'Application Re-Design and UX', 'Database Migration', 'DevOps', 'System Modernization', 'Unit and Integration Tests', 'Regression Testing and Certification'],
+  },
+  {
+    title: 'Evolution',
+    items: ['Assessment and Inventory', 'Target Architecture Setup', 'Application Re-Design', 'Database Migration', 'DevOps', 'System Modernization', 'Unit and Integration Tests', 'Cyber Security and Performance', 'Regression Testing and Certification', 'User Acceptance and Coexistence', 'Monitoring'],
+  },
+]
+
 const modCases = [
   { title: 'Instituição Financeira (EUA)', result: 'Migração de monolito para microserviços Python, DevOps, conteinerização e orquestração — maior escalabilidade, integração via APIs e redução no tempo de execução.', metrics: [{ v: '+4M', l: 'Linhas de código' }, { v: '12', l: 'Meses de projeto' }] },
   { title: 'Seguradora', result: 'Migração de mainframe COBOL e Visual Age para .NET e React com IA para transpiração de código — redução de custo de infraestrutura e adição de funcionalidades estratégicas.', metrics: [{ v: '+2M', l: 'Linhas de código' }, { v: '20%', l: 'Aumento de negócios' }] },
   { title: 'Risk Score (Global)', result: 'Retirada do AS400 para Java com IA e migração para Cloud EUA — produto se tornou global, instalação reduziu de 12 para 3 meses.', metrics: [{ v: '+2Bi', l: 'Novos negócios no 1o ano' }, { v: '600K', l: 'Linhas de código' }] },
+]
+
+const modCasesEn = [
+  { title: 'Financial Institution (USA)', result: 'Monolith migration to Python microservices, DevOps, containerization and orchestration — greater scalability, API integration and reduced execution time.', metrics: [{ v: '+4M', l: 'Lines of code' }, { v: '12', l: 'Project months' }] },
+  { title: 'Insurance Company', result: 'Mainframe COBOL and Visual Age migration to .NET and React with AI-powered code transpilation — infrastructure cost reduction and addition of strategic features.', metrics: [{ v: '+2M', l: 'Lines of code' }, { v: '20%', l: 'Business growth' }] },
+  { title: 'Risk Score (Global)', result: 'AS400 retirement to Java with AI and cloud migration to USA — product went global, deployment reduced from 12 to 3 months.', metrics: [{ v: '+2Bi', l: 'New business in 1st year' }, { v: '600K', l: 'Lines of code' }] },
 ]
 
 const modImpacts = [
@@ -457,22 +493,39 @@ const modImpacts = [
   'Impulso no movimento "Move to Cloud"',
 ]
 
-function ModernizacaoDeepDive() {
+const modImpactsEn = [
+  'Reduced operational costs and easier maintenance',
+  'Expanded innovation capacity',
+  'Improved customer experience',
+  'Enhanced performance and scalability',
+  'Increased security and reliability',
+  'Reduced project complexity',
+  'Fewer failures in system integrations',
+  'Boost to the "Move to Cloud" initiative',
+]
+
+function ModernizacaoDeepDive({ lang }: { lang: string }) {
+  const steps = lang === 'en' ? modMethodStepsEn : modMethodSteps
+  const accelerators = lang === 'en' ? modAcceleratorsEn : modAccelerators
+  const contractModels = lang === 'en' ? modContractModelsEn : modContractModels
+  const cases = lang === 'en' ? modCasesEn : modCases
+  const impacts = lang === 'en' ? modImpactsEn : modImpacts
+
   return (
     <div className="space-y-7">
       {/* Proposta de valor */}
       <div className="p-5 rounded-xl bg-gradient-to-r from-violet-500/15 to-transparent border border-violet-500/25">
         <p className="text-xs text-foursys-text-muted leading-relaxed">
-          <strong className="text-foursys-text">Proposta de Valor:</strong> A Foursys oferece a única solução de modernização de legados que combina transformação tecnológica, segurança avançada e capacitação humana em uma abordagem integrada — garantindo que seus sistemas não apenas funcionem melhor hoje, mas sejam a base para a inovação de amanhã.
+          <strong className="text-foursys-text">{lang === 'pt' ? 'Proposta de Valor:' : 'Value Proposition:'}</strong> {lang === 'pt' ? 'A Foursys oferece a única solução de modernização de legados que combina transformação tecnológica, segurança avançada e capacitação humana em uma abordagem integrada — garantindo que seus sistemas não apenas funcionem melhor hoje, mas sejam a base para a inovação de amanhã.' : 'Foursys offers the only legacy modernization solution that combines technological transformation, advanced security and human empowerment in an integrated approach — ensuring your systems not only work better today, but become the foundation for future innovation.'}
         </p>
       </div>
 
       {/* Métricas */}
       <div className="grid grid-cols-3 gap-3">
         {[
-          { value: '+30%', label: 'Redução de Custos', color: 'text-green-400' },
-          { value: '+70%', label: 'Aceleração Time to Mkt', color: 'text-cyan-400' },
-          { value: '+60%', label: 'Segurança de Código', color: 'text-violet-400' },
+          { value: '+30%', label: lang === 'pt' ? 'Redução de Custos' : 'Cost Reduction', color: 'text-green-400' },
+          { value: '+70%', label: lang === 'pt' ? 'Aceleração Time to Mkt' : 'Time to Market Acceleration', color: 'text-cyan-400' },
+          { value: '+60%', label: lang === 'pt' ? 'Segurança de Código' : 'Code Security', color: 'text-violet-400' },
         ].map(m => (
           <div key={m.label} className="text-center p-3 rounded-xl bg-foursys-surface/50 border border-white/10">
             <div className={`text-xl font-black ${m.color}`}>{m.value}</div>
@@ -484,10 +537,10 @@ function ModernizacaoDeepDive() {
       {/* Aceleradores 4AI */}
       <div>
         <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          Aceleradores 4AI
+          {lang === 'pt' ? 'Aceleradores 4AI' : '4AI Accelerators'}
         </div>
         <div className="grid md:grid-cols-3 gap-3">
-          {modAccelerators.map(a => (
+          {accelerators.map(a => (
             <div key={a.title} className="p-4 rounded-xl bg-violet-500/8 border border-violet-500/20">
               <div className="flex items-center gap-2 mb-2">
                 <DynIcon name={a.icon} size={16} className="text-violet-400" />
@@ -502,10 +555,10 @@ function ModernizacaoDeepDive() {
       {/* Metodologia passo a passo */}
       <div>
         <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          Metodologia — Ciclos de 6 semanas com automação IA + supervisão humana (50/50)
+          {lang === 'pt' ? 'Metodologia — Ciclos de 6 semanas com automação IA + supervisão humana (50/50)' : 'Methodology — 6-week cycles with AI automation + human oversight (50/50)'}
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-          {modMethodSteps.map((step, i) => (
+          {steps.map((step, i) => (
             <div key={step.title} className="p-4 rounded-xl bg-foursys-surface/50 border border-white/10 relative">
               <div className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-violet-500/30 border border-violet-500/50 flex items-center justify-center text-[9px] font-bold text-violet-300">
                 {i + 1}
@@ -523,10 +576,10 @@ function ModernizacaoDeepDive() {
       {/* Modelos de Contratação */}
       <div>
         <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          Modelos de Contratação
+          {lang === 'pt' ? 'Modelos de Contratação' : 'Contract Models'}
         </div>
         <div className="grid md:grid-cols-3 gap-3">
-          {modContractModels.map((model, idx) => (
+          {contractModels.map((model, idx) => (
             <div key={model.title} className={`p-4 rounded-xl border ${idx === 2 ? 'bg-violet-500/12 border-violet-500/30' : 'bg-foursys-surface/50 border-white/10'}`}>
               <div className={`text-xs font-bold mb-3 ${idx === 2 ? 'text-violet-300' : 'text-foursys-text'}`}>
                 {model.title}
@@ -547,10 +600,10 @@ function ModernizacaoDeepDive() {
       {/* Cases */}
       <div>
         <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          Cases e Resultados Comprovados
+          {lang === 'pt' ? 'Cases e Resultados Comprovados' : 'Case Studies and Proven Results'}
         </div>
         <div className="grid md:grid-cols-3 gap-3">
-          {modCases.map(c => (
+          {cases.map(c => (
             <div key={c.title} className="p-4 rounded-xl bg-foursys-surface/50 border border-white/10">
               <div className="text-xs font-bold text-foursys-text mb-2">{c.title}</div>
               <p className="text-[10px] text-foursys-text-dim leading-relaxed mb-3">{c.result}</p>
@@ -570,10 +623,10 @@ function ModernizacaoDeepDive() {
       {/* Impacto Esperado */}
       <div>
         <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          Impacto Esperado
+          {lang === 'pt' ? 'Impacto Esperado' : 'Expected Impact'}
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-          {modImpacts.map(impact => (
+          {impacts.map(impact => (
             <div key={impact} className="p-3 rounded-xl bg-green-500/8 border border-green-500/20 flex items-start gap-2">
               <DynIcon name="check-circle" size={12} className="text-green-400 shrink-0 mt-0.5" />
               <span className="text-[10px] text-foursys-text-dim leading-relaxed">{impact}</span>
@@ -585,13 +638,13 @@ function ModernizacaoDeepDive() {
       {/* Próximos Passos */}
       <div className="p-4 rounded-xl bg-gradient-to-r from-violet-500/15 to-transparent border border-violet-500/25">
         <div className="text-[10px] font-bold uppercase tracking-widest text-violet-300 mb-3">
-          Próximos Passos em 3 Etapas
+          {lang === 'pt' ? 'Próximos Passos em 3 Etapas' : 'Next Steps in 3 Phases'}
         </div>
         <div className="grid grid-cols-3 gap-3">
           {[
-            { n: '1', title: 'POT / POC', desc: 'Mapeamos uma amostra do legado e geramos documentação e aplicação em stack target com padrões Clean Code.' },
-            { n: '2', title: 'Negociação', desc: 'Definição conjunta do modelo, proposta com escopo, roadmap, estratégia, responsabilidades e investimento.' },
-            { n: '3', title: 'Contratação', desc: 'Assinatura contratual, kick-off para alinhar expectativas, apresentar equipe e início formal das atividades.' },
+            { n: '1', title: 'POT / POC', desc: lang === 'pt' ? 'Mapeamos uma amostra do legado e geramos documentação e aplicação em stack target com padrões Clean Code.' : 'We map a legacy sample and generate documentation and application in the target stack with Clean Code standards.' },
+            { n: '2', title: lang === 'pt' ? 'Negociação' : 'Negotiation', desc: lang === 'pt' ? 'Definição conjunta do modelo, proposta com escopo, roadmap, estratégia, responsabilidades e investimento.' : 'Joint definition of the model, proposal with scope, roadmap, strategy, responsibilities and investment.' },
+            { n: '3', title: lang === 'pt' ? 'Contratação' : 'Contracting', desc: lang === 'pt' ? 'Assinatura contratual, kick-off para alinhar expectativas, apresentar equipe e início formal das atividades.' : 'Contract signing, kick-off to align expectations, introduce the team and formally start activities.' },
           ].map(s => (
             <div key={s.n} className="text-center">
               <div className="w-7 h-7 rounded-full bg-violet-500/30 border border-violet-500/50 flex items-center justify-center text-xs font-bold text-violet-300 mx-auto mb-2">{s.n}</div>
@@ -645,6 +698,48 @@ const sec4sysModels = [
       'Campanhas de phishing',
       'Continuidade de negócios / Gestão de Crises',
       'Governança, Riscos e Compliance (GRC)',
+    ],
+  },
+]
+
+const sec4sysModelsEn = [
+  {
+    id: 'consulting',
+    title: 'Consulting & Assessment',
+    icon: 'clipboard-list',
+    color: '#EF4444',
+    desc: 'Strategic consulting and assessment for organizations seeking to strengthen corporate risk management and cybersecurity, promoting resilience and alignment with best practices.',
+    items: [
+      'Maturity Score/Assessment (NIST)',
+      'Secure Architecture Score/Assessment',
+      'Secure Development Score — SDLC',
+      'Privacy/LGPD Score',
+      'Ransomware Assessment',
+      'ISMP / Policies / Risk Assessment',
+      'Third Party Risk Management Score',
+      'Risk awareness and culture programs',
+    ],
+  },
+  {
+    id: 'secaas',
+    title: 'SECaaS',
+    icon: 'cloud',
+    color: '#F97316',
+    desc: 'On-demand cybersecurity solutions through subscriptions or custom contracts — scalable, flexible, and cost-effective.',
+    items: [
+      'AppSec / SDLC',
+      'Pentesting / Ethical Hacking (EHT)',
+      'Fraud Pentesting (Bypass Tests)',
+      'Vulnerability Management',
+      'Operations (DLP, WAF, Antispam, etc.)',
+      'SOC & Incident Response',
+      'Identity & Access Management (IAM)',
+      'Security architecture & requirements',
+      'DevSecOps',
+      'Network Security',
+      'Phishing campaigns',
+      'Business continuity / Crisis Management',
+      'Governance, Risk & Compliance (GRC)',
     ],
   },
 ]
@@ -752,6 +847,109 @@ const sec4sysPortfolio = [
   },
 ]
 
+const sec4sysPortfolioEn = [
+  {
+    id: 'seguranca-informacao',
+    title: 'Information Security',
+    icon: 'shield-check',
+    color: '#EF4444',
+    items: [
+      'ISO 27001 and ISO 27701 support and qualification',
+      'AppSec (SDLC)',
+      'IS reference architecture',
+      'Ransomware Assessment',
+      'Cyber Security maturity assessment and evolution support',
+      'Secure architecture score assessment',
+      'Secure development score assessment — SDLC',
+      'IS maturity score assessment',
+      'BISO As A Service (Business Security)',
+      'Phishing campaigns',
+      'CISO As A Service (ISMP, Consulting...)',
+      'Secure development framework — DevSecOps',
+      'Identity & Access Management (IAM)',
+      'Vulnerability management and scanning',
+      'Security Tools Implementation & Support',
+      'Operations (DLP, WAF, Antispam, AM, AV...)',
+      'Pentesting / Ethical Hacking (EHT)',
+      'Information Security Master Plan (ISMP)',
+      'Information Security policies and procedures',
+      'Cybersecurity awareness programs and training',
+      'Red Team as a Service',
+      'IS tools score',
+      'Security Champions',
+      'Network and cloud security',
+      'SOC / Incident Response / Blue Team',
+      'Threat Intelligence',
+      'VIP Protection',
+    ],
+  },
+  {
+    id: 'continuidade-negocios',
+    title: 'Business Continuity & Crisis Management',
+    icon: 'life-buoy',
+    color: '#8B5CF6',
+    items: [
+      'Business Impact Analysis (BIA)',
+      'Business Continuity Plan (BCP)',
+      'Disaster Recovery Plan (DR)',
+      'Incident Action and Response Plans (IARP)',
+      'Crisis Management Playbook',
+      'Crisis Management awareness programs and training',
+      'Crisis simulations and exercises',
+      'Crisis Management support',
+    ],
+  },
+  {
+    id: 'riscos-corporativos',
+    title: 'Corporate Risk Management',
+    icon: 'alert-triangle',
+    color: '#F59E0B',
+    items: [
+      'Internal Controls Assessment and Effectiveness Testing',
+      'Risk appetite and indicators dashboard',
+      'Governance, Risk & Compliance (GRC)',
+      'Corporate Risk policies and governance',
+      'Risk Culture Program',
+      'Anti-Money Laundering Program (AML)',
+    ],
+  },
+  {
+    id: 'prevencao-fraudes',
+    title: 'Fraud Prevention',
+    icon: 'scan-eye',
+    color: '#EC4899',
+    items: [
+      'Fraud Maturity Assessment / Score',
+      'Anti-fraud architecture and layer design',
+      'Fraud Prevention as a Service',
+      'Biometric bypass pentesting',
+      'Anti-fraud solutions and tools',
+    ],
+  },
+  {
+    id: 'privacidade-dados',
+    title: 'Data Privacy',
+    icon: 'lock',
+    color: '#06B6D4',
+    items: [
+      'Data protection and privacy assessment score (LGPD)',
+      'Data protection and privacy policies and procedures (LGPD)',
+      'Data Protection and Privacy Program (LGPD)',
+    ],
+  },
+  {
+    id: 'tprm',
+    title: 'Third Party Risk Management (TPRM)',
+    icon: 'users',
+    color: '#10B981',
+    items: [
+      '3rd party score assessment (TPRM)',
+      'Third-party risk policies and procedures',
+      'Third Party Risk Management Program',
+    ],
+  },
+]
+
 const sec4sysPillars = [
   { label: 'Confidencialidade', icon: 'lock' },
   { label: 'Integridade', icon: 'check-circle' },
@@ -759,6 +957,15 @@ const sec4sysPillars = [
   { label: 'Resiliência', icon: 'shield' },
   { label: 'Estabilidade', icon: 'activity' },
   { label: 'Privacidade', icon: 'eye-off' },
+]
+
+const sec4sysPillarsEn = [
+  { label: 'Confidentiality', icon: 'lock' },
+  { label: 'Integrity', icon: 'check-circle' },
+  { label: 'Availability', icon: 'server' },
+  { label: 'Resilience', icon: 'shield' },
+  { label: 'Stability', icon: 'activity' },
+  { label: 'Privacy', icon: 'eye-off' },
 ]
 
 /* ── FourBlox Deep Dive ──────────────────────────────────────────────────── */
@@ -772,6 +979,15 @@ const fbProblems = [
   'Soluções genéricas que não atendem à realidade',
 ]
 
+const fbProblemsEn = [
+  'Systems that don\'t communicate with each other',
+  'Parallel spreadsheets out of control',
+  'Low tool adoption',
+  'Projects that never finish',
+  'High investment without clear return',
+  'Generic solutions that don\'t fit reality',
+]
+
 const fbSolutionSteps = [
   'Diagnóstico estruturado',
   'Desenho personalizado da solução',
@@ -780,11 +996,26 @@ const fbSolutionSteps = [
   'Evolução contínua baseada em dados',
 ]
 
+const fbSolutionStepsEn = [
+  'Structured diagnosis',
+  'Custom solution design',
+  'Tailored configuration',
+  'Production in up to 30 days',
+  'Continuous data-driven evolution',
+]
+
 const fbHowItWorks = [
   { n: '01', icon: 'search', title: 'Diagnóstico Profundo', desc: 'Mapeamento de dores, usuários, fluxos e necessidades reais.' },
   { n: '02', icon: 'brain', title: 'Arquitetura da Solução', desc: 'Definição dos blocos (módulos) necessários para resolver o problema.' },
   { n: '03', icon: 'settings', title: 'Configuração Personalizada', desc: 'Customização inteligente dentro da plataforma modular.' },
   { n: '04', icon: 'rocket', title: 'Go Live em até 30 dias', desc: 'Entrega em produção com acompanhamento e ajustes finos.' },
+]
+
+const fbHowItWorksEn = [
+  { n: '01', icon: 'search', title: 'Deep Diagnosis', desc: 'Mapping pain points, users, workflows, and real needs.' },
+  { n: '02', icon: 'brain', title: 'Solution Architecture', desc: 'Defining the blocks (modules) needed to solve the problem.' },
+  { n: '03', icon: 'settings', title: 'Custom Configuration', desc: 'Intelligent customization within the modular platform.' },
+  { n: '04', icon: 'rocket', title: 'Go Live in up to 30 days', desc: 'Production delivery with follow-up and fine-tuning.' },
 ]
 
 const fbDifferentials = [
@@ -795,6 +1026,14 @@ const fbDifferentials = [
   { icon: 'trending-up', title: 'Evolução Contínua', desc: 'A solução cresce com sua empresa.' },
 ]
 
+const fbDifferentialsEn = [
+  { icon: 'clock', title: 'Production in 30 days', desc: 'No 6-to-12-month projects.' },
+  { icon: 'file-text', title: 'Subscription Model', desc: 'Financial predictability.' },
+  { icon: 'puzzle', title: 'Smart Modularity', desc: 'You activate only what delivers value.' },
+  { icon: 'users', title: 'User-Centered UX', desc: 'Real adoption, not imposition.' },
+  { icon: 'trending-up', title: 'Continuous Evolution', desc: 'The solution grows with your company.' },
+]
+
 const fbBenefits = [
   { icon: 'bar-chart-2', label: 'Redução de retrabalho' },
   { icon: 'zap', label: 'Aumento de eficiência operacional' },
@@ -802,6 +1041,15 @@ const fbBenefits = [
   { icon: 'database', label: 'Dados estruturados para decisão' },
   { icon: 'shield', label: 'Menor risco de investimento' },
   { icon: 'target', label: 'Time-to-value acelerado' },
+]
+
+const fbBenefitsEn = [
+  { icon: 'bar-chart-2', label: 'Rework reduction' },
+  { icon: 'zap', label: 'Increased operational efficiency' },
+  { icon: 'eye', label: 'Better management visibility' },
+  { icon: 'database', label: 'Structured data for decision-making' },
+  { icon: 'shield', label: 'Lower investment risk' },
+  { icon: 'target', label: 'Accelerated time-to-value' },
 ]
 
 const fbSolutions = [
@@ -815,11 +1063,29 @@ const fbSolutions = [
   { cat: 'Governança', items: ['Gestão de Guarda Compartilhada'] },
 ]
 
+const fbSolutionsEn = [
+  { cat: 'People Management', items: ['Smart Allocation Map', 'Performance & OKR Tracker', 'Strategic Talent Pool'] },
+  { cat: 'Operations', items: ['Demand & SLA Control', 'Custom Workflow', 'Hearing Check-in', 'Event Management'] },
+  { cat: 'Finance', items: ['Budget Management by Area', 'Smart Forecast', 'Payroll Credit Card', 'Budget Management'] },
+  { cat: 'Sales', items: ['Pipeline & Sales Performance', 'Commission Management', 'SME Prospecting & Retention', 'CRM', 'SDR'] },
+  { cat: 'Projects', items: ['Project Portfolio Management'] },
+  { cat: 'ESG', items: ['ESG Indicator Monitor'] },
+  { cat: 'Data & Analytics', items: ['Executive Data Hub'] },
+  { cat: 'Governance', items: ['Shared Custody Management'] },
+]
+
 const fbKits = [
   { title: 'Kit Eficiência Operacional', items: ['Controle de Demandas & SLA', 'Workflow Personalizado', 'Data Hub Executivo'] },
   { title: 'Kit Gestão de Pessoas 360°', items: ['Mapa de Alocação Inteligente', 'Performance & OKR Tracker', 'Banco de Talentos Estratégico'] },
   { title: 'Kit Performance Comercial', items: ['Forecast Inteligente', 'Pipeline & Performance Comercial', 'Gestão de Comissões'] },
   { title: 'Kit Governança Executiva', items: ['Gestão de Portfólio de Projetos', 'Monitor de Indicadores ESG', 'Data Hub Executivo'] },
+]
+
+const fbKitsEn = [
+  { title: 'Operational Efficiency Kit', items: ['Demand & SLA Control', 'Custom Workflow', 'Executive Data Hub'] },
+  { title: 'People Management 360° Kit', items: ['Smart Allocation Map', 'Performance & OKR Tracker', 'Strategic Talent Pool'] },
+  { title: 'Sales Performance Kit', items: ['Smart Forecast', 'Pipeline & Sales Performance', 'Commission Management'] },
+  { title: 'Executive Governance Kit', items: ['Project Portfolio Management', 'ESG Indicator Monitor', 'Executive Data Hub'] },
 ]
 
 function FourBloxDeepDive() {
@@ -977,9 +1243,13 @@ function FourBloxDeepDive() {
   )
 }
 
-function Sec4SysDeepDive() {
+function Sec4SysDeepDive({ lang }: { lang: string }) {
   const [expandedPortfolio, setExpandedPortfolio] = useState<string | null>(null)
   const [expandedModel, setExpandedModel] = useState<string | null>(null)
+
+  const models = lang === 'en' ? sec4sysModelsEn : sec4sysModels
+  const portfolio = lang === 'en' ? sec4sysPortfolioEn : sec4sysPortfolio
+  const pillars = lang === 'en' ? sec4sysPillarsEn : sec4sysPillars
 
   return (
     <div className="space-y-6">
@@ -993,20 +1263,21 @@ function Sec4SysDeepDive() {
             <div>
               <h4 className="text-base font-black text-white tracking-wide">Sec4Sys</h4>
               <p className="text-[10px] text-red-400 font-semibold uppercase tracking-[0.15em]">
-                Vertical Foursys de Cibersegurança
+                {lang === 'pt' ? 'Vertical Foursys de Cibersegurança' : 'Foursys Cybersecurity Vertical'}
               </p>
             </div>
           </div>
           <p className="text-xs text-foursys-text-muted leading-relaxed">
-            A Sec4Sys é uma vertical de negócios Foursys especializada em riscos corporativos e cibersegurança,
-            auxiliando clientes na definição de estratégia, detecção de ameaças, proteção de dados e mitigação de riscos.
+            {lang === 'pt'
+              ? 'A Sec4Sys é uma vertical de negócios Foursys especializada em riscos corporativos e cibersegurança, auxiliando clientes na definição de estratégia, detecção de ameaças, proteção de dados e mitigação de riscos.'
+              : 'Sec4Sys is a Foursys business vertical specialized in corporate risk and cybersecurity, helping clients define strategy, detect threats, protect data, and mitigate risks.'}
           </p>
         </div>
 
         {/* Pilares */}
         <div className="px-5 py-3 bg-white/[0.02] border-t border-red-500/15">
           <div className="flex flex-wrap gap-2 justify-center">
-            {sec4sysPillars.map(p => (
+            {pillars.map(p => (
               <div
                 key={p.label}
                 className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-500/10 border border-red-500/20"
@@ -1022,10 +1293,10 @@ function Sec4SysDeepDive() {
       {/* Modelos de Negócio */}
       <div>
         <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          Modelos de Negócio
+          {lang === 'pt' ? 'Modelos de Negócio' : 'Business Models'}
         </div>
         <div className="grid md:grid-cols-2 gap-3">
-          {sec4sysModels.map(model => {
+          {models.map(model => {
             const isOpen = expandedModel === model.id
             return (
               <div key={model.id} className="rounded-xl border border-white/10 bg-foursys-surface/40 overflow-hidden">
@@ -1075,10 +1346,10 @@ function Sec4SysDeepDive() {
       {/* Portfólio Completo */}
       <div>
         <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          Portfólio Sec4Sys
+          {lang === 'pt' ? 'Portfólio Sec4Sys' : 'Sec4Sys Portfolio'}
         </div>
         <div className="space-y-2">
-          {sec4sysPortfolio.map(area => {
+          {portfolio.map(area => {
             const isOpen = expandedPortfolio === area.id
             return (
               <div
@@ -1105,7 +1376,7 @@ function Sec4SysDeepDive() {
                   <div className="flex-1 min-w-0">
                     <h5 className="text-xs font-bold text-white">{area.title}</h5>
                     <p className="text-[10px] text-foursys-text-dim mt-0.5">
-                      {area.items.length} serviços disponíveis
+                      {area.items.length} {lang === 'pt' ? 'serviços disponíveis' : 'services available'}
                     </p>
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
@@ -1156,8 +1427,9 @@ function Sec4SysDeepDive() {
           <div className="flex-1">
             <p className="text-xs text-foursys-text-muted leading-relaxed">
               <strong className="text-white">Sec4Sys — Foursys Group.</strong>{' '}
-              Soluções e apoio para estabelecer ou ampliar a maturidade em cibersegurança, prevenção à fraudes,
-              privacidade de dados, continuidade de negócios e gestão de riscos de terceiros.
+              {lang === 'pt'
+                ? 'Soluções e apoio para estabelecer ou ampliar a maturidade em cibersegurança, prevenção à fraudes, privacidade de dados, continuidade de negócios e gestão de riscos de terceiros.'
+                : 'Solutions and support to establish or expand maturity in cybersecurity, fraud prevention, data privacy, business continuity, and third-party risk management.'}
             </p>
           </div>
         </div>
@@ -1168,7 +1440,7 @@ function Sec4SysDeepDive() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-red-400 hover:text-red-300 transition-colors"
           >
-            Visitar sec4sys.com.br
+            {lang === 'pt' ? 'Visitar sec4sys.com.br' : 'Visit sec4sys.com.br'}
             <DynIcon name="external-link" size={12} />
           </a>
         </div>
@@ -1187,6 +1459,14 @@ const sddPhases = [
   { icon: 'rocket', title: 'Deploy', desc: 'CI/CD integrado, rollout seguro e monitoramento pós-deploy com observabilidade.' },
 ]
 
+const sddPhasesEn = [
+  { icon: 'search', title: 'Discovery', desc: 'Context analysis, stack and domain mapping, specialized agent definition.' },
+  { icon: 'palette', title: 'Design', desc: 'C4 diagrams, ADRs, user stories, API specifications, and reference architecture.' },
+  { icon: 'code', title: 'Development', desc: 'AI-accelerated coding by agents trained on the client\'s stack and business rules.' },
+  { icon: 'check-circle', title: 'Quality', desc: 'AI-powered automated testing, coverage analysis, and acceptance validation.' },
+  { icon: 'rocket', title: 'Deploy', desc: 'Integrated CI/CD, safe rollout, and post-deploy monitoring with observability.' },
+]
+
 const squadDeliverables = [
   { icon: 'users', title: 'Squad Operacional', desc: 'PO, AI Engineer, Desenvolvedores e QA amplificados por 20+ agentes.', color: '#FF6600' },
   { icon: 'book-open', title: 'Documentação Completa', desc: 'Diagramas C4, ADRs, user stories, specs de API e testes.', color: '#8B5CF6' },
@@ -1195,31 +1475,42 @@ const squadDeliverables = [
   { icon: 'unlock', title: 'Autonomia do Cliente', desc: 'Total domínio sobre o código. Aberto para evolução. Sem lock-in.', color: '#F59E0B' },
 ]
 
+const squadDeliverablesEn = [
+  { icon: 'users', title: 'Operational Squad', desc: 'PO, AI Engineer, Developers, and QA amplified by 20+ agents.', color: '#FF6600' },
+  { icon: 'book-open', title: 'Complete Documentation', desc: 'C4 diagrams, ADRs, user stories, API specs, and tests.', color: '#8B5CF6' },
+  { icon: 'bar-chart', title: 'Real-Time Dashboards', desc: 'Velocity, burndown, costs, AI acceptance rate, code quality.', color: '#00C2E0' },
+  { icon: 'brain', title: 'Custom Agents', desc: 'Trained on the client\'s stack, domain, and business rules. Not generic.', color: '#4ADE80' },
+  { icon: 'unlock', title: 'Client Autonomy', desc: 'Full ownership of the code. Open for evolution. No lock-in.', color: '#F59E0B' },
+]
 
-function AISquadDeepDive() {
+
+function AISquadDeepDive({ lang }: { lang: string }) {
+  const phases = lang === 'en' ? sddPhasesEn : sddPhases
+  const deliverables = lang === 'en' ? squadDeliverablesEn : squadDeliverables
+
   return (
     <div className="space-y-6">
       {/* AI Squad (solução) */}
       <div className="p-5 rounded-xl bg-orange-500/10 border border-orange-500/25">
-        <div className="text-sm font-bold text-orange-400 mb-2.5">AI Squad (solução)</div>
+        <div className="text-sm font-bold text-orange-400 mb-2.5">{lang === 'pt' ? 'AI Squad (solução)' : 'AI Squad (Solution)'}</div>
         <ul className="space-y-1.5 text-xs text-foursys-text-muted">
-          <li>• Times humanos + 20+ agentes IA especializados</li>
-          <li>• Framework SDD com agentes por fase do ciclo</li>
-          <li>• Documentação automática e completa</li>
-          <li>• Dashboards de performance em tempo real</li>
-          <li>• Agentes treinados na stack e domínio do cliente</li>
-          <li>• Código aberto, sem lock-in</li>
-          <li>• Dois modelos: ambiente cliente ou Foursys</li>
+          <li>{lang === 'pt' ? '• Times humanos + 20+ agentes IA especializados' : '• Human teams + 20+ specialized AI agents'}</li>
+          <li>{lang === 'pt' ? '• Framework SDD com agentes por fase do ciclo' : '• SDD Framework with agents for each lifecycle phase'}</li>
+          <li>{lang === 'pt' ? '• Documentação automática e completa' : '• Automatic and comprehensive documentation'}</li>
+          <li>{lang === 'pt' ? '• Dashboards de performance em tempo real' : '• Real-time performance dashboards'}</li>
+          <li>{lang === 'pt' ? '• Agentes treinados na stack e domínio do cliente' : '• Agents trained on the client\'s stack and domain'}</li>
+          <li>{lang === 'pt' ? '• Código aberto, sem lock-in' : '• Open code, no lock-in'}</li>
+          <li>{lang === 'pt' ? '• Dois modelos: ambiente cliente ou Foursys' : '• Two models: client environment or Foursys'}</li>
         </ul>
       </div>
 
       {/* Framework SDD */}
       <div>
         <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          Framework SDD — Fases do Processo
+          {lang === 'pt' ? 'Framework SDD — Fases do Processo' : 'SDD Framework — Process Phases'}
         </div>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-          {sddPhases.map((phase, i) => (
+          {phases.map((phase, i) => (
             <div key={phase.title} className="p-4 rounded-xl bg-foursys-surface/50 border border-orange-500/15 relative">
               <div className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-orange-500/30 border border-orange-500/50 flex items-center justify-center text-[9px] font-bold text-orange-300">
                 {i + 1}
@@ -1237,10 +1528,10 @@ function AISquadDeepDive() {
       {/* Entregáveis */}
       <div>
         <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          O que você recebe
+          {lang === 'pt' ? 'O que você recebe' : 'What You Get'}
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5">
-          {squadDeliverables.map(d => (
+          {deliverables.map(d => (
             <div key={d.title} className="p-3.5 rounded-xl bg-foursys-surface/40 border border-white/10">
               <div className="mb-1.5">
                 <DynIcon name={d.icon} size={16} style={{ color: d.color }} />
@@ -1257,26 +1548,26 @@ function AISquadDeepDive() {
         <div className="p-4 rounded-xl border border-white/10 bg-foursys-surface/30">
           <div className="flex items-center gap-2 mb-2.5">
             <DynIcon name="building" size={16} className="text-foursys-cyan" />
-            <span className="text-xs font-bold text-white">Ambiente do Cliente</span>
+            <span className="text-xs font-bold text-white">{lang === 'pt' ? 'Ambiente do Cliente' : 'Client Environment'}</span>
           </div>
           <ul className="space-y-1.5 text-[10px] text-foursys-text-dim">
-            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-foursys-cyan mt-0.5 flex-shrink-0" /> Repositório Git com permissões para o squad</li>
-            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-foursys-cyan mt-0.5 flex-shrink-0" /> Pipeline de CI/CD definido ou co-criado</li>
-            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-foursys-cyan mt-0.5 flex-shrink-0" /> Ambientes Dev / Staging / Produção</li>
-            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-foursys-cyan mt-0.5 flex-shrink-0" /> VPN ou acesso seguro de rede</li>
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-foursys-cyan mt-0.5 flex-shrink-0" /> {lang === 'pt' ? 'Repositório Git com permissões para o squad' : 'Git repository with squad permissions'}</li>
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-foursys-cyan mt-0.5 flex-shrink-0" /> {lang === 'pt' ? 'Pipeline de CI/CD definido ou co-criado' : 'CI/CD pipeline defined or co-created'}</li>
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-foursys-cyan mt-0.5 flex-shrink-0" /> {lang === 'pt' ? 'Ambientes Dev / Staging / Produção' : 'Dev / Staging / Production environments'}</li>
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-foursys-cyan mt-0.5 flex-shrink-0" /> {lang === 'pt' ? 'VPN ou acesso seguro de rede' : 'VPN or secure network access'}</li>
           </ul>
         </div>
         <div className="p-4 rounded-xl border border-orange-500/20 bg-orange-500/5">
           <div className="flex items-center gap-2 mb-2.5">
             <DynIcon name="server" size={16} className="text-orange-400" />
-            <span className="text-xs font-bold text-white">Ambiente Foursys</span>
+            <span className="text-xs font-bold text-white">{lang === 'pt' ? 'Ambiente Foursys' : 'Foursys Environment'}</span>
           </div>
           <ul className="space-y-1.5 text-[10px] text-foursys-text-dim">
-            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-orange-400 mt-0.5 flex-shrink-0" /> Cloud isolada e criptografada por cliente</li>
-            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-orange-400 mt-0.5 flex-shrink-0" /> VPN dedicada ao codebase</li>
-            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-orange-400 mt-0.5 flex-shrink-0" /> Conformidade GDPR & EU AI Act</li>
-            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-orange-400 mt-0.5 flex-shrink-0" /> Stack de monitoramento e observabilidade inclusa</li>
-            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-orange-400 mt-0.5 flex-shrink-0" /> IDE compatível com BMAD/OpenSpecLLM</li>
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-orange-400 mt-0.5 flex-shrink-0" /> {lang === 'pt' ? 'Cloud isolada e criptografada por cliente' : 'Isolated and encrypted cloud per client'}</li>
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-orange-400 mt-0.5 flex-shrink-0" /> {lang === 'pt' ? 'VPN dedicada ao codebase' : 'Dedicated VPN for the codebase'}</li>
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-orange-400 mt-0.5 flex-shrink-0" /> {lang === 'pt' ? 'Conformidade GDPR & EU AI Act' : 'GDPR & EU AI Act compliance'}</li>
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-orange-400 mt-0.5 flex-shrink-0" /> {lang === 'pt' ? 'Stack de monitoramento e observabilidade inclusa' : 'Monitoring and observability stack included'}</li>
+            <li className="flex items-start gap-1.5"><CheckCircle2 size={10} className="text-orange-400 mt-0.5 flex-shrink-0" /> {lang === 'pt' ? 'IDE compatível com BMAD/OpenSpecLLM' : 'IDE compatible with BMAD/OpenSpecLLM'}</li>
           </ul>
         </div>
       </div>
@@ -1298,6 +1589,17 @@ const qaShiftLeftSteps = [
   { icon: 'shield-check', title: 'Certificação GMUD', desc: 'Merge, automação de caminho crítico (2 dias), atestado de qualidade GO/NO GO.' },
 ]
 
+const qaShiftLeftStepsEn = [
+  { icon: 'clipboard-list', title: 'Assessment', desc: 'Assessment document, agreements, and assumptions for initial client alignment.' },
+  { icon: 'calendar', title: 'Planning', desc: 'Test plan, timeline, defined communication (meetings and reports), and environment validation.' },
+  { icon: 'file-text', title: 'Scenario Design', desc: 'Test scenarios written in BDD/Gherkin (step-by-step), functional validation, and early quality.' },
+  { icon: 'database', title: 'Sanity Test & Data', desc: 'Validated environments and structured test data with DataForge — synthetic and unbiased.' },
+  { icon: 'play', title: 'Manual Testing', desc: 'Evidence of positive and negative tests, failure evidence, and execution dashboard.' },
+  { icon: 'repeat', title: 'Functional Automation', desc: 'Automated scenarios included in regression with Cypress, Python, and Robot Framework.' },
+  { icon: 'activity', title: 'Performance (NFT)', desc: 'Load simulation, performance measurement, bottleneck identification, and required adjustments.' },
+  { icon: 'shield-check', title: 'GMUD Certification', desc: 'Merge, critical path automation (2 days), GO/NO GO quality attestation.' },
+]
+
 const qaTowers = [
   {
     title: 'COE — Torre de Excelência',
@@ -1317,11 +1619,37 @@ const qaTowers = [
   },
 ]
 
+const qaTowersEn = [
+  {
+    title: 'COE — Excellence Tower',
+    icon: 'award',
+    color: 'text-amber-400',
+    bg: 'bg-amber-500/10',
+    border: 'border-amber-500/25',
+    items: ['Methodology & Standards', 'Products & Tools', 'Report Templates & Standards', 'Indicators', 'Events, Monitoring & Synchronization', 'Non-Functional Testing (NFT)'],
+  },
+  {
+    title: 'CSC — Execution Tower',
+    icon: 'settings',
+    color: 'text-cyan-400',
+    bg: 'bg-cyan-500/10',
+    border: 'border-cyan-500/25',
+    items: ['QA Services in Squads', 'GMUD Patch Certification', 'Functional Test Automation', 'Training, Upskilling & Contingencies'],
+  },
+]
+
 const qaGains = [
   { value: '+10x', label: 'Visibilidade de riscos', desc: 'Visibilidade sobre riscos e evolução da qualidade nas entregas' },
   { value: '+80%', label: 'Prevenção de falhas', desc: 'Prevenção de falhas críticas evitadas antes de produção' },
   { value: '+6x', label: 'Aceleração de testes', desc: 'Agente Automatizador: +120 cenários/mês vs 20 manuais' },
   { value: '+70%', label: 'Cobertura funcional', desc: 'Cobertura de testes funcionais com massa de dados via DataForge' },
+]
+
+const qaGainsEn = [
+  { value: '+10x', label: 'Risk visibility', desc: 'Visibility into risks and quality evolution across deliveries' },
+  { value: '+80%', label: 'Failure prevention', desc: 'Critical failures prevented before reaching production' },
+  { value: '+6x', label: 'Test acceleration', desc: 'Automator Agent: 120+ scenarios/month vs 20 manual' },
+  { value: '+70%', label: 'Functional coverage', desc: 'Functional test coverage with DataForge-generated test data' },
 ]
 
 const qaAvoids = [
@@ -1330,6 +1658,14 @@ const qaAvoids = [
   'Falta de Visibilidade',
   'Riscos de Mercado',
   'Inconsistência de Processos',
+]
+
+const qaAvoidsEn = [
+  'Rework Costs',
+  'Time Waste',
+  'Lack of Visibility',
+  'Market Risks',
+  'Process Inconsistency',
 ]
 
 const qaRoiItems = [
@@ -1341,19 +1677,46 @@ const qaRoiItems = [
   'Agilidade e Confiança',
 ]
 
-function QualityAIDeepDive() {
+const qaRoiItemsEn = [
+  'Critical Failure Prevention',
+  'Accelerated Automation',
+  'Intelligent Decisions',
+  'Operational Efficiency',
+  'Continuous Quality',
+  'Agility and Confidence',
+]
+
+function QualityAIDeepDive({ lang }: { lang: string }) {
+  const shiftLeftSteps = lang === 'en' ? qaShiftLeftStepsEn : qaShiftLeftSteps
+  const towers = lang === 'en' ? qaTowersEn : qaTowers
+  const gains = lang === 'en' ? qaGainsEn : qaGains
+  const avoids = lang === 'en' ? qaAvoidsEn : qaAvoids
+  const roiItems = lang === 'en' ? qaRoiItemsEn : qaRoiItems
+
+  const aiAccelerators = lang === 'en'
+    ? [
+        { title: 'Automator Agent', icon: 'bot', desc: 'Functional QA generates 120+ scenarios/month (vs 20 manual). Structured prompts and cURL for instant status code and structure testing.' },
+        { title: 'DataForge', icon: 'database', desc: 'Synthetic data generation integrated in 1 day, with no data bias. Support for functional and regression testing with scalability.' },
+        { title: 'Gherkin Analyst', icon: 'file-code', desc: 'Gherkin-standard test scenarios (positive, negative, regression) with easy business comprehension and automation integration.' },
+      ]
+    : [
+        { title: 'Agente Automatizador', icon: 'bot', desc: 'QA Funcional gera +120 cenários/mês (vs 20 manuais). Prompts estruturados e cURL para testes instantâneos de status codes e estruturas.' },
+        { title: 'DataForge', icon: 'database', desc: 'Geração de massa sintética integrada em 1 dia, sem vício de dados. Suporte a testes funcionais e regressivos com escalabilidade.' },
+        { title: 'Analista Gherkin', icon: 'file-code', desc: 'Cenários de testes padrão Gherkin (positivos, negativos, regressivos) com fácil compreensão para negócios e integração com automação.' },
+      ]
+
   return (
     <div className="space-y-7">
       {/* Proposta de valor */}
       <div className="p-5 rounded-xl bg-gradient-to-r from-amber-500/15 to-transparent border border-amber-500/25">
         <p className="text-xs text-foursys-text-muted leading-relaxed">
-          <strong className="text-foursys-text">Proposta de Valor:</strong> Qualidade no escopo não é custo a mais — é o que evita custo maior. Modelo plug&apos;n&apos;play com duas torres especializadas que garantem qualidade desde o início do projeto, com IA acelerando cada etapa do ciclo de testes.
+          <strong className="text-foursys-text">{lang === 'pt' ? 'Proposta de Valor:' : 'Value Proposition:'}</strong> {lang === 'pt' ? 'Qualidade no escopo não é custo a mais — é o que evita custo maior. Modelo plug\u0027n\u0027play com duas torres especializadas que garantem qualidade desde o início do projeto, com IA acelerando cada etapa do ciclo de testes.' : 'In-scope quality isn\'t an extra cost — it\'s what prevents a bigger one. A plug\'n\'play model with two specialized towers that ensure quality from the start of the project, with AI accelerating every stage of the testing cycle.'}
         </p>
       </div>
 
       {/* Métricas */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {qaGains.map(m => (
+        {gains.map(m => (
           <div key={m.label} className="text-center p-3 rounded-xl bg-foursys-surface/50 border border-white/10">
             <div className="text-xl font-black text-amber-400">{m.value}</div>
             <div className="text-[10px] font-bold text-foursys-text mt-1">{m.label}</div>
@@ -1365,10 +1728,10 @@ function QualityAIDeepDive() {
       {/* Duas Torres */}
       <div>
         <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          Estrutura — Duas Torres Especializadas
+          {lang === 'pt' ? 'Estrutura — Duas Torres Especializadas' : 'Structure — Two Specialized Towers'}
         </div>
         <div className="grid md:grid-cols-2 gap-4">
-          {qaTowers.map(tower => (
+          {towers.map(tower => (
             <div key={tower.title} className={`p-4 rounded-xl ${tower.bg} border ${tower.border}`}>
               <div className="flex items-center gap-2 mb-3">
                 <DynIcon name={tower.icon} size={16} className={tower.color} />
@@ -1390,10 +1753,10 @@ function QualityAIDeepDive() {
       {/* Framework Shift-Left */}
       <div>
         <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          Framework Shift-Left — Qualidade antecipada em cada etapa
+          {lang === 'pt' ? 'Framework Shift-Left — Qualidade antecipada em cada etapa' : 'Shift-Left Framework — Early quality at every stage'}
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {qaShiftLeftSteps.map((step, i) => (
+          {shiftLeftSteps.map((step, i) => (
             <div key={step.title} className="p-3 rounded-xl bg-foursys-surface/50 border border-white/10 relative">
               <div className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-amber-500/30 border border-amber-500/50 flex items-center justify-center text-[9px] font-bold text-amber-300">
                 {i + 1}
@@ -1411,14 +1774,10 @@ function QualityAIDeepDive() {
       {/* Aceleradores com IA */}
       <div>
         <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-3">
-          Aceleração com IA
+          {lang === 'pt' ? 'Aceleração com IA' : 'AI Acceleration'}
         </div>
         <div className="grid md:grid-cols-3 gap-3">
-          {[
-            { title: 'Agente Automatizador', icon: 'bot', desc: 'QA Funcional gera +120 cenários/mês (vs 20 manuais). Prompts estruturados e cURL para testes instantâneos de status codes e estruturas.' },
-            { title: 'DataForge', icon: 'database', desc: 'Geração de massa sintética integrada em 1 dia, sem vício de dados. Suporte a testes funcionais e regressivos com escalabilidade.' },
-            { title: 'Analista Gherkin', icon: 'file-code', desc: 'Cenários de testes padrão Gherkin (positivos, negativos, regressivos) com fácil compreensão para negócios e integração com automação.' },
-          ].map(a => (
+          {aiAccelerators.map(a => (
             <div key={a.title} className="p-4 rounded-xl bg-amber-500/8 border border-amber-500/20">
               <div className="flex items-center gap-2 mb-2">
                 <DynIcon name={a.icon} size={16} className="text-amber-400" />
@@ -1434,10 +1793,10 @@ function QualityAIDeepDive() {
       <div className="grid md:grid-cols-2 gap-4">
         <div className="p-4 rounded-xl bg-green-500/8 border border-green-500/20">
           <div className="text-[10px] font-bold uppercase tracking-widest text-green-400 mb-3">
-            Seu Sucesso é Nosso Foco (ROI)
+            {lang === 'pt' ? 'Seu Sucesso é Nosso Foco (ROI)' : 'Your Success Is Our Focus (ROI)'}
           </div>
           <div className="grid grid-cols-2 gap-2">
-            {qaRoiItems.map(item => (
+            {roiItems.map(item => (
               <div key={item} className="flex items-start gap-1.5">
                 <DynIcon name="check-circle" size={12} className="text-green-400 shrink-0 mt-0.5" />
                 <span className="text-[10px] text-foursys-text-dim">{item}</span>
@@ -1447,10 +1806,10 @@ function QualityAIDeepDive() {
         </div>
         <div className="p-4 rounded-xl bg-red-500/8 border border-red-500/20">
           <div className="text-[10px] font-bold uppercase tracking-widest text-red-400 mb-3">
-            O Que Você Evita Conosco
+            {lang === 'pt' ? 'O Que Você Evita Conosco' : 'What You Avoid With Us'}
           </div>
           <ul className="space-y-2">
-            {qaAvoids.map(item => (
+            {avoids.map(item => (
               <li key={item} className="flex items-start gap-1.5">
                 <DynIcon name="x-circle" size={12} className="text-red-400 shrink-0 mt-0.5" />
                 <span className="text-[10px] text-foursys-text-dim">{item}</span>
@@ -1465,7 +1824,7 @@ function QualityAIDeepDive() {
         <p className="text-xs text-foursys-text-muted text-center flex flex-wrap items-start justify-center gap-1.5">
           <DynIcon name="bar-chart-2" size={14} className="text-amber-400 shrink-0 mt-0.5" />
           <span>
-            <strong className="text-foursys-text">Governança de Qualidade:</strong> Metodologias, padrões, indicadores, templates, treinamentos, monitoramentos e ferramentas — com dashboards de 5+ indicadores para tomada de decisão.
+            <strong className="text-foursys-text">{lang === 'pt' ? 'Governança de Qualidade:' : 'Quality Governance:'}</strong> {lang === 'pt' ? 'Metodologias, padrões, indicadores, templates, treinamentos, monitoramentos e ferramentas — com dashboards de 5+ indicadores para tomada de decisão.' : 'Methodologies, standards, indicators, templates, training, monitoring, and tools — with 5+ indicator dashboards for decision-making.'}
           </span>
         </p>
       </div>
@@ -1473,25 +1832,25 @@ function QualityAIDeepDive() {
   )
 }
 
-function DeepDiveContent({ serviceId }: { serviceId: string }) {
+function DeepDiveContent({ serviceId, lang }: { serviceId: string; lang: string }) {
   if (serviceId === 'modernizacao-legados') {
-    return <ModernizacaoDeepDive />
+    return <ModernizacaoDeepDive lang={lang} />
   }
 
   if (serviceId === 'ciberseguranca') {
-    return <Sec4SysDeepDive />
+    return <Sec4SysDeepDive lang={lang} />
   }
 
   if (serviceId === 'ai-augmented-squad') {
-    return <AISquadDeepDive />
+    return <AISquadDeepDive lang={lang} />
   }
 
   if (serviceId === 'quality-testes-ia') {
-    return <QualityAIDeepDive />
+    return <QualityAIDeepDive lang={lang} />
   }
 
   if (serviceId === 'fourblox') {
-    return <FourBloxDeepDive />
+    return <FourBloxDeepDive lang={lang} />
   }
 
   return null
@@ -1504,7 +1863,7 @@ function DeepDiveModal({
   service: ServiceLine
   onClose: () => void
 }) {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const visual = SERVICE_VISUALS[service.id] ?? DEFAULT_VISUAL
   const Icon = SERVICE_ICONS[service.id] ?? Layers3
   const modalRef = useRef<HTMLDivElement>(null)
@@ -1577,7 +1936,7 @@ function DeepDiveModal({
             {service.problem}
           </p>
 
-          <DeepDiveContent serviceId={service.id} />
+          <DeepDiveContent serviceId={service.id} lang={lang} />
         </div>
       </motion.div>
     </motion.div>

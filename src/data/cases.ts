@@ -1654,7 +1654,7 @@ const casesEn: CaseStudy[] = [
   {
     id: 'saude-modernizacao',
     title: '100 Projects Unlocked',
-    client: 'Operadora de Saúde (Grupo Nacional)',
+    client: 'Health Insurance Provider (National Group)',
     sector: 'Healthcare',
     type: 'Legacy Modernization',
     challenge: 'A 15-year-old core system blocked integration with new partners and prevented product launches. Critical failure risk within 18 months and dependency on obsolete technologies without market support.',
@@ -1701,12 +1701,12 @@ const casesEn: CaseStudy[] = [
   {
     id: 'fintech-lead-time',
     title: '70% Lead Time Reduction',
-    client: 'Fintech de Crédito',
+    client: 'Credit Fintech',
     sector: 'Financial',
     type: 'AI Squad',
     challenge: '8-month backlog with no resolution in sight. Overloaded internal team with high turnover. Critical credit product launches blocked by lack of delivery capacity and absence of AI-driven development practices.',
     solution: 'AI Squad with quality and security playbook. Two squads (frontend + backend) integrated into the existing Fintech team and processes, using AI agents for code review, test generation, and documentation automation.',
-    stack: ['React', 'Node.js', 'AWS', 'GitHub Actions', 'Quality IA', 'Agentes IA'],
+    stack: ['React', 'Node.js', 'AWS', 'GitHub Actions', 'AI Quality', 'AI Agents'],
     results: [
       '70% reduction in delivery lead time',
       '8-month backlog reduced to 3 months in 12 weeks',
@@ -1748,7 +1748,7 @@ const casesEn: CaseStudy[] = [
   {
     id: 'seguradora-ia',
     title: '85% Analysis Time Reduction',
-    client: 'Seguradora Multi-linha',
+    client: 'Multi-line Insurance Company',
     sector: 'Insurance',
     type: 'AI First',
     challenge: 'Claims analysis process took 5 business days with high fraud rate and manual rework generating operational losses. 6 previous AI pilots had failed without measurable results, creating board skepticism.',
@@ -1795,7 +1795,7 @@ const casesEn: CaseStudy[] = [
   {
     id: 'data-lakehouse',
     title: 'R$ 45M in Optimization Identified',
-    client: 'Banco Tier 1 (confidencial)',
+    client: 'Tier 1 Bank (confidential)',
     sector: 'Financial',
     type: 'Data Engineering',
     challenge: 'Credit, risk, and operations data scattered across 12 legacy systems with no integration, preventing cross-functional analysis and real-time risk models. Critical provisioning decisions were based on 24-hour stale data.',
@@ -1837,7 +1837,7 @@ const casesEn: CaseStudy[] = [
   {
     id: 'varejo-data',
     title: '40% Stock-Out Reduction',
-    client: 'Rede de Varejo Nacional',
+    client: 'National Retail Chain',
     sector: 'Retail',
     type: 'Data & Intelligence',
     challenge: 'Sales data distributed across 4 different systems with no integration. Reports took 3 days to complete. Inventory decisions based on gut feeling caused stock-outs and excess across entire categories.',
@@ -1931,7 +1931,7 @@ const casesEn: CaseStudy[] = [
   {
     id: 'industria-agilidade',
     title: '82% Delivery Predictability',
-    client: 'Indústria Farmacêutica',
+    client: 'Pharmaceutical Industry',
     sector: 'Industry',
     type: 'Agility & Org Design',
     challenge: '200-person team with only 30% delivery predictability. IT projects delaying critical regulatory product launches, with no visibility over capacity and blockers.',
@@ -1978,12 +1978,12 @@ const casesEn: CaseStudy[] = [
   {
     id: 'sias-modernizacao',
     title: '1.6 Million Lines Converted',
-    client: 'Seguradora de Vida',
+    client: 'Life Insurance Company',
     sector: 'Insurance',
     type: 'Legacy Modernization',
     challenge: 'IBM Mainframe life insurance system with critical technical and operational limitations. Scheduling and batch processing bottlenecks prevented business evolution and new product launches like Individual Life.',
     solution: 'Complete legacy system migration to React, .NET and containers with AI-automated Cobol to .NET C# code conversion. Batch and online scheduling overhaul, DB2 to SQL Server migration, and Product Configurator implementation.',
-    stack: ['React', '.NET Core C#', 'Docker', 'SQL Server', 'DB2', 'IA Generativa'],
+    stack: ['React', '.NET Core C#', 'Docker', 'SQL Server', 'DB2', 'Generative AI'],
     results: [
       '~1.6 million lines of code converted to .NET C#',
       '40% reduction in batch processing failures',
@@ -2025,7 +2025,7 @@ const casesEn: CaseStudy[] = [
     type: 'Legacy Modernization',
     challenge: 'Monolithic Clipper and PL/SQL legacy with poor performance and scalability compromised by high data volumes and transactions. System slowness impacted customer service and caused business losses in branches and digital channels.',
     solution: 'Modernization with AI accelerators for Clipper to Java Spring Boot and ReactJS transpilation, integrated with Salesforce Lightning. Reusable framework to scale modernization to 2,800 future screens.',
-    stack: ['Java Spring Boot', 'ReactJS', 'Salesforce Lightning', 'IA Generativa', 'Kafka'],
+    stack: ['Java Spring Boot', 'ReactJS', 'Salesforce Lightning', 'Generative AI', 'Kafka'],
     results: [
       '30% development effort reduction with AI',
       '27 screens and journeys migrated in 3 months',
@@ -2062,7 +2062,7 @@ const casesEn: CaseStudy[] = [
   {
     id: 'migracao-azure',
     title: '1,411 APIs Migrated to Azure',
-    client: 'Instituição Financeira',
+    client: 'Financial Institution',
     sector: 'Financial',
     type: 'Legacy Modernization',
     challenge: 'On-premises IBM environment with limited scalability, high maintenance costs, upgrade complexity, and restricted observability across 247 APIs, 102 bus services, and 1,062 integration paths.',
@@ -2091,7 +2091,7 @@ const casesEn: CaseStudy[] = [
         '40% reduction in incident diagnosis and resolution time',
         '50% reduction in bus change deployment lead time',
       ],
-      dimensions: { features: '247 APIs, 102 serviços, 1062 paths', months: '9' },
+      dimensions: { features: '247 APIs, 102 services, 1062 paths', months: '9' },
       keyMetrics: [
         { value: '99.9%', label: 'availability' },
         { value: '-40%', label: 'maintenance effort' },
@@ -2104,7 +2104,7 @@ const casesEn: CaseStudy[] = [
   {
     id: 'automacao-sinistros',
     title: '70% Reduction in Critical Steps',
-    client: 'Instituição Financeira',
+    client: 'Financial Institution',
     sector: 'Insurance',
     type: 'Process Automation',
     challenge: 'Slow manual processes in underwriting and claims caused operational overload, exceeded regulatory deadlines, and limited management visibility over real-time operations status.',
@@ -2228,7 +2228,7 @@ const casesEn: CaseStudy[] = [
   {
     id: 'arquitetura-modernizacao',
     title: '30% Fewer Legacy Incidents',
-    client: 'Instituição Financeira',
+    client: 'Financial Institution',
     sector: 'Financial',
     type: 'Legacy Modernization',
     challenge: 'Obsolescence, high costs, and risks from legacy Cobol and VB6 systems with Mainframe and distributed system integration limitations, compromising architectural evolution and innovation capacity.',
@@ -2275,7 +2275,7 @@ const casesEn: CaseStudy[] = [
     type: 'PEGA Platform',
     challenge: 'Highly manual collective billing process with poor visibility and dependency on internal operations. Policyholders, sub-policyholders, and brokers had no autonomy to manage group life policies.',
     solution: 'End-to-end PEGA platform automation with policyholder/broker portal, digital enrollment proposal, automatic pre-billing, parameterized dynamic import, and integration APIs with legacy systems and Federal Revenue.',
-    stack: ['PEGA System', 'APIs REST', 'Java', 'Filas MQ', 'DocuSign', 'Salesforce'],
+    stack: ['PEGA System', 'APIs REST', 'Java', 'MQ Queues', 'DocuSign', 'Salesforce'],
     results: [
       '100% digital enrollment proposal flow with integrated acceptance',
       'Automatic pre-billing with life validation and rules',
@@ -2441,7 +2441,7 @@ const casesEn: CaseStudy[] = [
     type: 'Digital Product',
     challenge: 'Create a 100% digital platform for the Genetics area, including ancestry tests and genetic recommendations with nationwide coverage, combining teleconsultation and remote sample collection.',
     solution: 'Agile MVP with complete digital platform including teleconsultation, personalized offer bundles, mail-based sample collection, and laboratory integration for results.',
-    stack: ['React', 'Node.js', 'AWS', 'APIs REST', 'Telemedicina'],
+    stack: ['React', 'Node.js', 'AWS', 'APIs REST', 'Telemedicine'],
     results: [
       'New Genetics product launch with differentiated offerings',
       '100% Digital platform including teleconsultation',
@@ -2482,7 +2482,7 @@ const casesEn: CaseStudy[] = [
     type: 'Digital Product',
     challenge: 'Create a web system for Rehabilitation patients to purchase services, schedule teleconsultations, and track progress digitally, eliminating geographical barriers.',
     solution: 'Single 100% digital platform with rehabilitation teleconsultation, progress tracking, and personalized guidance with medical record integration.',
-    stack: ['React', 'Node.js', 'APIs REST', 'Telemedicina', 'AWS'],
+    stack: ['React', 'Node.js', 'APIs REST', 'Telemedicine', 'AWS'],
     results: [
       'Only 100% digital telerehabilitation platform',
       'Operational efficiency with scalable remote care',
@@ -2812,7 +2812,7 @@ const casesEn: CaseStudy[] = [
     type: 'Process Automation',
     challenge: 'Mostly manual procurement portal process resulting in slowness, frequent errors, and low user satisfaction. Need for automation with generative AI.',
     solution: 'RPA implementation with generative AI to automate 22 critical processes, from requisition capture to ERP order generation, with natural language flow understanding.',
-    stack: ['RPA', 'Power Automate', 'AI Builder', 'IA Generativa', 'ERP'],
+    stack: ['RPA', 'Power Automate', 'AI Builder', 'Generative AI', 'ERP'],
     results: [
       '22 critical processes automated',
       'Total procurement process lead time reduction',
@@ -2894,7 +2894,7 @@ const casesEn: CaseStudy[] = [
     type: 'UX & Design',
     challenge: 'Facilitate deal closing between dealerships and customers with clear contract language, reducing churn during negotiations and backoffice requests for basic questions.',
     solution: 'UX Research, UX Writing, UX Design, and Responsive UI with incremental contract-by-contract process, business area analysis, and legal language simplification.',
-    stack: ['UX Research', 'UX Writing', 'UX Design', 'UI Responsiva', 'React'],
+    stack: ['UX Research', 'UX Writing', 'UX Design', 'Responsive UI', 'React'],
     results: [
       'Increase in contract closing on first interaction',
       'Churn decrease during negotiations',
@@ -3136,7 +3136,7 @@ const casesEn: CaseStudy[] = [
   {
     id: 'viagens-b2b-b2c',
     title: 'B2B and B2C Travel Platform',
-    client: 'Agência de Viagens',
+    client: 'Travel Agency',
     sector: 'Retail',
     type: 'Digital Product',
     challenge: 'Create a travel platform with data foundation for B2B and innovative B2C experience with personalized machine learning predictions and behavior-based offers.',
@@ -3218,7 +3218,7 @@ const casesEn: CaseStudy[] = [
   {
     id: 'banco-consignado',
     title: 'Payroll Loan System Unification',
-    client: 'Banco de Grande Porte',
+    client: 'Large Bank',
     sector: 'Financial',
     type: 'Legacy Modernization',
     challenge: 'Unify payroll loan systems and customer portfolios from two banks after merger, including complementary feature merge and specific handling requirements without service interruption.',
@@ -3264,7 +3264,7 @@ const casesEn: CaseStudy[] = [
     type: 'Process Automation',
     challenge: 'Implement monitoring panel for reserve pilots by product line, ensuring liquidity and reserve account automation with complete audit trails.',
     solution: 'SPB monitoring panel with contribution and securities sale automation, product-level messaging adjustments, and audit trails for product-by-product reserve system view.',
-    stack: ['Mainframe', 'Mensageria BACEN', 'Automação', 'Monitoramento'],
+    stack: ['Mainframe', 'BACEN Messaging', 'Automation', 'Monitoring'],
     results: [
       'Monitoring panel for reserve pilots',
       'Contribution and securities sale automation for settlement',

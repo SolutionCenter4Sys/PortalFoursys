@@ -30,7 +30,7 @@ const badgeStyles: Record<string, string> = {
 }
 
 function InsightCard({ insight, index, featured = false }: { insight: Insight; index: number; featured?: boolean }) {
-  const { navigate } = useApp()
+  const { navigate, setDeepDiveHint } = useApp()
   const { t, lang } = useLanguage()
   const [expanded, setExpanded] = useState(false)
 
@@ -150,7 +150,12 @@ function InsightCard({ insight, index, featured = false }: { insight: Insight; i
                 {insight.sectionLink && (
                   <button
                     type="button"
-                    onClick={() => navigate(insight.sectionLink!)}
+                    onClick={() => {
+                      if (insight.detailId && insight.sectionLink === 'services') {
+                        setDeepDiveHint(insight.detailId)
+                      }
+                      navigate(insight.sectionLink!, insight.detailId)
+                    }}
                     className="flex items-center gap-2 text-xs font-semibold text-foursys-primary hover:text-foursys-cyan transition-colors"
                   >
                     {lang === 'pt' ? 'Explorar seção' : 'Explore section'} <ArrowRight size={14} />

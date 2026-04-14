@@ -28,6 +28,7 @@ export function SectionTestimonials() {
   const testimonials = useMemo(() => cases
     .filter(c => c.testimonial)
     .map(c => ({
+      caseId: c.id,
       quote: c.testimonial!.quote,
       author: c.testimonial!.author,
       role: c.testimonial!.role,
@@ -172,7 +173,7 @@ export function SectionTestimonials() {
                     </div>
                     <button
                       type="button"
-                      onClick={() => navigate('cases')}
+                      onClick={() => navigate('cases', item.caseId)}
                       className="flex items-center gap-1 text-[11px] font-semibold text-foursys-primary hover:text-foursys-cyan transition-colors group/link"
                     >
                       {t('testimonials.viewCase')}

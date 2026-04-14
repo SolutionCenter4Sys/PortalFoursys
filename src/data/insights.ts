@@ -27,6 +27,7 @@ export interface Insight {
   readTime: string
   author: InsightAuthor
   sectionLink?: AppSection
+  detailId?: string
   color: string
   gradient: string
 }
@@ -86,6 +87,7 @@ const insightsPt: Insight[] = [
     readTime: '6 min',
     author: { name: 'Camila Ferreira', role: 'Lead Architect, Modernização' },
     sectionLink: 'services',
+    detailId: 'modernizacao-legados',
     color: '#06B6D4',
     gradient: 'from-cyan-600/30 via-slate-800/20 to-transparent',
   },
@@ -132,6 +134,7 @@ const insightsPt: Insight[] = [
     readTime: '7 min',
     author: { name: 'Patricia Costa', role: 'Head de Governança & Compliance' },
     sectionLink: 'services',
+    detailId: 'ai-augmented-squad',
     color: '#8B5CF6',
     gradient: 'from-violet-500/20 via-slate-800/10 to-transparent',
   },
@@ -146,6 +149,7 @@ const insightsPt: Insight[] = [
     readTime: '6 min',
     author: { name: 'Rafael Moura', role: 'Principal Architect, IA & Data' },
     sectionLink: 'services',
+    detailId: 'ai-augmented-squad',
     color: '#8B5CF6',
     gradient: 'from-purple-500/20 via-slate-800/10 to-transparent',
   },
@@ -161,6 +165,7 @@ const insightsPt: Insight[] = [
     readTime: '5 min',
     author: { name: 'André Santos', role: 'Lead Security Architect' },
     sectionLink: 'services',
+    detailId: 'ciberseguranca',
     color: '#EF4444',
     gradient: 'from-red-600/20 via-slate-800/10 to-transparent',
   },
@@ -175,6 +180,7 @@ const insightsPt: Insight[] = [
     readTime: '5 min',
     author: { name: 'André Santos', role: 'Lead Security Architect' },
     sectionLink: 'services',
+    detailId: 'ciberseguranca',
     color: '#EF4444',
     gradient: 'from-red-500/20 via-slate-800/10 to-transparent',
   },
@@ -324,6 +330,7 @@ const insightsEn: Insight[] = [
     readTime: '6 min',
     author: { name: 'Camila Ferreira', role: 'Lead Architect, Modernization' },
     sectionLink: 'services',
+    detailId: 'modernizacao-legados',
     color: '#06B6D4',
     gradient: 'from-cyan-600/30 via-slate-800/20 to-transparent',
   },
@@ -370,6 +377,7 @@ const insightsEn: Insight[] = [
     readTime: '7 min',
     author: { name: 'Patricia Costa', role: 'Head of Governance & Compliance' },
     sectionLink: 'services',
+    detailId: 'ai-augmented-squad',
     color: '#8B5CF6',
     gradient: 'from-violet-500/20 via-slate-800/10 to-transparent',
   },
@@ -384,6 +392,7 @@ const insightsEn: Insight[] = [
     readTime: '6 min',
     author: { name: 'Rafael Moura', role: 'Principal Architect, AI & Data' },
     sectionLink: 'services',
+    detailId: 'ai-augmented-squad',
     color: '#8B5CF6',
     gradient: 'from-purple-500/20 via-slate-800/10 to-transparent',
   },
@@ -399,6 +408,7 @@ const insightsEn: Insight[] = [
     readTime: '5 min',
     author: { name: 'André Santos', role: 'Lead Security Architect' },
     sectionLink: 'services',
+    detailId: 'ciberseguranca',
     color: '#EF4444',
     gradient: 'from-red-600/20 via-slate-800/10 to-transparent',
   },
@@ -413,6 +423,7 @@ const insightsEn: Insight[] = [
     readTime: '5 min',
     author: { name: 'André Santos', role: 'Lead Security Architect' },
     sectionLink: 'services',
+    detailId: 'ciberseguranca',
     color: '#EF4444',
     gradient: 'from-red-500/20 via-slate-800/10 to-transparent',
   },

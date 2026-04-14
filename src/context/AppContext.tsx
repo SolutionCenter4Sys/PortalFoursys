@@ -32,6 +32,7 @@ const initialState: AppState = {
   isOverviewOpen: false,
   isExportModalOpen: false,
   deepDiveHint: null,
+  detailId: null,
   searchVoiceOnOpen: false,
 }
 
@@ -84,6 +85,7 @@ function appReducer(state: AppState, action: AppAction): AppState {
         sectionEnteredAt: action.timestamp,
         sessionStats: updatedStats,
         trailVisitedSections: updatedTrailVisited,
+        detailId: action.detailId ?? null,
       }
     }
 
@@ -189,6 +191,9 @@ function appReducer(state: AppState, action: AppAction): AppState {
     case 'CLEAR_DEEP_DIVE_HINT':
       return { ...state, deepDiveHint: null }
 
+    case 'CLEAR_DETAIL_ID':
+      return { ...state, detailId: null }
+
     default:
       return state
   }
@@ -198,7 +203,7 @@ function appReducer(state: AppState, action: AppAction): AppState {
 
 interface AppContextValue {
   state: AppState
-  navigate: (section: AppSection) => void
+  navigate: (section: AppSection, detailId?: string) => void
   toggleFullscreen: () => void
   toggleMenu: () => void
   openSearch: (voice?: boolean) => void
@@ -216,6 +221,7 @@ interface AppContextValue {
   toggleExportModal: () => void
   setDeepDiveHint: (serviceId: string) => void
   clearDeepDiveHint: () => void
+  clearDetailId: () => void
   // Helpers derivados
   getSectionLabel: (section: AppSection) => string
   getSectionIcon: (section: AppSection) => string
@@ -231,7 +237,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(appReducer, initialState)
 
   const navigate = useCallback(
-    (section: AppSection) => dispatch({ type: 'NAVIGATE', section, timestamp: Date.now() }),
+    (section: AppSection, detailId?: string) => dispatch({ type: 'NAVIGATE', section, timestamp: Date.now(), detailId }),
     []
   )
 
@@ -320,6 +326,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     toggleExportModal,
     setDeepDiveHint: (serviceId: string) => dispatch({ type: 'SET_DEEP_DIVE_HINT', serviceId }),
     clearDeepDiveHint: () => dispatch({ type: 'CLEAR_DEEP_DIVE_HINT' }),
+    clearDetailId: () => dispatch({ type: 'CLEAR_DETAIL_ID' }),
     getSectionLabel,
     getSectionIcon,
     activeNavigationItems,
