@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
-import { useCountUp } from '../../../hooks/useCountUp'
+
 import { useApp } from '../../../context/AppContext'
 import { useLanguage } from '../../../i18n'
 import { SectionWrapper } from '../../ui/SectionWrapper'
@@ -320,19 +320,9 @@ export function SectionClientOpening() {
   const { t } = useLanguage()
   const client = state.activeClientId ? getClientById(state.activeClientId) : null
 
-  const kpi1 = useCountUp(26,    1400)
-  const kpi2 = useCountUp(500,   1800)
-  const kpi3 = useCountUp(client?.yearsPartnership ?? 5, 1600)
-
   if (!client) return null
 
   const clientColor = client.colors.primary
-
-  const kpis = [
-    { ref: kpi1, suffix: ` ${t('common.years')}`,  label: t('clientSections.opening.foursysHistory') },
-    { ref: kpi2, suffix: 'K+',     label: t('clientSections.opening.projectsDelivered') },
-    { ref: kpi3, suffix: '+',      label: t('clientSections.opening.yearsWith').replace('{client}', client.name) },
-  ]
 
   const clientSections = client.sections.slice(1)
 
@@ -341,14 +331,14 @@ export function SectionClientOpening() {
       <div className="h-full flex flex-col overflow-y-auto">
 
         {/* ── Área principal: 1 coluna mobile → 3 colunas desktop ── */}
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-[2.5fr_3fr_2.5fr]">
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-[3fr_2.5fr]">
 
           {/* ── Coluna central: Visual do cliente (aparece primeiro no mobile) ── */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col items-center justify-center py-6 lg:py-6 order-1 lg:order-2"
+            className="flex flex-col items-center justify-center py-6 lg:py-6 order-1"
           >
             <div className="scale-75 md:scale-90 lg:scale-100">
               {client.id === 'santander'
@@ -388,48 +378,12 @@ export function SectionClientOpening() {
             </motion.div>
           </motion.div>
 
-          {/* ── Coluna esquerda: KPIs ── */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col justify-center px-4 md:px-6 lg:px-10 py-4 lg:py-8 gap-4 lg:gap-7 order-2 lg:order-1"
-          >
-            <div>
-              <span
-                className="text-xs font-bold tracking-[0.18em] uppercase"
-                style={{ color: clientColor }}
-              >
-                Foursys × {client.name}
-              </span>
-            </div>
-
-            <div className="grid grid-cols-3 lg:grid-cols-1 gap-3 lg:gap-7">
-              {kpis.map(({ ref, suffix, label }, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 + i * 0.12, duration: 0.5 }}
-                  className="border-l-[3px] pl-3 lg:pl-5"
-                  style={{ borderColor: clientColor }}
-                >
-                  <div className="text-3xl md:text-5xl lg:text-[68px] leading-none font-black text-white tracking-tight tabular-nums">
-                    {ref.count}
-                    <span className="text-lg md:text-2xl lg:text-4xl">{suffix}</span>
-                  </div>
-                  <div className="text-[10px] md:text-xs lg:text-sm text-foursys-text-muted mt-1 font-medium">{label}</div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
           {/* ── Coluna direita: Seções do cliente ── */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col justify-center px-4 md:px-6 lg:px-8 py-4 lg:py-8 gap-2 lg:gap-3 order-3"
+            className="flex flex-col justify-center px-4 md:px-6 lg:px-8 py-4 lg:py-8 gap-2 lg:gap-3 order-2"
           >
             <div
               className="text-[10px] font-bold uppercase tracking-[0.18em] mb-1 lg:mb-2"
