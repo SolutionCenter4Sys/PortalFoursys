@@ -120,10 +120,6 @@ export function SectionClientExtra2() {
   }, [contacts, search, activeTag])
 
   const isFiltered = activeTag !== null || search.trim() !== ''
-  const filteredOpportunities = filtered.reduce((sum, c) => sum + c.opportunities, 0)
-  const filteredAvgScore = filtered.length > 0
-    ? Math.round(filtered.reduce((sum, c) => sum + c.topScore, 0) / filtered.length)
-    : 0
 
   const staggerStep = filtered.length > 0
     ? Math.min(0.04, MAX_STAGGER_DELAY / filtered.length)
@@ -160,29 +156,6 @@ export function SectionClientExtra2() {
               background: `linear-gradient(to right, ${clientColor}50, rgba(255,255,255,0.06), transparent)`,
             }}
           />
-        </motion.div>
-
-        {/* Stats — reflect active filters */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="mb-6 sm:mb-8 grid grid-cols-3 gap-2 sm:gap-3"
-        >
-          <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-white/[0.08] bg-foursys-surface/40 text-center">
-            <div className="text-lg sm:text-2xl font-black" style={{ color: clientColor }}>
-              {isFiltered ? `${filtered.length}/${contacts.length}` : contacts.length}
-            </div>
-            <div className="text-[10px] sm:text-xs text-foursys-text-muted">{t('clientSections.extra2.totalContacts')}</div>
-          </div>
-          <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-white/[0.08] bg-foursys-surface/40 text-center">
-            <div className="text-lg sm:text-2xl font-black text-emerald-400">{filteredOpportunities}</div>
-            <div className="text-[10px] sm:text-xs text-foursys-text-muted">{t('clientSections.extra2.totalOpportunities')}</div>
-          </div>
-          <div className="p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-white/[0.08] bg-foursys-surface/40 text-center">
-            <div className="text-lg sm:text-2xl font-black text-blue-400">{filteredAvgScore}</div>
-            <div className="text-[10px] sm:text-xs text-foursys-text-muted">{t('clientSections.extra2.avgScore')}</div>
-          </div>
         </motion.div>
 
         {/* Search bar */}
