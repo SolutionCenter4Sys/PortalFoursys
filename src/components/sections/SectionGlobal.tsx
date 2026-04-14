@@ -371,7 +371,7 @@ export function SectionGlobal() {
                   key={region.id}
                   type="button"
                   onClick={() => setActiveRegionId(region.id)}
-                  className={`px-3 py-1.5 rounded-full text-xs border transition-colors ${
+                  className={`inline-flex items-center px-3 py-1.5 h-7 rounded-full text-xs border transition-colors ${
                     activeRegion.id === region.id ? 'text-white' : 'text-foursys-text-dim'
                   }`}
                   style={{
