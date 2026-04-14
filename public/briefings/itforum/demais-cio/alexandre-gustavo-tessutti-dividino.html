@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Alexandre Dividino | Rockwell Automation</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .summary-stat { text-align: center; padding: 20px; }
+        .summary-stat .number { font-size: 36px; font-weight: 800; color: var(--primary); }
+        .summary-stat .desc { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Alexandre Gustavo Tessutti Dividino</h1>
+                <h2>CIO / Chief of Staff — Global I/O — Rockwell Automation</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Tecnologia e Telecom (Automação Industrial) | São Paulo - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">Acima de R$ 15 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 1,1 BI a R$ 2 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá até 10%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Rockwell Automation</h3>
+            <p style="margin-bottom:20px;line-height:1.8">A Rockwell Automation é líder global em automação industrial e transformação digital, com sede em Milwaukee, EUA, e operações em mais de 100 países. A empresa fornece soluções de controle industrial, automação, software e serviços para manufatura. Receita global de aproximadamente US$ 8,1 bilhões no ano fiscal 2025, com crescimento orgânico de 1% e receita recorrente anual (ARR) crescendo 8%. No Brasil, a Rockwell é referência em soluções de automação para indústrias como automotiva, mineração, alimentos e bebidas. Em maio de 2025, no ROKTOP Brasil em São Paulo, reuniu líderes da Vale, GM e Votorantim para debater "Empresa Conectada". Implementou tecnologia de gêmeo digital (Emulate3D) com a brasileira Falcare Industrial, acelerando projetos em 60%. Foco em máquinas inteligentes, tecnologias autônomas, IA e infraestrutura/virtualização para segurança operacional.</p>
+            
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global — operações em 100+ países</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada (NYSE: ROK)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento — guidance FY2026: +3% a +7% em vendas</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">CEO Global</div>
+                        <div class="value">Blake Moret</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="alert-box">
+                <strong>Contexto Estratégico:</strong> A Rockwell Automation opera com modelo <strong>predominantemente interno (in-house)</strong> e todos os projetos já possuem fornecedor selecionado. No entanto, o executivo reconhece a necessidade de <strong>aumentar maturidade em Cibersegurança, IA/ML e IA Generativa</strong> — janela de entrada como parceiro especializado.
+                Modelo de compra: <strong>Híbrido por categoria/ticket — varia conforme valor/risco</strong>.
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar sistemas legados</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Orquestrar transformação digital</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Otimizar custos e eficiência (FinOps/SecFinOps)</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div style="margin-bottom:20px">
+                        <span class="tag tag-priority">Infraestrutura de redes</span>
+                        <span class="tag tag-priority">Cibersegurança</span>
+                        <span class="tag tag-priority">IA Generativa</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos Ativos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento (verde = continuidade de investimento):</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+                <span class="tag tag-active">Armazenamento/Backup</span>
+                <span class="tag tag-active">Conectividade e Telecom</span>
+                <span class="tag tag-active">Nuvem Pública</span>
+                <span class="tag tag-active">Nuvem Privada/Híbrida</span>
+                <span class="tag tag-active">Cibersegurança</span>
+                <span class="tag tag-active">Disaster Recovery</span>
+                <span class="tag tag-active">Segurança de Dados (LGPD/DLP)</span>
+                <span class="tag tag-active">Gestão de Dados</span>
+                <span class="tag tag-active">IA / ML</span>
+                <span class="tag tag-active">IA Generativa</span>
+                <span class="tag tag-active">ERP</span>
+                <span class="tag tag-active">BPM</span>
+                <span class="tag tag-active">Automação / RPA</span>
+                <span class="tag tag-active">Hiperautomação</span>
+                <span class="tag tag-active">Workplace / End-User Computing</span>
+                <span class="tag tag-active">CPaaS / UCaaS / CCaaS</span>
+                <span class="tag tag-active">Sistemas Core</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Análise de oportunidades de entrada na conta:</p>
+            <div>
+                <p style="color:var(--text)"><strong>Todos os projetos definidos já possuem fornecedor selecionado.</strong></p>
+                <p style="margin-top:12px;color:var(--text-light)">No entanto, o executivo declarou necessidade de <strong>aumentar maturidade</strong> em 3 áreas críticas antes de investir com consistência — oportunidade de consultoria e aceleração:</p>
+            </div>
+            <div style="margin-top:16px">
+                <h4 style="color:var(--text-light)">Áreas com gap de maturidade (oportunidade de consultoria/aceleração):</h4>
+                <div style="margin-top:8px">
+                    <span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Cibersegurança</span>
+                    <span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA / ML</span>
+                    <span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA Generativa</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Alexandre Dividino</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Conta com modelo predominantemente in-house — abordagem via consultoria especializada e aceleração de maturidade.</p>
+            
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 65</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>IA Generativa é Top 3 prioridade de investimento — investimento ativo nos próximos 12 meses</li>
+                        <li>IA/ML e IA Generativa declarados como áreas que precisam de maturidade — oportunidade de consultoria/aceleração</li>
+                        <li>Empresa com cultura de inovação máxima — receptiva a soluções avançadas de IA</li>
+                        <li>Hiperautomação com investimento ativo — fit com inteligência preditiva do AI Squad</li>
+                        <li>Limitante: modelo in-house e fornecedor já selecionado — posicionar como acelerador, não substituto</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 62</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>Cibersegurança é Top 3 prioridade E declarada como área que precisa de maturidade</li>
+                        <li>11% do orçamento de TI em cibersegurança (~R$ 120-220 MM) — budget significativo</li>
+                        <li>Investimento ativo em Cibersegurança, Disaster Recovery e Segurança de Dados</li>
+                        <li>Convergência IT/OT é desafio crítico na automação industrial — Foursys com ISO 27001/27701</li>
+                        <li>Limitante: modelo in-house e fornecedor selecionado — posicionar como complemento especializado</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 58</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>Modernização de legados é Top 3 desafio estratégico declarado</li>
+                        <li>Transformação digital é desafio central — legados são o gargalo típico</li>
+                        <li>Investimento em ERP e BPM ativos — complementar com modernização de integração</li>
+                        <li>Limitante: sem investimento previsto em "Desenvolvimento e modernização de legados" — pode ser necessidade latente</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 55</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>Infraestrutura de redes é Top 3 prioridade de investimento</li>
+                        <li>40% do orçamento em nuvem — empresa cloud-first com demanda contínua</li>
+                        <li>Orquestrar transformação digital é desafio estratégico — engenharia digital é enabler</li>
+                        <li>Limitante: modelo in-house para todos os temas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 52</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>Otimização de custos e eficiência (FinOps) é desafio estratégico — FourBlox reduz custo de dev</li>
+                        <li>Empresa com ágil em toda a TI — componentes reutilizáveis complementam abordagem ágil</li>
+                        <li>Limitante: modelo in-house e baixa relevância para critérios de fornecedor</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Alexandre Dividino é um executivo experiente (37+ anos em TI) com visão de longo prazo e forte viés para capacidade interna. A abordagem NÃO deve ser de "vamos fazer por vocês", mas sim de <strong>"vamos acelerar a maturidade do seu time interno"</strong>. Iniciar a conversa sobre os 3 temas que ele mesmo declarou precisar de maturidade: <strong>Cibersegurança, IA/ML e IA Generativa</strong>. Apresentar a Foursys como parceiro de <strong>consultoria especializada e aceleração</strong> — não como terceirização. Mencionar o AI Squad como ferramenta de aceleração que complementa equipes internas. Alexandre participa de eventos como IT Forum e SingularityU — demonstrar conhecimento de tendências exponenciais.</p>
+            </div>
+            
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>O gap de maturidade em <strong>IA Generativa e Cibersegurança</strong> é a principal janela de entrada. Ambos são Top 3 prioridades com investimento ativo MAS declarados como áreas que precisam de maturidade — o executivo reconhece a lacuna. A Rockwell investe R$ 1,1 BI a R$ 2 BI em TI e o orçamento crescerá até 10% — há budget. O desafio de <strong>modernização de legados</strong> pode ser abordado via Hackathon ou Assessment gratuito para demonstrar valor antes de proposta comercial. O modelo de compra <strong>híbrido por categoria/ticket</strong> permite entrar em projetos menores/especializados sem competir com fornecedores globais estabelecidos.</p>
+            </div>
+            
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conta de perfil in-house/global, destacar: (1) <strong>AI Squad como acelerador</strong> — produto proprietário que potencializa equipes internas, não as substitui; (2) <strong>ISO 27001/27701</strong> para cibersegurança OT/IT — diferencial raro em consultorias; (3) <strong>Experiência em Indústria 4.0</strong> — cases em automação, IoT e manufatura; (4) <strong>Modelo flexível</strong> — Foursys pode atuar em projeto pontual ou co-gerenciado, adaptando-se ao modelo in-house da Rockwell; (5) <strong>Foursys como consultoria brasileira de porte</strong> — 24 anos de mercado, alternativa a big-4 com mais agilidade e proximidade.</p>
+            </div>
+            
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p>1. O mercado global de automação industrial vale US$ 205,9 bi (2023), projetado para US$ 283,1 bi em 2032. A <strong>Rockwell precisa acelerar em IA e software</strong> para competir com Siemens (MindSphere) e ABB (Ability).<br>
+                2. A <strong>convergência IT/OT</strong> é o novo campo de batalha — 70% dos fabricantes investem em IA, robótica e simulação. Cibersegurança de sistemas OT é vulnerabilidade crítica na indústria.<br>
+                3. Alexandre valoriza <strong>liderança de propósito</strong> (participou de programa da SingularityU) e é mentor — abordagem deve ser de <strong>peer-to-peer</strong>, não de vendedor-comprador.<br>
+                4. A Rockwell está <strong>crescendo ARR em 8%</strong> (receita recorrente anual) — foco em software e serviços, não apenas hardware. Modernização de legados de clientes é oportunidade adjacente.<br>
+                5. O orçamento de TI é <strong>robusto (R$ 1,1-2 BI)</strong> e <strong>em crescimento</strong> — mesmo com modelo in-house, há espaço para parceiros especializados em temas onde falta maturidade interna.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark: O Que os Concorrentes Estão Fazendo</h3>
+            
+            <div class="competitor-card">
+                <h4>Siemens</h4>
+                <p>Maior concorrente global com receita de US$ 83,1 bilhões (2023). Plataforma MindSphere (IoT industrial em nuvem) e SIMATIC para automação. Forte investimento em digital twins (Xcelerator), IA industrial e Indústria 4.0. Líder em automação de fábricas com ecossistema integrado de hardware e software. Aquisição da Brightly Software para gestão de ativos inteligentes.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>ABB</h4>
+                <p>Receita de US$ 32,2 bilhões (2023) e ~11% do mercado global de automação industrial. Plataforma ABB Ability para IoT industrial, robótica colaborativa (cobots) e eletrificação. Forte atuação em mineração e energia no Brasil. Investimentos em IA para otimização de processos e manutenção preditiva.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Schneider Electric</h4>
+                <p>Plataforma EcoStruxure para automação e gestão de energia, concorrente direto do ABB Ability e da Connected Enterprise da Rockwell. Forte foco em sustentabilidade e eficiência energética. Ecossistema aberto com parcerias amplas. Crescimento em soluções de edge computing e IA para manufatura.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Emerson Electric</h4>
+                <p>Especialista em automação de processos com a plataforma DeltaV. Aquisição da National Instruments (NI) fortaleceu portfólio de testes e medição. Forte em indústrias de processo (petroquímica, farmacêutica). Investimentos em software industrial e IA para otimização de produção.</p>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>Gap Analysis vs Concorrentes</h4>
+                <p>A Rockwell Automation é líder na América do Norte, mas globalmente compete com Siemens e ABB, que possuem ecossistemas de software mais amplos. Oportunidades de melhoria: (1) Expansão de capabilities de IA generativa em escala industrial — Siemens avança com Xcelerator e IA embarcada; (2) Maturidade em cibersegurança industrial (OT security) — setor cada vez mais visado por ataques; (3) Modernização de sistemas legados de clientes industriais — muitos ainda operam PLCs e SCADA de gerações anteriores; (4) Integração IT/OT — convergência entre TI corporativa e tecnologia operacional é o novo campo de batalha competitivo.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Experiência Profissional</div>
+                        <div class="value">37+ anos em TI. Carreira: Head of IT na Whirlpool Latin America, CIO na Mineração Buritirama, Latam IT Manager na Rockwell, atual Chief of Staff — Global I/O.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Cidade / Região</div>
+                        <div class="value">São Paulo, SP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn: linkedin.com/in/dividino — publica sobre liderança, inovação e TI. Articulista (escreveu sobre apps vs aplicações tradicionais). Speaker em IT Forum.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Atividades Paralelas</div>
+                        <div class="value">Mentor &amp; Counselor; Open Mind Brazil; Participante da SingularityU Brazil (tecnologias exponenciais)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Perfil de Liderança</div>
+                        <div class="value">Liderança de Propósito — participou de programa "Liderança de Proposito" com Distrito Itaqui e SingularityU Brazil. Valoriza impacto social e desenvolvimento de pessoas.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Versatilidade Setorial</div>
+                        <div class="value">Atuou em setores diversos: eletrodomésticos (Whirlpool), mineração (Buritirama), automação industrial (Rockwell) — visão cross-industry rara.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Fontes de Conhecimento</div>
+                        <div class="value">Eventos e conferências presenciais; Comunidades de CIOs; MSPs — prefere aprendizado presencial e networking</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Visão sobre Budget de TI</div>
+                        <div class="value">Compartilhou insights no IT Forum sobre como apresentar budget de TI em empresas multinacionais — abordagem estratégica e orientada a valor de negócio.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-box" style="margin-top:16px">
+                <h4>Dicas para Conversa Amistosa</h4>
+                <p>1. <strong>Experiência cross-industry:</strong> Pergunte sobre as diferenças de liderar TI em eletrodomésticos (Whirlpool), mineração (Buritirama) e automação (Rockwell) — é uma trajetória única que demonstra adaptabilidade.<br>
+                2. <strong>SingularityU e Open Mind Brazil:</strong> Demonstre conhecimento sobre tecnologias exponenciais e inovação aberta. Alexandre participa dessas comunidades e valoriza pensamento disruptivo.<br>
+                3. <strong>Mentoria:</strong> Ele se identifica como Mentor &amp; Counselor — pergunte sobre suas experiências mentorando profissionais de TI. Isso cria conexão pessoal e demonstra interesse genuíno.<br>
+                4. <strong>Liderança de Propósito:</strong> Valoriza impacto social e desenvolvimento humano. Conectar a conversa com como a tecnologia melhora a vida das pessoas, não apenas eficiência operacional.<br>
+                5. <strong>37 Anos de TI:</strong> Reconheça a profundidade da experiência. Pergunte sobre as maiores transformações que ele testemunhou na TI ao longo de quase 4 décadas — gera conversa rica e demonstra respeito pela trajetória.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo e Abrangência</div>
+                        <div class="value">CIO / Chief of Staff — Global I/O (abrangência global)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte à liderança global de operações</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Treinamento e L&D</div>
+                        <div class="value">Sim: área corporativa de L&D com governança e budget próprio</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Compra híbrida por categoria/ticket — varia conforme valor/risco</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais (global)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Dificuldade com Talentos</div>
+                        <div class="value">Sim, na contratação — disputa salarial, faixa defasada, soft skills, localização</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Visão do Time</div>
+                        <div class="value">Competente</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Estilo de Liderança</div>
+                        <div class="value">Ambidestra: equilibra inovação e eficiência</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:40%;background:#1a237e">40%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:21%;background:#3949ab">21%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:11%;background:#3949ab">11%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+                <div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#7986cb">7%</div></div></div>
+                <div class="bar"><div class="bar-label">Inovação/P&D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:4%;background:#9fa8da">4%</div></div></div>
+                <div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#c5cae9">3%</div></div></div>
+                <div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#c5cae9">1%</div></div></div>
+            </div>
+            <div class="alert-box" style="margin-top:16px">
+                <strong>Destaque:</strong> 40% do orçamento em <strong>operação em nuvem</strong> — empresa cloud-first. Apenas 3% em infra on-prem. Orçamento expressivo de R$ 1,1 BI a R$ 2 BI com <strong>crescimento de até 10%</strong> previsto.
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Relevância</h4>
+                    <div class="alert-box">
+                        <strong>Atenção:</strong> Todos os critérios de avaliação de fornecedores foram classificados como <strong>"Baixa"</strong> relevância — indicando que a empresa prioriza capacidade interna e trata fornecedores como commodity. Abordagem deve ser por <strong>valor diferenciado e especialização</strong>, não por critérios tradicionais de RFP.
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI; Consultoria especializada; MSP / Outsourcing gerenciado</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação</div>
+                        <div class="value">
+                            Interno (in-house): 18 temas |
+                            Prefere capacidade própria em todos os temas
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing Gerente de TI - Diego de Mores | Grupo Sinosserra</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Diego de Mores</h1>
+                <h2>Gerente de TI — Grupo Sinosserra</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Comércio atacadista e varejista | Novo Hamburgo - RS</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 3,1 BI a R$ 4 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 20,1 MM a R$ 30 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Será mantido</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Grupo Sinosserra</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">O <strong>Grupo Sinosserra</strong> é um dos maiores grupos de concessionárias de veículos do Rio Grande do Sul, fundado em <strong>1947 em Canela-RS</strong> pelas famílias Zugno e Jacobus — atualmente em processo de sucessão para a terceira geração. O grupo opera <strong>mais de 21 concessionárias em 11 municípios gaúchos</strong>, representando marcas como Chevrolet (Sinoscar), Volkswagen (Guaibacar), Jeep (Tramonto), Kia (Sinosserra/Pampa) e, mais recentemente, marcas chinesas como Omoda &amp; Jaecoo e Jetour (Chery). Em 2025, consolidou-se na <strong>45ª posição entre as maiores empresas do RS</strong> e acumula mais de <strong>200.000 veículos vendidos</strong> na última década. Em 2026, o grupo investiu <strong>R$ 24 milhões</strong> na abertura de quatro novas concessionárias de veículos eletrificados (híbridos e elétricos), sinalizando forte aposta na eletrificação e na diversificação de marcas. Além das concessionárias, o grupo conta com braço financeiro próprio (Sinosserra Financeira), consórcios e seguros — evidenciando um ecossistema de negócios integrado com potencial para iniciativas de transformação digital de ponta a ponta.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Estabilidade</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Comércio atacadista e varejista</strong> com abrangência <strong>Local (Brasil)</strong>. Possui <strong>3 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>Direto com fornecedoríbrido por categoria/ticket — varia conforme valor/risco.</strong>. Perspectiva do orçamento de TI: <strong>Será mantido</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos e operações para ganho de eficiência</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar custos, riscos e lock-in de fornecedores</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar complexidade dos dados e qualidade da informação</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar sistemas legados</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Cibersegurança</span>
+<span class="tag tag-priority">IA Generativa</span>
+<span class="tag tag-priority">ERP</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">CRM</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">BPM</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">Sistemas core</span>
+<span class="tag tag-active">Sustentabilidade e green IT</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Cibersegurança</span>
+<span class="tag tag-opportunity">APIs e integração</span>
+<span class="tag tag-opportunity">Hiperautomação</span>
+</div><div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria/assessment):</h4>
+                <div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Gestão de dados</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA / ML</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA Generativa</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Sustentabilidade e green IT</span>
+</div>
+            </div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Diego de Mores</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 80</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA Generativa é prioridade Top 3 de investimento</li><li>Hiperautomação SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 80</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>APIs e integração SEM fornecedor definido</li><li>ERP é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 50</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Cibersegurança SEM fornecedor definido</li><li>Cibersegurança é prioridade Top 3</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Diego de Mores tem como top prioridades <strong>Cibersegurança; IA Generativa; ERP</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>3 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 3 projetos definidos sem fornecedor: Cibersegurança, APIs e integração, Hiperautomação. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Será mantido</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; Modernização de Legado; Cibersegurança. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. Digitalização é mandatória, não diferencial:</strong> Concessionárias que não adotarem CRM avançado, automação e IA perderão espaço rapidamente. O Sinosserra, com 21+ lojas e braço financeiro, precisa de uma plataforma unificada para orquestrar vendas, pós-venda e serviços financeiros.<br><br>
+                <strong>2. Expansão de marcas chinesas exige integração sistêmica:</strong> A abertura de 4 novas lojas Jetour/Omoda/Jaecoo em 2026 (R$ 24M) gera complexidade operacional — novos processos, novos SKUs, novos padrões de garantia. APIs e integração (projeto sem fornecedor!) são críticas para escalar sem fragmentar.<br><br>
+                <strong>3. Pós-venda como motor de receita recorrente:</strong> No cenário de desaceleração prevista de 6% nos emplacamentos em 2026, o pós-venda se torna fonte estratégica de faturamento. Hiperautomação de processos de agendamento, peças e garantias é oportunidade direta.<br><br>
+                <strong>4. Experiência do cliente omnichannel é o novo campo de batalha:</strong> Concorrentes como Saga (PrimeiraMão) e Barigui (Banco Bari) já oferecem jornadas digitais integradas. O Sinosserra precisa conectar WhatsApp, site, showroom e financeira em uma experiência fluida.<br><br>
+                <strong>5. Sucessão geracional e governança de dados:</strong> Com a transição para a 3ª geração da família, decisões baseadas em dados (não em intuição) se tornam essenciais para a governança corporativa. IA/ML e gestão de dados — ambos projetos sem definição — são pilares para essa transição.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Grupo Barigui — Maior revendedor do Sul do Brasil</h4>
+                <p><strong>100+ concessionárias</strong> em 25 cidades, representando 26 marcas. Mais de 3.000 colaboradores e 1 milhão de veículos vendidos desde 1993. Investiu <strong>R$ 5 milhões em Data Lake na Google Cloud</strong> (parceria Rox Partner), reduzindo em 51% o tempo com problemas operacionais e automatizando 100+ regras de negócios. Criou o <strong>Banco Bari</strong> (banco digital autorizado pelo BC) e a Bari Tecnologia. Mantém hub de inovação (Distrito Spark CWB) e investe em startups.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Grupo Saga — Líder nacional em capilaridade</h4>
+                <p><strong>110+ lojas</strong> pelo Brasil com 19 marcas (incl. Toyota, BMW, BYD, Geely, Leap Motors). Fundado em 1972. Lançou a plataforma omnichannel <strong>PrimeiraMão Saga</strong> para compra e venda de seminovos com avaliação online, simulação de financiamento e garantia de 1 ano. Forte posicionamento em veículos conectados (5G, V2X, IA embarcada) e no segmento de eletrificados via BYD e marcas chinesas.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Grupo Sinal — Multimarca com presença em SP e RS</h4>
+                <p><strong>60+ lojas</strong> na Grande São Paulo, Baixada Santista, Vale do Paraíba e RS, com 16 marcas (Fiat, Honda, Ford, Nissan, Hyundai, Kia, Omoda/Jaecoo, GAC, Geely, Jetour, Leapmotor). Compra 100% online com entrega na região metropolitana. Inspeção técnica de 100+ pontos para seminovos. Expansão agressiva para marcas chinesas de eletrificados — <strong>concorrente direto do Sinosserra em Jetour e Omoda/Jaecoo no RS</strong>.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Grupo Cometa — Referência no Norte/Centro-Oeste</h4>
+                <p>Fundado em 1973, com <strong>1.200+ colaboradores</strong> e gestão centralizada em Cáceres-MT. Opera concessionárias Honda Motos (14 unidades em 5 estados), Hyundai e Volkswagen. Foco em Mato Grosso, Rondônia, Amazonas e Pará. <strong>Menor maturidade digital</strong> comparado aos demais players — sem investimentos públicos relevantes em plataformas de dados ou transformação digital.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis: Sinosserra vs. Concorrentes</h4>
+                <p>O Grupo Barigui lidera em <strong>maturidade de dados e inovação digital</strong> (Data Lake, banco digital, hub de startups). O Grupo Saga lidera em <strong>omnicanalidade e plataformas de e-commerce automotivo</strong>. O Sinosserra, embora em forte expansão de marcas e lojas, ainda não comunicou publicamente investimentos equivalentes em <strong>plataformas de dados, CRM unificado ou e-commerce automotivo</strong>. Esta é uma oportunidade clara para a Foursys: posicionar soluções de <strong>gestão de dados, IA/ML, hiperautomação e integração de sistemas (APIs)</strong> para que o Sinosserra acompanhe ou supere os concorrentes em maturidade digital — especialmente considerando que estes temas estão entre os projetos sem fornecedor definido.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Nome Completo</div>
+                        <div class="value">Diego de Moraes</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CIO — Grupo Sinosserra (desde Jul/2025)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Total em TI</div>
+                        <div class="value">+19 anos (desde 2008, todo no Sinosserra)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação</div>
+                        <div class="value">Análise e Desenv. de Sistemas — UNISINOS (2011-2015)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Pós-Graduação</div>
+                        <div class="value">MBA em Gestão de Projetos — Universidade Positivo (2018-2019)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Certificações</div>
+                        <div class="value">Gestão de Projetos de Software, Testes de Software, Melhoria de Processos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Sapucaia do Sul — RS</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória no Sinosserra</div>
+                        <div class="value">Assistente Suporte → Analista TI → Analista Sistemas → Analista Negócios → Coord. Sistemas → Coord. TI → Supervisor TI → CIO</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa com Diego</h4>
+                <p><strong>1. Valorize a trajetória interna:</strong> Diego construiu toda a carreira dentro do Sinosserra — de Assistente de Suporte a CIO em 17 anos. Reconheça essa jornada; ele conhece cada processo da empresa de dentro para fora e valoriza quem entende contexto antes de propor soluções.<br><br>
+                <strong>2. Fale a linguagem de gestão de projetos:</strong> Com MBA em Gestão de Projetos e certificações na área, Diego pensa em escopo, prazo, risco e ROI. Apresente propostas com timeline claro, marcos de entrega e métricas de sucesso — evite discursos vagos.<br><br>
+                <strong>3. Conecte com o momento de promoção recente:</strong> CIO desde julho/2025, Diego está em fase de consolidação e precisa mostrar resultados estratégicos. Posicione as soluções Foursys como aceleradoras do impacto que ele quer gerar neste novo papel.<br><br>
+                <strong>4. Demonstre conhecimento do setor automotivo gaúcho:</strong> Mencione a expansão das marcas chinesas, o investimento de R$ 24M e a competição com Barigui e Sinal no RS. Mostrar que você entende o contexto de mercado gera credibilidade imediata.<br><br>
+                <strong>5. Aborde qualidade e processos:</strong> Suas certificações em testes de software e melhoria de processos indicam um perfil metódico, orientado a qualidade. Destaque as certificações ISO 27001/27701 da Foursys e a abordagem estruturada de entrega — isso ressoa com seu perfil profissional.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Gerente de TI e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma gerência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao COO/Operações</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Regular: participa com frequência, sem ser membro.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">10 a 29</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#9fa8da">1%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#c5cae9">1%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Integrador / empresa de serviços (SI);Consultoria especializada</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 5 temas | Interno: 4 temas | Projeto: 3 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

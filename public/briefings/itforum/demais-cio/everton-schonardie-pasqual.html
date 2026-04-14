@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Everton Schonardie Pasqual | ITAIPU Binacional</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Everton Schonardie Pasqual</h1>
+                <h2>CIO — ITAIPU Binacional</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Utilities | Foz do Iguaçu - PR</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 12,1 BI a R$ 13 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 100,1 MM a R$ 200 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Será mantido</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: ITAIPU Binacional</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Itaipu Binacional</strong> é a maior usina hidrelétrica em geração de energia limpa do mundo, operada em regime binacional por Brasil e Paraguai desde 1984. Com 20 unidades geradoras e capacidade instalada de 14 GW, a empresa é responsável por cerca de 10% da energia consumida no Brasil e 86% no Paraguai. Atualmente, a Itaipu vive seu momento estratégico mais relevante em quatro décadas: a <strong>maior atualização tecnológica da história da usina</strong>, com investimento de aproximadamente <strong>US$ 950 milhões até 2036</strong>. O projeto contempla a substituição completa dos sistemas de controle analógicos por plataformas digitais (SCADA, RTA), implementação de cibersegurança integrada — tornando-se a primeira hidrelétrica com sistema próprio de cibersegurança — e a construção de "Salas Seguras" para abrigar a infraestrutura digital. Em 2026, a usina entra em fase decisiva com a parada da primeira turbina para modernização, num ritmo planejado de duas unidades por ano. Paralelamente, a empresa diversifica receitas com a comercialização de certificados I-RECs, projeto-piloto de usina solar flutuante e parceria estratégica com a Petrobras para desenvolvimento de energias limpas, incluindo biogás e combustíveis sustentáveis de aviação (SAF).</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Regional (América Latina)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Pública</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Estabilidade</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Utilities</strong> com abrangência <strong>Regional (América Latina)</strong>. Possui <strong>3 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>Licitação pública  (edital/pregão</strong>. Perspectiva do orçamento de TI: <strong>Será mantido</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos e operações para ganho de eficiência</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar custos, riscos e lock-in de fornecedores</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Posicionar a TI como área estratégica do negócio</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Priorizar portfólio em meio a excesso de demandas</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Cibersegurança</span>
+<span class="tag tag-priority">Gestão de dados</span>
+<span class="tag tag-priority">IA Generativa</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">BPM</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Gestão de dados</span>
+<span class="tag tag-opportunity">IA Generativa</span>
+<span class="tag tag-opportunity">APIs e integração</span>
+</div><div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria/assessment):</h4>
+                <div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">BPM</span>
+</div>
+            </div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Everton Schonardie Pasqual</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 65</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA Generativa SEM fornecedor definido</li><li>IA Generativa é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 50</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>APIs e integração SEM fornecedor definido</li><li>BPM com investimento inicial previsto</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Everton Schonardie Pasqual tem como top prioridades <strong>Cibersegurança; Gestão de dados; IA Generativa</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>3 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 3 projetos definidos sem fornecedor: Gestão de dados, IA Generativa, APIs e integração. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Será mantido</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; Modernização de Legado. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. Modernização gera demanda massiva de integração:</strong> A substituição dos 20 sistemas de controle analógicos por SCADA digital criará uma necessidade crítica de APIs e middleware para integrar os novos sistemas com o legado operacional — exatamente o tipo de projeto onde a Foursys + Digibee (iPaaS) podem entregar valor imediato.<br><br>
+                <strong>2. Cibersegurança binacional é um desafio único:</strong> A Itaipu opera sob duas jurisdições regulatórias (Brasil e Paraguai), o que torna a governança de cibersegurança e conformidade com LGPD/proteção de dados extremamente complexa. A certificação ISO 27001/27701 da Foursys é um diferencial direto para este cenário.<br><br>
+                <strong>3. Janela I-RECs e diversificação de receitas:</strong> Com a comercialização de certificados I-RECs prevista para 2026, a Itaipu precisará de sistemas de gestão de dados e rastreabilidade para certificar a origem da energia — oportunidade direta para soluções de Gestão de Dados.<br><br>
+                <strong>4. O "cérebro digital" da usina precisa de IA:</strong> O novo sistema SCADA centralizado gerará volumes sem precedentes de dados operacionais em tempo real. Soluções de IA para manutenção preditiva, otimização de geração e detecção de anomalias são o próximo passo natural — e a concorrência (CEMIG, COPEL) já avançou neste tema.<br><br>
+                <strong>5. Modelo de licitação exige preparação antecipada:</strong> Como empresa pública binacional, a Itaipu compra via licitação/pregão. É fundamental iniciar o relacionamento consultivo agora para influenciar requisitos técnicos de futuros editais, especialmente nos 3 projetos sem fornecedor definido.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>&#9889; COPEL — Companhia Paranaense de Energia</h4>
+                <p><strong>Destaque tecnológico:</strong> Programa <em>Copel Beyond</em>, considerado o maior programa de digitalização do setor elétrico brasileiro. Investimento de R$ 12,5 milhões em IA e visão computacional (startup Fu2re) para gestão de ativos, com ganhos de produtividade de até 30%. Prova de conceito processou 1,4 milhão de imagens de 680 km de rede elétrica. Realiza Semana de Inovação anual com parceiros como Google, SAP, NVIDIA e Toyota.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>&#9889; CEMIG — Companhia Energética de Minas Gerais</h4>
+                <p><strong>Destaque tecnológico:</strong> Lançou o <em>EnergyGPT</em>, primeira plataforma de IA generativa dedicada ao setor elétrico na América Latina, apresentada no SXSW 2026. Investimento de R$ 26 milhões, com modelos treinados na base regulatória da ANEEL. Parceria com Google Cloud e previsão de R$ 70 bilhões em investimentos até 2030, incluindo 1,48 milhão de medidores inteligentes. Desenvolve assistentes virtuais especializados para áreas jurídica, auditoria e regulatória.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>&#9889; Neoenergia (Grupo Iberdrola)</h4>
+                <p><strong>Destaque tecnológico:</strong> Aprovou em março/2026 Política de IA Responsável alinhada à OCDE. Opera o CEGRI (Centro de Gerenciamento de Redes Inteligentes) em Salvador com supercomputadores que monitoram +75 mil dispositivos digitais via IA. Algoritmos de manutenção preditiva com acurácia superior a 90%. Modelo ágil de gestão com ferramenta FiscNeo (400 colaboradores) e coleta de 10 GB de dados operacionais/dia.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>&#9889; Eletrobras Furnas</h4>
+                <p><strong>Destaque tecnológico:</strong> Implantação da plataforma SAGE (Sistema Aberto de Gerenciamento de Energia) substituindo sistema de 25 anos. Automação via RPA com o robô "Volt", reduzindo 95% do tempo de processamento de notas fiscais. Sistema SOMA para monitoramento em tempo real e manutenção preditiva. Eletrobras/Cepel inaugurou nova era de supercomputação para IA no setor elétrico em 2025, com estratégia pioneira de gestão de ativos e cibersegurança apresentada no UTCAL Summit 2026.</p>
+            </div>
+            <div class="insight-box">
+                <h4>&#128269; Gap Analysis: Itaipu vs. Peers do Setor</h4>
+                <p><strong>1. IA Generativa:</strong> Enquanto a CEMIG já lançou o EnergyGPT e a COPEL investe agressivamente em IA via startups, a Itaipu ainda está em fase inicial de adoção de IA — há uma janela clara para posicionar soluções de IA Generativa antes que o gap se amplie.<br><br>
+                <strong>2. Automação/RPA:</strong> Furnas já opera robôs RPA com resultados comprovados (95% de redução de tempo). A Itaipu tem BPM sem definição de fornecedor — oportunidade para consultoria de assessment e implementação de automação.<br><br>
+                <strong>3. Cibersegurança:</strong> A Itaipu está construindo o primeiro sistema proprietário de cibersegurança para hidrelétricas, mas peers como Cepel/Eletrobras já apresentam estratégias maduras. A complexidade binacional (Brasil-Paraguai) torna este tema ainda mais crítico e diferenciador.<br><br>
+                <strong>4. Gestão de Dados e Integração:</strong> Neoenergia processa 10 GB/dia com analytics avançado; COPEL mapeia ativos com visão computacional. A Itaipu, com escaneamento 3D concluído e novo SCADA gerando volumes massivos de dados, precisa de uma estratégia robusta de gestão de dados e APIs para integração dos novos sistemas digitais.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Mestrado em Ciência da Computação — UFSC</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">MBAs</div>
+                        <div class="value">Gerenciamento de Projetos (FGV) e Governança de TIC (FGV)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Certificações</div>
+                        <div class="value">PMP, COBIT Foundation, ITIL Foundation, Java</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Premiação</div>
+                        <div class="value">CIO Destaque 2023 — Categoria Empresas Públicas (4CIO Public Sectors)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Tempo na Itaipu</div>
+                        <div class="value">+23 anos (desde março de 2002)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Superintendente de TI e Telecom (desde out/2019)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória Interna</div>
+                        <div class="value">Analista de Sistemas → Gerente de Projetos → Arquiteto de Soluções → Analista de Governança → Gestor de Infraestrutura → Superintendente</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Atuação Institucional</div>
+                        <div class="value">Membro do Conselho Curador da Fundação Parque Tecnológico Itaipu (FPTI)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>&#128172; 5 Dicas de Rapport para a Conversa</h4>
+                <p><strong>1. Fale a linguagem de governança:</strong> Com certificações PMP, COBIT e ITIL, Everton valoriza processos estruturados e governança. Apresente soluções com frameworks claros de gestão, SLAs definidos e métricas de TCO — evite discursos puramente comerciais.<br><br>
+                <strong>2. Reconheça a trajetória técnica:</strong> Ele começou como desenvolvedor Java e evoluiu internamente até a superintendência. Demonstre respeito pelo conhecimento técnico dele — ele entende arquitetura de software e não se impressiona com buzzwords vazios.<br><br>
+                <strong>3. Mencione o prêmio CIO Destaque 2023:</strong> Parabenize pelo reconhecimento como CIO Destaque na categoria Empresas Públicas. Isso demonstra que você pesquisou sobre ele e valoriza suas conquistas profissionais.<br><br>
+                <strong>4. Conecte com o ecossistema de inovação regional:</strong> Everton atua no Conselho da FPTI (Fundação Parque Tecnológico Itaipu), que fomenta inovação no Oeste do Paraná. Mencione interesse da Foursys em contribuir com o ecossistema local — isso ressoa com seu compromisso com desenvolvimento regional.<br><br>
+                <strong>5. Contextualize a modernização histórica:</strong> A atualização tecnológica de US$ 950 milhões é o maior projeto da história da Itaipu. Posicione a conversa como uma contribuição para esse momento transformador, não como uma venda — Everton precisa de parceiros que entendam a magnitude e a responsabilidade binacional do projeto.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Pontual: convidado ad hoc para temas específicos.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">100 a 199</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Tática/consultiva: é consultada, decide aquisições para demandas já definidas.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#3949ab">20%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#7986cb">3%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#9fa8da">2%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Referências e cases BR</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Roadmap e inovação</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+<span class="tag tag-active">Capilaridade/cobertura regional</span>
+<span class="tag tag-active">Residência de dados no BR</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Integrador / empresa de serviços (SI)</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Projeto: 6 temas | Interno: 1 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

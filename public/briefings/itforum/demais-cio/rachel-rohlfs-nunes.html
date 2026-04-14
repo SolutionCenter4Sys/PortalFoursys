@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Rachel Rohlfs Nunes | Drogaria ARAUJO</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Rachel Rohlfs Nunes</h1>
+                <h2>CIO — Drogaria ARAUJO</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Saúde | Belo Horizonte - MG</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 5,1 BI a R$ 6 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 100,1 MM a R$ 200 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá entre 10% e 20%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Drogaria ARAUJO</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">Fundada em 20 de março de 1906 como Pharmacia Mineira em Belo Horizonte, a Drogaria Araújo é a <strong>maior rede de farmácias de Minas Gerais</strong> e a <strong>6ª maior do Brasil</strong> em faturamento. Em 1913, Modesto de Carvalho Araújo adquiriu o estabelecimento e rebatizou-o, iniciando uma trajetória de pioneirismo: primeiro atendimento 24h (1927), primeiro delivery farmacêutico (Drogatel, 1963), conceito de drugstore (1990) e primeiro drive-thru farmacêutico do país (1998). Hoje, opera <strong>mais de 350 lojas em 50 municípios</strong>, com 30% de market share regional e mais de 10 mil colaboradores. A empresa permanece sob gestão familiar (3ª e 4ª gerações), sem modelo de franquias. Em seu momento estratégico atual, a Drogaria Araújo concluiu a migração para <strong>SAP S/4HANA</strong> (jan/2022) sem interrupções operacionais, implantou <strong>Salesforce</strong> (2023) para alcançar omnicanalidade e está estruturando uma <strong>arquitetura orientada por dados e IA</strong>. Foi reconhecida pela AWS Brasil por democratização de dados e pelo IT Forum como uma das 100+ empresas inovadoras no uso de TI em 2025.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Saúde</strong> com abrangência <strong>Local (Brasil)</strong>. Possui <strong>1 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>RFP/concorrência estruturada entre fornecedores qualificados</strong>. Perspectiva do orçamento de TI: <strong>Crescerá entre 10% e 20%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Aumentar confiabilidade e observabilidade (SRE)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Elevar a experiência de clientes e colaboradores (CX/EX)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Fomentação da cultura de inovação na área de TI e organização</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Integrar equipes de TI e negócios para acelerar a entrega de valor</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar sistemas legados</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">IA Generativa</span>
+<span class="tag tag-priority">CRM</span>
+<span class="tag tag-priority">Desenvolvimento e modernização de legados</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">CRM</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">HCM</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Disaster recovery / continuidade de negócios</span>
+</div><div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria/assessment):</h4>
+                <div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">HCM</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Low-code / no-code</span>
+</div>
+            </div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Rachel Rohlfs Nunes</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 60</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Desenvolvimento e modernização de legados é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 50</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Disaster recovery / continuidade de negócios SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Rachel Rohlfs Nunes tem como top prioridades <strong>IA Generativa; CRM; Desenvolvimento e modernização de legados</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>1 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 1 projetos definidos sem fornecedor: Disaster recovery / continuidade de negócios. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá entre 10% e 20%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: Modernização de Legado; Cibersegurança. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p>O setor farmacêutico brasileiro projeta investir <strong>R$ 1 bilhão em IA nos próximos 10 anos</strong>, com foco em automação de operações, personalização de experiência e agentic AI. A omnicanalidade deixou de ser diferencial e tornou-se requisito: consumidores esperam experiência consistente entre loja física, app, marketplace e delivery. As farmácias estão se transformando em <strong>hubs de saúde</strong>, com check-ups, vacinação, telemedicina e orientação farmacêutica integrados. A Drogaria Araújo já deu passos concretos nessa direção (SAP S/4HANA + Salesforce + arquitetura de dados/IA), mas concorrentes como RD Saúde e Panvel avançam rapidamente com IA generativa em canais de venda. O market share do top 5 representa apenas 32% do mercado — há espaço significativo para quem escalar tecnologia primeiro. Com orçamento de TI entre R$ 100-200 MM e crescimento projetado de 10-20%, a Araújo tem capital para acelerar. <strong>Oportunidade-chave:</strong> posicionar a Foursys como parceira na próxima onda — governança de IA, modernização de legados remanescentes e disaster recovery — áreas onde a empresa ainda busca fornecedor.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>RD Saúde (Raia + Drogasil) — Líder do setor</h4>
+                <p><strong>Iniciativas tech:</strong> IA generativa para processamento automático de receitas em farmácias de manipulação (de 2h para 15 min), reduzindo 10% dos orçamentos para apenas 3 segundos. Migração de arquitetura monolítica para microsserviços. Digital representou R$ 7,1 bi em receita (20,2% de penetração). Estratégia em 3 pilares: Nova Farmácia (hub de saúde multicanal), marketplace de saúde e plataforma Vitat (prevenção).</p>
+                <p style="margin-top:8px"><strong>Gap para Araújo:</strong> A RD lidera em escala de IA aplicada e penetração digital — a Araújo precisa acelerar IA em operações e vendas para não ampliar a distância.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Grupo DPSP (Drogaria São Paulo + Pacheco) — 2º em faturamento</h4>
+                <p><strong>Iniciativas tech:</strong> Dispositivos móveis proprietários em 420 lojas com ganho de 30% em produtividade (inventário, precificação, validade). Modelo "figital" usando 1.600 lojas como hubs de distribuição para e-commerce. Máquinas de venda automática em pontos estratégicos. Lançamento de Hub de Saúde integrado previsto para 2025.</p>
+                <p style="margin-top:8px"><strong>Gap para Araújo:</strong> O DPSP investe em tecnologia proprietária de loja — a Araújo pode se diferenciar com foco em dados/IA e CRM avançado (Salesforce já implantado).</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Pague Menos — Presença nacional</h4>
+                <p><strong>Iniciativas tech:</strong> Migração para SAP S/4 HANA concluída em 4 meses. Lojas 4.0 com telemetria e coleta de dados operacionais. Omnicanalidade completa: Clique&Retire (1h), Prateleira Infinita (4h), lockers e marketplace. Clinic Farma presente em 800+ lojas com 37 serviços de saúde. Nova diretoria de Digital criada em jan/2025.</p>
+                <p style="margin-top:8px"><strong>Gap para Araújo:</strong> Pague Menos avança rápido em hub de saúde e omnicanal — Araújo tem vantagem em market share regional mas precisa escalar serviços digitais ao consumidor.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Panvel — Referência em IA generativa</h4>
+                <p><strong>Iniciativas tech:</strong> Lançou a "Sofia", primeira IA generativa do varejo farmacêutico brasileiro: vendas completas via WhatsApp com linguagem natural e interpretação automática de receitas digitais no app. Desenvolvida internamente pelas equipes de Digital, Dados e TI. A Sofia responde por 68% dos atendimentos SAC com 3 mil interações/dia. Digital representa 24,4% das vendas, com crescimento de 51,3% no app.</p>
+                <p style="margin-top:8px"><strong>Gap para Araújo:</strong> Panvel é benchmark em IA generativa para vendas — área que a Araújo priorizou como Top 1 de investimento mas ainda precisa implementar em escala.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo</div>
+                        <div class="value">Diretora de Tecnologia, Controladoria, Gestão e Estratégia Digital</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação</div>
+                        <div class="value">Graduação: PUC Minas | MBA: Ibmec | Formações internacionais: Wharton e New York University | Certificações: Prosci (gestão de mudanças), Fundação Dom Cabral | Formação para Conselheira de Administração</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória</div>
+                        <div class="value">Iniciou carreira em consultorias (EY e Falconi) antes de ingressar na Drogaria Araújo. Não tem formação técnica em TI — perfil estratégico e de gestão que assumiu a área de tecnologia.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Realizações Notáveis</div>
+                        <div class="value">Liderou migração SAP S/4HANA (jan/2022) sem interrupções, implantação Salesforce (2023) e estruturação de arquitetura de dados/IA. Parceria com Capgemini na transformação digital.</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Atividades Externas</div>
+                        <div class="value">Mentora no programa de formação de lideranças femininas da Fundação Dom Cabral. Interesse em metodologias de gestão (visitou Cedro Textil para conhecer método Kaizen).</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Personalidade</div>
+                        <div class="value">Autodescreve-se como "apaixonada por desafios". Perfil orientado a resultados, com forte viés consultivo e de gestão de mudanças (Prosci). Valoriza eficiência e execução sem interrupções.</div>
+                    </div>
+                    <div class="alert-box" style="margin-top:12px">
+                        <strong>5 Dicas de Rapport:</strong>
+                        <ul style="margin-top:8px;margin-left:16px;font-size:14px;color:var(--text)">
+                            <li><strong>Fale de resultados, não de tecnologia:</strong> Rachel vem de consultorias de gestão (EY, Falconi) — valorize ROI, eficiência e impacto em negócio, não features técnicas.</li>
+                            <li><strong>Mencione gestão de mudanças:</strong> Ela é certificada Prosci — demonstre que a Foursys entende change management e não apenas implementação.</li>
+                            <li><strong>Reconheça a migração SAP sem downtime:</strong> Foi uma conquista significativa — elogiar genuinamente cria conexão imediata.</li>
+                            <li><strong>Conecte-se pelo tema de liderança feminina:</strong> Ela é mentora na FDC — demonstre que a Foursys valoriza diversidade e pode ser parceira nessa pauta.</li>
+                            <li><strong>Traga benchmarks externos:</strong> Seu perfil consultivo aprecia dados comparativos — apresente o que concorrentes como Panvel e RD Saúde estão fazendo com IA para criar senso de urgência estratégica.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma vice-presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Membro: assento permanente, com voto.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">500 a 999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">200 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Coprotagonista: co-lidera estratégia e orçamento, influencia metas de negócio.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:31%;background:#1a237e">31%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:14%;background:#3949ab">14%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#5c6bc0">7%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:4%;background:#5c6bc0">4%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:4%;background:#7986cb">4%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:4%;background:#9fa8da">4%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#c5cae9">1%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Referências e cases BR</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Integrador / empresa de serviços (SI);Consultoria especializada</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 7 temas | Interno: 4 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Angelo Figaro Egido | Patria Investimwntos</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Angelo Figaro Egido</h1>
+                <h2>CIO — Patria Investimwntos</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Serviços financeiros | Sao Paulo - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 500,1 MM a R$ 600 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 200,1 MM a R$ 300 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá entre 20% e 30%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Patria Investimwntos</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Pátria Investimentos</strong> é uma das maiores plataformas de investimentos alternativos da América Latina, com mais de 37 anos de história e raízes que remontam a 1988, quando foi fundado o "Patrimônio Planejamento Financeiro" em parceria com a Salomon Brothers. Atualmente listada na Nasdaq sob o ticker <strong>PAX</strong> (IPO em 2021), a gestora administra mais de <strong>R$ 272 bilhões em ativos sob gestão</strong>, operando em Private Equity, Infraestrutura, Crédito, Public Equities e Real Estate, com forte presença no Brasil, Colômbia, Chile e Peru. A Blackstone adquiriu 40% de participação estratégica em 2010, reforçando a credibilidade institucional. A empresa vive um momento de expansão estratégica acelerada, com investimentos significativos em tecnologia e transformação digital para suportar o crescimento global e a diversificação de seus portfólios em setores como Agronegócio, Energia, Saúde e Logística.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Serviços financeiros</strong> com abrangência <strong>Global</strong>. Possui <strong>5 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>Direto com fornecedoríbrido por categoria/ticket — varia conforme valor/risco.</strong>. Perspectiva do orçamento de TI: <strong>Crescerá entre 20% e 30%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Atrair, desenvolver e engajar talentos</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Elevar a experiência de clientes e colaboradores (CX/EX)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer processos e políticas de governança / compliance</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar custos, riscos e lock-in de fornecedores</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Posicionar a TI como área estratégica do negócio</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">IA / ML</span>
+<span class="tag tag-priority">IA Generativa</span>
+<span class="tag tag-priority">Low-code / no-code</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">CRM</span>
+<span class="tag tag-active">HCM</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">Workplace e end-user computing</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">IA / ML</span>
+<span class="tag tag-opportunity">IA Generativa</span>
+<span class="tag tag-opportunity">Low-code / no-code</span>
+<span class="tag tag-opportunity">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-opportunity">Workplace e end-user computing</span>
+</div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Angelo Figaro Egido</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML SEM fornecedor definido</li><li>IA / ML é prioridade Top 3 de investimento</li><li>IA Generativa SEM fornecedor definido</li><li>IA Generativa é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 76</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Low-code / no-code SEM fornecedor definido</li><li>Low-code / no-code é prioridade Top 3</li><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 50</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Angelo Figaro Egido tem como top prioridades <strong>IA / ML; IA Generativa; Low-code / no-code</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>5 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 5 projetos definidos sem fornecedor: IA / ML, IA Generativa, Low-code / no-code, Desenvolvimento e modernização de legados, Workplace e end-user computing. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá entre 20% e 30%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; FourBlox; Modernização de Legado. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. Transformação digital pós-IPO na Nasdaq:</strong> Desde o IPO em 2021 (ticker PAX), a Pátria enfrenta exigências regulatórias americanas (SOX, SEC) que demandam automação de governança, auditoria e compliance — área onde IA e automação de processos podem gerar valor imediato.</p>
+                <p style="margin-top:10px"><strong>2. Expansão multi-jurisdicional Latam:</strong> Com operações ativas em Brasil, Colômbia, Chile e Peru, a Pátria precisa de plataformas integradas que suportem múltiplas regulamentações, moedas e padrões contábeis — cenário ideal para modernização de legados e APIs de integração.</p>
+                <p style="margin-top:10px"><strong>3. Crescimento do orçamento de TI (20-30%):</strong> O aumento projetado do orçamento reflete a estratégia de usar tecnologia como diferencial competitivo. Angelo vem de 30 anos de experiência em TI na Renault (incluindo reconhecimento do World Economic Forum como "Advanced Lighthouse in Industry 4.0") e tende a valorizar soluções que demonstrem ROI mensurável e escala industrial.</p>
+                <p style="margin-top:10px"><strong>4. IA aplicada a investimentos alternativos:</strong> O mercado de PE brasileiro está cada vez mais data-driven. Modelos de IA para due diligence, análise de portfólio e previsão de performance de ativos são diferenciais competitivos que a Pátria precisa desenvolver para manter liderança frente a BTG e Vinci.</p>
+                <p style="margin-top:10px"><strong>5. Cultura de inovação do CIO:</strong> Angelo liderou a transformação que tornou a Renault a primeira montadora da América Latina reconhecida pelo WEF em Indústria 4.0. Ele responde bem a propostas que combinem inovação comprovada com governança robusta — exatamente o posicionamento do AI Squad e FourBlox da Foursys.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>🏦 BTG Pactual Asset Management</h4>
+                <p><strong>Perfil:</strong> Maior banco de investimentos da América Latina, com presença em Brasil, Chile, Colômbia, EUA, Luxemburgo, México, Portugal e Reino Unido. Captou quase R$ 300 bilhões nos últimos 12 meses e prepara ofensiva estratégica em 2026 com forte expansão digital e internacionalização (Peru, Uruguai, Argentina, México e eixo EUA-Europa).</p>
+                <p style="margin-top:8px"><strong>Foco tecnológico:</strong> Plataforma digital proprietária robusta, investimentos em IA para análise de risco e automação de operações, infraestrutura cloud-native e expansão de canais digitais para wealth management.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🏦 Vinci Partners (Vinci Compass)</h4>
+                <p><strong>Perfil:</strong> Gestora independente brasileira com R$ 354 bilhões sob gestão (dez/2025), 13 escritórios nas Américas e mais de 600 colaboradores. Atua em Real Assets (Infraestrutura, Real Estate, Florestal), Crédito (Brasil, Latam, Agro) e Global IP&S. Em 2026, lançou o fundo "Vinci Verde Infra" em parceria com a Verde Asset, mirando R$ 1 bilhão em debêntures de infraestrutura.</p>
+                <p style="margin-top:8px"><strong>Foco tecnológico:</strong> Plataforma integrada de gestão multi-ativos, analytics avançado para ESG e infraestrutura, modernização contínua de sistemas de back-office e compliance regulatório automatizado.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🏦 Advent International</h4>
+                <p><strong>Perfil:</strong> Firma global de private equity com longa trajetória de investimentos no Brasil, atuando em setores como bens de consumo, serviços financeiros, saúde e tecnologia. Conhecida por sua abordagem de criação de valor operacional e governança ativa nas empresas investidas.</p>
+                <p style="margin-top:8px"><strong>Foco tecnológico:</strong> Investimento em plataformas de due diligence digital, analytics preditivo para avaliação de portfólio, automação de processos de compliance e ferramentas de monitoramento de performance em tempo real.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🏦 3G Capital</h4>
+                <p><strong>Perfil:</strong> Gestora brasileira de private equity globalmente reconhecida por aquisições estratégicas de grande porte (AB InBev, Kraft Heinz, Burger King). Foco intenso em eficiência operacional, corte de custos e meritocracia. Modelo de gestão "zero-based budgeting" amplamente replicado no mercado.</p>
+                <p style="margin-top:8px"><strong>Foco tecnológico:</strong> Cultura de eficiência aplicada a TI — automação agressiva, uso de IA para otimização de custos, plataformas centralizadas de dados e forte investimento em analytics operacional.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para Pátria</h4>
+                <p>Enquanto BTG Pactual e Vinci Partners já avançaram significativamente em plataformas digitais proprietárias e analytics integrado, a Pátria está em fase de aceleração tecnológica sob a liderança do novo CIO. As principais lacunas identificadas são: <strong>(1)</strong> Plataforma unificada de dados multi-ativos — concorrentes já possuem visão consolidada cross-portfolio; <strong>(2)</strong> IA aplicada a due diligence e análise de investimentos — BTG e Advent já utilizam modelos preditivos avançados; <strong>(3)</strong> Automação de compliance regulatório multi-jurisdicional — crítico para a expansão Latam da Pátria; <strong>(4)</strong> Experiência digital para investidores (portais, relatórios interativos) — área onde Vinci e BTG têm vantagem competitiva. A Foursys pode posicionar-se como parceira de aceleração nessas frentes com AI Squad e FourBlox.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória Profissional</div>
+                        <div class="value">+30 anos em TI. Carreira de quase 30 anos na Renault, onde foi VP de Tecnologia e Transformação Digital do grupo, CIO e Diretor de Inovação e Transformação Digital da Renault-Nissan-Mitsubishi na América Latina, e VP Digital e IS IT para o cluster Latam.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Internacional</div>
+                        <div class="value">7 anos na França liderando equipes multiculturais na América Latina e Europa. Vivência profunda em gestão cross-cultural e times distribuídos globalmente.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reconhecimentos</div>
+                        <div class="value">CIO do Ano (2018). Referência em tecnologia e transformação digital (2021). Liderou a Renault ao reconhecimento do World Economic Forum como "Advanced Lighthouse in Industry 4.0" na América Latina (2020).</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CIO Global e VP de Inovação e Transformação Digital (CDO) na Pátria Investimentos, desde setembro de 2023.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">Ativo no LinkedIn — compartilha conteúdo sobre Indústria 4.0, realidade aumentada, transformação digital e inovação. Perfil público e acessível.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Liderança</div>
+                        <div class="value">Líder de transformação com DNA industrial (automotivo) migrando para o setor financeiro. Valoriza governança, escala e resultados mensuráveis.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p><strong>1. Referência à Indústria 4.0:</strong> Mencione que você conhece o case da Renault como "Advanced Lighthouse" do WEF — isso demonstra que você pesquisou e valoriza sua trajetória. Pergunte como ele está aplicando conceitos de Indústria 4.0 no setor financeiro.</p>
+                <p style="margin-top:8px"><strong>2. Experiência multicultural:</strong> Angelo viveu 7 anos na França e liderou equipes na Latam e Europa. Comentar sobre desafios de gestão de times distribuídos e multicountry pode gerar identificação imediata, especialmente considerando a expansão Latam da Pátria.</p>
+                <p style="margin-top:8px"><strong>3. Transição indústria → finanças:</strong> Ele fez uma mudança ousada de 30 anos no setor automotivo para liderar TI em uma gestora global. Pergunte sobre os paralelos e diferenças que encontrou — isso mostra interesse genuíno e abre espaço para ele compartilhar insights.</p>
+                <p style="margin-top:8px"><strong>4. Inovação com governança:</strong> Angelo valoriza inovação, mas com governança robusta (vem de um ambiente altamente regulado). Posicione as soluções Foursys sempre equilibrando inovação + compliance + segurança (ISO 27001/27701). Evite abordagens "disruptivas" sem mencionar controles.</p>
+                <p style="margin-top:8px"><strong>5. Resultados mensuráveis:</strong> Seu perfil no LinkedIn mostra interesse em resultados concretos e tecnologias aplicadas (realidade aumentada, qualidade industrial). Traga sempre dados de ROI, métricas de aceleração e cases com resultados quantificáveis — ele responde melhor a evidências do que a promessas.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma vice-presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao COO/Operações</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Regular: participa com frequência, sem ser membro.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Influenciadora técnica</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">50 a 99</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+<div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:22%;background:#1a237e">22%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:14%;background:#3949ab">14%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:11%;background:#5c6bc0">11%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#7986cb">3%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#9fa8da">1%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#c5cae9">1%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">Liderança e solidez</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Consultoria especializada;Start-up / scale-up</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 10 temas | Interno: 1 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

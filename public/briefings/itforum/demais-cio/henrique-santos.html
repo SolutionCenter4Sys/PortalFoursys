@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing Diretor de TI - Henrique Santos | SEPLAG</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Henrique Santos</h1>
+                <h2>Diretor de TI — SEPLAG</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Setor público | BELO HORIZONTE - MG</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 3,1 BI a R$ 4 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 100,1 MM a R$ 200 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá entre 20% e 30%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: SEPLAG</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>SEPLAG — Secretaria de Estado de Planejamento e Gestão de Minas Gerais</strong> — é o órgão central do governo estadual responsável por planejamento estratégico, orçamento, modernização administrativa e gestão de pessoas. Com orçamento de TI entre R$ 100 MM e R$ 200 MM e perspectiva de crescimento de 20% a 30%, a SEPLAG lidera a transformação digital do estado em parceria com a Prodemge. Em 2025-2026, a secretaria lançou seu <strong>Planejamento Estratégico 2025-2028</strong>, com metas ambiciosas: duplicar as Unidades de Atendimento Integrado (UAIs), elevar de 50% para 80% os serviços digitais de trânsito e ampliar o MG App para mais de 200 serviços. A SEPLAG protagonizou o lançamento do novo <strong>Portal de Planejamento e Orçamento (PPO)</strong>, unificando os sistemas SIGPlan e Sisor em plataforma moderna, e implementou a <strong>"Revisa, Sô!"</strong>, ferramenta de IA para simplificação de linguagem institucional. Minas Gerais alcançou 83% de serviços digitalizados e aderiu ao Programa Nacional de Gestão e Inovação (PNGI). O estado também concluiu licitatório para nova Rede IP Multisserviços, projetando economia de R$ 415 MM para R$ 173 MM em cinco anos com tecnologia de satélites de baixa órbita. A Prodemge foi reposicionada como coordenadora do ecossistema de TIC estadual, adotando modelo ágil com parcerias público-privadas e startups.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Pública</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Volátil/incerto</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Setor público</strong> com abrangência <strong>Local (Brasil)</strong>. Possui <strong>2 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>Licitação pública  (edital/pregão</strong>. Perspectiva do orçamento de TI: <strong>Crescerá entre 20% e 30%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos e operações para ganho de eficiência</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar infraestrutura e redes</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Otimizar custos e eficiência (FinOps/SecFinOps)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Posicionar a TI como área estratégica do negócio</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Infraestrutura de redes</span>
+<span class="tag tag-priority">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-priority">IA / ML</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">ITSM/ESM e service desk</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Infraestrutura de redes</span>
+<span class="tag tag-opportunity">Cibersegurança</span>
+</div><div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria/assessment):</h4>
+                <div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Armazenamento, backup e imutabilidade</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Conectividade e telecom</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Disaster recovery / continuidade de negócios</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Gestão de dados</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA / ML</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA Generativa</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">APIs e integração</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Low-code / no-code</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">ITSM/ESM e service desk</span>
+</div>
+            </div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Henrique Santos</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 80</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Cibersegurança SEM fornecedor definido</li><li>Disaster recovery / continuidade de negócios com investimento inicial previsto</li><li>Disaster recovery / continuidade de negócios é prioridade Top 3</li><li>Segurança de dados e privacidade (LGPD/DLP) com investimento inicial previsto</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 78</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Infraestrutura de redes SEM fornecedor definido</li><li>Infraestrutura de redes é prioridade Top 3</li><li>Conectividade e telecom com investimento previsto</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 60</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML com investimento inicial previsto</li><li>IA / ML é prioridade Top 3 de investimento</li><li>IA Generativa com investimento inicial previsto</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Henrique Santos tem como top prioridades <strong>Infraestrutura de redes; Disaster recovery / continuidade de negócios; IA / ML</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>2 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 2 projetos definidos sem fornecedor: Infraestrutura de redes, Cibersegurança. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá entre 20% e 30%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: Cibersegurança; Engenharia Digital; AI Squad. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <ul style="margin-left:20px;margin-top:4px;list-style:disc">
+                    <li style="margin-bottom:10px"><strong>Lei do Governo Digital (14.129/2021) pressiona resultados:</strong> Em 2026, o governo digital sai do discurso para a cobrança operacional. A SEPLAG precisa demonstrar resultados mensuráveis dentro do PPA 2024-2027, o que cria urgência por parceiros que acelerem entregas com menor risco.</li>
+                    <li style="margin-bottom:10px"><strong>IA Soberana é pauta federal que desce aos estados:</strong> O SERPRO lidera a construção de infraestrutura nacional de IA soberana com HPC. Minas Gerais precisa definir sua estratégia estadual de IA — oportunidade para a Foursys posicionar o AI Squad como acelerador, alinhando IA generativa com governança e residência de dados no Brasil.</li>
+                    <li style="margin-bottom:10px"><strong>Rede IP Multisserviços redefine a infraestrutura:</strong> A conclusão do licitatório para nova rede com economia projetada de R$ 242 MM em 5 anos gera demanda por redesenho de infraestrutura, disaster recovery e cibersegurança — áreas onde a SEPLAG tem projetos sem fornecedor definido.</li>
+                    <li style="margin-bottom:10px"><strong>Prodemge reposicionada como orquestradora:</strong> O novo modelo da Prodemge como coordenadora de ecossistema (não mais executora monopolista) abre espaço estratégico para parceiros externos como a Foursys, especialmente em IA, cibersegurança e automação de processos.</li>
+                    <li style="margin-bottom:10px"><strong>LGPD e DPO como diferencial de confiança:</strong> Henrique Santos acumula a função de Data Protection Officer (DPO), demonstrando que privacidade e proteção de dados são prioridade pessoal. As certificações ISO 27001/27701 da Foursys criam alinhamento direto com essa preocupação.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Organizações públicas de TI estaduais e federais que atuam como benchmarks para a SEPLAG/Prodemge:</p>
+
+            <div class="competitor-card">
+                <h4>PRODESP — Governo de São Paulo</h4>
+                <p><strong>Destaque:</strong> Líder nacional em IA aplicada ao governo. Lançou a <strong>Plataforma de IA Generativa Ativa</strong> para automatizar tarefas jurídicas, análise documental e compras públicas. O Diário Oficial 100% digital, com IA, reduziu diagramação de 180 para 5 minutos e gera economia de R$ 10 MM/ano. Programa <strong>GovChallenge SP</strong> (FAPESP + Prodesp) destinou R$ 15 MM para startups resolverem desafios de governo com tecnologia. Foco em microsserviços, modernização de legados e inclusão digital.</p>
+            </div>
+
+            <div class="competitor-card">
+                <h4>SERPRO — Governo Federal</h4>
+                <p><strong>Destaque:</strong> Braço tecnológico do governo federal, protagonista da estratégia de <strong>IA Soberana</strong> com infraestrutura própria de supercomputação (HPC). Lançou o <strong>MentorIA</strong>, assistente de IA integrado ao Compras.gov.br para contratações públicas. Lidera aliança estratégica com Petrobras, LNCC e Rede Nacional de Pesquisa para construir pilha de IA soberana. Rede Amplia capacitou 28 mil servidores em IA (meta: 115 mil até 2026). Parceria com SUS para nuvem soberana e IA em saúde.</p>
+            </div>
+
+            <div class="competitor-card">
+                <h4>PROCERGS — Governo do Rio Grande do Sul</h4>
+                <p><strong>Destaque:</strong> <strong>4x líder no Índice Nacional de Serviços Públicos Digitais</strong>. Lançou a <strong>GurIA</strong>, assistente virtual com IA generativa acessível por texto, voz e imagem. Portal rs.gov.br unificado alcança 6,9 milhões de acessos/mês com 85% de aprovação. Nova política de TIC instituída por decreto em 2025, liderada pela SPGG. Top 10 no ranking "As 100 Mais Inovadoras no Uso de TI" em 2025. Jornadas personalizadas por perfil do cidadão (produtor rural, estudante, empreendedor).</p>
+            </div>
+
+            <div class="competitor-card">
+                <h4>CELEPAR — Governo do Paraná</h4>
+                <p><strong>Destaque:</strong> Soluções com IA aplicada à educação e trânsito: <strong>Chamada Inteligente</strong> (reconhecimento facial escolar), <strong>Aprendiz Inteligente</strong> (IA generativa educacional), <strong>Detran Inteligente</strong> (renovação de CNH por selfie biométrica). Planejamento estratégico até 2026 feito com consultoria Gartner e FIEP. Momento de transição significativa: PL nº 163/2026 encaminhado para privatização com salvaguardas de proteção de dados determinadas pelo STF.</p>
+            </div>
+
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidade para a SEPLAG</h4>
+                <p>Enquanto SP (PRODESP) e o governo federal (SERPRO) já possuem <strong>plataformas proprietárias de IA generativa em produção</strong> e RS (PROCERGS) lidera com assistente virtual multimodal, a SEPLAG/Prodemge iniciou com a "Revisa, Sô!" mas ainda não possui uma estratégia abrangente de IA para serviços ao cidadão. Há lacunas em: <strong>(1)</strong> Plataforma centralizada de IA para automação de processos internos — PRODESP e SERPRO já possuem; <strong>(2)</strong> Assistente virtual inteligente para atendimento ao cidadão — RS lidera com a GurIA; <strong>(3)</strong> Programa estruturado de capacitação em IA para servidores — SERPRO já capacitou 28 mil; <strong>(4)</strong> Parcerias com ecossistema de startups/inovação — SP já opera com R$ 15 MM via GovChallenge. Estas lacunas representam oportunidades diretas para a Foursys oferecer AI Squad, consultoria de governança de IA e aceleração de capacidades digitais.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Especialização em Gestão de TI, Tecnologia e Comunicação, e Governança de TI — PUC Minas (2010-2011)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Diretor de Tecnologia da Informação e Data Protection Officer (DPO) — SEPLAG-MG</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Belo Horizonte, Minas Gerais</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Certificações — Governança</div>
+                        <div class="value">ITIL® Foundation (ITSM) · COBIT Foundation 4.1 · Scrum Foundation Professional · DevOps Essentials Professional</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Certificações — Segurança</div>
+                        <div class="value">CISM Cert Prep · Certified Network Security Specialist (CNSS) · Fortinet NSE 1 &amp; 2</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn: linkedin.com/in/henriqueadsantos</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <ul style="margin-left:20px;margin-top:8px;list-style:decimal">
+                    <li style="margin-bottom:10px"><strong>Fale a língua de governança:</strong> Henrique possui ITIL, COBIT e Scrum — use esses frameworks como referência ao apresentar soluções. Demonstrar que a Foursys entrega com processos estruturados e mensuráveis vai ressoar com seu perfil de gestor metódico.</li>
+                    <li style="margin-bottom:10px"><strong>Valorize o papel de DPO:</strong> Ele acumula a função de Data Protection Officer, o que indica forte preocupação com LGPD e privacidade. Aborde as certificações ISO 27001/27701 da Foursys logo no início e mostre como a proteção de dados é central na entrega, não um add-on.</li>
+                    <li style="margin-bottom:10px"><strong>Conecte-se pelo contexto Minas Gerais:</strong> Referencie iniciativas que ele lidera ou conhece — Portal PPO, "Revisa, Sô!", Rede IP Multisserviços. Mostrar que você pesquisou o cenário estadual demonstra respeito e preparo, e abre espaço para ele compartilhar desafios reais.</li>
+                    <li style="margin-bottom:10px"><strong>Use benchmarks estaduais com tato:</strong> Mencione o que RS (GurIA), SP (IA Generativa Ativa) e o SERPRO (MentorIA) estão fazendo — não como crítica, mas como inspiração. Posicione a Foursys como parceira que pode ajudar MG a atingir o mesmo nível ou superar esses casos.</li>
+                    <li style="margin-bottom:10px"><strong>Respeite o modelo de licitação pública:</strong> O modelo de compra é via edital/pregão. Evite propostas comerciais diretas; foque em construir relacionamento consultivo, oferecer assessments gratuitos e posicionar a Foursys como referência técnica para quando os editais forem publicados.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Diretor de TI e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Pontual: convidado ad hoc para temas específicos.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Co-decisão TI + Negócios</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1 a 99</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">50 a 99</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Coprotagonista: co-lidera estratégia e orçamento, influencia metas de negócio.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:50%;background:#1a237e">50%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Residência de dados no BR</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Serviço Gerenciado: 8 temas | Projeto: 4 temas | Co-gerenciado: 3 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

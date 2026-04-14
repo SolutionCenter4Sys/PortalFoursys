@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Luiz Carlos Dias | GJA - GRUPO JOSÉ ALVES</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Luiz Carlos Dias</h1>
+                <h2>CIO — GJA - GRUPO JOSÉ ALVES</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Indústria de alimentos, bebidas e fumos | Trindade - GO</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 4,1 BI a R$ 5 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 100,1 MM a R$ 200 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Diminuirá entre 10% e 20%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: GJA - GRUPO JOSÉ ALVES</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">O <strong>Grupo José Alves (GJA)</strong> é uma holding familiar fundada em 1962 por José Alves ("Seu Nendo") na cidade de Trindade, Goiás, inicialmente como atacado de secos e molhados sob a marca "Casas Alô Brasil". Com mais de 62 anos de história, o grupo evoluiu para uma holding diversificada que administra <strong>11 empresas</strong> em segmentos como <strong>bebidas (Refrescos Bandeirantes — fabricante Coca-Cola para GO e TO desde 1988), educação (UNIALFA, Colégio Alfa), tecnologia, logística, locação de veículos e administração imobiliária</strong>. Sob a liderança de José Alves Filho, que assumiu o comando em 1993, o grupo implantou governança corporativa moderna e mantém trajetória de crescimento constante. Atualmente com faturamento entre R$ 4,1 e R$ 5 bilhões e entre 5.000 e 9.999 colaboradores, o GJA vive um momento de <strong>transformação digital acelerada</strong>, com implementações de SAP S4/HANA, Salesforce, e-commerce VTEX e migração para nuvem (Azure/AWS), liderado pelo CIO Luiz Dias desde 2022. O desafio estratégico atual é modernizar sistemas legados e integrar TI ao negócio em um grupo multi-setorial, ao mesmo tempo em que se fortalece a cibersegurança e a continuidade operacional.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Indústria de alimentos, bebidas e fumos</strong> com abrangência <strong>Local (Brasil)</strong>. Todos os projetos definidos já possuem fornecedor selecionado. Modelo de compra: <strong>Direto com fornecedoríbrido por categoria/ticket — varia conforme valor/risco.</strong>. Perspectiva do orçamento de TI: <strong>Diminuirá entre 10% e 20%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Atrair, desenvolver e engajar talentos</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Integrar equipes de TI e negócios para acelerar a entrega de valor</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar sistemas legados</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Orquestrar transformação digital</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Priorizar portfólio em meio a excesso de demandas</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Cibersegurança</span>
+<span class="tag tag-priority">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-priority">Gestão de dados</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">Workplace e end-user computing</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">CPaaS / UCaaS / CCaaS</span>
+<span class="tag tag-active">IoT / edge computing</span>
+<span class="tag tag-active">Sistemas core</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades de Consultoria</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Todos os projetos definidos já possuem fornecedor. No entanto, há temas <strong>sem projeto definido</strong> — oportunidade de assessment/consultoria:</p>
+            <div><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Disaster recovery / continuidade de negócios</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA / ML</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA Generativa</span>
+</div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Luiz Carlos Dias</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 60</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Cibersegurança é prioridade Top 3</li><li>Disaster recovery / continuidade de negócios é prioridade Top 3</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Luiz Carlos Dias tem como top prioridades <strong>Cibersegurança; Disaster recovery / continuidade de negócios; Gestão de dados</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 0 projetos definidos sem fornecedor. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Diminuirá entre 10% e 20%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: Cibersegurança. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. SAP S4/HANA como alavanca de integração:</strong> O GJA está implementando SAP S4/HANA Rise na VITAMEDIC e N&L. Perguntar como está a jornada de rollout para as demais empresas do grupo — a Foursys pode apoiar na integração entre ERPs e na governança de dados cross-company com sua expertise em APIs/integração (parceria Digibee).<br><br>
+                <strong>2. IA Generativa sem projeto definido:</strong> O GJA marcou IA Generativa como tema de investimento, mas sem projeto definido nem fornecedor. A Solar Coca-Cola já opera com IA/ML em produção — usar esse benchmark como provocação. A Foursys pode oferecer um assessment de IA Generativa com seu AI Squad proprietário para identificar quick-wins em atendimento, vendas e operações.<br><br>
+                <strong>3. Orçamento em contração exige ROI rápido:</strong> Com orçamento de TI previsto para diminuir 10-20%, cada investimento precisa demonstrar payback acelerado. Posicionar serviços gerenciados e automação (RPA/low-code) como forma de reduzir custos operacionais e liberar budget para inovação — alinhado ao perfil de contratação preferido do CIO (serviço gerenciado é o modelo #1).<br><br>
+                <strong>4. Complexidade multi-setorial é diferencial:</strong> Gerenciar TI de 11 empresas em setores tão distintos (bebidas, educação, farmacêutica, logística) é um desafio raro. Poucos fornecedores têm experiência cross-industry — posicionar a Foursys com seus 24 anos e 41.000+ projetos em diversos setores como parceira que entende essa complexidade.<br><br>
+                <strong>5. Cibersegurança como porta de entrada:</strong> É a prioridade #1, tem projeto com fornecedor definido, mas DR/continuidade está sem projeto. Entrar por DR — que é complementar à cibersegurança — e expandir a conversa para uma estratégia integrada de resiliência, alavancando as certificações ISO 27001/27701 da Foursys.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>🟢 Solar Coca-Cola</h4>
+                <p><strong>Setor:</strong> Engarrafadora Coca-Cola (2ª maior do Brasil) | <strong>Faturamento:</strong> ~R$ 15 bilhões (2024)</p>
+                <p>Opera 13 fábricas e 120 centros de distribuição, atendendo 70% do território nacional. Investiu R$ 1 bilhão em transformação digital com foco em Advanced Analytics, Data Lake com IA/ML e canais digitais (52% dos clientes comprando online). Planeja R$ 5 bilhões em investimentos nos próximos 5 anos, incluindo tecnologia avançada.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🟢 Coca-Cola FEMSA Brasil</h4>
+                <p><strong>Setor:</strong> Maior engarrafadora Coca-Cola da América Latina | <strong>Faturamento:</strong> ~US$ 3,3 bilhões (operação Brasil)</p>
+                <p>Opera a maior fábrica do sistema Coca-Cola global em Jundiaí-SP. Líder em automação industrial e logística integrada. Forte investimento em plataformas digitais de relacionamento com o varejo e otimização de rotas com IA. Potencial adquirente do Grupo Petrópolis (Itaipava).</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🟡 Ambev</h4>
+                <p><strong>Setor:</strong> Bebidas (cervejas, refrigerantes, sucos) | <strong>Faturamento:</strong> ~R$ 80 bilhões</p>
+                <p>Maior empresa de bebidas da América Latina com 60,8% do mercado cervejeiro. Líder em transformação digital com plataformas BEES (B2B) e Zé Delivery (D2C), investimento massivo em IA para supply chain, e centros de inovação em cervejaria. Benchmark em automação fabril e eficiência operacional.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🟡 Uberlândia Refrescos</h4>
+                <p><strong>Setor:</strong> Engarrafadora Coca-Cola regional | <strong>Faturamento:</strong> estimado R$ 1-2 bilhões</p>
+                <p>Engarrafadora franqueada com atuação regional complementar. Concorrente direto da Refrescos Bandeirantes (GJA) em regiões limítrofes do Centro-Oeste/Sudeste. Investimentos em modernização fabril e digitalização de operações logísticas.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para o GJA</h4>
+                <p>Comparado aos concorrentes, o GJA possui <strong>gaps relevantes</strong> que representam oportunidades de consultoria Foursys:<br><br>
+                <strong>1. Canais Digitais:</strong> Enquanto a Solar tem 52% de clientes digitais e a Ambev domina com BEES/Zé Delivery, o GJA ainda está em fase inicial de e-commerce (VTEX). Há espaço para acelerar a digitalização B2B da Refrescos Bandeirantes.<br>
+                <strong>2. Advanced Analytics e IA:</strong> Solar e Ambev já operam Data Lakes com IA/ML em produção. O GJA tem IA/ML e IA Generativa como temas de investimento sem projeto definido — janela para posicionar assessments.<br>
+                <strong>3. Cibersegurança Multi-empresa:</strong> A complexidade de proteger 11 empresas em setores distintos (bebidas, educação, TI) é significativamente maior que a dos concorrentes mono-setoriais. O GJA precisa de uma estratégia de segurança unificada.<br>
+                <strong>4. Disaster Recovery:</strong> Concorrentes de grande porte (Ambev, FEMSA) possuem DR robusto. O GJA reconhece DR como prioridade Top 3 mas sem projeto definido — oportunidade crítica.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Engenharia de Sistemas e Computação — UERJ (1984-1988)<br>MBA Gestão de Negócios e TI — FGV (1999-2000)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória Profissional</div>
+                        <div class="value">+25 anos em liderança de TI. Passagens por Michelin (Gerente Sênior, 1999), IBM/TAM Linhas Aéreas (CIO), Brasif (CIO), Ultrapel (CEO), MICHELIN Connected Fleet (Diretor Executivo, 2019-2022). No GJA como CTO/CIO desde Nov/2022.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Certificações Adicionais</div>
+                        <div class="value">Gerenciamento de Projetos, Desenvolvimento Imobiliário, Governança Corporativa</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn ativo: linkedin.com/in/luizdias10<br>Perfil público no The Org (org chart do GJA)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Goiânia, GO — Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil Executivo</div>
+                        <div class="value">Reporta diretamente ao acionista majoritário José Alves Filho. Membro do Board com participação no planejamento estratégico de todos os negócios do grupo.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p><strong>1. Valorize a experiência multinacional:</strong> Luiz tem passagem pela Michelin (empresa francesa global) e IBM — demonstre conhecimento internacional e cases de empresas globais. Ele valoriza maturidade e sofisticação em fornecedores.<br><br>
+                <strong>2. Fale a língua do Board:</strong> Ele é membro do conselho e reporta ao acionista majoritário. Não fale apenas de tecnologia — conecte cada solução a impacto em receita, margem e risco de negócio. Use linguagem executiva, não técnica.<br><br>
+                <strong>3. Reconheça o desafio multi-empresa:</strong> Gerenciar TI de 11 empresas em setores completamente distintos (de Coca-Cola a universidade) é raro e complexo. Demonstrar que entende essa dor e que a Foursys já atendeu holdings diversificadas gera identificação imediata.<br><br>
+                <strong>4. Mencione a jornada SAP S4/HANA:</strong> Ele está pilotando SAP S4/HANA Rise — pergunte sobre os aprendizados e desafios do rollout. É um tema que ele domina e gosta de discutir. Ofereça insights sobre integrações complexas pós-SAP.<br><br>
+                <strong>5. Explore a conexão com Goiânia:</strong> O GJA é uma empresa com raízes profundas em Goiás, com história de mais de 60 anos na região. Demonstrar interesse genuíno pelo ecossistema de negócios goiano (UNIALFA, Refrescos Bandeirantes) e pela relevância do grupo para a economia local cria conexão emocional.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma vice-presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Regular: participa com frequência, sem ser membro.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">100 a 499</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">100 a 199</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Coprotagonista: co-lidera estratégia e orçamento, influencia metas de negócio.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#1a237e">18%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#c5cae9">2%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Referências e cases BR</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Roadmap e inovação</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+<span class="tag tag-active">Capilaridade/cobertura regional</span>
+<span class="tag tag-active">Residência de dados no BR</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Integrador / empresa de serviços (SI);Consultoria especializada</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Serviço Gerenciado: 6 temas | Interno: 5 temas | Co-gerenciado: 5 temas | Projeto: 2 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

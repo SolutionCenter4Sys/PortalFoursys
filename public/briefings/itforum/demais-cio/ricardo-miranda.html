@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Ricardo Miranda | Santos Brasil</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Ricardo Miranda</h1>
+                <h2>CIO — Santos Brasil</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Transporte e logística | Santos - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 5,1 BI a R$ 6 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 80,1 MM a R$ 100 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá entre 10% e 20%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Santos Brasil</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Santos Brasil</strong> é a maior operadora de terminais de contêineres do Brasil, com destaque para o <strong>Tecon Santos</strong> — o principal terminal do Porto de Santos, que encerrou 2025 com recorde histórico de 186,4 milhões de toneladas movimentadas. A empresa opera com capacidade atual de 2,6 milhões de TEUs/ano, 13 portêineres e 47 RTGs em uma área de 620 mil m². Em um marco estratégico, a Santos Brasil foi adquirida pelo grupo francês <strong>CMA CGM</strong> (3º maior armador do mundo) em operação de aproximadamente <strong>R$ 6,3 bilhões</strong>, aprovada pelo CADE em março de 2025 sem restrições. A empresa está em plena expansão: projeta ampliar a capacidade do Tecon Santos para <strong>3 milhões de TEUs até o final de 2026</strong>, com investimentos de R$ 300 milhões em novos portêineres e RTGs elétricos, além de R$ 72 milhões em nova sede administrativa. O contexto de mercado é de forte crescimento — o leilão do Tecon Santos 10 (STS 10), estimado em R$ 6,45 bilhões, promete ampliar em 50% a capacidade total de contêineres do porto, posicionando Santos entre os 20 maiores portos do mundo.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Estabilidade</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Transporte e logística</strong> com abrangência <strong>Local (Brasil)</strong>. Todos os projetos definidos já possuem fornecedor selecionado. Modelo de compra: <strong>Via canais/parceiros credenciados</strong>. Perspectiva do orçamento de TI: <strong>Crescerá entre 10% e 20%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Atrair, desenvolver e engajar talentos</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Elevar a experiência de clientes e colaboradores (CX/EX)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar sistemas legados</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Otimizar custos e eficiência (FinOps/SecFinOps)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-priority">IA / ML</span>
+<span class="tag tag-priority">Desenvolvimento e modernização de legados</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">CRM</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Hiperautomação</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades sem Fornecedor Definido</h3>
+            <p style="color:var(--text-light)"><strong>Todos os projetos definidos já possuem fornecedor selecionado.</strong> Abordagem deve ser por valor diferenciado e especialização.</p>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Ricardo Miranda</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 60</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Ricardo Miranda tem como top prioridades <strong>Disaster recovery / continuidade de negócios; IA / ML; Desenvolvimento e modernização de legados</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 0 projetos definidos sem fornecedor. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá entre 10% e 20%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p>O setor portuário brasileiro vive um ciclo de investimentos sem precedentes, com o Porto de Santos batendo recorde de 186,4 milhões de toneladas em 2025. A aquisição da Santos Brasil pela CMA CGM por R$ 6,3 bi sinaliza que a empresa terá acesso a capital e tecnologia de um grupo global com presença em 160 países. <strong>Oportunidade-chave:</strong> a expansão para 3 milhões de TEUs até 2026 exigirá modernização acelerada de sistemas legados, integração OT/IT e automação — áreas onde a Foursys pode agregar valor imediato. Concorrentes como BTP (Maersk/MSC) já operam com rede 5G privada e 20+ iniciativas digitais; DP World investe R$ 1,6 bi em expansão com IA e IoT. Ricardo Miranda conduz um plano trienal de reestruturação baseado em dados e automação — alinhar a conversa com cases de <strong>hiperautomação, modernização de legados e governança de IA</strong> no setor logístico será decisivo. O orçamento de TI crescente (10-20%) e os 21% alocados em consultoria/outsourcing representam porta de entrada natural para squads especializados.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>BTP — Brasil Terminal Portuário (Maersk / MSC)</h4>
+                <p><strong>Posição:</strong> Joint venture entre APM Terminals (Maersk) e TIL (MSC) no Porto de Santos. Capacidade de 1,5 milhão de TEUs/ano, com plano de expansão para 2,1 milhões (+40%). Investimento de US$ 514 milhões em infraestrutura.</p>
+                <p style="margin-top:8px"><strong>Iniciativas Tech:</strong> Rede 5G privada pioneira na América Latina (8 estações rádio-base), 20+ projetos de transformação digital incluindo manutenção preditiva, câmeras inteligentes e realidade aumentada. Sistema TAS (Truck Appointment System) desenvolvido internamente e 460 câmeras de alta resolução com IA.</p>
+                <p style="margin-top:8px"><strong>Gap vs Santos Brasil:</strong> BTP está à frente em conectividade 5G e volume de iniciativas digitais simultâneas. Oportunidade para Santos Brasil acelerar com squads ágeis de IA e automação.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>DP World Santos</h4>
+                <p><strong>Posição:</strong> Opera um dos maiores terminais privados multipropósito do país — 845 mil m², 1.100m de cais. Investimento aprovado de R$ 1,6 bilhão para ampliar capacidade para 2,1 milhões de TEUs até 2028, somando-se a R$ 3 bilhões já investidos.</p>
+                <p style="margin-top:8px"><strong>Iniciativas Tech:</strong> Plataforma NAVIS para gestão de pátio e logística, gates automatizados com OCR e biometria, lacre eletrônico com sensor inteligente, sensores de fadiga com IA em veículos (redução de 78% em acidentes) e chatbot de IA para atendimento ao cliente.</p>
+                <p style="margin-top:8px"><strong>Gap vs Santos Brasil:</strong> DP World possui integração IT/OT mais madura e automação de gates avançada. Ponto de atenção para Santos Brasil em automação de processos operacionais.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>TCP — Terminal de Contêineres de Paranaguá</h4>
+                <p><strong>Posição:</strong> Principal terminal de contêineres do Paraná, movimentando mais de 1,1 milhão de TEUs/ano. Primeiro porto do Brasil com rede LTE privada licenciada (2022). Recebe cerca de 1.300 caminhões/dia.</p>
+                <p style="margin-top:8px"><strong>Iniciativas Tech:</strong> App TCP GO com QR Code para acesso digital de caminhoneiros, rede wireless LTE privada para operações de baixa latência, simulador avançado importado dos EUA para treinamento de operadores de RTGs e portêineres, e scanner de cargas de última geração.</p>
+                <p style="margin-top:8px"><strong>Gap vs Santos Brasil:</strong> TCP lidera em digitalização da experiência do motorista e treinamento simulado. Oportunidade para Santos Brasil investir em apps mobile e simulação operacional.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>CMA CGM (Grupo Controlador)</h4>
+                <p><strong>Posição:</strong> 3º maior grupo de transporte marítimo do mundo, presente em 160 países. Agora controlador da Santos Brasil após aquisição de R$ 6,3 bilhões aprovada pelo CADE em 2025. Opera 600+ navios e 50+ terminais globalmente.</p>
+                <p style="margin-top:8px"><strong>Iniciativas Tech:</strong> Forte investimento global em IA, descarbonização e digitalização de supply chain. Braço tecnológico dedicado (CMA CGM ZEBOX — aceleradora de startups de logtech) e plataforma digital de visibilidade de carga end-to-end.</p>
+                <p style="margin-top:8px"><strong>Implicação para Santos Brasil:</strong> A integração com os padrões tecnológicos globais da CMA CGM demandará modernização acelerada de sistemas legados e adequação a plataformas corporativas — cenário ideal para parceria com a Foursys.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória Profissional</div>
+                        <div class="value">+35 anos em liderança de tecnologia em multinacionais. Carreira inclui Pirelli (de SAP Basis a CIO LatAm, 12 anos), Accenture (Senior Manager), Suzano (CIO), Grupo Cimed (CIO), Deloitte Brasil (CIO, 6 anos) e Santos Brasil (Diretor de Tecnologia / CIO & CTO desde jan/2022).</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Setorial</div>
+                        <div class="value">Automotivo, papel e celulose, farmacêutico, consultoria Big Four e operações portuárias. Atuação em mais de 20 países.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reconhecimentos</div>
+                        <div class="value">Santos Brasil entre as Top 100 Empresas Mais Inovadoras em TI (2024) sob sua gestão. Listado no Global CIO Top 100.</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Liderança</div>
+                        <div class="value">Especialista em transformação digital, convergência OT/IT, cibersegurança, cloud e processos data-driven. Iniciou na tecnologia aos 15 anos — criou e vendeu seu primeiro software para uma clínica médica ainda adolescente.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Foco Atual na Santos Brasil</div>
+                        <div class="value">Conduz plano trienal de reestruturação tecnológica com foco em dados, automação e integração de tecnologia operacional (OT) com TI corporativa.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">Ativo no LinkedIn com publicações sobre transformação digital, inovação e convergência IT/OT no setor portuário.</div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:20px">
+                <h4 style="color:var(--primary);margin-bottom:12px">5 Dicas de Rapport para a Conversa</h4>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="timeline-dot" style="background:var(--primary-light)"></div><div><strong>Valorize a trajetória multissetorial:</strong> Ricardo passou por indústrias muito distintas (automotiva, farmacêutica, celulose, consultoria Big Four, portos). Pergunte como essa diversidade influencia sua visão de TI na Santos Brasil — executivos seniores apreciam quando reconhecem a amplitude de sua experiência.</div></div>
+                    <div class="timeline-item"><div class="timeline-dot" style="background:var(--primary-light)"></div><div><strong>Converse sobre convergência OT/IT:</strong> Este é o diferencial técnico que Ricardo mais destaca. Demonstrar conhecimento sobre integração de tecnologia operacional portuária (portêineres, RTGs, sensores) com TI corporativa gera conexão imediata.</div></div>
+                    <div class="timeline-item"><div class="timeline-dot" style="background:var(--primary-light)"></div><div><strong>Mencione o momento CMA CGM:</strong> A aquisição pelo grupo francês é o evento mais transformador da história recente da empresa. Perguntar sobre os desafios e oportunidades da integração com um player global demonstra preparo e abre portas para oferecer apoio em modernização.</div></div>
+                    <div class="timeline-item"><div class="timeline-dot" style="background:var(--primary-light)"></div><div><strong>Referencie experiência com Big Four:</strong> Ricardo foi CIO da Deloitte por 6 anos — ele conhece bem consultorias e valoriza parceiros que entregam além do discurso. Posicione a Foursys como parceira de execução com agilidade que grandes consultorias não oferecem.</div></div>
+                    <div class="timeline-item"><div class="timeline-dot" style="background:var(--primary-light)"></div><div><strong>Comece pela história pessoal:</strong> Ele criou seu primeiro software aos 15 anos e vendeu para uma clínica. Esse espírito empreendedor e hands-on ainda o define — aborde a conversa mostrando soluções práticas, não apenas slides estratégicos.</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte matricial (regional/global e local)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Membro: assento permanente, com voto.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Co-decisão TI + Negócios</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">10 a 29</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:23%;background:#1a237e">23%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:21%;background:#1a237e">21%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:19%;background:#3949ab">19%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">12%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#5c6bc0">7%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#9fa8da">3%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#c5cae9">2%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Referências e cases BR</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Roadmap e inovação</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Integrador / empresa de serviços (SI);Consultoria especializada;Hiperscaler / parceiro cloud;Especialista setorial / regulatório</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Interno: 4 temas | Projeto: 2 temas | Serviço Gerenciado: 1 temas | Co-gerenciado: 1 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

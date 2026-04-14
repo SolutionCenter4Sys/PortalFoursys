@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing Diretor de TI - Izaias Francisco Gomes | Grupo Piracanjuba</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Izaias Francisco Gomes</h1>
+                <h2>Diretor de TI — Grupo Piracanjuba</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Indústria de alimentos, bebidas e fumos | Goiania - GO</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 11,1 BI a R$ 12 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 50,1 MM a R$ 80 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá até 10%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Grupo Piracanjuba</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">Fundado em 1955 em Bela Vista de Goiás, o Grupo Piracanjuba é a <strong>segunda maior indústria de laticínios do Brasil</strong>, atrás apenas da Lactalis. A empresa de origem familiar — comandada pelos irmãos Cesar e Marcos Helou desde 1985 — opera com <strong>8 fábricas e 16 postos de resfriamento</strong> em oito estados brasileiros. Com mais de <strong>200 produtos</strong> sob as marcas Piracanjuba, LeitBom e licenças como Almond Breeze, Ninho e Molico, a companhia é pioneira em inovações no setor (primeiro leite zero lactose do país em 2012, leite A2 em caixinha em 2022). Em 2024, adquiriu a Emana (suplementos de nutrição), diversificando além do setor lácteo. A empresa celebrou 70 anos em 2025, é a <strong>7ª marca mais escolhida nos lares brasileiros</strong> (Kantar 2025) e projeta faturamento de <strong>R$ 12 bilhões em 2025</strong> (receita líquida de R$ 8,24 bi em 2024, +7,3%). No pilar tecnológico, a Piracanjuba implementou o <strong>RISE with SAP</strong> em 2023 — projeto que envolveu 100+ colaboradores e 27 áreas — e investe ativamente em IA, hiperautomação e segurança da informação.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Indústria de alimentos, bebidas e fumos</strong> com abrangência <strong>Local (Brasil)</strong>. Possui <strong>4 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>Direto com fornecedoríbrido por categoria/ticket — varia conforme valor/risco.</strong>. Perspectiva do orçamento de TI: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Aumentar confiabilidade e observabilidade (SRE)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos e operações para ganho de eficiência</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Fomentação da cultura de inovação na área de TI e organização</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Orquestrar transformação digital</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Posicionar a TI como área estratégica do negócio</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Priorizar portfólio em meio a excesso de demandas</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">IA Generativa</span>
+<span class="tag tag-priority">ERP</span>
+<span class="tag tag-priority">Hiperautomação</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">GRC, compliance e auditoria</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">IA / ML</span>
+<span class="tag tag-opportunity">IA Generativa</span>
+<span class="tag tag-opportunity">Hiperautomação</span>
+<span class="tag tag-opportunity">GRC, compliance e auditoria</span>
+</div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Izaias Francisco Gomes</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML SEM fornecedor definido</li><li>IA Generativa SEM fornecedor definido</li><li>IA Generativa é prioridade Top 3 de investimento</li><li>Hiperautomação SEM fornecedor definido</li><li>Hiperautomação é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 50</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>GRC, compliance e auditoria SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Izaias Francisco Gomes tem como top prioridades <strong>IA Generativa; ERP; Hiperautomação</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>4 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 4 projetos definidos sem fornecedor: IA / ML, IA Generativa, Hiperautomação, GRC, compliance e auditoria. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; Cibersegurança. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. SAP como alavanca para IA:</strong> A Piracanjuba já opera com RISE with SAP desde jan/2023 (650 transações homologadas). Isso cria a base ideal para projetos de IA embarcada em processos — como previsão de demanda, otimização de mix de produção e manutenção preditiva. A Foursys pode oferecer squads de IA que se integrem ao ecossistema SAP existente.</p>
+                <p style="margin-bottom:12px"><strong>2. Indústria 4.0 no setor lácteo:</strong> O setor está em estágio inicial de adoção de IoT, visão computacional e robótica. Sensores monitoram qualidade do leite em tempo real, e IA já auxilia na padronização de derivados. Com 8 fábricas, a Piracanjuba pode escalar pilotos de hiperautomação industrial com impacto em custo e qualidade.</p>
+                <p style="margin-bottom:12px"><strong>3. Pressão por eficiência operacional:</strong> Custos crescentes de produção, regulamentações ambientais rigorosas e queda na produção de leite por mudanças climáticas forçam otimização. Automação de processos (RPA + IA) pode reduzir custos operacionais em 15-25%, área onde Izaias já sinalizou prioridade com hiperautomação.</p>
+                <p style="margin-bottom:12px"><strong>4. Segurança como diferencial competitivo:</strong> A Piracanjuba já realizou 3 eventos internos de Privacidade e Segurança da Informação — Izaias liderou a agenda de segurança desde 2021. Com a LGPD e o crescimento do e-commerce B2B (parceria Compra Agora), GRC automatizado é prioridade natural.</p>
+                <p><strong>5. Momento de expansão:</strong> Com 20 novos produtos planejados, aquisição da Emana e projeção de R$ 12 bi em faturamento, a TI precisa escalar sem perder governança. O orçamento de TI crescendo até 10% sinaliza apetite para investimentos estratégicos — mas com exigência de ROI claro.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Principais concorrentes no setor de laticínios e alimentos e suas iniciativas tecnológicas:</p>
+            <div class="competitor-card">
+                <h4>🥛 Lactalis (Parmalat, Elegê, Batavo)</h4>
+                <p><strong>Líder global e #1 no Brasil em laticínios.</strong> Utiliza IA e Big Data para monitorar qualidade do leite cru em tempo real, automatizou armazéns com reconhecimento por voz e digitalizou o atendimento ao cliente. Resultados: redução de erros de separação de pedidos em mais de 30% e corte de custos logísticos em até 20%. Forte investimento em compliance regulatório automatizado.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🍫 Nestlé Brasil</h4>
+                <p><strong>Maior empresa de alimentos do mundo com presença massiva no Brasil.</strong> Conectou ~300 linhas de produção em 14 fábricas, coletando dados de mais de 24 mil instrumentos. Utiliza IA para aumentar a precisão de previsão de demanda em +20%, implementou precificação dinâmica e desenvolveu o NesGPT — assistente de IA generativa interno para colaboradores. Referência em Indústria 4.0 no setor alimentício.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🧀 Saputo</h4>
+                <p><strong>Multinacional canadense com operações globais em laticínios.</strong> Aplica IA em análise financeira, previsão de tendências de preços, trading algorítmico e compliance regulatório. A abordagem data-driven permite manter preços mais competitivos em contextos inflacionários e otimizar a cadeia de suprimentos global.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🥛 Danone Brasil</h4>
+                <p><strong>Gigante francesa com portfólio diversificado (lácteos, nutrição, águas).</strong> Forte investimento em sustentabilidade digital, rastreabilidade de cadeia e plataformas D2C (direct-to-consumer). Utiliza analytics avançado para personalização de portfólio regional e gestão preditiva de estoque em centros de distribuição.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis: Piracanjuba vs. Concorrentes</h4>
+                <p>A Piracanjuba já deu um passo importante com a migração para RISE with SAP (2023), mas ainda há gaps em relação aos líderes: <strong>(1)</strong> Nestlé e Lactalis já possuem IA embarcada em linhas de produção com IoT em escala — a Piracanjuba pode acelerar com projetos de IA/ML (sem fornecedor definido); <strong>(2)</strong> Nenhum concorrente nacional de porte similar possui assistente de IA generativa corporativo — oportunidade para a Piracanjuba se diferenciar; <strong>(3)</strong> A hiperautomação de processos logísticos e de armazém (como fez a Lactalis com -30% de erros) é uma frente onde a Piracanjuba pode capturar valor rápido; <strong>(4)</strong> Em GRC e compliance, o grupo já possui cultura de segurança (ISO 27001), mas pode automatizar governança e auditoria para escalar. Posicionar a Foursys como parceira para fechar esses gaps é a estratégia ideal.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória na Piracanjuba</div>
+                        <div class="value">Coord. Seg. Informação (2021) → Ger. Operações TI (2023) → Diretor de TI (set/2025)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Total</div>
+                        <div class="value">16+ anos em liderança de tecnologia</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Passagens Anteriores</div>
+                        <div class="value">SONDA e CTIS (Segurança da Informação e Coordenação de TI)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Especialidades</div>
+                        <div class="value">Segurança da Informação, Privacidade de Dados, Infraestrutura, Governança de TI</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Conquistas Notáveis</div>
+                        <div class="value">Liderou programa de certificação ISO 27001; organizou 3 eventos internos de Privacidade e Segurança</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn ativo — 3.593 conexões, 3.672 seguidores</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa com Izaias</h4>
+                <p style="margin-bottom:8px"><strong>1. Valorize a jornada interna:</strong> Izaias cresceu dentro da Piracanjuba — de coordenador a diretor em 4 anos. Reconheça esse mérito e demonstre que entende a cultura de promoção por competência do grupo.</p>
+                <p style="margin-bottom:8px"><strong>2. Fale a língua de segurança:</strong> Sua formação é em InfoSec (SONDA, CTIS, ISO 27001). Mencione as certificações ISO 27001/27701 da Foursys logo no início — isso gera credibilidade imediata com seu perfil.</p>
+                <p style="margin-bottom:8px"><strong>3. Respeite o contexto de promoção recente:</strong> Ele assumiu a diretoria em set/2025 — está no cargo há ~7 meses. Provavelmente quer mostrar resultados rápidos e consolidar sua posição. Ofereça quick wins com ROI mensurável.</p>
+                <p style="margin-bottom:8px"><strong>4. Conecte SRE com sua origem em infra:</strong> Um dos top desafios é "aumentar confiabilidade e observabilidade (SRE)". Como ele vem de infraestrutura e segurança, esse tema é muito pessoal — demonstre expertise prática em SRE e como IA pode automatizar observabilidade.</p>
+                <p><strong>5. Aborde governança como habilitador:</strong> Izaias precisa "posicionar TI como área estratégica". Com background em governança, ele valoriza processos estruturados. Apresente a Foursys como parceira que traz metodologia (não apenas código) — isso ressoa com líderes que subiram pela trilha de governance.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Diretor de TI e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Pontual: convidado ad hoc para temas específicos.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Co-decisão TI + Negócios</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">50 a 99</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:50%;background:#1a237e">50%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#1a237e">18%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#5c6bc0">2%</div></div></div>
+<div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#5c6bc0">2%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#7986cb">1%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#9fa8da">1%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#c5cae9">1%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+<span class="tag tag-active">Capilaridade/cobertura regional</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Consultoria especializada</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 4 temas | Interno: 3 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Marcus Falcão | Grupo Profarma</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Marcus Falcão</h1>
+                <h2>CIO — Grupo Profarma</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Comércio atacadista e varejista | Rio de Janeiro - RJ</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 13,1 BI a R$ 15 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 50,1 MM a R$ 80 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá entre 10% e 20%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Grupo Profarma</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">O <strong>Grupo Profarma</strong>, fundado em 1961, é a <strong>segunda maior distribuidora farmacêutica do Brasil</strong>, com mais de 60 anos de atuação no setor de saúde. A operação de distribuição (Profarma Distribuidora) cobre <strong>17 estados brasileiros</strong> através de <strong>15 centros de distribuição</strong>, atendendo mais de <strong>49 mil clientes</strong> (farmácias e pontos de venda) com uma equipe de mais de 3.600 colaboradores dedicados à logística. O grupo também controla a <strong>Rede d1000</strong>, braço varejista com mais de <strong>240 lojas</strong> operando sob as bandeiras Drogasmil, Farmalife, Drogarias Tamoio e Drogaria Rosário, além de marcas exclusivas como Bem Básico, GoNutri, Número 21 e Polimix. No total, o Grupo emprega mais de <strong>8 mil colaboradores</strong>, atinge <strong>2,3 milhões de consumidores mensalmente</strong> e atingiu faturamento superior a <strong>R$ 10 bilhões em 2023</strong>. Em 2025, o Grupo Profarma foi reconhecido pelo <strong>Prêmio Valor Inovação Brasil</strong> como uma das cinco empresas mais inovadoras do setor comercial e entre as 150 mais inovadoras do país, sinalizando um momento estratégico forte de investimento em tecnologia e transformação digital. A empresa opera a plataforma digital <strong>"Profarma ON"</strong> para pedidos eletrônicos, demonstrando compromisso com a digitalização da cadeia de suprimentos farmacêutica.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Comércio atacadista e varejista</strong> com abrangência <strong>Local (Brasil)</strong>. Possui <strong>3 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>Direto com fornecedoríbrido por categoria/ticket — varia conforme valor/risco.</strong>. Perspectiva do orçamento de TI: <strong>Crescerá entre 10% e 20%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Atrair, desenvolver e engajar talentos</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos e operações para ganho de eficiência</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Elevar a experiência de clientes e colaboradores (CX/EX)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar complexidade dos dados e qualidade da informação</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Padronizar e otimizar arquiteturas híbridas e multicloud</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Gestão de dados</span>
+<span class="tag tag-priority">APIs e integração</span>
+<span class="tag tag-priority">Sistemas core</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Sistemas core</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Nuvem Privada e híbrida</span>
+<span class="tag tag-opportunity">Low-code / no-code</span>
+<span class="tag tag-opportunity">Desenvolvimento e modernização de legados</span>
+</div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Marcus Falcão</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 80</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li><li>APIs e integração é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 54</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Low-code / no-code SEM fornecedor definido</li><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Marcus Falcão tem como top prioridades <strong>Gestão de dados; APIs e integração; Sistemas core</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>3 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 3 projetos definidos sem fornecedor: Nuvem Privada e híbrida, Low-code / no-code, Desenvolvimento e modernização de legados. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá entre 10% e 20%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: Modernização de Legado; FourBlox. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. Prêmio Inovação Brasil 2025:</strong> O Grupo Profarma foi reconhecido como uma das 5 empresas mais inovadoras do setor comercial e entre as 150 mais inovadoras do país. Usar este reconhecimento como validação de que a empresa está no caminho certo — e que a Foursys pode acelerar essa jornada com soluções de modernização e IA.</p>
+                <p style="margin-top:10px"><strong>2. Integração Distribuição + Varejo (d1000):</strong> Com mais de 240 lojas varejistas e 49 mil clientes na distribuição, a Profarma enfrenta o desafio clássico de integração de dados entre dois modelos de negócio distintos. Soluções de APIs e integração (prioridade Top 3 do CIO) são críticas para unificar visibilidade de estoque, pricing e experiência do cliente.</p>
+                <p style="margin-top:10px"><strong>3. Mercado farmacêutico em consolidação:</strong> O setor de distribuição farmacêutica no Brasil concentra 86,8% do faturamento em apenas 64 empresas (de 224 atuantes). A Profarma precisa de agilidade tecnológica para se manter competitiva frente a movimentos de M&A — como a aquisição da PanPharma pela Santa Cruz — que redefinem o market share rapidamente.</p>
+                <p style="margin-top:10px"><strong>4. Cadeia fria e rastreabilidade (SNCM):</strong> O Sistema Nacional de Controle de Medicamentos exige rastreabilidade ponta a ponta. Com 15 centros de distribuição e frota própria, a Profarma precisa de sistemas integrados e modernos para compliance regulatório — oportunidade direta para modernização de legados.</p>
+                <p style="margin-top:10px"><strong>5. IA e automação na logística farmacêutica:</strong> Concorrentes como Santa Cruz e Panpharma investem em automação de CDs e IA para otimização de rotas e previsão de demanda. A Profarma já sinalizou investimento em IA/ML e IA Generativa nos próximos 12 meses — momento ideal para posicionar soluções de AI Squad da Foursys.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>&#127942; Santa Cruz Distribuidora — Líder de Mercado</h4>
+                <p><strong>Faturamento:</strong> ~R$ 13 bilhões (líder absoluta do segmento). Controlada pela família Mayer, consolidou a liderança após adquirir as operações da Celesio AG (PanPharma e Oncoprod) em 2016, atingindo ~15% de market share. <strong>Diferencial tecnológico:</strong> plataforma de pedidos integrada, gestão de estoque centralizada com WMS avançado e rastreabilidade completa da cadeia fria. Forte investimento em automação logística nos centros de distribuição.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>&#128230; Panpharma — Capilaridade e Plataformas Digitais</h4>
+                <p><strong>Presença:</strong> 16 centros de distribuição, atendendo mais de 80 mil clientes com 1.500 veículos e mais de 30 mil entregas/dia. <strong>Diferencial tecnológico:</strong> ecossistema digital robusto com plataforma de pedidos "ePan", sistema de rastreamento "Comprovei" (tracking ponta a ponta), portal "Devolução Web" e programa de fidelidade "PDV Farma". Forte orientação a experiência digital do cliente varejista.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>&#128138; Grupo Panvel (Dimed S/A) — Pioneiro Digital no Sul</h4>
+                <p><strong>Modelo:</strong> integração vertical distribuição + varejo (farmácias Panvel). <strong>Diferencial tecnológico:</strong> pioneiro em e-commerce farmacêutico (loja online desde 1998), primeiro sistema de pedidos eletrônicos no atacado (E-Dimed, 2001), app mobile desde 2016. Investimentos consistentes em inovação com Panvel Clinic (farmácias como hubs de saúde) e programa de vacinação em loja. Follow-on em 2020 direcionou recursos para logística e tecnologia.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>&#127973; RD Saúde (Raia Drogasil) — Gigante do Varejo Farmacêutico</h4>
+                <p><strong>Posição:</strong> maior rede de farmácias do Brasil e referência em transformação digital no varejo de saúde. Embora atue principalmente no varejo, compete por atenção e mindshare no ecossistema farmacêutico. <strong>Diferencial tecnológico:</strong> marketplace de saúde, plataforma omnichannel avançada, forte investimento em dados e analytics para personalização, iniciativas com IA generativa para atendimento e operações, e plataforma de saúde integrada (RD Ads, RD Marketplace).</p>
+            </div>
+            <div class="insight-box">
+                <h4>&#128269; Análise de Gaps — Onde a Profarma Pode se Diferenciar</h4>
+                <p>A Profarma está posicionada como <strong>segunda maior distribuidora</strong>, mas enfrenta uma distância significativa para a líder Santa Cruz (~R$ 13 bi vs ~R$ 10 bi). Os principais gaps identificados são: <strong>(1) Automação logística</strong> — Santa Cruz e Panpharma investem pesado em automação de CDs, área onde a Profarma pode acelerar com modernização de legados; <strong>(2) Ecossistema digital integrado</strong> — Panpharma lidera com múltiplas plataformas digitais (ePan, Comprovei, PDV Farma), enquanto a Profarma opera o "Profarma ON" como solução única; <strong>(3) Dados e IA</strong> — RD Saúde é referência em uso de analytics e IA no varejo farmacêutico, competência que a Profarma precisa desenvolver para sua rede d1000; <strong>(4) Integração vertical</strong> — Grupo Panvel demonstra sucesso na integração distribuição-varejo com tecnologia, modelo que a Profarma pode replicar com a d1000. Esses gaps representam <strong>oportunidades diretas para soluções de modernização, integração via APIs e gestão de dados</strong> — exatamente as prioridades declaradas pelo CIO.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Diretor Executivo de Tecnologia da Informação e Inovação</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação</div>
+                        <div class="value">Engenharia de Produção</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Foco Estratégico</div>
+                        <div class="value">Alinhamento entre TI e negócios, inovação tecnológica e integração de equipes</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reconhecimentos sob sua Liderança</div>
+                        <div class="value">Prêmio Valor Inovação Brasil 2025 — Top 5 setor comercial, Top 150 Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Iniciativas Recentes</div>
+                        <div class="value">Tech Day 2025, Encontros de Alinhamento TI, integração de IA nas operações</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Estilo de Liderança</div>
+                        <div class="value">Integrador — promove conexão entre equipes de TI e áreas de negócio de cada vertical do grupo</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>&#128161; 5 Dicas de Rapport para a Conversa</h4>
+                <p><strong>1. Reconheça o Prêmio Inovação:</strong> Mencione o reconhecimento no Prêmio Valor Inovação Brasil 2025 — é uma conquista recente que demonstra a eficácia da liderança de Marcus. Pergunte sobre os pilares que levaram a essa conquista.</p>
+                <p style="margin-top:8px"><strong>2. Fale sobre integração TI-Negócio:</strong> Marcus enfatiza o alinhamento estratégico entre tecnologia e negócios. Aborde a conversa mostrando como a Foursys entrega valor de negócio (não apenas tecnologia), com cases de integração entre áreas técnicas e operacionais.</p>
+                <p style="margin-top:8px"><strong>3. Engenharia de Produção como ponte:</strong> Sua formação em Engenharia de Produção sugere um perfil orientado a processos, eficiência e métricas. Use linguagem de ROI, TCO e ganho de produtividade — ele valoriza dados concretos e resultados mensuráveis.</p>
+                <p style="margin-top:8px"><strong>4. Demonstre interesse pelo Tech Day:</strong> Marcus organizou eventos internos como o Tech Day 2025 para apresentar tendências (incluindo IA). Pergunte sobre as tendências que mais chamaram atenção da equipe e ofereça conteúdo complementar ou participação em eventos futuros da Foursys.</p>
+                <p style="margin-top:8px"><strong>5. Desafio da multi-verticalidade:</strong> O Grupo Profarma opera distribuição, varejo (d1000) e marcas próprias — cada vertical com demandas de TI distintas. Demonstre empatia com a complexidade de atender múltiplos stakeholders internos e mostre experiência em gestão de portfólio de projetos em grupos diversificados.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma vice-presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Pontual: convidado ad hoc para temas específicos.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Co-decisão TI + Negócios</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">200 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:35%;background:#1a237e">35%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#3949ab">5%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#7986cb">2%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#9fa8da">2%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#c5cae9">1%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 10 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

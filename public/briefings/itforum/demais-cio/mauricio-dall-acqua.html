@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Mauricio Dall Acqua | SMC Atomação</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Mauricio Dall Acqua</h1>
+                <h2>CIO — SMC Atomação</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Indústria mineral-metalúrgica | São Bernardo do Campo - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">Acima de R$ 15 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">Acima de R$ 5 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá entre 20% e 30%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: SMC Atomação</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>SMC Automação do Brasil</strong> é a subsidiária brasileira da <strong>SMC Corporation</strong>, multinacional japonesa fundada em 1959 em Tóquio como Sintered Metal Corporation. A SMC é uma das maiores empresas do mundo em engenharia de controle pneumático para automação industrial, desenvolvendo válvulas direcionais, atuadores, equipamentos de tratamento de ar, controle de temperatura, sistemas de vácuo e neutralização de eletricidade estática. Com presença global expressiva — fábricas em 28 países, subsidiárias em 50 países e escritórios de vendas em 82 países —, a corporação emprega mais de 20.000 colaboradores e é listada na TOPIX Large 70 da Bolsa de Tóquio. No Brasil, a SMC está sediada em <strong>São Bernardo do Campo, SP</strong>, e se destaca por oferecer soluções personalizadas para diversas aplicações industriais. A empresa mantém forte compromisso com sustentabilidade, desenvolvendo produtos ecologicamente corretos, e participa ativamente de feiras como Feimec, Fispal e Fipan. O momento estratégico é de expansão, com crescimento previsto de 20% a 30% no orçamento de TI, investimentos em IA Generativa, cibersegurança e disaster recovery, além de 9 projetos sem fornecedor definido — sinalizando uma janela de oportunidade significativa para parceiros de tecnologia.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">500 a 999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Indústria mineral-metalúrgica</strong> com abrangência <strong>Global</strong>. Possui <strong>9 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>Via canais/parceiros credenciados</strong>. Perspectiva do orçamento de TI: <strong>Crescerá entre 20% e 30%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Elevar a experiência de clientes e colaboradores (CX/EX)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar complexidade dos dados e qualidade da informação</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-priority">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-priority">IA Generativa</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">CRM</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">GRC, compliance e auditoria</span>
+<span class="tag tag-active">Sistemas core</span>
+<span class="tag tag-active">Sustentabilidade e green IT</span>
+<span class="tag tag-active">ITSM/ESM e service desk</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Infraestrutura de redes</span>
+<span class="tag tag-opportunity">Cibersegurança</span>
+<span class="tag tag-opportunity">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-opportunity">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-opportunity">IA / ML</span>
+<span class="tag tag-opportunity">IA Generativa</span>
+<span class="tag tag-opportunity">Mobile apps / superapps</span>
+<span class="tag tag-opportunity">GRC, compliance e auditoria</span>
+<span class="tag tag-opportunity">Sustentabilidade e green IT</span>
+</div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Mauricio Dall Acqua</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML SEM fornecedor definido</li><li>IA Generativa SEM fornecedor definido</li><li>IA Generativa é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Cibersegurança SEM fornecedor definido</li><li>Disaster recovery / continuidade de negócios SEM fornecedor definido</li><li>Disaster recovery / continuidade de negócios é prioridade Top 3</li><li>Segurança de dados e privacidade (LGPD/DLP) SEM fornecedor definido</li><li>Segurança de dados e privacidade (LGPD/DLP) é prioridade Top 3</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 51</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Mobile apps / superapps SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Mauricio Dall Acqua tem como top prioridades <strong>Disaster recovery / continuidade de negócios; Segurança de dados e privacidade (LGPD/DLP); IA Generativa</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>9 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 9 projetos definidos sem fornecedor: Infraestrutura de redes, Cibersegurança, Disaster recovery / continuidade de negócios, Segurança de dados e privacidade (LGPD/DLP), IA / ML e mais 4 temas. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá entre 20% e 30%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; Cibersegurança; FourBlox. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. Indústria 4.0 e Pneumática Inteligente:</strong> O setor de automação industrial está em plena transição para a Indústria 4.0, com integração de sensores IoT, gêmeos digitais e manutenção preditiva. A SMC, como líder em componentes pneumáticos, precisa conectar seu portfólio físico a plataformas digitais — a Foursys pode ser a ponte entre a engenharia de campo e a inteligência de dados.</p>
+                <p style="margin-bottom:12px"><strong>2. IA Generativa na Manufatura:</strong> Aplicações de IA Generativa estão transformando o setor industrial — desde otimização de linhas de produção até atendimento ao cliente e documentação técnica automatizada. Com IA Generativa como prioridade Top 3 e sem fornecedor definido, há uma oportunidade direta para o AI Squad da Foursys acelerar POCs e projetos piloto.</p>
+                <p style="margin-bottom:12px"><strong>3. Cibersegurança em Ambientes OT/IT:</strong> A convergência entre redes operacionais (OT) e tecnologia da informação (IT) em empresas de automação industrial cria superfícies de ataque ampliadas. Com 20% do orçamento de TI alocado em cibersegurança e projetos sem fornecedor em LGPD/DLP e disaster recovery, a demanda é clara e urgente.</p>
+                <p style="margin-bottom:12px"><strong>4. Sustentabilidade e Green IT:</strong> A SMC declara compromisso com produtos ecologicamente corretos e sustentabilidade. Com "Sustentabilidade e Green IT" como projeto sem fornecedor, a Foursys pode propor soluções de monitoramento de consumo energético, otimização de infraestrutura e compliance ESG.</p>
+                <p><strong>5. Modernização de Legados e ERP:</strong> Com investimentos planejados em ERP, sistemas core e desenvolvimento de legados, a SMC sinaliza um ciclo de modernização tecnológica. A plataforma FourBlox e os squads de desenvolvimento da Foursys podem acelerar esse processo com componentes reutilizáveis e menor time-to-market.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Festo (Alemanha)</h4>
+                <p><strong>Receita:</strong> €3,65 bilhões (2023) | <strong>Colaboradores:</strong> ~20.500 | <strong>Presença:</strong> 61 países</p>
+                <p style="margin-top:8px">Fundada em 1925, a Festo é concorrente direta da SMC em pneumática e automação industrial. Investiu fortemente em IA com a aquisição da Resolto Informatik (2018) e em acionamentos eletromecânicos (Eichenberger Group, 2015). Destaque para o programa Bionic Learning Network, que posiciona a marca como referência em inovação e robótica inspirada na natureza. Forte atuação em educação industrial e treinamento técnico.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Parker Hannifin (EUA)</h4>
+                <p><strong>Receita:</strong> US$19,9 bilhões (2025) | <strong>Colaboradores:</strong> ~58.000 | <strong>Presença:</strong> Global (Fortune 500 #216)</p>
+                <p style="margin-top:8px">Gigante americana fundada em 1917, a Parker é uma das maiores empresas do mundo em tecnologias de movimento e controle. Atua em pneumática, hidráulica, aeroespacial, controle de processos e vedação. Adquiriu a Meggitt para fortalecer o segmento aeroespacial. Possui portfólio extremamente diversificado, com forte investimento em digitalização industrial, IoT e soluções de eficiência energética para manufatura.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Bosch Rexroth (Alemanha)</h4>
+                <p><strong>Receita:</strong> €6,2 bilhões (2021) | <strong>Colaboradores:</strong> ~31.100 | <strong>Controladora:</strong> Robert Bosch GmbH</p>
+                <p style="margin-top:8px">Subsidiária da Bosch, a Rexroth nasceu da fusão entre Mannesmann Rexroth e a unidade de automação da Bosch em 2001. Forte em hidráulica, acionamentos elétricos, movimento linear e tecnologias de montagem. Adquiriu a Elmo Motion Control (2022) para expandir em servo drives de alta precisão. Estratégia focada em Indústria 4.0, fábricas conectadas e automação adaptativa.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Norgren / IMI Precision Engineering (Reino Unido)</h4>
+                <p><strong>Receita do grupo IMI:</strong> £2,2 bilhões | <strong>Colaboradores:</strong> ~10.500 | <strong>Presença:</strong> 50+ países</p>
+                <p style="margin-top:8px">Divisão do grupo IMI plc, a Norgren é especialista em tecnologias de movimento e controle de fluidos, incluindo pneumática, vedação e controle de processos. Forte atuação nos setores de alimentos e bebidas, energia e veículos comerciais. Investindo em soluções de automação sustentável, eficiência pneumática e plataformas digitais de monitoramento preditivo.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades Competitivas</h4>
+                <p>Enquanto concorrentes como Festo e Bosch Rexroth aceleram investimentos em <strong>IA industrial</strong>, <strong>Indústria 4.0</strong> e <strong>fábricas conectadas</strong>, a SMC pode se diferenciar aprofundando sua transformação digital interna — especialmente em IA Generativa, cibersegurança e disaster recovery, áreas já priorizadas pelo CIO. A Parker Hannifin lidera em escala e diversificação, mas a SMC possui vantagem competitiva em <strong>especialização pneumática e personalização de soluções</strong>. O gap principal está na infraestrutura digital e na governança de dados, onde a Foursys pode agregar valor significativo com squads de IA, consultoria em segurança (ISO 27001/27701) e modernização de legados.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CIO — SMC Automação do Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Empresa</div>
+                        <div class="value">Subsidiária brasileira da SMC Corporation (Japão), líder global em pneumática e automação industrial</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">São Bernardo do Campo, SP</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Nível Hierárquico</div>
+                        <div class="value">Diretoria — Reporte direto ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Liderança</div>
+                        <div class="value">Influenciador técnico com assento permanente em comitês, com voto. Lidera equipe de TI de 30-49 profissionais.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Contexto da Empresa</div>
+                        <div class="value">Multinacional japonesa com cultura de excelência operacional e melhoria contínua (Kaizen)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Valorize a cultura de excelência japonesa:</strong> A SMC é uma multinacional japonesa com forte cultura de precisão e melhoria contínua. Demonstre respeito por esses valores mencionando como a Foursys aplica metodologias rigorosas (ISO 27001/27701) e processos estruturados — isso ressonará com o DNA da empresa.</p>
+                <p style="margin-bottom:10px"><strong>2. Fale a linguagem da indústria:</strong> Mauricio lidera TI em uma empresa de automação industrial. Conecte as soluções Foursys ao universo de manufatura: IA para otimização de produção, cibersegurança OT/IT, integração de sistemas industriais. Evite jargões puramente de TI corporativa.</p>
+                <p style="margin-bottom:10px"><strong>3. Destaque o poder de decisão e autonomia:</strong> Com reporte direto ao CEO e assento em comitês com voto, Mauricio tem influência real. Aborde as conversas em nível estratégico — ROI, TCO de 3 anos e impacto nos negócios — não apenas especificações técnicas.</p>
+                <p style="margin-bottom:10px"><strong>4. Explore o crescimento do orçamento:</strong> Com perspectiva de crescimento de 20-30% no orçamento de TI, Mauricio está em posição de investir. Posicione a Foursys como parceira de longo prazo que pode ajudar a alocar esse crescimento de forma estratégica, especialmente nos 9 projetos sem fornecedor.</p>
+                <p><strong>5. Abordagem consultiva e co-gestão:</strong> O modelo de contratação preferido é co-gerenciado (9 temas). Proponha um formato de parceria onde a Foursys atue lado a lado com a equipe interna, respeitando a abordagem consultiva que ele valoriza e a necessidade de capacitação do time.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Membro: assento permanente, com voto.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Influenciadora técnica</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">500 a 999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">500 a 999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">30 a 49</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#3949ab">20%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+<span class="tag tag-active">Capilaridade/cobertura regional</span>
+<span class="tag tag-active">Residência de dados no BR</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Integrador / empresa de serviços (SI);Consultoria especializada;Especialista setorial / regulatório;Fornecedor com cobertura global</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 9 temas | Interno: 8 temas | Projeto: 1 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

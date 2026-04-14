@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Francieli Tartari Pietsch | BBM Logística</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Francieli Tartari Pietsch</h1>
+                <h2>CIO — BBM Logística</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Transporte e logística | Curitiba - PR</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 1,1 BI a R$ 2 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 30,1 MM a R$ 50 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá entre 10% e 20%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: BBM Logística</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>BBM Logística</strong>, fundada em 1996 e sediada em São José dos Pinhais (PR), é um dos principais operadores logísticos rodoviários do Mercosul. Listada na B3 desde 2019, a empresa foi reconhecida pelo <em>Financial Times</em> como uma das oito transportadoras que mais cresceram nas Américas — sendo a única brasileira no ranking. Com mais de 5.300 colaboradores, 3.000 veículos em operação e mais de 15 milhões de entregas por ano, a BBM operacionaliza soluções <strong>End-to-End</strong>, do inbound de matéria-prima até o last mile. Atua em transporte de carga geral e fracionado, logística para e-commerce, operações dedicadas (química, gases industriais, florestal e agronegócio), transporte internacional/intermodal e centros de distribuição. A empresa acumula mais de 100 anos de know-how logístico por meio de empresas adquiridas e vive momento estratégico de forte investimento em transformação digital, com ganho de 20% em produtividade por meio da digitalização e crescimento anual sustentado de 15%. Promove internamente o <strong>BBM Tech Summit</strong> — evento anual de inovação que reúne parceiros como Totvs, Salesforce e Oracle — e o programa de inovação <strong>BBMInX</strong>, sinalizando maturidade digital crescente e abertura a novas parcerias tecnológicas.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Regional (América Latina)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Transporte e logística</strong> com abrangência <strong>Regional (América Latina)</strong>. Possui <strong>5 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>RFP/concorrência estruturada entre fornecedores qualificados</strong>. Perspectiva do orçamento de TI: <strong>Crescerá entre 10% e 20%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos e operações para ganho de eficiência</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Fomentação da cultura de inovação na área de TI e organização</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar custos, riscos e lock-in de fornecedores</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Integrar equipes de TI e negócios para acelerar a entrega de valor</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Orquestrar transformação digital</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Posicionar a TI como área estratégica do negócio</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">IA / ML</span>
+<span class="tag tag-priority">Automação de processos / RPA</span>
+<span class="tag tag-priority">IoT / edge computing</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">CRM</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">HCM</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">IoT / edge computing</span>
+<span class="tag tag-active">GRC, compliance e auditoria</span>
+<span class="tag tag-active">Sistemas core</span>
+<span class="tag tag-active">Sustentabilidade e green IT</span>
+<span class="tag tag-active">ITSM/ESM e service desk</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Cibersegurança</span>
+<span class="tag tag-opportunity">CRM</span>
+<span class="tag tag-opportunity">Low-code / no-code</span>
+<span class="tag tag-opportunity">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-opportunity">Automação de processos / RPA</span>
+</div><div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria/assessment):</h4>
+                <div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Disaster recovery / continuidade de negócios</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Hiperautomação</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">GRC, compliance e auditoria</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Sistemas core</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Sustentabilidade e green IT</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">ITSM/ESM e service desk</span>
+</div>
+            </div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Francieli Tartari Pietsch</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML é prioridade Top 3 de investimento</li><li>IA Generativa com investimento inicial previsto</li><li>Hiperautomação com investimento inicial previsto</li><li>Automação de processos / RPA SEM fornecedor definido</li><li>Automação de processos / RPA é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Low-code / no-code SEM fornecedor definido</li><li>Automação de processos / RPA SEM fornecedor definido</li><li>Automação de processos / RPA é prioridade Top 3</li><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 65</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 65</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Cibersegurança SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Francieli Tartari Pietsch tem como top prioridades <strong>IA / ML; Automação de processos / RPA; IoT / edge computing</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>5 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 5 projetos definidos sem fornecedor: Cibersegurança, CRM, Low-code / no-code, Desenvolvimento e modernização de legados, Automação de processos / RPA. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá entre 10% e 20%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; FourBlox; Modernização de Legado. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. IA já é pré-requisito no setor:</strong> 43% das empresas brasileiras de logística já integraram IA e machine learning a sistemas TMS, superando a média global de 37%. Empresas que adotaram reportam redução de 5-7% em tempos de entrega e ganhos operacionais de até 20%. A BBM já demonstra maturidade digital — perguntar sobre os resultados do BBM Tech Summit e do programa BBMInX pode abrir caminho para discutir como escalar IA com o AI Squad da Foursys.</p>
+                <p style="margin-top:12px"><strong>2. IoT e sensores embarcados geram ROI mensurável:</strong> Cases no setor mostram que sensores de temperatura, vibração e pressão reduziram perdas em 0,5%, quilometragem em 1% e emissões de CO₂ em 5%. Como IoT/edge computing é prioridade Top 3 da Francieli, apresentar como a Foursys integra dados de IoT com plataformas de analytics e IA pode ser um diferencial decisivo.</p>
+                <p style="margin-top:12px"><strong>3. Automação operacional elimina falhas humanas:</strong> Leitura automática, checklists digitais e robótica em armazéns estão se tornando padrão. Concorrentes como Braspress já operam SORTERs industriais. A BBM tem Automação/RPA e Hiperautomação como projetos sem fornecedor — oportunidade direta para posicionar FourBlox e AI Squad.</p>
+                <p style="margin-top:12px"><strong>4. Visibilidade em tempo real como diferencial competitivo:</strong> Em 2026, dados deixam de ser apenas coletados e passam a ser decisores estratégicos. A evolução é de "onde está o caminhão" para "o que está dentro, qual a condição e qual o impacto nas entregas". Control towers digitais e rastreamento multimodal são o novo padrão — tema que conecta com os investimentos da BBM em gestão de dados e APIs/integração.</p>
+                <p style="margin-top:12px"><strong>5. ESG e Green IT como requisito de mercado:</strong> Sustentabilidade deixou de ser opcional e virou requisito. A BBM já investe em Sustentabilidade e Green IT (projeto sem definição). Otimização de rotas para menor emissão de carbono e monitoramento ambiental integrado são tendências que podem ser viabilizadas por soluções de IA e IoT — conexão natural com o portfólio Foursys.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>🚛 JSL (Júlio Simões Logística) — Faturamento ~R$ 10-12,5 BI</h4>
+                <p>Maior empresa de logística rodoviária do Brasil e parte do Grupo Simpar (R$ 24 BI em receita). Lançou em 2025 a <strong>JSL Digital</strong>, unidade dedicada à digitalização logística. Adquiriu a <strong>TruckPad</strong> (maior plataforma de conexão caminhoneiro-carga da América Latina) e desenvolveu o <strong>TMS Pro</strong> internamente. Investe fortemente em IA para recomendação de rotas, IoT para rastreamento e cloud computing. Possui o Banco Digital BBC para soluções financeiras ao ecossistema logístico. Foco em eliminar os 30% de ineficiência estimada no transporte nacional.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🚗 Tegma Gestão Logística — Faturamento ~R$ 1,6 BI</h4>
+                <p>Líder em logística automotiva, a Tegma conduz o programa <strong>Tegma 5.0</strong> — jornada estruturada de transformação digital em três fases (ERP modernizado, IA/cloud, modernização integral). Criou a <strong>tegUP</strong>, unidade de inovação aberta que conecta startups ao negócio desde 2017, com cases como Rabbot (3 milhões de veículos gerenciados em 5 países). Possui Comitê de Inovação formal coordenado pela diretoria de TI, com foco em Indústria 4.0 e logística conectada.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>📦 Braspress — Faturamento ~R$ 2 BI</h4>
+                <p>Referência em transporte de encomendas expressas e carga fracionada, com 106 filiais próprias e ~850 mil entregas/mês. Pioneira em automação industrial aplicada à logística: opera sistemas <strong>SORTER</strong> desde 2004 (140 volumes/minuto em 2 km de esteiras automatizadas). Possui Data Center com tecnologia TIER III e monitoramento em tempo real de todas as 95+ filiais. Em 2025, lançou a <strong>Braspress Air Cargo</strong>, integrando modal aéreo à operação rodoviária para logística multimodal.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🛣️ RTE Rodonaves — Faturamento ~R$ 1,5 BI</h4>
+                <p>Destaque em cargas fracionadas no interior do Brasil, a Rodonaves investe em rastreamento em tempo real, digitalização de processos operacionais e integração com e-commerce. Possui capilaridade forte em regiões de agronegócio e interior, com presença consolidada em São Paulo e Minas Gerais. Compete diretamente com a BBM em segmentos de carga geral e distribuição regional.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Onde a BBM Pode se Diferenciar</h4>
+                <p>Comparada aos concorrentes, a BBM Logística apresenta oportunidades claras: (1) <strong>Plataforma digital própria</strong> — JSL já possui a JSL Digital e o TMS Pro, enquanto a BBM ainda busca fornecedor para low-code e modernização de legados; (2) <strong>Inovação aberta estruturada</strong> — Tegma opera a tegUP desde 2017 com Comitê de Inovação formal, enquanto o BBMInX da BBM é mais recente e pode ser acelerado; (3) <strong>Automação de centros de distribuição</strong> — Braspress já opera SORTERs industriais há 20 anos, enquanto a BBM lista Automação/RPA e Hiperautomação como projetos sem fornecedor definido; (4) <strong>IA e IoT</strong> — 43% do setor já integrou IA a TMS, e concorrentes como JSL e Tegma estão avançados; a BBM tem a vantagem de poder implementar soluções de última geração sem legado tecnológico obsoleto. A Foursys pode posicionar-se como a parceira que fecha essas lacunas com velocidade, trazendo AI Squad, FourBlox e modernização de legados como pacote integrado.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Graduação em Informática Industrial e Ciência da Computação. Mestrado em Engenharia de Software. MBAs em Gestão Empresarial. Cursos complementares em Liderança, Coaching e PMBOK.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória Profissional</div>
+                        <div class="value">+19 anos em tecnologia. Começou a programar em Delphi aos 12 anos e aos 13 já ensinava programação. Passou ~9 anos na Sistema Info (software para logística), onde foi de estagiária a Gerente de Fábrica de Software atendendo 2.000+ clientes. Na BBM desde 2019, evoluiu de Gerente de Tecnologia a CIO/CTO (dez/2023).</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Digital & Comunidades</div>
+                        <div class="value">Ativa no LinkedIn. Membro do Movimento Transformação Logística, MEX Brasil (Mulheres Executivas) e MCIO Brasil. Moderadora de painéis no BBM Tech Summit. Idealizadora do programa de inovação BBMInX.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Liderança</div>
+                        <div class="value">Inspiração para mulheres na tecnologia — concilia carreira executiva e maternidade. Defende a tese de que "é preciso ser incansável". Atualmente foca na construção de agentes de IA para departamentos internos (jurídico, RH, marketing, financeiro, comercial) e na capacitação de profissionais para replicar esse conhecimento.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa com Francieli</h4>
+                <p><strong>1. Comece pela trajetória técnica:</strong> Francieli é uma líder que começou programando aos 12 anos — ela valoriza profundidade técnica. Evite abordagens puramente comerciais; demonstre conhecimento real sobre IA, automação e arquitetura de sistemas.</p>
+                <p style="margin-top:8px"><strong>2. Mencione o BBM Tech Summit e o BBMInX:</strong> Ela é idealizadora do programa de inovação e moderadora do evento de tecnologia da BBM. Perguntar "como foi a última edição do Tech Summit?" ou "quais resultados o BBMInX trouxe?" demonstra que você fez a lição de casa e valoriza as iniciativas dela.</p>
+                <p style="margin-top:8px"><strong>3. Conecte-se pelo tema de agentes de IA:</strong> Francieli está ativamente construindo agentes de IA para departamentos internos (jurídico, RH, marketing, financeiro). Este é um ponto de conexão direto com o AI Squad da Foursys — explore experiências, desafios e lições aprendidas nesse tema.</p>
+                <p style="margin-top:8px"><strong>4. Respeite sua visão de TI estratégica:</strong> Ela reporta ao CFO e tem assento permanente com voto em conselho/comitês. Posicione a conversa em nível de impacto no negócio e ROI, não apenas em especificações técnicas. Ela pensa como executiva de negócios que domina tecnologia.</p>
+                <p style="margin-top:8px"><strong>5. Valorize a representatividade feminina na tech:</strong> Francieli é membro do MEX Brasil (Mulheres Executivas) e referência como mulher na liderança de TI. Se a Foursys tiver iniciativas de diversidade, cases de mulheres na liderança tech ou programas de capacitação inclusivos, mencione naturalmente — isso gera identificação e confiança.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CFO/Financeiro</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Membro: assento permanente, com voto.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">50 a 99</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+<div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">12%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#c5cae9">3%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Roadmap e inovação</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Integrador / empresa de serviços (SI);Consultoria especializada;Start-up / scale-up;Especialista setorial / regulatório;Fornecedor com cobertura global</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Projeto: 12 temas | Co-gerenciado: 3 temas | Interno: 3 temas | Alocação de profissionais: 1 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

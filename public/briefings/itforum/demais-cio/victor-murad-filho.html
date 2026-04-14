@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing Diretor de TI - Victor Murad Filho | SEG</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Victor Murad Filho</h1>
+                <h2>Diretor de TI — SEG</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Setor público | Vitoria - ES</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 7,1 BI a R$ 8 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 400,1 MM a R$ 500 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá até 10%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: SEG</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>SEG — Secretaria de Estado do Governo do Espírito Santo</strong> é o órgão central de coordenação do Governo Estadual, responsável por articular políticas de gestão, governança e transformação digital em todo o aparelho público capixaba. Através do <strong>Prodest</strong> (Instituto de Tecnologia da Informação e Comunicação do Estado), a SEG opera uma das infraestruturas de TI estaduais mais reconhecidas do país — figurando entre as <strong>100 organizações mais inovadoras em TI do Brasil</strong> pelo IT Forum. A secretaria lidera projetos estratégicos como o <strong>Portal Único de Informação e Bases Integradas</strong>, que centraliza mais de 580 serviços públicos em um único endereço virtual com identidade digital; o <strong>ES Digital</strong>, rede de fibra óptica de 3.672 km cobrindo 74 municípios; e o <strong>Núcleo de Intervenções Rápidas (NIR)</strong>, que integra câmeras com reconhecimento facial, drones e inteligência artificial para segurança pública. Com mais de 10.000 colaboradores, orçamento de TI entre R$ 400 e R$ 500 milhões e perspectiva de crescimento de até 10%, a SEG está em um momento de forte aceleração da transformação digital, contando com consultoria do <strong>Instituto Gartner</strong> para alinhar estratégias de TI com as metas de governo.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Pública</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Estabilidade</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Setor público</strong> com abrangência <strong>Local (Brasil)</strong>. Possui <strong>17 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>Via canais/parceiros credenciados</strong>. Perspectiva do orçamento de TI: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Atrair, desenvolver e engajar talentos</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Elevar a experiência de clientes e colaboradores (CX/EX)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Orquestrar transformação digital</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Provar valor e ROI sob pressão de custos</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Infraestrutura de redes</span>
+<span class="tag tag-priority">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-priority">Automação de processos / RPA</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">BPM</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">Workplace e end-user computing</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">Realidade estendida (VR/AR/MR)</span>
+<span class="tag tag-active">IoT / edge computing</span>
+<span class="tag tag-active">GRC, compliance e auditoria</span>
+<span class="tag tag-active">Sustentabilidade e green IT</span>
+<span class="tag tag-active">ITSM/ESM e service desk</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Gestão de dados</span>
+<span class="tag tag-opportunity">IA / ML</span>
+<span class="tag tag-opportunity">IA Generativa</span>
+<span class="tag tag-opportunity">APIs e integração</span>
+<span class="tag tag-opportunity">ERP</span>
+<span class="tag tag-opportunity">BPM</span>
+<span class="tag tag-opportunity">Low-code / no-code</span>
+<span class="tag tag-opportunity">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-opportunity">Automação de processos / RPA</span>
+<span class="tag tag-opportunity">Hiperautomação</span>
+<span class="tag tag-opportunity">Workplace e end-user computing</span>
+<span class="tag tag-opportunity">Mobile apps / superapps</span>
+<span class="tag tag-opportunity">Realidade estendida (VR/AR/MR)</span>
+<span class="tag tag-opportunity">IoT / edge computing</span>
+<span class="tag tag-opportunity">GRC, compliance e auditoria</span>
+<span class="tag tag-opportunity">Sustentabilidade e green IT</span>
+<span class="tag tag-opportunity">ITSM/ESM e service desk</span>
+</div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Victor Murad Filho</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML SEM fornecedor definido</li><li>IA Generativa SEM fornecedor definido</li><li>Hiperautomação SEM fornecedor definido</li><li>Automação de processos / RPA SEM fornecedor definido</li><li>Automação de processos / RPA é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li><li>APIs e integração SEM fornecedor definido</li><li>ERP SEM fornecedor definido</li><li>BPM SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Low-code / no-code SEM fornecedor definido</li><li>Automação de processos / RPA SEM fornecedor definido</li><li>Automação de processos / RPA é prioridade Top 3</li><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 80</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>GRC, compliance e auditoria SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 78</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Infraestrutura de redes é prioridade Top 3</li><li>Workplace e end-user computing SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Victor Murad Filho tem como top prioridades <strong>Infraestrutura de redes; Armazenamento, backup e imutabilidade; Automação de processos / RPA</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>17 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 17 projetos definidos sem fornecedor: Gestão de dados, IA / ML, IA Generativa, APIs e integração, ERP e mais 12 temas. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; Modernização de Legado; FourBlox. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. Portal Cidadão como Alavanca de Eficiência:</strong> O projeto Portal Único de Informação (580 serviços) coloca a SEG em competição direta com benchmarks como o Poupatempo de SP (78,9% digital). Demonstrar como o FourBlox e plataformas low-code podem acelerar a digitalização dos serviços restantes e atingir a meta de 90%+ de serviços online é um gancho direto.</p>
+                <p style="margin-top:12px"><strong>2. IA no Setor Público — Janela Crítica:</strong> O Serpro já oferece IA para políticas públicas e prevenção de fraudes a estados e municípios. A SEG tem IA/ML e IA Generativa como projetos sem fornecedor — posicionar o AI Squad antes que soluções federais (Serpro/MGI) preencham esse espaço é urgente e estratégico.</p>
+                <p style="margin-top:12px"><strong>3. Concentração em Infra On-Prem (35% do orçamento):</strong> Com apenas 3% do orçamento em nuvem e 35% em infra on-prem, a SEG está significativamente abaixo da média de maturidade cloud de seus pares. Isso cria uma oportunidade massiva de modernização de legados, migração cloud e disaster recovery — temas que já estão no mapa de investimentos.</p>
+                <p style="margin-top:12px"><strong>4. LGPD e Segurança em Governo:</strong> Com o avanço do NIR (reconhecimento facial, drones, IA em segurança pública) e a centralização de dados cidadãos no Portal Único, a conformidade com LGPD/DLP e governança de dados se torna crítica. As certificações ISO 27001/27701 da Foursys são um diferencial direto nessa conversa.</p>
+                <p style="margin-top:12px"><strong>5. Modelo Co-gerenciado como Preferência:</strong> A SEG opera 23 temas em modelo co-gerenciado — isso se alinha perfeitamente ao modelo de Squads da Foursys, que permite transferência de conhecimento e co-responsabilidade, diferenciando-se de fornecedores que operam apenas em modelo managed service.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Organizações estaduais e federais de TI pública que atuam como referência ou benchmarks para a SEG/Prodest:</p>
+
+            <div class="competitor-card">
+                <h4>Prodesp — Governo do Estado de São Paulo</h4>
+                <p><strong>Fundação:</strong> 1969 | <strong>Colaboradores:</strong> ~737</p>
+                <p>Empresa de TI do Governo de SP, opera uma das maiores infraestruturas de tecnologia pública da América Latina. Responsável pelo <strong>Poupatempo</strong> (4.200+ serviços, 78,9% de interações digitais), vencedor do <strong>Prêmio iBest 2025</strong> como melhor serviço digital do Brasil. Forte em certificação digital, portais de transparência e soluções prontas para governo, com atuação em nuvem, integração de sistemas e desenvolvimento customizado.</p>
+            </div>
+
+            <div class="competitor-card">
+                <h4>CELEPAR — Governo do Estado do Paraná</h4>
+                <p><strong>Fundação:</strong> 1964 (primeira empresa pública de TI do Brasil) | <strong>Data Center:</strong> 270 m², 3.000+ servidores, 6 PB de armazenamento</p>
+                <p>Pioneira em TI governamental no Brasil. Destaca-se por soluções com <strong>IA Generativa</strong> (plataforma Aprendiz Inteligente), reconhecimento facial (Chamada Inteligente para escolas) e chatbots para atendimento ao cidadão. Impacta 900 mil matrículas escolares, 1 milhão de chamadas SAMU e 980 mil renovações de carteira DETRAN. Atualmente em processo de <strong>desestatização</strong>, o que pode gerar oportunidades de parcerias com empresas privadas.</p>
+            </div>
+
+            <div class="competitor-card">
+                <h4>Serpro — Governo Federal do Brasil</h4>
+                <p><strong>Abrangência:</strong> Nacional (27 estados, 2.568 municípios na Rede GOV.BR)</p>
+                <p>Empresa Nacional de Inteligência em Governo Digital, opera sistemas críticos como o IRPF com monitoramento baseado em Golden Signals. Firmou acordo com o MGI em 2026 para disseminar soluções tecnológicas em estados e municípios. Oferece <strong>Nuvem Soberana</strong> (garantia de soberania de dados), IA para políticas públicas e prevenção de fraudes, e o programa <strong>Prefeitura +Digital</strong> com soluções gratuitas para municípios de até 30 mil habitantes. Referência em escala e maturidade digital.</p>
+            </div>
+
+            <div class="competitor-card">
+                <h4>Prodemge — Governo do Estado de Minas Gerais</h4>
+                <p><strong>Fundação:</strong> 1972 | <strong>Abrangência:</strong> Estadual (MG)</p>
+                <p>Companhia de Tecnologia da Informação de Minas Gerais, responsável por soluções de governo digital, data center estadual e integração de sistemas para órgãos públicos mineiros. Atua em modernização de legados, gestão de dados e cibersegurança. Referência em plataformas de gestão fiscal e transparência pública para grandes estados.</p>
+            </div>
+
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Ao comparar a SEG/Prodest com seus pares, identificam-se lacunas exploráveis: (1) <strong>IA Generativa e Hiperautomação</strong> — enquanto a CELEPAR já possui soluções com IA Generativa em produção, a SEG ainda busca fornecedor para esses temas, abrindo espaço para o AI Squad da Foursys; (2) <strong>Modernização de Legados e APIs</strong> — diferente do Serpro que já opera com microsserviços e nuvem soberana, a SEG mantém 35% do orçamento em infra on-prem, indicando alto potencial de modernização com a oferta Foursys de Modernização de Legado + parceria Digibee; (3) <strong>Portal Cidadão Unificado</strong> — a Prodesp referência com o Poupatempo (78,9% digital), enquanto a SEG está implementando seu Portal Único de 580 serviços — aceleração com FourBlox e low-code pode ser diferencial decisivo; (4) <strong>GRC e Compliance</strong> — com a desestatização da CELEPAR e aumento de parcerias público-privadas, cresce a demanda por governança e conformidade, área onde as certificações ISO 27001/27701 da Foursys se destacam.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">SubSecretário de Estado da Transformação Digital — Governo do ES (desde dez/2023)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência</div>
+                        <div class="value">+25 anos em TIC, com atuação em órgãos públicos e empresas privadas no Brasil e exterior</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Posições de Destaque</div>
+                        <div class="value">Presidente Executivo do Prodest (2012–2015) · Presidente da ABEP (2014–2015) · Diretor de Tecnologia do TJ-ES</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Expertise Técnica</div>
+                        <div class="value">Governança de TIC, infraestrutura de telecom, integração de sistemas, segurança da informação, ERP, gestão de projetos (PMI)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Internacional</div>
+                        <div class="value">Projetos em Angola, Uruguai e Estados Unidos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Liderança Associativa</div>
+                        <div class="value">Como presidente da ABEP, promoveu integração entre entidades estaduais de TIC, workshops colaborativos e infraestrutura de nuvem compartilhada para redução de custos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn: linkedin.com/in/vicmurad</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Decisão</div>
+                        <div class="value">Perfil técnico-estratégico; reporta ao CEO/Presidência; membro com voto em conselho; aprovador de aquisições dentro do budget</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p><strong>1. Valorize sua trajetória institucional:</strong> Victor tem uma carreira rara — liderou o Prodest, presidiu a ABEP e agora é SubSecretário de Transformação Digital. Reconheça essa visão de longo prazo e pergunte sobre a evolução que ele presenciou na TI pública capixaba.</p>
+                <p style="margin-top:10px"><strong>2. Fale de integração entre estados:</strong> Na ABEP, ele liderou iniciativas de nuvem compartilhada e integração entre entidades estaduais. Mencionar como a Foursys pode ajudar a replicar boas práticas entre estados (como o modelo Poupatempo de SP) ressoará com sua visão colaborativa.</p>
+                <p style="margin-top:10px"><strong>3. Use referências internacionais:</strong> Com experiência em Angola, Uruguai e EUA, Victor tem visão global. Trazer benchmarks internacionais de governo digital (Estônia, Singapura, Reino Unido) e como a Foursys pode ajudar a SEG a atingir esse patamar será bem recebido.</p>
+                <p style="margin-top:10px"><strong>4. Conecte-se pelo PMI e governança:</strong> Sua formação inclui gestão de projetos PMI e governança de TIC. Demonstrar maturidade em gestão de projetos, metodologias ágeis e governança de entrega nos Squads Foursys estabelece credibilidade técnica imediata.</p>
+                <p style="margin-top:10px"><strong>5. Aborde o legado com respeito:</strong> Victor construiu sistemas que ainda estão em operação. Ao falar de modernização de legados, posicione como evolução (não substituição), enfatizando preservação de investimentos e migração gradual — isso respeitará o trabalho que ele ajudou a construir.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Diretor de TI e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma gerência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Membro: assento permanente, com voto.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">200 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Coprotagonista: co-lidera estratégia e orçamento, influencia metas de negócio.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:35%;background:#1a237e">35%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:16%;background:#1a237e">16%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#7986cb">3%</div></div></div>
+<div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#9fa8da">3%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#c5cae9">3%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">Crédito/Financiamento</span>
+<span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Referências e cases BR</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Roadmap e inovação</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+<span class="tag tag-active">Capilaridade/cobertura regional</span>
+<span class="tag tag-active">Residência de dados no BR</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Integrador / empresa de serviços (SI);Consultoria especializada</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 23 temas | Serviço Gerenciado: 1 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

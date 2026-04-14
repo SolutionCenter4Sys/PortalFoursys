@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CTO - Zaima Mendes Oliveira Milazzo | Algar</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Zaima Mendes Oliveira Milazzo</h1>
+                <h2>CTO — Algar</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Tecnologia e telecom | Uberlândia - MG</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 2,1 BI a R$ 3 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 200,1 MM a R$ 300 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Diminuirá até 10%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Algar</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Algar</strong> (anteriormente Algar Telecom) é a quinta maior empresa de telecomunicações do Brasil, fundada em 15 de fevereiro de 1954 por Alexandrino Garcia em Uberlândia (MG), originalmente como CTBC — Companhia de Telecomunicações do Brasil Central. Parte do <strong>Grupo Algar</strong>, a empresa é a única operadora brasileira que se manteve privada mesmo após a criação da Telebrás no regime militar. Em junho de 2025, a empresa adotou a marca simplificada "Algar", refletindo sua expansão para além da telefonia, abrangendo TI, IoT e Inteligência Artificial. Com faturamento de aproximadamente <strong>R$ 3,3 bilhões</strong> (2023) e mais de 4.200 colaboradores, a Algar opera em mais de 350 cidades em 16 estados e no Distrito Federal, com uma infraestrutura de 82.300 km de fibra óptica. Foi pioneira no lançamento comercial de <strong>5G no Brasil</strong> em dezembro de 2021. Em 2017, recebeu um aporte de R$ 1 bilhão do fundo soberano de Singapura (GIC), que adquiriu 25% das ações. A empresa opera o <strong>Brain</strong>, seu centro de inovação em negócios digitais, e mantém parcerias estratégicas com Google e Nokia Networks. Seu momento estratégico atual é de consolidação como provedora integrada de soluções de telecom, TI e transformação digital, com forte aposta em IA, hiperautomação e IoT.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Tecnologia e telecom</strong> com abrangência <strong>Local (Brasil)</strong>. Possui <strong>7 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>RFP/concorrência estruturada entre fornecedores qualificados</strong>. Perspectiva do orçamento de TI: <strong>Diminuirá até 10%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos e operações para ganho de eficiência</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Integrar equipes de TI e negócios para acelerar a entrega de valor</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar sistemas legados</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Orquestrar transformação digital</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Provar valor e ROI sob pressão de custos</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">CRM</span>
+<span class="tag tag-priority">Hiperautomação</span>
+<span class="tag tag-priority">Mobile apps / superapps</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">CRM</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">CPaaS / UCaaS / CCaaS</span>
+<span class="tag tag-active">IoT / edge computing</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Nuvem pública</span>
+<span class="tag tag-opportunity">Nuvem Privada e híbrida</span>
+<span class="tag tag-opportunity">Cibersegurança</span>
+<span class="tag tag-opportunity">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-opportunity">Low-code / no-code</span>
+<span class="tag tag-opportunity">CPaaS / UCaaS / CCaaS</span>
+<span class="tag tag-opportunity">IoT / edge computing</span>
+</div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Zaima Mendes Oliveira Milazzo</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 75</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Hiperautomação é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 73</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Low-code / no-code SEM fornecedor definido</li><li>Mobile apps / superapps é prioridade Top 3</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 72</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Nuvem pública SEM fornecedor definido</li><li>Nuvem Privada e híbrida SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 70</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Cibersegurança SEM fornecedor definido</li><li>Disaster recovery / continuidade de negócios SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Zaima Mendes Oliveira Milazzo tem como top prioridades <strong>CRM; Hiperautomação; Mobile apps / superapps</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>7 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 7 projetos definidos sem fornecedor: Nuvem pública, Nuvem Privada e híbrida, Cibersegurança, Disaster recovery / continuidade de negócios, Low-code / no-code e mais 2 temas. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Diminuirá até 10%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; FourBlox; Engenharia Digital. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. Rebranding estratégico para além da Telecom:</strong> A mudança de nome para "Algar" em junho de 2025 sinaliza uma reorientação estratégica — a empresa quer ser percebida como provedora integrada de tecnologia (TI, IoT, IA), não apenas telecomunicações. Posicionar ofertas da Foursys como aceleradoras dessa transformação de portfólio.<br><br>
+                <strong>2. Pressão competitiva pós-consolidação Oi:</strong> Com Vivo, Claro e TIM absorvendo a base móvel da Oi, a Algar enfrenta concorrentes maiores e mais capitalizados. A eficiência operacional via hiperautomação e IA é crítica para competir com custo menor — exatamente onde AI Squad e FourBlox se encaixam.<br><br>
+                <strong>3. 5G como catalisador de novos serviços:</strong> A Algar foi a primeira a ativar 5G comercial no Brasil (2021) e detém espectro nas faixas 2,3 GHz e 3,5 GHz. A monetização do 5G exige soluções de IoT/edge computing, CPaaS e aplicações móveis avançadas — todos listados como investimentos sem fornecedor definido.<br><br>
+                <strong>4. Brain como hub de inovação:</strong> O centro de inovação Brain, sob liderança direta de Zaima, é o motor de inovação digital da empresa. Isso indica abertura para parcerias com fornecedores de tecnologia que tragam metodologias ágeis, IA aplicada e capacitação — áreas centrais da oferta Foursys.<br><br>
+                <strong>5. Orçamento de TI em ajuste:</strong> Com perspectiva de redução de até 10% no orçamento de TI, a prioridade será ROI comprovado e TCO otimizado. Apresentar cases com métricas claras de redução de custo e aceleração de entrega será decisivo para conquistar espaço.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>📡 Vivo (Telefônica Brasil)</h4>
+                <p><strong>Posição:</strong> Líder de mercado — maior operadora de telecomunicações do Brasil, subsidiária da Telefónica (Espanha). Receita de R$ 64,6 bilhões (2021), presença em mais de 5.000 municípios e ~133 mil colaboradores. <strong>Iniciativas de TI:</strong> Forte investimento em 5G standalone, plataformas digitais de autoatendimento (App Vivo), soluções B2B de cloud e cibersegurança via Vivo Empresas, e parcerias com hyperscalers (AWS, Azure, Google Cloud). Aposta em IA generativa para atendimento ao cliente e operações de rede.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>📡 Claro (América Móvil)</h4>
+                <p><strong>Posição:</strong> Segunda maior operadora do Brasil, subsidiária da América Móvil (Grupo Carlos Slim, México). Atende mais de 80 milhões de clientes no país. <strong>Iniciativas de TI:</strong> Expansão agressiva de FTTH e 5G, plataforma Claro Cloud para soluções corporativas, investimentos em data centers próprios, oferta de IoT industrial e soluções de smart cities. Forte atuação em convergência de serviços (móvel + banda larga + TV + streaming).</p>
+            </div>
+            <div class="competitor-card">
+                <h4>📡 TIM Brasil</h4>
+                <p><strong>Posição:</strong> Terceira maior operadora móvel do Brasil, subsidiária da Telecom Italia. Adquiriu parte da base de clientes da Oi Móvel em 2022. <strong>Iniciativas de TI:</strong> Pioneira em Open RAN e redes 5G, forte investimento em automação de rede via IA/ML, plataforma TIM Empresas com soluções de cloud, cibersegurança e IoT. Programa de inovação aberta (TIM Open) para parcerias com startups de tecnologia.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>📡 Oi (em recuperação judicial)</h4>
+                <p><strong>Posição:</strong> Quarta maior operadora, focada agora exclusivamente em fibra óptica após vender sua operação móvel para Vivo, Claro e TIM em 2022. Possui a maior rede de fibra óptica neutra do Brasil via V.tal. <strong>Iniciativas de TI:</strong> Estratégia centrada em FTTH e infraestrutura de fibra neutra (V.tal), investimento em plataformas digitais simplificadas e operações lean, reposicionamento como provedora de conectividade de fibra para residencial e PMEs.</p>
+            </div>
+            <div class="insight-box">
+                <h4>📊 Gap Analysis — Onde a Algar pode se diferenciar</h4>
+                <p>Diferentemente das grandes operadoras nacionais, a Algar tem a vantagem de ser uma empresa <strong>regional com agilidade e proximidade do cliente</strong>. Os gaps exploráveis incluem: <strong>(1)</strong> As grandes operadoras (Vivo, Claro, TIM) possuem ofertas B2B massificadas com atendimento menos personalizado — a Algar pode se diferenciar com soluções sob medida e suporte consultivo via seu centro de inovação Brain; <strong>(2)</strong> A competição em IA e automação está concentrada em PoCs e pilotos — a Algar pode acelerar com parceiros especializados (como a Foursys) para entregar hiperautomação e IA aplicada com velocidade; <strong>(3)</strong> Em CRM e experiência do cliente, as grandes ainda operam com sistemas legados fragmentados — há espaço para a Algar implementar soluções modernas de CRM com visão 360° do cliente; <strong>(4)</strong> A Oi focou em fibra neutra e deixou de competir em serviços gerenciados — abrindo espaço regional para a Algar expandir em serviços de valor agregado como CPaaS, UCaaS e CCaaS.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Real</div>
+                        <div class="value">VP de Tecnologia, Evolução Digital, Agilidade e Inovação</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Engenharia Elétrica com especialização em Telecomunicações — UFU (Universidade Federal de Uberlândia)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Complementar</div>
+                        <div class="value">Gestão de Empresas — INSA/Lyon, França | Estratégia da Inovação — TAU, Universidade de Tel Aviv, Israel</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Tempo de Empresa</div>
+                        <div class="value">+25 anos na Algar (de um total de 28 anos de carreira)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória na Algar</div>
+                        <div class="value">Áreas comerciais → Consultoria corporativa → Direção de unidades de negócios de mídia → Desenvolvimento de produtos e inovação → VP de Tecnologia</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reconhecimento Recente</div>
+                        <div class="value">2º lugar — Executivo de TI do Ano 2025 (IT Forum), categoria Indústria Digital – TI e Telecom</div>
+                    </div>
+                </div>
+            </div>
+            <div class="info-card" style="margin-top:12px;margin-bottom:20px">
+                <div class="label">Presença Digital</div>
+                <div class="value">Ativa no LinkedIn com publicações sobre inovação, evolução digital e cultura de agilidade. Responsável pelo Brain (centro de inovação da Algar).</div>
+            </div>
+            <div class="insight-box">
+                <h4>🤝 5 Dicas de Rapport para a Conversa</h4>
+                <p><strong>1. Valorize a longevidade e lealdade:</strong> Zaima tem +25 anos na Algar — uma trajetória rara. Reconhecer essa dedicação e perguntar sobre a evolução que ela presenciou demonstra respeito genuíno e abre espaço para conexão pessoal.<br><br>
+                <strong>2. Conecte pela inovação, não só por tecnologia:</strong> Sua formação em Estratégia da Inovação (Tel Aviv) e o papel à frente do Brain indicam que ela pensa além da tecnologia — fale de inovação aplicada ao negócio, design thinking e cultura ágil, não apenas de ferramentas.<br><br>
+                <strong>3. Referencie o reconhecimento no IT Forum:</strong> O 2º lugar como Executiva de TI do Ano 2025 é uma conquista recente e significativa. Parabenizá-la de forma natural na conversa demonstra que você fez o dever de casa e valoriza suas realizações.<br><br>
+                <strong>4. Fale a língua de quem construiu carreira internamente:</strong> Zaima cresceu dentro da Algar, passando por áreas comerciais, mídia e inovação. Ela conhece a empresa profundamente — evite abordagens genéricas e mostre que entende as especificidades do segmento telecom regional.<br><br>
+                <strong>5. Aborde a transformação de marca como tema de conversa:</strong> A mudança de "Algar Telecom" para "Algar" é recente e estratégica. Perguntar como essa transição impacta a estratégia tecnológica demonstra interesse genuíno pelo momento da empresa e pode revelar oportunidades latentes.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CTO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao COO/Operações</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Membro: assento permanente, com voto.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Co-decisão TI + Negócios</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">200 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:26%;background:#1a237e">26%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#1a237e">18%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">12%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:9%;background:#5c6bc0">9%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#7986cb">8%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#9fa8da">8%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#c5cae9">1%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Integrador / empresa de serviços (SI);Consultoria especializada;Start-up / scale-up;MSP / outsourcing gerenciado;Hiperscaler / parceiro cloud</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Projeto: 18 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

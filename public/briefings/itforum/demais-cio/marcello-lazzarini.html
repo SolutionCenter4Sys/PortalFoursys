@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Marcello Lazzarini | Rede Materdei de Saúde</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Marcello Lazzarini</h1>
+                <h2>CIO — Rede Materdei de Saúde</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Saúde | Belo Horizonte - MG</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 3,1 BI a R$ 4 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 100,1 MM a R$ 200 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá até 10%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Rede Materdei de Saúde</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Rede Mater Dei de Saúde</strong> foi fundada em 1º de junho de 1980 em Belo Horizonte pelo médico José Salvador Silva, o "Doutor Salvador". Inicialmente uma única unidade hospitalar, cresceu ao longo de mais de 45 anos até se tornar uma das maiores redes hospitalares privadas do Brasil, com <strong>9 unidades operacionais</strong> distribuídas por Minas Gerais (Santo Agostinho, Contorno, Betim-Contagem, Nova Lima e Uberlândia), Bahia (Salvador e Feira de Santana) e Goiás (Goiânia), somando aproximadamente <strong>2.000 leitos hospitalares</strong>. Em 2021, a empresa abriu capital na B3 e levantou R$ 1,4 bilhão para financiar sua agressiva expansão — uma 10ª unidade em São Paulo está prevista para o final de 2028. Quatro unidades possuem <strong>acreditação internacional JCI</strong> (Joint Commission International), referência global em qualidade assistencial. A gestão é familiar, com três gerações da família Salvador à frente: José Henrique Salvador assumiu como CEO em 2023 e Henrique Moraes Salvador Silva atua como chairman. O momento estratégico é de <strong>crescimento acelerado e transformação digital</strong>, com foco em expansão geográfica, eficiência operacional via tecnologia e consolidação como player nacional de saúde de alta complexidade. A rede foi reconhecida entre as 100 empresas mais inovadoras no uso de TI pelo prêmio 100+ Inovadoras do IT Forum.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Saúde</strong> com abrangência <strong>Local (Brasil)</strong>. Possui <strong>20 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>RFP/concorrência estruturada entre fornecedores qualificados</strong>. Perspectiva do orçamento de TI: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos e operações para ganho de eficiência</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Elevar a experiência de clientes e colaboradores (CX/EX)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Priorizar portfólio em meio a excesso de demandas</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Provar valor e ROI sob pressão de custos</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Nuvem Privada e híbrida</span>
+<span class="tag tag-priority">Cibersegurança</span>
+<span class="tag tag-priority">IA Generativa</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">CRM</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">HCM</span>
+<span class="tag tag-active">BPM</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">Workplace e end-user computing</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">Realidade estendida (VR/AR/MR)</span>
+<span class="tag tag-active">CPaaS / UCaaS / CCaaS</span>
+<span class="tag tag-active">IoT / edge computing</span>
+<span class="tag tag-active">GRC, compliance e auditoria</span>
+<span class="tag tag-active">Sistemas core</span>
+<span class="tag tag-active">Sustentabilidade e green IT</span>
+<span class="tag tag-active">ITSM/ESM e service desk</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Infraestrutura de redes</span>
+<span class="tag tag-opportunity">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-opportunity">Nuvem pública</span>
+<span class="tag tag-opportunity">Nuvem Privada e híbrida</span>
+<span class="tag tag-opportunity">Cibersegurança</span>
+<span class="tag tag-opportunity">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-opportunity">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-opportunity">IA / ML</span>
+<span class="tag tag-opportunity">IA Generativa</span>
+<span class="tag tag-opportunity">CRM</span>
+<span class="tag tag-opportunity">Low-code / no-code</span>
+<span class="tag tag-opportunity">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-opportunity">Automação de processos / RPA</span>
+<span class="tag tag-opportunity">Hiperautomação</span>
+<span class="tag tag-opportunity">Workplace e end-user computing</span>
+<span class="tag tag-opportunity">CPaaS / UCaaS / CCaaS</span>
+<span class="tag tag-opportunity">IoT / edge computing</span>
+<span class="tag tag-opportunity">GRC, compliance e auditoria</span>
+<span class="tag tag-opportunity">Sustentabilidade e green IT</span>
+<span class="tag tag-opportunity">ITSM/ESM e service desk</span>
+</div><div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria/assessment):</h4>
+                <div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Realidade estendida (VR/AR/MR)</span>
+</div>
+            </div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Marcello Lazzarini</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML SEM fornecedor definido</li><li>IA Generativa SEM fornecedor definido</li><li>IA Generativa é prioridade Top 3 de investimento</li><li>Hiperautomação SEM fornecedor definido</li><li>Automação de processos / RPA SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Infraestrutura de redes SEM fornecedor definido</li><li>Nuvem pública SEM fornecedor definido</li><li>Nuvem Privada e híbrida SEM fornecedor definido</li><li>Nuvem Privada e híbrida é prioridade Top 3</li><li>Workplace e end-user computing SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Cibersegurança SEM fornecedor definido</li><li>Cibersegurança é prioridade Top 3</li><li>Disaster recovery / continuidade de negócios SEM fornecedor definido</li><li>Segurança de dados e privacidade (LGPD/DLP) SEM fornecedor definido</li><li>GRC, compliance e auditoria SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 93</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Low-code / no-code SEM fornecedor definido</li><li>Automação de processos / RPA SEM fornecedor definido</li><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 80</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li><li>APIs e integração com investimento inicial previsto</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Marcello Lazzarini tem como top prioridades <strong>Nuvem Privada e híbrida; Cibersegurança; IA Generativa</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>20 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 20 projetos definidos sem fornecedor: Infraestrutura de redes, Armazenamento, backup e imutabilidade, Nuvem pública, Nuvem Privada e híbrida, Cibersegurança e mais 15 temas. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; Engenharia Digital; Cibersegurança. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. IA como copiloto clínico:</strong> O setor hospitalar brasileiro está migrando a IA de ferramenta administrativa para copiloto clínico robusto — agentes inteligentes de faturamento já processam contas 10x mais rápido com 98% de eficiência. A Materdei, com 20 projetos sem fornecedor em IA/ML e IA Generativa, está na janela ideal para implementar. 17% dos médicos brasileiros já utilizam IA generativa na rotina.</p>
+                <p style="margin-top:10px"><strong>2. Cibersegurança hospitalar sob pressão regulatória:</strong> Com a LGPD e a expansão para múltiplos estados (MG, BA, GO, SP), a superfície de ataque da Materdei cresce exponencialmente. Cibersegurança é prioridade Top 3 do CIO e há projetos sem fornecedor em segurança de dados, DLP, DR e GRC — convergência perfeita para a oferta Foursys com ISO 27001/27701.</p>
+                <p style="margin-top:10px"><strong>3. Corrida da interoperabilidade:</strong> O padrão HL7 FHIR e o conceito de "Open Health" estão se tornando infraestrutura crítica no Brasil. Com 9 unidades (em breve 10) em 4 estados, a Materdei precisará de integração de sistemas core, prontuário unificado e APIs robustas — áreas onde a Foursys atua com Modernização de Legado e parceria Digibee (iPaaS).</p>
+                <p style="margin-top:10px"><strong>4. Hospital em Casa e IoT Médica:</strong> A hospitalização domiciliar está evoluindo de piloto para linha de receita essencial, com bioadesivos e roupas inteligentes. A Materdei investirá em IoT/edge computing (projeto sem fornecedor) — oportunidade para a Engenharia Digital Foursys.</p>
+                <p style="margin-top:10px"><strong>5. Automação libera 30% da carga de enfermagem:</strong> Estudos mostram que ~30% do trabalho de enfermagem é administrativo. Com investimentos planejados em RPA, hiperautomação e BPM (todos sem fornecedor), a Materdei pode capturar ganhos operacionais massivos na expansão — tema central para o ROI que Lazzarini precisa comprovar.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Rede D'Or São Luiz</h4>
+                <p><strong>Maior rede hospitalar privada do Brasil</strong> com mais de 70 hospitais. Implementou estratégia "figital" integrando experiência digital e física. Lançou app próprio em jan/2026 com 100 mil downloads em 10 dias, 5,7 milhões de consultas agendadas online e 47,2 milhões de exames entregues digitalmente (+73%). Utiliza IA em leitura de laudos, apoio à decisão e pesquisa oncológica (publicação na Nature Communications). Possui assistente digital "Dora" para resolução automatizada de demandas e totens de autoatendimento com biometria nas unidades.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Hapvida NotreDame Intermédica</h4>
+                <p><strong>Maior operadora de saúde da América Latina</strong> com 16 milhões de beneficiários. Conduz 150 projetos de IA com 200+ modelos, sendo 39 já integrados à rotina. Destaque para o sistema "AutoCID" (classificação automática de doenças com 97,66% de acurácia em 6 milhões de atendimentos) e programa "Navegar" que reduziu em 75% o tempo entre investigação e diagnóstico oncológico. Opera com prontuário único e dados integrados em escala nacional. Recebeu acreditação PADI com 98% de conformidade.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Dasa</h4>
+                <p><strong>Maior rede de medicina diagnóstica do Brasil</strong> e segundo maior grupo hospitalar (3 mil leitos). Investiu R$ 7 bilhões em aquisições desde 2017. Lançou a plataforma digital "Nav" que hoje possui 12 milhões de usuários e 89 mil médicos conectados. Desenvolveu 30+ modelos de IA aplicados a diagnósticos, incluindo algoritmos de NLP que analisam 6 a 10 mil laudos diariamente. Opera um dos maiores data lakes privados do setor de saúde brasileiro.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Hospital Israelita Albert Einstein</h4>
+                <p><strong>Referência em inovação hospitalar na América Latina</strong>, eleito a organização mais inovadora do Brasil em 2024 e primeiro hospital da América Latina no ranking World's Best Smart Hospitals (Newsweek). Opera ~120 algoritmos de IA em diversas áreas assistenciais. Desenvolveu o "HStory" (big data + IA generativa para histórico do paciente) e possui parque de cirurgia robótica de última geração. Inaugurará em 2026 Centros Colaborativos de Inovação (2.500 m²) com big techs e farmacêuticas.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Materdei</h4>
+                <p>A Rede Materdei possui <strong>posicionamento competitivo intermediário</strong> em maturidade digital: é reconhecida entre as 100+ Inovadoras, mas concorrentes como D'Or, Dasa e Einstein já operam plataformas digitais proprietárias com milhões de usuários, dezenas de modelos de IA em produção e data lakes consolidados. <strong>Gaps críticos identificados:</strong> (1) Ausência de plataforma digital unificada para o paciente — D'Or e Dasa já possuem apps com alta adoção; (2) IA em estágio inicial vs. concorrentes com 30-120 algoritmos em produção; (3) Interoperabilidade e dados — a expansão para 10 unidades em múltiplos estados exigirá prontuário unificado e data lake robusto; (4) Cibersegurança em contexto de crescimento — a abertura de capital e expansão geográfica ampliam a superfície de ataque. A Foursys pode se posicionar como <strong>parceira aceleradora</strong> nesses gaps, especialmente em IA/ML, cibersegurança e modernização de legados.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Bacharelado em Ciência da Computação | MBA em Gestão Empresarial</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Certificações</div>
+                        <div class="value">PMP, ITIL, Professional Scrum Master, COBIT, Oracle Certified Associate</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência</div>
+                        <div class="value">+23 anos em TI executiva | Na Materdei desde outubro/2020</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória Profissional</div>
+                        <div class="value">CIO na TORA (logística) | CIO na Fundação São Francisco Xavier | CDO no Grupo Pardini (diagnósticos)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Idiomas</div>
+                        <div class="value">Português, Inglês e Espanhol (fluente)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn ativo — publica sobre inovação e reconhecimentos da Materdei (ex: 100+ Inovadoras IT Forum)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p><strong>1. Valorize a jornada cross-industry:</strong> Lazzarini passou por logística (TORA), siderurgia (FSFX), diagnósticos (Pardini) e agora saúde hospitalar. Pergunte como essa diversidade de setores moldou sua visão de TI — isso demonstra que você pesquisou e valoriza sua experiência além da Materdei.</p>
+                <p style="margin-top:8px"><strong>2. Fale a linguagem de governança:</strong> Com certificações PMP, ITIL, COBIT e Scrum Master, Lazzarini é um executivo orientado a processos e frameworks. Apresente propostas com métricas claras, SLAs, ROI e TCO — ele vai se conectar com essa abordagem estruturada.</p>
+                <p style="margin-top:8px"><strong>3. Mencione o prêmio 100+ Inovadoras:</strong> Ele publicou com orgulho no LinkedIn sobre o reconhecimento da Materdei entre as empresas mais inovadoras. Parabenize e pergunte quais iniciativas foram determinantes — é um gatilho de rapport genuíno e abre espaço para entender prioridades.</p>
+                <p style="margin-top:8px"><strong>4. Conecte com o desafio da escala:</strong> A Materdei saltou de uma operação concentrada em BH para 9 unidades em 4 estados. Pergunte sobre os desafios de padronizar e escalar TI nesse crescimento acelerado — tema que ressoa com qualquer CIO em expansão e abre portas para ofertas de cloud, integração e cibersegurança.</p>
+                <p style="margin-top:8px"><strong>5. Traga referência do Grupo Pardini:</strong> Lazzarini foi CDO no Grupo Pardini (hoje parte da Dasa), concorrente direto no ecossistema de saúde. Ele conhece bem os avanços da Dasa em IA e plataformas digitais. Referencie cases de IA em saúde e mostre como a Foursys pode ajudar a Materdei a competir nesse nível — ele entenderá imediatamente o benchmark.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma vice-presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Regular: participa com frequência, sem ser membro.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">100 a 199</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#1a237e">15%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#5c6bc0">15%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#5c6bc0">7%</div></div></div>
+<div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#c5cae9">3%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Roadmap e inovação</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Integrador / empresa de serviços (SI);Consultoria especializada;Start-up / scale-up;ISV de nicho / produto específico</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 17 temas | Projeto: 11 temas | Serviço Gerenciado: 1 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

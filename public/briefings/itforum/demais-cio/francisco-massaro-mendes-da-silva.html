@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Francisco Massaro Mendes da Silva | ELIS</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Francisco Massaro Mendes da Silva</h1>
+                <h2>CIO — ELIS</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Serviços especializados | Jundiaí - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">Acima de R$ 15 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 500,1 MM a R$ 1 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá até 10%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: ELIS</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>ELIS</strong> é uma multinacional francesa líder global em <strong>serviços circulares</strong>, especializada em locação e higienização de têxteis profissionais, incluindo uniformes, roupas de cama, toalhas industriais, tapetes e serviços de sala limpa (cleanroom). Fundada na França e com sede em Saint-Cloud, a empresa reportou receita de <strong>€4,8 bilhões em 2025</strong> (+4,9% vs. 2024), com EBITDA ajustado de €1,7 bilhão (margem de 35,4%). Cerca de 69% da receita está alinhada com a taxonomia europeia de economia circular, reforçando seu posicionamento sustentável.</p>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">No <strong>Brasil</strong>, a ELIS opera desde 2014, quando adquiriu a <strong>Atmosfera Gestão & Higienização de Têxteis</strong>, sediada em Jundiaí-SP. Em 2017, consolidou sua posição com a aquisição da <strong>Lavebras</strong> (segunda maior do setor), reforçando a estratégia de consolidação do mercado. A empresa atende segmentos como <strong>saúde, hotelaria, indústria (química, farmacêutica, alimentícia), varejo e serviços gerais</strong>, com presença em múltiplos estados e operações em cinco países da América Latina.</p>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)"><strong>Momento Estratégico:</strong> A ELIS está em plena fase de <strong>unificação e regionalização da TI na América Latina</strong>, consolidando sistemas e processos que antes operavam de forma descentralizada em cada país. Com a chegada de Francisco Massaro como CIO LatAm em abril/2025, a empresa busca elevar a maturidade tecnológica da região, alinhar-se à estratégia global da matriz francesa e modernizar legados — um cenário que abre diversas oportunidades para parceiros de tecnologia.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Serviços especializados</strong> com abrangência <strong>Global</strong>. Possui <strong>4 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>RFP/concorrência estruturada entre fornecedores qualificados</strong>. Perspectiva do orçamento de TI: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Aumentar confiabilidade e observabilidade (SRE)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Elevar a experiência de clientes e colaboradores (CX/EX)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Otimizar custos e eficiência (FinOps/SecFinOps)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Provar valor e ROI sob pressão de custos</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Outro</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-priority">Hiperautomação</span>
+<span class="tag tag-priority">ITSM/ESM e service desk</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">CRM</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">HCM</span>
+<span class="tag tag-active">BPM</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">Workplace e end-user computing</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">Realidade estendida (VR/AR/MR)</span>
+<span class="tag tag-active">IoT / edge computing</span>
+<span class="tag tag-active">Sistemas core</span>
+<span class="tag tag-active">ITSM/ESM e service desk</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Gestão de dados</span>
+<span class="tag tag-opportunity">IA / ML</span>
+<span class="tag tag-opportunity">IA Generativa</span>
+<span class="tag tag-opportunity">Desenvolvimento e modernização de legados</span>
+</div><div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria/assessment):</h4>
+                <div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Disaster recovery / continuidade de negócios</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">APIs e integração</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">BPM</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Automação de processos / RPA</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Hiperautomação</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Realidade estendida (VR/AR/MR)</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IoT / edge computing</span>
+</div>
+            </div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Francisco Massaro Mendes da Silva</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML SEM fornecedor definido</li><li>IA Generativa SEM fornecedor definido</li><li>Hiperautomação com investimento inicial previsto</li><li>Hiperautomação é prioridade Top 3 de investimento</li><li>Automação de processos / RPA com investimento inicial previsto</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li><li>Desenvolvimento e modernização de legados é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 73</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li><li>Desenvolvimento e modernização de legados é prioridade Top 3</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 60</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Potencial para plataformas digitais e cloud</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Francisco Massaro Mendes da Silva tem como top prioridades <strong>Desenvolvimento e modernização de legados; Hiperautomação; ITSM/ESM e service desk</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>4 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 4 projetos definidos sem fornecedor: Gestão de dados, IA / ML, IA Generativa, Desenvolvimento e modernização de legados. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; Modernização de Legado; FourBlox. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p>1. <strong>Unificação de TI LatAm:</strong> Francisco Massaro está liderando a consolidação de sistemas de 5 países que operam de forma descentralizada — projetos de integração, ERP e APIs são pauta imediata. Perguntar sobre os desafios dessa unificação é um excelente gancho.</p>
+                <p style="margin-top:8px">2. <strong>Economia Circular como DNA:</strong> 69% da receita global da ELIS está alinhada à economia circular. Mostrar como soluções de IA, IoT e gestão de dados podem otimizar a rastreabilidade têxtil (RFID), logística reversa e previsão de demanda agrega valor direto ao core business.</p>
+                <p style="margin-top:8px">3. <strong>Setor em Consolidação:</strong> O mercado de lavanderia industrial no Brasil é altamente fragmentado. A ELIS já adquiriu Atmosfera e Lavebras — futuras aquisições exigem integração rápida de sistemas, onde modernização de legados e hiperautomação são críticos.</p>
+                <p style="margin-top:8px">4. <strong>Perfil Acadêmico do CIO:</strong> Francisco é professor de MBA em Agritecnologia na FIAP com foco em Indústria 5.0 e IA. Conversar sobre inovação tecnológica com profundidade técnica e casos de uso de IA será bem recebido — ele valoriza a visão estratégica da tecnologia.</p>
+                <p style="margin-top:8px">5. <strong>Scale de Operação:</strong> Com mais de 10.000 colaboradores e operação em múltiplos estados/países, desafios de ITSM/ESM, observabilidade e SRE são reais e urgentes para garantir disponibilidade dos serviços operacionais.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Principais concorrentes da ELIS no mercado de serviços circulares e lavanderia industrial:</p>
+            <div class="competitor-card">
+                <h4>Alsco Uniforms</h4>
+                <p><strong>Perfil:</strong> Multinacional americana fundada em 1889, presente no Brasil desde 1944. Opera com 15 unidades em 12 estados brasileiros e 180 unidades globais em 12 países. Especializada em locação de uniformes, toalhas, tapetes e higienização de EPIs.</p>
+                <p style="margin-top:8px"><strong>Setores:</strong> Agronegócio, alimentício, farmacêutico, industrial, saúde e hotelaria.</p>
+                <p style="margin-top:8px"><strong>Iniciativas Tech:</strong> Investimentos em rastreabilidade RFID, sistemas de gestão de inventário têxtil e logística automatizada. Plataforma digital de gestão de pedidos para clientes.</p>
+                <p style="margin-top:8px"><strong>Gap vs ELIS:</strong> Menor presença hospitalar no Brasil; modelo mais focado em uniformes industriais. ELIS tem portfólio mais amplo (cleanroom, hospitalar).</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Rentokil Initial</h4>
+                <p><strong>Perfil:</strong> Multinacional britânica com receita global superior a £5 bilhões. No Brasil, atua com serviços de higiene, controle de pragas e têxteis para banheiros. Presença em mais de 80 países.</p>
+                <p style="margin-top:8px"><strong>Setores:</strong> Varejo, alimentício, saúde, hotelaria e escritórios corporativos.</p>
+                <p style="margin-top:8px"><strong>Iniciativas Tech:</strong> Plataforma digital myRentokil para monitoramento IoT de dispositivos de higiene, dashboards de consumo e manutenção preditiva. Forte investimento em dados e analytics.</p>
+                <p style="margin-top:8px"><strong>Gap vs ELIS:</strong> Foco mais estreito em higiene e pest control; menor escala em locação de uniformes e enxoval hospitalar no Brasil.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Cintas Corporation</h4>
+                <p><strong>Perfil:</strong> Gigante americana com receita anual superior a US$ 9 bilhões. Líder global em uniformes corporativos, proteção contra incêndio e produtos de segurança. Presença predominante na América do Norte.</p>
+                <p style="margin-top:8px"><strong>Setores:</strong> Industrial, saúde, alimentício, hotelaria e serviços gerais.</p>
+                <p style="margin-top:8px"><strong>Iniciativas Tech:</strong> Plataforma digital de gestão de uniformes, sistemas de rastreamento por chip RFID, automação de plantas industriais com robótica e IA para otimização de rotas logísticas.</p>
+                <p style="margin-top:8px"><strong>Gap vs ELIS:</strong> Presença limitada na América Latina; não compete diretamente no Brasil, mas representa benchmark global de maturidade tecnológica para a ELIS.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>BioLimp</h4>
+                <p><strong>Perfil:</strong> Empresa brasileira com mais de 40 anos de atuação em higienização têxtil. Focada nos segmentos hospitalar, industrial e empresarial, com conformidade às normas da ANVISA.</p>
+                <p style="margin-top:8px"><strong>Setores:</strong> Hospitalar (principal), industrial e corporativo.</p>
+                <p style="margin-top:8px"><strong>Iniciativas Tech:</strong> Sistemas de rastreabilidade de enxoval, controle microbiológico e gestão de rouparia com foco em compliance sanitário.</p>
+                <p style="margin-top:8px"><strong>Gap vs ELIS:</strong> Escala regional, sem presença internacional. Menor investimento em transformação digital e IA. Vulnerável a aquisições pela ELIS ou Alsco.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CIO Latin America — ELIS (desde abr/2025)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Anterior</div>
+                        <div class="value">CDO LatAm na Ingredion (2024-2025) · Head de Transformação Digital na Ingredion (2021-2024) · Passagens por PepsiCo, Bausch Health e Unilever</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">MSc (Mestrado) · MBA · Professor e Coordenador do MBA em Agritecnologia na FIAP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Total</div>
+                        <div class="value">+20 anos em TI e transformação digital</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">LinkedIn</div>
+                        <div class="value"><a href="https://linkedin.com/in/franciscomassaro" target="_blank">linkedin.com/in/franciscomassaro</a></div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Foco Estratégico na ELIS</div>
+                        <div class="value">Regionalização de TI · Governança · Integração de sistemas entre 5 países · Elevação da maturidade tecnológica</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Interesses Acadêmicos</div>
+                        <div class="value">IA aplicada · Indústria 5.0 · Inovação digital centrada no humano · Agritecnologia</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Comunicação</div>
+                        <div class="value">Executivo técnico com visão estratégica, ativo no LinkedIn, compartilha reflexões sobre transformação digital</div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:20px">
+                <h4 style="color:var(--primary);margin-bottom:12px">5 Dicas de Rapport para a Conversa</h4>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Mencione Indústria 5.0 e IA centrada no humano:</strong> Francisco é professor de MBA na FIAP com foco em inovação digital e Indústria 5.0. Demonstrar conhecimento sobre IA aplicada de forma human-centric vai gerar identificação imediata.</div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Pergunte sobre o desafio de unificar a TI LatAm:</strong> Ele assumiu a missão de integrar sistemas de 5 países que operavam de forma descentralizada. Mostrar empatia com a complexidade deste desafio e apresentar cases de integração regional é altamente relevante.</div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Valorize sua trajetória em multinacionais de consumo:</strong> Com passagem por PepsiCo, Unilever, Bausch Health e Ingredion, Francisco tem DNA de operação global e supply chain complexo. Referências a esses setores mostram preparo.</div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Aborde a economia circular com dados:</strong> A ELIS tem 69% da receita alinhada à economia circular. Conectar soluções de tecnologia (IoT, rastreabilidade, IA preditiva) à sustentabilidade do modelo de negócio mostra entendimento do core business.</div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Conecte transformação digital com resultados operacionais:</strong> Francisco vem de uma trajetória como CDO e Head de Transformação Digital. Ele valoriza tecnologia que gera impacto mensurável no negócio — traga métricas, ROI e casos de sucesso concretos.</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Membro: assento permanente, com voto.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">100 a 499</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">100 a 199</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#3949ab">20%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#c5cae9">2%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Roadmap e inovação</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Capilaridade/cobertura regional</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Integrador / empresa de serviços (SI);Consultoria especializada;Start-up / scale-up;ISV de nicho / produto específico;MSP / outsourcing gerenciado;Hiperscaler / parceiro cloud</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 15 temas | Serviço Gerenciado: 8 temas | Projeto: 1 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

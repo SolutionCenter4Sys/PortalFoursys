@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Marcello José da Fonsêca Borges | SOMAH (Queiroz Galvão)</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Marcello José da Fonsêca Borges</h1>
+                <h2>CIO — SOMAH (Queiroz Galvão)</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Grupos e conglomerados | Rio de Janeiro - RJ</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 8,1 BI a R$ 9 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 100,1 MM a R$ 200 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá até 10%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: SOMAH (Queiroz Galvão)</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>SOMAH Investimentos e Participações S.A.</strong> é a holding do Grupo Queiroz Galvão, conglomerado industrial fundado em 1953 no Recife (PE) com sede atual no Rio de Janeiro. O grupo emprega cerca de 40 mil colaboradores e possui atuação global — com presença em todos os estados brasileiros e em países da América Latina e África, além de exportações para EUA, Canadá e Europa. Sob a gestão da SOMAH, estão empresas como <strong>Alya Construtora</strong>, <strong>Vital Engenharia Ambiental</strong>, <strong>Timbaúba S/A</strong>, <strong>EGTC Infra</strong> e a própria SOMAH Investimentos, atuando em setores como construção civil, engenharia ambiental, agronegócio, infraestrutura e desenvolvimento imobiliário. A empresa vive um momento de transformação relevante: sob a liderança de TI de Marcello Borges (CIO desde 2016), o grupo tem investido em <strong>transformação digital, cibersegurança e Indústria 5.0</strong>, buscando integrar tecnologia de ponta em operações diversificadas. O faturamento na faixa de R$ 8,1 a 9 bilhões e a perspectiva de crescimento de até 10% no orçamento de TI indicam um ciclo de investimentos ativo e estratégico.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Grupos e conglomerados</strong> com abrangência <strong>Global</strong>. Possui <strong>5 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>Direto com fornecedoríbrido por categoria/ticket — varia conforme valor/risco.</strong>. Perspectiva do orçamento de TI: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos e operações para ganho de eficiência</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Desenvolver / ampliar iniciativas de sustentabilidade / green IT</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Fomentação da cultura de inovação na área de TI e organização</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-priority">IA / ML</span>
+<span class="tag tag-priority">IoT / edge computing</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">Workplace e end-user computing</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">IoT / edge computing</span>
+<span class="tag tag-active">GRC, compliance e auditoria</span>
+<span class="tag tag-active">Sistemas core</span>
+<span class="tag tag-active">Sustentabilidade e green IT</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Conectividade e telecom</span>
+<span class="tag tag-opportunity">Gestão de dados</span>
+<span class="tag tag-opportunity">Workplace e end-user computing</span>
+<span class="tag tag-opportunity">GRC, compliance e auditoria</span>
+<span class="tag tag-opportunity">Sustentabilidade e green IT</span>
+</div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Marcello José da Fonsêca Borges</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Nuvem Privada e híbrida com investimento previsto</li><li>Conectividade e telecom SEM fornecedor definido</li><li>Workplace e end-user computing SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Disaster recovery / continuidade de negócios é prioridade Top 3</li><li>GRC, compliance e auditoria SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 75</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Marcello José da Fonsêca Borges tem como top prioridades <strong>Disaster recovery / continuidade de negócios; IA / ML; IoT / edge computing</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>5 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 5 projetos definidos sem fornecedor: Conectividade e telecom, Gestão de dados, Workplace e end-user computing, GRC, compliance e auditoria, Sustentabilidade e green IT. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: Engenharia Digital; Cibersegurança; AI Squad. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. Indústria 5.0 — tema central para Marcello:</strong> O CIO participou de podcast dedicado à transição da Indústria 4.0 para 5.0, enfatizando o fator humano na tecnologia. Use este tema como ponte: a Foursys, com seu modelo de squads, coloca pessoas no centro da entrega tecnológica.</p>
+                <p style="margin-top:10px"><strong>2. Green IT é vantagem competitiva inexplorada:</strong> Apenas 1 em cada 3 empresas brasileiras investe em TI verde, e nenhum setor atingiu maturidade avançada nesta área. A SOMAH tem "Sustentabilidade e Green IT" como projeto sem fornecedor — posicionar-se aqui é ocupar um espaço vazio no mercado.</p>
+                <p style="margin-top:10px"><strong>3. Centralização de dados em holdings é tendência urgente:</strong> Grandes conglomerados brasileiros estão reorganizando suas estruturas para integrar dados e IA de forma centralizada entre unidades de negócio. A SOMAH gerencia 5+ empresas diversificadas — uma plataforma de dados unificada pode gerar inteligência operacional em escala.</p>
+                <p style="margin-top:10px"><strong>4. Cybersegurança como DNA comprovado:</strong> Marcello ganhou o prêmio de Melhor Projeto de Cybersegurança em 2019. Destacar as certificações ISO 27001/27701 da Foursys como extensão natural dessa cultura de segurança já estabelecida.</p>
+                <p style="margin-top:10px"><strong>5. 50-60% dos dados brasileiros são processados no exterior:</strong> Há uma pressão crescente por soberania de dados e data centers locais. Para um grupo global como a SOMAH, estratégias de nuvem híbrida e edge computing (IoT é prioridade Top 3) são críticas para manter compliance e performance.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Grupo Votorantim</h4>
+                <p><strong>Setor:</strong> Conglomerado diversificado (cimento, metais, energia, finanças, agronegócio). Receita superior a R$ 50 bilhões. Referência em governança corporativa e inovação, com forte investimento em transformação digital centralizada, plataformas de dados integradas entre unidades de negócio e automação industrial. Possui braço de venture capital (Votorantim Ventures) para startups de tecnologia.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Andrade Gutierrez</h4>
+                <p><strong>Setor:</strong> Construção, infraestrutura, concessões e telecomunicações. 2ª maior construtora do Brasil, opera em 28+ países. Possui divisão AG Telecom dedicada a telecomunicações e conectividade. Mais de mil projetos concluídos em transportes, energia, mineração e saneamento. Forte investimento em BIM (Building Information Modeling), IoT para canteiros de obra e sustentabilidade — com 65 usinas hidrelétricas e parques eólicos gerando 10GW de capacidade instalada.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Novonor (ex-Odebrecht)</h4>
+                <p><strong>Setor:</strong> Engenharia, petroquímica (Braskem) e infraestrutura. Em reestruturação estratégica, o grupo tem investido em digitalização de processos construtivos, gestão de ativos com IA e integração de plataformas ERP/SAP em larga escala. Forte atuação em América Latina e África, com foco em eficiência operacional e compliance pós-reestruturação.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Grupo Edson Queiroz</h4>
+                <p><strong>Setor:</strong> Energia (GLP), bens de consumo, mídia e comunicação. Receita recorde de R$ 12,8 bilhões em 2024, com investimentos superiores a R$ 1 bilhão previstos para 2026. Vem acelerando a transformação digital com foco em supply chain inteligente, automação logística e plataformas de dados para tomada de decisão em tempo real nas suas múltiplas verticais de negócio.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidade Foursys</h4>
+                <p>Os concorrentes da SOMAH estão investindo agressivamente em <strong>centralização de dados e IA entre unidades de negócio</strong>, <strong>IoT/edge computing para operações industriais</strong> e <strong>sustentabilidade/Green IT</strong>. A SOMAH possui 5 projetos sem fornecedor definido — incluindo justamente Sustentabilidade/Green IT e Gestão de Dados — áreas em que os concorrentes já avançam. A Foursys pode se posicionar como parceira estratégica para <strong>fechar esse gap competitivo</strong>, oferecendo Engenharia Digital para integração de plataformas, AI Squad para aceleração de IA/ML e Cibersegurança para proteção dos dados unificados. O diferencial é a capacidade de entregar <strong>velocidade de implementação</strong> enquanto concorrentes dependem de consultorias globais com ciclos mais longos.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">MSc em Ciência da Computação — UFPE</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">MBA</div>
+                        <div class="value">Gestão com Ênfase em Liderança e Inovação — FGV</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Pós-Graduação</div>
+                        <div class="value">Engenharia de Software</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência</div>
+                        <div class="value">+27 anos em TI | CIO da SOMAH desde julho/2016</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Prêmios e Reconhecimentos</div>
+                        <div class="value">CIO Destaque 2019 (Sudeste e RJ) · Melhor Projeto de Cybersegurança 2019 · 1º lugar em Holdings/Grupos Empresariais — As 100+ Inovadoras em TI 2019 · Finalista Executivo de TI do Ano 2025</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn ativo · Participação em podcasts (Os Agilistas, ep. 321 — Indústria 5.0) · Palestrante em eventos de TI</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Temas de Interesse</div>
+                        <div class="value">Indústria 5.0 · Transformação Digital · Fator humano na tecnologia · Inovação e liderança · Cibersegurança</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Origem</div>
+                        <div class="value">Recife, PE — mesmo berço do Grupo Queiroz Galvão (fundado em Recife, 1953)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p><strong>1. Mencione o podcast "Os Agilistas":</strong> Marcello participou do episódio 321 sobre Indústria 5.0 na SOMAH. Demonstrar que você ouviu o podcast mostra preparo e gera conexão imediata — pergunte sobre a evolução desde a gravação.</p>
+                <p style="margin-top:8px"><strong>2. Reconheça a trajetória premiada:</strong> Ele é multi-premiado (CIO Destaque, Melhor Projeto de Cybersegurança, finalista Executivo de TI do Ano 2025). Use elogios genuínos sobre essa consistência de reconhecimento ao longo dos anos como abertura.</p>
+                <p style="margin-top:8px"><strong>3. Conecte pela formação acadêmica:</strong> Com mestrado em Ciência da Computação (UFPE) e MBA na FGV, Marcello valoriza profundidade técnica combinada com visão de negócio. Aborde conversas com dados e frameworks, não apenas com pitches comerciais.</p>
+                <p style="margin-top:8px"><strong>4. Explore o tema "fator humano na tecnologia":</strong> Ele defende a Indústria 5.0 — onde a tecnologia amplifica capacidades humanas, não substitui. Posicione a Foursys como empresa que coloca pessoas no centro (squads, capacitação, cultura) em vez de apenas vender ferramentas.</p>
+                <p style="margin-top:8px"><strong>5. Valorize a origem pernambucana:</strong> Tanto Marcello quanto o Grupo Queiroz Galvão têm raízes em Recife. Se houver conexões com o Nordeste na equipe Foursys, use como ponto de afinidade cultural. Demonstrar conhecimento sobre a história do grupo gera credibilidade.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CFO/Financeiro</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Regular: participa com frequência, sem ser membro.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">50 a 99</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:40%;background:#1a237e">40%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#5c6bc0">7%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#7986cb">2%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#9fa8da">1%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Integrador / empresa de serviços (SI);Consultoria especializada;Start-up / scale-up</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Serviço Gerenciado: 12 temas | Interno: 6 temas | Alocação de profissionais: 2 temas | Projeto: 1 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

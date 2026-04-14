@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing Diretor de TI - Joao Vicente Alvarenga | GRUPO FLEURY</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Joao Vicente Alvarenga</h1>
+                <h2>Diretor de TI — GRUPO FLEURY</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Saúde | SAO PAULO - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 10,1 BI a R$ 11 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 500,1 MM a R$ 1 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Será mantido</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: GRUPO FLEURY</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">O <strong>Grupo Fleury</strong> (B3: FLRY3) é uma das maiores e mais respeitadas organizações de saúde do Brasil, fundada em 1926 por Gastão Fleury da Silveira como um pequeno laboratório de análises clínicas em São Paulo. Com quase um século de história, a empresa se consolidou como referência em medicina diagnóstica, sendo pioneira na disponibilização de resultados de exames pela internet nos anos 1990 e detentora da Acreditação Internacional do Colégio Americano de Patologistas desde 2007. Atualmente conta com mais de 22.400 colaboradores, incluindo 4.900 médicos, e opera por meio de múltiplas marcas — entre elas Fleury Medicina e Saúde, Labs a+, Hermes Pardini, Weinmann e a+ Medicina Diagnóstica. Em 2022, concretizou a combinação de negócios com o Grupo Pardini, ampliando significativamente sua capilaridade e portfólio de serviços. A empresa atua em quatro avenidas de crescimento: Medicina Diagnóstica B2C (unidades de atendimento e serviço móvel), B2B (processamento de exames em hospitais e lab-to-lab), Novos Elos (infusão de medicamentos, ortopedia, oftalmologia, centro cirúrgico ambulatorial e medicina reprodutiva) e Plataformas de Saúde (marketplaces digitais e integração entre marcas). O momento estratégico é de transformação digital acelerada, com forte investimento em IA, plataformas digitais e expansão dos serviços integrados de saúde, reforçando seu posicionamento como ecossistema de saúde completo.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Saúde</strong> com abrangência <strong>Global</strong>. Possui <strong>19 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>Direto com fornecedoríbrido por categoria/ticket — varia conforme valor/risco.</strong>. Perspectiva do orçamento de TI: <strong>Será mantido</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Fomentação da cultura de inovação na área de TI e organização</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer processos e políticas de governança / compliance</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar sistemas legados</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Provar valor e ROI sob pressão de custos</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Cibersegurança</span>
+<span class="tag tag-priority">IA / ML</span>
+<span class="tag tag-priority">ERP</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">CRM</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">HCM</span>
+<span class="tag tag-active">BPM</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">GRC, compliance e auditoria</span>
+<span class="tag tag-active">Sistemas core</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Infraestrutura de redes</span>
+<span class="tag tag-opportunity">Conectividade e telecom</span>
+<span class="tag tag-opportunity">Nuvem pública</span>
+<span class="tag tag-opportunity">Nuvem Privada e híbrida</span>
+<span class="tag tag-opportunity">Cibersegurança</span>
+<span class="tag tag-opportunity">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-opportunity">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-opportunity">Gestão de dados</span>
+<span class="tag tag-opportunity">IA / ML</span>
+<span class="tag tag-opportunity">IA Generativa</span>
+<span class="tag tag-opportunity">APIs e integração</span>
+<span class="tag tag-opportunity">CRM</span>
+<span class="tag tag-opportunity">ERP</span>
+<span class="tag tag-opportunity">HCM</span>
+<span class="tag tag-opportunity">BPM</span>
+<span class="tag tag-opportunity">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-opportunity">Automação de processos / RPA</span>
+<span class="tag tag-opportunity">GRC, compliance e auditoria</span>
+<span class="tag tag-opportunity">Sistemas core</span>
+</div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Joao Vicente Alvarenga</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML SEM fornecedor definido</li><li>IA / ML é prioridade Top 3 de investimento</li><li>IA Generativa SEM fornecedor definido</li><li>Automação de processos / RPA SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li><li>APIs e integração SEM fornecedor definido</li><li>ERP SEM fornecedor definido</li><li>ERP é prioridade Top 3 de investimento</li><li>BPM SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Infraestrutura de redes SEM fornecedor definido</li><li>Nuvem pública SEM fornecedor definido</li><li>Nuvem Privada e híbrida SEM fornecedor definido</li><li>Conectividade e telecom SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Cibersegurança SEM fornecedor definido</li><li>Cibersegurança é prioridade Top 3</li><li>Disaster recovery / continuidade de negócios SEM fornecedor definido</li><li>Segurança de dados e privacidade (LGPD/DLP) SEM fornecedor definido</li><li>GRC, compliance e auditoria SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 54</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Automação de processos / RPA SEM fornecedor definido</li><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Joao Vicente Alvarenga tem como top prioridades <strong>Cibersegurança; IA / ML; ERP</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>19 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 19 projetos definidos sem fornecedor: Infraestrutura de redes, Conectividade e telecom, Nuvem pública, Nuvem Privada e híbrida, Cibersegurança e mais 14 temas. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Será mantido</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; Modernização de Legado; Engenharia Digital. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. Integração Pós-M&A com Pardini:</strong> A combinação de negócios com o Grupo Pardini (2022) adicionou dezenas de marcas e unidades, mas a integração de sistemas legados, bases de dados e processos operacionais é um desafio em andamento. Abordar como a Foursys pode acelerar a unificação de ERPs, APIs e plataformas digitais entre as operações.</p>
+                <p style="margin-top:12px"><strong>2. IA em Diagnóstico por Imagem:</strong> A medicina diagnóstica é um dos setores com maior potencial de aplicação de IA/ML — laudos automatizados, triagem inteligente, detecção precoce de anomalias em radiologia e patologia. Com IA/ML como prioridade Top 3 e sem fornecedor definido, o AI Squad da Foursys tem aderência direta.</p>
+                <p style="margin-top:12px"><strong>3. Cibersegurança em Saúde:</strong> O setor de saúde é o 2º mais atacado por ransomware globalmente. Dados de pacientes (exames, diagnósticos, genômica) são altamente sensíveis. A LGPD e regulamentações da ANS exigem governança robusta. A Foursys com certificações ISO 27001/27701 pode endereçar diretamente essa prioridade.</p>
+                <p style="margin-top:12px"><strong>4. Plataformas Digitais e Experiência do Paciente:</strong> O Fleury aposta em Plataformas de Saúde (marketplace, Saúde iD) para criar jornadas integradas. A modernização de legados e a construção de microsserviços cloud-native são essenciais para escalar. A Engenharia Digital da Foursys cobre exatamente esse escopo.</p>
+                <p style="margin-top:12px"><strong>5. Modelo Multi-Marca e Complexidade Operacional:</strong> Com 18+ marcas de diagnóstico, o Fleury opera com alta complexidade de TI — sistemas heterogêneos, múltiplos ERPs e processos distintos. Há oportunidade clara para BPM, automação de processos (RPA) e governança unificada (GRC), todos sem fornecedor definido.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Dasa (Diagnósticos da América) — B3: DASA3</h4>
+                <p>Líder em medicina diagnóstica no Brasil e na América Latina, 5ª maior do setor no mundo. Fundada em 1961, possui mais de 40 mil profissionais, 900+ unidades ambulatoriais e 54+ marcas (Delboni, Salomão Zoppi, Lavoisier, entre outras). Em 2024, fundiu sua operação hospitalar com a Amil criando a Rede Américas. Investiu fortemente em plataformas digitais com o lançamento do Nav (telemedicina, agendamento e resultados). <strong>Foco tech:</strong> Plataforma Nav com telemedicina e agendamento digital, IA para diagnóstico por imagem, integração de dados entre marcas pós-aquisições e genômica (GeneOne/Genera).</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Rede D'Or São Luiz — B3: RDOR3</h4>
+                <p>Maior grupo hospitalar privado do Brasil, com 69 hospitais próprios e mais de 11.000 leitos em 12 estados. Faturamento de R$ 22,8 bilhões (2021). IPO em 2020 movimentou R$ 11,3 bilhões. Em 2022, concretizou a fusão com a SulAmérica Seguros, criando uma operação verticalmente integrada de hospitais + seguros. Fundada em 1977 pelo cardiologista Jorge Moll Filho. <strong>Foco tech:</strong> Digitalização hospitalar end-to-end, prontuário eletrônico integrado, telemedicina, automação de processos clínicos e plataformas de coordenação de cuidado.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Hapvida NotreDame Intermédica — B3: HAPV3</h4>
+                <p>Maior operador de saúde do Brasil com mais de 15 milhões de beneficiários, formado em 2022 pela fusão entre Hapvida e NotreDame Intermédica. Opera com modelo verticalmente integrado (planos + hospitais + diagnóstico). Mais de 60.000 colaboradores, 27 mil médicos e 28 mil dentistas credenciados. Presente em todo o território nacional. <strong>Foco tech:</strong> Modelo verticalizado com controle de custos via tecnologia, plataformas digitais para gestão de beneficiários, telemedicina integrada e analytics para gestão de sinistralidade.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Grupo Sabin</h4>
+                <p>Referência em medicina diagnóstica, fundado em 1984 em Brasília. Presente em mais de 14 estados com 300+ unidades. Reconhecido como Great Place to Work (GPTW) por diversos anos consecutivos. Modelo de gestão diferenciado com foco em cultura organizacional e inovação. Forte atuação em B2B e lab-to-lab. <strong>Foco tech:</strong> Automação laboratorial avançada, plataformas digitais de resultados, parcerias com startups de healthtech, investimento em genômica e medicina personalizada.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades Competitivas para Foursys</h4>
+                <p>O setor de saúde e diagnósticos vive uma corrida por digitalização e integração tecnológica. Os concorrentes do Grupo Fleury estão investindo pesadamente em plataformas digitais, IA e integração pós-M&A. <strong>Gaps exploráveis:</strong> (1) A integração de sistemas pós-fusão com Pardini gera demanda por modernização de legados e APIs — exatamente onde a Foursys se posiciona com Modernização de Legado e parceria Digibee; (2) Nenhum concorrente demonstra governança madura de IA/ML, criando espaço para o AI Squad da Foursys; (3) A crescente regulação (LGPD, ANS) exige compliance e GRC — a Foursys com ISO 27001/27701 tem diferencial; (4) O modelo multi-marca do Fleury demanda integração de dados e ERP unificado, área onde o Fleury busca fornecedor.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Diretor de TI — Grupo Fleury</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Nível Hierárquico</div>
+                        <div class="value">Equivalente a Vice-Presidência, com reporte direto ao CEO</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Setor de Atuação</div>
+                        <div class="value">Saúde / Medicina Diagnóstica — empresa centenária líder no Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe sob Gestão</div>
+                        <div class="value">200+ profissionais de TI, 10.000+ usuários internos</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Orçamento de TI</div>
+                        <div class="value">R$ 500,1 MM a R$ 1 BI — perspectiva de manutenção</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Decisão</div>
+                        <div class="value">Co-decisão TI + Negócios — abordagem consultiva e baseada em ROI</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Contexto Relevante</div>
+                        <div class="value">Lidera TI de organização com 22.400+ colaboradores e múltiplas marcas pós-fusão Pardini</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Evento</div>
+                        <div class="value">IT Forum ATI Trancoso 2026</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p><strong>1. Valorize a complexidade do setor de saúde:</strong> Demonstre conhecimento sobre os desafios regulatórios (LGPD, ANS, ANVISA) e a criticidade de sistemas em saúde — downtime significa impacto direto na vida de pacientes. Isso mostra maturidade e gera identificação imediata.</p>
+                <p style="margin-top:10px"><strong>2. Aborde a fusão com Pardini como oportunidade:</strong> Reconheça o desafio de integrar duas grandes operações (Fleury + Pardini) e posicione a conversa como parceria de aceleração, não venda. Pergunte como está a jornada de integração e ouça ativamente antes de propor soluções.</p>
+                <p style="margin-top:10px"><strong>3. Fale a linguagem de ROI e eficiência:</strong> O perfil indica foco em preço, ROI estimado e SLA como critérios de alta relevância. Traga números concretos: cases com percentuais de redução de custo, aceleração de time-to-market e métricas de disponibilidade.</p>
+                <p style="margin-top:10px"><strong>4. Conecte inovação com pragmatismo:</strong> Com prioridades em IA/ML e cultura de inovação, mas também pressão para provar valor e ROI, o equilíbrio entre inovar e entregar resultados mensuráveis é chave. Mostre como o AI Squad da Foursys acelera ciclos com produto proprietário — inovação com resultado rápido.</p>
+                <p style="margin-top:10px"><strong>5. Respeite o modelo de co-decisão:</strong> A compra envolve TI + Negócios em co-decisão. Prepare materiais que também falem a linguagem de negócio (impacto em receita, experiência do paciente, eficiência operacional) para que o executivo possa socializar internamente com stakeholders de negócio.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Diretor de TI e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma vice-presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Pontual: convidado ad hoc para temas específicos.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Co-decisão TI + Negócios</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">200 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#1a237e">15%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#1a237e">15%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#7986cb">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#c5cae9">5%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Referências e cases BR</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+<span class="tag tag-active">Capilaridade/cobertura regional</span>
+<span class="tag tag-active">Residência de dados no BR</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Consultoria especializada</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 20 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

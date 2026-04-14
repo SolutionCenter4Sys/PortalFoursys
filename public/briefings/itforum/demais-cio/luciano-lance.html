@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Luciano Lance | ADAMA BRASIL</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Luciano Lance</h1>
+                <h2>CIO — ADAMA BRASIL</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Agronegócio | Londrina - PR</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">Acima de R$ 15 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 50,1 MM a R$ 80 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Diminuirá até 10%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: ADAMA BRASIL</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A ADAMA é a <strong>7ª maior empresa de defensivos agrícolas do mundo</strong>, com vendas globais de US$ 4,1 bilhões em 2024 e operações em mais de 100 países. No Brasil, sua história remonta a 1970 com a fundação da Herbitécnica em Londrina-PR, que se tornou uma das maiores revendas de defensivos do país. Hoje, a operação brasileira conta com <strong>mais de 650 colaboradores</strong>, 2 plantas fabris com capacidade de 170 milhões de litros/ano e 7 centros de distribuição. A empresa é a <strong>6ª maior S.A. do Paraná e a maior de Londrina</strong>. Seu portfólio abrange fungicidas, herbicidas, inseticidas e biossoluções, além de serviços AgTech como ADAMA Clima, ADAMA Alvo (identificação de pragas por IA) e ADAMA Pastagem. A ADAMA vive um <strong>momento estratégico de transformação digital</strong>, com a implantação do SAP S/4HANA como plataforma global integrada e planos de lançar 25 novos produtos a partir de 2026. O setor agroquímico brasileiro está em expansão com 508 novos registros aprovados em 2025, e a empresa aposta em inovação de valor e formulações localizadas para manter competitividade.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Estabilidade</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Agronegócio</strong> com abrangência <strong>Global</strong>. Possui <strong>7 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>Híbrido por categoria/ticket (varia conforme valor/risco)</strong>. Perspectiva do orçamento de TI: <strong>Diminuirá até 10%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos e operações para ganho de eficiência</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar custos, riscos e lock-in de fornecedores</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Integrar equipes de TI e negócios para acelerar a entrega de valor</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Orquestrar transformação digital</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Priorizar portfólio em meio a excesso de demandas</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">IA Generativa</span>
+<span class="tag tag-priority">APIs e integração</span>
+<span class="tag tag-priority">Automação de processos / RPA</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">CRM</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">ITSM/ESM e service desk</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">IA / ML</span>
+<span class="tag tag-opportunity">IA Generativa</span>
+<span class="tag tag-opportunity">CRM</span>
+<span class="tag tag-opportunity">Low-code / no-code</span>
+<span class="tag tag-opportunity">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-opportunity">Automação de processos / RPA</span>
+<span class="tag tag-opportunity">Hiperautomação</span>
+</div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Luciano Lance</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML SEM fornecedor definido</li><li>IA Generativa SEM fornecedor definido</li><li>IA Generativa é prioridade Top 3 de investimento</li><li>Hiperautomação SEM fornecedor definido</li><li>Automação de processos / RPA SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 91</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Low-code / no-code SEM fornecedor definido</li><li>Automação de processos / RPA SEM fornecedor definido</li><li>Automação de processos / RPA é prioridade Top 3</li><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 65</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li><li>APIs e integração é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Luciano Lance tem como top prioridades <strong>IA Generativa; APIs e integração; Automação de processos / RPA</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>7 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 7 projetos definidos sem fornecedor: IA / ML, IA Generativa, CRM, Low-code / no-code, Desenvolvimento e modernização de legados e mais 2 temas. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Diminuirá até 10%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; FourBlox; Modernização de Legado. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p>1. <strong>Corrida pela IA no Agro:</strong> Syngenta, Bayer e BASF já possuem plataformas de IA embarcada para prescrições preditivas — a ADAMA está na fase de construção de infraestrutura digital (SAP S/4HANA). Há uma janela de 12-18 meses para acelerar com squads de IA e fechar o gap competitivo antes que a distância se torne irreversível.</p>
+                <p style="margin-top:8px">2. <strong>Eficiência operacional com RPA comprovada:</strong> Sob liderança de Luciano Lance, a ADAMA já conquistou reduções de 39% a 81% em ciclos de processos via automação. Isso demonstra maturidade organizacional para escalar hiperautomação — terreno fértil para FourBlox e AI Squad.</p>
+                <p style="margin-top:8px">3. <strong>SAP S/4HANA como catalisador:</strong> A migração para SAP S/4HANA cria demanda natural por integrações via APIs, modernização de sistemas legados ao redor do ERP e automação de processos adjacentes. Cada uma dessas frentes é uma oportunidade direta para as ofertas Foursys.</p>
+                <p style="margin-top:8px">4. <strong>Orçamento em retração exige ROI comprovado:</strong> Com orçamento de TI diminuindo até 10%, Luciano precisará fazer mais com menos. Soluções que demonstrem ROI rápido, TCO reduzido e flexibilidade contratual terão prioridade — posicionar a Foursys como parceira de eficiência, não apenas de tecnologia.</p>
+                <p style="margin-top:8px">5. <strong>Mercado agroquímico em transformação:</strong> O setor registrou 508 novos produtos aprovados em 2025 entre 139 empresas, intensificando a competição. A ADAMA planeja lançar 25 novos produtos a partir de 2026. Essa pressão competitiva demanda agilidade digital para acelerar go-to-market e reduzir custos operacionais — exatamente onde squads de IA e low-code geram impacto imediato.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Principais concorrentes da ADAMA no setor agroquímico brasileiro e suas iniciativas tecnológicas:</p>
+            <div class="competitor-card">
+                <h4>🧪 Syngenta</h4>
+                <p><strong>Posição:</strong> Líder global em proteção de cultivos e sementes, com forte presença digital no Brasil.</p>
+                <p style="margin-top:8px"><strong>Iniciativas tecnológicas:</strong> Plataforma <strong>Cropwise</strong> com IA e comandos de voz via WhatsApp para gestão agrícola em tempo real. Em 2026, fechou parceria com SAP para escalar agricultura assistida por IA. Abriu 25 anos de big data agrícola (74 milhões de hectares) na Cropwise Open Platform, com meta de 100M ha digitalizados até 2030.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🌱 Bayer CropScience</h4>
+                <p><strong>Posição:</strong> Gigante global com o Brasil como principal vetor de crescimento da agricultura digital.</p>
+                <p style="margin-top:8px"><strong>Iniciativas tecnológicas:</strong> Ferramenta <strong>Bayer Valora</strong> com IA e imagens de satélite para prescrição de plantio (500 mil ha de prescrições, ganho médio de 7,8 sacas/ha). Plataforma <strong>Climate FieldView</strong> de agricultura digital. Programa <strong>PRO Carbono</strong> com ML para sequestro de carbono. Primeira equipe de desenvolvimento regional do mundo alocada no Brasil.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>⚗️ BASF Agrícola</h4>
+                <p><strong>Posição:</strong> Líder em soluções químicas e biológicas, com ecossistema digital aberto.</p>
+                <p style="margin-top:8px"><strong>Iniciativas tecnológicas:</strong> Ecossistema <strong>conecta.ag</strong> integrando crédito, comercialização e gestão digital (R$ 500M em crédito digital na safra 2025/26). Plataforma <strong>xarvio FIELD MANAGER</strong> com 11M+ hectares cadastrados, redução de 77% nos custos de análise de solo. Parcerias com Grão Direto (comercialização digital) e Farmtech (crédito digital).</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🇧🇷 Nortox</h4>
+                <p><strong>Posição:</strong> Maior fabricante 100% brasileiro de agroquímicos, líder em registros (32 em 2025), com 70 anos de história.</p>
+                <p style="margin-top:8px"><strong>Iniciativas tecnológicas:</strong> Plataforma <strong>Akcelo</strong> — portal 100% digital para relacionamento com revendas, transações comerciais, controle financeiro e treinamento 24/7. Pioneira na produção de glifosato no Brasil. Atua em três plataformas: defensivos, fertilizantes e sementes híbridas.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis: ADAMA vs. Concorrentes</h4>
+                <p>Os grandes concorrentes estão investindo pesadamente em <strong>plataformas digitais integradas com IA</strong> (Syngenta Cropwise, Bayer FieldView, BASF xarvio), enquanto a ADAMA está focada na implantação do SAP S/4HANA como base de digitalização. <strong>Gaps identificados:</strong> (1) Os concorrentes já possuem plataformas de agricultura de precisão com IA embarcada — a ADAMA ainda está construindo essa camada; (2) Syngenta e Bayer já utilizam big data e ML para prescrições preditivas em escala — oportunidade para a ADAMA acelerar com squads de IA; (3) BASF lidera em ecossistema digital aberto com crédito e comercialização integrados — a ADAMA pode explorar APIs e integrações para criar seu ecossistema; (4) A Nortox, concorrente local, já digitalizou seu canal comercial — pressão competitiva para a ADAMA modernizar processos internos e de relacionamento.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">LATAM IT Manager — ADAMA (desde fev/2017)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Profissional</div>
+                        <div class="value">+24 anos de experiência em TI, liderando infraestrutura, suporte, sistemas, projetos e segurança</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Nacionalidade</div>
+                        <div class="value">Dupla cidadania: brasileira e italiana</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Londrina, Paraná</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Conquista de Destaque</div>
+                        <div class="value">Prêmio "100+ Inovadoras no Uso de TI" (2020) — liderou resposta tecnológica à COVID-19, migrando 600 colaboradores para remoto em 2 dias</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Projeto Estratégico Atual</div>
+                        <div class="value">Gerente de projeto da implantação SAP S/4HANA — plataforma global integrada para todas as operações ADAMA</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Áreas de Expertise</div>
+                        <div class="value">LGPD/Privacidade, RPA, Lean, BigData, IoT, Analytics, Segurança da Informação</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil LinkedIn</div>
+                        <div class="value"><a href="https://linkedin.com/in/luciano-lance" target="_blank">linkedin.com/in/luciano-lance</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p>1. <strong>Valorize o prêmio de inovação:</strong> Mencione que conhece o reconhecimento "100+ Inovadoras no Uso de TI" que a ADAMA conquistou sob sua liderança — isso demonstra pesquisa prévia e respeito por suas conquistas.</p>
+                <p style="margin-top:6px">2. <strong>Fale sobre eficiência com dados concretos:</strong> Luciano é orientado a resultados mensuráveis (reduções de 39% a 81% em processos). Traga cases Foursys com métricas de ROI e eficiência — ele responde bem a números, não apenas promessas.</p>
+                <p style="margin-top:6px">3. <strong>Conecte-se pela experiência SAP:</strong> Ele está imerso na implantação do S/4HANA. Demonstrar conhecimento sobre os desafios de integração pós-ERP e como a Foursys pode complementar essa jornada (APIs, automação, modernização de legados) cria conexão imediata.</p>
+                <p style="margin-top:6px">4. <strong>Respeite a cultura lean:</strong> Luciano utiliza ferramentas lean para otimização. Evite discursos inflados — seja direto, prático e mostre como a Foursys entrega valor incremental com agilidade. Ele valoriza simplicidade (o próprio propósito da ADAMA é "criar simplicidade na agricultura").</p>
+                <p style="margin-top:6px">5. <strong>Explore a conexão regional:</strong> Ele está baseado em Londrina-PR, longe do eixo Rio-SP. Demonstrar disponibilidade e interesse genuíno em atender empresas fora dos grandes centros pode ser um diferencial — muitos fornecedores priorizam apenas capitais.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Observador fixo: presença permanente, sem voto.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Co-decisão TI + Negócios</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">30 a 49</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Coprotagonista: co-lidera estratégia e orçamento, influencia metas de negócio.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#c5cae9">5%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Roadmap e inovação</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Capacitação do time</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Integrador / empresa de serviços (SI);Start-up / scale-up;Fornecedor com cobertura global</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 13 temas | Interno: 1 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

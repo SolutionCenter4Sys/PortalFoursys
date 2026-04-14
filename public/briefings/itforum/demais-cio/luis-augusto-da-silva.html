@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing Gerente de TI - Luis Augusto da Silva | ODEBRECHT</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Luis Augusto da Silva</h1>
+                <h2>Gerente de TI — ODEBRECHT</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Engenharia e construção | São Paulo - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 13,1 BI a R$ 15 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 200,1 MM a R$ 300 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá entre 20% e 30%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: ODEBRECHT</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Novonor</strong> (anteriormente Organização Odebrecht) é um conglomerado brasileiro de capital fechado fundado em 1944 por Norberto Odebrecht, em Salvador, Bahia. É historicamente a <strong>maior empresa de engenharia e construção da América Latina</strong>, com atuação diversificada em construção pesada, infraestrutura, química e petroquímica (via Braskem), óleo e gás, energia e imobiliário. A empresa passou por profunda reestruturação após os desdobramentos da Operação Lava Jato, tendo entrado em <strong>recuperação judicial em 2019</strong> e adotado o nome Novonor em dezembro de 2020 como parte de seu reposicionamento. Com receita de aproximadamente R$ 75,9 bilhões (2023) e mais de 23 mil colaboradores, o grupo mantém operações em mais de 20 países nas Américas, África, Europa e Oriente Médio. Suas principais subsidiárias incluem a <strong>OEC</strong> (infraestrutura e construção), <strong>Braskem</strong> (maior petroquímica da América Latina), <strong>OR</strong> (imobiliário) e <strong>Ocyan</strong> (óleo e gás, vendida em 2023). O momento atual é de <strong>reestruturação e transformação digital</strong>, com foco em eficiência operacional, modernização de sistemas legados e adoção de novas tecnologias para recuperar competitividade — o que explica o expressivo crescimento previsto de 20% a 30% no orçamento de TI.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Engenharia e construção</strong> com abrangência <strong>Local (Brasil)</strong>. Possui <strong>24 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>Direto com fornecedoríbrido por categoria/ticket — varia conforme valor/risco.</strong>. Perspectiva do orçamento de TI: <strong>Crescerá entre 20% e 30%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos e operações para ganho de eficiência</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar complexidade dos dados e qualidade da informação</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Otimizar custos e eficiência (FinOps/SecFinOps)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Padronizar e otimizar arquiteturas híbridas e multicloud</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Cibersegurança</span>
+<span class="tag tag-priority">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-priority">ERP</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">HCM</span>
+<span class="tag tag-active">BPM</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">Workplace e end-user computing</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">CPaaS / UCaaS / CCaaS</span>
+<span class="tag tag-active">GRC, compliance e auditoria</span>
+<span class="tag tag-active">Sistemas core</span>
+<span class="tag tag-active">Sustentabilidade e green IT</span>
+<span class="tag tag-active">ITSM/ESM e service desk</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Infraestrutura de redes</span>
+<span class="tag tag-opportunity">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-opportunity">Conectividade e telecom</span>
+<span class="tag tag-opportunity">Nuvem pública</span>
+<span class="tag tag-opportunity">Nuvem Privada e híbrida</span>
+<span class="tag tag-opportunity">Cibersegurança</span>
+<span class="tag tag-opportunity">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-opportunity">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-opportunity">Gestão de dados</span>
+<span class="tag tag-opportunity">IA / ML</span>
+<span class="tag tag-opportunity">IA Generativa</span>
+<span class="tag tag-opportunity">APIs e integração</span>
+<span class="tag tag-opportunity">ERP</span>
+<span class="tag tag-opportunity">HCM</span>
+<span class="tag tag-opportunity">BPM</span>
+<span class="tag tag-opportunity">Low-code / no-code</span>
+<span class="tag tag-opportunity">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-opportunity">Automação de processos / RPA</span>
+<span class="tag tag-opportunity">Workplace e end-user computing</span>
+<span class="tag tag-opportunity">Mobile apps / superapps</span>
+<span class="tag tag-opportunity">CPaaS / UCaaS / CCaaS</span>
+<span class="tag tag-opportunity">GRC, compliance e auditoria</span>
+<span class="tag tag-opportunity">Sistemas core</span>
+<span class="tag tag-opportunity">ITSM/ESM e service desk</span>
+</div><div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria/assessment):</h4>
+                <div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Hiperautomação</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Sustentabilidade e green IT</span>
+</div>
+            </div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Luis Augusto da Silva</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML SEM fornecedor definido</li><li>IA Generativa SEM fornecedor definido</li><li>Hiperautomação com investimento inicial previsto</li><li>Automação de processos / RPA SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li><li>APIs e integração SEM fornecedor definido</li><li>ERP SEM fornecedor definido</li><li>ERP é prioridade Top 3 de investimento</li><li>BPM SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Infraestrutura de redes SEM fornecedor definido</li><li>Nuvem pública SEM fornecedor definido</li><li>Nuvem Privada e híbrida SEM fornecedor definido</li><li>Conectividade e telecom SEM fornecedor definido</li><li>Workplace e end-user computing SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Cibersegurança SEM fornecedor definido</li><li>Cibersegurança é prioridade Top 3</li><li>Disaster recovery / continuidade de negócios SEM fornecedor definido</li><li>Disaster recovery / continuidade de negócios é prioridade Top 3</li><li>Segurança de dados e privacidade (LGPD/DLP) SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Low-code / no-code SEM fornecedor definido</li><li>Automação de processos / RPA SEM fornecedor definido</li><li>Desenvolvimento e modernização de legados SEM fornecedor definido</li><li>Mobile apps / superapps SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Luis Augusto da Silva tem como top prioridades <strong>Cibersegurança; Disaster recovery / continuidade de negócios; ERP</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>24 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 24 projetos definidos sem fornecedor: Infraestrutura de redes, Armazenamento, backup e imutabilidade, Conectividade e telecom, Nuvem pública, Nuvem Privada e híbrida e mais 19 temas. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá entre 20% e 30%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; Modernização de Legado; Engenharia Digital. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. Reconstrução com tecnologia:</strong> A Novonor está em fase de recuperação judicial e rebranding — a TI é peça central para viabilizar a nova operação enxuta, reduzir custos e automatizar processos. Mostrar como a Foursys ajuda empresas em transformação a acelerar resultados com menor risco é um gancho poderoso.</p>
+                <p style="margin-top:10px"><strong>2. Setor de construção adota IA e gêmeos digitais:</strong> O segmento de engenharia e construção está investindo globalmente em IA para otimização de projetos, manutenção preditiva e planejamento de obras. A Novonor, com 24 projetos sem fornecedor em IA/ML e IA Generativa, tem oportunidade de liderar essa adoção no Brasil.</p>
+                <p style="margin-top:10px"><strong>3. Cibersegurança é crítica pós-Lava Jato:</strong> Após os escândalos de corrupção e a exposição midiática, a governança, compliance e segurança da informação tornaram-se prioridades estratégicas. Cibersegurança e LGPD/DLP são essenciais para a credibilidade da "nova Novonor".</p>
+                <p style="margin-top:10px"><strong>4. ERP e modernização de legados — dívida técnica acumulada:</strong> Empresas em recuperação judicial frequentemente operam com sistemas fragmentados e legados desatualizados. A modernização do ERP (prioridade Top 3) e a integração via APIs são fundamentais para a eficiência operacional do grupo.</p>
+                <p style="margin-top:10px"><strong>5. Orçamento de TI em forte crescimento:</strong> A perspectiva de crescimento de 20% a 30% no orçamento de TI sinaliza um ciclo de investimento agressivo. Com 24 projetos sem fornecedor definido, a Novonor está ativamente buscando parceiros — timing ideal para a Foursys se posicionar como parceira estratégica de longo prazo.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Andrade Gutierrez</h4>
+                <p><strong>Perfil:</strong> Multinacional brasileira fundada em 1948 em Belo Horizonte (MG). Uma das maiores construtoras do Brasil, com mais de mil projetos executados e filiais em 44 países. Atua em infraestrutura, energia, óleo e gás e mineração.</p>
+                <p style="margin-top:8px"><strong>Iniciativas de TI:</strong> Investimentos em digitalização de canteiros de obra, uso de BIM (Building Information Modeling) para gestão de projetos e implementação de plataformas de gestão integrada. Foco em eficiência operacional pós-reestruturação e modernização de processos com ferramentas de automação.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Mover Participações (ex-Camargo Corrêa)</h4>
+                <p><strong>Perfil:</strong> Conglomerado fundado em 1939 em São Paulo. Atua em engenharia e construção, concessões de transporte e mobilidade urbana, indústria naval/offshore e incorporação imobiliária. Rebranding para Mover Participações como parte da reestruturação pós-Lava Jato.</p>
+                <p style="margin-top:8px"><strong>Iniciativas de TI:</strong> Adoção de plataformas cloud para gestão de concessões rodoviárias, implementação de IoT em canteiros de obra e investimento em cibersegurança para proteção de infraestrutura crítica de transporte e mobilidade.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Queiroz Galvão</h4>
+                <p><strong>Perfil:</strong> Conglomerado fundado em 1953 no Recife (PE), com sede no Rio de Janeiro. Atua em construção de grande porte, engenharia ambiental, desenvolvimento imobiliário, naval/offshore e gestão de negócios. Aproximadamente 40 mil colaboradores.</p>
+                <p style="margin-top:8px"><strong>Iniciativas de TI:</strong> Investimentos em sistemas de gestão de resíduos e engenharia ambiental digital, plataformas de monitoramento remoto de obras e digitalização de processos operacionais para ganho de eficiência em projetos de infraestrutura.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Construtora OAS (em recuperação judicial)</h4>
+                <p><strong>Perfil:</strong> Uma das maiores construtoras brasileiras, fundada em 1976 na Bahia. Especializada em obras de infraestrutura pesada, rodovias, aeroportos e saneamento. Em processo de recuperação judicial desde 2015, com operações reduzidas.</p>
+                <p style="margin-top:8px"><strong>Iniciativas de TI:</strong> Foco em manutenção de sistemas legados críticos e migração seletiva para cloud. Investimentos limitados em tecnologia devido ao processo de recuperação judicial, representando menor competitividade tecnológica no setor.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidade Competitiva</h4>
+                <p>O setor de engenharia e construção pesada no Brasil passa por um momento de <strong>reinvenção pós-crise</strong>. As grandes construtoras — incluindo Novonor, Andrade Gutierrez, Mover e Queiroz Galvão — enfrentam desafios similares de reestruturação e modernização tecnológica. <strong>Gaps identificados:</strong> (1) Baixa maturidade em IA/ML e automação inteligente no setor — a Novonor pode se diferenciar sendo pioneira; (2) Cibersegurança ainda tratada de forma reativa pela maioria dos concorrentes — oportunidade para a Novonor liderar com abordagem proativa; (3) Modernização de ERPs legados é dor comum — quem resolver primeiro ganha vantagem operacional significativa; (4) Poucos concorrentes investem em hiperautomação e IA Generativa — janela para posicionamento estratégico. A Foursys pode posicionar a Novonor à frente dos concorrentes em maturidade digital.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo</div>
+                        <div class="value">Gerente de TI — Odebrecht (Novonor)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Nível Hierárquico</div>
+                        <div class="value">Equivale a uma diretoria, com poder aprovador de aquisições dentro do budget</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe sob gestão</div>
+                        <div class="value">200+ profissionais de TI, atendendo 10.000+ usuários</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Setor / Empresa</div>
+                        <div class="value">Engenharia e Construção — Novonor (ex-Odebrecht), maior construtora da América Latina</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Contexto profissional</div>
+                        <div class="value">Lidera TI em empresa com faturamento R$ 13-15 BI em fase de recuperação e transformação digital</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI</div>
+                        <div class="value">Estratégica: participa das discussões de negócio, define roadmap e contribui no orçamento</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p><strong>1. Reconheça o momento de transformação:</strong> Mostre empatia pela complexidade de liderar TI em uma empresa em reestruturação. Frases como "sabemos que liderar a TI em um momento de reinvenção corporativa exige visão estratégica e parceiros confiáveis" demonstram compreensão do cenário.</p>
+                <p style="margin-top:8px"><strong>2. Foque no futuro, não no passado:</strong> A empresa rebranding de Odebrecht para Novonor indica o desejo de virar a página. Evite menções à Lava Jato — foque na "nova Novonor" e no papel da tecnologia na reconstrução da empresa.</p>
+                <p style="margin-top:8px"><strong>3. Valorize a abrangência da TI:</strong> Com 200+ profissionais de TI e 10.000+ usuários, Luis Augusto lidera uma operação robusta. Demonstre respeito pela escala e complexidade do ambiente que ele gerencia.</p>
+                <p style="margin-top:8px"><strong>4. Fale a linguagem de resultados e TCO:</strong> Ele valoriza TCO em horizonte de 3 anos, SLA e abordagem consultiva. Traga cases com métricas concretas de ROI, redução de custos e aceleração de entrega.</p>
+                <p style="margin-top:8px"><strong>5. Posicione-se como parceiro de longo prazo:</strong> O modelo preferido é co-gerenciado (24 temas). Isso indica busca por parceiros que complementem a equipe interna, não que a substituam. Enfatize o modelo flexível da Foursys (Squads, Projetos, AMS) como extensão do time dele.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Gerente de TI e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte a outra diretoria de negócio</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Regular: participa com frequência, sem ser membro.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">200 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#1a237e">15%</div></div></div>
+<div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#c5cae9">5%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Roadmap e inovação</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+<span class="tag tag-active">Capilaridade/cobertura regional</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Integrador / empresa de serviços (SI);Consultoria especializada;MSP / outsourcing gerenciado;Hiperscaler / parceiro cloud;Fornecedor com cobertura global</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 24 temas | Projeto: 2 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

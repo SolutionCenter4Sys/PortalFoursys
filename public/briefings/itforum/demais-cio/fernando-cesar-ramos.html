@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Fernando Cesar Ramos | COPASA</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Fernando Cesar Ramos</h1>
+                <h2>CIO — COPASA</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Utilities | Belo Horizonte - MG</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 7,1 BI a R$ 8 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 200,1 MM a R$ 300 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá até 10%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: COPASA</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>COPASA (Companhia de Saneamento de Minas Gerais)</strong> é a segunda maior empresa de saneamento do Brasil, responsável pelo abastecimento de água e tratamento de esgoto em centenas de municípios mineiros. Em 2025, a companhia realizou investimentos recordes de <strong>R$ 2,9 bilhões</strong> (crescimento de 32% sobre 2024), alcançando 80,1% de cobertura de esgoto e mantendo universalização de água acima de 99%. A empresa reduziu perdas de água de 38,1% para 35,6% com uso de tecnologias como satélite e inteligência artificial para detecção de vazamentos, além de substituir 730 mil hidrômetros. A COPASA projeta <strong>R$ 21 bilhões em investimentos até 2030</strong> para cumprir as metas do Marco Legal do Saneamento (99% água e 90% esgoto até 2033). A companhia vive momento estratégico decisivo: o processo de <strong>desestatização/privatização</strong> está em andamento, com expectativa de arrecadação de R$ 4 bilhões pelo governo de Minas Gerais, atraindo interesse de players como Sabesp, Aegea e Suez. Este cenário de transição gera necessidades intensas de modernização tecnológica, governança de dados e cibersegurança.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Pública</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Utilities</strong> com abrangência <strong>Local (Brasil)</strong>. Possui <strong>2 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>Licitação pública  (edital/pregão</strong>. Perspectiva do orçamento de TI: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Elevar a experiência de clientes e colaboradores (CX/EX)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Integrar equipes de TI e negócios para acelerar a entrega de valor</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar sistemas legados</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Priorizar portfólio em meio a excesso de demandas</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Cibersegurança</span>
+<span class="tag tag-priority">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-priority">Segurança de dados e privacidade (LGPD/DLP)</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Segurança de dados e privacidade (LGPD/DLP)</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Cibersegurança</span>
+<span class="tag tag-opportunity">Disaster recovery / continuidade de negócios</span>
+</div><div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria/assessment):</h4>
+                <div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Segurança de dados e privacidade (LGPD/DLP)</span>
+</div>
+            </div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Fernando Cesar Ramos</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Cibersegurança SEM fornecedor definido</li><li>Cibersegurança é prioridade Top 3</li><li>Disaster recovery / continuidade de negócios SEM fornecedor definido</li><li>Disaster recovery / continuidade de negócios é prioridade Top 3</li><li>Segurança de dados e privacidade (LGPD/DLP) com investimento inicial previsto</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Fernando Cesar Ramos tem como top prioridades <strong>Cibersegurança; Disaster recovery / continuidade de negócios; Segurança de dados e privacidade (LGPD/DLP)</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>2 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 2 projetos definidos sem fornecedor: Cibersegurança, Disaster recovery / continuidade de negócios. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: Cibersegurança. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. Cibersegurança é urgência no setor:</strong> Em 2025, empresas de utilities no Brasil sofreram em média 3.059 tentativas de ataque cibernético por semana — aumento de 53% em relação ao ano anterior. Sistemas SCADA e CLPs legados, comuns em companhias de saneamento, operam sem controles básicos de segurança, criando vulnerabilidades críticas em tratamento de água e bombeamento. A Foursys pode ajudar com assessment de segurança OT/IT e implementação de modelo Zero Trust.</p>
+                <p style="margin-top:12px"><strong>2. Privatização exige maturidade digital acelerada:</strong> Com a desestatização prevista para 2026, a COPASA precisará demonstrar governança de dados, conformidade LGPD e padrões de segurança de nível privado para atrair investidores. Empresas como Sabesp, Aegea e Suez — potenciais compradores — já operam com padrões elevados de cibersegurança e compliance. A Foursys pode posicionar-se como parceira para elevar a maturidade antes da transição.</p>
+                <p style="margin-top:12px"><strong>3. Concorrentes estão à frente em IoT e IA:</strong> A Sabesp investe R$ 3,8 bilhões em 4,4 milhões de hidrômetros inteligentes; a Aegea usa satélites israelenses para detectar vazamentos; a BRK emprega IA preditiva em estações elevatórias. A COPASA reduziu perdas de 38,1% para 35,6%, mas ainda está atrás na adoção de IoT em escala — oportunidade para projetos de integração e plataforma de dados.</p>
+                <p style="margin-top:12px"><strong>4. Marco Legal pressiona investimentos até 2033:</strong> A meta de 99% de cobertura de água e 90% de esgoto até 2033 exige que a COPASA invista R$ 21 bilhões até 2030 (R$ 3,1 bi somente em 2026). A eficiência operacional via tecnologia será crucial para viabilizar esse volume de investimento — disaster recovery e continuidade de negócios são essenciais para proteger a operação durante essa expansão acelerada.</p>
+                <p style="margin-top:12px"><strong>5. COPASA reconhecida como inovadora em TI:</strong> A empresa conquistou a 19ª posição no prêmio "100+ Inovadoras no Uso de TI 2025" do IT Forum, demonstrando que há apetite interno por inovação. Esse reconhecimento pode ser usado como gancho positivo na conversa — a Foursys pode ajudar a escalar as iniciativas já existentes e proteger os ativos digitais em expansão.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Sabesp (São Paulo)</h4>
+                <p><strong>Faturamento:</strong> ~R$ 25 bilhões | <strong>Investimento previsto:</strong> R$ 70 bilhões até 2029</p>
+                <p style="margin-top:8px">Referência em transformação digital no setor. Iniciou o maior projeto de IoT do mundo para saneamento: 4,4 milhões de hidrômetros inteligentes (R$ 3,8 bi) em parceria com a Vivo. Utiliza IA e imagens de satélite para detecção de vazamentos (81 vazamentos encontrados vs. 14 pelo método tradicional). Primeira utility do mundo com pagamento via WhatsApp (8 milhões de atendimentos). Emprega impressão 3D para fabricação de peças e veículos com câmeras de IA para análise de pavimento.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Aegea Saneamento (Nacional)</h4>
+                <p><strong>Receita 2025:</strong> R$ 18,3 bilhões (+21%) | <strong>Investimento:</strong> R$ 8,6 bilhões em 2025</p>
+                <p style="margin-top:8px">Maior empresa privada de saneamento do Brasil. Possui hub de inovação próprio (AegeaHub, 1.260 m² em Indaiatuba-SP) com programas de cocriação com startups e universidades. Migrou infraestrutura SAP para Azure com segurança reforçada (Azure AD Premium + MFA). Utiliza satélites israelenses para detecção de vazamentos subterrâneos (2.700+ pontos identificados no RJ). Implementa hidrômetros inteligentes com leitura remota e projetos de IA para detecção de fraudes e monitoramento climático.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>BRK Ambiental (Nacional)</h4>
+                <p><strong>Posição:</strong> Segunda maior operadora privada | <strong>Destaque:</strong> 26ª no prêmio 100+ Inovadoras em TI</p>
+                <p style="margin-top:8px">Reconhecida pela plataforma de gestão de perdas técnicas com IA/ML (redução de 3,7% em perdas de água). Implementou monitoramento online de qualidade em 11 estações de tratamento, com meta de 40 unidades até 2026. Utiliza manutenção preditiva com IA baseada em Análise de Assinatura Elétrica (ESA) em estações elevatórias. Possui Política de Segurança da Informação estruturada com foco em análise de riscos e detecção proativa de ameaças. Preparando IPO para financiar expansão.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Iguá Saneamento (RJ, MT, SE)</h4>
+                <p><strong>Receita 2025:</strong> R$ 2,7 bilhões (+42,5%) | <strong>Investimento:</strong> R$ 828 milhões em 2025</p>
+                <p style="margin-top:8px">Terceira maior operadora privada, líder em inovação na categoria Saneamento (2021-2025). Programa "Move Iguá Inova" incentiva inovação colaborativa com funcionários. Investiu R$ 200 milhões em controle de perdas com tecnologia de monitoramento em tempo real, setorização de redes e controle de pressão. Para 2026, prevê R$ 228,6 milhões em tecnologia para operações em Cuiabá, Rio de Janeiro, Paranaguá e Sergipe. Está entre as 100 empresas que mais inovam no Brasil.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a COPASA</h4>
+                <p>Comparando com os concorrentes, identificam-se lacunas estratégicas que a Foursys pode ajudar a endereçar:<br><br>
+                <strong>1. IoT e Telemetria:</strong> Enquanto a Sabesp investe R$ 3,8 bi em hidrômetros inteligentes e a Aegea já implementa leitura remota, a COPASA ainda está no início desta jornada com substituição de hidrômetros convencionais — oportunidade para projetos de integração IoT.<br>
+                <strong>2. Cibersegurança OT/IT:</strong> Com a convergência de sistemas operacionais (SCADA/CLPs) e TI, o setor sofre 3.059 tentativas de ataque semanais no Brasil. A COPASA precisa proteger infraestrutura crítica de tratamento de água e bombeamento — alinhado com sua prioridade declarada.<br>
+                <strong>3. Plataforma de Dados e IA:</strong> Concorrentes já utilizam IA para manutenção preditiva (BRK), detecção de vazamentos por satélite (Aegea) e análise de imagens (Sabesp). A COPASA pode acelerar a maturidade de IA com parceiro especializado.<br>
+                <strong>4. Governança e Compliance:</strong> O processo de privatização exigirá padrões elevados de governança de dados, LGPD e controles de segurança para atrair investidores — área onde a Foursys tem certificações ISO 27001/27701.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Fundação Getulio Vargas (FGV)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Profissional</div>
+                        <div class="value">+32 anos na área de Tecnologia da Informação</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Tempo na COPASA</div>
+                        <div class="value">Desde agosto de 1993 (~33 anos) — construiu carreira inteira na empresa</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Superintendente de TI — nível de diretoria na área de Engenharia e Técnica</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reconhecimento</div>
+                        <div class="value">Liderou a COPASA ao 19º lugar no prêmio "100+ Inovadoras no Uso de TI 2025" (IT Forum)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn ativo — 500+ conexões, 848 seguidores</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p><strong>1. Valorize a longevidade e lealdade:</strong> Fernando está na COPASA há mais de 30 anos — uma carreira inteira dedicada a uma única empresa. Reconheça esse comprometimento e demonstre respeito pelo conhecimento profundo que ele tem da operação. Evite abordagens que sugiram que "tudo precisa mudar".</p>
+                <p style="margin-top:10px"><strong>2. Referencie o prêmio de inovação:</strong> A conquista da 19ª posição no "100+ Inovadoras em TI" é motivo de orgulho. Abra a conversa parabenizando pelo reconhecimento e demonstre que a Foursys acompanha os avanços da COPASA. Isso cria conexão e mostra que você fez a lição de casa.</p>
+                <p style="margin-top:10px"><strong>3. Fale a linguagem de quem conhece o setor público:</strong> Fernando opera em contexto de licitação pública e modelo co-gerenciado. Demonstre familiaridade com pregões, compliance público e flexibilidade contratual. Evite linguagem exclusivamente de mercado privado.</p>
+                <p style="margin-top:10px"><strong>4. Aborde a privatização com sensibilidade:</strong> O processo de desestatização é tema delicado para quem construiu carreira na empresa pública. Posicione a Foursys como parceira que ajuda a COPASA a se fortalecer independentemente do modelo societário — foque em continuidade e proteção do legado.</p>
+                <p style="margin-top:10px"><strong>5. Conecte-se pela formação FGV:</strong> A formação na FGV indica perfil analítico, orientado a gestão e estratégia. Use dados concretos, benchmarks do setor e ROI nas conversas. Fernando provavelmente valoriza abordagem consultiva baseada em evidências — não apenas apresentação de produto.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma gerência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CFO/Financeiro</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Pontual: convidado ad hoc para temas específicos.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Co-decisão TI + Negócios</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">200 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:23%;background:#1a237e">23%</div></div></div>
+<div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:21%;background:#1a237e">21%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#3949ab">20%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#5c6bc0">7%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:4%;background:#7986cb">4%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#9fa8da">3%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#c5cae9">2%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Referências e cases BR</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Roadmap e inovação</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+<span class="tag tag-active">Capilaridade/cobertura regional</span>
+<span class="tag tag-active">Residência de dados no BR</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Integrador / empresa de serviços (SI);Consultoria especializada</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 2 temas | Interno: 1 temas | Projeto: 1 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>
