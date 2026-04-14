@@ -5,7 +5,7 @@ import { useApp } from '../../../context/AppContext'
 import { useLanguage } from '../../../i18n'
 import { useVoiceSearch } from '../../../hooks/useVoiceSearch'
 import { SectionWrapper } from '../../ui/SectionWrapper'
-import { InterestButton } from '../../ui/InterestButton'
+
 import { ClientBackButton } from './ClientBackButton'
 import { getClientById } from '../../../data/clients'
 
@@ -154,10 +154,6 @@ export function SectionClientExtra2() {
 
           <h2 className="text-xl sm:text-2xl md:text-4xl font-black text-white leading-tight mb-2 sm:mb-3">{title}</h2>
           <p className="text-foursys-text-muted text-sm sm:text-base max-w-2xl leading-relaxed">{subtitle}</p>
-          <div className="mt-3 sm:mt-4">
-            <InterestButton section="client-extra-2" />
-          </div>
-
           <div
             className="mt-5 sm:mt-6 h-px"
             style={{
