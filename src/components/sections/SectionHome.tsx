@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { BrainCircuit } from 'lucide-react'
 import { useCountUp } from '../../hooks/useCountUp'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
@@ -150,7 +151,7 @@ function getPainStatement(sector: string | null, role: string | null, t: (key: s
 
 export function SectionHome() {
   const { navigate, state } = useApp()
-  const { t } = useLanguage()
+  const { lang, t } = useLanguage()
 
   const kpi1 = useCountUp(heroStats.years,      1400)
   const kpi2 = useCountUp(30,                   1800)
@@ -191,6 +192,21 @@ export function SectionHome() {
             onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate('identity') } }}
           >
             <FoursysLogo />
+
+            <motion.button
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.55, duration: 0.5 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="mt-3 mb-1 inline-flex items-center gap-2 px-5 py-2 rounded-full bg-foursys-primary/10 border border-foursys-primary/30 cursor-pointer hover:bg-foursys-primary/20 hover:border-foursys-primary/50 transition-colors duration-300"
+              onClick={e => { e.stopPropagation(); navigate('ai-foursys') }}
+            >
+              <BrainCircuit size={15} className="text-foursys-primary" />
+              <span className="text-xs font-bold uppercase tracking-[0.15em] text-foursys-primary">
+                {lang === 'pt' ? 'Inteligência Artificial' : 'Artificial Intelligence'}
+              </span>
+            </motion.button>
 
             <motion.div
               initial={{ opacity: 0, y: 10 }}
