@@ -366,7 +366,6 @@ function ItForumLogo({ size = 48 }: LogoProps) {
       <rect x="6" y="6" width="28" height="28" rx="5" fill="#004C97" opacity="0.18" />
       <text x="20" y="25" textAnchor="middle" fill="#0072CE" fontSize="13" fontWeight="900" fontFamily="Arial,sans-serif" letterSpacing="1">IT</text>
       <text x="78" y="19" textAnchor="middle" fill="#0072CE" fontSize="10" fontWeight="800" fontFamily="Arial,sans-serif" letterSpacing="1">FORUM</text>
-      <text x="78" y="30" textAnchor="middle" fill="#0072CE" fontSize="5.5" fontWeight="400" fontFamily="Arial,sans-serif" letterSpacing="0.3">Gartner CIO 2026</text>
     </svg>
   )
 }
