@@ -1777,8 +1777,8 @@ export const itforumClient: ClientConfig = {
           opportunities: 5,
           topOffer: 'Engenharia de Dados',
           topScore: 95,
-          briefingFiles: [{ label: 'Sucafina', file: 'reuniao-foursys/andre-davico-schneiter-sucafina_nrespondeu-it.html' }],
-          tag: 'Reunião Foursys',
+          briefingFiles: [{ label: 'Sucafina', file: 'demais-cio/andre-davico-schneiter-sucafina_nrespondeu-it.html' }],
+          tag: 'Demais CIO',
         },
         {
           name: 'Diego Neufert',
@@ -3626,8 +3626,8 @@ const itforumClientEn: ClientConfig = {
           opportunities: 5,
           topOffer: 'Engenharia de Dados',
           topScore: 95,
-          briefingFiles: [{ label: 'Sucafina', file: 'reuniao-foursys/andre-davico-schneiter-sucafina_nrespondeu-it.html' }],
-          tag: 'Foursys Meeting',
+          briefingFiles: [{ label: 'Sucafina', file: 'demais-cio/andre-davico-schneiter-sucafina_nrespondeu-it.html' }],
+          tag: 'Other CIOs',
         },
         {
           name: 'Diego Neufert',
