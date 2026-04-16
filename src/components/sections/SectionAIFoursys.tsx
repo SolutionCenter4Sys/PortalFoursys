@@ -208,8 +208,8 @@ const SERVICES: ServiceItem[] = [
       en: 'Multidisciplinary cell that attaches to your area, maps journeys, delivers automations with AI and low/no-code, and trains your team to autonomy — leaving legacy, not dependency.',
     },
     marketBadge: {
-      pt: '+1.000h economizadas em processos automatizados',
-      en: '+1,000h saved in automated processes',
+      pt: '+10.000h economizadas em fluxos automatizados',
+      en: '+10,000h saved in automated flows',
     },
     bullets: {
       pt: [
@@ -295,10 +295,9 @@ const SERVICES: ServiceItem[] = [
           type: 'metrics',
           title: { pt: 'Resultados Comprovados', en: 'Proven Results' },
           metrics: [
-            { value: '8', label: { pt: 'Clientes atendidos', en: 'Clients served' } },
-            { value: '+10', label: { pt: 'Processos automatizados', en: 'Automated processes' } },
-            { value: '+1.000h', label: { pt: 'Economizadas', en: 'Hours saved' } },
-            { value: '4', label: { pt: 'Áreas-tipo atendidas', en: 'Area types served' } },
+            { value: '+12', label: { pt: 'Clientes atendidos', en: 'Clients served' } },
+            { value: '+30', label: { pt: 'Fluxos automatizados', en: 'Automated flows' } },
+            { value: '+10.000h', label: { pt: 'Economizadas', en: 'Hours saved' } },
           ],
         },
         {
