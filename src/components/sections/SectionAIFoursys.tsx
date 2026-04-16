@@ -31,6 +31,20 @@ interface ResultItem {
   color: string
 }
 
+interface DetailSection {
+  type: 'text' | 'steps' | 'belts' | 'metrics' | 'phases' | 'cards' | 'highlight' | 'list' | 'dimensions'
+  title: { pt: string; en: string }
+  body?: { pt: string; en: string }
+  note?: { pt: string; en: string }
+  items?: { pt: string[]; en: string[] }
+  steps?: { num: string; title: { pt: string; en: string }; desc: { pt: string; en: string } }[]
+  belts?: { name: string; label: { pt: string; en: string }; desc: { pt: string; en: string }; color: string }[]
+  metrics?: { value: string; label: { pt: string; en: string } }[]
+  phases?: { name: { pt: string; en: string }; items: { pt: string[]; en: string[] }; color: string }[]
+  cards?: { title: { pt: string; en: string }; desc: { pt: string; en: string } }[]
+  dimensions?: { icon: React.ReactNode; name: { pt: string; en: string }; items: { pt: string[]; en: string[] } }[]
+}
+
 interface ServiceItem {
   icon: React.ReactNode
   title: { pt: string; en: string }
@@ -38,6 +52,10 @@ interface ServiceItem {
   marketBadge: { pt: string; en: string }
   bullets: { pt: string[]; en: string[] }
   color: string
+  detail?: {
+    tagline: { pt: string; en: string }
+    sections: DetailSection[]
+  }
 }
 
 interface HowItem {
@@ -195,6 +213,93 @@ const SERVICES: ServiceItem[] = [
       ],
     },
     color: '#2DD4BF',
+    detail: {
+      tagline: {
+        pt: 'Resolve dores reais do negócio enquanto capacita seu time em inovação e IA',
+        en: 'Solves real business pain while training your team in innovation and AI',
+      },
+      sections: [
+        {
+          type: 'text',
+          title: { pt: 'O Desafio do CIO Hoje', en: 'The CIO Challenge Today' },
+          body: {
+            pt: 'Áreas operacionais travadas em trabalho manual. Iniciativas de inovação que não saem do PowerPoint. Capacitações genéricas que não viram resultado. Pressão para entregar produtividade com IA — sem um modelo operacional que combine entrega concreta e formação de pessoas.',
+            en: 'Operational areas stuck in manual work. Innovation initiatives that never leave PowerPoint. Generic training that produces no results. Pressure to deliver AI productivity — without an operational model that combines concrete delivery and people development.',
+          },
+        },
+        {
+          type: 'text',
+          title: { pt: 'O que é Fusion Teams', en: 'What is Fusion Teams' },
+          body: {
+            pt: 'Uma célula de especialistas Foursys que se anexa a uma área do cliente por um ciclo estruturado, mapeia jornadas, entrega automações com IA e low/no-code, e simultaneamente capacita um profissional da área até que ele se torne multiplicador autônomo. Ao final, o time desanexa — deixando o legado rodando.',
+            en: 'A Foursys specialist cell that attaches to a client area for a structured cycle, maps journeys, delivers automations with AI and low/no-code, and simultaneously trains an area professional until they become an autonomous multiplier. At the end, the team detaches — leaving the legacy running.',
+          },
+          items: {
+            pt: [
+              'Multidisciplinaridade real: Jornada (PO/PM), Tech/IA (Arquiteto/Dev), Negócio (SME do cliente)',
+              'Autonomia com propósito: decide e executa dentro das diretrizes do Studio',
+              'Ciclo ágil e iterativo: sprints curtos com hipóteses, testes e validação contínua',
+              'Aprendizado constante: cada ciclo registra práticas e alimenta os próximos projetos',
+            ],
+            en: [
+              'Real multidisciplinarity: Journey (PO/PM), Tech/AI (Architect/Dev), Business (client SME)',
+              'Purposeful autonomy: decides and executes within Studio guidelines',
+              'Agile iterative cycle: short sprints with hypotheses, tests and continuous validation',
+              'Constant learning: each cycle records practices and feeds future projects',
+            ],
+          },
+        },
+        {
+          type: 'steps',
+          title: { pt: 'Ciclo Anexar / Desanexar', en: 'Attach / Detach Cycle' },
+          note: {
+            pt: 'Os ciclos 01→05 se repetem iterativamente até a desanexação, com o SME do cliente evoluindo em belts de maturidade.',
+            en: 'Cycles 01→05 repeat iteratively until detachment, with the client SME evolving through maturity belts.',
+          },
+          steps: [
+            { num: '01', title: { pt: 'Diagnóstico', en: 'Diagnosis' }, desc: { pt: 'Maturidade inicial', en: 'Initial maturity' } },
+            { num: '02', title: { pt: 'Mapeamento', en: 'Mapping' }, desc: { pt: 'Processos, dores e oportunidades', en: 'Processes, pain points and opportunities' } },
+            { num: '03', title: { pt: 'Priorização', en: 'Prioritization' }, desc: { pt: 'Quick wins e alto impacto', en: 'Quick wins and high impact' } },
+            { num: '04', title: { pt: 'Ideação', en: 'Ideation' }, desc: { pt: 'Cocriação de soluções', en: 'Solution co-creation' } },
+            { num: '05', title: { pt: 'Dev MVP', en: 'Dev MVP' }, desc: { pt: 'Construção iterativa', en: 'Iterative building' } },
+            { num: '✓', title: { pt: 'Go-live', en: 'Go-live' }, desc: { pt: 'Entrega e validação', en: 'Delivery and validation' } },
+          ],
+        },
+        {
+          type: 'belts',
+          title: { pt: 'Trilha de Maturidade', en: 'Maturity Track' },
+          note: {
+            pt: 'Em 6 meses, o objetivo é levar o SME até Yellow/Green Belt com autonomia para operar IA e no-code.',
+            en: 'In 6 months, the goal is to bring the SME to Yellow/Green Belt with autonomy to operate AI and no-code.',
+          },
+          belts: [
+            { name: 'WHITE', label: { pt: 'Introdução', en: 'Introduction' }, desc: { pt: 'Fundamentos de inovação e jornadas', en: 'Innovation and journey fundamentals' }, color: '#E5E7EB' },
+            { name: 'YELLOW', label: { pt: 'Ferramentas', en: 'Tools' }, desc: { pt: 'Mapeamento, priorização e ideação', en: 'Mapping, prioritization and ideation' }, color: '#FBBF24' },
+            { name: 'GREEN', label: { pt: 'Autonomia com IA', en: 'AI Autonomy' }, desc: { pt: 'Prompt engineering e no-code', en: 'Prompt engineering and no-code' }, color: '#34D399' },
+            { name: 'BLUE', label: { pt: 'Champion', en: 'Champion' }, desc: { pt: 'Lidera novos ciclos na área', en: 'Leads new cycles in the area' }, color: '#60A5FA' },
+            { name: 'BLACK', label: { pt: 'Estratégico', en: 'Strategic' }, desc: { pt: 'Visão apurada e tendências', en: 'Sharp vision and trends' }, color: '#9CA3AF' },
+          ],
+        },
+        {
+          type: 'metrics',
+          title: { pt: 'Resultados Comprovados', en: 'Proven Results' },
+          metrics: [
+            { value: '8', label: { pt: 'Clientes atendidos', en: 'Clients served' } },
+            { value: '+10', label: { pt: 'Processos automatizados', en: 'Automated processes' } },
+            { value: '+1.000h', label: { pt: 'Economizadas', en: 'Hours saved' } },
+            { value: '4', label: { pt: 'Áreas-tipo atendidas', en: 'Area types served' } },
+          ],
+        },
+        {
+          type: 'highlight',
+          title: { pt: 'Case Destaque', en: 'Featured Case' },
+          body: {
+            pt: 'Cinco áreas do Centro de Serviços Compartilhados de uma corporação com 2 mil colaboradores (RH, Jurídico, Operações, Marketing e Financeiro) passaram pelo Fusion Teams. Cada área teve ao menos uma jornada priorizada, com soluções entregues via ferramentas de mercado ou automações no-code — liberando os times para atuação estratégica.',
+            en: 'Five areas of a Shared Services Center in a 2,000-employee corporation (HR, Legal, Operations, Marketing and Finance) went through Fusion Teams. Each area had at least one prioritized journey, with solutions delivered via market tools or no-code automations — freeing teams for strategic work.',
+          },
+        },
+      ],
+    },
   },
   {
     icon: <Compass size={22} />,
@@ -220,6 +325,151 @@ const SERVICES: ServiceItem[] = [
       ],
     },
     color: '#818CF8',
+    detail: {
+      tagline: {
+        pt: 'Inteligência Artificial que começa pela estratégia — não pela ferramenta',
+        en: 'Artificial Intelligence that starts with strategy — not the tool',
+      },
+      sections: [
+        {
+          type: 'text',
+          title: { pt: 'O Desafio do CEO e do COO', en: 'The CEO and COO Challenge' },
+          body: {
+            pt: 'A pressão para adotar IA é concreta, mas o ruído é maior. Ferramentas surgem a cada semana. POCs nascem soltos em áreas diferentes, sem critério de priorização. Investimentos vão para casos de baixo retorno. Custos de modelo escapam ao controle. O executivo não precisa de mais uma iniciativa isolada — precisa de uma visão orquestrada que transforme IA em vantagem competitiva mensurável.',
+            en: 'The pressure to adopt AI is real, but the noise is louder. Tools emerge every week. POCs spring up across different areas with no prioritization criteria. Investments go to low-return cases. Model costs spiral out of control. Executives don\'t need another isolated initiative — they need an orchestrated vision that turns AI into measurable competitive advantage.',
+          },
+        },
+        {
+          type: 'text',
+          title: { pt: 'O que é AI Strategy & Roadmap', en: 'What is AI Strategy & Roadmap' },
+          body: {
+            pt: 'Programa estruturado que leva a organização da visão estratégica de IA até a execução dos primeiros casos priorizados. Combina diagnóstico de maturidade, benchmarking de ferramentas, desenho de governança e comitês, capacitação de equipes e seleção rigorosa de casos de uso com método proprietário Foursys — construído a partir de 25 anos de experiência em transformação digital em grandes corporações.',
+            en: 'Structured program that takes the organization from AI strategic vision to execution of prioritized use cases. Combines maturity assessment, tool benchmarking, governance and committee design, team training and rigorous use case selection with proprietary Foursys method — built from 25 years of digital transformation experience in large corporations.',
+          },
+        },
+        {
+          type: 'phases',
+          title: { pt: 'Framework Foursys', en: 'Foursys Framework' },
+          phases: [
+            {
+              name: { pt: 'Estratégia', en: 'Strategy' },
+              color: '#818CF8',
+              items: {
+                pt: ['Tendências de mercado e tecnológicas', 'Avaliação de maturidade e definição da estratégia de IA', 'Plano de recursos para adoção de IA', 'Desenho de governança e comitês'],
+                en: ['Market and technology trends', 'Maturity assessment and AI strategy definition', 'Resource plan for AI adoption', 'Governance and committee design'],
+              },
+            },
+            {
+              name: { pt: 'Mapeamento', en: 'Mapping' },
+              color: '#60A5FA',
+              items: {
+                pt: ['Capacitação das equipes de negócio e TI', 'Avaliação Construir vs. Comprar tecnologias', 'Identificação de parceiros tecnológicos', 'Identificação e priorização de casos de uso'],
+                en: ['Business and IT team training', 'Build vs. Buy technology assessment', 'Technology partner identification', 'Use case identification and prioritization'],
+              },
+            },
+            {
+              name: { pt: 'Aceleração', en: 'Acceleration' },
+              color: '#34D399',
+              items: {
+                pt: ['Detalhamento e seleção dos casos', 'Experimentações e POCs dos casos priorizados', 'Análise de resultados com métricas de negócio', 'Rollout de produto ou projeto em escala'],
+                en: ['Case detailing and selection', 'Experiments and POCs of prioritized cases', 'Results analysis with business metrics', 'Product or project rollout at scale'],
+              },
+            },
+          ],
+        },
+        {
+          type: 'steps',
+          title: { pt: 'Método de Priorização — ROI Mensurável', en: 'Prioritization Method — Measurable ROI' },
+          note: {
+            pt: 'Priorização final via matriz Valor × Complexidade — considerando P&L endereçável, impacto, escala, alinhamento estratégico, complexidade de dados e riscos.',
+            en: 'Final prioritization via Value × Complexity matrix — considering addressable P&L, impact, scale, strategic alignment, data complexity and risks.',
+          },
+          steps: [
+            { num: '01', title: { pt: 'Identificação', en: 'Identification' }, desc: { pt: 'Oportunidades de IA', en: 'AI opportunities' } },
+            { num: '02', title: { pt: 'Quantificação', en: 'Quantification' }, desc: { pt: 'Impacto dos problemas', en: 'Problem impact' } },
+            { num: '03', title: { pt: 'Dimensionamento', en: 'Sizing' }, desc: { pt: 'Tamanho da oportunidade', en: 'Opportunity size' } },
+            { num: '04', title: { pt: 'Estimativa', en: 'Estimation' }, desc: { pt: 'Custo de implantação', en: 'Implementation cost' } },
+            { num: '05', title: { pt: 'Cálculo do ROI', en: 'ROI Calculation' }, desc: { pt: 'Retorno sobre investimento', en: 'Return on investment' } },
+          ],
+        },
+        {
+          type: 'dimensions',
+          title: { pt: 'Seleção de Modelo de IA', en: 'AI Model Selection' },
+          note: {
+            pt: 'Matriz de 3 dimensões que protege o cliente de decisões que parecem boas no POC mas quebram em produção.',
+            en: '3-dimension matrix that protects the client from decisions that look good in POC but break in production.',
+          },
+          dimensions: [
+            {
+              icon: <Shield size={18} />,
+              name: { pt: 'Aplicabilidade', en: 'Applicability' },
+              items: {
+                pt: ['Cloud vs. Local (on-premise)', 'Modelo grande vs. pequeno', 'Requisitos de modalidade', 'Necessidade de fine-tuning', 'Privacidade e segurança'],
+                en: ['Cloud vs. On-premise', 'Large vs. small model', 'Modality requirements', 'Fine-tuning needs', 'Privacy and security'],
+              },
+            },
+            {
+              icon: <Rocket size={18} />,
+              name: { pt: 'Performance', en: 'Performance' },
+              items: {
+                pt: ['Capacidade de raciocínio', 'Compreensão de linguagem', 'Matemática e programação', 'Latência'],
+                en: ['Reasoning capability', 'Language comprehension', 'Math and programming', 'Latency'],
+              },
+            },
+            {
+              icon: <DollarSign size={18} />,
+              name: { pt: 'Custo', en: 'Cost' },
+              items: {
+                pt: ['Custo por token', 'Taxas de fine-tuning', 'Despesas com engenharia', 'Requisitos de hardware (on-premise)'],
+                en: ['Cost per token', 'Fine-tuning fees', 'Engineering expenses', 'Hardware requirements (on-premise)'],
+              },
+            },
+          ],
+        },
+        {
+          type: 'cards',
+          title: { pt: 'Arquétipos de Casos de Uso', en: 'Use Case Archetypes' },
+          cards: [
+            {
+              title: { pt: 'Melhoria de Produtividade', en: 'Productivity Improvement' },
+              desc: { pt: 'Chatbots internos, análise e criação de documentos, suporte a desenvolvimento, detecção de fraude', en: 'Internal chatbots, document analysis and creation, development support, fraud detection' },
+            },
+            {
+              title: { pt: 'Interação com Cliente', en: 'Customer Interaction' },
+              desc: { pt: 'Argumentos de vendas, co-pilots para agentes, hiper-personalização, criação de conteúdo visual', en: 'Sales arguments, agent co-pilots, hyper-personalization, visual content creation' },
+            },
+            {
+              title: { pt: 'Automação Externa', en: 'External Automation' },
+              desc: { pt: 'Chatbots externos, automação de WhatsApp, respostas em mídias sociais, relatórios personalizados', en: 'External chatbots, WhatsApp automation, social media responses, custom reports' },
+            },
+          ],
+        },
+        {
+          type: 'list',
+          title: { pt: 'Capacitação Integrada — 7 Módulos', en: 'Integrated Training — 7 Modules' },
+          items: {
+            pt: [
+              'I — IA Generativa: introdução e fundamentos para áreas administrativas',
+              'II — Fundamentos técnicos de IA e LLMs',
+              'III — Ferramentas e aplicações práticas',
+              'IV — IA Generativa avançada para áreas administrativas',
+              'V — Estratégias de implementação e gestão',
+              'VI — Criatividade e inovação com IA',
+              'VII — Projeto prático aplicado a caso real da empresa',
+            ],
+            en: [
+              'I — Generative AI: introduction and fundamentals for administrative areas',
+              'II — Technical AI and LLM fundamentals',
+              'III — Tools and practical applications',
+              'IV — Advanced Generative AI for administrative areas',
+              'V — Implementation and management strategies',
+              'VI — Creativity and innovation with AI',
+              'VII — Practical project applied to a real company case',
+            ],
+          },
+        },
+      ],
+    },
   },
 ]
 
@@ -346,7 +596,7 @@ function ResultCard({ item, index, lang }: { item: ResultItem; index: number; la
 
 // ─── Service Card ────────────────────────────────────────────────────────────
 
-function ServiceCard({ item, index, lang }: { item: ServiceItem; index: number; lang: string }) {
+function ServiceCard({ item, index, lang, onShowDetail }: { item: ServiceItem; index: number; lang: string; onShowDetail?: (item: ServiceItem) => void }) {
   const [expanded, setExpanded] = useState(false)
   const [hovered, setHovered] = useState(false)
 
@@ -432,13 +682,26 @@ function ServiceCard({ item, index, lang }: { item: ServiceItem; index: number; 
           )}
         </AnimatePresence>
 
-        <div className="flex items-center gap-2 mt-3 text-xs font-bold" style={{ color: item.color }}>
-          {expanded
-            ? (lang === 'pt' ? 'Recolher' : 'Collapse')
-            : (lang === 'pt' ? 'Ver detalhes' : 'View details')}
-          <motion.div animate={{ rotate: expanded ? 90 : 0 }} transition={{ duration: 0.2 }}>
-            <ChevronRight size={14} />
-          </motion.div>
+        <div className="flex items-center gap-4 mt-3">
+          <div className="flex items-center gap-2 text-xs font-bold" style={{ color: item.color }}>
+            {expanded
+              ? (lang === 'pt' ? 'Recolher' : 'Collapse')
+              : (lang === 'pt' ? 'Ver detalhes' : 'View details')}
+            <motion.div animate={{ rotate: expanded ? 90 : 0 }} transition={{ duration: 0.2 }}>
+              <ChevronRight size={14} />
+            </motion.div>
+          </div>
+          {item.detail && onShowDetail && (
+            <button
+              type="button"
+              onClick={e => { e.stopPropagation(); onShowDetail(item) }}
+              className="flex items-center gap-1.5 text-xs font-bold transition-colors duration-200 hover:text-white"
+              style={{ color: hexToRgba(item.color, 0.7) }}
+            >
+              {lang === 'pt' ? 'Explorar completo' : 'Explore full'}
+              <ArrowRight size={12} />
+            </button>
+          )}
         </div>
       </div>
 
@@ -613,6 +876,236 @@ function HowCard({ item, index, lang }: { item: HowItem; index: number; lang: st
   )
 }
 
+// ─── Service Detail Modal ───────────────────────────────────────────────────
+
+function ServiceDetailModal({ item, onClose, lang }: { item: ServiceItem; onClose: () => void; lang: string }) {
+  const trapRef = useFocusTrap(true)
+  const pt = lang === 'pt'
+  const L = lang as 'pt' | 'en'
+  const c = item.color
+  const d = item.detail!
+
+  function renderSection(section: DetailSection, idx: number) {
+    switch (section.type) {
+      case 'text':
+        return (
+          <div key={idx} className="space-y-3">
+            <h4 className="text-xs font-bold uppercase tracking-[0.15em]" style={{ color: c }}>{section.title[L]}</h4>
+            {section.body && <p className="text-sm text-foursys-text-muted leading-relaxed">{section.body[L]}</p>}
+            {section.items && (
+              <div className="space-y-2 mt-3">
+                {section.items[L].map(it => (
+                  <div key={it} className="flex items-start gap-2 text-xs text-white/80">
+                    <CheckCircle2 size={12} style={{ color: c }} className="flex-shrink-0 mt-0.5" />
+                    {it}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )
+
+      case 'steps':
+        return (
+          <div key={idx} className="space-y-4">
+            <h4 className="text-xs font-bold uppercase tracking-[0.15em]" style={{ color: c }}>{section.title[L]}</h4>
+            <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
+              {section.steps!.map((s, i) => (
+                <div key={i} className="text-center p-3 rounded-xl" style={{ background: hexToRgba(c, 0.06), border: `1px solid ${hexToRgba(c, 0.12)}` }}>
+                  <div className="text-lg font-black mb-1" style={{ color: c }}>{s.num}</div>
+                  <div className="text-[11px] font-bold text-white leading-tight">{s.title[L]}</div>
+                  <div className="text-[10px] text-foursys-text-dim mt-0.5 leading-tight">{s.desc[L]}</div>
+                </div>
+              ))}
+            </div>
+            {section.note && <p className="text-[11px] text-foursys-text-dim italic">{section.note[L]}</p>}
+          </div>
+        )
+
+      case 'belts':
+        return (
+          <div key={idx} className="space-y-4">
+            <h4 className="text-xs font-bold uppercase tracking-[0.15em]" style={{ color: c }}>{section.title[L]}</h4>
+            <div className="flex flex-wrap gap-2">
+              {section.belts!.map(b => (
+                <div key={b.name} className="flex-1 min-w-[120px] p-3 rounded-xl text-center" style={{ background: hexToRgba(b.color, 0.08), border: `1px solid ${hexToRgba(b.color, 0.2)}` }}>
+                  <div className="text-[10px] font-black uppercase tracking-wider mb-1" style={{ color: b.color }}>{b.name}</div>
+                  <div className="text-[11px] font-bold text-white">{b.label[L]}</div>
+                  <div className="text-[10px] text-foursys-text-dim mt-0.5">{b.desc[L]}</div>
+                </div>
+              ))}
+            </div>
+            {section.note && <p className="text-[11px] text-foursys-text-dim italic">{section.note[L]}</p>}
+          </div>
+        )
+
+      case 'metrics':
+        return (
+          <div key={idx} className="space-y-4">
+            <h4 className="text-xs font-bold uppercase tracking-[0.15em]" style={{ color: c }}>{section.title[L]}</h4>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {section.metrics!.map(m => (
+                <div key={m.label.pt} className="p-4 rounded-xl text-center" style={{ background: hexToRgba(c, 0.06), border: `1px solid ${hexToRgba(c, 0.12)}` }}>
+                  <div className="text-xl md:text-2xl font-black" style={{ color: c }}>{m.value}</div>
+                  <div className="text-[9px] text-foursys-text-dim uppercase tracking-wider font-bold mt-1">{m.label[L]}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+
+      case 'phases':
+        return (
+          <div key={idx} className="space-y-4">
+            <h4 className="text-xs font-bold uppercase tracking-[0.15em]" style={{ color: c }}>{section.title[L]}</h4>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              {section.phases!.map(p => (
+                <div key={p.name.pt} className="p-4 rounded-xl" style={{ background: hexToRgba(p.color, 0.05), border: `1px solid ${hexToRgba(p.color, 0.15)}` }}>
+                  <div className="text-[10px] font-black uppercase tracking-[0.15em] mb-3" style={{ color: p.color }}>{p.name[L]}</div>
+                  <div className="space-y-2">
+                    {p.items[L].map(it => (
+                      <div key={it} className="flex items-start gap-2 text-[11px] text-white/80">
+                        <ChevronRight size={10} style={{ color: p.color }} className="flex-shrink-0 mt-0.5" />
+                        {it}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+
+      case 'dimensions':
+        return (
+          <div key={idx} className="space-y-4">
+            <h4 className="text-xs font-bold uppercase tracking-[0.15em]" style={{ color: c }}>{section.title[L]}</h4>
+            {section.note && <p className="text-[11px] text-foursys-text-dim italic mb-2">{section.note[L]}</p>}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              {section.dimensions!.map(dim => (
+                <div key={dim.name.pt} className="p-4 rounded-xl" style={{ background: hexToRgba(c, 0.04), border: `1px solid ${hexToRgba(c, 0.12)}` }}>
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: hexToRgba(c, 0.12), color: c }}>{dim.icon}</div>
+                    <div className="text-xs font-bold text-white">{dim.name[L]}</div>
+                  </div>
+                  <div className="space-y-1.5">
+                    {dim.items[L].map(it => (
+                      <div key={it} className="text-[11px] text-foursys-text-muted flex items-center gap-1.5">
+                        <div className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: c }} />
+                        {it}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+
+      case 'cards':
+        return (
+          <div key={idx} className="space-y-4">
+            <h4 className="text-xs font-bold uppercase tracking-[0.15em]" style={{ color: c }}>{section.title[L]}</h4>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              {section.cards!.map(card => (
+                <div key={card.title.pt} className="p-4 rounded-xl" style={{ background: hexToRgba(c, 0.04), border: `1px solid ${hexToRgba(c, 0.1)}` }}>
+                  <div className="text-xs font-bold text-white mb-1.5">{card.title[L]}</div>
+                  <div className="text-[11px] text-foursys-text-muted leading-relaxed">{card.desc[L]}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+
+      case 'highlight':
+        return (
+          <div key={idx} className="p-5 rounded-2xl" style={{ background: hexToRgba(c, 0.06), border: `1px solid ${hexToRgba(c, 0.15)}` }}>
+            <h4 className="text-xs font-bold uppercase tracking-[0.15em] mb-2" style={{ color: c }}>{section.title[L]}</h4>
+            {section.body && <p className="text-sm text-foursys-text-muted leading-relaxed">{section.body[L]}</p>}
+          </div>
+        )
+
+      case 'list':
+        return (
+          <div key={idx} className="space-y-3">
+            <h4 className="text-xs font-bold uppercase tracking-[0.15em]" style={{ color: c }}>{section.title[L]}</h4>
+            <div className="space-y-2">
+              {section.items![L].map((it, i) => (
+                <div key={i} className="flex items-start gap-3 p-2.5 rounded-xl" style={{ background: hexToRgba(c, i % 2 === 0 ? 0.03 : 0.06) }}>
+                  <div className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 text-[10px] font-black" style={{ background: hexToRgba(c, 0.12), color: c }}>
+                    {i + 1}
+                  </div>
+                  <span className="text-xs text-white/80 leading-relaxed pt-0.5">{it}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+
+      default:
+        return null
+    }
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain py-8"
+      role="dialog"
+      aria-modal="true"
+      aria-label={item.title[L]}
+      onClick={onClose}
+    >
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-xl" />
+      <motion.div
+        initial={{ scale: 0.92, y: 40, opacity: 0 }}
+        animate={{ scale: 1, y: 0, opacity: 1 }}
+        exit={{ scale: 0.95, y: 20, opacity: 0 }}
+        transition={{ duration: 0.4, type: 'spring', stiffness: 200 }}
+        onClick={e => e.stopPropagation()}
+        ref={trapRef}
+        className="relative z-10 w-full max-w-4xl mx-4 rounded-3xl overflow-hidden"
+        style={{
+          background: `linear-gradient(180deg, ${hexToRgba(c, 0.08)} 0%, rgba(10,14,22,0.98) 12%, rgba(10,14,22,0.99) 100%)`,
+          border: `1px solid ${hexToRgba(c, 0.2)}`,
+        }}
+      >
+        <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: `linear-gradient(90deg, transparent, ${c}, transparent)` }} />
+        <div className="absolute top-6 right-6 z-20">
+          <button type="button" onClick={onClose} aria-label="Close" className="p-2.5 rounded-xl bg-white/[0.06] border border-white/[0.1] hover:bg-white/[0.12] transition-colors">
+            <X size={18} className="text-white/70" />
+          </button>
+        </div>
+
+        <div className="p-8 md:p-10">
+          <div className="flex items-center gap-4 mb-2">
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${hexToRgba(c, 0.25)}, ${hexToRgba(c, 0.1)})`, border: `1px solid ${hexToRgba(c, 0.35)}`, color: c }}>
+              {item.icon}
+            </div>
+            <div>
+              <h2 className="text-2xl md:text-3xl font-black text-white">{item.title[L]}</h2>
+              <p className="text-sm font-semibold mt-0.5" style={{ color: c }}>{d.tagline[L]}</p>
+            </div>
+          </div>
+
+          <div className="h-px my-6" style={{ background: `linear-gradient(90deg, transparent, ${hexToRgba(c, 0.3)}, transparent)` }} />
+
+          <div className="space-y-8">
+            {d.sections.map((section, idx) => renderSection(section, idx))}
+          </div>
+
+          <div className="h-px mt-8 mb-4" style={{ background: `linear-gradient(90deg, transparent, ${hexToRgba(c, 0.2)}, transparent)` }} />
+          <p className="text-[10px] text-foursys-text-dim text-center italic">
+            {pt ? 'Studio de Inovação Foursys — 25 anos de mercado' : 'Foursys Innovation Studio — 25 years in the market'}
+          </p>
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+}
+
 // ─── Market Highlight Modal ──────────────────────────────────────────────────
 
 function MarketModal({ onClose, lang }: { onClose: () => void; lang: string }) {
@@ -732,6 +1225,7 @@ function MarketModal({ onClose, lang }: { onClose: () => void; lang: string }) {
 export function SectionAIFoursys() {
   const { t, lang } = useLanguage()
   const [showMarket, setShowMarket] = useState(false)
+  const [detailService, setDetailService] = useState<ServiceItem | null>(null)
   const pt = lang === 'pt'
 
   return (
@@ -805,7 +1299,7 @@ export function SectionAIFoursys() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {SERVICES.map((item, i) => (
-              <ServiceCard key={item.title.pt} item={item} index={i} lang={lang} />
+              <ServiceCard key={item.title.pt} item={item} index={i} lang={lang} onShowDetail={setDetailService} />
             ))}
           </div>
         </motion.div>
@@ -861,6 +1355,7 @@ export function SectionAIFoursys() {
 
       <AnimatePresence>
         {showMarket && <MarketModal onClose={() => setShowMarket(false)} lang={lang} />}
+        {detailService && <ServiceDetailModal item={detailService} onClose={() => setDetailService(null)} lang={lang} />}
       </AnimatePresence>
     </SectionWrapper>
   )
