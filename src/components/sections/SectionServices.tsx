@@ -406,7 +406,7 @@ function OfferDetailModal({
 
 /* ── Deep-dive content for specific service lines ────────────────────────────── */
 
-const DEEP_DIVE_IDS = ['modernizacao-legados', 'ciberseguranca', 'fourblox', 'ai-augmented-squad', 'quality-testes-ia'] as const
+const DEEP_DIVE_IDS = ['modernizacao-legados', 'ciberseguranca', 'fourblox', 'ai-augmented-squad', 'quality-testes-ia', 'dados-analytics'] as const
 
 /* ── Modernização de Legados Deep Dive ────────────────────────────────────── */
 
@@ -1840,6 +1840,249 @@ function QualityAIDeepDive({ lang }: { lang: string }) {
   )
 }
 
+/* ── Dados & Analytics Deep Dive ──────────────────────────────────────────── */
+
+const dadosPillars = [
+  {
+    icon: 'database',
+    title: 'Plataforma de Dados',
+    desc: 'Definição e desenho da solução aderente às necessidades de negócio, aspectos técnicos e regulatórios.',
+    action: 'Definir | Desenhar',
+    items: ['Construção de MDS (Modern Data Stack)', 'Modernização de ambientes de Data & Analytics', 'MDS as a Service (plataforma gerenciada)'],
+  },
+  {
+    icon: 'settings',
+    title: 'Engenharia',
+    desc: 'Construção e implantação de artefatos e componentes de solução para movimentação e processamento de dados.',
+    action: 'Construir | Implantar',
+    items: ['Construção de Pipeline de Dados', 'Implantação de DataOps e MLOps', 'Data Warehouses, Data Lakes, Lakehouses, Data Mesh e Data Fabric'],
+  },
+  {
+    icon: 'package',
+    title: 'Produtos de Dados',
+    desc: 'Uso dos dados como asset para revolucionar negócios, transformando informações em produtos e serviços.',
+    action: 'Produtizar | Processar',
+    items: ['Modelos descritivos, diagnósticos, preditivos e prescritivos', 'Agentes Autônomos, LLMs e Processamento de Linguagem Natural', 'Visão Computacional e Automação Inteligente'],
+  },
+  {
+    icon: 'bar-chart',
+    title: 'Analytics',
+    desc: 'Insights e decisões orientadas por dados para todos os níveis da organização.',
+    action: 'Analisar | Visualizar',
+    items: ['Dashboards e Relatórios interativos', 'Indicadores e KPIs automatizados', 'Alertas inteligentes em tempo real'],
+  },
+  {
+    icon: 'shield',
+    title: 'Governança de Dados',
+    desc: 'Políticas, processos e controles que garantem qualidade, integridade, segurança e conformidade dos dados.',
+    action: 'Organizar | Proteger',
+    items: ['Segurança e Privacidade de dados', 'Catálogo e Observabilidade', 'Active Metadata'],
+  },
+  {
+    icon: 'graduation-cap',
+    title: 'Cultura',
+    desc: 'Universalização do acesso à informação e seu entendimento dentro do contexto específico do negócio.',
+    action: 'Instruir | Divulgar',
+    items: ['Assessment de maturidade analítica', 'Alfabetização em Dados e Self-Service BI', 'Cultura Data-Driven'],
+  },
+]
+
+const dadosPillarsEn = [
+  {
+    icon: 'database',
+    title: 'Data Platform',
+    desc: 'Solution definition and design aligned with business needs, technical aspects and regulatory requirements.',
+    action: 'Define | Design',
+    items: ['MDS (Modern Data Stack) Construction', 'Data & Analytics Environment Modernization', 'MDS as a Service (managed platform)'],
+  },
+  {
+    icon: 'settings',
+    title: 'Engineering',
+    desc: 'Building and deploying solution artifacts and components for data movement and processing.',
+    action: 'Build | Deploy',
+    items: ['Data Pipeline Construction', 'DataOps and MLOps Implementation', 'Data Warehouses, Data Lakes, Lakehouses, Data Mesh and Data Fabric'],
+  },
+  {
+    icon: 'package',
+    title: 'Data Products',
+    desc: 'Using data as an asset to revolutionize business, transforming information into products and services.',
+    action: 'Productize | Process',
+    items: ['Descriptive, diagnostic, predictive and prescriptive models', 'Autonomous Agents, LLMs and Natural Language Processing', 'Computer Vision and Intelligent Automation'],
+  },
+  {
+    icon: 'bar-chart',
+    title: 'Analytics',
+    desc: 'Data-driven insights and decisions for all levels of the organization.',
+    action: 'Analyze | Visualize',
+    items: ['Interactive dashboards and reports', 'Automated indicators and KPIs', 'Real-time intelligent alerts'],
+  },
+  {
+    icon: 'shield',
+    title: 'Data Governance',
+    desc: 'Policies, processes and controls ensuring data quality, integrity, security and compliance.',
+    action: 'Organize | Protect',
+    items: ['Data Security and Privacy', 'Catalog and Observability', 'Active Metadata'],
+  },
+  {
+    icon: 'graduation-cap',
+    title: 'Culture',
+    desc: 'Universalizing access to information and its understanding within the specific business context.',
+    action: 'Instruct | Disseminate',
+    items: ['Analytical maturity assessment', 'Data Literacy and Self-Service BI', 'Data-Driven Culture'],
+  },
+]
+
+const dadosChallenges = [
+  'Melhoria da tomada de decisões',
+  'Aumento da eficiência operacional',
+  'Inovação orientada por dados',
+  'Vantagem competitiva',
+  'Redução de custos',
+  'Conformidade e segurança',
+  'Criação de uma cultura orientada por dados',
+  'Agilidade e adaptação',
+]
+
+const dadosChallengesEn = [
+  'Improved decision-making',
+  'Increased operational efficiency',
+  'Data-driven innovation',
+  'Competitive advantage',
+  'Cost reduction',
+  'Compliance and security',
+  'Building a data-driven culture',
+  'Agility and adaptation',
+]
+
+const dadosCoeValues = [
+  'Soluções rápidas e eficientes com ciclos reduzidos',
+  'Repositório de conhecimento centralizado',
+  'Capacitação e competência contínua',
+  'Aconselhamento just in time e inovação',
+  'Frameworks e artefatos reutilizáveis',
+  'Governança e melhores práticas aplicadas',
+  'Métricas, KPIs e qualidade mensuráveis',
+]
+
+const dadosCoeValuesEn = [
+  'Fast and efficient solutions with reduced cycles',
+  'Centralized knowledge repository',
+  'Continuous training and competency',
+  'Just-in-time advice and innovation',
+  'Reusable frameworks and artifacts',
+  'Applied governance and best practices',
+  'Measurable metrics, KPIs and quality',
+]
+
+function DadosAnalyticsDeepDive({ lang }: { lang: string }) {
+  const pillars = lang === 'en' ? dadosPillarsEn : dadosPillars
+  const challenges = lang === 'en' ? dadosChallengesEn : dadosChallenges
+  const coeValues = lang === 'en' ? dadosCoeValuesEn : dadosCoeValues
+  const pt = lang === 'pt'
+
+  const iconMap: Record<string, string> = {
+    'database': '🗄️', 'settings': '⚙️', 'package': '📦',
+    'bar-chart': '📊', 'shield': '🛡️', 'graduation-cap': '🎓',
+  }
+
+  return (
+    <div className="space-y-7">
+      {/* Proposta de valor */}
+      <div className="p-5 rounded-xl bg-gradient-to-r from-amber-500/15 to-transparent border border-amber-500/25">
+        <p className="text-xs text-foursys-text-muted leading-relaxed">
+          <strong className="text-foursys-text">{pt ? 'Proposta de Valor:' : 'Value Proposition:'}</strong>{' '}
+          {pt
+            ? 'Transforme dados em decisões estratégicas instantâneas. Com a implantação da nossa solução All In Data & Analytics, sua empresa ganha agilidade na análise de informações cruciais, impulsionando a eficiência operacional e a tomada de decisões baseadas em dados. Uma área de dados ativa é a solução definitiva — dados confiáveis, acesso facilitado e insights poderosos que transformam volume em vantagem competitiva.'
+            : 'Transform data into instant strategic decisions. With our All In Data & Analytics solution, your company gains agility in analyzing crucial information, driving operational efficiency and data-driven decision-making. An active data area is the definitive solution — reliable data, easy access and powerful insights that turn volume into competitive advantage.'}
+        </p>
+      </div>
+
+      {/* Métricas */}
+      <div className="grid grid-cols-3 gap-3">
+        {[
+          { value: 'US$350B', label: pt ? 'Mercado Data & AI' : 'Data & AI Market', color: 'text-amber-400' },
+          { value: '280%', label: pt ? 'ROI Médio' : 'Average ROI', color: 'text-green-400' },
+          { value: '23x', label: pt ? 'Mais Aquisição de Clientes' : 'More Customer Acquisition', color: 'text-cyan-400' },
+        ].map(m => (
+          <div key={m.label} className="text-center p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+            <div className={`text-xl font-black ${m.color}`}>{m.value}</div>
+            <div className="text-[9px] uppercase tracking-wider text-foursys-text-dim font-bold mt-1">{m.label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* 6 Pilares de Serviço */}
+      <div>
+        <h4 className="text-xs font-bold uppercase tracking-[0.15em] text-amber-400 mb-4">{pt ? 'Pilares de Serviço' : 'Service Pillars'}</h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {pillars.map(p => (
+            <div key={p.title} className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-base">{iconMap[p.icon] || '📌'}</span>
+                <div>
+                  <h5 className="text-xs font-bold text-white">{p.title}</h5>
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-amber-400/70">{p.action}</span>
+                </div>
+              </div>
+              <p className="text-[11px] text-foursys-text-muted leading-relaxed mb-2">{p.desc}</p>
+              <div className="space-y-1">
+                {p.items.map(item => (
+                  <div key={item} className="flex items-start gap-1.5 text-[10px] text-white/70">
+                    <span className="text-amber-400 mt-0.5">▸</span>
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Data CoE */}
+      <div>
+        <h4 className="text-xs font-bold uppercase tracking-[0.15em] text-amber-400 mb-3">{pt ? 'Data CoE — Centro de Excelência' : 'Data CoE — Center of Excellence'}</h4>
+        <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+          <p className="text-[11px] text-foursys-text-muted leading-relaxed mb-3">
+            {pt
+              ? 'Integração próxima e de longo prazo em simbiose com o cliente, promovendo ganho de performance e qualidade baseados no conhecimento mútuo. Empregamos método científico, design e uso intensivo de dados para produzir ideias e direcionamentos que transformam o negócio.'
+              : 'Close and long-term integration in symbiosis with the client, promoting performance and quality gains based on mutual knowledge. We employ scientific method, design and intensive data use to produce ideas and directions that transform the business.'}
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            {coeValues.map(v => (
+              <div key={v} className="flex items-start gap-1.5 text-[10px] text-white/70">
+                <span className="text-amber-400 mt-0.5">✓</span>
+                {v}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Desafios Superados */}
+      <div>
+        <h4 className="text-xs font-bold uppercase tracking-[0.15em] text-amber-400 mb-3">{pt ? 'Desafios Superados' : 'Challenges Overcome'}</h4>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          {challenges.map((c, i) => (
+            <div key={i} className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06] text-center">
+              <span className="text-[11px] text-white/80 leading-tight">{c}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Diferenciais */}
+      <div className="p-4 rounded-xl bg-gradient-to-r from-amber-500/10 to-transparent border border-amber-500/20">
+        <p className="text-[11px] text-foursys-text-muted leading-relaxed">
+          <strong className="text-foursys-text">{pt ? 'Por que Foursys:' : 'Why Foursys:'}</strong>{' '}
+          {pt
+            ? 'Somos reconhecidos por vasta experiência e comprometimento com o sucesso de nossos clientes. Nossa expertise técnica e profundo conhecimento do mercado nos permite oferecer soluções personalizadas. Conosco você tem um parceiro confiável dedicado a impulsionar o crescimento e o sucesso por meio da inteligência e da eficácia dos dados.'
+            : 'We are recognized for extensive experience and commitment to our clients\' success. Our technical expertise and deep market knowledge allows us to offer customized solutions. With us you have a reliable partner dedicated to driving growth and success through data intelligence and effectiveness.'}
+        </p>
+      </div>
+    </div>
+  )
+}
+
 function DeepDiveContent({ serviceId, lang }: { serviceId: string; lang: string }) {
   if (serviceId === 'modernizacao-legados') {
     return <ModernizacaoDeepDive lang={lang} />
@@ -1859,6 +2102,10 @@ function DeepDiveContent({ serviceId, lang }: { serviceId: string; lang: string 
 
   if (serviceId === 'fourblox') {
     return <FourBloxDeepDive lang={lang} />
+  }
+
+  if (serviceId === 'dados-analytics') {
+    return <DadosAnalyticsDeepDive lang={lang} />
   }
 
   return null
