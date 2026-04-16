@@ -67,6 +67,17 @@ interface HowItem {
   color: string
   bullets?: { pt: string[]; en: string[] }
   pillars?: { icon: React.ReactNode; title: { pt: string; en: string }; desc: { pt: string; en: string } }[]
+  detail?: {
+    tagline: { pt: string; en: string }
+    sections: DetailSection[]
+  }
+}
+
+interface DetailableItem {
+  icon: React.ReactNode
+  title: { pt: string; en: string }
+  color: string
+  detail: { tagline: { pt: string; en: string }; sections: DetailSection[] }
 }
 
 const RESULTS: ResultItem[] = [
@@ -536,6 +547,137 @@ const HOW_ITEMS: HowItem[] = [
         desc: { pt: 'Billing e consumo por usuário, agente ou projeto — sem surpresas no fim do mês', en: 'Billing and consumption per user, agent or project — no end-of-month surprises' },
       },
     ],
+    detail: {
+      tagline: {
+        pt: 'Crie, orquestre e governe agentes de IA em escala — com produtividade, segurança e controle de custo desde o dia um',
+        en: 'Create, orchestrate and govern AI agents at scale — with productivity, security and cost control from day one',
+      },
+      sections: [
+        {
+          type: 'text',
+          title: { pt: 'O Desafio da IA Corporativa Hoje', en: 'The Corporate AI Challenge Today' },
+          body: {
+            pt: 'Empresas estão adotando IA em múltiplas frentes e ferramentas diferentes, sem uma camada que unifique criação, operação e governança. O resultado é previsível: custos descontrolados, riscos de segurança, retrabalho de agentes parecidos em áreas diferentes e dependência de um único hyperscaler que limita escolhas.',
+            en: 'Companies are adopting AI across multiple fronts and different tools, without a layer that unifies creation, operation and governance. The result is predictable: uncontrolled costs, security risks, rework of similar agents across different areas and dependency on a single hyperscaler that limits choices.',
+          },
+        },
+        {
+          type: 'text',
+          title: { pt: 'O que é MOXE', en: 'What is MOXE' },
+          body: {
+            pt: 'MOXE é um sistema operacional cognitivo entregue como SaaS. Em uma única plataforma, sua empresa cria, orquestra e governa agentes autônomos, fluxos agênticos e skills. Opera em ambiente multi-cloud e seleciona dinamicamente o melhor modelo de IA para cada tarefa. Integra-se aos sistemas, canais e bases de conhecimento da empresa — aprendendo o DNA da organização e entregando respostas assertivas e contextualizadas.',
+            en: 'MOXE is a cognitive operating system delivered as SaaS. On a single platform, your company creates, orchestrates and governs autonomous agents, agentic flows and skills. It operates in a multi-cloud environment and dynamically selects the best AI model for each task. It integrates with your company\'s systems, channels and knowledge bases — learning the organization\'s DNA and delivering assertive, contextualized responses.',
+          },
+        },
+        {
+          type: 'cards',
+          title: { pt: 'Capacidades-Chave', en: 'Key Capabilities' },
+          cards: [
+            {
+              title: { pt: 'Construção para Todos', en: 'Built for Everyone' },
+              desc: { pt: 'De desenvolvedor a analista de negócio, qualquer usuário constrói agentes, fluxos e skills. Elimina a dependência de time de engenharia para tirar IA do POC.', en: 'From developer to business analyst, any user builds agents, flows and skills. Eliminates engineering team dependency to move AI past POC.' },
+            },
+            {
+              title: { pt: 'Inteligência Multi-Modelo', en: 'Multi-Model Intelligence' },
+              desc: { pt: 'LLM Routing seleciona automaticamente o melhor modelo para cada tarefa. Sem amarração a um único provedor, com custo otimizado por consumo.', en: 'LLM Routing automatically selects the best model for each task. No single-provider lock-in, with consumption-optimized cost.' },
+            },
+            {
+              title: { pt: 'Conectado à sua Empresa', en: 'Connected to Your Business' },
+              desc: { pt: 'Integrações nativas com CRM, Jira, GitHub, bases de conhecimento (RAG), WhatsApp, Teams, IDEs e mais. Agentes com contexto real do seu negócio.', en: 'Native integrations with CRM, Jira, GitHub, knowledge bases (RAG), WhatsApp, Teams, IDEs and more. Agents with real business context.' },
+            },
+            {
+              title: { pt: 'Governança desde o Núcleo', en: 'Core Governance' },
+              desc: { pt: 'AI Safety, FinOps, políticas de uso, auditoria e rastreabilidade. Controle que nenhum hyperscaler entrega em produto pronto.', en: 'AI Safety, FinOps, usage policies, auditing and traceability. Control that no hyperscaler delivers out of the box.' },
+            },
+          ],
+        },
+        {
+          type: 'steps',
+          title: { pt: 'Os 3 Pilares da Governança MOXE', en: 'The 3 MOXE Governance Pillars' },
+          note: {
+            pt: 'O que diferencia MOXE de qualquer toolkit de hyperscaler: governança não é plugin, é núcleo do produto.',
+            en: 'What sets MOXE apart from any hyperscaler toolkit: governance is not a plugin, it\'s the product\'s core.',
+          },
+          steps: [
+            { num: '01', title: { pt: 'Construção Segura e Guiada', en: 'Secure Guided Building' }, desc: { pt: 'Boas práticas aplicadas por padrão no desenho de agentes e skills, com análise estática e dinâmica dos fluxos construídos', en: 'Best practices applied by default in agent and skill design, with static and dynamic analysis of built flows' } },
+            { num: '02', title: { pt: 'Proteção de Dados Sensíveis', en: 'Sensitive Data Protection' }, desc: { pt: 'Políticas de uso granulares: controle de quais informações podem ser processadas, por quais modelos, por quais usuários', en: 'Granular usage policies: control which data can be processed, by which models, by which users' } },
+            { num: '03', title: { pt: 'Controle de Custo de IA', en: 'AI Cost Control' }, desc: { pt: 'FinOps nativo: billing, consumo de modelos e avaliações por usuário, agente ou projeto. Sem surpresas no fim do mês', en: 'Native FinOps: billing, model consumption and evaluations per user, agent or project. No end-of-month surprises' } },
+          ],
+        },
+        {
+          type: 'dimensions',
+          title: { pt: 'Posicionamento no Mercado', en: 'Market Positioning' },
+          note: {
+            pt: 'MOXE é produto pronto com governança embutida, adaptado ao DNA da empresa — não um toolkit técnico genérico.',
+            en: 'MOXE is a ready-made product with built-in governance, adapted to the company\'s DNA — not a generic technical toolkit.',
+          },
+          dimensions: [
+            {
+              icon: <Layers size={18} />,
+              name: { pt: 'vs. Hyperscalers', en: 'vs. Hyperscalers' },
+              items: {
+                pt: ['Copilot Studio, Bedrock, Vertex entregam toolkit técnico', 'Sem governança nativa nem personalização ao negócio', 'MOXE: produto pronto, governança embutida, adaptado ao DNA da empresa'],
+                en: ['Copilot Studio, Bedrock, Vertex deliver technical toolkit', 'No native governance or business customization', 'MOXE: ready product, built-in governance, adapted to company DNA'],
+              },
+            },
+            {
+              icon: <Bot size={18} />,
+              name: { pt: 'vs. Plataformas Dev', en: 'vs. Dev Platforms' },
+              items: {
+                pt: ['Focam em code generation e produtividade de squads técnicos', 'Limitadas à engenharia de software', 'MOXE: transforma toda a operação corporativa, não só engenharia'],
+                en: ['Focus on code generation and technical squad productivity', 'Limited to software engineering', 'MOXE: transforms the entire corporate operation, not just engineering'],
+              },
+            },
+            {
+              icon: <Blocks size={18} />,
+              name: { pt: 'vs. Open-Source', en: 'vs. Open-Source' },
+              items: {
+                pt: ['LangGraph, CrewAI e similares exigem time de engenharia dedicado', 'Construção e manutenção sob responsabilidade do cliente', 'MOXE: SaaS pronto; qualquer usuário da empresa constrói'],
+                en: ['LangGraph, CrewAI and similar require dedicated engineering team', 'Building and maintenance under client responsibility', 'MOXE: ready SaaS; any company user can build'],
+              },
+            },
+          ],
+        },
+        {
+          type: 'list',
+          title: { pt: 'Prova de Maturidade', en: 'Proof of Maturity' },
+          items: {
+            pt: [
+              'Nascida dentro da Foursys para resolver um problema real de engenharia em escala',
+              'Escalou para toda a companhia como camada corporativa de IA',
+              'Clientes pagantes ativos nos setores de Serviços, Financeiro e Meios de Pagamento',
+              'Sustentada pela engenharia e capacidade de dados & IA da Foursys — 25 anos de mercado',
+              '5 Studios integrados, certificações ISO 9001, 27001, 27701 (LGPD/GDPR)',
+            ],
+            en: [
+              'Born inside Foursys to solve a real engineering problem at scale',
+              'Scaled across the entire company as a corporate AI layer',
+              'Active paying clients in Services, Financial and Payment sectors',
+              'Backed by Foursys engineering and data & AI capabilities — 25 years in the market',
+              '5 integrated Studios, ISO 9001, 27001, 27701 (LGPD/GDPR) certifications',
+            ],
+          },
+        },
+        {
+          type: 'metrics',
+          title: { pt: 'Modelo Comercial', en: 'Commercial Model' },
+          metrics: [
+            { value: 'SaaS', label: { pt: 'Assinatura mensal', en: 'Monthly subscription' } },
+            { value: 'R$ 19.900', label: { pt: 'Plano recomendado /mês', en: 'Recommended plan /mo' } },
+            { value: '100', label: { pt: 'Usuários ativos inclusos', en: 'Active users included' } },
+            { value: 'R$ 0', label: { pt: 'Setup e onboarding', en: 'Setup and onboarding' } },
+          ],
+        },
+        {
+          type: 'highlight',
+          title: { pt: 'MOXE + Fusion Teams — Adoção Acelerada', en: 'MOXE + Fusion Teams — Accelerated Adoption' },
+          body: {
+            pt: 'MOXE pode ser adotada isoladamente como SaaS. Para empresas que querem extrair valor máximo desde o primeiro ciclo, o programa Fusion Teams do Studio de Inovação Foursys embarca com uma célula multidisciplinar que capacita o time do cliente e entrega as primeiras jornadas automatizadas diretamente na plataforma — deixando autonomia residual para a área continuar inovando sozinha.',
+            en: 'MOXE can be adopted standalone as SaaS. For companies wanting to extract maximum value from the first cycle, the Foursys Innovation Studio Fusion Teams program brings a multidisciplinary cell that trains the client team and delivers the first automated journeys directly on the platform — leaving residual autonomy for the area to continue innovating on its own.',
+          },
+        },
+      ],
+    },
   },
 ]
 
@@ -720,7 +862,7 @@ function ServiceCard({ item, index, lang, onShowDetail }: { item: ServiceItem; i
 
 // ─── How Card ────────────────────────────────────────────────────────────────
 
-function HowCard({ item, index, lang }: { item: HowItem; index: number; lang: string }) {
+function HowCard({ item, index, lang, onShowDetail }: { item: HowItem; index: number; lang: string; onShowDetail?: (item: HowItem) => void }) {
   const [hovered, setHovered] = useState(false)
   const [expanded, setExpanded] = useState(false)
   const hasExtra = item.bullets || item.pillars
@@ -851,14 +993,29 @@ function HowCard({ item, index, lang }: { item: HowItem; index: number; lang: st
           )}
         </AnimatePresence>
 
-        {hasExtra && (
-          <div className="flex items-center gap-2 mt-4 text-xs font-bold" style={{ color: item.color }}>
-            {expanded
-              ? (lang === 'pt' ? 'Recolher' : 'Collapse')
-              : (lang === 'pt' ? 'Ver capacidades' : 'View capabilities')}
-            <motion.div animate={{ rotate: expanded ? 90 : 0 }} transition={{ duration: 0.2 }}>
-              <ChevronRight size={14} />
-            </motion.div>
+        {(hasExtra || item.detail) && (
+          <div className="flex items-center gap-4 mt-4">
+            {hasExtra && (
+              <div className="flex items-center gap-2 text-xs font-bold" style={{ color: item.color }}>
+                {expanded
+                  ? (lang === 'pt' ? 'Recolher' : 'Collapse')
+                  : (lang === 'pt' ? 'Ver capacidades' : 'View capabilities')}
+                <motion.div animate={{ rotate: expanded ? 90 : 0 }} transition={{ duration: 0.2 }}>
+                  <ChevronRight size={14} />
+                </motion.div>
+              </div>
+            )}
+            {item.detail && onShowDetail && (
+              <button
+                type="button"
+                onClick={e => { e.stopPropagation(); onShowDetail(item) }}
+                className="flex items-center gap-1.5 text-xs font-bold transition-colors duration-200 hover:text-white"
+                style={{ color: hexToRgba(item.color, 0.7) }}
+              >
+                {lang === 'pt' ? 'Explorar completo' : 'Explore full'}
+                <ArrowRight size={12} />
+              </button>
+            )}
           </div>
         )}
       </div>
@@ -878,12 +1035,12 @@ function HowCard({ item, index, lang }: { item: HowItem; index: number; lang: st
 
 // ─── Service Detail Modal ───────────────────────────────────────────────────
 
-function ServiceDetailModal({ item, onClose, lang }: { item: ServiceItem; onClose: () => void; lang: string }) {
+function ServiceDetailModal({ item, onClose, lang }: { item: DetailableItem; onClose: () => void; lang: string }) {
   const trapRef = useFocusTrap(true)
   const pt = lang === 'pt'
   const L = lang as 'pt' | 'en'
   const c = item.color
-  const d = item.detail!
+  const d = item.detail
 
   function renderSection(section: DetailSection, idx: number) {
     switch (section.type) {
@@ -1226,6 +1383,7 @@ export function SectionAIFoursys() {
   const { t, lang } = useLanguage()
   const [showMarket, setShowMarket] = useState(false)
   const [detailService, setDetailService] = useState<ServiceItem | null>(null)
+  const [detailHow, setDetailHow] = useState<HowItem | null>(null)
   const pt = lang === 'pt'
 
   return (
@@ -1317,7 +1475,7 @@ export function SectionAIFoursys() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {HOW_ITEMS.map((item, i) => (
-              <HowCard key={item.title.pt} item={item} index={i} lang={lang} />
+              <HowCard key={item.title.pt} item={item} index={i} lang={lang} onShowDetail={setDetailHow} />
             ))}
           </div>
         </motion.div>
@@ -1355,7 +1513,8 @@ export function SectionAIFoursys() {
 
       <AnimatePresence>
         {showMarket && <MarketModal onClose={() => setShowMarket(false)} lang={lang} />}
-        {detailService && <ServiceDetailModal item={detailService} onClose={() => setDetailService(null)} lang={lang} />}
+        {detailService && <ServiceDetailModal item={detailService as DetailableItem} onClose={() => setDetailService(null)} lang={lang} />}
+        {detailHow && detailHow.detail && <ServiceDetailModal item={{ icon: detailHow.icon, title: detailHow.title, color: detailHow.color, detail: detailHow.detail }} onClose={() => setDetailHow(null)} lang={lang} />}
       </AnimatePresence>
     </SectionWrapper>
   )
