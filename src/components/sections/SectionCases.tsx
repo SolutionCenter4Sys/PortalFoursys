@@ -575,26 +575,6 @@ export function SectionCases() {
           ))}
         </motion.div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
-          className="mt-12 md:mt-16 text-center"
-        >
-          <p className="text-xs text-foursys-text-dim mb-2">{t('cases.satisfiedClients')}</p>
-          <h3 className="text-lg md:text-2xl font-black text-white mb-6">
-            {t('cases.ctaQuestion')}
-          </h3>
-          <div className="flex items-center justify-center gap-3 text-xs text-foursys-text-dim">
-            <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-foursys-primary" /> {t('cases.freeDiagnosis')}</span>
-            <span>·</span>
-            <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-foursys-primary" /> {t('cases.responseTime')}</span>
-            <span>·</span>
-            <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-foursys-primary" /> {t('cases.noCommitment')}</span>
-          </div>
-        </motion.div>
-
       </div>
 
       {/* Detail modal */}
