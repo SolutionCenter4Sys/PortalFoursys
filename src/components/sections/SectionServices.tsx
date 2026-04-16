@@ -406,7 +406,7 @@ function OfferDetailModal({
 
 /* ── Deep-dive content for specific service lines ────────────────────────────── */
 
-const DEEP_DIVE_IDS = ['modernizacao-legados', 'ciberseguranca', 'fourblox', 'ai-augmented-squad', 'quality-testes-ia', 'dados-analytics'] as const
+const DEEP_DIVE_IDS = ['modernizacao-legados', 'ciberseguranca', 'fourblox', 'ai-augmented-squad', 'quality-testes-ia', 'dados-analytics', 'cloud-finops'] as const
 
 /* ── Modernização de Legados Deep Dive ────────────────────────────────────── */
 
@@ -1840,6 +1840,198 @@ function QualityAIDeepDive({ lang }: { lang: string }) {
   )
 }
 
+/* ── Cloud & FinOps Deep Dive ─────────────────────────────────────────────── */
+
+const finopsPillars = [
+  {
+    emoji: '👁️',
+    title: 'Visibilidade',
+    desc: 'Monitoramento de Custos em Tempo Real',
+    items: [
+      'Dashboards unificados multi-cloud',
+      'Alocação e chargeback por time/projeto',
+      'Alertas proativos de anomalias de consumo',
+    ],
+  },
+  {
+    emoji: '📉',
+    title: 'Otimização',
+    desc: 'Redução de Custos com IA',
+    highlight: '↓ 35% Gastos em Cloud',
+    items: [
+      'Right-sizing automatizado de recursos',
+      'Reservas e savings plans inteligentes',
+      'Identificação de recursos ociosos e órfãos',
+    ],
+  },
+  {
+    emoji: '⚖️',
+    title: 'Governança',
+    desc: 'Automação de Políticas & Conformidade',
+    highlight: 'Framework FinOps Foundation',
+    items: [
+      'Políticas de tagging e compliance',
+      'Guardrails de provisionamento',
+      'Auditoria contínua de conformidade',
+    ],
+  },
+  {
+    emoji: '🎓',
+    title: 'Cultura',
+    desc: 'FinOps como Disciplina',
+    highlight: 'Engenharia × Finanças × Negócio',
+    items: [
+      'Capacitação de times em práticas FinOps',
+      'Accountability financeira descentralizada',
+      'Decisões de arquitetura cost-aware',
+    ],
+  },
+]
+
+const finopsPillarsEn = [
+  {
+    emoji: '👁️',
+    title: 'Visibility',
+    desc: 'Real-Time Cost Monitoring',
+    items: [
+      'Unified multi-cloud dashboards',
+      'Allocation and chargeback by team/project',
+      'Proactive consumption anomaly alerts',
+    ],
+  },
+  {
+    emoji: '📉',
+    title: 'Optimization',
+    desc: 'Cost Reduction with AI',
+    highlight: '↓ 35% Cloud Spending',
+    items: [
+      'Automated resource right-sizing',
+      'Intelligent reservations and savings plans',
+      'Identification of idle and orphan resources',
+    ],
+  },
+  {
+    emoji: '⚖️',
+    title: 'Governance',
+    desc: 'Policy Automation & Compliance',
+    highlight: 'FinOps Foundation Framework',
+    items: [
+      'Tagging and compliance policies',
+      'Provisioning guardrails',
+      'Continuous compliance auditing',
+    ],
+  },
+  {
+    emoji: '🎓',
+    title: 'Culture',
+    desc: 'FinOps as a Discipline',
+    highlight: 'Engineering × Finance × Business',
+    items: [
+      'Team training in FinOps practices',
+      'Decentralized financial accountability',
+      'Cost-aware architecture decisions',
+    ],
+  },
+]
+
+function CloudFinOpsDeepDive({ lang }: { lang: string }) {
+  const pillars = lang === 'en' ? finopsPillarsEn : finopsPillars
+  const pt = lang === 'pt'
+
+  return (
+    <div className="space-y-7">
+      {/* Proposta de valor */}
+      <div className="p-5 rounded-xl bg-gradient-to-r from-orange-500/15 to-transparent border border-orange-500/25">
+        <h4 className="text-sm font-bold text-white mb-1">
+          {pt ? 'Estratégia FinOps' : 'FinOps Strategy'}
+        </h4>
+        <p className="text-xs text-orange-300 font-semibold mb-2">
+          {pt
+            ? 'Inteligência Financeira em Cloud & Otimização Contínua'
+            : 'Financial Intelligence in Cloud & Continuous Optimization'}
+        </p>
+        <p className="text-[11px] text-foursys-text-muted leading-relaxed">
+          {pt
+            ? 'Potencializado por Agentes de IA + Ecossistema de Parceiros. Equilibramos escala, custo e governança em ambientes cloud, transformando consumo em eficiência mensurável e previsível — com disciplina FinOps que conecta Engenharia, Finanças e Negócio.'
+            : 'Powered by AI Agents + Partner Ecosystem. We balance scale, cost, and governance in cloud environments, turning consumption into measurable and predictable efficiency — with FinOps discipline connecting Engineering, Finance, and Business.'}
+        </p>
+      </div>
+
+      {/* Métricas */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {[
+          { value: '+280%', label: pt ? 'ROI em Cloud' : 'Cloud ROI', color: 'text-green-400' },
+          { value: '<5min', label: pt ? 'Detecção de Anomalias' : 'Anomaly Detection', color: 'text-cyan-400' },
+          { value: '40%', label: pt ? 'Redução de Desperdício' : 'Waste Reduction', color: 'text-orange-400' },
+          { value: '3', label: pt ? 'Multi-cloud: AWS · Azure · GCP' : 'Multi-cloud: AWS · Azure · GCP', color: 'text-purple-400' },
+        ].map(m => (
+          <div key={m.label} className="text-center p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+            <div className={`text-xl font-black ${m.color}`}>{m.value}</div>
+            <div className="text-[9px] uppercase tracking-wider text-foursys-text-dim font-bold mt-1">{m.label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* 4 Pilares */}
+      <div>
+        <h4 className="text-xs font-bold uppercase tracking-[0.15em] text-orange-400 mb-4">
+          {pt ? 'Pilares da Estratégia' : 'Strategy Pillars'}
+        </h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {pillars.map(p => (
+            <div key={p.title} className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-lg">{p.emoji}</span>
+                <div>
+                  <h5 className="text-xs font-bold text-white uppercase tracking-wider">{p.title}</h5>
+                  <span className="text-[10px] text-foursys-text-muted">{p.desc}</span>
+                </div>
+              </div>
+              {p.highlight && (
+                <div className="mb-2 px-2 py-1 rounded bg-orange-500/10 border border-orange-500/20 text-[10px] text-orange-300 font-semibold inline-block">
+                  {p.highlight}
+                </div>
+              )}
+              <div className="space-y-1 mt-1">
+                {p.items.map(item => (
+                  <div key={item} className="flex items-start gap-1.5 text-[10px] text-white/70">
+                    <span className="text-orange-400 mt-0.5">▸</span>
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Ecossistema de Parceiros */}
+      <div>
+        <h4 className="text-xs font-bold uppercase tracking-[0.15em] text-orange-400 mb-3">
+          {pt ? 'Ecossistema de Parceiros' : 'Partner Ecosystem'}
+        </h4>
+        <div className="flex flex-wrap gap-2">
+          {['Datadog', 'Dynatrace', 'AWS', 'Azure'].map(partner => (
+            <span key={partner} className="px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[11px] font-semibold text-white/80">
+              {partner}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Diferencial */}
+      <div className="p-4 rounded-xl bg-gradient-to-r from-orange-500/10 to-transparent border border-orange-500/20">
+        <p className="text-[11px] text-foursys-text-muted leading-relaxed">
+          <strong className="text-foursys-text">{pt ? 'Por que Foursys:' : 'Why Foursys:'}</strong>{' '}
+          {pt
+            ? 'FinOps como disciplina, não apenas ferramenta. Otimização contínua com métricas reais de negócio, experiência multi-cloud (AWS, Azure, GCP) e governança financeira integrada à operação técnica. Potencializado por Agentes de IA do Foursys Innovation Labs.'
+            : 'FinOps as a discipline, not just a tool. Continuous optimization with real business metrics, multi-cloud experience (AWS, Azure, GCP) and financial governance integrated with technical operations. Powered by AI Agents from Foursys Innovation Labs.'}
+        </p>
+      </div>
+    </div>
+  )
+}
+
 /* ── Dados & Analytics Deep Dive ──────────────────────────────────────────── */
 
 const dadosPillars = [
@@ -2106,6 +2298,10 @@ function DeepDiveContent({ serviceId, lang }: { serviceId: string; lang: string 
 
   if (serviceId === 'dados-analytics') {
     return <DadosAnalyticsDeepDive lang={lang} />
+  }
+
+  if (serviceId === 'cloud-finops') {
+    return <CloudFinOpsDeepDive lang={lang} />
   }
 
   return null
