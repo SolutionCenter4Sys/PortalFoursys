@@ -5,6 +5,7 @@ import {
   GraduationCap, BookOpen, Shield, CheckCircle2,
   Bot, Scale, Blocks, FlaskConical, Building2, Layers,
   ArrowRight, ChevronRight, TrendingUp, X, Sparkles,
+  Waypoints, Compass,
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { useLanguage } from '../../i18n'
@@ -42,9 +43,12 @@ interface ServiceItem {
 interface HowItem {
   icon: React.ReactNode
   title: { pt: string; en: string }
+  subtitle?: { pt: string; en: string }
   desc: { pt: string; en: string }
   highlight?: boolean
   color: string
+  bullets?: { pt: string[]; en: string[] }
+  pillars?: { icon: React.ReactNode; title: { pt: string; en: string }; desc: { pt: string; en: string } }[]
 }
 
 const RESULTS: ResultItem[] = [
@@ -167,6 +171,56 @@ const SERVICES: ServiceItem[] = [
     },
     color: '#FBBF24',
   },
+  {
+    icon: <Waypoints size={22} />,
+    title: { pt: 'Fusion Teams', en: 'Fusion Teams' },
+    desc: {
+      pt: 'Célula multidisciplinar que se anexa à sua área, mapeia jornadas, entrega automações com IA e low/no-code, e capacita seu time até a autonomia — entregando legado, não dependência.',
+      en: 'Multidisciplinary cell that attaches to your area, maps journeys, delivers automations with AI and low/no-code, and trains your team to autonomy — leaving legacy, not dependency.',
+    },
+    marketBadge: {
+      pt: '+1.000h economizadas em processos automatizados',
+      en: '+1,000h saved in automated processes',
+    },
+    bullets: {
+      pt: [
+        'Ciclo Anexar/Desanexar com sprints iterativos de diagnóstico ao go-live',
+        'Trilha de belts — do iniciante ao Champion autônomo em 6 meses',
+        'Time integrado: PO/PM + Arquiteto/Dev IA + SME do cliente desde o dia um',
+      ],
+      en: [
+        'Attach/Detach cycle with iterative sprints from diagnosis to go-live',
+        'Belt track — from beginner to autonomous Champion in 6 months',
+        'Integrated team: PO/PM + AI Architect/Dev + client SME from day one',
+      ],
+    },
+    color: '#2DD4BF',
+  },
+  {
+    icon: <Compass size={22} />,
+    title: { pt: 'AI Strategy & Roadmap', en: 'AI Strategy & Roadmap' },
+    desc: {
+      pt: 'Programa estruturado que leva sua organização da visão estratégica de IA até a execução dos primeiros casos priorizados — com diagnóstico de maturidade, governança e capacitação integrados.',
+      en: 'Structured program that takes your organization from AI strategic vision to execution of prioritized use cases — with integrated maturity assessment, governance and training.',
+    },
+    marketBadge: {
+      pt: 'ROI mensurável em cada caso priorizado',
+      en: 'Measurable ROI on every prioritized case',
+    },
+    bullets: {
+      pt: [
+        'Framework de 3 fases: Estratégia, Mapeamento e Aceleração com método proprietário',
+        'Priorização por ROI: funil de 5 etapas com matriz Valor × Complexidade',
+        'Capacitação integrada: 7 módulos de IA com low-code para áreas de negócio e TI',
+      ],
+      en: [
+        '3-phase framework: Strategy, Mapping and Acceleration with proprietary method',
+        'ROI-driven prioritization: 5-stage funnel with Value × Complexity matrix',
+        'Integrated training: 7 AI modules with low-code for business and IT teams',
+      ],
+    },
+    color: '#818CF8',
+  },
 ]
 
 const HOW_ITEMS: HowItem[] = [
@@ -190,13 +244,48 @@ const HOW_ITEMS: HowItem[] = [
   },
   {
     icon: <BrainCircuit size={24} />,
-    title: { pt: 'Moxe', en: 'Moxe' },
+    title: { pt: 'MOXE', en: 'MOXE' },
+    subtitle: {
+      pt: 'O sistema operacional cognitivo da sua empresa',
+      en: 'Your company\'s cognitive operating system',
+    },
     desc: {
-      pt: 'Plataforma proprietária de Governança, Gestão de LLM, Agentes de IA e acionamento do framework de IA — o centro nervoso da operação inteligente.',
-      en: 'Proprietary platform for Governance, LLM Management, AI Agents and AI framework orchestration — the nerve center of intelligent operations.',
+      pt: 'Crie, orquestre e governe agentes de IA em escala em uma única plataforma SaaS. Multi-cloud e multi-modelo, integrada ao DNA da sua organização — com produtividade, segurança e controle de custo desde o dia um.',
+      en: 'Create, orchestrate and govern AI agents at scale on a single SaaS platform. Multi-cloud and multi-model, integrated into your organization\'s DNA — with productivity, security and cost control from day one.',
     },
     highlight: true,
     color: ORANGE,
+    bullets: {
+      pt: [
+        'Construção para todos — de devs a analistas de negócio, sem depender de engenharia para sair do POC',
+        'LLM Routing multi-modelo — seleção automática do melhor modelo por tarefa, sem lock-in de provedor',
+        'Integrações nativas — CRM, Jira, GitHub, WhatsApp, Teams, RAG e mais, com contexto real do negócio',
+        'Governança no núcleo — AI Safety, FinOps, auditoria e rastreabilidade embutidos, não como plugin',
+      ],
+      en: [
+        'Built for everyone — from devs to business analysts, no engineering dependency to move past POC',
+        'Multi-model LLM Routing — automatic best-model selection per task, no provider lock-in',
+        'Native integrations — CRM, Jira, GitHub, WhatsApp, Teams, RAG and more, with real business context',
+        'Core governance — AI Safety, FinOps, auditing and traceability built-in, not bolted on',
+      ],
+    },
+    pillars: [
+      {
+        icon: <Shield size={16} />,
+        title: { pt: 'Construção Segura', en: 'Secure Building' },
+        desc: { pt: 'Boas práticas no desenho de agentes com análise estática e dinâmica dos fluxos', en: 'Best practices in agent design with static and dynamic flow analysis' },
+      },
+      {
+        icon: <Scale size={16} />,
+        title: { pt: 'Proteção de Dados', en: 'Data Protection' },
+        desc: { pt: 'Políticas granulares de quais informações, modelos e usuários podem interagir', en: 'Granular policies for which data, models and users can interact' },
+      },
+      {
+        icon: <DollarSign size={16} />,
+        title: { pt: 'FinOps Nativo', en: 'Native FinOps' },
+        desc: { pt: 'Billing e consumo por usuário, agente ou projeto — sem surpresas no fim do mês', en: 'Billing and consumption per user, agent or project — no end-of-month surprises' },
+      },
+    ],
   },
 ]
 
@@ -370,6 +459,8 @@ function ServiceCard({ item, index, lang }: { item: ServiceItem; index: number; 
 
 function HowCard({ item, index, lang }: { item: HowItem; index: number; lang: string }) {
   const [hovered, setHovered] = useState(false)
+  const [expanded, setExpanded] = useState(false)
+  const hasExtra = item.bullets || item.pillars
 
   return (
     <motion.div
@@ -378,7 +469,8 @@ function HowCard({ item, index, lang }: { item: HowItem; index: number; lang: st
       transition={{ delay: 0.2 + index * 0.12, duration: 0.5, type: 'spring', stiffness: 120 }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="group relative rounded-3xl overflow-hidden"
+      onClick={hasExtra ? () => setExpanded(!expanded) : undefined}
+      className={`group relative rounded-3xl overflow-hidden${hasExtra ? ' cursor-pointer' : ''}`}
     >
       <motion.div
         className="absolute inset-0"
@@ -427,13 +519,85 @@ function HowCard({ item, index, lang }: { item: HowItem; index: number; lang: st
                 color: ORANGE,
               }}
             >
-              {lang === 'pt' ? 'Plataforma Proprietária' : 'Proprietary Platform'}
+              {lang === 'pt' ? 'Plataforma Proprietária · SaaS' : 'Proprietary Platform · SaaS'}
             </span>
           )}
         </div>
 
-        <h3 className="text-xl font-black text-white leading-tight mb-2">{item.title[lang as 'pt' | 'en']}</h3>
+        <h3 className="text-xl font-black text-white leading-tight mb-1">{item.title[lang as 'pt' | 'en']}</h3>
+        {item.subtitle && (
+          <p className="text-xs font-semibold mb-3" style={{ color: item.color }}>
+            {item.subtitle[lang as 'pt' | 'en']}
+          </p>
+        )}
         <p className="text-sm text-foursys-text-muted leading-relaxed flex-1">{item.desc[lang as 'pt' | 'en']}</p>
+
+        <AnimatePresence>
+          {expanded && hasExtra && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.35 }}
+              className="overflow-hidden"
+            >
+              {item.bullets && (
+                <div className="pt-4 mt-4 border-t border-white/[0.06]">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.15em] mb-3" style={{ color: item.color }}>
+                    {lang === 'pt' ? 'Capacidades-chave' : 'Key Capabilities'}
+                  </p>
+                  <div className="space-y-2">
+                    {item.bullets[lang as 'pt' | 'en'].map(b => (
+                      <div key={b} className="flex items-start gap-2 text-xs text-white/80">
+                        <CheckCircle2 size={12} style={{ color: item.color }} className="flex-shrink-0 mt-0.5" />
+                        {b}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {item.pillars && (
+                <div className="pt-4 mt-4 border-t border-white/[0.06]">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.15em] mb-3" style={{ color: item.color }}>
+                    {lang === 'pt' ? 'Pilares de Governança' : 'Governance Pillars'}
+                  </p>
+                  <div className="grid grid-cols-1 gap-2.5">
+                    {item.pillars.map(p => (
+                      <div
+                        key={p.title.pt}
+                        className="flex items-start gap-2.5 p-2.5 rounded-xl"
+                        style={{ background: hexToRgba(item.color, 0.05), border: `1px solid ${hexToRgba(item.color, 0.1)}` }}
+                      >
+                        <div
+                          className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
+                          style={{ background: hexToRgba(item.color, 0.12), color: item.color }}
+                        >
+                          {p.icon}
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-xs font-bold text-white leading-tight">{p.title[lang as 'pt' | 'en']}</p>
+                          <p className="text-[11px] text-foursys-text-muted leading-snug mt-0.5">{p.desc[lang as 'pt' | 'en']}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {hasExtra && (
+          <div className="flex items-center gap-2 mt-4 text-xs font-bold" style={{ color: item.color }}>
+            {expanded
+              ? (lang === 'pt' ? 'Recolher' : 'Collapse')
+              : (lang === 'pt' ? 'Ver capacidades' : 'View capabilities')}
+            <motion.div animate={{ rotate: expanded ? 90 : 0 }} transition={{ duration: 0.2 }}>
+              <ChevronRight size={14} />
+            </motion.div>
+          </div>
+        )}
       </div>
 
       <motion.div
