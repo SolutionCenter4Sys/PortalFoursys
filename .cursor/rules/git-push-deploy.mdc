@@ -1,24 +1,32 @@
 ---
-description: Sempre fazer git push e monitorar deploy Azure após alterações
+description: Sempre fazer git push e monitorar deploy Azure apos alteracoes no PortalFoursys
 alwaysApply: true
 ---
 
 # Git Push e Monitoramento de Deploy
 
-Após concluir qualquer alteração em código, executar obrigatoriamente:
+Apos concluir qualquer alteracao em codigo, executar obrigatoriamente:
 
 ## 1. Commit e Push
-- O repo git está em `C:\Cursor_Codigo\FoursysPortal\PortalFoursys` (usar como working_directory)
-- Shell é PowerShell — não usar `&&`, heredoc ou sintaxe bash. Executar comandos separados
-- `git add <arquivos>`
-- `git commit -m "tipo: mensagem curta"` seguindo conventional commits (fix, feat, refactor, docs, style)
-- `git push origin main`
+- Repo git: `C:\Cursor_Codigo\FoursysPortal\PortalFoursys` (usar como working_directory)
+- Shell e **PowerShell** — nunca usar `&&`, heredoc, `$(cat ...)` ou sintaxe bash
+- Executar cada comando git como chamada Shell **separada**:
+  1. `git add <arquivos>`
+  2. `git commit -m "tipo: mensagem curta sem acentos"`
+  3. `git push origin main`
+- Conventional commits: feat, fix, refactor, docs, style, chore
+- Mensagens em portugues sem acentos
 
 ## 2. Monitorar Deploy Azure
-- Verificar status: `gh run list --repo SolutionCenter4Sys/PortalFoursys --limit 1`
-- Pipeline: **Azure Static Web Apps CI/CD** (~2 min)
-- Aguardar com polling (30s, depois 60s) até status `completed/success`
-- Se falhar: `gh run view <run-id> --repo SolutionCenter4Sys/PortalFoursys --log-failed`, corrigir e refazer push
+- Listar runs: `gh run list --limit 3`
+- Pipeline: **Azure Static Web Apps CI/CD** (tipico ~1m50s)
+- Capturar run ID do `in_progress` mais recente
+- Polling: `Start-Sleep -Seconds N; gh run view <run-id>`
+  - 1a: 30s | 2a: +40s | 3a: +50s
+- Sucesso = checkmark no output
+- Falha: `gh run view <run-id> --log-failed`, corrigir e refazer push
 
-## 3. Reportar ao Usuário
-- Confirmar commit hash, status do deploy e tempo de execução
+## 3. Reportar ao Usuario
+- Commit hash, status (sucesso/falha), tempo de execucao
+- Warnings relevantes do pipeline
+- Se falhou: causa e acoes corretivas

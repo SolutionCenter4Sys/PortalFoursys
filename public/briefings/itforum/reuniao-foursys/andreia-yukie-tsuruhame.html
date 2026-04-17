@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CEO - Andreia Yukie Tsuruhame | Numen IT</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } .header-content { flex-direction: column; text-align: center; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .tag-international { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .global-card { background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%); color: white; border-radius: 12px; padding: 18px; margin-bottom: 12px; }
+        .global-card h4 { margin-bottom: 6px; font-size: 16px; }
+        .global-card .city { font-size: 13px; opacity: 0.9; margin-bottom: 8px; }
+        .global-card .desc { font-size: 13px; opacity: 0.95; line-height: 1.6; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } body { background: white; } .section { box-shadow: none; border: 1px solid #eee; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Andreia Yukie Tsuruhame</h1>
+                <h2>CEO Brasil &amp; Sócia — Numen IT</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Consultoria de Tecnologia &amp; SAP Gold Partner | São Paulo, SP — Operações no Brasil, EUA e Portugal</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Colaboradores</div>
+                    <div class="value">~1.300</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Crescimento 2025</div>
+                    <div class="value">+28% receita</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Receita Internacional</div>
+                    <div class="value">10% a 15%</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Países</div>
+                    <div class="value">3 (BR, EUA, PT)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- ANÁLISE DA EMPRESA -->
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Numen IT</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Numen IT</strong> é uma consultoria de tecnologia brasileira fundada em <strong>2009</strong> pela empreendedora <strong>Patrícia Terue</strong> (falecida em 2017), que liderou a empresa em torno de cinco pilares: trabalho árduo, humildade, empatia, alegria e respeito. Sediada em <strong>São Paulo</strong>, é hoje reconhecida como a <strong>2ª maior parceira SAP no Brasil</strong> (SAP Gold Partner) e parceira estratégica também de <strong>AWS, Salesforce e Celonis</strong>. Encerrou 2025 com ~<strong>1.300 colaboradores</strong> (crescimento de 40% no ano) e <strong>+28% em faturamento</strong>, projetando alta de 22% para 2026. Já acumula <strong>+4 milhões de horas em projetos SAP</strong> entregues a clientes como <strong>Natura, Embraer e Johnson &amp; Johnson</strong>. Cerca de <strong>90% do time atua em projetos SAP</strong>, com forte aposta em <strong>SAP Cloud ERP (RISE/GROW with SAP)</strong>, <strong>SAP BTP</strong>, <strong>SAP Signavio/WalkMe/LeanIX</strong> e <strong>IA aplicada a SAP</strong>. Em 2024 venceu o <strong>Hack2Build (hackathon mundial da SAP)</strong> com solução de IA generativa para supply chain, e anunciou investimento de <strong>R$ 40 milhões em IA até 2028</strong>. A liderança é compartilhada entre 15 sócios/Executive Directors, com Andreia Tsuruhame como CEO Brasil, Eduardo Nagata como CEO North America e Décio Kimura como VP of Solutions.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Razão Social / Marca</div>
+                        <div class="value">Numen IT — Numen Tecnologia</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Empresa privada (capital fechado), modelo de partnership (15 sócios)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Sede &amp; Abrangência</div>
+                        <div class="value">São Paulo (BR) — Operações em Brasil, Estados Unidos e Portugal</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Especialidade</div>
+                        <div class="value">SAP (90% do time), Salesforce, AWS, Celonis, IA aplicada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">CEO Brasil</div>
+                        <div class="value">Andreia Yukie Tsuruhame (formalizada em 2025)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Outros Líderes</div>
+                        <div class="value">Eduardo Nagata (CEO North America), Décio Kimura (VP Solutions), Marcelo Kuipers (Delivery)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Crescimento Recente</div>
+                        <div class="value">+28% receita e +40% headcount em 2025; projeção +22% em 2026</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Clientes Referência</div>
+                        <div class="value">Natura, Embraer, Johnson &amp; Johnson + 22 novos clientes Lean Services em 2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DESTAQUE: ATUAÇÃO INTERNACIONAL -->
+        <div class="section" style="border: 2px solid #1565c0">
+            <h3><span class="icon">&#127758;</span> Atuação Internacional — Destaque Estratégico</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">A Numen IT iniciou sua expansão internacional em <strong>2018</strong> e hoje opera em <strong>três países</strong>, com meta agressiva de globalização. As operações internacionais cresceram <strong>48% em 2025</strong> e representam atualmente entre <strong>10% e 15% da receita</strong> — com projeção de chegar a <strong>50% até 2030</strong>.</p>
+
+            <div class="grid-2" style="margin-bottom:20px">
+                <div class="global-card">
+                    <h4>&#127463;&#127479; Brasil — Sede &amp; Operação Principal</h4>
+                    <div class="city">São Paulo (sede), São José dos Campos, Vitória, Florianópolis, Curitiba, Goiás (Centro-Oeste — nova unidade)</div>
+                    <div class="desc">Concentra ~85-90% da receita. Em 2025 expandiu para o Centro-Oeste (já responde por ~5% do crescimento) e prepara entrada em Norte e Nordeste. Cerca de 1.270 dos 1.300 colaboradores estão no Brasil.</div>
+                </div>
+                <div class="global-card" style="background: linear-gradient(135deg, #c62828 0%, #d32f2f 100%);">
+                    <h4>&#127482;&#127480; Estados Unidos — Numen North America</h4>
+                    <div class="city">New Jersey e Miami | CEO: Eduardo Nagata (desde fev/2022)</div>
+                    <div class="desc">Foco em receita em moeda forte e atendimento a clientes globais. Estratégia combina presença local com entrega offshore a partir do Brasil. Junto com Europa, já representa quase 20% do negócio (segundo Eduardo Nagata).</div>
+                </div>
+                <div class="global-card" style="background: linear-gradient(135deg, #00695c 0%, #00897b 100%);">
+                    <h4>&#127477;&#127481; Portugal — Numen Europa</h4>
+                    <div class="city">Lisboa | ~30 colaboradores | Hub de entrada na Europa</div>
+                    <div class="desc">Atualmente representa ~4% da receita, com meta de chegar a 10% em 5 anos. Liderança feminina forte (ex.: Ana Alves, com agenda de upskilling feminino e diversidade). Porta de entrada para mercado europeu de SAP.</div>
+                </div>
+                <div class="global-card" style="background: linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%);">
+                    <h4>&#128640; Próximos Movimentos Globais</h4>
+                    <div class="city">América Latina (Colômbia / México) | América Central | Ásia (avaliação)</div>
+                    <div class="desc">A empresa avalia abrir operações na <strong>Colômbia ou México</strong> nos próximos 12-24 meses, além de explorar <strong>América Central e Ásia</strong>. Modelo combina sócios locais + estrutura própria. Possíveis aquisições de nicho com sinergia operacional.</div>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <strong>Insight estratégico:</strong> A Numen é uma empresa <strong>com DNA brasileiro mas vocação global</strong>. Diferente de muitos pares brasileiros que mantêm operações internacionais simbólicas, a Numen tem meta clara: <strong>50% da receita global até 2030</strong>. Isso a coloca como case raro no ecossistema SAP brasileiro com aposta real em internacionalização.
+            </div>
+
+            <div>
+                <span class="tag tag-international">SAP Gold Partner Global</span>
+                <span class="tag tag-international">3 países / 8 escritórios</span>
+                <span class="tag tag-international">+48% receita internacional em 2025</span>
+                <span class="tag tag-international">Meta 50% global até 2030</span>
+                <span class="tag tag-international">Expansão LATAM em estudo</span>
+                <span class="tag tag-international">Sócios locais em cada geografia</span>
+            </div>
+        </div>
+
+        <!-- RESUMO EXECUTIVO -->
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico &amp; Posicionamento de Mercado</h4>
+                <p>A Numen IT é uma das consultorias de tecnologia que <strong>mais cresce no ecossistema SAP brasileiro</strong>, com posição consolidada como 2ª maior parceira SAP no país e expansão acelerada nos EUA e Europa. Em 2025, sob liderança formal de Andreia Yukie Tsuruhame como CEO Brasil, a empresa entrou em uma <strong>nova fase de maturidade organizacional</strong>: contratou 4 executivos sênior de mercado (operações, vendas, marketing, pessoas), estruturou governança corporativa e mudou o discurso de "velocidade de crescimento" para <strong>"governança, organização e execução disciplinada"</strong>. O contexto é singular: <strong>Numen não é um cliente típico de pré-vendas Foursys</strong> — é uma <strong>consultoria-pares</strong> com sobreposição de portfólio (SAP, IA, transformação digital), porém com diferenças complementares relevantes (Foursys tem maior força em Engenharia Digital cloud-native, FourBlox, AI Squad de aceleração de desenvolvimento, parceria Digibee para iPaaS e certificações ISO 27001/27701). O relacionamento mais provável é de <strong>co-opetição estratégica</strong>: parcerias para projetos onde uma fortalece a outra (ex.: integração entre SAP e sistemas non-SAP via Digibee; modernização de aplicações legadas em torno do core SAP; squads de IA generativa com FourBlox; segurança certificada para clientes regulados). O timing é particularmente favorável: a Numen está em fase de profissionalização da governança e abertura para parceiros estratégicos.</p>
+            </div>
+        </div>
+
+        <!-- DESAFIOS E PRIORIDADES -->
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios Declarados pela CEO</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Sustentar crescimento sem perder cultura</strong> — desafio central da CEO em 2026</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Governança e disciplina de execução</strong> — após 28% de crescimento em 2025, foco passa a ser estruturação</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Internacionalização acelerada</strong> — sair de 10-15% para 50% de receita global até 2030</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Redução de dependência do SAP puro</strong> — diversificar com Salesforce, AWS, IA e novos verticais</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Migração massiva da base para SAP S/4HANA Cloud</strong> — onda de RISE/GROW with SAP</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Formação de talentos em escala</strong> — Moovi (+2 mil alunos), trainees, programas PCD e diversidade</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Ampliação de receita recorrente</strong> — Smart Services (AMS) cresceu 83% em 2025</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento Declaradas</h4>
+                    <div>
+                        <span class="tag tag-priority">SAP S/4HANA Cloud (RISE/GROW)</span>
+                        <span class="tag tag-priority">IA Aplicada (R$ 40 mi até 2028)</span>
+                        <span class="tag tag-priority">Smart Services / AMS</span>
+                        <span class="tag tag-priority">Salesforce Customer Experience</span>
+                        <span class="tag tag-priority">SAP BTP &amp; Integração</span>
+                        <span class="tag tag-priority">Governança &amp; Back-Office</span>
+                        <span class="tag tag-priority">Expansão Internacional (LATAM)</span>
+                        <span class="tag tag-priority">Diversidade &amp; Formação de Pessoas</span>
+                    </div>
+                    <div class="alert-box" style="margin-top:16px">
+                        <strong>Sinal-chave:</strong> Andreia tem repetido publicamente que "<em>estrutura precisa vir antes do resultado</em>". Isso indica que a Numen está aberta a <strong>parceiros que ofereçam capacidade complementar testada</strong>, em vez de tentar construir tudo internamente. Janela aberta para ofertas de aceleração (FourBlox, AI Squad) e segurança certificada.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAPA DE INVESTIMENTOS -->
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos Tecnológicos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que devem receber investimento com base nos anúncios oficiais da empresa, perfil da CEO e movimentos do mercado SAP brasileiro:</p>
+            <div>
+                <span class="tag tag-active">SAP Cloud ERP (RISE / GROW with SAP — confirmado)</span>
+                <span class="tag tag-active">Hub de Inovação em IA (R$ 40 mi até 2028 — confirmado)</span>
+                <span class="tag tag-active">SAP Signavio / WalkMe / LeanIX (BTM — confirmado)</span>
+                <span class="tag tag-active">SAP BTP — Business Technology Platform (confirmado)</span>
+                <span class="tag tag-active">Salesforce CX (aquisição 25% Backlgrs — confirmado)</span>
+                <span class="tag tag-active">Plataforma educacional Moovi (confirmado)</span>
+                <span class="tag tag-active">Diversidade &amp; PCDs / Programa Potenc.IA (confirmado)</span>
+                <span class="tag tag-opportunity">Cibersegurança certificada (ISO 27001/27701)</span>
+                <span class="tag tag-opportunity">Integração non-SAP via iPaaS (Digibee)</span>
+                <span class="tag tag-opportunity">Engenharia Digital cloud-native em torno do core SAP</span>
+                <span class="tag tag-opportunity">DevOps / SRE / Observabilidade SAP BTP</span>
+                <span class="tag tag-opportunity">Aceleradores de desenvolvimento (FourBlox)</span>
+                <span class="tag tag-opportunity">Squads de IA generativa para fora do SAP</span>
+                <span class="tag tag-opportunity">Modernização de legados periféricos ao SAP</span>
+                <span class="tag tag-opportunity">Sociedade de cotas + faturamento via sedes Numen EUA/Europa (anti-bitributação)</span>
+            </div>
+            <p style="margin-top:12px;font-size:12px;color:var(--text-light)"><span class="tag tag-active" style="font-size:11px">Verde</span> = Investimentos confirmados/em andamento &nbsp; <span class="tag tag-opportunity" style="font-size:11px">Laranja</span> = Oportunidades para complementaridade Foursys</p>
+        </div>
+
+        <!-- OPORTUNIDADES SEM FORNECEDOR DEFINIDO -->
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Quentes — Co-opetição &amp; Parceria</h3>
+            <div class="alert-box">
+                <strong>Janela de oportunidade:</strong> A Numen está em fase de profissionalização e <strong>abertura para parcerias estratégicas</strong>. Como consultoria com 90% do time em SAP, ela tem gaps claros em (a) tecnologias non-SAP de mesma criticidade, (b) certificações de segurança que clientes regulados exigem, (c) capacidade de aceleração de desenvolvimento via componentes pré-construídos e (d) IA generativa para domínios fora do SAP. A Foursys, com 24 anos e 41.000+ projetos, pode atuar como <strong>parceira complementar</strong> em projetos onde a Numen lidera o core SAP e precisa de braços especialistas em entornos.
+            </div>
+            <div class="grid-2">
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Parceria de Integração non-SAP via Digibee</h4>
+                        <span class="score-badge">Alta Sinergia</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Numen lidera o SAP do cliente; Foursys/Digibee integra os sistemas legados, e-commerce, parceiros e APIs externas</li>
+                            <li>Modelo de iPaaS evita que a Numen tenha que construir capacidade própria de integração de mercado</li>
+                            <li>Aplicável a clientes Numen como Natura (e-commerce + SAP) e Johnson &amp; Johnson (SAP + ecossistema regulado)</li>
+                            <li>Receita compartilhada em projetos sem competição direta</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Cibersegurança Certificada para Clientes Regulados</h4>
+                        <span class="score-badge">Gap Estrutural</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Numen não possui certificações ISO 27001/27701 em destaque público; Foursys tem ambas</li>
+                            <li>Clientes farmacêuticos (J&amp;J), industriais (Embraer) e financeiros exigem essas certificações em RFPs</li>
+                            <li>Foursys pode entrar como subcontratada/parceira em projetos onde Numen lidera SAP mas precisa endereçar segurança certificada</li>
+                            <li>LGPD/DLP, prevenção a fraudes e disaster recovery são naturalmente complementares ao escopo SAP</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>FourBlox para Aceleração de Aplicações ao Redor do SAP</h4>
+                        <span class="score-badge">Acelerador</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Projetos SAP frequentemente exigem portais, apps mobile, dashboards e integrações com legados — Numen entrega o ERP e Foursys acelera o entorno</li>
+                            <li>FourBlox reduz time-to-market de aplicações cliente em torno do SAP S/4HANA Cloud</li>
+                            <li>Permite à Numen oferecer projetos "end-to-end" sem precisar contratar squads próprias de aplicações non-SAP</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>AI Squad para Casos de Uso Fora do Core SAP</h4>
+                        <span class="score-badge">Complementar</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Numen investe R$ 40 mi em IA, mas com foco em IA aplicada a SAP (Joule, BTP, Signavio)</li>
+                            <li>AI Squad da Foursys atende casos de uso non-SAP: atendimento, código, testes, automação, analytics</li>
+                            <li>Sem sobreposição direta — Foursys complementa onde Numen não vai investir tão profundamente</li>
+                            <li>Possível co-criação de cases conjuntos para clientes compartilhados</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card" style="grid-column: 1 / -1; border: 2px solid #1565c0; background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 60%);">
+                    <div class="oferta-header">
+                        <h4>&#127758; Sociedade de Cotas de Participação &amp; Faturamento via Sedes Internacionais (Europa / EUA)</h4>
+                        <span class="score-badge" style="background: #1565c0;">Alta Estratégia</span>
+                    </div>
+                    <div class="reasons">
+                        <p style="margin-bottom:10px;font-size:14px;color:var(--text);">Modelo de parceria estruturada que complementa o portfólio SAP da Foursys usando a <strong>presença internacional consolidada da Numen</strong> (Numen North America em NJ/Miami e Numen Europa em Lisboa) como <strong>veículo de contratação e faturamento</strong> para clientes globais — eliminando bitributação e reduzindo fricção fiscal para o cliente final.</p>
+                        <ul>
+                            <li><strong>Sociedade de cotas de participação (equity sinérgica):</strong> modelo já praticado pela Numen (aquisição de 25% da Backlgrs/Salesforce CX). Foursys pode entrar com participação cruzada em célula/BU SAP conjunta — Numen entra com Gold Partner SAP e expertise no core; Foursys entra com Engenharia Digital, FourBlox, AI Squad, Digibee e certificações ISO 27001/27701.</li>
+                            <li><strong>Faturamento via Numen Europa (Lisboa):</strong> para clientes europeus ou multinacionais com matriz na UE, contratação e faturamento em euros a partir de Portugal evita bitributação BR&#8596;UE, aproveita acordos fiscais Portugal-Brasil e o regime de IRC português (porta de entrada natural para o mercado SAP europeu).</li>
+                            <li><strong>Faturamento via Numen North America (NJ / Miami):</strong> para clientes norte-americanos (ex.: Johnson &amp; Johnson, subsidiárias US de clientes brasileiros), contratação em USD a partir dos EUA elimina retenções brasileiras (IRRF, CIDE, PIS/COFINS-Importação) e oferece receita em moeda forte — alinhado à estratégia declarada de Eduardo Nagata.</li>
+                            <li><strong>Complementa portfólio SAP da Foursys sem competir no core:</strong> Foursys passa a ofertar projetos SAP end-to-end globais sem precisar montar operação própria na UE ou EUA — a sede Numen vira braço comercial-fiscal compartilhado.</li>
+                            <li><strong>Defesa de margem do cliente:</strong> em deals internacionais, bitributação pode consumir 15-25% do ticket. O modelo offshore via Numen preserva competitividade de preço e viabiliza RFPs que hoje não fecham por custo fiscal.</li>
+                            <li><strong>Aderência ao anti-padrão da CEO:</strong> Andreia declarou que evita "movimentos grandes" e busca <em>complementaridade e aderência cultural</em> — uma sociedade de cotas em BU específica (não aquisição total) casa com a tese dela.</li>
+                            <li><strong>Alavanca a meta 2030:</strong> Numen quer 50% de receita internacional até 2030; Foursys oferece pipeline adicional (base de clientes Foursys com operações globais) que flui pela estrutura Numen EUA/Europa — ganho mútuo.</li>
+                            <li><strong>Gancho de conversa imediato:</strong> abrir diálogo com Andreia sobre "co-BU SAP internacional" conecta diretamente com a tese estratégica dela e abre espaço para discussões de equity/go-to-market conjunto em LATAM (Colômbia/México em estudo).</li>
+                        </ul>
+                        <div class="alert-box" style="margin-top:12px;background:#e8f5e9;border-color:#a5d6a7;">
+                            <strong style="color:#2e7d32;">Racional fiscal-executivo:</strong> este é o único modelo que <em>simultaneamente</em> (1) complementa o portfólio SAP da Foursys, (2) elimina bitributação para o cliente final, (3) dá à Numen pipeline internacional adicional e (4) cria vínculo societário com governança — ou seja, contempla os 3 pilares da tese de Andreia: <strong>complementaridade, aderência cultural e disciplina de governança</strong>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OFERTAS FOURSYS -->
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para a Conversa com Andreia Tsuruhame</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit considerando que Numen é uma <strong>consultoria-pares</strong> (não cliente final). Foco em <strong>co-opetição e complementaridade</strong>, evitando ofertas que conflitem com o core SAP da Numen.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. Modernização de Legado &amp; Integração (Digibee iPaaS)</h4>
+                    <span class="score-badge">Score 88</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Modernização de sistemas legados periféricos ao SAP e integração ecossistêmica via parceria Foursys-Digibee.</p>
+                    <ul>
+                        <li>Numen lidera o core SAP; Foursys/Digibee integra os "satélites" (e-commerce, CRM legado, sistemas de chão de fábrica, parceiros)</li>
+                        <li>Modelo non-conflicting: aumenta o ticket dos projetos Numen sem competir pelo SAP</li>
+                        <li>Clientes Numen como Embraer e Johnson &amp; Johnson têm landscape com dezenas de sistemas non-SAP — demanda natural</li>
+                        <li>Reduz risco para a Numen ao terceirizar integrações complexas para parceiro especialista</li>
+                        <li>SAP BTP + Digibee pode formar oferta conjunta diferenciada no mercado</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. Cibersegurança &amp; Privacidade (ISO 27001/27701)</h4>
+                    <span class="score-badge">Score 85</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Segurança da informação, LGPD/DLP, prevenção a fraudes, gestão de riscos e continuidade — com certificações que abrem RFPs regulados.</p>
+                    <ul>
+                        <li>Numen não possui certificações ISO 27001/27701 em destaque público — Foursys preenche o gap</li>
+                        <li>Clientes da Numen em farma (J&amp;J), aviação (Embraer) e cosméticos regulados (Natura) demandam essas certificações</li>
+                        <li>Foursys pode entrar como subcontratada de segurança em RFPs liderados pela Numen</li>
+                        <li>LGPD para SAP HCM/SuccessFactors é demanda recorrente nos projetos da Numen</li>
+                        <li>Conformidade GDPR/LGPD fortalece também a operação Numen Europa (Lisboa)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. FourBlox — Aceleração de Aplicações ao Redor do SAP</h4>
+                    <span class="score-badge">Score 78</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Plataforma de componentes reutilizáveis para acelerar entrega de portais, dashboards e apps que orbitam o SAP.</p>
+                    <ul>
+                        <li>Numen entrega o S/4HANA; Foursys acelera o "wrapper" — portais B2B, apps mobile de aprovação, dashboards executivos</li>
+                        <li>Permite à Numen ampliar escopo de projetos sem precisar formar squads próprias de aplicações non-SAP</li>
+                        <li>Reduz time-to-market em projetos RISE/GROW with SAP onde clientes querem entrega completa</li>
+                        <li>Reuso entre clientes do mesmo setor (manufatura, farma, serviços) gera escala</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. Engenharia Digital — Plataformas, Cloud-Native &amp; SRE</h4>
+                    <span class="score-badge">Score 72</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Microsserviços, DevOps, observabilidade e infraestrutura cloud-native para o entorno do SAP.</p>
+                    <ul>
+                        <li>SAP BTP exige práticas modernas de DevOps e observabilidade — Foursys já entrega isso em larga escala</li>
+                        <li>Numen está expandindo para AWS — parceria com Foursys para arquiteturas cloud-native acelera o caminho</li>
+                        <li>SRE para ambientes SAP críticos é demanda crescente em clientes enterprise</li>
+                        <li>Plataformas de dados (data mesh, data fabric) integradas ao SAP Datasphere</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>5. AI Squad — Casos de Uso Non-SAP &amp; Hiperautomação</h4>
+                    <span class="score-badge">Score 60</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Squads de IA com produto proprietário para acelerar desenvolvimento, automação de testes, RPA e IA generativa em domínios fora do core SAP.</p>
+                    <ul>
+                        <li>Numen já investe R$ 40 mi em IA, mas focada em SAP (Joule, BTP, Signavio) — Foursys atende casos non-SAP</li>
+                        <li>Possível parceria em automação de testes de regressão SAP via AI Squad + Luzid (parceira da Numen)</li>
+                        <li>Hiperautomação cross-sistemas (SAP + non-SAP) com RPA + IA — escopo natural de complementaridade</li>
+                        <li>Nota: existe sobreposição parcial — usar com cautela e foco em onde NÃO conflita com o roadmap interno da Numen</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESTRATÉGIA DE ABORDAGEM -->
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Andreia Tsuruhame é uma CEO em fase de <strong>profissionalização da governança</strong> e que tem repetido publicamente o lema "<em>estrutura precisa vir antes do resultado</em>". O gancho ideal NÃO é vender serviços competitivos ao SAP — é posicionar a Foursys como <strong>parceira estratégica complementar</strong> que ajuda a Numen a entregar projetos end-to-end com menor risco operacional. Iniciar a conversa por <strong>cibersegurança certificada (ISO 27001/27701)</strong> e <strong>integração non-SAP via Digibee</strong> — dois temas onde a Numen tem gap visível e onde a Foursys tem credenciais únicas. Mencionar que entendemos a tese de internacionalização (50% global até 2030) e que a Foursys tem escala para ser parceira tanto no Brasil quanto em projetos com clientes globais Numen.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente — Janela de Profissionalização</h4>
+                <p>Em 2025, a Numen contratou <strong>4 executivos sênior de mercado</strong> (operações, vendas, marketing, pessoas) e está estruturando back-office, governança e rituais de gestão. Esse é o momento <strong>raro e curto</strong> em que a empresa está mais aberta a redes de parceiros estratégicos — antes era uma empresa de fundação técnica, agora é uma empresa profissionalizada. Apresentar a Foursys como parceira de longo prazo, não fornecedor pontual. O timing também conversa com a aposta declarada em <strong>SAP S/4HANA Cloud (RISE/GROW)</strong> e a aquisição de 25% da Backlgrs (Salesforce CX) — ambos abrem demanda por entornos non-SAP que a Foursys pode entregar.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para uma conversa com a CEO Brasil de uma consultoria SAP, destacar: (1) <strong>Não somos concorrentes diretos no SAP</strong> — Foursys não compete pela liderança do core ERP; (2) <strong>Certificações ISO 27001 e 27701</strong> — credenciais que a Numen não destaca publicamente e que abrem RFPs regulados; (3) <strong>Parceria Digibee (iPaaS)</strong> — modelo provado de integração que a Numen pode revender em conjunto sem precisar construir; (4) <strong>FourBlox e AI Squad</strong> — produtos proprietários que aceleram entregas no entorno do SAP; (5) <strong>24 anos e 41.000+ projetos</strong> — solidez para suportar projetos enterprise em paralelo a um core SAP liderado pela Numen; (6) <strong>Modelo flexível</strong> — squads, projetos, AMS ou subcontratação branqueada (white label) a partir da Numen. A oferta é de <strong>complementaridade estratégica</strong>, não competição.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. Numen é case raro de internacionalização real:</strong> Diferente de muitos pares brasileiros, a Numen tem meta agressiva de <strong>50% de receita global até 2030</strong> (vs. 10-15% atual) e operações com sócios locais nos EUA e Portugal. Conversa sobre como a Foursys pode ser parceira tanto no Brasil quanto em projetos para clientes globais é estratégica para Andreia.</p>
+                <p style="margin-bottom:12px"><strong>2. SAP S/4HANA Cloud é a onda do momento:</strong> A Numen é <strong>líder de vendas em SAP Cloud ERP no Brasil e LATAM</strong> (22 novos clientes em 2025). RISE e GROW with SAP exigem entornos modernos (BTP, integrações, observabilidade, segurança) — todos espaços para Foursys complementar.</p>
+                <p style="margin-bottom:12px"><strong>3. Aposta em IA é declarada e vultosa:</strong> R$ 40 milhões até 2028, vitória no Hack2Build mundial da SAP, parceria com Luzid para automação de testes SAP. Foursys pode posicionar AI Squad para casos non-SAP e hiperautomação cross-sistemas, evitando sobreposição.</p>
+                <p style="margin-bottom:12px"><strong>4. Cultura é ativo estratégico declarado:</strong> Andreia tem repetido que "<em>todo mundo fala que crescer faz perder cultura. Nosso desafio é provar o contrário</em>". Iniciativas de PCD, programa Potenc.IA (100 mulheres em IA), agenda de diversidade. Foursys tem agenda similar — ponto de conexão pessoal e institucional poderoso.</p>
+                <p style="margin-bottom:12px"><strong>5. Aquisições de nicho estão no radar:</strong> Numen adquiriu 25% da Backlgrs (Salesforce) e avalia outras com critério de "complementaridade e aderência cultural". Esse é um sinal de que a empresa pode considerar parcerias estratégicas formais com players complementares — Foursys se enquadra perfeitamente nesse perfil.</p>
+                <p style="margin-bottom:12px"><strong>6. Liderança feminina forte:</strong> Andreia (CEO Brasil), Ana Alves (Numen Europa) e Andreia Tsuruhame protagonista de agenda de diversidade. Conexão com lideranças femininas da Foursys e cases de programas similares fortalece o relacionamento de marca.</p>
+                <p><strong>7. Sociedade de cotas + faturamento internacional como tese central:</strong> A Numen já adotou modelo de equity por sinergia (25% da Backlgrs). Propor uma <strong>sociedade de cotas em uma BU SAP conjunta</strong> — com faturamento via Numen Europa (Lisboa) ou Numen North America (NJ/Miami) para clientes globais — é o movimento mais alinhado à tese da CEO. Complementa o portfólio SAP da Foursys, <strong>elimina bitributação para o cliente final</strong> (hoje corrói 15-25% do ticket em deals internacionais), oferece pipeline adicional para a meta 2030 da Numen e respeita a premissa declarada de "complementaridade + aderência cultural + governança". É, provavelmente, a conversa de maior valor estratégico em um primeiro encontro executivo.</p>
+            </div>
+        </div>
+
+        <!-- BENCHMARK DE CONCORRENTES -->
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes (Consultorias SAP no Brasil)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Concorrentes diretos da Numen no segmento de consultoria SAP, ordenados por sobreposição estratégica:</p>
+            <div class="competitor-card">
+                <h4>Stefanini — São Paulo, SP (Global)</h4>
+                <p><strong>Segmento:</strong> Consultoria de tecnologia global | <strong>Receita:</strong> R$ 5+ bi (global) | <strong>Colaboradores:</strong> +35.000</p>
+                <p>Parceria SAP com mais de 20 anos, +400 consultores SAP, +600 projetos executados. Cobertura global em 41 países. Concorre com a Numen em grandes contas brasileiras e em projetos internacionais. Tem maior escala mas menos foco exclusivo em SAP que a Numen.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Sonda Procwork — São Paulo, SP (LATAM)</h4>
+                <p><strong>Segmento:</strong> Consultoria SAP &amp; integradora LATAM | <strong>Nível SAP:</strong> Gold Partner</p>
+                <p>Operação LATAM consolidada (Brasil, Chile, Argentina, México, Colômbia). Forte em SAP S/4HANA, BTP e RISE with SAP. É referência da Numen em internacionalização — o caminho que a Numen está construindo com 8 anos de atraso, mas com aposta cultural mais forte.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>FH Consultoria — Curitiba, PR</h4>
+                <p><strong>Segmento:</strong> Consultoria SAP especializada | <strong>Nível SAP:</strong> Gold Partner | <strong>Colaboradores:</strong> ~3.000</p>
+                <p>Concorrente direto no core SAP brasileiro. Forte em vertical de manufatura, agronegócio e indústria pesada. Menos internacional que a Numen, mais regionalizada no Sul do Brasil. Aposta semelhante em SAP Cloud ERP e BTP.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Capgemini Brasil / Accenture / IBM — São Paulo, SP</h4>
+                <p><strong>Segmento:</strong> Consultorias globais Platinum SAP | <strong>Receita Brasil:</strong> bilionária</p>
+                <p>Concorrentes em grandes contas multinacionais (Embraer, Natura, J&amp;J). Têm escala global muito superior, mas custos mais altos e menor agilidade. A Numen se posiciona como alternativa "premium boutique" — qualidade equivalente a custos mais competitivos e relacionamento mais próximo.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Megawork / Avannt / Uppertools — Brasil</h4>
+                <p><strong>Segmento:</strong> Boutiques SAP Gold Partner | <strong>Porte:</strong> Médio</p>
+                <p>Concorrentes diretos da Numen no segmento boutique de SAP. Menos vocação internacional. Numen se diferencia pela combinação de tamanho (1.300+), partnerships expandidas (AWS, Salesforce, Celonis) e vitórias em hackathons globais SAP.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Posicionamento da Numen vs. Concorrentes</h4>
+                <p>A Numen ocupa uma posição <strong>singular no mercado SAP brasileiro</strong>: maior que as boutiques (FH, Megawork) mas mais ágil que as multinacionais (Accenture, Capgemini, IBM). Sua aposta em <strong>internacionalização real</strong> (50% até 2030), <strong>cultura como ativo estratégico</strong> e <strong>vitórias em IA generativa SAP</strong> (Hack2Build mundial) a diferenciam claramente. Os principais gaps competitivos que a Foursys pode endereçar como parceira: (1) <strong>Cibersegurança certificada</strong> — Stefanini e Accenture têm; Numen não destaca publicamente; (2) <strong>Plataformas de aceleração proprietárias para non-SAP</strong> — FourBlox preenche; (3) <strong>iPaaS de mercado</strong> — Stefanini tem parcerias com MuleSoft/Boomi; Numen pode adotar Digibee via Foursys; (4) <strong>Engenharia digital cloud-native fora do SAP</strong> — Capgemini tem força aqui; Foursys pode complementar a Numen sem competir pelo SAP.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <!-- PERFIL PESSOAL & RAPPORT -->
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport — Andreia Yukie Tsuruhame</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações públicas sobre a CEO Brasil da Numen, sua trajetória, posicionamento e dicas de conversa.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Nome Completo</div>
+                        <div class="value">Andreia Yukie Tsuruhame</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CEO Brasil &amp; Sócia / Executive Director — Numen IT (formalizada em 2025)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Empresa</div>
+                        <div class="value">Numen IT (~1.300 colaboradores, 2ª maior parceira SAP no Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Localização</div>
+                        <div class="value">São Paulo, SP — Brasil</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Tempo de Mercado</div>
+                        <div class="value">+20 anos em tecnologia (estimado por publicações setoriais)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Trajetória na Numen</div>
+                        <div class="value">Sócia e Executive Director há vários anos; assumiu CEO em 2025 após processo de profissionalização</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Agenda Pessoal</div>
+                        <div class="value">Diversidade, inclusão de PCDs, formação feminina em IA (Programa Potenc.IA), cultura organizacional</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn ativo; aparições recorrentes em IT Forum, Administradores.com, eventos SAP House e SAP NOW AI Tour</div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert-box">
+                <strong>Nota:</strong> A formação acadêmica detalhada de Andreia Tsuruhame não está amplamente publicada nas fontes pesquisadas. Recomenda-se complementar via LinkedIn Sales Navigator antes da abordagem formal. Suas <strong>declarações públicas</strong>, por outro lado, são abundantes e oferecem material rico para construção de rapport (ver dicas abaixo).
+            </div>
+            <div class="insight-box" style="margin-top:16px">
+                <h4>5 Dicas de Rapport para a Conversa com Andreia</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconheça a transição que ela conduziu em 2025:</strong> Andreia formalizou-se como CEO em 2025 e liderou uma transformação organizacional profunda — contratação de 4 executivos sênior, criação de back-office estruturado, governança e rituais de gestão. Citar o trabalho dela com frase como "<em>vi que vocês mudaram o jogo da governança em 2025 — parabéns pela maturidade que isso representa</em>" gera conexão imediata.</p>
+                <p style="margin-bottom:10px"><strong>2. Cite suas próprias frases-chave:</strong> Andreia repete publicamente "<em>estrutura precisa vir antes do resultado</em>" e "<em>crescer não é infinito quando o negócio depende de pessoas</em>". Usar essa linguagem mostra que você consumiu o conteúdo dela e respeita o discurso. Posicionar a Foursys como "parceira que ajuda a estruturar antes do resultado" é praticamente espelhar o discurso dela.</p>
+                <p style="margin-bottom:10px"><strong>3. Conecte com a agenda de diversidade e PCDs:</strong> Andreia é protagonista da agenda de diversidade da Numen, do Programa Potenc.IA (100 mulheres em IA) e de iniciativas para inclusão de PCDs. Se a Foursys tem cases similares, mencione. Se há eventos conjuntos possíveis (mentorias, palestras, conteúdos), proponha. É um terreno onde a relação humana se constrói.</p>
+                <p style="margin-bottom:10px"><strong>4. Valorize o legado de Patrícia Terue:</strong> A fundadora faleceu em 2017 e deixou cinco pilares (trabalho árduo, humildade, empatia, alegria, respeito) que Andreia trata como inegociáveis. Demonstrar respeito por essa história — não tratar a Numen como "mais uma consultoria" mas como "a empresa do legado da Patrícia Terue" — sinaliza que você entende a alma do negócio.</p>
+                <p style="margin-bottom:10px"><strong>5. Posicione-se como aliada da internacionalização:</strong> A meta de 50% de receita global até 2030 é a aposta mais ousada da Numen. Mostrar que a Foursys tem capacidade de apoiar projetos no Brasil e em clientes globais (com qualidade e governança comparáveis) é falar diretamente com a tese estratégica da CEO. Pode-se inclusive explorar parcerias para ofertas conjuntas em LATAM (onde a Numen avalia abrir Colômbia/México).</p>
+                <p><strong>Bônus — Tom de conversa:</strong> Andreia tem perfil técnico-executivo, direto, sem rodeios e muito orientado a estrutura/resultado. Evitar conversas excessivamente comerciais ou "pitchadas". Ela responde melhor a diálogos baseados em dados, cases, ROI e estruturas claras de parceria.</p>
+            </div>
+        </div>
+
+        <!-- PERFIL DO EXECUTIVO E POSIÇÃO DE TI -->
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Executivo e Posição na Empresa</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">CEO Brasil — topo da hierarquia da operação brasileira (que representa ~85-90% do negócio total da Numen)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Modelo de Governança</div>
+                        <div class="value">Partnership com 15 sócios; Andreia é uma das 3 lideranças centrais (com Eduardo Nagata e Décio Kimura)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reportes Diretos (estimado)</div>
+                        <div class="value">4 executivos sênior contratados em 2025 (operações, vendas, marketing, pessoas) + diretores de áreas técnicas (Marcelo Kuipers - Delivery)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão</div>
+                        <div class="value">Máximo na operação Brasil — define estratégia, estrutura organizacional, parcerias e expansão regional</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Foco Estratégico Atual</div>
+                        <div class="value">Governança, organização, execução disciplinada, regionalização Brasil e suporte à internacionalização</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe Total Brasil</div>
+                        <div class="value">~1.270 colaboradores (de ~1.300 totais; ~30 em Lisboa e demais nos EUA)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da Numen no Mercado</div>
+                        <div class="value">Consultoria de tecnologia premium, 2ª maior parceira SAP do Brasil, líder em vendas SAP Cloud ERP em LATAM</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência Geográfica de Atuação</div>
+                        <div class="value">Brasil (8 cidades), EUA (NJ + Miami), Portugal (Lisboa) — avaliando Colômbia/México</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DISTRIBUIÇÃO DE INVESTIMENTOS -->
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada de Receita por Linha de Negócio</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">SAP Core (S/4HANA, ECC)</div><div class="bar-track"><div class="bar-fill" style="width:55%;background:#1a237e">55%</div></div></div>
+                <div class="bar"><div class="bar-label">SAP Cloud ERP (RISE/GROW)</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#1a237e">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Smart Services / AMS (+83% em 2025)</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">12%</div></div></div>
+                <div class="bar"><div class="bar-label">Digital Solutions (+64% em 2025)</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#3949ab">8%</div></div></div>
+                <div class="bar"><div class="bar-label">Salesforce (Backlgrs, CX)</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+                <div class="bar"><div class="bar-label">SAP BTP / Signavio / WalkMe</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#5c6bc0">3%</div></div></div>
+                <div class="bar"><div class="bar-label">IA Aplicada / Inovação / Moovi</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#9fa8da">2%</div></div></div>
+            </div>
+            <p style="margin-top:12px;font-size:12px;color:var(--text-light);text-align:center">* Distribuição estimada com base em declarações públicas e perfil 90% SAP da empresa. Não é receita oficial divulgada.</p>
+            <div class="alert-box" style="margin-top:16px">
+                <strong>Distribuição geográfica:</strong> Brasil ~85-90% | Estados Unidos ~6-10% | Portugal ~4% — com meta de virar para 50% Brasil / 50% internacional até 2030.
+            </div>
+        </div>
+
+        <!-- PREFERÊNCIAS DE FORNECEDOR -->
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Perfil de Parceiro Buscado pela Numen</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios Declarados pela CEO em Aquisições e Parcerias</h4>
+                    <div>
+                        <span class="tag tag-active">Complementaridade Operacional</span>
+                        <span class="tag tag-active">Aderência Cultural</span>
+                        <span class="tag tag-active">Sinergia em Nicho Especializado</span>
+                        <span class="tag tag-active">Capacidade de Entrega Comprovada</span>
+                        <span class="tag tag-active">Relacionamento de Longo Prazo</span>
+                        <span class="tag tag-active">Disciplina de Governança</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Modelo de Parceria Preferido</div>
+                        <div class="value">Parcerias estratégicas de longo prazo com complementaridade clara. Recentemente adquiriu 25% da Backlgrs (Salesforce CX) — modelo de equity por sinergia.</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Anti-Padrão Declarado</div>
+                        <div class="value">"Não buscamos movimentos grandes. O critério é complementariedade e aderência cultural" — Andreia evita movimentos puramente financeiros ou aquisições agressivas.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>Recomendação Final de Posicionamento Foursys</h4>
+                <p>Apresentar a Foursys NÃO como vendor, mas como <strong>parceira estratégica complementar</strong> que pode atuar lado a lado com a Numen em projetos onde ela lidera o core SAP e precisa de capacidade certificada para entornos non-SAP, segurança e aceleração. O modelo ideal é começar por <strong>1-2 projetos conjuntos</strong> em clientes existentes (Natura, Embraer, J&amp;J) onde haja necessidade clara de cibersegurança certificada ou integração non-SAP, e evoluir para uma <strong>parceria formal</strong> com canais de go-to-market compartilhados. A meta de 50% de receita internacional da Numen até 2030 abre espaço inclusive para conversas sobre apoio Foursys em projetos para clientes globais — tema que pode ser explorado no segundo momento da relação.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | Numen IT — CEO Andreia Yukie Tsuruhame</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+        <p style="margin-top:8px;font-size:11px">Fontes: numenit.com, itforum.com.br, administradores.com.br, hrportugal.sapo.pt, theorg.com, LinkedIn público</p>
+    </div>
+</body>
+</html>
