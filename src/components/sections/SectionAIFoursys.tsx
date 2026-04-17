@@ -1664,13 +1664,14 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain py-8"
+      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain py-3 sm:py-6 md:py-8"
       role="dialog"
       aria-modal="true"
       aria-label="AI Framework"
       onClick={onClose}
+      style={{ WebkitTapHighlightColor: 'transparent' }}
     >
-      <div className="absolute inset-0 bg-black/85 backdrop-blur-xl" />
+      <div className="absolute inset-0 bg-black/85 backdrop-blur-md md:backdrop-blur-xl" />
       <motion.div
         initial={{ scale: 0.92, y: 40, opacity: 0 }}
         animate={{ scale: 1, y: 0, opacity: 1 }}
@@ -1678,51 +1679,60 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
         transition={{ duration: 0.4, type: 'spring', stiffness: 200 }}
         onClick={e => e.stopPropagation()}
         ref={trapRef}
-        className="relative z-10 w-full max-w-5xl mx-4 rounded-3xl overflow-hidden"
+        className="relative z-10 w-full max-w-5xl mx-3 sm:mx-4 rounded-2xl sm:rounded-3xl overflow-hidden"
         style={{
           background: `linear-gradient(180deg, ${hexToRgba(c, 0.10)} 0%, rgba(10,14,22,0.98) 14%, rgba(10,14,22,0.99) 100%)`,
           border: `1px solid ${hexToRgba(c, 0.22)}`,
         }}
       >
         <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: `linear-gradient(90deg, transparent, ${c}, transparent)` }} />
-        <div className="absolute top-6 right-6 z-20">
-          <button type="button" onClick={onClose} aria-label="Close"
-            className="p-2.5 rounded-xl bg-white/[0.06] border border-white/[0.1] hover:bg-white/[0.12] transition-colors">
-            <X size={18} className="text-white/70" />
+        <div
+          className="absolute right-3 sm:right-6 z-20"
+          style={{ top: 'max(0.75rem, env(safe-area-inset-top))' }}
+        >
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="min-w-[44px] min-h-[44px] p-2.5 rounded-xl bg-white/[0.08] border border-white/[0.12] hover:bg-white/[0.14] active:bg-white/[0.2] transition-colors flex items-center justify-center"
+            style={{ WebkitTapHighlightColor: 'transparent' }}
+          >
+            <X size={18} className="text-white/80" />
           </button>
         </div>
 
-        <div className="p-6 md:p-10 space-y-10">
+        <div className="p-4 sm:p-6 md:p-10 space-y-8 md:space-y-10">
 
           {/* HERO */}
           <div className="relative">
             <div className="absolute -top-8 -left-8 w-72 h-72 rounded-full pointer-events-none"
               style={{ background: `radial-gradient(ellipse, ${hexToRgba(c, 0.12)} 0%, transparent 70%)`, filter: 'blur(40px)' }} />
-            <div className="relative flex items-center gap-4 mb-4">
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center"
+            <div className="relative flex items-center gap-3 sm:gap-4 mb-4 pr-14 sm:pr-16">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
                 style={{ background: `linear-gradient(135deg, ${hexToRgba(c, 0.28)}, ${hexToRgba(c, 0.1)})`, border: `1px solid ${hexToRgba(c, 0.38)}`, color: c }}>
-                <Blocks size={24} />
+                <Blocks size={22} className="sm:hidden" />
+                <Blocks size={24} className="hidden sm:block" />
               </div>
-              <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: c }}>
+              <div className="min-w-0">
+                <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em]" style={{ color: c }}>
                   {pt ? 'AI-SDLC Framework™ · 2026' : 'AI-SDLC Framework™ · 2026'}
                 </p>
-                <h2 className="text-2xl md:text-4xl font-black text-white leading-tight">AI Framework</h2>
+                <h2 className="text-xl sm:text-2xl md:text-4xl font-black text-white leading-tight">AI Framework</h2>
               </div>
             </div>
-            <p className="text-sm md:text-base text-foursys-text-muted leading-relaxed max-w-3xl">
+            <p className="text-[13px] sm:text-sm md:text-base text-foursys-text-muted leading-relaxed max-w-3xl">
               {pt
                 ? 'O novo ciclo de vida de software começa na tela real em menos de uma semana. Combinamos specs vivas (SDD), agentes de IA orquestrados e delivery humano em um framework auditável.'
                 : 'The new software lifecycle starts on a real screen in less than a week. We combine living specs (SDD), orchestrated AI agents and human delivery in an auditable framework.'}
             </p>
 
             {/* Stats row */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-2.5 mt-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5 mt-6">
               {stats.map(s => (
-                <div key={s.label} className="p-3 rounded-xl text-center"
+                <div key={s.label} className="p-2.5 sm:p-3 rounded-xl text-center"
                   style={{ background: hexToRgba(c, 0.06), border: `1px solid ${hexToRgba(c, 0.14)}` }}>
-                  <div className="text-xl md:text-2xl font-black" style={{ color: c }}>{s.value}</div>
-                  <div className="text-[9px] text-foursys-text-dim uppercase tracking-wider font-bold mt-1 leading-tight">{s.label}</div>
+                  <div className="text-lg sm:text-xl md:text-2xl font-black" style={{ color: c }}>{s.value}</div>
+                  <div className="text-[10px] sm:text-[11px] text-foursys-text-muted uppercase tracking-wider font-bold mt-1 leading-tight">{s.label}</div>
                 </div>
               ))}
             </div>
@@ -1744,7 +1754,35 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
                 : 'Senior talent scarcity, EU AI Act, exploding technical debt and commoditization of "AI that writes code" changed the game. Value migrated from the model to the framework.'}
             </p>
 
-            <div className="relative">
+            {/* Timeline — vertical em mobile, horizontal em desktop */}
+            <div className="md:hidden relative pl-1">
+              <div className="absolute left-[22px] top-2 bottom-2 w-px" style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.18), rgba(255,255,255,0.08))' }} />
+              <div className="space-y-3">
+                {timeline.map(era => (
+                  <div key={era.year} className="relative flex items-start gap-3">
+                    <div className="relative w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0"
+                      style={{
+                        background: era.highlight ? `linear-gradient(135deg, ${era.color}, ${hexToRgba(era.color, 0.5)})` : hexToRgba(era.color, 0.14),
+                        border: `2px solid ${era.highlight ? era.color : hexToRgba(era.color, 0.4)}`,
+                        boxShadow: era.highlight ? `0 0 20px ${hexToRgba(era.color, 0.5)}` : 'none',
+                      }}>
+                      <span className="text-[11px] font-black" style={{ color: era.highlight ? '#0B0F17' : era.color }}>
+                        {era.highlight ? '★' : '•'}
+                      </span>
+                    </div>
+                    <div className="flex-1 min-w-0 pt-1">
+                      <div className="flex items-baseline gap-2 flex-wrap">
+                        <span className="text-[12px] font-black" style={{ color: era.color }}>{era.year}</span>
+                        <span className="text-[12px] font-bold text-white">{era.title}</span>
+                      </div>
+                      <div className="text-[11px] text-foursys-text-muted leading-snug mt-0.5">{era.desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="hidden md:block relative">
               <div className="absolute left-0 right-0 top-[22px] h-px" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.16), rgba(255,255,255,0.08))' }} />
               <div className="grid grid-cols-5 gap-2 relative">
                 {timeline.map(era => (
@@ -1761,7 +1799,7 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
                     </div>
                     <div className="text-[11px] font-black" style={{ color: era.color }}>{era.year}</div>
                     <div className="text-[11px] font-bold text-white mt-0.5">{era.title}</div>
-                    <div className="text-[10px] text-foursys-text-dim leading-snug mt-0.5 px-1">{era.desc}</div>
+                    <div className="text-[10px] text-foursys-text-muted leading-snug mt-0.5 px-1">{era.desc}</div>
                   </div>
                 ))}
               </div>
@@ -1786,20 +1824,20 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
             <div className="space-y-2.5">
               {layers.map((layer, i) => (
                 <div key={layer.n} className="relative">
-                  <div className="rounded-2xl p-4 md:p-5 relative overflow-hidden"
+                  <div className="rounded-2xl p-3.5 sm:p-4 md:p-5 relative overflow-hidden"
                     style={{ background: hexToRgba(layer.color, 0.05), border: `1px solid ${hexToRgba(layer.color, 0.22)}` }}>
                     <div className="absolute top-0 left-0 bottom-0 w-1" style={{ background: layer.color }} />
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 font-black text-lg"
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center flex-shrink-0 font-black text-base sm:text-lg"
                         style={{ background: `linear-gradient(135deg, ${hexToRgba(layer.color, 0.3)}, ${hexToRgba(layer.color, 0.1)})`, border: `1px solid ${hexToRgba(layer.color, 0.4)}`, color: layer.color }}>
                         {layer.n}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <div className="text-sm font-black text-white mb-2">{layer.name}</div>
+                        <div className="text-[13px] sm:text-sm font-black text-white mb-2">{layer.name}</div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-1.5">
                           {layer.items.map(it => (
-                            <div key={it} className="flex items-start gap-2 text-[11px] text-white/80">
-                              <ChevronRight size={10} style={{ color: layer.color }} className="flex-shrink-0 mt-0.5" />
+                            <div key={it} className="flex items-start gap-2 text-[11px] sm:text-xs text-white/80">
+                              <ChevronRight size={11} style={{ color: layer.color }} className="flex-shrink-0 mt-0.5" />
                               <span className="leading-snug">{it}</span>
                             </div>
                           ))}
@@ -1808,7 +1846,7 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
                     </div>
                   </div>
                   {i < layers.length - 1 && (
-                    <div className="flex justify-center py-1">
+                    <div className="flex justify-center py-0.5">
                       <ChevronRight size={14} className="text-white/30 rotate-90" />
                     </div>
                   )}
@@ -1832,63 +1870,63 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
                   : 'From 6-12 months of traditional SDLC to 6-10 weeks with full governance and docs that never age.'}
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
               {/* AS-IS */}
-              <div className="rounded-2xl p-5 relative overflow-hidden"
+              <div className="rounded-2xl p-4 sm:p-5 relative overflow-hidden"
                 style={{ background: hexToRgba(danger, 0.04), border: `1px solid ${hexToRgba(danger, 0.18)}` }}>
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-7 h-7 rounded-lg flex items-center justify-center text-[11px] font-black"
+                <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                  <div className="w-7 h-7 rounded-lg flex items-center justify-center text-[11px] font-black flex-shrink-0"
                     style={{ background: hexToRgba(danger, 0.15), color: danger }}>✕</div>
-                  <div>
-                    <div className="text-[10px] font-black uppercase tracking-wider" style={{ color: danger }}>AS-IS</div>
-                    <div className="text-sm font-black text-white">{pt ? 'SDLC Tradicional' : 'Traditional SDLC'}</div>
+                  <div className="min-w-0">
+                    <div className="text-[11px] font-black uppercase tracking-wider" style={{ color: danger }}>AS-IS</div>
+                    <div className="text-[13px] sm:text-sm font-black text-white">{pt ? 'SDLC Tradicional' : 'Traditional SDLC'}</div>
                   </div>
                 </div>
-                <div className="space-y-1.5">
+                <div className="space-y-1">
                   {asIs.map((row, i) => (
-                    <div key={i} className="flex items-center gap-3 py-1 border-b border-white/[0.04] last:border-0">
-                      <span className="text-[10px] font-bold w-16 text-right flex-shrink-0" style={{ color: hexToRgba(danger, 0.85) }}>{row.time}</span>
-                      <span className="text-[11px] text-white/75 leading-snug">{row.step}</span>
+                    <div key={i} className="flex items-center gap-2.5 sm:gap-3 py-1.5 border-b border-white/[0.04] last:border-0">
+                      <span className="text-[11px] font-bold w-[72px] sm:w-20 text-right flex-shrink-0" style={{ color: hexToRgba(danger, 0.9) }}>{row.time}</span>
+                      <span className="text-[12px] sm:text-xs text-white/80 leading-snug">{row.step}</span>
                     </div>
                   ))}
                 </div>
-                <div className="mt-4 p-2.5 rounded-lg flex items-center gap-2"
+                <div className="mt-4 p-2.5 rounded-lg flex items-start sm:items-center gap-2"
                   style={{ background: hexToRgba(danger, 0.08), border: `1px solid ${hexToRgba(danger, 0.2)}` }}>
-                  <AlertTriangle size={12} style={{ color: danger }} />
-                  <span className="text-[11px] font-bold" style={{ color: danger }}>
+                  <AlertTriangle size={12} style={{ color: danger }} className="flex-shrink-0 mt-0.5 sm:mt-0" />
+                  <span className="text-[11px] sm:text-xs font-bold leading-snug" style={{ color: danger }}>
                     {pt ? 'Total: 6 a 12 meses · docs defasadas em semanas' : 'Total: 6 to 12 months · outdated docs in weeks'}
                   </span>
                 </div>
               </div>
 
               {/* TO-BE */}
-              <div className="rounded-2xl p-5 relative overflow-hidden"
+              <div className="rounded-2xl p-4 sm:p-5 relative overflow-hidden"
                 style={{ background: `linear-gradient(160deg, ${hexToRgba(ok, 0.08)}, ${hexToRgba(c, 0.04)})`, border: `1px solid ${hexToRgba(ok, 0.25)}` }}>
                 <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: `linear-gradient(90deg, transparent, ${ok}, transparent)` }} />
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-7 h-7 rounded-lg flex items-center justify-center text-[11px] font-black"
+                <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                  <div className="w-7 h-7 rounded-lg flex items-center justify-center text-[11px] font-black flex-shrink-0"
                     style={{ background: hexToRgba(ok, 0.18), color: ok }}>✓</div>
-                  <div>
-                    <div className="text-[10px] font-black uppercase tracking-wider" style={{ color: ok }}>TO-BE</div>
-                    <div className="text-sm font-black text-white">AI-SDLC Foursys</div>
+                  <div className="min-w-0">
+                    <div className="text-[11px] font-black uppercase tracking-wider" style={{ color: ok }}>TO-BE</div>
+                    <div className="text-[13px] sm:text-sm font-black text-white">AI-SDLC Foursys</div>
                   </div>
                 </div>
-                <div className="space-y-1.5">
+                <div className="space-y-1">
                   {toBe.map((row, i) => (
-                    <div key={i} className={`flex items-center gap-3 py-1 border-b border-white/[0.04] last:border-0 ${row.highlight ? 'px-2 rounded-lg' : ''}`}
+                    <div key={i} className={`flex items-center gap-2.5 sm:gap-3 py-1.5 border-b border-white/[0.04] last:border-0 ${row.highlight ? 'px-2 rounded-lg' : ''}`}
                       style={row.highlight ? { background: hexToRgba(c, 0.1), border: `1px solid ${hexToRgba(c, 0.25)}` } : undefined}>
-                      <span className={`text-[10px] font-bold w-16 text-right flex-shrink-0`} style={{ color: row.highlight ? c : hexToRgba(ok, 0.9) }}>{row.time}</span>
-                      <span className={`text-[11px] leading-snug ${row.highlight ? 'font-black text-white' : 'text-white/80'}`}>
+                      <span className={`text-[11px] font-bold w-[72px] sm:w-20 text-right flex-shrink-0`} style={{ color: row.highlight ? c : hexToRgba(ok, 0.9) }}>{row.time}</span>
+                      <span className={`text-[12px] sm:text-xs leading-snug ${row.highlight ? 'font-black text-white' : 'text-white/80'}`}>
                         {row.highlight && <Target size={10} className="inline mr-1" style={{ color: c }} />}
                         {row.step}
                       </span>
                     </div>
                   ))}
                 </div>
-                <div className="mt-4 p-2.5 rounded-lg flex items-center gap-2"
+                <div className="mt-4 p-2.5 rounded-lg flex items-start sm:items-center gap-2"
                   style={{ background: hexToRgba(ok, 0.1), border: `1px solid ${hexToRgba(ok, 0.28)}` }}>
-                  <BadgeCheck size={12} style={{ color: ok }} />
-                  <span className="text-[11px] font-bold" style={{ color: ok }}>
+                  <BadgeCheck size={12} style={{ color: ok }} className="flex-shrink-0 mt-0.5 sm:mt-0" />
+                  <span className="text-[11px] sm:text-xs font-bold leading-snug" style={{ color: ok }}>
                     {pt ? 'Total: 6 a 10 semanas · governança completa · docs vivas' : 'Total: 6 to 10 weeks · full governance · living docs'}
                   </span>
                 </div>
@@ -1911,43 +1949,43 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
                   : 'Starting from zero, understanding a legacy or evolving an existing product — all pluggable into your stack.'}
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
               {doors.map(door => (
-                <div key={door.letter} className="rounded-2xl p-5 flex flex-col"
+                <div key={door.letter} className="rounded-2xl p-4 sm:p-5 flex flex-col"
                   style={{ background: `linear-gradient(160deg, ${hexToRgba(door.color, 0.08)}, rgba(10,14,22,0.6))`, border: `1px solid ${hexToRgba(door.color, 0.25)}` }}>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-11 h-11 rounded-xl flex items-center justify-center font-black text-lg"
+                  <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                    <div className="w-11 h-11 rounded-xl flex items-center justify-center font-black text-lg flex-shrink-0"
                       style={{ background: `linear-gradient(135deg, ${hexToRgba(door.color, 0.3)}, ${hexToRgba(door.color, 0.1)})`, border: `1px solid ${hexToRgba(door.color, 0.4)}`, color: door.color }}>
                       {door.letter}
                     </div>
                     <div className="min-w-0">
                       <div className="flex items-center gap-1.5" style={{ color: door.color }}>
                         {door.icon}
-                        <span className="text-[10px] font-bold uppercase tracking-wider">{pt ? 'Porta' : 'Path'} {door.letter}</span>
+                        <span className="text-[11px] font-bold uppercase tracking-wider">{pt ? 'Porta' : 'Path'} {door.letter}</span>
                       </div>
-                      <div className="text-xs font-black text-white leading-tight">{door.title}</div>
+                      <div className="text-[13px] sm:text-xs font-black text-white leading-tight">{door.title}</div>
                     </div>
                   </div>
 
-                  <div className="inline-flex items-center gap-1.5 mb-4 px-2.5 py-1 rounded-full text-[10px] font-bold self-start"
+                  <div className="inline-flex items-center gap-1.5 mb-3 sm:mb-4 px-2.5 py-1 rounded-full text-[11px] font-bold self-start"
                     style={{ background: hexToRgba(door.color, 0.1), border: `1px solid ${hexToRgba(door.color, 0.22)}`, color: door.color }}>
-                    <Timer size={10} />
+                    <Timer size={11} />
                     {door.meta}
                   </div>
 
                   <div className="flex-1 space-y-1.5">
                     {door.flow.map((f, i) => (
-                      <div key={i} className={`flex items-center gap-2 py-1.5 px-2.5 rounded-lg ${i === door.highlightIdx ? '' : ''}`}
+                      <div key={i} className="flex items-center gap-2 py-1.5 px-2.5 rounded-lg"
                         style={i === door.highlightIdx
                           ? { background: hexToRgba(c, 0.12), border: `1px solid ${hexToRgba(c, 0.28)}` }
                           : { background: hexToRgba(door.color, 0.04) }}>
-                        <span className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 text-[9px] font-black"
+                        <span className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 text-[10px] font-black"
                           style={i === door.highlightIdx
                             ? { background: c, color: '#0B0F17' }
                             : { background: hexToRgba(door.color, 0.2), color: door.color }}>
                           {i + 1}
                         </span>
-                        <span className={`text-[11px] leading-snug ${i === door.highlightIdx ? 'font-bold text-white' : 'text-white/75'}`}>
+                        <span className={`text-[11px] sm:text-xs leading-snug ${i === door.highlightIdx ? 'font-bold text-white' : 'text-white/80'}`}>
                           {f}
                         </span>
                       </div>
@@ -1973,7 +2011,7 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
                   : 'Real products put on navigable screens in less than a week — concrete proof of the framework in action.'}
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
               {cases.map(cs => (
                 <div key={cs.title} className="rounded-2xl overflow-hidden flex flex-col"
                   style={{ background: 'rgba(10,14,22,0.6)', border: '1px solid rgba(255,255,255,0.08)' }}>
@@ -1981,36 +2019,37 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
                     style={{ background: `linear-gradient(135deg, ${hexToRgba(cs.g1, 0.4)}, ${hexToRgba(cs.g2, 0.25)})` }}>
                     <div className="absolute inset-0"
                       style={{ background: `radial-gradient(circle at 30% 50%, ${hexToRgba(cs.g1, 0.35)} 0%, transparent 60%)` }} />
-                    <div className="absolute inset-0 flex items-center justify-between px-5">
-                      <div className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: cs.g1 }}>{cs.sub}</div>
-                      <div className="w-10 h-10 rounded-xl flex items-center justify-center"
+                    <div className="absolute inset-0 flex items-center justify-between px-4 sm:px-5 gap-3">
+                      <div className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.18em] truncate" style={{ color: cs.g1 }}>{cs.sub}</div>
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
                         style={{ background: hexToRgba(cs.g1, 0.2), border: `1px solid ${hexToRgba(cs.g1, 0.35)}`, color: cs.g1 }}>
                         <Target size={18} />
                       </div>
                     </div>
                   </div>
-                  <div className="p-4 flex flex-col flex-1">
-                    <div className="text-sm font-black text-white leading-tight mb-2">{cs.title}</div>
-                    <p className="text-[11px] text-foursys-text-muted leading-relaxed mb-3 flex-1">{cs.desc}</p>
-                    <div className="flex items-center justify-between gap-2 flex-wrap">
-                      <div className="inline-flex items-center gap-1.5 text-[10px] font-bold px-2.5 py-1 rounded-full"
+                  <div className="p-4 flex flex-col flex-1 gap-3">
+                    <div className="text-[15px] sm:text-sm font-black text-white leading-tight">{cs.title}</div>
+                    <p className="text-[12px] sm:text-xs text-foursys-text-muted leading-relaxed flex-1">{cs.desc}</p>
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5">
+                      <div className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1.5 rounded-full self-start"
                         style={{ background: hexToRgba(cs.g1, 0.08), border: `1px solid ${hexToRgba(cs.g1, 0.2)}`, color: cs.g1 }}>
-                        <Blocks size={10} />
-                        {cs.stack}
+                        <Blocks size={11} className="flex-shrink-0" />
+                        <span className="leading-tight">{cs.stack}</span>
                       </div>
                       <a
                         href={cs.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full transition-all duration-200 hover:scale-105"
+                        className="inline-flex items-center justify-center gap-1.5 text-[12px] sm:text-[11px] font-black uppercase tracking-wider px-4 py-2.5 sm:py-2 rounded-full transition-all duration-200 active:scale-95 md:hover:scale-105 w-full sm:w-auto min-h-[44px] sm:min-h-0"
                         style={{
                           background: `linear-gradient(135deg, ${cs.g1}, ${cs.g2})`,
                           color: '#0B0F17',
                           boxShadow: `0 0 16px ${hexToRgba(cs.g1, 0.45)}`,
+                          WebkitTapHighlightColor: 'transparent',
                         }}
                       >
                         {pt ? 'Ver ao vivo' : 'View live'}
-                        <ExternalLink size={11} />
+                        <ExternalLink size={12} />
                       </a>
                     </div>
                   </div>
@@ -2034,7 +2073,7 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
                   : 'From free diagnostic to outcome-based strategic partnership — choose the format that fits your moment.'}
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
               {engage.map(e => (
                 <div key={e.title} className="rounded-2xl p-4 flex flex-col relative overflow-hidden"
                   style={{
@@ -2047,7 +2086,7 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
                     <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: `linear-gradient(90deg, transparent, ${e.color}, transparent)` }} />
                   )}
                   {e.featured && (
-                    <div className="absolute top-2 right-2 text-[8px] font-black uppercase tracking-[0.15em] px-1.5 py-0.5 rounded-full"
+                    <div className="absolute top-2 right-2 text-[10px] font-black uppercase tracking-[0.12em] px-2 py-0.5 rounded-full"
                       style={{ background: hexToRgba(e.color, 0.18), border: `1px solid ${hexToRgba(e.color, 0.35)}`, color: e.color }}>
                       {pt ? 'Grátis' : 'Free'}
                     </div>
@@ -2056,32 +2095,33 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
                     style={{ background: `linear-gradient(135deg, ${hexToRgba(e.color, 0.25)}, ${hexToRgba(e.color, 0.08)})`, border: `1px solid ${hexToRgba(e.color, 0.3)}`, color: e.color }}>
                     {e.icon}
                   </div>
-                  <div className="text-sm font-black text-white leading-tight mb-1">{e.title}</div>
-                  <div className="text-[10px] font-bold uppercase tracking-wider mb-2" style={{ color: e.color }}>{e.price}</div>
-                  <p className="text-[11px] text-foursys-text-muted leading-relaxed">{e.desc}</p>
+                  <div className="text-[14px] sm:text-sm font-black text-white leading-tight mb-1">{e.title}</div>
+                  <div className="text-[11px] font-bold uppercase tracking-wider mb-2" style={{ color: e.color }}>{e.price}</div>
+                  <p className="text-[12px] sm:text-xs text-foursys-text-muted leading-relaxed">{e.desc}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* CTA */}
-          <div className="rounded-3xl p-6 md:p-8 relative overflow-hidden"
+          <div className="rounded-3xl p-4 sm:p-6 md:p-8 relative overflow-hidden"
             style={{ background: `linear-gradient(160deg, ${hexToRgba(c, 0.1)} 0%, ${hexToRgba(ORANGE, 0.05)} 100%)`, border: `1px solid ${hexToRgba(c, 0.3)}` }}>
             <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: `linear-gradient(90deg, transparent, ${c}, ${ORANGE}, transparent)` }} />
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+            <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
+              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
                 style={{ background: `linear-gradient(135deg, ${c}, ${hexToRgba(c, 0.5)})`, boxShadow: `0 0 24px ${hexToRgba(c, 0.5)}`, color: '#0B0F17' }}>
-                <Target size={22} />
+                <Target size={20} className="sm:hidden" />
+                <Target size={22} className="hidden sm:block" />
               </div>
               <div className="min-w-0">
-                <div className="text-[10px] font-black uppercase tracking-[0.2em] mb-1" style={{ color: c }}>
+                <div className="text-[11px] font-black uppercase tracking-[0.18em] mb-1" style={{ color: c }}>
                   {pt ? 'Próximo Passo' : 'Next Step'}
                 </div>
-                <h3 className="text-lg md:text-xl font-black text-white leading-tight mb-2">
+                <h3 className="text-base sm:text-lg md:text-xl font-black text-white leading-tight mb-2">
                   {pt ? 'Vamos colocar seu próximo produto na tela real em menos de uma semana?'
                       : 'Shall we put your next product on a real screen in less than a week?'}
                 </h3>
-                <p className="text-xs md:text-sm text-foursys-text-muted leading-relaxed">
+                <p className="text-[13px] sm:text-xs md:text-sm text-foursys-text-muted leading-relaxed">
                   {pt ? 'Comece pelo Diagnóstico Express gratuito — sem amarra, sem obrigação. Se fizer sentido, avançamos para o Pilot. Se não, você leva o relatório com insights acionáveis.'
                       : 'Start with the free Express Diagnostic — no strings, no obligation. If it makes sense, we move to Pilot. If not, you leave with a report of actionable insights.'}
                 </p>
@@ -2089,7 +2129,7 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
             </div>
           </div>
 
-          <p className="text-[10px] text-foursys-text-dim text-center italic">
+          <p className="text-[11px] text-foursys-text-muted text-center italic px-2">
             {pt ? 'Studio de Inovação Foursys — AI-SDLC Framework™ · 25 anos de mercado' : 'Foursys Innovation Studio — AI-SDLC Framework™ · 25 years in the market'}
           </p>
         </div>
