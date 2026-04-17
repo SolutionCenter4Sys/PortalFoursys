@@ -199,6 +199,241 @@ const SERVICES: ServiceItem[] = [
       en: ['Model and agent catalog', 'Multi-LLM orchestration', 'Observability and monitoring'],
     },
     color: '#FBBF24',
+    detail: {
+      tagline: {
+        pt: 'AI-SDLC Framework™ — o novo ciclo de vida de software na era pós-IA generativa',
+        en: 'AI-SDLC Framework™ — the new software lifecycle in the post-generative-AI era',
+      },
+      sections: [
+        {
+          type: 'text',
+          title: { pt: 'A Proposta', en: 'The Proposition' },
+          body: {
+            pt: 'O novo ciclo de vida de software começa na tela real em menos de uma semana. A Foursys combina especificações vivas (SDD), agentes de IA orquestrados e delivery humano em um framework auditável que substitui o SDLC tradicional — menos retrabalho, mais valor, documentação que nunca envelhece.',
+            en: 'The new software lifecycle starts on a real screen in less than a week. Foursys combines living specifications (SDD), orchestrated AI agents and human delivery in an auditable framework that replaces traditional SDLC — less rework, more value, documentation that never ages.',
+          },
+        },
+        {
+          type: 'metrics',
+          title: { pt: 'Indicadores do Framework', en: 'Framework KPIs' },
+          metrics: [
+            { value: '< 1 sem', label: { pt: 'Brief → Tela navegável', en: 'Brief → Navigable screen' } },
+            { value: '4×', label: { pt: 'Aceleração de Upstream', en: 'Upstream acceleration' } },
+            { value: '≥ 70%', label: { pt: 'Cobertura de testes', en: 'Test coverage' } },
+            { value: '< 2%', label: { pt: 'Regressões pós-deploy', en: 'Post-deploy regressions' } },
+          ],
+        },
+        {
+          type: 'text',
+          title: { pt: 'Por que o SDLC tradicional morreu em 2025', en: 'Why traditional SDLC died in 2025' },
+          body: {
+            pt: 'Escassez de sênior, EU AI Act, dívida técnica explosiva e commoditização de "IA que escreve código" mudaram o jogo. O valor migrou do modelo para o framework.',
+            en: 'Senior talent scarcity, EU AI Act, exploding technical debt and commoditization of "AI that writes code" changed the game. Value migrated from the model to the framework.',
+          },
+          items: {
+            pt: [
+              '1970 · Waterfall — previsível, mas lento',
+              '2001 · Scrum/Ágil — iterativo, com retrabalho',
+              '2010 · DevOps — deploy veloz, upstream lento',
+              '2020 · DevSecOps — segurança shift-left',
+              '2026 · AI-SDLC · SDD — specs vivas + agentes + self-healing',
+            ],
+            en: [
+              '1970 · Waterfall — predictable, but slow',
+              '2001 · Scrum/Agile — iterative, with rework',
+              '2010 · DevOps — fast deploy, slow upstream',
+              '2020 · DevSecOps — shift-left security',
+              '2026 · AI-SDLC · SDD — living specs + agents + self-healing',
+            ],
+          },
+        },
+        {
+          type: 'phases',
+          title: { pt: 'AI-SDLC Framework™ em 5 Camadas', en: 'AI-SDLC Framework™ in 5 Layers' },
+          phases: [
+            {
+              name: { pt: '5 · Camada Humana', en: '5 · Human Layer' },
+              color: '#A78BFA',
+              items: {
+                pt: ['C-level, Product Owner, Tech Lead e Stakeholders', 'Decisão, criatividade e relacionamento', 'O humano sobe de camada: deixa de caçar bug, passa a decidir direção'],
+                en: ['C-level, Product Owner, Tech Lead and Stakeholders', 'Decision, creativity and relationship', 'Humans move up: stop hunting bugs, start deciding direction'],
+              },
+            },
+            {
+              name: { pt: '4 · Governança', en: '4 · Governance' },
+              color: '#F472B6',
+              items: {
+                pt: ['Self-Healing por IA e rastreabilidade spec→código', 'LGPD/ANPD e EU AI Act by design', 'SOC2, ISO 27001 e controle de merge com regressão automática'],
+                en: ['AI Self-Healing and spec→code traceability', 'LGPD/ANPD and EU AI Act by design', 'SOC2, ISO 27001 and merge control with automated regression'],
+              },
+            },
+            {
+              name: { pt: '3 · Orquestração', en: '3 · Orchestration' },
+              color: '#34D399',
+              items: {
+                pt: ['Novo Produto — 17 steps', 'Engenharia Reversa — 8 steps', 'Evolução de Produto — 14 steps', 'Gates de qualidade obrigatórios entre fases'],
+                en: ['New Product — 17 steps', 'Reverse Engineering — 8 steps', 'Product Evolution — 14 steps', 'Mandatory quality gates between phases'],
+              },
+            },
+            {
+              name: { pt: '2 · Agentes Especialistas', en: '2 · Specialist Agents' },
+              color: '#FBBF24',
+              items: {
+                pt: ['30+ agentes orquestrados', 'UpStream: Visão, Produto, UX (@the-visionary, @the-artista Bella)', 'Habilitadores: Arquitetura, Segurança, Design (@the-architect-C4L4, @the-critico)', 'DownStream: Dev FE/BE por stack + QA Gherkin (@gherkinflow-agent)'],
+                en: ['30+ orchestrated agents', 'UpStream: Vision, Product, UX (@the-visionary, @the-artista Bella)', 'Enablers: Architecture, Security, Design (@the-architect-C4L4, @the-critico)', 'DownStream: FE/BE Dev per stack + QA Gherkin (@gherkinflow-agent)'],
+              },
+            },
+            {
+              name: { pt: '1 · Specs Vivas', en: '1 · Living Specs' },
+              color: '#60A5FA',
+              items: {
+                pt: ['Épicos e Features versionados', 'C4 Model L1-L4 e User Stories FE/BE', 'Gherkin, Security Assessment e Design System', 'Fonte única da verdade — sempre sincronizada com o código'],
+                en: ['Versioned Epics and Features', 'C4 Model L1-L4 and FE/BE User Stories', 'Gherkin, Security Assessment and Design System', 'Single source of truth — always in sync with code'],
+              },
+            },
+          ],
+        },
+        {
+          type: 'cards',
+          title: { pt: 'AS-IS × TO-BE — O Salto Concreto', en: 'AS-IS × TO-BE — The Concrete Leap' },
+          cards: [
+            {
+              title: { pt: '❌ SDLC Tradicional (AS-IS)', en: '❌ Traditional SDLC (AS-IS)' },
+              desc: {
+                pt: '2-4 sem briefing · 3-6 sem wireframe · 4-6 sem specs · 8-16 sem dev FE · 8-16 sem dev BE · 4-8 sem QA manual. Total: 6 a 12 meses até produção, com docs desatualizadas em semanas.',
+                en: '2-4 wk briefing · 3-6 wk wireframe · 4-6 wk specs · 8-16 wk FE dev · 8-16 wk BE dev · 4-8 wk manual QA. Total: 6 to 12 months to production, with outdated docs in weeks.',
+              },
+            },
+            {
+              title: { pt: '✅ AI-SDLC Foursys (TO-BE)', en: '✅ Foursys AI-SDLC (TO-BE)' },
+              desc: {
+                pt: '1-3 dias briefing + diagnóstico · 3-5 dias priorização + arquitetura · < 1 sem MVP navegável · 1 sem specs BE + security · 2-3 sem dev + testes + peer review. Total: 6 a 10 semanas até produção com governança completa.',
+                en: '1-3 days briefing + diagnosis · 3-5 days prioritization + architecture · < 1 wk navigable MVP · 1 wk BE specs + security · 2-3 wk dev + tests + peer review. Total: 6 to 10 weeks to production with full governance.',
+              },
+            },
+            {
+              title: { pt: '♾️ Documentação Viva', en: '♾️ Living Documentation' },
+              desc: {
+                pt: 'DevOps + App Integrada + Self-Healing em dias. Engenharia Reversa pós-deploy mantém as docs eternamente sincronizadas com o código real — nunca mais documentação defasada.',
+                en: 'DevOps + Integrated App + Self-Healing in days. Post-deploy Reverse Engineering keeps docs eternally in sync with real code — no more outdated documentation.',
+              },
+            },
+          ],
+        },
+        {
+          type: 'dimensions',
+          title: { pt: 'Três Portas de Entrada', en: 'Three Entry Paths' },
+          note: {
+            pt: 'Começando do zero, entendendo um legado ou evoluindo um produto existente — todos plugáveis na sua stack.',
+            en: 'Starting from zero, understanding a legacy or evolving an existing product — all pluggable into your stack.',
+          },
+          dimensions: [
+            {
+              icon: <Rocket size={18} />,
+              name: { pt: 'Porta A · Greenfield', en: 'Path A · Greenfield' },
+              items: {
+                pt: ['Novo Produto — 17 steps · 6 fases · 6-10 semanas', 'Do briefing ao MVP em produção', 'Épicos → Priorização WSJF → Arquitetura + DS', 'MVP navegável < 1 sem → Specs BE → Dev FE/BE → DevOps'],
+                en: ['New Product — 17 steps · 6 phases · 6-10 weeks', 'From briefing to MVP in production', 'Epics → WSJF Prioritization → Architecture + DS', 'Navigable MVP < 1 wk → BE Specs → FE/BE Dev → DevOps'],
+              },
+            },
+            {
+              icon: <Compass size={18} />,
+              name: { pt: 'Porta B · Brownfield sem docs', en: 'Path B · Brownfield no docs' },
+              items: {
+                pt: ['Engenharia Reversa — 8 steps · 4 fases · 5-10 dias', 'Mapeia legados derivando do código real, sem suposições', 'Épicos do código → Features reais → C4 L1-L4 + 12 HTMLs', 'Design System inventário → Gherkin → OWASP + LGPD → US sincronizadas'],
+                en: ['Reverse Engineering — 8 steps · 4 phases · 5-10 days', 'Maps legacies deriving from real code, no assumptions', 'Code Epics → Real Features → C4 L1-L4 + 12 HTMLs', 'Design System inventory → Gherkin → OWASP + LGPD → synced US'],
+              },
+            },
+            {
+              icon: <Layers size={18} />,
+              name: { pt: 'Porta C · Brownfield com docs', en: 'Path C · Brownfield with docs' },
+              items: {
+                pt: ['Evolução de Produto — 14 steps · 4 fases · 8-15 dias', 'Novas features respeitando arquitetura, DS e BD existentes — zero regressão', 'Novos épicos (sem duplicar) → Features → FE mock + Usab >9', 'Gherkin + US BE → Evolução BD + Security → Dev + Tests + Review >8'],
+                en: ['Product Evolution — 14 steps · 4 phases · 8-15 days', 'New features respecting existing architecture, DS and DB — zero regression', 'New epics (no duplicates) → Features → FE mock + Usab >9', 'Gherkin + BE US → DB Evolution + Security → Dev + Tests + Review >8'],
+              },
+            },
+          ],
+        },
+        {
+          type: 'steps',
+          title: { pt: 'Loop Virtuoso do AI-SDLC', en: 'AI-SDLC Virtuous Loop' },
+          note: {
+            pt: 'Specs alimentam agentes · agentes são orquestrados por workflows · workflows passam por governança · humano valida no topo · feedback retorna para refinar as specs.',
+            en: 'Specs feed agents · agents are orchestrated by workflows · workflows pass through governance · humans validate at top · feedback returns to refine specs.',
+          },
+          steps: [
+            { num: '01', title: { pt: 'Specs Vivas', en: 'Living Specs' }, desc: { pt: 'Fonte da verdade', en: 'Source of truth' } },
+            { num: '02', title: { pt: 'Agentes IA', en: 'AI Agents' }, desc: { pt: '30+ especialistas', en: '30+ specialists' } },
+            { num: '03', title: { pt: 'Orquestração', en: 'Orchestration' }, desc: { pt: '3 workflows + gates', en: '3 workflows + gates' } },
+            { num: '04', title: { pt: 'Governança', en: 'Governance' }, desc: { pt: 'Self-Healing + LGPD', en: 'Self-Healing + LGPD' } },
+            { num: '05', title: { pt: 'Humano', en: 'Human' }, desc: { pt: 'Valida e decide', en: 'Validates and decides' } },
+            { num: '✓', title: { pt: 'Produção', en: 'Production' }, desc: { pt: 'Docs vivas pós-deploy', en: 'Living post-deploy docs' } },
+          ],
+        },
+        {
+          type: 'cards',
+          title: { pt: 'Cases Reais em < 1 Semana', en: 'Real Cases in < 1 Week' },
+          cards: [
+            {
+              title: { pt: 'Check-in de Audiência — Grande Banco', en: 'Audience Check-in — Large Bank' },
+              desc: {
+                pt: 'Setor Financeiro · Jornada de check-in digital para audiências, integrada ao ecossistema do banco, com validação presencial e remota. React + Design System corporativo, mobile-first.',
+                en: 'Financial Sector · Digital check-in journey for audiences, integrated with the bank ecosystem, with in-person and remote validation. React + corporate Design System, mobile-first.',
+              },
+            },
+            {
+              title: { pt: 'Pipeline de Dados — Cliente EUA', en: 'Data Pipeline — US Client' },
+              desc: {
+                pt: 'Dashboard para orquestrar, monitorar e governar pipelines de dados (ETL/ELT) de ponta a ponta, com visibilidade de latência, custos e SLA. React + Observability + Multi-source.',
+                en: 'Dashboard to orchestrate, monitor and govern data pipelines (ETL/ELT) end-to-end, with latency, cost and SLA visibility. React + Observability + Multi-source.',
+              },
+            },
+            {
+              title: { pt: 'Gestão de Eventos Médicos', en: 'Medical Events Management' },
+              desc: {
+                pt: 'Saúde · Plataforma para planejar, promover e gerenciar eventos médicos e científicos: agenda de palestrantes, inscrições, credenciamento e relatórios. React + Multi-perfil.',
+                en: 'Healthcare · Platform to plan, promote and manage medical and scientific events: speaker agenda, registrations, accreditation and reports. React + Multi-profile.',
+              },
+            },
+            {
+              title: { pt: 'Guarda Compartilhada — Governo', en: 'Shared Custody — Government' },
+              desc: {
+                pt: 'Setor Público · Plataforma para acompanhamento e gestão de processos de guarda compartilhada, conectando órgãos públicos e judiciário. React + LGPD by design + Acessibilidade.',
+                en: 'Public Sector · Platform for tracking and managing shared custody processes, connecting public agencies and the judiciary. React + LGPD by design + Accessibility.',
+              },
+            },
+          ],
+        },
+        {
+          type: 'list',
+          title: { pt: '5 Modelos de Engajamento', en: '5 Engagement Models' },
+          items: {
+            pt: [
+              '🎁 Diagnóstico Express — Gratuito · 2 semanas · AS-IS/TO-BE, 3 quick-wins e projeção de ROI customizada',
+              '⚡ Pilot — 4-6 semanas · preço fixo · 1 feature real entregue end-to-end com métricas comparáveis ao baseline',
+              '🚀 Squad-as-a-Service — Trimestral renovável · Tech Lead + agentes + devs sênior Foursys com KPIs contratados',
+              '🏛️ Framework License — Anual + enablement · seu time opera o framework com certificação; Foursys evolui',
+              '💎 Outcome-based — Parceria estratégica · compartilhamento de ganho sobre redução de TTM ou custo',
+            ],
+            en: [
+              '🎁 Express Diagnostic — Free · 2 weeks · AS-IS/TO-BE, 3 quick-wins and customized ROI projection',
+              '⚡ Pilot — 4-6 weeks · fixed price · 1 real feature delivered end-to-end with metrics comparable to baseline',
+              '🚀 Squad-as-a-Service — Quarterly renewable · Tech Lead + agents + Foursys senior devs with contracted KPIs',
+              '🏛️ Framework License — Annual + enablement · your team operates the framework with certification; Foursys evolves it',
+              '💎 Outcome-based — Strategic partnership · gain-sharing on TTM or cost reduction',
+            ],
+          },
+        },
+        {
+          type: 'highlight',
+          title: { pt: 'Próximo Passo', en: 'Next Step' },
+          body: {
+            pt: 'Vamos colocar seu próximo produto na tela real em menos de uma semana? Comece pelo Diagnóstico Express gratuito — sem amarra, sem obrigação. Se fizer sentido, avançamos para o Pilot. Se não, você leva o relatório com insights acionáveis.',
+            en: 'Shall we put your next product on a real screen in less than a week? Start with the free Express Diagnostic — no strings, no obligation. If it makes sense, we move to Pilot. If not, you leave with a report of actionable insights.',
+          },
+        },
+      ],
+    },
   },
   {
     icon: <Waypoints size={22} />,
