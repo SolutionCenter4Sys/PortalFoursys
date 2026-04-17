@@ -6,7 +6,7 @@ import {
   Bot, Scale, Blocks, FlaskConical, Building2, Layers,
   ArrowRight, ChevronRight, TrendingUp, X, Sparkles,
   Waypoints, Compass, Gift, Zap, Gem, BadgeCheck, Timer,
-  Target, AlertTriangle, RefreshCw, GitBranch,
+  Target, AlertTriangle, RefreshCw, GitBranch, ExternalLink,
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { useLanguage } from '../../i18n'
@@ -1524,21 +1524,21 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
   ]
 
   const layers = [
-    { n: 5, name: pt ? 'Camada Humana' : 'Human Layer', color: '#A78BFA',
-      items: pt ? ['C-level · PO · Tech Lead · Stakeholders', 'Decisão · criatividade · relacionamento', 'O humano sobe de camada: deixa de caçar bug, passa a decidir direção']
-                : ['C-level · PO · Tech Lead · Stakeholders', 'Decision · creativity · relationship', 'Humans move up: stop hunting bugs, start deciding direction'] },
-    { n: 4, name: pt ? 'Governança' : 'Governance', color: '#F472B6',
-      items: pt ? ['Self-Healing por IA · rastreabilidade spec→código', 'EU AI Act · LGPD/ANPD · SOC2 · ISO 27001', 'Auditoria · controle de merge · regressão automática']
-                : ['AI Self-Healing · spec→code traceability', 'EU AI Act · LGPD/ANPD · SOC2 · ISO 27001', 'Audit · merge control · automated regression'] },
-    { n: 3, name: pt ? 'Orquestração' : 'Orchestration', color: '#34D399',
-      items: pt ? ['Novo Produto — 17 steps · 6 fases', 'Engenharia Reversa — 8 steps · 4 fases', 'Evolução de Produto — 14 steps · 4 fases', 'Gates de qualidade obrigatórios entre fases']
-                : ['New Product — 17 steps · 6 phases', 'Reverse Engineering — 8 steps · 4 phases', 'Product Evolution — 14 steps · 4 phases', 'Mandatory quality gates between phases'] },
-    { n: 2, name: pt ? 'Agentes Especialistas' : 'Specialist Agents', color: c,
-      items: pt ? ['30+ agentes orquestrados', 'UpStream: @the-visionary · @the-artista Bella', 'Habilitadores: @the-architect-C4L4 · @the-critico', 'DownStream: dev FE/BE por stack · @gherkinflow']
-                : ['30+ orchestrated agents', 'UpStream: @the-visionary · @the-artista Bella', 'Enablers: @the-architect-C4L4 · @the-critico', 'DownStream: FE/BE dev per stack · @gherkinflow'] },
     { n: 1, name: pt ? 'Specs Vivas' : 'Living Specs', color: '#60A5FA',
       items: pt ? ['Épicos e Features versionados', 'C4 Model L1-L4 · User Stories FE/BE', 'Gherkin · Security Assessment · Design System', 'Fonte única da verdade — sempre sincronizada com o código']
                 : ['Versioned Epics and Features', 'C4 Model L1-L4 · FE/BE User Stories', 'Gherkin · Security Assessment · Design System', 'Single source of truth — always in sync with code'] },
+    { n: 2, name: pt ? 'Agentes Especialistas' : 'Specialist Agents', color: c,
+      items: pt ? ['30+ agentes orquestrados', 'UpStream: @the-visionary · @the-artista Bella', 'Habilitadores: @the-architect-C4L4 · @the-critico', 'DownStream: dev FE/BE por stack · @gherkinflow']
+                : ['30+ orchestrated agents', 'UpStream: @the-visionary · @the-artista Bella', 'Enablers: @the-architect-C4L4 · @the-critico', 'DownStream: FE/BE dev per stack · @gherkinflow'] },
+    { n: 3, name: pt ? 'Orquestração' : 'Orchestration', color: '#34D399',
+      items: pt ? ['Novo Produto — 17 steps · 6 fases', 'Engenharia Reversa — 8 steps · 4 fases', 'Evolução de Produto — 14 steps · 4 fases', 'Gates de qualidade obrigatórios entre fases']
+                : ['New Product — 17 steps · 6 phases', 'Reverse Engineering — 8 steps · 4 phases', 'Product Evolution — 14 steps · 4 phases', 'Mandatory quality gates between phases'] },
+    { n: 4, name: pt ? 'Governança' : 'Governance', color: '#F472B6',
+      items: pt ? ['Self-Healing por IA · rastreabilidade spec→código', 'EU AI Act · LGPD/ANPD · SOC2 · ISO 27001', 'Auditoria · controle de merge · regressão automática']
+                : ['AI Self-Healing · spec→code traceability', 'EU AI Act · LGPD/ANPD · SOC2 · ISO 27001', 'Audit · merge control · automated regression'] },
+    { n: 5, name: pt ? 'Camada Humana' : 'Human Layer', color: '#A78BFA',
+      items: pt ? ['C-level · PO · Tech Lead · Stakeholders', 'Decisão · criatividade · relacionamento', 'O humano sobe de camada: deixa de caçar bug, passa a decidir direção']
+                : ['C-level · PO · Tech Lead · Stakeholders', 'Decision · creativity · relationship', 'Humans move up: stop hunting bugs, start deciding direction'] },
   ]
 
   const asIs: { time: string; step: string }[] = pt ? [
@@ -1622,19 +1622,23 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
     { title: pt ? 'Check-in de Audiência' : 'Audience Check-in', sub: pt ? 'Grande Banco · Financeiro' : 'Large Bank · Financial',
       desc: pt ? 'Jornada de check-in digital para audiências, integrada ao ecossistema do banco, com validação presencial e remota.'
                 : 'Digital check-in journey for audiences, integrated with the bank ecosystem, with in-person and remote validation.',
-      stack: 'React + DS corporativo + Mobile-first', g1: '#60A5FA', g2: '#818CF8' },
+      stack: 'React + DS corporativo + Mobile-first', g1: '#60A5FA', g2: '#818CF8',
+      url: 'https://nice-ground-0e6881a1e.6.azurestaticapps.net/' },
     { title: pt ? 'Gestão de Pipeline de Dados' : 'Data Pipeline Management', sub: pt ? 'Cliente EUA · Dados' : 'US Client · Data',
       desc: pt ? 'Dashboard para orquestrar, monitorar e governar pipelines ETL/ELT de ponta a ponta, com visibilidade de latência, custos e SLA.'
                 : 'Dashboard to orchestrate, monitor and govern ETL/ELT pipelines end-to-end, with latency, cost and SLA visibility.',
-      stack: 'React + Observability + Multi-source', g1: '#34D399', g2: '#2DD4BF' },
+      stack: 'React + Observability + Multi-source', g1: '#34D399', g2: '#2DD4BF',
+      url: 'https://gentle-forest-0142c430f.6.azurestaticapps.net/' },
     { title: pt ? 'Gestão de Eventos Médicos' : 'Medical Events Management', sub: pt ? 'Saúde · Eventos' : 'Healthcare · Events',
       desc: pt ? 'Plataforma para planejar, promover e gerenciar eventos médicos e científicos: agenda, inscrições, credenciamento e relatórios.'
                 : 'Platform to plan, promote and manage medical and scientific events: agenda, registrations, accreditation and reports.',
-      stack: 'React + Multi-perfil + Relatórios', g1: '#F472B6', g2: '#EC4899' },
+      stack: 'React + Multi-perfil + Relatórios', g1: '#F472B6', g2: '#EC4899',
+      url: 'https://lemon-stone-0a8ef171e.1.azurestaticapps.net/' },
     { title: pt ? 'Guarda Compartilhada' : 'Shared Custody', sub: pt ? 'Governo · Setor Público' : 'Government · Public Sector',
       desc: pt ? 'Plataforma para acompanhamento e gestão de processos de guarda compartilhada, conectando órgãos públicos e judiciário.'
                 : 'Platform for tracking and managing shared custody processes, connecting public agencies and the judiciary.',
-      stack: 'React + LGPD + Multi-órgão + Acessibilidade', g1: c, g2: '#F59E0B' },
+      stack: 'React + LGPD + Multi-órgão + Acessibilidade', g1: c, g2: '#F59E0B',
+      url: 'https://witty-forest-0437c781e.1.azurestaticapps.net/' },
   ]
 
   const engage = [
@@ -1971,7 +1975,7 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {cases.map(cs => (
-                <div key={cs.title} className="rounded-2xl overflow-hidden"
+                <div key={cs.title} className="rounded-2xl overflow-hidden flex flex-col"
                   style={{ background: 'rgba(10,14,22,0.6)', border: '1px solid rgba(255,255,255,0.08)' }}>
                   <div className="relative h-20 overflow-hidden"
                     style={{ background: `linear-gradient(135deg, ${hexToRgba(cs.g1, 0.4)}, ${hexToRgba(cs.g2, 0.25)})` }}>
@@ -1985,13 +1989,29 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
                       </div>
                     </div>
                   </div>
-                  <div className="p-4">
+                  <div className="p-4 flex flex-col flex-1">
                     <div className="text-sm font-black text-white leading-tight mb-2">{cs.title}</div>
-                    <p className="text-[11px] text-foursys-text-muted leading-relaxed mb-3">{cs.desc}</p>
-                    <div className="inline-flex items-center gap-1.5 text-[10px] font-bold px-2.5 py-1 rounded-full"
-                      style={{ background: hexToRgba(cs.g1, 0.08), border: `1px solid ${hexToRgba(cs.g1, 0.2)}`, color: cs.g1 }}>
-                      <Blocks size={10} />
-                      {cs.stack}
+                    <p className="text-[11px] text-foursys-text-muted leading-relaxed mb-3 flex-1">{cs.desc}</p>
+                    <div className="flex items-center justify-between gap-2 flex-wrap">
+                      <div className="inline-flex items-center gap-1.5 text-[10px] font-bold px-2.5 py-1 rounded-full"
+                        style={{ background: hexToRgba(cs.g1, 0.08), border: `1px solid ${hexToRgba(cs.g1, 0.2)}`, color: cs.g1 }}>
+                        <Blocks size={10} />
+                        {cs.stack}
+                      </div>
+                      <a
+                        href={cs.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full transition-all duration-200 hover:scale-105"
+                        style={{
+                          background: `linear-gradient(135deg, ${cs.g1}, ${cs.g2})`,
+                          color: '#0B0F17',
+                          boxShadow: `0 0 16px ${hexToRgba(cs.g1, 0.45)}`,
+                        }}
+                      >
+                        {pt ? 'Ver ao vivo' : 'View live'}
+                        <ExternalLink size={11} />
+                      </a>
                     </div>
                   </div>
                 </div>
