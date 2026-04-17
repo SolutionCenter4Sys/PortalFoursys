@@ -166,6 +166,183 @@ const SERVICES: ServiceItem[] = [
       en: ['Customer service agents', 'Cognitive process automation', 'Legacy system integration'],
     },
     color: '#60A5FA',
+    detail: {
+      tagline: {
+        pt: 'Do caos operacional ao sistema previsível — controle, escala e governança por padrão',
+        en: 'From operational chaos to a predictable system — control, scale and governance by default',
+      },
+      sections: [
+        {
+          type: 'highlight',
+          title: { pt: 'Quem lidera, sabe', en: 'Leaders already know' },
+          body: {
+            pt: 'O problema não é tecnologia. O problema é caos operacional. Inconsistência, risco de compliance, custos imprevisíveis e dependência de pessoas-chave não são exceção — são o padrão do mercado. E esse padrão não escala.',
+            en: 'The problem is not technology. The problem is operational chaos. Inconsistency, compliance risk, unpredictable costs and dependency on key people are not exceptions — they are the market standard. And this standard does not scale.',
+          },
+        },
+        {
+          type: 'cards',
+          title: { pt: 'Os 4 sintomas do caos', en: 'The 4 symptoms of chaos' },
+          cards: [
+            {
+              title: { pt: '⚠️ Inconsistência', en: '⚠️ Inconsistency' },
+              desc: {
+                pt: 'Cada entrega depende de quem executa. Padrões se diluem, qualidade oscila e o retrabalho vira rotina.',
+                en: 'Every delivery depends on who executes it. Standards dilute, quality oscillates and rework becomes routine.',
+              },
+            },
+            {
+              title: { pt: '📋 Risco de Compliance', en: '📋 Compliance Risk' },
+              desc: {
+                pt: 'LGPD, EU AI Act, SOC2… sem rastreabilidade por padrão, toda auditoria vira projeto de exceção.',
+                en: 'LGPD, EU AI Act, SOC2… without traceability by default, every audit becomes an exception project.',
+              },
+            },
+            {
+              title: { pt: '💸 Custos Imprevisíveis', en: '💸 Unpredictable Costs' },
+              desc: {
+                pt: 'Horas alocadas sem correlação com valor entregue. Orçamento estoura. Previsibilidade some.',
+                en: 'Hours allocated without correlation to delivered value. Budget explodes. Predictability vanishes.',
+              },
+            },
+            {
+              title: { pt: '🔑 Dependência de Pessoas-Chave', en: '🔑 Key-Person Dependency' },
+              desc: {
+                pt: 'Conhecimento preso em 3-4 cabeças. Se alguém sai, a operação para. Isso não é time, é risco concentrado.',
+                en: 'Knowledge locked in 3-4 heads. If someone leaves, operations stop. That is not a team — it is concentrated risk.',
+              },
+            },
+          ],
+        },
+        {
+          type: 'highlight',
+          title: { pt: 'A virada', en: 'The turning point' },
+          body: {
+            pt: 'Agora imagine transformar esse caos em um sistema previsível, governado e eficiente. Não com mais pessoas. Não com mais processos manuais. Mas com orquestração inteligente.',
+            en: 'Now imagine turning this chaos into a predictable, governed and efficient system. Not with more people. Not with more manual processes. But with intelligent orchestration.',
+          },
+        },
+        {
+          type: 'text',
+          title: { pt: 'O que os Agentes Foursys fazem', en: 'What Foursys Agents do' },
+          body: {
+            pt: 'Não é uma ferramenta. É um modelo operacional baseado em IA que transforma engenharia de dados e de software em um fluxo padronizado, auditável e escalável. Um comando em linguagem natural — e, por trás, uma orquestra de agentes especialistas entrega com qualidade sênior, 24/7.',
+            en: 'It is not a tool. It is an AI-based operating model that turns data and software engineering into a standardized, auditable and scalable flow. One natural-language command — and, behind it, an orchestra of specialist agents delivers at senior quality, 24/7.',
+          },
+          items: {
+            pt: [
+              'Você deixa de depender de pessoas — passa a contar com um sistema.',
+              'Saem processos artesanais. Entra produção em escala com inteligência embarcada.',
+              'Não é automação de tarefas. É orquestração de inteligência.',
+            ],
+            en: [
+              'You stop depending on people — you rely on a system.',
+              'Artisan processes leave. Scaled production with embedded intelligence enters.',
+              'It is not task automation. It is intelligence orchestration.',
+            ],
+          },
+        },
+        {
+          type: 'steps',
+          title: { pt: 'Anatomia · Como funciona por dentro', en: 'Anatomy · How it works inside' },
+          steps: [
+            { num: '01', title: { pt: 'Comando', en: 'Command' }, desc: { pt: 'Linguagem natural', en: 'Natural language' } },
+            { num: '02', title: { pt: 'Supervisor', en: 'Supervisor' }, desc: { pt: 'Entende o problema', en: 'Understands the problem' } },
+            { num: '03', title: { pt: 'Especialistas', en: 'Specialists' }, desc: { pt: 'Executam a solução', en: 'Execute the solution' } },
+            { num: '04', title: { pt: 'Governança', en: 'Governance' }, desc: { pt: 'Valida cada passo', en: 'Validates every step' } },
+            { num: '05', title: { pt: 'Motor', en: 'Engine' }, desc: { pt: 'Decisão em tempo real', en: 'Real-time decision' } },
+            { num: '✓', title: { pt: 'Entrega', en: 'Delivery' }, desc: { pt: 'Auditável e rastreada', en: 'Auditable and tracked' } },
+          ],
+          note: {
+            pt: 'Um único comando em linguagem natural aciona toda a cadeia — do entendimento à entrega rastreada.',
+            en: 'A single natural-language command triggers the full chain — from understanding to tracked delivery.',
+          },
+        },
+        {
+          type: 'phases',
+          title: { pt: 'Diferenciais · Aqui você ganha o jogo', en: 'Differentiators · This is where you win' },
+          phases: [
+            {
+              name: { pt: '🧱 Código padronizado', en: '🧱 Standardized code' },
+              color: '#60A5FA',
+              items: {
+                pt: ['100% dos entregáveis seguem o mesmo padrão', 'Arquitetura, DS e stack unificados', 'Onboarding de novos devs reduzido drasticamente'],
+                en: ['100% of deliverables follow the same standard', 'Unified architecture, DS and stack', 'Dramatically reduced onboarding for new devs'],
+              },
+            },
+            {
+              name: { pt: '🛡️ Compliance automático', en: '🛡️ Automatic compliance' },
+              color: '#34D399',
+              items: {
+                pt: ['LGPD, EU AI Act e SOC2 by design', 'Rastreabilidade spec → código → decisão', 'Auditoria deixa de ser projeto — vira relatório'],
+                en: ['LGPD, EU AI Act and SOC2 by design', 'Spec → code → decision traceability', 'Audit is no longer a project — it becomes a report'],
+              },
+            },
+            {
+              name: { pt: '💰 Custos visíveis em tempo real', en: '💰 Real-time cost visibility' },
+              color: '#FBBF24',
+              items: {
+                pt: ['Cada execução de agente tem custo registrado', 'Dashboards de consumo por iniciativa/projeto', 'Previsibilidade de OPEX — adeus estouro de budget'],
+                en: ['Every agent execution has logged cost', 'Consumption dashboards per initiative/project', 'OPEX predictability — goodbye budget overruns'],
+              },
+            },
+            {
+              name: { pt: '🧠 Conhecimento descentralizado', en: '🧠 Decentralized knowledge' },
+              color: '#A78BFA',
+              items: {
+                pt: ['Know-how vive nos agentes, não em pessoas', 'Specs vivas como fonte única da verdade', 'Zero gargalo se alguém-chave sai do time'],
+                en: ['Know-how lives in agents, not in people', 'Living specs as single source of truth', 'Zero bottleneck if a key person leaves'],
+              },
+            },
+          ],
+        },
+        {
+          type: 'metrics',
+          title: { pt: 'Resultado · O que você vê depois', en: 'Outcome · What you see afterwards' },
+          metrics: [
+            { value: '–70%', label: { pt: 'Gargalos operacionais', en: 'Operational bottlenecks' } },
+            { value: '–60%', label: { pt: 'Risco concentrado', en: 'Concentrated risk' } },
+            { value: '3×', label: { pt: 'Velocidade com controle', en: 'Speed with control' } },
+            { value: '24/7', label: { pt: 'Capacidade sênior contínua', en: 'Continuous senior capacity' } },
+          ],
+        },
+        {
+          type: 'cards',
+          title: { pt: 'AS-IS × TO-BE · O Salto Concreto', en: 'AS-IS × TO-BE · The Concrete Leap' },
+          cards: [
+            {
+              title: { pt: '❌ Modelo atual (AS-IS)', en: '❌ Current model (AS-IS)' },
+              desc: {
+                pt: 'Time sobrecarregado · entregas artesanais · compliance reativo · custos opacos · know-how em pessoas · escala limitada pela folha de pagamento.',
+                en: 'Overloaded team · artisan deliveries · reactive compliance · opaque costs · know-how in people · scale limited by payroll.',
+              },
+            },
+            {
+              title: { pt: '✅ Agentes Foursys (TO-BE)', en: '✅ Foursys Agents (TO-BE)' },
+              desc: {
+                pt: 'Sistema escalável · produção padronizada · compliance por padrão · custo visível · know-how nos agentes · escala pela governança, não pelo headcount.',
+                en: 'Scalable system · standardized production · compliance by default · visible cost · know-how in agents · scale via governance, not headcount.',
+              },
+            },
+            {
+              title: { pt: '🔁 Mudança de modelo', en: '🔁 Model shift' },
+              desc: {
+                pt: 'Não é melhorar o processo atual — é substituir o modelo operacional. Sai execução artesanal, entra produção em escala com inteligência embarcada.',
+                en: 'It is not about improving the current process — it is about replacing the operating model. Artisan execution out, scaled production with embedded intelligence in.',
+              },
+            },
+          ],
+        },
+        {
+          type: 'highlight',
+          title: { pt: 'Insight para a diretoria', en: 'Boardroom insight' },
+          body: {
+            pt: 'A pergunta não é se isso funciona. A pergunta é: o que sua empresa faria com acesso contínuo a um time sênior, 24/7, com custo previsível e governança automática? No fim, empresas de ponta não são as que têm mais tecnologia — são as que têm mais controle sobre como ela é usada. Você não está comprando um produto: está migrando de CAPEX humano para OPEX inteligente, de execução artesanal para produção em escala. Isso é vantagem competitiva.',
+            en: 'The question is not whether this works. The question is: what would your company do with continuous access to a senior team, 24/7, with predictable cost and automatic governance? In the end, leading companies are not the ones with the most technology — they are the ones with the most control over how it is used. You are not buying a product: you are migrating from human CAPEX to intelligent OPEX, from artisan execution to scaled production. That is competitive advantage.',
+          },
+        },
+      ],
+    },
   },
   {
     icon: <Scale size={22} />,
