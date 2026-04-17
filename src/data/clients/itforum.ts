@@ -94,6 +94,19 @@ export const itforumClient: ClientConfig = {
     content: {
       contacts: [
         {
+          name: 'Alessandro Fernandes',
+          role: 'Ex-CTO / CIO Destaque 2024',
+          company: 'Grupo Polimix',
+          sector: 'Construção Civil & Infraestrutura',
+          city: 'Serra - ES',
+          revenue: 'Grupo privado (+7.000 colab., 6 países)',
+          opportunities: 5,
+          topOffer: 'Modernização de Legado',
+          topScore: 95,
+          briefingFiles: [{ label: 'Grupo Polimix', file: 'reuniao-foursys/alessandro-fernandes.html' }],
+          tag: 'Reunião Foursys',
+        },
+        {
           name: 'Alexandre Falsarella Ricoy',
           role: 'CIO',
           company: 'Bertoldo Transportes e Logística Ltda - EPP',
@@ -1945,6 +1958,19 @@ const itforumClientEn: ClientConfig = {
     subtitle: 'CIOs and IT leaders confirmed at IT Forum ATI Trancoso 2026',
     content: {
       contacts: [
+        {
+          name: 'Alessandro Fernandes',
+          role: 'Former CTO / CIO Highlight 2024',
+          company: 'Grupo Polimix',
+          sector: 'Construction & Infrastructure',
+          city: 'Serra - ES',
+          revenue: 'Private group (+7,000 employees, 6 countries)',
+          opportunities: 5,
+          topOffer: 'Legacy Modernization',
+          topScore: 95,
+          briefingFiles: [{ label: 'Grupo Polimix', file: 'reuniao-foursys/alessandro-fernandes.html' }],
+          tag: 'Foursys Meeting',
+        },
         {
           name: 'Alexandre Falsarella Ricoy',
           role: 'CIO',
