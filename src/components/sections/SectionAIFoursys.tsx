@@ -1511,7 +1511,6 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
     { value: '< 1 sem', label: pt ? 'Brief → Tela navegável' : 'Brief → Navigable screen' },
     { value: '4×', label: pt ? 'Aceleração Upstream' : 'Upstream acceleration' },
     { value: '≥ 70%', label: pt ? 'Cobertura de testes' : 'Test coverage' },
-    { value: '< 2%', label: pt ? 'Regressões pós-deploy' : 'Post-deploy regressions' },
     { value: '100%', label: pt ? 'Docs sincronizadas' : 'Synced docs' },
   ]
 
@@ -1727,7 +1726,7 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
             </p>
 
             {/* Stats row */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5 mt-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 mt-6">
               {stats.map(s => (
                 <div key={s.label} className="p-2.5 sm:p-3 rounded-xl text-center"
                   style={{ background: hexToRgba(c, 0.06), border: `1px solid ${hexToRgba(c, 0.14)}` }}>
