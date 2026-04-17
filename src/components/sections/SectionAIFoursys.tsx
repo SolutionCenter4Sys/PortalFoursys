@@ -5,7 +5,8 @@ import {
   GraduationCap, BookOpen, Shield, CheckCircle2,
   Bot, Scale, Blocks, FlaskConical, Building2, Layers,
   ArrowRight, ChevronRight, TrendingUp, X, Sparkles,
-  Waypoints, Compass,
+  Waypoints, Compass, Gift, Zap, Gem, BadgeCheck, Timer,
+  Target, AlertTriangle, RefreshCw, GitBranch,
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { useLanguage } from '../../i18n'
@@ -1497,6 +1498,586 @@ function ServiceDetailModal({ item, onClose, lang }: { item: DetailableItem; onC
   )
 }
 
+// ─── AI Framework Modal (fidelity to HTML, DS tokens only) ──────────────────
+
+function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string }) {
+  const trapRef = useFocusTrap(true)
+  const pt = lang === 'pt'
+  const c = '#FBBF24'
+  const danger = '#F87171'
+  const ok = '#34D399'
+
+  const stats = [
+    { value: '< 1 sem', label: pt ? 'Brief → Tela navegável' : 'Brief → Navigable screen' },
+    { value: '4×', label: pt ? 'Aceleração Upstream' : 'Upstream acceleration' },
+    { value: '≥ 70%', label: pt ? 'Cobertura de testes' : 'Test coverage' },
+    { value: '< 2%', label: pt ? 'Regressões pós-deploy' : 'Post-deploy regressions' },
+    { value: '100%', label: pt ? 'Docs sincronizadas' : 'Synced docs' },
+  ]
+
+  const timeline: { year: string; title: string; desc: string; color: string; highlight?: boolean }[] = [
+    { year: '1970', title: 'Waterfall', desc: pt ? 'Previsível, mas lento' : 'Predictable, but slow', color: '#64748B' },
+    { year: '2001', title: 'Scrum / Ágil', desc: pt ? 'Iterativo, com retrabalho' : 'Iterative, with rework', color: '#60A5FA' },
+    { year: '2010', title: 'DevOps', desc: pt ? 'Deploy veloz · upstream lento' : 'Fast deploy · slow upstream', color: '#34D399' },
+    { year: '2020', title: 'DevSecOps', desc: pt ? 'Segurança shift-left' : 'Shift-left security', color: '#F472B6' },
+    { year: '2026', title: 'AI-SDLC · SDD', desc: pt ? 'Specs vivas + agentes + self-healing' : 'Living specs + agents + self-healing', color: c, highlight: true },
+  ]
+
+  const layers = [
+    { n: 5, name: pt ? 'Camada Humana' : 'Human Layer', color: '#A78BFA',
+      items: pt ? ['C-level · PO · Tech Lead · Stakeholders', 'Decisão · criatividade · relacionamento', 'O humano sobe de camada: deixa de caçar bug, passa a decidir direção']
+                : ['C-level · PO · Tech Lead · Stakeholders', 'Decision · creativity · relationship', 'Humans move up: stop hunting bugs, start deciding direction'] },
+    { n: 4, name: pt ? 'Governança' : 'Governance', color: '#F472B6',
+      items: pt ? ['Self-Healing por IA · rastreabilidade spec→código', 'EU AI Act · LGPD/ANPD · SOC2 · ISO 27001', 'Auditoria · controle de merge · regressão automática']
+                : ['AI Self-Healing · spec→code traceability', 'EU AI Act · LGPD/ANPD · SOC2 · ISO 27001', 'Audit · merge control · automated regression'] },
+    { n: 3, name: pt ? 'Orquestração' : 'Orchestration', color: '#34D399',
+      items: pt ? ['Novo Produto — 17 steps · 6 fases', 'Engenharia Reversa — 8 steps · 4 fases', 'Evolução de Produto — 14 steps · 4 fases', 'Gates de qualidade obrigatórios entre fases']
+                : ['New Product — 17 steps · 6 phases', 'Reverse Engineering — 8 steps · 4 phases', 'Product Evolution — 14 steps · 4 phases', 'Mandatory quality gates between phases'] },
+    { n: 2, name: pt ? 'Agentes Especialistas' : 'Specialist Agents', color: c,
+      items: pt ? ['30+ agentes orquestrados', 'UpStream: @the-visionary · @the-artista Bella', 'Habilitadores: @the-architect-C4L4 · @the-critico', 'DownStream: dev FE/BE por stack · @gherkinflow']
+                : ['30+ orchestrated agents', 'UpStream: @the-visionary · @the-artista Bella', 'Enablers: @the-architect-C4L4 · @the-critico', 'DownStream: FE/BE dev per stack · @gherkinflow'] },
+    { n: 1, name: pt ? 'Specs Vivas' : 'Living Specs', color: '#60A5FA',
+      items: pt ? ['Épicos e Features versionados', 'C4 Model L1-L4 · User Stories FE/BE', 'Gherkin · Security Assessment · Design System', 'Fonte única da verdade — sempre sincronizada com o código']
+                : ['Versioned Epics and Features', 'C4 Model L1-L4 · FE/BE User Stories', 'Gherkin · Security Assessment · Design System', 'Single source of truth — always in sync with code'] },
+  ]
+
+  const asIs: { time: string; step: string }[] = pt ? [
+    { time: '2-4 sem', step: 'Briefing e alinhamento' },
+    { time: '3-6 sem', step: 'Wireframe no Figma' },
+    { time: '2-4 sem', step: 'Protótipo Hi-Fi descartável' },
+    { time: '—', step: 'Validação com retrabalho' },
+    { time: '4-6 sem', step: 'Specs manuais' },
+    { time: '4-8 sem', step: 'Arquitetura' },
+    { time: '8-16 sem', step: 'Dev Frontend' },
+    { time: '8-16 sem', step: 'Dev Backend' },
+    { time: '4-8 sem', step: 'QA manual' },
+    { time: '2-4 sem', step: 'Deploy + regressões' },
+  ] : [
+    { time: '2-4 wk', step: 'Briefing and alignment' },
+    { time: '3-6 wk', step: 'Figma wireframe' },
+    { time: '2-4 wk', step: 'Disposable Hi-Fi prototype' },
+    { time: '—', step: 'Validation with rework' },
+    { time: '4-6 wk', step: 'Manual specs' },
+    { time: '4-8 wk', step: 'Architecture' },
+    { time: '8-16 wk', step: 'Frontend Dev' },
+    { time: '8-16 wk', step: 'Backend Dev' },
+    { time: '4-8 wk', step: 'Manual QA' },
+    { time: '2-4 wk', step: 'Deploy + regressions' },
+  ]
+
+  const toBe: { time: string; step: string; highlight?: boolean }[] = pt ? [
+    { time: '1-3 dias', step: 'Briefing + Diagnóstico Express' },
+    { time: '3-5 dias', step: 'Priorização + Arquitetura antecipadas' },
+    { time: '< 1 sem', step: 'MVP NAVEGÁVEL com mock realista', highlight: true },
+    { time: '—', step: 'Validação direta na tela real (score >9)' },
+    { time: '1 sem', step: 'Specs BE + DB + Security' },
+    { time: '2-3 sem', step: 'Dev FE/BE + testes + Peer Review' },
+    { time: 'Dias', step: 'DevOps + App Integrada + Self-Healing' },
+    { time: '♾️', step: 'Eng. Reversa pós-deploy → docs vivas' },
+  ] : [
+    { time: '1-3 days', step: 'Briefing + Express Diagnostic' },
+    { time: '3-5 days', step: 'Prioritization + Upfront Architecture' },
+    { time: '< 1 wk', step: 'NAVIGABLE MVP with realistic mock', highlight: true },
+    { time: '—', step: 'Validation directly on real screen (score >9)' },
+    { time: '1 wk', step: 'BE Specs + DB + Security' },
+    { time: '2-3 wk', step: 'Dev FE/BE + tests + Peer Review' },
+    { time: 'Days', step: 'DevOps + Integrated App + Self-Healing' },
+    { time: '♾️', step: 'Post-deploy Reverse Eng → living docs' },
+  ]
+
+  const doors = [
+    {
+      letter: 'A',
+      icon: <Rocket size={18} />,
+      title: pt ? 'Greenfield · Novo Produto' : 'Greenfield · New Product',
+      meta: pt ? '17 steps · 6 fases · 6-10 sem' : '17 steps · 6 phases · 6-10 wk',
+      color: '#60A5FA',
+      flow: pt ? ['Épicos & Features', 'Priorização WSJF', 'Arquitetura + DS', 'MVP navegável < 1 sem', 'Specs BE + Security', 'Dev FE/BE + Tests', 'DevOps + App integrada']
+                : ['Epics & Features', 'WSJF Prioritization', 'Architecture + DS', 'Navigable MVP < 1 wk', 'BE Specs + Security', 'FE/BE Dev + Tests', 'DevOps + Integrated App'],
+      highlightIdx: 3,
+    },
+    {
+      letter: 'B',
+      icon: <Compass size={18} />,
+      title: pt ? 'Brownfield sem docs · Eng. Reversa' : 'Brownfield no docs · Reverse Eng',
+      meta: pt ? '8 steps · 4 fases · 5-10 dias' : '8 steps · 4 phases · 5-10 days',
+      color: '#34D399',
+      flow: pt ? ['Épicos do código', 'Features reais', 'C4 L1-L4 + 12 HTMLs', 'DS inventário', 'Gherkin por feature', 'OWASP + LGPD', 'US FE/BE sincronizadas']
+                : ['Code Epics', 'Real Features', 'C4 L1-L4 + 12 HTMLs', 'DS inventory', 'Gherkin per feature', 'OWASP + LGPD', 'Synced FE/BE US'],
+      highlightIdx: 2,
+    },
+    {
+      letter: 'C',
+      icon: <Layers size={18} />,
+      title: pt ? 'Brownfield com docs · Evolução' : 'Brownfield with docs · Evolution',
+      meta: pt ? '14 steps · 4 fases · 8-15 dias' : '14 steps · 4 phases · 8-15 days',
+      color: '#A78BFA',
+      flow: pt ? ['Novos épicos (sem duplicar)', 'Features novas', 'Frontend mock + Usab >9', 'Gherkin + US BE', 'Evolução BD + Security', 'Dev + Tests + Review >8', 'DevOps + App integrada']
+                : ['New epics (no duplicates)', 'New features', 'Frontend mock + Usab >9', 'Gherkin + BE US', 'DB Evolution + Security', 'Dev + Tests + Review >8', 'DevOps + Integrated App'],
+      highlightIdx: 2,
+    },
+  ]
+
+  const cases = [
+    { title: pt ? 'Check-in de Audiência' : 'Audience Check-in', sub: pt ? 'Grande Banco · Financeiro' : 'Large Bank · Financial',
+      desc: pt ? 'Jornada de check-in digital para audiências, integrada ao ecossistema do banco, com validação presencial e remota.'
+                : 'Digital check-in journey for audiences, integrated with the bank ecosystem, with in-person and remote validation.',
+      stack: 'React + DS corporativo + Mobile-first', g1: '#60A5FA', g2: '#818CF8' },
+    { title: pt ? 'Gestão de Pipeline de Dados' : 'Data Pipeline Management', sub: pt ? 'Cliente EUA · Dados' : 'US Client · Data',
+      desc: pt ? 'Dashboard para orquestrar, monitorar e governar pipelines ETL/ELT de ponta a ponta, com visibilidade de latência, custos e SLA.'
+                : 'Dashboard to orchestrate, monitor and govern ETL/ELT pipelines end-to-end, with latency, cost and SLA visibility.',
+      stack: 'React + Observability + Multi-source', g1: '#34D399', g2: '#2DD4BF' },
+    { title: pt ? 'Gestão de Eventos Médicos' : 'Medical Events Management', sub: pt ? 'Saúde · Eventos' : 'Healthcare · Events',
+      desc: pt ? 'Plataforma para planejar, promover e gerenciar eventos médicos e científicos: agenda, inscrições, credenciamento e relatórios.'
+                : 'Platform to plan, promote and manage medical and scientific events: agenda, registrations, accreditation and reports.',
+      stack: 'React + Multi-perfil + Relatórios', g1: '#F472B6', g2: '#EC4899' },
+    { title: pt ? 'Guarda Compartilhada' : 'Shared Custody', sub: pt ? 'Governo · Setor Público' : 'Government · Public Sector',
+      desc: pt ? 'Plataforma para acompanhamento e gestão de processos de guarda compartilhada, conectando órgãos públicos e judiciário.'
+                : 'Platform for tracking and managing shared custody processes, connecting public agencies and the judiciary.',
+      stack: 'React + LGPD + Multi-órgão + Acessibilidade', g1: c, g2: '#F59E0B' },
+  ]
+
+  const engage = [
+    { icon: <Gift size={20} />, title: pt ? 'Diagnóstico Express' : 'Express Diagnostic', price: pt ? 'Gratuito · 2 semanas' : 'Free · 2 weeks',
+      desc: pt ? 'AS-IS/TO-BE, 3 quick-wins e projeção de ROI customizada' : 'AS-IS/TO-BE, 3 quick-wins and customized ROI projection',
+      color: ok, featured: true },
+    { icon: <Zap size={20} />, title: 'Pilot', price: pt ? '4-6 semanas · preço fixo' : '4-6 weeks · fixed price',
+      desc: pt ? '1 feature real entregue end-to-end com métricas comparáveis ao baseline' : '1 real feature delivered end-to-end with metrics comparable to baseline',
+      color: '#60A5FA' },
+    { icon: <Rocket size={20} />, title: 'Squad-as-a-Service', price: pt ? 'Trimestral renovável' : 'Quarterly renewable',
+      desc: pt ? 'Tech Lead + agentes + devs sênior Foursys com KPIs contratados' : 'Tech Lead + agents + Foursys senior devs with contracted KPIs',
+      color: c },
+    { icon: <Building2 size={20} />, title: 'Framework License', price: pt ? 'Anual + enablement' : 'Annual + enablement',
+      desc: pt ? 'Seu time opera o framework com certificação; Foursys evolui' : 'Your team operates the framework with certification; Foursys evolves it',
+      color: '#F472B6' },
+    { icon: <Gem size={20} />, title: 'Outcome-based', price: pt ? 'Parceria estratégica' : 'Strategic partnership',
+      desc: pt ? 'Compartilhamento de ganho sobre redução de TTM ou custo' : 'Gain-sharing on TTM or cost reduction',
+      color: '#A78BFA' },
+  ]
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain py-8"
+      role="dialog"
+      aria-modal="true"
+      aria-label="AI Framework"
+      onClick={onClose}
+    >
+      <div className="absolute inset-0 bg-black/85 backdrop-blur-xl" />
+      <motion.div
+        initial={{ scale: 0.92, y: 40, opacity: 0 }}
+        animate={{ scale: 1, y: 0, opacity: 1 }}
+        exit={{ scale: 0.95, y: 20, opacity: 0 }}
+        transition={{ duration: 0.4, type: 'spring', stiffness: 200 }}
+        onClick={e => e.stopPropagation()}
+        ref={trapRef}
+        className="relative z-10 w-full max-w-5xl mx-4 rounded-3xl overflow-hidden"
+        style={{
+          background: `linear-gradient(180deg, ${hexToRgba(c, 0.10)} 0%, rgba(10,14,22,0.98) 14%, rgba(10,14,22,0.99) 100%)`,
+          border: `1px solid ${hexToRgba(c, 0.22)}`,
+        }}
+      >
+        <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: `linear-gradient(90deg, transparent, ${c}, transparent)` }} />
+        <div className="absolute top-6 right-6 z-20">
+          <button type="button" onClick={onClose} aria-label="Close"
+            className="p-2.5 rounded-xl bg-white/[0.06] border border-white/[0.1] hover:bg-white/[0.12] transition-colors">
+            <X size={18} className="text-white/70" />
+          </button>
+        </div>
+
+        <div className="p-6 md:p-10 space-y-10">
+
+          {/* HERO */}
+          <div className="relative">
+            <div className="absolute -top-8 -left-8 w-72 h-72 rounded-full pointer-events-none"
+              style={{ background: `radial-gradient(ellipse, ${hexToRgba(c, 0.12)} 0%, transparent 70%)`, filter: 'blur(40px)' }} />
+            <div className="relative flex items-center gap-4 mb-4">
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                style={{ background: `linear-gradient(135deg, ${hexToRgba(c, 0.28)}, ${hexToRgba(c, 0.1)})`, border: `1px solid ${hexToRgba(c, 0.38)}`, color: c }}>
+                <Blocks size={24} />
+              </div>
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: c }}>
+                  {pt ? 'AI-SDLC Framework™ · 2026' : 'AI-SDLC Framework™ · 2026'}
+                </p>
+                <h2 className="text-2xl md:text-4xl font-black text-white leading-tight">AI Framework</h2>
+              </div>
+            </div>
+            <p className="text-sm md:text-base text-foursys-text-muted leading-relaxed max-w-3xl">
+              {pt
+                ? 'O novo ciclo de vida de software começa na tela real em menos de uma semana. Combinamos specs vivas (SDD), agentes de IA orquestrados e delivery humano em um framework auditável.'
+                : 'The new software lifecycle starts on a real screen in less than a week. We combine living specs (SDD), orchestrated AI agents and human delivery in an auditable framework.'}
+            </p>
+
+            {/* Stats row */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-2.5 mt-6">
+              {stats.map(s => (
+                <div key={s.label} className="p-3 rounded-xl text-center"
+                  style={{ background: hexToRgba(c, 0.06), border: `1px solid ${hexToRgba(c, 0.14)}` }}>
+                  <div className="text-xl md:text-2xl font-black" style={{ color: c }}>{s.value}</div>
+                  <div className="text-[9px] text-foursys-text-dim uppercase tracking-wider font-bold mt-1 leading-tight">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="h-px" style={{ background: `linear-gradient(90deg, transparent, ${hexToRgba(c, 0.3)}, transparent)` }} />
+
+          {/* TIMELINE */}
+          <section>
+            <div className="flex items-center gap-2 mb-2">
+              <AlertTriangle size={16} style={{ color: c }} />
+              <h3 className="text-sm font-black text-white uppercase tracking-[0.15em]">
+                {pt ? 'Por que o SDLC tradicional morreu em 2025' : 'Why traditional SDLC died in 2025'}
+              </h3>
+            </div>
+            <p className="text-xs text-foursys-text-muted mb-5 leading-relaxed">
+              {pt
+                ? 'Escassez de sênior, EU AI Act, dívida técnica explosiva e commoditização de "IA que escreve código" mudaram o jogo. O valor migrou do modelo para o framework.'
+                : 'Senior talent scarcity, EU AI Act, exploding technical debt and commoditization of "AI that writes code" changed the game. Value migrated from the model to the framework.'}
+            </p>
+
+            <div className="relative">
+              <div className="absolute left-0 right-0 top-[22px] h-px" style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.16), rgba(255,255,255,0.08))' }} />
+              <div className="grid grid-cols-5 gap-2 relative">
+                {timeline.map(era => (
+                  <div key={era.year} className="flex flex-col items-center text-center">
+                    <div className="relative w-11 h-11 rounded-full flex items-center justify-center mb-2.5"
+                      style={{
+                        background: era.highlight ? `linear-gradient(135deg, ${era.color}, ${hexToRgba(era.color, 0.5)})` : hexToRgba(era.color, 0.12),
+                        border: `2px solid ${era.highlight ? era.color : hexToRgba(era.color, 0.35)}`,
+                        boxShadow: era.highlight ? `0 0 24px ${hexToRgba(era.color, 0.55)}` : 'none',
+                      }}>
+                      <span className="text-[10px] font-black" style={{ color: era.highlight ? '#0B0F17' : era.color }}>
+                        {era.highlight ? '★' : '•'}
+                      </span>
+                    </div>
+                    <div className="text-[11px] font-black" style={{ color: era.color }}>{era.year}</div>
+                    <div className="text-[11px] font-bold text-white mt-0.5">{era.title}</div>
+                    <div className="text-[10px] text-foursys-text-dim leading-snug mt-0.5 px-1">{era.desc}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <div className="h-px" style={{ background: `linear-gradient(90deg, transparent, ${hexToRgba(c, 0.2)}, transparent)` }} />
+
+          {/* 5 LAYERS STACK */}
+          <section>
+            <div className="flex items-center gap-2 mb-2">
+              <Layers size={16} style={{ color: c }} />
+              <h3 className="text-sm font-black text-white uppercase tracking-[0.15em]">
+                {pt ? 'AI-SDLC Framework™ em 5 Camadas' : 'AI-SDLC Framework™ in 5 Layers'}
+              </h3>
+            </div>
+            <p className="text-xs text-foursys-text-muted mb-5 leading-relaxed">
+              {pt ? 'Cada camada se apoia na seguinte — specs alimentam agentes, agentes são orquestrados, orquestração é governada e o humano decide direção no topo.'
+                  : 'Each layer builds on the next — specs feed agents, agents get orchestrated, orchestration is governed and humans decide direction at the top.'}
+            </p>
+
+            <div className="space-y-2.5">
+              {layers.map((layer, i) => (
+                <div key={layer.n} className="relative">
+                  <div className="rounded-2xl p-4 md:p-5 relative overflow-hidden"
+                    style={{ background: hexToRgba(layer.color, 0.05), border: `1px solid ${hexToRgba(layer.color, 0.22)}` }}>
+                    <div className="absolute top-0 left-0 bottom-0 w-1" style={{ background: layer.color }} />
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 font-black text-lg"
+                        style={{ background: `linear-gradient(135deg, ${hexToRgba(layer.color, 0.3)}, ${hexToRgba(layer.color, 0.1)})`, border: `1px solid ${hexToRgba(layer.color, 0.4)}`, color: layer.color }}>
+                        {layer.n}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-sm font-black text-white mb-2">{layer.name}</div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-1.5">
+                          {layer.items.map(it => (
+                            <div key={it} className="flex items-start gap-2 text-[11px] text-white/80">
+                              <ChevronRight size={10} style={{ color: layer.color }} className="flex-shrink-0 mt-0.5" />
+                              <span className="leading-snug">{it}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {i < layers.length - 1 && (
+                    <div className="flex justify-center py-1">
+                      <ChevronRight size={14} className="text-white/30 rotate-90" />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <div className="h-px" style={{ background: `linear-gradient(90deg, transparent, ${hexToRgba(c, 0.2)}, transparent)` }} />
+
+          {/* AS-IS × TO-BE */}
+          <section>
+            <div className="flex items-center gap-2 mb-2">
+              <RefreshCw size={16} style={{ color: c }} />
+              <h3 className="text-sm font-black text-white uppercase tracking-[0.15em]">
+                {pt ? 'AS-IS × TO-BE — O Salto Concreto' : 'AS-IS × TO-BE — The Concrete Leap'}
+              </h3>
+            </div>
+            <p className="text-xs text-foursys-text-muted mb-5 leading-relaxed">
+              {pt ? 'De 6-12 meses de SDLC tradicional para 6-10 semanas com governança completa e docs que nunca envelhecem.'
+                  : 'From 6-12 months of traditional SDLC to 6-10 weeks with full governance and docs that never age.'}
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* AS-IS */}
+              <div className="rounded-2xl p-5 relative overflow-hidden"
+                style={{ background: hexToRgba(danger, 0.04), border: `1px solid ${hexToRgba(danger, 0.18)}` }}>
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-7 h-7 rounded-lg flex items-center justify-center text-[11px] font-black"
+                    style={{ background: hexToRgba(danger, 0.15), color: danger }}>✕</div>
+                  <div>
+                    <div className="text-[10px] font-black uppercase tracking-wider" style={{ color: danger }}>AS-IS</div>
+                    <div className="text-sm font-black text-white">{pt ? 'SDLC Tradicional' : 'Traditional SDLC'}</div>
+                  </div>
+                </div>
+                <div className="space-y-1.5">
+                  {asIs.map((row, i) => (
+                    <div key={i} className="flex items-center gap-3 py-1 border-b border-white/[0.04] last:border-0">
+                      <span className="text-[10px] font-bold w-16 text-right flex-shrink-0" style={{ color: hexToRgba(danger, 0.85) }}>{row.time}</span>
+                      <span className="text-[11px] text-white/75 leading-snug">{row.step}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-4 p-2.5 rounded-lg flex items-center gap-2"
+                  style={{ background: hexToRgba(danger, 0.08), border: `1px solid ${hexToRgba(danger, 0.2)}` }}>
+                  <AlertTriangle size={12} style={{ color: danger }} />
+                  <span className="text-[11px] font-bold" style={{ color: danger }}>
+                    {pt ? 'Total: 6 a 12 meses · docs defasadas em semanas' : 'Total: 6 to 12 months · outdated docs in weeks'}
+                  </span>
+                </div>
+              </div>
+
+              {/* TO-BE */}
+              <div className="rounded-2xl p-5 relative overflow-hidden"
+                style={{ background: `linear-gradient(160deg, ${hexToRgba(ok, 0.08)}, ${hexToRgba(c, 0.04)})`, border: `1px solid ${hexToRgba(ok, 0.25)}` }}>
+                <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: `linear-gradient(90deg, transparent, ${ok}, transparent)` }} />
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-7 h-7 rounded-lg flex items-center justify-center text-[11px] font-black"
+                    style={{ background: hexToRgba(ok, 0.18), color: ok }}>✓</div>
+                  <div>
+                    <div className="text-[10px] font-black uppercase tracking-wider" style={{ color: ok }}>TO-BE</div>
+                    <div className="text-sm font-black text-white">AI-SDLC Foursys</div>
+                  </div>
+                </div>
+                <div className="space-y-1.5">
+                  {toBe.map((row, i) => (
+                    <div key={i} className={`flex items-center gap-3 py-1 border-b border-white/[0.04] last:border-0 ${row.highlight ? 'px-2 rounded-lg' : ''}`}
+                      style={row.highlight ? { background: hexToRgba(c, 0.1), border: `1px solid ${hexToRgba(c, 0.25)}` } : undefined}>
+                      <span className={`text-[10px] font-bold w-16 text-right flex-shrink-0`} style={{ color: row.highlight ? c : hexToRgba(ok, 0.9) }}>{row.time}</span>
+                      <span className={`text-[11px] leading-snug ${row.highlight ? 'font-black text-white' : 'text-white/80'}`}>
+                        {row.highlight && <Target size={10} className="inline mr-1" style={{ color: c }} />}
+                        {row.step}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-4 p-2.5 rounded-lg flex items-center gap-2"
+                  style={{ background: hexToRgba(ok, 0.1), border: `1px solid ${hexToRgba(ok, 0.28)}` }}>
+                  <BadgeCheck size={12} style={{ color: ok }} />
+                  <span className="text-[11px] font-bold" style={{ color: ok }}>
+                    {pt ? 'Total: 6 a 10 semanas · governança completa · docs vivas' : 'Total: 6 to 10 weeks · full governance · living docs'}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div className="h-px" style={{ background: `linear-gradient(90deg, transparent, ${hexToRgba(c, 0.2)}, transparent)` }} />
+
+          {/* 3 DOORS */}
+          <section>
+            <div className="flex items-center gap-2 mb-2">
+              <GitBranch size={16} style={{ color: c }} />
+              <h3 className="text-sm font-black text-white uppercase tracking-[0.15em]">
+                {pt ? 'Três Portas de Entrada' : 'Three Entry Paths'}
+              </h3>
+            </div>
+            <p className="text-xs text-foursys-text-muted mb-5 leading-relaxed">
+              {pt ? 'Começando do zero, entendendo um legado ou evoluindo um produto existente — todos plugáveis na sua stack.'
+                  : 'Starting from zero, understanding a legacy or evolving an existing product — all pluggable into your stack.'}
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {doors.map(door => (
+                <div key={door.letter} className="rounded-2xl p-5 flex flex-col"
+                  style={{ background: `linear-gradient(160deg, ${hexToRgba(door.color, 0.08)}, rgba(10,14,22,0.6))`, border: `1px solid ${hexToRgba(door.color, 0.25)}` }}>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-11 h-11 rounded-xl flex items-center justify-center font-black text-lg"
+                      style={{ background: `linear-gradient(135deg, ${hexToRgba(door.color, 0.3)}, ${hexToRgba(door.color, 0.1)})`, border: `1px solid ${hexToRgba(door.color, 0.4)}`, color: door.color }}>
+                      {door.letter}
+                    </div>
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1.5" style={{ color: door.color }}>
+                        {door.icon}
+                        <span className="text-[10px] font-bold uppercase tracking-wider">{pt ? 'Porta' : 'Path'} {door.letter}</span>
+                      </div>
+                      <div className="text-xs font-black text-white leading-tight">{door.title}</div>
+                    </div>
+                  </div>
+
+                  <div className="inline-flex items-center gap-1.5 mb-4 px-2.5 py-1 rounded-full text-[10px] font-bold self-start"
+                    style={{ background: hexToRgba(door.color, 0.1), border: `1px solid ${hexToRgba(door.color, 0.22)}`, color: door.color }}>
+                    <Timer size={10} />
+                    {door.meta}
+                  </div>
+
+                  <div className="flex-1 space-y-1.5">
+                    {door.flow.map((f, i) => (
+                      <div key={i} className={`flex items-center gap-2 py-1.5 px-2.5 rounded-lg ${i === door.highlightIdx ? '' : ''}`}
+                        style={i === door.highlightIdx
+                          ? { background: hexToRgba(c, 0.12), border: `1px solid ${hexToRgba(c, 0.28)}` }
+                          : { background: hexToRgba(door.color, 0.04) }}>
+                        <span className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 text-[9px] font-black"
+                          style={i === door.highlightIdx
+                            ? { background: c, color: '#0B0F17' }
+                            : { background: hexToRgba(door.color, 0.2), color: door.color }}>
+                          {i + 1}
+                        </span>
+                        <span className={`text-[11px] leading-snug ${i === door.highlightIdx ? 'font-bold text-white' : 'text-white/75'}`}>
+                          {f}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <div className="h-px" style={{ background: `linear-gradient(90deg, transparent, ${hexToRgba(c, 0.2)}, transparent)` }} />
+
+          {/* CASES */}
+          <section>
+            <div className="flex items-center gap-2 mb-2">
+              <Sparkles size={16} style={{ color: c }} />
+              <h3 className="text-sm font-black text-white uppercase tracking-[0.15em]">
+                {pt ? 'Cases Reais em < 1 Semana' : 'Real Cases in < 1 Week'}
+              </h3>
+            </div>
+            <p className="text-xs text-foursys-text-muted mb-5 leading-relaxed">
+              {pt ? 'Produtos reais colocados em tela navegável em menos de uma semana — prova concreta do framework em execução.'
+                  : 'Real products put on navigable screens in less than a week — concrete proof of the framework in action.'}
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {cases.map(cs => (
+                <div key={cs.title} className="rounded-2xl overflow-hidden"
+                  style={{ background: 'rgba(10,14,22,0.6)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                  <div className="relative h-20 overflow-hidden"
+                    style={{ background: `linear-gradient(135deg, ${hexToRgba(cs.g1, 0.4)}, ${hexToRgba(cs.g2, 0.25)})` }}>
+                    <div className="absolute inset-0"
+                      style={{ background: `radial-gradient(circle at 30% 50%, ${hexToRgba(cs.g1, 0.35)} 0%, transparent 60%)` }} />
+                    <div className="absolute inset-0 flex items-center justify-between px-5">
+                      <div className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: cs.g1 }}>{cs.sub}</div>
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center"
+                        style={{ background: hexToRgba(cs.g1, 0.2), border: `1px solid ${hexToRgba(cs.g1, 0.35)}`, color: cs.g1 }}>
+                        <Target size={18} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <div className="text-sm font-black text-white leading-tight mb-2">{cs.title}</div>
+                    <p className="text-[11px] text-foursys-text-muted leading-relaxed mb-3">{cs.desc}</p>
+                    <div className="inline-flex items-center gap-1.5 text-[10px] font-bold px-2.5 py-1 rounded-full"
+                      style={{ background: hexToRgba(cs.g1, 0.08), border: `1px solid ${hexToRgba(cs.g1, 0.2)}`, color: cs.g1 }}>
+                      <Blocks size={10} />
+                      {cs.stack}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <div className="h-px" style={{ background: `linear-gradient(90deg, transparent, ${hexToRgba(c, 0.2)}, transparent)` }} />
+
+          {/* ENGAGEMENT MODELS */}
+          <section>
+            <div className="flex items-center gap-2 mb-2">
+              <DollarSign size={16} style={{ color: c }} />
+              <h3 className="text-sm font-black text-white uppercase tracking-[0.15em]">
+                {pt ? '5 Modelos de Engajamento' : '5 Engagement Models'}
+              </h3>
+            </div>
+            <p className="text-xs text-foursys-text-muted mb-5 leading-relaxed">
+              {pt ? 'Do diagnóstico gratuito à parceria estratégica baseada em resultado — escolha o formato que cabe no seu momento.'
+                  : 'From free diagnostic to outcome-based strategic partnership — choose the format that fits your moment.'}
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
+              {engage.map(e => (
+                <div key={e.title} className="rounded-2xl p-4 flex flex-col relative overflow-hidden"
+                  style={{
+                    background: e.featured
+                      ? `linear-gradient(160deg, ${hexToRgba(e.color, 0.14)}, rgba(10,14,22,0.7))`
+                      : `linear-gradient(160deg, ${hexToRgba(e.color, 0.06)}, rgba(10,14,22,0.7))`,
+                    border: `1px solid ${hexToRgba(e.color, e.featured ? 0.35 : 0.18)}`,
+                  }}>
+                  {e.featured && (
+                    <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: `linear-gradient(90deg, transparent, ${e.color}, transparent)` }} />
+                  )}
+                  {e.featured && (
+                    <div className="absolute top-2 right-2 text-[8px] font-black uppercase tracking-[0.15em] px-1.5 py-0.5 rounded-full"
+                      style={{ background: hexToRgba(e.color, 0.18), border: `1px solid ${hexToRgba(e.color, 0.35)}`, color: e.color }}>
+                      {pt ? 'Grátis' : 'Free'}
+                    </div>
+                  )}
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3"
+                    style={{ background: `linear-gradient(135deg, ${hexToRgba(e.color, 0.25)}, ${hexToRgba(e.color, 0.08)})`, border: `1px solid ${hexToRgba(e.color, 0.3)}`, color: e.color }}>
+                    {e.icon}
+                  </div>
+                  <div className="text-sm font-black text-white leading-tight mb-1">{e.title}</div>
+                  <div className="text-[10px] font-bold uppercase tracking-wider mb-2" style={{ color: e.color }}>{e.price}</div>
+                  <p className="text-[11px] text-foursys-text-muted leading-relaxed">{e.desc}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* CTA */}
+          <div className="rounded-3xl p-6 md:p-8 relative overflow-hidden"
+            style={{ background: `linear-gradient(160deg, ${hexToRgba(c, 0.1)} 0%, ${hexToRgba(ORANGE, 0.05)} 100%)`, border: `1px solid ${hexToRgba(c, 0.3)}` }}>
+            <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: `linear-gradient(90deg, transparent, ${c}, ${ORANGE}, transparent)` }} />
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+                style={{ background: `linear-gradient(135deg, ${c}, ${hexToRgba(c, 0.5)})`, boxShadow: `0 0 24px ${hexToRgba(c, 0.5)}`, color: '#0B0F17' }}>
+                <Target size={22} />
+              </div>
+              <div className="min-w-0">
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] mb-1" style={{ color: c }}>
+                  {pt ? 'Próximo Passo' : 'Next Step'}
+                </div>
+                <h3 className="text-lg md:text-xl font-black text-white leading-tight mb-2">
+                  {pt ? 'Vamos colocar seu próximo produto na tela real em menos de uma semana?'
+                      : 'Shall we put your next product on a real screen in less than a week?'}
+                </h3>
+                <p className="text-xs md:text-sm text-foursys-text-muted leading-relaxed">
+                  {pt ? 'Comece pelo Diagnóstico Express gratuito — sem amarra, sem obrigação. Se fizer sentido, avançamos para o Pilot. Se não, você leva o relatório com insights acionáveis.'
+                      : 'Start with the free Express Diagnostic — no strings, no obligation. If it makes sense, we move to Pilot. If not, you leave with a report of actionable insights.'}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-[10px] text-foursys-text-dim text-center italic">
+            {pt ? 'Studio de Inovação Foursys — AI-SDLC Framework™ · 25 anos de mercado' : 'Foursys Innovation Studio — AI-SDLC Framework™ · 25 years in the market'}
+          </p>
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+}
+
 // ─── Market Highlight Modal ──────────────────────────────────────────────────
 
 function MarketModal({ onClose, lang }: { onClose: () => void; lang: string }) {
@@ -1747,7 +2328,12 @@ export function SectionAIFoursys() {
 
       <AnimatePresence>
         {showMarket && <MarketModal onClose={() => setShowMarket(false)} lang={lang} />}
-        {detailService && <ServiceDetailModal item={detailService as DetailableItem} onClose={() => setDetailService(null)} lang={lang} />}
+        {detailService && detailService.title.pt === 'AI Framework' && (
+          <AIFrameworkModal onClose={() => setDetailService(null)} lang={lang} />
+        )}
+        {detailService && detailService.title.pt !== 'AI Framework' && (
+          <ServiceDetailModal item={detailService as DetailableItem} onClose={() => setDetailService(null)} lang={lang} />
+        )}
         {detailHow && detailHow.detail && <ServiceDetailModal item={{ icon: detailHow.icon, title: detailHow.title, color: detailHow.color, detail: detailHow.detail }} onClose={() => setDetailHow(null)} lang={lang} />}
       </AnimatePresence>
     </SectionWrapper>
