@@ -19,7 +19,7 @@ const DIFFERENTIALS_PT = [
   { icon: <Users size={20} />, stat: '3,6%', label: 'Turnover', context: 'vs. 22% da média do mercado' },
   { icon: <Calendar size={20} />, stat: '26', label: 'Anos de entrega', context: 'Fundada em 2000' },
   { icon: <ShieldCheck size={20} />, stat: '6', label: 'Certificações', context: 'ISO 9001 · 27001 · 27701 · 14001 · SAFe · GPTW' },
-  { icon: <Globe size={20} />, stat: '4', label: 'Regiões do Globo', context: 'Brasil · EUA · Europa · Oriente Médio' },
+  { icon: <Globe size={20} />, stat: '3', label: 'Regiões do Globo', context: 'Brasil · EUA · Europa' },
   { icon: <Network size={20} />, stat: '9+', label: 'Alianças estratégicas', context: 'Microsoft · AWS · Google · Adobe' },
   { icon: <TrendingUp size={20} />, stat: '30K+', label: 'Projetos entregues', context: 'Todos os modelos de delivery' },
 ]
@@ -28,7 +28,7 @@ const DIFFERENTIALS_EN = [
   { icon: <Users size={20} />, stat: '3.6%', label: 'Turnover', context: 'vs. 22% market average' },
   { icon: <Calendar size={20} />, stat: '26', label: 'Years of delivery', context: 'Founded in 2000' },
   { icon: <ShieldCheck size={20} />, stat: '6', label: 'Certifications', context: 'ISO 9001 · 27001 · 27701 · 14001 · SAFe · GPTW' },
-  { icon: <Globe size={20} />, stat: '4', label: 'Global Regions', context: 'Brazil · USA · Europe · Middle East' },
+  { icon: <Globe size={20} />, stat: '3', label: 'Global Regions', context: 'Brazil · USA · Europe' },
   { icon: <Network size={20} />, stat: '9+', label: 'Strategic alliances', context: 'Microsoft · AWS · Google · Adobe' },
   { icon: <TrendingUp size={20} />, stat: '30K+', label: 'Projects delivered', context: 'All delivery models' },
 ]
