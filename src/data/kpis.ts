@@ -4,19 +4,19 @@ import type { Language } from '../i18n/types'
 export const heroStats = {
   years: 26,
   projects: '30K+',
-  cities: '8',
+  cities: '7',
   turnover: '3,6%',
   sla: '99,9%',
-  continents: 4,
+  continents: 3,
 }
 
 const heroStatsEn = {
   years: 26,
   projects: '30K+',
-  cities: '8',
+  cities: '7',
   turnover: '3.6%',
   sla: '99.9%',
-  continents: 4,
+  continents: 3,
 }
 
 const kpisPt: KPI[] = [
@@ -39,10 +39,10 @@ const kpisPt: KPI[] = [
     description: 'Incluindo os maiores líderes globais de cada segmento'
   },
   {
-    value: 8,
+    value: 7,
     suffix: '',
     label: 'Cidades com Escritórios',
-    description: 'São Paulo, Barueri, Curitiba, Rio, Boca Raton, Lisboa, Inovabra e Tel Aviv'
+    description: 'São Paulo, Barueri, Curitiba, Rio, Boca Raton, Lisboa e Inovabra'
   },
   {
     value: 3.6,
@@ -78,10 +78,10 @@ const kpisEn: KPI[] = [
     description: 'Including top global leaders in each segment'
   },
   {
-    value: 8,
+    value: 7,
     suffix: '',
     label: 'Office Locations',
-    description: 'São Paulo, Barueri, Curitiba, Rio, Boca Raton, Lisbon, Inovabra and Tel Aviv'
+    description: 'São Paulo, Barueri, Curitiba, Rio, Boca Raton, Lisbon and Inovabra'
   },
   {
     value: 3.6,
@@ -151,10 +151,10 @@ const timelinePt: TimelineItem[] = [
   {
     year: '2023',
     title: 'Presença na Europa — Lisboa',
-    description: 'Abertura do escritório em Lisboa, Portugal, consolidando a presença da Foursys em 4 regiões do globo e ampliando o alcance para o mercado europeu.',
+    description: 'Abertura do escritório em Lisboa, Portugal, consolidando a presença da Foursys em 3 regiões do globo e ampliando o alcance para o mercado europeu.',
     icon: 'globe',
     era: 'Expansão Global',
-    kpi: { value: '4', label: 'regiões do globo' },
+    kpi: { value: '3', label: 'regiões do globo' },
   },
   {
     year: '2024',
@@ -230,10 +230,10 @@ const timelineEn: TimelineItem[] = [
   {
     year: '2023',
     title: 'European presence — Lisbon',
-    description: 'Opening of the Lisbon, Portugal office, consolidating Foursys presence across 4 global regions and expanding reach to the European market.',
+    description: 'Opening of the Lisbon, Portugal office, consolidating Foursys presence across 3 global regions and expanding reach to the European market.',
     icon: 'globe',
     era: 'Global Expansion',
-    kpi: { value: '4', label: 'global regions' },
+    kpi: { value: '3', label: 'global regions' },
   },
   {
     year: '2024',

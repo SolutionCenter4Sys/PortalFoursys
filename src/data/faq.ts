@@ -22,7 +22,7 @@ const faqItemsPt: FAQItem[] = [
     id: 'faq-3',
     category: 'Institucional',
     question: 'A Foursys é uma empresa nacional ou tem presença global?',
-    answer: 'Temos presença global com escritórios em 8 cidades: Barueri (sede), São Paulo (Paulista e Inovabra Habitat), Curitiba, Rio de Janeiro, Lisboa (Portugal), Boca Raton (EUA) e Tel Aviv (Israel). Atuamos em 4 regiões do globo com capacidade de delivery remoto e presencial.',
+    answer: 'Temos presença global com escritórios em 7 cidades: Barueri (sede), São Paulo (Paulista e Inovabra Habitat), Curitiba, Rio de Janeiro, Lisboa (Portugal) e Boca Raton (EUA). Atuamos em 3 regiões do globo com capacidade de delivery remoto e presencial.',
     sectionLink: 'global',
     sectionLabel: 'Ver Presença Global'
   },
@@ -145,7 +145,7 @@ const faqItemsEn: FAQItem[] = [
     id: 'faq-3',
     category: 'About Us',
     question: 'Is Foursys a domestic company or does it have a global presence?',
-    answer: 'We have a global presence with offices in 8 cities: Barueri (headquarters), São Paulo (Paulista and Inovabra Habitat), Curitiba, Rio de Janeiro, Lisbon (Portugal), Boca Raton (USA), and Tel Aviv (Israel). We operate across 4 global regions with both remote and on-site delivery capabilities.',
+    answer: 'We have a global presence with offices in 7 cities: Barueri (headquarters), São Paulo (Paulista and Inovabra Habitat), Curitiba, Rio de Janeiro, Lisbon (Portugal), and Boca Raton (USA). We operate across 3 global regions with both remote and on-site delivery capabilities.',
     sectionLink: 'global',
     sectionLabel: 'See Global Presence'
   },
