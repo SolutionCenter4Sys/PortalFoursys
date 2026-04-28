@@ -101,6 +101,9 @@ export function SectionTestimonials() {
               key={s}
               type="button"
               onClick={() => setActiveSector(s)}
+              data-voz-filtro="setor"
+              data-voz-filtro-valor={s}
+              aria-label={s === 'Todos' ? t('testimonials.filterAll') : s}
               className={`px-4 py-2 rounded-full text-xs font-semibold border transition-all duration-200 ${
                 activeSector === s
                   ? 'bg-foursys-primary/20 border-foursys-primary/40 text-foursys-primary'

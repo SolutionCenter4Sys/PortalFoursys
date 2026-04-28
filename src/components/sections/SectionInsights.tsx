@@ -241,6 +241,10 @@ export function SectionInsights() {
           <button
             type="button"
             onClick={() => setActiveCategory(null)}
+            data-voz-filtro="categoria"
+            data-voz-filtro-valor="Todos"
+            data-voz-filtro-limpa="true"
+            aria-label={t('common.allFilter')}
             className={`px-4 py-2 rounded-full text-xs font-semibold border transition-all duration-200 ${
               activeCategory === null
                 ? 'bg-foursys-primary/20 border-foursys-primary/40 text-foursys-primary'
@@ -254,6 +258,9 @@ export function SectionInsights() {
               key={cat}
               type="button"
               onClick={() => setActiveCategory(cat)}
+              data-voz-filtro="categoria"
+              data-voz-filtro-valor={cat}
+              aria-label={cat}
               className={`px-4 py-2 rounded-full text-xs font-semibold border transition-all duration-200 ${
                 activeCategory === cat
                   ? 'bg-foursys-primary/20 border-foursys-primary/40 text-foursys-primary'

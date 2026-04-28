@@ -16,6 +16,15 @@ const levelWidth = {
   solid: 'w-3/5'
 }
 
+function slugify(s: string): string {
+  return s
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
 export function SectionCapabilities() {
   const { t, lang } = useLanguage()
   const capabilities = useMemo(() => getCapabilities(lang), [lang])
@@ -56,7 +65,11 @@ export function SectionCapabilities() {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="p-6 rounded-2xl bg-foursys-surface/50 border border-white/10 hover:border-foursys-primary/25 transition-all duration-300"
+              data-voz-caixa={`capabilities-${slugify(area.category)}`}
+              data-voz-caixa-secao="capabilities"
+              data-voz-caixa-rotulo={area.category}
+              tabIndex={-1}
+              className="p-6 rounded-2xl bg-foursys-surface/50 border border-white/10 hover:border-foursys-primary/25 transition-all duration-300 focus:outline-none"
             >
               <h3 className="font-bold text-foursys-text mb-4 text-sm uppercase tracking-wide">{area.category}</h3>
 

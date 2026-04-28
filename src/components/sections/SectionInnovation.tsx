@@ -40,6 +40,9 @@ function TrendCard({ trend, index, onClick }: { trend: InnovationTrend; index: n
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.15 + index * 0.1, duration: 0.5, type: 'spring', stiffness: 120 }}
+      data-voz-detalhe={`innovation-${trend.id}`}
+      data-voz-detalhe-secao="innovation"
+      data-voz-detalhe-rotulo={trend.title}
       className="group relative w-full text-left rounded-3xl overflow-hidden cursor-pointer"
       style={{ minHeight: 280 }}
     >
@@ -215,6 +218,7 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
               type="button"
               onClick={onClose}
               aria-label={t('common.close')}
+              data-voz-fechar-detalhe="true"
               className="p-2.5 rounded-xl bg-white/[0.06] border border-white/[0.1] hover:bg-white/[0.12] transition-colors"
             >
               <X size={18} className="text-white/70" />
@@ -403,7 +407,13 @@ export function SectionInnovation() {
         </motion.div>
 
         {/* Trends grid */}
-        <div className="grid grid-cols-1 tablet:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 mb-12">
+        <div
+          data-voz-caixa="innovation-trends"
+          data-voz-caixa-secao="innovation"
+          data-voz-caixa-rotulo={t('innovation.title')}
+          tabIndex={-1}
+          className="grid grid-cols-1 tablet:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 mb-12 focus:outline-none"
+        >
           {trends.map((trend, i) => (
             <TrendCard key={trend.id} trend={trend} index={i} onClick={() => setActiveTrend(trend)} />
           ))}

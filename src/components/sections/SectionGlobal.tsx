@@ -344,6 +344,10 @@ export function SectionGlobal() {
                   key={region.id}
                   type="button"
                   onClick={() => setActiveRegionId(region.id)}
+                  data-voz-filtro="regiao"
+                  data-voz-filtro-valor={region.region}
+                  data-voz-filtro-sinonimos={region.id}
+                  aria-label={region.region}
                   className={`inline-flex items-center gap-1.5 whitespace-nowrap px-3 py-1.5 h-7 rounded-full text-xs border transition-colors ${
                     activeRegion.id === region.id ? 'text-white' : 'text-foursys-text-dim'
                   }`}

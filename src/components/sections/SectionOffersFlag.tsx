@@ -326,6 +326,7 @@ function OfferModal({
           <button
             onClick={onClose}
             aria-label={t('common.close')}
+            data-voz-fechar-detalhe="true"
             className="absolute top-4 right-4 p-2 rounded-xl hover:bg-white/10 text-foursys-text-muted transition-colors"
           >
             <X size={16} />
@@ -399,6 +400,9 @@ function OfferCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.07, duration: 0.4 }}
       onClick={onClick}
+      data-voz-detalhe={`offers-${offer.id}`}
+      data-voz-detalhe-secao="offers-flagship"
+      data-voz-detalhe-rotulo={offer.title}
       className={`p-6 rounded-2xl bg-gradient-to-br ${offer.bg} border ${offer.border} cursor-pointer hover:-translate-y-1 transition-all duration-300 flex flex-col group`}
     >
       {/* Badge */}
@@ -494,7 +498,13 @@ export function SectionOffersFlag() {
         </motion.div>
 
         {/* ── Grid de ofertas: 1 col mobile, 2 tablet, 5 desktop ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4 mb-6 md:mb-10">
+        <div
+          data-voz-caixa="offers-grid"
+          data-voz-caixa-secao="offers-flagship"
+          data-voz-caixa-rotulo={t('offersFlag.title')}
+          tabIndex={-1}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4 mb-6 md:mb-10 focus:outline-none"
+        >
           {flagshipOffers.map((offer, i) => (
             <OfferCard
               key={offer.id}

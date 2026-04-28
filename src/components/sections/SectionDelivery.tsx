@@ -36,6 +36,10 @@ export function SectionDelivery() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.12 }}
+              data-voz-caixa={`delivery-${model.id}`}
+              data-voz-caixa-secao="delivery"
+              data-voz-caixa-rotulo={model.title}
+              tabIndex={-1}
               className={`
                 p-7 rounded-2xl border backdrop-blur-md transition-all duration-300
                 ${model.highlight

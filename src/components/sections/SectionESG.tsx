@@ -153,6 +153,9 @@ function VideoCard({
       role="button"
       tabIndex={0}
       aria-label={`${lang === 'pt' ? 'Assistir' : 'Watch'}: ${video.title}`}
+      data-voz-detalhe={`esg-video-${video.id}`}
+      data-voz-detalhe-secao="esg"
+      data-voz-detalhe-rotulo={video.title}
       onClick={() => onPlay(video.id)}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onPlay(video.id) } }}
     >
@@ -350,6 +353,7 @@ function VideoPlayerModal({
           </div>
           <button
             onClick={onClose}
+            data-voz-fechar-detalhe="true"
             className="w-10 h-10 rounded-full bg-white/[0.08] hover:bg-white/[0.15] active:scale-95 flex items-center justify-center transition-all min-h-[44px] min-w-[44px]"
             aria-label={t('common.close')}
           >
@@ -443,14 +447,24 @@ export function SectionESG() {
         </motion.div>
 
         {/* ── 3 Frentes de impacto ── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-8 md:mb-10">
+        <div
+          data-voz-caixa="esg-frentes"
+          data-voz-caixa-secao="esg"
+          data-voz-caixa-rotulo={t('esg.title')}
+          tabIndex={-1}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-8 md:mb-10 focus:outline-none"
+        >
           {fronts.map((front, i) => (
             <motion.div
               key={front.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 + i * 0.1, duration: 0.4 }}
-              className={`p-6 rounded-2xl bg-gradient-to-br ${front.bg} border ${front.border} flex flex-col`}
+              data-voz-caixa={`esg-${front.id}`}
+              data-voz-caixa-secao="esg"
+              data-voz-caixa-rotulo={front.title}
+              tabIndex={-1}
+              className={`p-6 rounded-2xl bg-gradient-to-br ${front.bg} border ${front.border} flex flex-col focus:outline-none`}
             >
               <div className="mb-3"><DynIcon name={front.icon} size={28} className="text-white/80" /></div>
               <h3 className="text-lg font-black text-white mb-3">{front.title}</h3>
@@ -486,7 +500,13 @@ export function SectionESG() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+          <div
+            data-voz-caixa="esg-videos"
+            data-voz-caixa-secao="esg"
+            data-voz-caixa-rotulo={mediaLabels.title}
+            tabIndex={-1}
+            className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 focus:outline-none"
+          >
             {videos.map((video, i) => (
               <VideoCard
                 key={video.id}

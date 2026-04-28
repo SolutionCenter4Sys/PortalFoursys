@@ -97,6 +97,9 @@ function OrbitRing({
             tabIndex={isActive ? 0 : -1}
             onClick={() => onSelect(service.id)}
             onKeyDown={e => onKeyNav(e, service.id)}
+            data-voz-filtro="linha-servico"
+            data-voz-filtro-valor={service.id}
+            data-voz-filtro-sinonimos={service.title}
             className="absolute -translate-x-1/2 -translate-y-1/2 focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-primary rounded-full z-10"
             style={{ top: `${y}%`, left: `${x}%` }}
           >
@@ -184,6 +187,9 @@ function ServiceDetailPanel({
         <button
           type="button"
           onClick={() => onOfferDetail(service.id)}
+          data-voz-detalhe={`services-${service.id}`}
+          data-voz-detalhe-secao="services"
+          data-voz-detalhe-rotulo={service.title}
           className="mt-4 flex items-center gap-2 text-sm font-semibold text-foursys-primary hover:text-foursys-cyan transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-primary rounded"
         >
           {t('services.offerDetails')} <ArrowRight size={16} />
@@ -250,6 +256,7 @@ function MobileBottomSheet({
         <button
           type="button"
           onClick={onClose}
+          data-voz-fechar-detalhe="true"
           className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-primary"
           aria-label={t('common.close')}
         >
@@ -317,6 +324,7 @@ function OfferDetailModal({
         <button
           type="button"
           onClick={onClose}
+          data-voz-fechar-detalhe="true"
           className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-primary z-10"
           aria-label={t('common.close')}
         >
@@ -2359,6 +2367,7 @@ function DeepDiveModal({
         <button
           type="button"
           onClick={onClose}
+          data-voz-fechar-detalhe="true"
           className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-primary z-10"
           aria-label={t('common.close')}
         >
@@ -2539,7 +2548,13 @@ export function SectionServices() {
         </motion.div>
 
         {/* Desktop/Tablet: orbit + side panel */}
-        <div className="hidden md:grid md:grid-cols-[1.1fr_0.9fr] lg:grid-cols-[1.15fr_0.85fr] gap-4 lg:gap-6 items-center mb-6">
+        <div
+          data-voz-caixa="services-orbita"
+          data-voz-caixa-secao="services"
+          data-voz-caixa-rotulo={lang === 'pt' ? 'Linhas de Serviço' : 'Service Lines'}
+          tabIndex={-1}
+          className="hidden md:grid md:grid-cols-[1.1fr_0.9fr] lg:grid-cols-[1.15fr_0.85fr] gap-4 lg:gap-6 items-center mb-6 focus:outline-none"
+        >
           <motion.div
             ref={orbitRef}
             initial={{ opacity: 0, scale: 0.96 }}
@@ -2588,6 +2603,9 @@ export function SectionServices() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.03 * index }}
                 onClick={() => setMobileSheetId(service.id)}
+                data-voz-detalhe={`services-mobile-${service.id}`}
+                data-voz-detalhe-secao="services"
+                data-voz-detalhe-rotulo={service.title}
                 className="text-left rounded-xl border border-white/[0.08] bg-foursys-surface/25 p-3 transition-all duration-200 active:scale-[0.97]"
               >
                 <div className="flex items-center gap-2">

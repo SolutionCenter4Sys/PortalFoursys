@@ -76,7 +76,13 @@ export function SectionIdentity() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8 md:mb-12">
+        <div
+          data-voz-caixa="identity-kpis"
+          data-voz-caixa-secao="identity"
+          data-voz-caixa-rotulo="KPIs"
+          tabIndex={-1}
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8 md:mb-12 focus:outline-none"
+        >
           {kpis.map((kpi, i) => (
             <KPICard key={kpi.label} kpi={kpi} delay={i * 0.1} />
           ))}
@@ -86,18 +92,21 @@ export function SectionIdentity() {
         <div className="grid md:grid-cols-3 gap-6">
           {[
             {
+              id: 'missao',
               title: t('identity.mission.title'),
               icon: 'target',
               content: t('identity.mission.content'),
               gradient: 'from-foursys-primary/20 to-transparent'
             },
             {
+              id: 'visao',
               title: t('identity.vision.title'),
               icon: 'telescope',
               content: t('identity.vision.content'),
               gradient: 'from-foursys-cyan/15 to-transparent'
             },
             {
+              id: 'proposito',
               title: t('identity.purpose.title'),
               icon: 'lightbulb',
               content: t('identity.purpose.content'),
@@ -109,7 +118,11 @@ export function SectionIdentity() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 + i * 0.1 }}
-              className={`p-6 rounded-2xl bg-gradient-to-b ${item.gradient} border border-white/10 backdrop-blur-md`}
+              data-voz-caixa={`identity-${item.id}`}
+              data-voz-caixa-secao="identity"
+              data-voz-caixa-rotulo={item.title}
+              tabIndex={-1}
+              className={`p-6 rounded-2xl bg-gradient-to-b ${item.gradient} border border-white/10 backdrop-blur-md focus:outline-none`}
             >
               <div className="mb-3">
                 <DynIcon name={item.icon} size={28} className="text-white/80" />

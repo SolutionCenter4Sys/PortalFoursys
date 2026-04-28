@@ -38,7 +38,13 @@ export function SectionAlliances() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10">
+        <div
+          data-voz-caixa="alliances-parceiros-grid"
+          data-voz-caixa-secao="alliances"
+          data-voz-caixa-rotulo={t('alliances.title')}
+          tabIndex={-1}
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10 focus:outline-none"
+        >
           {partnerCards.map((partner, i) => (
             <motion.div
               key={partner.id}
@@ -56,7 +62,13 @@ export function SectionAlliances() {
           ))}
         </div>
 
-        <div className="space-y-3">
+        <div
+          data-voz-caixa="alliances-lista-detalhada"
+          data-voz-caixa-secao="alliances"
+          data-voz-caixa-rotulo={t('alliances.title')}
+          tabIndex={-1}
+          className="space-y-3 focus:outline-none"
+        >
           {alliances.map((alliance, i) => (
             <motion.div
               key={alliance.id}

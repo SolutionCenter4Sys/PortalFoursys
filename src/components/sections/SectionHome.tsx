@@ -245,7 +245,11 @@ export function SectionHome() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col justify-center px-5 md:px-8 py-4 md:py-5 gap-3 md:gap-5 order-2 lg:order-1 border-t lg:border-t-0 lg:border-r border-white/[0.06]"
+            data-voz-caixa="home-kpis"
+            data-voz-caixa-secao="home"
+            data-voz-caixa-rotulo={t('home.foundedIn')}
+            tabIndex={-1}
+            className="flex flex-col justify-center px-5 md:px-8 py-4 md:py-5 gap-3 md:gap-5 order-2 lg:order-1 border-t lg:border-t-0 lg:border-r border-white/[0.06] focus:outline-none"
           >
             <div>
               <span className="text-xs font-bold tracking-[0.18em] uppercase text-foursys-primary">
@@ -278,7 +282,11 @@ export function SectionHome() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col justify-center px-5 md:px-8 py-4 md:py-5 gap-2 md:gap-3 order-3 border-t lg:border-t-0 lg:border-l border-white/[0.06]"
+            data-voz-caixa="home-ofertas"
+            data-voz-caixa-secao="home"
+            data-voz-caixa-rotulo={t('home.mainOffers')}
+            tabIndex={-1}
+            className="flex flex-col justify-center px-5 md:px-8 py-4 md:py-5 gap-2 md:gap-3 order-3 border-t lg:border-t-0 lg:border-l border-white/[0.06] focus:outline-none"
           >
             <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-foursys-primary mb-1">
               {t('home.mainOffers')}
@@ -308,7 +316,13 @@ export function SectionHome() {
           className="grid grid-cols-1 sm:grid-cols-3 border-t border-white/[0.08]"
         >
           {/* Estrutura de entrega */}
-          <div className="px-5 md:px-8 py-3 md:py-4 border-b sm:border-b-0 sm:border-r border-white/[0.06]">
+          <div
+            data-voz-caixa="home-modelos-entrega"
+            data-voz-caixa-secao="home"
+            data-voz-caixa-rotulo={t('home.deliveryModels')}
+            tabIndex={-1}
+            className="px-5 md:px-8 py-3 md:py-4 border-b sm:border-b-0 sm:border-r border-white/[0.06] focus:outline-none"
+          >
             <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-2">
               {t('home.deliveryModels')}
             </div>
@@ -318,7 +332,13 @@ export function SectionHome() {
           </div>
 
           {/* Certificações */}
-          <div className="px-5 md:px-8 py-3 md:py-4 border-b sm:border-b-0 sm:border-r border-white/[0.06]">
+          <div
+            data-voz-caixa="home-certificacoes"
+            data-voz-caixa-secao="home"
+            data-voz-caixa-rotulo={t('home.certifications')}
+            tabIndex={-1}
+            className="px-5 md:px-8 py-3 md:py-4 border-b sm:border-b-0 sm:border-r border-white/[0.06] focus:outline-none"
+          >
             <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-2">
               {t('home.certifications')}
             </div>
@@ -330,7 +350,13 @@ export function SectionHome() {
           </div>
 
           {/* Alianças */}
-          <div className="px-5 md:px-8 py-3 md:py-4">
+          <div
+            data-voz-caixa="home-aliancas"
+            data-voz-caixa-secao="home"
+            data-voz-caixa-rotulo={t('home.strategicAlliances')}
+            tabIndex={-1}
+            className="px-5 md:px-8 py-3 md:py-4 focus:outline-none"
+          >
             <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-2">
               {t('home.strategicAlliances')}
             </div>

@@ -4,6 +4,7 @@ import { useTheme } from '../../context/ThemeContext'
 import { useLanguage } from '../../i18n'
 import { getTrailById } from '../../data/trails'
 import { getClientById } from '../../data/clients'
+import { VoiceMicButton } from '../../voice/VoiceMicButton'
 import type { AppSection } from '../../types'
 
 export function TopBar() {
@@ -164,6 +165,9 @@ export function TopBar() {
       >
         <Search size={15} />
       </button>
+
+      {/* Comando de voz "Touchless" */}
+      <VoiceMicButton />
 
       {/* Analytics — visível em todos os tamanhos */}
       <button

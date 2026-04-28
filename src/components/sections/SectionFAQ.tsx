@@ -118,6 +118,10 @@ export function SectionFAQ() {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
+              data-voz-filtro="categoria"
+              data-voz-filtro-valor={cat}
+              data-voz-filtro-sinonimos={categoryLabels[cat] || cat}
+              aria-label={categoryLabels[cat] || cat}
               className={`px-3 py-1.5 rounded-lg text-xs transition-all ${
                 activeCategory === cat
                   ? 'bg-foursys-primary/30 border border-foursys-primary/50 text-foursys-cyan'

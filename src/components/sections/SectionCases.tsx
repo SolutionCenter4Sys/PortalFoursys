@@ -518,6 +518,9 @@ export function SectionCases() {
                 key={s}
                 type="button"
                 onClick={() => setFilter(s)}
+                data-voz-filtro="setor"
+                data-voz-filtro-valor={s}
+                aria-label={s === 'Todos' ? t('common.allFilter') : s}
                 className={`px-4 py-2 rounded-full text-xs font-semibold border transition-all duration-200 ${
                   filter === s
                     ? 'bg-foursys-primary/20 border-foursys-primary/40 text-foursys-primary'
@@ -534,6 +537,9 @@ export function SectionCases() {
                 key={tp}
                 type="button"
                 onClick={() => setTypeFilter(tp)}
+                data-voz-filtro="tipo"
+                data-voz-filtro-valor={tp}
+                aria-label={tp === 'Todos' ? t('common.allFilter') : tp}
                 className={`px-3 py-1.5 rounded-full text-[10px] font-semibold border transition-all duration-200 ${
                   typeFilter === tp
                     ? 'bg-white/10 border-white/25 text-white'

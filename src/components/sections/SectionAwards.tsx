@@ -39,14 +39,24 @@ export function SectionAwards() {
         </motion.div>
 
         {/* Awards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mb-10">
+        <div
+          data-voz-caixa="awards-grid"
+          data-voz-caixa-secao="awards"
+          data-voz-caixa-rotulo={t('awards.title')}
+          tabIndex={-1}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mb-10 focus:outline-none"
+        >
           {awards.map((award, i) => (
             <motion.div
               key={award.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.08 * i, duration: 0.4 }}
-              className="group relative rounded-2xl border border-white/[0.08] p-5 md:p-6 transition-all duration-300 hover:border-white/[0.15]"
+              data-voz-caixa={`awards-${award.id}`}
+              data-voz-caixa-secao="awards"
+              data-voz-caixa-rotulo={award.title}
+              tabIndex={-1}
+              className="group relative rounded-2xl border border-white/[0.08] p-5 md:p-6 transition-all duration-300 hover:border-white/[0.15] focus:outline-none"
               style={{
                 background: `linear-gradient(145deg, ${award.glow}08 0%, transparent 55%), rgba(255,255,255,0.015)`,
               }}

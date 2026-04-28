@@ -81,6 +81,16 @@ interface DetailableItem {
   detail: { tagline: { pt: string; en: string }; sections: DetailSection[] }
 }
 
+/** Slug determinístico a partir do título PT — usado para `data-voz-detalhe`. */
+function slugifyAI(s: string): string {
+  return s
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
 const RESULTS: ResultItem[] = [
   {
     icon: <Users size={20} />,
@@ -1249,6 +1259,9 @@ function ServiceCard({ item, index, lang, onShowDetail }: { item: ServiceItem; i
             <button
               type="button"
               onClick={e => { e.stopPropagation(); onShowDetail(item) }}
+              data-voz-detalhe={`ai-${slugifyAI(item.title.pt)}`}
+              data-voz-detalhe-secao="ai-foursys"
+              data-voz-detalhe-rotulo={item.title[lang as 'pt' | 'en']}
               className="flex items-center gap-1.5 text-xs font-bold transition-colors duration-200 hover:text-white"
               style={{ color: hexToRgba(item.color, 0.7) }}
             >
@@ -1421,6 +1434,9 @@ function HowCard({ item, index, lang, onShowDetail }: { item: HowItem; index: nu
               <button
                 type="button"
                 onClick={e => { e.stopPropagation(); onShowDetail(item) }}
+                data-voz-detalhe={`ai-how-${slugifyAI(item.title.pt)}`}
+                data-voz-detalhe-secao="ai-foursys"
+                data-voz-detalhe-rotulo={item.title[lang as 'pt' | 'en']}
                 className="flex items-center gap-1.5 text-xs font-bold transition-colors duration-200 hover:text-white"
                 style={{ color: hexToRgba(item.color, 0.7) }}
               >
@@ -1643,7 +1659,7 @@ function ServiceDetailModal({ item, onClose, lang }: { item: DetailableItem; onC
       >
         <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: `linear-gradient(90deg, transparent, ${c}, transparent)` }} />
         <div className="absolute top-6 right-6 z-20">
-          <button type="button" onClick={onClose} aria-label="Close" className="p-2.5 rounded-xl bg-white/[0.06] border border-white/[0.1] hover:bg-white/[0.12] transition-colors">
+          <button type="button" onClick={onClose} aria-label="Close" data-voz-fechar-detalhe="true" className="p-2.5 rounded-xl bg-white/[0.06] border border-white/[0.1] hover:bg-white/[0.12] transition-colors">
             <X size={18} className="text-white/70" />
           </button>
         </div>
@@ -1870,6 +1886,7 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
             type="button"
             onClick={onClose}
             aria-label="Close"
+            data-voz-fechar-detalhe="true"
             className="min-w-[44px] min-h-[44px] p-2.5 rounded-xl bg-white/[0.08] border border-white/[0.12] hover:bg-white/[0.14] active:bg-white/[0.2] transition-colors flex items-center justify-center"
             style={{ WebkitTapHighlightColor: 'transparent' }}
           >
@@ -2357,6 +2374,7 @@ function MarketModal({ onClose, lang }: { onClose: () => void; lang: string }) {
             type="button"
             onClick={onClose}
             aria-label="Close"
+            data-voz-fechar-detalhe="true"
             className="p-2.5 rounded-xl bg-white/[0.06] border border-white/[0.1] hover:bg-white/[0.12] transition-colors"
           >
             <X size={18} className="text-white/70" />
@@ -2482,7 +2500,11 @@ export function SectionAIFoursys() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="mb-14"
+          data-voz-caixa="ai-resultados"
+          data-voz-caixa-secao="ai-foursys"
+          data-voz-caixa-rotulo={pt ? 'Resultados Comprovados' : 'Proven Results'}
+          tabIndex={-1}
+          className="mb-14 focus:outline-none"
         >
           <div className="flex items-center gap-3 mb-6">
             <Sparkles size={18} className="text-foursys-primary" />
@@ -2500,7 +2522,11 @@ export function SectionAIFoursys() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="mb-14"
+          data-voz-caixa="ai-servicos"
+          data-voz-caixa-secao="ai-foursys"
+          data-voz-caixa-rotulo={pt ? 'Nossos Serviços' : 'Our Services'}
+          tabIndex={-1}
+          className="mb-14 focus:outline-none"
         >
           <div className="flex items-center gap-3 mb-6">
             <Blocks size={18} className="text-foursys-primary" />
@@ -2518,7 +2544,11 @@ export function SectionAIFoursys() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="mb-12"
+          data-voz-caixa="ai-como"
+          data-voz-caixa-secao="ai-foursys"
+          data-voz-caixa-rotulo={pt ? 'Como Fazemos' : 'How We Deliver'}
+          tabIndex={-1}
+          className="mb-12 focus:outline-none"
         >
           <div className="flex items-center gap-3 mb-6">
             <FlaskConical size={18} className="text-foursys-primary" />
@@ -2553,6 +2583,9 @@ export function SectionAIFoursys() {
           <button
             type="button"
             onClick={() => setShowMarket(true)}
+            data-voz-detalhe="ai-mercado"
+            data-voz-detalhe-secao="ai-foursys"
+            data-voz-detalhe-rotulo={pt ? 'Dados de mercado de IA' : 'AI market data'}
             className="inline-flex items-center gap-2 text-xs font-bold text-foursys-primary hover:text-white transition-colors duration-300 cursor-pointer"
           >
             <TrendingUp size={14} />

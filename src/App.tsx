@@ -17,16 +17,46 @@ import { useSessionPersistence } from './hooks/useSessionPersistence'
 import { SectionOverview } from './components/navigation/SectionOverview'
 import { ExportPdfModal } from './components/export/ExportPdfModal'
 import { OnboardingTour } from './components/ui/OnboardingTour'
+import { VoiceProvider, useVoice } from './voice/VoiceProvider'
+import { VoiceHelpDialog } from './voice/VoiceHelpDialog'
+import { VoiceLiveIndicator } from './voice/VoiceLiveIndicator'
 import type { AppSection } from './types'
 
 function AppInner() {
   const { state, toggleFullscreen, toggleMenu, navigate, activeNavigationItems, toggleOverview } = useApp()
   const { isDark } = useTheme()
   const { t } = useLanguage()
+  const voice = useVoice()
   const mainRef = useRef<HTMLDivElement>(null)
   useKeyboard()
   useUrlSync()
   useSessionPersistence()
+
+  // Atalhos de voz: "V" inicia/para escuta · "?" abre/fecha ajuda.
+  useEffect(() => {
+    function isTypingTarget(target: EventTarget | null): boolean {
+      const el = target as HTMLElement | null
+      if (!el) return false
+      const tag = el.tagName?.toLowerCase()
+      if (tag === 'input' || tag === 'textarea' || tag === 'select') return true
+      if ((el as HTMLElement).isContentEditable) return true
+      return false
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.ctrlKey || e.metaKey || e.altKey) return
+      if (isTypingTarget(e.target)) return
+      if (e.key === 'v' || e.key === 'V') {
+        e.preventDefault()
+        voice.toggle()
+      } else if (e.key === '?') {
+        e.preventDefault()
+        if (voice.ajudaAberta) voice.fecharAjuda()
+        else voice.abrirAjuda()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [voice])
 
   // Swipe hint — aparece uma única vez na primeira visita em mobile
   const [showSwipeHint, setShowSwipeHint] = useState(() => {
@@ -139,6 +169,8 @@ function AppInner() {
       <SectionOverview isOpen={state.isOverviewOpen} onClose={toggleOverview} />
       <ExportPdfModal />
       <OnboardingTour />
+      <VoiceHelpDialog />
+      <VoiceLiveIndicator />
     </div>
   )
 }
@@ -148,7 +180,9 @@ function App() {
     <LanguageProvider>
       <ThemeProvider>
         <AppProvider>
-          <AppInner />
+          <VoiceProvider>
+            <AppInner />
+          </VoiceProvider>
         </AppProvider>
       </ThemeProvider>
     </LanguageProvider>

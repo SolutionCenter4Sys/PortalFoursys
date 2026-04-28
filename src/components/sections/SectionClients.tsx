@@ -178,6 +178,10 @@ export function SectionClients() {
           <button
             type="button"
             onClick={() => setActiveSector(null)}
+            data-voz-filtro="setor"
+            data-voz-filtro-valor="Todos"
+            data-voz-filtro-limpa="true"
+            aria-label={t('clients.filterAll')}
             className={`px-4 py-2 rounded-full text-xs font-bold border transition-all duration-300 ${
               activeSector === null
                 ? 'bg-foursys-primary/20 border-foursys-primary/50 text-foursys-primary shadow-[0_0_12px_rgba(255,102,0,0.2)]'
@@ -191,6 +195,9 @@ export function SectionClients() {
               key={sector}
               type="button"
               onClick={() => setActiveSector(sector)}
+              data-voz-filtro="setor"
+              data-voz-filtro-valor={sector}
+              aria-label={sector}
               className={`px-4 py-2 rounded-full text-xs font-bold border transition-all duration-300 ${
                 activeSector === sector
                   ? 'bg-foursys-primary/20 border-foursys-primary/50 text-foursys-primary shadow-[0_0_12px_rgba(255,102,0,0.2)]'

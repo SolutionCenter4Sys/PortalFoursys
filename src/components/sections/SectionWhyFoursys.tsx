@@ -392,7 +392,11 @@ export function SectionWhyFoursys() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15, duration: 0.4 }}
-          className="grid grid-cols-3 md:grid-cols-6 gap-3 mb-10"
+          data-voz-caixa="why-kpis"
+          data-voz-caixa-secao="why-foursys"
+          data-voz-caixa-rotulo={uiLabels.tableTitle ?? 'KPIs'}
+          tabIndex={-1}
+          className="grid grid-cols-3 md:grid-cols-6 gap-3 mb-10 focus:outline-none"
         >
           {differentials.map((d, i) => (
             <motion.div
@@ -423,7 +427,13 @@ export function SectionWhyFoursys() {
             {t('whyFoursys.title')}
           </h3>
 
-          <div className="grid md:grid-cols-2 gap-4 md:gap-5">
+          <div
+            data-voz-caixa="why-vantagens"
+            data-voz-caixa-secao="why-foursys"
+            data-voz-caixa-rotulo={t('whyFoursys.advantage')}
+            tabIndex={-1}
+            className="grid md:grid-cols-2 gap-4 md:gap-5 focus:outline-none"
+          >
             {advantages.map((adv, i) => (
               <motion.div
                 key={adv.title}
@@ -481,6 +491,9 @@ export function SectionWhyFoursys() {
         >
           <button
             onClick={() => setShowComparison(prev => !prev)}
+            data-voz-detalhe="why-comparativo"
+            data-voz-detalhe-secao="why-foursys"
+            data-voz-detalhe-rotulo={uiLabels.tableTitle}
             className="w-full flex items-center justify-between gap-3 p-4 rounded-xl border border-white/[0.08] bg-foursys-surface/30 hover:border-foursys-primary/25 transition-all duration-300 group"
           >
             <div className="flex items-center gap-2.5">

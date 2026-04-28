@@ -78,6 +78,10 @@ export function SectionTimeline() {
         >
           <button
             onClick={() => setActiveEra(null)}
+            data-voz-filtro="era"
+            data-voz-filtro-valor="Todos"
+            data-voz-filtro-limpa="true"
+            aria-label={t('common.all')}
             className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 border ${
               !activeEra
                 ? 'bg-foursys-primary/20 border-foursys-primary/40 text-foursys-primary'
@@ -93,6 +97,9 @@ export function SectionTimeline() {
               <button
                 key={era}
                 onClick={() => setActiveEra(isActive ? null : era)}
+                data-voz-filtro="era"
+                data-voz-filtro-valor={era}
+                aria-label={era}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 border ${
                   isActive
                     ? 'text-white'
