@@ -22,7 +22,7 @@ if not exist "node_modules" (
 )
 
 echo  Iniciando servidor de desenvolvimento...
-echo  Acesse: http://localhost:5173
+echo  Acesse: http://localhost:4001
 echo.
 call npm run dev
 

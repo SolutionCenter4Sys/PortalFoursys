@@ -26,7 +26,31 @@ import { executarIntencao, type ExecutorCallbacks } from './executor'
 import { falar, pararFala } from './feedback'
 import type { AppSection, NavigationItem } from '../types'
 
-const MAX_LISTEN_MS = 12_000
+/**
+ * Em modo contínuo, alguns navegadores (especialmente Chrome) ainda emitem
+ * `onend` periodicamente — após silêncio prolongado, mudança de aba ou erro
+ * `no-speech`. Reagendamos um restart com pequeno backoff para manter o mic
+ * vivo até o usuário pedir para parar (botão ou voz).
+ *
+ * Valor reduzido para ~120 ms para minimizar o "tempo morto" entre ciclos
+ * de reconhecimento e dar a sensação de escuta praticamente contínua.
+ */
+const RESTART_BACKOFF_MS = 120
+
+/**
+ * Janela de espera após receber um resultado "final" do navegador antes
+ * de despachar o comando. Permite que o usuário faça pequenas pausas
+ * naturais no meio de um comando (ex.: "navegar para... clientes") sem
+ * que o trecho parcial seja processado prematuramente. Resultados
+ * adicionais que chegam dentro da janela são concatenados.
+ */
+const FINAL_DEBOUNCE_MS = 700
+
+/**
+ * Salvaguarda contra estados travados: se ficamos `processing` por mais que
+ * isso, forçamos voltar a `listening`. Não impacta a duração da escuta.
+ */
+const PROCESSING_TIMEOUT_MS = 8_000
 
 function getSpeechRecognition(): SpeechRecognitionConstructor | null {
   if (typeof window === 'undefined') return null
@@ -72,7 +96,15 @@ export function useVoiceAssistant(): UseVoiceAssistantReturn {
   const [silenciado, setSilenciado] = useState(false)
 
   const recognitionRef = useRef<SpeechRecognition | null>(null)
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  /** Modo "always-on": uma vez iniciado, o mic só desliga quando o usuário
+   *  pede (botão ou voz "pausar voz"). */
+  const continuousRef = useRef(false)
+  /** Timer agendado para auto-restart depois de um onend espontâneo. */
+  const restartTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  /** Buffer de resultados "final" dentro da janela de debounce. */
+  const finalBufferRef = useRef<string>('')
+  /** Timer do debounce que dispara o handleTranscricao após silêncio. */
+  const finalDebounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const isSupported = getSpeechRecognition() !== null
 
   const clientes = useMemo(
@@ -98,6 +130,8 @@ export function useVoiceAssistant(): UseVoiceAssistantReturn {
   }, [navegacao, clientes])
 
   const stopRef = useRef<() => void>(() => {})
+  /** Indireção para permitir auto-restart sem auto-referência fechada. */
+  const startRecognitionRef = useRef<() => void>(() => {})
 
   // ─── Executor: callbacks aplicando intenções ────────────────────────────
   // Inicializa com no-op estável; o conteúdo real é construído via useEffect
@@ -116,18 +150,35 @@ export function useVoiceAssistant(): UseVoiceAssistantReturn {
   }, [idioma, app, setLang, toggleTheme, lang])
 
   // ─── Reconhecimento ─────────────────────────────────────────────────────
-  const clearSafetyTimeout = useCallback(() => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
-      timeoutRef.current = null
+  const clearRestartTimer = useCallback(() => {
+    if (restartTimerRef.current) {
+      clearTimeout(restartTimerRef.current)
+      restartTimerRef.current = null
     }
   }, [])
 
+  const clearFinalDebounce = useCallback(() => {
+    if (finalDebounceTimerRef.current) {
+      clearTimeout(finalDebounceTimerRef.current)
+      finalDebounceTimerRef.current = null
+    }
+    finalBufferRef.current = ''
+  }, [])
+
   const stop = useCallback(() => {
-    clearSafetyTimeout()
-    recognitionRef.current?.stop()
+    // Desliga o modo contínuo ANTES de parar para impedir o auto-restart
+    // disparado em onend.
+    continuousRef.current = false
+    clearRestartTimer()
+    clearFinalDebounce()
+    try {
+      recognitionRef.current?.stop()
+    } catch {
+      /* recognition pode já estar finalizando */
+    }
     setStatus('idle')
-  }, [clearSafetyTimeout])
+    setTranscricaoAoVivo('')
+  }, [clearRestartTimer, clearFinalDebounce])
 
   useEffect(() => {
     stopRef.current = stop
@@ -155,32 +206,56 @@ export function useVoiceAssistant(): UseVoiceAssistantReturn {
       setIntencaoUltima(intencao)
       const resultado = executarIntencao(intencao, executorRef.current)
       setMensagemUltima(resultado.mensagem)
-      if (resultado.mensagem) falar(resultado.mensagem, idioma, { silenciar: silenciado })
-      setStatus('idle')
+      // Respeita tanto o silenciamento global (`silenciado`) quanto o
+      // silenciamento por intenção (`resultado.silenciar`). Mensagens de
+      // confirmação foram silenciadas a pedido do usuário; o feedback
+      // visual (mensagemUltima) é mantido.
+      if (resultado.mensagem && !resultado.silenciar) {
+        falar(resultado.mensagem, idioma, { silenciar: silenciado })
+      }
+      // Em modo contínuo o mic continua escutando; senão, retorna para idle.
+      // O `pausarVoz` (acionado pelo intent "pausar voz") já fez stop() antes
+      // deste ponto, logo `continuousRef.current` será false e cairemos em idle.
+      setStatus(continuousRef.current ? 'listening' : 'idle')
+      setTranscricaoAoVivo('')
     },
     [navegacao, clientes, idioma, silenciado],
   )
 
-  const start = useCallback(() => {
+  /**
+   * Cria + inicia uma instância de SpeechRecognition. Função separada de
+   * `start` porque é reutilizada pelo auto-restart sem precisar resetar o
+   * `continuousRef` (que indica intenção do usuário, não da instância).
+   */
+  const startRecognition = useCallback(() => {
     const Ctor = getSpeechRecognition()
     if (!Ctor) {
       setStatus('error')
       return
     }
-    if (recognitionRef.current) recognitionRef.current.abort()
-    clearSafetyTimeout()
+    // Garante que não há instância anterior viva.
+    if (recognitionRef.current) {
+      try {
+        recognitionRef.current.abort()
+      } catch {
+        /* noop */
+      }
+      recognitionRef.current = null
+    }
 
     const recognition = new Ctor()
     recognition.lang = idioma
     recognition.interimResults = true
-    recognition.continuous = false
+    // Modo contínuo no nível da API: o reconhecimento entrega múltiplos
+    // resultados em sequência sem precisar de start() repetido a cada fala.
+    recognition.continuous = true
     recognition.maxAlternatives = 1
 
     recognition.onstart = () => {
       setStatus('listening')
       setTranscricaoAoVivo('')
-      timeoutRef.current = setTimeout(() => recognitionRef.current?.stop(), MAX_LISTEN_MS)
     }
+
     recognition.onresult = (event: SpeechRecognitionEvent) => {
       let interim = ''
       let final = ''
@@ -189,37 +264,86 @@ export function useVoiceAssistant(): UseVoiceAssistantReturn {
         if (result.isFinal) final += result[0].transcript
         else interim += result[0].transcript
       }
-      // Atualiza preview em tempo real (não classifica ainda).
-      setTranscricaoAoVivo((interim + final).trim())
-      // Só dispara classificação no resultado final.
-      if (final) handleTranscricao(final.trim())
-    }
-    recognition.onspeechend = () => recognitionRef.current?.stop()
-    recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
-      clearSafetyTimeout()
-      if (event.error === 'aborted' || event.error === 'no-speech') {
-        setStatus('idle')
-      } else {
-        setStatus('error')
-        setTimeout(() => setStatus('idle'), 3000)
+      // Mostra ao usuário o que já foi capturado (buffer + final + interim).
+      const buffer = finalBufferRef.current
+      setTranscricaoAoVivo(
+        [buffer, final, interim].filter(Boolean).join(' ').trim(),
+      )
+      if (final) {
+        // Acumula resultados finais e despacha após FINAL_DEBOUNCE_MS sem
+        // novos finais. Isso dá ao usuário tempo extra para concluir o
+        // comando caso faça uma pausa breve no meio da fala.
+        finalBufferRef.current = (
+          finalBufferRef.current + ' ' + final
+        ).trim()
+        if (finalDebounceTimerRef.current) {
+          clearTimeout(finalDebounceTimerRef.current)
+        }
+        finalDebounceTimerRef.current = setTimeout(() => {
+          const texto = finalBufferRef.current.trim()
+          finalBufferRef.current = ''
+          finalDebounceTimerRef.current = null
+          if (texto) handleTranscricao(texto)
+        }, FINAL_DEBOUNCE_MS)
       }
     }
+
+    recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+      // 'no-speech' e 'aborted' são esperados em modo contínuo: o navegador
+      // encerra a sessão sozinho. Reagendamos o restart se ainda estamos
+      // em modo always-on.
+      if (event.error === 'no-speech' || event.error === 'aborted') {
+        // onend cuidará do restart abaixo.
+        return
+      }
+      // Erros reais ('not-allowed', 'audio-capture', 'network', etc.):
+      // saímos do modo contínuo para evitar loop.
+      continuousRef.current = false
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 3000)
+    }
+
     recognition.onend = () => {
-      clearSafetyTimeout()
+      recognitionRef.current = null
+      // Se ainda estamos em "always-on", reagenda o reconhecimento. O backoff
+      // pequeno evita loops ocupados em alguns navegadores que disparam
+      // onend imediatamente após start (raro, mas possível).
+      if (continuousRef.current) {
+        setStatus((s) => (s === 'processing' ? s : 'listening'))
+        clearRestartTimer()
+        restartTimerRef.current = setTimeout(() => {
+          if (continuousRef.current) startRecognitionRef.current()
+        }, RESTART_BACKOFF_MS)
+        return
+      }
       setStatus((s) => (s === 'processing' ? s : 'idle'))
       setTranscricaoAoVivo('')
-      recognitionRef.current = null
     }
 
     recognitionRef.current = recognition
     try {
       recognition.start()
     } catch {
-      clearSafetyTimeout()
-      setStatus('error')
-      setTimeout(() => setStatus('idle'), 3000)
+      // Se já havia uma instância iniciando, o navegador joga InvalidState.
+      // Em modo contínuo, deixamos onend agendar a próxima tentativa.
+      if (!continuousRef.current) {
+        setStatus('error')
+        setTimeout(() => setStatus('idle'), 3000)
+      }
     }
-  }, [idioma, handleTranscricao, clearSafetyTimeout])
+  }, [idioma, handleTranscricao, clearRestartTimer])
+
+  // Mantém o ref do startRecognition sempre apontando para a versão mais
+  // recente, para que o auto-restart no onend pegue closures atualizados
+  // (ex.: idioma trocado durante a sessão).
+  useEffect(() => {
+    startRecognitionRef.current = startRecognition
+  }, [startRecognition])
+
+  const start = useCallback(() => {
+    continuousRef.current = true
+    startRecognition()
+  }, [startRecognition])
 
   const toggle = useCallback(() => {
     if (status === 'listening') stop()
@@ -229,12 +353,28 @@ export function useVoiceAssistant(): UseVoiceAssistantReturn {
   // Cleanup ao desmontar
   useEffect(() => {
     return () => {
-      clearSafetyTimeout()
-      recognitionRef.current?.abort()
+      continuousRef.current = false
+      clearRestartTimer()
+      clearFinalDebounce()
+      try {
+        recognitionRef.current?.abort()
+      } catch {
+        /* noop */
+      }
       recognitionRef.current = null
       pararFala()
     }
-  }, [clearSafetyTimeout])
+  }, [clearRestartTimer, clearFinalDebounce])
+
+  // Salvaguarda: se ficamos travados em "processing" por muito tempo
+  // (ex.: TTS muito longo + onend perdido), volta para listening/idle.
+  useEffect(() => {
+    if (status !== 'processing') return
+    const id = setTimeout(() => {
+      setStatus(continuousRef.current ? 'listening' : 'idle')
+    }, PROCESSING_TIMEOUT_MS)
+    return () => clearTimeout(id)
+  }, [status])
 
   return {
     status,
@@ -286,6 +426,45 @@ function buildExecutor(args: BuildArgs): ExecutorCallbacks {
         if (prev) app.navigate(prev.id as AppSection)
       } else {
         app.navigate('home')
+      }
+    },
+
+    rolar: (d) => {
+      const alvo = encontrarContainerScrollavel()
+
+      const passo = Math.max(
+        Math.round(
+          (alvo?.clientHeight ?? window.innerHeight) * 0.75,
+        ),
+        320,
+      )
+
+      const aplicar = (top: number) => {
+        if (alvo) alvo.scrollBy({ top, behavior: 'smooth' })
+        else window.scrollBy({ top, behavior: 'smooth' })
+      }
+      const irPara = (top: number) => {
+        if (alvo) alvo.scrollTo({ top, behavior: 'smooth' })
+        else window.scrollTo({ top, behavior: 'smooth' })
+      }
+
+      switch (d) {
+        case 'baixo':
+          aplicar(passo)
+          break
+        case 'cima':
+          aplicar(-passo)
+          break
+        case 'topo':
+          irPara(0)
+          break
+        case 'fim': {
+          const max =
+            alvo?.scrollHeight ??
+            Math.max(document.body.scrollHeight, document.documentElement.scrollHeight)
+          irPara(max)
+          break
+        }
       }
     },
 
@@ -389,21 +568,52 @@ function buildExecutor(args: BuildArgs): ExecutorCallbacks {
       return true
     },
 
-    fecharDetalhe: () => {
-      // 1) fecha overlays Radix/dialog através do botão de fechar marcado;
-      // 2) fallback: dispara Escape no document para handlers padrões.
-      const fecharBtn = document.querySelector<HTMLElement>(
-        '[role="dialog"] [data-voz-fechar-detalhe="true"], [role="dialog"] [aria-label*="ech" i]',
-      )
-      if (fecharBtn) {
-        try {
-          fecharBtn.click()
-          return
-        } catch {
-          /* fallback abaixo */
-        }
+    abrirDetalheFoco: () => {
+      const el = encontrarDetalheContextual()
+      if (!el) return { sucesso: false }
+      const rotulo = (
+        el.dataset.vozDetalheRotulo ??
+        el.getAttribute('aria-label') ??
+        el.textContent?.trim() ??
+        ''
+      ).trim()
+      try {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' })
+        el.click()
+        return { sucesso: true, rotuloEncontrado: rotulo || undefined }
+      } catch {
+        return { sucesso: false }
       }
-      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
+    },
+
+    fecharDetalhe: () => {
+      fecharDetalheNoDom()
+    },
+
+    voltar: () => {
+      // 1. Modal/drill-down aberto? Fecha.
+      if (document.querySelector('[role="dialog"]')) {
+        fecharDetalheNoDom()
+        return 'modal-fechado'
+      }
+      // 2. Caixa em foco? Tira o foco.
+      const caixasFoco = document.querySelectorAll<HTMLElement>(
+        '[data-voz-caixa-foco="true"]',
+      )
+      if (caixasFoco.length > 0) {
+        caixasFoco.forEach((el) => el.removeAttribute('data-voz-caixa-foco'))
+        return 'caixa-desfocada'
+      }
+      // 3. Senão, navega para a seção anterior (se houver).
+      const idx = app.activeNavigationItems.findIndex(
+        (n) => n.id === app.state.currentSection,
+      )
+      const prev = app.activeNavigationItems[idx - 1]
+      if (prev) {
+        app.navigate(prev.id as AppSection)
+        return 'secao-anterior'
+      }
+      return 'nada'
     },
 
     aplicarFiltro: (grupo, valor) => {
@@ -457,18 +667,117 @@ function cssEscape(s: string): string {
   return s.replace(/["\\]/g, '\\$&')
 }
 
+/**
+ * Fecha qualquer modal/drill-down aberto no DOM, na ordem:
+ * 1. botão dentro de [role=dialog] com data-voz-fechar-detalhe="true"
+ * 2. botão dentro de [role=dialog] com aria-label contendo "ech" (close/fechar)
+ * 3. fallback: dispara Escape no document (handlers padrão Radix/Dialog)
+ */
+function fecharDetalheNoDom(): void {
+  if (typeof document === 'undefined') return
+  const fecharBtn = document.querySelector<HTMLElement>(
+    '[role="dialog"] [data-voz-fechar-detalhe="true"], [role="dialog"] [aria-label*="ech" i]',
+  )
+  if (fecharBtn) {
+    try {
+      fecharBtn.click()
+      return
+    } catch {
+      /* fallback abaixo */
+    }
+  }
+  document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
+}
+
+/**
+ * Procura o container scrollável atual.
+ *
+ * O App tem várias camadas com `overflow-y-auto` (o `<main>` global e o
+ * `SectionWrapper` interno de cada seção). Ambos são marcados com
+ * `data-voz-scroll-root`. Para que o comando "descer" rola dentro da
+ * seção atual (não no main vazio), iteramos do MAIS ESPECÍFICO (último no
+ * DOM, normalmente o SectionWrapper) para o MAIS EXTERNO, escolhendo o
+ * primeiro que tem overflow real (`scrollHeight > clientHeight`).
+ *
+ * Se nenhum candidato tiver overflow real, devolve o último candidato
+ * marcado (mesmo "vazio") — assim continua sendo possível rolar a 0/fim
+ * para reposicionar o scroll, e o navegador ignora silenciosamente.
+ *
+ * Fallback final: `<main>` ou `null` (caller usa `window`).
+ */
+/**
+ * Encontra o melhor `[data-voz-detalhe]` para abrir quando o usuário
+ * pediu drill-down sem nomear o item. Heurística:
+ *
+ * 1. Caixa em foco (`data-voz-caixa-foco="true"`):
+ *    - se a própria caixa for `[data-voz-detalhe]`, usa-a.
+ *    - senão, primeiro descendente `[data-voz-detalhe]` dela.
+ * 2. Senão, dentre todos os `[data-voz-detalhe]` visíveis no viewport,
+ *    o que está mais próximo do **centro vertical** da tela.
+ * 3. Senão, `null` (executor reporta "não encontrei nada").
+ */
+function encontrarDetalheContextual(): HTMLElement | null {
+  if (typeof document === 'undefined') return null
+
+  const caixaFoco = document.querySelector<HTMLElement>('[data-voz-caixa-foco="true"]')
+  if (caixaFoco) {
+    if (caixaFoco.hasAttribute('data-voz-detalhe')) return caixaFoco
+    const dentro = caixaFoco.querySelector<HTMLElement>('[data-voz-detalhe]')
+    if (dentro) return dentro
+  }
+
+  const todos = Array.from(document.querySelectorAll<HTMLElement>('[data-voz-detalhe]'))
+  if (todos.length === 0) return null
+
+  const vh = window.innerHeight
+  const centroViewportY = vh / 2
+
+  let melhor: { el: HTMLElement; dist: number } | null = null
+  for (const el of todos) {
+    const rect = el.getBoundingClientRect()
+    // ignora elementos completamente fora do viewport
+    if (rect.bottom <= 0 || rect.top >= vh) continue
+    // ignora elementos sem tamanho (display:none / aria-hidden)
+    if (rect.width < 4 || rect.height < 4) continue
+    const elCentroY = rect.top + rect.height / 2
+    const dist = Math.abs(elCentroY - centroViewportY)
+    if (!melhor || dist < melhor.dist) melhor = { el, dist }
+  }
+  return melhor?.el ?? null
+}
+
+function encontrarContainerScrollavel(): HTMLElement | null {
+  if (typeof document === 'undefined') return null
+  const candidatos = Array.from(
+    document.querySelectorAll<HTMLElement>('[data-voz-scroll-root]'),
+  )
+  // Itera do mais interno para o mais externo.
+  for (const el of [...candidatos].reverse()) {
+    if (el.scrollHeight - el.clientHeight > 4) return el
+  }
+  // Nenhum tem overflow agora — usa o mais interno mesmo assim para que
+  // "topo"/"fim" tenham efeito visual ao mudar de seção, e devolve null
+  // como fallback final para cair em window.
+  return candidatos[candidatos.length - 1] ??
+    document.querySelector<HTMLElement>('main') ??
+    null
+}
+
 /** Executor inerte usado como valor inicial estável para o ref. */
 const NOOP_EXECUTOR: ExecutorCallbacks = {
   idioma: 'pt-BR',
   navegar: () => {},
   direcao: () => {},
+  rolar: () => {},
   alternar: () => {},
   buscar: () => {},
   selecionarCliente: () => false,
   abrirCaixa: () => false,
   fecharCaixa: () => {},
   abrirDetalhe: () => false,
+  abrirDetalheFoco: () => ({ sucesso: false }),
   fecharDetalhe: () => {},
+  voltar: () => 'nada',
   aplicarFiltro: () => ({ sucesso: false }),
   limparFiltro: () => false,
   abrirAjuda: () => {},

@@ -205,6 +205,7 @@ function DrillDownModal({
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.95, opacity: 0, y: 10 }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        data-voz-scroll-root
         className="relative w-full max-w-3xl max-h-[85vh] overflow-y-auto rounded-2xl border border-white/[0.1] bg-[#0c0c14]"
         aria-live="polite"
         onClick={(e) => e.stopPropagation()}

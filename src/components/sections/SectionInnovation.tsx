@@ -182,6 +182,7 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      data-voz-scroll-root
       className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain"
       role="dialog"
       aria-modal="true"

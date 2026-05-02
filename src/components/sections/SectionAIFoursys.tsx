@@ -1637,6 +1637,7 @@ function ServiceDetailModal({ item, onClose, lang }: { item: DetailableItem; onC
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      data-voz-scroll-root
       className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain py-8"
       role="dialog"
       aria-modal="true"
@@ -1856,6 +1857,7 @@ function AIFrameworkModal({ onClose, lang }: { onClose: () => void; lang: string
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      data-voz-scroll-root
       className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain py-3 sm:py-6 md:py-8"
       role="dialog"
       aria-modal="true"
@@ -2349,6 +2351,7 @@ function MarketModal({ onClose, lang }: { onClose: () => void; lang: string }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      data-voz-scroll-root
       className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overscroll-contain"
       role="dialog"
       aria-modal="true"

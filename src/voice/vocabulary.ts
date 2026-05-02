@@ -5,21 +5,27 @@
  * Mantemos as listas extensas de propósito: cobre coloquialismos,
  * plurais e formas com preposição ("filtrar pelo", "abrir caixa de...").
  */
-import type { AlvoAlternar, DirecaoNavegacao, IdiomaVoz } from './types'
+import type { AlvoAlternar, DirecaoNavegacao, DirecaoScroll, IdiomaVoz } from './types'
 
 export interface VocabularioVoz {
   readonly ajuda: ReadonlyArray<string>
   readonly pausar: ReadonlyArray<string>
   readonly verbosNavegacao: ReadonlyArray<string>
+  /** Frases isoladas para "voltar" contextual (fecha modal/caixa/seção). */
+  readonly voltar: ReadonlyArray<string>
   readonly verbosBusca: ReadonlyArray<string>
   readonly verbosAbrirCaixa: ReadonlyArray<string>
   readonly fecharCaixa: ReadonlyArray<string>
   readonly verbosAbrirDetalhe: ReadonlyArray<string>
+  /** Frases isoladas que disparam drill-down contextual (sem alvo nomeado) */
+  readonly abrirDetalheFoco: ReadonlyArray<string>
   readonly fecharDetalhe: ReadonlyArray<string>
   readonly verbosAplicarFiltro: ReadonlyArray<string>
   readonly limparFiltro: ReadonlyArray<string>
   readonly selecionarCliente: ReadonlyArray<string>
   readonly direcoes: Record<DirecaoNavegacao, ReadonlyArray<string>>
+  /** Frases completas que disparam scroll de página (sem precisar de alvo). */
+  readonly scroll: Record<DirecaoScroll, ReadonlyArray<string>>
   readonly alternar: Record<AlvoAlternar, ReadonlyArray<string>>
   /** Sinônimos por id de seção (ex.: 'home' → ['início', 'inicio']) */
   readonly sinonimosRotulo: Record<string, ReadonlyArray<string>>
@@ -30,6 +36,16 @@ export interface VocabularioVoz {
 const ptBR: VocabularioVoz = {
   ajuda: ['ajuda', 'me ajude', 'mostrar ajuda', 'que comandos', 'o que posso falar', 'help'],
   pausar: ['pausar voz', 'parar voz', 'desligar microfone', 'parar de ouvir', 'pausar microfone', 'pause'],
+
+  voltar: [
+    'voltar',
+    'volta',
+    'volte',
+    'voltar atras',
+    'volta atras',
+    'voltar uma',
+    'volta uma',
+  ],
 
   verbosNavegacao: [
     'ir para',
@@ -154,6 +170,57 @@ const ptBR: VocabularioVoz = {
     'me explique',
   ],
 
+  abrirDetalheFoco: [
+    'trazer detalhes',
+    'trazer detalhe',
+    'trazer mais detalhes',
+    'trazer o detalhe',
+    'me traz detalhes',
+    'me traz o detalhe',
+    'detalhar isso',
+    'detalhar isto',
+    'detalhar este',
+    'detalhar esse',
+    'detalhar este item',
+    'detalhar esse item',
+    'detalha isso',
+    'detalha isto',
+    'detalha este',
+    'detalha esse',
+    'detalhar item',
+    'detalhar o item',
+    'explorar isso',
+    'explorar isto',
+    'explorar este',
+    'explorar esse',
+    'explorar este item',
+    'explorar esse item',
+    'explora isso',
+    'explora isto',
+    'explora este',
+    'explora esse',
+    'aprofundar isso',
+    'aprofundar isto',
+    'aprofunda isso',
+    'aprofunda isto',
+    'abrir detalhes',
+    'abrir o detalhe',
+    'abrir detalhe',
+    'abrir esse modal',
+    'abrir este modal',
+    'abrir esse drilldown',
+    'abrir este drilldown',
+    'mais detalhes',
+    'ver detalhes',
+    'ver o detalhe',
+    'ver mais detalhes',
+    'me mostra detalhes',
+    'me mostre detalhes',
+    'mostrar detalhes',
+    'mostre detalhes',
+    'mostra detalhes',
+  ],
+
   fecharDetalhe: [
     'fechar detalhes',
     'fechar detalhe',
@@ -238,8 +305,83 @@ const ptBR: VocabularioVoz = {
 
   direcoes: {
     proximo: ['proximo', 'proxima', 'avancar', 'avance', 'avanca', 'segue', 'seguir', 'next', 'continuar', 'continua', 'depois'],
-    anterior: ['anterior', 'voltar', 'volte', 'volta', 'retornar', 'retorna', 'previous', 'antes'],
+    // "voltar"/"volta"/"volte" foram movidos para a intent `voltar` contextual.
+    // "sessão anterior" continua disponível aqui via "anterior", "retornar".
+    anterior: ['anterior', 'sessao anterior', 'pagina anterior', 'retornar', 'retorna'],
     inicio: ['inicio', 'home', 'comeco', 'principal', 'tela inicial', 'pagina inicial'],
+  },
+
+  scroll: {
+    baixo: [
+      'rolar para baixo',
+      'rolar pra baixo',
+      'rola para baixo',
+      'rola pra baixo',
+      'descer a tela',
+      'descer pagina',
+      'descer a pagina',
+      'descer um pouco',
+      'desce a tela',
+      'desce a pagina',
+      'desce um pouco',
+      'desce',
+      'descer',
+      'scroll para baixo',
+      'scroll pra baixo',
+      'scroll baixo',
+      'rolar baixo',
+      'pra baixo',
+      'para baixo',
+    ],
+    cima: [
+      'rolar para cima',
+      'rolar pra cima',
+      'rola para cima',
+      'rola pra cima',
+      'subir a tela',
+      'subir pagina',
+      'subir a pagina',
+      'subir um pouco',
+      'sobe a tela',
+      'sobe a pagina',
+      'sobe um pouco',
+      'sobe',
+      'subir',
+      'scroll para cima',
+      'scroll pra cima',
+      'scroll cima',
+      'rolar cima',
+      'pra cima',
+      'para cima',
+    ],
+    topo: [
+      'ir para o topo',
+      'ir pro topo',
+      'rolar para o topo',
+      'rolar pro topo',
+      'voltar ao topo',
+      'volta ao topo',
+      'ao topo',
+      'no topo',
+      'topo da pagina',
+      'inicio da pagina',
+      'topo',
+    ],
+    fim: [
+      'ir para o fim',
+      'ir pro fim',
+      'rolar para o fim',
+      'rolar pro fim',
+      'rolar ate o fim',
+      'rolar ate o final',
+      'ir para o final',
+      'fim da pagina',
+      'final da pagina',
+      'rodape',
+      'rodape da pagina',
+      'fim',
+      'final',
+    ],
   },
 
   alternar: {
@@ -283,6 +425,12 @@ const ptBR: VocabularioVoz = {
 const enUS: VocabularioVoz = {
   ajuda: ['help', 'show help', 'what can i say', 'commands'],
   pausar: ['pause voice', 'stop voice', 'stop listening', 'turn off microphone', 'pause'],
+
+  voltar: [
+    'back',
+    'go back',
+    'step back',
+  ],
 
   verbosNavegacao: [
     'go to',
@@ -353,6 +501,36 @@ const enUS: VocabularioVoz = {
     'expand on',
   ],
 
+  abrirDetalheFoco: [
+    'show details',
+    'show the details',
+    'show me details',
+    'show me the details',
+    'open details',
+    'open the details',
+    'open this',
+    'open this card',
+    'open this modal',
+    'bring details',
+    'bring the details',
+    'bring more details',
+    'more details',
+    'more detail',
+    'see details',
+    'see the details',
+    'see more details',
+    'detail this',
+    'detail it',
+    'explore this',
+    'explore it',
+    'explore this card',
+    'deep dive this',
+    'deep dive it',
+    'expand this',
+    'expand it',
+    'tell me more',
+  ],
+
   fecharDetalhe: [
     'close detail',
     'close details',
@@ -397,8 +575,47 @@ const enUS: VocabularioVoz = {
 
   direcoes: {
     proximo: ['next', 'forward', 'continue', 'after', 'go next'],
-    anterior: ['previous', 'back', 'go back', 'before', 'return'],
+    // "back"/"go back" foram movidos para a intent `voltar` contextual.
+    anterior: ['previous', 'previous section', 'previous page', 'before', 'return'],
     inicio: ['home', 'start', 'main', 'main page', 'beginning'],
+  },
+
+  scroll: {
+    baixo: [
+      'scroll down',
+      'scroll a bit down',
+      'scroll page down',
+      'page down',
+      'go down',
+      'down a bit',
+      'down',
+    ],
+    cima: [
+      'scroll up',
+      'scroll a bit up',
+      'scroll page up',
+      'page up',
+      'go up',
+      'up a bit',
+      'up',
+    ],
+    topo: [
+      'go to top',
+      'scroll to top',
+      'top of page',
+      'back to top',
+      'to the top',
+      'top',
+    ],
+    fim: [
+      'go to bottom',
+      'scroll to bottom',
+      'bottom of page',
+      'to the bottom',
+      'bottom',
+      'end of page',
+      'footer',
+    ],
   },
 
   alternar: {

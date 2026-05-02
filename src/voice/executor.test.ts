@@ -14,13 +14,16 @@ function criarCallbacks(
     idioma: 'pt-BR',
     navegar: vi.fn(),
     direcao: vi.fn(),
+    rolar: vi.fn(),
     alternar: vi.fn(),
     buscar: vi.fn(),
     selecionarCliente: vi.fn().mockReturnValue(true),
     abrirCaixa: vi.fn().mockReturnValue(true),
     fecharCaixa: vi.fn(),
     abrirDetalhe: vi.fn().mockReturnValue(true),
+    abrirDetalheFoco: vi.fn().mockReturnValue({ sucesso: true, rotuloEncontrado: 'Card Foco' }),
     fecharDetalhe: vi.fn(),
+    voltar: vi.fn().mockReturnValue('secao-anterior'),
     aplicarFiltro: vi.fn().mockReturnValue({ sucesso: true, rotuloEncontrado: 'Banco' }),
     limparFiltro: vi.fn().mockReturnValue(true),
     abrirAjuda: vi.fn(),
@@ -37,7 +40,7 @@ describe('executor — desconhecido / ajuda / pausa', () => {
 
   it('desconhecido devolve fallback PT', () => {
     const r = executarIntencao({ tipo: 'desconhecido', transcricao: 'xpto' }, cb)
-    expect(r.mensagem).toMatch(/Não entendi/i)
+    expect(r.mensagem).toMatch(/Repita/i)
   })
 
   it('falar-ajuda chama abrirAjuda', () => {
@@ -89,6 +92,30 @@ describe('executor — navegação', () => {
     const cb = criarCallbacks()
     const r = executarIntencao({ tipo: 'navegar-direcao', direcao: 'inicio' }, cb)
     expect(r.mensagem).toMatch(/início/i)
+  })
+})
+
+describe('executor — rolar página', () => {
+  it.each(['baixo', 'cima', 'topo', 'fim'] as const)(
+    'rolar(%s) chama callback e devolve mensagem',
+    (direcao) => {
+      const cb = criarCallbacks()
+      const r = executarIntencao({ tipo: 'rolar', direcao }, cb)
+      expect(cb.rolar).toHaveBeenCalledWith(direcao)
+      expect(r.mensagem).toBeTruthy()
+    },
+  )
+
+  it('feedback PT para "baixo" menciona "página"', () => {
+    const cb = criarCallbacks()
+    const r = executarIntencao({ tipo: 'rolar', direcao: 'baixo' }, cb)
+    expect(r.mensagem).toMatch(/página/i)
+  })
+
+  it('feedback EN para "topo"', () => {
+    const cb = criarCallbacks({ idioma: 'en-US' })
+    const r = executarIntencao({ tipo: 'rolar', direcao: 'topo' }, cb)
+    expect(r.mensagem).toMatch(/Scrolling to top/i)
   })
 })
 
@@ -156,6 +183,66 @@ describe('executor — drill-down', () => {
     executarIntencao({ tipo: 'fechar-detalhe' }, cb)
     expect(cb.fecharDetalhe).toHaveBeenCalled()
   })
+
+  it('abrir-detalhe-foco sucesso → fala o rótulo encontrado', () => {
+    const cb = criarCallbacks()
+    const r = executarIntencao({ tipo: 'abrir-detalhe-foco' }, cb)
+    expect(cb.abrirDetalheFoco).toHaveBeenCalledOnce()
+    expect(r.mensagem).toMatch(/Card Foco/)
+  })
+
+  it('abrir-detalhe-foco falha → mensagem "nada para detalhar"', () => {
+    const cb = criarCallbacks({
+      abrirDetalheFoco: vi.fn().mockReturnValue({ sucesso: false }),
+    })
+    const r = executarIntencao({ tipo: 'abrir-detalhe-foco' }, cb)
+    expect(r.mensagem).toMatch(/nada para detalhar/i)
+  })
+})
+
+describe('executor — voltar contextual', () => {
+  it('voltar fechando modal devolve mensagem de detalhe (PT)', () => {
+    const cb = criarCallbacks({ voltar: vi.fn().mockReturnValue('modal-fechado') })
+    const r = executarIntencao({ tipo: 'voltar' }, cb)
+    expect(cb.voltar).toHaveBeenCalledOnce()
+    expect(r.mensagem).toMatch(/Fechando detalhe/i)
+  })
+
+  it('voltar tirando foco da caixa devolve mensagem de caixa (PT)', () => {
+    const cb = criarCallbacks({ voltar: vi.fn().mockReturnValue('caixa-desfocada') })
+    const r = executarIntencao({ tipo: 'voltar' }, cb)
+    expect(r.mensagem).toMatch(/Saindo da caixa/i)
+  })
+
+  it('voltar para seção anterior devolve mensagem de seção (PT)', () => {
+    const cb = criarCallbacks({ voltar: vi.fn().mockReturnValue('secao-anterior') })
+    const r = executarIntencao({ tipo: 'voltar' }, cb)
+    expect(r.mensagem).toMatch(/sessão anterior/i)
+  })
+
+  it('voltar quando já está no início devolve fallback (PT)', () => {
+    const cb = criarCallbacks({ voltar: vi.fn().mockReturnValue('nada') })
+    const r = executarIntencao({ tipo: 'voltar' }, cb)
+    expect(r.mensagem).toMatch(/já está no início/i)
+  })
+
+  it('voltar fechando modal em inglês', () => {
+    const cb = criarCallbacks({
+      idioma: 'en-US',
+      voltar: vi.fn().mockReturnValue('modal-fechado'),
+    })
+    const r = executarIntencao({ tipo: 'voltar' }, cb)
+    expect(r.mensagem).toMatch(/Closing detail/i)
+  })
+
+  it('voltar para seção anterior em inglês', () => {
+    const cb = criarCallbacks({
+      idioma: 'en-US',
+      voltar: vi.fn().mockReturnValue('secao-anterior'),
+    })
+    const r = executarIntencao({ tipo: 'voltar' }, cb)
+    expect(r.mensagem).toMatch(/previous section/i)
+  })
 })
 
 describe('executor — filtros', () => {
@@ -198,10 +285,10 @@ describe('executor — i18n EN', () => {
   it('mensagens em inglês quando idioma="en-US"', () => {
     const cb = criarCallbacks({ idioma: 'en-US' })
     const r = executarIntencao(
-      { tipo: 'navegar', secao: 'cases', rotuloAlvo: 'Cases' },
+      { tipo: 'navegar-direcao', direcao: 'proximo' },
       cb,
     )
-    expect(r.mensagem).toMatch(/Going to/i)
+    expect(r.mensagem).toMatch(/Next section/i)
   })
 
   it('feedback de drill-down em EN', () => {

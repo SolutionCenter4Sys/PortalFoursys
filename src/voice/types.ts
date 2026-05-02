@@ -41,6 +41,10 @@ export type AlvoAlternar =
 
 export type DirecaoNavegacao = 'proximo' | 'anterior' | 'inicio'
 
+// ─── Direções de scroll de página ───────────────────────────────────────────
+
+export type DirecaoScroll = 'baixo' | 'cima' | 'topo' | 'fim'
+
 // ─── União das intenções classificadas ──────────────────────────────────────
 
 export type IntencaoVoz =
@@ -50,6 +54,12 @@ export type IntencaoVoz =
   | { readonly tipo: 'alternar'; readonly alvo: AlvoAlternar }
   | { readonly tipo: 'navegar'; readonly secao: AppSection; readonly rotuloAlvo?: string }
   | { readonly tipo: 'navegar-direcao'; readonly direcao: DirecaoNavegacao }
+  | { readonly tipo: 'rolar'; readonly direcao: DirecaoScroll }
+  | {
+      /** "Voltar" contextual: fecha modal se houver, depois desfoca caixa,
+       *  depois navega para a seção anterior. */
+      readonly tipo: 'voltar'
+    }
   | { readonly tipo: 'buscar'; readonly termo: string }
   | { readonly tipo: 'selecionar-cliente'; readonly nomeOuId: string }
   | { readonly tipo: 'abrir-caixa'; readonly caixaId: string; readonly rotuloAlvo?: string }
@@ -58,6 +68,11 @@ export type IntencaoVoz =
       readonly tipo: 'abrir-detalhe'
       readonly detalheId: string
       readonly rotuloAlvo?: string
+    }
+  | {
+      /** Drill-down contextual: abre detalhe da caixa em foco ou do card
+       *  visível no centro do viewport, sem precisar nomear o item. */
+      readonly tipo: 'abrir-detalhe-foco'
     }
   | { readonly tipo: 'fechar-detalhe' }
   | {

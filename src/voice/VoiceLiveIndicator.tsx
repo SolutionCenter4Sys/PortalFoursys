@@ -45,7 +45,7 @@ export function VoiceLiveIndicator() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 12, scale: 0.96 }}
           transition={{ duration: 0.22 }}
-          className="fixed bottom-4 right-4 z-[55] max-w-[min(420px,calc(100vw-32px))] pointer-events-none"
+          className="fixed bottom-4 right-4 z-[150] max-w-[min(420px,calc(100vw-32px))] pointer-events-none"
           role="status"
           aria-live="polite"
         >

@@ -98,9 +98,9 @@ describe('classifierRegex — direção', () => {
     expect(classificar('proximo').tipo).toBe('navegar-direcao')
     expect(classificar('next', 'en-US').tipo).toBe('navegar-direcao')
   })
-  it('voltar / back', () => {
-    const a = classificar('voltar')
-    const b = classificar('back', 'en-US')
+  it('anterior / previous (mudança explícita de seção)', () => {
+    const a = classificar('anterior')
+    const b = classificar('previous', 'en-US')
     expect(a.tipo).toBe('navegar-direcao')
     expect(b.tipo).toBe('navegar-direcao')
     if (a.tipo === 'navegar-direcao') expect(a.direcao).toBe('anterior')
@@ -167,6 +167,31 @@ describe('classifierRegex — caixas internas', () => {
   })
 })
 
+describe('classifierRegex — drill-down contextual (sem alvo)', () => {
+  it('"trazer detalhes" → abrir-detalhe-foco', () => {
+    expect(classificar('trazer detalhes').tipo).toBe('abrir-detalhe-foco')
+  })
+  it('"detalhar isso" → abrir-detalhe-foco', () => {
+    expect(classificar('detalhar isso').tipo).toBe('abrir-detalhe-foco')
+  })
+  it('"explorar este item" → abrir-detalhe-foco', () => {
+    expect(classificar('explorar este item').tipo).toBe('abrir-detalhe-foco')
+  })
+  it('"mais detalhes" → abrir-detalhe-foco', () => {
+    expect(classificar('mais detalhes').tipo).toBe('abrir-detalhe-foco')
+  })
+  it('"show details" em inglês → abrir-detalhe-foco', () => {
+    expect(classificar('show details', 'en-US').tipo).toBe('abrir-detalhe-foco')
+  })
+  it('"explore this" em inglês → abrir-detalhe-foco', () => {
+    expect(classificar('explore this', 'en-US').tipo).toBe('abrir-detalhe-foco')
+  })
+  it('"explorar IA Generativa" continua sendo abrir-detalhe específico', () => {
+    const i = classificar('explorar ia generativa')
+    expect(i.tipo).toBe('abrir-detalhe')
+  })
+})
+
 describe('classifierRegex — drill-down (detalhes)', () => {
   it('explorar IA Generativa', () => {
     const i = classificar('explorar ia generativa')
@@ -212,6 +237,97 @@ describe('classifierRegex — filtros', () => {
   })
 })
 
+describe('classifierRegex — rolar página (scroll)', () => {
+  it('"rolar para baixo" → rolar(baixo)', () => {
+    const i = classificar('rolar para baixo')
+    expect(i.tipo).toBe('rolar')
+    if (i.tipo === 'rolar') expect(i.direcao).toBe('baixo')
+  })
+  it('"descer um pouco" → rolar(baixo)', () => {
+    const i = classificar('descer um pouco')
+    expect(i.tipo).toBe('rolar')
+    if (i.tipo === 'rolar') expect(i.direcao).toBe('baixo')
+  })
+  it('"subir a página" → rolar(cima)', () => {
+    const i = classificar('subir a pagina')
+    expect(i.tipo).toBe('rolar')
+    if (i.tipo === 'rolar') expect(i.direcao).toBe('cima')
+  })
+  it('"ir para o topo" → rolar(topo)', () => {
+    const i = classificar('ir para o topo')
+    expect(i.tipo).toBe('rolar')
+    if (i.tipo === 'rolar') expect(i.direcao).toBe('topo')
+  })
+  it('"fim da página" → rolar(fim)', () => {
+    const i = classificar('fim da pagina')
+    expect(i.tipo).toBe('rolar')
+    if (i.tipo === 'rolar') expect(i.direcao).toBe('fim')
+  })
+  it('"scroll down" em inglês → rolar(baixo)', () => {
+    const i = classificar('scroll down', 'en-US')
+    expect(i.tipo).toBe('rolar')
+    if (i.tipo === 'rolar') expect(i.direcao).toBe('baixo')
+  })
+  it('"go to bottom" em inglês → rolar(fim)', () => {
+    const i = classificar('go to bottom', 'en-US')
+    expect(i.tipo).toBe('rolar')
+    if (i.tipo === 'rolar') expect(i.direcao).toBe('fim')
+  })
+  it('palavra única "topo" → rolar(topo)', () => {
+    const i = classificar('topo')
+    expect(i.tipo).toBe('rolar')
+    if (i.tipo === 'rolar') expect(i.direcao).toBe('topo')
+  })
+  it('palavra única "down" em inglês → rolar(baixo)', () => {
+    const i = classificar('down', 'en-US')
+    expect(i.tipo).toBe('rolar')
+    if (i.tipo === 'rolar') expect(i.direcao).toBe('baixo')
+  })
+  it('"desce até inovação" NÃO vira scroll (palavra solta exige isolamento)', () => {
+    const i = classificar('desce ate inovacao')
+    expect(i.tipo).not.toBe('rolar')
+  })
+})
+
+describe('classifierRegex — voltar contextual', () => {
+  it('"voltar" sozinho vira intent voltar', () => {
+    const i = classificar('voltar')
+    expect(i.tipo).toBe('voltar')
+  })
+  it('"volta" sozinho vira intent voltar', () => {
+    expect(classificar('volta').tipo).toBe('voltar')
+  })
+  it('"volte" sozinho vira intent voltar', () => {
+    expect(classificar('volte').tipo).toBe('voltar')
+  })
+  it('"voltar atras" vira intent voltar (multi-palavra)', () => {
+    expect(classificar('voltar atras').tipo).toBe('voltar')
+  })
+  it('"back" em inglês vira intent voltar', () => {
+    expect(classificar('back', 'en-US').tipo).toBe('voltar')
+  })
+  it('"go back" em inglês vira intent voltar', () => {
+    expect(classificar('go back', 'en-US').tipo).toBe('voltar')
+  })
+  it('"anterior" continua sendo navegar-direcao (mudança de seção)', () => {
+    const i = classificar('anterior')
+    expect(i.tipo).toBe('navegar-direcao')
+    if (i.tipo === 'navegar-direcao') expect(i.direcao).toBe('anterior')
+  })
+  it('"sessao anterior" continua sendo navegar-direcao', () => {
+    const i = classificar('sessao anterior')
+    expect(i.tipo).toBe('navegar-direcao')
+  })
+  it('"previous" em inglês continua navegar-direcao', () => {
+    const i = classificar('previous', 'en-US')
+    expect(i.tipo).toBe('navegar-direcao')
+  })
+  it('"voltar" não dispara navegar-direcao mais', () => {
+    const i = classificar('voltar')
+    expect(i.tipo).not.toBe('navegar-direcao')
+  })
+})
+
 describe('classifierRegex — desconhecido', () => {
   it('texto fora do vocabulário', () => {
     const i = classificar('xpto qwerty')
@@ -220,5 +336,41 @@ describe('classifierRegex — desconhecido', () => {
   it('texto vazio', () => {
     const i = classificar('   ')
     expect(i.tipo).toBe('desconhecido')
+  })
+})
+
+describe('classifierRegex — fallback fuzzy (comandos parecidos)', () => {
+  it('"ajud" (faltou letra) → falar-ajuda', () => {
+    expect(classificar('ajud').tipo).toBe('falar-ajuda')
+  })
+  it('"voltarr" (letra duplicada) → voltar', () => {
+    expect(classificar('voltarr').tipo).toBe('voltar')
+  })
+  it('"topu" (letra trocada) → rolar topo', () => {
+    const i = classificar('topu')
+    expect(i.tipo).toBe('rolar')
+    if (i.tipo === 'rolar') expect(i.direcao).toBe('topo')
+  })
+  it('"proximu" (letra trocada) → navegar-direcao próximo', () => {
+    const i = classificar('proximu')
+    expect(i.tipo).toBe('navegar-direcao')
+    if (i.tipo === 'navegar-direcao') expect(i.direcao).toBe('proximo')
+  })
+  it('"inico" (letra trocada) → navegar-direcao início', () => {
+    const i = classificar('inico')
+    expect(i.tipo).toBe('navegar-direcao')
+    if (i.tipo === 'navegar-direcao') expect(i.direcao).toBe('inicio')
+  })
+  it('"fechar moodal" (letra duplicada) → fechar-detalhe', () => {
+    expect(classificar('fechar moodal').tipo).toBe('fechar-detalhe')
+  })
+  it('"helpe" em inglês (letra extra) → falar-ajuda', () => {
+    expect(classificar('helpe', 'en-US').tipo).toBe('falar-ajuda')
+  })
+  it('"backk" em inglês (letra duplicada) → voltar', () => {
+    expect(classificar('backk', 'en-US').tipo).toBe('voltar')
+  })
+  it('texto sem similaridade alguma continua desconhecido', () => {
+    expect(classificar('xpto qwerty asdf').tipo).toBe('desconhecido')
   })
 })

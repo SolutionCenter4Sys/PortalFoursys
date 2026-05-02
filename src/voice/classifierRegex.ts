@@ -4,22 +4,18 @@
  * Pipeline (ordem importa):
  *   1. Ajuda / Pausa
  *   2. Fechar detalhe / Fechar caixa  (frases isoladas)
- *   3. Limpar filtro (frase isolada — antes de "alternar" porque
- *      "mostrar tudo" e "todos" entrariam como toggle/seção)
- *   4. Abrir detalhe (verbos específicos + termo) — antes de caixa
- *      porque "explorar X" tem precedência sobre "abrir caixa de X"
- *   5. Abrir caixa   (verbos específicos + termo)
- *   6. Aplicar filtro (verbos específicos + termo)
- *   7. Selecionar cliente
- *   8. Alternar (tema, idioma, fullscreen, menu, overview, etc)
- *   9. Direção (próximo / anterior / início)
- *  10. Buscar
- *  11. Navegar com verbo + destino
- *  12. Fallback "abrir detalhe" só com verbo de navegação (alta confiança)
- *  13. Fallback "abrir caixa" só com verbo de navegação
- *  14. Fallback "filtro só com rótulo" (premier, banco)
- *  15. Fallback "navegar só com nome do destino"
- *  16. Desconhecido
+ *   3. Limpar filtro (frase isolada)
+ *   4. Abrir detalhe / Abrir caixa / Aplicar filtro (verbos específicos)
+ *   5. Selecionar cliente
+ *   6. Rolar página (scroll de viewport — antes de alternar/direcao
+ *      para evitar colisão com palavras curtas como "topo"/"down")
+ *   7. Alternar (tema, idioma, fullscreen, menu, etc)
+ *   8. Direção (próximo / anterior / início)
+ *   9. Buscar
+ *  10. Navegar com verbo + destino
+ *  11. Fallbacks: detalhe / caixa por verbo de nav, filtro só com rótulo,
+ *      navegar só com nome do destino
+ *  12. Desconhecido
  */
 import type {
   AlvoAlternar,
@@ -28,6 +24,7 @@ import type {
   ContextoClassificacao,
   DetalheDisponivel,
   DirecaoNavegacao,
+  DirecaoScroll,
   FiltroDisponivel,
   IClassificadorIntencao,
   IntencaoVoz,
@@ -42,6 +39,15 @@ const THRESHOLD_FUZZY_DETALHE = 0.78
 const THRESHOLD_FUZZY_FILTRO = 0.78
 const THRESHOLD_FUZZY_FILTRO_DIRETO = 0.86
 const THRESHOLD_FUZZY_NAV_DIRETO = 0.86
+/**
+ * Threshold do fallback fuzzy global: usado como última tentativa
+ * antes de retornar `desconhecido`. Compara a transcrição contra todas
+ * as frases canônicas de comandos sem alvo nomeado (ajuda, pausar,
+ * voltar, fechar caixa/detalhe, scroll, direção, alternar...). Mais
+ * permissivo (0.72) porque o reconhecimento de fala costuma errar
+ * 1-2 letras em palavras curtas como "topu" vs "topo".
+ */
+const THRESHOLD_FUZZY_FALLBACK = 0.72
 
 interface CandidatoNavegacao {
   readonly item: NavegacaoItem
@@ -86,6 +92,11 @@ export class RegexIntencaoClassifier implements IClassificadorIntencao {
     const limparFiltro = casarLimparFiltro(t, v, ctx)
     if (limparFiltro) return limparFiltro
 
+    // Detalhe contextual ANTES de abrir-detalhe específico para que
+    // "trazer detalhes" não exija termo nem lista de drillables.
+    const abrirDetalheFoco = casarAbrirDetalheFoco(t, v)
+    if (abrirDetalheFoco) return abrirDetalheFoco
+
     const abrirDetalhe = casarAbrirDetalhe(t, v, ctx)
     if (abrirDetalhe) return abrirDetalhe
 
@@ -97,6 +108,15 @@ export class RegexIntencaoClassifier implements IClassificadorIntencao {
 
     const cliente = casarSelecionarCliente(t, v, ctx)
     if (cliente) return cliente
+
+    const rolar = casarRolarPagina(t, v)
+    if (rolar) return rolar
+
+    // "Voltar" contextual ANTES de direcao para que "voltar" não dispare
+    // mudança de seção quando há um modal aberto (a intent `voltar`
+    // resolve isso no executor: modal → caixa-foco → seção anterior).
+    const voltar = casarVoltar(t, v)
+    if (voltar) return voltar
 
     const alternar = casarAlternar(t, v)
     if (alternar) return alternar
@@ -122,6 +142,12 @@ export class RegexIntencaoClassifier implements IClassificadorIntencao {
     const navegarDireto = casarNavegarSemVerbo(t, v, ctx)
     if (navegarDireto) return navegarDireto
 
+    // Última tentativa: fuzzy match global contra todas as frases
+    // canônicas de comandos sem alvo. Cobre casos típicos de erro
+    // de reconhecimento (1-2 letras trocadas, plural/singular).
+    const fuzzyFallback = casarFuzzyFallback(t, v)
+    if (fuzzyFallback) return fuzzyFallback
+
     return { tipo: 'desconhecido', transcricao: orig }
   }
 }
@@ -145,6 +171,45 @@ function casarDirecao(t: string, v: VocabularioVoz): IntencaoVoz | null {
   for (const [direcao, frases] of direcoes) {
     if (frases.some((p) => contemPalavra(t, p))) {
       return { tipo: 'navegar-direcao', direcao }
+    }
+  }
+  return null
+}
+
+/**
+ * Casa intent `voltar` contextual. Para palavras isoladas exige
+ * transcrição == frase; para multi-palavras usa `contemFrase`.
+ */
+function casarVoltar(t: string, v: VocabularioVoz): IntencaoVoz | null {
+  for (const frase of v.voltar) {
+    const fraseN = normalizar(frase)
+    if (!fraseN) continue
+    if (fraseN.includes(' ')) {
+      if (contemFrase(t, fraseN)) return { tipo: 'voltar' }
+    } else if (t === fraseN) {
+      return { tipo: 'voltar' }
+    }
+  }
+  return null
+}
+
+/**
+ * Casa intent `rolar` (scroll de página). Para frases multi-palavras usa
+ * `contemFrase`; para palavras únicas (ex.: "desce", "topo", "down") exige
+ * que a transcrição inteira seja apenas aquela palavra — assim "desce até
+ * inovação" não vira scroll, mas "desce" sim.
+ */
+function casarRolarPagina(t: string, v: VocabularioVoz): IntencaoVoz | null {
+  const direcoes = Object.entries(v.scroll) as Array<[DirecaoScroll, ReadonlyArray<string>]>
+  for (const [direcao, frases] of direcoes) {
+    for (const frase of frases) {
+      const fraseN = normalizar(frase)
+      if (!fraseN) continue
+      if (fraseN.includes(' ')) {
+        if (contemFrase(t, fraseN)) return { tipo: 'rolar', direcao }
+      } else if (t === fraseN) {
+        return { tipo: 'rolar', direcao }
+      }
     }
   }
   return null
@@ -241,6 +306,18 @@ function casarFecharCaixa(t: string, v: VocabularioVoz): IntencaoVoz | null {
 
 function casarFecharDetalhe(t: string, v: VocabularioVoz): IntencaoVoz | null {
   return v.fecharDetalhe.some((p) => contemFrase(t, p)) ? { tipo: 'fechar-detalhe' } : null
+}
+
+/**
+ * Casa intent contextual `abrir-detalhe-foco` — frases sem termo nomeado
+ * (ex.: "trazer detalhes", "explorar isso", "show details"). O alvo é
+ * resolvido pelo executor inspecionando o DOM (caixa em foco ou card
+ * mais centralizado no viewport).
+ */
+function casarAbrirDetalheFoco(t: string, v: VocabularioVoz): IntencaoVoz | null {
+  return v.abrirDetalheFoco.some((p) => contemFrase(t, p))
+    ? { tipo: 'abrir-detalhe-foco' }
+    : null
 }
 
 function casarAbrirDetalhe(
@@ -416,6 +493,82 @@ function casarAplicarFiltroSemVerbo(
     }
   }
   return null
+}
+
+/**
+ * Fallback fuzzy global: tenta encontrar uma intent sem alvo nomeado
+ * (ajuda, pausar, voltar, fechar caixa/detalhe, scroll, direção,
+ * alternar) cuja frase canônica seja suficientemente próxima da
+ * transcrição. Útil para corrigir pequenos erros de reconhecimento
+ * como "ajdua" → "ajuda", "topu" → "topo", "voltarr" → "voltar",
+ * "modu escuro" → "modo escuro".
+ *
+ * Estratégia:
+ *  - frase canônica multi-palavra: similaridade(transcrição, frase).
+ *  - frase canônica de palavra única: também testa cada palavra da
+ *    transcrição contra a frase (cobre "topu pagina" → "topo").
+ *  - retorna a intent do melhor score se >= THRESHOLD_FUZZY_FALLBACK.
+ */
+function casarFuzzyFallback(t: string, v: VocabularioVoz): IntencaoVoz | null {
+  const candidatos: Array<{ frase: string; intent: IntencaoVoz }> = [
+    ...v.ajuda.map((p) => ({ frase: p, intent: { tipo: 'falar-ajuda' } as IntencaoVoz })),
+    ...v.pausar.map((p) => ({ frase: p, intent: { tipo: 'pausar-voz' } as IntencaoVoz })),
+    ...v.voltar.map((p) => ({ frase: p, intent: { tipo: 'voltar' } as IntencaoVoz })),
+    ...v.fecharCaixa.map((p) => ({ frase: p, intent: { tipo: 'fechar-caixa' } as IntencaoVoz })),
+    ...v.fecharDetalhe.map((p) => ({ frase: p, intent: { tipo: 'fechar-detalhe' } as IntencaoVoz })),
+    ...v.abrirDetalheFoco.map((p) => ({
+      frase: p,
+      intent: { tipo: 'abrir-detalhe-foco' } as IntencaoVoz,
+    })),
+  ]
+  for (const [direcao, frases] of Object.entries(v.direcoes) as Array<
+    [DirecaoNavegacao, ReadonlyArray<string>]
+  >) {
+    for (const p of frases) {
+      candidatos.push({
+        frase: p,
+        intent: { tipo: 'navegar-direcao', direcao } as IntencaoVoz,
+      })
+    }
+  }
+  for (const [direcao, frases] of Object.entries(v.scroll) as Array<
+    [DirecaoScroll, ReadonlyArray<string>]
+  >) {
+    for (const p of frases) {
+      candidatos.push({
+        frase: p,
+        intent: { tipo: 'rolar', direcao } as IntencaoVoz,
+      })
+    }
+  }
+  for (const [alvo, frases] of Object.entries(v.alternar) as Array<
+    [AlvoAlternar, ReadonlyArray<string>]
+  >) {
+    for (const p of frases) {
+      candidatos.push({
+        frase: p,
+        intent: { tipo: 'alternar', alvo } as IntencaoVoz,
+      })
+    }
+  }
+
+  const palavrasT = t.split(/\s+/).filter(Boolean)
+  let melhor: { intent: IntencaoVoz; score: number } | null = null
+  for (const c of candidatos) {
+    const fraseN = normalizar(c.frase)
+    if (!fraseN) continue
+    let score = similaridade(t, fraseN)
+    // Para frases canônicas de uma palavra, também tenta cada palavra
+    // da transcrição. Isso permite que "topu pagina" case "topo".
+    if (!fraseN.includes(' ')) {
+      for (const pt of palavrasT) {
+        const s = similaridade(pt, fraseN)
+        if (s > score) score = s
+      }
+    }
+    if (!melhor || score > melhor.score) melhor = { intent: c.intent, score }
+  }
+  return melhor && melhor.score >= THRESHOLD_FUZZY_FALLBACK ? melhor.intent : null
 }
 
 // ───────────────────────────── helpers ─────────────────────────────

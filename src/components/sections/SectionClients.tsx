@@ -114,7 +114,7 @@ export function SectionClients() {
   const STATS = [
     { value: '150+', label: t('clients.activeClients'), icon: '🏢' },
     { value: '98%', label: t('clients.nps'), icon: '⭐' },
-    { value: '4', label: t('clients.regions'), icon: '🌎' },
+    { value: '3', label: t('clients.regions'), icon: '🌎' },
   ]
 
   const filtered = activeSector

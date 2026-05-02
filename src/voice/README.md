@@ -58,7 +58,10 @@ Testes ficam ao lado: `*.test.ts` (Vitest + jsdom).
 | `pausar-voz` | _"pausar voz"_ | _"pause voice"_ |
 | `alternar` | _"modo escuro"_, _"tela cheia"_, _"abrir menu"_ | _"toggle theme"_, _"fullscreen"_ |
 | `navegar` | _"ir para cases"_, _"premiações"_ | _"go to innovation"_ |
-| `navegar-direcao` | _"próximo"_, _"anterior"_, _"início"_ | _"next"_, _"back"_, _"home"_ |
+| `navegar-direcao` | _"próximo"_, _"anterior"_, _"início"_ | _"next"_, _"previous"_, _"home"_ |
+| `voltar` (contextual) | _"voltar"_ | _"back"_, _"go back"_ |
+| `rolar` | _"descer a página"_, _"ir para o topo"_ | _"scroll down"_, _"go to top"_ |
+| `abrir-detalhe-foco` | _"trazer detalhes"_, _"explorar isso"_ | _"show details"_, _"explore this"_ |
 | `buscar` | _"buscar por modernização"_ | _"search for cases"_ |
 | `selecionar-cliente` | _"selecionar cliente Santander"_ | _"select client Bradesco"_ |
 | `abrir-caixa` | _"abrir caixa de KPIs"_, _"focar nas alianças"_ | _"open box of partners"_ |
@@ -71,6 +74,12 @@ Testes ficam ao lado: `*.test.ts` (Vitest + jsdom).
 > A ordem do pipeline em `classifierRegex.classificarSync` é **importante**:
 > intents mais específicos (fechar/abrir detalhe, limpar filtro, abrir caixa)
 > vêm antes dos genéricos (navegar, busca direta) para evitar overlap.
+>
+> **`voltar` é contextual** (igual ao botão "voltar" do celular): primeiro tenta
+> fechar modal aberto, depois tira o foco da caixa em destaque, e só então
+> navega para a seção anterior. Por isso o vocabulário `voltar`/`back` foi
+> separado de `navegar-direcao: anterior` (que continua disponível via
+> `"anterior"`/`"previous"`/`"sessão anterior"`).
 
 ---
 
@@ -181,15 +190,23 @@ melhora o fuzzy match mesmo antes de a página carregar.
 
 ## 6. UX e feedback
 
+- **Modo always‑on**: ao clicar no `VoiceMicButton` (ou apertar `M`), o
+  microfone fica **ligado continuamente** até o usuário pedir para parar.
+  Internamente usamos `recognition.continuous = true` + auto‑restart do
+  `onend` (com backoff de 250 ms) para sobreviver aos `no-speech` /
+  `aborted` que o Chrome dispara após silêncio. Para desligar:
+  - clicar de novo no `VoiceMicButton`, ou
+  - falar _"pausar voz"_, _"desligar microfone"_, _"parar de ouvir"_,
+    _"stop listening"_, _"turn off microphone"_, etc.
 - **`VoiceMicButton`**: botão flutuante (canto inferior direito) com 3 estados
-  visuais — _idle_, _listening_ (pulsante azul), _processing_ (girando).
+  visuais — _idle_, _listening_ (pulsante vermelho), _processing_ (azul).
 - **`VoiceLiveIndicator`**: overlay no topo do viewport com:
   - texto da transcrição em tempo real (`interimResults`),
-  - mensagem TTS curta após o intent ser executado (auto‑some em 2.5s).
+  - mensagem TTS curta após o intent ser executado (auto‑some em 4.5 s).
 - **`VoiceHelpDialog`**: aberta por _"ajuda"_ ou pelo `?` na TopBar; lista
   comandos relevantes da seção atual + caixas/filtros/detalhes descobertos.
 - **TTS**: o feedback é falado pela `feedback.ts` (Web SpeechSynthesis) com
-  voz nativa do idioma — silenciável via _"pausar voz"_.
+  voz nativa do idioma — silenciável via toggle no `VoiceMicButton`.
 
 ---
 

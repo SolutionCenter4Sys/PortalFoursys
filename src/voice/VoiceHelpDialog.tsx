@@ -60,11 +60,14 @@ export function VoiceHelpDialog() {
         '"toggle theme" / "toggle language"',
         '"open menu" / "fullscreen" / "agenda"',
         '"next" / "previous" / "home"',
+        '"scroll down" / "scroll up" / "go to top" / "go to bottom"',
         '"go to <section>"',
         '"search for <term>"',
         '"select client <name>"',
         '"explore <item>" / "tell me about <item>"',
+        '"show details" / "explore this" (no name needed)',
         '"close detail" / "close modal"',
+        '"back" / "go back" (closes modal → unfocuses → previous section)',
       ]
     : [
         '"ajuda"',
@@ -72,11 +75,14 @@ export function VoiceHelpDialog() {
         '"alternar tema" / "alternar idioma"',
         '"abrir menu" / "tela cheia" / "agenda"',
         '"próximo" / "anterior" / "início"',
+        '"descer a página" / "subir a página" / "ir para o topo" / "fim da página"',
         '"ir para <sessão>"',
         '"buscar por <termo>"',
         '"selecionar cliente <nome>"',
         '"explorar <item>" / "me conta sobre <item>"',
+        '"trazer detalhes" / "explorar isso" (sem precisar do nome)',
         '"fechar detalhe" / "fechar modal"',
+        '"voltar" (fecha modal → tira foco da caixa → seção anterior)',
       ]
 
   return (

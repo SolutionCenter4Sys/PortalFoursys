@@ -16,7 +16,6 @@ import { useSwipe } from './hooks/useSwipe'
 import { useSessionPersistence } from './hooks/useSessionPersistence'
 import { SectionOverview } from './components/navigation/SectionOverview'
 import { ExportPdfModal } from './components/export/ExportPdfModal'
-import { OnboardingTour } from './components/ui/OnboardingTour'
 import { VoiceProvider, useVoice } from './voice/VoiceProvider'
 import { VoiceHelpDialog } from './voice/VoiceHelpDialog'
 import { VoiceLiveIndicator } from './voice/VoiceLiveIndicator'
@@ -127,7 +126,12 @@ function AppInner() {
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden min-w-0 relative w-full">
         <TopBar />
-        <main ref={mainRef} id="main-content" className="flex-1 relative overflow-y-auto overflow-x-hidden overscroll-contain">
+        <main
+          ref={mainRef}
+          id="main-content"
+          data-voz-scroll-root
+          className="flex-1 relative overflow-y-auto overflow-x-hidden overscroll-contain"
+        >
           <SectionRenderer />
         </main>
       </div>
@@ -168,7 +172,6 @@ function AppInner() {
 
       <SectionOverview isOpen={state.isOverviewOpen} onClose={toggleOverview} />
       <ExportPdfModal />
-      <OnboardingTour />
       <VoiceHelpDialog />
       <VoiceLiveIndicator />
     </div>
