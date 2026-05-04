@@ -6,6 +6,7 @@ import { useApp } from '../../../context/AppContext'
 import { useLanguage } from '../../../i18n'
 import { SectionWrapper } from '../../ui/SectionWrapper'
 import { ClientLogo } from '../../ui/ClientLogos'
+import { PartnerLogo, type PartnerId } from '../../ui/PartnerLogos'
 import { DynIcon } from '../../../utils/iconMap'
 import { getClientById } from '../../../data/clients'
 
@@ -316,7 +317,7 @@ function SectionNavButton({
 // ─── Componente principal ─────────────────────────────────────────────────────
 
 export function SectionClientOpening() {
-  const { state, navigate, clearClient } = useApp()
+  const { state, navigate } = useApp()
   const { t } = useLanguage()
   const client = state.activeClientId ? getClientById(state.activeClientId) : null
 
@@ -406,14 +407,125 @@ export function SectionClientOpening() {
           </motion.div>
         </div>
 
+        {/* ── Histórico Foursys × Cliente: Big Numbers ── */}
+        {client.partnership && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.55, duration: 0.5 }}
+            className="px-4 md:px-6 lg:px-10 pt-6 pb-5 border-t border-white/[0.08]"
+          >
+            <div
+              className="rounded-2xl p-5 md:p-6 lg:p-7"
+              style={{
+                background: `linear-gradient(135deg, ${rgba(clientColor, 0.08)}, ${rgba(clientColor, 0.02)})`,
+                border: `1px solid ${rgba(clientColor, 0.18)}`,
+                boxShadow: `inset 0 1px 0 ${rgba(clientColor, 0.1)}`,
+              }}
+            >
+              <div className="grid grid-cols-1 lg:grid-cols-[minmax(180px,1fr)_3fr] gap-5 lg:gap-7 items-center">
+                {/* Selo de contrato */}
+                <div className="lg:border-r lg:pr-6" style={{ borderColor: rgba(clientColor, 0.18) }}>
+                  <div
+                    className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.18em] leading-tight"
+                    style={{ color: clientColor }}
+                  >
+                    {client.partnership.contractLabel}
+                  </div>
+                  <div
+                    className="font-black leading-none mt-1"
+                    style={{
+                      color: clientColor,
+                      fontSize: 'clamp(2.25rem, 5vw, 3.25rem)',
+                      textShadow: `0 0 24px ${rgba(clientColor, 0.35)}`,
+                    }}
+                  >
+                    {client.partnership.contractSince}
+                  </div>
+                  <p className="text-[11px] md:text-xs text-foursys-text-muted leading-snug mt-2">
+                    {client.partnership.contractDescription}
+                  </p>
+                </div>
+
+                {/* Big Numbers */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                  {client.partnership.bigNumbers.map((kpi, i) => (
+                    <motion.div
+                      key={kpi.label}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.65 + i * 0.07, duration: 0.4 }}
+                      className="text-center md:text-left"
+                    >
+                      <div
+                        className="font-black leading-none"
+                        style={{
+                          color: clientColor,
+                          fontSize: 'clamp(1.5rem, 3.2vw, 2.25rem)',
+                          textShadow: `0 0 16px ${rgba(clientColor, 0.3)}`,
+                        }}
+                      >
+                        {kpi.value}
+                      </div>
+                      <div className="text-[10px] md:text-[11px] text-foursys-text-muted leading-snug mt-1.5">
+                        {kpi.label}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* ── Áreas de Atuação ── */}
+        {client.partnership && client.partnership.actionAreas.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.65, duration: 0.5 }}
+            className="px-4 md:px-6 lg:px-10 pb-6"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(180px,1fr)_3fr] gap-4 lg:gap-7 items-start">
+              <div>
+                <div
+                  className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.18em]"
+                  style={{ color: clientColor }}
+                >
+                  {client.partnership.actionAreasTitle}
+                </div>
+                <div className="hidden lg:block w-10 h-0.5 mt-2" style={{ background: clientColor }} />
+              </div>
+
+              <div className="flex flex-wrap gap-2 md:gap-2.5">
+                {client.partnership.actionAreas.map((area, i) => (
+                  <motion.span
+                    key={area}
+                    initial={{ opacity: 0, scale: 0.92 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.75 + i * 0.03, duration: 0.3 }}
+                    className="text-[10px] md:text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 md:px-3.5 md:py-2 rounded-full text-white whitespace-nowrap"
+                    style={{
+                      background: `linear-gradient(135deg, ${clientColor}, ${rgba(clientColor, 0.78)})`,
+                      boxShadow: `0 2px 8px ${rgba(clientColor, 0.35)}, inset 0 1px 0 rgba(255,255,255,0.18)`,
+                    }}
+                  >
+                    {area}
+                  </motion.span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+
         {/* ── Barra inferior ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.5 }}
-          className="grid grid-cols-1 sm:grid-cols-3 border-t border-white/[0.08]"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_auto] border-t border-white/[0.08] gap-y-3 sm:gap-y-0 items-stretch"
         >
-          <div className="px-4 md:px-6 lg:px-10 py-3 sm:py-5 sm:border-r border-b sm:border-b-0 border-white/[0.06]">
+          <div className="px-4 md:px-6 lg:px-10 py-3 sm:py-5 sm:border-r border-b sm:border-b-0 border-white/[0.06] flex flex-col justify-center">
             <div
               className="text-[10px] font-bold uppercase tracking-[0.16em] mb-1 sm:mb-2"
               style={{ color: clientColor }}
@@ -425,7 +537,7 @@ export function SectionClientOpening() {
             </div>
           </div>
 
-          <div className="px-4 md:px-6 lg:px-10 py-3 sm:py-5 sm:border-r border-b sm:border-b-0 border-white/[0.06]">
+          <div className="px-4 md:px-6 lg:px-10 py-3 sm:py-5 lg:border-r border-b sm:border-b-0 border-white/[0.06] flex flex-col justify-center">
             <div
               className="text-[10px] font-bold uppercase tracking-[0.16em] mb-1 sm:mb-2"
               style={{ color: clientColor }}
@@ -437,20 +549,39 @@ export function SectionClientOpening() {
             </div>
           </div>
 
-          <div className="px-4 md:px-6 lg:px-10 py-3 sm:py-5 flex flex-col justify-center">
-            <div
-              className="text-[10px] font-bold uppercase tracking-[0.16em] mb-1 sm:mb-2"
-              style={{ color: clientColor }}
-            >
-              {t('clientSections.opening.viewMode')}
+          {client.partnership?.alliances && client.partnership.alliances.length > 0 && (
+            <div className="px-4 md:px-6 lg:px-8 py-3 sm:py-4 sm:col-span-2 lg:col-span-1 flex items-center justify-center">
+              <div
+                className="rounded-2xl px-5 py-3.5 md:px-6 md:py-4 w-full max-w-md"
+                style={{
+                  background: 'rgba(8,12,22,0.65)',
+                  border: `1px solid ${rgba(clientColor, 0.22)}`,
+                  boxShadow: `0 8px 24px rgba(0,0,0,0.35), inset 0 1px 0 ${rgba(clientColor, 0.1)}`,
+                }}
+              >
+                <div
+                  className="text-center text-[11px] md:text-xs font-bold uppercase tracking-[0.18em] mb-3"
+                  style={{ color: clientColor }}
+                >
+                  {client.partnership.alliancesTitle}
+                </div>
+                <div className="flex items-center justify-around gap-3 md:gap-4">
+                  {client.partnership.alliances.map((id, i) => (
+                    <motion.div
+                      key={id}
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.85 + i * 0.06, duration: 0.35 }}
+                      className="flex items-center justify-center"
+                      style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.4))' }}
+                    >
+                      <PartnerLogo id={id as PartnerId} size={26} />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
             </div>
-            <button
-              onClick={clearClient}
-              className="text-xs text-foursys-text-dim hover:text-foursys-text-muted active:text-white transition-colors underline underline-offset-2 text-left min-h-[44px] flex items-center"
-            >
-              {t('clientSections.opening.backToInstitutional')}
-            </button>
-          </div>
+          )}
         </motion.div>
 
         {/* ── Rodapé ── */}

@@ -624,6 +624,13 @@ export const santanderClient: ClientConfig = {
       icon: 'building',
       component: 'client-cases',
     },
+    {
+      id: 'client-extra-2',
+      label: 'Social Selling',
+      description: 'Contatos estratégicos no ecossistema Santander',
+      icon: 'users',
+      component: 'client-extra-2',
+    },
   ],
   insights: [
     {
@@ -699,6 +706,35 @@ export const santanderClient: ClientConfig = {
       icon: '🌱',
     },
   ],
+  partnership: {
+    contractSince: '2009',
+    contractLabel: 'CONTRATO ATIVO DESDE',
+    contractDescription: 'Atuação ininterrupta da Foursys junto ao Santander.',
+    bigNumbers: [
+      { value: '69', label: 'Quantidade de profissionais envolvidos' },
+      { value: '78.624', label: 'Horas de serviços' },
+      { value: '110', label: 'Atuação em projetos em 2020' },
+      { value: '1,58%', label: 'Turnover médio mensal' },
+    ],
+    actionAreasTitle: 'Atuação nas seguintes áreas',
+    actionAreas: [
+      'COBRANÇA E DDA',
+      'RISCOS',
+      'CARTÕES',
+      'CASH',
+      'PAGAMENTOS E ARRECADAÇÕES',
+      'RECEBÍVEIS',
+      'COMEX',
+      'EMPRÉSTIMOS',
+      'INFRAESTRUTURA MAINFRAME',
+      'ADQUIRÊNCIA',
+      'ANTIFRAUDES',
+      'CORE BANKING',
+      'CANAIS',
+    ],
+    alliancesTitle: 'Alianças Estratégicas',
+    alliances: ['aws', 'databricks', 'salesforce', 'pega'],
+  },
   cases: [
     {
       id: 'shi-portal',
@@ -775,6 +811,27 @@ export const santanderClient: ClientConfig = {
       ],
     },
   },
+  extra2: {
+    title: 'Social Selling — Contatos Estratégicos',
+    subtitle: 'Líderes de TI estratégicos no ecossistema Santander Brasil',
+    content: {
+      contacts: [
+        {
+          name: 'Wander Cunha',
+          role: 'Director — F1RST Digital Services',
+          company: 'F1RST Digital Services (Grupo Santander Brasil)',
+          sector: 'Bancário e Serviços Financeiros',
+          city: 'São Paulo - SP',
+          revenue: 'F1RST: ~R$ 2 bi orçamento anual de TI',
+          opportunities: 4,
+          topOffer: 'AI Squad',
+          topScore: 96,
+          briefingFiles: [{ label: 'Wander Cunha — Santander Brasil', file: 'wander-cunha.html' }],
+          tag: 'F1RST / Santander Brasil',
+        },
+      ],
+    },
+  },
 }
 
 const santanderClientEn: ClientConfig = {
@@ -812,6 +869,13 @@ const santanderClientEn: ClientConfig = {
       description: 'Deliveries within the Santander ecosystem',
       icon: 'building',
       component: 'client-cases',
+    },
+    {
+      id: 'client-extra-2',
+      label: 'Social Selling',
+      description: 'Strategic contacts in the Santander ecosystem',
+      icon: 'users',
+      component: 'client-extra-2',
     },
   ],
   insights: [
@@ -888,6 +952,35 @@ const santanderClientEn: ClientConfig = {
       icon: '🌱',
     },
   ],
+  partnership: {
+    contractSince: '2009',
+    contractLabel: 'ACTIVE CONTRACT SINCE',
+    contractDescription: 'Foursys uninterrupted work alongside Santander.',
+    bigNumbers: [
+      { value: '69', label: 'Professionals involved' },
+      { value: '78,624', label: 'Service hours' },
+      { value: '110', label: 'Projects in 2020' },
+      { value: '1.58%', label: 'Average monthly turnover' },
+    ],
+    actionAreasTitle: 'Engaged across the following areas',
+    actionAreas: [
+      'COLLECTIONS & DDA',
+      'RISK',
+      'CARDS',
+      'CASH',
+      'PAYMENTS & RECEIPTS',
+      'RECEIVABLES',
+      'COMEX',
+      'LOANS',
+      'MAINFRAME INFRASTRUCTURE',
+      'ACQUIRING',
+      'ANTI-FRAUD',
+      'CORE BANKING',
+      'CHANNELS',
+    ],
+    alliancesTitle: 'Strategic Alliances',
+    alliances: ['aws', 'databricks', 'salesforce', 'pega'],
+  },
   cases: [
     {
       id: 'shi-portal',
@@ -961,6 +1054,27 @@ const santanderClientEn: ClientConfig = {
         { value: '3x', label: 'Release velocity' },
         { value: '60%', label: 'Defect reduction' },
         { value: '100%', label: 'Santander approved' },
+      ],
+    },
+  },
+  extra2: {
+    title: 'Social Selling — Strategic Contacts',
+    subtitle: 'Strategic IT leaders in the Santander Brazil ecosystem',
+    content: {
+      contacts: [
+        {
+          name: 'Wander Cunha',
+          role: 'Director — F1RST Digital Services',
+          company: 'F1RST Digital Services (Santander Brazil Group)',
+          sector: 'Banking & Financial Services',
+          city: 'São Paulo - SP',
+          revenue: 'F1RST: ~BRL 2bi annual IT budget',
+          opportunities: 4,
+          topOffer: 'AI Squad',
+          topScore: 96,
+          briefingFiles: [{ label: 'Wander Cunha — Santander Brazil', file: 'wander-cunha.html' }],
+          tag: 'F1RST / Santander Brazil',
+        },
       ],
     },
   },

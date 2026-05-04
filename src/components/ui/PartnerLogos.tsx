@@ -90,6 +90,32 @@ export function PegaLogo({ className = '', size = 32 }: LogoProps) {
   )
 }
 
+export function SalesforceLogo({ className = '', size = 32 }: LogoProps) {
+  const w = size * 1.95
+  const h = size
+  return (
+    <svg viewBox="0 0 200 110" width={w} height={h} className={className} aria-label="Salesforce">
+      <path
+        d="M82 26c6-9 17-15 30-15 16 0 30 9 37 22 5-2 11-3 17-3 21 0 38 17 38 38 0 6-2 12-4 17 9 6 14 16 14 27 0 18-15 33-33 33-3 0-6 0-9-1-7 12-20 20-35 20-9 0-17-3-23-7-7 11-19 19-32 19-21 0-39-17-39-38 0-1 0-1 0-2-3 1-7 1-11 1C16 137 0 122 0 102c0-15 9-28 22-34-1-3-1-7-1-10 0-19 16-35 35-35 11 0 21 5 26 13 0-4 0-7 0-10z"
+        fill="#00A1E0"
+      />
+      <text
+        x="100"
+        y="73"
+        textAnchor="middle"
+        fill="#FFFFFF"
+        fontSize="32"
+        fontWeight="600"
+        fontFamily="'Salesforce Sans', system-ui, sans-serif"
+        fontStyle="italic"
+        letterSpacing="-0.5"
+      >
+        salesforce
+      </text>
+    </svg>
+  )
+}
+
 export function SnowflakeLogo({ className = '', size = 32 }: LogoProps) {
   return (
     <svg viewBox="0 0 36 36" width={size} height={size} className={className} aria-label="Snowflake">
@@ -113,7 +139,7 @@ export function SnowflakeLogo({ className = '', size = 32 }: LogoProps) {
   )
 }
 
-export type PartnerId = 'microsoft' | 'aws' | 'google-cloud' | 'databricks' | 'adobe' | 'digibee' | 'intel' | 'pega' | 'snowflake'
+export type PartnerId = 'microsoft' | 'aws' | 'google-cloud' | 'databricks' | 'adobe' | 'digibee' | 'intel' | 'pega' | 'salesforce' | 'snowflake'
 
 const LOGO_MAP: Record<PartnerId, React.FC<LogoProps>> = {
   'microsoft': MicrosoftLogo,
@@ -124,6 +150,7 @@ const LOGO_MAP: Record<PartnerId, React.FC<LogoProps>> = {
   'digibee': DigibeeLogo,
   'intel': IntelLogo,
   'pega': PegaLogo,
+  'salesforce': SalesforceLogo,
   'snowflake': SnowflakeLogo,
 }
 

@@ -388,6 +388,7 @@ export function SectionClientExtra2() {
           {selectedContact && (
             <ContactBriefingModal
               contact={selectedContact}
+              clientId={client.id}
               clientColor={clientColor}
               onClose={() => setSelectedContact(null)}
             />
@@ -400,10 +401,12 @@ export function SectionClientExtra2() {
 
 function ContactBriefingModal({
   contact,
+  clientId,
   clientColor,
   onClose,
 }: {
   contact: SocialContact
+  clientId: string
   clientColor: string
   onClose: () => void
 }) {
@@ -484,7 +487,7 @@ function ContactBriefingModal({
           {files.length > 0 ? (
             <iframe
               key={files[activeFile].file}
-              src={`/briefings/itforum/${files[activeFile].file}`}
+              src={`/briefings/${clientId}/${files[activeFile].file}`}
               className="w-full h-full border-0"
               title={`${t('clientSections.extra2.briefing')} — ${contact.name}`}
             />

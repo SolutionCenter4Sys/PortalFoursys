@@ -28,6 +28,17 @@ export interface ClientSection {
   component: 'client-opening' | 'client-insights' | 'client-cases' | 'client-extra-1' | 'client-extra-2'
 }
 
+export interface ClientPartnership {
+  contractSince: string
+  contractLabel: string
+  contractDescription: string
+  bigNumbers: { value: string; label: string }[]
+  actionAreasTitle: string
+  actionAreas: string[]
+  alliancesTitle?: string
+  alliances?: string[]
+}
+
 export interface ClientConfig {
   id: string
   name: string
@@ -39,6 +50,7 @@ export interface ClientConfig {
   sections: ClientSection[]
   insights?: ClientInsight[]
   cases?: ClientCase[]
+  partnership?: ClientPartnership
   extra1?: {
     title: string
     subtitle: string
