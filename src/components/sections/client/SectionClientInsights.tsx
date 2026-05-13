@@ -51,17 +51,6 @@ function SantanderStrategicHero({
       transition={{ duration: 0.5 }}
       className="mb-10"
     >
-      {/* Report badge */}
-      <div className="flex items-center gap-3 mb-6">
-        <div
-          className="px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.16em]"
-          style={{ background: hexToRgba(color, 0.15), color }}
-        >
-          {ctx.reportTitle}
-        </div>
-        <span className="text-xs text-foursys-text-dim">{ctx.period}</span>
-      </div>
-
       {/* KPI strip */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
         {ctx.kpis.slice(0, 8).map((kpi, i) => (

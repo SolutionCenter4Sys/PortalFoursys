@@ -187,6 +187,7 @@ export type AppSection =
   | 'awards'
   | 'clients-showcase'
   | 'capabilities'
+  | 'benchmark'
   // ESG
   | 'esg'
   // Referência

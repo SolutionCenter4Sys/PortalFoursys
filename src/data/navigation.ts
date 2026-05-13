@@ -121,6 +121,13 @@ const navigationItemsPt: NavigationItem[] = [
     category: 'Provas',
     description: 'Stack, métodos e expertise por área',
   },
+  {
+    id: 'benchmark',
+    label: 'Benchmark',
+    icon: 'users',
+    category: 'Provas',
+    description: 'Líderes de TI estratégicos · Santander Brasil e IT Fórum Trancoso 2026',
+  },
 
   // ── ESG ────────────────────────────────────────────────────────────────────
   {
@@ -274,6 +281,13 @@ const navigationItemsEn: NavigationItem[] = [
     icon: 'code',
     category: 'Proof Points',
     description: 'Stack, methods and expertise by area',
+  },
+  {
+    id: 'benchmark',
+    label: 'Benchmark',
+    icon: 'users',
+    category: 'Proof Points',
+    description: 'Strategic IT leaders · Santander Brazil and IT Forum Trancoso 2026',
   },
 
   // ── ESG ────────────────────────────────────────────────────────────────────

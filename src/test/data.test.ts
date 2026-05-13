@@ -59,7 +59,7 @@ describe('Client data', () => {
     expect(unknown).toBeFalsy()
   })
 
-  it('Santander has enriched insights from 4T25', () => {
+  it('Santander has enriched insights', () => {
     const santander = getClientById('santander')
     expect(santander?.insights?.length).toBeGreaterThanOrEqual(6)
     const thinkValue = santander?.insights?.find(i => i.id === 'think-value')

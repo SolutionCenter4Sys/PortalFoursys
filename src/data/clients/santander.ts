@@ -1,11 +1,9 @@
 import type { ClientConfig } from '../../types'
 import type { Language } from '../../i18n/types'
 
-// ─── Dados estratégicos extraídos da Apresentação Institucional 4T25 ────────
+// ─── Dados estratégicos do Santander Brasil ─────────────────────────────────
 
 export interface SantanderStrategicContext {
-  reportTitle: string
-  period: string
   kpis: { value: string; label: string; delta?: string }[]
   strategyPillars: {
     id: string
@@ -21,8 +19,6 @@ export interface SantanderStrategicContext {
 }
 
 export const santanderStrategicContext: SantanderStrategicContext = {
-  reportTitle: 'Apresentação Institucional 4T25',
-  period: '4º Trimestre 2025 (BRGAAP)',
   kpis: [
     { value: 'R$ 1,256T', label: 'Total de Ativos', delta: '' },
     { value: 'R$ 708B', label: 'Carteira de Crédito', delta: '' },
@@ -99,8 +95,6 @@ export const santanderStrategicContext: SantanderStrategicContext = {
 }
 
 const santanderStrategicContextEn: SantanderStrategicContext = {
-  reportTitle: 'Institutional Presentation Q4 2025',
-  period: 'Q4 2025 (BRGAAP)',
   kpis: [
     { value: 'BRL 1.256T', label: 'Total Assets', delta: '' },
     { value: 'BRL 708B', label: 'Credit Portfolio', delta: '' },
@@ -617,13 +611,6 @@ export const santanderClient: ClientConfig = {
       icon: 'building',
       component: 'client-cases',
     },
-    {
-      id: 'client-extra-2',
-      label: 'Social Selling',
-      description: 'Contatos estratégicos no ecossistema Santander',
-      icon: 'users',
-      component: 'client-extra-2',
-    },
   ],
   insights: [
     {
@@ -711,16 +698,21 @@ export const santanderClient: ClientConfig = {
     ],
     actionAreasTitle: 'Atuação nas seguintes áreas',
     actionAreas: [
-      'COBRANÇA E DDA',
-      'RISCOS',
-      'CARTÕES',
-      'CASH',
+      'CASH MANAGEMENT',
+      'AGRONEGÓCIO',
+      'MEIOS DE PAGAMENTOS',
       'PAGAMENTOS E ARRECADAÇÕES',
       'RECEBÍVEIS',
-      'COMEX',
+      'CONSÓRCIO',
       'EMPRÉSTIMOS',
-      'INFRAESTRUTURA MAINFRAME',
+      'PLATAFORMA DE INVESTIMENTOS / COMEX',
       'ADQUIRÊNCIA',
+      'BNDES',
+      'RISCO PJ / PF',
+      'FINANCEIRA',
+      'COBRANÇA E DDA',
+      'CARTÕES',
+      'INFRAESTRUTURA MAINFRAME',
       'ANTIFRAUDES',
       'CORE BANKING',
       'CANAIS',
@@ -856,13 +848,6 @@ const santanderClientEn: ClientConfig = {
       icon: 'building',
       component: 'client-cases',
     },
-    {
-      id: 'client-extra-2',
-      label: 'Social Selling',
-      description: 'Strategic contacts in the Santander ecosystem',
-      icon: 'users',
-      component: 'client-extra-2',
-    },
   ],
   insights: [
     {
@@ -950,16 +935,21 @@ const santanderClientEn: ClientConfig = {
     ],
     actionAreasTitle: 'Engaged across the following areas',
     actionAreas: [
-      'COLLECTIONS & DDA',
-      'RISK',
-      'CARDS',
-      'CASH',
+      'CASH MANAGEMENT',
+      'AGRIBUSINESS',
+      'PAYMENT METHODS',
       'PAYMENTS & RECEIPTS',
       'RECEIVABLES',
-      'COMEX',
+      'CONSORTIUM',
       'LOANS',
-      'MAINFRAME INFRASTRUCTURE',
+      'INVESTMENT PLATFORM / COMEX',
       'ACQUIRING',
+      'BNDES',
+      'CORPORATE & RETAIL RISK',
+      'CONSUMER FINANCE',
+      'COLLECTIONS & DDA',
+      'CARDS',
+      'MAINFRAME INFRASTRUCTURE',
       'ANTI-FRAUD',
       'CORE BANKING',
       'CHANNELS',

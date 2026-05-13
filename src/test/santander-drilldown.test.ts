@@ -5,12 +5,7 @@ import {
   santanderClient,
 } from '../data/clients/santander'
 
-describe('Santander strategic context (4T25)', () => {
-  it('has report metadata', () => {
-    expect(santanderStrategicContext.reportTitle).toContain('4T25')
-    expect(santanderStrategicContext.period).toContain('2025')
-  })
-
+describe('Santander strategic context', () => {
   it('has at least 6 KPIs', () => {
     expect(santanderStrategicContext.kpis.length).toBeGreaterThanOrEqual(6)
   })
@@ -87,8 +82,8 @@ describe('Santander client config', () => {
     expect(santanderClient.colors.accent).toBe('#FF3333')
   })
 
-  it('has 4 sections', () => {
-    expect(santanderClient.sections).toHaveLength(4)
+  it('has 3 sections', () => {
+    expect(santanderClient.sections).toHaveLength(3)
   })
 
   it('has 2 cases', () => {
