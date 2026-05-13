@@ -1,10 +1,10 @@
 import { useState, useCallback, useRef, useEffect, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, Layers3, X, CheckCircle2, Shield, Zap } from 'lucide-react'
+import { ArrowRight, Layers3, X, CheckCircle2, Shield, Zap, Sparkles, BrainCircuit, Blocks } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { DynIcon } from '../../utils/iconMap'
-import { getServiceLines } from '../../data/services'
+import { getServiceLines, findServiceLineById } from '../../data/services'
 import { SERVICE_ICONS, SERVICE_VISUALS, DEFAULT_VISUAL } from '../../data/serviceVisuals'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
@@ -57,7 +57,7 @@ function OrbitRing({
 
   return (
     <div
-      className="relative aspect-square max-w-[340px] lg:max-w-[420px] xl:max-w-[480px] mx-auto"
+      className="relative aspect-square max-w-[380px] lg:max-w-[460px] xl:max-w-[520px] mx-auto"
       role="radiogroup"
       aria-label={t('services.title')}
     >
@@ -104,18 +104,18 @@ function OrbitRing({
             style={{ top: `${y}%`, left: `${x}%` }}
           >
             <span
-              className={`w-10 h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 rounded-full border flex items-center justify-center transition-all duration-300 ${visual.softBg} ${visual.border}`}
+              className={`w-14 h-14 lg:w-16 lg:h-16 xl:w-[72px] xl:h-[72px] rounded-full border-2 flex items-center justify-center transition-all duration-300 ${visual.softBg} ${visual.border}`}
               style={{
                 boxShadow: isActive
-                  ? `0 0 0 5px ${visual.glow}30, 0 0 24px ${visual.glow}70`
-                  : `0 0 10px ${visual.glow}30`,
-                transform: isActive ? 'scale(1.18)' : 'scale(1)',
+                  ? `0 0 0 6px ${visual.glow}35, 0 0 32px ${visual.glow}85`
+                  : `0 0 14px ${visual.glow}45`,
+                transform: isActive ? 'scale(1.22)' : 'scale(1)',
               }}
             >
-              <Icon size={16} className={visual.text} />
+              <Icon size={22} className={visual.text} strokeWidth={2.2} />
             </span>
             <span
-              className={`absolute max-w-[100px] lg:max-w-[110px] text-[9px] lg:text-[10px] xl:text-[11px] font-bold leading-tight pointer-events-none text-white/90 ${labelPos}`}
+              className={`absolute max-w-[110px] lg:max-w-[120px] text-[10px] lg:text-[11px] xl:text-[12px] font-bold leading-tight pointer-events-none text-white/90 ${labelPos}`}
             >
               {service.title}
             </span>
@@ -416,7 +416,7 @@ function OfferDetailModal({
 
 /* ── Deep-dive content for specific service lines ────────────────────────────── */
 
-const DEEP_DIVE_IDS = ['modernizacao-legados', 'ciberseguranca', 'fourblox', 'ai-augmented-squad', 'quality-testes-ia', 'dados-analytics', 'cloud-finops'] as const
+const DEEP_DIVE_IDS = ['modernizacao-legados', 'ciberseguranca', 'fourblox', 'ai-augmented-squad', 'quality-testes-ia', 'dados-analytics'] as const
 
 /* ── Modernização de Legados Deep Dive ────────────────────────────────────── */
 
@@ -1850,197 +1850,13 @@ function QualityAIDeepDive({ lang }: { lang: string }) {
   )
 }
 
-/* ── Cloud & FinOps Deep Dive ─────────────────────────────────────────────── */
-
-const finopsPillars = [
-  {
-    emoji: '👁️',
-    title: 'Visibilidade',
-    desc: 'Monitoramento de Custos em Tempo Real',
-    items: [
-      'Dashboards unificados multi-cloud',
-      'Alocação e chargeback por time/projeto',
-      'Alertas proativos de anomalias de consumo',
-    ],
-  },
-  {
-    emoji: '📉',
-    title: 'Otimização',
-    desc: 'Redução de Custos com IA',
-    highlight: '↓ 35% Gastos em Cloud',
-    items: [
-      'Right-sizing automatizado de recursos',
-      'Reservas e savings plans inteligentes',
-      'Identificação de recursos ociosos e órfãos',
-    ],
-  },
-  {
-    emoji: '⚖️',
-    title: 'Governança',
-    desc: 'Automação de Políticas & Conformidade',
-    highlight: 'Framework FinOps Foundation',
-    items: [
-      'Políticas de tagging e compliance',
-      'Guardrails de provisionamento',
-      'Auditoria contínua de conformidade',
-    ],
-  },
-  {
-    emoji: '🎓',
-    title: 'Cultura',
-    desc: 'FinOps como Disciplina',
-    highlight: 'Engenharia × Finanças × Negócio',
-    items: [
-      'Capacitação de times em práticas FinOps',
-      'Accountability financeira descentralizada',
-      'Decisões de arquitetura cost-aware',
-    ],
-  },
-]
-
-const finopsPillarsEn = [
-  {
-    emoji: '👁️',
-    title: 'Visibility',
-    desc: 'Real-Time Cost Monitoring',
-    items: [
-      'Unified multi-cloud dashboards',
-      'Allocation and chargeback by team/project',
-      'Proactive consumption anomaly alerts',
-    ],
-  },
-  {
-    emoji: '📉',
-    title: 'Optimization',
-    desc: 'Cost Reduction with AI',
-    highlight: '↓ 35% Cloud Spending',
-    items: [
-      'Automated resource right-sizing',
-      'Intelligent reservations and savings plans',
-      'Identification of idle and orphan resources',
-    ],
-  },
-  {
-    emoji: '⚖️',
-    title: 'Governance',
-    desc: 'Policy Automation & Compliance',
-    highlight: 'FinOps Foundation Framework',
-    items: [
-      'Tagging and compliance policies',
-      'Provisioning guardrails',
-      'Continuous compliance auditing',
-    ],
-  },
-  {
-    emoji: '🎓',
-    title: 'Culture',
-    desc: 'FinOps as a Discipline',
-    highlight: 'Engineering × Finance × Business',
-    items: [
-      'Team training in FinOps practices',
-      'Decentralized financial accountability',
-      'Cost-aware architecture decisions',
-    ],
-  },
-]
-
-function CloudFinOpsDeepDive({ lang }: { lang: string }) {
-  const pillars = lang === 'en' ? finopsPillarsEn : finopsPillars
-  const pt = lang === 'pt'
-
-  return (
-    <div className="space-y-7">
-      {/* Proposta de valor */}
-      <div className="p-5 rounded-xl bg-gradient-to-r from-orange-500/15 to-transparent border border-orange-500/25">
-        <h4 className="text-sm font-bold text-white mb-1">
-          {pt ? 'Estratégia FinOps' : 'FinOps Strategy'}
-        </h4>
-        <p className="text-xs text-orange-300 font-semibold mb-2">
-          {pt
-            ? 'Inteligência Financeira em Cloud & Otimização Contínua'
-            : 'Financial Intelligence in Cloud & Continuous Optimization'}
-        </p>
-        <p className="text-[11px] text-foursys-text-muted leading-relaxed">
-          {pt
-            ? 'Potencializado por Agentes de IA + Ecossistema de Parceiros. Equilibramos escala, custo e governança em ambientes cloud, transformando consumo em eficiência mensurável e previsível — com disciplina FinOps que conecta Engenharia, Finanças e Negócio.'
-            : 'Powered by AI Agents + Partner Ecosystem. We balance scale, cost, and governance in cloud environments, turning consumption into measurable and predictable efficiency — with FinOps discipline connecting Engineering, Finance, and Business.'}
-        </p>
-      </div>
-
-      {/* Métricas */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {[
-          { value: '+280%', label: pt ? 'ROI em Cloud' : 'Cloud ROI', color: 'text-green-400' },
-          { value: '<5min', label: pt ? 'Detecção de Anomalias' : 'Anomaly Detection', color: 'text-cyan-400' },
-          { value: '40%', label: pt ? 'Redução de Desperdício' : 'Waste Reduction', color: 'text-orange-400' },
-          { value: '3', label: pt ? 'Multi-cloud: AWS · Azure · GCP' : 'Multi-cloud: AWS · Azure · GCP', color: 'text-purple-400' },
-        ].map(m => (
-          <div key={m.label} className="text-center p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-            <div className={`text-xl font-black ${m.color}`}>{m.value}</div>
-            <div className="text-[9px] uppercase tracking-wider text-foursys-text-dim font-bold mt-1">{m.label}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* 4 Pilares */}
-      <div>
-        <h4 className="text-xs font-bold uppercase tracking-[0.15em] text-orange-400 mb-4">
-          {pt ? 'Pilares da Estratégia' : 'Strategy Pillars'}
-        </h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {pillars.map(p => (
-            <div key={p.title} className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-lg">{p.emoji}</span>
-                <div>
-                  <h5 className="text-xs font-bold text-white uppercase tracking-wider">{p.title}</h5>
-                  <span className="text-[10px] text-foursys-text-muted">{p.desc}</span>
-                </div>
-              </div>
-              {p.highlight && (
-                <div className="mb-2 px-2 py-1 rounded bg-orange-500/10 border border-orange-500/20 text-[10px] text-orange-300 font-semibold inline-block">
-                  {p.highlight}
-                </div>
-              )}
-              <div className="space-y-1 mt-1">
-                {p.items.map(item => (
-                  <div key={item} className="flex items-start gap-1.5 text-[10px] text-white/70">
-                    <span className="text-orange-400 mt-0.5">▸</span>
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Ecossistema de Parceiros */}
-      <div>
-        <h4 className="text-xs font-bold uppercase tracking-[0.15em] text-orange-400 mb-3">
-          {pt ? 'Ecossistema de Parceiros' : 'Partner Ecosystem'}
-        </h4>
-        <div className="flex flex-wrap gap-2">
-          {['Datadog', 'Dynatrace', 'AWS', 'Azure'].map(partner => (
-            <span key={partner} className="px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-[11px] font-semibold text-white/80">
-              {partner}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Diferencial */}
-      <div className="p-4 rounded-xl bg-gradient-to-r from-orange-500/10 to-transparent border border-orange-500/20">
-        <p className="text-[11px] text-foursys-text-muted leading-relaxed">
-          <strong className="text-foursys-text">{pt ? 'Por que Foursys:' : 'Why Foursys:'}</strong>{' '}
-          {pt
-            ? 'FinOps como disciplina, não apenas ferramenta. Otimização contínua com métricas reais de negócio, experiência multi-cloud (AWS, Azure, GCP) e governança financeira integrada à operação técnica. Potencializado por Agentes de IA do Foursys Innovation Labs.'
-            : 'FinOps as a discipline, not just a tool. Continuous optimization with real business metrics, multi-cloud experience (AWS, Azure, GCP) and financial governance integrated with technical operations. Powered by AI Agents from Foursys Innovation Labs.'}
-        </p>
-      </div>
-    </div>
-  )
-}
+/* ── Cloud & FinOps Deep Dive — @deprecated ───────────────────────────────────
+ * O card "Cloud & FinOps" foi consolidado em "Arquitetura, DevOps, Cloud e FinOps".
+ * O conteúdo histórico do Deep Dive (pilares FinOps, parceiros, métricas) foi
+ * removido daqui para evitar código morto. Caso seja necessário reaproveitar
+ * para um futuro detalhamento dentro de Arquitetura, o histórico está no git
+ * (commit anterior à consolidação 12 → 8).
+ * --------------------------------------------------------------------------- */
 
 /* ── Dados & Analytics Deep Dive ──────────────────────────────────────────── */
 
@@ -2310,9 +2126,12 @@ function DeepDiveContent({ serviceId, lang }: { serviceId: string; lang: string 
     return <DadosAnalyticsDeepDive lang={lang} />
   }
 
-  if (serviceId === 'cloud-finops') {
-    return <CloudFinOpsDeepDive lang={lang} />
-  }
+  // @deprecated 'cloud-finops' foi consolidado em 'arquitetura-devops' (Arquitetura, DevOps, Cloud e FinOps).
+  // O componente CloudFinOpsDeepDive permanece no arquivo para reaproveitamento futuro,
+  // mas o guard abaixo foi removido junto com o id em DEEP_DIVE_IDS.
+  // if (serviceId === 'cloud-finops') {
+  //   return <CloudFinOpsDeepDive lang={lang} />
+  // }
 
   return null
 }
@@ -2430,9 +2249,13 @@ export function SectionServices() {
       if (state.previousSection && state.previousSection !== 'services') {
         returnSectionRef.current = state.previousSection
       }
-      const targetService = serviceLines.find(s => s.id === state.deepDiveHint)
+      const hintId = state.deepDiveHint
+      const targetService = findServiceLineById(lang, hintId)
       if (targetService) {
-        setActiveServiceId(targetService.id)
+        const isInOrbit = serviceLines.some(s => s.id === targetService.id)
+        if (isInOrbit) {
+          setActiveServiceId(targetService.id)
+        }
         if ((DEEP_DIVE_IDS as readonly string[]).includes(targetService.id)) {
           setDeepDiveId(targetService.id)
         } else {
@@ -2441,18 +2264,18 @@ export function SectionServices() {
       }
       clearDeepDiveHint()
     }
-  }, [state.deepDiveHint, clearDeepDiveHint, state.previousSection])
+  }, [state.deepDiveHint, clearDeepDiveHint, state.previousSection, lang, serviceLines])
 
   const mobileSheetService = mobileSheetId
     ? serviceLines.find(s => s.id === mobileSheetId) ?? null
     : null
 
   const offerDetailService = offerDetailId
-    ? serviceLines.find(s => s.id === offerDetailId) ?? null
+    ? findServiceLineById(lang, offerDetailId) ?? null
     : null
 
   const deepDiveService = deepDiveId
-    ? serviceLines.find(s => s.id === deepDiveId) ?? null
+    ? findServiceLineById(lang, deepDiveId) ?? null
     : null
 
   useEffect(() => {
@@ -2531,19 +2354,111 @@ export function SectionServices() {
                 {t('services.subtitle')}
               </p>
             </div>
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex gap-2.5 flex-wrap">
               {[
-                { value: `${serviceLines.length}`, label: lang === 'pt' ? 'frentes' : 'fronts' },
-                { value: '360°', label: lang === 'pt' ? 'cobertura' : 'coverage' },
-                { value: 'B2B', label: 'enterprise' },
-              ].map(stat => (
-                <div
-                  key={stat.label}
-                  className="text-center px-3 py-1.5 rounded-lg bg-foursys-surface/40 border border-white/[0.08]"
+                {
+                  id: 'innovation',
+                  Icon: Sparkles,
+                  label: lang === 'pt' ? 'Inovação' : 'Innovation',
+                  glow: '#A78BFA',
+                  ariaLabel: lang === 'pt' ? 'Ir para Inovação' : 'Go to Innovation',
+                  onClick: () => navigate('innovation'),
+                },
+                {
+                  id: 'ai-foursys',
+                  Icon: BrainCircuit,
+                  label: lang === 'pt' ? 'IA na Foursys' : 'AI at Foursys',
+                  glow: '#22D3EE',
+                  ariaLabel: lang === 'pt' ? 'Ir para IA na Foursys' : 'Go to AI at Foursys',
+                  onClick: () => navigate('ai-foursys'),
+                },
+                {
+                  id: 'fourblox',
+                  Icon: Blocks,
+                  label: 'FourBlox',
+                  glow: '#34D399',
+                  ariaLabel: lang === 'pt' ? 'Abrir detalhamento do FourBlox' : 'Open FourBlox details',
+                  // Abre o Deep Dive localmente (não usa setDeepDiveHint para
+                  // que returnSectionRef permaneça null e o fechamento mantenha
+                  // o usuário em 'services' em vez de navegar para uma seção
+                  // antiga via state.previousSection).
+                  onClick: () => handleOfferDetail('fourblox'),
+                },
+              ].map((shortcut, idx) => (
+                <motion.button
+                  key={shortcut.id}
+                  type="button"
+                  onClick={shortcut.onClick}
+                  aria-label={shortcut.ariaLabel}
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 + idx * 0.07, duration: 0.4, ease: 'easeOut' }}
+                  whileHover={{ y: -3, scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="group relative flex items-center gap-2.5 pl-2 pr-3.5 py-2 rounded-xl overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-foursys-primary"
+                  style={{
+                    background: `linear-gradient(135deg, ${shortcut.glow}18 0%, ${shortcut.glow}05 40%, rgba(15,17,28,0.7) 100%)`,
+                    border: `1.5px solid ${shortcut.glow}38`,
+                    boxShadow: `0 4px 14px -4px ${shortcut.glow}40, inset 0 1px 0 ${shortcut.glow}25`,
+                  }}
                 >
-                  <div className="text-base font-black text-foursys-primary">{stat.value}</div>
-                  <div className="text-[9px] text-foursys-text-dim uppercase tracking-widest">{stat.label}</div>
-                </div>
+                  {/* Pulse ring (idle) */}
+                  <motion.span
+                    aria-hidden
+                    className="absolute inset-0 rounded-xl pointer-events-none"
+                    animate={{
+                      boxShadow: [
+                        `0 0 0 0 ${shortcut.glow}00`,
+                        `0 0 0 6px ${shortcut.glow}12`,
+                        `0 0 0 0 ${shortcut.glow}00`,
+                      ],
+                    }}
+                    transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut', delay: idx * 0.4 }}
+                  />
+
+                  {/* Hover glow overlay */}
+                  <span
+                    aria-hidden
+                    className="absolute inset-0 rounded-xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{
+                      background: `radial-gradient(circle at 30% 30%, ${shortcut.glow}30 0%, transparent 60%)`,
+                      boxShadow: `0 0 24px ${shortcut.glow}55, inset 0 0 0 1px ${shortcut.glow}80`,
+                    }}
+                  />
+
+                  {/* Icon */}
+                  <span
+                    className="relative w-9 h-9 rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                    style={{
+                      background: `linear-gradient(140deg, ${shortcut.glow}35 0%, ${shortcut.glow}10 100%)`,
+                      boxShadow: `inset 0 0 0 1px ${shortcut.glow}55, 0 2px 8px -2px ${shortcut.glow}60`,
+                    }}
+                  >
+                    <shortcut.Icon size={18} style={{ color: shortcut.glow }} strokeWidth={2.4} />
+                  </span>
+
+                  {/* Label */}
+                  <span className="relative text-left leading-tight">
+                    <span className="block text-[8px] uppercase tracking-[0.2em] text-foursys-text-dim font-bold">
+                      {lang === 'pt' ? 'atalho' : 'shortcut'}
+                    </span>
+                    <span
+                      className="block text-[12.5px] font-extrabold"
+                      style={{ color: shortcut.glow, textShadow: `0 0 12px ${shortcut.glow}60` }}
+                    >
+                      {shortcut.label}
+                    </span>
+                  </span>
+
+                  {/* Hover arrow indicator */}
+                  <motion.span
+                    aria-hidden
+                    className="relative -ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+                    style={{ color: shortcut.glow }}
+                  >
+                    <ArrowRight size={14} strokeWidth={2.6} />
+                  </motion.span>
+                </motion.button>
               ))}
             </div>
           </div>

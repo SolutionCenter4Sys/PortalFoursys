@@ -9,6 +9,7 @@ import {
   Target, AlertTriangle, RefreshCw, GitBranch, ExternalLink,
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { BackToOriginChip } from '../ui/BackToOriginChip'
 import { useLanguage } from '../../i18n'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
 
@@ -2461,6 +2462,10 @@ export function SectionAIFoursys() {
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-6 md:py-10 max-w-7xl mx-auto">
+
+        <div className="mb-4">
+          <BackToOriginChip />
+        </div>
 
         {/* Hero header */}
         <motion.div

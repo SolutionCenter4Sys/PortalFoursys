@@ -1,11 +1,12 @@
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  BrainCircuit, Factory, Bot,
+  BrainCircuit, Factory, Bot, Network, Dna, FlaskConical,
   X, ArrowRight, ChevronRight, Sparkles, TrendingUp,
   Zap, CheckCircle2, Quote,
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { BackToOriginChip } from '../ui/BackToOriginChip'
 import { useLanguage } from '../../i18n'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
 import { getInnovationTrends } from '../../data/innovation'
@@ -15,6 +16,9 @@ const ICON_MAP: Record<string, React.ReactNode> = {
   'brain-circuit': <BrainCircuit />,
   'factory': <Factory />,
   'bot': <Bot />,
+  'network': <Network />,
+  'dna': <Dna />,
+  'flask-conical': <FlaskConical />,
 }
 
 function hexToRgba(hex: string, a: number) {
@@ -371,6 +375,10 @@ export function SectionInnovation() {
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-6 md:py-10 max-w-7xl mx-auto">
+
+        <div className="mb-4">
+          <BackToOriginChip />
+        </div>
 
         {/* Hero header */}
         <motion.div
