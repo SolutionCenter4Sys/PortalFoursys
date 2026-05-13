@@ -611,13 +611,6 @@ export const santanderClient: ClientConfig = {
       component: 'client-insights',
     },
     {
-      id: 'client-extra-1',
-      label: 'Framework Quality IA',
-      description: 'Plugin homologado pelo Santander',
-      icon: 'zap',
-      component: 'client-extra-1',
-    },
-    {
       id: 'client-cases',
       label: 'Cases no Santander',
       description: 'Entregas dentro do ecossistema Santander',
@@ -855,13 +848,6 @@ const santanderClientEn: ClientConfig = {
       description: 'What we identified across Santander projects',
       icon: 'search',
       component: 'client-insights',
-    },
-    {
-      id: 'client-extra-1',
-      label: 'Quality AI Framework',
-      description: 'Plugin approved by Santander',
-      icon: 'zap',
-      component: 'client-extra-1',
     },
     {
       id: 'client-cases',
