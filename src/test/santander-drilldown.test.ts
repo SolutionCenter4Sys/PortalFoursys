@@ -86,8 +86,35 @@ describe('Santander client config', () => {
     expect(santanderClient.sections).toHaveLength(3)
   })
 
-  it('has 2 cases', () => {
-    expect(santanderClient.cases).toHaveLength(2)
+  it('has at least 15 cases (2 original + 13 new from PDFs)', () => {
+    expect(santanderClient.cases?.length).toBeGreaterThanOrEqual(15)
+  })
+
+  it('includes original SHI portal and Quality IA cases', () => {
+    const caseIds = santanderClient.cases?.map(c => c.id) ?? []
+    expect(caseIds).toContain('shi-portal')
+    expect(caseIds).toContain('quality-ia-impl')
+  })
+
+  it('includes new cases from Santander PDFs', () => {
+    const caseIds = santanderClient.cases?.map(c => c.id) ?? []
+    expect(caseIds).toContain('cnpj-alfanumerico-cobol')
+    expect(caseIds).toContain('sites-aem-santander')
+    expect(caseIds).toContain('gravity-24x7-mainframe')
+    expect(caseIds).toContain('continuidade-pcn-zurich')
+  })
+
+  it('each case has the required structure', () => {
+    for (const c of santanderClient.cases ?? []) {
+      expect(c.id).toBeTruthy()
+      expect(c.title).toBeTruthy()
+      expect(c.sector).toBeTruthy()
+      expect(c.type).toBeTruthy()
+      expect(c.challenge.length).toBeGreaterThan(30)
+      expect(c.solution.length).toBeGreaterThan(30)
+      expect(c.results.length).toBeGreaterThanOrEqual(3)
+      expect(Array.isArray(c.stack)).toBe(true)
+    }
   })
 
   it('has extra1 (Quality IA framework)', () => {
