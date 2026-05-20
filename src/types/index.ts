@@ -194,6 +194,8 @@ export type AppSection =
   | 'insights'
   | 'faq'
   | 'export-pdf'
+  // Mídia & Reconhecimento
+  | 'media'
   // Cliente (injetadas dinamicamente)
   | 'client-opening'
   | 'client-insights'

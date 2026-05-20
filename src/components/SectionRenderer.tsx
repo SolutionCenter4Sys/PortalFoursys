@@ -21,6 +21,7 @@ const SectionClients = lazy(() => import('./sections/SectionClients').then(m => 
 const SectionCapabilities = lazy(() => import('./sections/SectionCapabilities').then(m => ({ default: m.SectionCapabilities })))
 const SectionBenchmark = lazy(() => import('./sections/SectionBenchmark').then(m => ({ default: m.SectionBenchmark })))
 const SectionESG = lazy(() => import('./sections/SectionESG').then(m => ({ default: m.SectionESG })))
+const SectionMedia = lazy(() => import('./sections/SectionMedia').then(m => ({ default: m.SectionMedia })))
 const SectionInsights = lazy(() => import('./sections/SectionInsights').then(m => ({ default: m.SectionInsights })))
 const SectionFAQ = lazy(() => import('./sections/SectionFAQ').then(m => ({ default: m.SectionFAQ })))
 const SectionExportPdf = lazy(() => import('./sections/SectionExportPdf').then(m => ({ default: m.SectionExportPdf })))
@@ -74,6 +75,7 @@ export function SectionRenderer() {
         {section === 'clients-showcase'   && <SectionClients key="clients-showcase" />}
         {section === 'capabilities'       && <SectionCapabilities key="capabilities" />}
         {section === 'benchmark'          && <SectionBenchmark key="benchmark" />}
+        {section === 'media'              && <SectionMedia key="media" />}
 
         {/* ── ESG ── */}
         {section === 'esg'            && <SectionESG key="esg" />}

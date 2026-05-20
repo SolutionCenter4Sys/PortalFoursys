@@ -8,7 +8,9 @@ import {
   CheckCircle2, Calendar, ClipboardList, Wrench, Search, Brain,
   Landmark, Bell, CreditCard, FolderOpen, Pencil, Mic, FlaskConical,
   Palette, Blocks, Ruler, BrickWall, AlertTriangle, Handshake,
-  Sprout, Cpu, TrendingUp, Headphones, PackageCheck, Sparkles, type LucideIcon,
+  Sprout, Cpu, TrendingUp, Headphones, PackageCheck, Sparkles,
+  Wallet, Wifi, Server, Newspaper, Tv, Linkedin, Instagram, Youtube, Mail,
+  type LucideIcon,
 } from 'lucide-react'
 
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -79,6 +81,15 @@ const ICON_MAP: Record<string, LucideIcon> = {
   headphones: Headphones,
   'package-check': PackageCheck,
   sparkles: Sparkles,
+  wallet: Wallet,
+  wifi: Wifi,
+  server: Server,
+  newspaper: Newspaper,
+  tv: Tv,
+  linkedin: Linkedin,
+  instagram: Instagram,
+  youtube: Youtube,
+  mail: Mail,
 }
 
 export function getIcon(name: string): LucideIcon {

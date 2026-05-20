@@ -104,7 +104,7 @@ const FLAGSHIP_OFFERS_PT: FlagshipOffer[] = [
   {
     id: 'fourblox',
     badge: 'Destaque',
-    title: 'FourBlox',
+    title: 'Produtos · FourMakers · FourBlox',
     tagline: 'Chega de projetos intermináveis. Sua solução digital pronta em 30 dias.',
     description:
       'Plataforma modular de soluções por assinatura com +18 soluções prontas em 9 categorias (Gestão de Pessoas, Operações, Financeiro, Comercial, Projetos, ESG, Dados & Analytics, Governança). Diagnóstico estruturado, desenho personalizado, configuração sob medida e produção em até 30 dias.',
@@ -234,7 +234,7 @@ const FLAGSHIP_OFFERS_EN: FlagshipOffer[] = [
   {
     id: 'fourblox',
     badge: 'Featured',
-    title: 'FourBlox',
+    title: 'Products · FourMakers · FourBlox',
     tagline: 'No more endless projects. Your digital solution ready in 30 days.',
     description:
       'Modular subscription-based solution platform with 18+ ready solutions across 9 categories (People Management, Operations, Finance, Sales, Projects, ESG, Data & Analytics, Governance). Structured diagnosis, custom design, tailored configuration and production in up to 30 days.',

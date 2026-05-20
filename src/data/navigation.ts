@@ -24,7 +24,7 @@ const navigationItemsPt: NavigationItem[] = [
     label: 'Presença Global',
     icon: 'globe',
     category: 'Institucional',
-    description: 'Brasil, Estados Unidos e Portugal',
+    description: 'Brasil, Estados Unidos, Portugal e Israel — 4 regiões do globo',
   },
   {
     id: 'timeline',
@@ -108,6 +108,13 @@ const navigationItemsPt: NavigationItem[] = [
     description: 'Prêmios, certificações e reconhecimentos que validam nossa entrega',
   },
   {
+    id: 'media',
+    label: 'Foursys na Mídia',
+    icon: 'newspaper',
+    category: 'Provas',
+    description: 'Cobertura editorial, lideranças visíveis e presença digital — 373k+ seguidores',
+  },
+  {
     id: 'clients-showcase',
     label: 'Nossos Clientes',
     icon: 'briefcase',
@@ -185,7 +192,7 @@ const navigationItemsEn: NavigationItem[] = [
     label: 'Global Presence',
     icon: 'globe',
     category: 'About Us',
-    description: 'Brazil, United States and Portugal',
+    description: 'Brazil, United States, Portugal and Israel — 4 global regions',
   },
   {
     id: 'timeline',
@@ -267,6 +274,13 @@ const navigationItemsEn: NavigationItem[] = [
     icon: 'award',
     category: 'Proof Points',
     description: 'Awards, certifications and recognitions that validate our delivery',
+  },
+  {
+    id: 'media',
+    label: 'Foursys in the Media',
+    icon: 'newspaper',
+    category: 'Proof Points',
+    description: 'Editorial coverage, visible leadership and digital presence — 373k+ followers',
   },
   {
     id: 'clients-showcase',

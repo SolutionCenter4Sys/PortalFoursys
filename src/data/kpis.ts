@@ -4,19 +4,19 @@ import type { Language } from '../i18n/types'
 export const heroStats = {
   years: 26,
   projects: '30K+',
-  cities: '7',
+  cities: '8',
   turnover: '3,6%',
   sla: '99,9%',
-  continents: 3,
+  continents: 4,
 }
 
 const heroStatsEn = {
   years: 26,
   projects: '30K+',
-  cities: '7',
+  cities: '8',
   turnover: '3.6%',
   sla: '99.9%',
-  continents: 3,
+  continents: 4,
 }
 
 const kpisPt: KPI[] = [
@@ -39,10 +39,10 @@ const kpisPt: KPI[] = [
     description: 'Incluindo os maiores líderes globais de cada segmento'
   },
   {
-    value: 7,
+    value: 8,
     suffix: '',
-    label: 'Cidades com Escritórios',
-    description: 'São Paulo, Barueri, Curitiba, Rio, Boca Raton, Lisboa e Inovabra'
+    label: 'Localidades · 4 Regiões no Globo',
+    description: 'São Paulo, Barueri, Curitiba, Rio, Belo Horizonte, Boca Raton, Lisboa e Inovabra'
   },
   {
     value: 3.6,
@@ -51,10 +51,10 @@ const kpisPt: KPI[] = [
     description: 'Retenção 6x superior à média do mercado de TI'
   },
   {
-    value: 98,
-    suffix: '%',
-    label: 'NPS de Clientes',
-    description: 'Satisfação comprovada por dados'
+    value: 2.8,
+    suffix: 'k+',
+    label: 'Colaboradores',
+    description: 'Distribuídos globalmente, com cultura GPTW e baixo turnover'
   }
 ]
 
@@ -78,10 +78,10 @@ const kpisEn: KPI[] = [
     description: 'Including top global leaders in each segment'
   },
   {
-    value: 7,
+    value: 8,
     suffix: '',
-    label: 'Office Locations',
-    description: 'São Paulo, Barueri, Curitiba, Rio, Boca Raton, Lisbon and Inovabra'
+    label: 'Offices · 4 Global Regions',
+    description: 'São Paulo, Barueri, Curitiba, Rio, Belo Horizonte, Boca Raton, Lisbon and Inovabra'
   },
   {
     value: 3.6,
@@ -90,10 +90,10 @@ const kpisEn: KPI[] = [
     description: '6x better than IT industry average'
   },
   {
-    value: 98,
-    suffix: '%',
-    label: 'Client NPS',
-    description: 'Data-driven satisfaction score'
+    value: 2.8,
+    suffix: 'k+',
+    label: 'Employees',
+    description: 'Distributed globally, with GPTW culture and low turnover'
   }
 ]
 
@@ -151,28 +151,28 @@ const timelinePt: TimelineItem[] = [
   {
     year: '2023',
     title: 'Presença na Europa — Lisboa',
-    description: 'Abertura do escritório em Lisboa, Portugal, consolidando a presença da Foursys em 3 regiões do globo e ampliando o alcance para o mercado europeu.',
+    description: 'Abertura do escritório em Lisboa, Portugal, consolidando a presença da Foursys em 4 regiões do globo e ampliando o alcance para o mercado europeu.',
     icon: 'globe',
     era: 'Expansão Global',
-    kpi: { value: '3', label: 'regiões do globo' },
+    kpi: { value: '4', label: 'regiões do globo' },
   },
   {
     year: '2024',
-    title: 'Equipes Híbridas com Agentes de IA',
-    description: 'Adoção de modelos de entrega com equipes híbridas, combinando profissionais humanos e agentes de IA para acelerar resultados com governança.',
+    title: 'IA Generativa em escala + Cibersegurança em produção',
+    description: 'Operação de IA Generativa em escala nos clientes e prática de Cibersegurança em produção em setores regulados — proteção, conformidade e governança ponta a ponta.',
     highlight: true,
     icon: 'brain-circuit',
     era: 'Inovação',
-    kpi: { value: 'Híbrido', label: 'humano + IA' },
+    kpi: { value: 'IA Gen', label: '+ Cyber' },
   },
   {
     year: '2026',
-    title: 'Cibersegurança e Qualidade & Testes com IA',
-    description: 'Oferta de Cibersegurança com proteção e conformidade para setores regulados. Framework Qualidade & Testes com IA operando em escala com retorno mensurável.',
+    title: 'Agentes especialistas em escala + abertura do hub Israel',
+    description: 'Agentes de IA especialistas operando em escala dentro de squads híbridas e abertura do hub em Tel Aviv (Israel), 4ª região do globo, conectando a Foursys ao ecossistema de cyber e deep-tech israelense.',
     highlight: true,
     icon: 'star',
     era: 'Futuro',
-    kpi: { value: '4–6', label: 'semanas para ROI' },
+    kpi: { value: 'IL', label: 'Israel · 4ª região' },
   },
 ]
 
@@ -230,28 +230,28 @@ const timelineEn: TimelineItem[] = [
   {
     year: '2023',
     title: 'European presence — Lisbon',
-    description: 'Opening of the Lisbon, Portugal office, consolidating Foursys presence across 3 global regions and expanding reach to the European market.',
+    description: 'Opening of the Lisbon, Portugal office, consolidating Foursys presence across 4 global regions and expanding reach to the European market.',
     icon: 'globe',
     era: 'Global Expansion',
-    kpi: { value: '3', label: 'global regions' },
+    kpi: { value: '4', label: 'global regions' },
   },
   {
     year: '2024',
-    title: 'Hybrid Teams with AI Agents',
-    description: 'Adoption of delivery models with hybrid teams, combining human professionals and AI agents to accelerate results with governance.',
+    title: 'Generative AI at scale + Cybersecurity in production',
+    description: 'Generative AI running at scale across clients and Cybersecurity practice in production within regulated industries — protection, compliance and end-to-end governance.',
     highlight: true,
     icon: 'brain-circuit',
     era: 'Innovation',
-    kpi: { value: 'Hybrid', label: 'human + AI' },
+    kpi: { value: 'Gen AI', label: '+ Cyber' },
   },
   {
     year: '2026',
-    title: 'Cybersecurity and Quality & AI Testing',
-    description: 'Cybersecurity offering with protection and compliance for regulated industries. Quality & AI Testing framework operating at scale with measurable ROI.',
+    title: 'Specialist AI agents at scale + Israel hub launch',
+    description: 'Specialist AI agents operating at scale inside hybrid squads and the launch of the Tel Aviv (Israel) hub, our 4th global region, connecting Foursys to the Israeli cyber and deep-tech ecosystem.',
     highlight: true,
     icon: 'star',
     era: 'Future',
-    kpi: { value: '4–6', label: 'weeks to ROI' },
+    kpi: { value: 'IL', label: 'Israel · 4th region' },
   },
 ]
 

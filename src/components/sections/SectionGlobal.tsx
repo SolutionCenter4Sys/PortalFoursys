@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { MapPin, Phone } from 'lucide-react'
+import { MapPin, Phone, CalendarClock } from 'lucide-react'
 import { DynIcon } from '../../utils/iconMap'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { useLanguage } from '../../i18n'
@@ -38,9 +38,23 @@ type Region = {
 type RegionContent = Pick<Region, 'region' | 'count' | 'summary' | 'spotlight' | 'stats' | 'units'>
 
 const REGION_STYLES: Omit<Region, 'region' | 'count' | 'summary' | 'spotlight' | 'stats' | 'units'>[] = [
-  { id: 'brasil', flag: 'BR', colorHex: '#22c55e', bg: 'from-green-500/15 to-green-600/5', border: 'border-green-500/30', textCls: 'text-green-400', marker: { top: '69%', left: '36.5%' } },
-  { id: 'eua', flag: 'US', colorHex: '#3b82f6', bg: 'from-blue-500/15 to-blue-600/5', border: 'border-blue-500/30', textCls: 'text-blue-400', marker: { top: '45%', left: '21.5%' } },
+  { id: 'brasil', flag: 'BR', colorHex: '#22c55e', bg: 'from-green-500/15 to-green-600/5',   border: 'border-green-500/30',  textCls: 'text-green-400',  marker: { top: '69%', left: '36.5%' } },
+  { id: 'eua',    flag: 'US', colorHex: '#3b82f6', bg: 'from-blue-500/15 to-blue-600/5',     border: 'border-blue-500/30',   textCls: 'text-blue-400',   marker: { top: '45%', left: '21.5%' } },
   { id: 'europa', flag: 'EU', colorHex: '#8b5cf6', bg: 'from-violet-500/15 to-violet-600/5', border: 'border-violet-500/30', textCls: 'text-violet-400', marker: { top: '31%', left: '48.2%' } },
+  { id: 'israel', flag: 'IL', colorHex: '#06b6d4', bg: 'from-cyan-500/15 to-cyan-600/5',     border: 'border-cyan-500/30',   textCls: 'text-cyan-400',   marker: { top: '38%', left: '55.5%' } },
+]
+
+interface RoadmapMarker {
+  id: 'china' | 'emirados'
+  flag: string
+  label: string
+  yearLabel: string
+  marker: { top: string; left: string }
+}
+
+const ROADMAP_MARKERS: RoadmapMarker[] = [
+  { id: 'china',    flag: 'CN', label: 'Xangai · China',    yearLabel: '2027', marker: { top: '38%', left: '76%' } },
+  { id: 'emirados', flag: 'AE', label: 'Dubai · Emirados', yearLabel: '2028', marker: { top: '46%', left: '60.5%' } },
 ]
 
 const SHARED_UNITS: Record<string, Unit[]> = {
@@ -95,6 +109,19 @@ const CONTENT: Record<string, RegionContent[]> = {
         { name: 'Unidade Europa', city: 'Lisboa – Portugal', address: 'Av. da Liberdade, 110 · 1250-096 Lisboa' },
       ],
     },
+    {
+      region: 'Israel', count: '1 unidade',
+      summary: 'Hub de inovação e IA aberto em 2026 em Tel Aviv. Conexão direta com o ecossistema israelense de cibersegurança e deep-tech, ampliando a Foursys para 4 regiões do globo.',
+      spotlight: 'Frente de inovação focada em IA e cibersegurança, com acesso ao ecossistema deep-tech mais avançado do mundo e proximidade aos hubs europeus e do Oriente Médio.',
+      stats: [
+        { label: 'Escritórios', value: '1 base em Tel Aviv' },
+        { label: 'Foco', value: 'Inovação · IA · Cyber · Deep-tech' },
+        { label: 'Operação', value: 'Desde 2026' },
+      ],
+      units: [
+        { name: 'Unidade Israel', city: 'Tel Aviv – Israel', address: 'Hub de inovação · 2026' },
+      ],
+    },
   ],
   en: [
     {
@@ -137,6 +164,19 @@ const CONTENT: Record<string, RegionContent[]> = {
       ],
       units: [
         { name: 'Europe Office', city: 'Lisbon – Portugal', address: 'Av. da Liberdade, 110 · 1250-096 Lisbon' },
+      ],
+    },
+    {
+      region: 'Israel', count: '1 unit',
+      summary: 'Innovation and AI hub opened in 2026 in Tel Aviv. Direct connection to the Israeli cyber and deep-tech ecosystem, expanding Foursys across 4 global regions.',
+      spotlight: 'Innovation front focused on AI and cybersecurity, with access to the world\'s most advanced deep-tech ecosystem and proximity to European and Middle Eastern hubs.',
+      stats: [
+        { label: 'Offices', value: '1 location in Tel Aviv' },
+        { label: 'Focus', value: 'Innovation · AI · Cyber · Deep-tech' },
+        { label: 'Operations', value: 'Since 2026' },
+      ],
+      units: [
+        { name: 'Israel Office', city: 'Tel Aviv – Israel', address: 'Innovation hub · 2026' },
       ],
     },
   ],
@@ -192,6 +232,32 @@ function UnitRow({
             <span className={`text-[10px] ${textCls} opacity-70`}>{unit.phone}</span>
           </div>
         )}
+      </div>
+    </div>
+  )
+}
+
+function RoadmapPin({ pin }: { pin: RoadmapMarker }) {
+  return (
+    <div
+      className="absolute -translate-x-1/2 -translate-y-1/2 z-[5] pointer-events-none select-none"
+      style={{ top: pin.marker.top, left: pin.marker.left }}
+      aria-hidden="true"
+    >
+      <div className="flex flex-col items-center gap-1.5">
+        <span className="relative flex items-center justify-center">
+          <span
+            className="absolute inset-0 rounded-full"
+            style={{ backgroundColor: 'rgba(255,165,0,0.18)', transform: 'scale(2.0)', filter: 'blur(2px)' }}
+          />
+          <span
+            className="relative flex items-center justify-center w-3.5 h-3.5 rounded-full border-2 border-dashed border-orange-300/80 bg-orange-400/40"
+            style={{ boxShadow: '0 0 12px rgba(255,165,0,0.6)' }}
+          />
+        </span>
+        <span className="px-2 py-0.5 rounded-full text-[9px] font-bold tracking-[0.18em] uppercase bg-foursys-dark/85 border border-orange-300/40 text-orange-200">
+          {pin.flag} · {pin.yearLabel}
+        </span>
       </div>
     </div>
   )
@@ -264,7 +330,7 @@ export function SectionGlobal() {
     { value: '+2K', label: t('global.kpis.collaborators'), icon: 'users' },
     { value: '+30K', label: t('global.kpis.projectsDelivered'), icon: 'rocket' },
     { value: '26', label: t('global.kpis.yearsInMarket'), icon: 'calendar' },
-    { value: '7', label: t('global.kpis.globalCities'), icon: 'building' },
+    { value: '8', label: t('global.kpis.globalCities'), icon: 'building' },
   ]
 
   return (
@@ -332,6 +398,10 @@ export function SectionGlobal() {
                   onSelect={setActiveRegionId}
                   ariaLabel={t('global.seeRegionDetails')}
                 />
+              ))}
+
+              {ROADMAP_MARKERS.map(pin => (
+                <RoadmapPin key={pin.id} pin={pin} />
               ))}
             </div>
 
@@ -436,6 +506,51 @@ export function SectionGlobal() {
             </div>
           </motion.div>
         </div>
+
+        {/* ── Roadmap de expansão (China 2027 · Emirados 2028) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.45 }}
+          className="mt-2 rounded-2xl border border-orange-300/30 bg-gradient-to-r from-orange-500/12 via-amber-400/6 to-transparent p-5 md:p-6"
+        >
+          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+            <div className="flex items-center gap-3 md:flex-shrink-0">
+              <div className="w-11 h-11 rounded-xl bg-orange-400/15 border border-orange-300/40 flex items-center justify-center text-orange-200">
+                <CalendarClock size={20} />
+              </div>
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-orange-200/85">
+                  {lang === 'pt' ? 'Próximas frentes' : 'Upcoming fronts'}
+                </div>
+                <div className="text-sm md:text-base font-black text-white leading-snug">
+                  {t('global.roadmap.title')}
+                </div>
+                <p className="text-xs text-foursys-text-dim mt-1 max-w-xl leading-relaxed">
+                  {t('global.roadmap.subtitle')}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex-1 grid grid-cols-2 gap-3">
+              {ROADMAP_MARKERS.map(pin => (
+                <div
+                  key={pin.id}
+                  className="rounded-xl border border-orange-300/25 bg-foursys-surface/40 px-3 py-3 flex items-center gap-3"
+                >
+                  <span className="text-lg font-black text-orange-200">{pin.flag}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-bold text-white truncate">{pin.label}</div>
+                    <div className="text-[10px] text-foursys-text-dim uppercase tracking-wider">
+                      {lang === 'pt' ? 'Início previsto' : 'Planned launch'} · {pin.yearLabel}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
 
       </div>
     </SectionWrapper>

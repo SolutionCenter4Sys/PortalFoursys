@@ -2,10 +2,68 @@ import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
+import { CyanBand } from '../ui/CyanBand'
+import { HighlightBlock, type HighlightItem } from '../ui/HighlightBlock'
 import { DynIcon } from '../../utils/iconMap'
 import { useLanguage } from '../../i18n'
 import { getTimeline } from '../../data/kpis'
 import { useApp } from '../../context/AppContext'
+
+// ─── i18n local: banda de qualidade + frentes estratégicas ────────────────────
+// Padrão idêntico ao usado em SectionESG (frontsI18n) — t() do contexto só
+// devolve string, então listas/objetos ficam local ao componente.
+
+const QUALITY_BAND_I18N: Record<'pt' | 'en', { title: string; subtitle: string; milestones: string[] }> = {
+  pt: {
+    title: '26 anos de compromisso com qualidade',
+    subtitle: 'Trajetória de certificações ininterrupta',
+    milestones: [
+      'CMM Nível 1 → 2 → 3',
+      'ISO 9001 contínua',
+      'Métodos Ágeis desde 2010',
+      'SAFe',
+      'ISO 27001 / 27701 / 14001',
+      'GPTW (5 anos consecutivos)',
+    ],
+  },
+  en: {
+    title: '26 years committed to quality',
+    subtitle: 'An uninterrupted certification journey',
+    milestones: [
+      'CMM Level 1 → 2 → 3',
+      'Continuous ISO 9001',
+      'Agile methods since 2010',
+      'SAFe',
+      'ISO 27001 / 27701 / 14001',
+      'GPTW (5 consecutive years)',
+    ],
+  },
+}
+
+const FRONTS_I18N: Record<'pt' | 'en', { badge: string; title: string; subtitle: string; items: HighlightItem[] }> = {
+  pt: {
+    badge: 'Frentes Estratégicas',
+    title: 'Novas linhas de serviço em curso',
+    subtitle: 'O que estamos construindo para os próximos ciclos — produtos próprios, eficiência de cloud e a próxima fronteira de automação.',
+    items: [
+      { id: 'produtizacao', title: 'Produtização', description: 'FourMakers + FourBlox — produtos próprios e plataformas modulares por assinatura.', icon: 'package-check' },
+      { id: 'finops',       title: 'FinOps',       description: 'Otimização contínua de cloud em escala — visibilidade, governança e redução de custo.',                 icon: 'wallet' },
+      { id: 'iot',          title: 'IoT',          description: 'Dispositivos conectados e edge computing aplicados a operações industriais e de saúde.',                icon: 'wifi' },
+      { id: 'haas',         title: 'HaaS',         description: 'Hardware-as-a-Service: infraestrutura crítica entregue como serviço, com SLA e renovação contínua.',    icon: 'server' },
+    ],
+  },
+  en: {
+    badge: 'Strategic Fronts',
+    title: 'New service lines underway',
+    subtitle: 'What we are building for the next cycles — proprietary products, cloud efficiency and the next frontier of automation.',
+    items: [
+      { id: 'produtizacao', title: 'Productization', description: 'FourMakers + FourBlox — proprietary products and modular subscription platforms.',                  icon: 'package-check' },
+      { id: 'finops',       title: 'FinOps',         description: 'Continuous cloud optimization at scale — visibility, governance and cost reduction.',                icon: 'wallet' },
+      { id: 'iot',          title: 'IoT',            description: 'Connected devices and edge computing applied to industrial and healthcare operations.',              icon: 'wifi' },
+      { id: 'haas',         title: 'HaaS',           description: 'Hardware-as-a-Service: critical infrastructure delivered as a service, with SLA and continuous refresh.', icon: 'server' },
+    ],
+  },
+}
 
 const ERA_STYLES: Record<string, { color: string; glow: string; bg: string; border: string }> = {
   // PT
@@ -31,6 +89,8 @@ export function SectionTimeline() {
   const [activeEra, setActiveEra] = useState<string | null>(null)
 
   const timeline = useMemo(() => getTimeline(lang), [lang])
+  const qualityBand = QUALITY_BAND_I18N[lang]
+  const fronts = FRONTS_I18N[lang]
 
   const eras = useMemo(() => {
     const seen = new Set<string>()
@@ -279,6 +339,21 @@ export function SectionTimeline() {
             </div>
           </AnimatePresence>
         </div>
+
+        {/* Banda institucional: 26 anos de compromisso com qualidade */}
+        <CyanBand
+          title={qualityBand.title}
+          subtitle={qualityBand.subtitle}
+          milestones={qualityBand.milestones}
+        />
+
+        {/* Frentes estratégicas — novas linhas de serviço em curso */}
+        <HighlightBlock
+          badge={fronts.badge}
+          title={fronts.title}
+          subtitle={fronts.subtitle}
+          items={fronts.items}
+        />
 
         {/* CTA */}
         <motion.div

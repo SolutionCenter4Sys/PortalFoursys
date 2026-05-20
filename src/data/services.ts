@@ -499,12 +499,12 @@ const deliveryModelsPt: DeliveryModel[] = [
   },
   {
     id: 'produtos-assinatura',
-    title: 'Produtos Foursys por Assinatura',
-    description: 'Plataformas digitais prontas, customizáveis e mantidas pela Foursys em modelo SaaS. O cliente contrata o resultado, não o esforço — com go-live em semanas e evolução contínua inclusa.',
+    title: 'Produtos · FourMakers · FourBlox',
+    description: 'Plataformas digitais prontas, customizáveis e mantidas pela Foursys em modelo SaaS — incluindo FourMakers (gestão de pessoas e produtividade) e FourBlox (soluções modulares por assinatura). O cliente contrata o resultado, não o esforço, com go-live em semanas e evolução contínua inclusa.',
     icon: 'package-check',
     features: [
-      'Plataformas prontas: check-in, gestão de eventos, portais e mais',
-      'Personalização de marca, fluxos e regras de negócio',
+      'FourBlox: 18+ soluções modulares prontas em 9 categorias de negócio',
+      'FourMakers: programa e plataforma para co-criação e produtividade',
       'Modelo por assinatura mensal sem investimento inicial',
       'Atualizações, hospedagem e suporte inclusos',
       'Escalável sob demanda com infraestrutura cloud-native'
@@ -578,12 +578,12 @@ const deliveryModelsEn: DeliveryModel[] = [
   },
   {
     id: 'produtos-assinatura',
-    title: 'Foursys Subscription Products',
-    description: 'Ready-made, customizable digital platforms maintained by Foursys in a SaaS model. The client pays for results, not effort — with go-live in weeks and continuous evolution included.',
+    title: 'Products · FourMakers · FourBlox',
+    description: 'Ready-made, customizable digital platforms maintained by Foursys in a SaaS model — including FourMakers (people management and productivity) and FourBlox (modular subscription solutions). The client pays for results, not effort, with go-live in weeks and continuous evolution included.',
     icon: 'package-check',
     features: [
-      'Ready-made platforms: check-in, event management, portals, and more',
-      'Brand, workflow, and business rule customization',
+      'FourBlox: 18+ ready modular solutions across 9 business categories',
+      'FourMakers: program and platform for co-creation and productivity',
       'Monthly subscription model with no upfront investment',
       'Updates, hosting, and support included',
       'Scalable on demand with cloud-native infrastructure'
