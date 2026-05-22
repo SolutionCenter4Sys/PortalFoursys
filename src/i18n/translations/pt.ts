@@ -275,8 +275,8 @@ export const pt = {
   },
   innovation: {
     badge: 'Inovação',
-    title: 'Tendências de Inovação',
-    subtitle: 'Explorar tendências que moldam o futuro da tecnologia e dos negócios.',
+    title: 'Inovação que transforma negócios',
+    subtitle: 'Da geração de receita ao valor de longo prazo — método, governança e portfólio para crescer com disciplina.',
     exploreTrend: 'Explorar tendência',
     overview: 'Visão Geral',
     whyItMatters: 'Por que importa',

@@ -275,8 +275,8 @@ export const en = {
   },
   innovation: {
     badge: 'Innovation',
-    title: 'Innovation Trends',
-    subtitle: 'Exploring trends that shape the future of technology and business.',
+    title: 'Innovation that transforms business',
+    subtitle: 'From revenue generation to long-term value — method, governance and portfolio to grow with discipline.',
     exploreTrend: 'Explore trend',
     overview: 'Overview',
     whyItMatters: 'Why it matters',

@@ -63,6 +63,18 @@ export function buildSearchIndex(): SearchEntry[] {
     })
   }
 
+  // ── Entradas extras (sessões fora do menu lateral) ──────────────────────
+  entries.push({
+    id: 'nav-kiam-comparison',
+    kind: 'section',
+    title: 'KIAM vs Mercado',
+    subtitle: 'IA na Foursys · Comparativo KIAM vs Hyperscalers vs Open-Source',
+    searchable: norm('kiam moxe comparativo hyperscalers vertex bedrock copilot langgraph crewai open source plataforma'),
+    icon: 'scale',
+    targetSection: 'kiam-comparison',
+    category: 'Sessões',
+  })
+
   for (const faq of faqItems) {
     entries.push({
       id: `faq-${faq.id}`,

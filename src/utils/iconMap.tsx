@@ -10,6 +10,7 @@ import {
   Palette, Blocks, Ruler, BrickWall, AlertTriangle, Handshake,
   Sprout, Cpu, TrendingUp, Headphones, PackageCheck, Sparkles,
   Wallet, Wifi, Server, Newspaper, Tv, Linkedin, Instagram, Youtube, Mail,
+  ClipboardCheck, Scale,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -63,6 +64,8 @@ const ICON_MAP: Record<string, LucideIcon> = {
   link: Link2,
   'check-circle': CheckCircle2,
   'clipboard-list': ClipboardList,
+  'clipboard-check': ClipboardCheck,
+  scale: Scale,
   search: Search,
   bell: Bell,
   'credit-card': CreditCard,

@@ -4,6 +4,8 @@ import {
   BrainCircuit, Factory, Bot, Network, Dna, FlaskConical,
   X, ArrowRight, ChevronRight, Sparkles, TrendingUp,
   Zap, CheckCircle2, Quote,
+  Banknote, Gem, Gauge, Workflow, Lightbulb, Compass,
+  Wallet, GraduationCap, Rocket, Telescope, Layers,
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { BackToOriginChip } from '../ui/BackToOriginChip'
@@ -365,12 +367,254 @@ function DrillDownModal({ trend, onClose }: { trend: InnovationTrend; onClose: (
   )
 }
 
+// ─── Dados: 3 Outcomes / 5 Serviços ──────────────────────────────────────────
+
+interface BiCopy { pt: string; en: string }
+
+interface OutcomeCard {
+  num: string
+  icon: React.ReactNode
+  title: BiCopy
+  desc: BiCopy
+  color: string
+}
+
+interface ServiceCard {
+  num: string
+  icon: React.ReactNode
+  title: BiCopy
+  desc: BiCopy
+  color: string
+}
+
+const OUTCOMES: OutcomeCard[] = [
+  {
+    num: '01',
+    icon: <Banknote size={20} />,
+    title: { pt: 'Geração de Novas Fontes de Receita', en: 'Generating New Revenue Streams' },
+    desc: {
+      pt: 'Estruturação e lançamento de novos modelos de negócio, produtos e serviços além do core bancário atual, com governança, método e foco em captura de valor recorrente.',
+      en: 'Structuring and launching new business models, products and services beyond the current banking core — with governance, method and focus on recurring value capture.',
+    },
+    color: '#34D399',
+  },
+  {
+    num: '02',
+    icon: <Gem size={20} />,
+    title: { pt: 'Aumento do Valor de Longo Prazo', en: 'Long-Term Value Growth' },
+    desc: {
+      pt: 'Construção de tese de futuro e portfólio de inovação que aumenta a confiança dos stakeholders, fortalece o posicionamento estratégico e sustenta o valuation da instituição.',
+      en: 'Building a future thesis and innovation portfolio that boosts stakeholder confidence, strengthens strategic positioning and sustains the institution\'s valuation.',
+    },
+    color: '#A78BFA',
+  },
+  {
+    num: '03',
+    icon: <Gauge size={20} />,
+    title: { pt: 'Otimização do Investimento em Inovação', en: 'Innovation Investment Optimization' },
+    desc: {
+      pt: 'Gestão disciplinada do portfólio de iniciativas, com critérios claros de priorização, métricas por estágio e visibilidade sobre o retorno de cada aposta, da exploração à escala.',
+      en: 'Disciplined portfolio management with clear prioritization criteria, stage-based metrics and visibility into the return of each bet, from exploration to scale.',
+    },
+    color: '#FBBF24',
+  },
+]
+
+const INNOVATION_SERVICES: ServiceCard[] = [
+  {
+    num: '01',
+    icon: <Workflow size={20} />,
+    title: { pt: 'Estrutura e Governança de Inovação', en: 'Innovation Structure & Governance' },
+    desc: {
+      pt: 'Desenhamos a arquitetura de inovação da organização: modelo operacional, instâncias de decisão, critérios de portfólio e ritos de acompanhamento. Orquestramos também o ecossistema de Open Innovation, conectando startups, hubs, universidades e parceiros tecnológicos para acelerar a execução da tese estratégica.',
+      en: 'We design the organization\'s innovation architecture: operating model, decision bodies, portfolio criteria and tracking rituals. We also orchestrate the Open Innovation ecosystem, connecting startups, hubs, universities and technology partners to accelerate the strategic thesis.',
+    },
+    color: '#60A5FA',
+  },
+  {
+    num: '02',
+    icon: <Lightbulb size={20} />,
+    title: { pt: 'Design de Novos Modelos de Negócio', en: 'New Business Model Design' },
+    desc: {
+      pt: 'É aqui que a inovação se transforma em novas fontes de receita. Aplicamos metodologias de ponta para desenhar, prototipar e validar novos modelos de negócio, produtos e serviços voltados ao mercado. Inclui a estruturação de ventures e unidades dedicadas que combinam autonomia para crescer com alinhamento ao core business.',
+      en: 'This is where innovation turns into new revenue streams. We apply leading methodologies to design, prototype and validate new business models, products and market-facing services. Includes structuring ventures and dedicated units that combine growth autonomy with alignment to the core business.',
+    },
+    color: '#34D399',
+  },
+  {
+    num: '03',
+    icon: <Compass size={20} />,
+    title: { pt: 'Estratégia de Negócios Digitais', en: 'Digital Business Strategy' },
+    desc: {
+      pt: 'No setor financeiro, tecnologia deixou de ser suporte e passou a ser o próprio negócio. Ajudamos instituições a transformar sua capacidade tecnológica em vantagem competitiva real — redefinindo modelos operacionais, criando jornadas digitais centradas no cliente, desenvolvendo ecossistemas de parceiros e evoluindo para uma mentalidade de plataforma.',
+      en: 'In the financial industry, technology has shifted from support to the business itself. We help institutions turn their tech capability into real competitive advantage — redefining operating models, creating customer-centric digital journeys, developing partner ecosystems and evolving toward a platform mindset.',
+    },
+    color: '#FF5315',
+  },
+  {
+    num: '04',
+    icon: <Wallet size={20} />,
+    title: { pt: 'Gestão do Portfólio e Financiamento (TBM)', en: 'Portfolio & Funding Management (TBM)' },
+    desc: {
+      pt: 'Tratamos inovação como uma classe de ativos a ser gerenciada com disciplina financeira. Implementamos a gestão do portfólio de inovação com métricas de performance por estágio, da exploração à escala, e aplicamos os princípios do TBM (Technology Business Management) para garantir visibilidade total e otimização do retorno sobre cada iniciativa.',
+      en: 'We treat innovation as an asset class managed with financial discipline. We implement portfolio management with stage-based performance metrics, from exploration to scale, applying TBM (Technology Business Management) principles to ensure full visibility and optimized return on each initiative.',
+    },
+    color: '#FBBF24',
+  },
+  {
+    num: '05',
+    icon: <GraduationCap size={20} />,
+    title: { pt: 'Cultura e Capacitação para Inovação', en: 'Innovation Culture & Enablement' },
+    desc: {
+      pt: 'Uma estratégia de inovação só ganha vida com as pessoas. Implementamos a jornada para criar uma cultura Innovation Driven em organizações financeiras — capacitação de lideranças e times em novos frameworks, programas de ideação, hackathons corporativos e assessments de maturidade que transformam o mindset sem comprometer a disciplina operacional que o setor exige.',
+      en: 'An innovation strategy only comes alive through people. We implement the journey to build an Innovation-Driven culture in financial organizations — leadership and team training in new frameworks, ideation programs, corporate hackathons and maturity assessments that shift the mindset without compromising the operational discipline the industry demands.',
+    },
+    color: '#89BAB1',
+  },
+]
+
+// ─── Outcome Card ────────────────────────────────────────────────────────────
+
+function OutcomeCardView({ item, index, lang }: { item: OutcomeCard; index: number; lang: 'pt' | 'en' }) {
+  const [hovered, setHovered] = useState(false)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.15 + index * 0.08, duration: 0.5, type: 'spring', stiffness: 120 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="group relative rounded-2xl overflow-hidden"
+    >
+      <motion.div
+        className="absolute inset-0"
+        animate={{
+          background: hovered
+            ? `linear-gradient(160deg, ${hexToRgba(item.color, 0.16)} 0%, rgba(10,12,20,0.95) 100%)`
+            : `linear-gradient(160deg, ${hexToRgba(item.color, 0.06)} 0%, rgba(10,12,20,0.95) 100%)`,
+        }}
+        transition={{ duration: 0.4 }}
+      />
+      <div
+        className="absolute inset-0 rounded-2xl transition-all duration-400"
+        style={{ border: hovered ? `1.5px solid ${hexToRgba(item.color, 0.4)}` : '1.5px solid rgba(255,255,255,0.06)' }}
+      />
+      <motion.div
+        className="absolute top-0 left-1/2 -translate-x-1/2 h-[2px] rounded-full"
+        animate={{ width: hovered ? '70%' : '0%', opacity: hovered ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        style={{ background: `linear-gradient(90deg, transparent, ${item.color}, transparent)` }}
+      />
+
+      <div className="relative z-10 p-5 md:p-6 flex flex-col h-full" style={{ minHeight: 240 }}>
+        <div className="flex items-center justify-between mb-4">
+          <div
+            className="w-11 h-11 rounded-xl flex items-center justify-center"
+            style={{
+              background: `linear-gradient(135deg, ${hexToRgba(item.color, 0.25)}, ${hexToRgba(item.color, 0.08)})`,
+              border: `1px solid ${hexToRgba(item.color, 0.35)}`,
+              color: item.color,
+            }}
+          >
+            {item.icon}
+          </div>
+          <span className="text-[11px] font-black tracking-widest" style={{ color: hexToRgba(item.color, 0.7) }}>
+            {item.num}
+          </span>
+        </div>
+        <h4 className="text-base md:text-lg font-black text-white leading-tight mb-2">
+          {item.title[lang]}
+        </h4>
+        <p className="text-xs md:text-sm text-foursys-text-muted leading-relaxed">
+          {item.desc[lang]}
+        </p>
+      </div>
+    </motion.div>
+  )
+}
+
+// ─── Service Card (Como atuamos) ─────────────────────────────────────────────
+
+function InnovationServiceCard({ item, index, lang }: { item: ServiceCard; index: number; lang: 'pt' | 'en' }) {
+  const [expanded, setExpanded] = useState(false)
+  const [hovered, setHovered] = useState(false)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.1 + index * 0.06, duration: 0.45, type: 'spring', stiffness: 120 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onClick={() => setExpanded(!expanded)}
+      className="group relative rounded-2xl overflow-hidden cursor-pointer"
+    >
+      <motion.div
+        className="absolute inset-0"
+        animate={{
+          background: hovered
+            ? `linear-gradient(155deg, ${hexToRgba(item.color, 0.14)} 0%, rgba(10,12,20,0.95) 100%)`
+            : `linear-gradient(155deg, ${hexToRgba(item.color, 0.05)} 0%, rgba(10,12,20,0.95) 100%)`,
+        }}
+        transition={{ duration: 0.4 }}
+      />
+      <div
+        className="absolute inset-0 rounded-2xl transition-all duration-400"
+        style={{ border: hovered ? `1px solid ${hexToRgba(item.color, 0.4)}` : '1px solid rgba(255,255,255,0.06)' }}
+      />
+
+      <div className="relative z-10 p-5 md:p-6">
+        <div className="flex items-start gap-3 mb-3">
+          <div
+            className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+            style={{
+              background: `linear-gradient(135deg, ${hexToRgba(item.color, 0.25)}, ${hexToRgba(item.color, 0.08)})`,
+              border: `1px solid ${hexToRgba(item.color, 0.35)}`,
+              color: item.color,
+            }}
+          >
+            {item.icon}
+          </div>
+          <div className="flex-1">
+            <span className="text-[10px] font-black tracking-widest" style={{ color: hexToRgba(item.color, 0.7) }}>
+              {item.num}
+            </span>
+            <h4 className="text-sm md:text-base font-black text-white leading-tight mt-0.5">
+              {item.title[lang]}
+            </h4>
+          </div>
+        </div>
+
+        <p
+          className={`text-xs md:text-sm text-foursys-text-muted leading-relaxed transition-all duration-300 ${
+            expanded ? '' : 'line-clamp-3'
+          }`}
+        >
+          {item.desc[lang]}
+        </p>
+
+        <div className="flex items-center gap-1.5 mt-3 text-[11px] font-bold" style={{ color: item.color }}>
+          {expanded
+            ? (lang === 'pt' ? 'Recolher' : 'Collapse')
+            : (lang === 'pt' ? 'Ler completo' : 'Read full')}
+          <motion.div animate={{ rotate: expanded ? 90 : 0 }} transition={{ duration: 0.2 }}>
+            <ChevronRight size={12} />
+          </motion.div>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
 // ─── Main Section ────────────────────────────────────────────────────────────
 
 export function SectionInnovation() {
   const { t, lang } = useLanguage()
   const trends = useMemo(() => getInnovationTrends(lang), [lang])
   const [activeTrend, setActiveTrend] = useState<InnovationTrend | null>(null)
+  const L = lang as 'pt' | 'en'
+  const pt = lang === 'pt'
 
   return (
     <SectionWrapper>
@@ -415,18 +659,207 @@ export function SectionInnovation() {
           </div>
         </motion.div>
 
-        {/* Trends grid */}
-        <div
-          data-voz-caixa="innovation-trends"
+        {/* ── Bloco 1: O que entregamos (3 Outcomes) ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          data-voz-caixa="innovation-outcomes"
           data-voz-caixa-secao="innovation"
-          data-voz-caixa-rotulo={t('innovation.title')}
+          data-voz-caixa-rotulo={pt ? 'O que entregamos' : 'What we deliver'}
           tabIndex={-1}
-          className="grid grid-cols-1 tablet:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 mb-12 focus:outline-none"
+          className="mb-14 focus:outline-none"
         >
-          {trends.map((trend, i) => (
-            <TrendCard key={trend.id} trend={trend} index={i} onClick={() => setActiveTrend(trend)} />
-          ))}
-        </div>
+          <div className="flex items-center gap-3 mb-6">
+            <Rocket size={18} className="text-foursys-primary" />
+            <h3 className="text-xl md:text-2xl font-black text-white">
+              {pt ? 'O que entregamos' : 'What we deliver'}
+            </h3>
+          </div>
+          <p className="text-xs md:text-sm text-foursys-text-muted leading-relaxed max-w-3xl mb-5">
+            {pt
+              ? 'Inovação aplicada ao negócio é tese, portfólio e disciplina. Estes são os três resultados que perseguimos junto com nossos clientes.'
+              : 'Business-applied innovation is thesis, portfolio and discipline. These are the three outcomes we pursue with our clients.'}
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+            {OUTCOMES.map((item, i) => (
+              <OutcomeCardView key={item.num} item={item} index={i} lang={L} />
+            ))}
+          </div>
+        </motion.div>
+
+        {/* ── Bloco 2: Como atuamos (5 Serviços) ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          data-voz-caixa="innovation-servicos"
+          data-voz-caixa-secao="innovation"
+          data-voz-caixa-rotulo={pt ? 'Como atuamos' : 'How we work'}
+          tabIndex={-1}
+          className="mb-14 focus:outline-none"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <Workflow size={18} className="text-foursys-primary" />
+            <h3 className="text-xl md:text-2xl font-black text-white">
+              {pt ? 'Como atuamos' : 'How we work'}
+            </h3>
+          </div>
+          <p className="text-xs md:text-sm text-foursys-text-muted leading-relaxed max-w-3xl mb-5">
+            {pt
+              ? 'Cinco frentes integradas que cobrem do desenho da governança ao financiamento e à cultura — para que inovação saia do PowerPoint e gere caixa.'
+              : 'Five integrated workstreams covering from governance design to funding and culture — so innovation moves beyond slides and generates cash.'}
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+            {INNOVATION_SERVICES.map((item, i) => (
+              <InnovationServiceCard key={item.num} item={item} index={i} lang={L} />
+            ))}
+          </div>
+        </motion.div>
+
+        {/* ── Bloco 3: Studio de Inovação Foursys (Featured) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          data-voz-caixa="innovation-studio"
+          data-voz-caixa-secao="innovation"
+          data-voz-caixa-rotulo={pt ? 'Studio de Inovação Foursys' : 'Foursys Innovation Studio'}
+          tabIndex={-1}
+          className="relative rounded-3xl overflow-hidden mb-16 focus:outline-none"
+        >
+          <div
+            className="absolute inset-0"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255,83,21,0.18) 0%, rgba(137,186,177,0.10) 50%, rgba(10,12,20,0.95) 100%)',
+            }}
+          />
+          <div
+            className="absolute inset-0 rounded-3xl"
+            style={{ border: '1.5px solid rgba(255,83,21,0.35)' }}
+          />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[2px] w-2/3 rounded-full"
+            style={{ background: 'linear-gradient(90deg, transparent, #FF5315, transparent)' }}
+          />
+          <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full pointer-events-none"
+            style={{ background: 'radial-gradient(ellipse, rgba(255,83,21,0.18) 0%, transparent 70%)', filter: 'blur(30px)' }}
+          />
+
+          <div className="relative z-10 p-6 md:p-10 grid grid-cols-1 lg:grid-cols-[1fr,2fr] gap-6 lg:gap-10 items-center">
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+              <div
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-foursys-primary/15 border border-foursys-primary/35 mb-4"
+              >
+                <Telescope size={13} className="text-foursys-primary" />
+                <span className="text-[10px] font-black uppercase tracking-[0.18em] text-foursys-primary">
+                  {pt ? 'Capacidade Integrada' : 'Integrated Capability'}
+                </span>
+              </div>
+              <div className="flex items-center gap-3 mb-3">
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(255,83,21,0.3), rgba(255,83,21,0.08))',
+                    border: '1px solid rgba(255,83,21,0.45)',
+                    color: '#FF5315',
+                  }}
+                >
+                  <Sparkles size={26} />
+                </div>
+                <h3 className="text-xl md:text-2xl font-black text-white leading-tight">
+                  {pt ? 'Studio de Inovação' : 'Innovation Studio'}<br />
+                  <span className="text-foursys-primary">Foursys</span>
+                </h3>
+              </div>
+              <div className="hidden lg:flex flex-wrap gap-2 mt-2">
+                {[
+                  { pt: 'Estratégia', en: 'Strategy' },
+                  { pt: 'Design', en: 'Design' },
+                  { pt: 'Produto', en: 'Product' },
+                  { pt: 'Portfólio', en: 'Portfolio' },
+                ].map((chip, i) => (
+                  <span
+                    key={i}
+                    className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full"
+                    style={{
+                      background: 'rgba(255,83,21,0.10)',
+                      border: '1px solid rgba(255,83,21,0.25)',
+                      color: '#FF5315',
+                    }}
+                  >
+                    {chip[L]}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-sm md:text-base text-white/90 leading-relaxed mb-3">
+                {pt
+                  ? <>O <span className="font-bold text-foursys-primary">Studio de Inovação da Foursys</span> é um motor de crescimento baseado em evidências, que combina <span className="font-bold text-white">visão estratégica, design de soluções, desenvolvimento de produtos e gestão de portfólio</span> em uma capacidade integrada, disponível para nossos clientes como extensão do seu próprio time de inovação.</>
+                  : <>The <span className="font-bold text-foursys-primary">Foursys Innovation Studio</span> is an evidence-based growth engine that combines <span className="font-bold text-white">strategic vision, solution design, product development and portfolio management</span> as an integrated capability, available to our clients as an extension of their own innovation team.</>}
+              </p>
+              <p className="text-xs md:text-sm text-foursys-text-muted leading-relaxed mb-5">
+                {pt
+                  ? 'Operamos com método, critérios claros de priorização e governança ativa sobre o que deve avançar, ser ajustado ou encerrado. O resultado é inovação conectada à estratégia, à execução e ao negócio.'
+                  : 'We operate with method, clear prioritization criteria and active governance over what should advance, be adjusted or be ended. The outcome is innovation connected to strategy, execution and business.'}
+              </p>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+                {[
+                  { icon: <CheckCircle2 size={14} />, label: { pt: 'Baseado em evidências', en: 'Evidence-based' } },
+                  { icon: <Layers size={14} />, label: { pt: 'Capacidade integrada', en: 'Integrated capability' } },
+                  { icon: <Compass size={14} />, label: { pt: 'Governança ativa', en: 'Active governance' } },
+                  { icon: <Zap size={14} />, label: { pt: 'Extensão do seu time', en: 'Your team extended' } },
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-2 rounded-xl px-3 py-2"
+                    style={{
+                      background: 'rgba(10,12,20,0.55)',
+                      border: '1px solid rgba(255,83,21,0.18)',
+                    }}
+                  >
+                    <span className="text-foursys-primary flex-shrink-0">{item.icon}</span>
+                    <span className="text-[11px] font-bold text-white leading-tight">{item.label[L]}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ── Bloco 4: Tendências que estamos navegando (existente) ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.45 }}
+          className="mb-14"
+        >
+          <div className="flex items-center gap-3 mb-2">
+            <TrendingUp size={18} className="text-foursys-primary" />
+            <h3 className="text-xl md:text-2xl font-black text-white">
+              {pt ? 'Tendências que estamos navegando' : 'Trends we are navigating'}
+            </h3>
+          </div>
+          <p className="text-xs md:text-sm text-foursys-text-muted leading-relaxed max-w-3xl mb-6">
+            {pt
+              ? 'As fronteiras globais que moldam o nosso pipeline de inovação. Cada tendência abre um deep-dive com posicionamento Foursys, líderes de mercado e perspectiva futura.'
+              : 'The global frontiers shaping our innovation pipeline. Each trend opens a deep-dive with Foursys positioning, market leaders and future outlook.'}
+          </p>
+
+          <div
+            data-voz-caixa="innovation-trends"
+            data-voz-caixa-secao="innovation"
+            data-voz-caixa-rotulo={pt ? 'Tendências que estamos navegando' : 'Trends we are navigating'}
+            tabIndex={-1}
+            className="grid grid-cols-1 tablet:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 focus:outline-none"
+          >
+            {trends.map((trend, i) => (
+              <TrendCard key={trend.id} trend={trend} index={i} onClick={() => setActiveTrend(trend)} />
+            ))}
+          </div>
+        </motion.div>
 
         {/* Bottom insight */}
         <motion.div

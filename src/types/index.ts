@@ -181,6 +181,8 @@ export type AppSection =
   | 'alliances'
   | 'innovation'
   | 'ai-foursys'
+  // IA — sub-sessões dedicadas
+  | 'kiam-comparison'
   // Provas
   | 'cases'
   | 'testimonials'

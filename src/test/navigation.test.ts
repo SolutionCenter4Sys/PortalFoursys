@@ -4,9 +4,10 @@ import { navigationItems, sectionCategories } from '../data/navigation'
 const SECTION_RENDERER_CASES = [
   'home', 'identity', 'timeline', 'global', 'why-foursys',
   'offers-flagship', 'services', 'delivery', 'alliances', 'innovation',
+  'ai-foursys', 'kiam-comparison',
   'cases', 'testimonials', 'awards', 'clients-showcase', 'capabilities',
-  'esg', 'insights', 'faq', 'export-pdf',
-  'client-opening', 'client-insights', 'client-cases', 'client-extra-1',
+  'benchmark', 'esg', 'insights', 'faq', 'export-pdf', 'media',
+  'client-opening', 'client-insights', 'client-cases', 'client-extra-1', 'client-extra-2',
 ]
 
 describe('Navigation items integrity', () => {

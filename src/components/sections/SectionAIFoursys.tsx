@@ -7,11 +7,15 @@ import {
   ArrowRight, ChevronRight, TrendingUp, X, Sparkles,
   Waypoints, Compass, Gift, Zap, Gem, BadgeCheck, Timer,
   Target, AlertTriangle, RefreshCw, GitBranch, ExternalLink,
+  Database, Heart, Network, Activity, Landmark, Factory,
+  Stethoscope, Banknote, MessageSquare, ShieldCheck, Trophy,
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { BackToOriginChip } from '../ui/BackToOriginChip'
 import { useLanguage } from '../../i18n'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
+import { useApp } from '../../context/AppContext'
+import type { AppSection } from '../../types'
 
 function hexToRgba(hex: string, a: number) {
   const h = hex.replace('#', '')
@@ -80,6 +84,37 @@ interface DetailableItem {
   title: { pt: string; en: string }
   color: string
   detail: { tagline: { pt: string; en: string }; sections: DetailSection[] }
+}
+
+type VerticalId = 'public' | 'finance' | 'industry' | 'health' | 'services'
+type PillarAnchor = 'kiam' | 'ai-strategy' | 'fusion-teams' | 'governance' | 'ai-squad' | 'framework' | 'agents'
+
+interface VerticalItem {
+  id: VerticalId
+  icon: React.ReactNode
+  label: { pt: string; en: string }
+  helper: { pt: string; en: string }
+  color: string
+  matchingServices: string[]
+}
+
+interface GovernancePillar {
+  num: string
+  icon: React.ReactNode
+  name: { pt: string; en: string }
+  desc: { pt: string; en: string }
+  anchor: PillarAnchor
+  color: string
+}
+
+interface EntryPort {
+  id: 'estrategia' | 'execucao' | 'plataforma'
+  icon: React.ReactNode
+  title: { pt: string; en: string }
+  desc: { pt: string; en: string }
+  cta: { pt: string; en: string }
+  color: string
+  targetSection?: AppSection
 }
 
 /** Slug determinístico a partir do título PT — usado para `data-voz-detalhe`. */
@@ -928,7 +963,7 @@ const HOW_ITEMS: HowItem[] = [
   },
   {
     icon: <BrainCircuit size={24} />,
-    title: { pt: 'MOXE', en: 'MOXE' },
+    title: { pt: 'KIAM', en: 'KIAM' },
     subtitle: {
       pt: 'O sistema operacional cognitivo da sua empresa',
       en: 'Your company\'s cognitive operating system',
@@ -986,10 +1021,10 @@ const HOW_ITEMS: HowItem[] = [
         },
         {
           type: 'text',
-          title: { pt: 'O que é MOXE', en: 'What is MOXE' },
+          title: { pt: 'O que é KIAM', en: 'What is KIAM' },
           body: {
-            pt: 'MOXE é um sistema operacional cognitivo entregue como SaaS. Em uma única plataforma, sua empresa cria, orquestra e governa agentes autônomos, fluxos agênticos e skills. Opera em ambiente multi-cloud e seleciona dinamicamente o melhor modelo de IA para cada tarefa. Integra-se aos sistemas, canais e bases de conhecimento da empresa — aprendendo o DNA da organização e entregando respostas assertivas e contextualizadas.',
-            en: 'MOXE is a cognitive operating system delivered as SaaS. On a single platform, your company creates, orchestrates and governs autonomous agents, agentic flows and skills. It operates in a multi-cloud environment and dynamically selects the best AI model for each task. It integrates with your company\'s systems, channels and knowledge bases — learning the organization\'s DNA and delivering assertive, contextualized responses.',
+            pt: 'KIAM é um sistema operacional cognitivo entregue como SaaS. Em uma única plataforma, sua empresa cria, orquestra e governa agentes autônomos, fluxos agênticos e skills. Opera em ambiente multi-cloud e seleciona dinamicamente o melhor modelo de IA para cada tarefa. Integra-se aos sistemas, canais e bases de conhecimento da empresa — aprendendo o DNA da organização e entregando respostas assertivas e contextualizadas.',
+            en: 'KIAM is a cognitive operating system delivered as SaaS. On a single platform, your company creates, orchestrates and governs autonomous agents, agentic flows and skills. It operates in a multi-cloud environment and dynamically selects the best AI model for each task. It integrates with your company\'s systems, channels and knowledge bases — learning the organization\'s DNA and delivering assertive, contextualized responses.',
           },
         },
         {
@@ -1016,10 +1051,10 @@ const HOW_ITEMS: HowItem[] = [
         },
         {
           type: 'steps',
-          title: { pt: 'Os 3 Pilares da Governança MOXE', en: 'The 3 MOXE Governance Pillars' },
+          title: { pt: 'Os 3 Pilares da Governança KIAM', en: 'The 3 KIAM Governance Pillars' },
           note: {
-            pt: 'O que diferencia MOXE de qualquer toolkit de hyperscaler: governança não é plugin, é núcleo do produto.',
-            en: 'What sets MOXE apart from any hyperscaler toolkit: governance is not a plugin, it\'s the product\'s core.',
+            pt: 'O que diferencia KIAM de qualquer toolkit de hyperscaler: governança não é plugin, é núcleo do produto.',
+            en: 'What sets KIAM apart from any hyperscaler toolkit: governance is not a plugin, it\'s the product\'s core.',
           },
           steps: [
             { num: '01', title: { pt: 'Construção Segura e Guiada', en: 'Secure Guided Building' }, desc: { pt: 'Boas práticas aplicadas por padrão no desenho de agentes e skills, com análise estática e dinâmica dos fluxos construídos', en: 'Best practices applied by default in agent and skill design, with static and dynamic analysis of built flows' } },
@@ -1031,32 +1066,32 @@ const HOW_ITEMS: HowItem[] = [
           type: 'dimensions',
           title: { pt: 'Posicionamento no Mercado', en: 'Market Positioning' },
           note: {
-            pt: 'MOXE é produto pronto com governança embutida, adaptado ao DNA da empresa — não um toolkit técnico genérico.',
-            en: 'MOXE is a ready-made product with built-in governance, adapted to the company\'s DNA — not a generic technical toolkit.',
+            pt: 'KIAM é produto pronto com governança embutida, adaptado ao DNA da empresa — não um toolkit técnico genérico.',
+            en: 'KIAM is a ready-made product with built-in governance, adapted to the company\'s DNA — not a generic technical toolkit.',
           },
           dimensions: [
             {
               icon: <Layers size={18} />,
               name: { pt: 'vs. Hyperscalers', en: 'vs. Hyperscalers' },
               items: {
-                pt: ['Copilot Studio, Bedrock, Vertex entregam toolkit técnico', 'Sem governança nativa nem personalização ao negócio', 'MOXE: produto pronto, governança embutida, adaptado ao DNA da empresa'],
-                en: ['Copilot Studio, Bedrock, Vertex deliver technical toolkit', 'No native governance or business customization', 'MOXE: ready product, built-in governance, adapted to company DNA'],
+                pt: ['Copilot Studio, Bedrock, Vertex entregam toolkit técnico', 'Sem governança nativa nem personalização ao negócio', 'KIAM: produto pronto, governança embutida, adaptado ao DNA da empresa'],
+                en: ['Copilot Studio, Bedrock, Vertex deliver technical toolkit', 'No native governance or business customization', 'KIAM: ready product, built-in governance, adapted to company DNA'],
               },
             },
             {
               icon: <Bot size={18} />,
               name: { pt: 'vs. Plataformas Dev', en: 'vs. Dev Platforms' },
               items: {
-                pt: ['Focam em code generation e produtividade de squads técnicos', 'Limitadas à engenharia de software', 'MOXE: transforma toda a operação corporativa, não só engenharia'],
-                en: ['Focus on code generation and technical squad productivity', 'Limited to software engineering', 'MOXE: transforms the entire corporate operation, not just engineering'],
+                pt: ['Focam em code generation e produtividade de squads técnicos', 'Limitadas à engenharia de software', 'KIAM: transforma toda a operação corporativa, não só engenharia'],
+                en: ['Focus on code generation and technical squad productivity', 'Limited to software engineering', 'KIAM: transforms the entire corporate operation, not just engineering'],
               },
             },
             {
               icon: <Blocks size={18} />,
               name: { pt: 'vs. Open-Source', en: 'vs. Open-Source' },
               items: {
-                pt: ['LangGraph, CrewAI e similares exigem time de engenharia dedicado', 'Construção e manutenção sob responsabilidade do cliente', 'MOXE: SaaS pronto; qualquer usuário da empresa constrói'],
-                en: ['LangGraph, CrewAI and similar require dedicated engineering team', 'Building and maintenance under client responsibility', 'MOXE: ready SaaS; any company user can build'],
+                pt: ['LangGraph, CrewAI e similares exigem time de engenharia dedicado', 'Construção e manutenção sob responsabilidade do cliente', 'KIAM: SaaS pronto; qualquer usuário da empresa constrói'],
+                en: ['LangGraph, CrewAI and similar require dedicated engineering team', 'Building and maintenance under client responsibility', 'KIAM: ready SaaS; any company user can build'],
               },
             },
           ],
@@ -1093,14 +1128,182 @@ const HOW_ITEMS: HowItem[] = [
         },
         {
           type: 'highlight',
-          title: { pt: 'MOXE + Fusion Teams — Adoção Acelerada', en: 'MOXE + Fusion Teams — Accelerated Adoption' },
+          title: { pt: 'KIAM + Fusion Teams — Adoção Acelerada', en: 'KIAM + Fusion Teams — Accelerated Adoption' },
           body: {
-            pt: 'MOXE pode ser adotada isoladamente como SaaS. Para empresas que querem extrair valor máximo desde o primeiro ciclo, o programa Fusion Teams do Studio de Inovação Foursys embarca com uma célula multidisciplinar que capacita o time do cliente e entrega as primeiras jornadas automatizadas diretamente na plataforma — deixando autonomia residual para a área continuar inovando sozinha.',
-            en: 'MOXE can be adopted standalone as SaaS. For companies wanting to extract maximum value from the first cycle, the Foursys Innovation Studio Fusion Teams program brings a multidisciplinary cell that trains the client team and delivers the first automated journeys directly on the platform — leaving residual autonomy for the area to continue innovating on its own.',
+            pt: 'KIAM pode ser adotada isoladamente como SaaS. Para empresas que querem extrair valor máximo desde o primeiro ciclo, o programa Fusion Teams do Studio de Inovação Foursys embarca com uma célula multidisciplinar que capacita o time do cliente e entrega as primeiras jornadas automatizadas diretamente na plataforma — deixando autonomia residual para a área continuar inovando sozinha.',
+            en: 'KIAM can be adopted standalone as SaaS. For companies wanting to extract maximum value from the first cycle, the Foursys Innovation Studio Fusion Teams program brings a multidisciplinary cell that trains the client team and delivers the first automated journeys directly on the platform — leaving residual autonomy for the area to continue innovating on its own.',
           },
         },
       ],
     },
+  },
+]
+
+// ─── Verticais (chips de segmentação) ────────────────────────────────────────
+
+const VERTICALS: VerticalItem[] = [
+  {
+    id: 'public',
+    icon: <Landmark size={14} />,
+    label: { pt: 'Setor Público', en: 'Public Sector' },
+    helper: { pt: 'Soberania · LGPD · EU AI Act', en: 'Sovereignty · LGPD · EU AI Act' },
+    color: '#A78BFA',
+    matchingServices: ['AI Strategy & Roadmap', 'Governança de IA', 'AI Framework'],
+  },
+  {
+    id: 'finance',
+    icon: <Banknote size={14} />,
+    label: { pt: 'Serviços Financeiros', en: 'Financial Services' },
+    helper: { pt: 'Compliance · Fraude · Risco', en: 'Compliance · Fraud · Risk' },
+    color: '#34D399',
+    matchingServices: ['AI Squad', 'Criação de Agentes de IA', 'AI Framework', 'Governança de IA'],
+  },
+  {
+    id: 'industry',
+    icon: <Factory size={14} />,
+    label: { pt: 'Indústria', en: 'Industry' },
+    helper: { pt: 'IoT · Operação · Qualidade', en: 'IoT · Operations · Quality' },
+    color: '#FBBF24',
+    matchingServices: ['Fusion Teams', 'Criação de Agentes de IA', 'AI Framework'],
+  },
+  {
+    id: 'health',
+    icon: <Stethoscope size={14} />,
+    label: { pt: 'Saúde', en: 'Healthcare' },
+    helper: { pt: 'LGPD · Dados sensíveis · Decisão clínica', en: 'LGPD · Sensitive data · Clinical decision' },
+    color: '#F472B6',
+    matchingServices: ['Governança de IA', 'AI Strategy & Roadmap', 'AI Squad'],
+  },
+  {
+    id: 'services',
+    icon: <MessageSquare size={14} />,
+    label: { pt: 'Serviços (CSC · HR · Legal)', en: 'Services (SSC · HR · Legal)' },
+    helper: { pt: 'Automação cognitiva · Backoffice', en: 'Cognitive automation · Backoffice' },
+    color: '#60A5FA',
+    matchingServices: ['Fusion Teams', 'Criação de Agentes de IA', 'AI Squad'],
+  },
+]
+
+// ─── 10 Pilares de Governança Foursys ────────────────────────────────────────
+
+const PILARES_GOVERNANCA: GovernancePillar[] = [
+  {
+    num: '01',
+    icon: <Compass size={18} />,
+    name: { pt: 'Estratégia e Governança', en: 'Strategy & Governance' },
+    desc: { pt: 'Alinhamento estratégico, políticas e comitês ativos.', en: 'Strategic alignment, policies and active committees.' },
+    anchor: 'ai-strategy',
+    color: '#818CF8',
+  },
+  {
+    num: '02',
+    icon: <Users size={18} />,
+    name: { pt: 'Cultura, Pessoas e Comunicação', en: 'Culture, People & Comms' },
+    desc: { pt: 'Capacitação por belts e gestão de mudança contínua.', en: 'Belt-based training and continuous change management.' },
+    anchor: 'fusion-teams',
+    color: '#2DD4BF',
+  },
+  {
+    num: '03',
+    icon: <Layers size={18} />,
+    name: { pt: 'Estrutura Tecnológica', en: 'Technology Foundation' },
+    desc: { pt: 'Multi-cloud, multi-modelo, LLM Routing e observabilidade.', en: 'Multi-cloud, multi-model, LLM Routing and observability.' },
+    anchor: 'kiam',
+    color: '#60A5FA',
+  },
+  {
+    num: '04',
+    icon: <DollarSign size={18} />,
+    name: { pt: 'Investimentos, Custos e Despesas', en: 'Investments, Costs & Expenses' },
+    desc: { pt: 'FinOps nativo — billing por usuário, agente ou projeto.', en: 'Native FinOps — billing per user, agent or project.' },
+    anchor: 'kiam',
+    color: '#FBBF24',
+  },
+  {
+    num: '05',
+    icon: <Database size={18} />,
+    name: { pt: 'Qualidade de Dados', en: 'Data Quality' },
+    desc: { pt: 'RAG governado, lineage e contratos de dados embarcados.', en: 'Governed RAG, lineage and embedded data contracts.' },
+    anchor: 'framework',
+    color: '#34D399',
+  },
+  {
+    num: '06',
+    icon: <Heart size={18} />,
+    name: { pt: 'Impacto no Usuário Final', en: 'End-User Impact' },
+    desc: { pt: 'Transparência, explicabilidade e UX humano-IA por design.', en: 'Transparency, explainability and human-AI UX by design.' },
+    anchor: 'governance',
+    color: '#F472B6',
+  },
+  {
+    num: '07',
+    icon: <Scale size={18} />,
+    name: { pt: 'Compliance, Riscos e Ética', en: 'Compliance, Risk & Ethics' },
+    desc: { pt: 'EU AI Act, LGPD, SOC2 e revisão ética em cada release.', en: 'EU AI Act, LGPD, SOC2 and ethical review on every release.' },
+    anchor: 'governance',
+    color: '#A78BFA',
+  },
+  {
+    num: '08',
+    icon: <ShieldCheck size={18} />,
+    name: { pt: 'Segurança da Informação', en: 'Information Security' },
+    desc: { pt: 'AI Safety, controles de prompt-injection e dados sensíveis.', en: 'AI Safety, prompt-injection and sensitive-data controls.' },
+    anchor: 'kiam',
+    color: '#FB923C',
+  },
+  {
+    num: '09',
+    icon: <Network size={18} />,
+    name: { pt: 'Fornecedores e Integrações', en: 'Vendors & Integrations' },
+    desc: { pt: 'Catálogo de modelos, conectores certificados e SLAs.', en: 'Model catalog, certified connectors and SLAs.' },
+    anchor: 'framework',
+    color: '#89BAB1',
+  },
+  {
+    num: '10',
+    icon: <Activity size={18} />,
+    name: { pt: 'Monitoramento e Melhoria Contínua', en: 'Monitoring & Continuous Improvement' },
+    desc: { pt: 'Telemetria de agentes, evals, drift e reavaliação contínua.', en: 'Agent telemetry, evals, drift and continuous reassessment.' },
+    anchor: 'framework',
+    color: '#FF5315',
+  },
+]
+
+// ─── 4 Portas de Entrada ─────────────────────────────────────────────────────
+
+const ENTRY_PORTS: EntryPort[] = [
+  {
+    id: 'estrategia',
+    icon: <Compass size={20} />,
+    title: { pt: 'Estratégia', en: 'Strategy' },
+    desc: {
+      pt: 'Da visão à execução priorizada por ROI — método Foursys em 3 fases.',
+      en: 'From vision to ROI-prioritized execution — Foursys 3-phase method.',
+    },
+    cta: { pt: 'Ver AI Strategy & Roadmap', en: 'See AI Strategy & Roadmap' },
+    color: '#818CF8',
+  },
+  {
+    id: 'execucao',
+    icon: <Rocket size={20} />,
+    title: { pt: 'Execução', en: 'Execution' },
+    desc: {
+      pt: 'Squads dedicados, agentes e Fusion Teams para entregar resultados rápidos.',
+      en: 'Dedicated squads, agents and Fusion Teams to deliver fast outcomes.',
+    },
+    cta: { pt: 'Ver ofertas de execução', en: 'See execution offers' },
+    color: '#FF5315',
+  },
+  {
+    id: 'plataforma',
+    icon: <BrainCircuit size={20} />,
+    title: { pt: 'Plataforma', en: 'Platform' },
+    desc: {
+      pt: 'KIAM — sistema operacional cognitivo SaaS, multi-modelo e governado.',
+      en: 'KIAM — SaaS cognitive operating system, multi-model and governed.',
+    },
+    cta: { pt: 'Conhecer KIAM', en: 'Discover KIAM' },
+    color: '#34D399',
   },
 ]
 
@@ -2450,14 +2653,302 @@ function MarketModal({ onClose, lang }: { onClose: () => void; lang: string }) {
   )
 }
 
+// ─── Vertical Chips ──────────────────────────────────────────────────────────
+
+function VerticalChips({
+  lang,
+  selected,
+  onSelect,
+}: {
+  lang: 'pt' | 'en'
+  selected: VerticalId | null
+  onSelect: (id: VerticalId | null) => void
+}) {
+  const pt = lang === 'pt'
+  const selectedItem = selected ? VERTICALS.find(v => v.id === selected) ?? null : null
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.15, duration: 0.5 }}
+      data-voz-caixa="ai-verticais"
+      data-voz-caixa-secao="ai-foursys"
+      data-voz-caixa-rotulo={pt ? 'Para qual setor?' : 'Which sector?'}
+      tabIndex={-1}
+      className="mb-10 focus:outline-none"
+    >
+      <div className="flex items-center justify-center gap-2 mb-3">
+        <Target size={14} className="text-foursys-text-muted" />
+        <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-foursys-text-muted">
+          {pt ? 'Para qual setor é esta jornada?' : 'Which sector is this journey for?'}
+        </span>
+      </div>
+
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <button
+          type="button"
+          onClick={() => onSelect(null)}
+          className={`px-3 py-1.5 rounded-full text-[11px] font-bold transition-all duration-300 border ${
+            selected === null
+              ? 'bg-white/[0.06] text-white border-white/20'
+              : 'text-foursys-text-muted border-white/[0.06] hover:text-white hover:border-white/15'
+          }`}
+        >
+          {pt ? 'Todos' : 'All'}
+        </button>
+
+        {VERTICALS.map(v => {
+          const active = selected === v.id
+          return (
+            <button
+              key={v.id}
+              type="button"
+              onClick={() => onSelect(active ? null : v.id)}
+              data-voz-detalhe={`ai-vertical-${v.id}`}
+              data-voz-detalhe-secao="ai-foursys"
+              data-voz-detalhe-rotulo={v.label[lang]}
+              className="px-3 py-1.5 rounded-full text-[11px] font-bold transition-all duration-300 inline-flex items-center gap-1.5 border"
+              style={{
+                color: active ? '#fff' : hexToRgba(v.color, 0.85),
+                background: active ? hexToRgba(v.color, 0.18) : hexToRgba(v.color, 0.06),
+                borderColor: active ? hexToRgba(v.color, 0.55) : hexToRgba(v.color, 0.2),
+              }}
+            >
+              {v.icon}
+              {v.label[lang]}
+            </button>
+          )
+        })}
+      </div>
+
+      <AnimatePresence>
+        {selectedItem && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden mt-4"
+          >
+            <div
+              className="max-w-2xl mx-auto rounded-xl p-3 text-center text-xs flex flex-col sm:flex-row items-center justify-center gap-2"
+              style={{
+                background: hexToRgba(selectedItem.color, 0.08),
+                border: `1px solid ${hexToRgba(selectedItem.color, 0.25)}`,
+              }}
+            >
+              <span className="text-foursys-text-muted">
+                {pt ? 'Foco em:' : 'Focused on:'}{' '}
+                <span className="font-bold text-white">{selectedItem.helper[lang]}</span>
+              </span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  )
+}
+
+// ─── Entry Ports (4 portas) ──────────────────────────────────────────────────
+
+function EntryPorts({
+  lang,
+  onPortClick,
+}: {
+  lang: 'pt' | 'en'
+  onPortClick: (port: EntryPort) => void
+}) {
+  const pt = lang === 'pt'
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.18 }}
+      data-voz-caixa="ai-portas"
+      data-voz-caixa-secao="ai-foursys"
+      data-voz-caixa-rotulo={pt ? 'Por onde começar' : 'Where to start'}
+      tabIndex={-1}
+      className="mb-12 focus:outline-none"
+    >
+      <div className="flex items-center gap-3 mb-5">
+        <Waypoints size={18} className="text-foursys-primary" />
+        <h3 className="text-xl md:text-2xl font-black text-white">
+          {pt ? 'Por onde você começa?' : 'Where do you start?'}
+        </h3>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {ENTRY_PORTS.map((port, i) => (
+          <motion.button
+            key={port.id}
+            type="button"
+            onClick={() => onPortClick(port)}
+            data-voz-detalhe={`ai-porta-${port.id}`}
+            data-voz-detalhe-secao="ai-foursys"
+            data-voz-detalhe-rotulo={port.title[lang]}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 + i * 0.07, duration: 0.5, type: 'spring', stiffness: 120 }}
+            whileHover={{ y: -4 }}
+            className="group relative rounded-2xl overflow-hidden text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-foursys-primary/60"
+          >
+            <div
+              className="absolute inset-0 transition-all duration-400"
+              style={{
+                background: `linear-gradient(160deg, ${hexToRgba(port.color, 0.18)} 0%, rgba(10,12,20,0.95) 100%)`,
+              }}
+            />
+            <div
+              className="absolute inset-0 rounded-2xl transition-all duration-300"
+              style={{ border: `1px solid ${hexToRgba(port.color, 0.3)}` }}
+            />
+            <div className="relative z-10 p-5 flex flex-col h-full" style={{ minHeight: 180 }}>
+              <div className="flex items-center gap-3 mb-3">
+                <div
+                  className="w-11 h-11 rounded-xl flex items-center justify-center"
+                  style={{
+                    background: `linear-gradient(135deg, ${hexToRgba(port.color, 0.25)}, ${hexToRgba(port.color, 0.08)})`,
+                    border: `1px solid ${hexToRgba(port.color, 0.35)}`,
+                    color: port.color,
+                  }}
+                >
+                  {port.icon}
+                </div>
+                <h4 className="text-base font-black text-white leading-tight">{port.title[lang]}</h4>
+              </div>
+              <p className="text-xs text-foursys-text-muted leading-relaxed mb-3 flex-1">
+                {port.desc[lang]}
+              </p>
+              <div
+                className="inline-flex items-center gap-1 text-xs font-bold transition-colors group-hover:text-white"
+                style={{ color: port.color }}
+              >
+                {port.cta[lang]}
+                <ArrowRight size={12} />
+              </div>
+            </div>
+          </motion.button>
+        ))}
+      </div>
+    </motion.div>
+  )
+}
+
+// ─── Pilar Card (10 Pilares de Governança) ───────────────────────────────────
+
+function PilarCard({
+  item,
+  index,
+  lang,
+}: {
+  item: GovernancePillar
+  index: number
+  lang: 'pt' | 'en'
+}) {
+  const [hovered, setHovered] = useState(false)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.05 + index * 0.04, duration: 0.45, type: 'spring', stiffness: 120 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="group relative rounded-2xl overflow-hidden"
+    >
+      <motion.div
+        className="absolute inset-0"
+        animate={{
+          background: hovered
+            ? `linear-gradient(145deg, ${hexToRgba(item.color, 0.14)} 0%, rgba(10,12,20,0.95) 100%)`
+            : `linear-gradient(145deg, ${hexToRgba(item.color, 0.05)} 0%, rgba(10,12,20,0.95) 100%)`,
+        }}
+        transition={{ duration: 0.4 }}
+      />
+      <div
+        className="absolute inset-0 rounded-2xl transition-all duration-400"
+        style={{ border: hovered ? `1px solid ${hexToRgba(item.color, 0.4)}` : '1px solid rgba(255,255,255,0.06)' }}
+      />
+
+      <div className="relative z-10 p-4 flex flex-col h-full" style={{ minHeight: 150 }}>
+        <div className="flex items-start justify-between mb-2">
+          <div
+            className="w-9 h-9 rounded-lg flex items-center justify-center"
+            style={{
+              background: `linear-gradient(135deg, ${hexToRgba(item.color, 0.22)}, ${hexToRgba(item.color, 0.07)})`,
+              border: `1px solid ${hexToRgba(item.color, 0.3)}`,
+              color: item.color,
+            }}
+          >
+            {item.icon}
+          </div>
+          <span
+            className="text-[10px] font-black tracking-widest"
+            style={{ color: hexToRgba(item.color, 0.7) }}
+          >
+            {item.num}
+          </span>
+        </div>
+        <h4 className="text-[13px] font-bold text-white leading-tight mb-1.5">
+          {item.name[lang]}
+        </h4>
+        <p className="text-[11px] text-foursys-text-muted leading-relaxed flex-1">
+          {item.desc[lang]}
+        </p>
+      </div>
+    </motion.div>
+  )
+}
+
 // ─── Main Section ────────────────────────────────────────────────────────────
 
 export function SectionAIFoursys() {
   const { t, lang } = useLanguage()
+  const { navigate } = useApp()
   const [showMarket, setShowMarket] = useState(false)
   const [detailService, setDetailService] = useState<ServiceItem | null>(null)
   const [detailHow, setDetailHow] = useState<HowItem | null>(null)
+  const [selectedVertical, setSelectedVertical] = useState<VerticalId | null>(null)
   const pt = lang === 'pt'
+
+  const verticalCfg = selectedVertical ? VERTICALS.find(v => v.id === selectedVertical) ?? null : null
+  const visibleServices = verticalCfg
+    ? SERVICES.filter(s => verticalCfg.matchingServices.includes(s.title.pt))
+    : SERVICES
+
+  function scrollToBlock(blockId: string) {
+    const el = document.querySelector<HTMLElement>(`[data-voz-caixa="${blockId}"]`)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      el.focus({ preventScroll: true })
+    }
+  }
+
+  function openKiamModal() {
+    const kiamHow = HOW_ITEMS.find(h => h.title.pt === 'KIAM')
+    if (kiamHow) setDetailHow(kiamHow)
+  }
+
+  function openAIStrategyModal() {
+    const aiStrategy = SERVICES.find(s => s.title.pt === 'AI Strategy & Roadmap')
+    if (aiStrategy) setDetailService(aiStrategy)
+  }
+
+  function handlePortClick(port: EntryPort) {
+    switch (port.id) {
+      case 'estrategia':
+        openAIStrategyModal()
+        break
+      case 'execucao':
+        scrollToBlock('ai-servicos')
+        break
+      case 'plataforma':
+        openKiamModal()
+        break
+    }
+  }
 
   return (
     <SectionWrapper>
@@ -2472,7 +2963,7 @@ export function SectionAIFoursys() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="relative text-center mb-14"
+          className="relative text-center mb-10"
         >
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-48 rounded-full pointer-events-none" style={{ background: 'radial-gradient(ellipse, rgba(255,83,21,0.08) 0%, transparent 70%)', filter: 'blur(40px)' }} />
 
@@ -2503,6 +2994,16 @@ export function SectionAIFoursys() {
           </div>
         </motion.div>
 
+        {/* ── Verticais (chips de segmentação) ── */}
+        <VerticalChips
+          lang={lang as 'pt' | 'en'}
+          selected={selectedVertical}
+          onSelect={setSelectedVertical}
+        />
+
+        {/* ── 4 Portas de Entrada ── */}
+        <EntryPorts lang={lang as 'pt' | 'en'} onPortClick={handlePortClick} />
+
         {/* ── Bloco 1: Resultados ── */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -2514,9 +3015,23 @@ export function SectionAIFoursys() {
           tabIndex={-1}
           className="mb-14 focus:outline-none"
         >
-          <div className="flex items-center gap-3 mb-6">
-            <Sparkles size={18} className="text-foursys-primary" />
-            <h3 className="text-xl md:text-2xl font-black text-white">{pt ? 'Resultados Comprovados' : 'Proven Results'}</h3>
+          <div className="flex items-center justify-between gap-3 mb-6 flex-wrap">
+            <div className="flex items-center gap-3">
+              <Sparkles size={18} className="text-foursys-primary" />
+              <h3 className="text-xl md:text-2xl font-black text-white">{pt ? 'Resultados Comprovados' : 'Proven Results'}</h3>
+            </div>
+            <button
+              type="button"
+              onClick={() => navigate('cases')}
+              data-voz-detalhe="ai-cta-cases"
+              data-voz-detalhe-secao="ai-foursys"
+              data-voz-detalhe-rotulo={pt ? 'Ver casos com números' : 'See cases with numbers'}
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-foursys-primary hover:text-white transition-colors duration-300 cursor-pointer"
+            >
+              <Trophy size={13} />
+              {pt ? 'Ver casos com números' : 'See cases with numbers'}
+              <ArrowRight size={12} />
+            </button>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {RESULTS.map((item, i) => (
@@ -2536,18 +3051,73 @@ export function SectionAIFoursys() {
           tabIndex={-1}
           className="mb-14 focus:outline-none"
         >
-          <div className="flex items-center gap-3 mb-6">
-            <Blocks size={18} className="text-foursys-primary" />
-            <h3 className="text-xl md:text-2xl font-black text-white">{pt ? 'Nossos Serviços' : 'Our Services'}</h3>
+          <div className="flex items-center justify-between gap-3 mb-6 flex-wrap">
+            <div className="flex items-center gap-3">
+              <Blocks size={18} className="text-foursys-primary" />
+              <h3 className="text-xl md:text-2xl font-black text-white">{pt ? 'Nossos Serviços' : 'Our Services'}</h3>
+              {verticalCfg && (
+                <span
+                  className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"
+                  style={{
+                    background: hexToRgba(verticalCfg.color, 0.12),
+                    border: `1px solid ${hexToRgba(verticalCfg.color, 0.3)}`,
+                    color: verticalCfg.color,
+                  }}
+                >
+                  {pt ? 'Filtrado por' : 'Filtered by'} · {verticalCfg.label[lang as 'pt' | 'en']}
+                </span>
+              )}
+            </div>
+            <button
+              type="button"
+              onClick={() => navigate('cases')}
+              data-voz-detalhe="ai-cta-especialista"
+              data-voz-detalhe-secao="ai-foursys"
+              data-voz-detalhe-rotulo={pt ? 'Ver cases reais' : 'See real cases'}
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-foursys-primary hover:text-white transition-colors duration-300 cursor-pointer"
+            >
+              <MessageSquare size={13} />
+              {pt ? 'Ver cases reais' : 'See real cases'}
+              <ArrowRight size={12} />
+            </button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {SERVICES.map((item, i) => (
+            {visibleServices.map((item, i) => (
               <ServiceCard key={item.title.pt} item={item} index={i} lang={lang} onShowDetail={setDetailService} />
             ))}
           </div>
         </motion.div>
 
-        {/* ── Bloco 3: Como ── */}
+        {/* ── Bloco 3: 10 Pilares de Governança ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          data-voz-caixa="ai-pilares"
+          data-voz-caixa-secao="ai-foursys"
+          data-voz-caixa-rotulo={pt ? '10 Pilares de Governança Foursys' : '10 Foursys Governance Pillars'}
+          tabIndex={-1}
+          className="mb-14 focus:outline-none"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <ShieldCheck size={18} className="text-foursys-primary" />
+            <h3 className="text-xl md:text-2xl font-black text-white">
+              {pt ? '10 Pilares de Governança Foursys' : '10 Foursys Governance Pillars'}
+            </h3>
+          </div>
+          <p className="text-xs md:text-sm text-foursys-text-muted leading-relaxed max-w-3xl mb-5">
+            {pt
+              ? 'A governança Foursys cobre as 10 dimensões críticas de IA — não como manifesto, mas como prática operacional embutida em KIAM, Fusion Teams e nos frameworks de Strategy e Squad.'
+              : 'Foursys governance covers the 10 critical AI dimensions — not as a manifesto, but as operational practice embedded in KIAM, Fusion Teams and the Strategy and Squad frameworks.'}
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+            {PILARES_GOVERNANCA.map((item, i) => (
+              <PilarCard key={item.num} item={item} index={i} lang={lang as 'pt' | 'en'} />
+            ))}
+          </div>
+        </motion.div>
+
+        {/* ── Bloco 4: Como ── */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -2558,9 +3128,37 @@ export function SectionAIFoursys() {
           tabIndex={-1}
           className="mb-12 focus:outline-none"
         >
-          <div className="flex items-center gap-3 mb-6">
-            <FlaskConical size={18} className="text-foursys-primary" />
-            <h3 className="text-xl md:text-2xl font-black text-white">{pt ? 'Como Fazemos' : 'How We Deliver'}</h3>
+          <div className="flex items-center justify-between gap-3 mb-6 flex-wrap">
+            <div className="flex items-center gap-3">
+              <FlaskConical size={18} className="text-foursys-primary" />
+              <h3 className="text-xl md:text-2xl font-black text-white">{pt ? 'Como Fazemos' : 'How We Deliver'}</h3>
+            </div>
+            <div className="flex items-center gap-3 flex-wrap">
+              <button
+                type="button"
+                onClick={openKiamModal}
+                data-voz-detalhe="ai-cta-kiam"
+                data-voz-detalhe-secao="ai-foursys"
+                data-voz-detalhe-rotulo={pt ? 'Conhecer KIAM' : 'Discover KIAM'}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-foursys-primary hover:text-white transition-colors duration-300 cursor-pointer"
+              >
+                <BrainCircuit size={13} />
+                {pt ? 'Conhecer KIAM' : 'Discover KIAM'}
+                <ArrowRight size={12} />
+              </button>
+              <button
+                type="button"
+                onClick={() => navigate('kiam-comparison')}
+                data-voz-detalhe="ai-cta-comparativo"
+                data-voz-detalhe-secao="ai-foursys"
+                data-voz-detalhe-rotulo={pt ? 'KIAM vs mercado' : 'KIAM vs market'}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-foursys-primary hover:text-white transition-colors duration-300 cursor-pointer"
+              >
+                <Scale size={13} />
+                {pt ? 'KIAM vs mercado' : 'KIAM vs market'}
+                <ArrowRight size={12} />
+              </button>
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {HOW_ITEMS.map((item, i) => (

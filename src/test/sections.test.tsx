@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { AppProvider } from '../context/AppContext'
+import { LanguageProvider } from '../i18n/LanguageContext'
 import { SectionHome } from '../components/sections/SectionHome'
 import { SectionIdentity } from '../components/sections/SectionIdentity'
 import { SectionCases } from '../components/sections/SectionCases'
@@ -11,9 +12,15 @@ import { SectionClients } from '../components/sections/SectionClients'
 import { SectionInsights } from '../components/sections/SectionInsights'
 import { SectionInnovation } from '../components/sections/SectionInnovation'
 import { SectionAlliances } from '../components/sections/SectionAlliances'
+import { SectionAIFoursys } from '../components/sections/SectionAIFoursys'
+import { SectionKiamComparison } from '../components/sections/SectionKiamComparison'
 
 function renderWithProvider(ui: React.ReactElement) {
-  return render(<AppProvider>{ui}</AppProvider>)
+  return render(
+    <LanguageProvider>
+      <AppProvider>{ui}</AppProvider>
+    </LanguageProvider>
+  )
 }
 
 describe('Section smoke tests', () => {
@@ -65,6 +72,39 @@ describe('Section smoke tests', () => {
   it('SectionAlliances renders without crash', () => {
     const { container } = renderWithProvider(<SectionAlliances />)
     expect(container).toBeTruthy()
+  })
+
+  it('SectionAIFoursys renders without crash', () => {
+    const { container } = renderWithProvider(<SectionAIFoursys />)
+    expect(container).toBeTruthy()
+  })
+
+  it('SectionKiamComparison renders without crash', () => {
+    const { container } = renderWithProvider(<SectionKiamComparison />)
+    expect(container).toBeTruthy()
+  })
+})
+
+describe('AI section content', () => {
+  it('SectionAIFoursys mostra os 10 Pilares de Governança', () => {
+    renderWithProvider(<SectionAIFoursys />)
+    expect(screen.getByText(/10 Pilares de Governan/i)).toBeTruthy()
+  })
+
+  it('SectionAIFoursys não contém mais a string MOXE', () => {
+    renderWithProvider(<SectionAIFoursys />)
+    const moxeElements = screen.queryAllByText(/\bMOXE\b/)
+    expect(moxeElements.length).toBe(0)
+  })
+
+  it('SectionAIFoursys mostra a marca KIAM', () => {
+    renderWithProvider(<SectionAIFoursys />)
+    expect(screen.getAllByText(/KIAM/).length).toBeGreaterThan(0)
+  })
+
+  it('SectionKiamComparison mostra a matriz comparativa', () => {
+    renderWithProvider(<SectionKiamComparison />)
+    expect(screen.getAllByText(/KIAM/i).length).toBeGreaterThan(0)
   })
 })
 
