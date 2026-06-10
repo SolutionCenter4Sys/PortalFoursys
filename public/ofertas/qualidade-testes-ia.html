@@ -1,0 +1,1475 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Foursys &middot; Oferta de Qualidade de Software</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          display: ['Outfit', 'sans-serif'],
+        },
+        colors: {
+          'foursys-navy':   '#1a1b3a',
+          'foursys-orange': '#ff5a1f',
+          'foursys-dark':   '#0f1025',
+          'qa-mint':        '#34d399',
+          'qa-mint-d':      '#10b981',
+          'qa-vanilla':     '#fbbf24',
+          'qa-vanilla-d':   '#f59e0b',
+          'qa-sky':         '#38bdf8',
+          'qa-sky-d':       '#0ea5e9',
+          'qa-violet':      '#a78bfa',
+          'qa-violet-d':    '#8b5cf6',
+          'qa-pink':        '#f472b6',
+          'qa-pink-d':      '#ec4899',
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0f1025;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
+
+  .glass-card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+  }
+  .glass-card:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.20);
+    transform: translateY(-2px);
+  }
+  .glass-card.featured {
+    background: linear-gradient(140deg, rgba(255,90,31,.18) 0%, rgba(255,90,31,.05) 100%);
+    border-color: rgba(255,90,31,.35);
+  }
+  .glass-card.featured:hover { border-color: rgba(255,90,31,.55); }
+
+  .orange-gradient-text {
+    background: linear-gradient(90deg, #ff5a1f 0%, #ff944d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+  }
+  .navy-gradient { background: linear-gradient(135deg, #1a1b3a 0%, #0f1025 100%); }
+  .orange-gradient { background: linear-gradient(140deg, #ff5a1f 0%, #e04408 100%); }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.21, 0.47, 0.32, 0.98), transform 0.7s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+  }
+  .fade-in.visible { opacity: 1; transform: translate(0, 0); }
+
+  .topic-tag {
+    font-size: 11px; letter-spacing: 0.18em; font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    font-size: 12px; font-weight: 600; color: #cbd5e1;
+  }
+  .pill.orange {
+    background: rgba(255,90,31,.10);
+    border-color: rgba(255,90,31,.28);
+    color: #ff944d;
+  }
+
+  .number-badge {
+    width: 56px; height: 56px; border-radius: 16px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 24px;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  /* Logo letter (substitui o asset que não existe) */
+  .logo-block {
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'Outfit',sans-serif;font-weight:900;letter-spacing:-0.02em;color:#fff;
+  }
+  .logo-block .mark{
+    width:40px;height:40px;border-radius:10px;background:#ff5a1f;
+    display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;
+  }
+  .logo-block .name{font-size:18px}
+  .logo-block .name b{color:#ff5a1f}
+
+  /* ─────── Animações tecnológicas ─────── */
+  @keyframes tech-grid-pan {
+    0%   { background-position: 0 0; }
+    100% { background-position: 60px 60px; }
+  }
+  .tech-grid {
+    position: absolute; inset: 0; pointer-events: none; opacity: .35;
+    background-image:
+      linear-gradient(rgba(255,90,31,.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,90,31,.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 30%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 30%, transparent 100%);
+    animation: tech-grid-pan 18s linear infinite;
+  }
+
+  @keyframes pulse-orange {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,90,31,.55), 0 0 24px rgba(255,90,31,.25); }
+    50%      { box-shadow: 0 0 0 14px rgba(255,90,31,0),  0 0 48px rgba(255,90,31,.45); }
+  }
+  .pulse-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #ff5a1f;
+    animation: pulse-orange 2s ease-out infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes shimmer {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(120%); }
+  }
+  .shimmer-bar {
+    position: relative; overflow: hidden;
+  }
+  .shimmer-bar::after {
+    content:''; position:absolute; inset:0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.18) 50%, transparent 100%);
+    animation: shimmer 2.4s infinite;
+  }
+
+  @keyframes flow-dash {
+    to { stroke-dashoffset: -28; }
+  }
+  .flow-line { stroke-dasharray: 6 6; animation: flow-dash 1.6s linear infinite; }
+
+  @keyframes flow-dot {
+    0%   { offset-distance: 0%;   opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { offset-distance: 100%; opacity: 0; }
+  }
+
+  @keyframes float-soft {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+  }
+  .float-soft { animation: float-soft 5s ease-in-out infinite; }
+
+  @keyframes orange-glow-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,90,31,.0), 0 8px 30px -8px rgba(255,90,31,.25); }
+    50%      { box-shadow: 0 0 0 0 rgba(255,90,31,.0), 0 14px 50px -8px rgba(255,90,31,.55); }
+  }
+  .glow-pulse { animation: orange-glow-pulse 3.6s ease-in-out infinite; }
+
+  @keyframes scan-line {
+    0%   { transform: translateY(-100%); }
+    100% { transform: translateY(700%); }
+  }
+  .scan-line {
+    position:absolute; left:0; right:0; height:1px;
+    background: linear-gradient(90deg, transparent, #ff5a1f, transparent);
+    opacity:.5;
+    animation: scan-line 5s linear infinite;
+  }
+
+  @keyframes count-pulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.04); }
+  }
+  .count-pulse { animation: count-pulse 2.8s ease-in-out infinite; display: inline-block; }
+
+  @keyframes spin-slow {
+    to { transform: rotate(360deg); }
+  }
+  .spin-slow { animation: spin-slow 22s linear infinite; }
+
+  /* ─────── Gradientes adicionais (cores complementares) ─────── */
+  .grad-orange  { background: linear-gradient(140deg, #ff5a1f 0%, #e04408 100%); }
+  .grad-vanilla { background: linear-gradient(140deg, #fbbf24 0%, #f59e0b 100%); }
+  .grad-mint    { background: linear-gradient(140deg, #34d399 0%, #10b981 100%); }
+  .grad-sky     { background: linear-gradient(140deg, #38bdf8 0%, #0ea5e9 100%); }
+  .grad-violet  { background: linear-gradient(140deg, #a78bfa 0%, #8b5cf6 100%); }
+  .grad-pink    { background: linear-gradient(140deg, #f472b6 0%, #ec4899 100%); }
+
+  .accent-orange  { color:#ff944d }   .border-accent-orange  { border-color: rgba(255,90,31,.45) }   .bg-accent-orange  { background: rgba(255,90,31,.10) }
+  .accent-vanilla { color:#fbbf24 }   .border-accent-vanilla { border-color: rgba(251,191,36,.45) }  .bg-accent-vanilla { background: rgba(251,191,36,.10) }
+  .accent-mint    { color:#34d399 }   .border-accent-mint    { border-color: rgba(52,211,153,.45) }  .bg-accent-mint    { background: rgba(52,211,153,.10) }
+  .accent-sky     { color:#38bdf8 }   .border-accent-sky     { border-color: rgba(56,189,248,.45) }  .bg-accent-sky     { background: rgba(56,189,248,.10) }
+  .accent-violet  { color:#a78bfa }   .border-accent-violet  { border-color: rgba(167,139,250,.45) } .bg-accent-violet  { background: rgba(167,139,250,.10) }
+  .accent-pink    { color:#f472b6 }   .border-accent-pink    { border-color: rgba(244,114,182,.45) } .bg-accent-pink    { background: rgba(244,114,182,.10) }
+
+  /* ─────── Pipeline horizontal Shift-Left (timeline com bolinhas) ─────── */
+  .pipeline-rail {
+    position: relative;
+    background: rgba(255,255,255,.02);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 20px;
+    padding: 28px 24px 22px;
+    overflow: hidden;
+  }
+  .pipeline-rail::after {
+    content:''; position:absolute; left:-100%; top:0; right:-100%; bottom:0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.04), transparent);
+    pointer-events:none;
+    animation: shimmer-h 8s linear infinite;
+  }
+  @keyframes shimmer-h {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  /* Cabeçalho de fases (SEM / COM ambiente) */
+  .phase-headers {
+    display: grid; grid-template-columns: 3fr 8fr;
+    gap: 10px; margin-bottom: 14px; align-items: center;
+  }
+  .phase-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border-radius: 100px;
+    font-size: 10.5px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase;
+    border: 1px solid currentColor;
+    background: rgba(255,255,255,.02);
+  }
+  .phase-tag .pulse-dot { width: 8px; height: 8px; }
+  .phase-bar {
+    height: 2px; flex: 1; border-radius: 2px;
+    background: linear-gradient(90deg, currentColor, transparent);
+    opacity: .35;
+  }
+  .phase-row { display:flex; align-items:center; gap:12px; min-width:0 }
+  .phase-aside { font-size: 10px; font-weight: 700; letter-spacing: .14em; color: rgba(255,255,255,.45); text-transform: uppercase; white-space: nowrap }
+
+  /* TIMELINE com 11 nós */
+  .timeline-track {
+    position: relative;
+    padding: 30px 0 14px;
+  }
+  .timeline-track::before {
+    content:''; position: absolute; left: 4%; right: 4%; top: 56px; height: 3px;
+    background: linear-gradient(90deg,
+      #ff5a1f 0%,    #fb923c 9%,    #fbbf24 18%, /* SEM ambiente: 3 etapas */
+      rgba(255,255,255,.45) 22%, rgba(255,255,255,.45) 26%, /* gap separador */
+      #a3e635 30%, #34d399 40%, #2dd4bf 50%, #38bdf8 60%, #818cf8 70%, #a78bfa 80%, #f472b6 90%, #fb7185 100% /* COM ambiente: 8 etapas */
+    );
+    border-radius: 2px;
+    box-shadow: 0 0 24px rgba(255,90,31,.25);
+  }
+  /* Separador vertical entre as 2 fases */
+  .timeline-track::after {
+    content: ''; position: absolute; left: calc(4% + (92% * 0.245)); top: 36px; bottom: 14px;
+    width: 1px; background: rgba(255,255,255,.20); opacity: .6;
+    background-image: repeating-linear-gradient(to bottom, rgba(255,255,255,.5) 0 4px, transparent 4px 8px);
+  }
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    column-gap: 8px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .step {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    position: relative;
+    transition: transform .3s;
+  }
+  .step:hover { transform: translateY(-3px); }
+  .step-dot {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family:'Outfit',sans-serif; font-weight: 900; font-size: 15px; color: #fff;
+    border: 3px solid #0f1025;
+    box-shadow: 0 0 0 2px currentColor, 0 4px 16px rgba(0,0,0,.4);
+    position: relative;
+    z-index: 3;
+    transition: all .3s;
+  }
+  .step:hover .step-dot { box-shadow: 0 0 0 3px currentColor, 0 0 28px rgba(255,90,31,.3); transform: scale(1.05); }
+  .step-card {
+    width: 100%;
+    padding: 12px 12px 12px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.10);
+    border-top: 3px solid currentColor;
+    border-radius: 10px;
+    transition: all .3s;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .step:hover .step-card { background: rgba(255,255,255,.05); border-color: currentColor; }
+  .step-name {
+    font-family:'Outfit',sans-serif; font-weight: 800; font-size: 12.5px;
+    color: #fff; line-height: 1.15; letter-spacing: -.005em;
+  }
+  .step-tag {
+    font-size: 9px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+    color: currentColor; opacity: .9;
+  }
+  .step-bullets {
+    list-style: none; display: flex; flex-direction: column; gap: 4px;
+    margin-top: 2px;
+  }
+  .step-bullets li {
+    font-size: 10.5px; line-height: 1.35;
+    color: rgba(255,255,255,.65);
+    display: flex; gap: 5px; align-items: flex-start;
+  }
+  .step-bullets li::before {
+    content:''; flex-shrink: 0; width: 4px; height: 4px; border-radius: 50%;
+    margin-top: 5px; background: currentColor; opacity: .8;
+  }
+
+  /* Partícula viajando pela trilha */
+  .timeline-track .traveler {
+    position: absolute; left: 4%; top: 51px;
+    width: 12px; height: 12px;
+    border-radius: 50%; background: #fff;
+    box-shadow: 0 0 18px #ff5a1f, 0 0 8px #fff;
+    animation: travel-x 9s linear infinite;
+    z-index: 4;
+  }
+  @keyframes travel-x {
+    0%   { left: 4%; opacity: 0; }
+    5%   { opacity: 1; }
+    95%  { opacity: 1; }
+    100% { left: 96%; opacity: 0; }
+  }
+
+  /* banda transversal Governança */
+  .pipeline-band {
+    margin-top: 18px;
+    border-radius: 12px;
+    padding: 12px 18px;
+    background: linear-gradient(90deg, rgba(255,90,31,.12) 0%, rgba(251,191,36,.10) 25%, rgba(52,211,153,.10) 50%, rgba(56,189,248,.10) 75%, rgba(167,139,250,.12) 100%);
+    border: 1px solid rgba(255,255,255,.10);
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.85);
+  }
+  .pipeline-foot {
+    margin-top: 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(255,255,255,.45); font-weight: 700;
+  }
+  .pipeline-foot .arrow-text {
+    display: inline-flex; align-items: center; gap: 8px; color: #ff944d;
+  }
+
+  @media (max-width: 1280px) {
+    .timeline-grid { grid-template-columns: repeat(11, minmax(120px, 1fr)); overflow-x: auto; padding-bottom: 8px; }
+  }
+  @media (max-width: 768px) {
+    .timeline-grid { grid-template-columns: repeat(11, 160px); }
+    .phase-headers { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    nav.fixed { display: none !important; }
+    body { background: white !important; color: #222 !important; }
+    .glass-card, .navy-gradient { background: white !important; color: #222 !important; border: 1px solid #ddd !important; }
+    .orange-gradient-text { color: #ff5a1f !important; -webkit-text-fill-color: #ff5a1f !important; }
+    .glass-card.featured { background: rgba(255,90,31,.05) !important; }
+    section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body class="font-sans bg-foursys-dark text-white antialiased">
+
+<!-- ========================== NAVIGATION ========================== -->
+<nav class="fixed top-0 w-full z-50 bg-foursys-dark/80 backdrop-blur-lg border-b border-white/5">
+  <div class="max-w-[1500px] mx-auto px-6 h-20 flex items-center justify-between">
+    <div class="logo-block">
+      <span class="mark">F</span>
+      <span class="name">Four<b>sys</b></span>
+      <span class="w-px h-8 bg-white/20 mx-2"></span>
+      <span class="text-sm font-semibold text-gray-400 tracking-wide">Studio de Engenharia de Qualidade</span>
+    </div>
+    <div class="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-400">
+      <a href="#capa"        class="hover:text-foursys-orange transition-colors">Vis&atilde;o</a>
+      <a href="#indice"      class="hover:text-foursys-orange transition-colors">&Iacute;ndice</a>
+      <a href="#shift-left"  class="hover:text-foursys-orange transition-colors">Shift-Left</a>
+      <a href="#agentes"     class="hover:text-foursys-orange transition-colors">Agentes IA</a>
+      <a href="#ganhos"      class="hover:text-foursys-orange transition-colors">Ganhos</a>
+      <a href="#contato"     class="hover:text-foursys-orange transition-colors">Contato</a>
+    </div>
+    <button onclick="window.print()" class="bg-foursys-orange hover:bg-orange-600 px-5 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105 active:scale-95 shadow-lg shadow-foursys-orange/20">
+      Imprimir / PDF
+    </button>
+  </div>
+</nav>
+
+<main class="pt-20">
+
+  <!-- ========================== HERO / CAPA ========================== -->
+  <section id="capa" class="relative py-24 overflow-hidden">
+    <div class="tech-grid"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none opacity-60 overflow-hidden">
+      <div class="absolute top-0 -left-20 w-[600px] h-[600px] bg-foursys-orange/10 blur-[120px] rounded-full"></div>
+      <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-foursys-orange/10 blur-[120px] rounded-full"></div>
+    </div>
+
+    <div class="max-w-[1500px] mx-auto px-6 relative">
+      <div class="fade-in">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-foursys-orange/10 border border-foursys-orange/20 text-foursys-orange topic-tag mb-8">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+          <span>Foursys &middot; Solution Center &middot; 2026</span>
+        </div>
+        <h1 class="text-5xl md:text-7xl font-display font-black leading-[1.05] mb-8">
+          Oferta de <span class="orange-gradient-text">Qualidade</span><br/>
+          de Software com <span class="orange-gradient-text">IA aplicada.</span>
+        </h1>
+        <p class="text-xl text-gray-300 max-w-3xl leading-relaxed mb-10">
+          Studio de Engenharia de Qualidade Foursys &mdash; estrat&eacute;gia, execu&ccedil;&atilde;o e inova&ccedil;&atilde;o
+          com aceleradores de automa&ccedil;&atilde;o e IA aplicada ao QA. Duas torres integradas,
+          governan&ccedil;a unificada e indicadores em tempo real.
+        </p>
+        <div class="flex flex-wrap gap-3 mb-12">
+          <span class="pill"><i data-lucide="award" class="w-3.5 h-3.5"></i> CoE &middot; Centro de Excel&ecirc;ncia</span>
+          <span class="pill"><i data-lucide="settings" class="w-3.5 h-3.5"></i> CSC &middot; Servi&ccedil;os Compartilhados</span>
+          <span class="pill"><i data-lucide="bot" class="w-3.5 h-3.5"></i> Agentes de IA</span>
+          <span class="pill orange"><i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Proposta P2025XXX</span>
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-4 max-w-3xl">
+          <div class="glass-card featured glow-pulse">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="pulse-dot"></span>
+              <p class="topic-tag text-foursys-orange">Saving</p>
+            </div>
+            <p class="text-4xl font-black font-display orange-gradient-text leading-none count-pulse">at&eacute; 37%</p>
+            <p class="text-sm text-gray-400 mt-2">redu&ccedil;&atilde;o no custo total dos projetos</p>
+          </div>
+          <div class="glass-card">
+            <p class="topic-tag text-foursys-orange mb-2">Retrabalho</p>
+            <p class="text-4xl font-black font-display text-white leading-none">&minus;22%</p>
+            <p class="text-sm text-gray-400 mt-2">defeitos identificados antes da produ&ccedil;&atilde;o</p>
+          </div>
+          <div class="glass-card">
+            <p class="topic-tag text-foursys-orange mb-2">Cen&aacute;rios</p>
+            <p class="text-4xl font-black font-display text-white leading-none">+10x</p>
+            <p class="text-sm text-gray-400 mt-2">cen&aacute;rios por jornada vs execu&ccedil;&atilde;o manual</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== INDICE ========================== -->
+  <section id="indice" class="py-20">
+    <div class="max-w-[1500px] mx-auto px-6">
+      <div class="fade-in mb-12">
+        <span class="pill"><i data-lucide="list" class="w-3.5 h-3.5"></i> Nove blocos &middot; uma oferta</span>
+        <h2 class="text-4xl md:text-5xl font-black mt-6 mb-4">
+          O que voc&ecirc; encontra na <span class="orange-gradient-text">Oferta Foursys de QA</span>.
+        </h2>
+        <p class="text-gray-400 max-w-3xl">Pr&aacute;tica completa de Qualidade de Software &mdash; CoE estrat&eacute;gico + CSC operacional + agentes de IA + indicadores executivos.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-5">
+        <a href="#studio" class="fade-in glass-card flex items-start gap-4 group">
+          <div class="number-badge grad-orange">01</div>
+          <div>
+            <p class="topic-tag accent-orange mb-1">CoE + CSC</p>
+            <h3 class="text-lg font-bold mb-1 group-hover:text-foursys-orange transition-colors">O Studio &mdash; duas torres integradas</h3>
+            <p class="text-sm text-gray-400">Pr&aacute;tica de Qualidade de Software com estrat&eacute;gia (CoE) e execu&ccedil;&atilde;o (CSC) atuando em sincronia.</p>
+          </div>
+        </a>
+        <a href="#shift-left" class="fade-in glass-card flex items-start gap-4 group" style="transition-delay:.05s">
+          <div class="number-badge grad-vanilla">02</div>
+          <div>
+            <p class="topic-tag accent-vanilla mb-1">Shift-Left</p>
+            <h3 class="text-lg font-bold mb-1 group-hover:text-qa-vanilla transition-colors" style="--tw-text-opacity:1">Pipeline horizontal &middot; 11 etapas</h3>
+            <p class="text-sm text-gray-400">Pipeline Upstream &rarr; Downstream em modelo plug&rsquo;n&rsquo;play, conectando-se &agrave;s squads do cliente.</p>
+          </div>
+        </a>
+        <a href="#agentes" class="fade-in glass-card flex items-start gap-4 group" style="transition-delay:.1s">
+          <div class="number-badge grad-mint">03</div>
+          <div>
+            <p class="topic-tag accent-mint mb-1">IA Aplicada</p>
+            <h3 class="text-lg font-bold mb-1 group-hover:text-qa-mint transition-colors">Agentes de IA aplicados ao QA</h3>
+            <p class="text-sm text-gray-400">Analista Gherkin, DataForge e Validador de US atuando em Frontend, API, Backend e Mobile.</p>
+          </div>
+        </a>
+        <a href="#squads" class="fade-in glass-card flex items-start gap-4 group" style="transition-delay:.15s">
+          <div class="number-badge grad-sky">04</div>
+          <div>
+            <p class="topic-tag accent-sky mb-1">Squads</p>
+            <h3 class="text-lg font-bold mb-1 group-hover:text-qa-sky transition-colors">QA embarcado nas squads</h3>
+            <p class="text-sm text-gray-400">QA Leads e QAs especializados, com TMO unificado fazendo o elo entre estrat&eacute;gia e opera&ccedil;&atilde;o.</p>
+          </div>
+        </a>
+        <a href="#ferramentas" class="fade-in glass-card flex items-start gap-4 group" style="transition-delay:.2s">
+          <div class="number-badge grad-violet">05</div>
+          <div>
+            <p class="topic-tag accent-violet mb-1">Stack</p>
+            <h3 class="text-lg font-bold mb-1 group-hover:text-qa-violet transition-colors">Ferramentas no ciclo de vida</h3>
+            <p class="text-sm text-gray-400">Jira/Xray, Cypress, Robot, Python, k6, JMeter, Grafana, Allure e Test Data Manager.</p>
+          </div>
+        </a>
+        <a href="#ganhos" class="fade-in glass-card flex items-start gap-4 group" style="transition-delay:.25s">
+          <div class="number-badge grad-pink">06</div>
+          <div>
+            <p class="topic-tag accent-pink mb-1">Resultados</p>
+            <h3 class="text-lg font-bold mb-1 group-hover:text-qa-pink transition-colors">Ganhos &amp; Multiplicadores</h3>
+            <p class="text-sm text-gray-400">+10x cen&aacute;rios &middot; +80% visibilidade &middot; +70% massa &middot; +6x scripts &middot; ~30x testes com IA.</p>
+          </div>
+        </a>
+        <a href="#roi" class="fade-in glass-card flex items-start gap-4 group" style="transition-delay:.3s">
+          <div class="number-badge grad-orange">07</div>
+          <div>
+            <p class="topic-tag accent-orange mb-1">ROI</p>
+            <h3 class="text-lg font-bold mb-1 group-hover:text-foursys-orange transition-colors">Seu sucesso &eacute; o nosso foco</h3>
+            <p class="text-sm text-gray-400">Seis indicadores priorizados: preven&ccedil;&atilde;o, automa&ccedil;&atilde;o, decis&otilde;es, efici&ecirc;ncia, qualidade, agilidade.</p>
+          </div>
+        </a>
+        <a href="#evita" class="fade-in glass-card flex items-start gap-4 group" style="transition-delay:.35s">
+          <div class="number-badge grad-mint">08</div>
+          <div>
+            <p class="topic-tag accent-mint mb-1">Riscos Mitigados</p>
+            <h3 class="text-lg font-bold mb-1 group-hover:text-qa-mint transition-colors">O que voc&ecirc; evita conosco</h3>
+            <p class="text-sm text-gray-400">Retrabalho, desperd&iacute;cio de tempo, falta de visibilidade, riscos de mercado, inconsist&ecirc;ncia.</p>
+          </div>
+        </a>
+        <a href="#dashboard" class="fade-in glass-card flex items-start gap-4 group" style="transition-delay:.4s">
+          <div class="number-badge grad-sky">09</div>
+          <div>
+            <p class="topic-tag accent-sky mb-1">Indicadores</p>
+            <h3 class="text-lg font-bold mb-1 group-hover:text-qa-sky transition-colors">QA Report &amp; Dashboards</h3>
+            <p class="text-sm text-gray-400">Modelo de status de execu&ccedil;&atilde;o &mdash; planejado vs executado, defeitos, status, categoria e frente.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== TEMA 1 — STUDIO ========================== -->
+  <section id="studio" class="py-20">
+    <div class="max-w-[1500px] mx-auto px-6">
+      <div class="fade-in mb-12">
+        <span class="pill orange"><span class="text-foursys-orange font-black">01</span> &middot; Pr&aacute;tica de Qualidade de Software</span>
+        <h2 class="text-4xl md:text-5xl font-black mt-6 mb-4">
+          O <span class="orange-gradient-text">Studio</span> &mdash; duas torres integradas em um s&oacute; fluxo.
+        </h2>
+        <p class="text-gray-400 max-w-3xl">Estrat&eacute;gia do CoE converge com a execu&ccedil;&atilde;o do CSC, com TMO/QA Lead fazendo o elo. Resultado: governan&ccedil;a unificada, padr&otilde;es replic&aacute;veis e indicadores executivos em tempo real.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-10">
+        <div class="fade-in glass-card featured">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="number-badge orange-gradient"><i data-lucide="award" class="w-7 h-7"></i></div>
+            <div>
+              <p class="topic-tag text-foursys-orange">Torre Estrat&eacute;gica</p>
+              <h3 class="text-xl font-bold leading-tight">CoE &mdash; Centro de Excel&ecirc;ncia</h3>
+            </div>
+          </div>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-foursys-orange shrink-0 mt-0.5"></i><span>Metodologia, padr&otilde;es e processos de QA</span></li>
+            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-foursys-orange shrink-0 mt-0.5"></i><span>Padr&otilde;es de Reports e indicadores executivos</span></li>
+            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-foursys-orange shrink-0 mt-0.5"></i><span>Eventos, monitoramento e sincroniza&ccedil;&atilde;o</span></li>
+            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-foursys-orange shrink-0 mt-0.5"></i><span>Produtos, ferramentas e templates</span></li>
+            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-foursys-orange shrink-0 mt-0.5"></i><span>NFT &mdash; Testes n&atilde;o funcionais transversais</span></li>
+          </ul>
+        </div>
+
+        <div class="fade-in glass-card" style="transition-delay:.05s">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="number-badge bg-white/10 border border-white/20"><i data-lucide="settings" class="w-7 h-7"></i></div>
+            <div>
+              <p class="topic-tag text-gray-300">Torre de Execu&ccedil;&atilde;o</p>
+              <h3 class="text-xl font-bold leading-tight">CSC &mdash; Servi&ccedil;os Compartilhados</h3>
+            </div>
+          </div>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-foursys-orange shrink-0 mt-0.5"></i><span>Servi&ccedil;os de QA atuando dentro das squads</span></li>
+            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-foursys-orange shrink-0 mt-0.5"></i><span>Testes funcionais &mdash; manuais e automatizados</span></li>
+            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-foursys-orange shrink-0 mt-0.5"></i><span>Certifica&ccedil;&atilde;o de Patch e GMUD</span></li>
+            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-foursys-orange shrink-0 mt-0.5"></i><span>Automa&ccedil;&atilde;o de regress&atilde;o e caminho cr&iacute;tico</span></li>
+            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-foursys-orange shrink-0 mt-0.5"></i><span>Treinamentos, capacita&ccedil;&otilde;es e conting&ecirc;ncias</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-4 fade-in">
+        <div class="glass-card featured glow-pulse text-center">
+          <div class="flex items-center justify-center gap-2 mb-2">
+            <span class="pulse-dot"></span>
+            <p class="topic-tag text-foursys-orange">Saving</p>
+          </div>
+          <p class="text-5xl font-black font-display orange-gradient-text leading-none count-pulse">at&eacute; 37%</p>
+          <p class="text-sm text-gray-300 mt-3">redu&ccedil;&atilde;o no custo total dos projetos com QA estruturado</p>
+        </div>
+        <div class="glass-card featured text-center">
+          <p class="topic-tag text-foursys-orange mb-2">Retrabalho</p>
+          <p class="text-5xl font-black font-display orange-gradient-text leading-none">&minus;22%</p>
+          <p class="text-sm text-gray-300 mt-3">defeitos identificados antes da produ&ccedil;&atilde;o</p>
+        </div>
+        <div class="glass-card text-center">
+          <p class="topic-tag text-foursys-orange mb-2">Fontes</p>
+          <p class="text-base font-bold text-white mt-2">NIST Report 02-3</p>
+          <p class="text-base font-bold text-white">DORA State of DevOps</p>
+          <p class="text-xs text-gray-500 mt-3 italic">benchmarks p&uacute;blicos do setor</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== TEMA 2 — SHIFT-LEFT ========================== -->
+  <section id="shift-left" class="py-20 relative overflow-hidden">
+    <div class="tech-grid"></div>
+    <div class="max-w-[1500px] mx-auto px-6 relative">
+      <div class="fade-in mb-12">
+        <span class="pill orange"><span class="text-foursys-orange font-black">02</span> &middot; Framework Shift-Left Test</span>
+        <h2 class="text-4xl md:text-5xl font-black mt-6 mb-4">
+          Cobertura fim a fim, em modelo <span class="orange-gradient-text">plug&rsquo;n&rsquo;play.</span>
+        </h2>
+        <p class="text-gray-400 max-w-3xl">O modelo Foursys de atendimento apresenta pilares de qualidade que comp&otilde;em a cobertura fim a fim de garantia de entrega de solu&ccedil;&otilde;es &mdash; permitindo ao cliente uma maior flexibilidade de conex&atilde;o com suas equipes e projetos.</p>
+      </div>
+
+      <!-- ─── TIMELINE HORIZONTAL · 11 ETAPAS Shift-Left ─── -->
+      <div class="fade-in pipeline-rail mb-8">
+        <!-- header do rail -->
+        <div class="flex items-center justify-between mb-5 flex-wrap gap-3 relative z-10">
+          <div class="flex items-center gap-3">
+            <span class="pill"><i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Receber Ambiente QA</span>
+            <span class="text-xs text-gray-500 uppercase tracking-widest font-semibold hidden md:inline">11 etapas &middot; ciclo cont&iacute;nuo</span>
+          </div>
+          <div class="flex items-center gap-2 text-xs text-foursys-orange font-bold uppercase tracking-widest">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+            <span>Earlier = Cheaper Fix</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </div>
+        </div>
+
+        <!-- Cabeçalhos de fase (SEM ambiente / COM ambiente) -->
+        <div class="phase-headers">
+          <div class="phase-row accent-orange">
+            <span class="phase-tag accent-orange">
+              <span class="pulse-dot"></span>
+              SEM ambiente QA validado
+            </span>
+            <span class="phase-bar"></span>
+            <span class="phase-aside">Upstream</span>
+          </div>
+          <div class="phase-row accent-mint">
+            <span class="phase-tag accent-mint">
+              <span class="pulse-dot" style="background:#34d399"></span>
+              COM ambiente QA validado
+            </span>
+            <span class="phase-bar"></span>
+            <span class="phase-aside">Execu&ccedil;&atilde;o &middot; GO/NO-GO</span>
+          </div>
+        </div>
+
+        <!-- TIMELINE HORIZONTAL · 11 BOLINHAS -->
+        <div class="timeline-track">
+          <span class="traveler"></span>
+          <div class="timeline-grid">
+            <!-- ●01 ASSESSMENT -->
+            <div class="step accent-orange">
+              <div class="step-dot grad-orange">01</div>
+              <div class="step-card">
+                <p class="step-tag">Etapa 01</p>
+                <p class="step-name">Assessment</p>
+                <ul class="step-bullets">
+                  <li>Documento de assessment</li>
+                  <li>Acordos e premissas</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ●02 PLANEJAMENTO -->
+            <div class="step" style="color:#fb923c">
+              <div class="step-dot" style="background:linear-gradient(140deg,#fb923c 0%,#f97316 100%)">02</div>
+              <div class="step-card">
+                <p class="step-tag">Etapa 02</p>
+                <p class="step-name">Planejamento</p>
+                <ul class="step-bullets">
+                  <li>Plano de testes &middot; cronograma</li>
+                  <li>Comunica&ccedil;&atilde;o e reports</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ●03 VALIDAÇÃO US -->
+            <div class="step accent-vanilla">
+              <div class="step-dot grad-vanilla">03</div>
+              <div class="step-card">
+                <p class="step-tag">Etapa 03</p>
+                <p class="step-name">Valida&ccedil;&atilde;o de US</p>
+                <ul class="step-bullets">
+                  <li>Qualidade antecipada</li>
+                  <li>Valida&ccedil;&atilde;o funcional</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ●04 DESIGN CENÁRIOS -->
+            <div class="step" style="color:#a3e635">
+              <div class="step-dot" style="background:linear-gradient(140deg,#bef264 0%,#a3e635 100%);color:#1a1b3a">04</div>
+              <div class="step-card">
+                <p class="step-tag">Etapa 04</p>
+                <p class="step-name">Design de Cen&aacute;rios</p>
+                <ul class="step-bullets">
+                  <li>BDD step-by-step (Gherkin)</li>
+                  <li>Positivos e negativos</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ●05 SANITY & MASSA -->
+            <div class="step accent-mint">
+              <div class="step-dot grad-mint">05</div>
+              <div class="step-card">
+                <p class="step-tag">Etapa 05</p>
+                <p class="step-name">Sanity &amp; Massa</p>
+                <ul class="step-bullets">
+                  <li>Ambientes validados</li>
+                  <li>Massa estruturada (DataForge)</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ●06 TESTES MANUAIS -->
+            <div class="step" style="color:#2dd4bf">
+              <div class="step-dot" style="background:linear-gradient(140deg,#2dd4bf 0%,#14b8a6 100%)">06</div>
+              <div class="step-card">
+                <p class="step-tag">Etapa 06</p>
+                <p class="step-name">Testes Manuais</p>
+                <ul class="step-bullets">
+                  <li>Evid&ecirc;ncias positivas e negativas</li>
+                  <li>Dashboard de execu&ccedil;&atilde;o</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ●07 AUTOMAÇÃO -->
+            <div class="step accent-sky">
+              <div class="step-dot grad-sky">07</div>
+              <div class="step-card">
+                <p class="step-tag">Etapa 07</p>
+                <p class="step-name">Automa&ccedil;&atilde;o Funcional</p>
+                <ul class="step-bullets">
+                  <li>Cen&aacute;rios na regress&atilde;o</li>
+                  <li>Cypress &middot; Robot &middot; Python</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ●08 PERFORMANCE -->
+            <div class="step" style="color:#818cf8">
+              <div class="step-dot" style="background:linear-gradient(140deg,#818cf8 0%,#6366f1 100%)">08</div>
+              <div class="step-card">
+                <p class="step-tag">Etapa 08</p>
+                <p class="step-name">Performance</p>
+                <ul class="step-bullets">
+                  <li>Simula&ccedil;&atilde;o de carga</li>
+                  <li>Identifica&ccedil;&atilde;o de gargalos</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ●09 CERTIFICAÇÃO -->
+            <div class="step accent-violet">
+              <div class="step-dot grad-violet">09</div>
+              <div class="step-card" style="border-color:rgba(167,139,250,.55);background:rgba(167,139,250,.10)">
+                <p class="step-tag">Etapa 09 &middot; GO/NO-GO</p>
+                <p class="step-name">Certifica&ccedil;&atilde;o</p>
+                <ul class="step-bullets">
+                  <li>Caminho cr&iacute;tico (2 dias)</li>
+                  <li>Atestado de qualidade</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ●10 SUPORTE UAT -->
+            <div class="step accent-pink">
+              <div class="step-dot grad-pink">10</div>
+              <div class="step-card">
+                <p class="step-tag">Etapa 10</p>
+                <p class="step-name">Suporte Homologa&ccedil;&atilde;o</p>
+                <ul class="step-bullets">
+                  <li>Plano de UAT</li>
+                  <li>Time-to-market &middot; aceite final</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ●11 SUSTENTAÇÃO -->
+            <div class="step" style="color:#fb7185">
+              <div class="step-dot" style="background:linear-gradient(140deg,#fb7185 0%,#f43f5e 100%)">11</div>
+              <div class="step-card">
+                <p class="step-tag">Etapa 11</p>
+                <p class="step-name">Sustenta&ccedil;&atilde;o</p>
+                <ul class="step-bullets">
+                  <li>Defeitos em produ&ccedil;&atilde;o</li>
+                  <li>Ambiente livre &middot; tempo reduzido</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- banda transversal: Governança -->
+        <div class="pipeline-band">
+          <i data-lucide="shield-check" class="w-5 h-5 text-foursys-orange shrink-0"></i>
+          <span class="text-foursys-orange">Governan&ccedil;a</span>
+          <span class="text-gray-500">&middot;</span>
+          <span class="accent-vanilla">M&eacute;tricas</span>
+          <span class="text-gray-500">&middot;</span>
+          <span class="accent-mint">Indicadores</span>
+          <span class="text-gray-500">&middot;</span>
+          <span class="accent-sky">Ferramentas</span>
+          <span class="text-gray-500">&middot;</span>
+          <span class="accent-violet">Report &amp; Gest&atilde;o de Defeitos</span>
+          <span class="ml-auto text-[10px] tracking-widest text-gray-500">transversal &mdash; todas as etapas</span>
+        </div>
+
+        <!-- foot do rail -->
+        <div class="pipeline-foot">
+          <span class="arrow-text"><i data-lucide="arrow-left-circle" class="w-4 h-4"></i> Receber Ambiente QA</span>
+          <span>11 etapas &middot; 11 gates &middot; ciclo cont&iacute;nuo</span>
+          <span class="arrow-text">GO / NO-GO &middot; Sustenta&ccedil;&atilde;o <i data-lucide="arrow-right-circle" class="w-4 h-4"></i></span>
+        </div>
+      </div>
+
+
+      <div class="fade-in glass-card featured glow-pulse mt-8 flex items-center gap-4 px-6 py-5" style="transition-delay:.1s">
+        <i data-lucide="shield-check" class="w-6 h-6 text-foursys-orange shrink-0"></i>
+        <p class="text-sm text-gray-100">
+          <strong class="text-foursys-orange">Governan&ccedil;a, m&eacute;tricas, indicadores e ferramentas</strong> atravessam todas as 11 etapas do pipeline, garantindo rastreabilidade, padr&atilde;o &uacute;nico e <strong class="text-foursys-orange">Report e Gest&atilde;o de Defeitos</strong> ponta a ponta.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== TEMA 3 — AGENTES IA ========================== -->
+  <section id="agentes" class="py-20 relative overflow-hidden">
+    <div class="tech-grid"></div>
+    <div class="max-w-[1500px] mx-auto px-6 relative">
+      <div class="fade-in mb-12">
+        <span class="pill orange"><span class="text-foursys-orange font-black">03</span> &middot; Diferencial Foursys</span>
+        <h2 class="text-4xl md:text-5xl font-black mt-6 mb-4">
+          Agentes de <span class="orange-gradient-text">IA</span> aplicados ao QA.
+        </h2>
+        <p class="text-gray-400 max-w-3xl">Tr&ecirc;s agentes especialistas atuando em Frontend, API, Backend e Mobile &mdash; integrados aos crit&eacute;rios de aceite com Neg&oacute;cio para garantir defini&ccedil;&atilde;o combinada e antecipada de QA.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="fade-in glass-card border-accent-orange bg-accent-orange glow-pulse">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="number-badge grad-orange"><i data-lucide="message-square" class="w-7 h-7"></i></div>
+            <div>
+              <p class="topic-tag accent-orange">Agente 01</p>
+              <p class="text-xs text-gray-400 mt-0.5">Conex&atilde;o com Neg&oacute;cio</p>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Analista Gherkin</h3>
+          <p class="text-sm text-gray-300 leading-relaxed mb-4">O Entrevistador conduz a constru&ccedil;&atilde;o dos cen&aacute;rios em padr&atilde;o Gherkin (positivos, negativos e regressivos), espec&iacute;fico para cada Neg&oacute;cio.</p>
+          <ul class="stage-bullets accent-orange mb-4">
+            <li>BDD step-by-step com Negócio</li>
+            <li>Cobertura de cen&aacute;rios edge case</li>
+            <li>Diretamente das User Stories</li>
+          </ul>
+          <div class="flex flex-wrap gap-2 mt-auto">
+            <span class="pill orange">BDD</span>
+            <span class="pill orange">Gherkin</span>
+            <span class="pill orange">User Stories</span>
+          </div>
+        </div>
+
+        <div class="fade-in glass-card border-accent-violet bg-accent-violet" style="transition-delay:.05s">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="number-badge grad-violet"><i data-lucide="database" class="w-7 h-7"></i></div>
+            <div>
+              <p class="topic-tag accent-violet">Agente 02</p>
+              <p class="text-xs text-gray-400 mt-0.5">Massa de Dados</p>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold mb-2">DataForge</h3>
+          <p class="text-sm text-gray-300 leading-relaxed mb-4">Gera massa sint&eacute;tica integrada e sem v&iacute;cios &mdash; em <span class="accent-violet font-bold">1 dia</span> o que um DataOps faria em 3.</p>
+          <ul class="stage-bullets accent-violet mb-4">
+            <li>Massa sintética sem GAPs</li>
+            <li>Integração entre sistemas</li>
+            <li>Privacidade e LGPD garantidas</li>
+          </ul>
+          <div class="flex flex-wrap gap-2 mt-auto">
+            <span class="pill" style="color:#a78bfa;border-color:rgba(167,139,250,.45);background:rgba(167,139,250,.08)">Sint&eacute;tica</span>
+            <span class="pill" style="color:#a78bfa;border-color:rgba(167,139,250,.45);background:rgba(167,139,250,.08)">Integrada</span>
+            <span class="pill" style="color:#a78bfa;border-color:rgba(167,139,250,.45);background:rgba(167,139,250,.08)">Sem GAPs</span>
+          </div>
+        </div>
+
+        <div class="fade-in glass-card border-accent-mint bg-accent-mint" style="transition-delay:.1s">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="number-badge grad-mint"><i data-lucide="check-square" class="w-7 h-7"></i></div>
+            <div>
+              <p class="topic-tag accent-mint">Agente 03</p>
+              <p class="text-xs text-gray-400 mt-0.5">Pr&eacute;-execu&ccedil;&atilde;o</p>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Validador de US</h3>
+          <p class="text-sm text-gray-300 leading-relaxed mb-4">Valida requisitos e documenta&ccedil;&otilde;es funcionais antes da execu&ccedil;&atilde;o &mdash; reduz retrabalho e antecipa amb&iacute;guidades em User Stories.</p>
+          <ul class="stage-bullets accent-mint mb-4">
+            <li>Anti-amb&iacute;guidades em US</li>
+            <li>Crit&eacute;rios de aceite validados</li>
+            <li>Quality Gate antes do dev</li>
+          </ul>
+          <div class="flex flex-wrap gap-2 mt-auto">
+            <span class="pill" style="color:#34d399;border-color:rgba(52,211,153,.45);background:rgba(52,211,153,.08)">Requisitos</span>
+            <span class="pill" style="color:#34d399;border-color:rgba(52,211,153,.45);background:rgba(52,211,153,.08)">Crit&eacute;rios</span>
+            <span class="pill" style="color:#34d399;border-color:rgba(52,211,153,.45);background:rgba(52,211,153,.08)">Anti-retrabalho</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-in grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="glass-card text-center">
+          <i data-lucide="monitor" class="w-7 h-7 text-foursys-orange mx-auto mb-3"></i>
+          <p class="topic-tag text-foursys-orange mb-1">Frontend</p>
+          <p class="text-xs text-gray-400">Web &amp; Mobile</p>
+        </div>
+        <div class="glass-card text-center">
+          <i data-lucide="zap" class="w-7 h-7 text-foursys-orange mx-auto mb-3"></i>
+          <p class="topic-tag text-foursys-orange mb-1">API</p>
+          <p class="text-xs text-gray-400">REST &middot; SOAP &middot; Contratos</p>
+        </div>
+        <div class="glass-card text-center">
+          <i data-lucide="server" class="w-7 h-7 text-foursys-orange mx-auto mb-3"></i>
+          <p class="topic-tag text-foursys-orange mb-1">Backend</p>
+          <p class="text-xs text-gray-400">L&oacute;gica &amp; Integra&ccedil;&otilde;es</p>
+        </div>
+        <div class="glass-card text-center">
+          <i data-lucide="smartphone" class="w-7 h-7 text-foursys-orange mx-auto mb-3"></i>
+          <p class="topic-tag text-foursys-orange mb-1">Mobile</p>
+          <p class="text-xs text-gray-400">iOS &amp; Android</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== TEMA 4 — SQUADS ========================== -->
+  <section id="squads" class="py-20">
+    <div class="max-w-[1500px] mx-auto px-6">
+      <div class="fade-in mb-12">
+        <span class="pill orange"><span class="text-foursys-orange font-black">04</span> &middot; Modelo de Atua&ccedil;&atilde;o</span>
+        <h2 class="text-4xl md:text-5xl font-black mt-6 mb-4">
+          QA <span class="orange-gradient-text">embarcado</span> nas squads.
+        </h2>
+        <p class="text-gray-400 max-w-3xl">Padr&otilde;es e governan&ccedil;a do CoE + execu&ccedil;&atilde;o do CSC nas squads, com TMO/QA Lead fazendo o elo estrat&eacute;gico entre estrat&eacute;gia e opera&ccedil;&atilde;o.</p>
+      </div>
+
+      <div class="fade-in glass-card p-10">
+        <!-- Topo: Studio QA + TMO -->
+        <div class="flex flex-col items-center gap-3 mb-10">
+          <div class="px-8 py-3 rounded-2xl orange-gradient text-white font-display font-black text-2xl shadow-lg shadow-foursys-orange/20">Studio QA</div>
+          <div class="w-px h-6 bg-gradient-to-b from-foursys-orange to-white/30"></div>
+          <div class="px-5 py-2 rounded-full bg-white/8 border border-white/20 text-sm font-bold tracking-wider uppercase">TMO &middot; QA Lead</div>
+          <div class="w-px h-6 bg-gradient-to-b from-white/30 to-foursys-orange"></div>
+        </div>
+
+        <!-- Duas colunas -->
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="topic-tag text-foursys-orange mb-4 flex items-center gap-2">
+              <i data-lucide="award" class="w-4 h-4"></i> CoE &middot; Pr&aacute;ticas &amp; Inova&ccedil;&atilde;o
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              <span class="pill">Pr&aacute;ticas de QA</span>
+              <span class="pill">Suporte</span>
+              <span class="pill">Monitoramento</span>
+              <span class="pill">Continuidade</span>
+              <span class="pill">Equaliza&ccedil;&atilde;o de Conhecimento</span>
+              <span class="pill">Evangeliza&ccedil;&atilde;o</span>
+              <span class="pill">Treinamentos</span>
+              <span class="pill">Entrega Especializada</span>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="topic-tag text-foursys-orange mb-4 flex items-center gap-2">
+              <i data-lucide="users" class="w-4 h-4"></i> Delivery &middot; Squads &middot; Execu&ccedil;&atilde;o
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              <span class="pill orange">QA Lead</span>
+              <span class="pill orange">QA Lead</span>
+              <span class="pill orange">QA Lead</span>
+              <span class="pill orange">QA Lead</span>
+              <span class="pill">QA</span>
+              <span class="pill">QA</span>
+              <span class="pill">QA</span>
+              <span class="pill">QA</span>
+              <span class="pill">QA</span>
+              <span class="pill">QA</span>
+              <span class="pill">QA</span>
+              <span class="pill">Certifica&ccedil;&atilde;o GMUD</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-white/10 text-center">
+          <p class="text-sm text-gray-400 italic">
+            <strong class="text-foursys-orange not-italic font-bold">TMO / QA Lead</strong> &mdash; elo estrat&eacute;gico entre as duas torres, alinhando padr&otilde;es do CoE &agrave; execu&ccedil;&atilde;o nas squads.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== TEMA 5 — FERRAMENTAS ========================== -->
+  <section id="ferramentas" class="py-20">
+    <div class="max-w-[1500px] mx-auto px-6">
+      <div class="fade-in mb-12">
+        <span class="pill orange"><span class="text-foursys-orange font-black">05</span> &middot; Stack &middot; Ciclo de Vida</span>
+        <h2 class="text-4xl md:text-5xl font-black mt-6 mb-4">
+          O que j&aacute; usamos no <span class="orange-gradient-text">dia a dia.</span>
+        </h2>
+        <p class="text-gray-400 max-w-3xl">Exemplos n&atilde;o exaustivos do que aplicamos ao longo dos nossos projetos &mdash; integra&ccedil;&atilde;o cont&iacute;nua entre gest&atilde;o, automa&ccedil;&atilde;o, dados e observabilidade.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="fade-in glass-card border-accent-orange">
+          <div class="w-11 h-11 rounded-xl grad-orange flex items-center justify-center mb-4">
+            <i data-lucide="kanban" class="w-5 h-5 text-white"></i>
+          </div>
+          <p class="topic-tag accent-orange mb-2">Gest&atilde;o &amp; ALM</p>
+          <h4 class="text-lg font-bold mb-2">Jira &amp; Plugins</h4>
+          <p class="text-sm text-gray-400 mb-4">Xray, Zephyr e plugins for Jira para gest&atilde;o de testes integrada ao backlog.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="pill orange">Jira</span>
+            <span class="pill">Xray</span>
+            <span class="pill">Zephyr</span>
+          </div>
+        </div>
+
+        <div class="fade-in glass-card border-accent-vanilla" style="transition-delay:.05s">
+          <div class="w-11 h-11 rounded-xl grad-vanilla flex items-center justify-center mb-4">
+            <i data-lucide="database" class="w-5 h-5 text-white"></i>
+          </div>
+          <p class="topic-tag accent-vanilla mb-2">Massa de Dados</p>
+          <h4 class="text-lg font-bold mb-2">Test Data Manager</h4>
+          <p class="text-sm text-gray-400 mb-4">DataForge para massa sint&eacute;tica e ferramentas de TDM seguras.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="pill" style="color:#fbbf24;border-color:rgba(251,191,36,.45);background:rgba(251,191,36,.10)">DataForge</span>
+            <span class="pill">TDM</span>
+            <span class="pill">LGPD</span>
+          </div>
+        </div>
+
+        <div class="fade-in glass-card border-accent-mint" style="transition-delay:.1s">
+          <div class="w-11 h-11 rounded-xl grad-mint flex items-center justify-center mb-4">
+            <i data-lucide="zap" class="w-5 h-5 text-white"></i>
+          </div>
+          <p class="topic-tag accent-mint mb-2">Automa&ccedil;&atilde;o</p>
+          <h4 class="text-lg font-bold mb-2">Frameworks</h4>
+          <p class="text-sm text-gray-400 mb-4">Cypress, Robot Framework e Python para cobertura E2E, API e CI/CD.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="pill" style="color:#34d399;border-color:rgba(52,211,153,.45);background:rgba(52,211,153,.10)">Cypress</span>
+            <span class="pill" style="color:#34d399;border-color:rgba(52,211,153,.45);background:rgba(52,211,153,.10)">Robot</span>
+            <span class="pill" style="color:#34d399;border-color:rgba(52,211,153,.45);background:rgba(52,211,153,.10)">Python</span>
+          </div>
+        </div>
+
+        <div class="fade-in glass-card border-accent-sky" style="transition-delay:.15s">
+          <div class="w-11 h-11 rounded-xl grad-sky flex items-center justify-center mb-4">
+            <i data-lucide="bar-chart-3" class="w-5 h-5 text-white"></i>
+          </div>
+          <p class="topic-tag accent-sky mb-2">Performance &amp; Reports</p>
+          <h4 class="text-lg font-bold mb-2">Carga &amp; Observabilidade</h4>
+          <p class="text-sm text-gray-400 mb-4">JMeter, k6, Grafana, Allure e dashboards executivos.</p>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="pill" style="color:#38bdf8;border-color:rgba(56,189,248,.45);background:rgba(56,189,248,.10)">k6</span>
+            <span class="pill" style="color:#38bdf8;border-color:rgba(56,189,248,.45);background:rgba(56,189,248,.10)">JMeter</span>
+            <span class="pill" style="color:#38bdf8;border-color:rgba(56,189,248,.45);background:rgba(56,189,248,.10)">Grafana</span>
+            <span class="pill" style="color:#38bdf8;border-color:rgba(56,189,248,.45);background:rgba(56,189,248,.10)">Allure</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== TEMA 6 — GANHOS ========================== -->
+  <section id="ganhos" class="py-20">
+    <div class="max-w-[1500px] mx-auto px-6">
+      <div class="fade-in mb-12">
+        <span class="pill orange"><span class="text-foursys-orange font-black">06</span> &middot; Ganhos &amp; Resultados</span>
+        <h2 class="text-4xl md:text-5xl font-black mt-6 mb-4">
+          Garantimos qualidade desde o <span class="orange-gradient-text">in&iacute;cio</span> do projeto.
+        </h2>
+        <p class="text-gray-400 max-w-3xl">Multiplicadores reais de produtividade observados nos projetos Foursys &mdash; comparativo entre execu&ccedil;&atilde;o manual e a oferta com aceleradores e IA.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div class="fade-in glass-card featured glow-pulse">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="pulse-dot" style="width:8px;height:8px"></span>
+            <p class="topic-tag text-foursys-orange">Cen&aacute;rios</p>
+          </div>
+          <p class="text-5xl font-black font-display orange-gradient-text leading-none mb-3 count-pulse">+10x</p>
+          <p class="text-xs text-gray-200 leading-relaxed">Manual: 5 cen&aacute;rios &middot; Foursys: 50 cen&aacute;rios por jornada.</p>
+        </div>
+        <div class="fade-in glass-card" style="transition-delay:.05s">
+          <p class="topic-tag text-foursys-orange mb-3">Visibilidade</p>
+          <p class="text-5xl font-black font-display text-white leading-none mb-3">+80%</p>
+          <p class="text-xs text-gray-400 leading-relaxed">Dashboard com 5 indicadores e acompanhamento di&aacute;rio.</p>
+        </div>
+        <div class="fade-in glass-card featured" style="transition-delay:.1s">
+          <p class="topic-tag text-foursys-orange mb-3">Massa de Dados</p>
+          <p class="text-5xl font-black font-display orange-gradient-text leading-none mb-3">+70%</p>
+          <p class="text-xs text-gray-200 leading-relaxed">DataForge: 1 dia &middot; DataOps tradicional: 3 dias com gaps.</p>
+        </div>
+        <div class="fade-in glass-card" style="transition-delay:.15s">
+          <p class="topic-tag text-foursys-orange mb-3">Automa&ccedil;&atilde;o</p>
+          <p class="text-5xl font-black font-display text-white leading-none mb-3">+6x</p>
+          <p class="text-xs text-gray-400 leading-relaxed">Manual: 20 scripts/m&ecirc;s &middot; Agente: +120 cen&aacute;rios/m&ecirc;s.</p>
+        </div>
+        <div class="fade-in glass-card featured glow-pulse" style="transition-delay:.2s">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="pulse-dot" style="width:8px;height:8px"></span>
+            <p class="topic-tag text-foursys-orange">Testes com IA</p>
+          </div>
+          <p class="text-5xl font-black font-display orange-gradient-text leading-none mb-3 count-pulse">~30x</p>
+          <p class="text-xs text-gray-200 leading-relaxed">15 min manual &rarr; instant&acirc;neo com prompts + cURL.</p>
+        </div>
+      </div>
+
+      <div class="fade-in glass-card mt-8 text-center py-8" style="transition-delay:.25s">
+        <i data-lucide="quote" class="w-8 h-8 text-foursys-orange mx-auto mb-4"></i>
+        <p class="text-xl md:text-2xl font-display font-bold text-white max-w-3xl mx-auto leading-snug">
+          Garantimos que o que &eacute; entregue funciona como esperado, com <span class="orange-gradient-text">velocidade, previsibilidade e confian&ccedil;a.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== TEMA 7 — ROI ========================== -->
+  <section id="roi" class="py-20">
+    <div class="max-w-[1500px] mx-auto px-6">
+      <div class="fade-in mb-12">
+        <span class="pill orange"><span class="text-foursys-orange font-black">07</span> &middot; ROI &middot; Indicadores</span>
+        <h2 class="text-4xl md:text-5xl font-black mt-6 mb-4">
+          Seu sucesso &eacute; o <span class="orange-gradient-text">nosso foco.</span>
+        </h2>
+        <p class="text-gray-400 max-w-3xl">Seis indicadores priorizados para garantir efici&ecirc;ncia, escala e visibilidade nos projetos.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="fade-in glass-card border-accent-orange bg-accent-orange">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="number-badge grad-orange" style="width:42px;height:42px;font-size:16px;border-radius:11px">01</div>
+            <i data-lucide="shield-alert" class="w-6 h-6 accent-orange"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Preven&ccedil;&atilde;o de Falhas Cr&iacute;ticas</h3>
+          <p class="text-sm text-gray-400 leading-relaxed mb-3">Defeitos identificados antes da produ&ccedil;&atilde;o &mdash; redu&ccedil;&atilde;o do custo de corre&ccedil;&atilde;o em at&eacute; 100&times;.</p>
+          <ul class="stage-bullets accent-orange">
+            <li>Bug escape rate &lt; 1%</li>
+            <li>Quality gate em cada PR</li>
+          </ul>
+        </div>
+        <div class="fade-in glass-card border-accent-vanilla bg-accent-vanilla" style="transition-delay:.05s">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="number-badge grad-vanilla" style="width:42px;height:42px;font-size:16px;border-radius:11px">02</div>
+            <i data-lucide="zap" class="w-6 h-6 accent-vanilla"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Automa&ccedil;&atilde;o Acelerada</h3>
+          <p class="text-sm text-gray-400 leading-relaxed mb-3">Cobertura cont&iacute;nua de regress&atilde;o e caminho cr&iacute;tico para libera&ccedil;&otilde;es seguras.</p>
+          <ul class="stage-bullets accent-vanilla">
+            <li>Cobertura ≥ 90% em regress&atilde;o</li>
+            <li>CI/CD com gates autom&aacute;ticos</li>
+          </ul>
+        </div>
+        <div class="fade-in glass-card border-accent-mint bg-accent-mint" style="transition-delay:.1s">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="number-badge grad-mint" style="width:42px;height:42px;font-size:16px;border-radius:11px">03</div>
+            <i data-lucide="brain" class="w-6 h-6 accent-mint"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Decis&otilde;es Inteligentes</h3>
+          <p class="text-sm text-gray-400 leading-relaxed mb-3">M&eacute;tricas em tempo real para tomada de decis&atilde;o baseada em dados.</p>
+          <ul class="stage-bullets accent-mint">
+            <li>5 indicadores executivos di&aacute;rios</li>
+            <li>Acompanhamento por squad</li>
+          </ul>
+        </div>
+        <div class="fade-in glass-card border-accent-sky bg-accent-sky" style="transition-delay:.15s">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="number-badge grad-sky" style="width:42px;height:42px;font-size:16px;border-radius:11px">04</div>
+            <i data-lucide="rocket" class="w-6 h-6 accent-sky"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Efici&ecirc;ncia Operacional</h3>
+          <p class="text-sm text-gray-300 leading-relaxed mb-3">Menos retrabalho, menos amb&iacute;guidades, mais previsibilidade no time.</p>
+          <ul class="stage-bullets accent-sky">
+            <li>−22% retrabalho m&eacute;dio</li>
+            <li>3&times; mais previsibilidade</li>
+          </ul>
+        </div>
+        <div class="fade-in glass-card border-accent-violet bg-accent-violet" style="transition-delay:.2s">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="number-badge grad-violet" style="width:42px;height:42px;font-size:16px;border-radius:11px">05</div>
+            <i data-lucide="target" class="w-6 h-6 accent-violet"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Qualidade Cont&iacute;nua</h3>
+          <p class="text-sm text-gray-400 leading-relaxed mb-3">Governan&ccedil;a, padr&otilde;es e indicadores ativos em todas as squads.</p>
+          <ul class="stage-bullets accent-violet">
+            <li>OKRs trimestrais por squad</li>
+            <li>Padr&otilde;es replic&aacute;veis CoE</li>
+          </ul>
+        </div>
+        <div class="fade-in glass-card border-accent-pink bg-accent-pink" style="transition-delay:.25s">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="number-badge grad-pink" style="width:42px;height:42px;font-size:16px;border-radius:11px">06</div>
+            <i data-lucide="thumbs-up" class="w-6 h-6 accent-pink"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Agilidade e Confian&ccedil;a</h3>
+          <p class="text-sm text-gray-400 leading-relaxed mb-3">Time-to-market reduzido com aceite final apoiado por evid&ecirc;ncias.</p>
+          <ul class="stage-bullets accent-pink">
+            <li>Atestado GO/NO-GO em 2 dias</li>
+            <li>Aceite final com rastreabilidade</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== TEMA 8 — O QUE EVITA ========================== -->
+  <section id="evita" class="py-20">
+    <div class="max-w-[1500px] mx-auto px-6">
+      <div class="fade-in mb-12">
+        <span class="pill orange"><span class="text-foursys-orange font-black">08</span> &middot; Riscos Mitigados</span>
+        <h2 class="text-4xl md:text-5xl font-black mt-6 mb-4">
+          O que voc&ecirc; <span class="orange-gradient-text">evita</span> conosco.
+        </h2>
+        <p class="text-gray-400 max-w-3xl">Os principais riscos eliminados quando QA passa a ser parte do investimento &mdash; n&atilde;o do custo &mdash; do projeto.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div class="fade-in glass-card border-accent-orange">
+          <div class="w-12 h-12 rounded-xl grad-orange flex items-center justify-center mb-4 shadow-lg shadow-foursys-orange/20">
+            <i data-lucide="x-circle" class="w-6 h-6 text-white"></i>
+          </div>
+          <h4 class="text-base font-bold mb-2">Custos com Retrabalho</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">Ciclos repetidos, defeitos retornando e cobertura insuficiente.</p>
+        </div>
+        <div class="fade-in glass-card border-accent-vanilla" style="transition-delay:.05s">
+          <div class="w-12 h-12 rounded-xl grad-vanilla flex items-center justify-center mb-4 shadow-lg" style="box-shadow:0 8px 24px -8px rgba(251,191,36,.4)">
+            <i data-lucide="clock" class="w-6 h-6 text-white"></i>
+          </div>
+          <h4 class="text-base font-bold mb-2">Desperd&iacute;cio de Tempo</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">Time apagando inc&ecirc;ndio em vez de prevenir e antecipar.</p>
+        </div>
+        <div class="fade-in glass-card border-accent-mint" style="transition-delay:.1s">
+          <div class="w-12 h-12 rounded-xl grad-mint flex items-center justify-center mb-4 shadow-lg" style="box-shadow:0 8px 24px -8px rgba(52,211,153,.4)">
+            <i data-lucide="eye-off" class="w-6 h-6 text-white"></i>
+          </div>
+          <h4 class="text-base font-bold mb-2">Falta de Visibilidade</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">Sem rastreabilidade de qualidade nem indicadores executivos.</p>
+        </div>
+        <div class="fade-in glass-card border-accent-sky" style="transition-delay:.15s">
+          <div class="w-12 h-12 rounded-xl grad-sky flex items-center justify-center mb-4 shadow-lg" style="box-shadow:0 8px 24px -8px rgba(56,189,248,.4)">
+            <i data-lucide="alert-triangle" class="w-6 h-6 text-white"></i>
+          </div>
+          <h4 class="text-base font-bold mb-2">Riscos de Mercado</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">Atrasos, multas regulat&oacute;rias e impacto reputacional.</p>
+        </div>
+        <div class="fade-in glass-card border-accent-violet" style="transition-delay:.2s">
+          <div class="w-12 h-12 rounded-xl grad-violet flex items-center justify-center mb-4 shadow-lg" style="box-shadow:0 8px 24px -8px rgba(167,139,250,.4)">
+            <i data-lucide="layers" class="w-6 h-6 text-white"></i>
+          </div>
+          <h4 class="text-base font-bold mb-2">Inconsist&ecirc;ncia</h4>
+          <p class="text-xs text-gray-400 leading-relaxed">QA desigual entre squads, sem padr&atilde;o nem governan&ccedil;a unificada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== TEMA 9 — DASHBOARD ========================== -->
+  <section id="dashboard" class="py-20 relative overflow-hidden">
+    <div class="tech-grid"></div>
+    <div class="max-w-[1500px] mx-auto px-6 relative">
+      <div class="fade-in mb-12">
+        <span class="pill orange"><span class="text-foursys-orange font-black">09</span> &middot; QA Report &amp; Governan&ccedil;a</span>
+        <h2 class="text-4xl md:text-5xl font-black mt-6 mb-4">
+          Indicadores de Qualidade <span class="orange-gradient-text">vis&iacute;veis em tempo real.</span>
+        </h2>
+        <p class="text-gray-400 max-w-3xl">Modelo de status de execu&ccedil;&atilde;o dos testes &mdash; vis&atilde;o di&aacute;ria por frente, status, defeitos e categoria com drill-down por squad e produto.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+
+        <!-- Mock dashboard -->
+        <div class="fade-in glass-card lg:col-span-2 p-0 overflow-hidden relative">
+          <div class="scan-line"></div>
+          <div class="px-6 py-4 bg-foursys-orange/15 border-b border-foursys-orange/25 flex items-center gap-3">
+            <span class="pulse-dot" style="width:9px;height:9px"></span>
+            <i data-lucide="layout-dashboard" class="w-5 h-5 text-foursys-orange"></i>
+            <p class="topic-tag text-foursys-orange">Modelo &middot; Status de Execu&ccedil;&atilde;o dos Testes</p>
+            <span class="ml-auto text-[10px] text-gray-500 font-mono uppercase tracking-widest">live &middot; 24/7</span>
+          </div>
+          <div class="p-6 grid grid-cols-2 gap-4">
+            <div class="rounded-xl p-5 bg-white/5 border border-white/10">
+              <p class="topic-tag text-gray-400 mb-2">Planejado vs Executado</p>
+              <p class="text-3xl font-display font-black orange-gradient-text">87%</p>
+              <p class="text-xs text-gray-500 mt-1">execu&ccedil;&atilde;o no per&iacute;odo</p>
+              <div class="mt-3 h-1.5 bg-white/10 rounded-full overflow-hidden shimmer-bar">
+                <div class="h-full orange-gradient" style="width:87%"></div>
+              </div>
+            </div>
+            <div class="rounded-xl p-5 bg-white/5 border border-white/10">
+              <p class="topic-tag text-gray-400 mb-2">Defeitos por Severidade</p>
+              <p class="text-3xl font-display font-black text-white">0 <span class="text-base font-bold text-gray-400">cr&iacute;t.</span></p>
+              <p class="text-xs text-gray-500 mt-1">12 menores no per&iacute;odo</p>
+              <div class="mt-3 flex gap-1 h-1.5">
+                <span class="block bg-foursys-orange rounded-full" style="flex:0"></span>
+                <span class="block bg-yellow-500/70 rounded-full" style="flex:.4"></span>
+                <span class="block bg-white/30 rounded-full" style="flex:1"></span>
+              </div>
+            </div>
+            <div class="rounded-xl p-5 bg-white/5 border border-white/10">
+              <p class="topic-tag text-gray-400 mb-2">Status de Casos</p>
+              <p class="text-base font-display font-black text-white mt-1">Pass &middot; Fail &middot; Blocked &middot; In Run</p>
+              <div class="mt-3 flex gap-0.5 h-2 rounded-full overflow-hidden">
+                <span class="block bg-foursys-orange" style="flex:7"></span>
+                <span class="block bg-foursys-navy" style="flex:1.5"></span>
+                <span class="block bg-white/40" style="flex:.7"></span>
+                <span class="block bg-white/15" style="flex:.8"></span>
+              </div>
+            </div>
+            <div class="rounded-xl p-5 bg-white/5 border border-white/10">
+              <p class="topic-tag text-gray-400 mb-2">Categoria &amp; Frente</p>
+              <p class="text-base font-display font-black text-white mt-1">Funcional &middot; API &middot; NFT</p>
+              <p class="text-xs text-gray-500 mt-2">drill-down por squad e produto</p>
+            </div>
+          </div>
+          <div class="px-6 py-3 bg-white/5 border-t border-white/10 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-foursys-orange"></span>
+            <p class="text-xs text-gray-400 font-semibold tracking-wide">Dashboard com 5 indicadores iniciais &middot; acompanhamento di&aacute;rio</p>
+          </div>
+        </div>
+
+        <!-- KPIs -->
+        <div class="space-y-4">
+          <div class="fade-in glass-card" style="transition-delay:.05s">
+            <p class="topic-tag text-foursys-orange mb-3 flex items-center gap-2"><i data-lucide="bar-chart-3" class="w-4 h-4"></i> M&eacute;tricas de Qualidade</p>
+            <ul class="space-y-2 text-sm text-gray-300">
+              <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-foursys-orange shrink-0 mt-0.5"></i><span>Cobertura de testes funcionais</span></li>
+              <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-foursys-orange shrink-0 mt-0.5"></i><span>Bug escape rate &middot; bug aging</span></li>
+              <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-foursys-orange shrink-0 mt-0.5"></i><span>CI pass rate por squad</span></li>
+            </ul>
+          </div>
+          <div class="fade-in glass-card" style="transition-delay:.1s">
+            <p class="topic-tag text-foursys-orange mb-3 flex items-center gap-2"><i data-lucide="file-text" class="w-4 h-4"></i> Reports Autom&aacute;ticos</p>
+            <ul class="space-y-2 text-sm text-gray-300">
+              <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-foursys-orange shrink-0 mt-0.5"></i><span>Dashboard executivo semanal</span></li>
+              <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-foursys-orange shrink-0 mt-0.5"></i><span>Allure Reports por sprint</span></li>
+              <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-foursys-orange shrink-0 mt-0.5"></i><span>Alertas em tempo real</span></li>
+            </ul>
+          </div>
+          <div class="fade-in glass-card" style="transition-delay:.15s">
+            <p class="topic-tag text-foursys-orange mb-3 flex items-center gap-2"><i data-lucide="layers" class="w-4 h-4"></i> Stack de Observabilidade</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="pill">Allure</span>
+              <span class="pill">Grafana</span>
+              <span class="pill">Jira</span>
+              <span class="pill">Azure DevOps</span>
+              <span class="pill">Slack Alerts</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ========================== FOOTER / CONTATO ========================== -->
+<footer id="contato" class="py-20 border-t border-white/5 bg-foursys-dark relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-foursys-orange/8 blur-[120px] rounded-full pointer-events-none"></div>
+  <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-foursys-orange/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+  <div class="max-w-[1500px] mx-auto px-6 relative">
+
+    <div class="text-center mb-12 fade-in">
+      <span class="pill orange"><i data-lucide="rocket" class="w-3.5 h-3.5"></i> Pr&oacute;ximo Passo</span>
+      <h2 class="text-4xl md:text-5xl font-black mt-6 mb-4">
+        Vamos transformar QA em <span class="orange-gradient-text">vantagem competitiva?</span>
+      </h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">
+        Iniciamos com um Discovery &mdash; mapeamos a maturidade de QA e entregamos o roadmap com OKRs e indicadores priorizados.
+      </p>
+    </div>
+
+    <div class="max-w-2xl mx-auto fade-in">
+      <div class="glass-card featured p-8">
+        <div class="flex items-start gap-5 mb-5">
+          <div class="w-16 h-16 rounded-full orange-gradient flex items-center justify-center font-display font-black text-2xl shadow-lg shadow-foursys-orange/30">GT</div>
+          <div class="flex-1">
+            <p class="font-display font-black text-2xl text-white">Genivaldo Teixeira</p>
+            <p class="topic-tag text-foursys-orange mt-1">Head Comercial &middot; Foursys</p>
+          </div>
+          <i data-lucide="briefcase" class="w-6 h-6 text-foursys-orange"></i>
+        </div>
+        <div class="border-t border-white/10 pt-5 space-y-3">
+          <a href="mailto:genivaldo.teixeira@foursys.com.br" class="flex items-center gap-3 text-gray-200 hover:text-foursys-orange transition-colors">
+            <span class="w-9 h-9 rounded-full bg-white/8 border border-white/15 flex items-center justify-center group-hover:bg-foursys-orange/20">
+              <i data-lucide="mail" class="w-4 h-4 text-foursys-orange"></i>
+            </span>
+            <span class="font-semibold">genivaldo.teixeira@foursys.com.br</span>
+          </a>
+          <a href="tel:+5511995569562" class="flex items-center gap-3 text-gray-200 hover:text-foursys-orange transition-colors">
+            <span class="w-9 h-9 rounded-full bg-white/8 border border-white/15 flex items-center justify-center">
+              <i data-lucide="phone" class="w-4 h-4 text-foursys-orange"></i>
+            </span>
+            <span class="font-semibold">(11) 99556-9562</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between gap-6 text-gray-500 text-xs uppercase tracking-widest font-medium">
+      <span>&copy; 2026 Foursys &middot; Todos os direitos reservados</span>
+      <span>Studio de Engenharia de Qualidade &middot; Proposta P2025XXX</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  lucide.createIcons();
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

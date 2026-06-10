@@ -21,7 +21,10 @@ interface FlagshipOffer {
   bg: string
   border: string
   navigateTo: 'services'
+  embedUrl?: string
 }
+
+const QA_EMBED_URL = '/ofertas/qualidade-testes-ia.html'
 
 // ─── Dados das ofertas flagship ───────────────────────────────────────────────
 
@@ -152,6 +155,7 @@ const FLAGSHIP_OFFERS_PT: FlagshipOffer[] = [
     bg: 'from-amber-500/15 to-amber-600/5',
     border: 'border-amber-500/30',
     navigateTo: 'services' as const,
+    embedUrl: QA_EMBED_URL,
   },
 ]
 
@@ -282,6 +286,7 @@ const FLAGSHIP_OFFERS_EN: FlagshipOffer[] = [
     bg: 'from-amber-500/15 to-amber-600/5',
     border: 'border-amber-500/30',
     navigateTo: 'services' as const,
+    embedUrl: QA_EMBED_URL,
   },
 ]
 
@@ -298,6 +303,47 @@ function OfferModal({
 }) {
   const trapRef = useFocusTrap(true)
   const { t } = useLanguage()
+  const isEmbed = Boolean(offer.embedUrl)
+
+  if (isEmbed) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 md:p-6"
+        role="dialog"
+        aria-modal="true"
+        aria-label={offer.title}
+        onClick={onClose}
+      >
+        <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+        <motion.div
+          ref={trapRef}
+          initial={{ scale: 0.97, y: 16 }}
+          animate={{ scale: 1, y: 0 }}
+          exit={{ scale: 0.97, y: 16 }}
+          onClick={e => e.stopPropagation()}
+          className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-none sm:rounded-2xl w-full h-[100dvh] sm:h-[92dvh] sm:max-w-[1180px] flex flex-col overflow-hidden"
+        >
+          <button
+            onClick={onClose}
+            aria-label={t('common.close')}
+            data-voz-fechar-detalhe="true"
+            className="absolute top-3 right-3 z-10 p-2 rounded-xl bg-black/50 hover:bg-black/70 text-white transition-colors"
+          >
+            <X size={16} />
+          </button>
+          <iframe
+            src={offer.embedUrl}
+            title={offer.title}
+            className="w-full h-full border-0 bg-white"
+            loading="lazy"
+          />
+        </motion.div>
+      </motion.div>
+    )
+  }
 
   return (
     <motion.div
@@ -484,7 +530,7 @@ export function SectionOffersFlag() {
               <InterestButton section="offers-flagship" />
               {[
                 { value: '26', label: t('common.years') },
-                { value: '3,6%', label: 'turnover' },
+                { value: '4%', label: 'turnover' },
                 { value: '30K+', label: t('common.projects') },
               ].map(stat => (
                 <div key={stat.label} className="text-center px-3 md:px-4 py-1.5 md:py-2 rounded-xl bg-foursys-surface/40 border border-white/[0.08]">

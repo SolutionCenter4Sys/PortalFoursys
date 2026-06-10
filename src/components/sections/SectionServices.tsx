@@ -2225,6 +2225,47 @@ function DeepDiveModal({
   )
 }
 
+/* ── Embed modal (HTML original servido em /public) ─────────────────────────── */
+
+const QA_EMBED_URL = '/ofertas/qualidade-testes-ia.html'
+
+function ServiceEmbedModal({ title, url, onClose }: { title: string; url: string; onClose: () => void }) {
+  const { t } = useLanguage()
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 md:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label={title}
+      onClick={onClose}
+    >
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.97, y: 12 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.97, y: 12 }}
+        transition={{ type: 'spring', damping: 26, stiffness: 300 }}
+        onClick={e => e.stopPropagation()}
+        className="relative z-10 w-full h-[100dvh] sm:h-[92dvh] sm:max-w-[1180px] bg-foursys-dark-2 border border-white/[0.12] rounded-none sm:rounded-2xl flex flex-col overflow-hidden"
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label={t('common.close')}
+          data-voz-fechar-detalhe="true"
+          className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-colors"
+        >
+          <X size={18} className="text-white/80" />
+        </button>
+        <iframe src={url} title={title} className="w-full h-full border-0 bg-white" loading="lazy" />
+      </motion.div>
+    </motion.div>
+  )
+}
+
 /* ── SectionServices ─────────────────────────────────────────────────────────── */
 
 export function SectionServices() {
@@ -2576,10 +2617,18 @@ export function SectionServices() {
           </AnimatePresence>
           <AnimatePresence>
             {deepDiveService && (
-              <DeepDiveModal
-                service={deepDiveService}
-                onClose={handleCloseAndReturn}
-              />
+              deepDiveService.id === 'quality-testes-ia' ? (
+                <ServiceEmbedModal
+                  title={deepDiveService.title}
+                  url={QA_EMBED_URL}
+                  onClose={handleCloseAndReturn}
+                />
+              ) : (
+                <DeepDiveModal
+                  service={deepDiveService}
+                  onClose={handleCloseAndReturn}
+                />
+              )
             )}
           </AnimatePresence>
         </>,

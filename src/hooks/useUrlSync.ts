@@ -5,7 +5,8 @@ import type { AppSection } from '../types'
 const VALID_SECTIONS: AppSection[] = [
   'home', 'identity', 'global', 'timeline', 'why-foursys',
   'offers-flagship', 'services', 'delivery', 'alliances', 'innovation',
-  'cases', 'testimonials', 'awards', 'clients-showcase', 'capabilities', 'esg',
+  'cases', 'testimonials', 'awards', 'clients-showcase', 'capabilities', 'benchmark',
+  'rh-talentos', 'media', 'esg',
   'insights', 'faq', 'export-pdf',
 ]
 

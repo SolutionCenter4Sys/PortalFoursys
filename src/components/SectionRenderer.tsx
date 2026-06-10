@@ -21,6 +21,7 @@ const SectionAwards = lazy(() => import('./sections/SectionAwards').then(m => ({
 const SectionClients = lazy(() => import('./sections/SectionClients').then(m => ({ default: m.SectionClients })))
 const SectionCapabilities = lazy(() => import('./sections/SectionCapabilities').then(m => ({ default: m.SectionCapabilities })))
 const SectionBenchmark = lazy(() => import('./sections/SectionBenchmark').then(m => ({ default: m.SectionBenchmark })))
+const SectionRHTalentos = lazy(() => import('./sections/SectionRHTalentos').then(m => ({ default: m.SectionRHTalentos })))
 const SectionESG = lazy(() => import('./sections/SectionESG').then(m => ({ default: m.SectionESG })))
 const SectionMedia = lazy(() => import('./sections/SectionMedia').then(m => ({ default: m.SectionMedia })))
 const SectionInsights = lazy(() => import('./sections/SectionInsights').then(m => ({ default: m.SectionInsights })))
@@ -77,6 +78,7 @@ export function SectionRenderer() {
         {section === 'clients-showcase'   && <SectionClients key="clients-showcase" />}
         {section === 'capabilities'       && <SectionCapabilities key="capabilities" />}
         {section === 'benchmark'          && <SectionBenchmark key="benchmark" />}
+        {section === 'rh-talentos'        && <SectionRHTalentos key="rh-talentos" />}
         {section === 'media'              && <SectionMedia key="media" />}
 
         {/* ── ESG ── */}

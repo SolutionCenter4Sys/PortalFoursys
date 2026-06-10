@@ -60,7 +60,7 @@ export const pt = {
       awards: 'Premiações',
       clientsShowcase: 'Nossos Clientes',
       capabilities: 'Capacidades Técnicas',
-      esg: 'FourLives — ESG',
+      esg: 'ESG na Foursys',
       insights: 'Insights',
       faq: 'Perguntas Frequentes',
       exportPdf: 'Exportar para PDF',
@@ -330,7 +330,7 @@ export const pt = {
     ctaButton: 'Ver todos os Cases de Sucesso',
   },
   esg: {
-    badge: 'FourLives — ESG',
+    badge: 'ESG na Foursys',
     title: 'Tecnologia que transforma vidas',
     subtitle: 'Impacto social e sustentabilidade — o que fazemos além do código.',
     fronts: {
@@ -430,7 +430,7 @@ export const pt = {
       deliveryStructure: 'Estrutura de Entrega',
       deliveryItems: 'Projetos · Squads · Alocação · Agentes · Produtos · AMS',
       differentials: 'Diferenciais',
-      differentialsList: '26 anos · 3,6% turnover · ISO 9001 · ISO 27001 · SAFe · GPTW',
+      differentialsList: '26 anos · 4% turnover · ISO 9001 · ISO 27001 · SAFe · GPTW',
       viewMode: 'Modo de visualização',
       backToInstitutional: 'Voltar para apresentação institucional →',
     },

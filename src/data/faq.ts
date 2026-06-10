@@ -6,7 +6,7 @@ const faqItemsPt: FAQItem[] = [
     id: 'faq-1',
     category: 'Institucional',
     question: 'O que é a Foursys e qual é o diferencial dela?',
-    answer: 'A Foursys é uma empresa de tecnologia com 26 anos de mercado, especializada em transformação digital para setores regulados. Nosso diferencial está na combinação de expertise técnica profunda, metodologia ágil consolidada com governança enterprise, e agentes de IA híbridos que aceleram a entrega de projetos complexos. 3,6% de turnover e 30K+ projetos entregues confirmam nossa consistência.',
+    answer: 'A Foursys é uma empresa de tecnologia com 26 anos de mercado, especializada em transformação digital para setores regulados. Nosso diferencial está na combinação de expertise técnica profunda, metodologia ágil consolidada com governança enterprise, e agentes de IA híbridos que aceleram a entrega de projetos complexos. 4% de turnover e 30K+ projetos entregues confirmam nossa consistência.',
     sectionLink: 'identity',
     sectionLabel: 'Ver Quem Somos'
   },
@@ -129,7 +129,7 @@ const faqItemsEn: FAQItem[] = [
     id: 'faq-1',
     category: 'About Us',
     question: 'What is Foursys and what sets it apart?',
-    answer: 'Foursys is a technology company with 26 years of market experience, specializing in digital transformation for regulated industries. Our differentiator lies in the combination of deep technical expertise, consolidated agile methodology with enterprise governance, and hybrid AI agents that accelerate the delivery of complex projects. A 3.6% turnover rate and 30K+ delivered projects confirm our consistency.',
+    answer: 'Foursys is a technology company with 26 years of market experience, specializing in digital transformation for regulated industries. Our differentiator lies in the combination of deep technical expertise, consolidated agile methodology with enterprise governance, and hybrid AI agents that accelerate the delivery of complex projects. A 4% turnover rate and 30K+ delivered projects confirm our consistency.',
     sectionLink: 'identity',
     sectionLabel: 'See About Us'
   },

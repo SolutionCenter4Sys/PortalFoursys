@@ -5,7 +5,7 @@ export const heroStats = {
   years: 26,
   projects: '30K+',
   cities: '8',
-  turnover: '3,6%',
+  turnover: '4%',
   sla: '99,9%',
   continents: 4,
 }
@@ -14,7 +14,7 @@ const heroStatsEn = {
   years: 26,
   projects: '30K+',
   cities: '8',
-  turnover: '3.6%',
+  turnover: '4%',
   sla: '99.9%',
   continents: 4,
 }
@@ -45,7 +45,7 @@ const kpisPt: KPI[] = [
     description: 'São Paulo, Barueri, Curitiba, Rio, Belo Horizonte, Boca Raton, Lisboa e Inovabra'
   },
   {
-    value: 3.6,
+    value: 4,
     suffix: '%',
     label: 'Turnover',
     description: 'Retenção 6x superior à média do mercado de TI'
@@ -84,7 +84,7 @@ const kpisEn: KPI[] = [
     description: 'São Paulo, Barueri, Curitiba, Rio, Belo Horizonte, Boca Raton, Lisbon and Inovabra'
   },
   {
-    value: 3.6,
+    value: 4,
     suffix: '%',
     label: 'Turnover',
     description: '6x better than IT industry average'

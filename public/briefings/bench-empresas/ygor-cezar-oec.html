@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pre-Sales Intelligence — Ygor Cezar | OEC (Odebrecht Engenharia & Construção)</title>
+<style>
+:root {
+    --primary: #1a237e;
+    --primary-light: #3949ab;
+    --accent: #00b894;
+    --accent-orange: #e17055;
+    --bg: #f5f6fa;
+    --card-bg: #ffffff;
+    --text: #2d3436;
+    --text-light: #636e72;
+    --border: #dfe6e9;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 48px 40px;
+    border-radius: 0 0 16px 16px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+}
+.brand {
+    font-size: 14px;
+    letter-spacing: 2px;
+    opacity: 0.85;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+.brand strong { font-weight: 700; }
+.brand .sys { color: var(--accent); font-weight: 700; }
+.header h1 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+}
+.header h2 {
+    font-size: 20px;
+    font-weight: 400;
+    opacity: 0.95;
+    margin-bottom: 6px;
+}
+.header .sublabel {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 24px;
+}
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+.badge {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.35);
+    padding: 8px 16px;
+    border-radius: 24px;
+    font-size: 13px;
+    backdrop-filter: blur(4px);
+}
+.badge strong { font-weight: 600; }
+
+/* Sections */
+.section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+}
+.section h3 {
+    font-size: 22px;
+    color: var(--primary);
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+}
+.section h4 {
+    color: var(--primary-light);
+    font-size: 17px;
+    margin: 14px 0 8px;
+}
+.section p { margin-bottom: 10px; color: var(--text); }
+.section ul { padding-left: 22px; margin-bottom: 10px; }
+.section li { margin-bottom: 6px; }
+
+/* Info grid */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+}
+.info-card {
+    background: #f8f9fb;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+}
+.info-card .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+.info-card .value {
+    font-size: 15px;
+    color: var(--text);
+    font-weight: 500;
+}
+
+/* Insight box */
+.insight-box {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 22px 26px;
+    border-radius: 10px;
+    margin: 16px 0;
+    box-shadow: 0 4px 18px rgba(102,126,234,0.25);
+}
+.insight-box h4 { color: #fff; opacity: 0.95; margin-bottom: 8px; }
+.insight-box p { color: #fff; }
+.insight-box ul { padding-left: 22px; }
+.insight-box li { margin-bottom: 6px; }
+
+/* Timeline */
+.timeline { margin: 18px 0; }
+.timeline-item {
+    position: relative;
+    padding-left: 26px;
+    padding-bottom: 16px;
+    border-left: 2px solid var(--border);
+}
+.timeline-item:last-child { border-left: 2px solid transparent; }
+.timeline-dot {
+    position: absolute;
+    left: -8px;
+    top: 3px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px var(--primary-light);
+}
+.timeline-item strong { color: var(--primary); }
+
+/* Tags */
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.tag {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 18px;
+    font-size: 13px;
+    font-weight: 500;
+}
+.tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+.tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+.tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+
+/* Highlighted sections */
+.section-opportunity { border: 2px solid var(--accent-orange); }
+.section-foursys { border: 2px solid var(--accent); }
+.section-rapport { border: 2px solid #667eea; }
+.section-rapport .info-card { border-color: #c5cae9; }
+
+/* Oferta card */
+.oferta-card {
+    background: #f8f9fb;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+}
+.oferta-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.oferta-head h4 { margin: 0; color: var(--primary); }
+.score-badge {
+    background: var(--accent);
+    color: #fff;
+    padding: 4px 14px;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 600;
+}
+.oferta-card p { font-size: 14px; color: var(--text-light); margin-bottom: 10px; }
+.oferta-card ul { font-size: 14px; }
+.oferta-card ul li { margin-bottom: 4px; }
+
+/* Approach card */
+.approach-card {
+    color: #fff;
+    padding: 22px 26px;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+.approach-card h4 { color: #fff; margin-bottom: 8px; font-size: 16px; }
+.approach-card p, .approach-card li { color: #fff; }
+.approach-card ul { padding-left: 22px; }
+.approach-green { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); }
+.approach-red { background: linear-gradient(135deg, #e17055 0%, #d63031 100%); }
+.approach-purple { background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%); }
+
+/* Competitor */
+.competitor-card {
+    background: #f8f9fb;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary-light);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+}
+.competitor-card h4 { color: var(--primary); margin-bottom: 6px; }
+.competitor-card p { font-size: 14px; color: var(--text-light); margin: 0; }
+
+/* Bars */
+.bar-row { margin-bottom: 12px; }
+.bar-row .bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+.bar-track {
+    background: var(--border);
+    height: 10px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--primary-light) 100%);
+    border-radius: 6px;
+}
+
+/* Divider */
+.divider {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 40px 0 24px;
+}
+
+/* Print button */
+.print-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 14px 22px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(26,35,126,0.35);
+    transition: all 0.2s;
+}
+.print-btn:hover { background: var(--primary-light); transform: translateY(-2px); }
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--text-light);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 30px;
+}
+.footer strong { color: var(--primary); }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header { padding: 32px 24px; }
+    .header h1 { font-size: 30px; }
+    .section { padding: 22px; }
+    .info-grid { grid-template-columns: 1fr; }
+}
+
+/* Print */
+@media print {
+    body { background: #fff; }
+    .print-btn { display: none; }
+    .section, .header { box-shadow: none; page-break-inside: avoid; }
+    .approach-card, .insight-box, .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <div class="container" style="padding:0;">
+        <div class="brand">four<span class="sys">sys</span> <strong>| Pre-Sales Intelligence</strong></div>
+        <h1>Ygor Cezar</h1>
+        <h2>Head of IT / CIO — OEC (Odebrecht Engenharia &amp; Construção)</h2>
+        <div class="sublabel">Construção Pesada & Infraestrutura • Sede: São Paulo (SP) • Presença em 38 países</div>
+        <div class="badges">
+            <div class="badge">Receita 2025 estimada: <strong>US$ 2,8 bi</strong></div>
+            <div class="badge">Pipeline: <strong>131 projetos / US$ 17,2 bi</strong></div>
+            <div class="badge">Equipe de TI: <strong>~100 profissionais</strong></div>
+            <div class="badge">Colaboradores: <strong>~9-10 mil (grupo)</strong></div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- 1. Análise da Empresa -->
+    <div class="section">
+        <h3>Análise da Empresa</h3>
+        <p>
+            A <strong>OEC (Odebrecht Engenharia &amp; Construção)</strong> é a maior construtora de infraestrutura do Brasil, com
+            mais de <strong>80 anos de história</strong> e presença em <strong>38 países</strong>. Atua em transporte e logística,
+            saneamento, desenvolvimento urbano, edificações, energia, óleo &amp; gás e engenharia industrial. Após um ciclo longo
+            de reestruturação financeira pós-Lava Jato (incluindo a renegociação de cerca de US$ 3,5 bilhões em dívidas e a
+            certificação ISO 37001 de compliance), a companhia retomou crescimento de receita e pipeline em 2024/2025. Em
+            <strong>maio de 2025</strong>, com a homologação do plano de reestruturação, a empresa voltou a adotar oficialmente
+            a marca <strong>Odebrecht Engenharia &amp; Construção</strong>.
+        </p>
+        <p>
+            A sede corporativa está em <strong>São Paulo (SP)</strong>, com forte presença operacional em Salvador (origem
+            histórica do grupo Novonor) e frentes de obra em 5 países prioritários: Brasil, Panamá, Peru, República Dominicana
+            e Angola. O portfólio atual combina obras de mobilidade urbana (Metrô SP Linha 19-Celeste e 5-Lilás, Metrô de
+            Salvador), infraestrutura rodoviária (Rodoanel Norte, Ponte de Guaratuba), saneamento (Canal do Sertão Alagoano)
+            e engenharia industrial via Tenenge (RNEST, Complexo Boaventura, Braskem Duque de Caxias).
+        </p>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="label">Abrangência</div>
+                <div class="value">Global — 38 países, foco em Brasil, América do Sul e África</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Categoria</div>
+                <div class="value">Privada — Grupo Novonor (ex-Odebrecht)</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Perspectiva de Faturamento</div>
+                <div class="value">Crescimento — US$ 2,8 bi em 2025 + R$ 2,2 bi Tenenge em 2026</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Ciclo Atual</div>
+                <div class="value">Expansão pós-reestruturação (volta da marca Odebrecht em 2025)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Resumo Executivo -->
+    <div class="section">
+        <h3>Resumo Executivo</h3>
+        <div class="insight-box">
+            <h4>Contexto estratégico e timing</h4>
+            <p>
+                A OEC vive um momento único: saiu de um ciclo de reestruturação, retomou o nome <em>Odebrecht</em> em
+                maio/2025, expandiu a carteira em US$ 1 bilhão nos últimos 12 meses e projeta 7 mil novas contratações
+                somente no braço industrial (Tenenge) até 2026. O CIO Ygor Cezar lidera uma área de TI com cerca de 100
+                pessoas atendendo operações em 10+ países, com agenda clara de <strong>LGPD, segurança da informação,
+                inovação com startups, Machine Learning/Analytics e redução de custos operacionais</strong>. É o timing
+                ideal para posicionar Foursys como parceiro de aceleração em IA aplicada, modernização de sistemas
+                fiscais/ERP (pós-migração Avalara) e cibersegurança, combinando o pragmatismo de quem reduz custo com a
+                sofisticação de quem já consome IA Generativa (Smart OEC, O.L.I.V.I.A) e BIM.
+            </p>
+        </div>
+    </div>
+
+    <!-- 3. Desafios Estratégicos e Prioridades -->
+    <div class="section">
+        <h3>Desafios Estratégicos e Prioridades de Investimento</h3>
+
+        <h4>Desafios em curso</h4>
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="timeline-dot"></span>
+                <strong>Governança, LGPD e Cibersegurança:</strong> operação multinacional (10+ países) com dados
+                sensíveis de obras públicas e contratos bilionários. Agenda ativa de adequação LGPD e maturidade em
+                segurança da informação liderada pelo CIO.
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-dot"></span>
+                <strong>Escala do pipeline:</strong> 131 projetos em execução simultânea (US$ 17,2 bi) exigem
+                padronização de processos, integração de dados (fiscal, suprimentos, engenharia) e plataforma única
+                para propostas e contratos.
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-dot"></span>
+                <strong>Modernização pós-ERP:</strong> migração recente do fiscal para Avalara evidencia fadiga com
+                integrações frágeis e atualizações manuais em sistemas legados; há apetite por arquiteturas mais
+                modernas (API-first, Oracle Cloud em curso).
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-dot"></span>
+                <strong>Inovação em obras:</strong> BIM em todos os projetos, chatbot O.L.I.V.I.A, plataforma Smart OEC
+                (IA para análise de contratos), Suíte OEC de Sustentabilidade (SST) — um ecossistema de produtos
+                internos que precisa de squads especializados para evoluir e sustentar.
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-dot"></span>
+                <strong>Cultura e capacitação:</strong> barreiras culturais explícitas para a adoção digital em obras
+                (frente de trabalho tradicional), demandando soluções de UX simples, mobile e offline-first.
+            </div>
+        </div>
+
+        <h4>Prioridades de investimento declaradas</h4>
+        <div class="tag-row">
+            <span class="tag tag-priority">LGPD / Privacidade</span>
+            <span class="tag tag-priority">Cibersegurança</span>
+            <span class="tag tag-priority">IA Generativa aplicada</span>
+            <span class="tag tag-priority">Machine Learning / Analytics</span>
+            <span class="tag tag-priority">Inovação aberta (startups)</span>
+            <span class="tag tag-priority">Redução de custos de TI</span>
+            <span class="tag tag-priority">BIM e digitalização de obras</span>
+        </div>
+    </div>
+
+    <!-- 4. Mapa de Investimentos -->
+    <div class="section">
+        <h3>Mapa de Investimentos nos Próximos 12 Meses</h3>
+        <p><strong>Continuidade</strong> (temas já em execução com orçamento recorrente):</p>
+        <div class="tag-row">
+            <span class="tag tag-active">Suíte OEC de Sustentabilidade (SST)</span>
+            <span class="tag tag-active">Smart OEC (IA em contratos)</span>
+            <span class="tag tag-active">Chatbot O.L.I.V.I.A (RH)</span>
+            <span class="tag tag-active">BIM corporativo</span>
+            <span class="tag tag-active">Oracle Cloud / ERP</span>
+            <span class="tag tag-active">Avalara (fiscal)</span>
+            <span class="tag tag-active">InovaBra (hub Bradesco)</span>
+        </div>
+        <p style="margin-top:14px;"><strong>Investimentos iniciais/expansão</strong> (janelas de oportunidade):</p>
+        <div class="tag-row">
+            <span class="tag tag-active">IA Generativa em engenharia e jurídico</span>
+            <span class="tag tag-active">Analytics de obras e produtividade</span>
+            <span class="tag tag-active">Cibersegurança (SOC/DLP/ISO 27001)</span>
+            <span class="tag tag-active">Squads de desenvolvimento para produtos internos</span>
+            <span class="tag tag-active">Integração via APIs/iPaaS</span>
+            <span class="tag tag-active">Mobile/offline-first para campo</span>
+        </div>
+    </div>
+
+    <!-- 5. Oportunidades sem fornecedor definido -->
+    <div class="section section-opportunity">
+        <h3>Oportunidades sem Fornecedor Definido</h3>
+        <p>Sinais públicos de projetos/áreas em construção de estratégia sem vendor declarado:</p>
+        <div class="tag-row">
+            <span class="tag tag-opportunity">Squads de IA Generativa para evoluir Smart OEC</span>
+            <span class="tag tag-opportunity">Expansão da O.L.I.V.I.A para novas áreas (suprimentos, engenharia)</span>
+            <span class="tag tag-opportunity">Modernização de sistemas legados pós-Avalara</span>
+            <span class="tag tag-opportunity">Plataforma de analytics de obras (produtividade e safety)</span>
+            <span class="tag tag-opportunity">AMS/sustentação dos produtos digitais proprietários (Suíte OEC)</span>
+            <span class="tag tag-opportunity">Aceleração do programa LGPD em subsidiárias internacionais</span>
+            <span class="tag tag-opportunity">Integração iPaaS entre Oracle Cloud, Avalara e sistemas de obra</span>
+        </div>
+    </div>
+
+    <!-- 6. Ofertas Foursys Recomendadas -->
+    <div class="section section-foursys">
+        <h3>Ofertas Foursys Recomendadas</h3>
+
+        <div class="oferta-card">
+            <div class="oferta-head">
+                <h4>AI Squad</h4>
+                <span class="score-badge">Score 95</span>
+            </div>
+            <p>Squads de IA com produto proprietário (aceleração de desenvolvimento, geração de código e automação de
+            testes), IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+            <ul>
+                <li>OEC já consome IA em produção (Smart OEC, O.L.I.V.I.A) — há demanda comprovada por evolução contínua.</li>
+                <li>CIO Ygor Cezar tem Machine Learning e Analytics entre suas prioridades declaradas.</li>
+                <li>Casos de uso claros: análise de contratos (jurídico/propostas), assistentes conversacionais (RH,
+                engenharia), previsibilidade em cronogramas e custos de obra.</li>
+                <li>Perfil de scale-up pós-reestruturação exige ganhos de produtividade — AI Squad entrega isso com ROI
+                mensurável.</li>
+            </ul>
+        </div>
+
+        <div class="oferta-card">
+            <div class="oferta-head">
+                <h4>Cibersegurança</h4>
+                <span class="score-badge">Score 90</span>
+            </div>
+            <p>Segurança da informação, privacidade (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de
+            negócios e disaster recovery. ISO 27001 e ISO 27701 certificadas.</p>
+            <ul>
+                <li>LGPD e segurança estão explicitamente na pauta do CIO, operando em 10+ países com regulações
+                distintas.</li>
+                <li>Histórico de compliance (ISO 37001) mostra empresa que valoriza certificações — fit cultural com as
+                ISOs da Foursys.</li>
+                <li>Projetos com governo e concessões exigem maturidade alta em segurança (LGPD, proteção de dados
+                contratuais, segregação de acessos).</li>
+                <li>Oportunidade de entrada por assessment + roadmap LGPD e evolução para SOC/DLP recorrente.</li>
+            </ul>
+        </div>
+
+        <div class="oferta-card">
+            <div class="oferta-head">
+                <h4>Modernização de Legado</h4>
+                <span class="score-badge">Score 85</span>
+            </div>
+            <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências,
+            construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+            <ul>
+                <li>Migração recente para Avalara revela dor com integrações frágeis e atualizações manuais — cenário
+                clássico de iPaaS (Digibee).</li>
+                <li>Portfólio de produtos proprietários (Suíte OEC, Smart OEC, O.L.I.V.I.A) precisa de AMS especializado
+                para liberar o time interno para inovação.</li>
+                <li>Coexistência Oracle Cloud + Avalara + sistemas de obra + ERPs regionais é terreno fértil para
+                integração via APIs.</li>
+            </ul>
+        </div>
+
+        <div class="oferta-card">
+            <div class="oferta-head">
+                <h4>Engenharia Digital</h4>
+                <span class="score-badge">Score 78</span>
+            </div>
+            <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade.
+            Modernização de arquiteturas.</p>
+            <ul>
+                <li>Produtos internos (Suíte OEC, Smart OEC) demandam arquitetura cloud-native robusta para atender
+                operação em 38 países.</li>
+                <li>Oracle Cloud em curso abre espaço para DevOps/SRE especializado em ambientes híbridos.</li>
+                <li>Requisitos de offline-first e baixa conectividade em obras pedem engenharia mobile/edge diferenciada.</li>
+            </ul>
+        </div>
+
+        <div class="oferta-card">
+            <div class="oferta-head">
+                <h4>FourBlox</h4>
+                <span class="score-badge">Score 65</span>
+            </div>
+            <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market
+            e custos de projetos de software.</p>
+            <ul>
+                <li>Redução de custos de TI é prioridade declarada do CIO — FourBlox entrega narrativa direta de TCO.</li>
+                <li>OEC possui uma família de produtos internos (Suíte OEC, Smart OEC, dashboards) que se beneficia de
+                padronização de componentes.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 7. Estratégia de Abordagem -->
+    <div class="section">
+        <h3>Estratégia de Abordagem</h3>
+
+        <div class="approach-card approach-green">
+            <h4>Gancho de Entrada</h4>
+            <p>
+                Iniciar a conversa pelo tema <strong>"IA aplicada à construção pesada — como escalar o que a OEC já começou"</strong>.
+                Reconhecer Smart OEC e O.L.I.V.I.A como cases de referência no setor, e apresentar a Foursys como parceira
+                capaz de <em>evoluir</em> esses produtos com squads de IA dedicados, liberando a equipe interna para novas
+                frentes. Mencionar os 41.000+ projetos entregues, a parceria Digibee para integração e as ISO 27001/27701
+                como credenciais de governança alinhadas ao compliance rigoroso que a OEC construiu pós-ISO 37001.
+            </p>
+        </div>
+
+        <div class="approach-card approach-red">
+            <h4>Oportunidade Quente</h4>
+            <ul>
+                <li><strong>Evolução dos produtos internos de IA</strong> (Smart OEC, O.L.I.V.I.A) — há apetite público
+                por expansão sem vendor de squads declarado.</li>
+                <li><strong>Adequação LGPD internacional</strong> — operação em 10+ países em ciclo de amadurecimento
+                regulatório.</li>
+                <li><strong>Janela orçamentária 2026</strong> — Tenenge projeta R$ 2,2 bi e 7 mil contratações; pico de
+                demanda por tecnologia de suporte a crescimento.</li>
+                <li><strong>Integração iPaaS pós-Avalara</strong> — dor explicitamente relatada pelo CIO.</li>
+            </ul>
+        </div>
+
+        <div class="approach-card approach-purple">
+            <h4>Diferencial Competitivo Foursys</h4>
+            <ul>
+                <li><strong>AI Squad com produto proprietário</strong> — diferencial concreto contra consultorias tradicionais
+                que entregam apenas mão de obra.</li>
+                <li><strong>ISO 27001 + 27701 + 24 anos</strong> — alinhamento natural com a cultura de compliance
+                reforçada da OEC.</li>
+                <li><strong>Parceria Digibee</strong> — resposta direta para a dor de integrações pós-Avalara/Oracle Cloud.</li>
+                <li><strong>Modelo flexível</strong> (Squads, AMS, co-gerenciado) — casa com o perfil de uma TI enxuta de
+                100 pessoas que precisa escalar sem inflar headcount.</li>
+                <li><strong>Setores Financeiro, Indústria e Logística</strong> no track record — credibilidade para
+                conversar com engenharia industrial e infraestrutura.</li>
+            </ul>
+        </div>
+
+        <div class="insight-box">
+            <h4>Insights de Negócio para a Conversa</h4>
+            <ul>
+                <li>O setor de construção pesada viveu um vale de 89% em faturamento combinado das 11 maiores (2015-2019) e
+                está em ciclo de retomada via concessões e PPPs — TI passa a ser alavanca competitiva, não apenas back-office.</li>
+                <li>BIM deixou de ser tema de "congresso" e virou exigência contratual em grandes obras públicas —
+                observabilidade e integração de dados BIM → ERP são nichos de ouro.</li>
+                <li>A volta da marca "Odebrecht" em 2025 é também um movimento de reposicionamento de reputação — projetos
+                de experiência digital com o cliente final (cidadão, poder público) ganham relevância.</li>
+                <li>A agenda ESG e SST é central para OEC; soluções de IA/Analytics aplicadas à segurança do trabalhador
+                têm patrocínio executivo natural.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 8. Benchmark de Concorrentes + Gap -->
+    <div class="section">
+        <h3>Benchmark de Concorrentes &amp; Gap Analysis</h3>
+
+        <div class="competitor-card">
+            <h4>Andrade Gutierrez</h4>
+            <p>Concorrente direto histórico em obras de infraestrutura e concessões. Também passou por reestruturação
+            pós-Lava Jato; investe em digitalização de processos e engenharia industrial. Menos visibilidade pública em
+            produtos digitais proprietários do que a OEC.</p>
+        </div>
+        <div class="competitor-card">
+            <h4>Queiroz Galvão</h4>
+            <p>Forte atuação em óleo &amp; gás, saneamento e rodovias. Tem investido em modernização e digitalização de
+            obras, mas não comunica publicamente uma plataforma de IA comparável ao Smart OEC.</p>
+        </div>
+        <div class="competitor-card">
+            <h4>Mover (ex-Camargo Corrêa)</h4>
+            <p>Holding diversificada (engenharia, cimento, calçados, energia). Competidor em grandes obras; adota
+            plataformas digitais corporativas, especialmente na vertical cimenteira (InterCement).</p>
+        </div>
+        <div class="competitor-card">
+            <h4>Acciona / Mota-Engil / Vinci (players globais)</h4>
+            <p>Concorrentes em licitações internacionais (Peru, Panamá, Angola). Trazem padrões europeus de BIM,
+            digital twins de obra e gestão integrada multi-projetos — referência para a OEC em termos de maturidade
+            digital global.</p>
+        </div>
+
+        <div class="insight-box">
+            <h4>Gap Analysis — Onde a OEC pode se diferenciar</h4>
+            <ul>
+                <li><strong>Digital Twin e integração BIM→ERP→campo</strong>: OEC lidera entre os brasileiros em BIM, mas
+                players europeus estão à frente em digital twin contínuo. Oportunidade clara para squads de engenharia
+                digital.</li>
+                <li><strong>IA preditiva de produtividade e safety</strong>: OEC tem dados ricos da Suíte de
+                Sustentabilidade — mas o salto para modelos preditivos de acidente/atraso é um espaço ainda aberto no
+                setor.</li>
+                <li><strong>Experiência do cliente público</strong>: com a volta da marca Odebrecht, portais digitais para
+                prestação de contas e transparência com poder concedente são diferencial de reputação.</li>
+                <li><strong>AMS de produtos internos</strong>: enquanto concorrentes ainda dependem de pacotes verticais,
+                a OEC já possui produtos proprietários — sustentá-los com qualidade é vantagem competitiva estrutural.</li>
+            </ul>
+        </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- 9. Perfil Pessoal e Rapport -->
+    <div class="section section-rapport">
+        <h3>Perfil Pessoal &amp; Rapport — Ygor Cezar</h3>
+        <p>
+            Ygor Cezar tem <strong>mais de 32 anos de experiência em tecnologia</strong> e uma trajetória praticamente
+            integral dentro do Grupo Novonor (ex-Odebrecht), onde começou ainda jovem como <strong>estagiário em
+            implementações de ERP</strong> em Salvador, sua cidade natal. Sua carreira passa por posições de Head de TI
+            em diversas empresas do grupo — <strong>BRK Ambiental (2017-2019), Atvos (2019), OR (2020-2021)</strong> —
+            até chegar à <strong>OEC em março de 2021</strong>, consolidando-se como um dos CIOs mais experientes em
+            operações multi-país do grupo. Hoje lidera um time de cerca de 100 profissionais de TI atendendo operações
+            em 10+ países.
+        </p>
+
+        <div class="info-grid" style="margin-top:18px;">
+            <div class="info-card">
+                <div class="label">Cidade de Origem</div>
+                <div class="value">Salvador (BA)</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Base Atual</div>
+                <div class="value">São Paulo (SP) — sede OEC</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Tempo no Cargo</div>
+                <div class="value">Desde março/2021 (~4 anos)</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Tempo no Grupo</div>
+                <div class="value">Praticamente toda a carreira (desde estágio)</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Trajetória</div>
+                <div class="value">BRK Ambiental → Atvos → OR → OEC</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Certificações</div>
+                <div class="value">ITIL 4 (referenciada publicamente como marco de reposicionamento)</div>
+            </div>
+            <div class="info-card">
+                <div class="label">LinkedIn</div>
+                <div class="value">linkedin.com/in/ygorcezar</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Motivação Pessoal</div>
+                <div class="value">"Trazer soluções por meio da tecnologia é o que mais me motiva"</div>
+            </div>
+        </div>
+
+        <div class="insight-box" style="margin-top:22px;">
+            <h4>5 Dicas de Conversa para Rapport</h4>
+            <ul>
+                <li><strong>Origem baiana e São Paulo:</strong> reconhecer a jornada Salvador → SP cria pontes imediatas;
+                Ygor cresceu no grupo desde estagiário em Salvador.</li>
+                <li><strong>"Tecnologia que resolve problemas de pessoas":</strong> ele tem uma declaração pública clara
+                sobre essa motivação — ancorar a conversa em casos de Foursys com impacto humano direto (safety, RH,
+                trabalhador de obra) ressoa.</li>
+                <li><strong>ITIL 4 e governança:</strong> ele valoriza explicitamente certificações e reposicionamento
+                profissional via aprendizado — conversar sobre a trilha de maturidade de processos/ITSM da Foursys gera
+                identificação.</li>
+                <li><strong>Experiência multi-empresa dentro do mesmo grupo:</strong> ele viveu BRK, Atvos, OR e agora
+                OEC — tem visão comparativa rara; perguntas do tipo "como você vê a evolução de TI entre essas empresas
+                do grupo?" abrem conversas estratégicas.</li>
+                <li><strong>Reestruturação e retomada:</strong> ele chegou à OEC em 2021, em pleno ciclo de
+                reconstrução — reconhecer o tamanho do desafio (10+ países, reestruturação, volta da marca Odebrecht em
+                2025) demonstra preparo e respeito.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 10. Perfil do CIO e Posição da Empresa -->
+    <div class="section">
+        <h3>Perfil do CIO e Posição da Empresa</h3>
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="label">Reporte</div>
+                <div class="value">Board / Presidência (Mauricio Cruz Lopes) — TI como área estratégica</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Hierarquia de TI</div>
+                <div class="value">Head of IT / CIO (Ygor Cezar) + Diretor de Finanças e TI (Lucas Cive Barbosa, USP/MIT)</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Abrangência</div>
+                <div class="value">10+ países do Grupo Novonor</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Tamanho da Equipe</div>
+                <div class="value">~100 pessoas em TI</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Modelo</div>
+                <div class="value">TI centralizada com frentes de inovação descentralizadas (OEC IN, InovaBra)</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Papel da TI</div>
+                <div class="value">Estratégica — foco em LGPD, IA, ML/Analytics, segurança e redução de custos</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Líder de Inovação</div>
+                <div class="value">Daniel Lepikson (programa OEC IN, desde 2021)</div>
+            </div>
+            <div class="info-card">
+                <div class="label">CEO / Presidente</div>
+                <div class="value">Mauricio Cruz Lopes (desde fev/2022) — 25 anos no grupo</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 11. Distribuição de investimento (estimativa) -->
+    <div class="section">
+        <h3>Distribuição Estimada de Investimento em TI</h3>
+        <p style="font-size:13px; color:var(--text-light); margin-bottom:14px;">
+            <em>Estimativa qualitativa baseada nas prioridades públicas do CIO e iniciativas comunicadas.</em>
+        </p>
+
+        <div class="bar-row">
+            <div class="bar-label"><span>IA, Analytics e ML aplicados</span><span>~25%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:25%"></div></div>
+        </div>
+        <div class="bar-row">
+            <div class="bar-label"><span>Segurança, LGPD e Governança</span><span>~22%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:22%"></div></div>
+        </div>
+        <div class="bar-row">
+            <div class="bar-label"><span>ERP, Fiscal e Integrações (Oracle Cloud, Avalara, iPaaS)</span><span>~20%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:20%"></div></div>
+        </div>
+        <div class="bar-row">
+            <div class="bar-label"><span>Produtos digitais proprietários (Suíte OEC, Smart OEC, O.L.I.V.I.A)</span><span>~15%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:15%"></div></div>
+        </div>
+        <div class="bar-row">
+            <div class="bar-label"><span>BIM e digitalização de obras</span><span>~10%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:10%"></div></div>
+        </div>
+        <div class="bar-row">
+            <div class="bar-label"><span>Infraestrutura, colaboração e suporte</span><span>~8%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:8%"></div></div>
+        </div>
+    </div>
+
+    <!-- 12. Preferências de Fornecedor -->
+    <div class="section">
+        <h3>Preferências de Fornecedor (inferidas)</h3>
+
+        <h4>Critérios de alta relevância</h4>
+        <div class="tag-row">
+            <span class="tag tag-active">Compliance e certificações (ISO)</span>
+            <span class="tag tag-active">Track record em grandes grupos</span>
+            <span class="tag tag-active">Redução de TCO</span>
+            <span class="tag tag-active">Capacidade multi-país</span>
+            <span class="tag tag-active">Parceria de longo prazo (AMS)</span>
+            <span class="tag tag-active">IA proprietária / diferenciação</span>
+        </div>
+
+        <h4>Perfil de fornecedor buscado</h4>
+        <p>
+            Parceiros <strong>sólidos, com governança madura, certificações reconhecidas e capacidade de atuar em
+            modelos de squad/AMS</strong>, que complementem a TI interna (de 100 pessoas) sem inflar estrutura. Há
+            preferência declarada por <strong>inovação aberta com startups e hubs</strong> (InovaBra) e por
+            <strong>parceiros de nicho com produto</strong> (Avalara para fiscal, Microsoft para cooperação
+            científica) — cenário perfeito para posicionamento da Foursys com AI Squad e FourBlox.
+        </p>
+
+        <h4>Modelo de contratação preferido</h4>
+        <p>
+            Combinação de <strong>squads dedicados</strong> para frentes de inovação (IA, analytics, produtos
+            proprietários), <strong>projetos turn-key</strong> para modernização/integrações pontuais, e
+            <strong>AMS</strong> para sustentação recorrente dos produtos digitais já em produção.
+        </p>
+    </div>
+
+</div>
+
+<div class="footer">
+    <strong>four<span style="color: var(--accent)">sys</span> | Pre-Sales Intelligence Report</strong> — OEC (Odebrecht Engenharia &amp; Construção) / São Paulo<br>
+    Gerado automaticamente — Confidencial | Data: Abril 2026
+</div>
+
+<button class="print-btn" onclick="window.print()">Imprimir / Salvar PDF</button>
+
+</body>
+</html>

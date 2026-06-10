@@ -1,7 +1,85 @@
 import type { CaseStudy, Capability } from '../types'
 import type { Language } from '../i18n/types'
+import { referenceCasesPt, referenceCasesEn } from './casesReference'
 
 const casesPt: CaseStudy[] = [
+  {
+    id: 'hub-meio-pagamento',
+    title: 'Hub de Meios de Pagamento',
+    client: 'Setor Financeiro',
+    sector: 'Financeiro',
+    type: 'Integração & Pagamentos',
+    challenge: 'Construir uma solução na qual o e-commerce direciona a jornada de pagamento do usuário conforme regras que determinam o provedor de meio de pagamento a ser utilizado.',
+    solution: 'Projeto ágil com fase de Discovery para validar as premissas levantadas no momento da proposta, desenvolvendo um hub que orquestra múltiplos meios de pagamento em uma plataforma de e-commerce, com parametrização para inclusão de novos operadores.',
+    stack: ['Arquitetura de Integração', 'APIs de Pagamento', 'Motor de Regras', 'Discovery Ágil', 'E-commerce'],
+    results: [
+      'Integração com dois operadores de meio de pagamento',
+      'Parametrização criada para inclusão de novos operadores, reduzindo manutenções futuras',
+      'Jornada de pagamento direcionada por regras de negócio configuráveis',
+      'Entrega em 8 meses de projeto ágil',
+    ],
+    metric: { value: '2', label: 'Operadores de pagamento integrados' },
+    color: 'from-purple-600 to-purple-800',
+    overview: 'Hub de meios de pagamento para e-commerce que direciona a jornada do usuário conforme regras de negócio, integrando dois operadores e criando parametrização para inclusão de novos provedores com mínima manutenção. Projeto ágil entregue em 8 meses, com fase de Discovery para validar as premissas da proposta.',
+    detail: {
+      context: 'Desenvolvimento de uma solução para uso de múltiplos meios de pagamento em uma plataforma de e-commerce, partindo de um cenário com dois players (operadores) iniciais.',
+      delivery: 'Projeto ágil iniciado com uma fase de Discovery para validar as premissas do momento da proposta, seguido pela construção de um hub que orquestra a jornada de pagamento conforme regras que determinam o provedor a ser utilizado.',
+      technicalDetails: 'Camada de orquestração de pagamentos integrada a dois operadores de meio de pagamento, com motor de regras configurável para direcionamento da jornada e parametrização para inclusão de novos operadores sem reescrita de código.',
+      challengesOvercome: 'Validação das premissas iniciais via Discovery, definição das regras de direcionamento por provedor e desenho de um modelo extensível que reduz o esforço de manutenção a cada novo operador integrado.',
+      successFactors: 'Abordagem ágil com Discovery, arquitetura parametrizável e foco na extensibilidade para incorporar novos provedores de pagamento de forma simples.',
+      businessImpact: [
+        'Direcionamento inteligente da jornada de pagamento por regras de negócio',
+        'Redução de manutenções futuras graças à parametrização de novos operadores',
+        'Base preparada para escalar a oferta de meios de pagamento do e-commerce',
+      ],
+      dimensions: { months: '8' },
+      keyMetrics: [
+        { value: '2', label: 'operadores integrados' },
+        { value: '8', label: 'meses de projeto' },
+      ],
+    },
+  },
+  {
+    id: 'mufg-cyber-auditoria-oim',
+    title: '100+ Apontamentos de Auditoria Resolvidos',
+    client: 'MUFG',
+    sector: 'Financeiro',
+    type: 'Cibersegurança & Zero Trust',
+    challenge: 'O banco enfrentava acúmulo de mais de 100 pontos de auditoria em TI e Segurança da Informação, representando riscos regulatórios e operacionais. Era necessário mitigar esses riscos, fortalecer a governança e prevenir reincidências, com revisão e otimização dos planos de ação em ambiente altamente regulado do setor financeiro.',
+    solution: 'Formação de uma squad multidisciplinar dedicada para revisar, executar, planejar e otimizar os planos de ação de encerramento dos pontos de auditoria, atuando de forma transversal com Infraestrutura, Aplicações, Segurança da Informação e Dados, e aplicando frameworks de governança como COBIT 2019, ISO 27001 e NIST.',
+    stack: ['COBIT 2019', 'ISO/IEC 27001', 'NIST SP 800-30/37', 'ITIL 4', '.NET Core', 'Angular', 'Docker', 'Kubernetes', 'Microsoft', 'Linux'],
+    results: [
+      '60% de redução no backlog de pontos de auditoria de TI e SI',
+      '40% de aumento na taxa de fechamento mensal de apontamentos',
+      '30% de redução de reincidência de não conformidades críticas',
+      '100+ apontamentos de auditoria resolvidos nos últimos 2 anos',
+    ],
+    metric: { value: '100+', label: 'Apontamentos de auditoria resolvidos' },
+    color: 'from-red-600 to-red-800',
+    overview: 'Squad multidisciplinar de governança e mitigação de riscos resolveu 100+ apontamentos de auditoria de TI e Segurança da Informação, reduzindo o backlog em 60% e a reincidência de não conformidades críticas em 30%, com base em COBIT 2019, ISO 27001 e NIST.',
+    detail: {
+      context: 'O cliente, banco do setor financeiro de grande porte, enfrentava acúmulo de pontos de auditoria em TI e Segurança da Informação, representando riscos regulatórios e operacionais. Era necessária a mitigação desses riscos e o fortalecimento da governança, bem como a prevenção de reincidências, demandando revisão e otimização dos planos de ação existentes em ambiente regulado.',
+      delivery: 'Constituição de squad multidisciplinar para revisar, executar e otimizar planos de ação para encerramento de pontos de auditoria de TI e SI, e desenvolver medidas preventivas conforme frameworks COBIT, ISO 27001 e NIST, com atuação prevista até 31/12/2026.',
+      technicalDetails: 'Aplicação do COBIT 2019, ISO/IEC 27001 e NIST SP 800-30/37, gestão integrada de riscos, frameworks ITIL 4, uso de KPIs e dashboards para monitoramento de segurança e conformidade, e modelo de governança com três linhas de defesa. Plataformas Microsoft e Linux, .NET Core, Angular, Docker e Kubernetes.',
+      challengesOvercome: 'Superação de desafios formais como alinhamento a frameworks regulatórios, coordenação de múltiplas áreas internas, integração das três linhas de defesa, gestão de riscos dinâmica e adaptação às revisões de escopo e prazos em ambiente altamente regulado.',
+      successFactors: 'Governança robusta baseada no COBIT 2019, alinhamento claro de escopo e responsabilidades, gestão integrada de riscos, modelo colaborativo com as três linhas de defesa, e uso de KPIs para monitoramento contínuo das entregas e mitigação de riscos.',
+      businessImpact: [
+        'Redução de riscos regulatórios com menor reincidência de apontamentos críticos',
+        'Fortalecimento da governança de TI com ciclo formal de diagnóstico, execução e prevenção',
+        'Agilidade no encerramento de auditorias e redução do backlog sem comprometer projetos estratégicos',
+        'Gestão de riscos contínua com matriz de priorização por criticidade',
+        'Escalabilidade do modelo de compliance com padronização de evidências, indicadores e relatórios executivos',
+      ],
+      dimensions: { months: '18', hours: '1344' },
+      keyMetrics: [
+        { value: '60%', label: 'redução do backlog de auditoria' },
+        { value: '40%', label: 'aumento no fechamento mensal' },
+        { value: '30%', label: 'redução de reincidência crítica' },
+      ],
+      profiles: ['Gerentes de Projetos e Serviços', 'Especialistas em Segurança da Informação', 'Analistas de Infraestrutura', 'Analistas de Sistemas', 'Testadores de Sistemas'],
+      responsibles: ['Edson Dutra — Gerente de Serviços MUFG', 'José Cícero dos Santos — Gerente Líder Técnico', 'Marcelo Demichele — Gerente Líder Técnico'],
+    },
+  },
   {
     id: 'saude-modernizacao',
     title: '100 Projetos Desbloqueados',
@@ -61,13 +139,13 @@ const casesPt: CaseStudy[] = [
     results: [
       '70% de redução no lead time de entrega',
       'Backlog de 8 meses reduzido para 3 meses em 12 semanas',
-      'Turnover de 3,6% — time estável durante todo o projeto',
+      'Turnover de 4% — time estável durante todo o projeto',
       'Throughput 3x superior ao modelo anterior',
     ],
     metric: { value: '70%', label: 'Redução no lead time' },
     color: 'from-green-600 to-green-800',
     image: '/cases/case-ai-augmented-squad.jpg',
-    overview: '70% de redução no lead time com AI Squad: backlog de 8 meses reduzido para 3 meses em 12 semanas com turnover de apenas 3,6%. Agentes de IA foram aplicados para code review e automação de testes.',
+    overview: '70% de redução no lead time com AI Squad: backlog de 8 meses reduzido para 3 meses em 12 semanas com turnover de apenas 4%. Agentes de IA foram aplicados para code review e automação de testes.',
     testimonial: {
       quote: 'Em 12 semanas saímos de um backlog travado para um ritmo de entrega que nunca tivemos. O modelo AI Squad mudou nossa realidade.',
       author: 'Fernanda Oliveira',
@@ -82,14 +160,14 @@ const casesPt: CaseStudy[] = [
       businessImpact: [
         'Backlog crítico de 8 meses reduzido para 3 meses em apenas 12 semanas',
         'Throughput de entrega 3x superior ao modelo tradicional anterior',
-        'Turnover de apenas 3,6% durante todo o projeto, garantindo estabilidade',
+        'Turnover de apenas 4% durante todo o projeto, garantindo estabilidade',
         'Lançamento de produtos de crédito antes bloqueados, gerando receita incremental',
         'Redução de custo por feature entregue em 40% comparado ao modelo anterior',
       ],
       dimensions: { months: '3', features: '48' },
       keyMetrics: [
         { value: '70%', label: 'redução no lead time' },
-        { value: '3,6%', label: 'turnover da squad' },
+        { value: '4%', label: 'turnover da squad' },
         { value: '3x', label: 'throughput vs anterior' },
       ],
       profiles: ['Tech Lead', 'Desenvolvedores React', 'Desenvolvedores Node.js', 'Engenheiros de IA', 'QA Automation', 'Scrum Master'],
@@ -2093,6 +2171,83 @@ const casesPt: CaseStudy[] = [
 
 const casesEn: CaseStudy[] = [
   {
+    id: 'hub-meio-pagamento',
+    title: 'Payment Methods Hub',
+    client: 'Financial Sector',
+    sector: 'Financial',
+    type: 'Integration & Payments',
+    challenge: 'Build a solution in which the e-commerce platform routes the user payment journey according to rules that determine the payment provider to be used.',
+    solution: 'Agile project with a Discovery phase to validate the assumptions raised at proposal time, building a hub that orchestrates multiple payment methods in an e-commerce platform, with parameterization to onboard new operators.',
+    stack: ['Integration Architecture', 'Payment APIs', 'Rules Engine', 'Agile Discovery', 'E-commerce'],
+    results: [
+      'Integration with two payment method operators',
+      'Parameterization created to onboard new operators, reducing future maintenance',
+      'Payment journey routed by configurable business rules',
+      'Delivered in 8 months of agile project',
+    ],
+    metric: { value: '2', label: 'Payment operators integrated' },
+    color: 'from-purple-600 to-purple-800',
+    overview: 'Payment methods hub for e-commerce that routes the user journey according to business rules, integrating two operators and creating parameterization to onboard new providers with minimal maintenance. Agile project delivered in 8 months, with a Discovery phase to validate the proposal assumptions.',
+    detail: {
+      context: 'Development of a solution for the use of multiple payment methods in an e-commerce platform, starting from a scenario with two initial players (operators).',
+      delivery: 'Agile project started with a Discovery phase to validate the assumptions from proposal time, followed by the construction of a hub that orchestrates the payment journey according to rules that determine the provider to be used.',
+      technicalDetails: 'Payment orchestration layer integrated with two payment method operators, with a configurable rules engine for journey routing and parameterization to onboard new operators without code rewrites.',
+      challengesOvercome: 'Validation of the initial assumptions via Discovery, definition of provider routing rules and the design of an extensible model that reduces the maintenance effort for each newly integrated operator.',
+      successFactors: 'Agile approach with Discovery, parameterizable architecture and a focus on extensibility to incorporate new payment providers simply.',
+      businessImpact: [
+        'Intelligent routing of the payment journey through business rules',
+        'Reduced future maintenance thanks to parameterization of new operators',
+        'A foundation ready to scale the e-commerce payment methods offering',
+      ],
+      dimensions: { months: '8' },
+      keyMetrics: [
+        { value: '2', label: 'operators integrated' },
+        { value: '8', label: 'months of project' },
+      ],
+    },
+  },
+  {
+    id: 'mufg-cyber-auditoria-oim',
+    title: '100+ Audit Findings Resolved',
+    client: 'MUFG',
+    sector: 'Financial',
+    type: 'Cybersecurity & Zero Trust',
+    challenge: 'The bank faced a backlog of 100+ audit findings in IT and Information Security, representing regulatory and operational risks. It needed to mitigate these risks, strengthen governance and prevent recurrence, reviewing and optimizing action plans within a highly regulated financial environment.',
+    solution: 'A dedicated multidisciplinary squad was formed to review, execute, plan and optimize the action plans to close audit findings, working cross-functionally with Infrastructure, Applications, Information Security and Data, applying governance frameworks such as COBIT 2019, ISO 27001 and NIST.',
+    stack: ['COBIT 2019', 'ISO/IEC 27001', 'NIST SP 800-30/37', 'ITIL 4', '.NET Core', 'Angular', 'Docker', 'Kubernetes', 'Microsoft', 'Linux'],
+    results: [
+      '60% reduction in the IT & InfoSec audit findings backlog',
+      '40% increase in the monthly findings closure rate',
+      '30% reduction in recurrence of critical non-conformities',
+      '100+ audit findings resolved over the last 2 years',
+    ],
+    metric: { value: '100+', label: 'Audit findings resolved' },
+    color: 'from-red-600 to-red-800',
+    overview: 'A multidisciplinary governance and risk-mitigation squad resolved 100+ IT and Information Security audit findings, cutting the backlog by 60% and the recurrence of critical non-conformities by 30%, based on COBIT 2019, ISO 27001 and NIST.',
+    detail: {
+      context: 'The client, a large financial-sector bank, faced an accumulation of IT and Information Security audit findings, representing regulatory and operational risks. Mitigating these risks and strengthening governance — as well as preventing recurrence — required reviewing and optimizing existing action plans within a regulated environment.',
+      delivery: 'Constitution of a multidisciplinary squad to review, execute and optimize action plans to close IT and InfoSec audit findings, and to develop preventive measures per COBIT, ISO 27001 and NIST frameworks, with engagement planned through 12/31/2026.',
+      technicalDetails: 'Application of COBIT 2019, ISO/IEC 27001 and NIST SP 800-30/37, integrated risk management, ITIL 4 frameworks, use of KPIs and dashboards for security and compliance monitoring, and a three-lines-of-defense governance model. Microsoft and Linux platforms, .NET Core, Angular, Docker and Kubernetes.',
+      challengesOvercome: 'Overcoming formal challenges such as alignment to regulatory frameworks, coordination of multiple internal areas, integration of the three lines of defense, dynamic risk management and adaptation to scope and deadline revisions in a highly regulated environment.',
+      successFactors: 'Robust governance based on COBIT 2019, clear alignment of scope and responsibilities, integrated risk management, a collaborative model with the three lines of defense, and use of KPIs for continuous monitoring of deliveries and risk mitigation.',
+      businessImpact: [
+        'Reduced regulatory risk with lower recurrence of critical findings',
+        'Strengthened IT governance with a formal diagnosis, execution and prevention cycle',
+        'Faster audit closure and backlog reduction without compromising strategic projects',
+        'Continuous risk management with a criticality-based prioritization matrix',
+        'Scalable compliance model with standardized evidence, indicators and executive reports',
+      ],
+      dimensions: { months: '18', hours: '1344' },
+      keyMetrics: [
+        { value: '60%', label: 'audit backlog reduction' },
+        { value: '40%', label: 'increase in monthly closure' },
+        { value: '30%', label: 'critical recurrence reduction' },
+      ],
+      profiles: ['Project & Service Managers', 'Information Security Specialists', 'Infrastructure Analysts', 'Systems Analysts', 'Systems Testers'],
+      responsibles: ['Edson Dutra — MUFG Service Manager', 'José Cícero dos Santos — Technical Lead Manager', 'Marcelo Demichele — Technical Lead Manager'],
+    },
+  },
+  {
     id: 'saude-modernizacao',
     title: '100 Projects Unlocked',
     client: 'Health Insurance Provider (National Group)',
@@ -2151,13 +2306,13 @@ const casesEn: CaseStudy[] = [
     results: [
       '70% reduction in delivery lead time',
       '8-month backlog reduced to 3 months in 12 weeks',
-      '3.6% turnover — stable team throughout the project',
+      '4% turnover — stable team throughout the project',
       '3x throughput compared to previous model',
     ],
     metric: { value: '70%', label: 'Lead time reduction' },
     color: 'from-green-600 to-green-800',
     image: '/cases/case-ai-augmented-squad.jpg',
-    overview: '70% lead time reduction with AI Squad: 8-month backlog reduced to 3 months in 12 weeks with only 3.6% turnover. AI agents applied for code review and test automation.',
+    overview: '70% lead time reduction with AI Squad: 8-month backlog reduced to 3 months in 12 weeks with only 4% turnover. AI agents applied for code review and test automation.',
     testimonial: {
       quote: 'In 12 weeks we went from a stalled backlog to a delivery pace we\'d never had. The AI Squad model changed our reality.',
       author: 'Fernanda Oliveira',
@@ -2172,14 +2327,14 @@ const casesEn: CaseStudy[] = [
       businessImpact: [
         'Critical 8-month backlog reduced to 3 months in just 12 weeks',
         '3x delivery throughput compared to previous traditional model',
-        'Only 3.6% turnover throughout the project, ensuring stability',
+        'Only 4% turnover throughout the project, ensuring stability',
         'Launch of previously blocked credit products, generating incremental revenue',
         '40% reduction in cost per feature delivered compared to previous model',
       ],
       dimensions: { months: '3', features: '48' },
       keyMetrics: [
         { value: '70%', label: 'lead time reduction' },
-        { value: '3.6%', label: 'squad turnover' },
+        { value: '4%', label: 'squad turnover' },
         { value: '3x', label: 'throughput vs previous' },
       ],
       profiles: ['Tech Lead', 'React Developers', 'Node.js Developers', 'AI Engineers', 'QA Automation', 'Scrum Master'],
@@ -4410,7 +4565,9 @@ const capabilitiesEn: Capability[] = [
 ]
 
 export function getCases(lang: Language): CaseStudy[] {
-  return lang === 'en' ? casesEn : casesPt
+  return lang === 'en'
+    ? [...casesEn, ...referenceCasesEn]
+    : [...casesPt, ...referenceCasesPt]
 }
 
 export function getCapabilities(lang: Language): Capability[] {

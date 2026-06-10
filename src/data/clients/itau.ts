@@ -154,7 +154,7 @@ export const itauClient: ClientConfig = {
       results: [
         '+300 profissionais especializados no ecossistema Itaú',
         '+2MM de horas de serviço entregues com excelência',
-        'Turnover de 3,6% vs 22% da indústria',
+        'Turnover de 4% vs 22% da indústria',
         'Cobertura de todas as frentes bancárias',
       ],
       metric: { value: '+2MM', label: 'Horas de serviço entregues' },
@@ -353,7 +353,7 @@ const itauClientEn: ClientConfig = {
       results: [
         '300+ professionals specialized in the Itaú ecosystem',
         '2MM+ service hours delivered with excellence',
-        '3.6% turnover vs 22% industry average',
+        '4% turnover vs 22% industry average',
         'Full coverage of all banking domains',
       ],
       metric: { value: '2MM+', label: 'Service hours delivered' },

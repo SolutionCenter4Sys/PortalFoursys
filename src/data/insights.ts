@@ -96,9 +96,9 @@ const insightsPt: Insight[] = [
   // ── Grid ──
   {
     id: 'turnover-squads',
-    title: 'Por que nosso turnover de 3,6% muda a entrega do seu produto digital',
+    title: 'Por que nosso turnover de 4% muda a entrega do seu produto digital',
     excerpt: 'O turnover médio da indústria de TI é de 22%. Nosso squad mantém os mesmos profissionais por anos. Entenda como isso impacta diretamente a velocidade, qualidade e custo do seu backlog.',
-    content: 'A rotatividade de profissionais de TI no Brasil atingiu 22% em 2025, gerando custo de recontratação estimado em R$ 45 mil por posição. Na Foursys, nosso turnover de 3,6% se traduz em squads estáveis que acumulam conhecimento de domínio, reduzem tempo de onboarding e entregam com previsibilidade crescente. Clientes com squads Foursys por mais de 12 meses reportam +40% de velocidade e -30% de defeitos comparado ao início da operação.',
+    content: 'A rotatividade de profissionais de TI no Brasil atingiu 22% em 2025, gerando custo de recontratação estimado em R$ 45 mil por posição. Na Foursys, nosso turnover de 4% se traduz em squads estáveis que acumulam conhecimento de domínio, reduzem tempo de onboarding e entregam com previsibilidade crescente. Clientes com squads Foursys por mais de 12 meses reportam +40% de velocidade e -30% de defeitos comparado ao início da operação.',
     category: 'Squads & Agilidade',
     type: 'Artigo',
     date: 'Jan 2026',
@@ -346,9 +346,9 @@ const insightsEn: Insight[] = [
   // ── Grid ──
   {
     id: 'turnover-squads',
-    title: 'Why our 3.6% turnover rate transforms your digital product delivery',
+    title: 'Why our 4% turnover rate transforms your digital product delivery',
     excerpt: 'The average IT industry turnover is 22%. Our squad keeps the same professionals for years. Understand how this directly impacts the speed, quality, and cost of your backlog.',
-    content: 'IT professional turnover in Brazil reached 22% in 2025, generating an estimated rehiring cost of R$45,000 per position. At Foursys, our 3.6% turnover translates into stable squads that accumulate domain knowledge, reduce onboarding time, and deliver with increasing predictability. Clients with Foursys squads for over 12 months report +40% velocity and -30% defects compared to the start of operations.',
+    content: 'IT professional turnover in Brazil reached 22% in 2025, generating an estimated rehiring cost of R$45,000 per position. At Foursys, our 4% turnover translates into stable squads that accumulate domain knowledge, reduce onboarding time, and deliver with increasing predictability. Clients with Foursys squads for over 12 months report +40% velocity and -30% defects compared to the start of operations.',
     category: 'Squads & Agility',
     type: 'Article',
     date: 'Jan 2026',

@@ -190,6 +190,7 @@ export type AppSection =
   | 'clients-showcase'
   | 'capabilities'
   | 'benchmark'
+  | 'rh-talentos'
   // ESG
   | 'esg'
   // Referência

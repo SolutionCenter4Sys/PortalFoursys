@@ -135,11 +135,18 @@ const navigationItemsPt: NavigationItem[] = [
     category: 'Provas',
     description: 'Líderes de TI estratégicos · Santander Brasil e IT Fórum Trancoso 2026',
   },
+  {
+    id: 'rh-talentos',
+    label: 'RH - Estratégia de Talentos',
+    icon: 'users',
+    category: 'Provas',
+    description: 'Atração, Desenvolvimento, Retenção e Governança para sustentar a excelência nas entregas',
+  },
 
   // ── ESG ────────────────────────────────────────────────────────────────────
   {
     id: 'esg',
-    label: 'FourLives — ESG',
+    label: 'ESG na Foursys',
     icon: 'leaf',
     category: 'ESG',
     description: 'Tecnologia que transforma vidas — impacto social e sustentabilidade',
@@ -303,11 +310,18 @@ const navigationItemsEn: NavigationItem[] = [
     category: 'Proof Points',
     description: 'Strategic IT leaders · Santander Brazil and IT Forum Trancoso 2026',
   },
+  {
+    id: 'rh-talentos',
+    label: 'HR - Talent Strategy',
+    icon: 'users',
+    category: 'Proof Points',
+    description: 'Attraction, Development, Retention and Governance to sustain delivery excellence',
+  },
 
   // ── ESG ────────────────────────────────────────────────────────────────────
   {
     id: 'esg',
-    label: 'FourLives — ESG',
+    label: 'ESG at Foursys',
     icon: 'leaf',
     category: 'ESG',
     description: 'Technology that transforms lives — social impact and sustainability',

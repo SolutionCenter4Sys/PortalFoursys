@@ -62,7 +62,7 @@ const awardsPt: Award[] = [
   {
     id: 'gptw',
     title: 'Great Place to Work',
-    subtitle: '3,6% turnover — referência no setor de tecnologia',
+    subtitle: '4% turnover — referência no setor de tecnologia',
     years: ['2023', '2024', '2025'],
     icon: 'star',
     category: 'cultura',
@@ -115,7 +115,7 @@ const awardsEn: Award[] = [
   {
     id: 'gptw',
     title: 'Great Place to Work',
-    subtitle: '3.6% turnover — benchmark in the technology sector',
+    subtitle: '4% turnover — benchmark in the technology sector',
     years: ['2023', '2024', '2025'],
     icon: 'star',
     category: 'cultura',

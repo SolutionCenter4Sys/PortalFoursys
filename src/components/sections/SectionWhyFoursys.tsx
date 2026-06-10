@@ -16,7 +16,7 @@ function hexToRgba(hex: string, a: number) {
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const DIFFERENTIALS_PT = [
-  { icon: <Users size={20} />, stat: '3,6%', label: 'Turnover', context: 'vs. 22% da média do mercado' },
+  { icon: <Users size={20} />, stat: '4%', label: 'Turnover', context: 'vs. 22% da média do mercado' },
   { icon: <Calendar size={20} />, stat: '26', label: 'Anos de entrega', context: 'Fundada em 2000' },
   { icon: <ShieldCheck size={20} />, stat: '6', label: 'Certificações', context: 'ISO 9001 · 27001 · 27701 · 14001 · SAFe · GPTW' },
   { icon: <Globe size={20} />, stat: '3', label: 'Regiões do Globo', context: 'Brasil · EUA · Europa' },
@@ -25,7 +25,7 @@ const DIFFERENTIALS_PT = [
 ]
 
 const DIFFERENTIALS_EN = [
-  { icon: <Users size={20} />, stat: '3.6%', label: 'Turnover', context: 'vs. 22% market average' },
+  { icon: <Users size={20} />, stat: '4%', label: 'Turnover', context: 'vs. 22% market average' },
   { icon: <Calendar size={20} />, stat: '26', label: 'Years of delivery', context: 'Founded in 2000' },
   { icon: <ShieldCheck size={20} />, stat: '6', label: 'Certifications', context: 'ISO 9001 · 27001 · 27701 · 14001 · SAFe · GPTW' },
   { icon: <Globe size={20} />, stat: '3', label: 'Global Regions', context: 'Brazil · USA · Europe' },
@@ -54,7 +54,7 @@ const COMPARISON_PT: ComparisonRow[] = [
   {
     dimension: 'Turnover de Equipe',
     icon: <Heart size={15} />,
-    foursys: { value: '3,6%', detail: 'GPTW + cultura de retenção', score: 'high' },
+    foursys: { value: '4%', detail: 'GPTW + cultura de retenção', score: 'high' },
     bigFour: { value: '15-22%', detail: 'Rotação alta, perda de conhecimento', score: 'low' },
     boutique: { value: '10-18%', detail: 'Variável, depende da firma', score: 'mid' },
     foursysAdvantage: true,
@@ -113,7 +113,7 @@ const COMPARISON_EN: ComparisonRow[] = [
   {
     dimension: 'Team Turnover',
     icon: <Heart size={15} />,
-    foursys: { value: '3.6%', detail: 'GPTW + retention culture', score: 'high' },
+    foursys: { value: '4%', detail: 'GPTW + retention culture', score: 'high' },
     bigFour: { value: '15-22%', detail: 'High rotation, knowledge loss', score: 'low' },
     boutique: { value: '10-18%', detail: 'Variable, firm-dependent', score: 'mid' },
     foursysAdvantage: true,
@@ -184,7 +184,7 @@ const ADVANTAGES_PT: Advantage[] = [
   },
   {
     title: 'Continuidade de Conhecimento',
-    description: 'Com turnover de 3,6% (vs 22% do mercado), nossos profissionais acumulam anos de conhecimento sobre o negócio do cliente. Zero perda de contexto.',
+    description: 'Com turnover de 4% (vs 22% do mercado), nossos profissionais acumulam anos de conhecimento sobre o negócio do cliente. Zero perda de contexto.',
     color: '#8B5CF6',
     metric: '6x',
     metricLabel: 'menor rotação',
@@ -215,7 +215,7 @@ const ADVANTAGES_EN: Advantage[] = [
   },
   {
     title: 'Knowledge Continuity',
-    description: 'With 3.6% turnover (vs 22% market average), our professionals accumulate years of knowledge about the client\'s business. Zero context loss.',
+    description: 'With 4% turnover (vs 22% market average), our professionals accumulate years of knowledge about the client\'s business. Zero context loss.',
     color: '#8B5CF6',
     metric: '6x',
     metricLabel: 'lower rotation',
@@ -349,7 +349,7 @@ export function SectionWhyFoursys() {
     leadsIn: `Foursys lidera em ${comparison.filter(c => c.foursysAdvantage).length} de ${comparison.length} dimensões`,
     ctaPart1: 'A Foursys entrega o calibre de uma consultoria global',
     ctaPart2: 'com a agilidade, proximidade e custo-benefício que só uma empresa global com',
-    ctaStats: '26 anos de história, 3,6% de turnover e 6 certificações',
+    ctaStats: '26 anos de história, 4% de turnover e 6 certificações',
     ctaPart3: 'pode oferecer. Não competimos em escala — competimos em profundidade, resultado e confiança.',
   } : {
     tableTitle: 'Foursys vs. Global Consultancies',
@@ -360,7 +360,7 @@ export function SectionWhyFoursys() {
     leadsIn: `Foursys leads in ${comparison.filter(c => c.foursysAdvantage).length} of ${comparison.length} dimensions`,
     ctaPart1: 'Foursys delivers the caliber of a global consultancy',
     ctaPart2: 'with the agility, proximity and cost-benefit that only a company with',
-    ctaStats: '26 years of history, 3.6% turnover and 6 certifications',
+    ctaStats: '26 years of history, 4% turnover and 6 certifications',
     ctaPart3: 'can offer. We don\'t compete on scale — we compete on depth, results and trust.',
   }, [lang, comparison])
 

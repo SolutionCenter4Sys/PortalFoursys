@@ -126,6 +126,72 @@ const ctaLabelsI18n = {
   en: { title: 'Awards & Certifications', subtitle: 'GPTW, Agilidade Brasil, 100 Open Startups, ISO 9001, 27001 and more' },
 }
 
+interface GovernancePillar {
+  id: string
+  icon: string
+  label: string
+  color: string
+  items: string[]
+  result: string
+}
+
+interface GovernanceContent {
+  title: string
+  titleHighlight: string
+  intro: string
+  pillars: GovernancePillar[]
+  impactTitle: string
+  impacts: string[]
+  impactText: string
+}
+
+const governanceI18n: Record<'pt' | 'en', GovernanceContent> = {
+  pt: {
+    title: 'Governança, Compliance e Segurança',
+    titleHighlight: 'para Escalar com Confiança',
+    intro: 'Garantimos conformidade, rastreabilidade e segurança operacional por meio de processos estruturados, certificações e controles que sustentam o crescimento da Foursys.',
+    pillars: [
+      { id: 'compliance', icon: 'scale', label: 'Compliance', color: '#FF6600',
+        items: ['Obrigações legais', 'Encargos', 'Processos padronizados', 'Mitigação de riscos'],
+        result: 'Menor exposição a passivos e riscos' },
+      { id: 'seguranca', icon: 'shield-check', label: 'Segurança e Privacidade', color: '#FF6600',
+        items: ['LGPD', 'ISO 27001', 'ISO 27701', 'Treinamentos obrigatórios'],
+        result: 'Proteção de dados e aderência regulatória' },
+      { id: 'governanca', icon: 'landmark', label: 'Governança Corporativa', color: '#FF6600',
+        items: ['Código de Ética', 'Auditorias', 'Controles internos', 'Processos rastreáveis'],
+        result: 'Maior transparência e confiabilidade' },
+      { id: 'esg', icon: 'leaf', label: 'ESG', color: '#FF6600',
+        items: ['Comitê ESG', 'Pacto Global', 'FourLives'],
+        result: 'Sustentabilidade e responsabilidade corporativa' },
+    ],
+    impactTitle: 'Impacto para os Clientes',
+    impacts: ['Segurança da informação', 'Conformidade regulatória', 'Processos auditáveis', 'Menor exposição a riscos', 'Continuidade operacional'],
+    impactText: 'Nossa estrutura de governança e compliance assegura que o crescimento da operação aconteça com segurança, conformidade e aderência aos padrões exigidos pelos nossos clientes.',
+  },
+  en: {
+    title: 'Governance, Compliance and Security',
+    titleHighlight: 'to Scale with Confidence',
+    intro: 'We ensure compliance, traceability and operational security through structured processes, certifications and controls that sustain Foursys growth.',
+    pillars: [
+      { id: 'compliance', icon: 'scale', label: 'Compliance', color: '#FF6600',
+        items: ['Legal obligations', 'Charges', 'Standardized processes', 'Risk mitigation'],
+        result: 'Lower exposure to liabilities and risks' },
+      { id: 'seguranca', icon: 'shield-check', label: 'Security and Privacy', color: '#FF6600',
+        items: ['LGPD', 'ISO 27001', 'ISO 27701', 'Mandatory training'],
+        result: 'Data protection and regulatory adherence' },
+      { id: 'governanca', icon: 'landmark', label: 'Corporate Governance', color: '#FF6600',
+        items: ['Code of Ethics', 'Audits', 'Internal controls', 'Traceable processes'],
+        result: 'Greater transparency and reliability' },
+      { id: 'esg', icon: 'leaf', label: 'ESG', color: '#FF6600',
+        items: ['ESG Committee', 'Global Compact', 'FourLives'],
+        result: 'Sustainability and corporate responsibility' },
+    ],
+    impactTitle: 'Impact for Clients',
+    impacts: ['Information security', 'Regulatory compliance', 'Auditable processes', 'Lower risk exposure', 'Operational continuity'],
+    impactText: 'Our governance and compliance structure ensures that operational growth happens with security, compliance and adherence to the standards required by our clients.',
+  },
+}
+
 // ─── Video Card ───────────────────────────────────────────────────────────────
 
 function VideoCard({
@@ -383,6 +449,92 @@ function VideoPlayerModal({
   )
 }
 
+// ─── Bloco Governança, Compliance e Segurança ──────────────────────────────────
+
+function GovernanceBlock({ content }: { content: GovernanceContent }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.35, duration: 0.4 }}
+      className="mb-8 md:mb-10 p-6 md:p-8 rounded-2xl bg-foursys-surface/40 border border-white/[0.08]"
+    >
+      {/* Título */}
+      <div className="flex items-start gap-3 mb-4">
+        <div className="w-9 h-9 rounded-lg bg-foursys-primary/15 border border-foursys-primary/30 flex items-center justify-center flex-shrink-0">
+          <DynIcon name="shield-check" size={18} className="text-foursys-primary" />
+        </div>
+        <div>
+          <h3 className="text-xl md:text-2xl font-black text-white leading-tight">{content.title}</h3>
+          <p className="text-sm md:text-base text-foursys-primary font-semibold">{content.titleHighlight}</p>
+        </div>
+      </div>
+
+      <p className="text-sm text-foursys-text-muted leading-relaxed max-w-4xl mb-6">
+        {content.intro}
+      </p>
+
+      {/* 4 Pilares */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        {content.pillars.map((pillar, i) => (
+          <motion.div
+            key={pillar.id}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 + i * 0.08, duration: 0.4 }}
+            className="flex flex-col p-4 rounded-xl bg-foursys-bg/40 border border-white/[0.06]"
+          >
+            <div className="flex items-center gap-2 pb-2.5 mb-3 border-b-2" style={{ borderColor: `${pillar.color}55` }}>
+              <DynIcon name={pillar.icon} size={16} style={{ color: pillar.color }} />
+              <span className="text-[11px] font-bold uppercase tracking-[0.12em]" style={{ color: pillar.color }}>
+                {pillar.label}
+              </span>
+            </div>
+            <ul className="space-y-1.5 flex-1 mb-4">
+              {pillar.items.map(item => (
+                <li key={item} className="flex items-start gap-2 text-xs text-foursys-text-muted">
+                  <span className="text-foursys-text-dim flex-shrink-0 mt-0.5">•</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <div className="rounded-lg bg-foursys-surface/50 border border-white/[0.06] p-2.5 mt-auto">
+              <div className="text-[9px] font-bold uppercase tracking-[0.14em] text-foursys-primary mb-1">
+                {content.impactTitle === 'Impact for Clients' ? 'Result' : 'Resultado'}
+              </div>
+              <div className="text-[11px] text-foursys-text-muted leading-snug">{pillar.result}</div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Impacto para os clientes */}
+      <div className="rounded-xl bg-foursys-bg/40 border border-white/[0.06] p-5 md:p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 items-center">
+          <div>
+            <div className="flex items-center gap-2 mb-3 pl-3 border-l-2 border-foursys-primary">
+              <span className="text-xs font-bold uppercase tracking-[0.14em] text-foursys-primary">
+                {content.impactTitle}
+              </span>
+            </div>
+            <ul className="space-y-2">
+              {content.impacts.map(impact => (
+                <li key={impact} className="flex items-center gap-2.5 text-xs md:text-sm text-foursys-text-muted uppercase tracking-wide">
+                  <DynIcon name="check-circle" size={15} className="text-foursys-primary flex-shrink-0" />
+                  {impact}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p className="text-sm md:text-base text-foursys-text-muted leading-relaxed text-center md:text-left">
+            {content.impactText}
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
 // ─── Componente principal ─────────────────────────────────────────────────────
 
 export function SectionESG() {
@@ -395,6 +547,7 @@ export function SectionESG() {
   const videos = useMemo(() => videosI18n[lang], [lang])
   const mediaLabels = useMemo(() => mediaLabelsI18n[lang], [lang])
   const ctaLabels = useMemo(() => ctaLabelsI18n[lang], [lang])
+  const governance = useMemo(() => governanceI18n[lang], [lang])
 
   const playingVideo = activeVideo ? videos.find(v => v.id === activeVideo) : null
 
@@ -415,11 +568,8 @@ export function SectionESG() {
                 {t('esg.badge')}
               </p>
               <h2 className="text-2xl md:text-4xl font-black text-white leading-none mb-3">
-                FourLives
-              </h2>
-              <p className="text-lg text-foursys-primary font-semibold mb-2">
                 {t('esg.title')}
-              </p>
+              </h2>
               <p className="text-foursys-text-muted max-w-xl leading-relaxed text-sm">
                 {t('esg.subtitle')}
               </p>
@@ -482,6 +632,9 @@ export function SectionESG() {
             </motion.div>
           ))}
         </div>
+
+        {/* ── Governança, Compliance e Segurança ── */}
+        <GovernanceBlock content={governance} />
 
         {/* ── Vídeos FourCamp ── */}
         <motion.div

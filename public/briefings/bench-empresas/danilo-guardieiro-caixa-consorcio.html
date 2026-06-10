@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Danilo Guardieiro — CAIXA Consórcio | Pre-Sales Intelligence Foursys</title>
+<style>
+    :root {
+        --primary: #1a237e;
+        --primary-light: #3949ab;
+        --accent: #00b894;
+        --accent-orange: #e17055;
+        --bg: #f5f6fa;
+        --card-bg: #ffffff;
+        --text: #2d3436;
+        --text-light: #636e72;
+        --border: #dfe6e9;
+        --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        --purple: #667eea;
+        --purple-dark: #764ba2;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        padding: 24px 12px;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* HEADER */
+    .header {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        color: white;
+        padding: 36px 32px;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 24px;
+    }
+    .header::after {
+        content: "";
+        position: absolute;
+        right: -80px; top: -80px;
+        width: 280px; height: 280px;
+        background: radial-gradient(circle, rgba(0,184,148,0.25), transparent 70%);
+        pointer-events: none;
+    }
+    .brand {
+        font-size: 13px;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        opacity: 0.95;
+        margin-bottom: 14px;
+        font-weight: 600;
+    }
+    .header h1 {
+        font-size: 34px;
+        font-weight: 700;
+        margin-bottom: 6px;
+        letter-spacing: -0.5px;
+    }
+    .header h2 {
+        font-size: 19px;
+        font-weight: 500;
+        opacity: 0.95;
+        margin-bottom: 4px;
+    }
+    .header .meta {
+        font-size: 14px;
+        opacity: 0.85;
+        margin-bottom: 18px;
+    }
+    .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+        position: relative;
+        z-index: 2;
+    }
+    .badge {
+        background: rgba(255,255,255,0.18);
+        border: 1px solid rgba(255,255,255,0.35);
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        backdrop-filter: blur(4px);
+    }
+    .badge.accent { background: var(--accent); border-color: var(--accent); }
+    .badge.orange { background: var(--accent-orange); border-color: var(--accent-orange); }
+
+    /* SECTION */
+    .section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 26px 28px;
+        margin-bottom: 22px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+    }
+    .section h3 {
+        font-size: 19px;
+        color: var(--primary);
+        margin-bottom: 18px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .section p { font-size: 15px; color: var(--text); margin-bottom: 12px; }
+    .section .num {
+        display: inline-flex;
+        align-items: center; justify-content: center;
+        width: 28px; height: 28px;
+        background: var(--primary);
+        color: white;
+        border-radius: 50%;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    /* INFO GRID */
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+        margin: 16px 0;
+    }
+    .info-card {
+        background: #f8f9fc;
+        padding: 16px;
+        border-radius: 8px;
+        border-left: 4px solid var(--primary);
+    }
+    .info-card .label {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--text-light);
+        letter-spacing: 0.6px;
+        margin-bottom: 6px;
+    }
+    .info-card .value {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text);
+    }
+    .info-card.purple { border-left-color: var(--purple); }
+
+    /* INSIGHT BOX */
+    .insight-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 22px 24px;
+        border-radius: 10px;
+        margin: 16px 0;
+        box-shadow: 0 4px 14px rgba(102,126,234,0.25);
+    }
+    .insight-box .insight-title {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        opacity: 0.9;
+    }
+    .insight-box p { font-size: 15px; color: white; margin-bottom: 8px; }
+    .insight-box ul { margin: 10px 0 0 22px; }
+    .insight-box li { font-size: 14.5px; margin-bottom: 6px; line-height: 1.55; }
+
+    /* TIMELINE */
+    .timeline { margin: 16px 0 6px; padding-left: 4px; }
+    .timeline-item {
+        position: relative;
+        padding-left: 26px;
+        margin-bottom: 14px;
+        border-left: 2px solid var(--border);
+        padding-bottom: 6px;
+    }
+    .timeline-dot {
+        position: absolute;
+        left: -8px; top: 4px;
+        width: 14px; height: 14px;
+        background: var(--primary);
+        border-radius: 50%;
+        border: 3px solid white;
+        box-shadow: 0 0 0 2px var(--primary);
+    }
+    .timeline-item h4 {
+        font-size: 15px;
+        color: var(--primary);
+        margin-bottom: 4px;
+    }
+    .timeline-item p { font-size: 14px; color: var(--text-light); margin-bottom: 0; }
+
+    /* TAGS */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tag {
+        padding: 6px 12px;
+        border-radius: 16px;
+        font-size: 13px;
+        font-weight: 600;
+        border: 1px solid;
+    }
+    .tag-priority { background: #fce4ec; color: #c62828; border-color: #ef9a9a; }
+    .tag-active { background: #e8f5e9; color: #2e7d32; border-color: #a5d6a7; }
+    .tag-opportunity { background: #fff3e0; color: #e65100; border-color: #ffcc80; }
+
+    /* OPPORTUNITY SECTION */
+    .opportunity-section {
+        border: 2px solid var(--accent-orange);
+        background: #fff8f3;
+    }
+    .opportunity-section h3 { color: var(--accent-orange); border-bottom-color: #ffcc80; }
+
+    /* OFERTAS */
+    .ofertas-section {
+        border: 2px solid var(--accent);
+        background: #f3fcf8;
+    }
+    .ofertas-section h3 { color: var(--accent); border-bottom-color: #a5d6a7; }
+    .oferta-card {
+        background: white;
+        border: 1px solid var(--border);
+        border-left: 5px solid var(--accent);
+        border-radius: 8px;
+        padding: 18px 20px;
+        margin-bottom: 14px;
+        position: relative;
+    }
+    .oferta-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 10px;
+    }
+    .oferta-card h4 {
+        font-size: 17px;
+        color: var(--primary);
+        font-weight: 700;
+    }
+    .score-badge {
+        background: var(--accent);
+        color: white;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+    .oferta-desc {
+        font-size: 14px;
+        color: var(--text-light);
+        margin-bottom: 10px;
+    }
+    .oferta-razoes { margin-left: 18px; }
+    .oferta-razoes li { font-size: 14px; margin-bottom: 5px; }
+
+    /* APPROACH CARDS */
+    .approach-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+        margin: 16px 0;
+    }
+    .approach-card {
+        color: white;
+        padding: 22px;
+        border-radius: 10px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    }
+    .approach-card.green { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); }
+    .approach-card.red { background: linear-gradient(135deg, #e17055 0%, #d63031 100%); }
+    .approach-card.purple { background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%); }
+    .approach-card .label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        opacity: 0.95;
+    }
+    .approach-card h4 {
+        font-size: 17px;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+    .approach-card p, .approach-card li { font-size: 14px; line-height: 1.55; }
+    .approach-card ul { margin-left: 20px; margin-top: 6px; }
+    .approach-card li { margin-bottom: 4px; }
+
+    /* COMPETITOR */
+    .competitor-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 14px;
+        margin: 16px 0;
+    }
+    .competitor-card {
+        background: #f8f9fc;
+        padding: 16px 18px;
+        border-radius: 8px;
+        border-left: 4px solid var(--primary-light);
+    }
+    .competitor-card h4 {
+        font-size: 15px;
+        color: var(--primary);
+        margin-bottom: 6px;
+    }
+    .competitor-card p { font-size: 13.5px; color: var(--text-light); margin-bottom: 0; }
+
+    /* DIVIDER */
+    .divider {
+        height: 2px;
+        background: linear-gradient(to right, transparent, var(--border), transparent);
+        margin: 36px 0 28px;
+    }
+
+    /* RAPPORT SECTION */
+    .rapport-section {
+        border: 2px solid var(--purple);
+        background: #f5f6ff;
+    }
+    .rapport-section h3 { color: var(--purple); border-bottom-color: #c7d2fe; }
+
+    /* BARS */
+    .bar-row {
+        display: grid;
+        grid-template-columns: 180px 1fr 60px;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 12px;
+    }
+    .bar-label { font-size: 14px; font-weight: 600; color: var(--text); }
+    .bar-track {
+        height: 12px;
+        background: var(--border);
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    .bar-fill {
+        height: 100%;
+        background: linear-gradient(to right, var(--primary), var(--accent));
+        border-radius: 6px;
+    }
+    .bar-pct { font-size: 14px; font-weight: 700; color: var(--primary); text-align: right; }
+
+    /* FOOTER */
+    .footer {
+        text-align: center;
+        padding: 28px 12px 8px;
+        color: var(--text-light);
+        font-size: 13px;
+    }
+    .footer .brand-line {
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 6px;
+        font-size: 15px;
+    }
+
+    /* PRINT BUTTON */
+    .print-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 22px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+        transition: transform 0.2s;
+        z-index: 100;
+    }
+    .print-btn:hover { transform: scale(1.08); }
+
+    @media (max-width: 768px) {
+        .header { padding: 26px 20px; }
+        .header h1 { font-size: 26px; }
+        .section { padding: 20px 16px; }
+        .bar-row { grid-template-columns: 1fr; gap: 6px; }
+        .bar-pct { text-align: left; }
+    }
+
+    @media print {
+        body { background: white; padding: 0; }
+        .print-btn { display: none; }
+        .section, .header { box-shadow: none; page-break-inside: avoid; }
+        .header::after { display: none; }
+        .approach-card, .insight-box, .oferta-card { page-break-inside: avoid; }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="brand">four<span style="color: var(--accent)">sys</span> | Pre-Sales Intelligence</div>
+        <h1>Danilo Guardieiro</h1>
+        <h2>Head of IT — CAIXA Consórcio</h2>
+        <div class="meta">Setor: Consórcios e Serviços Financeiros &nbsp;|&nbsp; Sede: São Paulo, SP</div>
+        <div class="badges">
+            <span class="badge accent">R$ 44 bi em cotas ativas</span>
+            <span class="badge">Crescimento +56,5% (set/24-set/25)</span>
+            <span class="badge orange">Grupo CAIXA: R$ 6,5 bi em TI (2026)</span>
+            <span class="badge">CIO há ~2 anos no cargo</span>
+        </div>
+    </header>
+
+    <!-- ANÁLISE DA EMPRESA -->
+    <section class="section">
+        <h3><span class="num">1</span> Análise da Empresa</h3>
+        <p>
+            A <strong>CAIXA Consórcio</strong> é a administradora de consórcios da CAIXA Seguridade (holding listada na B3 — CXSE3),
+            focada em consórcios de imóveis, veículos, serviços e bens duráveis. A companhia consolidou em 2025 um dos maiores ciclos
+            de crescimento do setor, com avanço de <strong>56,5% na carteira de crédito</strong>, atingindo <strong>R$ 44 bilhões em cotas ativas</strong>
+            e vendas <strong>35,4% acima</strong> do mesmo período de 2024. A estratégia de transformação digital iniciada em 2021
+            posiciona a empresa entre os maiores grupos de consórcio do Brasil, com forte aposta em digitalização da jornada
+            do cliente, IA generativa, automação via WhatsApp e expansão para o mercado secundário em 2026.
+        </p>
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="label">Razão social</div>
+                <div class="value">CAIXA Consórcios S.A. Administradora</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Holding controladora</div>
+                <div class="value">CAIXA Seguridade Participações (CXSE3)</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Sede</div>
+                <div class="value">São Paulo, SP</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Abrangência</div>
+                <div class="value">Nacional (rede CAIXA + correspondentes)</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Categoria</div>
+                <div class="value">Subsidiária de holding pública listada</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Colaboradores</div>
+                <div class="value">~246 (crescimento +25,3% YoY)</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Cotas ativas</div>
+                <div class="value">R$ 44,0 bilhões (set/2025)</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Perspectiva 2026</div>
+                <div class="value">Crescimento acima do mercado, expansão imobiliária</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESUMO EXECUTIVO -->
+    <section class="section">
+        <h3><span class="num">2</span> Resumo Executivo</h3>
+        <div class="insight-box">
+            <div class="insight-title">⚡ Contexto Estratégico e Timing</div>
+            <p>
+                A CAIXA Consórcio vive seu <strong>melhor momento histórico de mercado</strong>, com crescimento de dois dígitos em vendas
+                e carteira, ao mesmo tempo em que <strong>internaliza processos antes terceirizados</strong> e moderniza arquitetura digital.
+                Danilo Guardieiro assumiu como Head of IT em <strong>abril/2024</strong> com mandato explícito de <strong>escalar a operação</strong>,
+                consolidar dados, ampliar uso de IA generativa (já em produção via WhatsApp com a Tech for Humans) e
+                preparar a empresa para o mercado secundário de cotas em 2026.
+            </p>
+            <p>
+                <strong>Janela ideal de abordagem:</strong> 2026 é o ano de inflexão tecnológica — o grupo CAIXA reservou
+                <strong>R$ 6,5 bi para tecnologia</strong> (com R$ 2,5 bi exclusivamente em Inovação) e a CAIXA Consórcio,
+                em ciclo contracíclico de crescimento +56,5%, deve ampliar seu orçamento próprio de TI estimado em
+                <strong>R$ 60-90 milhões para 2026</strong>. Projetos de modernização em curso, contratação de fornecedores
+                especialistas em IA, cibersegurança e integração em alta prioridade. <em>É agora.</em>
+            </p>
+        </div>
+    </section>
+
+    <!-- ORÇAMENTO DE TI -->
+    <section class="section" style="border: 2px solid var(--primary-light);">
+        <h3><span class="num">3</span> Orçamento de TI: 2025 vs 2026</h3>
+
+        <div class="insight-box" style="background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);">
+            <div class="insight-title">💰 Orçamento de TI do Grupo CAIXA (controlador)</div>
+            <p>A <strong>CAIXA Econômica Federal</strong>, controladora última do grupo (via CAIXA Seguridade → CAIXA Consórcio), divulgou em fevereiro de 2026 ao Valor Econômico seu orçamento consolidado de tecnologia, que define o pano de fundo estratégico, padrões e prioridades para todas as subsidiárias — inclusive a CAIXA Consórcio.</p>
+        </div>
+
+        <h4 style="font-size: 16px; color: var(--primary); margin: 18px 0 10px;">📊 Evolução do Orçamento de TI — Grupo CAIXA</h4>
+        <div class="info-grid">
+            <div class="info-card" style="border-left-color: var(--text-light);">
+                <div class="label">2024 — Executado</div>
+                <div class="value" style="font-size: 22px; color: var(--text-light);">R$ 5,7 bilhões</div>
+                <div style="font-size: 12px; color: var(--text-light); margin-top: 4px;">Realizado abaixo do orçado</div>
+            </div>
+            <div class="info-card" style="border-left-color: var(--accent-orange);">
+                <div class="label">2025 — Orçado</div>
+                <div class="value" style="font-size: 22px; color: var(--accent-orange);">R$ 7,0 bilhões</div>
+                <div style="font-size: 12px; color: var(--text-light); margin-top: 4px;">Pico histórico de orçamento</div>
+            </div>
+            <div class="info-card" style="border-left-color: var(--accent);">
+                <div class="label">2026 — Orçado</div>
+                <div class="value" style="font-size: 22px; color: var(--accent);">R$ 6,5 bilhões</div>
+                <div style="font-size: 12px; color: var(--text-light); margin-top: 4px;">+14% vs executado de 2024</div>
+            </div>
+        </div>
+
+        <h4 style="font-size: 16px; color: var(--primary); margin: 22px 0 10px;">🎯 Distribuição Oficial do Orçamento 2026 — Grupo CAIXA (R$ 6,5 bi)</h4>
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="label">Infraestrutura</div>
+                <div class="value" style="font-size: 18px;">R$ 2,8 bi <span style="font-size: 13px; color: var(--text-light); font-weight: 500;">(43%)</span></div>
+            </div>
+            <div class="info-card">
+                <div class="label">Inovação</div>
+                <div class="value" style="font-size: 18px;">R$ 2,5 bi <span style="font-size: 13px; color: var(--text-light); font-weight: 500;">(38%)</span></div>
+            </div>
+            <div class="info-card">
+                <div class="label">Segurança da Informação</div>
+                <div class="value" style="font-size: 18px;">R$ 400 mi <span style="font-size: 13px; color: var(--text-light); font-weight: 500;">(6%)</span></div>
+            </div>
+            <div class="info-card">
+                <div class="label">Sistemas Legados</div>
+                <div class="value" style="font-size: 18px;">R$ 300 mi <span style="font-size: 13px; color: var(--text-light); font-weight: 500;">(5%)</span></div>
+            </div>
+        </div>
+
+        <h4 style="font-size: 16px; color: var(--primary); margin: 22px 0 10px;">🏢 Estimativa para CAIXA Consórcio (subsidiária)</h4>
+        <p style="font-size: 13.5px; color: var(--text-light); margin-bottom: 12px;">
+            A CAIXA Consórcio <strong>não divulga publicamente seu orçamento de TI próprio</strong>. A estimativa abaixo é proprietária Foursys, baseada em: porte da operação (~246 colaboradores), receitas extrapoladas da CXSE3, ritmo de crescimento (+56,5% na carteira), benchmarks do setor financeiro brasileiro (tech budget = 6-12% da OPEX em administradoras digitais) e movimentos públicos de modernização.
+        </p>
+        <div class="info-grid">
+            <div class="info-card" style="border-left-color: var(--accent-orange);">
+                <div class="label">2025 — Estimativa CAIXA Consórcio</div>
+                <div class="value" style="font-size: 20px; color: var(--accent-orange);">R$ 45 - 65 milhões</div>
+                <div style="font-size: 12px; color: var(--text-light); margin-top: 4px;">Foco: digitalização da jornada, IA com Tech for Humans, modernização do app Caixa Aqui</div>
+            </div>
+            <div class="info-card" style="border-left-color: var(--accent);">
+                <div class="label">2026 — Estimativa CAIXA Consórcio</div>
+                <div class="value" style="font-size: 20px; color: var(--accent);">R$ 60 - 90 milhões</div>
+                <div style="font-size: 12px; color: var(--text-light); margin-top: 4px;">Crescimento 30-40% — ciclo de mercado secundário + expansão IA + internalização</div>
+            </div>
+        </div>
+
+        <div class="insight-box" style="margin-top: 18px;">
+            <div class="insight-title">🔑 Leitura Estratégica para a Foursys</div>
+            <ul>
+                <li><strong>Inovação (R$ 2,5 bi grupo):</strong> maior categoria flexível, onde squads de IA, modernização e novos produtos são contratados — é onde a Foursys se posiciona com AI Squad, FourBlox e Engenharia Digital.</li>
+                <li><strong>Segurança (R$ 400 mi grupo):</strong> nova diretoria de segurança digital criada após ataques de 2025 — aderência total com oferta de Cibersegurança Foursys (ISO 27001/27701).</li>
+                <li><strong>Tendência 2026:</strong> orçamento total do grupo caiu 7% (de R$ 7 bi para R$ 6,5 bi), mas <strong>a fatia de Inovação cresceu</strong> proporcionalmente — sinal de que projetos de alto valor (não infra) estão protegidos.</li>
+                <li><strong>Janela específica CAIXA Consórcio:</strong> a subsidiária está em <em>movimento contracíclico</em> (cresceu +56%), portanto seu orçamento de TI 2026 deve crescer 30-40% (vs queda do banco mãe). Momento ideal para pitch.</li>
+                <li><strong>Estratégia de cloud:</strong> grupo está definindo cloud strategy no 1º semestre de 2026 (Microsoft, AWS, Google, Huawei em testes) — janela para parceiros cloud-native.</li>
+                <li><strong>IA na CAIXA mãe:</strong> 35.000 licenças do Microsoft Copilot — sinaliza padrão tecnológico que a Consórcio deverá adotar em massa.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- DESAFIOS -->
+    <section class="section">
+        <h3><span class="num">4</span> Desafios Estratégicos e Prioridades</h3>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h4>Escalar TI para sustentar crescimento de +56% sem comprometer estabilidade</h4>
+                <p>O ritmo de vendas exige plataformas resilientes, observabilidade e SRE — risco de degradação operacional cresce com o volume.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h4>Internalizar processos antes terceirizados</h4>
+                <p>Movimento estratégico declarado para 2026: requer squads internos + parceiros que transfiram conhecimento.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h4>Habilitar mercado secundário de cotas canceladas (lançamento 2026)</h4>
+                <p>Novo produto digital com regras complexas, integração com sistemas core, KYC/AML reforçado e UX mobile.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h4>Expandir IA generativa para além da carta contemplada</h4>
+                <p>Caso de sucesso com Tech for Humans (60 dias para produção) cria apetite para novos casos: cobrança, atendimento, simulação.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h4>Modernizar legado e integrações com a rede CAIXA</h4>
+                <p>Coexistência com sistemas do banco controlador exige iPaaS robusto e estratégia de APIs.</p>
+            </div>
+        </div>
+        <h4 style="margin-top: 18px; font-size: 15px; color: var(--text);">Prioridades de Investimento Declaradas</h4>
+        <div class="tags">
+            <span class="tag tag-priority">Digitalização da jornada</span>
+            <span class="tag tag-priority">IA Generativa</span>
+            <span class="tag tag-priority">Modernização da comunicação</span>
+            <span class="tag tag-priority">Internalização de processos</span>
+            <span class="tag tag-priority">Mercado secundário de cotas</span>
+            <span class="tag tag-priority">Educação financeira digital</span>
+        </div>
+    </section>
+
+    <!-- MAPA DE INVESTIMENTOS -->
+    <section class="section">
+        <h3><span class="num">5</span> Mapa de Investimentos nos Próximos 12 Meses</h3>
+        <p style="font-size: 14px; color: var(--text-light);">Temas com investimento ativo identificados em pesquisa pública e movimentos recentes da empresa:</p>
+        <div class="tags">
+            <span class="tag tag-active">IA Generativa & Agentes Conversacionais</span>
+            <span class="tag tag-active">Cloud & Plataformas Digitais</span>
+            <span class="tag tag-active">Integração de Sistemas (iPaaS)</span>
+            <span class="tag tag-active">Salesforce / CRM</span>
+            <span class="tag tag-active">Big Data & Analytics</span>
+            <span class="tag tag-active">Cibersegurança & Antifraude</span>
+            <span class="tag tag-active">App Mobile (Caixa Aqui)</span>
+            <span class="tag tag-active">Automação de Processos (RPA)</span>
+        </div>
+        <p style="margin-top: 14px; font-size: 14px; color: var(--text-light);">
+            <strong>Continuidade:</strong> Salesforce (legado da gestão de Danilo na CNP), Big Data, plataformas mobile.<br>
+            <strong>Investimento inicial / expansão:</strong> IA generativa multimodal, agentes autônomos, mercado secundário, segurança em IA.
+        </p>
+    </section>
+
+    <!-- OPORTUNIDADES -->
+    <section class="section opportunity-section">
+        <h3><span class="num">6</span> Oportunidades sem Fornecedor Definido</h3>
+        <p>Áreas com forte indício de demanda e baixa evidência de vendor incumbente — janelas reais de prospecção:</p>
+        <div class="tags">
+            <span class="tag tag-opportunity">Squad de IA para novos casos de uso (cobrança, simulação, antifraude)</span>
+            <span class="tag tag-opportunity">Plataforma do mercado secundário de cotas (greenfield 2026)</span>
+            <span class="tag tag-opportunity">AMS / Sustentação de aplicações Salesforce + integrações</span>
+            <span class="tag tag-opportunity">Modernização de jornada do correspondente (app Caixa Aqui)</span>
+            <span class="tag tag-opportunity">Adequação LGPD / privacy by design em novos agentes de IA</span>
+            <span class="tag tag-opportunity">Observabilidade e SRE para suportar crescimento +56%</span>
+        </div>
+    </section>
+
+    <!-- OFERTAS FOURSYS -->
+    <section class="section ofertas-section">
+        <h3><span class="num">7</span> Ofertas Foursys Recomendadas</h3>
+
+        <div class="oferta-card">
+            <div class="oferta-header">
+                <h4>AI Squad</h4>
+                <span class="score-badge">95</span>
+            </div>
+            <p class="oferta-desc">Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+            <ul class="oferta-razoes">
+                <li>Danilo já patrocinou IA na CNP (97% de cobertura de dados em Big Data/AI) e replicou a aposta na CAIXA Consórcio.</li>
+                <li>Caso recente com Tech for Humans (carta contemplada via WhatsApp em 60 dias) prova apetite e modelo de delivery curto.</li>
+                <li>Há vários casos de uso adjacentes esperando squad: cobrança, simulação, antifraude, atendimento ao correspondente.</li>
+                <li>Foursys diferencia-se com produto proprietário (acelerador) + governança ISO 27001/27701 — crítico para dados financeiros.</li>
+            </ul>
+        </div>
+
+        <div class="oferta-card">
+            <div class="oferta-header">
+                <h4>Modernização de Legado (com Digibee iPaaS)</h4>
+                <span class="score-badge">88</span>
+            </div>
+            <p class="oferta-desc">Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+            <ul class="oferta-razoes">
+                <li>Coexistência com sistemas core da CAIXA exige integração robusta — Digibee é referência no setor financeiro brasileiro.</li>
+                <li>Internalização de processos terceirizados (declarada para 2026) demanda redesenho de integrações.</li>
+                <li>Mercado secundário de cotas (greenfield) precisa de orquestração entre múltiplos sistemas (core, KYC, pagamentos, CRM).</li>
+                <li>Histórico de Danilo: trajetória forte em integrações na CNP, fala a língua iPaaS/APIs.</li>
+            </ul>
+        </div>
+
+        <div class="oferta-card">
+            <div class="oferta-header">
+                <h4>Engenharia Digital</h4>
+                <span class="score-badge">85</span>
+            </div>
+            <p class="oferta-desc">Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+            <ul class="oferta-razoes">
+                <li>Crescimento de +56% na carteira pressiona resiliência — observabilidade e SRE são prioridade implícita.</li>
+                <li>App Caixa Aqui (correspondentes) e jornada digital do cliente demandam evolução contínua de plataformas mobile/web.</li>
+                <li>Danilo tem background em Azure Cloud (5M usuários atendidos na Invit) — forte fluência cloud-native.</li>
+                <li>Mercado secundário será uma plataforma greenfield ideal para arquitetura cloud-native moderna.</li>
+            </ul>
+        </div>
+
+        <div class="oferta-card">
+            <div class="oferta-header">
+                <h4>Cibersegurança</h4>
+                <span class="score-badge">82</span>
+            </div>
+            <p class="oferta-desc">Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+            <ul class="oferta-razoes">
+                <li>Posicionamento pessoal de Danilo no LinkedIn destaca explicitamente "Cybersecurity" como pilar de atuação.</li>
+                <li>Setor financeiro + holding listada (CXSE3) = alto compliance regulatório (Bacen, CVM, ANPD).</li>
+                <li>Adoção de IA generativa exige nova camada de governança: prompts, dados sensíveis, auditoria.</li>
+                <li>Foursys ISO 27001 + 27701 alinha-se ao perfil de fornecedor exigido pelo grupo CAIXA.</li>
+            </ul>
+        </div>
+
+        <div class="oferta-card">
+            <div class="oferta-header">
+                <h4>FourBlox</h4>
+                <span class="score-badge">68</span>
+            </div>
+            <p class="oferta-desc">Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+            <ul class="oferta-razoes">
+                <li>Pressão por time-to-market é crítica — case Tech for Humans (60 dias) define o benchmark interno.</li>
+                <li>Internalização de processos cria oportunidade de padronizar componentes reutilizáveis nos squads internos.</li>
+                <li>Diferencial de custo/produtividade ressoa com perfil orçamentário do grupo CAIXA (eficiência operacional).</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ESTRATÉGIA DE ABORDAGEM -->
+    <section class="section">
+        <h3><span class="num">8</span> Estratégia de Abordagem</h3>
+
+        <div class="approach-grid">
+            <div class="approach-card green">
+                <div class="label">🎯 Gancho de Entrada</div>
+                <h4>"Como acelerar o próximo agente de IA depois do case da carta contemplada?"</h4>
+                <p>Reconhecer publicamente o sucesso do projeto com a Tech for Humans e propor uma <strong>conversa estratégica sobre roadmap de IA</strong> — explorando casos de cobrança, simulação inteligente, atendimento ao correspondente e antifraude.</p>
+                <ul>
+                    <li>Mencionar AI Squad com produto proprietário (acelerador)</li>
+                    <li>Trazer cases Foursys em seguros / financeiro</li>
+                    <li>Citar ISO 27001/27701 como base de confiança regulatória</li>
+                </ul>
+            </div>
+
+            <div class="approach-card red">
+                <div class="label">🔥 Oportunidade Quente</div>
+                <h4>Plataforma do mercado secundário de cotas (greenfield 2026)</h4>
+                <p>Projeto declarado pela CAIXA Consórcio com <strong>implementação prevista até o fim de 2026</strong>. Greenfield arquitetural com necessidade de integração, UX, segurança e IA — sem vendor incumbente identificado publicamente.</p>
+                <ul>
+                    <li>Janela: ciclo de planejamento Q1-Q2 2026</li>
+                    <li>Alavanca múltiplas ofertas (Engenharia, Modernização, IA, Cyber)</li>
+                    <li>Posicionar Foursys como integrador único do projeto</li>
+                </ul>
+            </div>
+
+            <div class="approach-card purple">
+                <div class="label">⚡ Diferencial Competitivo</div>
+                <h4>Foursys = velocidade + governança + IA proprietária</h4>
+                <p>Combinar três argumentos que ressoam com o perfil de Danilo:</p>
+                <ul>
+                    <li><strong>Velocidade:</strong> AI Squad e FourBlox aceleram delivery (responde ao benchmark de 60 dias)</li>
+                    <li><strong>Governança:</strong> ISO 27001/27701 + 24 anos / 41.000+ projetos = baixo risco de compliance</li>
+                    <li><strong>Profundidade financeira:</strong> Setor financeiro como vertical de atuação histórica</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <div class="insight-title">💡 Insights de Negócio para a Conversa</div>
+            <ul>
+                <li>O sistema brasileiro de consórcios fechou 2025 com <strong>R$ 500,27 bi em créditos comercializados</strong> (+32,1% YoY) e a ABAC projeta +11% para 2026 — vento a favor estrutural.</li>
+                <li>IA passou de tendência a realidade no setor de consórcios — a ABAC já posiciona o case da CAIXA como exemplo de transformação setorial.</li>
+                <li>Concorrentes diretos (Itaú, Bradesco, Santander) têm budgets de TI muito maiores — a CAIXA precisa <strong>compensar com agilidade e parceiros estratégicos</strong>, não com volume.</li>
+                <li>A descontinuidade da JV CAIXA × CNP Assurances (origem de Danilo) deixa <strong>passivo de modernização</strong> nos sistemas herdados — oportunidade de AMS + modernização.</li>
+                <li>Risco regulatório crescente sobre IA + dados pessoais (Bacen, ANPD) torna ISO 27701 da Foursys um diferencial mensurável.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- BENCHMARK CONCORRENTES -->
+    <section class="section">
+        <h3><span class="num">9</span> Benchmark de Concorrentes & Gap Analysis</h3>
+
+        <div class="competitor-grid">
+            <div class="competitor-card">
+                <h4>Itaú Administradora de Consórcios</h4>
+                <p>Líder em solidez financeira e canais digitais. Forte integração com produtos do grupo, grande maturidade em CRM, dados e IA. Investimento massivo em personalização.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Bradesco Administradora de Consórcios</h4>
+                <p>Carteira ampla (auto, imóveis, motos, serviços) e gestão integrada. Forte presença em modernização de canais e parceiros digitais. Tem programa de IA conversacional avançado (BIA).</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Santander Consórcios</h4>
+                <p>Aposta em jornadas 100% digitais e produtos integrados ao banco. Investe em open finance e em automação inteligente. Modelo enxuto com forte uso de squads externos.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Embracon / HS Consórcio</h4>
+                <p>Players independentes (não bancarizados) com agilidade digital, marketing direto e estratégias agressivas em SEO/performance. Apostam em apps mobile e nicho imobiliário.</p>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <div class="insight-title">📊 Gap Analysis — Onde a CAIXA Consórcio Pode Avançar</div>
+            <ul>
+                <li><strong>vs Itaú/Bradesco:</strong> Gap em maturidade analítica e personalização preditiva — oportunidade Foursys em <em>AI Squad + Engenharia de Dados</em>.</li>
+                <li><strong>vs Santander:</strong> Gap em jornadas 100% digitais self-service — oportunidade em <em>Engenharia Digital + UX</em>.</li>
+                <li><strong>vs Embracon/HS:</strong> Gap em agilidade de mudanças no app e velocidade de release — oportunidade em <em>DevOps/SRE + FourBlox</em>.</li>
+                <li><strong>Vantagem estrutural CAIXA:</strong> Capilaridade da rede + marca + crédito imobiliário com Caixa = liderança no consórcio imobiliário se a tecnologia acompanhar.</li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- PERFIL PESSOAL & RAPPORT -->
+    <section class="section rapport-section">
+        <h3><span class="num">10</span> Perfil Pessoal & Rapport — Danilo Guardieiro</h3>
+
+        <div class="info-grid">
+            <div class="info-card purple">
+                <div class="label">Cargo atual</div>
+                <div class="value">Head of IT — CAIXA Consórcio (desde abr/2024)</div>
+            </div>
+            <div class="info-card purple">
+                <div class="label">Tempo no cargo</div>
+                <div class="value">~2 anos</div>
+            </div>
+            <div class="info-card purple">
+                <div class="label">Empresa anterior</div>
+                <div class="value">CNP Seguros Holding Brasil (8 anos e 4 meses)</div>
+            </div>
+            <div class="info-card purple">
+                <div class="label">Experiência total em TI</div>
+                <div class="value">+20 anos</div>
+            </div>
+            <div class="info-card purple">
+                <div class="label">Formação acadêmica</div>
+                <div class="value">Lecionou em Uniube e Fazu Uberaba (Redes, Arquitetura, Segurança)</div>
+            </div>
+            <div class="info-card purple">
+                <div class="label">Trajetória anterior</div>
+                <div class="value">TIT Consultoria (2013-2015), Invit Negócios Inovadores (2011-2013)</div>
+            </div>
+            <div class="info-card purple">
+                <div class="label">Especialidades autodeclaradas</div>
+                <div class="value">IA, Cibersegurança, Transformação Digital, Soluções para Consórcio e Financeiro</div>
+            </div>
+            <div class="info-card purple">
+                <div class="label">Vínculo com Uberaba (MG)</div>
+                <div class="value">Carreira docente na região — possível origem ou forte ligação afetiva</div>
+            </div>
+            <div class="info-card purple">
+                <div class="label">Localização atual</div>
+                <div class="value">Grande São Paulo (sede CAIXA Consórcio)</div>
+            </div>
+            <div class="info-card purple">
+                <div class="label">Idiomas</div>
+                <div class="value">Português (nativo), Inglês profissional</div>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <div class="insight-title">🤝 5 Dicas de Conversa para Rapport</div>
+            <ul>
+                <li><strong>Reconhecer o legado na CNP:</strong> mencionar os "97% de cobertura de dados de clientes" e os "R$ 300 milhões de impacto positivo" — dados que ele cita publicamente como conquistas. Demonstra que você fez o dever de casa.</li>
+                <li><strong>Perguntar sobre o "depois" do case da carta contemplada:</strong> é o projeto-vitrine atual dele. Perguntar quais novos casos de uso de IA estão na esteira para 2026 abre uma porta natural.</li>
+                <li><strong>Falar sobre transição de operadora terceirizada para internalização:</strong> ele está liderando esse movimento — demonstra interesse genuíno na agenda estratégica dele.</li>
+                <li><strong>Carreira docente em Uberaba (MG):</strong> ponto humano forte. Perguntar sobre a transição academia → indústria, ou se mantém vínculo com universidades, gera conexão pessoal.</li>
+                <li><strong>Cibersegurança como pilar:</strong> ele coloca segurança no topo do perfil LinkedIn. Comentar sobre desafios de governança de IA, LGPD em agentes generativos e ISO 27701 ressoa diretamente com a identidade profissional dele.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- PERFIL DO CIO -->
+    <section class="section">
+        <h3><span class="num">11</span> Perfil do CIO e Posição da Empresa</h3>
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="label">Hierarquia</div>
+                <div class="value">Head of IT — reporte direto à Diretoria Executiva da CAIXA Consórcio</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Reporte</div>
+                <div class="value">Diretor da CAIXA Consórcio (vinculado à CAIXA Seguridade)</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Abrangência da TI</div>
+                <div class="value">Toda a operação da CAIXA Consórcio (não compartilhada com a CAIXA bancária)</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Modelo de TI</div>
+                <div class="value">Híbrido — squads internos + parceiros especializados (movimento 2026 = mais internalização)</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Tamanho estimado da equipe</div>
+                <div class="value">Não publicado — proporcional aos 246 colaboradores totais (estimado 30-50)</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Papel da TI no negócio</div>
+                <div class="value">Estratégico — protagonista do crescimento de +56% e da agenda de mercado secundário 2026</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Decisor final de fornecedor</div>
+                <div class="value">Sim, com chancela jurídica/compliance da CAIXA Seguridade</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Ciclo orçamentário</div>
+                <div class="value">Anual com revisão trimestral (alinhado ao calendário de holding listada)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DISTRIBUIÇÃO DE INVESTIMENTO -->
+    <section class="section">
+        <h3><span class="num">12</span> Distribuição Estimada de Investimento de TI — CAIXA Consórcio</h3>
+        <p style="font-size: 13.5px; color: var(--text-light); margin-bottom: 14px;">
+            Distribuição estimada para a CAIXA Consórcio (orçamento estimado <strong>R$ 60-90 mi em 2026</strong>),
+            calibrada pelas prioridades declaradas, casos públicos (IA via WhatsApp, mercado secundário, internalização)
+            e pela proporcionalidade observada no orçamento oficial do grupo CAIXA.
+        </p>
+
+        <div class="bar-row">
+            <div class="bar-label">IA & Automação</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 28%;"></div></div>
+            <div class="bar-pct">~28%</div>
+        </div>
+        <div class="bar-row">
+            <div class="bar-label">Plataformas Digitais & App</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 22%;"></div></div>
+            <div class="bar-pct">~22%</div>
+        </div>
+        <div class="bar-row">
+            <div class="bar-label">Integração & Modernização</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 18%;"></div></div>
+            <div class="bar-pct">~18%</div>
+        </div>
+        <div class="bar-row">
+            <div class="bar-label">Cibersegurança & LGPD</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 15%;"></div></div>
+            <div class="bar-pct">~15%</div>
+        </div>
+        <div class="bar-row">
+            <div class="bar-label">Sustentação (AMS)</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 12%;"></div></div>
+            <div class="bar-pct">~12%</div>
+        </div>
+        <div class="bar-row">
+            <div class="bar-label">Inovação / R&D</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 5%;"></div></div>
+            <div class="bar-pct">~5%</div>
+        </div>
+
+        <div style="background: #f8f9fc; padding: 14px 16px; border-radius: 8px; margin-top: 18px; border-left: 4px solid var(--accent);">
+            <p style="font-size: 13.5px; color: var(--text); margin-bottom: 6px;"><strong>📌 Endereçável Foursys:</strong> as faixas de IA, Plataformas Digitais, Integração, Cibersegurança e Sustentação somam <strong>~95% do budget</strong> — todas atendidas diretamente pelo portfólio Foursys (AI Squad, Engenharia Digital, Modernização + Digibee, Cibersegurança, AMS).</p>
+            <p style="font-size: 13.5px; color: var(--text); margin: 0;"><strong>💵 TAM endereçável CAIXA Consórcio 2026:</strong> ~R$ 57-85 milhões (95% de R$ 60-90 mi).</p>
+        </div>
+    </section>
+
+    <!-- PREFERÊNCIAS DE FORNECEDOR -->
+    <section class="section">
+        <h3><span class="num">13</span> Preferências de Fornecedor (inferidas)</h3>
+
+        <h4 style="font-size: 14px; margin-bottom: 8px; color: var(--text);">Critérios de alta relevância</h4>
+        <div class="tags">
+            <span class="tag tag-active">ISO 27001 / 27701</span>
+            <span class="tag tag-active">Track-record em setor financeiro</span>
+            <span class="tag tag-active">Time-to-market curto (≤ 90 dias)</span>
+            <span class="tag tag-active">Governança de dados e LGPD</span>
+            <span class="tag tag-active">Capacidade de squad multidisciplinar</span>
+            <span class="tag tag-active">Aceleradores próprios / produtos</span>
+            <span class="tag tag-active">Aderência a ecossistema Salesforce</span>
+        </div>
+
+        <div class="info-grid" style="margin-top: 18px;">
+            <div class="info-card">
+                <div class="label">Perfil de fornecedor buscado</div>
+                <div class="value">Parceiro estratégico de longo prazo, com produto proprietário, governança madura e capacidade de transferir conhecimento (alinhado ao movimento de internalização)</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Modelo de contratação preferido</div>
+                <div class="value">Squad dedicado + AMS, com SLA agressivo. Projetos por fases curtas (60-90 dias) com entregas mensuráveis.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="brand-line">four<span style="color: var(--accent)">sys</span> | Pre-Sales Intelligence Report | Bench Empresas</div>
+        <div>Gerado automaticamente — Confidencial | Data: Abril 2026</div>
+        <div style="margin-top: 6px; font-size: 12px;">Fontes: LinkedIn público, CAIXA Seguridade (CXSE3), Valor Econômico (fev/2026), Revista Apólice, Universo do Seguro, TI Inside, ABAC, CQCS, Empreendedor.com.br, Diário da Região</div>
+    </footer>
+</div>
+
+<button class="print-btn" onclick="window.print()" title="Imprimir relatório">🖨️</button>
+
+</body>
+</html>

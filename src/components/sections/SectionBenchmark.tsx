@@ -30,6 +30,7 @@ import {
 const SOURCE_COLORS: Record<BenchmarkSource, { bg: string; text: string; border: string; primary: string }> = {
   santander: { bg: 'rgba(204,0,0,0.12)', text: '#FF6B6B', border: 'rgba(204,0,0,0.32)', primary: '#CC0000' },
   itforum: { bg: 'rgba(0,114,206,0.12)', text: '#5BB4FF', border: 'rgba(0,114,206,0.32)', primary: '#004C97' },
+  'bench-empresas': { bg: 'rgba(139,92,246,0.12)', text: '#A78BFA', border: 'rgba(139,92,246,0.32)', primary: '#8B5CF6' },
 }
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
@@ -176,11 +177,16 @@ export function SectionBenchmark() {
             <Users size={12} />
             {lang === 'pt' ? 'Todas as origens' : 'All sources'} ({contacts.length})
           </button>
-          {(['santander', 'itforum'] as BenchmarkSource[]).map(src => {
+          {(['santander', 'itforum', 'bench-empresas'] as BenchmarkSource[]).map(src => {
             const palette = SOURCE_COLORS[src]
             const count = sourceCounts.get(src) ?? 0
             const active = activeSource === src
-            const label = src === 'santander' ? 'Santander' : (lang === 'pt' ? 'IT Fórum' : 'IT Forum')
+            const label =
+              src === 'santander'
+                ? 'Santander'
+                : src === 'itforum'
+                  ? (lang === 'pt' ? 'IT Fórum' : 'IT Forum')
+                  : (lang === 'pt' ? 'Bench Empresas' : 'Company Bench')
             return (
               <button
                 key={src}
@@ -362,12 +368,14 @@ export function SectionBenchmark() {
                           <ChevronRight size={10} className="group-hover:translate-x-0.5 transition-transform" />
                         </div>
                       )}
-                      <div
-                        className="w-8 h-8 sm:w-auto sm:h-auto sm:px-2 sm:py-0.5 rounded-full text-[10px] font-bold flex-shrink-0 flex items-center justify-center"
-                        style={{ backgroundColor: `${scoreColor}20`, color: scoreColor, border: `1px solid ${scoreColor}40` }}
-                      >
-                        {contact.topScore}
-                      </div>
+                      {contact.source !== 'bench-empresas' && (
+                        <div
+                          className="w-8 h-8 sm:w-auto sm:h-auto sm:px-2 sm:py-0.5 rounded-full text-[10px] font-bold flex-shrink-0 flex items-center justify-center"
+                          style={{ backgroundColor: `${scoreColor}20`, color: scoreColor, border: `1px solid ${scoreColor}40` }}
+                        >
+                          {contact.topScore}
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -406,12 +414,14 @@ export function SectionBenchmark() {
                           {contact.revenue}
                         </span>
                       )}
-                      <span
-                        className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold whitespace-nowrap"
-                        style={{ backgroundColor: oppColor.bg, color: oppColor.text, border: `1px solid ${oppColor.border}` }}
-                      >
-                        {contact.opportunities} {t('clientSections.extra2.projects')}
-                      </span>
+                      {contact.source !== 'bench-empresas' && (
+                        <span
+                          className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold whitespace-nowrap"
+                          style={{ backgroundColor: oppColor.bg, color: oppColor.text, border: `1px solid ${oppColor.border}` }}
+                        >
+                          {contact.opportunities} {t('clientSections.extra2.projects')}
+                        </span>
+                      )}
                     </div>
                     <span
                       className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold truncate max-w-[120px] sm:max-w-[140px]"
