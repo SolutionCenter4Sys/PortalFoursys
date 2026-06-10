@@ -1,4 +1,4 @@
-import { navigationItems } from '../data/navigation'
+﻿import { navigationItems } from '../data/navigation'
 import { faqItems } from '../data/faq'
 import { cases } from '../data/cases'
 import { serviceLines, deliveryModels } from '../data/services'
@@ -67,9 +67,9 @@ export function buildSearchIndex(): SearchEntry[] {
   entries.push({
     id: 'nav-kiam-comparison',
     kind: 'section',
-    title: 'KIAM vs Mercado',
-    subtitle: 'IA na Foursys · Comparativo KIAM vs Hyperscalers vs Open-Source',
-    searchable: norm('kiam moxe comparativo hyperscalers vertex bedrock copilot langgraph crewai open source plataforma'),
+    title: 'Foursys Nexus vs Mercado',
+    subtitle: 'IA na Foursys · Comparativo Foursys Nexus vs Hyperscalers vs Open-Source',
+    searchable: norm('foursys nexus kiam moxe comparativo hyperscalers vertex bedrock copilot langgraph crewai open source plataforma'),
     icon: 'scale',
     targetSection: 'kiam-comparison',
     category: 'Sessões',

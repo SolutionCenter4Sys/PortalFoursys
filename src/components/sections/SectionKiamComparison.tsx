@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 import {
   BrainCircuit, Shield, DollarSign, Timer, Lock, Layers,
   Bot, Blocks, CheckCircle2, XCircle, AlertTriangle,
@@ -260,14 +260,14 @@ export function SectionKiamComparison() {
 
           <h2 className="text-3xl md:text-5xl font-black text-white leading-tight mb-4">
             {pt
-              ? <>KIAM <span className="text-foursys-primary">vs.</span> Mercado</>
-              : <>KIAM <span className="text-foursys-primary">vs.</span> Market</>}
+              ? <>Foursys Nexus <span className="text-foursys-primary">vs.</span> Mercado</>
+              : <>Foursys Nexus <span className="text-foursys-primary">vs.</span> Market</>}
           </h2>
 
           <p className="text-sm md:text-base text-foursys-text-muted max-w-2xl mx-auto leading-relaxed">
             {pt
-              ? 'Por que KIAM é a única opção com governança no núcleo, produto pronto e adaptação ao DNA da empresa — comparada a Hyperscalers, Plataformas Dev e Open-Source.'
-              : 'Why KIAM is the only option with governance at the core, ready product and adaptation to company DNA — compared to Hyperscalers, Dev Platforms and Open-Source.'}
+              ? 'Por que Foursys Nexus é a única opção com governança no núcleo, produto pronto e adaptação ao DNA da empresa — comparada a Hyperscalers, Plataformas Dev e Open-Source.'
+              : 'Why Foursys Nexus is the only option with governance at the core, ready product and adaptation to company DNA — compared to Hyperscalers, Dev Platforms and Open-Source.'}
           </p>
 
           <div className="mt-6 flex justify-center">
@@ -286,7 +286,7 @@ export function SectionKiamComparison() {
           tabIndex={-1}
           className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10 focus:outline-none"
         >
-          {/* KIAM destacado */}
+          {/* Foursys Nexus destacado */}
           <div
             className="relative rounded-2xl p-4 text-center order-first md:order-none md:col-span-1"
             style={{
@@ -300,7 +300,7 @@ export function SectionKiamComparison() {
             </span>
             <div className="flex items-center justify-center gap-2 mb-1 mt-1">
               <BrainCircuit size={20} className="text-foursys-primary" />
-              <span className="text-lg font-black text-white">KIAM</span>
+              <span className="text-lg font-black text-white">Foursys Nexus</span>
             </div>
             <p className="text-[10px] text-foursys-text-muted leading-tight">
               {pt ? 'Sistema operacional cognitivo SaaS' : 'SaaS cognitive operating system'}
@@ -374,7 +374,7 @@ export function SectionKiamComparison() {
                   }}
                 >
                   <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-xs font-black text-foursys-primary">KIAM</span>
+                    <span className="text-xs font-black text-foursys-primary">Foursys Nexus</span>
                     <VerdictBadge verdict={row.kiam.verdict} lang={L} />
                   </div>
                   <p className="text-[11px] text-white/85 leading-relaxed">{row.kiam.note[L]}</p>
@@ -421,8 +421,8 @@ export function SectionKiamComparison() {
           </h3>
           <p className="text-sm md:text-base text-white/90 leading-relaxed">
             {pt
-              ? <>KIAM é o único produto pronto que combina <span className="text-foursys-primary font-bold">governança no núcleo</span>, <span className="text-foursys-primary font-bold">FinOps nativo</span> e <span className="text-foursys-primary font-bold">adaptação ao DNA da empresa</span> — entregando valor em semanas em vez de meses, sem lock-in de provedor.</>
-              : <>KIAM is the only ready product combining <span className="text-foursys-primary font-bold">core governance</span>, <span className="text-foursys-primary font-bold">native FinOps</span> and <span className="text-foursys-primary font-bold">company-DNA adaptation</span> — delivering value in weeks instead of months, with no vendor lock-in.</>}
+              ? <>Foursys Nexus é o único produto pronto que combina <span className="text-foursys-primary font-bold">governança no núcleo</span>, <span className="text-foursys-primary font-bold">FinOps nativo</span> e <span className="text-foursys-primary font-bold">adaptação ao DNA da empresa</span> — entregando valor em semanas em vez de meses, sem lock-in de provedor.</>
+              : <>Foursys Nexus is the only ready product combining <span className="text-foursys-primary font-bold">core governance</span>, <span className="text-foursys-primary font-bold">native FinOps</span> and <span className="text-foursys-primary font-bold">company-DNA adaptation</span> — delivering value in weeks instead of months, with no vendor lock-in.</>}
           </p>
         </motion.div>
 
@@ -434,16 +434,16 @@ export function SectionKiamComparison() {
           className="text-center pt-8 border-t border-white/[0.06]"
         >
           <p className="text-sm text-foursys-text-muted mb-4">
-            {pt ? 'Quer ver KIAM em ação na sua operação?' : 'Want to see KIAM in action in your operation?'}
+            {pt ? 'Quer ver Foursys Nexus em ação na sua operação?' : 'Want to see Foursys Nexus in action in your operation?'}
           </p>
           <a
-            href="mailto:contato@foursys.com.br?subject=KIAM%20-%20Plataforma%20de%20IA"
+            href="mailto:contato@foursys.com.br?subject=Foursys%20Nexus%20-%20Plataforma%20de%20IA"
             data-voz-detalhe="kiam-comp-cta"
             data-voz-detalhe-secao="kiam-comparison"
             data-voz-detalhe-rotulo={pt ? 'Falar com a Foursys' : 'Talk to Foursys'}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-foursys-primary text-white text-sm font-bold hover:bg-foursys-primary/90 transition-all cursor-pointer"
           >
-            {pt ? 'Falar com a Foursys sobre KIAM' : 'Talk to Foursys about KIAM'}
+            {pt ? 'Falar com a Foursys sobre o Foursys Nexus' : 'Talk to Foursys about Foursys Nexus'}
             <ArrowRight size={14} />
           </a>
         </motion.div>

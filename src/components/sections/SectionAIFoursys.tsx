@@ -1,4 +1,4 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   BrainCircuit, Users, Rocket, DollarSign, Lightbulb,
@@ -963,7 +963,7 @@ const HOW_ITEMS: HowItem[] = [
   },
   {
     icon: <BrainCircuit size={24} />,
-    title: { pt: 'KIAM', en: 'KIAM' },
+    title: { pt: 'Foursys Nexus', en: 'Foursys Nexus' },
     subtitle: {
       pt: 'O sistema operacional cognitivo da sua empresa',
       en: 'Your company\'s cognitive operating system',
@@ -1021,10 +1021,10 @@ const HOW_ITEMS: HowItem[] = [
         },
         {
           type: 'text',
-          title: { pt: 'O que é KIAM', en: 'What is KIAM' },
+          title: { pt: 'O que é Foursys Nexus', en: 'What is Foursys Nexus' },
           body: {
-            pt: 'KIAM é um sistema operacional cognitivo entregue como SaaS. Em uma única plataforma, sua empresa cria, orquestra e governa agentes autônomos, fluxos agênticos e skills. Opera em ambiente multi-cloud e seleciona dinamicamente o melhor modelo de IA para cada tarefa. Integra-se aos sistemas, canais e bases de conhecimento da empresa — aprendendo o DNA da organização e entregando respostas assertivas e contextualizadas.',
-            en: 'KIAM is a cognitive operating system delivered as SaaS. On a single platform, your company creates, orchestrates and governs autonomous agents, agentic flows and skills. It operates in a multi-cloud environment and dynamically selects the best AI model for each task. It integrates with your company\'s systems, channels and knowledge bases — learning the organization\'s DNA and delivering assertive, contextualized responses.',
+            pt: 'Foursys Nexus é um sistema operacional cognitivo entregue como SaaS. Em uma única plataforma, sua empresa cria, orquestra e governa agentes autônomos, fluxos agênticos e skills. Opera em ambiente multi-cloud e seleciona dinamicamente o melhor modelo de IA para cada tarefa. Integra-se aos sistemas, canais e bases de conhecimento da empresa — aprendendo o DNA da organização e entregando respostas assertivas e contextualizadas.',
+            en: 'Foursys Nexus is a cognitive operating system delivered as SaaS. On a single platform, your company creates, orchestrates and governs autonomous agents, agentic flows and skills. It operates in a multi-cloud environment and dynamically selects the best AI model for each task. It integrates with your company\'s systems, channels and knowledge bases — learning the organization\'s DNA and delivering assertive, contextualized responses.',
           },
         },
         {
@@ -1051,10 +1051,10 @@ const HOW_ITEMS: HowItem[] = [
         },
         {
           type: 'steps',
-          title: { pt: 'Os 3 Pilares da Governança KIAM', en: 'The 3 KIAM Governance Pillars' },
+          title: { pt: 'Os 3 Pilares da Governança Foursys Nexus', en: 'The 3 Foursys Nexus Governance Pillars' },
           note: {
-            pt: 'O que diferencia KIAM de qualquer toolkit de hyperscaler: governança não é plugin, é núcleo do produto.',
-            en: 'What sets KIAM apart from any hyperscaler toolkit: governance is not a plugin, it\'s the product\'s core.',
+            pt: 'O que diferencia Foursys Nexus de qualquer toolkit de hyperscaler: governança não é plugin, é núcleo do produto.',
+            en: 'What sets Foursys Nexus apart from any hyperscaler toolkit: governance is not a plugin, it\'s the product\'s core.',
           },
           steps: [
             { num: '01', title: { pt: 'Construção Segura e Guiada', en: 'Secure Guided Building' }, desc: { pt: 'Boas práticas aplicadas por padrão no desenho de agentes e skills, com análise estática e dinâmica dos fluxos construídos', en: 'Best practices applied by default in agent and skill design, with static and dynamic analysis of built flows' } },
@@ -1066,32 +1066,32 @@ const HOW_ITEMS: HowItem[] = [
           type: 'dimensions',
           title: { pt: 'Posicionamento no Mercado', en: 'Market Positioning' },
           note: {
-            pt: 'KIAM é produto pronto com governança embutida, adaptado ao DNA da empresa — não um toolkit técnico genérico.',
-            en: 'KIAM is a ready-made product with built-in governance, adapted to the company\'s DNA — not a generic technical toolkit.',
+            pt: 'Foursys Nexus é produto pronto com governança embutida, adaptado ao DNA da empresa — não um toolkit técnico genérico.',
+            en: 'Foursys Nexus is a ready-made product with built-in governance, adapted to the company\'s DNA — not a generic technical toolkit.',
           },
           dimensions: [
             {
               icon: <Layers size={18} />,
               name: { pt: 'vs. Hyperscalers', en: 'vs. Hyperscalers' },
               items: {
-                pt: ['Copilot Studio, Bedrock, Vertex entregam toolkit técnico', 'Sem governança nativa nem personalização ao negócio', 'KIAM: produto pronto, governança embutida, adaptado ao DNA da empresa'],
-                en: ['Copilot Studio, Bedrock, Vertex deliver technical toolkit', 'No native governance or business customization', 'KIAM: ready product, built-in governance, adapted to company DNA'],
+                pt: ['Copilot Studio, Bedrock, Vertex entregam toolkit técnico', 'Sem governança nativa nem personalização ao negócio', 'Foursys Nexus: produto pronto, governança embutida, adaptado ao DNA da empresa'],
+                en: ['Copilot Studio, Bedrock, Vertex deliver technical toolkit', 'No native governance or business customization', 'Foursys Nexus: ready product, built-in governance, adapted to company DNA'],
               },
             },
             {
               icon: <Bot size={18} />,
               name: { pt: 'vs. Plataformas Dev', en: 'vs. Dev Platforms' },
               items: {
-                pt: ['Focam em code generation e produtividade de squads técnicos', 'Limitadas à engenharia de software', 'KIAM: transforma toda a operação corporativa, não só engenharia'],
-                en: ['Focus on code generation and technical squad productivity', 'Limited to software engineering', 'KIAM: transforms the entire corporate operation, not just engineering'],
+                pt: ['Focam em code generation e produtividade de squads técnicos', 'Limitadas à engenharia de software', 'Foursys Nexus: transforma toda a operação corporativa, não só engenharia'],
+                en: ['Focus on code generation and technical squad productivity', 'Limited to software engineering', 'Foursys Nexus: transforms the entire corporate operation, not just engineering'],
               },
             },
             {
               icon: <Blocks size={18} />,
               name: { pt: 'vs. Open-Source', en: 'vs. Open-Source' },
               items: {
-                pt: ['LangGraph, CrewAI e similares exigem time de engenharia dedicado', 'Construção e manutenção sob responsabilidade do cliente', 'KIAM: SaaS pronto; qualquer usuário da empresa constrói'],
-                en: ['LangGraph, CrewAI and similar require dedicated engineering team', 'Building and maintenance under client responsibility', 'KIAM: ready SaaS; any company user can build'],
+                pt: ['LangGraph, CrewAI e similares exigem time de engenharia dedicado', 'Construção e manutenção sob responsabilidade do cliente', 'Foursys Nexus: SaaS pronto; qualquer usuário da empresa constrói'],
+                en: ['LangGraph, CrewAI and similar require dedicated engineering team', 'Building and maintenance under client responsibility', 'Foursys Nexus: ready SaaS; any company user can build'],
               },
             },
           ],
@@ -1128,10 +1128,10 @@ const HOW_ITEMS: HowItem[] = [
         },
         {
           type: 'highlight',
-          title: { pt: 'KIAM + Fusion Teams — Adoção Acelerada', en: 'KIAM + Fusion Teams — Accelerated Adoption' },
+          title: { pt: 'Foursys Nexus + Fusion Teams — Adoção Acelerada', en: 'Foursys Nexus + Fusion Teams — Accelerated Adoption' },
           body: {
-            pt: 'KIAM pode ser adotada isoladamente como SaaS. Para empresas que querem extrair valor máximo desde o primeiro ciclo, o programa Fusion Teams do Studio de Inovação Foursys embarca com uma célula multidisciplinar que capacita o time do cliente e entrega as primeiras jornadas automatizadas diretamente na plataforma — deixando autonomia residual para a área continuar inovando sozinha.',
-            en: 'KIAM can be adopted standalone as SaaS. For companies wanting to extract maximum value from the first cycle, the Foursys Innovation Studio Fusion Teams program brings a multidisciplinary cell that trains the client team and delivers the first automated journeys directly on the platform — leaving residual autonomy for the area to continue innovating on its own.',
+            pt: 'Foursys Nexus pode ser adotada isoladamente como SaaS. Para empresas que querem extrair valor máximo desde o primeiro ciclo, o programa Fusion Teams do Studio de Inovação Foursys embarca com uma célula multidisciplinar que capacita o time do cliente e entrega as primeiras jornadas automatizadas diretamente na plataforma — deixando autonomia residual para a área continuar inovando sozinha.',
+            en: 'Foursys Nexus can be adopted standalone as SaaS. For companies wanting to extract maximum value from the first cycle, the Foursys Innovation Studio Fusion Teams program brings a multidisciplinary cell that trains the client team and delivers the first automated journeys directly on the platform — leaving residual autonomy for the area to continue innovating on its own.',
           },
         },
       ],
@@ -1299,10 +1299,10 @@ const ENTRY_PORTS: EntryPort[] = [
     icon: <BrainCircuit size={20} />,
     title: { pt: 'Plataforma', en: 'Platform' },
     desc: {
-      pt: 'KIAM — sistema operacional cognitivo SaaS, multi-modelo e governado.',
-      en: 'KIAM — SaaS cognitive operating system, multi-model and governed.',
+      pt: 'Foursys Nexus — sistema operacional cognitivo SaaS, multi-modelo e governado.',
+      en: 'Foursys Nexus — SaaS cognitive operating system, multi-model and governed.',
     },
-    cta: { pt: 'Conhecer KIAM', en: 'Discover KIAM' },
+    cta: { pt: 'Conhecer Foursys Nexus', en: 'Discover Foursys Nexus' },
     color: '#34D399',
   },
 ]
@@ -2927,7 +2927,7 @@ export function SectionAIFoursys() {
   }
 
   function openKiamModal() {
-    const kiamHow = HOW_ITEMS.find(h => h.title.pt === 'KIAM')
+    const kiamHow = HOW_ITEMS.find(h => h.title.pt === 'Foursys Nexus')
     if (kiamHow) setDetailHow(kiamHow)
   }
 
@@ -3107,8 +3107,8 @@ export function SectionAIFoursys() {
           </div>
           <p className="text-xs md:text-sm text-foursys-text-muted leading-relaxed max-w-3xl mb-5">
             {pt
-              ? 'A governança Foursys cobre as 10 dimensões críticas de IA — não como manifesto, mas como prática operacional embutida em KIAM, Fusion Teams e nos frameworks de Strategy e Squad.'
-              : 'Foursys governance covers the 10 critical AI dimensions — not as a manifesto, but as operational practice embedded in KIAM, Fusion Teams and the Strategy and Squad frameworks.'}
+              ? 'A governança Foursys cobre as 10 dimensões críticas de IA — não como manifesto, mas como prática operacional embutida em Foursys Nexus, Fusion Teams e nos frameworks de Strategy e Squad.'
+              : 'Foursys governance covers the 10 critical AI dimensions — not as a manifesto, but as operational practice embedded in Foursys Nexus, Fusion Teams and the Strategy and Squad frameworks.'}
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
             {PILARES_GOVERNANCA.map((item, i) => (
@@ -3139,11 +3139,11 @@ export function SectionAIFoursys() {
                 onClick={openKiamModal}
                 data-voz-detalhe="ai-cta-kiam"
                 data-voz-detalhe-secao="ai-foursys"
-                data-voz-detalhe-rotulo={pt ? 'Conhecer KIAM' : 'Discover KIAM'}
+                data-voz-detalhe-rotulo={pt ? 'Conhecer Foursys Nexus' : 'Discover Foursys Nexus'}
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-foursys-primary hover:text-white transition-colors duration-300 cursor-pointer"
               >
                 <BrainCircuit size={13} />
-                {pt ? 'Conhecer KIAM' : 'Discover KIAM'}
+                {pt ? 'Conhecer Foursys Nexus' : 'Discover Foursys Nexus'}
                 <ArrowRight size={12} />
               </button>
               <button
@@ -3151,11 +3151,11 @@ export function SectionAIFoursys() {
                 onClick={() => navigate('kiam-comparison')}
                 data-voz-detalhe="ai-cta-comparativo"
                 data-voz-detalhe-secao="ai-foursys"
-                data-voz-detalhe-rotulo={pt ? 'KIAM vs mercado' : 'KIAM vs market'}
+                data-voz-detalhe-rotulo={pt ? 'Foursys Nexus vs mercado' : 'Foursys Nexus vs market'}
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-foursys-primary hover:text-white transition-colors duration-300 cursor-pointer"
               >
                 <Scale size={13} />
-                {pt ? 'KIAM vs mercado' : 'KIAM vs market'}
+                {pt ? 'Foursys Nexus vs mercado' : 'Foursys Nexus vs market'}
                 <ArrowRight size={12} />
               </button>
             </div>

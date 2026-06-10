@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+﻿import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { AppProvider } from '../context/AppContext'
 import { LanguageProvider } from '../i18n/LanguageContext'
@@ -97,14 +97,14 @@ describe('AI section content', () => {
     expect(moxeElements.length).toBe(0)
   })
 
-  it('SectionAIFoursys mostra a marca KIAM', () => {
+  it('SectionAIFoursys mostra a marca Foursys Nexus', () => {
     renderWithProvider(<SectionAIFoursys />)
-    expect(screen.getAllByText(/KIAM/).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/Foursys Nexus/).length).toBeGreaterThan(0)
   })
 
   it('SectionKiamComparison mostra a matriz comparativa', () => {
     renderWithProvider(<SectionKiamComparison />)
-    expect(screen.getAllByText(/KIAM/i).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/Foursys Nexus/i).length).toBeGreaterThan(0)
   })
 })
 
