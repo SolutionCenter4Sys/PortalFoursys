@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Maximize2, ArrowRight } from 'lucide-react'
+import { X, Maximize2 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { useLanguage } from '../../i18n'
 import { DynIcon } from '../../utils/iconMap'
@@ -43,6 +43,13 @@ interface IntegratedStrategy {
   note: string
 }
 
+interface ServiceModelBlock {
+  title: string
+  description: string
+  factors: { icon: string; title: string; items: string[] }[]
+  note: string
+}
+
 interface RHContent {
   badge: string
   title: string
@@ -51,6 +58,7 @@ interface RHContent {
   pillars: Pillar[]
   platform: PlatformBlock
   integrated: IntegratedStrategy
+  serviceModel: ServiceModelBlock
   valueTitle: string
   values: { icon: string; title: string; description: string }[]
   closing: string
@@ -244,13 +252,14 @@ const rhContentI18n: Record<'pt' | 'en', RHContent> = {
         'A Foursys utiliza a Fourmakers, sua plataforma proprietária de inteligência organizacional, como principal ambiente de gestão integrada de pessoas, processos, dados e agentes de Inteligência Artificial.',
       title: 'Plataforma Fourmakers',
       description:
-        'Estruturada sobre 4 pilares de transformação organizacional, promove atendimento inteligente, integração com IA, automação e desenvolvimento humano, garantindo escalabilidade, rastreabilidade e alinhamento estratégico.',
+        'Estruturada sobre 4 pilares de transformação organizacional, promove atendimento inteligente, integração com IA, automação e desenvolvimento humano, garantindo escalabilidade, rastreabilidade e alinhamento estratégico. A padronização e a automação de processos reduzem atividades manuais e liberam o time para focar no relacionamento com gestores, sem perder qualidade operacional.',
       pillars: [
         {
           title: 'RH Digital',
           icon: 'clipboard-list',
           items: [
             'Gestão de ponto e jornada',
+            'Cartão de ponto do colaborador disponível na ferramenta',
             'Férias e afastamentos',
             'Timesheet e alocação de equipes',
             'Gestão de terceiros',
@@ -309,6 +318,41 @@ const rhContentI18n: Record<'pt' | 'en', RHContent> = {
         { value: '85%', label: 'Favorabilidade GPTW (2025)' },
       ],
       note: 'Nossa estratégia de talentos foi desenhada para garantir que os profissionais certos estejam nos projetos certos, permaneçam engajados e sustentem resultados para nossos clientes.',
+    },
+    serviceModel: {
+      title: 'Modelo de Atendimento aos Gestores',
+      description:
+        'Como sustentamos proximidade, agilidade e accountability no relacionamento com os gestores dos nossos clientes — os fatores de sucesso que diferenciam a operação.',
+      factors: [
+        {
+          icon: 'handshake',
+          title: 'Proximidade com os Gestores',
+          items: [
+            'Conexões fortes e relacionamento de confiança com cada gestor',
+            'Atendimento personalizado ao contexto e à necessidade de cada conta',
+            'Atuação consultiva, gerando confiança e previsibilidade',
+          ],
+        },
+        {
+          icon: 'zap',
+          title: 'Agilidade com Assertividade',
+          items: [
+            'Tempo de resposta rápido às demandas',
+            'Qualidade e precisão nas informações fornecidas',
+            'Menos retrabalho e escalonamentos desnecessários',
+          ],
+        },
+        {
+          icon: 'headphones',
+          title: 'Modelo SPOC (Ponto Único de Contato)',
+          items: [
+            'Focal point responsável por cada consultoria/conta',
+            'Comunicação e acompanhamento centralizados',
+            'Mais proximidade, rapidez na decisão e accountability',
+          ],
+        },
+      ],
+      note: 'A combinação de relacionamento próximo, excelência operacional e governança clara cria um modelo escalável que fortalece a satisfação dos gestores, reduz ruídos operacionais e aumenta a percepção de valor. O cliente percebe não apenas a qualidade dos consultores, mas também a eficiência da operação que os suporta.',
     },
     valueTitle: 'O que isso gera para nossos clientes',
     values: [
@@ -476,13 +520,14 @@ const rhContentI18n: Record<'pt' | 'en', RHContent> = {
         'Foursys uses Fourmakers, its proprietary organizational intelligence platform, as the main environment for the integrated management of people, processes, data and Artificial Intelligence agents.',
       title: 'Fourmakers Platform',
       description:
-        'Built on 4 pillars of organizational transformation, it promotes intelligent service, AI integration, automation and human development, ensuring scalability, traceability and strategic alignment.',
+        'Built on 4 pillars of organizational transformation, it promotes intelligent service, AI integration, automation and human development, ensuring scalability, traceability and strategic alignment. Process standardization and automation reduce manual activities and free the team to focus on the relationship with managers, without losing operational quality.',
       pillars: [
         {
           title: 'Digital HR',
           icon: 'clipboard-list',
           items: [
             'Time and attendance management',
+            'Employee time card available in the platform',
             'Vacation and leave',
             'Timesheet and team allocation',
             'Third-party management',
@@ -541,6 +586,41 @@ const rhContentI18n: Record<'pt' | 'en', RHContent> = {
         { value: '85%', label: 'GPTW favorability (2025)' },
       ],
       note: 'Our talent strategy was designed to ensure the right professionals are on the right projects, stay engaged and sustain results for our clients.',
+    },
+    serviceModel: {
+      title: 'Client Manager Service Model',
+      description:
+        'How we sustain proximity, agility and accountability in the relationship with our clients\' managers — the success factors that set the operation apart.',
+      factors: [
+        {
+          icon: 'handshake',
+          title: 'Proximity with Managers',
+          items: [
+            'Strong, trust-based relationships with each manager',
+            'Service tailored to the context and needs of each account',
+            'Consultative approach that builds trust and predictability',
+          ],
+        },
+        {
+          icon: 'zap',
+          title: 'Agility with Assertiveness',
+          items: [
+            'Fast response time to demands',
+            'Quality and accuracy in the information provided',
+            'Less rework and fewer unnecessary escalations',
+          ],
+        },
+        {
+          icon: 'headphones',
+          title: 'SPOC Model (Single Point of Contact)',
+          items: [
+            'A focal point responsible for each consultancy/account',
+            'Centralized communication and follow-up',
+            'Greater proximity, faster decisions and accountability',
+          ],
+        },
+      ],
+      note: 'Combining close relationships, operational excellence and clear governance creates a scalable model that strengthens manager satisfaction, reduces operational noise and increases perceived value. Clients perceive not only the quality of the consultants, but also the efficiency of the operation that supports them.',
     },
     valueTitle: 'What this generates for our clients',
     values: [
@@ -622,7 +702,7 @@ const atracaoDrillI18n: Record<'pt' | 'en', AtracaoDrill> = {
       },
       {
         page: 'Página 7',
-        title: 'Benefícios para atrair e reconhecer',
+        title: 'Benefícios para atrair',
         intro:
           'Custos subsidiados — 100% Empresa: nossa empresa subsidia integralmente o custo dos principais benefícios de saúde e bem-estar para o titular colaborador, garantindo custo zero de adesão.',
         table: {
@@ -1375,6 +1455,25 @@ const governancaDrillI18n: Record<'pt' | 'en', AtracaoDrill> = {
             items: [{ desc: 'Comitê ESG' }, { desc: 'Pacto Global' }, { desc: 'FourLives' }],
           },
           {
+            heading: 'Excelência operacional na retaguarda',
+            subtitle: 'Resultado: previsibilidade e zero ruído administrativo.',
+            items: [
+              { desc: 'Controle eficiente de horas extras (HE)' },
+              { desc: 'Emissão de notas fiscais dentro dos prazos acordados' },
+              { desc: 'Submissão de documentações obrigatórias sem atrasos' },
+              { desc: 'Processos administrativos transparentes e organizados' },
+            ],
+          },
+          {
+            heading: 'Governança sobre horas extras',
+            subtitle: 'Resultado: faturamento previsível e sem divergências.',
+            items: [
+              { desc: 'Alinhamento prévio das regras de HE com cada gestor' },
+              { desc: 'Definição clara de HE pré-aprovada ou sob autorização' },
+              { desc: 'Prevenção de divergências de faturamento e insatisfação do cliente' },
+            ],
+          },
+          {
             heading: 'Impacto para os clientes',
             items: [
               { desc: 'Segurança da informação' },
@@ -1450,6 +1549,25 @@ const governancaDrillI18n: Record<'pt' | 'en', AtracaoDrill> = {
             heading: 'ESG',
             subtitle: 'Result: sustainability and corporate responsibility.',
             items: [{ desc: 'ESG Committee' }, { desc: 'Global Compact' }, { desc: 'FourLives' }],
+          },
+          {
+            heading: 'Operational excellence in the back office',
+            subtitle: 'Result: predictability and zero administrative noise.',
+            items: [
+              { desc: 'Efficient overtime (OT) control' },
+              { desc: 'Invoice issuance within agreed deadlines' },
+              { desc: 'Mandatory documentation submitted without delays' },
+              { desc: 'Transparent and organized administrative processes' },
+            ],
+          },
+          {
+            heading: 'Overtime governance',
+            subtitle: 'Result: predictable billing with no discrepancies.',
+            items: [
+              { desc: 'Upfront alignment of OT rules with each manager' },
+              { desc: 'Clear definition of pre-approved vs. authorization-based OT' },
+              { desc: 'Prevention of billing discrepancies and client dissatisfaction' },
+            ],
           },
           {
             heading: 'Impact for clients',
@@ -1656,100 +1774,6 @@ function PillarDrillModal({
   )
 }
 
-// ─── Painel de detalhe do pilar ─────────────────────────────────────────────────
-
-function PillarDetail({
-  pillar,
-  label,
-  onDrill,
-  drillLabel,
-}: {
-  pillar: Pillar
-  label: string
-  onDrill?: () => void
-  drillLabel?: string
-}) {
-  return (
-    <motion.div
-      key={pillar.id}
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
-      transition={{ duration: 0.3 }}
-      className="rounded-2xl border p-5 md:p-7"
-      style={{ borderColor: `${pillar.color}40`, background: `linear-gradient(135deg, ${pillar.color}12, transparent 70%)` }}
-    >
-      {/* Cabeçalho */}
-      <div className="flex items-center justify-between gap-3 mb-5 flex-wrap">
-        <div className="flex items-center gap-3">
-          <div
-            className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-            style={{ background: `${pillar.color}22`, border: `1px solid ${pillar.color}55` }}
-          >
-            <DynIcon name={pillar.icon} size={22} style={{ color: pillar.color }} />
-          </div>
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: pillar.color }}>
-              {label}
-            </p>
-            <h3 className="text-xl md:text-2xl font-black text-white leading-tight">
-              {pillar.title} <span className="text-foursys-text-muted font-semibold">· {pillar.scope}</span>
-            </h3>
-          </div>
-        </div>
-        {onDrill && (
-          <button
-            type="button"
-            onClick={onDrill}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white transition-all active:scale-95"
-            style={{ background: `${pillar.color}22`, border: `1px solid ${pillar.color}66` }}
-          >
-            <Maximize2 size={14} style={{ color: pillar.color }} />
-            {drillLabel}
-            <ArrowRight size={14} style={{ color: pillar.color }} />
-          </button>
-        )}
-      </div>
-
-      {/* Stats */}
-      <div className="grid grid-cols-3 gap-3 mb-6">
-        {pillar.stats.map((stat) => (
-          <div key={stat.label} className="rounded-xl bg-foursys-bg/40 border border-white/[0.06] p-3 text-center">
-            <div className="text-base md:text-xl font-black leading-tight" style={{ color: pillar.color }}>
-              {stat.value}
-            </div>
-            <div className="text-[10px] text-foursys-text-dim mt-1 leading-snug">{stat.label}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* Grupos de detalhe */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {pillar.groups.map((group) => (
-          <div key={group.title} className="rounded-xl bg-foursys-surface/40 border border-white/[0.06] p-4">
-            <div
-              className="text-[11px] font-bold uppercase tracking-[0.12em] pb-2 mb-3 border-b-2"
-              style={{ color: pillar.color, borderColor: `${pillar.color}55` }}
-            >
-              {group.title}
-            </div>
-            <ul className="space-y-2">
-              {group.items.map((item) => (
-                <li key={item} className="flex items-start gap-2 text-xs text-foursys-text-muted leading-snug">
-                  <span className="flex-shrink-0 mt-0.5" style={{ color: pillar.color }}>
-                    ✓
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </motion.div>
-  )
-}
-
 // ─── Componente principal ───────────────────────────────────────────────────────
 
 export function SectionRHTalentos() {
@@ -1767,13 +1791,6 @@ export function SectionRHTalentos() {
   const [activeId, setActiveId] = useState<string>(content.pillars[0].id)
   const [drillPillarId, setDrillPillarId] = useState<string | null>(null)
 
-  const activePillar = content.pillars.find((p) => p.id === activeId) ?? content.pillars[0]
-  const drillPagesLabel: Record<string, string> = {
-    atracao: lang === 'pt' ? 'Ver conteúdo completo (págs. 5–7)' : 'View full content (pp. 5–7)',
-    desenvolvimento: lang === 'pt' ? 'Ver conteúdo completo (págs. 11–14)' : 'View full content (pp. 11–14)',
-    retencao: lang === 'pt' ? 'Ver conteúdo completo (págs. 8–10)' : 'View full content (pp. 8–10)',
-    governanca: lang === 'pt' ? 'Ver conteúdo completo (págs. 15–16)' : 'View full content (pp. 15–16)',
-  }
   const drillPillar = drillPillarId ? content.pillars.find((p) => p.id === drillPillarId) : null
 
   return (
@@ -1852,23 +1869,59 @@ export function SectionRHTalentos() {
           })}
         </div>
 
-        {/* ── Detalhamento do pilar selecionado ── */}
-        <div className="mb-8 md:mb-10">
-          <AnimatePresence mode="wait">
-            <PillarDetail
-              pillar={activePillar}
-              label={content.detailLabel}
-              onDrill={drillMap[activePillar.id] ? () => setDrillPillarId(activePillar.id) : undefined}
-              drillLabel={drillPagesLabel[activePillar.id]}
-            />
-          </AnimatePresence>
-        </div>
+        {/* ── Estratégia Integrada de Talentos (pág. 4 do PDF) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15, duration: 0.4 }}
+          className="mb-8 md:mb-10"
+        >
+          <h3 className="text-lg md:text-2xl font-black text-foursys-primary leading-tight mb-1.5">
+            {content.integrated.title}
+          </h3>
+          <p className="text-xs md:text-sm text-foursys-text-muted leading-relaxed mb-6 max-w-4xl">
+            {content.integrated.description}
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
+            {content.integrated.steps.map((step, i) => (
+              <motion.div
+                key={step.stage}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.22 + i * 0.05, duration: 0.32 }}
+                className="relative rounded-xl bg-foursys-surface/40 border border-white/[0.08] p-3.5 text-center"
+              >
+                <span className="absolute -top-2 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-foursys-primary text-foursys-bg text-[11px] font-black flex items-center justify-center">
+                  {i + 1}
+                </span>
+                <p className="mt-2 text-sm font-black text-white uppercase tracking-wide">{step.stage}</p>
+                <p className="text-[10px] text-foursys-text-muted leading-snug mt-1">{step.action}</p>
+              </motion.div>
+            ))}
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+            {content.integrated.stats.map((stat) => (
+              <div
+                key={stat.label}
+                className="rounded-xl bg-foursys-primary/10 border border-foursys-primary/25 p-4 flex items-center gap-3"
+              >
+                <span className="text-2xl md:text-3xl font-black text-foursys-primary leading-none">{stat.value}</span>
+                <span className="text-[11px] md:text-xs font-semibold text-foursys-text-muted leading-snug uppercase tracking-wide">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
+          <p className="text-sm md:text-base text-foursys-text-muted leading-relaxed max-w-4xl">
+            {content.integrated.note}
+          </p>
+        </motion.div>
 
         {/* ── Plataforma Fourmakers (pág. 3 do PDF) ── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15, duration: 0.4 }}
+          transition={{ delay: 0.18, duration: 0.4 }}
           className="mb-8 md:mb-10 rounded-2xl bg-foursys-surface/30 border border-white/[0.08] p-5 md:p-7"
         >
           <p className="text-sm md:text-base text-foursys-text-muted leading-relaxed mb-4 max-w-4xl">
@@ -1910,51 +1963,47 @@ export function SectionRHTalentos() {
           </div>
         </motion.div>
 
-        {/* ── Estratégia Integrada de Talentos (pág. 4 do PDF) ── */}
+        {/* ── Modelo de Atendimento aos Gestores (fatores de sucesso) ── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.18, duration: 0.4 }}
+          transition={{ delay: 0.2, duration: 0.4 }}
           className="mb-8 md:mb-10"
         >
           <h3 className="text-lg md:text-2xl font-black text-foursys-primary leading-tight mb-1.5">
-            {content.integrated.title}
+            {content.serviceModel.title}
           </h3>
           <p className="text-xs md:text-sm text-foursys-text-muted leading-relaxed mb-6 max-w-4xl">
-            {content.integrated.description}
+            {content.serviceModel.description}
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
-            {content.integrated.steps.map((step, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+            {content.serviceModel.factors.map((factor, i) => (
               <motion.div
-                key={step.stage}
-                initial={{ opacity: 0, y: 12 }}
+                key={factor.title}
+                initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.22 + i * 0.05, duration: 0.32 }}
-                className="relative rounded-xl bg-foursys-surface/40 border border-white/[0.08] p-3.5 text-center"
+                transition={{ delay: 0.24 + i * 0.06, duration: 0.35 }}
+                className="rounded-xl bg-foursys-surface/40 border border-white/[0.08] p-4 md:p-5 hover:border-foursys-primary/30 transition-colors"
               >
-                <span className="absolute -top-2 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-foursys-primary text-foursys-bg text-[11px] font-black flex items-center justify-center">
-                  {i + 1}
-                </span>
-                <p className="mt-2 text-sm font-black text-white uppercase tracking-wide">{step.stage}</p>
-                <p className="text-[10px] text-foursys-text-muted leading-snug mt-1">{step.action}</p>
+                <div className="flex items-center gap-2.5 mb-3">
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 bg-foursys-primary/15 border border-foursys-primary/30">
+                    <DynIcon name={factor.icon} size={18} className="text-foursys-primary" />
+                  </div>
+                  <span className="text-sm font-bold text-white leading-tight">{factor.title}</span>
+                </div>
+                <ul className="space-y-2">
+                  {factor.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-[11px] md:text-xs text-foursys-text-muted leading-snug">
+                      <DynIcon name="check-circle" size={13} className="text-foursys-primary mt-0.5 flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
-            {content.integrated.stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-xl bg-foursys-primary/10 border border-foursys-primary/25 p-4 flex items-center gap-3"
-              >
-                <span className="text-2xl md:text-3xl font-black text-foursys-primary leading-none">{stat.value}</span>
-                <span className="text-[11px] md:text-xs font-semibold text-foursys-text-muted leading-snug uppercase tracking-wide">
-                  {stat.label}
-                </span>
-              </div>
-            ))}
-          </div>
-          <p className="text-sm md:text-base text-foursys-text-muted leading-relaxed max-w-4xl">
-            {content.integrated.note}
+          <p className="text-sm md:text-base text-foursys-text-muted italic leading-relaxed max-w-4xl pl-3 border-l-2 border-foursys-primary/50">
+            {content.serviceModel.note}
           </p>
         </motion.div>
 
