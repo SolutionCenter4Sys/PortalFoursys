@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  TEMPLATE CANÔNICO — Briefing CIO IT Forum 2026 (Praia do Forte)
+  Design System Foursys (Nunito + navy #222239 / laranja #FF5315 / menta / baunilha)
+  ORDEM DE ZONAS: B (contexto/pré-vendas) → A (comercial/pitch) → C (apêndice técnico)
+  ----------------------------------------------------------------------------
+  INSTRUÇÕES PARA O SUB-AGENTE:
+  1. NÃO altere o <style>. Ele já é o Design System Foursys oficial. Reuse tal e qual.
+  2. Substitua TODOS os {{placeholders}} por conteúdo real pesquisado.
+  3. Respeite a ORDEM física B → A → C.
+  4. Se um dado não existir publicamente: escrever "Não localizado" ou
+     "Dados insuficientes — requer pesquisa adicional". NUNCA inventar.
+  5. Diferencie fato (com fonte) de hipótese consultiva (marcar "hipótese").
+  6. Tetos: apps 3-5, GAPs 4-6, ofertas 3-6, mensagens 5-7, roadmap 5-6, concorrentes 3-5, rapport 5-7.
+  7. Mantenha o bloco ".zone-divider.update-banner" no topo (obrigatório).
+  8. NÃO repetir números de mercado em Segmento (ficam só no header). NÃO incluir SAP em nenhuma seção (nem badge, nem tópico).
+  ============================================================================
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Rafael Rosa | SLC Agrícola</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Rafael Rosa</h1>
+                <h2>CTO / Diretor de Tecnologia — SLC Agrícola</h2>
+                <div class="loc">Agronegócio e Serviços Relacionados · Porto Alegre/RS · CNPJ 89.096.457/0041-42</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Sul (RS) + grande porte</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Receita 2025</div><div class="value">R$ 8,6 bi</div></div>
+                <div class="header-badge"><div class="label">Colaboradores</div><div class="value">~6,7 mil</div></div>
+                <div class="header-badge"><div class="label">Área 25/26</div><div class="value">837 mil ha</div></div>
+                <div class="header-badge"><div class="label">Agro digital 2025</div><div class="value">R$ 12,1 mi</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: RI 2025 + go-live core ERP nuvem (abr/2026) + leitura de comitê + material de apresentação · Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>A <strong>SLC Agrícola S.A.</strong> (B3: SLCE3) é uma das maiores produtoras de grãos e fibras do Brasil, controlada pelo Grupo SLC / família Logemann, com sede em Porto Alegre/RS e ações no Novo Mercado. Opera <strong>26 unidades produtivas em oito estados</strong> (MT, MS, GO, MG, BA, MA, PI e PA), com matriz no RS. Em 2025 registrou receita líquida de <strong>R$ 8,6 bilhões</strong> (Relatório Integrado 2025) e projeta ~837 mil hectares plantados na safra 2025/26. A agenda tecnológica combina agricultura digital (telemetria, drones, taxa variável, IA agronômica), fábrica interna <strong>SLC Digital Labs</strong>, inovação aberta (AgroExponencial / SLC Ventures) e, em abril/2026, go-live do core ERP em nuvem gerenciada — base declarada pelo CTO para IA nativa e conexão ágil com agtechs. <em>Identificação antifraude:</em> razão social SLC AGRICOLA S.A.; CNPJ da planilha IT Forum <strong>89.096.457/0041-42</strong> (estabelecimento); matriz pública 89.096.457/0001-55.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">SLC AGRICOLA S.A.</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">Porto Alegre / RS</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Nacional — 26 fazendas / 8 UFs</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">R$ 8,6 bi (RI 2025)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~6,7 mil (RI 2025)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">S.A. aberta (B3 SLCE3)</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Rafael Rosa</strong> é <strong>CTO / Diretor de Tecnologia</strong> da SLC Agrícola, promovido a partir de Gerente de TI após ~5 anos na companhia (Portal Agro Summit). Lidera <strong>Agricultura Digital + TI</strong>. Trajetória: 20+ anos em tech; IT Manager South America na AGCO (~6 anos); passagens por Kepler Weber e Wilson Sons. Domínio declarado: ERP corporativo, Salesforce, DevOps, RPA, IoT, PLM, multicloud (AWS/Azure/GCP), analytics, cibersegurança e governança digital; processos de soja, milho, algodão e sementes. No go-live do core em nuvem (abr/2026) posicionou a migração como “portal para IA nativa” e extensão via BTP para integrar agtechs sem fragilizar o core. <strong>Poder de decisão:</strong> diretoria com assento em comitês (briefing Trancoso); modelo de compra RFP/concorrência estruturada; critérios fortes em preço, ROI e TCO 3 anos. <strong>Leitura de comitê:</strong> Aurélio Pavinato (CEO), Ivo Brum (CFO/IR), Frederico Logemann (Head de Inovação e Estratégia — família fundadora), Álvaro Dilli (RH). Venda consultiva deve conectar eficiência de campo + risco/controle (CFO) + inovação aberta (Logemann).</p>
+            <div class="grid-2" style="margin-top:14px">
+                <div class="info-card"><div class="label">LinkedIn / cargo</div><div class="value">CTO — Diretor de Tecnologia (confirmado em fontes abertas 2025–2026)</div></div>
+                <div class="info-card"><div class="label">IT Forum</div><div class="value">Presente no último IT Forum: SIM · Confirmado Praia do Forte 2026</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Atua no <strong>agronegócio de commodities em escala industrial</strong> (soja, milho, algodão e outras culturas), com ciclo completo — planejamento, insumos, solo, plantio, colheita, beneficiamento e armazenamento — e braço de portfólio de terras. Posição: referência nacional listada, entre as maiores produtoras de grãos/fibras do país, com diversificação geográfica no Cerrado para mitigar risco climático. Prioridades setoriais: produtividade por hectare, custo de insumos, conectividade de frota, rastreabilidade/ESG e digitalização de decisão agronômica. Pressões: volatilidade de commodities, reforma tributária/compliance fiscal, escassez de talentos de TI no agro, e corrida competitiva em IA/agtech frente a grupos verticalmente integrados (trading + logística). Tendência relevante para venda: quem já estabilizou o core passa a monetizar <strong>camada de extensão</strong> (IA, integração de sensores/agtechs, governança de dados, cibersegurança OT/IT).</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar IA com governança após o go-live do core — risco de “portal aberto” sem fábrica de casos de uso e MLOps (evidência: declaração do CTO sobre IA nativa + BTP).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar dezenas de fontes de campo (telemetria, satélite, drones, apps de pragas) com Digital Labs e core corporativo sem criar dívida de APIs.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Operação distribuída em 26 fazendas / 8 estados — padronizar processos e service desk sob pressão de eficiência.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Provar ROI sob pressão de custos de commodities; agro digital já mostrou R$ 58,2 mi de economia em 2025 — barra de payback sobe.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Superfície de ataque OT/IT cresce com 100% 4G nas fazendas e frota telemetrizada (hipótese: necessidade de cyber industrial).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Atrair e reter talentos de TI/dados no agro (desafio listado no briefing Trancoso; reforçado pela escala Digital Labs).</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">IA nativa sobre o core</span>
+                <span class="tag tag-priority">Conectar agtechs com agilidade</span>
+                <span class="tag tag-priority">Hiperautomação / RPA</span>
+                <span class="tag tag-priority">Decisão agronômica data-driven</span>
+                <span class="tag tag-priority">ITSM/ESM maduro</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Agricultura digital / precisão</span>
+                <span class="tag tag-active">IA / ML / GenAI</span>
+                <span class="tag tag-active">Dados &amp; analytics</span>
+                <span class="tag tag-active">APIs &amp; integração</span>
+                <span class="tag tag-active">Automação / RPA</span>
+                <span class="tag tag-active">Cloud &amp; estabilidade do core</span>
+                <span class="tag tag-active">Irrigação / resiliência operacional</span>
+                <span class="tag tag-active">Cibersegurança (hipótese pós-conectividade)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Fábrica de casos de uso IA pós-core</span>
+                <span class="tag tag-opportunity">iPaaS / orquestração agtech ↔ Digital Labs</span>
+                <span class="tag tag-opportunity">Modernização de apps de campo</span>
+                <span class="tag tag-opportunity">Cyber OT/IT em fazendas conectadas</span>
+                <span class="tag tag-opportunity">Squads AMS / hiperautomação backoffice</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">92/100</span></div>
+                <p>Squads de IA (GenAI, preditiva, visão computacional, hiperautomação) para transformar o “portal de IA” do core em casos de uso com ROI mensurável no campo e no backoffice.</p>
+                <div class="reasons"><ul>
+                    <li>CTO prioriza IA nativa e analytics avançados após go-live abr/2026.</li>
+                    <li>RI 2025 já usa IA em sementes/canteiros; falta industrializar a fábrica de casos.</li>
+                    <li>Fit direto com Digital Labs e Centro de Inteligência Agrícola.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (Digibee iPaaS)</h4><span class="score-badge">88/100</span></div>
+                <p>Integração ágil e governada entre core, Digital Labs, telemetria, CRM e ecossistema de agtechs — sem reinventar o middleware a cada piloto.</p>
+                <div class="reasons"><ul>
+                    <li>Discurso público do CTO: conectar agtechs com agilidade mantendo o core intacto.</li>
+                    <li>Mapa de investimento inclui APIs/integração; ISO 27001/27701 Foursys reduz atrito de compliance.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">84/100</span></div>
+                <p>Acelera produtos do SLC Digital Labs (apps de campo, APIs, UX operacional) com squads DevOps, qualidade e modernização de legado periférico.</p>
+                <div class="reasons"><ul>
+                    <li>Fábrica interna de software é pilar declarado no site de Agricultura Digital.</li>
+                    <li>Escala 26 fazendas exige padronização e throughput de entrega.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">78/100</span></div>
+                <p>Assessment e hardening IT/OT para operação 100% conectada (4G + telemetria), alinhado a ISO e governança de listada.</p>
+                <div class="reasons"><ul>
+                    <li>Expansão de superfície de ataque em campo (hipótese sustentada por conectividade total).</li>
+                    <li>Companhia listada e ESG-sensitive — board sensível a risco cibernético.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">72/100</span></div>
+                <p>Desacoplar e modernizar aplicações satélites ao core (integrações, relatórios, apps de fazenda) para reduzir custo e risco pós-migração.</p>
+                <div class="reasons"><ul>
+                    <li>Fase pós-go-live tipicamente revela dívida técnica periférica.</li>
+                    <li>Complementa AI Squad e FourBlox sem mexer no core estável.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Não abrir com “projeto de ERP”. Abrir com: <em>“Vocês acabaram de estabilizar o core; o jogo agora é industrializar IA e integração de agtechs com governança — como medimos o primeiro R$ 10 mi de valor em 90 dias?”</em> Cite a economia de R$ 58,2 mi do agro digital 2025 como barra de ROI.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Janela pós go-live abr/2026 + IT Forum Praia do Forte: posicionar PoC de AI Squad (visão computacional / predição de insumos) + blueprint FourBlox de orquestração Digital Labs ↔ sensores. Orçamento TI com perspectiva de crescimento (briefing anterior: até +10%).</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>AI Squad proprietário + FourBlox/Digibee + ISO 27001/27701 + 24 anos / 41.000+ projetos. Modelo flexível (Squads, Projetos, AMS). Para o comitê: linguagem de produtividade/ha e risco operacional — não jargão de plataforma.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Grupo Amaggi</h4><p>Conglomerado privado (commodities, logística, energia) com forte verticalização e agenda de rastreabilidade digital. Gap SLC: menos integração trading-logística; oportunidade Foursys em dados de cadeia e integração multi-sistema sem virar “consultoria de ERP”.</p></div>
+            <div class="competitor-card"><h4>BrasilAgro (AGRO3)</h4><p>Listada focada em terras + produção; precision farming e geoespacial. Gap: SLC opera escala maior de área plantada — pressão por padronização e fábrica de software; fit Engenharia Digital + AI Squad.</p></div>
+            <div class="competitor-card"><h4>Adecoagro</h4><p>Player regional com operação agroindustrial diversificada e disciplina de eficiência. Gap: SLC pode diferenciar-se acelerando IA agronômica e Digital Labs com parceiro de delivery.</p></div>
+            <div class="competitor-card"><h4>Cosan / Raízen</h4><p>Referência em digitalização agroindustrial (IA de colheita, drones, plataformas integradas). Gap analysis: SLC avançou no core e no campo digital, mas ainda industrializa GenAI/hiperautomação corporativa — janela para AI Squad + RPA.</p></div>
+            <div class="insight-box"><h4>Gap → monetização</h4><p>Concorrentes maduros em programas digitais integrados. SLC tem ativo raro: Digital Labs + conectividade total + core estável. Foursys monetiza a <strong>camada de extensão</strong> (IA, iPaaS, cyber, modernização periférica), não a troca do core.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">SLC Agrícola (SLCE3) — agro de escala, 26 fazendas, receita R$ 8,6 bi (2025), sede POA/RS.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Rafael Rosa, CTO — ex-AGCO; lidera TI + Agricultura Digital; voz pública no go-live do core nuvem.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Pós-estabilização do core: industrializar IA, integrar agtechs e provar ROI no campo e no backoffice.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Agro digital (R$ 12,1 mi / 2025), IA, dados, APIs, automação, cloud do core — fontes: RI 2025 + declarações CTO (fontes abertas).</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) AI Squad · 2) FourBlox/Digibee · 3) Engenharia Digital (+ Cyber como 4ª).</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 45 min no IT Forum → discovery de 2 casos de uso IA + mapa de integrações Digital Labs.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Pós go-live abr/2026 + ciclo orçamentário 2026/27 + evento Praia do Forte.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “mais ERP”. Vender governança e velocidade da camada de extensão (IA + iPaaS) que protege o core.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Core estável, porta aberta</h4><p>Go-live do ERP em nuvem (21/abr) e promoção de Rafael a CTO consolidam a base. Digital Labs e 100% 4G já geram economia real no campo.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>IA sem fábrica = risco</h4><p>Promessa de IA nativa e agtechs esbarra em integração, governança, talentos e ROI sob pressão de commodities. Concorrentes avançam em programas digitais maduros.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Squads que monetizam a extensão</h4><p>Foursys entra com AI Squad + FourBlox + Engenharia Digital: casos de uso em 90 dias, APIs governadas, cyber alinhada — core intacto.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Industrializar IA agronômica e GenAI com ROI</h4>
+                <p>Evidência: RI 2025 (IA em sementes/canteiros; R$ 58,2 mi economia por aplicação localizada) + CTO fala em “portal para IA nativa”.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — 2–3 casos prioritários (visão de invasoras, previsão de demanda de insumos, copiloto operacional) com métricas de sacas/ha e custo/ha.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual caso de uso de IA, se entregue em 90 dias, o comitê celebraria no board?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de priorização IA (meio dia) com Digital Labs + operações.</p>
+            </div>
+            <div class="business-card">
+                <h4>Orquestrar agtechs e telemetria sem dívida de integração</h4>
+                <p>Evidência: site Agricultura Digital (satélite, drones, pulverização seletiva, apps georreferenciados) + discurso BTP/agtechs.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee) — mapa de integração canônico, APIs versionadas, observabilidade.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quantos pontos de integração “sombra” existem hoje entre fazenda, Labs e core?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment de 2 semanas + blueprint de integração prioritária.</p>
+            </div>
+            <div class="business-card">
+                <h4>Acelerar o SLC Digital Labs como produto interno</h4>
+                <p>Evidência: “fábrica de softwares” própria no site institucional; escala de 26 fazendas.</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital — squads para throughput, DevOps, qualidade e modernização de apps de campo.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual o lead time médio de um app do Labs até adoção em todas as fazendas?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Diagnóstico de delivery + piloto de squad em um produto crítico.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de PoC IA · levar tablet, não binder</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad + FourBlox — porquê: pós-core o budget migra para extensão e integração</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) visão computacional / pulverização seletiva em agro; (2) integração iPaaS em operação multi-site; (3) hiperautomação backoffice em indústria/commodities — adaptar ao jargão de safra e custo/ha. Se case agro Foursys não estiver pronto, usar case de operação distribuída + métricas de ROI.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> o maior ROI não é “mais feature no ERP”; é <em>proteger o investimento do go-live</em> acelerando valor na borda (IA + APIs) com governança — narrativa que ecoa a frase do próprio CTO.</p>
+            <p style="margin-top:8px"><em>Discurso se material faltar: “Rafael, vocês abriram o portal de IA. Nós trazemos a fábrica de casos e a tubulação segura até as agtechs — em 90 dias, com ISO e squad dedicado.”</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>Parabéns pelo go-live — o hard do core está feito; o valor agora está na camada de extensão.</li>
+                <li>Vocês já provaram R$ 58 mi de economia com agro digital; IA industrializada é o próximo múltiplo.</li>
+                <li>Não vamos tocar no core estável: AI Squad + iPaaS ao redor, no ritmo do Digital Labs.</li>
+                <li>Integração de agtechs sem governança vira dívida; FourBlox/Digibee é o antídoto.</li>
+                <li>26 fazendas / 8 estados: o gargalo é throughput de software e padronização — Engenharia Digital.</li>
+                <li>Comitê (CEO/CFO/Inovação) compra produtividade/ha e risco controlado — falamos essa língua.</li>
+                <li>Proposta concreta: discovery de 2 semanas → PoC 90 dias com métricas de board.</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Encontro IT Forum + follow-up com Rafael</td><td>One-pager + agenda discovery</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshops Digital Labs + Ops + Segurança</td><td>Mapa de 5 casos IA + integrações críticas</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>AI Squad em 1 caso de campo + 1 backoffice</td><td>KPI baseline vs resultado; demo board</td><td>60–90 dias</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>FourBlox + Eng. Digital em produto Labs</td><td>Pipeline APIs + release em N fazendas</td><td>1 trimestre</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Modelo AMS + roadmap anual comitê</td><td>MSA / SOW multi-ano; cyber continuous</td><td>T+6–9 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Portal institucional SLC Agrícola</h4><div class="url">https://www.slcagricola.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Site institucional (GTM)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Sinais Azure (CTO Rank / fontes abertas)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Agricultura Digital / precisão</h4><div class="url">https://www.slcagricola.com.br/inovacao/agricultura-digital</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Apps de campo + mapas</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Digital Labs (interno)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Satélite / drone / IoT</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações telemetria (hipótese)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Core ERP corporativo (nuvem gerenciada)</h4><div class="url">Fontes: Agro Summit / TI Inside — go live 21/abr/2026</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Módulos corporativos</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">ERP em nuvem gerenciada (RISE)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Nuvem do fornecedor ERP</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">BTP / extensões</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>CRM / experiência comercial</h4><div class="url">Trajetória CTO: experiência Salesforce (fontes abertas)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não confirmado em produção</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Hipótese Salesforce</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">SaaS</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Multicloud na trajetória do CTO (AWS/Azure/GCP); sinais Azure no site; core ERP em nuvem gerenciada (go live abr/2026); 100% fazendas com 4G.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">Empresa listada (Novo Mercado, ISE/ICO2 em históricos RI). Detalhe de stack de segurança OT/IT: não localizado publicamente — gap de discovery.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">IA em análise de sementes/canteiros; visão computacional em drones; pulverização seletiva; RPA/hiperautomação como prioridade declarada; “portal IA” pós-core.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">Centro de Inteligência Agrícola; mapas de fertilidade/produtividade; telemetria em tempo real; histórico de dados de lavoura.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">Core ERP corporativo em nuvem (versão 2023, modelo RISE) — go live 21/abr/2026; Projeto Mais Agro como jornada estruturante. Extensões via BTP.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">SLC Digital Labs (fábrica interna); apps de apontamento/pragas; CRM (hipótese Salesforce); possível PLM/IoT de frota.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">Site institucional + GTM; QR Code em embalagens SLC Sementes; RI e portal do investidor (empresa listada).</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.slcagricola.com.br/</td><td><span class="status-200">200</span></td><td>HTML institucional</td><td>Não identificado no header</td><td>Google Tag Manager (GTM-) presente no HTML</td></tr>
+                    <tr><td>https://www.slcagricola.com.br/inovacao/agricultura-digital</td><td><span class="status-200">200</span></td><td>Conteúdo editorial</td><td>—</td><td>Descreve Digital Labs, drones, taxa variável, IA</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026 (~11:40 BRT). Só registrar o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · IA</div><h4>Fábrica de casos de uso pós-core</h4><p>Core abre “portal de IA”, mas industrialização de GenAI/MLOps no agro ainda é agenda — risco de pilots isolados.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Agtechs + telemetria + Labs</h4><p>Múltiplos sensores/apps de campo sem iPaaS canônico geram dívida e falhas de dado para decisão.</p><div class="offer">Oferta Foursys: FourBlox (Digibee)</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Delivery</div><h4>Throughput do Digital Labs</h4><p>Fábrica interna existe; escala 26 fazendas exige engenharia de produto e DevOps maduros.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Segurança</div><h4>OT/IT em fazendas 100% 4G</h4><p>Conectividade total amplia superfície; stack de cyber OT pouco visível em fontes abertas.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Legado periférico</div><h4>Satélites do core pós-migração</h4><p>Go-live tipicamente revela integrações e apps satélite com custo/risco — modernizar sem tocar o core.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 6 · Automação</div><h4>Hiperautomação corporativa</h4><p>Prioridade declarada (RPA/ITSM); gap entre automação de campo e backoffice fiscal/financeiro sob reforma tributária.</p><div class="offer">Oferta Foursys: AI Squad + AMS</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Não localizado em fontes abertas desta rodada</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">Porto Alegre / RS (sede)</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">PT (confirmado) · EN provável (carreira AGCO LatAm) — hipótese</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5–7)</h4>
+                <p><strong>1.</strong> Fale produtividade/ha, custo de insumos e safra — não “features de plataforma”.<br>
+                <strong>2.</strong> Reconheça a jornada Mais Agro → go-live nuvem; posicione Foursys na fase seguinte.<br>
+                <strong>3.</strong> Traga ROI concreto (barra: R$ 58 mi economia 2025) e TCO 3 anos — critérios que ele valoriza.<br>
+                <strong>4.</strong> IA com pragmatismo: governança e escalabilidade, zero hype.<br>
+                <strong>5.</strong> Mencione Digital Labs e AgroExponencial — mostra lição de casa.<br>
+                <strong>6.</strong> Respeite a herança gaúcha / Grupo SLC (colheitadeiras → John Deere JV histórica).<br>
+                <strong>7.</strong> Prepare-se para RFP: linguagem consultiva + ISV de nicho; envolva CFO/Inovação cedo.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>Relatório Integrado 2025 (coberturas Folha Estado / Revista Cultivar — receita R$ 8,6 bi; agro digital R$ 12,1 mi)</li>
+                    <li>PwC Agtech Innovation — entrevista Frederico Logemann (2026)</li>
+                    <li>Site slcagricola.com.br — negócio e fazendas</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Portal Agro Summit — go-live core ERP nuvem / RISE (abr/2026)</li>
+                    <li>TI Inside / LinkedIn — Projeto Mais Agro</li>
+                    <li>slcagricola.com.br/inovacao/agricultura-digital</li>
+                    <li>CTO Rank — sinais de stack web (Azure, GTM etc.)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Benchmark Amaggi, BrasilAgro, Adecoagro, Cosan/Raízen (fontes abertas + briefing Trancoso)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>Portal Agro Summit — “Rafael Rosa é novo Diretor de Tecnologia”</li>
+                    <li>IR presentation / MarketScreener — organograma (Rafael Rosa Technology Director)</li>
+                    <li>Planilha CIOs Confirmados IT Forum 10.07 — ID 78</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>HTTP GET https://www.slcagricola.com.br/ — 200 + GTM (21/07/2026)</li>
+                    <li>WebFetch agricultura digital + Agro Summit</li>
+                    <li>Referência P1: Demais CIO\Rafael Rosa - SLC Agricola.html (Trancoso)</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

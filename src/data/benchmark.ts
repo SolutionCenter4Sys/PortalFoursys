@@ -1,11 +1,12 @@
 import type { Language } from '../i18n/types'
 import { getSantanderClient } from './clients/santander'
 import { getItforumClient } from './clients/itforum'
+import { getPraiaForteContacts } from './benchmarkPraiaForte'
 import type { SocialContact } from '../components/sections/client/SectionClientExtra2'
 
 // ─── Tipos ──────────────────────────────────────────────────────────────────
 
-export type BenchmarkSource = 'santander' | 'itforum' | 'bench-empresas'
+export type BenchmarkSource = 'santander' | 'itforum' | 'bench-empresas' | 'itforum-praiaforte'
 
 export interface BenchmarkContact extends SocialContact {
   source: BenchmarkSource
@@ -202,7 +203,7 @@ export function getBenchmarkContacts(lang: Language = 'pt'): BenchmarkContact[] 
   const itforum = getItforumClient(lang)
 
   const santanderLabel = lang === 'en' ? 'Santander' : 'Santander'
-  const itforumLabel = lang === 'en' ? 'IT Forum' : 'IT Fórum'
+  const itforumLabel = 'IT Forum 2026 Trancoso'
 
   const santanderContacts: BenchmarkContact[] = extractContacts(santander.extra2).map(c => ({
     ...c,
@@ -216,7 +217,12 @@ export function getBenchmarkContacts(lang: Language = 'pt'): BenchmarkContact[] 
     sourceLabel: itforumLabel,
   }))
 
-  return [...santanderContacts, ...itforumContacts, ...getBenchEmpresasContacts(lang)]
+  return [
+    ...santanderContacts,
+    ...itforumContacts,
+    ...getBenchEmpresasContacts(lang),
+    ...getPraiaForteContacts(lang),
+  ]
 }
 
 // ─── Metadados da seção Benchmark ──────────────────────────────────────────

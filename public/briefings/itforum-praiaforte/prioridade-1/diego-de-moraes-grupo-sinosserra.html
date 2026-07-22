@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Diego de Moraes | GRUPO SINOSSERRA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Diego de Moraes</h1>
+                <h2>CIO / Gerente de TI — GRUPO SINOSSERRA</h2>
+                <div class="loc">Comércio Atacadista e Varejista · Novo Hamburgo/RS · CNPJ 89.625.032/0001-96</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Sede Sul (RS) + porte (21+ lojas / ~R$ bi)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Lojas (2026)</div><div class="value">21–22</div></div>
+                <div class="header-badge"><div class="label">Colaboradores</div><div class="value">~1.000+</div></div>
+                <div class="header-badge"><div class="label">Invest. EV 2026</div><div class="value">R$ 24 mi</div></div>
+                <div class="header-badge"><div class="label">Orç. TI (fontes abertas)</div><div class="value">R$ 20–30 mi*</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: deep-dive fontes abertas (site institucional, GZH, Cintra/AWS, LinkedIn, Campeãs da Inovação) + leitura de comitê + material de apresentação · Evolui edição Trancoso (layout antigo Segoe/azul; tipografia “Diego de Mores”). Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ============ ZONA B ============ -->
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>O <strong>Grupo Sinosserra</strong> é um dos maiores grupos de concessionárias do Rio Grande do Sul, fundado em <strong>1947 em Canela/RS</strong> pelas famílias Zugno e Jacobus — hoje em sucessão para a terceira geração. Opera <strong>mais de 20 empresas</strong> e <strong>21–22 lojas</strong> em praças-chave (Porto Alegre, Novo Hamburgo, Canoas, Passo Fundo, Osório, Serra, Vale dos Sinos), representando Chevrolet (Sinoscar), Volkswagen (Guaibacar), Jeep (Tramonto), Kia e, em 2026, marcas chinesas eletrificadas Jetour e Omoda &amp; Jaecoo (investimento público de <strong>R$ 24 milhões</strong> em quatro novas unidades — GZH/Correio do Povo). Braço financeiro (Sinosserra Serviços Financeiros / Financeira) e capitalização (Aplicap) ampliam o ecossistema além do showroom. Site institucional aponta “quase mil” colaboradores e formação de mais de 20 empresas; ranking estadual histórico entre as maiores do RS. Em 2024–2025 apareceu entre as <strong>Campeãs da Inovação</strong> (Grupo Amanhã / IXL-Center) por uso de IA em processos internos e plataforma digital de atendimento.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Companhia de Participações Sinosserra</div></div>
+                <div class="info-card"><div class="label">Sede (planilha)</div><div class="value">Novo Hamburgo / RS</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">RS (automotivo) + Brasil (financeira/Aplicap)</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">Histórico ~R$ 1,5–2 bi (2021–22, Caldeira); estimativa IT Forum anterior R$ 3,1–4 bi* — empresa privada sem RI</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~1.000+ (site institucional); LinkedIn company desatualizado</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada · S.A. fechada · holding familiar</div></div>
+            </div>
+            <p style="margin-top:14px;font-size:13px;color:var(--text-light)"><strong>Identificação antifraude:</strong> CNPJ <strong>89.625.032/0001-96</strong> confirmado em fontes públicas (Econodata / Adv Dinâmico) como Companhia de Participações Sinosserra — CNAE holdings de instituições não-financeiras; endereço Rua Getúlio Vargas, 100, Pátria Nova, Novo Hamburgo/RS. Planilha IT Forum: <code>89625032000196</code>. Presente no último IT Forum: <strong>SIM</strong>. *Orçamento TI e faixa de faturamento superior: dado de pesquisa IT Forum / edição Trancoso (fontes abertas) — validar na reunião.</p>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Diego de Moraes</strong> (LinkedIn: <a href="https://www.linkedin.com/in/diegomoraes-rs" style="color:var(--orange)">diegomoraes-rs</a>) é <strong>CIO / Gerente de TI</strong> do Grupo Sinosserra desde <strong>jul/2025</strong>. Carreira quase inteira dentro do grupo: Assistente de Suporte (2008) → Analista de TI → Desenvolvimento → Analista de Negócios → Coordenador de Sistemas → Coordenador de TI → Supervisor de TI (2021–ago/2025) → CIO. Total ~19 anos de experiência em TI, ~17 no Sinosserra. Formação: Análise e Desenvolvimento de Sistemas (Unisinos, 2011–2015); MBA Gestão de Projetos (Universidade Positivo, 2018–2019); certificações Unisinos em gestão de projetos de software, testes e melhoria de processos. Skills públicas: infraestrutura, SQL Server, Oracle, virtualização, ITIL, Scrum/PMI, firewalls, governança de TI.</p>
+            <p style="margin-top:10px"><strong>Evidência de atuação recente:</strong> participou do 1º hackathon de IA generativa AWS em Porto Alegre (nov/2024) — projeto Sinosserra de <strong>automação de lançamento de faturas de fretes</strong> ficou em 1º lugar (post LinkedIn; Fabiano Longaray / Leonardo Hans). Perfil metódico, “homem de casa”: conhece processos de ponta a ponta e valoriza escopo, prazo e ROI.</p>
+            <p style="margin-top:10px"><strong>Poder de decisão:</strong> C-level de TI desde jul/2025; na edição anterior (pesquisa IT Forum) constava como aprovador dentro do budget, com reporte a COO/Operações e participação regular em comitês. <em>Hipótese consultiva:</em> janela de consolidação do papel de CIO — precisa entregar resultados estratégicos visíveis em 12–18 meses; propostas com marcos claros e payback aceleram.</p>
+            <h4 style="margin:16px 0 8px">Leitura de comitê</h4>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Diego de Moraes</div><div class="value">CIO — sponsor técnico / orçamento TI</div></div>
+                <div class="info-card"><div class="label">Fabiano Longaray</div><div class="value">Gerente Executivo Marketing e Inovação — IA, Caldeira, prêmios</div></div>
+                <div class="info-card"><div class="label">Daniela Zugno Pinto Ribeiro</div><div class="value">Diretora de Negócios Automotivos — expansão lojas/marcas</div></div>
+                <div class="info-card"><div class="label">Leonardo Hans</div><div class="value">Time inovação/hackathon AWS — camada execução IA</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento & mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Grupo multimarca de varejo automotivo gaúcho com ecossistema de serviços financeiros e capitalização. Posição: um dos principais players do RS em Chevrolet e Volkswagen (Guaibacar liderou vendas VW na região Sul em 2025 — Carros e Carangas); expansão agressiva para eletrificados chineses com exclusividade Jetour no estado. Cadeia de valor: showroom + pós-venda + peças + F&amp;I + capitalização. Pressões: ciclo de emplacamentos, guerra de preço em seminovos, exigência de omnicanalidade (tablet/loja/WhatsApp), padrões de fábrica por marca e concorrentes com data lake / banco digital (Barigui) ou plataforma de seminovos (Saga). Tendências: eletrificação, integração DMS↔financeira, IA em backoffice e CX, governança de dados na sucessão familiar.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões & lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Integração multibandeira 2026:</strong> quatro lojas Jetour/Omoda/Jaecoo (R$ 24 mi) somam processos, SKUs, garantias e DMS diferentes às redes VW/GM/Jeep/Kia — risco de fragmentação sistêmica.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Gap de maturidade de dados vs. peers:</strong> Barigui publicou Data Lake (GCP); Sinosserra ainda não comunicou plataforma equivalente — pressão competitiva em analytics e pricing.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Escalabilidade pós-cloud:</strong> migração on-prem → AWS RDS (case Cintra) destravou resiliência; próximo passo é modernizar apps e integrações, não só IaaS.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Cibersegurança sob expansão de superfície:</strong> mais lojas, canais digitais e braço financeiro aumentam superfície de ataque e exigências LGPD.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>IA com governança:</strong> vitória no hackathon AWS prova capacidade tática; falta programa industrializado (MLOps, dados mestres, priorização por ROI).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Sucessão 3ª geração:</strong> decisões precisam migrar de intuição familiar para indicadores unificados (hipótese consultiva + narrativa institucional de inovação).</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">IA Generativa com ROI</span>
+                <span class="tag tag-priority">Integração / APIs entre lojas e F&amp;I</span>
+                <span class="tag tag-priority">Cibersegurança</span>
+                <span class="tag tag-priority">Plataforma de dados unificada</span>
+                <span class="tag tag-priority">Hiperautomação de backoffice</span>
+                <span class="tag tag-priority">CX omnichannel (já com 16k+ vendas digitais)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses (fontes abertas + pesquisa IT Forum)</h4>
+            <div>
+                <span class="tag tag-active">Infra / cloud AWS</span>
+                <span class="tag tag-active">Cibersegurança</span>
+                <span class="tag tag-active">Gestão de dados</span>
+                <span class="tag tag-active">IA / ML / GenAI</span>
+                <span class="tag tag-active">APIs e integração</span>
+                <span class="tag tag-active">CRM / jornada digital</span>
+                <span class="tag tag-active">Core / ERP-DMS</span>
+                <span class="tag tag-active">Hiperautomação / BPM</span>
+                <span class="tag tag-active">Expansão lojas EV</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido (pesquisa IT Forum — validar)</h4>
+            <div>
+                <span class="tag tag-opportunity">Cibersegurança</span>
+                <span class="tag tag-opportunity">APIs e integração</span>
+                <span class="tag tag-opportunity">Hiperautomação</span>
+                <span class="tag tag-opportunity">Gestão de dados</span>
+                <span class="tag tag-opportunity">IA / ML / GenAI</span>
+            </div>
+            <p style="margin-top:12px;font-size:13px;color:var(--text-light)"><strong>Direcionamento de investimento em TI (fontes abertas):</strong> budget TI estimado R$ 20–30 mi com perspectiva “será mantido” (pesquisa IT Forum / edição Trancoso — sem RI pública). Capex de negócio 2026 concentra R$ 24 mi em lojas EV (GZH) — TI precisa acompanhar com integração, segurança e dados. Parceria Cintra/AWS indica prioridade histórica em modernização de infraestrutura; hackathon GenAI e prêmio de inovação sinalizam budget móvel para IA e eficiência de processos.</p>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">85/100</span></div>
+                <p>Squads de IA com aceleração de código, GenAI e hiperautomação — encaixa no 1º lugar do hackathon AWS (faturas de frete) e no desejo de industrializar IA além do piloto.</p>
+                <div class="reasons"><ul>
+                    <li>IA Generativa é prioridade Top 3 na pesquisa IT Forum</li>
+                    <li>Evidência pública de capacidade e apetite (hackathon + Campeãs da Inovação)</li>
+                    <li>Projetos de IA/ML ainda sem fornecedor definido (janela)</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado + FourBlox (Digibee iPaaS)</h4><span class="score-badge">82/100</span></div>
+                <p>Modernização de sistemas, integração de ecossistema via APIs/iPaaS e sustentação AMS — crítico para orquestrar 6+ marcas, DMS, financeira e canais digitais sem “spaghetti” pós-expansão EV.</p>
+                <div class="reasons"><ul>
+                    <li>APIs e integração SEM fornecedor definido</li>
+                    <li>Expansão de 4 lojas chinesas exige integração sistêmica imediata</li>
+                    <li>Cloud AWS já migrado (Cintra) — hora de modernizar camada de aplicação</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">72/100</span></div>
+                <p>Produtos digitais, jornada omnichannel e evolução da plataforma de atendimento/negociação (já com 16.000+ veículos vendidos digitalmente).</p>
+                <div class="reasons"><ul>
+                    <li>Pressão competitiva de Saga (PrimeiraMão) e Barigui (Banco Bari)</li>
+                    <li>Grupo já investe em CX digital — precisa escala e qualidade de engenharia</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">70/100</span></div>
+                <p>Segurança da informação, LGPD/DLP, continuidade e DR — ISO 27001/27701 Foursys. Superfície cresce com lojas, apps e serviços financeiros.</p>
+                <div class="reasons"><ul>
+                    <li>Cibersegurança SEM fornecedor e Top 3 de prioridade (pesquisa IT Forum)</li>
+                    <li>Braço financeiro + dados de clientes ampliam risco regulatório</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Reconhecer a promoção a CIO (jul/2025) e a vitória no hackathon AWS GenAI. Entrar com: “como industrializar o que já provaram em 48h — integração de lojas EV + segurança + ROI de IA — sem depender só de fornecedor de infraestrutura.” Destacar ISO 27001/27701, AI Squad e Digibee/FourBlox. Mencionar presença no último IT Forum (continuidade de relacionamento).</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Três frentes sem fornecedor (pesquisa IT Forum): <strong>Cibersegurança, APIs/integração, Hiperautomação</strong> — timing perfeito com a abertura das 4 lojas EV (R$ 24 mi) e orçamento TI “mantido”. Ângulo: assessment de integração multibandeira em 3–4 semanas + PoC de automação (fretes/faturas) já validado culturalmente.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>AI Squad proprietário + modernização com iPaaS Digibee (FourBlox) + cibersegurança certificada + 24 anos / 41.000+ projetos. Modelo flexível (squad, projeto, AMS). Não competir com Cintra no “lift-and-shift” — complementar na camada de negócio, dados e segurança.</p></div>
+            <div class="insight-box" style="margin-top:16px">
+                <h4>Insights de negócio para a conversa</h4>
+                <p><strong>1.</strong> Expansão chinesa não é só imobiliário — é projeto de integração.<br><br>
+                <strong>2.</strong> Barigui já tem Data Lake; Sinosserra tem munição de inovação mas falta narrativa de plataforma de dados.<br><br>
+                <strong>3.</strong> Pós-venda e F&amp;I são o hedge se emplacamentos desacelerarem — hiperautomação paga a conta.<br><br>
+                <strong>4.</strong> Diego “cresceu na casa”: respeite contexto antes de template genérico de concessionária.<br><br>
+                <strong>5.</strong> Fabiano Longaray (inovação) e Daniela Zugno (negócio) fecham o comitê — não trate só o CIO.</p>
+            </div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Grupo Barigui</h4><p>Maior revendedor do Sul (100+ lojas, 26 marcas). Investiu ~R$ 5 mi em Data Lake (Google Cloud / Rox Partner), Banco Bari e hub de inovação. <strong>Gap Sinosserra:</strong> maturidade pública de plataforma de dados e produtos financeiros digitais.</p></div>
+            <div class="competitor-card"><h4>Grupo Saga</h4><p>110+ lojas, plataforma omnichannel PrimeiraMão para seminovos, forte em eletrificados (BYD etc.). <strong>Gap:</strong> jornada digital unificada de seminovos/avaliação online ainda pouco comunicada pelo Sinosserra.</p></div>
+            <div class="competitor-card"><h4>Grupo Sinal</h4><p>60+ lojas (SP + RS), compra online, expansão em Jetour/Omoda/Jaecoo — <strong>concorrente direto de marcas chinesas no RS</strong>. Pressão de time-to-market digital.</p></div>
+            <div class="competitor-card"><h4>Grupos regionais gaúchos (DRSUL / Sponchiado — hipótese de peer set)</h4><p>Peers de capilaridade estadual. <strong>Gap relativo:</strong> Sinosserra lidera narrativa de inovação (Caldeira, prêmios) mas precisa converter em stack de dados/integração visível.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <!-- ============ ZONA A ============ -->
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Holding familiar RS · 21–22 lojas multimarca + F&amp;I · CNPJ 89.625.032/0001-96 · expansão EV R$ 24 mi (2026)</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Diego de Moraes — CIO desde jul/2025 · 17 anos de casa · Unisinos + MBA projetos · sponsor GenAI (hackathon AWS)</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Integrar 4 lojas chinesas + industrializar IA + fechar gap de dados vs. Barigui/Saga sem estourar budget mantido</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Cloud AWS já migrado; próximos 12 meses: segurança, dados, GenAI, APIs, CRM/core — orç. estimado R$ 20–30 mi (fontes abertas)</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) AI Squad · 2) Modernização + FourBlox/Digibee · 3) Cibersegurança (+ Engenharia Digital)</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Workshop 90 min: mapa de integrações EV + backlog GenAI priorizado por ROI · convidar Fabiano Longaray</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum Praia do Forte 2026 + ramp-up lojas Jetour/Omoda/Jaecoo (abr/2026) + CIO &lt;12 meses no cargo</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “mais cloud” (Cintra já fez). Vender <em>sistema nervoso</em> entre marcas/F&amp;I — iPaaS + dados + GenAI de processo — para a 3ª geração governar por indicador.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>De Canela ao hub EV</h4><p>Grupo de 1947 escala para 21+ lojas e aposta R$ 24 mi em marcas chinesas eletrificadas. Cloud AWS e plataforma digital (16k+ vendas) já existem. Diego sobe a CIO em 2025.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Inovação sem plataforma</h4><p>Hackathons e prêmios mostram músculo. Peers (Barigui/Saga) já monetizam data lake e omnichannel. Multibandeira sem iPaaS vira custo oculto; segurança e dados ainda sem dono claro de fornecedor.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Foursys como sistema nervoso</h4><p>AI Squad industrializa GenAI; FourBlox integra lojas/F&amp;I; cibersegurança protege a expansão. Resultado: CIO entrega governança e velocidade na sucessão — não só tickets.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Integração das lojas EV sem fragmentar o core</h4>
+                <p>Evidência: inauguração simultânea Jetour + Omoda/Jaecoo (GZH, abr/2026) com padrões de fábrica distintos das redes VW/GM.</p>
+                <div class="sub">Solução Foursys</div><p>Modernização + FourBlox (Digibee): mapa de integrações DMS↔estoque↔F&amp;I↔CRM; APIs canônicas; AMS.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quantos sistemas manuais novos entraram com Jetour/Omoda que ainda não conversam com a Guaibacar/Sinoscar?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment de 3 semanas com inventário de fluxos críticos pós-venda e F&amp;I.</p>
+            </div>
+            <div class="business-card">
+                <h4>Industrializar o GenAI que já venceu o hackathon</h4>
+                <p>Evidência: 1º lugar AWS GenAI (faturas de frete) — LinkedIn Diego/Fabiano (nov/2024); prêmio Campeãs da Inovação.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad: backlog priorizado (fretes, NF, atendimento, pricing), guardrails, métricas de economia de horas.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“O que impediu o case de fretes de virar produto interno nos últimos 12 meses — dado, integração ou capacidade?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>PoC 4–6 semanas em um processo financeiro/logístico com ROI medido.</p>
+            </div>
+            <div class="business-card">
+                <h4>Cibersegurança alinhada à expansão e ao braço financeiro</h4>
+                <p>Evidência: superfície cresce (lojas + apps + Serviços Financeiros/Aplicap); prioridade Top 3 e projeto sem fornecedor (pesquisa IT Forum).</p>
+                <div class="sub">Solução Foursys</div><p>Assessment + roadmap LGPD/SOC/DR; ISO 27001/27701 como âncora de confiança.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Com as novas lojas online, qual é o RTO aceitável se o DMS ou a financeira ficar fora por 4 horas?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Tabletop de continuidade + gap analysis de controles em 2 semanas.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de PoC GenAI · opcional demo Digibee/FourBlox</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad + Modernização/FourBlox (+ Cibersegurança) — por quê: já têm “vitória GenAI” e dor de integração EV</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) Integração iPaaS em redes multimarca / retail automotive; (2) GenAI em backoffice financeiro/logístico (paralelo ao case fretes); (3) Programa de cibersegurança + LGPD em grupos com braço financeiro. Se case automotivo BR não estiver pronto, usar retail/distribuição com analogia explícita de “loja = unidade de P&amp;L”.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> não abrir com cloud ou “transformação digital genérica”. Abrir com <em>custo de não integrar as marcas chinesas</em> + <em>como transformar o 1º lugar do hackathon em fábrica de ROI</em> — isso diferencia Foursys de Cintra e de boutiques de IA.</p>
+            <p style="margin-top:8px"><em>Discurso se material setorial faltar: “Vocês já provaram GenAI e já migraram cloud. O gap agora é o sistema nervoso entre 6 marcas, F&amp;I e dados — é aí que a Foursys entra.”</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Diego, do suporte a CIO em 17 anos — a gente não traz template; traz aceleração do que você já construiu.”</li>
+                <li>“As quatro lojas EV de R$ 24 mi não falham no showroom — falham se DMS, estoque e F&amp;I não conversarem.”</li>
+                <li>“Vocês ganharam o hackathon AWS de GenAI. Falta o ‘dia 2’: produto, dados e governança.”</li>
+                <li>“Barigui publicou Data Lake; Saga publicou PrimeiraMão. Qual é a plataforma Sinosserra que a 3ª geração vai governar?”</li>
+                <li>“Cintra cuidou do RDS. Nós cuidamos de APIs, apps e segurança de negócio — sem competir com o que já funciona.”</li>
+                <li>“Três frentes sem fornecedor (segurança, APIs, hiperautomação) — dá para fechar um pacote piloto antes do ciclo orçamentário seguinte.”</li>
+                <li>“ISO 27001/27701 + Digibee + AI Squad: menos risco de fornecedor único e mais velocidade de entrega.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Reunião IT Forum + follow-up com Diego (+ Fabiano)</td><td>Ata de dores + mapa de stakeholders</td><td>0–2 semanas</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshops integração EV + GenAI + segurança</td><td>Backlog priorizado / heat map de sistemas</td><td>2–5 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC GenAI (fretes/NF) ou PoC iPaaS em 1 fluxo F&amp;I</td><td>Demo + métricas de ROI</td><td>5–10 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>AI Squad ou squad de integração em 1–2 marcas</td><td>MVP em produção + runbook</td><td>10–16 semanas</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Programa multibandeira + AMS + roadmap segurança</td><td>MSA / SOW anual + OKRs com comitê</td><td>4–6 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <!-- ============ ZONA C ============ -->
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3–5)</h4>
+            <div class="app-card">
+                <h4>Portal institucional Grupo Sinosserra</h4>
+                <div class="url">https://gruposinosserra.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">SPA/bundle.min.js (site custom)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado (API interna)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud / edge</div><div class="v">nginx · sem Cloudflare detectado</div></div>
+                    <div class="app-stack-item"><div class="k">Trackers</div><div class="v">Google Analytics · reCAPTCHA · Facebook pixel</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Plataforma Digital de Atendimento e Negociação</h4>
+                <div class="url">Institucional / Inovação — 16.000+ veículos vendidos digitalmente (tablet/celular)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">App/tablet consultor (stack não publicada)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Negócio</div><div class="v">Venda assistida omnichannel</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Hipótese: integração DMS/estoque</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Assistente virtual F&amp;I (case Cintra/AWS)</h4>
+                <div class="url">Case Cintra — NLP para financiamento de veículos</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">AWS</div></div>
+                    <div class="app-stack-item"><div class="k">Dados</div><div class="v">AWS RDS (pós-migração)</div></div>
+                    <div class="app-stack-item"><div class="k">IA</div><div class="v">Assistente linguagem natural</div></div>
+                    <div class="app-stack-item"><div class="k">Parceiro</div><div class="v">Cintra (migrate/modernize)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Automação GenAI — faturas de frete</h4>
+                <div class="url">Hackathon AWS POA (nov/2024) — 1º lugar</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">IA</div><div class="v">IA generativa AWS</div></div>
+                    <div class="app-stack-item"><div class="k">Processo</div><div class="v">Lançamento faturas frete</div></div>
+                    <div class="app-stack-item"><div class="k">Status</div><div class="v">Prova de conceito premiada</div></div>
+                    <div class="app-stack-item"><div class="k">Escala</div><div class="v">Não localizado se em produção</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="name">AWS (RDS) + on-prem legado residual</div><div class="cmp">Migração on-prem → AWS RDS com Cintra (case público). Site corporativo em nginx. Hipótese: híbrido ainda em lojas/PDV.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="name">Controles não publicados em detalhe</div><div class="cmp">LGPD aplicável (clientes + financeira). Skills LinkedIn de Diego incluem firewalls. Projeto cibersegurança sem fornecedor (pesquisa IT Forum). Não localizado SOC/SIEM público.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="name">GenAI AWS + assistente F&amp;I + IA processos</div><div class="cmp">Hackathon GenAI; case NLP financiamento; prêmio Campeãs da Inovação (IA processos internos, apps redução de impressões).</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="name">RDS + BI não detalhado publicamente</div><div class="cmp">Sem anúncio de data lake corporativo (gap vs. Barigui). Gestão de dados listada como investimento/oportunidade.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP/DMS)</div><div class="name">DMS/ERP de concessionária — não publicado</div><div class="cmp">Skills Diego: Oracle, SQL Server. ERP aparece como prioridade Top 3 na pesquisa IT Forum. Fabricante DMS específico: não localizado publicamente.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="name">Financeira · Aplicap · DMS · pós-venda</div><div class="cmp">Sinosserra Serviços Financeiros, capitalização Aplicap, operações por marca (Guaibacar, Sinoscar, Tramonto, Kia, Jetour, Omoda/Jaecoo).</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="name">Plataforma digital de venda + site + redes</div><div class="cmp">16k+ vendas digitais; site com GA/Facebook; movimento “transformação descentralizada”; presença Instituto Caldeira.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://gruposinosserra.com.br/</td><td><span class="status-200">200</span></td><td>bundle.min.js (custom)</td><td>nginx</td><td>GA analytics.js · reCAPTCHA · Facebook</td></tr>
+                    <tr><td>https://gruposinosserra.com.br/inovacao-e-novos-negocios</td><td><span class="status-200">200</span></td><td>mesmo stack</td><td>nginx</td><td>Narrativa plataforma digital / 16k vendas</td></tr>
+                    <tr><td>https://gruposinosserra.com.br/concessionarias</td><td><span class="status-200">200</span></td><td>mesmo stack</td><td>nginx</td><td>Marcas e praças</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026 via HTTP HEAD/GET. Só o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4–6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Integração</div><h4>Ecossistema multibandeira fragmentado</h4><p>Evidência setorial: 6+ marcas e 4 lojas EV novas (GZH) exigem integrações DMS/estoque/F&amp;I; APIs listadas sem fornecedor.</p><div class="offer">Oferta Foursys: Modernização + FourBlox (Digibee)</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Dados</div><h4>Ausência de plataforma de dados anunciada</h4><p>Evidência: Barigui publicou Data Lake GCP; Sinosserra não — gap competitivo em pricing, estoque e CX analítico.</p><div class="offer">Oferta Foursys: Engenharia Digital + AI Squad (camada dados)</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · IA</div><h4>GenAI tático sem industrialização</h4><p>Evidência: 1º lugar hackathon AWS e prêmio de inovação; escala/produção não localizada publicamente.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Segurança</div><h4>Programa de cibersegurança sem dono de implementação</h4><p>Evidência: prioridade Top 3 e projeto sem fornecedor (pesquisa IT Forum); expansão de superfície + F&amp;I.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Experiência</div><h4>Omnichannel vs. peers digitais</h4><p>Evidência: Saga PrimeiraMão e Barigui Bari; Sinosserra tem plataforma própria (16k vendas) mas precisa evolução contínua de engenharia.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 6 · Automação</div><h4>Backoffice ainda manual em fluxos críticos</h4><p>Evidência: case fretes como prova de dor; hiperautomação sem fornecedor; pressão de margem em pós-venda.</p><div class="offer">Oferta Foursys: AI Squad + Modernização</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">ADS Unisinos · MBA Gestão de Projetos (Positivo)</div></div>
+                <div class="info-card"><div class="label">Cidade / base</div><div class="value">São Leopoldo / Sapucaia do Sul — RS (LinkedIn)</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5–7)</h4>
+                <p><strong>1.</strong> Valorize a trajetória interna (suporte → CIO) — ele conhece o chão de fábrica da TI.<br><br>
+                <strong>2.</strong> Fale em marcos, escopo e ROI (MBA projetos + certificações Unisinos).<br><br>
+                <strong>3.</strong> Mencione o hackathon AWS e o 1º lugar — prova que você fez lição de casa.<br><br>
+                <strong>4.</strong> Cite a expansão Jetour/Omoda (R$ 24 mi) e a rivalidade com Sinal/Barigui no RS.<br><br>
+                <strong>5.</strong> Traga Fabiano Longaray para a segunda conversa (inovação) sem atropelar Diego.<br><br>
+                <strong>6.</strong> Evite “cloud 101” — eles já migraram com Cintra; foque apps, APIs e segurança.<br><br>
+                <strong>7.</strong> Use linguagem de qualidade/processos (testes, melhoria contínua) — ressoa com o perfil.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; empresa</h4><ul>
+                    <li>gruposinosserra.com.br (institucional, concessionárias, inovação)</li>
+                    <li>GZH — R$ 24 mi / 4 lojas chinesas (abr/2026)</li>
+                    <li>Correio do Povo — Jetour POA/NH</li>
+                    <li>Instituto Caldeira — case inovação/financeira</li>
+                    <li>Carros e Carangas — Campeãs da Inovação; Guaibacar liderança VW Sul</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Cintra — Sinosserra Cloud Transformation (AWS RDS)</li>
+                    <li>LinkedIn Diego — skills Oracle/SQL Server/infra</li>
+                    <li>Pesquisa IT Forum (edição Trancoso) — prioridades e orçamento TI*</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado / identidade</h4><ul>
+                    <li>Econodata / Adv Dinâmico — CNPJ 89.625.032/0001-96</li>
+                    <li>Planilha CIOs Confirmados IT Forum Praia do Forte 2026</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn: diegomoraes-rs (CIO desde jul/2025)</li>
+                    <li>Post hackathon AWS GenAI (Fabiano Longaray / Diego / Leonardo Hans)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch/HTTP 21/07/2026 — gruposinosserra.com.br (+ inovação, concessionárias)</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

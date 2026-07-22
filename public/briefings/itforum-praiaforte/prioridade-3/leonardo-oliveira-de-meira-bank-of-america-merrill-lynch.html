@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<!--
+  Briefing CIO — Leonardo Oliveira de Meira | BANK OF AMERICA MERRILL LYNCH
+  IT Forum 2026 Praia do Forte · Prioridade 3 · CRIAR_NOVO · Hunter --full
+  Design System Foursys · Ordem B → A → C
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Leonardo Oliveira de Meira | BANK OF AMERICA MERRILL LYNCH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Leonardo Oliveira de Meira</h1>
+                <h2>IT Director / Brazil PTT CIO — BANK OF AMERICA MERRILL LYNCH</h2>
+                <div class="loc">Bancos · São Paulo/SP · CNPJ 62.073.200/0001-21</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Porte (banco global / capital R$ 5,7 bi)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Tech budget grupo</div><div class="value">US$ 13–13,5 bi</div></div>
+                <div class="header-badge"><div class="label">Novas iniciativas</div><div class="value">~US$ 4 bi</div></div>
+                <div class="header-badge"><div class="label">Capital social BR</div><div class="value">R$ 5,7 bi</div></div>
+                <div class="header-badge"><div class="label">Casa BofA</div><div class="value">desde 2015</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: RI deep-dive (grupo BAC) + leitura de comitê local FICC/ops tech + material de apresentação · Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p><strong>FATO:</strong> BANK OF AMERICA MERRILL LYNCH BANCO MÚLTIPLO S.A. (CNPJ 62.073.200/0001-21) é a entidade bancária brasileira do grupo Bank of America, com sede na Av. Brigadeiro Faria Lima, 3400 (Itaim Bibi, São Paulo/SP). Situação cadastral ativa; capital social ~R$ 5,74 bilhões; CNAE bancos múltiplos com carteira comercial; associada ANBIMA desde 1995 (negociação CCB, derivativos de balcão, coordenação/estruturação). No Brasil a franquia é predominantemente <em>wholesale / markets</em> (FICC, sales &amp; trading, operações e tecnologia de Global Markets), não o varejo digital de massa do BAC nos EUA. O parent global (BAC, Charlotte/NC) publica investimento anual em tecnologia da ordem de US$ 13–13,5 bilhões, com ~30% (~US$ 4 bi) em novas iniciativas — com ênfase em IA, automação e experiência digital (fontes: American Banker, Banking Dive, InfotechLead / earnings calls 2025–2026).</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">BANK OF AMERICA MERRILL LYNCH BANCO MÚLTIPLO S.A.</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">São Paulo/SP — Faria Lima 3400</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Brasil (wholesale) · rede global BAC</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">Não publicado localmente; grupo BAC em escala US$ 100B+ (fontes abertas LinkedIn/company)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">Não localizado (headcount BR); grupo BAC 100k–200k</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">S.A. fechada · subsidiária BAC</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>FATO (LinkedIn / posts públicos):</strong> Leonardo Oliveira de Meira é <strong>IT Director</strong> no Bank of America Merrill Lynch desde dezembro/2022 (São Paulo, híbrido), com assinatura pública de <strong>Brazil PTT CIO</strong>. Na casa desde agosto/2015 (antes Vice President): liderou GMOT Brasil — transformação digital de operações de tecnologia em Fixed Income, Derivatives e FX; business cases de tech para FICC; times de PMs, BAs, engenheiros e data scientists; Design Thinking no serviço a clientes FX; Lean/Agile/DevOps em Operations Technology; revisão de cibersegurança e infraestrutura; suite de hiperautomação e framework interno de Data Science/ML. Trajetória anterior: Product Manager na Nasdaq Calypso Technology; Vice President no Goldman Sachs. Reconhecimentos: finalista Prêmio Executivo de TI do Ano 2024 (IT Forum, categoria Bancos); HITEC 50 (2024 e 2025); inventor com patente USPTO <em>pending</em> — “Adaptive AI Architecture for Institutional-Scale Financial Systems” (arquitetura de IA adaptativa para sistemas financeiros institucionais sob governança forte). Participa de fóruns CIONET / IT Forum — perfil de interlocutor sênior, técnico-estratégico, com poder de patrocinar iniciativas locais alinhadas a mandatos globais de Markets Ops Technology.</p>
+            <p style="margin-top:12px"><strong>Leitura de comitê (hipótese + sinais públicos):</strong> decisões locais de capacidade, risco operacional e automação FICC tendem a envolver Leonardo + VPs de Operations/Technology (ex.: times GMOT, FICC Ops, Front Office Tech citados em LinkedIn público) e alinhamento com CTIO global (Hari Gopalkrishnan) e governance de IA do grupo. Presidente local da entidade: Eduardo Alcalay (quadro societário RFB/GuiaPJ). Abordagem Foursys: Leonardo como âncora técnica; validar budget owner e procurement BAC Brasil em discovery.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Atua no segmento de <strong>bancos múltiplos / investment &amp; wholesale banking</strong> no Brasil: mesas e operações de FICC (renda fixa, câmbio, derivativos OTC), liquidação/custódia junto a infraestruturas locais (SELIC, CETIP/B3), onboarding institucional, AML/KYC e suporte sales &amp; trading. Posição: braço brasileiro de um dos maiores bancos globais dos EUA — competição direta com peers de markets (JPM, GS, Citi, MS) e banks locais sofisticados em produtos de mercado. Prioridades setoriais: eficiência operacional end-to-end, redução de risco operacional e de liquidação, compliance regulatório ágil (BCB, CVM, Bacen resoluções), hiperautomação, IA com governança, integração local↔global e resiliência cibernética. Pressões: custo de run vs. change sob mandato global; legado de integrações front-to-back; escassez de talentos especializados em markets tech; exigência de ROI mensurável em IA (narrativa do CTIO global).</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Escala de IA além de pilotos locais — grupo quer process transformation e reuse em ~3.000 processos; franquia BR precisa encaixar sem quebrar governança (FATO grupo + hipótese local).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Integrações front-to-back FICC com clearings/custodiantes locais vs. plataformas globais — risco operacional e capacity (sinais LinkedIn ops/tech BR).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Pressão contínua de mitigação de risco + aumento de capacidade sem headcount linear (discurso VP/IT Director: Lean, automation, ML).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Cibersegurança e infraestrutura sob crescimento da franquia com governance corporativa (citado no histórico LinkedIn do gestor).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>FinOps / economics de compute para modelos de IA — tema explícito do CTIO global (Banking Dive / CIO Dive).</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Hiperautomação FICC ops</span>
+                <span class="tag tag-priority">IA institucional com governança</span>
+                <span class="tag tag-priority">Reuse enterprise (não silos)</span>
+                <span class="tag tag-priority">Experiência FX/cliente institucional</span>
+                <span class="tag tag-priority">Resiliência + compliance</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">IA / Erica &amp; automação (grupo)</span>
+                <span class="tag tag-active">Digital / CashPro &amp; canais (grupo)</span>
+                <span class="tag tag-active">Cyber &amp; risk controls</span>
+                <span class="tag tag-active">Ops tech FICC Brasil (capacidade + risk)</span>
+                <span class="tag tag-active">Data/ML frameworks internos</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Squad IA local sob governance BAC</span>
+                <span class="tag tag-opportunity">Integração iPaaS clearings BR ↔ global</span>
+                <span class="tag tag-opportunity">Modernização seletiva de legado ops</span>
+                <span class="tag tag-opportunity">Engenharia digital / DevOps acelerado</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">92/100</span></div>
+                <p>Encaixa no mandato público do gestor (framework DS/ML interno, patente USPTO pending de AI architecture) e na agenda global de scale/reuse + ROI de IA. Squad com governança (16 dimensões de risco citadas pelo CTIO) para acelerar casos FICC ops sem “piloto eterno”.</p>
+                <div class="reasons"><ul>
+                    <li>Alinhamento direto com narrativa HITEC / patent / hiperautomação do interlocutor</li>
+                    <li>Budget de change do grupo (US$ ~4 bi new initiatives) cria cobertura de narrativa corporativa</li>
+                    <li>Foursys: 24 anos, 41.000+ projetos, ISO 27001/27701 — credencial para banco regulado</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS Digibee)</h4><span class="score-badge">86/100</span></div>
+                <p>Integrações locais (SELIC/CETIP/custodiantes, onboarding, reconciliações) com sistemas globais Markets — camada de orquestração com governança e observabilidade, reduzindo custom one-offs.</p>
+                <div class="reasons"><ul>
+                    <li>Dor estrutural de front-to-back e vendor/local/global teams (sinais públicos)</li>
+                    <li>Parceria Digibee + ISO — encaixa compliance de banco múltiplo</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">78/100</span></div>
+                <p>Strangler seletivo em componentes de ops tech / booking / reconciliação que travam escala de IA e capacity (hipótese: legado local + platforms Calypso-class / grids citados em trajetórias do ecossistema).</p>
+                <div class="reasons"><ul>
+                    <li>CTIO global aponta legado como freio ao scale de IA</li>
+                    <li>Gestor já modernizou via Agile/DevOps — linguagem familiar</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">74/100</span></div>
+                <p>Aceleração de delivery (product + platform engineering) para business cases FICC, Design Thinking em jornada FX e DevOps industrializado.</p>
+                <div class="reasons"><ul>
+                    <li>Histórico explícito do gestor em Design Thinking + Agile/DevOps</li>
+                    <li>Demanda de capacity sem headcount linear</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">68/100</span></div>
+                <p>Assessment e hardening alinhados a crescimento da franquia e revisão de cyber/infra já no radar do gestor; complemento a controles globais BAC.</p>
+                <div class="reasons"><ul>
+                    <li>Citado no escopo de responsabilidade LinkedIn</li>
+                    <li>Setor bancos: pressão regulatória contínua</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>IT Forum Praia do Forte 2026: abrir pela agenda de <em>IA institucional com governança</em> + hiperautomação FICC — não por “app de varejo”. Reconhecer HITEC 50 / finalista IT Forum e a patente USPTO pending como prova de profundidade técnica do interlocutor.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>PoC curta (4–6 semanas) de AI Squad em um processo FICC ops mensurável (ex.: reconciliação, capacity forecasting, triagem de exceções) com métricas de ROI no padrão BAC — timing pós-evento enquanto budget de change 2026 ainda é discutido.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Parceiro brasileiro com ISO 27001/27701, FourBlox/Digibee para integrações reguladas, e squads que falam a língua de Markets Ops — sem tentar “reescrever o core global”. 41.000+ projetos e foco em entrega sob compliance.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>JPMorgan Chase (Markets BR)</h4><p>Peer global em wholesale; investe pesado em platforms e cloud. Gap alvo: velocidade de experimentação local sob governance BAC vs. escala JPM — Foursys pode ser “capacity flexível” sem headcount permanente.</p></div>
+            <div class="competitor-card"><h4>Goldman Sachs (Markets BR)</h4><p>Leonardo conhece a cultura GS (ex-VP). Gap: GS costuma internalizar engineering; BofA BR pode precisar de parceiro para picos de change + ML — ângulo de complementaridade, não substituição.</p></div>
+            <div class="competitor-card"><h4>Citi / Morgan Stanley</h4><p>Competem em FICC e custody flows. Gap tecnológico típico do setor: integração com infra BR e automação de middle/back — onde iPaaS + AI Squad geram contraste.</p></div>
+            <div class="competitor-card"><h4>BTG Pactual (local sofisticado)</h4><p>Referência local em velocidade digital markets. Gap: BofA tem vantagem de balanço/global franchise, mas pode perder agilidade de delivery — Engenharia Digital Foursys como equalizador de pace.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Banco múltiplo BAC no Brasil (CNPJ 62.073.200/0001-21), wholesale/FICC na Faria Lima; capital ~R$ 5,7 bi.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Leonardo O. de Meira — IT Director / Brazil PTT CIO desde dez/2022; casa desde 2015; HITEC 50; USPTO patent pending.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escalar IA/hiperautomação em ops FICC com ROI e governança, sem romper controles globais.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Grupo: US$ 13–13,5 bi tech (~US$ 4 bi new) → CX, receita, custo, IA, cyber (RI/earnings). Local: ops tech FICC, capacity, risk (fontes abertas LinkedIn).</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">AI Squad; FourBlox/Digibee; Modernização de Legado (+ Engenharia Digital / Cyber).</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 30 min pós-IT Forum: 1 processo FICC candidato a PoC + critérios de ROI BAC.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum 2026 Praia do Forte + ciclo de change 2H2026 / planejamento 2027.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “digital banking varejo”. Vender capacity de IA institucional + integração local↔global sob a mesma barra de risco do CTIO.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Brasil PTT sob mandato global de IA</h4><p>Leonardo consolida IT Director com track de hiperautomação/ML em FICC enquanto o grupo declara US$ 4 bi em novas iniciativas de tech — a franquia BR precisa provar valor local mensurável.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Governança vs. velocidade</h4><p>Escalar IA em ambiente regulado, com integrações clearings e legado front-to-back, sem inflar risco operacional nem headcount — o “meio-campo” entre inovação e compliance.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Squad + iPaaS + legado seletivo</h4><p>Foursys entra como extensão governada: AI Squad em processo piloto, FourBlox nas pontes locais, modernização cirúrgica onde o legado trava ROI.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Escalar IA/ML em processos FICC com ROI auditável</h4>
+                <p>Evidência: discurso LinkedIn do gestor (framework DS/ML + hiperautomação); CTIO global enfatiza process transformation, reuse e ROI (Banking Dive/CIO Dive 2026).</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — time dedicado com playbooks de governança e métricas de redução de toil / exceções / capacity.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Qual processo FICC hoje consome mais capacity humana em exceções e já tem dados suficientes para um piloto de 6 semanas?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de 90 min: mapa de 3 processos candidatos × score de dados × risco regulatório.</p>
+            </div>
+            <div class="business-card">
+                <h4>Reduzir atrito das integrações local ↔ global</h4>
+                <p>Evidência: papéis públicos de ops/tech citando SELIC/CETIP, front-to-back, vendor/local/global teams.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee) — conectores e orquestração com trilha de auditoria.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Onde as falhas de integração mais geram risk events ou overtime de settlement?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment de 2 semanas: top 5 fluxos críticos + proposta de landing zone iPaaS.</p>
+            </div>
+            <div class="business-card">
+                <h4>Destravar capacity sem headcount linear</h4>
+                <p>Evidência: mandato histórico de capacity increase + risk mitigation via Lean/Agile/DevOps (LinkedIn gestor).</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital + Modernização seletiva — acelerar delivery e retirar atrito de legado pontual.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quais business cases FICC estão aprovados mas presos em fila de engineering?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Backlog triage conjunto e proposta de squad piloto com SLA de throughput.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de PoC AI Squad · opcional: mini-case iPaaS</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad (porquê: mandato IA+ROI) · FourBlox (porquê: pontes BR↔global)</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) narrativa de hiperautomação/ops em instituições financeiras reguladas; (2) integração iPaaS em ecossistemas com clearings/custódia; (3) squads de engenharia sob ISO 27001/27701 para bancos. Se case nominal BAC não existir no portfólio, usar peer anônimo de markets/ops com métricas de ciclo e risco.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> posicionar Foursys como <em>multiplicador de capacity sob a barra de risco do BAC</em> — não como substituto de plataformas globais nem como “digital consumer bank”.</p>
+            <p style="margin-top:8px"><em>Discurso se material setorial estiver fino: “Trouxemos um canvas de PoC alinhado às 4 frentes do CTIO (process transformation, scale/reuse, governance, ROI) aplicado a um processo FICC Brasil — queremos validar juntos em 30 minutos.”</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Leonardo, vimos a combinação HITEC 50 + patente USPTO de AI architecture — queremos falar no mesmo nível: IA institucional, não demo de chatbot.”</li>
+                <li>“O grupo declara ~US$ 4 bi em new tech; a pergunta no Brasil é qual processo FICC prova ROI local sem ferir governance.”</li>
+                <li>“Nossa hipótese: o gargalo não é ideia de ML — é integração, dados operacionais e fila de engineering.”</li>
+                <li>“FourBlox entra onde SELIC/CETIP/custódia encontram o stack global — menos glue code, mais trilha auditável.”</li>
+                <li>“AI Squad Foursys opera sob ISO 27001/27701 e se molda aos 16 eixos de risco que o CTIO já usa como linguagem.”</li>
+                <li>“Não propomos reescrever core Markets — propomos capacity cirúrgica onde toil e exceções doem.”</li>
+                <li>“Próximo passo objetivo: escolher 1 processo, definir métrica de sucesso em 6 semanas, e decidir go/no-go com o comitê local.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Encontro IT Forum + follow-up LinkedIn/e-mail com one-pager</td><td>Agendamento 30–45 min</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop processos FICC × dados × risco</td><td>Scorecard 3 candidatos + sponsor map</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>AI Squad em 1 processo (ou spike iPaaS)</td><td>Resultado ROI + riscos + decisão</td><td>4–6 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad 3–4 meses (AI + engenharia)</td><td>Throughput acordado + runbook</td><td>1 trimestre</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Expandir para N processos + integrações FourBlox</td><td>MSA / SOW anual + governance conjunta</td><td>6–12 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Bank of America — site institucional global</h4><div class="url">https://www.bankofamerica.com</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">HTML/JS corporativo (inspecionado 2026)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não exposto publicamente</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado no edge público</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>BofA Business / Markets — portal corporativo</h4><div class="url">https://business.bofa.com</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portal AEM-like / conteúdo corporativo</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">CDN/edge corporativo</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>CashPro / canais digitais corporativos (grupo)</h4><div class="url">Referência earnings / InfotechLead 2025</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Apps digitais BAC (grupo)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Plataformas internas BAC</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Hipótese: híbrido enterprise</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">API banking (grupo — hipótese)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Erica / assistentes IA (grupo)</h4><div class="url">American Banker / earnings AI narrative</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Canais digitais BAC</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Modelos IA + orquestração</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Compute enterprise (FinOps citado)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Serviços internos</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Grupo: estratégia cloud/compute + FinOps para IA (FATO discurso CTIO). Brasil: data center/híbrido corporativo — detalhe local não publicado.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">Revisão cyber/infra citada pelo gestor; banco sob BCB/CVM/ANBIMA; governance de IA com múltiplas dimensões de risco (grupo).</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">Hiperautomação + DS/ML framework interno (gestor); Erica e AI em escala no grupo; patente USPTO pending (AI architecture institucional).</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">Data science/ML para valor da franquia local; dados como fundação da estratégia AI do grupo.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">Core bancário/markets platforms — não publicado publicamente para a entidade BR. Hipótese: stack global Markets + sistemas locais de liquidação/registro.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">FICC booking/settlement, collateral/UMR, onboarding AML/KYC, trade support FX/FI/derivativos (sinais LinkedIn ops/tech).</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">Design Thinking em jornada FX (gestor); canais digitais/CashPro no grupo; site business.bofa.com / bankofamerica.com.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.bankofamerica.com</td><td><span class="status-200">200</span></td><td>HTML/JS corporativo (~318 KB)</td><td>Edge corporativo (headers Server vazios na sonda)</td><td>Site consumer/global; não reflete stack FICC BR</td></tr>
+                    <tr><td>https://business.bofa.com</td><td><span class="status-200">200</span></td><td>Portal corporativo (~248 KB)</td><td>CDN/edge</td><td>Confirma presença Markets/locations incl. São Paulo</td></tr>
+                    <tr><td>https://www.bofa.com</td><td><span class="status-err">timeout</span></td><td>—</td><td>—</td><td>Sem resposta em 20s na sonda local</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026 ~13:55 (America/Sao_Paulo). Só o efetivamente inspecionado via HTTP.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · IA / Processos</div><h4>De piloto ML a process transformation</h4><p>Setor bancário global acelera IA, mas legado e falta de alinhamento de ROI travam escala (CTIO BAC). Evidência local: gestor já tem framework DS/ML — falta industrializar sob barra de risco.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Pontes clearings BR ↔ platforms globais</h4><p>Wholesale BR depende de SELIC/CETIP/custódia com times local/global/vendor — atrito clássico de markets ops.</p><div class="offer">Oferta Foursys: FourBlox (Digibee)</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Legado</div><h4>Componentes que impedem reuse de IA</h4><p>Narrativa setorial: legacy IT systems dificultam scale de AI. Hipótese: bolsões de legado em ops/reconciliação.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Delivery</div><h4>Fila de engineering vs. business cases FICC</h4><p>Gestor responsável por tech business cases FICC — tension típica capacity vs. demanda de mesa.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Cyber</div><h4>Crescimento da franquia × superfície de ataque</h4><p>Revisão cyber/infra já no escopo histórico; bancos wholesale sob pressão contínua de controles.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Não localizado em fontes abertas detalhadas</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">São Paulo / Grande SP</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">PT (nativo) · EN (ambiente global BAC/GS — hipótese forte)</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Reconhecer HITEC 50 (2024/2025) e finalista IT Forum 2024 — status importa.<br>
+                2) Perguntar pela jornada da patente USPTO (AI architecture) — sinal de profundidade, não small talk.<br>
+                3) Falar FICC/ops tech e Design Thinking em FX — linguagem do próprio LinkedIn.<br>
+                4) Evitar pitch de varejo digital / Erica consumer — franquia BR é wholesale.<br>
+                5) Trazer métricas e governance (ROI, risk dimensions) — ecoa o CTIO Hari Gopalkrishnan.<br>
+                6) Mencionar ISO 27001/27701 e parceria Digibee cedo — reduz atrito de procurement em banco.<br>
+                7) Tom: peer técnico-estratégico, frases curtas, zero fluff consultivo genérico.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>American Banker — CTIO Hari Gopalkrishnan / tech budget &amp; AI</li>
+                    <li>Banking Dive / CIO Dive — Semafor World Economy 2026 AI strategy</li>
+                    <li>InfotechLead — digital/AI investments Q4 2025</li>
+                    <li>Fortune — CFO AI productivity (jul/2026)</li>
+                    <li>ANBIMA — perfil instituição BofA Merrill Lynch Banco Múltiplo</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>LinkedIn Leonardo Meira — GMOT, hiperautomação, DS/ML, cyber</li>
+                    <li>LinkedIn papéis FICC Ops / FO Tech BR (sinais de domínio)</li>
+                    <li>Newsroom BAC — unificação apps digitais (contexto grupo)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado / identidade</h4><ul>
+                    <li>Planilha CIOs Confirmados IT Forum 2026 (lookup ID 112)</li>
+                    <li>GuiaPJ / RFB — CNPJ 62.073.200/0001-21, capital, endereço</li>
+                    <li>business.bofa.com/locations — escritório São Paulo</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>linkedin.com/in/leonardomeira</li>
+                    <li>Posts LinkedIn: HITEC 50 2025, IT Forum 2024, patente USPTO, CIONET</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>HTTP GET bankofamerica.com (200)</li>
+                    <li>HTTP GET business.bofa.com (200)</li>
+                    <li>HTTP bofa.com (timeout)</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

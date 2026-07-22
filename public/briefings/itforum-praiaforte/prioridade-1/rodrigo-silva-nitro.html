@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Rodrigo Silva | NITRO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Rodrigo Silva</h1>
+                <h2>CIO — Companhia Nitro Química Brasileira (NITRO)</h2>
+                <div class="loc">Agronegócio e especialidades químicas · São Paulo/SP · CNPJ 61.150.348/0001-50</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Porte bilionário + FOCO 4SYS</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Receita grupo 2024</div><div class="value">~R$ 2,5 bi</div></div>
+                <div class="header-badge"><div class="label">Receita agro 2024</div><div class="value">~R$ 1,0 bi</div></div>
+                <div class="header-badge"><div class="label">Colaboradores</div><div class="value">~1,9 mil</div></div>
+                <div class="header-badge"><div class="label">Unidades</div><div class="value">BR+EUA+UY</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: fontes abertas (site + AgFeed + Decision Report + LinkedIn) + demonstrações financeiras públicas + leitura de comitê (CIO × CEO × CAPEX) + material de apresentação · Diferencia da edição anterior (Trancoso). Contato não presente no último IT Forum (planilha).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>Companhia Nitro Química Brasileira (marca Nitro) é multinacional brasileira de especialidades químicas e insumos para o agronegócio, fundada em 1935. Controlada pelo Grupo Faro, combina liderança histórica em nitrocelulose e ácidos com expansão acelerada no agro desde 2019 (nutrição vegetal/animal, biológicos, fertilizantes). Opera plantas no Brasil (São Miguel Paulista, Cesário Lange, Sertãozinho, Várzea Paulista, CD Cuiabá), EUA (Atlanta) e Uruguai (San José), com CDs na Europa. Capital fechado — sem RI listada; há demonstrações financeiras públicas no site. CNPJ da planilha confirmado: 61.150.348/0001-50 (GuiaPJ / Receita).</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Companhia Nitro Química Brasileira</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">São Paulo/SP (Pinheiros adm. · S. Miguel Paulista planta)</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Brasil + EUA + Uruguai · CDs Europa · 70+ países (site)</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">~R$ 2,5 bi (2024, AgFeed) · agro ~R$ 1 bi</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~1,9 mil (Decision Report / CIO, out/2025)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">S.A. fechada · Grupo Faro · privada</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Rodrigo Silva</strong> é <strong>CIO da Nitro desde jul/2024</strong> (LinkedIn: rodrigosilvacio). C-level de TI com mandato de transformação digital: revisão de processos e de <strong>+70 sistemas</strong>, montagem de times de desenvolvimento, Plano Diretor de TI (PDTI) e democratização de IA. Perfil público forte — Decision Report (Bastidores da TI, out/2025), Itshow (case Nina/ROI) e presença contínua no LinkedIn com cases Nina, ZaIA e alfabetização em IA.</p>
+            <p style="margin-top:12px">Trajetória (~26 anos): Unicamp (Sistemas de Informação); consultoria/projetos em grandes ERPs; Aché (governança de TI); UnitedHealth/Amil (IT Manager); CIO TotalEnergies BR (pandemia + M&amp;A de postos); CIO Silimed (expansão internacional). Formação: Mestrado Software Engineering (Univ. Phoenix); MBAs e pós em Cloud, Data Science/IA, Governança (UFLA), Arquitetura (FIAP); múltiplas certificações (DevOps, Change, OKR, Management 3.0). Idiomas: PT/EN/ES fluentes. Autor de livros/colunas sobre IA para líderes.</p>
+            <p style="margin-top:12px"><strong>Poder de decisão:</strong> conduz comitê de CAPEX/demandas via ZaIA (entrada → priorização → aprovação); reporta a C-level de negócio (CEO Marcos Cruz citado em AgFeed). Nível: decisor de portfolio TI + influência cultural em IA/citizen development.</p>
+            <div class="alert-box" style="margin-top:14px">⚠️ <strong>Leitura de comitê (CIO ativo — não saiu):</strong> Contato do evento = Rodrigo Silva (CIO). Sponsor de negócio = Marcos Cruz (CEO). Hipótese: decisões de CAPEX TI passam por comitê alimentado pela ZaIA; pitch com ROI mensurável (modelo Nina) escala mais rápido que “visão de plataforma” genérica. Outros contatos de comitê técnico/comercial (CTO/CDO) — não localizados em fontes abertas nesta pesquisa.</div>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Dois motores: (1) especialidades químicas industriais — nitrocelulose e derivados (tintas, vernizes, farma/FDA Atlanta, embalagens); (2) agro — nutrição vegetal (~60% do agro), biológicos (~20%) e nutrição animal/matérias-primas (~20%). Posição: um dos maiores fornecedores globais de nitrocelulose; no agro brasileiro, entre as maiores em insumos especiais após ciclo de M&amp;As (AgFeed), com força própria de ~200 agrônomos + ~100 revendedores.</p>
+            <p style="margin-top:10px">Prioridades setoriais 2026: crescimento orgânico do agro (meta ~R$ 1,2 bi), bioinsumos, crédito ao produtor (FIDCs), integração pós-aquisições, eficiência industrial e digitalização da jornada comercial B2B. Pressões: margem do produtor, clima, crédito, concorrência de importados/tradings e exigência de rastreabilidade/compliance químico-agro.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Espraiamento pós-M&amp;A</strong> — +70 sistemas e processos heterogêneos após aquisições agro (Decision Report). Integração é gargalo, não “falta de IA”.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Capacidade vs. demanda de TI</strong> — citizen development e Power Platform aceleram, mas geram fila de governança, segurança e integração (hipótese consultiva).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Chão de fábrica químico</strong> — pressão por OEE, rastreabilidade e PCP digital; case TOTVS MES/APS já mostrou ganhos, mas multi-planta amplia complexidade.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Comercial agro sob estresse de crédito</strong> — FIDCs e força de campo exigem dados/CRM/crédito integrados à operação.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Superfície de risco</strong> — plantas químicas + OT + agentes de IA + dados Databricks elevam necessidade de AppSec, identidade e controles ISO-grade.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">PDTI sustentável alinhado ao negócio</span>
+                <span class="tag tag-priority">IA com ROI (não piloto eterno)</span>
+                <span class="tag tag-priority">Alfabetização IA em massa (~500–800+ treinados)</span>
+                <span class="tag tag-priority">Portfólio/CAPEX com rastreabilidade (ZaIA)</span>
+                <span class="tag tag-priority">Crescimento agro 2026–2029 com integração digital</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">CapEx agro 2025 ~R$ 130 mi (planta biológicos ~R$ 50 mi)</span>
+                <span class="tag tag-active">FIDCs crédito agro (Itaú + novo veículo)</span>
+                <span class="tag tag-active">Nina (Copilot Studio/Teams → evolução Runflow)</span>
+                <span class="tag tag-active">ZaIA PPM (Lovable + Supabase + Databricks)</span>
+                <span class="tag tag-active">Power Platform / builders internos</span>
+                <span class="tag tag-active">MES/APS industrial (TOTVS + PPI/WEG — case publicado)</span>
+                <span class="tag tag-active">Nitro Boost / Arar Capital (open innovation)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">iPaaS corporativo para consolidar +70 sistemas</span>
+                <span class="tag tag-opportunity">Squad de engenharia para productizar citizen apps</span>
+                <span class="tag tag-opportunity">Dados industriais MES ↔ lake ↔ agentes</span>
+                <span class="tag tag-opportunity">Ciber IT/OT + governança de agentes</span>
+                <span class="tag tag-opportunity">Modernização seletiva de legados pós-M&amp;A</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS Digibee)</h4><span class="score-badge">94/100</span></div>
+                <p>Âncora nº 1: o problema real não é “falta de IA” — é integrar o património de +70 sistemas pós-aquisições com governança. FourBlox (parceria Digibee; ISO 27001/27701) vira o tecido entre ERP/MES/CRM/crédito/agentes.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: revisão explícita de +70 sistemas (Decision Report).</li>
+                    <li>ZaIA e Nina já consomem APIs/dados — integração escalável evita ponto a ponto.</li>
+                    <li>Fit com multi-planta BR/EUA/UY e ciclo de M&amp;As agro.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">91/100</span></div>
+                <p>Não vender “primeira IA”. Vender <em>industrialização</em> do que já funciona: agents com KPI (modelo Nina: ~R$ 460 mil/ano e 3 headcounts evitados — Itshow), SDRs/comercial agro, CSC e chão de fábrica. Squad sob governança do CIO.</p>
+                <div class="reasons"><ul>
+                    <li>Rodrigo já prova ROI e alfabetiza 500–800+ pessoas.</li>
+                    <li>Stack: Copilot Studio, Databricks, vibe-coding (Lovable/Runflow).</li>
+                    <li>Pressão 2026: crescimento agro sem inflar headcount de suporte.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">86/100</span></div>
+                <p>Times de desenvolvimento + productização de apps Power Platform/citizen builders + entrega sob PDTI/PMO. Foursys como fábrica de software alinhada a ZaIA (demanda → CAPEX → entrega).</p>
+                <div class="reasons"><ul>
+                    <li>Montagem de squads internos em curso (Decision Report).</li>
+                    <li>CSC já criou robô pós-treino de IA — precisa de engenharia para produção.</li>
+                    <li>24 anos / 41.000+ projetos Foursys = capacidade de throughput.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">78/100</span></div>
+                <p>Racionalizar portfólio pós-M&amp;A: desligar, encapsular ou reescrever sistemas que travam integração e dados mestres. Complementa iPaaS — não substitui.</p>
+                <div class="reasons"><ul>
+                    <li>Espraiamento típico de holdings químicas/agro após aquisições.</li>
+                    <li>Case MES/APS mostra apetite por digitalização industrial mensurável.</li>
+                    <li>Hipótese: parte dos 70 sistemas é legado de empresas adquiridas.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">74/100</span></div>
+                <p>Ângulo: governança de agentes + identidade + AppSec no pipeline citizen/pro-code + segmentação IT/OT em plantas químicas. Nina já atua em temas de ciber/compliance — elevar maturidade corporativa.</p>
+                <div class="reasons"><ul>
+                    <li>Superfície ampliada por IA e multi-cloud/dados.</li>
+                    <li>Indústria química exige continuidade e compliance.</li>
+                    <li>Credencial Foursys ISO 27001/27701.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Elogiar Nina/ZaIA com números (ROI, throughput de demandas, comitê CAPEX). Em seguida: “como industrializar isso em escala multi-planta sem virar sombra de TI?” — conversa de peer CIO, não de vendedor de chatbot.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Integração pós-M&amp;A (+70 sistemas) + pipeline ZaIA de CAPEX. Timing: IT Forum 2026 (primeira presença no evento, planilha) + meta agro ~R$ 1,2 bi e crescimento 20–30%/ano declarado pelo CEO.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Squads que entregam sob governança do cliente (ISO 27001/27701, Digibee/FourBlox, AI Squad, 41.000+ projetos). Encaixa no estilo Rodrigo: MVP → ROI → escala — sem slides de “jornada digital” vazia.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>ICL / Produquímica (nutrição especial)</h4><p>Player global com maturidade digital e presença forte no agro BR. Gap Nitro: integrar dados comerciais/campo pós-aquisições com a mesma velocidade de lançamento de biológicos.</p></div>
+            <div class="competitor-card"><h4>Vittia / Biotrop e peers de bioinsumos</h4><p>Especialistas em biológicos com narrativas de inovação. Gap: Nitro tem escala fabril e FIDC — precisa de stack comercial/dados que acompanhe o portfólio.</p></div>
+            <div class="competitor-card"><h4>Oxiteno (Indorama) / Unigel (química)</h4><p>Peers químicos com programas de Indústria 4.0 e compliance global. Gap: Nitro compete em nitrocelulose global — OT/dados e integração multi-país são diferenciais a proteger.</p></div>
+            <div class="competitor-card"><h4>Majors agroquímicas (BASF, Bayer, Syngenta — biológicos)</h4><p>Capacidade digital e de R&amp;D superior. Gap: Nitro diferencia por proximidade e M&amp;A local; TI precisa reduzir atrito operacional para não perder velocidade.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <!-- ZONA A -->
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Nitro (CNPJ 61.150.348/0001-50): química + agro, ~R$ 2,5 bi, multi-planta BR/EUA/UY, Grupo Faro.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Rodrigo Silva, CIO desde jul/2024 — IA com ROI, PDTI, ZaIA/CAPEX, perfil publicamente ativo.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escalar agro 2026 e integrar +70 sistemas pós-M&amp;A sem perder o momentum de IA.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Fontes abertas: PDTI, Power Platform, agentes (Nina/ZaIA), Databricks, MES/APS, comitê CAPEX. Sem RI listada.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">FourBlox iPaaS; AI Squad (industrializar Nina); Engenharia Digital sob ZaIA.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 45 min no IT Forum: mapa de integração + 1 use case agro/CSC com KPI.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum Praia do Forte 2026 (1ª presença) + ciclo CapEx agro/biológicos.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender IA — vender integração e governança que deixam a IA dele escalar com segurança.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Do químico centenário ao agro bilionário</h4><p>Em poucos anos a Nitro dobrou o jogo com M&amp;As agro e chegou a ~R$ 1 bi no segmento. Jul/2024: entra Rodrigo para digitalizar a máquina.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>70 sistemas × ambição de IA</h4><p>Nina e ZaIA provam valor. O risco agora é o espraiamento: integração, segurança e throughput de engenharia não acompanharem a cultura de builders.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>iPaaS + squads sob o PDTI dele</h4><p>Foursys entra como braço de execução: FourBlox integra, AI Squad industrializa, Engenharia Digital entrega no ritmo do comitê CAPEX.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Integração pós-M&amp;A sem parar o crescimento agro</h4>
+                <p>Evidência: +70 sistemas em revisão (Decision Report); meta agro ~R$ 1,2 bi e planta de biológicos.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee) + mapa de integração prioritária (crédito, comercial, MES, dados mestres) → menor lead time de lançamento e menos retrabalho manual.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quais 5 integrações, se resolvidas em 90 dias, liberariam mais CapEx no comitê ZaIA?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de ½ dia: inventário de interfaces críticas multi-planta.</p>
+            </div>
+            <div class="business-card">
+                <h4>Industrializar Nina: de ROI local a plataforma de agentes</h4>
+                <p>Evidência: Nina economizou ~R$ 460 mil/ano e 3 posições (Itshow); evolução Runflow; CSC criou robô de NF.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad: backlog de agentes com KPI (comercial agro, CSC, fábrica), MLOps leve e governança de prompts/dados.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual agente, depois da Nina, tem business case fechado e falta capacidade de engenharia?</p>
+                <div class="sub">Gancho / próximo passo</div><p>PoC 4–6 semanas com métrica de abandono/SLA igual à Nina.</p>
+            </div>
+            <div class="business-card">
+                <h4>Throughput de engenharia sob ZaIA</h4>
+                <p>Evidência: ZaIA centraliza demanda→CAPEX; Power Platform e vibe-coding aceleram, mas produção exige disciplina.</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital: squad dedicado ligado ao PMO/ZaIA, DoD, segurança e handoff para sustentação interna.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual % do backlog ZaIA está travado por capacidade (não por prioridade)?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Pilotar 1 squad em 1 vertical (CSC ou agro comercial) com OKRs trimestrais.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de ROI estilo Nina · opcional PoC 1-pager</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">FourBlox + AI Squad (+ Engenharia Digital) — integração que escala a IA já validada</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) case industrial MES/APS químico (próprio Nitro como prova de cultura de KPI); (2) cases Foursys de iPaaS Digibee em indústrias multi-planta; (3) AI Squad em operações/CSC com ROI em headcount e ciclo de atendimento.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> abrir com “vocês já venceram o debate da IA” — o gap é orquestração (dados, APIs, segurança, throughput). Evitar pitch genérico de Copilot.</p>
+            <p style="margin-top:8px"><em>Se material de agro químico não estiver pronto: usar discurso de peer — mapa +70 sistemas × comitê CAPEX × meta agro 2026, e propor diagnóstico de integração em 2 semanas.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Nina já provou ROI — nossa conversa é sobre escala com governança, não sobre ‘começar a usar IA’.”</li>
+                <li>“Com +70 sistemas pós-M&amp;A, o ROI da próxima onda está na integração, não em mais um app isolado.”</li>
+                <li>“ZaIA organiza o comitê CAPEX; a Foursys pode ser o braço que esvazia a fila com squads mensuráveis.”</li>
+                <li>“FourBlox (Digibee) + ISO 27001/27701: tecido seguro entre MES, crédito agro, comercial e agentes.”</li>
+                <li>“Citizen development é ativo — desde que productizado. Evitamos sombra de TI sem matar a cultura de builders.”</li>
+                <li>“Meta agro 2026 exige dados únicos de cliente/crédito/estoque; TI vira alavanca de margem, não só de eficiência.”</li>
+                <li>“IT Forum é a primeira conexão presencial — propomos um diagnóstico de 2 semanas com 3 quick wins.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Encontro IT Forum + follow-up LinkedIn/e-mail citando Nina/ZaIA</td><td>Ata + hipótese de 3 quick wins</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop integração (+70 sistemas) e backlog ZaIA</td><td>Mapa de interfaces + heat-map de valor/risco</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC iPaaS (1 fluxo crítico) ou agente com KPI estilo Nina</td><td>Demo + métricas + business case</td><td>4–6 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad Engenharia Digital / AI sob governança CIO</td><td>OKRs Q + handoff sustentação</td><td>1 trimestre</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Programa multi-planta (FourBlox + squads + ciber agentes)</td><td>MSA / SOW anual alinhado PDTI</td><td>6–9 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <!-- ZONA C -->
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Site institucional Nitro</h4><div class="url">https://nitro.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">HTML/CSS custom · assets locais</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado (site estático/CMS leve)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Hospedagem LiteSpeed (header Server)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não exposta publicamente</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Portal Nitro Agro</h4><div class="url">https://agro.nitro.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Site conteúdo / marketing agro</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">LiteSpeed (200 OK)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Nina — colaboradora digital</h4><div class="url">Microsoft Teams / Copilot Studio (fontes LinkedIn + Itshow)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Teams bot / agente</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Copilot Studio · evolução Runflow</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Microsoft 365 (hipótese forte)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Conectores internos / MCP (LinkedIn)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>ZaIA — PPM / demandas</h4><div class="url">App interno (Lovable + Supabase + Databricks)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Lovable (web app)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Supabase</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Databricks (dados)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações portfolio/CAPEX</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>TOTVS MES + APS (chão de fábrica)</h4><div class="url">Case PPI-Multitask / WEG</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Dashboards OEE / apontamento</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">TOTVS MES + APS</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado (on-prem/híbrido típico)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integração MES↔APS↔ERP</div></div>
+                </div>
+            </div>
+
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Microsoft 365 / Power Platform (FATO entrevistas); Databricks (ZaIA); hospedagem web LiteSpeed nos sites públicos. Multi-cloud/híbrido industrial — detalhe de IaaS não publicado.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">Nina cobre temas de ciber/compliance para usuários; maturidade SOC/OT não localizada publicamente. Hipótese: necessidade crescente com agentes e plantas químicas.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">Nina (agente), ZaIA (PPM IA), Copilot Studio, Power Platform, vibe-coding (Lovable/Runflow), RPA no CSC, MES/APS (OEE, rastreabilidade).</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">Databricks conectado à ZaIA (LinkedIn). BI corporativo específico — não localizado. Hipótese: lakehouse emergente a partir de iniciativas 2025–2026.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">Ecossistema TOTVS evidenciado no chão de fábrica (MES/APS). ERP corporativo completo — não detalhado em fontes abertas nesta pesquisa (evitar afirmação sem evidência).</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">+70 sistemas em racionalização; CRM/crédito agro/FIDC — parcialmente inferidos pelo modelo de negócio; inventário nominal não público.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">Sites nitro.com.br e agro.nitro.com.br; Teams como canal de serviço (Nina); força de campo ~200 agrônomos (experiência B2B presencial + digital).</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://nitro.com.br/</td><td><span class="status-200">200</span></td><td>HTML custom / assets locais</td><td>Server: LiteSpeed</td><td>Sem GTM/GA/Meta Pixel detectados no HTML baixado; ~84 KB</td></tr>
+                    <tr><td>https://nitro.com.br/a-nitro/</td><td><span class="status-200">200</span></td><td>Página institucional história</td><td>LiteSpeed</td><td>Timeline 1935–2023 / unidades globais</td></tr>
+                    <tr><td>https://agro.nitro.com.br/</td><td><span class="status-200">200</span></td><td>Portal agro</td><td>LiteSpeed</td><td>Conteúdo comercial e notícias agro</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 20/07/2026 via HTTP HEAD/GET. Só registrar o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Integração</div><h4>Espraiamento de +70 sistemas</h4><p>Pós-M&amp;A típico do agro químico: múltiplos cores, cadastros e interfaces manuais. Evidência: Decision Report.</p><div class="offer">Oferta Foursys: FourBlox (Digibee iPaaS)</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · IA em escala</div><h4>De MVP de agente a plataforma</h4><p>Nina/ZaIA validam; falta industrializar backlog (comercial, CSC, fábrica) com MLOps e segurança.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Engenharia</div><h4>Throughput vs. citizen development</h4><p>Builders aceleram; produção e sustentação precisam de fábrica de software sob PDTI/ZaIA.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Industrial data</div><h4>MES ↔ analytics ↔ decisão</h4><p>Case MES/APS mostra ganho local; multi-planta + Databricks pedem camada de dados industrial unificada (hipótese).</p><div class="offer">Oferta Foursys: Engenharia Digital + AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Legado M&amp;A</div><h4>Racionalização de portfólio</h4><p>Sistemas herdados travam master data e time-to-market de biológicos/nutrição.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 6 · Segurança</div><h4>Governança de agentes + IT/OT</h4><p>Plantas químicas + agentes com conectores ampliam superfície; controles ISO-grade aceleram board trust.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Unicamp (SI) · Mestrado SE · MBAs Cloud/IA/Governança</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">São Paulo/SP (origem Diadema / Indaiatuba — Decision Report)</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">PT · EN · ES (fluentes) · FR básico</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Comece por Nina/ZaIA com respeito técnico — ele publica cases e odeia “IA genérica”.<br>
+                2) Fale ROI e headcount evitado, não “transformação”. Linguagem dele é board + operação.<br>
+                3) Mencione alfabetização em massa (500–800+) — alinha cultura, não só stack.<br>
+                4) Trajetória TotalEnergies/Silimed/Aché: ele entende indústria regulada e M&amp;A.<br>
+                5) Livros/colunas sobre IA para líderes: peça opinião — rapport intelectual.<br>
+                6) Evite pitch de “substituir time”; ele democratiza builders com governança.<br>
+                7) IT Forum é 1ª presença (planilha) — ofereça continuidade pós-evento com diagnóstico curto.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>nitro.com.br/a-nitro/ — história, unidades, Grupo Faro</li>
+                    <li>AgFeed / agro.nitro.com.br — receita ~R$ 2,5 bi / agro ~R$ 1 bi, CapEx biológicos</li>
+                    <li>Demonstrações financeiras 2025 (PDF site Nitro) — capital fechado, controladas</li>
+                    <li>Planilha CIOs IT Forum 10.07 — ID 30, CNPJ, UF, presença</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>PPI-Multitask — case TOTVS MES + APS Nitro</li>
+                    <li>LinkedIn Rodrigo — Nina, ZaIA (Lovable/Supabase/Databricks), Power Platform, Runflow</li>
+                    <li>Itshow — ROI Nina (~R$ 460 mil/ano)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>AgFeed — meta agro R$ 1,2 bi / biológicos / FIDCs</li>
+                    <li>Nitro Boost (Liga Ventures) — open innovation</li>
+                    <li>Wikipedia / site — posicionamento nitrocelulose</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn: linkedin.com/in/rodrigosilvacio</li>
+                    <li>Decision Report — Bastidores da TI (09/10/2025)</li>
+                    <li>CEO Marcos Cruz — entrevistas AgFeed</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch/HTTP 20/07/2026 — nitro.com.br, /a-nitro/, agro.nitro.com.br (200, LiteSpeed)</li>
+                    <li>GuiaPJ — CNPJ 61.150.348/0001-50</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

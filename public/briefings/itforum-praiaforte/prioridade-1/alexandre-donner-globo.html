@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Alexandre Donner | GLOBO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Alexandre Donner</h1>
+                <h2>Diretor de Plataformas Corporativas — GLOBO</h2>
+                <div class="loc">Telecomunicações / Mídia &amp; Comunicação · Rio de Janeiro/RJ · CNPJ 27.865.757/0001-02</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Maior porte</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Colaboradores</div><div class="value">~12–15 mil</div></div>
+                <div class="header-badge"><div class="label">Faturamento</div><div class="value">R$ 15,1 bi</div></div>
+                <div class="header-badge"><div class="label">Abrangência</div><div class="value">Nacional+</div></div>
+                <div class="header-badge"><div class="label">Último IT Forum</div><div class="value">Não</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: fontes abertas (LinkedIn, IT Forum, Decision Report, Oracle, Google Cloud) + leitura de comitê + material de apresentação · Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p><strong>FATO:</strong> Globo Comunicação e Participações S/A (CNPJ 27.865.757/0001-02, sede Rio de Janeiro/RJ) é o maior conglomerado de mídia da América Latina — TV aberta, canais pagos, Globoplay, portais digitais (g1, ge, gshow) e publicidade OOH (Eletromidia). A planilha do IT Forum lista o setor como “Telecomunicações”; o CNAE público é televisão aberta / comunicação. Em 2020 consolidou TV Globo, Globosat, Globo.com, Som Livre e DGCorp sob “Uma só Globo”, com agenda explícita de virar <em>mediatech</em>. Capital social público ~R$ 6,98 bi; ~12–15 mil colaboradores (fontes abertas LinkedIn/IT Forum). Conteúdo dublado em 70+ idiomas e presença em 160 territórios (comunicado Oracle, out/2025).</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Globo Comunicação e Participações S/A</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">Rio de Janeiro / RJ</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Brasil (rede afiliadas) + distribuição global de conteúdo</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">R$ 15,1 bi (ref. 2022 — IT Forum)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~12–15 mil (1/3 em Tech/Engenharia — Decision Report)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada · S.A. fechada</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>FATO:</strong> Alexandre Donner é Diretor de Plataformas Corporativas na Globo desde maio/2026 (LinkedIn). Escopo: Finanças, Supply Chain, Jurídico, CSC, Marca, Comunicação e RH — soluções de Jornada do Colaborador, Workplace, Produtividade e IA. Antes (set/2019–abr/2026) foi líder de tecnologia para Finanças/SCM/Jurídico/Marca e capitão do programa Conecta (go-live jan/2022; conclusão 2023), premiado Executivo de TI do Ano 2023 (IT Forum). Trajetória: CIO Infoglobo ~11 anos; co-fundador/CIO Webb (~9 anos); CIONET Brasil (conselheiro desde 2015). Formação: Eng. Eletrônica; MBA FGV Gestão de Negócios e TI; Harvard Business School Online — Organizational Leadership (2025).</p>
+            <p style="margin-top:12px"><strong>Poder de decisão:</strong> alto no domínio <em>enterprise/corporativo</em> (plataformas de gestão, IA para o colaborador, produtividade). Não é o dono único da TI de produto/streaming — lado mídia/produção tem outras lideranças (ex.: Marcelo Bossoni em tech de produção/conteúdo — Mobile Time, 2026). <strong>Leitura de comitê:</strong> Donner (plataformas corporativas + ROI de IA/automação) · Bossoni (escala Globoplay/eventos) · Mauricio Gonzalez (parceria Oracle / governança de IA — DPL News). Abordagem Foursys deve ancorar no mandato de Donner, não competir com Google Cloud no streaming.</p>
+            <p style="margin-top:12px"><strong>HIPÓTESE consultiva:</strong> a promoção a Diretor de Plataformas Corporativas em 2026 aumenta apetite por parceiros que entreguem squads ágeis com ROI mensurável em backoffice — não decks genéricos de “transformação digital”.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Globo lidera audiência e alcance de conteúdo no Brasil (TV aberta + streaming + portais), sob pressão de plataformas globais de streaming, fragmentação de atenção e migração de verba publicitária para digital/performance. Cadeia de valor crítica: produção → distribuição multiplataforma → monétização (ads + assinatura) → operações corporativas (finanças, SCM de produção física/logística, RH de dezenas de milhares de pessoas). Prioridades setoriais 2026: resiliência de plataformas em picos (Copa, BBB), personalização com IA, TV 3.0/DTV+, e eficiência operacional no backoffice pós-consolidação. Risco para o vendedor: misturar pitch de media-tech (Globoplay) com pitch de plataformas corporativas — Donner compra o segundo.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Escala de picos de audiência vs. estabilidade (instabilidades citadas em cobertura BBB 26 / preparação Copa 2026 — fontes abertas).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Pós-Conecta: racionalizar portfólio de sistemas especialistas ainda acoplados ao core Oracle Fusion (Donner/TI Inside).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Governança de IA com ROI claro — “IA não é remédio para tudo” (Donner, Oracle Data &amp; AI Forum 2025).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>FinOps e custo de nuvem sob disciplina premiada; pressão contínua por eficiência (fontes abertas).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Jornada do colaborador e produtividade em empresa com ~1/3 da força em Tech/Engenharia — expectativa alta de experiência digital interna.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Mediatech com backoffice inteligente</span>
+                <span class="tag tag-priority">Agentes de IA democratizados com governança</span>
+                <span class="tag tag-priority">Interoperabilidade entre agentes e processos</span>
+                <span class="tag tag-priority">Fechamento financeiro mais rápido (já 8→3 dias com EPM)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Google Cloud — produção/distribuição/streaming</span>
+                <span class="tag tag-active">Oracle Fusion + IA embutida / Agent Studio</span>
+                <span class="tag tag-active">Low latency Globoplay · Copa 2026</span>
+                <span class="tag tag-active">TV 3.0 / DTV+</span>
+                <span class="tag tag-active">RPA (&gt;50 robôs) + IA corporativa</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Squads de IA para jornada do colaborador (domínio Donner)</span>
+                <span class="tag tag-opportunity">Integração iPaaS entre Fusion e sistemas especialistas</span>
+                <span class="tag tag-opportunity">Modernização de apps satélite pós-consolidação</span>
+                <span class="tag tag-opportunity">Cibersegurança / privacidade em agentes que leem dados internos</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad — agentes com ROI e governança</h4><span class="score-badge">92/100</span></div>
+                <p>Encaixa no discurso público de Donner: democratizar IA para o negócio com governança, ROI e Agent Studio. Squad Foursys entrega casos priorizados (SCM, finanças, RH, jurídico) com métricas de ciclo e custo — não PoC ornamental.</p>
+                <div class="reasons"><ul>
+                    <li>55 features de IA em SCM; ~metade implantada/teste (Convergência Digital)</li>
+                    <li>Mandato 2026: Plataformas Corporativas + IA para o colaborador</li>
+                    <li>Donner exige ROI claro por projeto (TI Inside)</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (Digibee iPaaS) — integração enterprise</h4><span class="score-badge">86/100</span></div>
+                <p>Pós-Conecta, core Oracle Fusion precisa conversar com dezenas de sistemas especialistas. FourBlox acelera integração segura (ISO 27001/27701) sem reinventar middleware.</p>
+                <div class="reasons"><ul>
+                    <li>Conecta unificou 5 empresas; sobra camada de integração contínua</li>
+                    <li>Donner cita “muitos fornecedores e sistemas especialistas” sobre a base Oracle</li>
+                    <li>Compliance e velocidade de release trimestral Oracle pedem iPaaS maduro</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital — jornada colaborador &amp; produtividade</h4><span class="score-badge">81/100</span></div>
+                <p>Novo escopo do cargo cobre Experiência, Produtividade e Workplace. Engenharia Digital Foursys estrutura produtos internos (self-service, portais, automação de CSC) com squads ágeis — linguagem que Donner já usa no Conecta.</p>
+                <div class="reasons"><ul>
+                    <li>Post LinkedIn mar/2026: protagonismo em Gestão Corporativa, Jornada, Experiência</li>
+                    <li>~15 mil colaboradores impactados por plataformas de RH/CSC</li>
+                    <li>Cultura de squads e OKRs já estabelecida no Conecta</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado — apps satélite</h4><span class="score-badge">74/100</span></div>
+                <p>Racionalização do portfólio pós-unificação: modernizar ou aposentar aplicações satélite que ainda geram custo e risco de integração.</p>
+                <div class="reasons"><ul>
+                    <li>Objetivo declarado do Conecta: racionalizar portfólio</li>
+                    <li>HIPÓTESE: ainda há long-tail de apps custom pós-2023</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança — dados corporativos + IA</h4><span class="score-badge">68/100</span></div>
+                <p>Agentes que consomem dados internos (sem exportar) elevam superfície de risco. Oferta Foursys amarra controles, identidade e monitoramento ao roadmap de IA corporativa.</p>
+                <div class="reasons"><ul>
+                    <li>Donner destaca Agent Studio com dados internos e governança</li>
+                    <li>Mídia + dados de colaboradores = ativo sensível</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Parabenizar o novo mandato (Diretor de Plataformas Corporativas, 2026) e o case Conecta/Oracle AI World. Abrir com: “como vocês estão priorizando os próximos agentes de IA com ROI mensurável na jornada do colaborador — e o que ainda trava a integração com o long-tail de sistemas especialistas?”</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Janela IT Forum Praia do Forte 2026 + Copa/eventos elevando pressão de eficiência no corporativo (budget sob escrutínio enquanto mídia investe em streaming). Timing ideal para workshop de 90 min: mapa de 5 casos de IA corporativa ranqueados por ROI + gap de integração.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>24 anos, 41.000+ projetos, ISO 27001/27701, AI Squad + FourBlox (Digibee). Não competimos com Google Cloud no Globoplay nem com Oracle no core — aceleramos a camada de execução (squads, integração, modernização) que transforma release Oracle em resultado de negócio.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Netflix / Disney+ / Prime Video</h4><p>Pressão no streaming e na batalha por atenção/assinatura. Gap Globo: combinar escala de TV aberta + Globoplay; no domínio Donner, o “gap” útil é eficiência de custo de backoffice para financiar a guerra de conteúdo.</p></div>
+            <div class="competitor-card"><h4>Record / SBT (digitalização)</h4><p>Players locais avançam em digital/ads. Gap: Globo já é referência em mediatech; oportunidade Foursys está em manter vantagem operacional (dados únicos pós-Conecta) convertida em velocidade de decisão corporativa.</p></div>
+            <div class="competitor-card"><h4>Big Tech consultorias (Accenture et al.)</h4><p>Accenture já participou do Conecta. Gap: hiperescala de consultoria ≠ squad enxuto com ownership e time-to-value curto — ângulo Foursys.</p></div>
+            <div class="competitor-card"><h4>Integradores Oracle / SI genéricos</h4><p>Competem no mesmo perímetro Fusion. Gap: Foursys combina IA aplicada + iPaaS Digibee + modernização, sem lock-in de fábrica de customização.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Maior mediatech do Brasil (Globo Comunicação e Participações S/A) — TV, Globoplay, portais, ads.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Alexandre Donner — Diretor de Plataformas Corporativas (mai/2026); ex-líder Conecta; Executivo TI 2023.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escalar IA corporativa com ROI + jornada do colaborador, sem perder governança pós-Conecta.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Fontes abertas: Google Cloud (mídia/streaming); Oracle Fusion+IA (corporativo); RPA; Copa/low latency. Sem RI pública detalhada de CapEx TI.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) AI Squad · 2) FourBlox iPaaS · 3) Engenharia Digital (jornada colaborador)</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Workshop 90 min: priorização de agentes + mapa de integração especialistas.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum Praia do Forte 2026 · mandato novo (mai/2026) · ciclo Copa/eficiência.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “IA para Globoplay”. Vender execução corporativa: agentes com ROI + integração do long-tail que o Fusion não engole sozinho.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Uma só Globo + Conecta</h4><p>Cinco empresas, um ecossistema. Donner lidera a unificação corporativa em nuvem (2020–2023) e ganha o prêmio Executivo de TI 2023.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>IA com ROI vs. complexidade</h4><p>Core Oracle maduro; long-tail de sistemas; pressão de custo; streaming consome orçamento e atenção da board.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Plataformas Corporativas 2026</h4><p>Foursys entra como braço de execução: AI Squad + FourBlox + Engenharia Digital — do release à jornada do colaborador com métrica.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Democratizar IA corporativa sem virar “piloto eterno”</h4>
+                <p>Evidência: &gt;50 features de IA em teste no Fusion; Agent Studio; discurso de ROI (Oracle/TI Inside, 2025).</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — backlog ranqueado, governança, métricas de ciclo/custo, handover para times Globo.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual caso de IA corporativa já mostrou payback em &lt;90 dias — e qual travou por dado ou integração?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de priorização com Finanças + SCM + RH.</p>
+            </div>
+            <div class="business-card">
+                <h4>Integrar o long-tail pós-Conecta</h4>
+                <p>Evidência: “muitos fornecedores e sistemas especialistas” sobre a base Oracle (Donner).</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee) — APIs e fluxos governados, ISO 27001/27701.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quantas integrações point-to-point ainda sustentam o fechamento e o CSC?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment de 2 semanas: top 10 integrações críticas.</p>
+            </div>
+            <div class="business-card">
+                <h4>Jornada do colaborador como produto</h4>
+                <p>Evidência: novo mandato cobre Experiência, Produtividade e IA para o colaborador (LinkedIn, 2026).</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital — produtos internos, automação de CSC, UX de self-service.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Onde o colaborador ainda “abre chamado” porque o processo digital quebrou?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Mapa de jornada CSC + 1 piloto em 45 dias.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de ROI de agentes · opcional: proposta de PoC 45 dias</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad + FourBlox — porquê: mandato 2026 de Donner e gap de integração pós-Conecta</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) consolidação multiempresa com core em nuvem e squads ágeis; (2) FinOps / governança de custo cloud em operação de mídia de alta escala; (3) automação de CSC/RH em grupos com milhares de colaboradores — adaptar cases Foursys de empresas de grande porte (não forçar case de streaming).</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> o maior ROI não está em “ajudar o Globoplay a não cair” (já coberto por Google Cloud + times de produto). Está em transformar a fábrica corporativa (Fusion + especialistas + agentes) em vantagem de velocidade de decisão enquanto a guerra de conteúdo consome CapEx.</p>
+            <p style="margin-top:8px"><em>Se não houver case de mídia pronto: usar discurso de “mediatech precisa de backoffice mediatech” — evidência Conecta + Agent Studio — sem inventar cliente.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Donner, o Conecta unificou o core — o próximo jogo é velocidade de agentes com ROI na jornada do colaborador.”</li>
+                <li>“Não viemos falar de streaming. Viemos falar da fábrica corporativa que banca a mediatech.”</li>
+                <li>“Vocês já testam dezenas de features de IA no Fusion; nós transformamos backlog em squad com métrica.”</li>
+                <li>“O long-tail de sistemas especialistas é onde o Core trava — FourBlox/Digibee existe para isso.”</li>
+                <li>“IA sem governança é custo; com governança e payback, é capacidade — alinhado ao que você disse no Oracle Forum.”</li>
+                <li>“IT Forum Praia do Forte: 90 minutos para ranquear 5 casos e sair com piloto definido.”</li>
+                <li>“Foursys: 24 anos, 41.000+ projetos, ISO 27001/27701 — execução, não slideware.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Abordagem no IT Forum + LinkedIn; reforçar mandato Plataformas Corporativas</td><td>Agenda 30–45 min com Donner (ou head de arquitetura corporativa)</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop ROI: Finanças, SCM, RH/CSC, Integração</td><td>Mapa de 5 casos + score de integração</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>1 agente ou 1 fluxo iPaaS crítico</td><td>PoC 45 dias com KPI acordado</td><td>45–60 dias</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>AI Squad ou Engenharia Digital em jornada colaborador</td><td>Squad 1–2 trimestres + playbook</td><td>Q3–Q4 2026</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Expandir para modernização satélite + segurança de agentes</td><td>MSA multi-frente / capacity reservada</td><td>2027</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Globo.com / Ecossistema G</h4><div class="url">https://www.globo.com · https://g1.globo.com</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">HTML/JS (portal alta escala)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não divulgado em detalhe</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Google Cloud (parceria estratégica)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Globo ID / identidade (público Variety)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Globoplay</h4><div class="url">https://globoplay.globo.com</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Apps web/TV/mobile</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Streaming + CDN</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Google Cloud · Via: google</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Low latency / eventos 2026</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Conecta — core corporativo</h4><div class="url">Interno (Oracle Fusion Cloud Applications)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Oracle Fusion UX</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">ERP · SCM · EPM · HCM</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Oracle Cloud</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações + Agent Studio</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Automação corporativa (RPA)</h4><div class="url">Interno</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">N/A</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">&gt;50 robôs (Decision Report)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Processos Finanças/CSC</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="name">Multicloud de fato</div><div class="cmp">Google Cloud (produção/distribuição/streaming, parceria 7 anos desde 2021) · Oracle Cloud (Fusion) · CDN/proxy observado: KubeCache (globo.com/g1), Via google (Globoplay)</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="name">Governança de IA + dados internos</div><div class="cmp">FATO: governança de IA citada em fóruns Oracle; detalhes de stack de segurança corporativa não localizados publicamente. HIPÓTESE: identidade Globo ID + controles cloud dos hyperscalers.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="name">IA embutida + RPA + Agent Studio</div><div class="cmp">&gt;50 features IA em teste no Fusion · ~55 features SCM · RPA &gt;50 robôs · IA Google em produção/conteúdo · GenIA (publicidade) citada em fontes abertas</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="name">Dados unificados pós-Conecta</div><div class="cmp">Objetivo declarado: dados mais detalhados para decisão (IT Forum). Parceria Google Cloud para AI/ML e personalização. Detalhe de lakehouse não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="name">Oracle Fusion Cloud (Conecta)</div><div class="cmp">ERP · SCM · EPM · HCM · WMS — core majoritariamente Oracle (Donner). Fechamento 8→3 dias com EPM. Precisão estoque 99,5% (Oracle, out/2025).</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="name">Especialistas + CRM histórico</div><div class="cmp">Sistemas especialistas diversos; CRM Salesforce citado no histórico Infoglobo (LinkedIn). Detalhe atual do CRM Globo: não localizado com precisão.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="name">Audiência + colaborador</div><div class="cmp">Globoplay, TV aberta, G-family; jornada do colaborador/workplace sob mandato Donner 2026.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.globo.com</td><td><span class="status-200">200</span></td><td>HTML UTF-8</td><td>Via 2.1 KubeCache</td><td>HEAD 20/07/2026</td></tr>
+                    <tr><td>https://g1.globo.com</td><td><span class="status-200">200</span></td><td>HTML UTF-8</td><td>Via 2.1 KubeCache</td><td>HEAD 20/07/2026</td></tr>
+                    <tr><td>https://globoplay.globo.com</td><td><span class="status-200">200</span></td><td>HTML UTF-8</td><td>Via 1.1 google</td><td>HEAD 20/07/2026 — alinhado à parceria Google Cloud</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 20/07/2026 via HEAD HTTP. GET completo de globo.com falhou por corte de conexão — só registrar o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · IA aplicada</div><h4>De feature Oracle a valor de negócio</h4><p>Dezenas de features em teste; risco de backlog sem ownership de squad. Evidência setorial: mídia escala IA em conteúdo, mas backoffice exige ROI (Donner).</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Long-tail de sistemas especialistas</h4><p>Core unificado; periferia fragmentada. Evidência: declaração pública de múltiplos fornecedores sobre Oracle.</p><div class="offer">Oferta Foursys: FourBlox (Digibee iPaaS)</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Experiência interna</div><h4>Jornada do colaborador incompleta</h4><p>Novo mandato 2026 eleva Experiência/Produtividade; gap típico de CSC em grupos de 10k+ pessoas.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Modernização</div><h4>Apps satélite pós-consolidação</h4><p>Racionalização declarada no Conecta raramente termina no go-live — long-tail remanescente (hipótese + padrão setorial).</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Segurança</div><h4>Agentes com dados internos</h4><p>Agent Studio sem exportação reduz risco, mas amplia superfície de acesso privilegiado a dados sensíveis de mídia/RH.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Eng. Eletrônica · MBA FGV · HBS Online 2025</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">Rio de Janeiro / RJ</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado com precisão</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Pai professor de informática na Marinha — história de origem forte (Decision Report); use com respeito, não como anedota barata.<br>
+                2) Orgulho legítimo do Conecta e do prêmio IT Forum 2023 — cite o time, não só o título.<br>
+                3) Empreendedor (Webb/Nimbi): responde bem a linguagem de ownership e velocidade de startup com disciplina corporativa.<br>
+                4) Evite pitch de Globoplay/Copa — respeite a divisão de papéis com Bossoni/produto.<br>
+                5) Fale ROI, FinOps e governança — palavras que ele usa em público.<br>
+                6) CIONET: peer network; posicionar Foursys como parceiro de execução, não “mais um vendor”.<br>
+                7) Mandato novo (mai/2026): pergunte o que mudou na priorização 2026 vs. 2025.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>Planilha CIOs IT Forum Praia do Forte 2026 (10.07) — ID 18</li>
+                    <li>Receita/Econodata — CNPJ 27.865.757/0001-02</li>
+                    <li>Oracle BR — comunicado 15/10/2025 (Fusion + IA)</li>
+                    <li>Google Cloud — case Globo / press 2021</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>IT Forum — Conecta / Uma só Globo (dez/2023)</li>
+                    <li>TI Inside / Convergência Digital — Oracle AI Forum 2025</li>
+                    <li>Mobile Time — Globoplay low latency Copa 2026</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Variety — parceria Google Cloud mediatech</li>
+                    <li>Fontes abertas Copa 2026 / TV 3.0</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn — alexandredonner (cargo mai/2026)</li>
+                    <li>Decision Report — Bastidores da TI (nov/2024)</li>
+                    <li>IT Forum — Executivo de TI 2023</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>HEAD https://www.globo.com (200, KubeCache)</li>
+                    <li>HEAD https://g1.globo.com (200, KubeCache)</li>
+                    <li>HEAD https://globoplay.globo.com (200, Via google)</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

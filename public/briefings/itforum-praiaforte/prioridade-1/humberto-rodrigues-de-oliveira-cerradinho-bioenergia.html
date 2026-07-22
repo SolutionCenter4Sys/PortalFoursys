@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<!--
+  Briefing CIO — Humberto Rodrigues de Oliveira | CERRADINHO BIOENERGIA SA
+  IT Forum 2026 Praia do Forte · Design System Foursys · Ordem B→A→C
+  AÇÃO: CRIAR_NOVO · ID 50 · Modo --full
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Humberto Rodrigues de Oliveira | CERRADINHO BIOENERGIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Humberto Rodrigues de Oliveira</h1>
+                <h2>Gerente de Tecnologia da Informação — Cerradinho Bioenergia S.A.</h2>
+                <div class="loc">Energia / Bioenergia · Chapadão do Céu/GO · CNPJ 08.322.396/0001-03</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Porte (R$ 4,3 bi / 3º etanol milho)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Receita 25/26</div><div class="value">R$ 4,3 bi</div></div>
+                <div class="header-badge"><div class="label">Lucro líquido</div><div class="value">+90%</div></div>
+                <div class="header-badge"><div class="label">EBITDA aj.</div><div class="value">R$ 1,5 bi</div></div>
+                <div class="header-badge"><div class="label">Colaboradores</div><div class="value">~750</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: RI deep-dive (safra 25/26) + leitura de comitê (CEO/CFO/TI) + material de apresentação · Diferencia da edição anterior (Trancoso). Presente no último IT Forum: NÃO (planilha 10.07).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>Cerradinho Bioenergia S.A. (CerradinhoBio) é companhia de capital aberto (CVM categoria A, ações na B3), 100% nacional, do Grupo Cerradinho. Opera complexo industrial em Chapadão do Céu (GO) e Maracaju (MS), com modelo híbrido cana + milho: etanol, açúcar VHP, bioeletricidade e coprodutos de nutrição animal via subsidiária Neomille. Na safra 2025/26 consolidou receita líquida de R$ 4,3 bilhões (+16%), EBITDA ajustado de R$ 1,5 bilhão (+35%) e lucro líquido de R$ 372,7 milhões (+90%). Etanol de milho já responde pela maior parte do resultado — a companhia se posiciona como terceira maior produtora do segmento no Brasil (atrás de Inpasa e FS). Identificação antifraude: razão social e CNPJ 08.322.396/0001-03 confirmados (planilha IT Forum + bases públicas Econodata/CNPJ).</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div class="value">Cerradinho Bioenergia S.A.</div></div>
+                <div class="info-card"><div class="label">Sede</div class="value">Chapadão do Céu / GO</div></div>
+                <div class="info-card"><div class="label">Abrangência</div class="value">GO + MS (indústria); logística própria; RI global</div></div>
+                <div class="info-card"><div class="label">Faturamento</div class="value">R$ 4,3 bi (safra 25/26 · RI/CNN)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div class="value">~700–800 (LinkedIn empresa)</div></div>
+                <div class="info-card"><div class="label">Categoria</div class="value">S.A. aberta · CVM A · B3</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Humberto Rodrigues de Oliveira</strong> é Gerente de TI da CerradinhoBio (LinkedIn: cargo atual; perfil em Catanduva/SP). Declara ~31 anos de experiência em informática e descreve mandato executivo: planejamento estratégico de TI alinhado a comitês e direção, orçamento da área, priorização de projetos, revisão de processos sob o aspecto de informação e facilitação cross-área. Em fontes abertas de imprensa (jan/2024), aparece como porta-voz da modernização do core ERP para nuvem (pacote RISE), citando pressão de mercado cloud, fim de suporte da versão antiga, complexidade de múltiplos parceiros (cibersegurança, IBM Cloud, AMS, Basis) e ganho de mobilidade/previsibilidade operacional. Formação: MTA Setor Sucroenergético (UFSCar, 2008–2009). Atua no Hub UniAgro (desde ~2015), rede de inovação/TI no agronegócio — sinal de benchmarking setorial e abertura a parceiros. <em>Nível de decisão:</em> orçamento e roadmap de TI sob políticas aprovadas pela direção/comitês (não consta na Diretoria Executiva pública — gerência reportando ao CEO). Tempo de casa: longo no ecossistema Cerradinho (LinkedIn lista vínculo desde 1995 no grupo/marca; empresa S.A. fundada em 2006 — tratar como carreira longa no grupo, não como gestor recém-chegado).</p>
+            <h4 style="margin:14px 0 8px">Leitura de comitê (abordagem multi-stakeholder)</h4>
+            <ul style="margin-left:18px;font-size:14px">
+                <li><strong>Renato Henrique Pretti</strong> — Diretor-Presidente (CEO desde mai/2024): agenda de expansão milho, alocação de capital e eficiência energética.</li>
+                <li><strong>Gustavo de Marchi Galvão Oliveira</strong> — Diretor Financeiro e RI: CAPEX, alavancagem (1,4x), governança de investimentos.</li>
+                <li><strong>Sebastião Abílio / Marcelo Paycorich</strong> — Diretores industriais (milho e cana): demanda OT/TI, sistemas de chão de fábrica e integração planta–ERP.</li>
+                <li><strong>Carlos Augusto Brasilino</strong> — Diretor de Gente e Gestão: talento TI, cultura digital, portal de talentos.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Atua no setor de bioenergia/sucroenergético com diversificação deliberada: cana (etanol + açúcar VHP + cogeração) e milho (etanol + DDG/WDG + óleo) sob o mesmo guarda-chuva de grupo, com logística própria (Cerradinho Logística) e capacidade de estocagem relevante. Posição competitiva: entre os principais complexos do Centro-Oeste e, no etanol de milho, no pelotão de liderança nacional (terceira posição citada pela própria companhia/imprensa). Prioridades setoriais 2026: expansão de capacidade milho com CAPEX disciplinado sob juros altos; flexibilidade de mix cana (açúcar vs etanol); eficiência energética/biomassa; compliance RenovaBio/CBIOs e ESG; digitalização agrícola e industrial para sustentar escala multiplanta. Pressões: volatilidade de commodity (milho, açúcar, etanol), competição de greenfields em MT, necessidade de integração de dados entre unidades GO/MS e backoffice do grupo. Tendência consultiva: quem digitaliza a cadeia planta–logística–comercialização com governança de dados e segurança OT/IT ganha velocidade de decisão no mix e no CAPEX.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Gestão multi-empresa / multiplanta (CerradinhoBio + Neomille + Logística) com parceiros de TI fragmentados — Humberto citou complexidade pré-unificação do contrato cloud/AMS/ciber.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>CAPEX industrial intenso (açúcar R$ 465 mi; Neomille +R$ 140 mi) exige TI que acompanhe ramp-up sem virar gargalo de integração e dados.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Eficiência energética: 40% da energia de produção já vem de cavaco; projeto para eliminar biomassa alternativa compete por capital com expansões (CEO, jun/2026).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Superfície OT/IT em usinas expande risco cibernético e de disponibilidade — típico do setor agroindustrial em digitalização.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Pressão de talentos de TI no agro (tema recorrente no Hub UniAgro) vs escala de projetos do grupo.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">TI como habilitador das expansões milho/açúcar</span>
+                <span class="tag tag-priority">Simplificar ecossistema de fornecedores</span>
+                <span class="tag tag-priority">Dados em tempo real para mix e comercialização</span>
+                <span class="tag tag-priority">Mobilidade gerencial e previsibilidade operacional</span>
+                <span class="tag tag-priority">Agenda ESG / descarbonização mensurável</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Expansão Neomille GO (+30% milho · R$ 140 mi · startup ago/2026)</span>
+                <span class="tag tag-active">Armazéns DDG / biomassa (CAPEX 3T26 RI)</span>
+                <span class="tag tag-active">Consolidação fábrica açúcar VHP (ciclo 2022–2025)</span>
+                <span class="tag tag-active">Core ERP em nuvem + AMS unificado (jornada desde fim/2022)</span>
+                <span class="tag tag-active">IBM Cloud (base há ~5+ anos)</span>
+                <span class="tag tag-active">Estudo nova expansão milho GO e eventual Maracaju (cautela juros)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Integração planta–logística–comercial (iPaaS / API layer)</span>
+                <span class="tag tag-opportunity">Camada analítica / IA operacional (rendimento, energia, mix)</span>
+                <span class="tag tag-opportunity">Programa de cibersegurança OT/IT end-to-end</span>
+                <span class="tag tag-opportunity">Modernização de sistemas satélite e legado agrícola/industrial</span>
+                <span class="tag tag-opportunity">Data products para RI e comitês (além do ERP)</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS Digibee) + Engenharia Digital</h4><span class="score-badge">88/100</span></div>
+                <p>Camada de integração entre unidades GO/MS, logística, comercialização e satélites de negócio — exatamente a dor de diversidade de parceiros e sistemas complementares relatada pela TI. ISO 27001/27701 + 24 anos / 41.000+ projetos como credencial de execução.</p>
+                <div class="reasons"><ul>
+                    <li>Grupo multi-empresa em expansão física precisa de integração estável, não de mais ponto a ponto.</li>
+                    <li>Encaixa após estabilização do core cloud: monetiza o “lado de fora” do ERP.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">84/100</span></div>
+                <p>Programa que unifica governança de risco entre cloud, AMS e perímetro OT das usinas — área citada explicitamente como parte do emaranhado de contratos.</p>
+                <div class="reasons"><ul>
+                    <li>Expansão industrial aumenta superfície de ataque e custo de downtime.</li>
+                    <li>S.A. aberta / RI eleva expectativa de controles e evidência para comitês de risco.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">78/100</span></div>
+                <p>Squads de IA aplicada a eficiência energética, rendimento industrial milho/cana e apoio ao mix comercial — alinhado ao projeto de eliminar biomassa alternativa e à cultura de dados em tempo real pós-migração cloud.</p>
+                <div class="reasons"><ul>
+                    <li>CEO prioriza eficiência energética com competição por capital — IA com ROI mensurável fala a linguagem do comitê.</li>
+                    <li>Hub UniAgro mostra apetite do gestor por cases de analytics no agro.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">72/100</span></div>
+                <p>Inventário e refactor de sistemas satélite (agrícola, manutenção, logística, portais) que não entraram no pacote RISE — evita “ilha de excelência” só no core.</p>
+                <div class="reasons"><ul>
+                    <li>Humberto antecipou migração do core; o próximo ciclo típico é limpar entorno.</li>
+                    <li>Reduz custo de AMS fragmentado e risco de shadow IT nas plantas.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital (produtos digitais / experiência)</h4><span class="score-badge">68/100</span></div>
+                <p>Evolução de canais digitais (site MZ, RI, portais de talento/ética) e experiências internas mobile para operações e gestão — coerente com o valor de mobilidade que a TI já valorizou no core.</p>
+                <div class="reasons"><ul>
+                    <li>Canais públicos já em WordPress/MZIQ com GTM — base pronta para produtos digitais.</li>
+                    <li>Diferença competitiva vs players milho que ainda tratam TI só como custo de fábrica.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Não vender “outro ERP”. Abrir com: “Vocês anteciparam o core cloud para não disputar parceiro em 2026 — o gargalo agora é integrar expansões Neomille/açúcar e OT/IT sem voltar ao emaranhado de contratos.” Timing perfeito no IT Forum (primeiro contato presencial pós-Trancoso; não esteve no último).</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Ramp-up da expansão Neomille GO (R$ 140 mi, operação ampliada em 2026) + armazéns DDG/biomassa no CAPEX RI: janela para discovery de integração, dados industriais e ciber OT antes do próximo ciclo de expansão Maracaju.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Squads multidisciplinares (AI + integração + cyber + modernização) com FourBlox/Digibee e governança ISO — capacidade de atuar no “lado de fora” do core sem brigar com o contrato RISE já firmado. Credencial: 24 anos, 41.000+ projetos.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Inpasa</h4><p>Líder absoluto de etanol de milho (escala multi-bilhões de litros). Gap do alvo: Cerradinho compete por eficiência e sinergia híbrida cana+milho, não por volume puro — TI deve maximizar custo unitário e flexibilidade de mix, não só throughput.</p></div>
+            <div class="competitor-card"><h4>FS (Fueling Sustainability)</h4><p>Segundo player de etanol de milho (MT). Gap: FS opera em ecossistema de fronteira agrícola intensa; Cerradinho precisa de integração GO–MS e logística própria como diferencial — oportunidade de digital twin da cadeia logística.</p></div>
+            <div class="competitor-card"><h4>Peers cana (ex.: São Martinho / grupos listados)</h4><p>Referência em produtividade agrícola e industrial. Gap: peers avançam em analytics orçamentário e integração TI/TO; Cerradinho já modernizou core — falta evidência pública de camada analítica/OT unificada (hipótese consultiva).</p></div>
+            <div class="competitor-card"><h4>Evermat / novos greenfields MT</h4><p>Entrantes com CAPEX bilionário e plantas novas. Gap: greenfields nascem cloud-native; Cerradinho carrega dívida técnica de satélites — modernização de legado + iPaaS fecha o gap sem greenfield de TI.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">S.A. aberta de bioenergia (cana+milho+açúcar+energia), CNPJ 08.322.396/0001-03, sede Chapadão do Céu/GO; receita R$ 4,3 bi na safra 25/26; 3ª em etanol de milho.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Humberto R. de Oliveira, Gerente de TI; mandato orçamentário/estratégico com comitês; porta-voz da migração cloud do core; rede Hub UniAgro.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escala industrial (Neomille + açúcar) sem recriar complexidade de parceiros; TI como freio ou acelerador do próximo CAPEX.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Fontes abertas/RI: budget TI puxado por (1) estabilização/evolução do ERP cloud + AMS unificado, (2) suporte a expansões multiplanta, (3) ciber e disponibilidade, (4) dados/mobilidade para gestão. CAPEX físico domina o caixa; TI compete por eficiência.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">FourBlox/Engenharia Digital; Cibersegurança; AI Squad.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 30 min no IT Forum: mapa de integrações críticas Neomille–Logística–Comercial + workshop de risco OT.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Pós start-up expansão GO (2026) e antes de decisão Maracaju; ciclo orçamentário safra 26/27.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não “ajudar no ERP”. Monetizar o entorno: cada R$ 1 de CAPEX industrial gera dívida de integração/dados/OT — Foursys vende redução dessa dívida técnica.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Do destilador de cana ao hub híbrido</h4><p>Em menos de uma década a CerradinhoBio virou player de etanol de milho, açúcar VHP e energia, com lucro +90% na safra 25/26. TI antecipou o core cloud para não ficar sem parceiro em 2026.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Escala física vs complexidade digital</h4><p>Expansões de R$ centenas de milhões criam multiplanta e multi-empresa. O risco é a dívida técnica do entorno (integração, OT, cyber, satélites) corroer o ganho do core moderno.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Foursys no lado de fora do core</h4><p>FourBlox + Cyber + AI Squad + modernização de legado amarram plantas, logística e comitês — sem reabrir a guerra do ERP. De CAPEX industrial a vantagem operacional mensurável.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Integração multiplanta sem “espaguete” de parceiros</h4>
+                <p>Evidência: Humberto descreveu ambiente pré-RISE com nuvem, AMS, Basis e ciber em contratos separados; agora há Neomille GO ampliada + MS + logística própria.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee) + Engenharia Digital — camada de integração e APIs com governança, reduzindo time-to-integrate de novas capacidades industriais.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quais fluxos entre Neomille, CerradinhoBio e Logística ainda dependem de planilha, e-mail ou integração ponto a ponto?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Mapa vivo de 8–12 integrações críticas em workshop de meio dia com TI + Industrial.</p>
+            </div>
+            <div class="business-card">
+                <h4>Disponibilidade e risco OT/IT sob alavancagem controlada</h4>
+                <p>Evidência: alavancagem caiu para 1,4x, mas downtime em usina de milho/açúcar destrói margem; ciber foi citada como peça do quebra-cabeça de fornecedores.</p>
+                <div class="sub">Solução Foursys</div><p>Cibersegurança — assessment OT/IT, SOC/resposta e hardening alinhado a comitê de auditoria e risco.</p>
+                <div class="sub">Pergunta de descoberta</div><p>O comitê de risco já pede evidência unificada de controles entre cloud corporativa e chão de fábrica?</p>
+                <div class="sub">Gancho / próximo passo</div><p>One-pager de risco operacional em linguagem de CFO/RI para Gustavo de Marchi + Humberto.</p>
+            </div>
+            <div class="business-card">
+                <h4>Eficiência energética e mix com IA aplicada</h4>
+                <p>Evidência: CEO fala em projeto para eliminar biomassa alternativa (40% cavaco hoje); mix cana açúcar/etanol e milho exigem decisão rápida.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — casos de uso com ROI em energia, rendimento e forecast de mix, alimentados por dados industriais já existentes.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual KPI de energia ou rendimento o board olharia em 90 dias se tivéssemos um piloto instrumentado?</p>
+                <div class="sub">Gancho / próximo passo</div><p>PoC 6–8 semanas em uma linha/planta com métrica financeira pré-acordada.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck 8–10 slides + one-pager de risco OT/IT (PDF) · opcional PoC canvas 1 página</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">FourBlox + Cibersegurança + AI Squad — porque atacam entorno do core já modernizado</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) integração agroindústria multiplanta / iPaaS Digibee; (2) programa de cibersegurança industrial com governança para comitê de risco; (3) AI Squad com ROI em eficiência energética ou yield — adaptar narrativa Hub UniAgro (analytics no agro).</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> o maior ROI não está em “outra migração de ERP”; está em reduzir a dívida técnica que cada real de CAPEX industrial cria em integração, dados e OT. Foursys vende velocidade de expansão com risco controlado.</p>
+            <p style="margin-top:8px"><em>Se material setorial específico não estiver pronto: abrir com discurso “CAPEX industrial × dívida digital” + 2 perguntas de discovery + convite a mapa de integrações — sem forçar case genérico de varejo/banco.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>Parabéns pela antecipação da migração cloud — vocês compraram tempo; queremos ajudar a gastar esse tempo no entorno certo.</li>
+                <li>Cada expansão Neomille/açúcar cria 10 problemas de integração; FourBlox existe para isso não virar 10 contratos.</li>
+                <li>Cibersegurança OT/IT é pauta de comitê de risco em S.A. aberta — não só de firewall de fábrica.</li>
+                <li>AI Squad com KPI de energia fala a língua do CEO neste ciclo de juros altos.</li>
+                <li>Não estamos aqui para reabrir o core; estamos aqui para fazer o core valer nas plantas de GO e MS.</li>
+                <li>IT Forum é o momento de alinhar TI + Industrial + Financeiro na mesma mesa — sugerimos discovery tripartite.</li>
+                <li>Credencial Foursys: ISO 27001/27701, FourBlox/Digibee, 24 anos e 41.000+ projetos.</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Abordagem Humberto no IT Forum + cc informal CEO/CFO via one-pager</td><td>Agenda 30 min + briefing compartilhado</td><td>Semana do evento</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop TI + Industrial + Logística: fluxos críticos e riscos OT</td><td>Mapa de integrações e heat-map de risco</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC FourBlox (1–2 fluxos) ou PoC AI energia com KPI financeiro</td><td>Resultado mensurável + go/no-go</td><td>6–8 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad integração ou cyber OT em uma planta (GO ou MS)</td><td>Runbook + indicadores de disponibilidade</td><td>1 trimestre</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Programa multiplanta alinhado ao CAPEX safra 26/27</td><td>MSA + roadmap anual com comitê</td><td>Semestre seguinte</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Site institucional CerradinhoBio</h4><div class="url">https://www.cerradinhobio.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">WordPress (MZIQ theme)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">WordPress / PHP</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Hospedagem MZ / CDN assets</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não exposta publicamente</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Portal de Relações com Investidores</h4><div class="url">https://cerradinho.mz-sites.com/home-ri/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">MZ Sites</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Plataforma MZIQ</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">MZ (API mziq)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Downloads RI / filings</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Portal de Talentos (HCM)</h4><div class="url">portaldetalentos.senior.com.br (link no site)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Senior cloud</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Senior Sistemas</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">SaaS Senior</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Core ERP corporativo (nuvem)</h4><div class="url">Não público (intranet / parceiro AMS)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">UI mobile de processos (fontes abertas)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">ERP cloud · pacote RISE</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">IBM Cloud + RISE</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Camada de integração planejada (fontes 2024)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Canal de Ética / Ouvidoria</h4><div class="url">https://www.cerradinhobio.com.br/a-companhia-2/canal-de-ouvidoria/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Página institucional</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Mesmo ecossistema site</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="name">IBM Cloud + hospedagem digital MZ</div><div class="cmp">FATO: jornada IBM Cloud há ~5+ anos (imprensa 2024). Site/RI em ecossistema MZIQ/WordPress. Hipótese: workloads industriais/OT separados do corporativo.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="name">Parceiro(s) de ciber + controles S.A. aberta</div><div class="cmp">FATO: cibersegurança citada como contrato distinto pré-unificação RISE. S.A. CVM A / comitês de risco. Detalhe de SOC/EDR: não localizado publicamente.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="name">Agricultura de precisão / automação industrial (parcial)</div><div class="cmp">Diretor Agrícola com expertise em agricultura de precisão (site governança). Programa formal de IA corporativa: não localizado — hipótese de oportunidade AI Squad.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="name">Dados em tempo real no core + RI</div><div class="cmp">FATO: gestão valoriza informação em tempo real pós-migração. Data lake/warehouse público: não localizado. Integração analytics avançada: hipótese.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="name">ERP corporativo em nuvem (RISE) + AMS</div><div class="cmp">FATO: migração iniciada fim/2022, antecipada vs roadmap 2026; conversão técnica com parceiro Mignow (imprensa). Nome de suíte omitido por política do briefing. HCM recrutamento: Senior.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="name">Logística própria · comercial · industrial</div><div class="cmp">Cerradinho Logística (49,8% do volume escoado até dez/2024 — site). CRM/SCM específicos: não localizado. Múltiplas empresas do grupo aumentam superfície de apps.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="name">Site · RI · Talentos · Ética</div><div class="cmp">Canais públicos 200 OK; GTM presente no institucional. App consumidor B2C: N/A (B2B commodities).</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.cerradinhobio.com.br/</td><td><span class="status-200">200</span></td><td>WordPress / MZIQ</td><td>Assets CDN MZ</td><td>GTM presente; ~46 KB HTML</td></tr>
+                    <tr><td>https://cerradinho.mz-sites.com/home-ri/</td><td><span class="status-200">200</span></td><td>MZ Sites</td><td>MZIQ</td><td>Portal RI ativo</td></tr>
+                    <tr><td>https://www.cerradinhobio.com.br/negocios-e-atividades/cerradinhobio/</td><td><span class="status-200">200</span></td><td>WordPress</td><td>MZ</td><td>Página de negócios/capacidades</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 20/07/2026 via HTTP HEAD/GET. Só o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Integração</div><h4>Espaguete multi-empresa pós-expansão</h4><p>Evidência setorial: players híbridos cana+milho somam ERPs, WMS, balança, logística e comercial; Cerradinho cresceu capacidade sem evidência pública de iPaaS. Oferta fecha o gap do “lado de fora” do core.</p><div class="offer">Oferta Foursys: FourBlox + Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Segurança</div><h4>OT/IT ainda fragmentado</h4><p>Evidência: ciber citada como contrato separado; usinas milho/açúcar são alvos típicos de ransomware industrial no agro BR.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Dados/IA</div><h4>Analytics operacional pouco visível</h4><p>Evidência: board discute eficiência energética e mix, mas não há case público de plataforma de IA — gap vs peers que já mostram analytics orçamentário.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Legado</div><h4>Satélites agrícolas/industriais</h4><p>Evidência: modernização focou o core; sistemas de campo, manutenção e logística tendem a ficar para trás em grupos que crescem por CAPEX físico.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Experiência digital B2B</div><h4>Canais institucionais ≠ produtos digitais</h4><p>Evidência empírica: site/RI sólidos, mas sem portal B2B de clientes/fornecedores aparente — oportunidade de Engenharia Digital para originação e logística.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">MTA Sucroenergético — UFSCar (2008–2009)</div></div>
+                <div class="info-card"><div class="label">Cidade (LinkedIn)</div><div class="value">Catanduva / SP</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1. Reconheça a antecipação da migração cloud — ele articulou o racional em imprensa; mostre que leu.<br>
+                2. Fale em “simplificar parceiros”, não em “trocar stack” — é a linguagem que ele usou.<br>
+                3. Cite Hub UniAgro / networking agro-TI — sinal de abertura a benchmarking.<br>
+                4. Traga KPI de negócio (energia, mix, disponibilidade de planta), não feature de ferramenta.<br>
+                5. Inclua Industrial e CFO cedo: Humberto executa, comitê autoriza CAPEX.<br>
+                6. Evite discurso de commodity ERP; ele já fechou esse capítulo.<br>
+                7. Tom direto, técnico-consultivo, sem jargão de startup — perfil de gerente veterano do setor.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>Planilha CIOs Confirmados IT Forum Praia do Forte 2026 (10.07) — linha ID 50</li>
+                    <li>CNN Brasil / Globo Rural / JornalCana — resultados safra 2025/26</li>
+                    <li>Release 3T SF 25/26 (MZIQ) — CAPEX Neomille/DDG/biomassa</li>
+                    <li>Site CerradinhoBio — negócios, governança, diretoria</li>
+                    <li>AgFeed / UDOP — investimento R$ 140 mi Neomille</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Imprensa técnica jan/2024 — migração ERP cloud / RISE / IBM Cloud / Mignow (marca de suíte omitida no corpo por política)</li>
+                    <li>Portal talentos Senior (link institucional)</li>
+                    <li>Verificação empírica site/RI (WordPress/MZIQ/GTM)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Valor International / NovaCana — posição 3º etanol milho</li>
+                    <li>Estadão / Visão Agro — ranking Inpasa, FS, entrantes</li>
+                    <li>Econodata / CNPJCheck — razão social e CNPJ</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn Humberto Oliveira (gerente TI)</li>
+                    <li>LinkedIn / site — Renato Pretti (CEO), Gustavo de Marchi (CFO/RI)</li>
+                    <li>RPAnews / NovaCana — transição CEO 2024</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch https://www.cerradinhobio.com.br/</li>
+                    <li>HEAD/GET RI e página de negócios — 20/07/2026</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

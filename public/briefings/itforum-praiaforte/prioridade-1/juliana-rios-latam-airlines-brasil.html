@@ -1,0 +1,593 @@
+﻿<!DOCTYPE html>
+<!--
+  BRIEFING CIO — Juliana Rios | LATAM AIRLINES BRASIL — IT Forum 2026 (Praia do Forte)
+  Design System Foursys (Nunito + navy/laranja/menta/baunilha) · Ordem B → A → C
+  Hunter --full | Julido 2026-07-20
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Juliana Rios | LATAM AIRLINES BRASIL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Juliana Rios</h1>
+                <h2>Chief Information and Digital Officer (CIDO) — LATAM Airlines Group / LATAM Airlines Brasil</h2>
+                <div class="loc">Transporte e Logística · São Paulo/SP · CNPJ 02.012.862/0001-60</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Porte (líder doméstico BR + grupo LatAm)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Receita grupo 2025</div><div class="value">US$ 14,5 bi</div></div>
+                <div class="header-badge"><div class="label">Share doméstico BR</div><div class="value">~38,6%</div></div>
+                <div class="header-badge"><div class="label">Colaboradores grupo</div><div class="value">~41 mil</div></div>
+                <div class="header-badge"><div class="label">Passageiros grupo</div><div class="value">87,4 mi</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: RI deep-dive (Investor Day 2025 + resultados FY2025) + leitura de comitê (CIDO / CISO / CEO Brasil) + material de apresentação · Diferencia da edição anterior (Trancoso). Presente no último IT Forum: NÃO (planilha).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p><strong>FATO:</strong> A entidade brasileira na planilha é <strong>LATAM Airlines Brasil</strong>, razão social <strong>TAM Linhas Aéreas S.A.</strong>, CNPJ <strong>02.012.862/0001-60</strong> (confirmado na planilha IT Forum e em bases cadastrais públicas). Opera como afiliada do <strong>LATAM Airlines Group S.A.</strong> (listado, RI em ir.latam.com), maior grupo aéreo da América Latina, com mercados domésticos em Brasil, Chile, Colômbia, Equador e Peru e rede internacional. Em 2025 o grupo reportou receita operacional de US$ 14,49 bi, lucro líquido de US$ 1,46 bi e 87,4 mi de passageiros; Brasil segue como mercado-âncora (liderança doméstica ANAC e pacote de investimentos anunciado de US$ 2 bi em dois anos com foco em produto, tecnologia, passageiro e MRO).</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">TAM Linhas Aéreas S.A. (fantasia LATAM Airlines Brasil)</div></div>
+                <div class="info-card"><div class="label">Sede (planilha)</div><div class="value">São Paulo / SP</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Brasil (líder doméstico) + rede grupo LatAm / intercontinental</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">Grupo FY2025: US$ 14,49 bi (RI LATAM)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">Grupo ~41 mil (6-K/RI); Brasil: não localizado desagregado</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada (subsidiária de grupo listado)</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Juliana Rios</strong> é <strong>Chief Information and Digital Officer (CIDO)</strong> do LATAM Airlines Group desde <strong>jan/2021</strong> (LinkedIn; ~5,5 anos no cargo). Brasileira, baseada em Santiago/Chile; na LATAM desde 2015 (área de PSS / Passenger Service System) e co-liderou a transformação digital “greenfield” a partir de 2018. Antes: executiva sênior no Banco Santander Brasil (estratégia de varejo e experiência do cliente; integrações BR/IT/NL). Formação: Administração + MBA em gestão corporativa (IBMEC). Board Member da <strong>SITA</strong> (desde jun/2022). Nível C-Level com mandato explícito de integrar TI/dados/IA ao modelo operacional — não é CIO “de suporte”.</p>
+            <p style="margin-top:12px"><strong>Poder de decisão:</strong> agenda digital do grupo (Investor Day 2025), priorização de plataformas, data lake / IA generativa (AmelIA), cloud e modelo de squads multifuncionais. Budget de cyber no grupo passa também por <strong>André Pires Ferreira</strong> (Diretor de Segurança da Informação — contrato IBM mar/2025). No Brasil, execução comercial/operacional sob <strong>Jerome Cadier</strong> (CEO LATAM Airlines Brasil) — leitura de comitê obrigatória: CIDO (grupo) × CEO Brasil × CISO.</p>
+            <p style="margin-top:12px"><strong>Estilo (fontes abertas):</strong> discurso de “tech como serviço para todos”, citizen development, AI agents que executam (não só assistem), funding Idea→Experiment→Scale. Evita conversa de projeto isolado; exige outcome de negócio medido.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Transporte aéreo de passageiros e carga, com forte camada digital de distribuição (site/app), fidelidade (LATAM Pass) e operação (manutenção preditiva, tripulação, combustível, janela 72h pré-voo). No Brasil, a LATAM lidera o mercado doméstico de forma sustentada (dezenas de meses consecutivos no topo ANAC) frente a Gol e Azul — disputa oligopolística de capacidade, ocupação e produto. Pressões setoriais: combustível e leasing/manutenção, experiência premium, punctualidade, cibersegurança de operação crítica e escala de dados de frota. Tendência 2026: IA operacional em tempo real, autonomia do passageiro no digital e expansão de rede/produto no Brasil sob o ciclo de investimento já anunciado.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Pressão por eficiência unitária em escala (1.600+ operações/dia no discurso Investor Day) — ganhos marginais de 0,1–1% viram milhões.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Janela operacional das 72h pré-voo ainda em transformação (próximo ciclo declarado pela CIDO) — decisões em tempo real vs. processos legados de dispatch/ops.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Superfície de ameaça cibernética global (5 mercados + intercontinental) mesmo com contrato IBM X-Force — necessidade contínua de maturidade, integração e resposta.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Democratização de tech (“bottom-up”) sem fragmentar governança — risco de shadow IT / citizen apps sem guardrails.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Concorrência doméstica Gol/Azul em share e produto — digital e NPS viram alavanca de retenção, não só canal.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">IA / agentes no core operacional</span>
+                <span class="tag tag-priority">Decisão em tempo real (72h)</span>
+                <span class="tag tag-priority">Tech as a service para colaboradores</span>
+                <span class="tag tag-priority">NPS e autonomia digital do pax</span>
+                <span class="tag tag-priority">Eficiência MRO / predicativo</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">US$ 2 bi Brasil (produto/tech/pax/MRO) — Valor</span>
+                <span class="tag tag-active">Google Cloud (TI 100% nuvem) — já migrado</span>
+                <span class="tag tag-active">IBM Security / X-Force — contrato mar/2025</span>
+                <span class="tag tag-active">AmelIA (GenAI OpenAI) — 35 mil usuários / 6 países</span>
+                <span class="tag tag-active">Data lake sensores aeronaves + ops 72h</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Squads AI para casos BR (MRO São Carlos, aeroportos, cargo)</span>
+                <span class="tag tag-opportunity">Governança de citizen development / integration layer</span>
+                <span class="tag tag-opportunity">Engenharia digital da janela 72h (hipótese de whitespace)</span>
+                <span class="tag tag-opportunity">Modernização de bordas legadas pós-PSS / apps satélite</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">92/100</span></div>
+                <p>Encaixa no discurso da CIDO (Investor Day + LinkedIn): agentes que executam, AmelIA já em escala, e agenda de democratização. Foursys entra com squads multidisciplinares para casos de negócio mensuráveis (ops 72h, MRO, cargo, atendimento) sob governança — não “PoC de chatbot”.</p>
+                <div class="reasons"><ul>
+                    <li>AmelIA já prova apetite por GenAI em 6 países.</li>
+                    <li>CIDO pede funding Idea→Experiment→Scale — modelo de squad encaixa.</li>
+                    <li>Ângulo BR: MRO São Carlos + operação doméstica líder.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">86/100</span></div>
+                <p>Produto digital e plataformas compartilhadas (site/app, LATAM Pass, check-in, wallet) + próximo ciclo 72h. Squads de engenharia para acelerar outcomes sem reinventar a nuvem (já em Google Cloud).</p>
+                <div class="reasons"><ul>
+                    <li>NPS digital 30→68 e 94% remarcações no app (fontes abertas) — ainda há margem no próximo ciclo.</li>
+                    <li>Times multifuncionais já são o modelo organizacional declarado.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS Digibee)</h4><span class="score-badge">78/100</span></div>
+                <p>Integração entre ecossistema multi-país, canais digitais, ops e parceiros (aeroportos, MRO, cargo). Hipótese: citizen apps e plataformas novas criam demanda de integração governada — FourBlox como backbone com ISO 27001/27701.</p>
+                <div class="reasons"><ul>
+                    <li>Agenda bottom-up aumenta superfície de integração.</li>
+                    <li>Grupo multi-jurisdição (LGPD/GDPR-like) valoriza iPaaS com compliance.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">72/100</span></div>
+                <p>Cloud já migrada; foco desloca para bordas: sistemas satélite pós-PSS, processos aeroportuários BR, apps internos. Modernização seletiva com desacoplamento — não “lift &amp; shift”.</p>
+                <div class="reasons"><ul>
+                    <li>Histórico de PSS migration (SITA bio) mostra competência e dor residual típica do setor.</li>
+                    <li>Discurso Tesla vs BMW: software como produto — legado vira freio cultural/técnico.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">58/100</span></div>
+                <p>Contrato IBM Security (mar/2025) cobre defesa/inteligência com X-Force — <strong>não atacar de frente como “substituir IBM”</strong>. Entrar em camadas adjacentes: secure-by-design em squads AI, AppSec, identidade em citizen development, exercícios de resposta com negócio BR.</p>
+                <div class="reasons"><ul>
+                    <li>Score mais baixo por vendor lock já anunciado no CISO.</li>
+                    <li>Espaço consultivo: segurança embutida no delivery digital Foursys.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>IT Forum Praia do Forte 2026: abrir com o ciclo 72h + valor medido (manutenção predicativa / combustível / tripulação) — linguagem de Investor Day, não catálogo de serviços. Pedir 1 caso BR para squad AI de 6–8 semanas com KPI financeiro.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Investimento US$ 2 bi no Brasil (produto/tech/pax/MRO) + expansão de rede: timing de fornecedores que falem “resultado operacional no Brasil” alinhados à CIDO do grupo. Hipótese: whitespace em engenharia da janela 72h e governança de citizen AI além do AmelIA corporativo.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>24 anos, 41.000+ projetos, ISO 27001/27701, AI Squad + FourBlox Digibee. Posicionar Foursys como acelerador de outcomes sob o modelo já escolhido (cloud Google + GenAI + squads), não como substituto dos megavendors. Evitar pitch óbvio de “nuvem” ou “cyber genérico”.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Gol Linhas Aéreas</h4><p>Vice-liderança doméstica (~31% passageiros 2025). Pressiona LATAM em ocupação e capacidade. Gap relativo: LATAM comunica maturidade digital/dados mais abertamente (Investor Day); Gol compete em eficiência de rede — oportunidade Foursys é reforçar vantagem digital operacional da LATAM, não “igualar site”.</p></div>
+            <div class="competitor-card"><h4>Azul Linhas Aéreas</h4><p>Terceira no doméstico (~30%). Forte em rede regional/produto (ex.: Comfort internacional). Gap: LATAM lidera share e narrativa de data ecosystem; Azul disputa experiência. Ângulo: manter lead de NPS digital e autonomia self-service.</p></div>
+            <div class="competitor-card"><h4>Delta / parceiros JV (contexto rede)</h4><p>LATAM opera em alianças e JVs internacionais; pressão por integração de experiência e dados entre parceiros. Gap típico do setor: orquestração multi-PSS/parceiro — FourBlox/integração como conversa.</p></div>
+            <div class="competitor-card"><h4>Thoughtworks (parceiro tech observado)</h4><p>Presença em painéis com a CIDO (Web Summit Rio). Não é concorrente aéreo; é referência de delivery ágil. Foursys deve chegar com case + KPI, não com slides genéricos de transformação.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">TAM Linhas Aéreas S.A. (LATAM BR), CNPJ 02.012.862/0001-60; afiliada do maior grupo aéreo LatAm; líder doméstico BR.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Juliana Rios, CIDO do grupo desde 2021; board SITA; mandato digital/IA/ops; baseada em Santiago.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escalar IA operacional e janela 72h com valor financeiro medido, sob investimento BR e liderança de share.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">RI/fontes abertas: cloud Google (já), GenAI AmelIA, data lake frota, cyber IBM, pacote US$ 2 bi BR (tech no mix).</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) AI Squad · 2) Engenharia Digital · 3) FourBlox (integração governada)</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Workshop 90 min no IT Forum: 1 KPI BR (MRO ou 72h) + proposta de squad piloto 6–8 semanas.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum 2026 + ciclo investimento BR + roadmap pós-Investor Day 2025.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender nuvem/cyber genérico (já Google + IBM). Vender capacidade de transformar a janela 72h e citizen AI em P&amp;L — com governança.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>De companhia aérea a empresa de software que voa</h4><p>Cloud 100%, data lake de sensores, AmelIA e Investor Day 2025 consolidam a narrativa: digital deixou de ser projeto. Juliana lidera a virada cultural e operacional.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Escala vs. velocidade vs. controle</h4><p>Próximo ciclo (72h, agentes, bottom-up) aumenta complexidade. IBM e Google cobrem pilares; falta acelerar casos BR com squads e integração sem shadow IT.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Foursys como fábrica de outcomes</h4><p>AI Squad + Engenharia + FourBlox amarram KPI financeiro a delivery governado — alinhado ao modelo Idea→Experiment→Scale da CIDO.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Valor na janela operacional 72h</h4>
+                <p><strong>FATO:</strong> CIDO declarou o próximo ciclo sobre as 72h pré-voo com decisões em tempo real (Brasilturis / Investor Day 2025).</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital + AI Squad para orquestrar dados/eventos e recomendações acionáveis (tripulação, slot, irregularidade) com KPI de custo/atraso.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Qual decisão das 72h ainda depende de planilha ou handoff humano que mais queima margem no Brasil?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Mapear 2 decisões críticas BR e desenhar experimento de 6 semanas.</p>
+            </div>
+            <div class="business-card">
+                <h4>MRO São Carlos + predicativo em escala</h4>
+                <p><strong>FATO:</strong> Investimento BR inclui MRO; discurso público liga predicativo a “aeronaves equivalentes” sem comprar frota.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad focado em manutenção/planejamento com integração ao data lake de sensores (já citado) e workflows de hangar.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Onde o predicativo ainda não fecha o ciclo até a ordem de serviço no chão de São Carlos?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Visita técnica MRO + painel de valor (AOG / downtime).</p>
+            </div>
+            <div class="business-card">
+                <h4>Citizen AI com governança (além do AmelIA)</h4>
+                <p><strong>FATO:</strong> AmelIA para ~35 mil colaboradores; CIDO sonha com “tech as a service” e citizen developers.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad + FourBlox: padrões, integração segura e fábrica de casos de uso locais BR sem fragmentar o core.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quantos apps/automações nascem fora do radar do CIDO e como vocês medem risco + valor?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment de 10 casos citizen + ranking de ROI/risco.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de KPI + proposta de PoC/squad 6–8 semanas</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad (âncora) + Engenharia Digital + FourBlox — porquê: encaixe no modelo Idea→Experiment→Scale e na agenda 72h/citizen AI</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) Discursos/cases Foursys de eficiência operacional em logística/transporte (se houver ativo pronto — usar; senão analogia MRO/ops). (2) Referência pública LATAM de valor predicativo/combustível como espelho de KPI. (3) Case de integração iPaaS Digibee/FourBlox em grupo multiempresa (se disponível no playbook).</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> “Vocês já compraram a plataforma (Google + GenAI + IBM). O gap agora é fábrica de decisões de 72h e governança de AI de borda — é onde P&amp;L aparece em semanas, não em roadmap de 3 anos.”</p>
+            <p style="margin-top:8px"><em>Se não houver case aéreo pronto: abrir com narrativa Investor Day da própria LATAM + método Foursys de squad com KPI — não forçar case genérico de outro setor no slide 1.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Não viemos vender nuvem — vocês já estão 100% Google Cloud. Viemos acelerar o ciclo 72h com KPI de margem.”</li>
+                <li>“AmelIA prova GenAI em escala; o próximo salto é agente que fecha decisão operacional, não só responde chat.”</li>
+                <li>“No Brasil, o pacote de US$ 2 bi cria timing: MRO e produto digital precisam de fábrica de delivery, não só de roadmap.”</li>
+                <li>“Citizen development sem iPaaS/governança vira shadow IT; com FourBlox vira vantagem.”</li>
+                <li>“IBM cobre o SOC; nós embutimos secure-by-design no squad que gera o valor — sem guerra de vendor.”</li>
+                <li>“Gol e Azul brigam por assento; vocês podem brigar por velocidade de decisão — isso não se compra em ASK.”</li>
+                <li>“Proposta concreta: um experimento de 6–8 semanas, um KPI BR, um squad Foursys — Idea→Experiment→Scale no seu modelo.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Encontro IT Forum com Juliana (+ intro Jerome Cadier / TI BR se presente)</td><td>One-pager + alinhamento de 1 KPI candidato</td><td>Evento + 7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshops 72h / MRO / citizen AI com stakeholders BR + arquitetura grupo</td><td>Mapa de decisões + ranking ROI/risco</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>Experimento controlado (AI Squad) em 1 fluxo</td><td>Demo + métrica baseline vs. pós</td><td>6–8 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Expandir para 2–3 casos; FourBlox se integração for gargalo</td><td>Playbook + governança citizen</td><td>1 trimestre</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Contrato guarda-chuva de squads sob CIDO/procurement grupo</td><td>MSA + roadmap anual de outcomes</td><td>2º semestre pós-piloto</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Portal / e-commerce LATAM (BR)</h4><div class="url">https://www.latamairlines.com/br/pt</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">SPA/web moderna (detalhe framework: não localizado — WAF bloqueia scrape)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">APIs de booking/check-in (inferido)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Google Cloud (FATO — migração pública)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Canais digitais ~100 mi visitas/mês (discurso CIDO)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>App LATAM / self-service</h4><div class="url">App stores / canais mobile LATAM</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">App nativo/híbrido (não localizado detalhe)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Serviços de remarcação — 94% voluntárias sem humano (fonte aberta)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Google Cloud</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integração PSS / fidelidade</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>AmelIA (GenAI interna)</h4><div class="url">Plataforma interna (parceria OpenAI citada em fontes abertas)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Assistente GenAI colaboradores</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">LLM + RAG corporativo (hipótese de arquitetura)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Google Cloud + OpenAI</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">~35 mil usuários / 6 países</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>LATAM Pass / engajamento</h4><div class="url">Programa de fidelidade (canais digitais LATAM)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Web/app fidelidade</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Motor de milhas/parceiros</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Google Cloud (contexto grupo)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">+44% membros ativos (discurso Investor Day)</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp"><strong>FATO:</strong> Migração completa para Google Cloud; encerramento de data centers BR/Chile; investimento ~US$ 15 mi na migração (InfoMoney). Serverless e analytics citados.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp"><strong>FATO:</strong> Contrato IBM Security Services (mar/2025) com IBM X-Force Protection; CISO André Pires Ferreira. Multi-país (LGPD e regimes locais).</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">AmelIA (GenAI); manutenção predicativa; modelos de combustível/rota; inspirações IA para viajante (~1.700 consultas/dia). Agenda de agentes autônomos (LinkedIn CIDO).</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">Data lake de sensores de aeronaves (100% dos dados citados); ~90 mil min de dados de voo/dia; ciclo “dados→ação” como diferencial declarado.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">ERP específico: <strong>não localizado</strong> em fontes abertas desta pesquisa. Core aeronáutico/PSS historicamente crítico (migração PSS no histórico da CIDO).</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">PSS/reservas, ops de voo, MRO, cargo, LATAM Pass, canais digitais, HR/treinamento com IA (onboarding citado).</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">Site/app, check-in automático, LATAM Wallet, NPS digital 30→68, programa fidelidade, lounges/produto premium (investimentos BR).</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.latamairlines.com/br/pt</td><td><span class="status-err">403</span></td><td>Não inspecionável (WAF)</td><td>AkamaiGHost</td><td>Bot protection / akavpau_CyberLatam; HSTS; X-Frame-Options DENY</td></tr>
+                    <tr><td>https://www.latam.com</td><td><span class="status-200">301</span></td><td>—</td><td>Akamai</td><td>Redirect para latamairlines.com; cookies geo BR</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 20/07/2026 via curl HEAD. Só registrar o efetivamente inspecionado. Detalhe de JS/framework não obtido por bloqueio 403 — hipótese de stack front permanece aberta.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Operações</div><h4>Orquestração da janela 72h</h4><p>Evidência: CIDO declara próximo ciclo nas 72h pré-voo. Lacuna típica: dados existem no lake, decisão ainda fragmentada entre sistemas ops.</p><div class="offer">Oferta Foursys: Engenharia Digital + AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · IA</div><h4>De assistente a agente com P&amp;L</h4><p>Evidência: AmelIA em escala + posts sobre AI agents executing. Lacuna: industrializar agentes em processos BR (MRO, irregularidade, cargo) com KPI.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Integração</div><h4>Citizen apps sem backbone</h4><p>Evidência: agenda bottom-up / tech as a service. Lacuna setorial: explosão de automações locais sem iPaaS/governança.</p><div class="offer">Oferta Foursys: FourBlox (Digibee)</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Legado de borda</div><h4>Satélites pós-core cloud</h4><p>Evidência: cloud core migrado; histórico PSS. Lacuna: sistemas aeroportuários/MRO/BR ainda acoplados ou manuais.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Segurança no delivery</div><h4>Secure-by-design além do SOC</h4><p>Evidência: IBM X-Force no perímetro. Lacuna: AppSec/identidade em fábrica de AI e citizen — camada onde Foursys agrega sem substituir IBM.</p><div class="offer">Oferta Foursys: Cibersegurança (adjacente) + AI Squad</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Administração + MBA IBMEC</div></div>
+                <div class="info-card"><div class="label">Base</div><div class="value">Santiago/Chile (brasileira); evento BR = terreno conhecido</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">PT / ES / EN (atuação multi-país; não localizado certificado formal)</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Fale outcome e margem, não “transformação digital” — ela já declarou o termo datado.<br>
+                2) Cite o Investor Day / 72h / AmelIA com respeito — mostra homework.<br>
+                3) Metáfora Tesla vs BMW (post LinkedIn dela) é ouro para rapport — use com cuidado, sem forçar.<br>
+                4) Reconheça Google Cloud e IBM como decisões certas; peça o whitespace.<br>
+                5) Board SITA: ela pensa ecossistema de aviação, não só LATAM — evite provincianismo BR.<br>
+                6) Tom franco e direto (recomendações LinkedIn) — vá objetivo, sem fluff.<br>
+                7) Se falar de família/filha: só se ela abrir; não inventar intimidade.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>LATAM RI — resultados FY2025 (lucro US$ 1,46 bi; receita US$ 14,49 bi)</li>
+                    <li>Brasilturis — Investor Day 2025 / entrevista Juliana Rios (dez/2025)</li>
+                    <li>Valor Econômico — investimento US$ 2 bi Brasil</li>
+                    <li>InfoMoney — migração Google Cloud / US$ 7 mi/ano</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>IT Show / InfoMoney — 100% Google Cloud</li>
+                    <li>IBM Newsroom — contrato cibersegurança (10/03/2025)</li>
+                    <li>Web Summit Rio / Aeroflap — transformação digital + AmelIA</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>ANAC / Panrotas / InfoMoney — share doméstico 2025 (LATAM ~38,6%; Gol; Azul)</li>
+                    <li>Planilha CIOs Confirmados IT Forum Praia do Forte 2026</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn — Juliana Rios (CIDO)</li>
+                    <li>SITA Board — bio oficial</li>
+                    <li>Diario Financiero — VP TI y Digital</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>curl HEAD latamairlines.com/br/pt → 403 Akamai</li>
+                    <li>curl HEAD latam.com → 301 Akamai</li>
+                    <li>Econodata — razão social TAM Linhas Aéreas S.A. / CNPJ</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

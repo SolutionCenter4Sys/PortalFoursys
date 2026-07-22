@@ -31,6 +31,7 @@ const SOURCE_COLORS: Record<BenchmarkSource, { bg: string; text: string; border:
   santander: { bg: 'rgba(204,0,0,0.12)', text: '#FF6B6B', border: 'rgba(204,0,0,0.32)', primary: '#CC0000' },
   itforum: { bg: 'rgba(0,114,206,0.12)', text: '#5BB4FF', border: 'rgba(0,114,206,0.32)', primary: '#004C97' },
   'bench-empresas': { bg: 'rgba(139,92,246,0.12)', text: '#A78BFA', border: 'rgba(139,92,246,0.32)', primary: '#8B5CF6' },
+  'itforum-praiaforte': { bg: 'rgba(13,148,136,0.12)', text: '#2DD4BF', border: 'rgba(13,148,136,0.32)', primary: '#0D9488' },
 }
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
@@ -91,7 +92,10 @@ export function SectionBenchmark() {
     baseContacts.forEach(c => {
       if (c.tag) set.add(c.tag)
     })
-    const preferred = ['Reunião Foursys', 'Foursys Meeting', 'Demais CIO', 'Other CIOs', 'Grupo NC', 'NC Group']
+    const preferred = [
+      'Prioridade 1', 'Prioridade 2', 'Prioridade 3',
+      'Reunião Foursys', 'Foursys Meeting', 'Demais CIO', 'Other CIOs', 'Grupo NC', 'NC Group',
+    ]
     return Array.from(set).sort((a, b) => {
       const ia = preferred.indexOf(a)
       const ib = preferred.indexOf(b)
@@ -177,7 +181,7 @@ export function SectionBenchmark() {
             <Users size={12} />
             {lang === 'pt' ? 'Todas as origens' : 'All sources'} ({contacts.length})
           </button>
-          {(['santander', 'itforum', 'bench-empresas'] as BenchmarkSource[]).map(src => {
+          {(['santander', 'itforum', 'bench-empresas', 'itforum-praiaforte'] as BenchmarkSource[]).map(src => {
             const palette = SOURCE_COLORS[src]
             const count = sourceCounts.get(src) ?? 0
             const active = activeSource === src
@@ -185,8 +189,10 @@ export function SectionBenchmark() {
               src === 'santander'
                 ? 'Santander'
                 : src === 'itforum'
-                  ? (lang === 'pt' ? 'IT Fórum' : 'IT Forum')
-                  : (lang === 'pt' ? 'Bench Empresas' : 'Company Bench')
+                  ? 'IT Forum 2026 Trancoso'
+                  : src === 'itforum-praiaforte'
+                    ? 'IT Forum 2026 Praia Forte'
+                    : (lang === 'pt' ? 'Bench Empresas' : 'Company Bench')
             return (
               <button
                 key={src}

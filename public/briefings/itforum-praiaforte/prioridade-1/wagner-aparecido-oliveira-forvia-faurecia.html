@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<!--
+  Briefing CIO — Wagner Aparecido Oliveira | FORVIA - FAURECIA
+  IT Forum 2026 Praia do Forte · Design System Foursys · Ordem B→A→C · Modo --full
+  Hunter | Pre-Sales Intelligence | CRIAR_NOVO
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Wagner Aparecido Oliveira | FORVIA - FAURECIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Wagner Aparecido Oliveira</h1>
+                <h2>Regional CIO — FORVIA (Faurecia)</h2>
+                <div class="loc">Indústria Automotiva · São Bernardo do Campo/SP · CNPJ 48.830.760/0001-09 (planilha IT Forum)</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Porte global + FOCO 4SYS + Sul (matriz PR / CIO Curitiba)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Receita grupo</div><div class="value">€20–22bi</div></div>
+                <div class="header-badge"><div class="label">Colaboradores</div><div class="value">~150 mil</div></div>
+                <div class="header-badge"><div class="label">Países / sites</div><div class="value">40+ / 200+</div></div>
+                <div class="header-badge"><div class="label">Capex teto</div><div class="value">&lt;7% vendas</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: RI deep-dive (IGNITE / CMD fev-2026) + leitura de comitê (CDIO + CIO Regional + IT planta) + material de apresentação · Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p><strong>FATO:</strong> FORVIA é o grupo automotivo formado em 2022 pela combinação Faurecia + HELLA — fornecedor global de tecnologias de mobilidade (interiores, seating, lighting, electronics, clean mobility e lifecycle). Atua em 40+ países com 200+ sites industriais e cerca de 150 mil colaboradores. Em 24/02/2026 apresentou o plano estratégico <em>IGNITE</em> (Capital Markets Day), com fase Focus &amp; Strengthen (2025–2028) e Lead &amp; Grow (após 2028). No Brasil, a operação industrial/comercial usa a marca Faurecia/FORVIA com Technology &amp; Customer Center em São Bernardo do Campo (Anchieta/VW) e plantas em PR, PE (Goiana — citada como uma das maiores e mais complexas do grupo), BA, RJ e outras. <strong>Antifraude CNPJ:</strong> a planilha do evento traz CNPJ <strong>48.830.760/0001-09</strong>; fontes públicas da Receita apontam a matriz ativa <strong>Faurecia Automotive do Brasil Ltda</strong> sob <strong>01.178.298/0001-97</strong> (Quatro Barras/PR, capital social ~R$ 1,08 bi). Validar qual entidade jurídica será o contratante antes da proposta — não inventamos razão social além do cruzamento público.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social (público Brasil)</div><div class="value">Faurecia Automotive do Brasil Ltda (validar vs CNPJ planilha)</div></div>
+                <div class="info-card"><div class="label">Sede (planilha / matriz BR)</div><div class="value">SBC/SP (evento) · Matriz Quatro Barras/PR</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Global (FRVIA.PA) · multiplanta Brasil</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">Outlook 2028: €21–22 bi (CMD IGNITE)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~150.000 (grupo, fontes institucionais)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada listada (subsidiária BR de grupo FR)</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>FATO:</strong> Wagner Oliveira figura como <strong>Regional CIO</strong> da FORVIA/Faurecia (LinkedIn <code>wagner-oliveira-8172511</code>), base Curitiba/PR. Em jan/2026 visitou a planta de Goiana ao lado de <strong>Raphael Viard</strong> (Chief Digital Information Officer — CDIO global) para revisar fábrica, processos, sistemas e infraestrutura de TI — evidência de que o perímetro regional reporta/alinha com GIT global e prioriza excelência operacional no chão de fábrica. Recomendações de pares destacam relacionamento forte com negócio, fornecedores e time global de TI, com histórico longo na Faurecia (fontes Adapt.io / recomendações LinkedIn). <strong>Poder de decisão:</strong> budget regional de TI/OT e priorização de plantas; decisões de plataforma corporativa e GenAI em escala tendem a passar pelo CDIO / programas SIMPLIFY e IGNITE. <strong>Leitura de comitê:</strong> (1) Wagner — CIO Regional (alvo 1ª conversa IT Forum); (2) Raphael Viard — CDIO (patrocínio digital/AI); (3) Paulo Vieira — IT Manager planta Goiana (campeão local de iniciativas); (4) Plant Managers (ex.: Ronaldo Alves em Goiana) — P&amp;L e CAPEX industrial.</p>
+            <div class="alert-box" style="margin-top:14px">⚠️ <strong>Identidade:</strong> confirmar no evento o nome completo “Wagner Aparecido Oliveira” vs perfil LinkedIn “Wagner Oliveira” (mesmo cargo Regional CIO FORVIA). Homônimos sem cargo FORVIA devem ser descartados.</div>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>FORVIA compete no tier-1 automotivo global, vendendo conteúdo por veículo para OEMs (Stellantis, VW e demais montadoras nas plantas BR). A cadeia crítica cobre engenharia de produto, manufatura JIT/JIS, logística inbound/outbound, qualidade IATF e integração digital com o cliente na linha. Prioridades setoriais 2026: software-defined vehicle, eletrificação, custo por peça, resiliência de supply chain e descarbonização. Pressão competitiva vem de Magna, Lear, Adient, Valeo e Continental — todos acelerando digital shop-floor e analytics. No Brasil, Goiana (polo Jeep/Stellantis) é vitrine de maturidade digital do grupo; o Technology Center em SBC ancora proximidade com o ABC paulista. <em>Hipótese consultiva:</em> o CIO regional equilibra adesão a padrões globais IGNITE/SIMPLIFY com urgência local de integração entre plantas heterogêneas e OEMs exigentes.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Desalavancagem + disciplina de CAPEX</strong> — IGNITE limita investimento (&lt;7% das vendas) e prioriza caixa; TI compete com CAPEX industrial. (RI/CMD 2026)</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Simplificação SG&amp;A / tarefas transacionais</strong> — programa SIMPLIFY mira −€110 mi na baseline até 2028 via eliminação de tarefas e GenAI. (FY2025 results)</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Integração planta ↔ GIT</strong> — visita CDIO+CIO Regional a Goiana evidencia necessidade de alinhar iniciativas locais ao padrão global. (LinkedIn Paulo Vieira, jan/2026)</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Complexidade multiplanta Brasil</strong> — portfólio de sites (PR, SP, PE, BA, RJ) com maturidade digital desigual. (fontes abertas presença BR)</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Pressão OEM por rastreabilidade e acurácia</strong> — go-live de WMS avançado (EWM) em Goiana; IoT de racks em FMM Goiana (Sawluz/Taggen, fontes abertas históricas).</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Performance end-to-end (IGNITE)</span>
+                <span class="tag tag-priority">GenAI em operações indiretas</span>
+                <span class="tag tag-priority">Digital &amp; AI como vantagem competitiva</span>
+                <span class="tag tag-priority">Modelo regional com accountability</span>
+                <span class="tag tag-priority">Excelência operacional shop-floor</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">SIMPLIFY / GenAI (2025–2028)</span>
+                <span class="tag tag-active">EU-FORWARD (custo Europa; sinal de disciplina global)</span>
+                <span class="tag tag-active">Digitalização logística/WMS plantas-chave</span>
+                <span class="tag tag-active">Clusters Growth: Electronics + Seating</span>
+                <span class="tag tag-active">Capex industrial disciplinado</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">PoC GenAI em processos regionais BR (espelho SIMPLIFY)</span>
+                <span class="tag tag-opportunity">Integração iPaaS planta–OEM–backoffice</span>
+                <span class="tag tag-opportunity">Modernização de aplicações legadas locais</span>
+                <span class="tag tag-opportunity">Cibersegurança OT/IT em multiplanta</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">92/100</span></div>
+                <p>Squads de GenAI alinhados ao SIMPLIFY: automação de tarefas transacionais SG&amp;A, copilots operacionais e casos de uso com ROI mensurável em 90 dias — linguagem nativa do IGNITE.</p>
+                <div class="reasons"><ul>
+                    <li>Grupo declara GenAI como alavanca explícita de −€110 mi até 2028.</li>
+                    <li>CIO Regional precisa provar valor local sem estourar CAPEX.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">88/100</span></div>
+                <p>Modernização de jornadas digitais de manufatura/logística (integrações, MES/WMS adjacentes, dados de linha) com squads próximos ao P&amp;L da planta.</p>
+                <div class="reasons"><ul>
+                    <li>Goiana é vitrine; outras plantas BR pedem replicabilidade.</li>
+                    <li>Visita CDIO reforça agenda digital shop-floor.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (Digibee iPaaS)</h4><span class="score-badge">84/100</span></div>
+                <p>Camada de integração ISO 27001/27701 entre core corporativo, plantas e OEMs — reduz ponto-a-ponto e acelera time-to-value de iniciativas locais sob governança GIT.</p>
+                <div class="reasons"><ul>
+                    <li>Gap típico tier-1: integrações frágeis planta ↔ cliente ↔ ERP.</li>
+                    <li>FourBlox + Digibee com trilha de 24 anos / 41.000+ projetos Foursys.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">76/100</span></div>
+                <p>Reengenharia incremental de aplicações locais e interfaces críticas, sem big-bang — compatível com teto de CAPEX IGNITE.</p>
+                <div class="reasons"><ul>
+                    <li>Multiplanta histórica Faurecia implica stack heterogênea. <em>(hipótese)</em></li>
+                    <li>Permite quick wins antes de programas globais longos.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">72/100</span></div>
+                <p>Assessment e hardening IT/OT, identidade e resposta a incidente em ambiente industrial multiplanta — agenda obrigatória para OEM audits.</p>
+                <div class="reasons"><ul>
+                    <li>Convergência IT/OT aumenta superfície de ataque.</li>
+                    <li>Foursys com ISO 27001/27701 como âncora de confiança.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Abrir com IGNITE/SIMPLIFY: “como o Brasil regionaliza GenAI e integração planta–GIT sem estourar o teto de CAPEX”. Wagner já opera nessa narrativa (visita com CDIO a Goiana).</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>PoC de 6–8 semanas: 1–2 casos GenAI em processos regionais (finops, quality tickets, planning) + mapa de integrações críticas de uma planta piloto (não Goiana — onde já há maturidade — e sim site de menor maturidade para ganhar mandato de réplica).</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Squads híbridos (AI + engenharia + integração FourBlox/Digibee) com governança ISO e velocidade de entrega BR — parceiro que fala P&amp;L de planta e compliance global ao mesmo tempo.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Magna International</h4><p>Tier-1 diversificado com forte digitalização de manufatura e eletrônica. Gap FORVIA BR: capturar velocidade de réplica de padrões digitais entre plantas com menor CAPEX unitário.</p></div>
+            <div class="competitor-card"><h4>Lear / Adient</h4><p>Concorrentes diretos em seating/interiors (Adient seating; Lear também em E-Systems). Gap: diferenciação por software/dados de conforto e integração com cockpit eletrônico — alinhado ao cluster Growth (Seating + Electronics).</p></div>
+            <div class="competitor-card"><h4>Valeo</h4><p>Forte em ADAS/eletrônica e eficiência energética. Gap: FORVIA precisa acelerar software e eletrônica de cabine; TI regional vira alavanca de time-to-market.</p></div>
+            <div class="competitor-card"><h4>Continental</h4><p>Referência em arquiteturas eletrônicas e software automotivo. Gap: governança de dados e integração multiplanta BR vs padrões europeus — espaço para iPaaS e AI Squad locais.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">FORVIA (Faurecia+HELLA): tier-1 global de mobilidade; Brasil multiplanta com hub SBC e vitrine Goiana.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Wagner Oliveira, Regional CIO; alinha com Raphael Viard (CDIO). Ativo e confirmado no IT Forum (FOCO 4SYS).</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Executar IGNITE no Brasil: performance, GenAI/SIMPLIFY e integração planta–GIT sob CAPEX apertado.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Budget puxado por eficiência (SIMPLIFY/GenAI), digital shop-floor e disciplina de CAPEX &lt;7% vendas (RI CMD 2026 — fontes RI/abertas).</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">AI Squad; Engenharia Digital; FourBlox (Digibee iPaaS).</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 45 min pós-IT Forum: discovery de 2 processos regionais + planta candidata a PoC.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Fase Focus &amp; Strengthen 2025–2028; IT Forum Praia do Forte 2026 = abertura comercial.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “fábrica digital” genérica — vender regionalização mensurável do SIMPLIFY (GenAI + integração) que o CDIO já cobrou em Goiana.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>IGNITE acende o farol</h4><p>Fev/2026: FORVIA publica IGNITE. Digital e AI viram alavanca oficial de performance. O Brasil precisa traduzir o plano global em resultados de planta.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>CAPEX curto, expectativa alta</h4><p>Wagner carrega multiplanta e OEMs exigentes com teto de investimento e pressão por GenAI/eficiência. Goiana já é benchmark — o resto do mapa BR ainda não.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Squad + iPaaS + réplica</h4><p>Foursys entra com PoC GenAI regional, FourBlox para destravar integrações e engenharia digital para replicar o padrão Goiana sem reinventar a roda.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Dor: SIMPLIFY sem “mão na massa” regional</h4>
+                <p>Grupo promete GenAI em tarefas transacionais e −€110 mi até 2028. Sem casos BR, o CIO Regional fica só no discurso.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad: 2 casos priorizados (ex.: triagem de tickets qualidade + assistente de planning) com KPI de horas poupadas / lead time.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quais 3 processos SG&amp;A ou planta consomem mais FTE e já têm dado estruturado o suficiente para GenAI em 60 dias?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de priorização de casos no perímetro do Wagner (½ dia).</p>
+            </div>
+            <div class="business-card">
+                <h4>Dor: plantas BR em maturidades diferentes</h4>
+                <p>Goiana recebe CDIO; outras plantas precisam do mesmo nível de integração e visibilidade sem CAPEX de “greenfield”.</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital + blueprint de réplica (integrações, dados de linha, dashboards operacionais).</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Qual planta fora de Goiana mais sofre com gap digital vs. exigência do OEM?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment express de 2 semanas em 1 planta piloto.</p>
+            </div>
+            <div class="business-card">
+                <h4>Dor: integração ponto-a-ponto planta–OEM–core</h4>
+                <p>WMS/IoT e sistemas locais aumentam acoplamento frágil. Cada novo projeto vira “fio solto”.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee iPaaS) como barramento governado, com segurança ISO.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quantas interfaces críticas ainda são arquivo/FTP/script entre planta e sistemas centrais?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Mapa de 10 interfaces + quick-win de 1 fluxo de ponta a ponta.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de PoC GenAI/SIMPLIFY</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad + FourBlox (+ Engenharia Digital como extensão)</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) narrativa de GenAI em operações indiretas alinhada a programas de custo de grupos industriais; (2) integrações iPaaS em manufatura/logística com OEMs; (3) modernização incremental em ambientes multiplanta com governança de segurança. Se case automotivo nominal não estiver pronto, usar case industrial adjacente (autopeças/bens de capital) e declarar o paralelo.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> posicionar Foursys como o “braço regional do SIMPLIFY” — não como substituto do stack global. O ROI está em acelerar o que o CDIO já aprovou como direção, com squad BR que entrega evidência para o comitê.</p>
+            <p style="margin-top:8px"><em>Discurso se faltar material pronto: “Wagner, vimos o IGNITE e a visita sua/CDIO a Goiana. Propomos em 45 dias um PoC GenAI em dois processos do seu perímetro + mapa de integrações de uma planta com gap vs. Goiana — sem pedir CAPEX de plataforma nova.”</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“IGNITE já definiu o jogo: performance com GenAI e disciplina de CAPEX — o Brasil precisa de provas rápidas, não de slides.”</li>
+                <li>“Goiana mostrou o padrão; nossa tese é replicar o efeito com menos atrito nas demais plantas do seu perímetro.”</li>
+                <li>“AI Squad da Foursys fala a língua do SIMPLIFY: cortar FTE transacional com governança, não com shadow IT.”</li>
+                <li>“FourBlox/Digibee destravam integração planta–OEM–core sem multiplicar ponto-a-ponto.”</li>
+                <li>“Trabalhamos ISO 27001/27701 — conversa fácil com GIT global e auditoria de cliente.”</li>
+                <li>“24 anos, 41.000+ projetos: sabemos entregar squad em ambiente industrial brasileiro.”</li>
+                <li>“Próximo passo objetivo: workshop de ½ dia para escolher 2 casos e 1 planta piloto.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>IT Forum + follow-up LinkedIn/e-mail com âncora IGNITE/Goiana</td><td>Briefing + one-pager PoC</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop ½ dia com CIO Regional (+ IT Manager planta se possível)</td><td>Backlog priorizado (2 casos GenAI + mapa integrações)</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>AI Squad em 1–2 casos + 1 fluxo FourBlox</td><td>Demo + KPI baseline/delta</td><td>6–8 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Expandir para planta piloto (réplica vs Goiana)</td><td>Blueprint + runbook de réplica</td><td>1 trimestre</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Contrato guarda-chuva regional (AI + integração + engenharia)</td><td>MSA + roadmap 12 meses alinhado IGNITE</td><td>2º semestre 2026</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Portal institucional FORVIA</h4>
+                <div class="url">https://www.forvia.com</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">CMS corporativo (detalhe não publicado)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado publicamente</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud / CDN</div><div class="v">Akamai (headers / edgesuite)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não inspecionado (WAF 403)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>WMS avançado — planta Goiana</h4>
+                <div class="url">Fontes abertas LinkedIn (go-live EWM 2025)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Clientes operacionais de armazém</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">WMS corporativo (EWM)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integração logística/linha (hipótese)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>IoT rastreamento de racks — FMM Goiana (histórico)</h4>
+                <div class="url">Sawluz / Taggen (fontes abertas)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">App mobile operador</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">SW Stock / Link IoT</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Azure ou AWS (fornecedor declara ambos)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Beacons BLE → gateways</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Analytics / automação (sinais públicos de stack)</h4>
+                <div class="url">LinkedIn company FORVIA (tech stack list — hipótese)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Power BI / MicroStrategy (citados)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">UiPath, Power Automate (citados)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Azure / Azure Data Factory (citados)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">GitLab / Salesforce (citados)</div></div>
+                </div>
+            </div>
+
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Sinais públicos de Azure (Data Factory, M365). CDN Akamai no site global. Detalhe de DC/híbrido plantas BR: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">WAF/CDN corporativo; exigências IATF/OEM. Programa formal OT/IT regional: não localizado publicamente — gap de conversa.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">IGNITE/SIMPLIFY (GenAI oficial); IoT histórico Goiana; RPA (UiPath citado em fontes abertas — hipótese).</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">Power BI / MicroStrategy citados em fontes abertas; data platform corporativa detalhada: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">ERP corporativo global presente (nome comercial omitido neste briefing por política de conteúdo). Confirmar versão/módulo BR em discovery.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">WMS avançado (Goiana), CRM Salesforce (sinal público), HCM/SCM: parcialmente não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">Site forvia.com (Akamai); employer brand LinkedIn; portais OEM: não inspecionados.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.forvia.com/en</td><td><span class="status-err">403</span></td><td>Bloqueado neste runtime</td><td>Akamai (edgesuite / Akamai-Cache-Status)</td><td>HSTS ativo; WAF nega bot/datacenter</td></tr>
+                    <tr><td>https://www.forvia.com/en/who-we-are/strategy</td><td><span class="status-200">200*</span></td><td>Página IGNITE (via WebFetch)</td><td>Akamai</td><td>*Conteúdo obtido por fetch alternativo; Head direto 403</td></tr>
+                    <tr><td>https://www.forvia.com/en/press/forvia-2026-capital-markets-day</td><td><span class="status-200">200*</span></td><td>Press CMD 2026</td><td>Akamai</td><td>Confirma roadmap Focus &amp; Strengthen / Lead &amp; Grow</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 20/07/2026 ~17:08 BRT. Só registrar o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · GenAI operacional</div><h4>SIMPLIFY sem pipeline local de casos</h4><p>Evidência: meta −€110 mi com GenAI até 2028 (RI). Risco: Brasil só consome roadmap global sem PoCs regionais.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Acoplamento planta–OEM–core</h4><p>Evidência setorial: WMS/IoT e multi-sistemas em Goiana; típico tier-1 multiplanta. Falta barramento governado.</p><div class="offer">Oferta Foursys: FourBlox (Digibee iPaaS)</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Réplica digital</div><h4>Maturidade desigual entre plantas BR</h4><p>Evidência: Goiana como maior/mais complexa + visita CDIO; demais sites menos expostos publicamente.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Legado</div><h4>Aplicações locais sob teto de CAPEX</h4><p>Evidência: IGNITE CAPEX &lt;7% vendas — modernização precisa ser incremental.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Segurança OT/IT</div><h4>Superfície industrial multiplanta</h4><p>Evidência setorial automotiva: convergência OT/IT + auditorias OEM. Programa regional não localizado em fontes abertas.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Não localizado com fonte pública confiável</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">Curitiba/PR (LinkedIn) · evento: SBC/SP empresa</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">PT (nativo) · EN provável (grupo FR) — não confirmado</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Comece por Goiana + visita com Raphael Viard — mostra que você leu o perímetro dele, não o site genérico.<br>
+                2) Fale IGNITE/SIMPLIFY em linguagem de P&amp;L (FTE, lead time, scrap), não de tecnologia pela tecnologia.<br>
+                3) Respeite a hierarquia: ofereça PoC regional que ele possa “levar” ao CDIO com KPI claro.<br>
+                4) Evite pitch de plataforma monolítica — CAPEX está sob escrutínio.<br>
+                5) Pergunte qual planta fora de Goiana mais preocupa em 2026.<br>
+                6) Reconheça longevidade Faurecia: ele conhece fornecedores; diferencie por squad + evidência rápida.<br>
+                7) Feche com próximo passo concreto (workshop ½ dia), não com “vamos continuar conversando”.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>forvia.com — Our Strategic Plan (IGNITE)</li>
+                    <li>FORVIA 2026 Capital Markets Day (press)</li>
+                    <li>GlobeNewswire — 2025 Annual Results / SIMPLIFY</li>
+                    <li>PDF FY2025 Results &amp; CMD IGNITE (forvia.com/sites)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>LinkedIn company FORVIA (tech stack signals)</li>
+                    <li>LinkedIn Eliana Ribeiro — go-live EWM Goiana</li>
+                    <li>Sawluz — IoT FMM Goiana (histórico)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado / Brasil</h4><ul>
+                    <li>forvia.com — Our global presence (SBC)</li>
+                    <li>Econodata / MonitorCNPJ — Faurecia Automotive do Brasil 01.178.298/0001-97</li>
+                    <li>Planilha CIOs IT Forum Praia do Forte 2026 (CNPJ evento)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn Wagner Oliveira — Regional CIO FORVIA</li>
+                    <li>LinkedIn Paulo Vieira — visita CDIO + CIO Regional Goiana (jan/2026)</li>
+                    <li>Adapt.io — Regional CIO Faurecia (Curitiba)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>curl/Invoke-WebRequest forvia.com — Akamai 403</li>
+                    <li>WebFetch strategy + CMD pages — 200 conteúdo</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+
+</html>
+
+</html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Antonio Vanderlei Leone Soares | Athena Saúde</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <!-- ============ HEADER ============ -->
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Antonio Vanderlei Leone Soares</h1>
+                <h2>Diretor Corporativo de Digital &amp; Inovação (CIO) — Athena Saúde</h2>
+                <div class="loc">Saúde suplementar verticalizada · São Paulo/SP · CNPJ 26.753.292/0001-27 (Athena Healthcare Holding S.A.)</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Grande porte (R$ 3,8 bi receita)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Receita 2025</div><div class="value">R$ 3,8 bi</div></div>
+                <div class="header-badge"><div class="label">EBITDA aj.</div><div class="value">R$ 454 MM</div></div>
+                <div class="header-badge"><div class="label">Beneficiários</div><div class="value">1,6 MM</div></div>
+                <div class="header-badge"><div class="label">SAP</div><div class="value">N/publ.</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- ============ DIVISÓRIA DE ATUALIZAÇÃO (OBRIGATÓRIA) ============ -->
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Nova ordem de zonas B → A → C (contexto/pré-vendas no topo, pitch comercial no meio, apêndice técnico no fim) · Escopo: RI deep-dive (resultados 2025 IFRS 17) + leitura de comitê + material de apresentação + ângulo comercial não óbvio. Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <!-- ============ ANCHOR NAV (ordem B → A → C) ============ -->
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ============ ZONA B — CONTEXTO / PRÉ-VENDAS (topo) ============ -->
+
+        <!-- B1. Empresa -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>A Athena Saúde é uma das maiores operadoras de saúde verticalizada do Brasil (3ª maior medicina de grupo). Atende 1,6 milhão de beneficiários em planos de saúde e odontológicos, com forte presença em cidades de médio porte no Nordeste, Sudeste e Sul. Opera 13 hospitais (+1.200 leitos), 36 unidades de atenção primária/pronto atendimento, 22 clínicas de TEA e 7 de oncologia, com +8 mil colaboradores e ~4,4 milhões de atendimentos presenciais/ano. Cresceu por consolidação (aquisições financiadas por debêntures) e hoje foca em eficiência, verticalização de serviços de alto custo e integração das operações adquiridas. Lançou recentemente a marca premium Elleva Health. Reconhecida: Great Place To Work e 3º lugar no Prêmio Valor Inovação Brasil 2025.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Athena Healthcare Holding S.A. / Athena Saúde Brasil S.A.</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">São Paulo/SP (Pinheiros)</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Nordeste, Sudeste e Sul (BR)</div></div>
+                <div class="info-card"><div class="label">Receita líquida 2025</div><div class="value">R$ 3,8 bi (IFRS 17, +6,2%) · fonte: RI</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">+8.000</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada · capital social R$ 2,27 bi</div></div>
+            </div>
+        </div>
+
+        <!-- B2. Gestor (foco DECISÃO) -->
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p>Antonio Vanderlei Leone Soares é Diretor Corporativo de Digital &amp; Inovação (CIO/CTO) da Athena Saúde desde agosto/2022 (confirmado ativo — 3 anos e 11 meses no cargo, LinkedIn). +35 anos em TI, com trajetória rara no setor verticalizado de saúde: CIO da Hapvida (2016-2021) e da NotreDame Intermédica (2012-2016), além de Hospital Care e Rede Energia (setor elétrico). Reporta ao Presidente e tem assento permanente no conselho, com poder de aprovação dentro do budget — decisor real de fornecedor. Linguagem de decisão orientada a TCO, ROI, SLA e redução de risco. Histórico técnico inclui reimplantação de módulos SAP FI/MM e RFPs de Data Center/Help Desk/Telecom em cargos anteriores. Palestrou no IT Forum Praia do Forte sobre observabilidade e IA proativa. Nível de decisão: <strong>alto</strong> (co-lidera estratégia e orçamento).</p>
+        </div>
+
+        <!-- B3. Segmento (SEM números de mercado — já estão no header) -->
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento & mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Saúde suplementar brasileira: mercado com forte pressão de sinistralidade e consolidação acelerada. A verticalização (operadora + rede própria) é a tese defensiva dominante — controlar o custo médico controlando a rede. A Athena ocupa posição de destaque como uma das maiores medicinas de grupo do país (3ª colocada), construída por consolidação e hoje voltada à eficiência da base recém-integrada. Prioridades setoriais 2026: IA preditiva de risco, interoperabilidade (FHIR/HL7), redução de fraude/glosa e experiência digital do beneficiário. A pressão regulatória da ANS (NIP, reajustes) é variável central de EBITDA, e a diluição da despesa médica é o eixo competitivo que separa operadoras eficientes das demais.</p>
+        </div>
+
+        <!-- B6. Tensões -->
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões & lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Sinistralidade pressiona margem — necessidade de preditividade (fonte: RI 2025 + entrevista Nov/2025).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Integração de operações adquiridas: stacks heterogêneos e onboarding lento (RI: "integração das empresas adquiridas").</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Governança de IA em produção: sair de POCs (BIOS) para modelos preditivos escalados com governança.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Fraude e glosa em contas médicas — hoje com agentes de IA reativos, evolução para prevenção.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Segurança e privacidade de dados clínicos sensíveis em escala (1,6 MM vidas, 350 MM req/mês).</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">IA preditiva de risco</span>
+                <span class="tag tag-priority">Prontuário único</span>
+                <span class="tag tag-priority">Interoperabilidade (FHIR/HL7)</span>
+                <span class="tag tag-priority">Eficiência operacional</span>
+                <span class="tag tag-priority">Jornada digital do prestador</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Cloud (OCI)</span>
+                <span class="tag tag-active">IA generativa/preditiva</span>
+                <span class="tag tag-active">Observabilidade</span>
+                <span class="tag tag-active">APIs e integração</span>
+                <span class="tag tag-active">Cibersegurança / imutabilidade de backup</span>
+                <span class="tag tag-active">Dados & BI (180+ painéis)</span>
+                <span class="tag tag-active">Biometria/telemedicina</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido (hipótese consultiva)</h4>
+            <div>
+                <span class="tag tag-opportunity">IA preditiva escalada</span>
+                <span class="tag tag-opportunity">Integração pós-M&amp;A</span>
+                <span class="tag tag-opportunity">Modernização de legados hospitalares</span>
+                <span class="tag tag-opportunity">Prevenção a fraude/glosa</span>
+            </div>
+        </div>
+
+        <!-- B7. Ofertas Foursys -->
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">85/100</span></div>
+                <p>Squads de IA proprietária para IA generativa e preditiva. Aplicável à camada C3/C4: modelos de risco assistencial e financeiro sobre o data lake e o prontuário único da Athena.</p>
+                <div class="reasons"><ul><li>Liderança declarou busca por modelos preditivos (agravamento, fraude, superlotação).</li><li>IA generativa já em produção (call center anti-NIP) — base cultural pronta para escalar.</li><li>Ataca diretamente sinistralidade, o KPI de EBITDA.</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado + Digibee (iPaaS)</h4><span class="score-badge">78/100</span></div>
+                <p>Integração de ecossistemas via APIs e modernização de sistemas hospitalares. Endereça a camada C5/C6 e o Hub de Integração já existente, escalando para o próximo ciclo de M&amp;A.</p>
+                <div class="reasons"><ul><li>Agenda de aquisições ativa exige onboarding rápido de operadoras/hospitais.</li><li>Barramento de APIs já é estratégia declarada — Digibee acelera.</li><li>Reduz tempo/custo de integração e passivo de legados.</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">72/100</span></div>
+                <p>ISO 27001/27701, DLP, prevenção a fraude e continuidade. Camada C2, protegendo 411 aplicações e dados clínicos sensíveis em escala.</p>
+                <div class="reasons"><ul><li>Dados de saúde de 1,6 MM de vidas — alvo regulatório e de ataque.</li><li>Cibersegurança e imutabilidade de backup entre prioridades declaradas.</li><li>Governança de IA exige segurança dos pipelines de dados.</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">64/100</span></div>
+                <p>Cloud-native, microsserviços, SRE/observabilidade e evolução do app de saúde. Camada C7: expandir o app em plataforma integrada (biometria, prontuário, protocolos).</p>
+                <div class="reasons"><ul><li>Roadmap declarado: transformar o app em plataforma integrada de saúde.</li><li>Base de observabilidade madura — evoluir para engenharia de confiabilidade contínua.</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox</h4><span class="score-badge">55/100</span></div>
+                <p>Componentes reutilizáveis para acelerar entregas digitais (portais de beneficiário/prestador, jornadas).</p>
+                <div class="reasons"><ul><li>Redesenho da jornada do prestador no roadmap.</li><li>Reduz time-to-market em múltiplas operadoras.</li></ul></div>
+            </div>
+        </div>
+
+        <!-- B8. Estratégia de abordagem -->
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Reconhecer a maturidade de observabilidade e IA já entregue (411 apps, 96% disponibilidade, IA anti-NIP) e propor a "próxima camada": IA preditiva que protege a margem. Falar a língua do ex-CIO de Hapvida/NotreDame — resultado mensurável, não hype.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Ciclo de M&amp;A ativo + pressão de sinistralidade em 2026. Integração de operações adquiridas e preditividade são frentes com fornecedor não consolidado (hipótese) — janela para squads Foursys.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>AI Squad proprietário + parceria Digibee (integração) + ISO 27001/27701, num único parceiro que combina IA, integração pós-M&amp;A e segurança — sem multiplicar fornecedores. 24 anos, 41.000+ projetos.</p></div>
+        </div>
+
+        <!-- B9. Concorrentes -->
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes & Gap Analysis</h3>
+            <div class="competitor-card"><h4>Hapvida NotreDame Intermédica</h4><p>Maior operadora verticalizada do país. 200 frentes de IA (90 em produção), telemedicina +700 mil consultas/mês, reestruturação de VPs para acelerar decisão. Gap para Athena: escala de IA em produção — espaço para acelerar com parceiro.</p></div>
+            <div class="competitor-card"><h4>Rede D'Or São Luiz</h4><p>Maior rede privada de hospitais. IA assistencial publicada (Nature), migração cloud colaborativa, genômica em tempo real. Gap para Athena: modernização assistencial de ponta e aplicação clínica de IA.</p></div>
+            <div class="competitor-card"><h4>Dasa</h4><p>Maior rede de diagnóstico da AL, com hospitais e operadora. FHIR/HL7 implementados, ML em imagem, app Nav Dasa. Gap para Athena: interoperabilidade padronizada entre operadoras e hospitais próprios.</p></div>
+            <div class="competitor-card"><h4>Unimed (sistema cooperativo)</h4><p>Maior sistema cooperativo do mundo, capilaridade nacional. Desafio de padronização por descentralização. Gap para Athena: usar sua governança centralizada como vantagem de dados unificados.</p></div>
+            <div class="insight-box"><h4>Gap Analysis — onde a Athena se diferencia</h4><p>A Athena tem uma vantagem que os concorrentes maiores não têm com a mesma limpeza: base recém-consolidada em nuvem única (OCI) com observabilidade madura. Enquanto Hapvida escala 200 frentes de IA e Dasa lidera interoperabilidade, a Athena pode saltar direto para <strong>IA preditiva de sinistralidade sobre dados já centralizados</strong> — sem o passivo de descentralização da Unimed. A Foursys posiciona-se para converter essa base limpa em vantagem preditiva antes dos concorrentes fecharem o gap.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <!-- ============ ZONA A — COMERCIAL / PITCH ============ -->
+
+        <!-- A2. Sumário de 1 página (SEM tópico SAP) -->
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">3ª maior medicina de grupo do Brasil. 1,6 MM de beneficiários, 13 hospitais, 8 operadoras, +8 mil colaboradores. Receita 2025: R$ 3,8 bi (IFRS 17, +6,2%).</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Antonio V. L. Soares, Diretor de Digital &amp; Inovação (CIO) desde ago/2022. Ex-CIO Hapvida e NotreDame. +35 anos em TI. Reporta ao Presidente; assento no conselho.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Ciclo de eficiência operacional pós-M&amp;A: integrar operadoras adquiridas, controlar sinistralidade e escalar IA preditiva sobre base já migrada para nuvem.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Cloud (OCI), observabilidade, IA generativa/preditiva, prontuário único, biometria/telemedicina, dados/BI. Fonte: RI + entrevistas 2025-2026.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1. AI Squad (IA preditiva/agentes); 2. Modernização de Legado + Digibee (integração/APIs pós-M&amp;A); 3. Cibersegurança (LGPD/dados sensíveis).</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Workshop executivo de IA preditiva aplicada a sinistralidade e auditoria de contas médicas, com ROI mensurável.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum 2026 Praia do Forte + fechamento de planejamento 2026 sob pressão de sinistralidade. Ciclo de integração de aquisições em curso.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender "mais IA": vender <strong>redução de sinistralidade e de NIP da ANS</strong> via IA preditiva — o KPI que define o EBITDA da operadora.</div></div>
+            </div>
+        </div>
+
+        <!-- A3. História em 3 atos -->
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>De consolidadora a operadora eficiente</h4><p>A Athena cresceu por aquisições até virar a 3ª maior medicina de grupo do país. Agora o jogo mudou: 2025 fechou com foco em controle de sinistralidade e integração das operações compradas.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Sinistralidade x escala tecnológica</h4><p>Sistemas hospitalares heterogêneos, fornecedores de maturidades distintas e pressão de custo médico. A observabilidade resolveu disponibilidade; falta transformar dados em decisão preditiva antes que o sinistro aconteça.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>IA que protege a margem</h4><p>A Foursys entra como squad que transforma a base em cloud (OCI) em IA preditiva de risco assistencial e financeiro — atacando o KPI que a liderança já declarou: eficiência operacional e diluição de despesa médica.</p></div>
+            </div>
+        </div>
+
+        <!-- A4. Soluções foco no negócio (3 de maior fit) -->
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Sinistralidade pressiona a margem — IA reativa não basta</h4>
+                <p>A liderança declarou publicamente (RI 2025 e entrevista Nov/2025) que o resultado veio de "controle de sinistralidade" e busca modelos preditivos para antecipar agravamento clínico, fraude e superlotação. Hoje há agentes de IA para auditoria de contas; falta preditividade estruturada.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad dedicado a modelos preditivos de risco assistencial e financeiro, integrados ao prontuário único e ao data lake. Resultado: reduzir sinistralidade e evitar NIP da ANS — impacto direto no EBITDA.</p>
+                <div class="sub">Pergunta de descoberta</div><p>"Quais decisões de risco assistencial ainda são tomadas de forma reativa por falta de modelo preditivo em produção?"</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de IA preditiva com um caso de uso de sinistralidade — quick win mensurável em 60-90 dias.</p>
+            </div>
+            <div class="business-card">
+                <h4>Aquisições contínuas exigem integração rápida de sistemas</h4>
+                <p>O RI 2025 confirma agenda ativa de M&amp;A e integração de "empresas adquiridas ao longo dos anos". Cada operadora/hospital novo traz stack próprio. O barramento de APIs já existe mas precisa escalar.</p>
+                <div class="sub">Solução Foursys</div><p>Modernização de Legado + iPaaS Digibee para acelerar onboarding de operações adquiridas e unificar prontuário/dados. Resultado: reduzir tempo e custo de integração pós-aquisição.</p>
+                <div class="sub">Pergunta de descoberta</div><p>"Qual o tempo médio hoje para integrar uma operadora adquirida ao ecossistema digital da Athena?"</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment de integração com mapa de conectores Digibee para o próximo alvo de M&amp;A.</p>
+            </div>
+            <div class="business-card">
+                <h4>Dados sensíveis de saúde em escala = alvo regulatório e de fraude</h4>
+                <p>1,6 MM de vidas, 411 aplicações e 350 MM de requisições/mês. Cibersegurança e imutabilidade de backup foram Top-3 de investimento no perfil anterior; LGPD e dados de saúde elevam o risco.</p>
+                <div class="sub">Solução Foursys</div><p>Cibersegurança (ISO 27001/27701), DLP, prevenção a fraudes e continuidade. Resultado: proteção da operação crítica e conformidade sem travar a agenda de IA.</p>
+                <div class="sub">Pergunta de descoberta</div><p>"Como a governança de dados sensíveis acompanha a velocidade da adoção de IA generativa na Athena?"</p>
+                <div class="sub">Gancho / próximo passo</div><p>Diagnóstico de postura de segurança focado em dados de saúde e pipelines de IA.</p>
+            </div>
+        </div>
+
+        <!-- A(material). Sugestão de Material para Apresentação -->
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck executivo curto (8-10 slides) + one-pager de "IA preditiva para sinistralidade" com estimativa de ROI.</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad (âncora) + Modernização de Legado/Digibee. Porquê: atacam diretamente margem e integração pós-M&amp;A, as duas prioridades declaradas.</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) Case de IA/automação em auditoria de contas médicas com métrica de redução de glosa; (2) Case de integração via Digibee em grupo multi-unidade de saúde; (3) Case de observabilidade + IA preditiva de disponibilidade em ambiente crítico.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> não competir com a Platform Builders na observabilidade (já entregue). Posicionar a Foursys uma camada acima — <strong>transformar a telemetria e os dados clínicos em decisão preditiva de risco financeiro</strong>. É onde o ROI é maior e o encaixe não é óbvio.</p>
+            <p style="margin-top:8px"><em>Evitar discurso genérico de "transformação digital" — a Athena já está avançada. Falar de margem, sinistralidade e NIP.</em></p>
+        </div>
+
+        <!-- A5. Mensagens-chave -->
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>"Acompanhei a jornada de observabilidade da Athena — 96% de disponibilidade e MTTR de 30 min em 411 aplicações. É uma base rara. A pergunta agora é: o que essa telemetria toda está prevendo antes de virar sinistro?"</li>
+                <li>"Vocês declararam que 2025 foi de controle de sinistralidade. Quando a IA sai de auditoria reativa e passa a prever agravamento clínico e fraude, ela vira alavanca de EBITDA, não custo de TI."</li>
+                <li>"Com a agenda de M&amp;A ativa, cada operadora nova é um projeto de integração. A parceria Foursys+Digibee encurta esse onboarding de meses para semanas."</li>
+                <li>"Você já reimplantou SAP e liderou TI na Hapvida e na NotreDame — conhece o jogo verticalizado melhor que ninguém. Trazemos squads que aceleram sem reinventar o que já funciona."</li>
+                <li>"IA generativa em call center para evitar NIP da ANS é só o começo. Dá para levar o mesmo motor para pré-autorização e jornada do prestador."</li>
+                <li>"ISO 27001/27701: com 1,6 milhão de vidas e dados clínicos, segurança e privacidade têm que andar na mesma velocidade da IA — a gente entrega as duas frentes no mesmo squad."</li>
+            </ol>
+        </div>
+
+        <!-- A6. Roadmap de engajamento -->
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Conversa no IT Forum Praia do Forte 2026; reconhecer jornada de observabilidade e agenda preditiva</td><td>Reunião executiva agendada</td><td>Semana 0</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop sobre sinistralidade e casos de IA preditiva; mapear dados disponíveis</td><td>Mapa de casos de uso priorizados por ROI</td><td>30 dias</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>Modelo preditivo em 1 caso (ex.: risco de agravamento / glosa)</td><td>PoC com métrica de acurácia e economia estimada</td><td>60-90 dias</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad de IA + integração Digibee para colocar modelo em produção</td><td>Modelo em produção + conector integrado</td><td>3-6 meses</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Programa multi-squad: IA preditiva, integração de M&amp;A e cibersegurança</td><td>MSA / contrato de programa contínuo</td><td>6-12 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <!-- ============ ZONA C — APÊNDICE TÉCNICO ============ -->
+
+        <!-- C1. Stack técnica -->
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações</h4>
+            <div class="app-card">
+                <h4>Site institucional / Portal</h4><div class="url">https://www.athenasaude.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">CMS (WordPress provável)</div></div>
+                    <div class="app-stack-item"><div class="k">Hospedagem</div><div class="v">Cloud (200 OK)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud corporativa</div><div class="v">Oracle Cloud Infrastructure</div></div>
+                    <div class="app-stack-item"><div class="k">Status</div><div class="v">200 — verificado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>App de saúde do beneficiário</h4><div class="url">App mobile (iOS/Android)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Recursos</div><div class="v">Biometria facial + geolocalização</div></div>
+                    <div class="app-stack-item"><div class="k">Telemedicina</div><div class="v">Integrada ao app</div></div>
+                    <div class="app-stack-item"><div class="k">Canais</div><div class="v">App, WhatsApp, chat</div></div>
+                    <div class="app-stack-item"><div class="k">IA</div><div class="v">Prontuário/protocolos clínicos</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Plataforma de dados & BI</h4><div class="url">Data lake + BI corporativo</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">BI</div><div class="v">180+ painéis</div></div>
+                    <div class="app-stack-item"><div class="k">Integração</div><div class="v">Hub de APIs (barramento)</div></div>
+                    <div class="app-stack-item"><div class="k">IA</div><div class="v">ML overbooking / auditoria contas</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">OCI</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Oracle Cloud Infrastructure (OCI) — migração dos 14 hospitais e +50 centros. Data center anterior IBM/T-Systems (histórico).</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança & Compliance</div><div class="cmp">LGPD, dados clínicos sensíveis; imutabilidade de backup e cibersegurança como prioridades declaradas. Detalhe de ferramentas: não publicado.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">IA generativa (call center anti-NIP), agentes de IA para auditoria de contas, ML de overbooking, biometria facial. Programa BIOS (inovação aberta).</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados & Analytics</div><div class="cmp">Data lake em cloud, 180+ painéis de BI, 10 bancos de dados, 350 MM requisições/mês. Observabilidade (Platform Builders).</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP/SAP)</div><div class="cmp">SAP não publicado como ERP atual da Athena. Stack central é OCI + sistemas hospitalares. Antonio tem histórico SAP FI/MM em cargo anterior (hipótese de gancho, não confirmação).</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">Salesforce (CRM/digitalização de vendas). Sistemas hospitalares (prontuário/autorizador/materiais). Prontuário único em evolução.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência & Engajamento</div><div class="cmp">App de saúde, WhatsApp, chat, telemedicina; marca premium Elleva Health. Portal institucional.</div></div>
+        </div>
+
+        <!-- C2. Verificação empírica -->
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.athenasaude.com.br/</td><td><span class="status-200">200</span></td><td>CMS (WordPress provável)</td><td>Não determinado</td><td>Site institucional ativo; destaque para lançamento "Elleva Health" (premium) e programa de integridade.</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em julho/2026 via WebFetch. Cabeçalhos HTTP detalhados (Server/X-Powered-By) não expostos no fetch — registrado apenas o efetivamente inspecionado.</p>
+        </div>
+
+        <!-- C3. GAPs -->
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · IA/Dados</div><h4>IA preditiva escalada</h4><p>Athena tem IA generativa e agentes reativos, mas Hapvida já opera 90 frentes de IA em produção. Falta preditividade em escala sobre sinistralidade.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Onboarding de M&amp;A</h4><p>Agenda de aquisições ativa (RI 2025) com stacks heterogêneos; Dasa já padronizou FHIR/HL7. Integração pós-aquisição é gargalo recorrente.</p><div class="offer">Oferta Foursys: Modernização + Digibee</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Segurança</div><h4>Governança de dados de IA</h4><p>Adoção acelerada de IA sobre 1,6 MM de vidas exige DLP e privacidade (LGPD/27701) na mesma velocidade — risco regulatório crescente no setor.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Experiência</div><h4>App como plataforma de saúde</h4><p>Roadmap declara transformar o app em plataforma integrada; concorrentes (Nav Dasa, Hapvida) já avançaram em jornada digital do paciente.</p><div class="offer">Oferta Foursys: Engenharia Digital / FourBlox</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Governança</div><h4>Prontuário único / interoperabilidade</h4><p>Prontuário único ainda em evolução; padronização FHIR/HL7 entre operadoras e hospitais próprios é diferencial competitivo não fechado.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+            </div>
+        </div>
+
+        <!-- C4. Rapport (foco PESSOA) -->
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal & Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Experiência</div><div class="value">+35 anos em TI, vivência internacional (EUA e AL)</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">São Paulo/SP</div></div>
+                <div class="info-card"><div class="label">Trajetória</div><div class="value">CIO Hapvida · CIO NotreDame · Hospital Care · Rede Energia</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p style="margin-bottom:10px"><strong>1. IT Forum:</strong> Antonio palestrou em Praia do Forte sobre observabilidade e IA proativa. Mencionar a palestra gera conexão imediata.</p>
+                <p style="margin-bottom:10px"><strong>2. Fale de resultado, não de hype:</strong> ex-CIO da Hapvida e NotreDame, conhece o modelo verticalizado a fundo. Traga TCO, ROI, SLA e MTTR.</p>
+                <p style="margin-bottom:10px"><strong>3. Valorize a jornada de observabilidade:</strong> 96,21% de disponibilidade, +411 apps, MTTR 30 min. Elogie e pergunte "o que vem depois da telemetria".</p>
+                <p style="margin-bottom:10px"><strong>4. Visão cross-industry:</strong> ele veio do setor elétrico (Rede Energia). Pergunte como aplica aprendizados de outros setores na saúde.</p>
+                <p style="margin-bottom:10px"><strong>5. Perfil pragmático:</strong> reporta ao Presidente e aprova dentro do budget. Números concretos e cases com métrica ganham a conversa.</p>
+                <p><strong>6. Reconhecimentos 2025:</strong> Great Place To Work e 3º no Prêmio Valor Inovação — bons ganchos de abertura.</p>
+            </div>
+        </div>
+
+        <!-- C8. Fontes -->
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia & RI</h4><ul><li>RI Athena — Demonstrações IFRS 17 2025 (receita R$ 3,8 bi, EBITDA aj. R$ 454 MM)</li><li>RI — Perfil corporativo (1,6 MM beneficiários, 13 hospitais)</li><li>Entrevista Inovativos.com.br (Nov/2025) — roadmap digital</li></ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul><li>Blog Oracle Brasil — Athena + OCI</li><li>Saúde Digital News — observabilidade Platform Builders (411 apps)</li><li>Inovativos — Salesforce, BI 180+, biometria, IA</li></ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul><li>ANS (beneficiários BR)</li><li>BRM / Folha Vitória — expansão ES (R$ 11 MM Vila Velha)</li></ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul><li>LinkedIn Antonio V. L. Soares (cargo, trajetória, SAP FI/MM histórico)</li><li>IT Forum — vídeo palestra observabilidade</li></ul></div>
+                <div class="sources-card"><h4>Identificação (antifraude)</h4><ul><li>MonitorCNPJ / GuiaPJ — CNPJ 26.753.292/0001-27, Athena Healthcare Holding S.A.</li></ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul><li>WebFetch https://www.athenasaude.com.br/ (200)</li></ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS) · Modo Híbrido · --full
+    </div>
+</body>
+</html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Marcelo Przyczynski | TK Elevator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Marcelo Przyczynski</h1>
+                <h2>Head of IT Business Unit Latin America — TK Elevator</h2>
+                <div class="loc">Bens de Capital · Guaíba/RS · CNPJ 90.347.840/0001-18</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Sul (RS) + porte global</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Fat. BR (faixa)</div><div class="value">R$ 2,1–3 Bi</div></div>
+                <div class="header-badge"><div class="label">Orçamento TI</div><div class="value">R$ 100–200 MM</div></div>
+                <div class="header-badge"><div class="label">Colab. BR</div><div class="value">5–10 mil</div></div>
+                <div class="header-badge"><div class="label">Último IT Forum</div><div class="value">SIM</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: fontes abertas + case DXC/ServiceNow 2026 + leitura de comitê (ITGC) + material de apresentação · Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>A <strong>TK Elevator</strong> (TKE; antes thyssenkrupp Elevator) é player global de mobilidade vertical — elevadores, escadas/esteiras rolantes e plataformas. Em 2020 a divisão foi desmembrada do grupo thyssenkrupp e tornou-se independente (consórcio Advent/Cinven). No Brasil opera como <strong>TK Elevadores Brasil Ltda.</strong> (CNPJ 90.347.840/0001-18, sede Guaíba/RS), com fábrica e matriz no mesmo campus. Portfólio digital de destaque: plataforma IoT/IA de manutenção preditiva <strong>MAX</strong> (Microsoft Azure) e elevador conectado <strong>EOX</strong>. Investimentos recentes na planta: PDC global em Guaíba (R$ 30 mi, entrega 2026) e adequação de linha EOX (R$ 20 mi com consultoria Porsche). FATO: razão social e CNPJ confirmados em bases públicas da Receita; faturação global citada em fontes da empresa na faixa de ~€8–9 bi.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">TK Elevadores Brasil Ltda.</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">Guaíba / RS</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Global (LATAM via BU Brasil)</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">BR R$ 2,1–3 Bi (faixa briefing); global ~€8–9 Bi (fontes TKE)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">BR 5.000–9.999 · Global ~50 mil</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada (subsidiária Brasil)</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Marcelo Przyczynski</strong> — LinkedIn lista como <em>Head of IT Business Unit Latin America</em> (desde fev/2019), com trajetória na TKE/thyssenkrupp desde ~2000 (Suporte → Infra → IT Manager Brasil → IT Manager LATAM → Head IT BU LATAM). Formação: Gestão Empresarial/Análise de Sistemas (PUC-RS) + MBA Finanças/Controladoria/Auditoria (FGV). Perfil hands-on com linguagem de ROI: liderou digitalização de campo (apps mobile para técnicos: +25% resposta, −15% tempo execução, −18 mil chamadas/mês ao call center — evidência do briefing P1). Em abr/2026, em entrevista IT Section sobre modernização do SSC com DXC/ServiceNow, ainda aparece como Head de IT BU LATAM e enfatiza pressão diária por custo e eficiência. Poder de decisão: co-decisão TI + negócios; reporte matricial regional/global; equipe TI LATAM na faixa 100–199 (fonte briefing anterior). Preferência de modelo: co-gerenciado / RFP estruturada.</p>
+            <div class="alert-box" style="margin-top:14px">⚠️ <strong>Atenção — possível transição de papel:</strong> no LinkedIn há postagem em que Marcelo anuncia passo para <em>Director, Global IT Internal Controls Excellence</em> (HQ Americas, Atlanta), após período liderando IT Internal Controls nas Américas. A experiência “Head of IT BU Latin America” ainda aparece como atual, e a matéria DXC (abr/2026) o cita no cargo de Head LATAM. <strong>Antes da reunião:</strong> confirmar se o mandato operacional de TI LATAM permanece com ele ou se o foco agora é ITGC/controles. Se o Head IT LATAM operacional tiver migrado, mapear sucessor local e manter Marcelo no ângulo GRC, SOX/ITGC, ciber e governança de sistemas críticos.</div>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Setor de <strong>bens de capital / engenharia de mobilidade vertical</strong>: mix de equipamento novo + base instalada de serviços (manutenção é o motor de margem e recorrência). Cadeia: construtoras e incorporadoras (novo), síndicos/facility managers (serviço), hospitais, hotéis, varejo, infraestrutura e indústria. Prioridades setoriais: uptime do equipamento, experiência do passageiro, eficiência energética, conectividade IoT e diferenciação por plataforma digital proprietária. Pressão competitiva no Brasil é alta — Atlas Schindler lidera percepção de conectividade de frota; Otis e KONE empurram IoT/IA e sustentabilidade. Tendência: elevador “nativamente digital” (EOX) + manutenção preditiva + API/experiencia omnichannel para cliente e técnico. Risco: frota conectada aumenta superfície de ataque e exigência de ITGC/compliance — alinhado à possível agenda de Internal Controls do gestor.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Pressão contínua por custo e eficiência em mercado acirrado (declaração pública de Marcelo no case DXC/ServiceNow, abr/2026).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Complexidade de SSC/workflow: &gt;70 fluxos customizados antes da modernização ServiceNow; necessidade de padronizar e integrar (FATO — IT Section).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Corrida competitiva em IoT/IA de campo (MAX vs Otis ONE / Schindler Ahead) — governança e escala de ML/GenAI.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Superfície cibernética de elevadores conectados + nuvem Azure + APIs de campo (hipótese consultiva de risco IoT industrial).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Integrações corporativas densas (Sensedia; ecossistema com centenas de integrações citado em fontes abertas) — legado e governança de API.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Orçamento TI “mantido” com projetos já com fornecedor — entrada só por especialização e valor diferencial (fonte briefing P1).</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">IA Generativa / agentes</span>
+                <span class="tag tag-priority">Cibersegurança &amp; ITGC</span>
+                <span class="tag tag-priority">Nuvem pública / híbrida</span>
+                <span class="tag tag-priority">Eficiência operacional SSC</span>
+                <span class="tag tag-priority">Escalabilidade MAX / serviço digital</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Nuvem pública / híbrida</span>
+                <span class="tag tag-active">Cibersegurança</span>
+                <span class="tag tag-active">IA Generativa</span>
+                <span class="tag tag-active">Gestão de dados</span>
+                <span class="tag tag-active">Modernização de legados</span>
+                <span class="tag tag-active">Hiperautomação</span>
+                <span class="tag tag-active">DR / continuidade</span>
+                <span class="tag tag-active">GRC / compliance</span>
+                <span class="tag tag-active">Mobile / campo</span>
+                <span class="tag tag-active">ERP / CRM / HCM (manutenção)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Governança de IA sobre MAX / GenAI campo (hipótese)</span>
+                <span class="tag tag-opportunity">Cibersegurança IoT industrial + OT/IT</span>
+                <span class="tag tag-opportunity">Camada complementar de integração (FourBlox/Digibee) além de Sensedia</span>
+                <span class="tag tag-opportunity">Squads co-gerenciados pós-ServiceNow (IA + automação avançada)</span>
+            </div>
+            <p style="margin-top:12px;font-size:13.5px;color:var(--text-light)"><strong>FATO (briefing P1):</strong> “Todos os projetos definidos já possuem fornecedor selecionado.” Abordagem por especialização, não por RFP aberta genérica. DXC é parceiro histórico no SSC — não atacar de frente; flanquear com temas onde Foursys diferencia.</p>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">92/100</span></div>
+                <p>Segurança da informação, LGPD/DLP, gestão de riscos, continuidade e DR. ISO 27001 e 27701. Encaixa na frota IoT + possível agenda ITGC/Internal Controls do gestor.</p>
+                <div class="reasons"><ul>
+                    <li>Cibersegurança é Top 3 de investimento declarado (briefing P1).</li>
+                    <li>Elevadores conectados MAX/Azure ampliam superfície OT/IT.</li>
+                    <li>Transição anunciada para Internal Controls Excellence reforça narrativa GRC.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">88/100</span></div>
+                <p>Squads com IA para acelerar casos de uso: diagnóstico assistido, atendimento técnico, agentes sobre ServiceNow, governança de GenAI.</p>
+                <div class="reasons"><ul>
+                    <li>Case DXC aponta próximo passo: agentes autônomos e workflows inteligentes.</li>
+                    <li>MAX já é ML em nuvem — GenAI é extensão natural (hipótese consultiva).</li>
+                    <li>IA Generativa é prioridade Top 3 de investimento.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (Digibee iPaaS)</h4><span class="score-badge">82/100</span></div>
+                <p>Integração e APIs com parceria Digibee; complementaridade a Sensedia (~11 mi req/mês) e modernização de integrações legado/campo.</p>
+                <div class="reasons"><ul>
+                    <li>Maturidade API já comprovada — Foursys entra onde há gargalo legado ou time-to-market.</li>
+                    <li>ServiceNow trouxe 70 integrações — camada iPaaS continua crítica.</li>
+                    <li>ISO 27001/27701 + 24 anos / 41.000+ projetos como credencial de entrega.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">78/100</span></div>
+                <p>Apps de campo, experiência digital do técnico/cliente, modernização de canais e product engineering alinhada a EOX/PDC.</p>
+                <div class="reasons"><ul>
+                    <li>Histórico de apps mobile com ROI mensurado por Marcelo.</li>
+                    <li>PDC Guaíba 2026 eleva demanda de engenharia digital local.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">74/100</span></div>
+                <p>Refatoração de sistemas de serviço, HCM/CRM de campo e núcleos que ainda freiam automação pós-ServiceNow.</p>
+                <div class="reasons"><ul>
+                    <li>Mapa de investimento inclui modernização de legados e sistemas core.</li>
+                    <li>Preferência por co-gerenciado favorece squad Foursys embutido.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Abrir pelo ROI que Marcelo já mede: digitalização de campo + pressão de custo citada no case ServiceNow. Em seguida conectar cibersegurança de frota IoT e governança de IA — temas que dialogam tanto com Head IT LATAM quanto com Internal Controls.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Pós-go-live ServiceNow (abr/2026): empresa declara avanço em IA/automação avançada e agentes. Janela para AI Squad + ciber em ambiente já estabilizado, sem confrontar DXC no SSC. Orçamento “mantido” — vender capacidade variável (squad), não headcount.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>AI Squad + ISO 27001/27701 + FourBlox/Digibee + modelo flexível (Squads/Projetos/AMS). 24 anos, 41.000+ projetos. Posicionar como especialista que acelera a camada acima do ServiceNow e ao lado do MAX — não como substituto do parceiro histórico.</p></div>
+            <div class="insight-box" style="margin-top:8px">
+                <h4>Insights de negócio (preservados + atualizados)</h4>
+                <p><strong>1.</strong> MAX compete com Otis ONE / Schindler Ahead — governança e GenAI sobre preditiva é flanco.</p>
+                <p style="margin-top:8px"><strong>2.</strong> Sensedia já processa ~11 mi req/mês — Foursys agrega em legado, hiperautomação e iPaaS complementar (FourBlox).</p>
+                <p style="margin-top:8px"><strong>3.</strong> Ciber em IoT industrial + ITGC é o ângulo não óbvio se Marcelo estiver migrando para Internal Controls.</p>
+                <p style="margin-top:8px"><strong>4.</strong> Case de campo (+25% resposta) é ponto de orgulho — usar como ponte para “próximo salto” com GenAI.</p>
+                <p style="margin-top:8px"><strong>5.</strong> DXC é fornecedor de décadas no SSC — respeitar; atacar temas adjacentes (IA agentes, ciber, modernização seletiva).</p>
+            </div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Otis Worldwide</h4><p>Plataforma Otis ONE™ (IoT preditivo), Gen360™ e eCall™ Plus. Referência em experiência digital do passageiro. Gap TKE: velocidade de narrativa “nativamente conectado” no Brasil vs. escala Otis.</p></div>
+            <div class="competitor-card"><h4>Atlas Schindler</h4><p>Schindler Ahead com crescimento forte de conexões; Centro de Operações 24/7; PORT / MetaCore / R.I.S.E. Percepção de liderança nacional em frota conectada. Gap TKE: densidade de equipamentos conectados e robotização de instalação.</p></div>
+            <div class="competitor-card"><h4>KONE</h4><p>UltraRope®, EcoDisc®, 24/7 Connected Services; forte ESG (EcoVadis/CDP). Gap TKE: storytelling de sustentabilidade + eficiência energética acoplado a serviço digital.</p></div>
+            <div class="competitor-card"><h4>Mitsubishi Electric</h4><p>Alta velocidade e prédios de grande porte; IA para tráfego e preditiva. Gap TKE: nicho premium de engenharia de precisão em vertical específica.</p></div>
+            <div class="insight-box"><h4>Gap analysis → Foursys</h4><p>Concorrentes empurram IoT proprietário + preditiva + CX digital. Para TKE: (1) escalar MAX com governança de IA; (2) hardenizar ciber da frota/nuvem; (3) modernizar integrações e legado de serviço — exatamente o trio AI Squad / Ciber / FourBlox+Modernização.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">TK Elevator Brasil (Guaíba/RS) — mobilidade vertical global; MAX + EOX; fábrica LATAM e PDC 2026.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Marcelo Przyczynski — Head IT BU LATAM (25+ anos TKE); possível migração para Global IT Internal Controls.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Pós-ServiceNow: eficiência + IA/agentes; manter competitividade digital vs Schindler/Otis; ciber/ITGC.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Budget mantido (~R$ 100–200 MM faixa); foco nuvem, ciber, GenAI, dados, legado — fontes abertas / briefing P1 (empresa privada, sem RI).</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">Cibersegurança; AI Squad; FourBlox (Digibee).</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 30 min: confirmar mandato do cargo + discovery de GenAI pós-SSC e superfície IoT.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum Praia do Forte 2026 + momentum pós-go-live ServiceNow (abr/2026).</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “mais ServiceNow”. Vender governança de IA + ciber ITGC sobre frota MAX — ROI de uptime e compliance.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>SSC modernizado, fábrica digital</h4><p>ServiceNow no SSC com DXC, EOX na linha e PDC em Guaíba. TKE Brasil entra em 2026 com base digital mais limpa e pressão para extrair eficiência e inovação daí.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Custo, concorrentes e risco IoT</h4><p>Mercado exige uptime e CX digital; Schindler/Otis avançam; frota conectada exige ciber e controles. Orçamento estável e fornecedores já escolhidos fecham a porta genérica.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Squad especializado Foursys</h4><p>AI Squad + Ciber + integração seletiva ao lado do MAX/ServiceNow. Capacidade variável, métricas de ROI no estilo FGV do Marcelo, sem brigar com DXC.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Dor: pressão por custo e complexidade operacional</h4>
+                <p>Evidência: declaração de Marcelo no case DXC (abr/2026) sobre competitividade e otimização diária; SSC com dezenas de workflows.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad + hiperautomação sobre ServiceNow/processos de campo — reduzir TMA e retrabalho sem inflar headcount.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quais dos 10 processos críticos do SSC ainda geram ticket manual após o go-live?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de 2h mapeando 3 processos candidatos a agente/automação com KPI de custo por ticket.</p>
+            </div>
+            <div class="business-card">
+                <h4>Dor: risco e compliance em frota IoT</h4>
+                <p>Evidência: MAX em Azure + APIs Sensedia + possível foco do gestor em IT Internal Controls.</p>
+                <div class="sub">Solução Foursys</div><p>Cibersegurança (ISO 27001/27701) + assessment OT/IT e endurecimento de controles ITGC.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Como está o ownership de risco cibernético entre TI, Engenharia de Produto e Controles Internos?</p>
+                <div class="sub">Gancho / próximo passo</div><p>One-pager de riscos IoT industrial + proposta de assessment de 3 semanas.</p>
+            </div>
+            <div class="business-card">
+                <h4>Oportunidade: próximo salto do case de campo</h4>
+                <p>Evidência: apps mobile com +25% resposta / −18 mil chamadas — case de orgulho do gestor.</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital + GenAI para diagnóstico assistido e roteirização inteligente do técnico.</p>
+                <div class="sub">Pergunta de descoberta</div><p>O que falta para o técnico no app receber diagnóstico preditivo em linguagem natural a partir do MAX?</p>
+                <div class="sub">Gancho / próximo passo</div><p>PoC de copiloto de campo em 1 região piloto (4–6 semanas).</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de ângulo IoT/ITGC</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">Cibersegurança + AI Squad (+ FourBlox se falar integração)</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) narrativa MAX/Azure como analogia de preditiva industrial; (2) case Foursys de modernização/integração em operações de campo ou manufatura (selecionar 2 ativos internos com métricas de TMA/SLA); (3) credenciais ISO 27001/27701 para ambientes regulados/críticos.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> “Vocês já compraram eficiência no SSC com DXC. O ROI seguinte não é outro workflow — é reduzir risco e tempo de decisão do técnico com GenAI governada sobre o MAX, com controles que Internal Controls assina.”</p>
+            <p style="margin-top:8px"><em>Se não houver case setorial elevadores pronto: usar discurso de IoT industrial + campo + ITGC, sem forçar analogia fraca.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Vi o go-live ServiceNow com DXC — parabéns pelo 98% de satisfação. Onde a GenAI entra no próximo ciclo sem reabrir o SSC?”</li>
+                <li>“Seu case de campo (+25% resposta) é referência. O próximo salto é diagnóstico assistido ligado ao MAX.”</li>
+                <li>“Frota conectada é vantagem competitiva — e superfície de risco. Ciber OT/IT é o que protege o uptime que o comercial vende.”</li>
+                <li>“Se Internal Controls for o novo chapéu, falamos a língua de ITGC, evidência e auditorabilidade — não só de feature.”</li>
+                <li>“Não viemos substituir Sensedia nem DXC. Viemos acelerar a camada onde time-to-value trava: legado, agentes e endurecimento.”</li>
+                <li>“Orçamento mantido pede capacidade variável: squad co-gerenciado com KPI de custo e risco, não headcount fixo.”</li>
+                <li>“No Sul, com fábrica e PDC em Guaíba, dá para pilotar perto da operação — ciclo curto, métrica clara.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>IT Forum + follow-up LinkedIn confirmando mandato do cargo</td><td>Ata 1 página + mapa de stakeholders</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop dores: SSC pós-SN, IoT/ciber, GenAI campo</td><td>Matriz dor×oferta (top 5)</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC copiloto técnico OU assessment ciber IoT (escolher 1)</td><td>Demo + KPI acordado</td><td>4–6 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad 3–5 FTE co-gerenciado (IA ou ciber)</td><td>Backlog 90 dias + ritual de ROI</td><td>Trimestre</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Expandir para integração/legado + AMS</td><td>MSA multi-ano / SOW programático</td><td>6–9 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3–5)</h4>
+            <div class="app-card">
+                <h4>Site institucional BR</h4>
+                <div class="url">https://www.tkelevator.com/br-pt/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">HTML/CMS corporativo</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Apache (origem)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não exposta publicamente</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>MAX — manutenção preditiva IoT</h4>
+                <div class="url">https://www.tkelevator.com/br-pt/produtos-e-soluções/max/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Dashboards / hub controle</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">ML + IoT sensores</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Microsoft Azure (fonte TKE/MS)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Ecossistema digital TKE</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>ServiceNow (SSC)</h4>
+                <div class="url">Case DXC — IT Section abr/2026</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portal ServiceNow</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Workflows + ITSM</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">SaaS ServiceNow</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">70 integrações (case)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Camada de APIs (Sensedia)</h4>
+                <div class="url">https://www.sensedia.com/customer-story/tk-elevator-enhances-customer-experience-with-sensedia-technology</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Apps mobilidade/campo</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">API management</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">~11 mi req/mês (fonte aberta)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Blog / conteúdo BR</h4>
+                <div class="url">https://blog.br.tkelevator.com/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">PHP / ASP.NET</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">IIS 10</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">On-prem/hosting clássico</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Microsoft Azure (MAX); nuvem pública/híbrida no mapa de investimento; site BR em Apache.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">Prioridade Top 3; agenda ITGC/Internal Controls emergente; ISO Foursys como credencial de conversa.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">MAX (ML preditivo); roadmap GenAI/agentes pós-ServiceNow; EOX com hardware digital IoT.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">Telemetria de elevadores na nuvem; big data MAX; gestão de dados no mapa 12 meses.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">ERP citado no mapa de investimento; fornecedor específico não publicado publicamente.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">ServiceNow (SSC); CRM/HCM/mobile de campo; apps técnicos.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">Site/blog BR; apps passageiro/técnico; APIs Sensedia; marketing digital (GTM detectado).</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.tkelevator.com/br-pt/</td><td><span class="status-200">200</span></td><td>HTML corporativo</td><td>Apache</td><td>GTM detectado no HTML</td></tr>
+                    <tr><td>https://blog.br.tkelevator.com/</td><td><span class="status-200">200</span></td><td>PHP 7.4 / ASP.NET</td><td>IIS 10.0</td><td>Stack clássico Microsoft/PHP</td></tr>
+                    <tr><td>https://www.tkelevator.com/br-pt/.../max/</td><td><span class="status-200">200</span></td><td>HTML produto</td><td>Apache</td><td>Página MAX BR acessível</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026 (HEAD/GET). Só o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4–6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Ciber / OT</div><h4>Segurança da frota conectada</h4><p>MAX/Azure + milhares de endpoints elevam risco OT/IT; concorrentes também conectam frota — falha vira downtime público.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · IA</div><h4>Governança de GenAI pós-SSC</h4><p>Case DXC aponta agentes/workflows inteligentes; falta camada de governança, avaliação e squad dedicado (hipótese).</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Integração</div><h4>Legado além do API gateway</h4><p>Sensedia maduro, mas ServiceNow exigiu 70 integrações — ainda há superfície legada em campo/fábrica.</p><div class="offer">Oferta Foursys: FourBlox (Digibee)</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Campo digital</div><h4>Do app ao copiloto</h4><p>Ganhos de mobile já capturados; próximo diferencial setorial é GenAI no diagnóstico do técnico.</p><div class="offer">Oferta Foursys: Engenharia Digital + AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Controles</div><h4>ITGC em escala multi-país</h4><p>Sinal LinkedIn de Internal Controls Excellence; LATAM + Americas exigem padronização de controles de sistemas.</p><div class="offer">Oferta Foursys: Cibersegurança / GRC enablement</div></div>
+                <div class="gap-card"><div class="num">GAP 6 · Legado core</div><h4>Modernização seletiva</h4><p>Mapa 12 meses inclui legado/core; sem modernização, automação e agentes saturam.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">PUC-RS + MBA FGV (Finanças/Controladoria)</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">Porto Alegre / Guaíba, RS (HQ Americas Atlanta no novo papel)</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">PT (nativo); EN provável (papel global) — não localizado formal</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5–7)</h4>
+                <p><strong>1.</strong> Valorize 25+ anos na TKE — pergunte a evolução thyssenkrupp → TKE.</p>
+                <p style="margin-top:6px"><strong>2.</strong> Fale ROI/TCO (MBA FGV) — números concretos, payback, custo por ticket.</p>
+                <p style="margin-top:6px"><strong>3.</strong> Mencione o case de campo (+25% / −18 mil chamadas) como ponto de orgulho.</p>
+                <p style="margin-top:6px"><strong>4.</strong> Traga o case ServiceNow com respeito à DXC — “e depois?”.</p>
+                <p style="margin-top:6px"><strong>5.</strong> Se Internal Controls estiver ativo, mude o vocabulário para controles, evidência e auditoria.</p>
+                <p style="margin-top:6px"><strong>6.</strong> Contexto gaúcho: fábrica/PDC Guaíba e formação PUC-RS — proximidade regional.</p>
+                <p style="margin-top:6px"><strong>7.</strong> Escopo LATAM: padronização multi-país e compliance regional como tema de empatia.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>Planilha CIOs Confirmados IT Forum Praia do Forte 2026 (CNPJ/UF/setor)</li>
+                    <li>Blog TKE BR — PDC Guaíba / EOX (investimentos R$ 30 mi / R$ 20 mi)</li>
+                    <li>IT Section — DXC/ServiceNow SSC (23/04/2026)</li>
+                    <li>Empresa privada — sem RI; números de budget = fontes abertas / briefing P1</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>TKE MAX (Azure / Microsoft) — páginas produto e press releases</li>
+                    <li>Sensedia customer story — TK Elevator</li>
+                    <li>EOX — tkelevator.com/br-pt</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Briefing P1 Foursys (concorrentes Otis, Schindler, KONE, Mitsubishi)</li>
+                    <li>Monitor CNPJ / CNPJCheck — razão social 90.347.840/0001-18</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn Marcelo Przyczynski (Head IT BU LATAM + post Internal Controls)</li>
+                    <li>Declarações em IT Section (abr/2026)</li>
+                    <li>Briefing referência Demais CIO (trajetória, ROI campo, preferências compra)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch/HEAD tkelevator.com/br-pt · blog.br.tkelevator.com · página MAX</li>
+                    <li>21/07/2026</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Adriana Moreira | Veolia Brasil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Adriana Moreira</h1>
+                <h2>Digital Business &amp; Technology Executive Director — Veolia Brasil</h2>
+                <div class="loc">Infraestrutura · São Paulo/SP · CNPJ 01.600.200/0001-48</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · grande porte (multinacional)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Receita BR 2025</div><div class="value">R$ 2,77 bi</div></div>
+                <div class="header-badge"><div class="label">Colaboradores BR</div><div class="value">~2.900+</div></div>
+                <div class="header-badge"><div class="label">Capital social</div><div class="value">R$ 855 mi</div></div>
+                <div class="header-badge"><div class="label">Último IT Forum</div><div class="value">NÃO</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: receita BR 2025 + Sansys Waste/Jtech + CIONET CIO 2025 + M&amp;A Alagoas + IA 2024–2027 · Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>A <strong>Veolia Serviços Ambientais Brasil Ltda.</strong> (CNPJ 01.600.200/0001-48) é a operação brasileira do grupo Veolia (Paris Euronext: VIE), líder global em transformação ecológica nos eixos água, resíduos e energia. Sede em São Paulo/SP; capital social registrado ~R$ 855 mi. Encerrou 2025 com receita de <strong>R$ 2,77 bilhões</strong> no Brasil (+18,3% vs. 2024, imprensa setorial). Expansão 2025: aquisição de Alagoas Ambiental e Serquip em AL, elevando quadro a ~2.900+ colaboradores e base municipal no Nordeste. Braço digital Jtech/Sansys (Waste/Water) digitaliza operação e faturamento de resíduos/água. Fontes: MonitorCNPJ; Revista TAE; Business Wire; site LATAM Veolia.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Veolia Serviços Ambientais Brasil Ltda.</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">São Paulo / SP</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Nacional · grupo global 5 continentes</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">R$ 2,77 bi (Brasil, 2025)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~2.900+ no Brasil (pós-M&amp;A AL)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Ltda. · subsidiária grupo Veolia</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Adriana Moreira</strong> é <strong>Digital Business &amp; Technology Executive Director</strong> na Veolia Brasil desde <strong>ago/2024</strong> (antes Head de TI, dez/2021–jul/2024). ~30 anos de carreira em TI; lidera digitalização, IA, governança de dados e produtos como Sansys Waste (reconhecimento IT Forum 100+ Inovadoras — redução de ~30% no tempo de faturamento citada). Indicada ao prêmio CIO do Ano 2025 (CIONET Brasil). Participou de discussões sobre IA 2024–2027 e liderança feminina em TI (MCIO/IT Show). Atua também em sinergias com Jtech (IA para fraude em ligações de água / Sansys Water). <strong>Poder de decisão:</strong> alto sobre digital/tech Brasil; alinhamento ao CEO Pedro Prádanos Zarzosa e matriz global. <strong>Comitê:</strong> liderança Veolia Brasil + vertical Water Tech (conta irmã Gisely Marques).</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Serviços ambientais integrados para indústrias e municípios: gestão de água/efluentes, resíduos (incluindo perigosos), energia/bioenergia e economia circular. Cadeia: operação de ativos, tratamento, valorização, eficiência energética e soluções digitais (Sansys). Prioridades: transformação ecológica, descarbonização, segurança ambiental regulatória, digitalização de campo e faturamento. Pressões: concorrentes locais de saneamento/resíduos, utilities públicas e exigência ESG de clientes industriais. Posição: referência multinacional com crescimento BR acima da média do grupo (imprensa 2025).</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Integração pós-M&amp;A regional</strong> — Alagoas Ambiental/Serquip entram no perímetro; sistemas e dados a unificar. FATO: Business Wire mai/2025.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Escala de digitalização campo → faturamento</strong> — Sansys Waste já entrega; expansão para outras operações/concessões. FATO: IT Forum 100+; cases Parque do Sol/Jtech.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>IA com governança de dados</strong> — estratégia 2024–2027 coloca IA no centro; precisa de fábrica e qualidade de dado OT. FATO: entrevista MCIO/IT Show.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Fraudes e perdas (água/resíduos)</strong> — IA Jtech &gt;80% precisão em alertas de irregularidade (LinkedIn Adriana). FATO: post projeto Sansys Water.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Cibersegurança OT/IT de ativos ambientais</strong> — superfície de plantas + canais digitais. HIPÓTESE: pressão cresce com IoT/smart metering.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Transformação ecológica data-driven</span>
+                <span class="tag tag-priority">IA 2024–2027 como pilar</span>
+                <span class="tag tag-priority">Digitalização ponta a ponta (Sansys)</span>
+                <span class="tag tag-priority">Sinergia grupo (Water Tech / Jtech)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Expansão Sansys Waste/Water</span>
+                <span class="tag tag-active">Integração M&amp;A Nordeste</span>
+                <span class="tag tag-active">IA manutenção preditiva / perdas</span>
+                <span class="tag tag-active">Governança de dados</span>
+                <span class="tag tag-active">Descarbonização / eficiência energética</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">AI Squad industrial (OT + fraude + preditiva)</span>
+                <span class="tag tag-opportunity">FourBlox — integração pós-M&amp;A e ERP↔Sansys</span>
+                <span class="tag tag-opportunity">Modernização de legado operacional</span>
+                <span class="tag tag-opportunity">Cibersegurança OT/IT</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">93/100</span></div>
+                <p>Squads de IA alinhados à estratégia 2024–2027: preditiva, perdas/fraudes, otimização energética — com governança de dados.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: Adriana lidera narrativa de IA e cases Jtech &gt;80% precisão.</li>
+                    <li>FATO: grupo global atribui fatia relevante de eficiências a Digital/IA (imprensa 2025).</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS) + Engenharia Digital</h4><span class="score-badge">88/100</span></div>
+                <p>Integração industrial pós-M&amp;A e entre Sansys, operações de campo e sistemas corporativos.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: crescimento inorgânico AL + produto digital multi-cliente.</li>
+                    <li>HIPÓTESE: dual-stack transitório eleva custo de ponto a ponto.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">82/100</span></div>
+                <p>Evolução de produtos digitais Sansys e canais B2B/municípios (agilidade, UX, APIs).</p>
+                <div class="reasons"><ul>
+                    <li>FATO: Sansys Waste premiado IT Forum; expansão comercial citada.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">76/100</span></div>
+                <p>Modernizar sistemas operacionais herdados das empresas adquiridas e plantas antigas.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: M&amp;A traz sistemas heterogêneos.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">72/100</span></div>
+                <p>Programa OT/IT para plantas ambientais e plataforma digital de faturamento/rastreio.</p>
+                <div class="reasons"><ul>
+                    <li>HIPÓTESE: IoT + dados de pesagem/fraude aumentam superfície.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>“Sansys já provou valor no IT Forum; o gargalo agora é escalar IA e integrar o perímetro pós-Alagoas sem perder velocidade de faturamento.”</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>PoC AI Squad em perdas/fraude ou preditiva em 1 operação + assessment de integrações das empresas adquiridas.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>AI Squad + FourBlox + modernização com ISO 27001/27701 — execução local para CIO que já dialoga com CIONET e IT Forum.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>SUEZ legado / players water tech</h4><p>Sobreposição tecnológica no grupo (ver conta Water Tech). Gap Brasil serviços: unificar oferta digital ao cliente municipal/industrial.</p></div>
+            <div class="competitor-card"><h4>Utilities e concessionárias locais</h4><p>Relacionamento político-territorial. Gap Veolia: vencer em tecnologia de rastreio, IA e economia circular.</p></div>
+            <div class="competitor-card"><h4>Especialistas de resíduos/perigosos</h4><p>Nicho operacional. Gap: Veolia combina água+resíduos+energia — precisa de stack digital integrada.</p></div>
+            <div class="competitor-card"><h4>Consultorias digitais genéricas</h4><p>Decks ESG. Gap: Adriana responde a produto (Sansys) e KPI de faturamento — não a slideware.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Veolia Brasil — água/resíduos/energia; R$ 2,77 bi (2025); CNPJ 01.600.200/0001-48.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Adriana Moreira — Digital Business &amp; Tech Exec. Dir. desde ago/2024; finalista CIONET CIO 2025.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escalar Sansys/IA + integrar M&amp;A Nordeste + metas GreenUp.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Digitalização operacional, IA 2024–27, dados, integração pós-aquisição.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) AI Squad; 2) FourBlox + Eng. Digital; 3) Modernização de Legado.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 45 min IT Forum: escala Sansys + PoC IA/integração.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum 2026 · 1ª presença (último NÃO) · pós-receita recorde 2025.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “ESG software”; vender throughput de digitalização que já reduz ciclo de faturamento.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Sansys + mandato Digital Business</h4><p>Veolia Brasil digitaliza resíduos com produto próprio premiado e eleva Adriana a Executive Director de Digital/Tech.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Crescer e integrar</h4><p>Receita sobe, M&amp;A amplia perímetro, IA vira pilar — bandwidth de integração e governança aperta.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Factory Foursys</h4><p>AI Squad + iPaaS + modernização escalam o que Sansys começou, com disciplina de segurança.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Escala de IA operacional</h4>
+                <p>Evidência: estratégia IA 2024–27; case fraude água &gt;80%; preditiva citada em entrevista.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — industrializar casos com MLOps e governança; resultado: eficiência e receita recuperada.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quais modelos já estão em produção além do piloto Jtech e onde falta fábrica?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Design sprint 1 semana + PoC com KPI de alerta/precisão.</p>
+            </div>
+            <div class="business-card">
+                <h4>Integração pós-M&amp;A Nordeste</h4>
+                <p>Evidência: aquisição AL 2025; ~380 pessoas e dezenas de municípios.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox + Modernização — mapa de sistemas e cutover controlado; resultado: um perímetro digital.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quantos ERPs/sistemas de campo ainda rodando em dual-stack após a compra?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment 2 semanas + shortlist de 2 fluxos para PoC.</p>
+            </div>
+            <div class="business-card">
+                <h4>Produto digital Sansys como plataforma</h4>
+                <p>Evidência: prêmio IT Forum; redução 30% tempo faturamento; contratos externos (ex. Parque do Sol).</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital — APIs, DX, escala multi-tenant; resultado: time-to-cliente menor.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“O roadmap Sansys é produto interno ou plataforma comercial escalável em 2026?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de arquitetura de produto + backlog 90 dias.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck 8–10 slides + one-pager PoC IA + diagrama integração M&amp;A</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad + FourBlox + Modernização — porquê: IA 2024–27 + perímetro AL</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) IA em operações industriais/campo; (2) iPaaS pós-M&amp;A; (3) modernização OT/IT ambiental — cases Foursys disponíveis ao vendedor.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> ela já tem produto premiado; vender <em>fábrica de escala</em> (IA + integração), não “mais um sistema de resíduos”.</p>
+            <p style="margin-top:8px"><em>Se material pronto não encaixar: discurso “do Sansys ao operating system digital da Veolia BR”.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“O Sansys Waste que vocês levaram ao IT Forum 100+ é prova de execução — queremos ajudar a escalar.”</li>
+                <li>“Pós-Alagoas, o risco é dual-stack; FourBlox industrializa a integração.”</li>
+                <li>“IA 2024–2027 precisa de AI Squad com governança, não só pilotos isolados.”</li>
+                <li>“Fraude/perdas com &gt;80% de precisão já mostrou ROI — próximo passo é fábrica.”</li>
+                <li>“CIONET CIO 2025: conversamos no mesmo nível de líderes que medem impacto de negócio.”</li>
+                <li>“Proposta: assessment M&amp;A + PoC IA em 30–45 dias.”</li>
+                <li>“Primeira presença no fórum com a conta — boa janela para abrir MSA digital.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>IT Forum com ângulo Sansys/IA/M&amp;A</td><td>Agenda 45 min Adriana (+ Jtech se houver)</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Mapa sistemas adquiridos + roadmap IA</td><td>One-pager + hipóteses PoC</td><td>1–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC AI Squad ou FourBlox em 1 operação</td><td>Demo + ROI</td><td>3–6 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad digital/integração sob governança Veolia</td><td>Backlog 90 dias</td><td>1–3 meses</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Programa multi-oferta anual</td><td>MSA / SOW</td><td>3–6 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Portal Veolia LATAM / Brasil</h4><div class="url">https://www.latinoamerica.veolia.com/pt</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portal institucional Drupal/marketing</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">CMS corporativo</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não identificado no fetch</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Sansys Waste (Jtech / Veolia)</h4><div class="url">Produto digital interno/comercial</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Aplicação de gestão resíduos/faturamento</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Sistema tempo real (claim)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integração a ERP citada em cases</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Sansys Water / smart metering</h4><div class="url">Jtech — soluções saneamento</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Monitoramento / alertas</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">IA detecção irregularidades</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Sistemas operacionais de plantas / M&amp;A</h4><div class="url">Não público</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Heterogêneo pós-aquisição (hipótese)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Não detalhada publicamente para operação BR; grupo global cloud-friendly. Hipótese: híbrido campo + cloud.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">Ambiente regulado ambiental + dados de faturamento/pesagem. Ferramentas: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">Pilar 2024–2027; preditiva de ativos; IA fraude água; Digital/IA no grupo global.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">Governança de dados citada por Adriana; Sansys tempo real. Lakehouse: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">ERP corporativo: marca não publicada neste briefing; cases citam integração faturamento↔ERP.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">Sansys Waste/Water, operações água/resíduos/energia, SCM de campo. CRM: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">Portal LATAM; canais B2B/municípios; reconhecimento IT Forum / CIONET.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.latinoamerica.veolia.com/pt</td><td><span class="status-200">200</span></td><td>Portal institucional</td><td>Não identificado</td><td>Água, resíduos, energia, cases LATAM</td></tr>
+                    <tr><td>https://www.latinoamerica.veolia.com/pt/noticias/...sansys...</td><td><span class="status-200">200</span></td><td>Notícia</td><td>Não identificado</td><td>IT Forum 100+; Adriana citada; −30% tempo faturamento</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026 (WebFetch).</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · IA</div><h4>De piloto a fábrica</h4><p>Estratégia forte; industrialização MLOps ainda opaca publicamente.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Pós-M&amp;A Nordeste</h4><p>Perímetro novo com sistemas herdados.</p><div class="offer">Oferta Foursys: FourBlox</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Legado</div><h4>Plantas e ops antigas</h4><p>Convivência com Sansys moderno.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Produto</div><h4>DX/plataforma Sansys</h4><p>Produto premiado precisa escala multi-cliente.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Segurança</div><h4>OT + dados de faturamento</h4><p>Superfície cresce com IoT e digitalização.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Não localizado com detalhe neste briefing · PMP citado no LinkedIn</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">São Paulo, SP</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Começar pelo Sansys Waste e o prêmio IT Forum — reconhecimento merecido.<br>
+                2) Ligar IA a descarbonização/economia circular — vocabulário dela.<br>
+                3) Mencionar CIONET CIO 2025 com respeito, sem bajulação.<br>
+                4) Separar Veolia Serviços (ela) de Water Tech (Gisely) — mostra mapa de conta.<br>
+                5) Trazer KPI de faturamento/perdas, não buzzword ESG vazio.<br>
+                6) Perguntar sinergia Jtech e priorização 2026 pós-receita R$ 2,77 bi.<br>
+                7) Evitar “somos parceiro cloud genérico”; falar fábrica de escala.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>Revista TAE — receita BR 2025 R$ 2,77 bi</li>
+                    <li>Business Wire — M&amp;A Alagoas</li>
+                    <li>MonitorCNPJ — 01.600.200/0001-48</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Veolia LATAM — notícia Sansys / IT Forum</li>
+                    <li>IT Show / MCIO — IA 2024–2027</li>
+                    <li>LinkedIn — Sansys Water / fraude</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>latinoamerica.veolia.com</li>
+                    <li>Veolia group results 2024/2025 (contexto)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn — Adriana Moreira</li>
+                    <li>CIONET CIO do Ano 2025 (indicação)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch 21/07/2026 — latinoamerica.veolia.com</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Gisely Marques | Veolia Water Technologies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Gisely Marques</h1>
+                <h2>CIO Latin America — Veolia Water Technologies (ex-SUEZ WTS)</h2>
+                <div class="loc">Infraestrutura · São Paulo/SP · CNPJ 47.098.918/0001-89</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · grande porte (Water Tech Zone)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Segmento WT global</div><div class="value">€4,97 bi</div></div>
+                <div class="header-badge"><div class="label">WTS FY2024</div><div class="value">€3,3 bi</div></div>
+                <div class="header-badge"><div class="label">LATAM team (LI)</div><div class="value">~300–400</div></div>
+                <div class="header-badge"><div class="label">Último IT Forum</div><div class="value">SIM</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: full ownership WTS (CDPQ) + integração SUEZ→Veolia + GreenUp + stack cloud CRM/HCM · Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>A <strong>Veolia Water Technologies and Solutions Brasil Tratamento de Águas Ltda.</strong> (CNPJ 47.098.918/0001-89) é a entidade brasileira da vertical Water Technologies (ex-SUEZ Water Technologies &amp; Solutions / WTS, com origem GE Water). Sede em São Paulo (Av. Manuel Bandeira, Vila Leopoldina). Atividade: fabricação/comercialização de tecnologias e soluções para tratamento de água e processos industriais/municipais. Em 2025 a Veolia anunciou acordo para adquirir a participação remanescente de 30% da CDPQ no WTS, buscando full ownership e sinergias. Water Technologies do grupo: receita ~€4,97 bi (FY2024); WTS ~€3,3 bi. Fontes: GuiaPJ/Receita; veolia.com press; watertechnologies.com.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Veolia Water Technologies and Solutions Brasil Tratamento de Águas Ltda.</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">São Paulo / SP (Vila Leopoldina)</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Brasil + CIO cobre LATAM · 40+ países no segmento WT</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">BR específico não localizado · WT/WTS em € (grupo)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">Water Tech LATAM ~300–400 (LinkedIn company)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Ltda. · Water Tech Zone Veolia (ex-SUEZ WTS)</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Gisely Grillo Marques</strong> é <strong>CIO Latin America</strong> na Veolia Water Tech LATAM. Conduziu M&amp;A/separação do antigo controlador (SUEZ) e trabalha sinergias com o grupo Veolia; anteriormente CIO LATAM na SUEZ WTS (após spin de GE Water), com 100+ projetos, digitalização de S&amp;OP/supply chain e cultura ágil. Stack citada no LinkedIn: ambiente cloud com Salesforce, Microsoft, Google e plataforma de HCM/RH em nuvem (marcas de ERP/HCM não detalhadas neste briefing). ~33 anos de experiência; passagens por Novelis (CIO South America) e consultoria. Participa da narrativa GreenUp (tecnologia e dados na transformação ecológica). <strong>Poder de decisão:</strong> alto sobre TI LATAM Water Tech; reportes a estrutura regional/global WTZ. <strong>Comitê:</strong> sinergia com Veolia Brasil Serviços (Adriana Moreira) e HQ Water Tech.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Tecnologias e soluções de tratamento de água/processo para indústrias (oil&amp;gas, food, pharma, microeletrônica, power etc.) e municípios: químicos, equipamentos, serviços e digitais. Cadeia: engenharia, supply chain, instalação, O&amp;M e monitoramento. Prioridades: unificar portfólio pós-SUEZ/Veolia (Water Tech Zone), digital water, GreenUp, time-to-quote e excelência de supply. Pressões: OEMs globais (Xylem, Ecolab/Nalco, Kurita etc.) e players locais. Posição: braço technology do maior grupo de transformação ecológica do mundo, em consolidação societária 2025–26.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Integração pós-SUEZ / full ownership WTS</strong> — sistemas, identidades, contratos e sinergias com Veolia. FATO: LinkedIn CIO + press Veolia/CDPQ.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Portfólio digital fragmentado WTZ</strong> — unificação de ofertas digitais water (Kurrant/WTZ). FATO: artigo Kurrant sobre streamlining digital portfolio.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Supply chain / S&amp;OP digital</strong> — já houve digitalização; escala LATAM exige continuidade. FATO: LinkedIn histórico SUEZ.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>CRM + cloud multiplataforma</strong> — Salesforce/M365/Google convivendo; risco de silos. FATO: stack citada pela CIO.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Dados para GreenUp</strong> — narrativa de monitoramento inteligente e decisão. FATO: posts Veolia Water Tech LATAM / Gisely.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Sinergias Veolia full ownership</span>
+                <span class="tag tag-priority">Digital water unificado</span>
+                <span class="tag tag-priority">Supply chain / S&amp;OP excelência</span>
+                <span class="tag tag-priority">GreenUp com dados</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Integração IT pós-CDPQ/WTS</span>
+                <span class="tag tag-active">Harmonização plataformas cloud/CRM</span>
+                <span class="tag tag-active">Digital solutions portfolio WTZ</span>
+                <span class="tag tag-active">Analytics / monitoramento</span>
+                <span class="tag tag-active">Cultura ágil / delivery</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">FourBlox — integração pós-M&amp;A multiplataforma</span>
+                <span class="tag tag-opportunity">Modernização de legado herdado GE/SUEZ</span>
+                <span class="tag tag-opportunity">AI Squad para ops/supply/digital water</span>
+                <span class="tag tag-opportunity">Cibersegurança cloud + OT de clientes</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS) + Engenharia Digital</h4><span class="score-badge">94/100</span></div>
+                <p>Camada de integração entre Salesforce, Microsoft, Google, HCM e sistemas de supply — crítica em M&amp;A contínuo.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: CIO declara stack multiplataforma cloud.</li>
+                    <li>FATO: mandato explícito de integrações/sinergias Veolia.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">88/100</span></div>
+                <p>Descomissionar/encapsular sistemas herdados GE Water / SUEZ ainda em dual-run.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: múltiplas ondas de M&amp;A (GE→SUEZ→Veolia→full WTS).</li>
+                    <li>HIPÓTESE: dívida técnica residual em LATAM.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">82/100</span></div>
+                <p>IA para S&amp;OP, previsão de demanda, monitoramento digital water e eficiência GreenUp.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: narrativa GreenUp + dados/monitoramento.</li>
+                    <li>FATO: histórico de valor em supply chain digital.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">78/100</span></div>
+                <p>Unificar experiência digital do portfólio WTZ e portais comerciais LATAM.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: desafio público de portfolio digital fragmentado.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">74/100</span></div>
+                <p>Hardening multi-cloud e proteção de dados industriais/cliente em ambiente pós-integração.</p>
+                <div class="reasons"><ul>
+                    <li>HIPÓTESE: fusão de identidades e tenants aumenta risco.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>“Full ownership do WTS desbloqueia sinergia — o gargalo agora é throughput de integração multiplataforma, não mais o equity story.”</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Assessment de mapa de interfaces Salesforce–ERP–supply + PoC FourBlox em 1 jornada S&amp;OP/comercial LATAM.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>FourBlox + Modernização + AI Squad para CIO que já entregou 100+ projetos em M&amp;A water tech — parceiro de execução LATAM.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Xylem / Ecolab / Kurita / Solenis</h4><p>Portfólio water chemicals/equipment. Gap Veolia WT: escala grupo + GreenUp; precisa DX e supply no nível dos melhores.</p></div>
+            <div class="competitor-card"><h4>Veolia Serviços Brasil (irmã)</h4><p>Mesmo grupo, outro P&amp;L. Gap: risco de silos digitais; oportunidade de sinergia governada (Adriana × Gisely).</p></div>
+            <div class="competitor-card"><h4>Integradores Salesforce / Microsoft SI</h4><p>Dominam plataforma única. Gap: cliente precisa de iPaaS cross-stack pós-M&amp;A, não só CRM.</p></div>
+            <div class="competitor-card"><h4>Consultorias de PMI pós-merger</h4><p>Programas de sinergia. Gap: Gisely já viveu M&amp;A — quer delivery técnico, não só PMO.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Veolia WTS Brasil (ex-SUEZ) — CNPJ 47.098.918/0001-89; water tech industrial.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Gisely Grillo Marques — CIO LATAM Water Tech; veterana GE/SUEZ/Veolia M&amp;A.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Full ownership WTS + sinergias + portfólio digital unificado GreenUp.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Integração cloud/CRM/HCM, supply digital, analytics, modernização pós-M&amp;A.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) FourBlox + Eng. Digital; 2) Modernização de Legado; 3) AI Squad.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 45 min IT Forum: mapa multiplataforma + 2 PoCs.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum 2026 · presente no último · ciclo full ownership 2025–26.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender CRM; vender integração industrial entre stacks já escolhidas.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>GE → SUEZ → Veolia 100%</h4><p>WTS atravessa três donos; Gisely estabiliza TI LATAM e agora mira sinergias plenas no grupo.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Multiplataforma × velocidade</h4><p>Salesforce, Microsoft, Google e legados competem; portfólio digital WTZ ainda se unifica.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Factory Foursys</h4><p>iPaaS + modernização + AI Squad aceleram GreenUp com menos fricção pós-M&amp;A.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Integração multiplataforma pós-full ownership</h4>
+                <p>Evidência: stack Salesforce/M365/Google; press CDPQ; mandato sinergias.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox — mapa e padrões de integração; resultado: menos ponto a ponto e onboarding mais rápido.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quantas interfaces críticas ainda são custom ponto a ponto entre CRM, supply e financeiro?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop 2h + PoC em jornada S&amp;OP ou order-to-cash.</p>
+            </div>
+            <div class="business-card">
+                <h4>Legado herdado de ondas M&amp;A</h4>
+                <p>Evidência: GE Water → SUEZ → Veolia; dual-run típico do setor.</p>
+                <div class="sub">Solução Foursys</div><p>Modernização de Legado — strangler controlado; resultado: OpEx e risco menores.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Qual % do roadmap 2026 ainda depende de sistemas pré-Veolia?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment de 3 apps + business case 90 dias.</p>
+            </div>
+            <div class="business-card">
+                <h4>Dados/IA para GreenUp</h4>
+                <p>Evidência: posts Water Tech LATAM; monitoramento inteligente.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — casos supply/ops/digital water com governança; resultado: eficiência GreenUp mensurável.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Onde o dado de campo já existe mas ainda não alimenta decisão comercial/ops?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Design sprint 1 semana + PoC com KPI operacional.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck 8–10 slides + diagrama multiplataforma + one-pager PoC iPaaS</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">FourBlox + Modernização + AI Squad — porquê: M&amp;A + GreenUp</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) integração pós-M&amp;A industrial; (2) modernização multi-cloud; (3) AI Squad em supply/ops — cases Foursys reais.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> plataformas já escolhidas; ROI está em <em>integração e legado</em>, não em trocar CRM.</p>
+            <p style="margin-top:8px"><em>Se material não encaixar: discurso “operating model digital LATAM pós-100% WTS”.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Você já atravessou GE→SUEZ→Veolia; full ownership muda o jogo — queremos acelerar a integração, não o slide de sinergia.”</li>
+                <li>“FourBlox nasceu para stack Salesforce + Microsoft + Google sem ponto a ponto eterno.”</li>
+                <li>“Modernização de legado herdado libera budget para digital water de verdade.”</li>
+                <li>“GreenUp precisa de dado confiável — AI Squad com governança, não chatbot.”</li>
+                <li>“Separar Water Tech de Serviços Brasil no mapa de conta evita conflito e cria sinergia.”</li>
+                <li>“Proposta: mapa de 10 interfaces + PoC em 30–45 dias.”</li>
+                <li>“Presente no último IT Forum — retomar conversa com avanço concreto pós-CDPQ.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>IT Forum ângulo full ownership / multiplataforma</td><td>Agenda 45 min Gisely</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Mapa sistemas LATAM + prioridades sinergia</td><td>One-pager + PoCs</td><td>1–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC FourBlox ou modernização 1 fluxo</td><td>Demo + valor</td><td>3–6 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad integração/modernização/AI</td><td>Backlog 90 dias</td><td>1–3 meses</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Programa LATAM multi-país</td><td>MSA / SOW</td><td>3–6 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Site Water Technologies (global)</h4><div class="url">https://www.watertechnologies.com/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portal Drupal/marketing produtos</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">CMS + document library</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não identificado no fetch</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">eStore documentos / SDS</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Salesforce CRM (LATAM)</h4><div class="url">Interno</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Salesforce</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Sales Cloud (citado CIO)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Salesforce SaaS</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações custom (hipótese)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Microsoft 365 + Google Workspace</h4><div class="url">Colaboração (citado CIO)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">M365 / Google</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">SaaS colaboração</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Microsoft / Google</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Graph / Google APIs</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Plataforma de HCM/RH (nuvem)</h4><div class="url">Interno · produto/marca não publicado</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portal RH/colaborador</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">HCM cloud</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">SaaS</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integração RH–ops</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Sistemas supply / S&amp;OP / legado M&amp;A</h4><div class="url">Não público</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Digitalização S&amp;OP citada</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Híbrido (hipótese)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Ambiente baseado em cloud (LinkedIn CIO); Microsoft e Google citados. Detalhe IaaS: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">Multi-tenant pós-M&amp;A; dados industriais de clientes. Ferramentas: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">GreenUp + monitoramento inteligente; automação de supply. Maturidade MLOps: hipótese.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">Dados como motor da transformação ecológica (comunicação LATAM). Plataforma específica: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">ERP corporativo: marca não detalhada neste briefing (evitar especulação).</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">Salesforce CRM; HCM/RH em nuvem; S&amp;OP/supply; portfólio digital water; químicos/equipamentos.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">watertechnologies.com; document library; canais comerciais B2B industriais.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.watertechnologies.com/</td><td><span class="status-200">200</span></td><td>Portal produtos/expertise</td><td>Não identificado</td><td>Newsroom: Petrobras desal; full ownership WTS mai/2025</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026 (WebFetch).</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Integração</div><h4>Multiplataforma pós-M&amp;A</h4><p>CRM/HCM/colab/legado sem iPaaS industrial.</p><div class="offer">Oferta Foursys: FourBlox</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Legado</div><h4>Sistemas GE/SUEZ residuais</h4><p>Ondas de ownership deixam dual-run.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Digital</div><h4>Portfólio digital WTZ</h4><p>Fragmentação de ofertas digitais water.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · IA</div><h4>GreenUp data-driven</h4><p>Narrativa forte; fábrica de modelos opaca.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Segurança</div><h4>Identidades e tenants fundidos</h4><p>Risco típico de M&amp;A cloud.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Não localizado com detalhe neste briefing</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">São Paulo, SP</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado (atuação LATAM sugere ES/EN — hipótese)</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Reconhecer as ondas GE/SUEZ/Veolia — ela viveu na prática.<br>
+                2) Falar integração e sinergia, não “transformação digital genérica”.<br>
+                3) GreenUp como ponte de negócio, não buzzword.<br>
+                4) Respeitar stack já escolhida (Salesforce/M365/Google).<br>
+                5) Mapear relação com Adriana/Veolia Serviços — conta irmã.<br>
+                6) Citar presença no último IT Forum e continuidade.<br>
+                7) Perguntar prioridades LATAM 2026 pós-anúncio CDPQ.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>Veolia press — aquisição stake CDPQ / WTS</li>
+                    <li>GuiaPJ — CNPJ 47.098.918/0001-89</li>
+                    <li>Kurrant — digital portfolio WTZ</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>LinkedIn Gisely — cloud, Salesforce, HCM/RH, Microsoft, Google</li>
+                    <li>watertechnologies.com — produtos/digital</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Veolia FY2024 Water Technologies metrics</li>
+                    <li>LinkedIn Veolia Water Tech LATAM — GreenUp</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn — Gisely Grillo Marques</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch 21/07/2026 — watertechnologies.com</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+
+</html>

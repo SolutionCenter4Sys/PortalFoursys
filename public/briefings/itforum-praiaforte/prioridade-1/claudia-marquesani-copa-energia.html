@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<!--
+  Briefing CIO — Cláudia Marquesani | COPA ENERGIA (COPAGAZ)
+  IT Forum 2026 — Praia do Forte | Agente Hunter | Modo --full (B→A→C)
+  Design System Foursys — CSS idêntico ao template canônico
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Cláudia Marquesani | COPA ENERGIA (COPAGAZ)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Cláudia Marquesani</h1>
+                <h2>CIO / Diretora de Tecnologia — COPA ENERGIA (COPAGAZ)</h2>
+                <div class="loc">Química, Petroquímica, Óleo e Gás · São Paulo/SP · CNPJ 03.237.583/0001-67</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Porte (líder GLP AL)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Market share</div><div class="value">~24%</div></div>
+                <div class="header-badge"><div class="label">Residências/mês</div><div class="value">13,2 Mi</div></div>
+                <div class="header-badge"><div class="label">Colaboradores</div><div class="value">~3.700</div></div>
+                <div class="header-badge"><div class="label">Estados + DF</div><div class="value">24+DF</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: fontes abertas (TI Inside, IT Forum, LinkedIn, Econodata) + leitura de comitê + material de apresentação · Diferencia da edição anterior (Trancoso). Empresa privada — sem RI listada.</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>A Copa Energia S.A. é a maior distribuidora de GLP da América Latina, detentora das marcas Copagaz e Liquigás. Nasceu da consolidação pós-aquisição da Liquigás e opera engarrafamento, comercialização e distribuição residencial e B2B. Em 2024 ampliou o portfólio com a CTG (gás natural e biometano) e investe em energia solar (usina fotovoltaica em Mataripe/BA). Sede em São Paulo; operação em 24 estados e DF; rede de mais de 4 mil revendas. Empresa privada — sem relatório de RI público; inteligência baseada em fontes abertas (imprensa especializada, LinkedIn, site institucional).</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Copa Energia S.A.</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">São Paulo / SP (Av. das Nações Unidas, 14171)</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">24 estados + DF · ~4,4 mil revendas</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">Não localizado em RI pública (privada)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~3.700 (fonte: TI Inside, 2024)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada · Distribuição de energia (GLP + adjacentes)</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Cláudia Marquesani</strong> é CIO / Diretora de Tecnologia da Copa Energia desde julho/agosto de 2024 (LinkedIn: ~2 anos no cargo em 2026). Criou a cadeira de Tecnologia na diretoria. Trajetória: IBM → Sodexo → LDC → Autopass → Santander Tecnologia → CIO Petz (2021–2024) → Copa Energia. Formação FGV (graduação, MBA Finanças, mestrado em TI/Gestão da Competitividade); doutoranda Mackenzie (Finanças/Controladoria/Sistemas). Autora do livro <em>Só Podia Ser Mulher</em> (Brasport, 2024); TEDx Speaker; mentora de diversidade em TI.</p>
+            <p style="margin-top:12px"><strong>Poder de decisão (fato):</strong> redesenhou a TI em modelo ambidestro (exploration/exploitation); mapeou 50+ projetos; liberou 20+ programas bloqueados; aprovou orçamento de TI no board com nota 8,8/10 das VPs (IT Forum, dez/2025). Criou comitês de PMO com áreas de negócio. <strong>Comitê relevante:</strong> Product (ex.: Uiaká de Andrade — Estratégia Digital &amp; Omnichannel); VPs de negócio como sponsors; board/presidente como gate de budget.</p>
+            <p style="margin-top:12px"><strong>Prioridades declaradas 2025–2026:</strong> GenAI (Marketing, Pricing, Service Desk via Microsoft Teams — 30% dos chamados resolvidos por assistente); motor de crédito com IA (Databricks/Lakehouse, parceiro Indicium — R$ 13,5 Mi/ano de risco reduzido); Hub de IA; portais; medição individualizada; omnicanal revendas; digitalização de centros operativos; plano diretor de segurança da informação e IA; cultura data-driven.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Distribuição de GLP é mercado altamente concentrado: quatro grandes players dominam a maior parte do volume nacional. A Copa Energia lidera o ranking consolidado (posição de liderança citada em imprensa e Sindigás), com marcas históricas Copagaz e Liquigás e forte presença no Sul e Centro-Oeste. Cadeia crítica: engarrafamento → logística de botijões → rede de revendas → consumidor residencial e B2B (indústria, condomínios, comércio). Pressões: eficiência logística e roteirização, crédito/inadimplência na ponta, experiência digital do revendedor e do cliente final, consolidação de rivais (consórcios Ultragaz/Supergasbras sob escrutínio do Cade), transição energética (biometano, solar) e compliance de segurança operacional. Tendência setorial: digitalização de jornadas, IA preditiva de demanda e crédito, e modernização de sistemas core em empresas tradicionalmente “analógicas”.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Gap tecnológico histórico pós-fusão Copagaz/Liquigás — CIO declara missão de “reduzir o gap” e entregar foco no cliente (IT Forum).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Ambidestria forçada: exploration (novos produtos digitais) + exploitation (débito técnico e projetos bloqueados) no mesmo orçamento.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção de GenAI pelas áreas usuárias — maior desafio persistente vs. capacitação técnica e escolha de ferramentas (TI Inside, jan/2026).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Crédito e inadimplência em base massiva (portal MI +150 mil clientes citados em perfil de produto) — risco financeiro operacional.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Logística de distribuição e roteirização ainda candidatas a IA/bots (declaração da CIO na entrada, TI Inside ago/2024).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Pressão competitiva de rivais com escala e, em alguns casos, compartilhamento de infraestrutura — digital vira diferencial de custo e serviço.</div></div>
+
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Cultura data-driven 2026</span>
+                <span class="tag tag-priority">GenAI nativa em processos críticos</span>
+                <span class="tag tag-priority">Omnicanal revendas</span>
+                <span class="tag tag-priority">Medição individualizada automática</span>
+                <span class="tag tag-priority">Centros operativos digitais</span>
+                <span class="tag tag-priority">Governança de IA + segurança</span>
+            </div>
+
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">IA / GenAI (Service Desk, Marketing, Pricing)</span>
+                <span class="tag tag-active">Motor de crédito + collection score (Databricks)</span>
+                <span class="tag tag-active">Portais e Hub de IA</span>
+                <span class="tag tag-active">Medição individualizada</span>
+                <span class="tag tag-active">Omnicanal e digitalização operacional</span>
+                <span class="tag tag-active">Plano diretor de SI e IA · Cloud</span>
+                <span class="tag tag-active">Modernização de core / ERP (hipótese de budget estruturante)</span>
+            </div>
+
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Squads de engenharia para portais/omnicanal</span>
+                <span class="tag tag-opportunity">Integração iPaaS entre legado, portais e Lakehouse</span>
+                <span class="tag tag-opportunity">Cibersegurança + governança de GenAI em escala</span>
+                <span class="tag tag-opportunity">Modernização de canais digitais (site ainda em portal legado)</span>
+                <span class="tag tag-opportunity">IA preditiva de demanda/roteirização (além do crédito)</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">92/100</span></div>
+                <p>Encaixa no roadmap GenAI já em produção (Service Desk 30%, Pricing, Marketing) e na expansão 2026 para processos críticos. Foursys entra como squad de produto+governança, não como “prova de conceito isolada”.</p>
+                <div class="reasons"><ul>
+                    <li>CIO prioriza GenAI com governança, segurança e adoção humana — exatamente o discurso Foursys.</li>
+                    <li>Cases públicos de crédito (Indicium/Databricks) abrem espaço para frentes adjacentes: roteirização, collection, atendimento revenda.</li>
+                    <li>Ângulo: industrializar o que já mostrou ROI, não reinventar o hub.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">88/100</span></div>
+                <p>Portais, medição individualizada, omnicanal revendas e digitalização de centros operativos exigem delivery contínuo (modelo ambidestro exploration).</p>
+                <div class="reasons"><ul>
+                    <li>Produto digital com base &gt;150 mil clientes no MI — backlog e jornadas com ROI financeiro.</li>
+                    <li>Site institucional ainda em stack de portal legado (sinal empírico) — modernização de experiência.</li>
+                    <li>Fit com squads Foursys full-stack + produto.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (Digibee iPaaS)</h4><span class="score-badge">84/100</span></div>
+                <p>Integração entre sistemas de crédito/Lakehouse, portais, atendimento e operação de distribuição — gargalo clássico pós-fusão e multi-marca (Copagaz/Liquigás).</p>
+                <div class="reasons"><ul>
+                    <li>Motor de crédito já unificou dados dispersos; próxima onda (collection, omnicanal) precisa de integração confiável.</li>
+                    <li>ISO 27001/27701 e 24 anos / 41.000+ projetos alinham ao plano diretor de SI.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">78/100</span></div>
+                <p>Plano diretor de segurança da informação e inteligência artificial declarado pela CIO; GenAI em Teams amplia superfície de risco e demanda de governança.</p>
+                <div class="reasons"><ul>
+                    <li>Adoção rápida de GenAI sem maturidade de usuário = risco operacional e de dados.</li>
+                    <li>Distribuição de energia crítica — compliance e continuidade são argumentos de board.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">74/100</span></div>
+                <p>Débito técnico e “exploitation” explícitos no redesenho da TI; canais digitais ainda com assinatura de portal corporativo legado; core transacional em modernização (sem detalhe público de vendor).</p>
+                <div class="reasons"><ul>
+                    <li>CIO libera programas bloqueados e precisa de capacidade de modernização sem parar operação.</li>
+                    <li>Hipótese: wave de core + APIs + experiência digital gera demanda de parceiro de execução.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Reconhecer o playbook dos 100 dias e o resultado já publicado (GenAI no Service Desk + motor de crédito). Entrar como parceiro que escala o que funciona — com governança e squads — não como vendor que “vende IA do zero”.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Prioridade 2026: GenAI em processos críticos + data-driven + omnicanal revendas + medição individualizada. Timing: IT Forum Praia do Forte (presença confirmada) + ciclo pós-aprovação de budget no board.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Combinação AI Squad + Engenharia Digital + FourBlox + Cibersegurança sob um único MSA, com ISO 27001/27701 e histórico de 41.000+ projetos — encaixa no discurso dela de ambidestria e “tecnologia com pessoas no centro”.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Ultragaz (Ultrapar)</h4><p>Concorrente histórico de escala; grupo listado com maior transparência de investimento e maturidade digital corporativa. Gap Copa: comunicar e industrializar inovação com a mesma velocidade de um player de holding listada — sem perder foco operacional de GLP.</p></div>
+            <div class="competitor-card"><h4>Nacional Gás</h4><p>Rival direto de market share; forte no Nordeste. Gap: diferenciação por jornada digital do revendedor/cliente e inteligência de crédito/demanda em regiões de disputa.</p></div>
+            <div class="competitor-card"><h4>Supergasbras (SHV)</h4><p>Player global de GLP; pressão de eficiência operacional e possível sinergia de infra com Ultragaz (consórcio sob análise). Gap: resposta digital e logística preditiva para não perder custo de serviço.</p></div>
+            <div class="competitor-card"><h4>Consigaz / regionais</h4><p>Ameaças regionais e nichos. Gap: portais e medição individualizada como barreira de retenção em condomínios e B2B.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <!-- ZONA A -->
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Maior distribuidora de GLP da AL (Copagaz + Liquigás); sede SP; ~3.700 colab.; líder de share nacional.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Cláudia Marquesani, CIO desde 2024; ex-Petz/Santander/IBM; board-ready; ambidestria e GenAI.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escalar GenAI e data-driven em 2026 sem perder governança; omnicanal e MI; modernizar legado.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Fontes abertas: GenAI, crédito/IA (Databricks), portais, MI, omnicanal, SI/IA, cloud — budget aprovado no board (IT Forum).</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) AI Squad · 2) Engenharia Digital · 3) FourBlox (+ Cibersegurança)</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião de 30 min no IT Forum: discovery de backlog GenAI 2026 + gap de integração portais/omnicanal.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum Praia do Forte 2026 · prioridade GenAI/data-driven do ano · CIO com mandato e budget.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “mais PoC de IA”. Vender industrialização + governança + integração do que já gera ROI (crédito e Service Desk) para omnicanal/revendas.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>TI na diretoria</h4><p>Em 2024 a Copa cria a cadeira de CIO. Cláudia chega da Petz, mapeia 50+ projetos, libera o que estava travado e conquista o board com o playbook dos 100 dias.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Escalar sem quebrar</h4><p>GenAI já entrega valor, mas adoção e governança travam. Omnicanal, MI e centros digitais pedem engenharia contínua enquanto o legado ainda pesa.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Foursys como acelerador</h4><p>AI Squad + Engenharia Digital + FourBlox + Cibersegurança industrializam o roadmap 2026 com segurança e velocidade de squad — alinhado ao discurso “pessoas no centro”.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+
+            <div class="business-card">
+                <h4>Industrializar GenAI além do Service Desk</h4>
+                <p>FATO: ~30% dos serviços do Service Desk resolvidos por assistente; PoCs em Marketing e Pricing (TI Inside, jan/2026). Prioridade 2026: GenAI em processos críticos com governança.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — produtos de IA com métricas de negócio, prompt/ops, segurança e capacitação de áreas.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quais três processos críticos (além de Service Desk) entram no roadmap GenAI deste semestre — e qual KPI de board cada um precisa bater?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de 90 min: priorização GenAI 2026 com mapa de risco × ROI.</p>
+            </div>
+
+            <div class="business-card">
+                <h4>Omnicanal revendas + portais com ROI de jornada</h4>
+                <p>FATO: projetos públicos de omnicanal para revendas, portais e MI; product com foco em inadimplência e jornadas digitais.</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital — squads produto+engenharia para jornadas revenda/cliente e digitalização de centros operativos.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual canal (WhatsApp, portal, app revenda) concentra mais abandono ou custo de atendimento hoje?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment de jornada revenda (2 semanas) com backlog priorizado por margem e churn.</p>
+            </div>
+
+            <div class="business-card">
+                <h4>Integrar Lakehouse, crédito e canais sem fricção</h4>
+                <p>FATO: motor de crédito em Lakehouse Databricks reduziu R$ 13,5 Mi/ano de risco; próxima etapa collection score (TI Inside, mar/2026).</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee) — integração segura entre dados, core e canais; Cibersegurança no plano diretor de SI/IA.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quantas integrações manuais ou batch ainda alimentam crédito, cobrança e atendimento — e qual falha dói mais no P&amp;L?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Mapa de integração crédito→collection→omnicanal (one-pager técnico + comercial).</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de discovery GenAI/omnicanal · opcional PoC canvas</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad + Engenharia Digital + FourBlox — porquê: escala o que já gera ROI com governança e integração</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) Transformação digital / GenAI em utilities ou energia com métrica de atendimento; (2) Integração iPaaS em operação multi-canal e crédito; (3) Squad de engenharia digital com foco em jornada B2B/revenda. Se case GLP exato não existir no portfólio, usar analogia utilities + logística de distribuição.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> Cláudia já comprou a narrativa de IA. O ROI está em <em>governança + escala + integração</em> — ligar Service Desk GenAI e motor de crédito ao omnicanal de revendas e à redução de inadimplência no MI. Evitar pitch genérico de “IA generativa”.</p>
+            <p style="margin-top:8px"><em>Discurso sugerido se material setorial GLP não estiver pronto: “Vocês já provaram GenAI e crédito preditivo. Nós industrializamos a ponte até a revenda e o condomínio — com squad, integração e segurança — para o board ver o mesmo tipo de ROI em 2026.”</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Vocês já tiraram GenAI do PowerPoint — 30% do Service Desk. O jogo agora é escalar com governança.”</li>
+                <li>“O motor de crédito mostrou R$ 13,5 Mi/ano. Collection e omnicanal pedem a mesma disciplina de dados + integração.”</li>
+                <li>“Ambidestria exploration/exploitation precisa de squads que entreguem produto sem abandonar o legado.”</li>
+                <li>“Revendas e medição individualizada são onde TI vira share e margem — não só eficiência interna.”</li>
+                <li>“Plano diretor de SI e IA é o freio certo; Foursys entra com ISO e prática de governança, não só features.”</li>
+                <li>“Não estamos vendendo outra PoC. Estamos oferecendo capacidade de execução alinhada ao mandato que o board já aprovou.”</li>
+                <li>“No IT Forum: 30 minutos para mapear os três processos críticos GenAI de 2026 e o gap de integração com canais.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Abordagem no IT Forum Praia do Forte com Cláudia (+ intro a Product/omnicanal se possível)</td><td>Agenda 30 min + one-pager da conta</td><td>Evento + 3 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop GenAI 2026 + mapa de jornadas revenda/MI + integrações crédito</td><td>Backlog priorizado (ROI × risco) · RACI</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC focada (ex.: agente GenAI em processo crítico OU integração FourBlox piloto)</td><td>PoC com KPI de board · go/no-go</td><td>4–6 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>AI Squad ou Engenharia Digital em uma vertical (revenda ou MI)</td><td>Squad 90 dias · métricas de adoção e custo</td><td>1 trimestre</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>MSA multi-oferta (AI + Digital + iPaaS + Cyber) alinhado ao plano diretor</td><td>Contrato guarda-chuva · roadmap 12 meses</td><td>Semestre</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <!-- ZONA C -->
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+
+            <div class="app-card">
+                <h4>Site institucional Copa Energia</h4>
+                <div class="url">https://www.copaenergia.com.br</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portal corporativo (headers sugerem WebSphere Portal)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não publicado · path /!ut/p/ típico de portal IBM</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud / Edge</div><div class="v">Cloudflare (Server: cloudflare · CF-RAY GRU)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado publicamente</div></div>
+                </div>
+            </div>
+
+            <div class="app-card">
+                <h4>Portal Medição Individualizada</h4>
+                <div class="url">https://portalmi.copaenergia.com.br</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">SPA moderna (assets hashed · login CPF/CNPJ)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Cloudflare (proteção; HEAD 403 automatizado)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Provável API própria (hipótese)</div></div>
+                </div>
+            </div>
+
+            <div class="app-card">
+                <h4>GenAI corporativo (Service Desk / Marketing / Pricing)</h4>
+                <div class="url">Plataforma: Microsoft Teams (fonte: TI Inside)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Microsoft Teams</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Assistentes GenAI / agentes (vendor não detalhado)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Microsoft 365 (hipótese forte)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integração Service Desk interna</div></div>
+                </div>
+            </div>
+
+            <div class="app-card">
+                <h4>Motor de crédito / Lakehouse</h4>
+                <div class="url">Arquitetura: Databricks Lakehouse + Mosaic AI (parceiro Indicium AI)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Painel de carteira / risco</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Modelos de crédito + auditoria</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Databricks (cloud não especificado publicamente)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Decisões automatizadas de crédito</div></div>
+                </div>
+            </div>
+
+            <div class="app-card">
+                <h4>Hub de IA + Portais corporativos</h4>
+                <div class="url">Citados pela CIO (LinkedIn / imprensa) — URLs internas não públicas</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portais (colaborador / cliente / revenda)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Migração cloud citada na entrada da CIO</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Cloudflare na borda do domínio institucional. Migração para nuvem citada como desafio na entrada da CIO (IT Forum/TI Inside, 2024). Detalhe de hyperscaler (AWS/Azure/GCP) não localizado publicamente — Microsoft 365/Teams sugere ecossistema Microsoft em colaboração.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">Plano diretor de segurança da informação e inteligência artificial (declarado pela CIO). WAF/bot challenge Cloudflare em subdomínios. Maturidade de governança GenAI em construção (desafio de adoção).</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">GenAI em Teams (Service Desk, Marketing, Pricing). Roadmap IA generativa e preditiva. Motor de crédito com Mosaic AI / Databricks. Próximo: collection score; hipótese: roteirização e demanda.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">Lakehouse Databricks; painéis de risco/carteira; prioridade 2026 cultura data-driven. Fontes abertas — sem detalhe de MDM/governança além do discurso de SI/IA.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">Modernização de sistemas core / ERP em andamento (plano estruturante citado pela liderança de TI). Vendor específico não detalhado neste briefing por política de conteúdo. Hipótese: integração crítica com crédito, faturamento e distribuição.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">Crédito/financeiro; Service Desk; Pricing; Marketing; operação de distribuição; HCM digital citado como intenção (bots RH na entrada). CRM: menções a jornadas/omnicanal — Salesforce citado em trajetória de product hire (contexto de mercado, não confirmação do stack Copa).</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">Portais (institucional legado + MI moderno); omnicanal revendas (WhatsApp/portais); Hub de IA; apps/super apps citados na fundação digital.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.copaenergia.com.br</td><td><span class="status-200">200</span></td><td>Portal corporativo (path /!ut/p/)</td><td>Cloudflare</td><td>Headers: Server cloudflare, HSTS, content-location WebSphere Portal</td></tr>
+                    <tr><td>https://portalmi.copaenergia.com.br/login</td><td><span class="status-err">403*</span></td><td>SPA (descrita em fontes abertas)</td><td>Cloudflare</td><td>*Bloqueio/bot challenge em HEAD automatizado; página de login documentada publicamente</td></tr>
+                    <tr><td>https://www.copagaz.com.br</td><td><span class="status-err">403</span></td><td>Não inspecionado (challenge CF)</td><td>Cloudflare</td><td>Cf-Mitigated: challenge</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 20/07/2026 (~17:10 BRT) via HTTP HEAD/GET com User-Agent de navegador. Só registrar o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · IA / Escala</div><h4>GenAI ainda em modo PoC/parcial</h4><p>Evidência: 30% Service Desk resolvido, mas CIO aponta adoção usuária como maior desafio; 2026 pede GenAI nativa em processos críticos.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Experiência</div><h4>Canal institucional legado vs. produtos digitais novos</h4><p>Evidência setorial: site em portal clássico enquanto MI/portais novos avançam — fricção de marca e manutenção.</p><div class="offer">Oferta Foursys: Engenharia Digital + Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Integração</div><h4>Dados e canais pós-crédito</h4><p>Evidência: motor de crédito unificou fontes dispersas; collection e omnicanal exigem integração contínua com operação GLP.</p><div class="offer">Oferta Foursys: FourBlox (Digibee iPaaS)</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Segurança</div><h4>Governança de GenAI + plano diretor SI</h4><p>Evidência: plano diretor SI/IA declarado; GenAI em Teams amplia superfície; setor de energia é alvo sensível.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Operação</div><h4>Roteirização e demanda preditiva</h4><p>Evidência: CIO citou IA/bots para roteirização na entrada; imprensa fala IA preditiva de demanda — ainda pouco detalhe de produção vs. crédito.</p><div class="offer">Oferta Foursys: AI Squad + Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 6 · Core</div><h4>Débito técnico e modernização de core</h4><p>Evidência: time exploitation + programas bloqueados liberados; modernização de sistemas core em plano — capacidade de execução é o gargalo típico.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">FGV (graduação, MBA Finanças, mestrado TI) · Doutoranda Mackenzie · Akron (gestão)</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">São Paulo, SP</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado com precisão · atuação BR + palestras internacionais</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1. Citar o <strong>Playbook dos 100 dias do CIO</strong> — ela é autora da própria metodologia; valida respeito ao processo.<br>
+                2. Falar de <strong>ambidestria</strong> (exploration/exploitation) — vocabulário que ela usa publicamente.<br>
+                3. Reconhecer entregas concretas: <strong>Service Desk GenAI</strong> e <strong>motor de crédito</strong> — não começar do zero.<br>
+                4. Diversidade e liderança feminina em TI — livro e TEDx; tom genuíno, sem tokenismo.<br>
+                5. Evitar jargão vazio de “transformação digital”; ela critica o LinkedIn “FracassadIn” — prefira desafios reais e métricas.<br>
+                6. Perguntar sobre <strong>adoção pelas áreas</strong> (o gargalo que ela mesma aponta) — abre discovery de change + squad.<br>
+                7. Conectar com o momento IT Forum: ela é case recorrente do próprio evento — rapport natural.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>Empresa privada — sem RI listada</li>
+                    <li>Econodata / consulta CNPJ 03.237.583/0001-67</li>
+                    <li>Planilha CIOs Confirmados IT Forum Praia do Forte 2026</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>TI Inside — GenAI Service Desk (19/01/2026)</li>
+                    <li>TI Inside — Motor de crédito Databricks (31/03/2026)</li>
+                    <li>Headers HTTP copaenergia.com.br (Cloudflare / portal)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Sindigás — Panorama GLP (market share)</li>
+                    <li>Eixos / Cade — dinâmica Ultragaz-Supergasbras</li>
+                    <li>TI Inside / IT Forum — perfil corporativo Copa Energia</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn — linkedin.com/in/cmarquesani</li>
+                    <li>IT Forum — nomeação CIO (2024) e playbook (26/12/2025)</li>
+                    <li>ORCID / Decision Report — trajetória acadêmica</li>
+                    <li>TI Inside — entrevista entrada (12/08/2024)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>HEAD/GET https://www.copaenergia.com.br (200)</li>
+                    <li>HEAD portalmi / copagaz (403 CF)</li>
+                    <li>WebFetch TI Inside GenAI + IT Forum playbook</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

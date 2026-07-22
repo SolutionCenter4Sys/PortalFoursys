@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Celso Eduardo de Amaral Bueno | Leo Madeiras</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Celso Eduardo de Amaral Bueno</h1>
+                <h2>CIO / Executive Director — Leo Madeiras (LEO S.A.)</h2>
+                <div class="loc">Comércio atacadista e varejista · Barueri/SP · CNPJ 61.069.373/0001-03</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Maior porte</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Faturamento</div><div class="value">R$ 3–4 bi</div></div>
+                <div class="header-badge"><div class="label">Orçamento TI</div><div class="value">R$ 50–80 MM</div></div>
+                <div class="header-badge"><div class="label">Lojas</div><div class="value">120+</div></div>
+                <div class="header-badge"><div class="label">Perspectiva TI</div><div class="value">− até 10%</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: fontes abertas + leitura de comitê + material de apresentação + ângulo não óbvio · Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p><strong>FATO:</strong> A Leo Madeiras (razão social <strong>LEO S.A.</strong>, CNPJ <strong>61.069.373/0001-03</strong>, sede em Barueri/SP) é a maior distribuidora de insumos e serviços para marcenaria do Brasil — origem em 1943, rede com mais de <strong>120 lojas</strong> em 24 estados e presença no Paraguai, portfólio acima de 15.000 itens e quase 3.000 colaboradores (fonte: site institucional / cases públicos; projeção de vendas na casa de R$ 4 bi citada em cobertura de e-commerce). Aposta em transformação digital intensiva: Oracle Commerce Cloud no e-commerce (parceria Jotta), digitalização de PDV com Selbetti (etiquetas eletrônicas / Retail Media), plataforma <strong>LeoMob</strong> (parceria Promob) para projetos 3D e pedidos, e IA de pricing integrada a data lake em Google Cloud (IT Forum, dez/2025). Modelo privado (S.A. fechada).</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">LEO S.A.</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">Barueri / SP</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Brasil + Paraguai (120+ lojas)</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">R$ 3,1–4 bi (fontes abertas / survey TI)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~1.000 a 4.999 (faixa survey); ~3.000 citados em materiais)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada — S.A. fechada</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>FATO:</strong> Celso Eduardo de Amaral Bueno é <strong>CIO / Executive Director</strong> na Leo Madeiras desde <strong>nov/2022</strong> (LinkedIn) e figura como <strong>Diretor</strong> no quadro societário da LEO S.A. (Portal da Transparência / Econodata). Trajetória de +30 anos: CIO/CDO Ultracargo; posições seniores Renault-Nissan-Mitsubishi e Whirlpool; fundador CBX Digital; mentor InovAtiva. Vocal em IT Forum / Go Enablers (dez/2025): IA de pricing no P&amp;L, copiloto de vendas em teste, mantra “não turbine o que está ruim”.</p>
+            <p style="margin-top:12px"><strong>Leitura de comitê:</strong> Celso concentra a narrativa de TI/IA e reporta em nível de diretoria. No braço de execução digital aparece <strong>Luiz Procopio</strong> (Gerente Executivo de TI — Transformação Digital / e-commerce, desenvolvimento, arquitetura, dados e RPA — LinkedIn). Hipótese consultiva: propostas técnicas longas devem incluir Procopio; pitch de ROI/P&amp;L deve mirar Celso.</p>
+            <p style="margin-top:12px"><strong>Poder de decisão (survey TI preservado):</strong> TI equivalente a VP; reporte a CEO/Presidência; assento em comitês com voto; co-decisão TI + Negócios em aquisições; equipe TI estimada 50–99.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Distribuição especializada B2B/B2C para marcenaria e indústria de móveis: painéis, ferragens, máquinas, serviços de corte/usinagem e relacionamento de loja. A Leo ocupa posição de <strong>liderança em distribuição especializada</strong> frente a fabricantes (Dexco/Duratex, Arauco, Berneck) e redes de home center (Leroy Merlin, Telhanorte). Pressões: omnichannel dos home centers, plataformas digitais de especificação dos fabricantes, margem sob disputa de preço e expectativa do marceneiro por atendimento técnico + velocidade. Tendência setorial: digitalizar a jornada do profissional (projeto 3D → orçamento → pedido → logística) sem destruir o vínculo com o vendedor de loja — exatamente o desenho do e-commerce Oracle + LeoMob.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Provar ROI de IA sob pressão de custo (orçamento TI com perspectiva de redução até 10% — survey).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Governança e escalabilidade de IA/ML e GenAI além do pricing (copiloto de vendas ainda em teste — IT Forum).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Integração confiável entre e-commerce, PDV, logística e core (filas assíncronas já foram gargalo — case Jotta).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Padronizar experiência digital em 120+ lojas (Selbetti em expansão; risco de heterogeneidade).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Atrair/reter talentos e letrar times de loja para IA (tema recorrente nos painéis do CIO).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Priorizar portfólio com excesso de demandas vs. budget em contração.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">IA / ML com impacto em margem</span>
+                <span class="tag tag-priority">IA Generativa / copiloto de vendas</span>
+                <span class="tag tag-priority">Automação / RPA com processo saneado</span>
+                <span class="tag tag-priority">CX do marceneiro (loja + digital)</span>
+                <span class="tag tag-priority">Cadeia conectada por dados</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Nuvem pública / híbrida</span>
+                <span class="tag tag-active">Cibersegurança</span>
+                <span class="tag tag-active">Gestão de dados / data lake</span>
+                <span class="tag tag-active">IA / ML / GenAI</span>
+                <span class="tag tag-active">APIs e integração</span>
+                <span class="tag tag-active">CRM / ERP / HCM</span>
+                <span class="tag tag-active">Modernização de legados</span>
+                <span class="tag tag-active">RPA / hiperautomação</span>
+                <span class="tag tag-active">Workplace / ITSM</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Cibersegurança (projeto definido, fornecedor aberto — survey)</span>
+                <span class="tag tag-opportunity">IA / ML e GenAI (escala pós-pricing)</span>
+                <span class="tag tag-opportunity">Modernização de legados + integração</span>
+                <span class="tag tag-opportunity">RPA / hiperautomação com BPM prévio</span>
+                <span class="tag tag-opportunity">HCM / low-code (demanda sem definição)</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">95/100</span></div>
+                <p>Squads de IA com produto proprietário para acelerar casos de uso (pricing, copiloto comercial, GenAI) com ciclos curtos e métricas de P&amp;L — alinhado à filosofia pública do CIO.</p>
+                <div class="reasons"><ul>
+                    <li>IA de pricing já impacta margem nacional (IT Forum); próximo salto = copiloto de vendas.</li>
+                    <li>Top 3 prioridades: IA/ML, GenAI, automação.</li>
+                    <li>Budget sob pressão: precisa de quick wins 8–12 semanas.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS Digibee) + Engenharia Digital</h4><span class="score-badge">88/100</span></div>
+                <p>Integração de ecossistema (e-commerce, PDV, logística, data lake, apps de loja) via iPaaS; Celso já circulou no ecossistema Digibee (painéis/kickoff — briefing anterior). ISO 27001/27701 e 24 anos / 41.000+ projetos como credencial.</p>
+                <div class="reasons"><ul>
+                    <li>Integração de pedidos foi gargalo crítico no e-commerce (case Jotta).</li>
+                    <li>Rede 120+ lojas + CD exige orquestração confiável.</li>
+                    <li>APIs/integração constam no mapa de investimento 12 meses.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">78/100</span></div>
+                <p>Assessment de processos + modernização de apps legados, AMS e desenho de plataformas antes de “turbinar” — discurso literal do CIO.</p>
+                <div class="reasons"><ul>
+                    <li>Algoritmo de pricing ficou “na prateleira” 5 anos até ser modernizado (IT Forum).</li>
+                    <li>Demanda survey: modernização de legados + BPM sem fornecedor.</li>
+                    <li>Reduz risco de RPA sobre processo quebrado.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">72/100</span></div>
+                <p>Assessment e implementação de controles em rede varejista omnichannel — único tema listado como projeto definido sem fornecedor no survey TI.</p>
+                <div class="reasons"><ul>
+                    <li>Janela aberta explícita no mapa de oportunidades.</li>
+                    <li>Expansão de PDV digital e e-commerce amplia superfície de ataque.</li>
+                    <li>Share de budget de segurança ainda baixo no survey (≈4%) — gap de maturidade vs. risco.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital (CX / LeoMob adjacente)</h4><span class="score-badge">65/100</span></div>
+                <p>Produtos digitais para a jornada do marceneiro (LeoMob, e-commerce, copiloto) com design, dados e squads — complementar ao AI Squad.</p>
+                <div class="reasons"><ul>
+                    <li>LeoMob e e-commerce são eixos competitivos vs. home centers.</li>
+                    <li>Celso valoriza ir à loja entender o problema antes de vender ferramenta.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Abrir com o case público de pricing + data lake (Google Cloud) e perguntar qual métrica de margem/conversão o copiloto de vendas precisa bater em 90 dias. Mostrar AI Squad + assessment de processo — não um deck genérico de GenAI.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Cibersegurança sem fornecedor + escala de IA comercial (copiloto) sob orçamento em contração. Timing: IT Forum Praia do Forte 2026 (Celso presente no último fórum) e ciclo de priorização pós-evento.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>AI Squad (ciclos curtos) + FourBlox/Digibee (integração) + Modernização com BPM prévio + ISO 27001/27701. Linguagem de P&amp;L, não de hype.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Dexco (Duratex)</h4><p>Fabricante líder de painéis; plataformas digitais de especificação (Duratex Inspira, DEXperience, BIM). Gap Leo: ecossistema LeoMob + dados de loja ainda pode virar “plataforma de especificação + compra” mais fechada.</p></div>
+            <div class="competitor-card"><h4>Leroy Merlin (Adeo)</h4><p>Home center omnichannel, marketplace, app com AR, last-mile urbano. Gap Leo: velocidade digital-física e escala de mídia/CRM de massa.</p></div>
+            <div class="competitor-card"><h4>Telhanorte / Saint-Gobain</h4><p>App, retirada rápida, app de mensagens, Pix/cashback. Gap Leo: jornada self-service para público menos especializado vs. força no B2B marceneiro.</p></div>
+            <div class="competitor-card"><h4>Arauco / Berneck</h4><p>Fabricantes com portais, texturas digitais e capacitação online. Gap Leo: capturar especificador antes da compra via dados + copiloto.</p></div>
+            <div class="insight-box"><h4>Onde a Leo pode se diferenciar</h4><p>IA de margem + copiloto de loja + integração da cadeia é território pouco explorado pelos home centers no nicho marcenaria. Hipótese: first-mover em hiperautomação da distribuição especializada se processos forem saneados antes.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">LEO S.A. (Leo Madeiras) — maior distribuidora de insumos para marcenaria; CNPJ 61.069.373/0001-03; Barueri/SP; 120+ lojas.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Celso E. de Amaral Bueno — CIO/Director desde nov/2022; diretor societário; pragmatico em ROI de IA.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escalar IA além do pricing (copiloto de vendas) com budget TI sob pressão e integração de rede omnichannel.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Fontes abertas/survey: ~30% inovação/TD, nuvem, dados, IA; cibersegurança e modernização em aberto. Sem RI listada.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">AI Squad; FourBlox/integração; Modernização + Cibersegurança.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Workshop 90 min: processo de venda em loja → métricas do copiloto → PoC 8 semanas.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum Praia do Forte 2026 + priorização orçamentária com perspectiva de corte.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “mais GenAI”: vender saneamento de processo de venda + integração de dados de loja para o copiloto gerar margem — o pricing já provou o modelo.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>IA no P&amp;L</h4><p>Pricing modernizado + data lake GCP voltou a mexer na margem nacional. E-commerce Oracle triplicou pedidos. A Leo saiu do piloto cosmético para TI que aparece no resultado.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Escalar sem turbinar o ruim</h4><p>Copiloto de vendas é a “virada” declarada, mas budget pode cair até 10%. Integração e segurança da rede ainda abrem flanco. Concorrentes digitais apertam o marceneiro.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Squad + processo + iPaaS</h4><p>Foursys entra com AI Squad ancorado em KPI de loja, Modernização/BPM antes de RPA e FourBlox para costurar canais — credenciais ISO e Digibee no mesmo discurso.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Copiloto de vendas para marcenaria</h4>
+                <p><strong>Evidência:</strong> Celso declara projeto em teste como possível “virada” (IT Forum, dez/2025); complexidade técnica do SKU exige precisão.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — agente assistindo orçamento/pedido com governança e métricas de conversão/margem.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual % do tempo do vendedor ainda é burocracia de consulta de preço/estoque vs. relacionamento?</p>
+                <div class="sub">Gancho / próximo passo</div><p>PoC em 1–2 lojas conceito (ex.: Pinheiros) com baseline de 4 semanas.</p>
+            </div>
+            <div class="business-card">
+                <h4>Integração da cadeia digital (loja ↔ e-commerce ↔ CD)</h4>
+                <p><strong>Evidência:</strong> Integração assíncrona de pedidos foi crítica para 3x pedidos (Jotta); Selbetti padroniza PDV.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee) + Engenharia Digital — fluxos confiáveis e observáveis.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quantos sistemas ainda trocam arquivo/batch vs. evento em tempo quase real?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Mapa de integração 2 semanas + quick win em um fluxo de pedido.</p>
+            </div>
+            <div class="business-card">
+                <h4>Cibersegurança da rede omnichannel</h4>
+                <p><strong>Evidência:</strong> Survey marca cibersegurança como projeto sem fornecedor; superfície cresce com PDV digital e e-commerce.</p>
+                <div class="sub">Solução Foursys</div><p>Cibersegurança — assessment + roadmap priorizado sob ISO 27001/27701.</p>
+                <div class="sub">Pergunta de descoberta</div><p>O board já pediu evidência de controles após a digitalização do PDV?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment 3 semanas com score de risco por domínio (loja, e-comm, identidade).</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de PoC do copiloto</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad (ROI em margem) + FourBlox (integração) + Cibersegurança (janela aberta)</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) Narrativa pública Leo pricing + GCP como espelho do método Foursys; (2) case de integração omnichannel varejo B2B (usar ativo Foursys de iPaaS/Digibee); (3) assessment de segurança em rede multi-loja.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> O concorrente vende GenAI; a Foursys vende o <em>mesmo playbook que já deu margem no pricing</em> — processo limpo + dado no lake + agente no fluxo de venda — com integração e segurança para não “errar mais rápido”.</p>
+            <p style="margin-top:8px"><em>Se faltar case setorial pronto: abrir com citação do próprio Celso (“vá até a loja”) e propor visita assistida a uma loja como fase 0 do engajamento.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Vocês já provaram que IA mexe em margem — o copiloto é a réplica desse método na ponta de venda.”</li>
+                <li>“Não vamos turbinar processo ruim: começamos por assessment de 2 semanas na jornada do vendedor.”</li>
+                <li>“Com budget sob pressão, só entra o que tiver KPI de P&amp;L em 90 dias.”</li>
+                <li>“FourBlox/Digibee costura e-commerce, PDV e CD sem novo ‘big bang’.”</li>
+                <li>“Cibersegurança está aberta no radar de vocês — dá para fechar risco e credencial ISO juntos.”</li>
+                <li>“Incluímos Procopio no discovery técnico para acelerar a execução enquanto você decide ROI.”</li>
+                <li>“IT Forum Praia do Forte: vamos sair com escopo de PoC, não com deck genérico.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Contato no IT Forum + follow-up LinkedIn com âncora pricing/copiloto</td><td>Reunião 30–45 min agendada</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop com Celso + Procopio; visita a loja</td><td>Mapa de processo + KPIs + riscos</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>AI Squad em 1–2 lojas (copiloto) OU assessment ciber</td><td>Resultado vs. baseline</td><td>8–10 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Escala do caso vencedor + integração FourBlox</td><td>Playbook + runbook</td><td>1 trimestre</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Portfólio multi-caso (IA + integração + segurança) sob AMS</td><td>MSA / roadmap anual</td><td>2º semestre</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Site / E-commerce Leo Madeiras</h4><div class="url">https://www.leomadeiras.com.br</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portal institucional + loja online</div></div>
+                    <div class="app-stack-item"><div class="k">Backend / Commerce</div><div class="v">Oracle Commerce Cloud (fonte Oracle/Jotta)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado no header HTTP</div></div>
+                    <div class="app-stack-item"><div class="k">API / Integração</div><div class="v">Pedidos assíncronos para core; Intelipost/SEDEX; Linx busca; PIX</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>LeoMob</h4><div class="url">https://blog.leomadeiras.com.br/leomob/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Plataforma 3D / orçamento</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Parceria Promob</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Pedido direto à Leo</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>PDV digital / precificação</h4><div class="url">Case Selbetti Retail Experience</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Etiquetas eletrônicas + Retail Media</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Integração sistemas da rede</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Atualização de preços em tempo real</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Data lake + pricing IA</h4><div class="url">IT Forum — cobertura Go Enablers (dez/2025)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">N/A (back-office)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Algoritmo de pricing modernizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Google Cloud (data lake)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integração ao lake / margens nacionais</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="name">Cloud híbrida</div><div class="cmp">Google Cloud para data lake (FATO — IT Forum). Nuvem pública/privada/híbrida no mapa de investimento (survey). Detalhe on-prem: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="name">Maturidade em evolução</div><div class="cmp">Tema com projeto sem fornecedor (survey). Certificações internas: não localizadas publicamente.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="name">Pricing IA + GenAI comercial</div><div class="cmp">Desconto/pricing dinâmico; copiloto de vendas em teste; RPA no escopo do time de Procopio.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="name">Data lake GCP</div><div class="cmp">Lake no Google Cloud alimentando pricing; BI corporativo: não detalhado publicamente.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="name">ERP corporativo</div><div class="cmp">Core de gestão integrado a e-commerce e PDV (FATO de integração em cases). Vendor específico não expandido neste briefing.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="name">Commerce + PDV + LeoMob</div><div class="cmp">Oracle Commerce Cloud; Selbetti PDV; LeoMob/Promob; CRM/HCM citados no mapa de investimento (detalhe vendor: não localizado).</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="name">Omnichannel marceneiro</div><div class="cmp">Loja física + e-commerce + LeoMob; pixel Facebook detectado no site institucional (verificação empírica).</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.leomadeiras.com.br</td><td><span class="status-200">200</span></td><td>HTML grande (~267 KB)</td><td>Server header vazio</td><td>Sinal de tracker Facebook no HTML</td></tr>
+                    <tr><td>https://www.leomadeiras.com.br/loja/</td><td><span class="status-err">404</span></td><td>—</td><td>—</td><td>Path /loja/ não resolve (HEAD)</td></tr>
+                    <tr><td>https://blog.leomadeiras.com.br/leomob/</td><td><span class="status-200">200</span></td><td>Blog LeoMob</td><td>nginx-rc</td><td>Conteúdo editorial da plataforma</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026 via HTTP HEAD/GET. Só o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · IA comercial</div><h4>Copiloto ainda não escalado</h4><p>Pricing já no P&amp;L; copiloto em teste. Evidência setorial: B2B técnico perde conversão quando vendedor gasta tempo em consulta.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Ecossistema multi-sistema frágil</h4><p>Cases públicos mostram filas e múltiplos parceiros (commerce, busca, frete, PDV). Rede 120+ lojas amplifica falha.</p><div class="offer">Oferta Foursys: FourBlox / Digibee</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Processo</div><h4>Risco de automatizar o ruim</h4><p>Discurso reiterado do CIO; algoritmo antigo ficou parado 5 anos. Setor de distribuição sofre com processos de loja heterogêneos.</p><div class="offer">Oferta Foursys: Modernização de Legado + BPM</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Segurança</div><h4>Projeto aberto sem fornecedor</h4><p>Survey marca cibersegurança sem SI. Omnichannel + PDV digital eleva superfície (padrão varejo brasileiro).</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Dados de loja</div><h4>Lake ainda centrado em pricing</h4><p>GCP lake citado para pricing; falta evidência pública de uso amplo em CX/estoque preditivo vs. home centers analytics-first.</p><div class="offer">Oferta Foursys: AI Squad + Engenharia Digital</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação / background</div><div class="value">+33 anos TI; indústria, varejo, e-commerce, automotivo, consultoria, startups</div></div>
+                <div class="info-card"><div class="label">Base</div><div class="value">Brasil (atuação Leo em Barueri/SP)</div></div>
+                <div class="info-card"><div class="label">Presença digital</div><div class="value">LinkedIn ativo — celsobueno</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p style="margin-bottom:10px"><strong>1.</strong> Fale ROI/P&amp;L primeiro — “Se não traz resultado, fica difícil sustentar IA”.</p>
+                <p style="margin-bottom:10px"><strong>2.</strong> Cite a visita à loja: ele desafia fornecedores a entender o chão antes de vender ferramenta.</p>
+                <p style="margin-bottom:10px"><strong>3.</strong> Conecte pelo lado empreendedor (CBX Digital, mentor InovAtiva) — AI Squad como produto com ciclos curtos.</p>
+                <p style="margin-bottom:10px"><strong>4.</strong> Ponte Digibee/FourBlox: ele já circulou nesse ecossistema — credencial, não cold pitch.</p>
+                <p style="margin-bottom:10px"><strong>5.</strong> Respeite “processos primeiro”: proponha BPM/assessment antes de RPA.</p>
+                <p style="margin-bottom:10px"><strong>6.</strong> Traga Procopio no thread técnico — acelera e mostra leitura de comitê.</p>
+                <p><strong>7.</strong> Evite hype GenAI genérico; use a linguagem do pricing que já deu margem.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Identificação &amp; RI</h4><ul>
+                    <li>Planilha CIOs Confirmados IT Forum Praia do Forte 2026 (ID 24)</li>
+                    <li>GuiaPJ / CNPJ 61.069.373/0001-03 — LEO S.A.</li>
+                    <li>Portal da Transparência / Econodata — quadro societário (Celso como Diretor)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Oracle Brasil — case e-commerce Leo</li>
+                    <li>JBQ/Jotta — aceleração canais digitais</li>
+                    <li>Selbetti — digitalização PDV</li>
+                    <li>Blog Leo — LeoMob / Promob</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado &amp; IA</h4><ul>
+                    <li>IT Forum — “IA começa a entregar resultados…” (09/12/2025)</li>
+                    <li>IT Forum — letramento digital / processos no varejo</li>
+                    <li>Briefing anterior Trancoso (Demais CIO) — survey TI preservado</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn — Celso Bueno (celsobueno)</li>
+                    <li>LinkedIn — Luiz Procopio (comitê TI)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>HTTP HEAD/GET leomadeiras.com.br · blog LeoMob — 21/07/2026</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

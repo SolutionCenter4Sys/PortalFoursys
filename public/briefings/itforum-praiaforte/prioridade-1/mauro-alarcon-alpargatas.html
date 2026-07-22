@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  TEMPLATE CANÔNICO — Briefing CIO IT Forum 2026 (Praia do Forte)
+  Design System Foursys (Nunito + navy #222239 / laranja #FF5315 / menta / baunilha)
+  ORDEM DE ZONAS: B (contexto/pré-vendas) → A (comercial/pitch) → C (apêndice técnico)
+  ----------------------------------------------------------------------------
+  INSTRUÇÕES PARA O SUB-AGENTE:
+  1. NÃO altere o <style>. Ele já é o Design System Foursys oficial. Reuse tal e qual.
+  2. Conteúdo pesquisado — sem placeholders restantes.
+  3. Respeite a ORDEM física B → A → C.
+  4. Se um dado não existir publicamente: escrever "Não localizado" ou
+     "Dados insuficientes — requer pesquisa adicional". NUNCA inventar.
+  5. Diferencie fato (com fonte) de hipótese consultiva (marcar "hipótese").
+  6. Tetos: apps 3-5, GAPs 4-6, ofertas 3-6, mensagens 5-7, roadmap 5-6, concorrentes 3-5, rapport 5-7.
+  7. Mantenha o bloco ".zone-divider.update-banner" no topo (obrigatório).
+  8. NÃO repetir números de mercado em Segmento (ficam só no header). NÃO incluir SAP em nenhuma seção (nem badge, nem tópico).
+  ============================================================================
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Mauro Alarcon | Alpargatas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Mauro Alarcon</h1>
+                <h2>Global CIO / VP Global de Tecnologia — Alpargatas S.A.</h2>
+                <div class="loc">Comércio Atacadista e Varejista (Calçados / Marcas) · São Paulo/SP · CNPJ 61.079.117/0001-05</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Porte listado + receita R$ 4,6 bi</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Receita líquida 2025</div><div class="value">R$ 4,56 bi</div></div>
+                <div class="header-badge"><div class="label">Capex 2026</div><div class="value">R$ 243 mi</div></div>
+                <div class="header-badge"><div class="label">Colaboradores</div><div class="value">~15 mil</div></div>
+                <div class="header-badge"><div class="label">CIO desde</div><div class="value">Jan/2025</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: RI deep-dive (AGO/earnings 2025–2026) + leitura de mandato do VP Tech + material de apresentação · Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p><strong>Alpargatas S.A.</strong> (B3: ALPA3/ALPA4) é companhia aberta com mais de 115 anos, dona da marca global <strong>Havaianas</strong> e investidora relevante na norte-americana <strong>Rothy’s</strong>. CNPJ da planilha IT Forum (<strong>61.079.117/0001-05</strong>) confere com a razão social divulgada em documentos CVM/RI — antifraude de homônimo OK. Sede em São Paulo/SP; operação industrial e logística concentrada no Nordeste (fábricas e Mixing Center em Campina Grande/PB e entorno). Em 2025 entregou receita líquida recorde de <strong>R$ 4,56 bilhões</strong> (+11,1% a/a), lucro líquido de <strong>R$ 567,9 milhões</strong> e EBITDA ajustado na casa de <strong>R$ 865–867 milhões</strong>. Orçamento de capital 2026 aprovado em AGO: <strong>R$ 243 milhões</strong> (sustentação R$ 104,3 mi · eficiência R$ 32,2 mi · crescimento R$ 106,5 mi). Estratégia pública: foco e competitividade, disciplina de capital, eficiência operacional e crescimento internacional da Havaianas.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Alpargatas S.A.</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">São Paulo / SP</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Brasil + operações próprias EUA, Europa, China, Índia, Colômbia, Dubai + exportação</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">R$ 4,56 bi receita líquida 2025 (RI/earnings)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~14–17 mil (fontes abertas 2025–26; variação metodológica)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Companhia aberta (B3) · CVM 10456</div></div>
+            </div>
+            <p style="margin-top:12px;font-size:12.5px;color:var(--text-light)">Presente no último IT Forum: <strong>NÃO</strong> (planilha). Participação 2026: digital e presencial · Confirmado com voo · FOCO 4SYS: X.</p>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Mauro Alarcon</strong> é <strong>Global CIO / Vice-Presidente Global de Tecnologia</strong> da Alpargatas desde <strong>janeiro/2025</strong> (LinkedIn + TI Inside/Baguete). Formação: Engenharia da Computação (UNISANTA), MBA Marketing &amp; TI (ESPM), especializações em liderança, inovação, ágeis e tecnologias emergentes; gestão de RH (Fundação Dom Cabral). Trajetória: ~20 anos na <strong>Pirelli</strong> (estagiário → CIO LatAm); ~4,5 anos como <strong>CIO da M. Dias Branco</strong> (estratégia, governança, sistemas, infra, ciber, dados, hiperautomação; time +300 tech; Agenda Digital; data lake; modernização de ERP e dezenas de apps). Mandato Alpargatas (fato, imprensa): consolidar área global de tecnologia; simplificar processos; soluções digitais baseadas em dados; fortalecer segurança; continuidade da modernização do core transacional; inovação para eficiência e resiliência.</p>
+            <div class="insight-box" style="margin-top:14px">
+                <h4>Leitura de comitê (fontes abertas)</h4>
+                <p>CEO: <strong>Liel Miranda</strong> (desde ~2024). Na posse de Mauro (jan/2025) a companhia também criou Corporate Affairs sob <strong>Sarah Bonadio</strong> — sinal de governança/ESG alinhados à estratégia. Em supply chain/tech: parceria Infios (WMS) com stakeholders comerciais do fornecedor; posts públicos citam liderança de IT Operations &amp; Security e jornada MES em fábricas (Santa Rita, Campina Grande, Carpina) e Mixing Center. Hipótese consultiva: compras grandes de TI passam por Mauro (VP Tech global) + CFO/área de eficiência + operações industriais/logística; vendors de WMS/cloud já ocupam fatias táticas.</p>
+            </div>
+            <p style="margin-top:12px;font-size:13.5px"><strong>Poder de decisão:</strong> alto — VP global reportando agenda de tecnologia ao C-level; budget de TI não segregado publicamente no Capex R$ 243 mi (mistura sustentação/eficiência/crescimento). LinkedIn: <a href="https://www.linkedin.com/in/maurocbalarcon" style="color:var(--orange)">maurocbalarcon</a>.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Modelo: <strong>CPG de calçados/lifestyle</strong> com marca âncora hiperconectada (Havaianas), mix atacado/varejo no Brasil e DTC/operações próprias no exterior, mais participação societária na Rothy’s (EUA). Cadeia crítica: fábrica → Mixing Center → canais (varejo, atacado, e-commerce, exportação). Prioridades setoriais 2026: eficiência de custo e margem, OTIF e customização de pedidos, experiência omnichannel, proteção de marca digital (40+ storefronts citados em case Cloudflare), indústria 4.0 (MES) e dados para decisão comercial. Posição: líder global em calçados abertos via Havaianas; no Brasil compete com Grendene (Melissa e linhas fashion), Vulcabras/Olympikus no calçado esportivo/casual, Arezzo&amp;Co no fashion; no exterior com Crocs e players de lifestyle. Pressão: sazonalidade, mix de coleções, tarifas EUA–China na investida Rothy’s, disciplina de capital pós-recuperação de margens.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Mandato do CIO ainda recente (desde jan/2025): consolidar TI global enquanto o negócio acelera volume e margem — risco de fila de projetos vs. capacidade (fato de posse + hipótese de contenção).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Operação logística de alta variabilidade (coleções, customização, exportação) pressionou WMS legado — Infios em implantação no Mixing Center (fato TI Inside set/2025).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Superfície digital ampla (dezenas de e-commerces) eleva exposição a ataque e fraude de marca (fato case Cloudflare).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Chão de fábrica e MES ainda em jornada — TI Operations &amp; Security em visitas industriais 2026 (fontes abertas LinkedIn).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Integração multi-região (BR, EUA, Europa, Ásia) e portfolio de marcas (Havaianas + Rothy’s) aumentam complexidade de dados e processos — hipótese consultiva.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Simplificação de processos</span>
+                <span class="tag tag-priority">Decisão data-driven</span>
+                <span class="tag tag-priority">Resiliência e cibersegurança</span>
+                <span class="tag tag-priority">Eficiência industrial (MES)</span>
+                <span class="tag tag-priority">OTIF e supply chain inteligente</span>
+                <span class="tag tag-priority">Crescimento internacional com disciplina de capital</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses (RI + fontes abertas)</h4>
+            <div>
+                <span class="tag tag-active">Capex 2026 R$ 243 mi (sustentação / eficiência / crescimento)</span>
+                <span class="tag tag-active">Infios WMS + Slotting + Labor no Mixing Center PB</span>
+                <span class="tag tag-active">Jornada MES / sistemas industriais</span>
+                <span class="tag tag-active">Migração / reforço Microsoft Azure (parceiro Teltec — fontes abertas)</span>
+                <span class="tag tag-active">Cloudflare (edge/security e-commerce)</span>
+                <span class="tag tag-active">Modernização do core ERP (prioridade declarada na posse — vendor omitido)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido (hipótese)</h4>
+            <div>
+                <span class="tag tag-opportunity">AI Squad em forecast / alocação de mix e OTIF</span>
+                <span class="tag tag-opportunity">FourBlox / iPaaS para orquestrar WMS↔ERP↔DTC↔B2B</span>
+                <span class="tag tag-opportunity">Engenharia Digital de produtos industriais e data products</span>
+                <span class="tag tag-opportunity">Cibersegurança ofensiva/defensiva além do edge</span>
+                <span class="tag tag-opportunity">Modernização de legado ao redor do core (não o core em si)</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS Digibee) — orquestração supply × marcas × canais</h4><span class="score-badge">91/100</span></div>
+                <p>Integrar WMS Infios, core ERP, e-commerces e canais B2B sem proliferar pontes frágeis — camada de integração governada (ISO 27001/27701 no DNA Foursys).</p>
+                <div class="reasons"><ul>
+                    <li>Timing: WMS novo em Mixing Center + core em modernização = pico de demanda de integração.</li>
+                    <li>Dor explícita do mandato: simplificação de processos e resiliência.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad — forecast, OTIF e decisão comercial</h4><span class="score-badge">86/100</span></div>
+                <p>Squads ágeis com casos de uso em previsão de demanda, slotting/expedição e insights comerciais — amarrados a dados já em movimento (WMS, sell-out, estoque).</p>
+                <div class="reasons"><ul>
+                    <li>Alarcon veio de Agenda Digital e data lake na M. Dias Branco — fala a língua de produto de dados.</li>
+                    <li>Meta pública de OTIF e eficiência no Capex 2026.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital — MES, chão de fábrica e data products</h4><span class="score-badge">82/100</span></div>
+                <p>Acelerar jornada MES e conectividade industrial (Azure) com engenharia orientada a uptime, qualidade e custo unitário.</p>
+                <div class="reasons"><ul>
+                    <li>Visitas públicas 2026 de liderança tech às fábricas e Mixing Center.</li>
+                    <li>Capex de eficiência (R$ 32 mi) e sustentação industrial no orçamento 2026.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança — superfície DTC global</h4><span class="score-badge">78/100</span></div>
+                <p>Complementar Cloudflare/edge com governança, SOC-as-a-service, appsec e resposta a incidente alinhados à proteção de marca Havaianas.</p>
+                <div class="reasons"><ul>
+                    <li>Mandato declara fortalecimento de segurança como pilar.</li>
+                    <li>Case Cloudflare confirma superfície grande e atrativa a ataques.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado — camada ao redor do core</h4><span class="score-badge">72/100</span></div>
+                <p>Não disputar o programa de ERP core (já em curso); atacar apps satélite, APIs, portais B2B e débito técnico que travam a simplificação.</p>
+                <div class="reasons"><ul>
+                    <li>Ângulo não óbvio: vendedores empurram ERP; Foursys vende velocidade ao redor.</li>
+                    <li>Track record do CIO em dezenas de apps e hiperautomação na M. Dias Branco.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>IT Forum Praia do Forte: reconhecer o mandato de ~18 meses — “simplificar + dados + segurança + resiliência industrial” — e perguntar onde a fila de integração (WMS novo × canais × core) mais dói no OTIF.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Pós-go-live Infios no Mixing Center: wave 2 de integração, analytics de labor/slotting e AI de expedição. Capex 2026 já aprovado com fatia de eficiência — timing orçamentário favorável no 2º semestre.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>24 anos, 41.000+ projetos, AI Squad + FourBlox (Digibee) + ciber com ISO 27001/27701. Posicionar como braço de execução do VP Tech, não como mais um vendor de software de prateleira.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Grendene (Melissa e portfolio)</h4><p>Concorrente direto no calçado fashion/casual BR. Maturidade digital de marca e varejo forte. Gap Alpargatas: escala industrial/logística Havaianas exige integração fábrica–Mixing Center–exportação em nível que Grendene não replica — oportunidade em supply tech, não só em DTC.</p></div>
+            <div class="competitor-card"><h4>Crocs (global lifestyle)</h4><p>Benchmark internacional de marca monoproduct e DTC. Gap: Alpargatas opera multi-país com complexidade fabril BR; Crocs pressiona percepção de inovação de produto/canal — TI precisa acelerar time-to-market digital (DAM/Yapoli já ajuda; falta orquestração de dados comerciais).</p></div>
+            <div class="competitor-card"><h4>Arezzo&amp;Co</h4><p>Fashion retail BR com digitalização de rede e marcas. Gap: Arezzo é mais retail-led; Alpargatas é brand+indústria — Foursys deve falar eficiência de custo e OTIF, não só CX de loja.</p></div>
+            <div class="competitor-card"><h4>Vulcabras (Olympikus / Under Armour BR)</h4><p>Calçado esportivo com pressão de volume e canal. Gap: menos marca lifestyle global que Havaianas; Alpargatas leva vantagem de brand equity — risco é perder eficiência operacional se MES/WMS atrasarem.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Alpargatas S.A. (ALPA), dona da Havaianas; receita R$ 4,56 bi em 2025; Capex 2026 R$ 243 mi; CNPJ 61.079.117/0001-05.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Mauro Alarcon — Global CIO / VP Tech desde jan/2025; ex-CIO M. Dias Branco e CIO LatAm Pirelli.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Consolidar TI global sob mandato de simplificação, dados, segurança e continuidade da modernização do core + WMS/MES.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Capex 2026: sustentação R$ 104 mi · eficiência R$ 32 mi · crescimento R$ 106 mi (RI/AGO). TI diluída nessas frentes + Infios/Azure/MES (fontes abertas).</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">FourBlox (integração); AI Squad (OTIF/forecast); Engenharia Digital (MES/indústria).</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 30 min no Fórum: mapa de integrações pós-WMS + 1 caso AI de expedição.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">2S2026 — execução do Capex aprovado; CIO com ~18 meses de casa buscando quick wins mensuráveis.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “outro ERP”. Vender velocidade de integração e AI operacional ao redor do core e do WMS novo.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Recuperação de margem + novo VP Tech</h4><p>2025 foi ano-recorde de receita e salto de lucro. Em jan/2025 Mauro assume para profissionalizar TI global sob a bandeira de foco e competitividade.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>WMS, MES, core e 40+ storefronts</h4><p>Modernizar fábrica e Mixing Center, proteger DTC global e simplificar processos — tudo ao mesmo tempo, com disciplina de capital.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Foursys como braço de execução</h4><p>FourBlox + AI Squad + engenharia industrial entregam OTIF e redução de fricção sem disputar o programa de ERP core.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+
+            <div class="business-card">
+                <h4>Integração pós-WMS sem “espaguete” de APIs</h4>
+                <p>Evidência: Infios (WMS, Slotting.IQ, Labor) em implantação no Mixing Center de 40 mil m² — TI Inside set/2025; meta OTIF.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee): conectores governados ERP↔WMS↔canais; time-to-integration menor e auditável.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quantas integrações ponto a ponto o time estima criar só na wave 1 do Mixing Center?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de 90 min: mapa AS-IS de fluxos de pedido e proposta de 3 fluxos críticos no iPaaS.</p>
+            </div>
+
+            <div class="business-card">
+                <h4>OTIF e forecast com AI operacional</h4>
+                <p>Evidência: Capex de eficiência 2026 + discurso de dados no mandato do VP Tech; sell-out/estoque críticos para Havaianas BR.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad: caso piloto em previsão de expedição/alocação com KPI OTIF e redução de retrabalho.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual % do backlog de pedidos customizados internacionais ainda depende de planilha ou regra manual?</p>
+                <div class="sub">Gancho / próximo passo</div><p>PoC 4–6 semanas com dados amostrais do Mixing Center (sob NDA).</p>
+            </div>
+
+            <div class="business-card">
+                <h4>MES e confiabilidade industrial</h4>
+                <p>Evidência: agenda pública AlpaTech em fábricas + Azure; Capex de sustentação industrial R$ 104 mi.</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital: acelerar casos MES/IoT e observabilidade de linha com squad misto.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Onde a falta de dado de chão de fábrica mais atrasa decisão de manutenção ou qualidade?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Visita técnica guiada (ou war-room remoto) com IT Operations &amp; Security + planta piloto.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de PoC OTIF/integração</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">FourBlox + AI Squad (+ Ciber como reforço) — porquê: mandato = simplificar + dados + segurança</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) integrações iPaaS em CPG/varejo com picos sazonais; (2) AI de forecast/supply em indústria de bens de consumo; (3) endurecimento de superfície digital para marcas consumer com DTC multi-país. Se case Havaianas-like não estiver pronto, usar analogia M. Dias Branco / indústria de volume (linguagem que Mauro já viveu).</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> o maior ROI não é “ajudar no ERP” — é destravar o valor do WMS/MES/Azure que já estão comprados, com integração e AI operacional.</p>
+            <p style="margin-top:8px"><em>Discurso se material não encaixar: “Vocês já escolheram peças caras do tabuleiro (WMS, cloud, core). Nosso jogo é fazer essas peças conversarem e gerarem OTIF e margem — em semanas, não em anos.”</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Parabéns pelo 2025 — agora o jogo é repetir margem com máquina digital mais simples.”</li>
+                <li>“WMS novo no Mixing Center sem iPaaS vira fila de integrações; isso atrasa OTIF.”</li>
+                <li>“Não viemos disputar o core ERP — viemos acelerar o que está ao redor.”</li>
+                <li>“AI Squad fala a língua da Agenda Digital que você liderou na M. Dias Branco.”</li>
+                <li>“Capex 2026 já tem fatia de eficiência: encaixamos PoC dentro do envelope aprovado.”</li>
+                <li>“40+ storefronts exigem ciber além do edge — protege a marca Havaianas.”</li>
+                <li>“Foursys: 24 anos, 41 mil+ projetos, FourBlox/Digibee, ISO 27001/27701 — braço de execução do VP Tech.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Abordagem no IT Forum + follow-up LinkedIn/e-mail</td><td>Agendamento 30–45 min com Mauro (ou head Integration/IT Ops)</td><td>D0–D7</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Mapa de integrações WMS/core/canais + KPIs OTIF</td><td>One-pager de oportunidades priorizadas</td><td>D7–D21</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC FourBlox (1–2 fluxos) ou AI de expedição</td><td>Resultado mensurável + lições</td><td>D21–D60</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>AI Squad ou Engenharia Digital em planta/Mixing Center</td><td>Squad 8–12 semanas com OKRs</td><td>D60–D120</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Programa de integração + AI + ciber sob MSA</td><td>Contrato guarda-chuva 12–24 meses</td><td>D120–D180</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+
+            <div class="app-card">
+                <h4>Havaianas e-commerce BR</h4><div class="url">https://www.havaianas.com.br</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Shopify (sinais HTML)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Shopify + apps</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud / CDN</div><div class="v">Cloudflare</div></div>
+                    <div class="app-stack-item"><div class="k">API / trackers</div><div class="v">GTM / analytics</div></div>
+                </div>
+            </div>
+
+            <div class="app-card">
+                <h4>Osklen (marca do grupo — verificação)</h4><div class="url">https://www.osklen.com.br</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não localizado com precisão</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud / CDN</div><div class="v">Cloudflare (HTTP 200)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+
+            <div class="app-card">
+                <h4>WMS Mixing Center (Infios)</h4><div class="url">Campina Grande/PB — implantação 2025+</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Console Infios (WMS)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">WMS + Slotting.IQ + Labor</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integração com core/canais (em curso)</div></div>
+                </div>
+            </div>
+
+            <div class="app-card">
+                <h4>DAM Havaianas (Yapoli)</h4><div class="url">Case Yapoli — ativos digitais / GTM</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portal DAM</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Yapoli DAM</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">AWS (case Yapoli)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Distribuição DTC/B2B/PDV</div></div>
+                </div>
+            </div>
+
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="name">Multicloud pragmática</div><div class="cmp">Microsoft Azure (migração citada 2026 — Teltec/fontes abertas); AWS no DAM Yapoli; Google Workspace historicamente para colaboração (TI Inside 2022).</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="name">Edge + mandato de reforço</div><div class="cmp">Cloudflare (Workers, Argo, WAF — case oficial); prioridade explícita de segurança no mandato do VP Tech. SOC/appsec interno: não localizado publicamente.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="name">MES + hiperautomação (herança do CIO)</div><div class="cmp">Jornada MES em fábricas (fontes abertas 2026); histórico do CIO em hiperautomação na M. Dias Branco. IA generativa corporativa: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="name">Dados para crescimento sustentável</div><div class="cmp">Mandato enfatiza soluções baseadas em dados; WMS/Slotting aumentam telemetria logística. Data lake corporativo Alpargatas: não localizado em detalhe (hipótese de evolução sob Mauro).</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="name">Core ERP em modernização</div><div class="cmp">Continuidade da implantação de ERP de nova geração declarada na posse do VP Tech (imprensa jan/2025). Vendor omitido neste briefing (política comercial). Detalhe sob NDA.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="name">SCM / WMS / DAM / CSC</div><div class="cmp">Infios WMS + módulos; Yapoli DAM; CSC e processos administrativos sob Google Workspace (legado 2022). CRM específico: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="name">DTC global Havaianas</div><div class="cmp">Shopify (havaianas.com.br) + rede multi-país atrás de Cloudflare; DAM acelera GTM de conteúdo.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.havaianas.com.br</td><td><span class="status-200">200</span></td><td>Shopify (sinais)</td><td>cloudflare</td><td>GTM presente</td></tr>
+                    <tr><td>https://www.osklen.com.br</td><td><span class="status-200">200</span></td><td>Não determinado</td><td>cloudflare</td><td>HTTP 200</td></tr>
+                    <tr><td>https://www.alpargatas.com.br</td><td><span class="status-err">403</span></td><td>—</td><td>—</td><td>Bloqueio ao crawler/HEAD neste ambiente</td></tr>
+                    <tr><td>https://ri.alpargatas.com.br</td><td><span class="status-err">403</span></td><td>—</td><td>—</td><td>RI acessada via documentos públicos (earnings/AGO)</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 20/07/2026 (~17:30 BRT). Só registrar o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Integração</div><h4>Orquestração pós-WMS</h4><p>Novo WMS Infios exige dezenas de fluxos com ERP, transportadoras e canais — risco clássico de integração ponto a ponto em CPG sazonal.</p><div class="offer">Oferta Foursys: FourBlox (Digibee iPaaS)</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Dados / AI</div><h4>OTIF ainda pouco “inteligente”</h4><p>Meta OTIF pública; Slotting/Labor geram dados — falta camada de AI operacional para fechar o ciclo decisão→ação.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Indústria 4.0</div><h4>MES em jornada</h4><p>Visitas a plantas em 2026 mostram MES ainda em evolução — gap típico de calçadista BR entre automação de linha e insight de custo.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Ciber</div><h4>Superfície DTC &gt; edge</h4><p>Cloudflare cobre borda; mandato pede reforço de segurança de operações e dados críticos — gap em appsec/identidade/SOC.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Legado satélite</div><h4>Apps ao redor do core</h4><p>Modernização do ERP core absorve atenção; satélites e portais B2B tendem a acumular débito — padrão visto em indústrias que o CIO já liderou.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Eng. Computação (UNISANTA); MBA ESPM; FDC; ágeis/inovação</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">São Paulo / SP</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado publicamente (carreira LatAm/global — hipótese: EN profissional)</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Reconhecer a passagem Pirelli → M. Dias Branco → Alpargatas: narrativa de CIO que escala manufatura e CPG.<br>
+                2) Usar vocabulário dele: simplificação, dados, segurança, resiliência — não jargão de “transformação digital genérica”.<br>
+                3) Perguntar pelo Mixing Center e OTIF antes de falar de tecnologia de prateleira.<br>
+                4) Mencionar que Foursys não compete com o programa de ERP core — alivia tensão política interna.<br>
+                5) Trazer analogia de hiperautomação/data lake da era M. Dias Branco como ponte de credibilidade.<br>
+                6) Evitar tom de “vendor de cloud”: Azure/Cloudflare já estão no radar; oferecer execução e integração.<br>
+                7) IT Forum é primeira impressão presencial (não veio no último) — ser concreto, com 1 PoC e 1 KPI.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>Proposta da Administração AGO/EGE 2026 (Capex R$ 243 mi; CNPJ; receita 2025) — investidor10 / documentos CVM</li>
+                    <li>Earnings Release 2025 / 4T25 (MZIQ Alpargatas)</li>
+                    <li>Valor Econômico / BPMoney / E-Commerce Brasil — resultados 2025</li>
+                    <li>Fato relevante redução de capital ago/2025 (MZIQ)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>TI Inside — Infios WMS Mixing Center (set/2025)</li>
+                    <li>Cloudflare Case Study — Alpargatas / e-commerce</li>
+                    <li>Yapoli — case DAM Havaianas (AWS)</li>
+                    <li>LinkedIn — migração Azure (Teltec) · AlpaTech MES</li>
+                    <li>TI Inside — Google Workspace (2022, legado colaboração)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Planilha CIOs Confirmados IT Forum Praia do Forte 2026</li>
+                    <li>Tracxn / Revelio — headcount (faixa ~14–17 mil)</li>
+                    <li>Imprensa setorial calçados / Capex 2026</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn Mauro Alarcon — maurocbalarcon</li>
+                    <li>TI Inside / Baguete — posse VP Tecnologia jan/2025</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch/HTTP: havaianas.com.br, osklen.com.br (200)</li>
+                    <li>alpargatas.com.br / ri.alpargatas.com.br (403 neste ambiente)</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Leonardo Franco de Moura | MULTILOG S/A</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Leonardo Franco de Moura</h1>
+                <h2>Head de TI — MULTILOG S/A</h2>
+                <div class="loc">Transporte e Logística · Itajaí/SC · CNPJ 60.526.977/0010-60</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Sul (SC) + porte</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Faturamento 2025</div><div class="value">R$ 1,5 bi</div></div>
+                <div class="header-badge"><div class="label">Meta 2028</div><div class="value">R$ 3 bi</div></div>
+                <div class="header-badge"><div class="label">Capex ciclo</div><div class="value">~R$ 1 bi</div></div>
+                <div class="header-badge"><div class="label">TI / receita</div><div class="value">&gt;4%</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: fontes abertas (RI/imprensa + LinkedIn) + leitura de comitê (Head de TI × CTO Transformação × Presidência) + material de apresentação · Diferencia da edição anterior (Trancoso). Evolui briefing P1 Reunião Fousys preservando dores/investimentos/rapport e recalibrando ofertas (≥50).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>Operadora de logística integrada com origem em Itajaí/SC (desde os anos 1980s como armazém; EADI Portobello em 1996). Atua em recintos alfandegados, portos secos de fronteira, centros de distribuição e transporte, com presença em SC, PR, RS, SP e BA. Site institucional afirma maior área alfandegada do Brasil (~1,5 milhão m²), centenas de licenças, ISO 9001 e OEA. Ciclo 2026–2028: plano de quase R$ 1 bilhão para dobrar faturamento (R$ 1,5 bi em 2025 → meta ~R$ 3 bi em 2028) e ampliar ~30% a capacidade — fonte: entrevista do presidente Djalma Vilela à Tecnologística (abr/2026). Razão social confirmada: <strong>MULTILOG BRASIL S.A.</strong> (raiz CNPJ 60.526.977); CNPJ da planilha IT Forum: <strong>60.526.977/0010-60</strong>. Presente no último IT Forum: SIM.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">MULTILOG BRASIL S.A. (fantasia Multilog)</div></div>
+                <div class="info-card"><div class="label">Sede (planilha)</div><div class="value">Itajaí / SC</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">34–35 unidades · Sul/Sudeste/BA · Mercosul</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">R$ 1,5 bi (2025) · meta R$ 3 bi (2028) — Tecnologística</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~2.800 (site) · LinkedIn ~1.200+ (fontes abertas divergem)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada — S.A. fechada</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Leonardo Franco de Moura</strong> — Head de TI desde jan/2026 (LinkedIn). Trajetória interna: Coordenador de TI (2018–2019, Itajaí) → Gerente de TI (abr/2019–atual) → Head. Antes: EcoRodovias (infra, 50+ datacenters, CAPEX/OPEX &gt; R$ 20 mi), Positivo Soluções Didáticas, Grupo Columbia, Condor. Formação: Bacharelado em Sistemas de Informação (Centro Universitário Santa Cruz de Curitiba). Porta-voz público do chatbot com IA na Intermodal 2026 (Logweb / Fator Brasil) — agenda de autosserviço sobre Data Lake + portal Genius, parceria Microsoft + consultoria de IA/dados. Perfil LinkedIn: transformação digital, cloud, modernização de plataformas, automação, governança, segurança, M&A tech. Poder de decisão: hierarquia equivalente a diretoria; reporte a CEO/Presidência; aprovador dentro do budget (dados preservados da edição Trancoso / pesquisa IT Forum). Colunista IT Forum (hiperautomação, crítica a “pseudo-inovações”).</p>
+            <div class="insight-box" style="margin-top:14px">
+                <h4>Leitura de comitê (não abordar só o CIO)</h4>
+                <p><strong>Leonardo</strong> (Head de TI) — budget, stack, fornecedores, roadmap técnico.<br>
+                <strong>Fabricio Baggio</strong> — Chief Transformation Officer (CTO Transformação), criado recentemente; inovação, IA, jornada do cliente e mudança organizacional (LinkedIn + fala de Djalma Vilela).<br>
+                <strong>Djalma Vilela</strong> — Presidente; Capex físico R$ ~1 bi, reposicionamento de unidades, narrativa de crescimento.<br>
+                <em>Hipótese consultiva:</em> deals de plataforma/IA precisam alinhar Leonardo (execução TI) + Fabricio (mandato de transformação) antes de ir a Djalma.</p>
+            </div>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento & mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Operador logístico integrado focado em comércio exterior: CLIAs/EADIs, portos secos de fronteira (Mercosul), CDs e transporte rodoviário (frota própria enxuta + agregados). Verticais: saúde & cosméticos, hi-tech, automotivo/industrial, químicos e bens de alto valor. Posição: player nacional com densidade no Sul e fronteiras; atende &gt;60% do fluxo rodoviário de importação/exportação em pontos de fronteira (claim institucional). Pressões 2026: ajuste de estoques dos clientes, frete +~15% (marítimo/rodoviário), Reforma Tributária e disputa por incentivos, demanda reprimida por capacidade. Prioridades setoriais: visibilidade ponta a ponta, autosserviço digital, previsibilidade, compliance aduaneiro e eficiência de CTL. Tendência: clientes B2B exigem transparência em tempo real — abre espaço para plataformas, data products e IA conversacional sobre o Data Lake.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões & lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar autosserviço e CX sem degradar relacionamento humano — chatbot IA sobre Data Lake (Intermodal 2026).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Capacidade física insuficiente em unidades mal posicionadas vs. demanda reprimida (Capex ~R$ 1 bi / +30% capacidade).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Pressão de custo logístico 2026 (frete +~15%; repasse incompleto em alguns segmentos).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Governança, qualidade e escala de IA/ML/GenAI em ambiente regulado (OEA, alfândega).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Complexidade de integração entre Genius, Torre de Controle, WMS, CRM e core transacional.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Integração tecnológica pós-M&A / padronização de unidades em expansão.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Dobrar receita até 2028</span>
+                <span class="tag tag-priority">CX digital + autosserviço</span>
+                <span class="tag tag-priority">Data-driven / Torre de Controle</span>
+                <span class="tag tag-priority">Cloud híbrida resiliente</span>
+                <span class="tag tag-priority">IA com ROI mensurável</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Capex unidades (Santos, Foz, 6 reposicionamentos)</span>
+                <span class="tag tag-active">Chatbot IA + Data Lake (Microsoft)</span>
+                <span class="tag tag-active">Digitalização (&gt;4% receita/ano)</span>
+                <span class="tag tag-active">Nuvem privada/híbrida</span>
+                <span class="tag tag-active">Cibersegurança &amp; compliance</span>
+                <span class="tag tag-active">APIs / integração</span>
+                <span class="tag tag-active">ITSM/ESM</span>
+                <span class="tag tag-active">IA/ML preditiva (transporte/estoque)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Nuvem privada/híbrida</span>
+                <span class="tag tag-opportunity">Cibersegurança (programa)</span>
+                <span class="tag tag-opportunity">IA Generativa (escala pós-chatbot)</span>
+                <span class="tag tag-opportunity">Infraestrutura de redes</span>
+                <span class="tag tag-opportunity">ITSM/ESM e service desk</span>
+                <span class="tag tag-opportunity">APIs e integração (iPaaS)</span>
+            </div>
+            <p style="margin-top:12px;font-size:13px;color:var(--text-light)">Fonte mista: mapa de investimentos/oportunidades preservado da edição Trancoso (pesquisa IT Forum) + atualização 2026 por imprensa (Capex, chatbot, &gt;4% receita em digitalização).</p>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">92/100</span></div>
+                <p>Squads de IA para acelerar GenAI, ML operacional e produtos de dados sobre o Data Lake — alinhado ao chatbot Intermodal e à Torre/Argos.</p>
+                <div class="reasons"><ul>
+                    <li>Chatbot IA em produção/lançamento com Microsoft; roadmap de evolução por adesão.</li>
+                    <li>Prioridade explícita IA/ML e GenAI sem fornecedor exclusivo de escala.</li>
+                    <li>Mandato paralelo do CTO Transformação cria budget de inovação.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">88/100</span></div>
+                <p>Plataformas cloud-native, APIs, observabilidade e evolução do Genius/Torre para autosserviço em escala no ciclo Capex 2026–28.</p>
+                <div class="reasons"><ul>
+                    <li>Genius + Torre são ativos proprietários sob pressão de escala CX.</li>
+                    <li>Prioridade nuvem privada/híbrida e redes sem SI definido.</li>
+                    <li>Expansão de 6 unidades alfandegadas exige padronização digital.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS Digibee)</h4><span class="score-badge">84/100</span></div>
+                <p>Integração segura entre Genius, WMS, CRM, core e parceiros Comex — ISO 27001/27701, 24 anos, 41.000+ projetos.</p>
+                <div class="reasons"><ul>
+                    <li>Lacuna pública em APIs/integração sem fornecedor.</li>
+                    <li>Ambiente multi-sistema (WMS Körber, CRM Salesforce, Data Lake).</li>
+                    <li>M&A e novas unidades aumentam dívida de integração.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">78/100</span></div>
+                <p>Programa de segurança e privacidade para dados aduaneiros/OEA, continuidade e DR em expansão geográfica.</p>
+                <div class="reasons"><ul>
+                    <li>Projeto de cibersegurança listado sem fornecedor (ed. Trancoso).</li>
+                    <li>Operação regulada (OEA, alfândega) eleva risco reputacional.</li>
+                    <li>Chatbot/Data Lake ampliam superfície de ataque e LGPD.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">72/100</span></div>
+                <p>Modernização de plataformas corporativas, AMS e desacoplamento de monólitos — suporte ao mandato LinkedIn de Leonardo (cloud + modernização).</p>
+                <div class="reasons"><ul>
+                    <li>Core + Genius sob dívida técnica típica de operador 30+ anos.</li>
+                    <li>ITSM/ESM e service desk sem fornecedor = porta de entrada AMS.</li>
+                    <li>Complementa AI Squad sem “reinventar” o GenAI já com Microsoft.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Partir do chatbot Intermodal 2026 e da pergunta: “como industrializar GenAI com governança, custo e multi-canal (Genius + WhatsApp + Torre) sem virar projeto de consultoria eterna?” — linguagem de Leonardo (pragmatismo, anti-hype).</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Janela 2º trimestre / 2º semestre 2026: Capex de capacidade + diretoria de transformação nova + projetos sem SI (cloud híbrida, cyber, GenAI escala, ITSM, APIs). Timing IT Forum Praia do Forte: Leonardo presente (confirmado + último fórum SIM).</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>AI Squad + Engenharia Digital + FourBlox com delivery em squads, ISO 27001/27701 e parceria Digibee — não competir com Microsoft no foundation model; competir na industrialização, integração e segurança operacional.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes & Gap Analysis</h3>
+            <div class="competitor-card"><h4>DHL Supply Chain</h4><p>Robótica, digital twins, IA de demanda/estoque e plataforma de visibilidade madura. Gap Multilog: industrializar IA e automação de armazém além de cases pontuais.</p></div>
+            <div class="competitor-card"><h4>Maersk Logistics</h4><p>Visibilidade end-to-end, IoT e plataformas digitais de comércio. Gap: experiência digital B2B comparável em escala global — Multilog responde com Genius + chatbot, ainda em expansão.</p></div>
+            <div class="competitor-card"><h4>DP World</h4><p>Automação portuária e expansão freight forwarder no Brasil. Gap: narrativa de automação de terminais vs. força Multilog em zona secundária/fronteira.</p></div>
+            <div class="competitor-card"><h4>Santos Brasil</h4><p>Automação de terminais, WMS e analytics portuário. Gap: integração porto–porto seco–CD–transporte como produto digital único (CTL).</p></div>
+            <div class="insight-box" style="margin-top:12px"><h4>Síntese de gap</h4><p>Concorrentes globais vendem plataforma + automação como commodity. Multilog diferencia em densidade alfandegada/fronteira; a disputa comercial agora é CX digital + dados. Foursys entra no “como escalar” (squads, integração, cyber), não no Capex de pátio.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">MULTILOG BRASIL S.A. — logística integrada alfandegada/fronteira; R$ 1,5 bi (2025); Capex ~R$ 1 bi até 2028.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Leonardo Franco de Moura, Head de TI (jan/2026); 6+ anos na casa; porta-voz GenAI; comitê com Fabricio Baggio (CTO Transformação).</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Dobrar receita + digitalizar CX sob pressão de custo 2026; chatbot/Data Lake é a vitrine.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">&gt;4% receita em digitalização; nuvem híbrida; IA/ML; cyber; APIs; ITSM — fontes abertas (IT Forum ranking + imprensa). Capex físico lidera, TI habilita escala.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">AI Squad; Engenharia Digital; FourBlox (iPaaS).</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Discovery 90 min com Leonardo + Fabricio: mapa de casos GenAI e backlog de integração Genius↔WMS↔core.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum Praia do Forte + investimentos 2026–27; pico histórico de spend no 2º tri (ed. Trancoso).</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “mais um chatbot”: vender fábrica de produtos de dados Comex com governança OEA — ROI em redução de N1 e SLA de status, não em demos de LLM.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Capex bilionário + Head de TI novo</h4><p>Multilog entra em ciclo de dobra de receita. Leonardo sobe a Head; nasce diretoria de Transformação. GenAI vira vitrine na Intermodal.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Escalar sem quebrar compliance</h4><p>Frete sobe, clientes pedem autosserviço, Data Lake tem dados que o Genius ainda não expõe. Risco: GenAI sem governança em ambiente OEA.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Fábrica Foursys de IA + integração</h4><p>AI Squad industrializa casos; Engenharia Digital endurece Genius/Torre; FourBlox e Cyber fecham o circuito seguro.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Dor: escalar atendimento Comex sem headcount linear</h4>
+                <p>Evidência: chatbot IA Intermodal 2026 — Leonardo cita redução de tempo de resposta e acesso a dados fora do Genius (Logweb).</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — fábrica de agentes/RAG com métricas de contenção N1, qualidade e custo por conversa.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual % das consultas de status ainda cai no time humano depois do Genius?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de 2 semanas: priorizar 5 intents Comex e baseline de TMA.</p>
+            </div>
+            <div class="business-card">
+                <h4>Dor: 6 unidades novas/reposicionadas sem padrão digital</h4>
+                <p>Evidência: Capex e reposicionamento (Santos, Foz 600 mil m²) — Tecnologística abr/2026.</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital — blueprint de plataforma + observabilidade para onboarding de unidades.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quanto tempo leva hoje para uma nova unidade entrar no Genius/Torre com telemetria completa?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment de arquitetura do Genius (2–3 semanas) amarrado ao go-live de Santos.</p>
+            </div>
+            <div class="business-card">
+                <h4>Dor: dívida de integração multi-sistema</h4>
+                <p>Evidência: Torre integra WMS Körber, CRM Salesforce, Data Lake e core (Expogestão / falas públicas); APIs sem SI definido.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee) + Modernização — iPaaS governado e desacoplamento incremental.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quantas integrações ponto a ponto quebram a cada mudança de regra aduaneira?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Mapa de interfaces críticas (Comex) e PoC iPaaS em um fluxo DI/averbação.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de PoC GenAI Comex</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad + Engenharia Digital + FourBlox — porque o painel é plataforma+dados, não Capex de pátio</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) Visibilidade e integração em cadeias logísticas/Comex; (2) Squads de IA com governança em ambientes regulados; (3) iPaaS Digibee em ecossistemas multi-ERP/WMS. Se case setorial idêntico não estiver pronto, usar discurso de “fábrica de produtos de dados” com métricas de contenção e SLA.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> Microsoft já está no foundation — Foursys não disputa o modelo; disputa a industrialização (MLOps, integração segura, cyber OEA) e o time-to-value do Capex digital &lt;4% da receita.</p>
+            <p style="margin-top:8px"><em>Discurso sugerido se material setorial faltar: “Vocês já provaram GenAI na Intermodal. O risco agora é virar piloto eterno. Nós montamos a linha de produção.”</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>Li o lançamento do chatbot na Intermodal — a pergunta útil não é “tem IA?”, é “qual intent gera mais ticket humano ainda?”</li>
+                <li>Capex de R$ ~1 bi compra capacidade física; o CTL do cliente melhora de verdade quando Genius/Torre escalam com a unidade nova.</li>
+                <li>Trabalhamos com comitê: TI (você) + Transformação (Fabricio) — senão o piloto morre no meio.</li>
+                <li>Não vamos competir com Microsoft no modelo; vamos industrializar RAG, custo e segurança OEA.</li>
+                <li>FourBlox/Digibee ataca a dívida de APIs que todo operador alfandegado esconde atrás do portal.</li>
+                <li>Seus artigos no IT Forum sobre pseudo-inovação batem com nosso filtro: ROI e governança antes de demo.</li>
+                <li>Proposta concreta: discovery 90 min + PoC de 4 semanas em um fluxo Comex mensurável.</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>IT Forum / follow-up LinkedIn citando chatbot + Capex 2026</td><td>Reunião Leonardo (+ convite Fabricio)</td><td>0–2 semanas</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Mapear intents GenAI, integrações críticas, RFP cloud/cyber</td><td>One-pager de oportunidades ranqueadas</td><td>2–4 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC AI Squad (1 fluxo Comex) ou PoC iPaaS</td><td>Métricas TMA/contenção ou #interfaces</td><td>4–8 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad misto GenAI + integração em unidade piloto (ex. Santos)</td><td>Runbook + backlog priorizado</td><td>1–2 trimestres</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Programa multi-unidade + AMS/cyber contínuo</td><td>MSA / SOW anual</td><td>2º semestre 2026+</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Portal Genius (cliente)</h4><div class="url">https://genius.multilog.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">App web ASP.NET (headers)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">ASP.NET · Scrum Team Multilog</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Cloudflare proxy</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">APIs internas (não documentadas publicamente)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Site institucional</h4><div class="url">https://site.multilog.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">WordPress</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">WordPress / PHP</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">GoCache CDN</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">GTM (GTM-P9NTD7G)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Torre de Controle + Argos</h4><div class="url">https://site.multilog.com.br/noticia/torre-de-controle-multilog/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Ops console (interno)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Integração multi-sistema</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Data Lake + IA Argos</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Feeds WMS/CRM/core</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Chatbot IA (cliente)</h4><div class="url">Intermodal 2026 · previsão maio/2026</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Assistente conversacional</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">TI Multilog + Microsoft + consultoria IA</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Ecossistema Microsoft (declarado)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Data Lake → respostas Comex</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="name">Cloud híbrida / privada</div><div class="cmp">Prioridade declarada (ed. Trancoso); Genius atrás de Cloudflare; site em GoCache. Detalhe de hyperscaler corporativo: parcialmente Microsoft (chatbot).</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="name">OEA + ISO 9001</div><div class="cmp">Ambiente aduaneiro; programa de cibersegurança em mapa de investimentos; Dynatrace RUM detectado no Genius (ruxitagent).</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="name">Chatbot + Argos + ML preditivo</div><div class="cmp">IA preditiva de transporte/estoque (&gt;3 anos); automação faturamento WhatsApp/PIX; realidade mista em inventário (fontes abertas).</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="name">Data Lake corporativo</div><div class="cmp">Base do chatbot e da Torre; gap: democratização de dados para cliente além do Genius.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="name">ERP corporativo</div><div class="cmp">Core transacional integrado à operação (não detalhado publicamente nesta revisão — evitar especulação de vendor).</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="name">WMS · CRM · Genius</div><div class="cmp">WMS Körber e CRM Salesforce citados em material sobre Torre; Genius como portal cliente; HCM/ITSM em roadmap de investimento.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="name">Genius + Chatbot + WhatsApp</div><div class="cmp">Autosserviço e status Comex; pressão por CX digital B2B (fala Djalma Vilela).</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://site.multilog.com.br/</td><td><span class="status-200">200</span></td><td>WordPress</td><td>GoCache</td><td>GTM-P9NTD7G</td></tr>
+                    <tr><td>https://site.multilog.com.br/a-multilog/</td><td><span class="status-200">200</span></td><td>WordPress</td><td>GoCache</td><td>Institucional / história</td></tr>
+                    <tr><td>https://genius.multilog.com.br/</td><td><span class="status-200">200</span></td><td>ASP.NET</td><td>Cloudflare</td><td>Dynatrace RUM; X-Powered-By ASP.NET</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026 via HTTP HEAD/GET. Só o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Experiência</div><h4>Dados no Lake, fora do Genius</h4><p>Chatbot nasce para expor o que o portal ainda não mostra — evidência setorial típica de operadores Comex com self-service incompleto.</p><div class="offer">Oferta Foursys: AI Squad + Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>APIs ponto a ponto</h4><p>Torre consome WMS/CRM/core; APIs listadas sem SI — risco clássico em expansão multi-unidade alfandegada.</p><div class="offer">Oferta Foursys: FourBlox (Digibee)</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Cloud</div><h4>Híbrido sem blueprint</h4><p>Prioridade nuvem privada/híbrida sem fornecedor — fricção comum quando Capex físico acelera e TI precisa acompanhar.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Segurança</div><h4>Superfície GenAI + OEA</h4><p>Dados aduaneiros + assistente conversacional elevam exigência de DLP/IAM — cyber ainda “sem fornecedor” no mapa legado.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Operações TI</div><h4>ITSM/ESM maduro</h4><p>Service desk/ITSM no radar sem SI — gap típico quando time de TI escala com M&A e novas unidades.</p><div class="offer">Oferta Foursys: Modernização de Legado / AMS</div></div>
+                <div class="gap-card"><div class="num">GAP 6 · Dados</div><h4>Governança de IA</h4><p>ML preditivo existe há anos; GenAI chega agora — falta fábrica/governança (hipótese alinhada a artigos do próprio Leonardo sobre pseudo-inovação).</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Sistemas de Informação — Sta. Cruz Curitiba</div></div>
+                <div class="info-card"><div class="label">Base</div><div class="value">SP (LinkedIn) · ops Itajaí/SC</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1. Cite os artigos dele no IT Forum (hiperautomação / pseudo-inovação) — valida anti-hype.<br>
+                2. Pergunte pela Torre e pelo Argos — projeto de orgulho, não só o chatbot novo.<br>
+                3. Reconheça a promoção a Head (jan/2026) sem bajulação: “mandato diferente de gerente”.<br>
+                4. Trajetória EcoRodovias (50+ DCs) — ponte natural com resiliência e ops 24x7.<br>
+                5. Evite buzzword GenAI; fale contenção de ticket, TMA e custo por intent.<br>
+                6. Mencione Fabricio Baggio como par de transformação — mostra leitura de comitê.<br>
+                7. Presente no último IT Forum (SIM) — continuidade de relacionamento, não cold call.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>Tecnologística — entrevista Djalma Vilela (abr/2026): Capex ~R$ 1 bi, meta R$ 3 bi</li>
+                    <li>Mundo Logística — plano R$ 900 mi / +30% capacidade</li>
+                    <li>Site Multilog — A Multilog / soluções</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Logweb / Fator Brasil / FoodBiz — chatbot IA Intermodal 2026</li>
+                    <li>Expogestão / site Multilog — Torre de Controle + Argos</li>
+                    <li>ABOL / Tecnologística — 100+ Inovadoras TI 2025 (&gt;4% receita)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Site Multilog — área alfandegada, fronteiras, GENIUS</li>
+                    <li>Planilha CIOs Confirmados IT Forum Praia do Forte 2026</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn — Leonardo Moura (leomoura)</li>
+                    <li>LinkedIn — Fabricio Baggio (CTO Transformação)</li>
+                    <li>Briefing P1 Reunião Fousys (Trancoso) — preservado e evoluído</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch/HTTP — site.multilog.com.br (200, GoCache, WP)</li>
+                    <li>HTTP — genius.multilog.com.br (200, Cloudflare, ASP.NET, Dynatrace)</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

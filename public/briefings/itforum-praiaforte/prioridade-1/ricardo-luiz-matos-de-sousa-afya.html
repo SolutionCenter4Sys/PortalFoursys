@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Ricardo Luiz Matos de Sousa | AFYA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Ricardo Luiz Matos de Sousa</h1>
+                <h2>IT Director — CIO — Afya Educacional</h2>
+                <div class="loc">Educação · Belo Horizonte/MG · CNPJ 23.399.329/0001-72</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · sede MG + porte (Nasdaq / ~R$ 3,7 bi)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Receita 2025</div><div class="value">R$ 3,7 bi</div></div>
+                <div class="header-badge"><div class="label">Guidance 2026</div><div class="value">R$ 3,95–4,10 bi</div></div>
+                <div class="header-badge"><div class="label">CAPEX 2026</div><div class="value">R$ 340–380 mi</div></div>
+                <div class="header-badge"><div class="label">Unidades / Med.</div><div class="value">37 / +25 mil</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: RI deep-dive (earnings 2025 + guidance 2026) + leitura de comitê TI + ângulo não óbvio + material de apresentação · Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p><strong>FATO:</strong> Afya Participações S.A. (CNPJ 23.399.329/0001-72, sede Belo Horizonte/MG) é a holding brasileira da Afya Limited (Nasdaq: AFYA), maior ecossistema de educação médica e soluções digitais para prática clínica no Brasil. Opera graduação (37 unidades, 32 com Medicina, +25 mil alunos de Medicina em 14 estados), educação continuada (+70 cursos / 25 unidades) e healthtechs (Whitebook, iClinic/Shosp, Afya Play, Receita Pro). Controlada majoritariamente por Bertelsmann + Família Esteves. Receita líquida 2025: R$ 3,7 bi; EBITDA ajustado com margem ~48%; guidance 2026: receita R$ 3,95–4,10 bi, CAPEX R$ 340–380 mi — ciclo de investimento focado em produtos digitais e adoção de médicos no ecossistema (fonte: earnings Afya Limited / Business Wire, mar/2026; site institucional).</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Afya Participações S.A.</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">Belo Horizonte / MG</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Nacional (14 estados; 37 unidades)</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">R$ 3,7 bi (2025, RI)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~2.000–3.000 (fontes abertas LinkedIn/TheOrg)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada · holding BR da Afya Limited (Nasdaq)</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>FATO:</strong> Ricardo Matos (Ricardo Luiz Matos de Sousa na planilha IT Forum) é IT Director — CIO da Afya Educacional desde março/2020 (≈6 anos), baseado em Belo Horizonte. Formação: Ciência da Computação (UFMG) + pós em Gestão de TI (FUMEC) + Executive Development (ISE). Trajetória: Diretor de TI na Unidas; Head de TI Locamerica; Head of Cloud/Datacenters/Infra na TOTVS; CIO Kroton; passagens por MRV, Intralot e Banco Inter. Na posse na Afya declarou meta de evoluir TI com tecnologias de ponta para vantagem competitiva e experiência do aluno (IT Forum / Baguete). <strong>Poder de decisão:</strong> C-level de TI corporativo; org chart público aponta reporte de Segurança da Informação, Governança/Processos/Inteligência em TI, Integrações &amp; Projetos e um IT Director de Afya Medical Solutions — leitura de comitê, não decisão monocrática.</p>
+            <h4 style="margin:14px 0 8px">Leitura de comitê (fontes abertas · TheOrg / LinkedIn)</h4>
+            <ul style="margin-left:18px;font-size:14px">
+                <li><strong>Eduardo Dias dos Santos</strong> — IT Director, Afya Medical Solutions (frente produtos digitais/clínicos).</li>
+                <li><strong>Carlos Augusto da Costa Lima Filho</strong> — Diretor de Integrações e Projetos (M&amp;A tech / integração pós-aquisição).</li>
+                <li><strong>Rodrigo Timóteo Costa</strong> — Gerente de Segurança da Informação (+ Thiago de Paula, Coordenador SI).</li>
+                <li><strong>Yago Drumond Figueiredo</strong> — Gerente de Governança, Processos e Inteligência em Tecnologia.</li>
+                <li><strong>Nadielle Rocha Miranda</strong> — Gerente Sênior de Sistemas (TOTVS RM, ServiceNow, Salesforce, Canvas).</li>
+            </ul>
+            <p style="margin-top:12px;font-size:13.5px;color:var(--text-light)"><em>HIPÓTESE consultiva:</em> para ofertas de product engineering / IA clínica, incluir Eduardo Dias cedo; para integração de campuses e iPaaS, Carlos Augusto; para cyber/LGPD saúde, Rodrigo.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Educação superior privada focada em Medicina + healthtech B2C/B2B (suporte à decisão clínica, gestão de consultório, lifelong learning). A Afya posiciona-se como líder em assentos médicos privados e como hub que quer ser a marca de referência do médico brasileiro em toda a carreira — da graduação à prática. Cadeia de valor: aluno → residente → médico em exercício → clínica/hospital (via software). Pressões: regulação MEC/vagas; competição por M&amp;A caro (Inspirali/Ânima, Yduqs/IDOMED); necessidade de integrar dezenas de IES adquiridas; ciclo 2026 explícito de fortalecer produtos digitais e retenção no ecossistema para CAC estruturalmente baixo na graduação. Tendência setorial: IA clínica proprietária, simulação acreditada, dual degree saúde digital, cross-sell pós e software.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Integração pós-M&amp;A de sistemas acadêmicos e backoffice (legado Universus/Cadsoft → TOTVS RM; múltiplos LMS e portais) — evidência: perfis LinkedIn de sistemas Afya + tese CSC BH.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Unificação de Data Lakes Whitebook × iClinic ainda em curso (origens de M&amp;A distintas) — evidência: Medium Afya / Leandro Carnevali.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Pressão por adoção e engajamento em produtos digitais no ciclo 2026 (guidance: expandir audiência médica) — evidência: earnings Q4/FY2025.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Governança de dados sensíveis de saúde + LGPD em escala (1 em 3 médicos/estudantes usa solução Afya) — evidência: site institucional.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>CAPEX guiado R$ 340–380 mi: priorizar o que escala LTV digital vs. manutenção campus — evidência: guidance 2026.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Go-to brand do médico BR</span>
+                <span class="tag tag-priority">IA clínica proprietária (Whitebook/iClinic Assist)</span>
+                <span class="tag tag-priority">Ecossistema integrado graduação→prática</span>
+                <span class="tag tag-priority">Receita B2B futura sobre plataforma</span>
+                <span class="tag tag-priority">Eficiência CSC + sinergias M&amp;A</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Produtos digitais / IA (Whitebook Assist, iClinic Assist, Receita Pro)</span>
+                <span class="tag tag-active">CAPEX R$ 340–380 mi (guidance)</span>
+                <span class="tag tag-active">Plataforma de dados AWS (Redshift, EKS, SageMaker)</span>
+                <span class="tag tag-active">Acesso gratuito Whitebook/Afya Play a alunos a partir de 2026</span>
+                <span class="tag tag-active">Bootcamp Python/IA (parceria DIO)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Orquestração iPaaS pós-aquisição (campus + healthtech)</span>
+                <span class="tag tag-opportunity">AI Squad para acelerar features clínicas com governança</span>
+                <span class="tag tag-opportunity">Modernização de integrações TOTVS ↔ Moodle/Canvas/CRM</span>
+                <span class="tag tag-opportunity">Programa cyber/ISO alinhado a dados clínicos</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">92/100</span></div>
+                <p>Squads multidisciplinares para acelerar IA generativa/aplicada com governança — encaixa no ciclo 2026 de Assist (Whitebook/iClinic) e no pipeline de product engineering da Medical Solutions.</p>
+                <div class="reasons"><ul>
+                    <li>Guidance 2026 prioriza fortalecimento de produtos digitais e adoção.</li>
+                    <li>Lançamentos públicos de IA conversacional e transcrição clínica exigem entrega contínua + qualidade/segurança.</li>
+                    <li>Comitê: Eduardo Dias (Medical Solutions) + Yago (inteligência em TI).</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (Digibee iPaaS) + Engenharia Digital</h4><span class="score-badge">88/100</span></div>
+                <p>Integração enterprise (ISO 27001/27701, 24 anos, 41.000+ projetos) para unificar TOTVS RM, LMS, CRM, healthtechs e data lakes — dor clássica de consolidadores de educação.</p>
+                <div class="reasons"><ul>
+                    <li>Integrações públicas citadas: Moodle, Canvas, CRM Rubeus, WorkNow, Debarry ↔ TOTVS.</li>
+                    <li>Data Lakes Whitebook/iClinic ainda separados (Medium Afya).</li>
+                    <li>Diretoria de Integrações &amp; Projetos no org chart.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">78/100</span></div>
+                <p>Padronização e migração pós-M&amp;A de sistemas acadêmicos/backoffice herdados para o padrão Afya (CSC BH + TOTVS RM + portais).</p>
+                <div class="reasons"><ul>
+                    <li>Histórico de migração Universus/Cadsoft → TOTVS RM (LinkedIn sistemas).</li>
+                    <li>Crescimento por aquisições exige playbook repetível de cutover.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">74/100</span></div>
+                <p>Programa de segurança e privacidade para ecossistema com dados clínicos e educacionais em escala nacional.</p>
+                <div class="reasons"><ul>
+                    <li>Gerência de SI dedicada no comitê.</li>
+                    <li>Produtos com conteúdo clínico proprietário e prontuário elevam superfície de risco.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital (plataformas aluno/médico)</h4><span class="score-badge">70/100</span></div>
+                <p>Aceleração de experiência digital (Afya Play, portais, jornada aluno→app clínico) com squads de produto.</p>
+                <div class="reasons"><ul>
+                    <li>2026: Whitebook/Afya Play gratuitos para estudantes — pico de carga e engajamento.</li>
+                    <li>Sites públicos em Webflow/Next + GTM indicam camada digital madura, mas multi-marca.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Abrir pelo ciclo de investimento 2026 (produtos digitais + CAPEX guiado) e pela tensão de unificar dados/integrações Whitebook×iClinic×campus — linguagem de ROI de adoção e LTV do médico, não de "projeto de TI".</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>AI Squad + FourBlox para acelerar Assist e orquestrar integrações pós-M&amp;A sem inflar headcount permanente. Timing: IT Forum Praia do Forte + janela orçamentária CAPEX 2026.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Capacidade de combinar squads de IA/engenharia com iPaaS Digibee (FourBlox) e governança ISO — útil para holding listada que vende confiança clínica e precisa integrar patrimônio adquirido.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Inspirali (Ânima + DNA Capital)</h4><p>Braço de educação médica da Ânima com capital externo e tese de lifelong learning. Gap Afya: Afya leva vantagem em healthtech própria (Whitebook/iClinic); Inspirali pressiona por escala de vagas e marca de rede. Em TI, Afya precisa sustentar diferencial de produto digital — não só campus.</p></div>
+            <div class="competitor-card"><h4>Yduqs / IDOMED</h4><p>Verticalização de ecossistema médico sob holding de educação. Gap: corrida por integração ensino-serviço e software; Afya já embute apps na jornada do aluno — risco é execução de engajamento 2026.</p></div>
+            <div class="competitor-card"><h4>Cogna Educação (medicina / marcas)</h4><p>Grande player de educação privada com portfólio amplo. Gap: Cogna compete por escala e capilaridade; Afya diferencia por pure-play medicina + tech clínica. Em comitês de CIO, tema comum: consolidação de ERP/LMS pós-aquisição.</p></div>
+            <div class="competitor-card"><h4>Healthtechs clínicas independentes</h4><p>Concorrentes pontuais de iClinic/Whitebook em prontuário e CDS. Gap Afya: distribuição via base de alunos e 1/3 dos médicos; precisa manter qualidade de IA e integração B2B.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Afya Participações S.A. (CNPJ 23.399.329/0001-72) — maior hub educação médica + healthtech BR; holding da Afya Limited (Nasdaq).</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Ricardo Matos, CIO desde mar/2020 (BH); 25+ anos TI; TOTVS/Kroton/Unidas; comitê com Medical Solutions, Integrações e SI.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Ciclo 2026: virar go-to brand do médico via produtos digitais e engajamento — CAPEX R$ 340–380 mi.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Budget/CAPEX guiado para digital products, IA clínica, plataforma de dados AWS e integração pós-M&amp;A (fonte RI + Medium Afya).</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) AI Squad; 2) FourBlox + Engenharia Digital; 3) Modernização de Legado / Cyber.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 45 min CIO + Diretor Integrações ou IT Dir. Medical Solutions; one-pager + 2 slides de ângulo LTV médico.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum 2026 Praia do Forte · execução guidance CAPEX 2026 · rollout aluno Whitebook/Play.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender "IA genérica": vender redução de time-to-feature e custo de integração que preserva margem EBITDA ~48% enquanto escala adoção digital.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Do campus ao ecossistema</h4><p>Afya consolidou assentos médicos via M&amp;A e CSC em BH. Em 2026 a tese pública muda: ser a marca do médico em toda a carreira — software e IA deixam de ser anexo e viram motor de LTV.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Integrar sem diluir margem</h4><p>Data lakes e produtos de origem distinta; TOTVS + LMS + CRM + healthtechs; CAPEX limitado; concorrentes de educação médica aceleram. CIO precisa entregar inovação sem estourar integração.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Squads + iPaaS + governança</h4><p>Foursys entra com AI Squad para features clínicas, FourBlox para orquestração e modernização/cyber para o patrimônio adquirido — acelerando o ciclo 2026 com risco controlado.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Acelerar IA clínica com governança (Assist)</h4>
+                <p><strong>Evidência:</strong> Whitebook Assist, iClinic Assist e Receita Pro anunciados; meta 2026 de adoção/engajamento no ecossistema digital.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — time pronto para feature factory com qualidade, observabilidade e alinhamento a conteúdo clínico proprietário.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual gargalo hoje limita o ritmo de release dos Assists: talent, dados unificados ou governança de modelo?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop 90 min de discovery com Medical Solutions + SI para priorizar 1 use case de PoC em 4–6 semanas.</p>
+            </div>
+            <div class="business-card">
+                <h4>Orquestrar o patrimônio digital pós-M&amp;A</h4>
+                <p><strong>Evidência:</strong> múltiplos data lakes; integrações TOTVS↔LMS/CRM; Diretoria de Integrações no organograma.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee) + Engenharia Digital — mapa de integrações críticas e padronização de APIs entre campus e healthtech.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quantos fluxos críticos ainda dependem de ponto a ponto após a última aquisição?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment de 2 semanas do top-10 fluxos (matrícula, financeiro, LMS, Whitebook entitlements).</p>
+            </div>
+            <div class="business-card">
+                <h4>Playbook repetível de cutover acadêmico</h4>
+                <p><strong>Evidência:</strong> migrações Universus→TOTVS RM documentadas em perfis; tese CSC BH de padronização.</p>
+                <div class="sub">Solução Foursys</div><p>Modernização de Legado — fábrica de migração/parametrização e automação de testes para novas IES.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual o lead time médio hoje entre signing de uma faculdade e go-live no padrão Afya?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Case review anônimo de cutover educacional + proposta de squad de migração sob demanda.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager impresso · opcional PoC 1-pager de AI Squad</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad + FourBlox — porquê: ciclo 2026 digital + dor de integração pós-M&amp;A</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) integração multi-campus / CSC educação; (2) squads de produto digital com compliance; (3) iPaaS em ambientes híbridos AWS/Azure — adaptar linguagem health/education, sem forçar case hospitalar genérico.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> o ROI não é "ter IA"; é proteger a margem e o CAC baixo da graduação fazendo o médico permanecer no ecossistema — cada semana de atraso em integração/feature custa LTV.</p>
+            <p style="margin-top:8px"><em>Discurso se material setorial específico não estiver pronto: abrir com guidance CAPEX 2026 + pergunta sobre unificação Whitebook/iClinic; oferecer assessment de integrações em 10 dias úteis.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>Confirmamos Afya Participações S.A. (CNPJ 23.399.329/0001-72) e o ciclo 2026 de investimento em produtos digitais — queremos falar a língua do guidance, não de catálogo.</li>
+                <li>Seu desafio público não é falta de ideias de IA: é ritmo de entrega com governança clínica e dados ainda parcialmente fragmentados.</li>
+                <li>AI Squad da Foursys encaixa como capacidade elástica para Medical Solutions sem inflar headcount permanente.</li>
+                <li>FourBlox (Digibee) ataca a dor invisível: TOTVS + LMS + CRM + entitlements Whitebook/iClinic em um mapa de integração auditável.</li>
+                <li>Modernização pós-M&amp;A vira playbook: cada nova IES entra no padrão Afya mais rápido, com menos risco de go-live.</li>
+                <li>Cyber/LGPD como habilitador comercial — confiança do médico no Assist depende de segurança percebida e real.</li>
+                <li>Próximo passo concreto: discovery de 90 min com você + Integrações ou Medical Solutions e um PoC escopado em uma página.</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Contato no IT Forum + LinkedIn; enviar one-pager Afya 2026</td><td>Agenda 45 min com CIO</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop com Integrações + Medical Solutions + SI</td><td>Mapa dores × ofertas (scorecard)</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC AI Squad (1 feature Assist) OU assessment iPaaS top-10 fluxos</td><td>Demo + métricas (lead time / erros)</td><td>4–6 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad 3–4 meses em produto digital ou fábrica de integração</td><td>Releases + runbook</td><td>Q3–Q4/2026</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>MSA capacidade + FourBlox em produção + opção cyber</td><td>Contrato anual / SOWs</td><td>até Q1/2027</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Site institucional Afya</h4><div class="url">https://institucional.afya.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Webflow</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">CMS Webflow</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Cloudflare</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Afya Whitebook (Pebmed)</h4><div class="url">https://whitebook.pebmed.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">SPA (sinais React/Next)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">APIs produto (não expostas)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Cloudflare + AWS (dados)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Produto + Segment/GTM</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Afya iClinic</h4><div class="url">https://www.iclinic.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">SPA (sinais React/Next)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">SaaS gestão clínica</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Amazon S3 (site) + AWS dados</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Produto clínico</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>ERP / academic core (corporativo)</h4><div class="url">interno (TOTVS RM)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portais TOTVS</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">TOTVS RM (Backoffice/RH/Educ.)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Híbrido (CSC BH)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações Moodle/Canvas/CRM</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">~90% plataforma de dados em AWS (EKS, Redshift RA3); Azure em casos Graduação/B2B; Terraform IaC (Medium Afya). Site institucional atrás de Cloudflare.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">Gerência de SI dedicada no org chart; dados clínicos/educacionais sob LGPD. Detalhes de stack SI não localizados publicamente.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">Whitebook Assist, iClinic Assist, Receita Pro; AWS SageMaker citado na plataforma de dados; bootcamp Python/IA (DIO).</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">4 Data Lakes (Graduação/EC, Whitebook, iClinic, MDM/CDP/B2B); Redshift; dbt; unificação Whitebook×iClinic em andamento; Power BI citado com TOTVS.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">TOTVS RM (Backoffice, RH, Educacional, Portais) — evidência LinkedIn sistemas Afya. ServiceNow para ITSM (citado).</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">Salesforce; CRM Rubeus; LMS Canvas / Moodle; WorkNow; Debarry; produtos Whitebook, iClinic/Shosp, Afya Play.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">Apps aluno/médico; simulação SSH; GTM/GA/Segment nos canais; Webflow institucional; rollout 2026 Whitebook/Play gratuitos a estudantes.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>institucional.afya.com.br</td><td><span class="status-200">200</span></td><td>Webflow</td><td>Cloudflare</td><td>GTM + GA</td></tr>
+                    <tr><td>www.afya.com.br</td><td><span class="status-200">200</span></td><td>Não inspecionado a fundo</td><td>Cloudflare</td><td>HEAD 200</td></tr>
+                    <tr><td>whitebook.pebmed.com.br</td><td><span class="status-200">200</span></td><td>SPA (React/Next?)</td><td>Cloudflare</td><td>GTM + Segment</td></tr>
+                    <tr><td>www.iclinic.com.br</td><td><span class="status-200">200</span></td><td>SPA (React/Next?)</td><td>Amazon S3</td><td>GTM</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 20/07/2026 (~17:30 BRT). Só registrar o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Dados</div><h4>Data Lakes ainda siloed (Whitebook × iClinic)</h4><p>Unificação em curso; limita 360° do médico e features de IA cross-produto. Evidência setorial: consolidadores healthtech pós-M&amp;A sofrem latência analítica.</p><div class="offer">Oferta Foursys: Engenharia Digital + AI Squad (feature sobre dados unificados)</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Integrações ponto a ponto pós-aquisição</h4><p>TOTVS ↔ Moodle/Canvas/CRM/WorkNow — complexidade cresce a cada IES. Evidência: perfis de sistemas + Diretoria de Integrações.</p><div class="offer">Oferta Foursys: FourBlox (Digibee iPaaS)</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Legado acadêmico</div><h4>Cutover de sistemas herdados</h4><p>Migrações Universus→TOTVS RM documentadas; risco de atraso no playbook M&amp;A. Evidência setorial: educação privada BR depende de go-live acadêmico para capturar receita de mensalidade.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · IA</div><h4>Capacidade de entrega vs. ambição de Assist</h4><p>Produto público de IA exige ritmo de release + validação clínica. Evidência: lançamentos Assist + guidance adoção 2026.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Segurança</div><h4>Superfície de dados clínicos em escala</h4><p>1/3 médicos/estudantes no ecossistema; prontuário e CDS aumentam impacto de incidente. Evidência: portfólio iClinic/Whitebook + SI no org chart.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Ciência da Computação (UFMG) · Gestão de TI (FUMEC) · ISE Executive</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">Belo Horizonte / MG</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Reconhecer a passagem pela TOTVS Cloud — ele fala fluente a linguagem de operação e produto SaaS.<br>
+                2) Citar a meta pública dele na posse (experiência do aluno + vantagem competitiva) e amarrar ao guidance 2026 de produtos digitais.<br>
+                3) Perguntar sobre o estágio da unificação Whitebook×iClinic — demonstra lição de casa técnica sem atacar.<br>
+                4) Trazer comitê: "faz sentido incluir Integrações ou Medical Solutions nesta conversa?".<br>
+                5) Evitar pitch genérico de educação; falar LTV do médico e CAPEX guiado.<br>
+                6) BH/MG: conexão regional (sede) e IT Forum presencial — rapport de presença, não só digital.<br>
+                7) Não inventar cargo/tempo: ele está desde 2020 — tratar como CIO estabilizado, não "novo no cargo".</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>Afya Limited — FY2025 earnings / guidance 2026 (Business Wire + PDF MZ)</li>
+                    <li>Moody's Local Brasil — rating Afya (contexto 2025)</li>
+                    <li>institucional.afya.com.br — razão social/CNPJ e números</li>
+                    <li>Estadão — tecnologia/IA e tese digital Afya</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Medium Afya — plataforma de dados Whitebook/iClinic (AWS, Redshift, EKS, SageMaker, dbt, Terraform)</li>
+                    <li>LinkedIn — sistemas Afya (TOTVS RM, ServiceNow, Salesforce, Canvas)</li>
+                    <li>Verificação HTTP headers (jul/2026)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Bastidores do Poder — competição educação médica (Inspirali, Yduqs)</li>
+                    <li>Substack Lucas Abreu — notas Afya (CSC, ERP, digital)</li>
+                    <li>Saúde Digital News — bootcamp DIO/Python IA</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn Ricardo Matos (ricardomatos)</li>
+                    <li>IT Forum / Baguete — posse CIO Afya</li>
+                    <li>TheOrg — org chart TI Afya</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch institucional.afya.com.br</li>
+                    <li>HEAD/GET whitebook.pebmed.com.br · iclinic.com.br · afya.com.br</li>
+                    <li>Planilha CIOs Confirmados IT Forum 10.07 (ID 40)</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+
+</html>

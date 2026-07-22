@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<!--
+  Briefing CIO — Manuel Landeiro | SADA (Grupo SADA)
+  IT Forum 2026 Praia do Forte · Design System Foursys · Ordem B→A→C · Modo --full
+  Hunter | Pre-Sales Intelligence
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Manuel Landeiro | SADA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Manuel Landeiro</h1>
+                <h2>CIO / Diretor de Tecnologia — Grupo SADA</h2>
+                <div class="loc">Transporte e Logística · Betim/MG · CNPJ 19.199.348/0008-54</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Sede MG + porte conglomerado</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Empresas (grupo)</div><div class="value">~38–47</div></div>
+                <div class="header-badge"><div class="label">Colaboradores</div><div class="value">~7,5 mil</div></div>
+                <div class="header-badge"><div class="label">Capex 2025*</div><div class="value">R$ 38,8 mi</div></div>
+                <div class="header-badge"><div class="label">CIO desde</div><div class="value">Jun/2022</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: fontes abertas + leitura de comitê TI + material de apresentação (sem RI pública) · Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>O <strong>Grupo SADA</strong> é conglomerado mineiro fundado em 1976 por Vittorio Medioli, líder em transporte e logística de veículos zero quilômetro na América Latina, com vertical de carga geral em expansão. A linha da planilha IT Forum aponta a empresa <strong>SADA</strong> (CNPJ <strong>19.199.348/0008-54</strong>), confirmada na Receita/Econodata como <strong>Sada Transportes e Armazenagens Ltda</strong>, filial em Betim/MG — núcleo histórico do grupo no polo Fiat. Atua também em indústria de componentes, concessionárias, bioenergia, mídia (Sempre Editora / O Tempo) e esporte (SADA Cruzeiro). Não é listada em bolsa; não há RI pública consolidada — análise de budget de TI usa fontes abertas (imprensa setorial, cases de fornecedores, entrevistas do CIO).</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social (CNPJ planilha)</div><div class="value">Sada Transportes e Armazenagens Ltda</div></div>
+                <div class="info-card"><div class="label">Sede operacional</div><div class="value">Betim / MG</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">BR + Argentina; Chile/Uruguai na logística automotiva</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">Não localizado consolidado recente (hist. ~R$ 3 bi em 2016 — MOM)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~7,5 mil (fonte aberta 2023)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada · conglomerado familiar</div></div>
+            </div>
+            <p style="margin-top:12px;font-size:12.5px;color:var(--text-light)">*R$ 38,8 mi: investimento anunciado 2025 na vertical Carga Geral (frota + digitalização) — não é CAPEX de TI isolado. Fontes abertas.</p>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Manuel Landeiro</strong> é CIO / Diretor de Tecnologia do Grupo SADA desde <strong>junho/2022</strong> (Betim/MG; LinkedIn + The Org). Trajetória de ~20+ anos em TI de logística e supply chain: CIO/superintendente de TI, Projetos e Inovação na <strong>Patrus Transportes</strong> (2017–2020; gerente de TI 2008–2017); Diretor de TI na <strong>Telemont</strong> (2020–2021); Diretor de BU Logística / Head de Sistemas Logística na <strong>Benner</strong> (2021–2022). Formação: Bacharelado em Ciência da Computação — Universidade Salvador (1993–1997). Perfil público: TI como meio de valor de negócio; prioriza proximidade com operações (agenda com diretor de operações, meta do time “conhecer o pátio”). Liderou digitalização do processo <strong>PDI on track</strong> (preparação de veículos para locadoras). Entrevista IT Forum (set/2023) e MoovenCast reforçam discurso de liderança “no caos” e priorização.</p>
+            <div class="insight-box" style="margin-top:14px">
+                <h4>Leitura de comitê (The Org — org chart público)</h4>
+                <p>Sob a órbita de TI aparecem: <strong>Gilberto Mota</strong> (CISO); <strong>Jose Eduardo Meinberg de Moraes</strong> (Corporate System &amp; Digital Products); coordenadores de Governança de Tecnologia (<strong>Rafael Conrado</strong>), Sistemas (<strong>Paulo Rogério Saldanha</strong>), Infraestrutura (<strong>Marcelino Soares da Cruz</strong>) e Governança/Riscos/Privacidade (<strong>Emerson do Amaral Barbosa</strong>). Hipótese consultiva: decisão de compra grande passa por Manuel + CISO + operações; fornecedor de outsourcing BHS já ocupa parte da capacidade tática.</p>
+            </div>
+            <p style="margin-top:12px;font-size:13.5px"><strong>Poder de decisão:</strong> alto sobre roadmap de sistemas e digitalização do grupo; budget de TI não publicado. Presente no último IT Forum: <strong>NÃO</strong> (planilha). Participação 2026: digital e presencial (confirmado com voo).</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Negócio âncora: <strong>logística automotiva</strong> (transporte/armazenagem de 0 km, PDI, pátios, exportação) a serviço de montadoras e, cada vez mais, <strong>locadoras</strong> — mudança de canal que o próprio CIO destaca. Vertical <strong>Carga Geral</strong> diversifica para alimentício, siderúrgico e recicláveis, com meta pública de dobrar receita da unidade até o cinquentenário (2026). Pressões setoriais: custo de combustível e descarbonização (conversão GNV/biometano), SLA de entrega para locadoras (diária = receita do cliente), rastreabilidade ponta a ponta, integração multiempresa (CSC do grupo). Posição: líder declarado em logística de veículos zero na América Latina; concorrência forte em carga geral e 3PL automotivo (Tegma, operadores globais, regionais). Tendência relevante para venda: plataformas de visibilidade (tipo “Jornada da Carga”), dados em tempo real e integração TMS/WMS/CSC sem reinventar ERP.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Processos ainda manuais em frentes de customização/PDI quando o mix de veículos explode (evidência: projeto PDI on track — IT Forum).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Complexidade multiempresa: dezenas de regras de negócio no CSC (Salesforce case) — risco de silos e dívida de integração.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Crescimento acelerado em Carga Geral (+40% volume 2024) pressiona TMS, telemetria e experiência do cliente B2B.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Descarbonização e GNV exigem dados de frota, abastecimento e compliance ambiental — camada de dados ainda pouco visível publicamente.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Dependência de outsourcing tático (BHS) pode limitar velocidade de inovação de produto digital interno — hipótese consultiva.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Visibilidade fim-a-fim (Jornada da Carga)</span>
+                <span class="tag tag-priority">TI próxima da operação</span>
+                <span class="tag tag-priority">Diversificação carga geral 2025–26</span>
+                <span class="tag tag-priority">Eficiência CSC multiempresa</span>
+                <span class="tag tag-priority">Cibersegurança com CISO nomeado</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses (fontes abertas)</h4>
+            <div>
+                <span class="tag tag-active">Frota + digitalização Carga Geral (até R$ 38,8 mi)</span>
+                <span class="tag tag-active">Plataforma Jornada da Carga</span>
+                <span class="tag tag-active">Frota GNV / postos Betim e SBC</span>
+                <span class="tag tag-active">Salesforce CSC (legado de transformação)</span>
+                <span class="tag tag-active">Outsourcing TI (parceiro BHS)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido (hipótese)</h4>
+            <div>
+                <span class="tag tag-opportunity">AI Squad em previsão de demanda / slot de pátio</span>
+                <span class="tag tag-opportunity">Modernização de integrações TMS ↔ CSC ↔ clientes</span>
+                <span class="tag tag-opportunity">Engenharia digital da Jornada da Carga</span>
+                <span class="tag tag-opportunity">FourBlox / iPaaS para multiempresa</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital — plataforma Jornada da Carga</h4><span class="score-badge">92/100</span></div>
+                <p>Acelerar produto digital de tracking/previsibilidade anunciado publicamente, com squads de engenharia orientados a outcome de cliente B2B (montadora/locadora/indústria).</p>
+                <div class="reasons"><ul>
+                    <li>Timing: projeto citado em releases 2025 como pilar de competitividade da Carga Geral.</li>
+                    <li>Fit com discurso do CIO: tecnologia a serviço da operação e do SLA do cliente.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (Digibee iPaaS) — integração multiempresa</h4><span class="score-badge">88/100</span></div>
+                <p>Orquestrar fluxos entre TMS SADA Log, Salesforce CSC, sistemas de pátio/PDI e APIs de clientes sem proliferar ponto-a-ponto.</p>
+                <div class="reasons"><ul>
+                    <li>Grupo com dezenas de empresas e ~100 processos no CSC — dor clássica de integração.</li>
+                    <li>ISO 27001/27701 + parceria Digibee alinhados a presença de CISO no comitê.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad — previsão operacional e slotting</h4><span class="score-badge">84/100</span></div>
+                <p>Squad focado em casos de alto ROI em logística: previsão de volume, otimização de carregamento, alerta de ruptura de SLA e apoio a PDI com regras fiscais (ex.: janela de 180 dias citada pelo CIO).</p>
+                <div class="reasons"><ul>
+                    <li>Crescimento de volume e diversificação de carga geram ruído operacional.</li>
+                    <li>Ângulo não óbvio: IA em compliance fiscal/operacional de PDI, não só chatbot.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança — endurecimento OT/IT logística</h4><span class="score-badge">78/100</span></div>
+                <p>Programa com CISO: superfície de telemetria, portais B2B, CSC e terceiros (outsourcing). Assessment + roadmap de controles.</p>
+                <div class="reasons"><ul>
+                    <li>CISO já mapeado (Gilberto Mota) — interlocutor técnico natural.</li>
+                    <li>Operação crítica 24h e cadeia automotiva sensível a interrupção.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado — TMS/processos de pátio</h4><span class="score-badge">72/100</span></div>
+                <p>Evoluir camadas legadas de TMS/WMS/PDI onde ainda há papel ou planilha (evidência histórica no PDI), com arquitetura evolutiva sem “big bang”.</p>
+                <div class="reasons"><ul>
+                    <li>Manuel veio de Benner/Patrus — fala a língua de TMS/WMS/ERP logístico.</li>
+                    <li>Complementa (não compete frontalmente) com outsourcing BHS em run.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Abrir com o recorte que ele já usa em público: “TI que anda no pátio”. Oferecer diagnóstico de 2 semanas na jornada PDI → entrega à locadora ou na trilha Jornada da Carga (latência de evento, APIs, UX B2B) — linguagem de negócio, não de stack.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Janela IT Forum 2026 (primeira participação presencial recente segundo planilha) + ciclo de expansão Carga Geral 2025–26. Propor PoC de integração/visibilidade em uma rota MG–SP–ES ou um fluxo PDI de alto volume.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Squads com ISO 27001/27701, FourBlox/Digibee e 24 anos / 41.000+ projetos — posicionar Foursys como motor de produto digital e integração, convivendo com BHS no run e Salesforce no CSC, sem pitch de “substituir tudo”.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Tegma Gestão Logística</h4><p>Referência em logística automotiva e serviços de valor agregado. Gap SADA: manter liderança 0 km enquanto escala carga geral com a mesma maturidade digital de visibilidade que o mercado espera de 3PLs listados.</p></div>
+            <div class="competitor-card"><h4>CEVA / operadores globais</h4><p>Fortes em torres de controle e stack global. Gap: SADA compete com conhecimento local de montadoras e pátios; precisa de torre digital própria (Jornada da Carga) para não perder contratos por falta de telemetria/API.</p></div>
+            <div class="competitor-card"><h4>Patrus Transportes</h4><p>Urgente/expresso; Manuel conhece o DNA de perto (ex-CIO). Gap: SADA vence em escala automotiva; Patrus pressiona em velocidade de sistemas e cultura digital lean.</p></div>
+            <div class="competitor-card"><h4>3PLs regionais de carga geral (MG/ES/SP)</h4><p>Disputam preço em alimentício/siderúrgico. Gap: diferencial SADA deve ser previsibilidade e dados — exatamente o que a plataforma anunciada promete entregar.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Grupo SADA — líder LATAM em logística de veículos 0 km; conglomerado Betim/MG; CNPJ planilha = Sada Transportes e Armazenagens Ltda 19.199.348/0008-54.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Manuel Landeiro, CIO desde jun/2022; ex-Patrus/Telemont/Benner; TI colada na operação.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escalar Carga Geral + digitalizar visibilidade (Jornada da Carga) sem perder excelência no core automotivo/PDI.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Fontes abertas: capex 2025 focado em frota + digitalização da vertical; Salesforce no CSC; TMS SADA Log; outsourcing BHS. Budget TI isolado: não localizado (sem RI).</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) Engenharia Digital (Jornada da Carga); 2) FourBlox/iPaaS multiempresa; 3) AI Squad operacional/PDI.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião no IT Forum → workshop 90 min com CIO + CISO + Ops sobre mapa de eventos da cadeia PDI/carga.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum Praia do Forte 2026 + ciclo expansão 2025–26 (cinquentenário).</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “mais apps”. Vender redução de diária perdida na locadora e integração fiscal/operacional do PDI — dinheiro do cliente do cliente.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Do pátio Fiat ao conglomerado multi-vertical</h4><p>Quase 50 anos depois, SADA não é só cegonha: é holding com CSC Salesforce, CISO e CIO que digitaliza PDI para locadoras. Carga Geral cresce 40% e pede torre digital.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Escala vs. dívida de integração</h4><p>Dezenas de empresas, processos manuais residuais, parceiros de run e pressão de SLA. Sem integração e produto digital, o crescimento vira custo e risco cibernético.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Squads Foursys na jornada do cliente</h4><p>Engenharia Digital + FourBlox + AI Squad entregam Jornada da Carga e PDI conectados — Foursys como fábrica de outcomes, convivendo com o ecossistema atual.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Visibilidade B2B da carga geral</h4>
+                <p>Evidência: plataforma “Jornada da Carga” anunciada em 2025 para tracking da coleta à entrega (Transporte Moderno / Intermodal).</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital + produto analytics: time-to-value em portal/API para shippers; redução de ticket de “cadê minha carga?”.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual % das reclamações de Carga Geral hoje nasce de falta de previsibilidade vs. falha física de transporte?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Mapa de eventos (coleta, balança, trânsito, descarga) em uma rota piloto MG–SP.</p>
+            </div>
+            <div class="business-card">
+                <h4>PDI on track em escala</h4>
+                <p>Evidência: CIO descreveu digitalização do PDI para locadoras (montagens, terceiros, prazo fiscal 180 dias) — IT Forum 2023.</p>
+                <div class="sub">Solução Foursys</div><p>Modernização + AI Squad: motor de regras + orquestração de fornecedores; menos atraso = mais diárias para o cliente.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quanto custa, em diárias de locação, cada dia de atraso médio no PDI das top 3 locadoras?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop com Ops + TI + fiscal em Betim; PoC em uma família de customização.</p>
+            </div>
+            <div class="business-card">
+                <h4>Integração do CSC multiempresa</h4>
+                <p>Evidência: Salesforce Platform/Sales Cloud no CSC (~100 processos; dezenas de empresas) — case Salesforce/JFox.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee): camada de integração governada entre CSC, TMS e parceiros, com trilho de segurança para o CISO.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quantas integrações ponto-a-ponto o time sustenta hoje entre Salesforce, TMS e clientes montadores?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Inventário de 10 fluxos críticos e score de fragilidade; proposta de hub iPaaS.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de PoC Jornada da Carga / PDI</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">Engenharia Digital + FourBlox + AI Squad — produto e integração, não “body shop”</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) torre de controle / tracking em logística automotiva ou 3PL; (2) integração iPaaS multi-ERP/CSC; (3) IA em previsão de demanda ou slotting de pátio. Se case Foursys setorial não estiver pronto, usar narrativa de valor com métricas de SLA e diária de locação.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> falar o idioma do cliente do SADA (locadora/montadora): cada hora ganha no PDI ou na previsibilidade da carga vira receita ou NPS — não “modernizar o TMS”.</p>
+            <p style="margin-top:8px"><em>Discurso sugerido se material setorial faltar: “Vocês já provaram digitalizar PDI. O próximo salto é industrializar a Jornada da Carga e a malha de integrações do grupo com governança que o CISO assina — a Foursys entrega o squad de produto e o hub, sem brigar com quem já roda o CSC e o outsourcing.”</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Manuel, vi o PDI on track — queremos medir juntos o impacto em diárias das locadoras, não só em tickets de TI.”</li>
+                <li>“Jornada da Carga é o produto certo; o risco é virar projeto eterno sem fábrica de releases — dá para montar squad em 30 dias.”</li>
+                <li>“Com dezenas de empresas no CSC, iPaaS governado reduz o custo oculto das integrações ponto-a-ponto.”</li>
+                <li>“Conversamos com você e com o Gilberto (CISO): segurança entra no desenho, não no final.”</li>
+                <li>“Não viemos substituir BHS nem Salesforce — viemos acelerar o que falta: produto digital e orquestração.”</li>
+                <li>“Crescimento de 40% em carga geral sem torre digital vira custo; com torre, vira margem.”</li>
+                <li>“Proposta concreta pós-fórum: mapa de eventos de uma rota + PoC de API para um shipper piloto.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Encontro IT Forum + follow-up LinkedIn com CIO e CISO</td><td>Ata + hipótese de valor PDI/Jornada</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop 90 min em Betim (TI + Ops + 1 negócio)</td><td>Mapa de eventos e 3 dores priorizadas</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC tracking ou integração TMS↔portal (1 rota / 1 fluxo PDI)</td><td>Demo + métricas de latência/SLA</td><td>4–6 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad Engenharia Digital + FourBlox em backlog quinzenal</td><td>Releases biweek + OKRs de negócio</td><td>1 trimestre</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Expandir para outras verticais do grupo + AI Squad</td><td>MSA plurianual + governança com CISO</td><td>6–12 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3–5)</h4>
+            <div class="app-card">
+                <h4>Portal institucional Grupo SADA</h4><div class="url">https://www.gruposada.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">HTML institucional (stack não declarada)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não exposta publicamente</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>SADA Transportes (site operacional)</h4><div class="url">https://www.sada.com.br → https://www.sadatransportes.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">WordPress</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">WordPress / PHP</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>TMS SADA Log</h4><div class="url">Citado no site do grupo (rastreabilidade da operação)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não localizado (app interno)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">TMS proprietário / não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Hipótese: APIs B2B limitadas</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Salesforce CSC</h4><div class="url">Case Salesforce / JFox — Platform, Sales Cloud, Chatter</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Salesforce Lightning</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Salesforce Platform</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Salesforce SaaS</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Salesforce APIs (hipótese de uso intenso)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Jornada da Carga (em desenvolvimento)</h4><div class="url">Anunciada em imprensa 2025 — URL pública não localizada</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Prevista (tracking tempo real)</div></div>
+                </div>
+            </div>
+
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Não publicado de forma consolidada. Outsourcing de TI (BHS) sugere ambiente híbrido/datacenter + cloud de workloads; hipótese consultiva — validar com infra (Marcelino).</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">CISO nomeado (Gilberto Mota); coordenação de privacidade/riscos (Emerson). Controles detalhados: não localizados publicamente.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">Não há anúncio público robusto de IA generativa. Automação presente em CSC (Salesforce) e processos digitalizados de PDI. Oportunidade aberta para AI Squad.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">Telemetria/monitoramento 24h citado; plataforma Jornada da Carga aponta maturidade em dados de cadeia. Lakehouse/BI corporativo: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">ERP corporativo consolidado: <strong>não localizado</strong> em fontes abertas (não especular marca). CSC Salesforce cobre processos administrativos/financeiros/TI/jurídico.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">TMS SADA Log; Salesforce (CSC + Sales Cloud); sistemas de pátio/PDI (parcialmente digitalizados); WMS implícito em armazenagem (não detalhado).</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">Sites públicos (gruposada / sadatransportes) com GTM/GA; portal cliente Jornada da Carga em construção; Chatter no CSC para colaboração interna.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.gruposada.com.br/</td><td><span class="status-200">200</span></td><td>Institucional</td><td>Não evidenciado CF</td><td>GTM/GA4 detectados no HTML</td></tr>
+                    <tr><td>https://www.sada.com.br/</td><td><span class="status-200">200</span></td><td>WordPress</td><td>Redirect</td><td>Redireciona para sadatransportes.com.br; GA4</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 20/07/2026 (HEAD/GET). Só o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4–6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Produto digital</div><h4>Jornada da Carga ainda em construção</h4><p>Anúncio público sem URL/produto live. Risco de atraso frente a 3PLs com torre madura enquanto volume de carga geral escala.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Malha ponto-a-ponto multiempresa</h4><p>CSC Salesforce + TMS + clientes montadores/locadoras sem hub iPaaS declarado — custo de mudança e falhas de sincronismo.</p><div class="offer">Oferta Foursys: FourBlox (Digibee)</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Dados/IA</div><h4>Baixa evidência de IA operacional</h4><p>Setor usa previsão de demanda e slotting; SADA comunica pouco — espaço para AI Squad em PDI e frota.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Legado operacional</div><h4>Resíduos manuais em PDI/customização</h4><p>CIO relatou processo manual antes da digitalização; escala de locadoras exige industrialização contínua.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Segurança</div><h4>Superfície OT/telemetria pouco visível</h4><p>CISO existe, mas posture pública e programa OT/IT logística não documentados — due diligence de clientes automotivos exige evidência.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Ciência da Computação — UNIFACS (Salvador)</div></div>
+                <div class="info-card"><div class="label">Base</div><div class="value">Belo Horizonte / Betim — MG</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px">
+                <h4>Dicas de conversa (5–7)</h4>
+                <p>
+                    1) Cite o hábito dele de “andar no pátio” — mostra que você leu a entrevista, não o LinkedIn só.<br>
+                    2) Fale de Bernardinho/foco (ele usa essa metáfora) para priorização de backlog.<br>
+                    3) Traga um número de negócio (diária de locação, % reclamação tracking) — ele rejeita TI “só técnica”.<br>
+                    4) Reconheça o time de governança/CISO; não ignore o comitê.<br>
+                    5) Evite pitch genérico de cloud; pergunte sobre TMS SADA Log e Jornada da Carga.<br>
+                    6) Se falar de Patrus/Benner, use como empatia de setor, não como currículo rival.<br>
+                    7) Futebol/vôlei: grupo tem SADA Cruzeiro — rapport leve só se o clima permitir; não forçar.
+                </p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>Planilha CIOs Confirmados IT Forum Praia do Forte 2026 (CNPJ/UF)</li>
+                    <li>Transporte Moderno — investimento R$ 38,8 mi / Jornada da Carga (mar/2025)</li>
+                    <li>AutoData / Transporte Mundial — crescimento carga geral 2024</li>
+                    <li>Intermodal 2025 — release expositor Grupo SADA</li>
+                    <li>MOM GMR — histórico grupo / faturamento 2016</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Salesforce customer story — CSC Grupo SADA</li>
+                    <li>IT Forum Brandspaces — Salesforce CSC</li>
+                    <li>BHS — case outsourcing TI Grupo SADA</li>
+                    <li>Site gruposada.com.br — TMS SADA Log / frota</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Econodata — CNPJ 19.199.348/0008-54</li>
+                    <li>Viui Tauna — expansão carga geral / ~7,5 mil colab.</li>
+                    <li>AutoData — frota GNV / R$ 9,3 mi</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn — Manuel Landeiro</li>
+                    <li>The Org — org chart Grupo SADA</li>
+                    <li>IT Forum — entrevista liderança (set/2023)</li>
+                    <li>MoovenCast 31 — perfil CIO</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch/HTTP GET gruposada.com.br (200, GTM/GA4)</li>
+                    <li>HTTP GET sada.com.br → sadatransportes.com.br (WordPress, 200)</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+
+</body>
+</html>

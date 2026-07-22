@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<!--
+  Briefing CIO — Cristiano Hypolitto | GRUPO SIMPAR
+  IT Forum 2026 Praia do Forte · Design System Foursys · Ordem B→A→C · Modo --full
+  Hunter | Pre-Sales Intelligence
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Cristiano Hypolitto | GRUPO SIMPAR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Cristiano Hypolitto</h1>
+                <h2>Global CIO / Diretor Executivo de Tecnologia — Grupo SIMPAR</h2>
+                <div class="loc">Holdings e Grupos Empresariais · São Paulo/SP · CNPJ 07.415.333/0001-20</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · maior porte (holding listada)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Receita bruta 2025</div><div class="value">R$ 48,1 bi</div></div>
+                <div class="header-badge"><div class="label">EBITDA 2025</div><div class="value">R$ 12,8 bi</div></div>
+                <div class="header-badge"><div class="label">Colaboradores</div><div class="value">+57 mil</div></div>
+                <div class="header-badge"><div class="label">CIO desde</div><div class="value">Out/2024</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: RI deep-dive (releases 4T25/1T26) + leitura de comitê + ângulo IA/integração + material de apresentação · Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>A <strong>SIMPAR S.A.</strong> (ticker <strong>SIMH3</strong>, Novo Mercado B3) é a holding que controla oito negócios independentes da economia real: <strong>JSL</strong> (logística), <strong>Movida</strong> (locação/GTF), <strong>Vamos</strong> (locação de pesados), <strong>Automob</strong> (concessionárias), <strong>CS Brasil</strong> (frotas setor público), <strong>BBC Digital</strong> (banco do ecossistema), <strong>CS Infra</strong> (concessões/PPPs) e <strong>Ciclus</strong> (resíduos/saneamento — com monetização recente de ativos). CNPJ da planilha IT Forum (<strong>07.415.333/0001-20</strong>) confere com B3/CVM e balanços publicados. Sede em São Paulo (Itaim Bibi). Ciclo 2025–2026 declarado pelo conselho: após a fase de construção de bases (2020–2024), foco em <strong>extração de valor</strong> — eficiência operacional, precificação, menor Capex líquido e geração de caixa.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">SIMPAR S.A.</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">São Paulo / SP</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Brasil + 10 países (site institucional)</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">Receita bruta R$ 48,1 bi (2025) · RI</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">+57 mil (RI / site)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Pública (listada) · holding</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Cristiano Hypolitto</strong> (grafia LinkedIn: <em>Hyppolito</em>) é <strong>Global CIO / Diretor executivo de tecnologia</strong> do Grupo SIMPAR desde <strong>outubro/2024</strong>. Discurso público: transformar operações de TI em vantagem competitiva via IA; angel investor em AI Commerce, Health Tech e LawTech; conselheiro CIONET e expositor frequente sobre liderança de IA (posts 2026). Trajetória anterior: CIO/CTO América Latina na <strong>Global Fashion Group / Dafiti</strong>; CTO/CDO/CIO e head de labs na <strong>Dotz</strong>; CIO/CTO/CDO na <strong>Cinemark</strong>. Perfil de produto digital e marketplace — não de CIO “infra-only”.</p>
+            <div class="insight-box" style="margin-top:14px">
+                <h4>Leitura de comitê</h4>
+                <p><strong>FATO:</strong> cada controlada tem conselho e plano estratégico próprio; CEO da holding (<strong>Fernando Simões</strong>) fala publicamente de IA como frentes estratégicas de processos e relacionamento digital com clientes (call 1T26). <strong>HIPÓTESE consultiva:</strong> budget de TI de grupo passa por Cristiano + CFOs/CIOs das verticais (JSL, Movida, Vamos, Automob); projetos cross-company (IA, integração, ciber) sobem para comitê da holding. Validar interlocutores de JSL Digital e de dados/telemetria Movida/JSL na discovery.</p>
+            </div>
+            <p style="margin-top:12px;font-size:13.5px"><strong>Poder de decisão:</strong> alto sobre arquitetura e roadmap de tecnologia do grupo (título Global CIO). Budget de TI isolado: não discriminado no RI (Capex consolidado é majoritariamente de frota/ativos). Presente no último IT Forum: <strong>NÃO</strong> (planilha). Participação 2026: digital e presencial · FOCO 4SYS marcado.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Holding diversificada de <strong>logística, mobilidade, infraestrutura e serviços financeiros</strong>, com modelo de gestão única e operações independentes. Cadeia de valor: frotas (leves e pesadas), 3PL, concessionárias, contratos públicos, concessões e crédito ao motorista (BBC). Prioridades setoriais 2026: eficiência de capital, ocupação de frota, precificação dinâmica, descarbonização, canais digitais B2B e uso pragmático de IA. Pressões: custo de capital, concorrência em locação leve (Localiza &amp; Co.), digitalização da logística rodoviária e exigência de visibilidade/API pelos clientes. Posição: um dos maiores conglomerados privados de mobilidade/logística do Brasil, com quatro listadas no Novo Mercado além da holding (JSL, Movida, Vamos, Automob).</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Oito empresas com stacks e roadmaps próprios — risco de silos e integrações ponto-a-ponto na holding (hipótese consultiva sustentada pelo modelo de gestão independente).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Ciclo de “fazer mais com menos”: Capex líquido caiu ~35% em 2025 — pressão para ROI rápido em TI, não projetos intermináveis (FATO RI).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>IA anunciada pelo CEO como frentes em curso, mas “ainda no início” e sem detalhe técnico público — gap entre narrativa e industrialização (call 1T26).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>JSL Digital em expansão progressiva para empresas adquiridas — complexidade de unificar gestão de transporte digital (imprensa setorial).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Superfície cibernética ampla: portais B2B, telemetria de frota, banco digital BBC, milhares de colaboradores e terceiros.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Extração de valor / eficiência 2026</span>
+                <span class="tag tag-priority">IA em processos e interface com clientes</span>
+                <span class="tag tag-priority">JSL Digital em escala</span>
+                <span class="tag tag-priority">Sinergias cross-company sem matar autonomia</span>
+                <span class="tag tag-priority">Redução de alavancagem e ROIC</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses (RI + fontes abertas)</h4>
+            <div>
+                <span class="tag tag-active">Capex líquido consolidado R$ 6,6 bi em 2025 (foco ativos/frota)</span>
+                <span class="tag tag-active">Sistemas e precificação (ciclo de bases concluído — carta 2025)</span>
+                <span class="tag tag-active">IA em processos administrativos e canal digital ao cliente</span>
+                <span class="tag tag-active">JSL Digital (contratação, rastreio, POD, pagamento)</span>
+                <span class="tag tag-active">Telemetria / SAT (ecossistema Movida) e dados de frota</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido (hipótese)</h4>
+            <div>
+                <span class="tag tag-opportunity">AI Squad industrializando casos de ROI (não PoCs isolados)</span>
+                <span class="tag tag-opportunity">FourBlox / iPaaS holding ↔ controladas</span>
+                <span class="tag tag-opportunity">Engenharia Digital em produtos B2B (JSL Digital / apps cliente)</span>
+                <span class="tag tag-opportunity">Cibersegurança OT/IT de frota conectada</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad — industrialização de IA com P&amp;L</h4><span class="score-badge">94/100</span></div>
+                <p>Squads com casos de negócio mensuráveis: automação de backoffice, precificação assistida, atendimento B2B e orquestração de agentes — alinhado ao discurso do CIO e ao CEO (IA como esforço contínuo, não milagre overnight).</p>
+                <div class="reasons"><ul>
+                    <li>Timing: call 1T26 confirma frentes de IA em andamento e demanda de parceiro que entregue outcome.</li>
+                    <li>Fit cultural: Cristiano publica sobre contratar quem aprende com IA — Foursys como fábrica, não slideware.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (Digibee iPaaS) — nervo digital da holding</h4><span class="score-badge">90/100</span></div>
+                <p>Camada de integração governada entre holding, JSL, Movida, Vamos, Automob, BBC e parceiros — reduz ponto-a-ponto e acelera sinergias sem quebrar autonomia das empresas.</p>
+                <div class="reasons"><ul>
+                    <li>Modelo de 8 negócios independentes é o maior risco técnico e de custo oculto de integração.</li>
+                    <li>ISO 27001/27701 + Digibee conversam com compliance de empresa listada e banco digital.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital — produtos B2B (JSL Digital &amp; canais)</h4><span class="score-badge">86/100</span></div>
+                <p>Acelerar releases de plataformas digitais de logística/mobilidade (contratação, tracking, POD, self-service de frota) com squads de produto.</p>
+                <div class="reasons"><ul>
+                    <li>JSL Digital em rollout para empresas adquiridas — precisa de velocidade de engenharia.</li>
+                    <li>CEO vincula IA a facilitar acesso do cliente aos serviços — produto digital é o veículo.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança — frota conectada + superfície B2B</h4><span class="score-badge">78/100</span></div>
+                <p>Programa de hardening IT/OT, identity, terceiros e resiliência para holding listada com banco digital e milhares de ativos conectados.</p>
+                <div class="reasons"><ul>
+                    <li>BBC Digital + telemetria + portais elevam risco regulatório e reputacional.</li>
+                    <li>Ângulo com board: proteção do ciclo de extração de valor (interrupção = hit em EBITDA).</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado — cores transacionais e legado pós-M&amp;A</h4><span class="score-badge">72/100</span></div>
+                <p>Evolução controlada de sistemas herdados das aquisições (JSL e outras) sem big bang — arquitetura evolutiva e strangler pattern.</p>
+                <div class="reasons"><ul>
+                    <li>Grupo cresceu por M&amp;A; carta 2025 cita adequação de sistemas como base já construída — agora é hora de racionalizar.</li>
+                    <li>Complementa iPaaS: modernizar o que fica, integrar o que permanece.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Abrir com a pergunta que o próprio Cristiano faz em público: “qual problema de negócio a IA está resolvendo?” Oferecer mapa de 5 casos com ROI em 90 dias (backoffice, pricing, canal cliente) — linguagem de P&amp;L, não de modelo de LLM.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Janela IT Forum 2026 (primeira participação presencial recente — planilha NÃO no último) + ciclo de extração de valor 2026 + JSL Digital em expansão. Propor PoC cross-company: um fluxo de dados holding↔vertical ou um caso de IA em processo administrativo com métricas de ciclo.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>AI Squad + FourBlox + Engenharia Digital com ISO 27001/27701, parceria Digibee e 24 anos / 41.000+ projetos — posicionar como parceiro de industrialização digital da holding, sem tentar “unificar ERP” nem brigar com autonomia das controladas.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Localiza &amp; Co.</h4><p>Principal rival da Movida em locação leve/GTF, com escala digital e app maduros. Gap SIMPAR: acelerar experiência digital e precificação assistida por dados/IA sem perder disciplina de capital.</p></div>
+            <div class="competitor-card"><h4>Operadores logísticos digitais / marketplaces de carga</h4><p>Pressão sobre JSL em frete spot e visibilidade. Gap: JSL Digital precisa entregar velocidade de produto comparável a pure-plays digitais.</p></div>
+            <div class="competitor-card"><h4>Unidas / players de GTF e seminovos</h4><p>Disputam frota corporativa e remarketing. Gap: stack de telemetria + CRM + pricing unificados no ecossistema Movida/SAT.</p></div>
+            <div class="competitor-card"><h4>Bancos digitais e fintechs de caminhões</h4><p>Competem com BBC Digital no crédito ao motorista/transportador. Gap: integração nativa com dados de operação JSL/Vamos como diferencial — depende de iPaaS e dados limpos.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">SIMPAR S.A. (SIMH3) — holding de 8 negócios (JSL, Movida, Vamos, Automob, CS Brasil, BBC, CS Infra, Ciclus); CNPJ 07.415.333/0001-20.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Cristiano Hypolitto, Global CIO desde out/2024; ex-Dafiti/Dotz/Cinemark; foco em IA como vantagem competitiva.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Ciclo 2026 de extração de valor: eficiência, caixa e IA pragmática — sem Capex de vaidade.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">RI: Capex líquido R$ 6,6 bi (2025, majoritariamente ativos); IA e sistemas citados como frentes de eficiência e canal digital. Budget TI isolado: não discriminado — fontes RI + abertas.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) AI Squad; 2) FourBlox/iPaaS holding; 3) Engenharia Digital (JSL Digital / canais).</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião IT Forum → workshop 90 min com CIO + 1 vertical (JSL ou Movida) mapeando 3 casos de IA com P&amp;L.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum Praia do Forte 2026 + guidance 2026 + 70 anos do grupo.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “plataforma de IA”. Vender redução de ciclo administrativo e facilidade de acesso do cliente aos serviços — exatamente o que o CEO descreveu no call.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Da construção à extração</h4><p>Após IPO e M&amp;A (2020–2024), a SIMPAR entra em 2025–26 colhendo escala: EBITDA recorde, Capex menor, holding com CIO global focado em IA.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Oito stacks, uma narrativa de IA</h4><p>Autonomia das empresas gera velocidade local e dívida de integração. IA está “em várias frentes”, mas industrializar exige governança, dados e squads — não mais slides.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Foursys como fábrica de outcomes</h4><p>AI Squad + FourBlox + Engenharia Digital aceleram JSL Digital e canais, com segurança de empresa listada — sinergia sem matar independência.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>IA com P&amp;L — do discurso à operação</h4>
+                <p>Evidência: CEO na call 1T26 descreve IA em processos administrativos/burocráticos e no acesso digital do cliente aos serviços; CIO publica sobre risco de agentes sem problema claro.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad com backlog priorizado por economia de horas/ciclo e NPS B2B; governança de modelos e agentes.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual processo administrativo do grupo ainda consome mais FTEs e já tem dado estruturado o suficiente para um piloto em 60 dias?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Scorecard de 5 processos × ROI × risco; escolher 1 PoC com KPI financeiro.</p>
+            </div>
+            <div class="business-card">
+                <h4>Integração holding ↔ verticais</h4>
+                <p>Evidência: modelo de gestão com 8 empresas independentes + ecossistema BBC que precisa de dados das operadoras.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee): hub de APIs com trilha de auditoria para listada/banco.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quantas integrações ponto-a-ponto o time de arquitetura sustenta hoje entre JSL, Movida e BBC?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Inventário de 10 fluxos críticos e proposta de hub iPaaS em uma vertical piloto.</p>
+            </div>
+            <div class="business-card">
+                <h4>Produto digital logístico em escala</h4>
+                <p>Evidência: JSL Digital — unidade para digitalizar gestão de transporte (contratação, rastreio, POD, pagamento), em expansão para empresas adquiridas.</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital: squad de produto com releases quinzenais e métricas de adoção de transportadores.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual percentual da base de transportadores homologados já opera 100% no fluxo digital vs. híbrido?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment de roadmap JSL Digital + sprint piloto em um corredor.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de PoC AI Squad (1 caso P&amp;L) + mapa iPaaS</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad + FourBlox + Engenharia Digital — industrializar IA e integração, não “body shop”</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) IA em backoffice/precificação de mobilidade ou logística; (2) iPaaS em holding multiempresa / M&amp;A; (3) torre digital / marketplace de frete. Se case Foursys setorial não estiver pronto, usar narrativa ancorada nas falas públicas do CEO (1T26) e do CIO (posts IA).</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> o board já comprou a tese de extração de valor; o CIO compra quem reduz ciclo e custo oculto de integração. Não abrir com “modernizar o data center”.</p>
+            <p style="margin-top:8px"><em>Discurso sugerido: “Você e o Fernando já disseram publicamente: IA não é milagre overnight, é contínuo. A Foursys traz o squad que transforma isso em backlog com P&amp;L — e o FourBlox para a holding conversar com as verticais sem matar a autonomia que fez a SIMPAR crescer.”</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Cristiano, li seus posts: não viemos vender agentes — viemos escolher o problema de negócio certo e medir o ROI.”</li>
+                <li>“O CEO falou no call que IA facilita o cliente acessar os serviços: isso é produto digital + integração, não slide de GenAI.”</li>
+                <li>“Oito empresas independentes são força; sem iPaaS governado viram custo oculto — FourBlox fecha o nervo.”</li>
+                <li>“JSL Digital em rollout precisa de fábrica de releases; Engenharia Digital entrega isso em 30–60 dias.”</li>
+                <li>“Ciclo 2026 é de Capex disciplinado: cada iniciativa nossa cabe em payback curto alinhado à extração de valor.”</li>
+                <li>“BBC + telemetria + portais: ciber entra no desenho com ISO 27001/27701, não no final.”</li>
+                <li>“Proposta pós-fórum: workshop 90 min + scorecard de 5 casos de IA; PoC no top 1.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Encontro IT Forum + follow-up LinkedIn com Global CIO</td><td>Ata + hipótese de valor (IA / iPaaS / JSL Digital)</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop 90 min (CIO + 1 vertical + arquitetura)</td><td>Scorecard 5 casos × ROI × risco</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC AI Squad (1 processo) ou fluxo FourBlox piloto</td><td>Demo + métricas de ciclo/custo</td><td>4–6 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad AI ou Engenharia Digital com backlog quinzenal</td><td>Releases + OKRs de negócio</td><td>1 trimestre</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Expandir para outras verticais + ciber + MSA</td><td>MSA plurianual + governança holding</td><td>6–12 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3–5)</h4>
+            <div class="app-card">
+                <h4>Portal institucional SIMPAR</h4><div class="url">https://simpar.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">WordPress + sinais React/Next</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">WordPress / PHP</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Cloudflare (proxy)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não exposta publicamente</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>RI SIMPAR (MZIQ)</h4><div class="url">https://ri.simpar.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Tema MZIQ / WordPress</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">MZIQ RI platform</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Cloudflare</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Downloads de releases/transcripts</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>JSL Digital</h4><div class="url">Unidade de negócio anunciada — URL pública dedicada não localizada</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Plataforma digital de gestão de transporte</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Prevista (contratação/rastreio/POD/pagamento)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Site JSL</h4><div class="url">https://www.jsl.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">WordPress</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">WordPress / PHP</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Cloudflare</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Telemetria / SAT (ecossistema Movida)</h4><div class="url">Citado no Relatório Integrado 2024 — rastreamento e atendimento 24h</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não localizado (app interno/cliente)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Telemetria / IoT frota</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Hipótese: feeds operacionais</div></div>
+                </div>
+            </div>
+
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Canais públicos sob Cloudflare. Cloud corporativa consolidada (AWS/Azure/GCP): <strong>não publicada</strong> de forma unificada — hipótese de multi-cloud por vertical pós-M&amp;A. Validar com arquitetura.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">Empresa listada + banco digital (BBC) implicam controles elevados; posture detalhada e CISO nomeado: <strong>não localizados</strong> em fontes abertas no escopo desta pesquisa.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">IA citada pelo CEO (processos e canal digital) e pelo CIO (narrativa pública). Maturidade de plataforma ML/MLOps: não localizada. Telemetria de frota como base para analytics operacional.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">Dados de frota, telemetria, precificação e vendas de ativos são críticos ao ciclo de extração de valor. Lakehouse/BI corporativo unificado: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">ERP consolidado da holding: <strong>não localizado</strong> em fontes abertas (não especular marca). Cada controlada tende a manter core próprio — hipótese consultiva.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">JSL Digital; telemetria/SAT Movida; apps de locação/GTF; BBC Digital; sistemas de concessionárias (Automob); TMS/WMS implícitos na JSL.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">Sites institucionais (simpar, jsl, movida) com GTM/GA; RI MZIQ; canais digitais B2B em expansão (meta do CEO).</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://simpar.com.br/</td><td><span class="status-200">200</span></td><td>WordPress (+ sinais React/Next)</td><td>Cloudflare</td><td>GTM/GA detectados</td></tr>
+                    <tr><td>https://ri.simpar.com.br/</td><td><span class="status-200">200</span></td><td>MZIQ / WordPress</td><td>Cloudflare</td><td>Portal RI; GTM/GA</td></tr>
+                    <tr><td>https://www.jsl.com.br/</td><td><span class="status-200">200</span></td><td>WordPress</td><td>Cloudflare</td><td>GTM/GA</td></tr>
+                    <tr><td>https://www.movida.com.br/</td><td><span class="status-err">403</span></td><td>—</td><td>—</td><td>Bloqueio ao fetch automatizado</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 20/07/2026 (GET). Só o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4–6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · IA</div><h4>IA narrativa vs. industrializada</h4><p>CEO confirma frentes em curso mas “início de jornada”; sem evidência pública de MLOps/governança de agentes. Risco de PoCs dispersos nas 8 empresas.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Malha holding multiempresa</h4><p>Modelo de gestão independente sem hub iPaaS declarado — custo oculto e lentidão de sinergias (BBC↔operadoras, JSL Digital↔adquiridas).</p><div class="offer">Oferta Foursys: FourBlox (Digibee)</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Produto digital</div><h4>Velocidade de release em JSL Digital</h4><p>Plataforma em expansão progressiva; concorrentes digitais de frete pressionam time-to-feature.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Segurança</div><h4>Superfície frota + banco digital</h4><p>Telemetria, portais B2B e BBC ampliam ataque; posture pública detalhada não localizada.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Legado M&amp;A</div><h4>Sistemas herdados pós-aquisição</h4><p>Carta 2025 cita adequação de sistemas como base concluída — racionalização contínua é candidata a modernização evolutiva.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Não localizado em detalhe público</div></div>
+                <div class="info-card"><div class="label">Base</div><div class="value">São Paulo / SP</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado (atuação LATAM sugere EN)</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px">
+                <h4>Dicas de conversa (5–7)</h4>
+                <p>
+                    1) Use a grafia LinkedIn (Hyppolito) na conversa oral; no material interno mantenha Hypolitto da planilha.<br>
+                    2) Cite um post recente dele sobre IA/liderança — mostra leitura, não stalk superficial.<br>
+                    3) Fale P&amp;L e ciclo de processo, não benchmarks de modelo de LLM.<br>
+                    4) Respeite a autonomia das verticais; proposta “holding unifica tudo” tende a falhar politicamente.<br>
+                    5) Angel investing / CIONET: rapport de ecossistema, sem forçar pitch de startup.<br>
+                    6) Trajetória Dafiti/Dotz: empatia de produto digital e marketplace.<br>
+                    7) Evite brand-name de ERP no primeiro contato — core não publicado; foque em IA + integração + produto.
+                </p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>Planilha CIOs Confirmados IT Forum Praia do Forte 2026</li>
+                    <li>Release / balanço SIMPAR 4T25 e FY2025 (receita, EBITDA, Capex)</li>
+                    <li>Transcript call 1T26 — Fernando Simões sobre IA</li>
+                    <li>ri.simpar.com.br · B3 SIMH3 CNPJ 07.415.333/0001-20</li>
+                    <li>Relatório Integrado 2024 / site Quem Somos</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Nação Truck — JSL Digital</li>
+                    <li>RA 2024 — SAT/telemetria Movida</li>
+                    <li>Verificação empírica simpar.com.br / jsl.com.br / RI</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Econodata — SIMPAR S.A. CNPJ</li>
+                    <li>Pipeline Valor — ciclo de transformação SIMPAR</li>
+                    <li>Imprensa setorial logística/mobilidade</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn — cristianohyppolito (Global CIO SIMPAR)</li>
+                    <li>Posts públicos 2026 sobre IA e liderança</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>GET simpar.com.br (200, CF, GTM)</li>
+                    <li>GET ri.simpar.com.br (200, MZIQ)</li>
+                    <li>GET jsl.com.br (200) · movida.com.br (403)</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

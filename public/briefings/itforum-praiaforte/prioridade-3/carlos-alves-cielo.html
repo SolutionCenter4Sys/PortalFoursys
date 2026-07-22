@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Carlos Alves | CIELO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Carlos Alves</h1>
+                <h2>VP Executivo de Tecnologia e Negócios (CPO / CTO / CDO) e Inovação — CIELO</h2>
+                <div class="loc">Serviços Financeiros · Barueri/SP · CNPJ 01.027.058/0001-91</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Porte (maior adquirente BR)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Receita líquida</div><div class="value">R$ 10,9 bi</div></div>
+                <div class="header-badge"><div class="label">Lucro líquido</div><div class="value">R$ 1,9 bi</div></div>
+                <div class="header-badge"><div class="label">TPV 2025</div><div class="value">R$ 898 bi</div></div>
+                <div class="header-badge"><div class="label">Colaboradores</div><div class="value">~7 mil</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: RI/DF 2025 + Cielo Day (IA agêntica) + LinkedIn/comitê + material de apresentação · Evolui briefing Trancoso (Demais CIO · Nrespondeu IT). Presente no último IT Forum: SIM.</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>Cielo S.A. — Instituição de Pagamento é a maior adquirente da América Latina, com sede em Barueri (SP). Fundada em 1995, processa crédito, débito, Pix e pagamentos digitais para estabelecimentos em praticamente todos os municípios brasileiros. Em agosto/novembro de 2024, Bradesco e Banco do Brasil concluíram a OPA e o fechamento de capital (100% das ações; saída da B3). Em 2025, a companhia reportou receita líquida de R$ 10.948,8 milhões e lucro líquido da controladora de R$ 1.888 milhões (DF 2025); o volume financeiro de transações (TPV) na Cielo atingiu R$ 897,8 bilhões (Cateno: R$ 451,0 bilhões). Estratégia pública: AI-First, integração profunda com os bancos controladores, eficiência logística e foco em rentabilidade (não volume a qualquer preço). Identidade confirmada: razão social Cielo S.A. · CNPJ 01.027.058/0001-91 (planilha IT Forum; dígito inicial recuperado do padrão 14 dígitos CNPJ).</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Cielo S.A. — Instituição de Pagamento</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">Barueri / SP</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Nacional (~99% dos municípios)</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">Receita líquida R$ 10,9 bi (DF 2025)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~7 mil (Cielo Day / fontes abertas)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Capital fechado — Bradesco + BB</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Carlos Alves</strong> é Vice-Presidente Executivo de Tecnologia e Negócios (CPO, CTO, CDO) e Inovação na Cielo desde fevereiro/2023 (LinkedIn: carlosalves00). Concentra produto, tecnologia, dados, engenharia e inovação sob a mesma VP — poder de decisão máximo em TI/produto. Trajetória: fundador da Integra Commerce (exit Magazine Luiza); Diretor de Marketplace Magalu; DE de Produto/Tecnologia/Dados/Inovação na Riachuelo e Midway (2018–2023, ~1.100 pessoas). Conselhos: Cateno (abr/2024) e Tenpo/Chile (mar/2024). No Cielo Day (nov/2025), falou publicamente como CTO sobre IA generativa, copiloto de engenharia, logística preditiva e arquitetura de agentes. Comitê de decisão relevante: Estanis Bassols (CEO), Carlos Alves (VP Tech/Produto/Dados), times de Cloud (~60+ profissionais AWS citados em fontes abertas) e dados (Databricks Data + AI Summit 2026). Ainda na empresa — sem alerta de saída.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento & mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Mercado de adquirência e meios de pagamento no Brasil: consolidação bancária (Cielo–Bradesco/BB, Getnet–Santander, Rede–Itaú) versus fintechs verticalizadas (Stone, PagBank). A Cielo permanece líder em volume e capilaridade, mas compete em NPS, time-to-market e preço com players digitais. Pressões: Pix canibalizando cartão, chargeback/fraude, logística de terminais, integração onboarding nos apps dos bancos, e-commerce (TPV e-commerce citado acima de R$ 100 bi em meados de 2025). Tendência 2026: AI-First operacional, terminais smart / Tap on Phone, Pix recorrente e “Vendeu, tá na conta”, biometria e autenticação avançada. Posição do alvo: maior adquirente nacional sob controle dos dois maiores bancos públicos/privados do país — âncora de infraestrutura de pagamentos, não fintech de nicho.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões & lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Orquestrar 500+ frentes de IA (ML, generativa, agêntica) com governança, ROI e guardrails — risco de “IA sem plataforma”.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Integração profunda Bradesco/BB (dados, APIs, jornadas nos apps) sem degradar estabilidade de captura/liquidação.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Migração cloud em larga escala (AWS / 900+ servidores citados) + FinOps sob pressão de custo.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Pressão competitiva de fintechs em experiência e taxa, com foco interno em rentabilidade (abertura de mão de grandes contas pouco rentáveis).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Cultura: gestores passando a liderar pessoas e agentes de IA (mensagem do CEO no Cielo Day).</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">AI-First com ROI mensurável</span>
+                <span class="tag tag-priority">Time-to-market (já −41% TTM)</span>
+                <span class="tag tag-priority">Sinergia bancos controladores</span>
+                <span class="tag tag-priority">NPS histórico + menos reclamação</span>
+                <span class="tag tag-priority">Arquitetura de agentes interoperáveis</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">IA / MLOps / agentes</span>
+                <span class="tag tag-active">Cloud AWS + FinOps</span>
+                <span class="tag tag-active">Integração bancária / APIs</span>
+                <span class="tag tag-active">Pix / Tap on Phone / smart POS</span>
+                <span class="tag tag-active">Fraude, AML e cibersegurança</span>
+                <span class="tag tag-active">Logística preditiva / N.A.V.E.</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Squads AI/MLOps em escala</span>
+                <span class="tag tag-opportunity">iPaaS integração Bradesco/BB</span>
+                <span class="tag tag-opportunity">Modernização de legado pós-cloud</span>
+                <span class="tag tag-opportunity">Engenharia digital de produtos</span>
+                <span class="tag tag-opportunity">Cibersegurança / fraud ops</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">96/100</span></div>
+                <p>Aceleração de iniciativas de IA alinhadas à estratégia AI-First (500+ frentes; ML + generativa + agêntica). Camada C3/C4: modelos, MLOps, agentes com guardrails, copiloto de engenharia e casos de fraude/chargeback/atendimento.</p>
+                <div class="reasons"><ul>
+                    <li>Carlos Alves e CEO falam publicamente de agentes, copiloto e “aha moment” de IA.</li>
+                    <li>Resultados já publicados (ex.: R$ 90 mi logística; N.A.V.E.; 50%+ redução tempo de resposta a incidentes).</li>
+                    <li>Gap típico do setor: escala de IA sem fábrica industrializada de modelos/agentes.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (parceria Digibee iPaaS)</h4><span class="score-badge">91/100</span></div>
+                <p>Integração acelerada Cielo ↔ Bradesco/BB e ecossistema de parceiros (APIs, eventos, dados de adquirência + banking). Camada C5/C6: interoperabilidade sem “cola” frágil.</p>
+                <div class="reasons"><ul>
+                    <li>Pós-OPA, integração com bancos é prioridade #1 declarada.</li>
+                    <li>Força de vendas técnica aos bancos multiplicada (~4×) — demanda de conectividade sobe junto.</li>
+                    <li>ISO 27001/27701 Foursys + Digibee encaixa em ambiente regulado de pagamentos.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">88/100</span></div>
+                <p>Squads de produto/engenharia para acelerar e-commerce, Tap on Phone, jornadas digitais e redução de time-to-market (programa “Pra Cima Cielo” / kanban trimestral).</p>
+                <div class="reasons"><ul>
+                    <li>TTM −41% (138→81 dias) — apetite por aceleração contínua.</li>
+                    <li>E-commerce: −53% tempo de implementação citado; TPV digital em expansão.</li>
+                    <li>Carlos pensa como CPO+CTO: entrega valor de produto, não só código.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">84/100</span></div>
+                <p>Fraude, AML, chargeback, PCI e superfície ampliada por Pix/biometria/agentes. Camada C2: SOC, identity, proteção de APIs e modelos.</p>
+                <div class="reasons"><ul>
+                    <li>Agentes de fraude/AML já em produção — precisam de hardening e governança.</li>
+                    <li>Confiança citada pelo CEO como vetor de inovação (“fortalecer segurança do Pix”).</li>
+                    <li>Foursys: ISO 27001/27701, 24 anos, 41.000+ projetos.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">78/100</span></div>
+                <p>Simplificação arquitetural na esteira da migração AWS (900+ servidores) e descontinuidade de terminais legados (MOVE 5000 / S920 no DF 2025). Camada C1/C5: desacoplamento, containers, APIs.</p>
+                <div class="reasons"><ul>
+                    <li>Cloud migration em andamento cria janela natural de modernização.</li>
+                    <li>Descontinuidade de POS legados sinaliza ciclo de renovação tecnológica.</li>
+                    <li>Hipótese: bolsões de sistemas satélite ainda acoplados à captura/liquidação.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Abrir pelo tema “fábrica de agentes com governança” — conectar N.A.V.E., Databricks Summit 2026 e os 500+ frentes de IA ao AI Squad Foursys. Linguagem de produto + ROI (economia logística, NPS, chargeback), não feature dump.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Integração Bradesco/BB + iPaaS (FourBlox/Digibee) e reforço de engenharia digital no ciclo pós-fechamento de capital. Timing: IT Forum Praia do Forte 2026 + ciclo orçamentário pós-DF 2025 com lucro em expansão.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>AI Squad + FourBlox (Digibee) + ISO 27001/27701 + modelo flexível de squads (24 anos, 41.000+ projetos). Posicionar como braço de execução sob a VP de Carlos — complementar, não competir com o time interno de Cloud/Dados.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes & Gap Analysis</h3>
+            <div class="competitor-card"><h4>Stone</h4><p>Adquirência + banking + software para PMEs; forte em experiência e atendimento. Gap Cielo: velocidade de inovação e “última milha” de experiência PME — Foursys acelera squads de produto/engenharia.</p></div>
+            <div class="competitor-card"><h4>PagSeguro / PagBank</h4><p>Banco digital + taxas agressivas no microempreendedor. Gap Cielo: simplicidade de oferta digital — responder com jornadas nos apps dos bancos e Pix/Tap sem fricção.</p></div>
+            <div class="competitor-card"><h4>Rede (Itaú)</h4><p>Adquirência nativa no ecossistema Itaú (e.Rede). Gap Cielo: profundidade de bundling bancário — exatamente a tese pós-OPA Bradesco/BB; iPaaS e dados unificados são o jogo.</p></div>
+            <div class="competitor-card"><h4>Getnet (Santander)</h4><p>Modelo espelho (fechou capital antes; integração bancária). Gap: quem executar melhor a integração banco+adquirente com IA e time-to-market.</p></div>
+            <div class="competitor-card"><h4>Mercado Pago</h4><p>Ecossistema marketplace + carteira digital. Gap Cielo: presença no comércio digital/omni — reforço de e-commerce e APIs.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Maior adquirente BR; capital fechado Bradesco+BB; TPV ~R$ 898 bi (2025); receita líquida R$ 10,9 bi.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Carlos Alves — VP CPO/CTO/CDO desde fev/2023; ex-Riachuelo/Magalu; conselhos Cateno e Tenpo.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escalar AI-First + integração bancos + cloud, mantendo rentabilidade e NPS.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">IA/agentes, AWS/FinOps, APIs bancárias, Pix/smart POS, fraude/AML (fontes: DF 2025, Cielo Day, LinkedIn — RI clássico limitado pós-fechamento).</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">AI Squad; FourBlox/Digibee; Engenharia Digital.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 45 min no IT Forum: discovery de pipeline de agentes + mapa de integração Bradesco/BB.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Praia do Forte 2026 + pós-DF 2025 (lucro em alta) + programa transformação em curso.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “mais IA”. Vender orquestração de agentes + integração bancária com governança — o gargalo real após 500 frentes.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Capital fechado, AI-First aberto</h4><p>OPA 2024 tirou a Cielo da bolsa e alinhou incentivos com Bradesco/BB. Carlos Alves concentra tech+produto+dados e coloca IA no centro da operação.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Escala sem orquestração</h4><p>500+ frentes de IA, migração AWS e integração bancária competem por capacidade. Fintechs pressionam experiência enquanto a casa prioriza rentabilidade.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Fábrica + iPaaS + squads</h4><p>Foursys entra como AI Squad + FourBlox + Engenharia Digital: industrializar agentes, conectar bancos e acelerar produtos sem inchar headcount permanente.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Orquestração de IA agêntica com ROI</h4>
+                <p>Evidência: Cielo Day / LinkedIn — ~100 agentes, 500+ frentes, copiloto de engenharia, agentes de chargeback/AML; N.A.V.E. com R$ 3 mi economia e −50% tempo de resposta.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad: fábrica de agentes, MLOps, avaliação de modelos e guardrails — resultado: mais casos em produção com risco controlado.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual percentual das 500 frentes já tem owner, KPI e kill-switch — e quantas estão “presas” em piloto?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop 2h: mapa de agentes críticos (fraude, logística, atendimento) × backlog Foursys.</p>
+            </div>
+            <div class="business-card">
+                <h4>Integração Cielo × bancos controladores</h4>
+                <p>Evidência: Valor/IT Forum — força técnica aos bancos ~4×; onboarding unificado; app journeys.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee): integrações event-driven e APIs com governança — resultado: time-to-integração menor e menos retrabalho.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quais jornadas Bradesco/BB ainda dependem de integração ponto a ponto ou planilha?</p>
+                <div class="sub">Gancho / próximo passo</div><p>One-pager de arquitetura de referência iPaaS para 2–3 jornadas prioritárias.</p>
+            </div>
+            <div class="business-card">
+                <h4>Velocidade de produto digital (e-commerce / Tap / Pix)</h4>
+                <p>Evidência: TTM −41%; e-commerce −53% implementação; Pix +163%; Tap on Phone lançado.</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital: squads de produto alinhados ao kanban trimestral — resultado: mais releases com qualidade e NPS.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Onde o bottleneck está hoje — requisitos, integração, homologação bandeira/BC ou capacidade de squad?</p>
+                <div class="sub">Gancho / próximo passo</div><p>PoC de 4–6 semanas em uma jornada digital com métrica de lead time.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de arquitetura de agentes/iPaaS; PoC opcional em 2ª conversa</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad (orquestração) + FourBlox/Digibee (integração bancos) — porquê: batem nas duas dores #1 pós-OPA</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) modernização/integração em serviços financeiros com iPaaS; (2) squads de engenharia com redução de lead time; (3) iniciativas de cibersegurança/fraude em ambiente regulado (ISO 27001/27701). Se case setorial exato não estiver pronto, usar narrativa de “fábrica de agentes com guardrails” + prova de capacidade Digibee.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> o concorrente vende “projeto de IA”; a Foursys vende a camada que impede 500 iniciativas de virar dívida técnica — governança, interoperabilidade de agentes e integração bancária.</p>
+            <p style="margin-top:8px"><em>Discurso sugerido se material setorial faltar: “Vocês já provaram ROI de IA. O próximo salto é industrializar — nós operamos squads que fazem isso sem disputar o protagonismo do time Cielo.”</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>Parabéns pelos números públicos de IA — o desafio agora é orquestrar, não só criar mais frentes.</li>
+                <li>Integração Bradesco/BB é onde iPaaS paga o projeto mais rápido que headcount interno.</li>
+                <li>Falamos a língua de CPO: lead time, NPS, aprovação e-commerce, custo logístico — não só stack.</li>
+                <li>AI Squad Foursys entra sob a sua VP como capacidade elástica com guardrails.</li>
+                <li>FourBlox + Digibee: mesma tese de sinergia bancária, com ISO 27001/27701.</li>
+                <li>Hipótese: bolsões de legado na esteira da migração AWS ainda consomem capacidade — modernização seletiva libera squads para produto.</li>
+                <li>Próximo passo concreto: mapa de 3 jornadas (fraude, onboarding banco, e-commerce) em 15 dias.</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Encontro IT Forum + follow-up LinkedIn com Carlos / staff VP Tech</td><td>Ata + hipóteses priorizadas</td><td>Semana 0–1</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshops agentes + integração bancos (tech + produto)</td><td>Mapa de gaps e score de fit</td><td>Semanas 2–3</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC AI Squad (1 agente crítico) ou PoC Digibee (1 jornada banco)</td><td>Demo + métricas</td><td>Semanas 4–8</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad misto Foursys–Cielo em produto digital ou MLOps</td><td>Releases + OKRs</td><td>90 dias</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>MSA multi-squad (AI + Integração + Engenharia)</td><td>Contrato + roadmap 12 meses</td><td>Após piloto</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Portal institucional Cielo</h4><div class="url">https://www.cielo.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Site marketing (Apache; GTM)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado (público)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">AWS (estratégia publicada)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não inspecionado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Cielo E-commerce / checkout digital</h4><div class="url">https://www.cielo.com.br/ecommerce/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portal (Apache; GTM)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Gateway/adquirência (não público)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">AWS (hipótese alinhada à migração)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">APIs de pagamento (documentação comercial)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Cielo Lio / smart terminals</h4><div class="url">Produto LIO / smart POS (site institucional)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">App no terminal</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Plataforma de apps POS</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado em detalhe</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Ecossistema de apps LIO</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Cielo Farol</h4><div class="url">Inteligência de mercado para lojistas (produto citado no site)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portal/app lojista</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Analytics comercial</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">BigData Cloud Platform (relatório 2023+)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>N.A.V.E. (ops monitoring)</h4><div class="url">Iniciativa interna (LinkedIn Carlos Alves, 2026)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Central de monitoramento</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Dados tempo real + IA</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integração varejo/bancos/logística/atendimento</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="name">AWS + migração em escala</div><div class="cmp">Migração 900+ servidores; superintendência Cloud ~60+; FinOps (Pier Cloud/Lighthouse citado em case AWS). BigData Cloud Platform desde 2023.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança & Compliance</div><div class="name">PCI / fraude / AML</div><div class="cmp">Agentes de fraude e lavagem; chargeback automatizado; reforço segurança Pix; ambiente regulado BC. Detalhes de ferramentas: não localizados publicamente.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="name">AI-First</div><div class="cmp">ML (5+ anos), GenAI (~1 ano), agêntica (~6 meses); ~100 agentes; copiloto engenharia; URA cognitiva; Databricks (case 2026).</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados & Analytics</div><div class="name">Lake/platform + Farol</div><div class="cmp">Plataforma de dados em cloud; Cielo Farol; N.A.V.E.; integração dados multiárea. Stack específica (Databricks confirmado em comunicação LinkedIn).</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="name">Core de adquirência</div><div class="cmp">Captura, autorização, liquidação, antecipação de recebíveis, Cateno. ERP corporativo específico: não publicado — não inventar.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="name">Produtos Cielo</div><div class="cmp">Lio, Tap on Phone, e-commerce, “Vendeu tá na conta”, Pix, gestão lojista, integração apps bancos.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência & Engajamento</div><div class="name">Atendimento + digital</div><div class="cmp">WhatsApp 24h, URA cognitiva, NPS recorde, autoatendimento no extrato com agentes.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.cielo.com.br/</td><td><span class="status-200">200</span></td><td>HTML marketing</td><td>Apache</td><td>GTM detectado</td></tr>
+                    <tr><td>https://www.cielo.com.br/ecommerce/</td><td><span class="status-200">200</span></td><td>HTML marketing</td><td>Apache</td><td>GTM detectado</td></tr>
+                    <tr><td>https://www.cielo.com.br/empresas/</td><td><span class="status-err">404</span></td><td>—</td><td>—</td><td>Path inexistente no momento da coleta</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026. Só registrar o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · IA</div><h4>Industrialização de agentes</h4><p>Setor de pagamentos escala ML/GenAI rápido, mas falha em MLOps, avaliação e kill-switch. Cielo declara 500+ frentes — risco de dívida de modelos.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Sinergia bancária end-to-end</h4><p>Adquirentes sob banco precisam unificar dados e jornadas; integrações ponto a ponto viram gargalo. Evidência: 4× força técnica aos bancos.</p><div class="offer">Oferta Foursys: FourBlox (Digibee)</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Engenharia</div><h4>Capacidade elástica de produto</h4><p>TTM melhorou, mas pressão de Pix/Tap/e-commerce continua. Squads externos complementam sem headcount fixo.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Segurança</div><h4>Superfície Pix + agentes</h4><p>Mais canais digitais e autonomia de agentes ampliam ataque e erro operacional — compliance PCI/BC exige hardening contínuo.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Legacy/Cloud</div><h4>Modernização seletiva pós-migração</h4><p>900+ servidores e descontinuidade de POS legados criam janela; sistemas satélite podem prender releases.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal & Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Não localizado em detalhe público</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">São Paulo / Barueri (atuação)</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Reconheça o exit Integra→Magalu — fala a língua de quem construiu e vendeu tecnologia.<br>
+                2) Cite N.A.V.E. / R$ 90 mi logística / Databricks 2026 — mostra leitura atualizada, não deck genérico.<br>
+                3) Trate-o como CPO+CTO: ROI de produto primeiro, stack depois.<br>
+                4) Conecte varejo (Riachuelo) ao lojista Cielo — empatia de ponta.<br>
+                5) Mencione conselhos Cateno/Tenpo com respeito — visão de ecossistema, não só adquirência.<br>
+                6) Evite pitch de “substituir time interno”; ofereça capacidade elástica sob a VP dele.<br>
+                7) Feche com pergunta de pipeline de agentes (owner/KPI/kill-switch) — diferencia amador de parceiro.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia & RI</h4><ul>
+                    <li>DF Cielo S.A. exercício 2025 (receita, lucro, TPV)</li>
+                    <li>Valor Econômico — integração bancos / IA (nov/2025)</li>
+                    <li>Época Negócios — TTM −41% / Pra Cima Cielo</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Relatório integrado 2023 — BigData Cloud Platform</li>
+                    <li>Case Pier Cloud / AWS FinOps (fontes abertas)</li>
+                    <li>LinkedIn Carlos Alves — Databricks Summit 2026; N.A.V.E.</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>IT Forum — Cielo Day / agentes de IA (14/11/2025)</li>
+                    <li>Valor — rentabilidade vs. grandes contas (2026)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn: https://br.linkedin.com/in/carlosalves00</li>
+                    <li>Planilha CIOs Confirmados IT Forum 2026 (ID 93)</li>
+                    <li>Briefing ref.: Demais CIO\Carlos Alves - CIELO_Nrespondeu IT.html</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch/HTTP: cielo.com.br e /ecommerce/ (200, Apache, GTM) — 21/07/2026</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

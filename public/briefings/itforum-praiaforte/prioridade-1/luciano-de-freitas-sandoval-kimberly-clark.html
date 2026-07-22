@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<!--
+  Briefing CIO — Luciano de Freitas Sandoval | KIMBERLY CLARK
+  IT Forum 2026 Praia do Forte · Design System Foursys · Ordem B→A→C · Modo --full
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Luciano de Freitas Sandoval | KIMBERLY CLARK</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+<button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Luciano de Freitas Sandoval</h1>
+                <h2>International Markets Digital Sales Director and Head of IT Brazil — Kimberly-Clark</h2>
+                <div class="loc">Bens de Consumo (Personal Care) · São Paulo/SP · CNPJ 02.290.277/0001-21</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · FOCO 4SYS + porte multinacional</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Brasil desde</div><div class="value">1996</div></div>
+                <div class="header-badge"><div class="label">Ambition BR</div><div class="value">2× até 28</div></div>
+                <div class="header-badge"><div class="label">E-comm. BR</div><div class="value">~15%</div></div>
+                <div class="header-badge"><div class="label">KMB receita</div><div class="value">US$ 20B+</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: RI deep-dive (Powering Care / Kenvue / digital procurement) + leitura de comitê (Head IT × Digital Sales × CEO BR) + material de apresentação · Diferencia da edição anterior (Trancoso). Contato não presente no último IT Forum (planilha). FOCO 4SYS = X · Confirmado com voo · Digital e presencial.</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>A <strong>Kimberly-Clark</strong> (NYSE: KMB) é multinacional americana de cuidados pessoais (fundada em 1872), com operação brasileira desde <strong>1996</strong>. No Brasil atua sob a razão <strong>Kimberly-Clark Brasil Indústria e Comércio de Produtos de Higiene Ltda.</strong>, com foco pós-divestiture em <strong>personal care</strong> (marcas Huggies, Intimus, Plenitud e correlatas). Plantas citadas em fontes abertas: <strong>Suzano/SP</strong> (inclui Centro de Inovação regional LatAm) e <strong>Camaçari/BA</strong> (expansão Norte/Nordeste). Hub administrativo citado em São Paulo/SP (planilha do evento).</p>
+            <p style="margin-top:10px"><strong>FATO estratégico BR:</strong> venda do negócio de tissue no Brasil à Suzano (conclusão 2023; acordo anterior ~US$ 175–185 mi conforme fontes) — KC concentra higiene pessoal e declara ambição de <strong>dobrar o tamanho da operação brasileira até o biênio 2027–2028</strong> (IstoÉ Dinheiro / Tissue Online; CEO Cláudio Vilardo). Brasil citado como um dos principais mercados de personal care do grupo (4º em algumas matérias).</p>
+            <p style="margin-top:10px"><strong>FATO RI global (2025–2026):</strong> estratégia <em>Powering Care</em> — produtividade, simplificação de plataformas, digital procurement, modernização de sistemas/ERP upgrades, automação de supply e investimento multi-bilionário em manufacturing NA; avanço na aquisição da <strong>Kenvue</strong> (health/consumer brands) como próximo salto de escala (IR KMB / 8-K jan/2026 / CAGNY 2026).</p>
+            <p style="margin-top:10px"><strong>Identificação antifraude:</strong> CNPJ da planilha <strong>02.290.277/0001-21</strong> (valor bruto 2290277000121) confere com a matriz da Kimberly-Clark Brasil Indústria e Comércio de Produtos de Higiene Ltda. (MonitorCNPJ / Receita). Capital social público ~R$ 597 mi. Filiais com outros CNPJs (ex. Jarinu) existem — não confundir com a matriz do evento.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Kimberly-Clark Brasil Indústria e Comércio de Produtos de Higiene Ltda.</div></div>
+                <div class="info-card"><div class="label">Sede (planilha)</div><div class="value">São Paulo / SP · plantas Suzano/SP e Camaçari/BA</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Nacional + hub LatAm (inovação Suzano) · matriz global Irving/TX</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">Grupo KMB ~US$ 20B+ (RI) · faturamento isolado BR: não localizado em detalhe público</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">Grupo: dezenas de milhares (LinkedIn empresa 10k–20k+ faixa) · headcount BR específico: não localizado</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Subsidiária de multinacional listada (KMB) · Ltda. Brasil</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Luciano de Freitas Sandoval</strong> (LinkedIn: Luciano S.) — cargo atual: <strong>International Markets Digital Sales Director and Head of IT Brazil</strong> na Kimberly-Clark (anúncio LinkedIn out/2024; experiência no perfil desde jan/2025). Acumula mandato de <strong>TI Brasil</strong> (marketing digital, privacidade, segurança de dados, analytics — Baguete) com <strong>digital sales</strong> de International Personal Care — perfil raro de “TI + receita digital”.</p>
+            <p style="margin-top:12px"><strong>Trajetória:</strong> ~5+ anos na KC (business partner de vendas LatAm; diretor de sistemas com foco em tecnologia digital para <em>revenue growth management</em>). Antes: Nestlé (contas estratégicas / canais), Unilever, Mondelez/Kraft, Philip Morris — DNA de bens de consumo e trade/digital. &gt;20 anos de experiência (Baguete / Panorama Farmacêutico).</p>
+            <p style="margin-top:12px"><strong>Poder de decisão:</strong> Head of IT da operação BR + diretor de digital sales IPC — influência direta sobre roadmap de dados/analytics, privacidade, segurança, plataformas digitais de venda e priorização de fornecedores locais alinhados a guidelines globais. Substituiu <strong>Silvio Veloso</strong> (agora diretor global de engajamento do consumidor e tecnologia). Sponsor de negócio BR: <strong>Cláudio Vilardo</strong> (presidente/CEO KC Brasil desde nov/2023).</p>
+            <div class="alert-box" style="margin-top:14px">⚠️ <strong>Leitura de comitê (ainda na empresa):</strong> Contato do evento = Luciano Sandoval (Head IT BR + Digital Sales IPC). Sponsor P&amp;L = Cláudio Vilardo (CEO BR — Ambition 2× até 2028). Predecessor global de engajamento digital = Silvio Veloso (pode influenciar stack DTC/consumer platforms). <em>Hipótese:</em> decisões de core ERP/cloud global passam por arquitetura corporativa KMB; Luciano decide/prioriza o que roda no Brasil em go-to-market digital, dados e cyber local. Não há evidência pública de saída do cargo — manter abordagem direta a ele.</div>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Atua em <strong>bens de consumo de higiene pessoal descartável</strong> (baby care, feminine care, adult care) — categorias de alta frequência, pressão de preço, trade marketing intenso e crescente peso do e-commerce/farmácia. Cadeia: fluff/insumos → plantas Suzano/Camaçari → distribuição varejo/farmácia/e-commerce → consumidor final.</p>
+            <p style="margin-top:10px">Após sair do tissue (Suzano líder nessa fatia), a KC Brasil disputa personal care contra <strong>P&amp;G</strong>, players regionais (ex. Softys/CMPC em higiene) e marcas privadas. Posição do alvo: um dos líderes em categorias-chave (ex. Huggies em lenços umedecidos e Intimus em absorventes, conforme Valor International) e hub LatAm de inovação. Prioridades setoriais 2025–2026: mix/premiumização, digital shelf, RGM, privacidade de dados do shopper, eficiência de planta e integração omnichannel.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Dobrar até 2028 com foco em rentabilidade, não só volume</strong> — CEO declara “fim do jogo pelo volume/trade tradicional” e Ambition Brasil 2026 (LinkedIn Vilardo). TI precisa acelerar dados, RGM e execução digital sem inflar opex.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>E-commerce ~15% das vendas BR e crescendo</strong> — Portal Personal Care: digitalização da jornada e integração com marketplaces/retail media. Pressão por digital shelf, conteúdo, pricing e fulfillment integrados.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Dual hat IT + Digital Sales</strong> — Luciano responde por stack e por receita digital IPC. Risco: backlog de modernização core vs. demandas comerciais de curto prazo.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Privacidade, segurança de dados e analytics no mandato público</strong> — Baguete: escopo explícito. LGPD + dados de shopper/retail media = superfície sensível.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Landscape global em transformação (Kenvue + ERP/digital upgrades)</strong> — IR: modernização de sistemas e “plug-and-play” para integração Kenvue. BR precisará absorver padrões sem perder velocidade local.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Expansão Norte/Nordeste + planta Camaçari</strong> — CapEx regional e capacidade +40% citada; OT/IT e S&amp;OP sob pressão de escala.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Ambition 2× Brasil 2027–28</span>
+                <span class="tag tag-priority">Cultura de dados / RGM</span>
+                <span class="tag tag-priority">E-commerce &amp; digital shelf</span>
+                <span class="tag tag-priority">Privacidade &amp; cyber de dados</span>
+                <span class="tag tag-priority">Premiumização Huggies/Intimus/Plenitud</span>
+                <span class="tag tag-priority">Agilidade LatAm (hub Suzano)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Powering Care / produtividade (RI KMB)</span>
+                <span class="tag tag-active">Digital procurement &amp; supply planning tools (RI)</span>
+                <span class="tag tag-active">ERP / infraestrutura digital (RI — upgrades multi-ano)</span>
+                <span class="tag tag-active">E-commerce &amp; consumer journey BR (fontes abertas)</span>
+                <span class="tag tag-active">CapEx planta/inovação BR (ciclos US$ 100 mi / R$ 500 mi citados em matérias anteriores)</span>
+                <span class="tag tag-active">Integração Kenvue (planejamento global 2026)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">AI Squad em RGM / forecast / digital shelf</span>
+                <span class="tag tag-opportunity">FourBlox iPaaS entre retail, e-comm e core</span>
+                <span class="tag tag-opportunity">Engenharia Digital — produtos digitais de trade/farmácia</span>
+                <span class="tag tag-opportunity">Cibersegurança + privacy-by-design (LGPD/shopper data)</span>
+                <span class="tag tag-opportunity">Modernização seletiva de apps locais pós-carve-out tissue</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad — RGM, demanda e digital shelf</h4><span class="score-badge">93/100</span></div>
+                <p>Encaixa no DNA do gestor (sistemas para growth/RGM) e na Ambition 2×: casos com KPI de mix, preço, ruptura e conteúdo em marketplaces — não PoC eternizado.</p>
+                <div class="reasons"><ul>
+                    <li>Fato: e-comm ~15% das vendas BR; diretoria prioriza jornada digital.</li>
+                    <li>Mandato público inclui analytics; LinkedIn dual role digital sales + IT.</li>
+                    <li>RI global enfatiza inovação e brand activation digital.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS Digibee) — Integração omnichannel</h4><span class="score-badge">90/100</span></div>
+                <p>Conectar varejo, farmácia, marketplaces, WMS/S&amp;OP e dados de shopper com governança (ISO 27001/27701). Evita spaghetti de APIs ponto a ponto sob pressão de escala.</p>
+                <div class="reasons"><ul>
+                    <li>Canal farmácia citado como ~40% do faturamento BR em matérias Ambition.</li>
+                    <li>Integração com “grandes plataformas” é prioridade declarada (Portal Personal Care).</li>
+                    <li>Foursys: 24 anos, 41.000+ projetos — execução local sob guidelines de multinacional.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">86/100</span></div>
+                <p>Squads para experiências digitais de marca/trade, portais B2B, retail media ops e apps internos de execução comercial — alinhados ao título Digital Sales Director.</p>
+                <div class="reasons"><ul>
+                    <li>Vagas públicas KC BR citam retail media / eCommerce solution architect (sinal de stack digital shelf).</li>
+                    <li>Hub de inovação Suzano exporta para LatAm — produtos digitais podem escalar região.</li>
+                    <li>Diferencia Foursys de “body shop” genérico: outcome de negócio com time misto.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">82/100</span></div>
+                <p>Assessment e hardening focados em dados de consumidor/shopper, identidade, terceiros de retail media e OT de planta — no escopo explícito do Head de TI (segurança de dados).</p>
+                <div class="reasons"><ul>
+                    <li>CPG + e-comm = alvo de ransomware e vazamento de PII.</li>
+                    <li>Mandato Baguete: privacy + data security.</li>
+                    <li>Janela Kenvue aumenta superfície de integração futura.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">74/100</span></div>
+                <p>Seleção do que modernizar localmente pós-tissue e o que herda do programa global de ERP/infra — sem rip-and-replace cego. Score menor porque muita decisão pode ser global.</p>
+                <div class="reasons"><ul>
+                    <li>RI: multi-year investments em ERP upgrades e digital platforms.</li>
+                    <li>Carve-out tissue tipicamente deixa dívida de apps/dados.</li>
+                    <li>Abordar como “acelerador local” sob arquitetura KMB, não como troca de core.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>“Vocês querem dobrar o Brasil até 2028 sem jogar o jogo velho de volume. O seu título já junta Digital Sales e IT — a conversa certa não é ‘cloud genérica’, é como dados, integração e AI viram mix e share no digital shelf e na farmácia.”</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>IT Forum 2026 (1ª presença no evento, planilha) + Ambition Brasil 2026 + e-comm 15% + FOCO 4SYS. Âncora: AI Squad + FourBlox; cyber como trust layer.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Parceiro brasileiro com engenharia, AI Squad, FourBlox/Digibee (ISO 27001/27701) e ciber no mesmo guarda-chuva — velocidade local compatível com compliance de multinacional, sem esperar fila do SI global.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Procter &amp; Gamble (Pampers / Always etc.)</h4><p>Escala global de brand building, media e supply. Gap KC: não copiar o monólito P&amp;G — acelerar dados locais de shopper/RGM e execução digital LatAm onde o hub Suzano já é diferencial.</p></div>
+            <div class="competitor-card"><h4>Softys / CMPC (higiene LatAm)</h4><p>Força regional em higiene e distribuição. Gap: KC joga personal care premium/tech de produto; TI deve sustentar diferenciação de marca e canal, não commodity.</p></div>
+            <div class="competitor-card"><h4>Suzano (ex-tissue KC + bens de consumo)</h4><p>Agora rival/parceiro complexo no tissue (Neve etc.) e JV Arbex em outros mercados. Gap: KC BR precisa de stack focada 100% em personal care pós-divestiture — clareza de landscape e dados limpos.</p></div>
+            <div class="competitor-card"><h4>Marcas próprias / varejo</h4><p>Pressão de preço em fraldas e absorventes. Gap: RGM + digital shelf + farmácia como resposta — demanda analytics e integração, não só trade tradicional.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">KC Brasil (CNPJ 02.290.277/0001-21) — personal care (Huggies/Intimus/Plenitud); hub LatAm; Ambition 2× até 2028; matriz KMB listada.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Luciano Sandoval — Head of IT Brazil + Digital Sales Director IPC; ex-Nestlé/Unilever; foco RGM, dados, privacy, cyber.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Crescer com rentabilidade via digital/e-comm/farmácia enquanto absorve padrões Powering Care / futura Kenvue.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">RI KMB: digital procurement, supply planning, ERP/infra upgrades, automação, brand digital. BR (fontes abertas): e-comm, jornada digital, CapEx planta/inovação; fatia BR ~10% do invest. tech global citada em ciclo anterior.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) AI Squad · 2) FourBlox iPaaS · 3) Engenharia Digital (+ Ciber)</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Workshop 90 min: mapa digital shelf × dados de shopper × integrações críticas + quick wins AI/iPaaS.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum Praia do Forte 2026 + ciclo Ambition Brasil 2026 + FOCO 4SYS.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “TI industrial”. Vender <em>máquina de receita digital</em>: mesma pessoa decide stack e digital sales — ROI em mix/share, não em ticket de infraestrutura.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Personal care puro + Ambition 2×</h4><p>Saiu do tissue, virou hub LatAm de higiene pessoal e colocou o Brasil entre os mercados prioritários. Vilardo e Sandoval carregam a meta de dobrar com outro jogo de trade.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Digital Sales × IT no mesmo chapéu</h4><p>E-comm sobe, farmácia pesa, privacy aperta, global puxa ERP/Kenvue. Backlog local compete com guidelines corporativos — e o relógio de 2028 não para.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Receita digital com governança</h4><p>Foursys entra com AI Squad + FourBlox + engenharia: acelera share digital e integração com auditabilidade, na linguagem de RGM que Luciano já fala.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>E-commerce e digital shelf com ROI de mix</h4>
+                <p>Evidência: e-comm ~15% das vendas BR; offsite de diretoria priorizou jornada digital (Portal Personal Care). Vagas de retail media/eCommerce architect sinalizam stack em construção.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad + Engenharia Digital: conteúdo, pricing, availability e medição — amarrados a KPI comercial.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Qual % da Ambition 2028 depende de canais digitais — e onde o time ainda opera planilha vs. plataforma?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>PoC 6–8 semanas em 1 categoria × 2 marketplaces com baseline de share/mix.</p>
+            </div>
+            <div class="business-card">
+                <h4>Integração omnichannel (farmácia + varejo + planta)</h4>
+                <p>Evidência: farmácia citada como canal relevante (~40% em matérias Ambition); expansão Camaçari/NNE; RI global em digital procurement e planning.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee): fluxos auditáveis pedido–estoque–promoção–dados de sell-out.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quais integrações críticas ainda são ponto a ponto ou manuais entre trade, supply e digital?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Mapa de 10 fluxos + PoC iPaaS em 2 fluxos de maior dor.</p>
+            </div>
+            <div class="business-card">
+                <h4>Trust layer: privacy + cyber de dados de shopper</h4>
+                <p>Evidência: mandato público do Head de TI inclui privacidade e segurança de dados (Baguete); LGPD + retail media aumentam risco.</p>
+                <div class="sub">Solução Foursys</div><p>Cibersegurança: assessment de superfície (apps digitais, parceiros, identidade) + roadmap de hardening.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quem é o DPO/owner de dados de shopper — e qual o último exercise de third-party risk nos parceiros de mídia?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment 15 dias → board pack de risco residual.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck 8–10 slides (Receita digital CPG) + one-pager Ambition 2028 × ofertas + opção de PoC AI/iPaaS</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad + FourBlox — porquê: dual mandate Digital Sales + IT; e-comm/RGM sob pressão de meta</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) AI/analytics em CPG para RGM e previsão de demanda. (2) iPaaS omnichannel varejo/farmácia/e-comm. (3) Privacy/cyber em dados de consumidor e parceiros de mídia — se ativo pronto; senão, discurso de assessment em 15 dias.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> o ROI não é “modernizar o data center”. É <em>pontos de mix e share digital por real investido</em>, falando a língua de quem já foi BP de vendas e diretor de sistemas de growth.</p>
+            <p style="margin-top:8px"><em>Se case Huggies/Intimus não existir pronto: abrir com números públicos (e-comm 15%, Ambition 2×, RI Powering Care) e perguntar o heat map interno de digital shelf — não forçar case genérico de banco/indústria.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Seu cargo já diz o briefing: Digital Sales e IT no mesmo chapéu — vamos falar de receita, não de infraestrutura genérica.”</li>
+                <li>“Ambition 2× até 2028 exige máquina de dados e integração; e-comm a 15% é só o começo.”</li>
+                <li>“AI Squad da Foursys entra com KPI de mix/share — não com demo de chatbot.”</li>
+                <li>“FourBlox (Digibee) conecta farmácia, marketplace e supply com trilha ISO 27001/27701.”</li>
+                <li>“Privacy e segurança de dados estão no seu mandato público — podemos ser o trust layer do crescimento digital.”</li>
+                <li>“Respeitamos o landscape global KMB; aceleramos o que o Brasil precisa agora sem esperar a fila corporativa.”</li>
+                <li>“Próximo passo: workshop de 90 minutos e mapa de quick wins em 10 dias úteis.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>IT Forum + follow-up citando Ambition BR / dual role</td><td>Agenda 90 min com Luciano (+ Vilardo/ops digital se possível)</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Mapa digital shelf, integrações, dados shopper, riscos LGPD</td><td>Heat map + hipóteses de valor (R$/KPI)</td><td>1–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>1 caso AI (preço/mix/conteúdo) ou 2 fluxos iPaaS</td><td>PoC medido (baseline → delta)</td><td>3–8 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>AI Squad ou Engenharia em 1 domínio comercial</td><td>Squad misto + runbook + cyber checklist</td><td>8–16 semanas</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Programa 12 meses (integração + AI + privacy)</td><td>MSA / SOWs por onda</td><td>Trimestre seguinte</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3–5)</h4>
+            <div class="app-card">
+                <h4>Site corporativo KC (pt-BR)</h4><div class="url">https://www.kimberly-clark.com.br/ → https://www.kimberly-clark.com/pt-br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não inspecionado a fundo (CF challenge)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Cloudflare (Server: cloudflare · 301)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Investor Relations KMB</h4><div class="url">https://www.investor.kimberly-clark.com/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portal IR corporativo</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Acesso automatizado 403 (WAF) em 20/07/2026</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">N/A (conteúdo IR via fontes já baixadas)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Marca Huggies BR (e-comm/consumer)</h4><div class="url">https://www.huggies.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não inspecionado (403/CF)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Proteção WAF/CDN (hipótese Cloudflare)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Requer discovery sob NDA</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Digital shelf / retail media / RGM</h4><div class="url">Não publicado (sinais em vagas e entrevistas)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Hipótese: stack Ad Tech + dados (vagas architect)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações retailer — mapear em discovery</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Core ERP / MES / supply</h4><div class="url">Não publicado</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">RI cita ERP upgrades globais — produto local não afirmado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Hipótese: híbrido global KMB</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Requer discovery</div></div>
+                </div>
+            </div>
+
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Site BR atrás de Cloudflare (verificado 301 + Server cloudflare). Landscape corporativo/planta: não publicado — alinhado a padrões globais KMB (hipótese).</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">Escopo declarado no mandato do Head de TI (privacy + data security). Ferramentas específicas: não localizadas. LGPD aplicável.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">RI: automação manufacturing/logistics, digital procurement. BR: IA embarcada citada em ciclo de investimento anterior (Cosmetic Innovation). Detalhe de ferramentas: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">Mandato explícito (analytics). Cultura de dados citada pelo próprio Luciano (Baguete). Stack (CDP/warehouse/BI): não publicada.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">ERP específico BR não publicado. RI global menciona ERP upgrades multi-ano — não nomear produto sem evidência.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">RGM, trade, e-comm, retail media (sinais em vagas/entrevistas). CRM/HCM/WMS/MES: não localizados em fontes abertas.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">Sites de marca + marketplaces + farmácia. Silvio Veloso lidera globalmente plataformas online/DTC — possível overlap com landscape BR.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.kimberly-clark.com.br/</td><td><span class="status-200">301</span></td><td>Challenge CF / redirect</td><td>Cloudflare</td><td>Location → kimberly-clark.com/pt-br/ · cookies __cf_bm</td></tr>
+                    <tr><td>https://www.kimberly-clark.com/ (e pt-br)</td><td><span class="status-err">403</span></td><td>Bloqueado (bot/WAF)</td><td>Cloudflare (ray observado em GET)</td><td>HTML de challenge “Just a moment…”</td></tr>
+                    <tr><td>https://www.huggies.com.br/</td><td><span class="status-err">403</span></td><td>Bloqueado</td><td>WAF/CDN</td><td>Sem headers úteis além do bloqueio</td></tr>
+                    <tr><td>https://www.investor.kimberly-clark.com/</td><td><span class="status-err">403</span></td><td>Bloqueado</td><td>WAF</td><td>Conteúdo IR obtido via fontes já indexadas/arquivos estáticos</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 20/07/2026 via HEAD/GET (curl + Invoke-WebRequest). Só o efetivamente inspecionado — HTML profundo dos sites de marca não disponível por WAF.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4–6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Dados / AI</div><h4>Analytics de RGM ainda não industrializado</h4><p>Evidência: mandato analytics + meta Ambition; e-comm 15%. Sem stack pública de AI/ML — hipótese de gap entre intenção e fábrica de modelos.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Omnichannel farmácia–marketplace–supply</h4><p>Evidência setorial CPG: canais fragmentados geram ruptura e promoção cega. Fontes BR pedem integração com grandes plataformas.</p><div class="offer">Oferta Foursys: FourBlox (Digibee)</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Experiência</div><h4>Produtos digitais de trade/digital shelf</h4><p>Evidência: vagas de retail media/eCommerce architect; jornada digital priorizada em offsite. Room para engenharia de produto além de site marketing.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Ciber / Privacy</div><h4>Superfície de dados de shopper pouco visível</h4><p>Evidência: escopo privacy/security no cargo; LGPD + parceiros de mídia. Zero disclosure público de controles = gap a validar.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Legado</div><h4>Dívida pós-carve-out tissue + upgrades globais</h4><p>Evidência: divestiture Suzano + RI ERP/digital multi-ano. Apps locais órfãos e sincronismo com core global são risco clássico de CPG.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 6 · Escala regional</div><h4>Dados/OT para expansão Camaçari–NNE</h4><p>Evidência: CapEx e +40% capacidade citados; regionalização Norte/Nordeste. Telemetria/S&amp;OP digital pouco visível em fontes abertas.</p><div class="offer">Oferta Foursys: Engenharia Digital + AI Squad</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Não localizada em detalhe público (LinkedIn truncado)</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">São Paulo, SP (LinkedIn / planilha)</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado — hipótese: inglês fluente (carreira multinacional CPG)</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5–7)</h4>
+                <p>1) Tratar como líder de <em>receita digital + TI</em>, não como CIO de infraestrutura.<br>
+                2) Usar vocabulário de RGM, mix, digital shelf, farmácia — ele veio de vendas/BP LatAm.<br>
+                3) Citar a frase pública dele sobre cultura de dados e consumidor (Baguete) como espelho.<br>
+                4) Reconhecer Ambition de Vilardo sem bypassá-lo: Luciano é o caminho técnico-comercial.<br>
+                5) Evitar pitch “trocar o ERP global” — falar aceleração local sob Powering Care.<br>
+                6) IT Forum é 1ª presença (planilha) — abrir espaço de peer learning com outros CIOs CPG.<br>
+                7) Fechar com workshop e KPI, não com brochure de fábrica de software.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>Kimberly-Clark IR — 8-K / earnings jan/2026 (Powering Care, outlook 2026)</li>
+                    <li>KMB CAGNY 2026 — generational value / Kenvue</li>
+                    <li>4Q 2025 Earnings Presentation — digital procurement, automation, ERP upgrades</li>
+                    <li>IstoÉ Dinheiro / Tissue Online — dobrar BR até 2028 · Cláudio Vilardo</li>
+                    <li>Valor International — foco personal care pós-tissue · CapEx BR</li>
+                    <li>Suzano — conclusão compra tissue KC Brasil</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Verificação empírica kimberly-clark.com.br (Cloudflare 301/403)</li>
+                    <li>Vagas públicas retail media / eCommerce solution architect (KC Brazil)</li>
+                    <li>Cosmetic Innovation — ciclo invest. tech/IA no Brasil (contexto)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Portal Personal Care — e-comm ~15% vendas BR; jornada digital</li>
+                    <li>Portal Personal Care — negócio tissue Suzano / personal care</li>
+                    <li>Planilha CIOs Confirmados IT Forum Praia do Forte 2026</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn — Luciano S. (luciano-s-807217) · cargo dual</li>
+                    <li>Baguete — “Kimberly-Clark tem novo head de TI no Brasil”</li>
+                    <li>Panorama Farmacêutico — novo comando TI KC</li>
+                    <li>LinkedIn / matérias — Cláudio Vilardo CEO BR</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>HEAD/GET 20/07/2026 — kimberly-clark.com.br, .com, huggies.com.br, investor.kimberly-clark.com</li>
+                    <li>MonitorCNPJ / Econodata — CNPJ 02.290.277/0001-21</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

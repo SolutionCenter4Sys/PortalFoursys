@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<!--
+  Briefing CIO — Luiz Humberto Rabelo Sucupira Júnior | Banco do Nordeste
+  IT Forum 2026 Praia do Forte · Design System Foursys · Ordem B → A → C
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Luiz Humberto Rabelo Sucupira Júnior | Banco do Nordeste</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Luiz Humberto Rabelo Sucupira Júnior</h1>
+                <h2>Superintendente de Tecnologia da Informação (CIO) — Banco do Nordeste</h2>
+                <div class="loc">Bancos · Fortaleza/CE · CNPJ 07.237.373/0001-20</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Porte (banco de desenvolvimento + orçamento TI R$ 1,45 bi)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Orçamento TI 2026</div><div class="value">R$ 1,45 bi</div></div>
+                <div class="header-badge"><div class="label">Investimento TI</div><div class="value">R$ 475 mi</div></div>
+                <div class="header-badge"><div class="label">Lucro 2025</div><div class="value">R$ 3,1 bi</div></div>
+                <div class="header-badge"><div class="label">Agências</div><div class="value">297</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: PDTIC 2026-2027 deep-dive + leitura de comitê (CIO + Arquitetura/Inovação + Torres de Negócio) + material de apresentação · Diferencia da edição anterior (Trancoso). Presente no último IT Forum: NÃO (planilha).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>O Banco do Nordeste do Brasil S.A. (BNB) é sociedade de economia mista, banco múltiplo e maior instituição financeira de desenvolvimento regional da América Latina. Administra o Fundo Constitucional de Financiamento do Nordeste (FNE), opera crédito de longo prazo, microfinanças (Crediamigo/Agroamigo) e serviços bancários em nove estados nordestinos e partes de MG e ES. Em 2025 registrou lucro líquido recorde de R$ 3,1 bilhões (+31,6%), contratações de R$ 68,4 bilhões e desembolsos acima de R$ 64,1 bilhões. A TI é habilitadora explícita da estratégia 2026–2030, com PDTIC 2026–2027 aprovado e orçamento total de TI de R$ 1,455 bilhão para 2026.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Banco do Nordeste do Brasil S.A.</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">Fortaleza/CE — Av. Dr. Silas Munguba, 5700</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">NE + partes de MG e ES · 297 agências · &gt;2 mil municípios</div></div>
+                <div class="info-card"><div class="label">Resultado 2025</div><div class="value">Lucro R$ 3,1 bi (BNB / Valor)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">Não localizado com precisão no RI desta rodada · PDTIC: ~6% do quadro em TI</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Sociedade de economia mista · CNPJ 07.237.373/0001-20</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>FATO:</strong> Luiz Humberto Rabelo Sucupira Júnior é Superintendente de Tecnologia da Informação (CIO) do BNB, listado no portal institucional e no Comitê de Inovação e Estratégia Digital. Mestre em Engenharia de Computação (Unicamp), graduado em Ciências da Computação (UECE). Ingressou no BNB em 2006 por concurso; passou por Infraestrutura Tecnológica, Controles Internos, Gestão de Pessoas, Desenvolvimento Organizacional e Segurança da Informação e Cibernética. Certificações: CISSP, EXIN DPO, ISO 27001 Lead Auditor, CPA-20. Premiações: Security Leaders 2021, TOP 10 Security Leaders 2023, Banking Transformation (privacidade/segurança) e, em 2025/2026, protagonismo no case MIA/LuzIA/Analisa AI (1º lugar Banking Transformation — Inovação em Crédito). LinkedIn: <em>luizsucupirajr</em>.</p>
+            <p style="margin-top:12px"><strong>Leitura de comitê:</strong> decisões de TI passam por Superintendência de TI + Ambientes de Arquitetura e Inovação (Dayvison Chaves Lima), Governança de TI e Operação de TI; Torres de Soluções de Negócio (ex.: Fabrício Dias) e Diretoria de Administração. Hipótese consultiva: abordagem mais eficaz se conectar CIO + Arquitetura/Inovação + área de crédito/negócio — o case MIA nasceu dessa ponte.</p>
+            <p style="margin-top:12px"><strong>Poder de decisão:</strong> alta influência sobre portfólio PDTIC, budget de despesa/investimento de TI e priorização de projetos estratégicos (Core Bancário, Figital, Governança de Dados, IA). Compra pública/economia mista: ciclo de contratação regulado — timing e enquadramento jurídico importam tanto quanto o pitch técnico.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento & mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Banco de desenvolvimento regional com mandato público forte (FNE) e operação comercial/microfinanças. Compete por relevância digital frente a bancos públicos (BB, Caixa, BASA) e bancos privados que avançam no Nordeste via canais digitais e Open Finance. Prioridades setoriais: crédito ágil e seguro, compliance (BACEN, LGPD, Basileia), modernização de core, experiência omnichannel (figital), IA responsável e integração com fintechs/ecossistema. Pressão estrutural: volume recorde de crédito + inadimplência sobida em 2025 exige tecnologia de risco, dados e automação documental — exatamente o território do case MIA. Tendência: bancos de desenvolvimento precisam “parecer fintech” na jornada sem perder governança de banco público.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões & lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Capital humano de TI abaixo do benchmark (~6% do quadro vs. médias nacionais/globais) e dependência de terceirizados — risco de segurança e diluição de conhecimento crítico (PDTIC).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Modernização de legados e implantação de Core Bancário com prazo até out/2026 — pressão de cutover e coexistência com plataformas atuais.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Transformação Figital (até 2028) exige Plataforma de Serviços Digitais, hiperautomação e integração físico-digital em 297 agências.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Governança de dados, nuvem e IA ainda em institucionalização (projeto Governança de Dados até jun/2026) — pré-requisito para escalar MIA além do crédito.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Inadimplência e volume de crédito crescentes pressionam pipelines de decisão, análise documental e observabilidade de risco (contexto 2025).</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">IA ética e escalável (MIA)</span>
+                <span class="tag tag-priority">Plataforma de Serviços Digitais / Figital</span>
+                <span class="tag tag-priority">Core bancário moderno</span>
+                <span class="tag tag-priority">Governança de dados/nuvem/IA</span>
+                <span class="tag tag-priority">Fortalecer quadro próprio de TI</span>
+                <span class="tag tag-priority">Integração ecossistema financeiro / Open Finance</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">PDTIC 2026: R$ 980 mi despesa + R$ 475 mi investimento</span>
+                <span class="tag tag-active">Core Bancário (até 18/10/2026)</span>
+                <span class="tag tag-active">Transformação Figital (2025–2028)</span>
+                <span class="tag tag-active">Governança de Dados (até 17/06/2026)</span>
+                <span class="tag tag-active">IA / MIA / LuzIA / Analisa AI</span>
+                <span class="tag tag-active">SIG, SCONF, Reforma Tributária, IFRS S1/S2</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Squads de modernização legado + APIs do Core</span>
+                <span class="tag tag-opportunity">Aceleração Figital / orquestração de serviços</span>
+                <span class="tag tag-opportunity">Governança e escala de IA além do crédito</span>
+                <span class="tag tag-opportunity">Integração iPaaS / ecossistema fintechs</span>
+                <span class="tag tag-opportunity">Cibersegurança contínua (perfil CISSP do CIO)</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado + Engenharia Digital</h4><span class="score-badge">92/100</span></div>
+                <p>Apoiar coexistência e migração em torno do Core Bancário e da Plataforma de Serviços Digitais (Figital): APIs, eventos, desacoplamento de monolitos e entrega contínua com governança de banco público.</p>
+                <div class="reasons"><ul>
+                    <li>Projeto Core Bancário com deadline 2026 no portfólio estratégico.</li>
+                    <li>PDTIC cita arquitetura para APIs/eventos e substituição de sistemas obsoletos.</li>
+                    <li>Fit natural com 24 anos / 41.000+ projetos Foursys em engenharia.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">88/100</span></div>
+                <p>Squads multidisciplinares para industrializar a plataforma MIA: MLOps, governança de modelos, casos além do crédito (jurídico, atendimento, operação de TI) com segurança e LGPD.</p>
+                <div class="reasons"><ul>
+                    <li>Case Banking Transformation prova maturidade inicial de IA interna.</li>
+                    <li>Direcionador PDTIC: adoção de IA + cultura de dados.</li>
+                    <li>Gap declarado: quadro de TI insuficiente para escalar cloud/dados/IA.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS Digibee)</h4><span class="score-badge">82/100</span></div>
+                <p>Integração segura e auditável entre core, canais digitais, Open Finance, parceiros e fintechs — acelerando o direcionador “Integração com o Ecossistema Financeiro”.</p>
+                <div class="reasons"><ul>
+                    <li>Figital e PSD exigem orquestração unificada de serviços.</li>
+                    <li>Histórico Open Banking/Finance no PETI e APIs no PDTIC.</li>
+                    <li>ISO 27001/27701 Foursys alinhada ao perfil de segurança do CIO.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">78/100</span></div>
+                <p>Programa contínuo de segurança (SOC advisory, zero trust, privacidade, testes, hardening cloud) alinhado à trajetória CISSP/DPO/ISO 27001 do gestor e às exigências BACEN.</p>
+                <div class="reasons"><ul>
+                    <li>CIO premiado em Security Leaders — agenda de segurança é identidade, não adendo.</li>
+                    <li>Dependência de terceiros eleva risco de superfície (PDTIC).</li>
+                    <li>Expansão de IA e cloud amplia superfície de ataque.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital — Capacitação & Squads mistos</h4><span class="score-badge">74/100</span></div>
+                <p>Modelo de squads mistos (Foursys + empregados BNB) para reduzir dependência de terceirização genérica e transferir conhecimento — resposta direta ao diagnóstico de capital humano do PDTIC.</p>
+                <div class="reasons"><ul>
+                    <li>Objetivo explícito: reduzir terceirização gradualmente.</li>
+                    <li>Direcionador “Fortalecimento do Capital Humano”.</li>
+                    <li>Diferencia Foursys de body-shop puro.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Reconhecer o PDTIC 2026–2027 e o case MIA como prova de capacidade — não vender “descoberta de IA”. Entrar pelo problema de escala: orçamento de R$ 1,45 bi, ~6% do quadro em TI e três megaprojetos paralelos (Core, Figital, Dados). Oferecer capacidade de entrega com governança, não slide de tendência.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Janela Core Bancário (cutover até out/2026) + ramp-up Figital (até 2028) + Governança de Dados (jun/2026). Timing ideal: IT Forum 2026 → discovery técnico 30–45 dias → PoC de integração/API ou AI Squad em caso de crédito/risco ainda sem fornecedor único declarado publicamente.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Combinação Modernização + AI Squad + FourBlox + Cibersegurança sob ISO 27001/27701, com histórico de 41.000+ projetos. Ângulo: “parceiro que escala o que o BNB já inventou (MIA), sem substituir a identidade de desenvolvimento regional”.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes & Gap Analysis</h3>
+            <div class="competitor-card"><h4>Banco do Brasil</h4><p>Escala digital, app e Open Finance maduros; forte investimento em cloud e IA. Gap do BNB: velocidade de experiência digital retail vs. mandato de desenvolvimento — precisa “figital” sem perder proximidade regional.</p></div>
+            <div class="competitor-card"><h4>Caixa Econômica Federal</h4><p>Canais digitais massivos e presença em programas sociais. Gap: BNB compete por eficiência operacional e jornada de crédito FNE/microfinanças, não por volume de conta corrente urbana.</p></div>
+            <div class="competitor-card"><h4>Banco da Amazônia (BASA)</h4><p>Par de desenvolvimento regional (outro fundo constitucional). Gap: BNB lidera em escala e agora em storytelling de IA (MIA); precisa sustentar liderança com execução, não só prêmio.</p></div>
+            <div class="competitor-card"><h4>Bancos digitais / fintechs de crédito</h4><p>Onboarding e decisão de crédito em minutos. Gap: BNB avançou com Analisa AI/MIA, mas precisa industrializar e conectar à Plataforma de Serviços Digitais para não ficar só em piloto premiado.</p></div>
+            <div class="competitor-card"><h4>Consultorias e SIs tradicionais (hipótese)</h4><p>Grandes integradoras disputam core, cloud e AMS em bancos públicos. Gap/oportunidade Foursys: squads ágeis + iPaaS + IA aplicada, com custo/risco menores que “programa de 5 anos” monolítico.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <!-- ZONA A -->
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">BNB — banco de desenvolvimento regional, economia mista, CNPJ 07.237.373/0001-20, sede Fortaleza/CE, 297 agências.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Luiz Humberto Sucupira Jr. — CIO/Superintendente de TI desde trajetória interna (2006); CISSP; foco segurança + IA (MIA).</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Executar PDTIC 2026–27 com Core, Figital e Dados em paralelo, com quadro de TI enxuto.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">R$ 1,455 bi em 2026 (R$ 980 mi despesa + R$ 475 mi investimento) — fonte PDTIC oficial.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) Modernização/Engenharia Digital; 2) AI Squad (escala MIA); 3) FourBlox iPaaS.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 45 min CIO + Dayvison (Arquitetura/Inovação) com mapa Core×Figital×Dados.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum 2026 + cutover Core out/2026 + Governança Dados jun/2026.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “IA genérica”: vender capacidade de escala e integração para o que o BNB já premiou (MIA) + gap de headcount TI.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Do prêmio à escala</h4><p>BNB fecha 2025 com lucro e crédito recordes e leva Banking Transformation com MIA. A TI deixou de ser “suporte” e virou habilitadora pública da estratégia 2026–2030.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Três megaprojetos, 6% do quadro</h4><p>Core, Figital e Dados correm juntos sob orçamento bilionário, mas com capital humano interno abaixo do benchmark e dependência de terceiros — risco clássico de execução.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Parceiro de escala com governança</h4><p>Foursys entra com modernização, AI Squad e integração FourBlox para industrializar o que o BNB já inventou — com cibersegurança no DNA do CIO.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+
+            <div class="business-card">
+                <h4>Dor: cutover do Core Bancário sem parar o crédito regional</h4>
+                <p>Evidência: projeto “Implantação do Core Bancário” (18/10/2023–18/10/2026) no portfólio estratégico do PDTIC.</p>
+                <div class="sub">Solução Foursys</div><p>Modernização de Legado + Engenharia Digital — squads de APIs, migração de dados, testes e coexistência; reduzir risco de interrupção em FNE/microfinanças.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quais sistemas satélites do crédito ainda não têm contrato claro de modernização até o cutover de outubro?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de 2 horas mapeando dependências Core × canais × risco.</p>
+            </div>
+
+            <div class="business-card">
+                <h4>Oportunidade: escalar MIA além do troféu</h4>
+                <p>Evidência: case MIA/LuzIA/Analisa AI venceu Banking Transformation; CIO e Arquitetura celebram plataforma interna de governança de IA; MiaCode roda em Azure (fontes abertas).</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — industrializar MLOps, casos de uso adicionais e compliance de modelos.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Qual o próximo domínio após crédito — jurídico, atendimento ou operação de TI — e qual o gargalo de gente?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>PoC de 4–6 semanas em um caso de negócio com métrica de ciclo de crédito ou produtividade.</p>
+            </div>
+
+            <div class="business-card">
+                <h4>Dor: Figital exige orquestração, não só novo portal</h4>
+                <p>Evidência: Transformação Figital (16/07/2025–30/06/2028) e Plataforma de Serviços Digitais com hiperautomação no PDTIC; portal Liferay já cobre experiência web.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee) + Engenharia Digital — integrar agências, canais digitais, parceiros e APIs do core sob governança.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quantas integrações ponto a ponto ainda bloqueiam a jornada unificada cliente-agência-digital?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment de integração (mapa AS-IS de 2 semanas) com priorização de fluxos de crédito.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck 10–12 slides + one-pager de 1 página (PDF) · opcional: PoC canvas MIA→escala</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">Modernização/Engenharia Digital + AI Squad + FourBlox — amarradas a Core, MIA e Figital</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) modernização de canais/core em bancos e instituições financeiras; (2) squads de IA com governança (análogo a plataformas internas tipo MIA); (3) integrações iPaaS Digibee em ecossistemas financeiros — adaptar sem forçar case genérico de varejo.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> o maior ROI não é “trazer IA”, e sim <em>liberar o orçamento de R$ 475 mi de investimento</em> com capacidade de execução que o quadro interno (~6%) não sustenta sozinho — preservando a autoria do BNB sobre MIA.</p>
+            <p style="margin-top:8px"><em>Discurso sugerido se não houver case setorial perfeito: “Vocês já provaram inovação em crédito. Nós ajudamos a industrializar e integrar — com a mesma disciplina de segurança que o senhor cobra como CISSP.”</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Li o PDTIC 2026–27: R$ 1,45 bi e três megaprojetos — Core, Figital e Dados. Onde a capacidade interna aperta primeiro?”</li>
+                <li>“Parabéns pelo Banking Transformation com MIA. Queremos ajudar a escalar o que já é de vocês — não substituir o time.”</li>
+                <li>“Cutover do Core em 2026: nossa proposta é squad de coexistência e APIs, não um segundo core.”</li>
+                <li>“Figital sem orquestração vira portal bonito e processos quebrados — FourBlox nasce para esse meio-campo.”</li>
+                <li>“Seu perfil CISSP muda a conversa: qualquer PoC nossa entra com segurança e LGPD desde o dia 1.”</li>
+                <li>“O diagnóstico de 6% do quadro em TI é o maior risco oculto do orçamento bilionário — squads mistos transferem conhecimento.”</li>
+                <li>“No IT Forum, propomos 45 minutos com você e Arquitetura/Inovação para mapear um PoC de 30 dias.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Encontro IT Forum / follow-up com CIO + Dayvison</td><td>Ata + mapa de dores priorizadas</td><td>0–2 semanas</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshops Core × Figital × Dados/IA</td><td>Assessment técnico-comercial (AS-IS/TO-BE)</td><td>2–5 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC AI Squad (caso crédito/risco) ou integração FourBlox</td><td>MVP mensurável + relatório de segurança</td><td>4–8 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad misto em modernização ou Figital</td><td>Backlog 90 dias + transferência de conhecimento</td><td>1–3 meses</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Contrato guarda-chuva alinhado a contratação pública</td><td>MSA / ata de registro / contrato plurianual</td><td>3–6 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <!-- ZONA C -->
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+
+            <div class="app-card">
+                <h4>Portal institucional BNB</h4><div class="url">https://www.bnb.gov.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Liferay DXP · Bootstrap · jQuery</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Liferay / Java (históricos RFP)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado no HTML · on-prem/híbrido (hipótese)</div></div>
+                    <div class="app-stack-item"><div class="k">API / Trackers</div><div class="v">GTM-P3FBRDHD · PrivacyTools · Facebook</div></div>
+                </div>
+            </div>
+
+            <div class="app-card">
+                <h4>Internet Banking / Canais digitais</h4><div class="url">https://www.bnb.gov.br/internet-banking</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Canal digital BNB (detalhe stack não publicado)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Integração com core / sistemas de crédito (hipótese)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Open Finance / APIs em evolução (PETI/PDTIC)</div></div>
+                </div>
+            </div>
+
+            <div class="app-card">
+                <h4>Plataforma MIA (IA interna)</h4><div class="url">Não pública (infra interna)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Soluções LuzIA, Analisa AI, MiaCode</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Modelos LLM (ex.: Llama 3.3-70B — fontes abertas)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Azure (Container Apps, GPU, Entra ID) — fontes abertas</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Governança de IA / escala interna</div></div>
+                </div>
+            </div>
+
+            <div class="app-card">
+                <h4>RI / Transparência</h4><div class="url">https://ri.bnb.gov.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portal RI (HTTP 200)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Publicação PDTIC/PETI / documentos</div></div>
+                </div>
+            </div>
+
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Sinais públicos: Azure para cargas de IA (MiaCode); PETI cita mainframe z15, Cloud VMware e expansão storage Open. Modelo híbrido (hipótese consolidada). Governança de nuvem é objetivo PDTIC.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança & Compliance</div><div class="cmp">CIO CISSP / DPO / ISO 27001 LA; histórico Security Leaders; LGPD (OneTrust citado em PETI); controles BACEN; PrivacyTools no portal.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">Plataforma MIA; LuzIA; Analisa AI; MiaCode; direcionador hiperautomação/Figital; AIOps citado em PETI.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados & Analytics</div><div class="cmp">Projeto Governança de Dados (2024–2026); cultura orientada a dados; jurimetria/Big Data citados em iniciativas jurídicas; pré-requisito para escala de IA.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">Implantação do Core Bancário em andamento (até 2026). ERP administrativo corporativo: não publicado nesta rodada. Evitar especulação de vendor.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">Crédito FNE, Crediamigo/Agroamigo, SIG, SCONF, Logística 3.0, plataformas de controle financeiro e recuperação de crédito (portfólio estratégico PDTIC).</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência & Engajamento</div><div class="cmp">Portal Liferay DXP (internet/intranet); internet banking; Transformação Figital (PSD); GTM + mídia social no site público.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.bnb.gov.br/</td><td><span class="status-200">200</span></td><td>Liferay · Bootstrap · jQuery</td><td>Não evidenciado CF/Akamai nos headers</td><td>GTM-P3FBRDHD · PrivacyTools · Facebook pixel</td></tr>
+                    <tr><td>https://www.bnb.gov.br/internet-banking</td><td><span class="status-200">200</span></td><td>Canal IB BNB</td><td>Não localizado</td><td>Entrada de internet banking</td></tr>
+                    <tr><td>https://ri.bnb.gov.br/</td><td><span class="status-200">200</span></td><td>Portal RI</td><td>Não localizado</td><td>Canal de relações com investidores</td></tr>
+                    <tr><td>https://www.bnb.gov.br/acesso-a-informacao/acoes-e-programas/plano-estrategico-de-ti</td><td><span class="status-200">200</span></td><td>Liferay</td><td>—</td><td>Página PDTIC / estratégia de TI</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026 via HTTP HEAD/GET. Só o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Capital humano TI</div><h4>Capacidade interna insuficiente para o budget</h4><p>PDTIC admite ~6% do quadro em TI e dependência de terceiros — incompatível com cloud, dados, IA e Figital simultâneos.</p><div class="offer">Oferta Foursys: Engenharia Digital + squads mistos</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Core & legado</div><h4>Coexistência até cutover 2026</h4><p>Core Bancário com prazo fixo; risco de dívida técnica e integrações frágeis em sistemas satélites de crédito.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Integração Figital</div><h4>Orquestração de serviços digitais</h4><p>PSD/hiperautomação exigem integração unificada além do CMS Liferay — Open Finance e parceiros aumentam complexidade.</p><div class="offer">Oferta Foursys: FourBlox (Digibee)</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Escala de IA</div><h4>De case premiado a plataforma industrial</h4><p>MIA venceu prêmio; falta evidência pública de MLOps enterprise e expansão multi-domínio com governança plena.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Dados</div><h4>Governança de dados ainda em projeto</h4><p>Projeto Governança de Dados até jun/2026 — sem isso, IA e personalização não escalam com segurança regulatória.</p><div class="offer">Oferta Foursys: Engenharia Digital (dados) + AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 6 · Superfície de risco</div><h4>Terceiros + cloud + IA</h4><p>Expansão tecnológica amplia ataque; CIO é Security Leader — espera parceiros com ISO e disciplina de privacidade.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal & Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">MSc Eng. Computação (Unicamp) · Ciência da Computação (UECE)</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">Fortaleza/CE (sede BNB)</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Comece por segurança e governança — é a identidade profissional dele, não um apêndice.<br>
+                2) Cite MIA e o Banking Transformation pelo nome; mostre que leu o LinkedIn institucional.<br>
+                3) Fale de desenvolvimento do Nordeste / crédito regional — missão do banco, não só “digital”.<br>
+                4) Evite tom de “banco atrasado”; o discurso correto é “escala e industrialização”.<br>
+                5) Inclua Dayvison Chaves (Arquitetura e Inovação) no follow-up — é o braço técnico do case.<br>
+                6) Pergunte sobre redução de terceirização: o PDTIC já abre a porta.<br>
+                7) Não force stack inventada; ele valoriza precisão técnica (CISSP/ISO).</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia & RI</h4><ul>
+                    <li>PDTIC 2026–2027 (PDF oficial BNB)</li>
+                    <li>PETI 2022–2026 (PDF oficial BNB)</li>
+                    <li>Portal PDTIC: bnb.gov.br/.../plano-estrategico-de-ti</li>
+                    <li>Notícia lucro R$ 3,1 bi (BNB Imprensa / Valor Econômico)</li>
+                    <li>Aviso de Privacidade BNB (razão social + CNPJ)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Case Liferay — Banco do Nordeste</li>
+                    <li>RFP Portal Corporativo Liferay (BNB)</li>
+                    <li>Fontes abertas MiaCode / Azure (LinkedIn colaboradores)</li>
+                    <li>PETI: mainframe z15, Cloud VMware, Open Banking</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Posicionamento desenvolvimento regional / FNE (site BNB)</li>
+                    <li>Concorrentes: BB, Caixa, BASA, fintechs de crédito (benchmark setorial)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn: linkedin.com/in/luizsucupirajr</li>
+                    <li>Currículos dos Administradores — bnb.gov.br</li>
+                    <li>Comitê de Inovação e Estratégia Digital — BNB</li>
+                    <li>Posts Banking Transformation (BNB / colaboradores)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>HTTP GET/HEAD www.bnb.gov.br (21/07/2026)</li>
+                    <li>internet-banking · ri.bnb.gov.br · página PDTIC</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

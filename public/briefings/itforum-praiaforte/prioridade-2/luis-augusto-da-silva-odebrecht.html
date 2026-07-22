@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Luis Augusto da Silva | ODEBRECHT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Luis Augusto da Silva</h1>
+                <h2>Gerente de Operações de Infraestrutura de TI — ODEBRECHT (Odebrecht Engenharia &amp; Construção / Novonor)</h2>
+                <div class="loc">Indústria da Engenharia e Construção · São Paulo - SP · CNPJ 15.102.288/0001-82</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Maior porte (grupo / 10k+ collab. / budget TI em expansão)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Faturamento (ref.)</div><div class="value">R$ 13–15 BI</div></div>
+                <div class="header-badge"><div class="label">Orçamento TI (ref.)</div><div class="value">R$ 200–300 MM</div></div>
+                <div class="header-badge"><div class="label">Perspectiva TI</div><div class="value">+20% a +30%</div></div>
+                <div class="header-badge"><div class="label">Último IT Forum</div><div class="value">Presente</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: fontes abertas + leitura de comitê (Ygor Cezar / Head of IT) + material de apresentação · Evolução do briefing Trancoso (layout antigo Segoe/azul) para Design System Foursys B→A→C.</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p><strong>FATO (identificação):</strong> CNPJ <strong>15.102.288/0001-82</strong> (planilha Confirmados IT Forum) corresponde à operação de engenharia e construção do grupo <strong>Novonor</strong> (ex-Organização Odebrecht). Em maio/2025 a construtora retomou a marca <strong>Odebrecht Engenharia &amp; Construção</strong> (antes OEC), mantendo a holding Novonor. Conglomerado privado fundado em 1944 (Salvador/BA), historicamente uma das maiores engenharias da América Latina, com atuação em infraestrutura, construção pesada e ecossistema de subsidiárias (ex.: OR imobiliário; Braskem no perímetro do grupo). Momento atual: pós-homologação de reestruturação financeira / recuperação judicial, retorno da marca Odebrecht e aceleração de transformação digital em obras (BIM, IA, automação, data-driven).</p>
+            <p style="margin-top:10px"><strong>FATO (fontes abertas):</strong> empresa declara prioridade em maturidade BIM nos canteiros, intensificação de IA (plataforma interna Smart OEC / Smart Odebrecht), parcerias com hubs (Inovabra) e sinergia Engenharia↔TI corporativa. Prêmio InovaInfra 2026 reconheceu projeto conceitual com IA para reforço hídrico na RMSP, com consultoria do time de TI.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social / marca operacional</div><div class="value">Odebrecht Engenharia &amp; Construção (grupo Novonor)</div></div>
+                <div class="info-card"><div class="label">Sede (planilha)</div><div class="value">São Paulo / SP</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Brasil + multi-país (Américas, África e outros)</div></div>
+                <div class="info-card"><div class="label">Faturamento (ref. briefing anterior)</div><div class="value">R$ 13–15 BI — validar com conta (capital fechado; sem RI pública completa)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">10.000+ (ordem de grandeza grupo/operação; fontes abertas variam)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada · grupo industrial/engenharia</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>FATO (LinkedIn):</strong> Luis Augusto da Silva atua como <strong>IT Infrastructure Operations Manager / Gerente de Operações de Infraestrutura de TI</strong> na Odebrecht Engenharia &amp; Construção desde <strong>nov/2013</strong> (São Paulo), com passagem anterior como Project Manager de Infraestrutura de TI (2011–2013). Perfil forte em operações de infraestrutura, virtualização, storage, telecom, segurança operacional e gestão de serviços — não é o Head of IT nominal da companhia.</p>
+            <p style="margin-top:10px"><strong>Leitura de comitê (obrigatória):</strong> o <strong>Head of IT / CIO de fato</strong> publicamente associado à Odebrecht E&amp;C / OEC é <strong>Ygor Silva Cezar</strong> (liderança de ~100 pessoas, serviços em múltiplos países do grupo Novonor; temas: segurança, governança, ML/analytics, RPA/chatbot, ERP SaaS, LGPD). Artigo corporativo “Construindo o Futuro: sinergia Engenharia e TI” é assinado por Cristiano Silva, Ibirajara Brauna e <strong>Ygor Silva</strong>. Inovação de campo é vocalizada por <strong>Daniel Lepikson</strong> (Gerente de Inovação).</p>
+            <p style="margin-top:10px"><strong>HIPÓTESE consultiva:</strong> Luis Augusto é interlocutor técnico-operacional de alto peso em infra, DR, nuvem híbrida, workplace e integração canteiro↔corporativo; decisões de plataforma/ERP/IA estratégica tendem a circular no trio <em>Luis (ops infra) + Ygor (Head of IT) + Inovação/Engenharia</em>. Modelo de compra do briefing anterior: aprovador dentro do budget; preferência por co-gerenciamento e TCO 3 anos.</p>
+            <div class="alert-box" style="margin-top:14px">⚠️ <strong>Atenção de abordagem (não é saída da empresa):</strong> o contato da planilha NÃO é o CIO titular. Manter Luis Augusto como âncora de rapport no IT Forum, mas incluir <strong>Ygor Cezar (Head of IT)</strong> no mapa de influência e, quando possível, Inovação (Lepikson) para temas BIM/IA de obra.</div>
+            <div class="grid-2" style="margin-top:14px">
+                <div class="info-card"><div class="label">Cargo (público)</div><div class="value">Gerente de Operações de Infraestrutura de TI</div></div>
+                <div class="info-card"><div class="label">Tempo de casa</div><div class="value">Desde nov/2013 (~12+ anos)</div></div>
+                <div class="info-card"><div class="label">Equipe / usuários (ref. briefing anterior)</div><div class="value">TI 200+ · usuários 10.000+</div></div>
+                <div class="info-card"><div class="label">Poder de decisão (ref.)</div><div class="value">Aprovador dentro do budget · TI estratégica no planejamento</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Engenharia e construção pesada / infraestrutura: ciclo de capital intensivo, pressão por produtividade em canteiro, compliance e integridade pós-crise setorial, e digitalização ainda incipiente frente a outros setores. A Odebrecht posiciona-se como player de grande porte em retomada reputacional e comercial — foco em contratos privados e parceria de construção (menos apetite a concessões capital-intensivas, segundo cobertura de imprensa recente). Cadeia de valor: EPC/EPCM, mobilização multi-país, administração contratual complexa, engenharia de detalhamento, segurança do trabalho e sustentabilidade de obra. Prioridades setoriais 2025–2026: BIM em escala, Indústria 4.0 no campo, IA para contratos/propostas/engenharia, continuidade operacional e cibersegurança de ativos críticos. Pressão competitiva: Andrade Gutierrez, Mover (ex-Camargo), Queiroz Galvão e players regionais — todos disputando eficiência digital como diferencial de entrega.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Digitalização de canteiro ainda desigual — barreira cultural (“sempre fiz assim”) + escassez de metas/orçamento em ciclos de crise (Lepikson / Grandes Construções).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Integração Engenharia↔TI: sensores, BIM/Digital Twin, edge e dados de obra exigem infraestrutura confiável multi-site (ângulo direto do perfil de Luis Augusto).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Governança de dados e qualidade da informação para virar “data driven” — empresa admite “bom caminho a percorrer”.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Cibersegurança, DR e continuidade em ambiente híbrido (corporativo + obras remotas com conectividade limitada).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Modernização de core (ERP/fiscal/tesouraria SaaS citado por Head of IT) + legados e APIs sem fornecedor fechado (ref. mapa anterior: dezenas de temas abertos).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Escala multi-país: padronizar stack/fornecedores globais vs. realidade local de cada contrato.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Empresa data-driven</span>
+                <span class="tag tag-priority">BIM em larga escala nos canteiros</span>
+                <span class="tag tag-priority">IA generativa / Smart OEC em produção</span>
+                <span class="tag tag-priority">Cibersegurança &amp; DR</span>
+                <span class="tag tag-priority">Modernização de core / integração</span>
+                <span class="tag tag-priority">Eficiência e redução de custo pós-RJ</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+                <span class="tag tag-active">Backup / imutabilidade</span>
+                <span class="tag tag-active">Nuvem pública e híbrida</span>
+                <span class="tag tag-active">Cibersegurança</span>
+                <span class="tag tag-active">DR / continuidade</span>
+                <span class="tag tag-active">LGPD / privacidade</span>
+                <span class="tag tag-active">Gestão de dados</span>
+                <span class="tag tag-active">IA / ML / GenAI</span>
+                <span class="tag tag-active">APIs e integração</span>
+                <span class="tag tag-active">Core / ERP</span>
+                <span class="tag tag-active">Modernização de legados</span>
+                <span class="tag tag-active">RPA / hiperautomação</span>
+                <span class="tag tag-active">Workplace / EUC</span>
+                <span class="tag tag-active">ITSM</span>
+                <span class="tag tag-active">BIM / Indústria 4.0 (campo)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Cibersegurança &amp; DR</span>
+                <span class="tag tag-opportunity">Nuvem híbrida / redes / storage</span>
+                <span class="tag tag-opportunity">IA / GenAI / hiperautomação</span>
+                <span class="tag tag-opportunity">APIs / modernização de legado</span>
+                <span class="tag tag-opportunity">Core / BPM / HCM</span>
+                <span class="tag tag-opportunity">Workplace / mobile de obra</span>
+                <span class="tag tag-opportunity">GRC / compliance</span>
+            </div>
+            <p style="margin-top:12px;font-size:13px;color:var(--text-light)">Fonte do mapa amplo de “sem fornecedor”: briefing Trancoso preservado (pesquisa de conta). Cruzar na discovery com pipeline real 2026.</p>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">96/100</span></div>
+                <p>ISO 27001/27701, privacidade (LGPD/DLP), continuidade e DR — encaixa na prioridade Top 3 declarada e no risco reputacional/operacional pós-reestruturação.</p>
+                <div class="reasons"><ul>
+                    <li>Cibersegurança e DR como prioridade de investimento</li>
+                    <li>Ambiente multi-país + canteiros com edge/conectividade limitada</li>
+                    <li>Compliance e integridade como narrativa de retomada do grupo</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">94/100</span></div>
+                <p>Squads de IA/GenAI para acelerar casos reais (contratos, engenharia, busca em acervo) e industrializar o que hoje é piloto (Smart OEC, O.L.I.V.I.A., Busca PD).</p>
+                <div class="reasons"><ul>
+                    <li>Empresa declara intensificar IA e virar data-driven com TI corporativa</li>
+                    <li>Prêmio InovaInfra 2026 com Smart Odebrecht — timing de escala</li>
+                    <li>Gap típico: piloto → governança, segurança e MLOps</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">92/100</span></div>
+                <p>APIs, integração (FourBlox / Digibee iPaaS), AMS e modernização de sistemas core — reduz atrito entre obras, backoffice e sistemas de engenharia.</p>
+                <div class="reasons"><ul>
+                    <li>Core/ERP e integração sem fornecedor fechado no mapa anterior</li>
+                    <li>Head of IT cita novo ERP/fiscal/tesouraria SaaS — janela de convivência legado↔novo</li>
+                    <li>Pressão de custo pós-RJ favorece TCO e aceleração</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">90/100</span></div>
+                <p>Cloud-native, DevOps/SRE, observabilidade e plataformas para sustentar BIM, edge AI e guidelines de infra global.</p>
+                <div class="reasons"><ul>
+                    <li>Perfil do interlocutor: ops de infraestrutura em escala</li>
+                    <li>Guideline de vendors/tecnologias globais (artigo OEC/CIO outlook)</li>
+                    <li>Nuvem híbrida e workplace sem fornecedor definido</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox</h4><span class="score-badge">85/100</span></div>
+                <p>Componentes reutilizáveis + iPaaS Digibee para acelerar apps de obra, mobile e low-code com governança.</p>
+                <div class="reasons"><ul>
+                    <li>Low-code / mobile / automação abertos no mapa de projetos</li>
+                    <li>Necessidade de time-to-market sem inflar headcount interno</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Abrir pelo ângulo de <strong>infraestrutura segura e contínua para digitalizar o canteiro</strong> — linguagem natural de Luis Augusto — e conectar imediatamente a BIM/IA/data-driven que a empresa já comunica. Evitar tom “enciclopédia da Lava Jato”; falar da Odebrecht que retoma marca e precisa de parceiros com ISO e delivery previsível.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Orçamento de TI com perspectiva de crescimento forte (ref. +20–30%) e dezenas de temas sem fornecedor (mapa anterior), especialmente <strong>ciber/DR, nuvem híbrida, IA em escala e modernização/integração</strong>. Timing: IT Forum Praia do Forte 2026 + prêmios/cases internos de IA já publicizados.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>AI Squad + Modernização/FourBlox (Digibee) + Cibersegurança certificada (ISO 27001/27701) + 24 anos / 41.000+ projetos. Modelo co-gerenciado (preferência declarada na conta) como extensão do time — não substituição.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Andrade Gutierrez</h4><p><strong>Perfil:</strong> grande construtora brasileira, infraestrutura e energia. <strong>TI:</strong> digitalização de canteiros e BIM. <strong>Gap vs. Odebrecht:</strong> disputa narrativa de maturidade digital; quem industrializar IA+dados primeiro ganha eficiência de proposta e obra.</p></div>
+            <div class="competitor-card"><h4>Mover Participações (ex-Camargo Corrêa)</h4><p><strong>Perfil:</strong> conglomerado pós-rebranding. <strong>TI:</strong> cloud em concessões, IoT em obra, ciber de infra crítica. <strong>Gap:</strong> Odebrecht pode diferenciar com Smart OEC + sinergia explícita Engenharia–TI se escalar além do piloto.</p></div>
+            <div class="competitor-card"><h4>Queiroz Galvão</h4><p><strong>Perfil:</strong> construção de grande porte e ambiental. <strong>TI:</strong> monitoramento remoto e digitalização operacional. <strong>Gap:</strong> poucos players do setor tratam hiperautomação/GenAI com governança — janela para Odebrecht liderar.</p></div>
+            <div class="competitor-card"><h4>Construtora OAS</h4><p><strong>Perfil:</strong> operações reduzidas / RJ. <strong>TI:</strong> manutenção seletiva de legados. <strong>Gap:</strong> menor pressão competitiva tecnológica — benchmark de “piso”, não de aspiração.</p></div>
+            <div class="insight-box"><h4>Gap analysis — oportunidade competitiva</h4><p>O setor reinventa-se pós-crise com digitalização ainda rasinha. FATO: Odebrecht já publica IA, BIM e chatbot internos. HIPÓTESE: o gargalo não é ideia — é <strong>escala segura</strong> (infra, integração, MLOps, ciber). Foursys vende a ponte piloto→plataforma, não o slogan de inovação.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Odebrecht E&amp;C (Novonor) — engenharia/construção pesada em retomada; CNPJ 15.102.288/0001-82.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Luis Augusto — Gerente Ops Infra TI (desde 2013). Comitê: Ygor Cezar (Head of IT).</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escalar BIM/IA/data-driven com infra segura multi-obra e modernizar core/integrações.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Fontes abertas + briefing conta: ciber/DR, nuvem híbrida, dados/IA, core/integração, workplace. Budget TI em expansão (ref. +20–30%). Sem RI pública completa — capital fechado.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">Cibersegurança; AI Squad; Modernização de Legado (+ Engenharia Digital).</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião no IT Forum: discovery de pipeline sem fornecedor + mapa de influência Ygor/Inovação.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Praia do Forte 2026 · cases IA 2025/26 · ciclo de crescimento de budget TI.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “mais um piloto de IA”. Vender a <strong>plataforma de escala</strong>: infra+integração+governança que transforma Smart OEC/BIM em capacidade repetível de obra.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Marca de volta, TI no centro</h4><p>Reestruturação avançada e retorno da marca Odebrecht. Digitalização e IA deixam de ser “inovação lateral” e viram condição de competitividade em propostas e obras.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Piloto ≠ escala</h4><p>Smart OEC, chatbots e BIM avançam, mas infraestrutura multi-site, integração de legados, dados e ciber ainda limitam industrialização. Luis Augusto vive essa tensão no dia a dia de ops.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Parceiro de co-gestão</h4><p>Foursys entra como extensão do time: ciber/DR, AI Squad com governança e modernização/integração — do piloto premiado à capacidade operacional repetível.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Continuidade e confiança digital multi-obra</h4>
+                <p>FATO: prioridade em ciber/DR no mapa de conta; operações em múltiplos países e canteiros com edge. HIPÓTESE: incidentes ou indisponibilidade derrubam produtividade e narrativa de integridade.</p>
+                <div class="sub">Solução Foursys</div><p>Cibersegurança + DR/continuidade com ISO 27001/27701 — reduzir risco operacional e acelerar auditorias de clientes.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual é o RTO/RPO aceitável hoje para sistemas críticos de obra vs. corporativo — e onde ainda há gap de teste?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment de continuidade em 2–3 contratos-piloto + roadmap 90 dias.</p>
+            </div>
+            <div class="business-card">
+                <h4>Industrializar IA além do Smart OEC</h4>
+                <p>FATO: plataforma interna, prêmio InovaInfra 2026, chatbots e busca em acervo. FATO: empresa quer data-driven com TI corporativa.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — MLOps, RAG seguro, agentes com governança e aceleração de casos de engenharia/contratos.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quais pilotos de IA já têm dono de negócio e KPI — e quais travam em dados/infra?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop ½ dia: priorizar 2 casos com ROI em proposta/obra.</p>
+            </div>
+            <div class="business-card">
+                <h4>Integração legado ↔ core SaaS ↔ canteiro</h4>
+                <p>FATO: Head of IT menciona ERP/fiscal/tesouraria SaaS; mapa antigo aponta APIs/legado/BPM abertos.</p>
+                <div class="sub">Solução Foursys</div><p>Modernização de Legado + FourBlox/Digibee — reduzir custo de integração e tempo de mobilização de obra.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quantas integrações manuais ainda existem entre administração contratual, engenharia e backoffice?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Mapa de integrações críticas + PoC iPaaS em um fluxo de alto atrito.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de discovery · opcional PoC 1-pager de IA/integração</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">Cibersegurança (confiança) · AI Squad (escala dos pilotos) · Modernização/FourBlox (integração obra–core)</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) narrativa de digitalização em engenharia/infraestrutura com ganho de produtividade e segurança; (2) programas de ciber/DR para operações multi-site; (3) modernização/integração em empresas industriais com legado + novo core — adaptar linguagem para canteiro/BIM sem forçar case idêntico.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> a Odebrecht já tem inovação visível; o ROI está em <em>tornar repetível</em> o que hoje é piloto premiado — infra, dados, integração e segurança como “fábrica” de capacidade digital.</p>
+            <p style="margin-top:8px"><em>Se material setorial específico não estiver pronto: discursar com o artigo interno Engenharia↔TI + prêmio Smart Odebrecht como espelho, e propor discovery conjunta com Ygor/Inovação.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Vocês já provaram IA e BIM em cases — o próximo salto é escala com governança, não mais um piloto.”</li>
+                <li>“Infraestrutura de obra e corporativo precisam falar a mesma língua de segurança e continuidade.”</li>
+                <li>“Integração legado↔core SaaS é onde o TCO de 3 anos se decide — dá para atacar por fluxo, não por big-bang.”</li>
+                <li>“Preferimos co-gerenciar com o time de vocês: squads que aceleram, AMS que sustenta.”</li>
+                <li>“ISO 27001/27701 e delivery previsível importam tanto quanto feature — especialmente na retomada reputacional.”</li>
+                <li>“Queremos mapear com você e com o Head of IT os 3 temas sem fornecedor que mais travam mobilização de obra.”</li>
+                <li>“IT Forum é o momento de escolher um PoC com KPI de negócio — proposta, prazo ou segurança.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>IT Forum: rapport com Luis + mapear influenciadores (Ygor/Inovação)</td><td>Ata de interesses + stakeholders</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop de pipeline (ciber/DR, IA, integração)</td><td>Matriz dor×oferta×KPI</td><td>1–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC focado (ex.: RAG seguro em acervo OU fluxo iPaaS crítico)</td><td>Resultado mensurável + risks</td><td>3–6 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad co-gerenciado em um domínio (IA ou modernização)</td><td>Backlog 90 dias + ritual de governança</td><td>6–12 semanas</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Expandir AMS + ciber + AI factory</td><td>MSA / SOW programa multiwave</td><td>Trimestre seguinte</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Site institucional Odebrecht E&amp;C</h4><div class="url">https://www.odebrecht.com</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Site dinâmico (Apache; sinais de analytics)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado (público)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud / CDN</div><div class="v">Apache; menções Cloudflare no HTML</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Smart OEC / Smart Odebrecht (IA interna)</h4><div class="url">Plataforma interna — não pública</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">IA/GenAI corporativa (fonte: imprensa/empresa)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Chatbot O.L.I.V.I.A. + Busca PD</h4><div class="url">Assistentes internos — não públicos</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Chatbot / busca documental</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">IA + acervo técnico</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Core ERP / Fiscal / Tesouraria (SaaS)</h4><div class="url">Citado por Head of IT (Ygor) — vendor não publicado aqui</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">SaaS (não detalhado)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Novo ERP + sistemas fiscais/tesouraria</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Modelo SaaS</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Provável integração — confirmar em discovery</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="name">Híbrida / multi-site</div><div class="cmp">Guideline de vendors globais para novos projetos (fonte: artigo OEC). Nuvem pública e privada no mapa de investimentos. Edge AI em canteiro (visão publicada). Detalhe de hyperscaler: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="name">Prioridade declarada</div><div class="cmp">Ciber, DR, LGPD/DLP e GRC no radar de conta. Head of IT enfatiza segurança da informação e governança. Controles específicos: não localizados publicamente.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="name">Smart OEC · RPA · Chatbot · BIM</div><div class="cmp">Smart OEC/Smart Odebrecht, O.L.I.V.I.A., Busca PD, pilotos em propostas/engenharia/jurídico, capacitação BIM, sensores/edge (visão engenharia 3.0).</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="name">Em evolução para data-driven</div><div class="cmp">Arquiteturas de dados e agentes internos descritos no blog; maturidade ainda em construção (admissão pública).</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="name">Migração SaaS em curso</div><div class="cmp">Novo ERP + fiscal/tesouraria SaaS (Ygor). Vendor específico: não localizado nesta pesquisa — confirmar sem inventar.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="name">Engenharia · contratos · HCM/BPM</div><div class="cmp">Administração contratual digitalizada; Suíte OEC de Sustentabilidade; HCM/BPM no mapa de investimento (ref.); CRM: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="name">Canais digitais + workplace</div><div class="cmp">Site odebrecht.com (Apache + GTM/GA); workplace/EUC e mobile de obra no mapa; intranet/colaboração: não localizado.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.odebrecht.com</td><td><span class="status-200">200</span></td><td>HTML dinâmico</td><td>Apache · Cloudflare (sinal no HTML)</td><td>GTM/GA presentes · X-Powered-By “Unicorns and Fairy Dust”</td></tr>
+                    <tr><td>https://www.novonor.com</td><td><span class="status-200">200</span></td><td>HTML</td><td>Apache</td><td>Holding do grupo</td></tr>
+                    <tr><td>https://www.odebrecht.com/.../sinergia-essencial-entre-engenharia-e-tecnologia-da-informacao</td><td><span class="status-200">200</span></td><td>Blog / CMS</td><td>Apache</td><td>Artigo Engenharia↔TI (Ygor et al.)</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026 via HTTP HEAD/GET. Só o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Segurança</div><h4>Ciber/DR desigual entre corporativo e obra</h4><p>Setor de construção pesada opera sites remotes com conectividade limitada; prioridade de ciber/DR no mapa de conta sem evidência pública de maturidade uniforme.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · IA</div><h4>Piloto premiado sem fábrica de escala</h4><p>Smart OEC e cases InovaInfra existem; gap típico do setor é MLOps, grounding (RAG) seguro e governança para sair do laboratório.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Integração</div><h4>Legado ↔ core SaaS ↔ campo</h4><p>Novo ERP SaaS convive com processos de engenharia/contratos; APIs e modernização aparecem abertas no inventário de projetos.</p><div class="offer">Oferta Foursys: Modernização de Legado / FourBlox</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Dados</div><h4>Cultura data-driven ainda incompleta</h4><p>Empresa admite caminho a percorrer em gestão de dados via IA; construção pesada historicamente pobre em qualidade de dados de obra.</p><div class="offer">Oferta Foursys: AI Squad + Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Plataforma</div><h4>Padronização multi-país vs. variação de contrato</h4><p>Guideline global de vendors ajuda mobilização, mas execução local gera desvio — dor clássica de EPC multi-mercado.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Não localizado publicamente com detalhe</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">São Paulo / SP</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p><strong>1.</strong> Respeite o cargo real: ele é âncora de <em>ops de infraestrutura</em>, não “CIO genérico” — fale de disponibilidade, redes, storage, DR e padronização de obra.</p>
+                <p style="margin-top:8px"><strong>2.</strong> Peça a ponte para Ygor Cezar como natural, não como bypass: “como vocês dividem ownership entre ops e plataforma?”</p>
+                <p style="margin-top:8px"><strong>3.</strong> Foque no futuro da marca Odebrecht retomada; evite reabrir narrativa Lava Jato.</p>
+                <p style="margin-top:8px"><strong>4.</strong> Traga TCO 3 anos, SLA e métricas — alinhado ao perfil de compra da conta.</p>
+                <p style="margin-top:8px"><strong>5.</strong> Valorize a escala (200+ TI / 10k+ usuários): linguagem de complexidade, não de “startup de inovação”.</p>
+                <p style="margin-top:8px"><strong>6.</strong> Use Smart OEC / BIM como espelho positivo — mostre que entendeu o que já funciona.</p>
+                <p style="margin-top:8px"><strong>7.</strong> Ofereça co-gestão: extensão do time, capacitação, não substituição.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; identificação</h4><ul>
+                    <li>Planilha CIOs Confirmados IT Forum Praia do Forte 2026 (CNPJ 15.102.288/0001-82)</li>
+                    <li>Estadão — retorno da marca Odebrecht Engenharia &amp; Construção (mai/2025)</li>
+                    <li>NeoFeed / Estadão — planos de retomada OEC/Novonor</li>
+                    <li>RMA recuperação judicial (ajruiz) — menção CNPJ CNO/OEC</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack &amp; iniciativas TI</h4><ul>
+                    <li>Grandes Construções — Odebrecht acelera transformação digital (jun/2025)</li>
+                    <li>Petronotícias — entrevista Daniel Lepikson (inovação)</li>
+                    <li>Blog Odebrecht — sinergia Engenharia e TI (Ygor et al.)</li>
+                    <li>LinkedIn Novonor — Prêmio InovaInfra 2026 / Smart Odebrecht</li>
+                    <li>APAC CIO Outlook — Ygor Silva Cezar (Head of IT OEC)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Cobertura setorial construção pesada / concorrentes (AG, Mover, QG, OAS)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn — Luis Augusto da Silva (IT Infrastructure Operations Manager)</li>
+                    <li>LinkedIn — Ygor Cezar (Head of IT)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch/HTTP — odebrecht.com, novonor.com, artigo Engenharia↔TI (21/07/2026)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Base preservada</h4><ul>
+                    <li>Briefing Trancoso: Demais CIO\Luis Augusto da Silva - ODEBRECHT.html (mapa de investimentos, budget, preferências de compra)</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>
+

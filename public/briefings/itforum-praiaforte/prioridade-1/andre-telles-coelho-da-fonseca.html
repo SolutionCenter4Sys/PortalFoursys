@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<!--
+  Briefing CIO — Andre Telles | Coelho da Fonseca
+  IT Forum 2026 Praia do Forte | Hunter | Ordem B→A→C | DS Foursys
+  ID 10 | CNPJ 46.384.335/0001-51 | AÇÃO: CRIAR_NOVO
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Andre Telles | Coelho da Fonseca</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Andre Telles</h1>
+                <h2>CIO / Diretor de TI e Inovações — Coelho da Fonseca</h2>
+                <div class="loc">Serviços Diversos (corretagem imobiliária de alto padrão) · São Paulo/SP · CNPJ 46.384.335/0001-51</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Porte (luxo SP / ~350 corretores / 50 anos)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Histórico VGV</div><div class="value">R$ 40bi+</div></div>
+                <div class="header-badge"><div class="label">Imóveis vendidos</div><div class="value">~70 mil</div></div>
+                <div class="header-badge"><div class="label">Corretores</div><div class="value">~350–370</div></div>
+                <div class="header-badge"><div class="label">Cresc. 23→24</div><div class="value">~34%</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: deep-dive fontes abertas (Estadão, Bloomberg Línea, Imobi Report, IT Forum) + leitura de comitê (sócios + CIO) + material de apresentação · Diferencia da edição anterior (Trancoso). Presente no último IT Forum: NÃO (planilha).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>A Coelho da Fonseca é imobiliária familiar de alto padrão sediada em São Paulo, fundada em 1975. Razão social confirmada: <strong>Coelho da Fonseca Empreendimentos Imobiliarios Ltda</strong>, CNPJ <strong>46.384.335/0001-51</strong> (CNAE principal: corretagem na compra e venda e avaliação de imóveis). Atua com modelo de <em>private brokers</em>, foco em bairros nobres (Jardins, Vila Nova Conceição, Morumbi, Pinheiros), Alphaville, condomínios de campo no interior paulista e presença internacional citada (Miami, Nova Iorque, Paris). Em 50 anos, a marca estima ~70 mil imóveis de luxo negociados e mais de R$ 40 bilhões em transações (Bloomberg Línea). Faturamento formal não divulgado pelos sócios; crescimento declarado na ordem de 34% entre 2023 e 2024. Sucessão geracional: Alvaro Marco e Luiz Alfredo Coelho da Fonseca na direção desde 2019; fundador Alvaro no conselho.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Coelho da Fonseca Empreendimentos Imobiliarios Ltda</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">Av. Brasil, 1064 — Jardim América, São Paulo/SP</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">SP capital/interior + exterior (Miami/NY/Paris citados)</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">Não localizado (cresc. ~34% 23→24 — Bloomberg)</div></div>
+                <div class="info-card"><div class="label">Colaboradores / rede</div><div class="value">~250–1000 (dir.); ~350–370 corretores associados</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada · Ltda · family business</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Andre Telles</strong> (André Luiz Telles) é listado como <strong>Director of Information Technology and Innovations / CIO</strong> na Coelho da Fonseca (Salesgear, Adapt.io; entrevista IT Forum+ em 2016). LinkedIn: <a href="https://br.linkedin.com/in/andr%C3%A9luiztelles" target="_blank" rel="noopener">br.linkedin.com/in/andréluiztelles</a> — reconhecimentos públicos incluem TOP 100 CIOs do mercado brasileiro e prêmios de inovação no segmento construção/engenharia. Em novembro/2025, o Podcafé Tech o apresenta como <strong>Head de Inovação e Transformação Digital</strong> com 35+ anos de carreira (tema: inovação sem ruptura em empresas maduras). <em>Hipótese consultiva:</em> o título pode ter evoluído de CIO operacional para liderança híbrida TI+inovação — confirmar cargo atual e reporte na abertura da conversa.</p>
+            <p style="margin-top:12px"><strong>Poder de decisão:</strong> inovação declarada como parte crítica da estratégia e sob responsabilidade da TI (IT Forum). Na prática, o orçamento e a narrativa pública de IA/ERP próprio são puxados também pelos sócios diretores (Luiz e Alvaro Marco) — leitura de <strong>comitê</strong> obrigatória: CIO sozinho não fecha; family office + marketing/internacional (Renata Firpo citada em diretórios) influenciam priorização.</p>
+            <p style="margin-top:12px"><strong>Antifraude de homônimo:</strong> não confundir com André Telles (CEO TIP Brasil, mai/2026 — telecom) nem com André Telles (CCO Celepar). O alvo desta conta é o executivo de TI/inovação vinculado à Coelho da Fonseca / André Luiz Telles.</p>
+            <div class="alert-box" style="margin-top:14px">⚠️ <strong>Verificar na 1ª conversa:</strong> cargo formal atual (CIO vs Head de Inovação/TD), tempo de casa e a quem reporta (sócios vs CEO Marcelo Doria — listado em diretórios). Não há evidência pública de saída da empresa; planilha IT Forum 2026 o confirma como participante da Coelho da Fonseca.</div>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Atua no topo do mercado imobiliário residencial de luxo em São Paulo — posição de marca tradicional com diferencial de <em>private brokers</em> e relacionamento com incorporadoras (históricos: Parque Cidade Jardim/JHSF, Place des Vosges, Fazenda Boa Vista, Quinta da Baroneza). Cadeia de valor: captação e comercialização de usados de alto ticket, lançamentos, locação, administração patrimonial e consultoria a incorporadores. Pressões: houses internas das incorporadoras, digitalização de concorrentes (Lopes Private, Axpe, QuintoAndar no mid-market), comprador millennial/gen-Z endinheirado e demanda estrangeira. Tendência setorial: IA para matching imóvel–cliente–corretor, AR/VR na jornada de venda e conteúdo social para corretores — exatamente onde a Coelho já anunciou movimento.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar IA sobre base proprietária de 50 anos sem quebrar o modelo do corretor presencial (tensão cultural + técnica).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>ERP próprio mantido por time interno enxuto (~7 desenvolvedores — Imobi Report): risco de backlog, débito técnico e dependência de conhecimento tácito.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Alinhar ~350 corretores associados em disciplina digital (conteúdo, CRM de relacionamento, adoção de ferramentas) sem alienar top performers “analógicos”.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Integração entre canal digital (site Next.js), agência interna de conteúdo, CRM de leads e operação de venda física — orquestração incompleta é hipótese forte.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Compliance LGPD e segurança em base de UHNW (clientes de alto patrimônio): superfície de risco reputacional alta.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">IA para mineração da base histórica</span>
+                <span class="tag tag-priority">Matching cliente–corretor–imóvel</span>
+                <span class="tag tag-priority">Busca conversacional no site</span>
+                <span class="tag tag-priority">AR/VR / spatial (Vision Pro citado em cases R2U)</span>
+                <span class="tag tag-priority">Capacitação digital dos corretores</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses (fontes abertas)</h4>
+            <div>
+                <span class="tag tag-active">IA &gt; R$ 1 mi (Estadão) — busca oral/texto no site</span>
+                <span class="tag tag-active">Modelo IA 2º semestre (Bloomberg) — scoring de leads/abordagem</span>
+                <span class="tag tag-active">ERP proprietário + squad interna</span>
+                <span class="tag tag-active">Agência de conteúdo internalizada (R$ 500/mês por corretor)</span>
+                <span class="tag tag-active">Experiências AR/RV em empreendimentos</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">MLOps / governança de modelos sobre base sensível</span>
+                <span class="tag tag-opportunity">Integração iPaaS ERP↔site↔CRM↔marketing</span>
+                <span class="tag tag-opportunity">Modernização controlada do ERP legado</span>
+                <span class="tag tag-opportunity">Cibersegurança + ISO alinhada a UHNW</span>
+                <span class="tag tag-opportunity">AI Squad para acelerar roadmap sem inflar headcount</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">92/100</span></div>
+                <p>Squad dedicada para tirar do papel o matching preditivo e a busca conversacional já anunciados — sem substituir o corretor, exatamente o framing dos sócios.</p>
+                <div class="reasons"><ul>
+                    <li>Budget e narrativa pública de IA já existem (&gt;R$ 1 mi; modelo 2º semestre).</li>
+                    <li>Time interno de 7 devs no ERP não escala sozinho GenAI + dados.</li>
+                    <li>Ângulo: “inovação sem ruptura” — linguagem do próprio André no Podcafé.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS Digibee)</h4><span class="score-badge">86/100</span></div>
+                <p>Orquestração ERP proprietário ↔ portal Next.js ↔ CRM/marketing ↔ conteúdo — camada de integração com governança (ISO 27001/27701 Foursys).</p>
+                <div class="reasons"><ul>
+                    <li>Arquitetura fragmentada típica de imobiliária digitalizada incrementalmente.</li>
+                    <li>Reduz risco de “integração por script” no time enxuto.</li>
+                    <li>Habilita dados limpos para o modelo de IA.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">81/100</span></div>
+                <p>Evolução controlada do ERP exclusivo (modularização, APIs, observabilidade) sem big-bang — preserva ativo competitivo da empresa.</p>
+                <div class="reasons"><ul>
+                    <li>ERP próprio é diferencial citado publicamente.</li>
+                    <li>Débito técnico cresce com novas frentes de IA/AR.</li>
+                    <li>Fit cultural: reinventar o que já funciona.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">78/100</span></div>
+                <p>Product engineering no canal digital (site, jornada de busca, CF TV, landings de lançamentos) e disciplina de entrega ágil junto à squad interna.</p>
+                <div class="reasons"><ul>
+                    <li>Site já em Next.js/Azion — base moderna para acelerar.</li>
+                    <li>Comprador mais jovem exige UX de produto, não só catálogo.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">74/100</span></div>
+                <p>Programa de segurança e privacidade alinhado a base UHNW + LGPD; assessment e hardening de aplicações e dados de clientes.</p>
+                <div class="reasons"><ul>
+                    <li>Vazamento em imobiliária de luxo = crise reputacional imediata.</li>
+                    <li>IA aumenta superfície (dados de relacionamento + preferências).</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>IT Forum 2026 (presente no último = NÃO, planilha). Abrir com o tema que André já defende: inovação sob responsabilidade da TI, sem ruptura do corretor. Citar o dual track IA (busca no site + scoring de base) e perguntar qual está engasgado na integração com o ERP.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Modelo de IA para mineração da base histórica previsto a partir da 2ª metade do ano (Bloomberg) + investimento &gt;R$ 1 mi já anunciado (Estadão). Timing: pós-50 anos da marca, pressão por VGV incremental atribuível a IA. Oferta âncora: AI Squad + FourBlox como “trilho de dados”.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>24 anos, 41.000+ projetos, ISO 27001/27701, parceria Digibee (FourBlox). Posicionar como acelerador externo que respeita o ERP proprietário e a cultura familiar — não como substituto da squad de 7. Linguagem: parceiro de execução do CIO junto aos sócios.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Lopes (incl. Lopes Private)</h4><p>Escala nacional e divisão private; capacidade de investir em plataforma e dados. <strong>Gap Coelho:</strong> menor escala de TI, mas base de luxo mais “pura” e narrativa de tradição — precisa vencer em inteligência de relacionamento, não em volume de anúncios.</p></div>
+            <div class="competitor-card"><h4>Axpe Imóveis</h4><p>Concorrente direto de alto padrão em SP. Pressão por experiência digital e atendimento consultivo. <strong>Gap:</strong> quem industrializar primeiro o matching preditivo UHNW ganha share of mind do corretor top.</p></div>
+            <div class="competitor-card"><h4>QuintoAndar / Loft (proptech)</h4><p>Não competem ticket a ticket no ultra-luxo, mas definem expectativa de UX digital do comprador mais jovem. <strong>Gap:</strong> Coelho precisa de produto digital “premium”, não cópia de self-service mid-market.</p></div>
+            <div class="competitor-card"><h4>Brasil Brokers / houses de incorporadoras</h4><p>Capilaridade em lançamentos e força de construtoras. <strong>Gap:</strong> Coelho depende de excelência em secundário + consultoria a incorporador — dados e CRM B2B2C são o campo de batalha.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Imobiliária familiar de luxo (1975), CNPJ 46.384.335/0001-51, sede Jardim América/SP; ~70 mil imóveis e R$ 40bi+ históricos.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Andre Telles (André Luiz Telles) — CIO / TI &amp; Inovações; TOP 100 CIOs; inovação sob a TI desde IT Forum+ 2016.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Industrializar IA sobre a base proprietária sem romper o modelo do corretor; ERP próprio precisa acompanhar.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Fontes abertas: IA (&gt;R$ 1 mi + modelo 2º sem.), ERP interno, conteúdo digital para corretores, AR/VR. Sem RI — empresa privada.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">AI Squad; FourBlox (iPaaS); Modernização de Legado (ERP).</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 45 min no IT Forum: mapa de integração ERP↔IA + proposta de PoC de matching em vertical de bairro.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Pós-50 anos + rollout de IA em andamento + evento Praia do Forte 2026.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “chatbot imobiliário”. Vender trilha de dados + governança para monetizar 50 anos de histórico UHNW com o corretor no centro.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>50 anos e a aposta em IA</h4><p>Marca consolidada no luxo paulistano decide transformar o arquivo de relacionamentos em ativo preditivo — com budget anunciado e sócios engajados.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Inovar sem quebrar o corretor</h4><p>ERP próprio enxuto, 350 associados e cliente UHNW. Risco: IA vira piloto de marketing se a integração e a governança falharem.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Squad + integração + legado</h4><p>Foursys entra como AI Squad e FourBlox para acelerar o trilho de dados, modernizando o ERP no ritmo da cultura familiar.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Dor: IA anunciada, execução engessada pelo ERP e pelo time interno</h4>
+                <p>Evidência: investimento &gt;R$ 1 mi (Estadão); modelo de scoring planejado (Bloomberg); apenas ~7 devs no ERP (Imobi Report).</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — time misto para entregas de matching/busca conversacional com métricas de VGV assistido e adoção pelo corretor.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Qual percentual do pipeline de IA depende hoje de dados que ainda não saem limpos do ERP?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de 1 dia: inventário de fontes de dados de venda × hipóteses de modelo.</p>
+            </div>
+            <div class="business-card">
+                <h4>Dor: fragmentação digital (site, marketing, operação, conteúdo)</h4>
+                <p>Evidência: portal Next.js + GTM/Facebook/Segment; agência interna de conteúdo; ERP separado — arquitetura típica de “melhoria por camada”.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee) — iPaaS com governança para fluxos lead→corretor→proposta→pós-venda.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quantas integrações críticas ainda são script/manual entre o time de marketing e o ERP?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Mapa de 5 fluxos críticos + PoC de um conector prioritário em 3–4 semanas.</p>
+            </div>
+            <div class="business-card">
+                <h4>Oportunidade: ERP proprietário como moat — se não virar âncora</h4>
+                <p>Evidência: software de gestão exclusivo citado como pilar de inovação (Imobi Report); pressão de novas features (IA, AR).</p>
+                <div class="sub">Solução Foursys</div><p>Modernização de Legado + Engenharia Digital — APIs, observabilidade, modularização sem big-bang.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“O que o ERP não consegue entregar em 90 dias que a narrativa de IA já prometeu ao mercado?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment técnico de 2 semanas com backlog priorizado por impacto em VGV.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de PoC AI Squad</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad + FourBlox — porquê: budget de IA já existe; falta trilho de dados/integração</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) narrativas de jornada digital + dados em serviços de alto relacionamento (financeiro/luxo) com AI Squad; (2) integrações iPaaS Digibee em ecossistemas com ERP heterogêneo; (3) se disponível, case de modernização de core proprietário sem substituição — senão usar discurso de “evolução do ativo digital próprio”.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> o ROI não está em “mais leads no site”; está em elevar taxa de conversão do corretor top usando 50 anos de histórico proprietário com governança — Foursys como braço de execução do CIO perante os sócios.</p>
+            <p style="margin-top:8px"><em>Se não houver case imobiliário pronto: abrir com slide “Inovação sem ruptura” (frase do Podcafé) e fechar com proposta de PoC de matching em um bairro (ex.: Jardins) medindo tempo-até-visita e taxa de proposta.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Vocês já anunciaram a IA; a pergunta é se o trilho de dados do ERP aguenta o modelo sem criar sombra paralela.”</li>
+                <li>“Inovação sob a TI — como você mesmo defendeu — exige capacidade de entrega além dos 7 devs do core.”</li>
+                <li>“Não viemos substituir o corretor; viemos fazer o histórico de 50 anos trabalhar a favor dele.”</li>
+                <li>“FourBlox resolve a orquestração site–CRM–ERP antes que cada piloto de IA vire um silo.”</li>
+                <li>“Proposta concreta: PoC de matching em um bairro, com métrica de negócio, em semanas — não em trimestre de estudo.”</li>
+                <li>“Com UHNW, governança e cibersegurança são parte do produto de confiança da marca Coelho.”</li>
+                <li>“No IT Forum, queremos sair com um mapa de integração e um sponsor conjunto: você + um dos sócios.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Encontro IT Forum + LinkedIn André Luiz Telles; validar cargo/reporte</td><td>Ata de interesses + sponsor interno</td><td>Semana 0–1</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop dados/ERP/IA com TI + 1 sócio + marketing</td><td>Mapa de fontes + gaps de integração</td><td>Semanas 2–3</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC matching ou busca conversacional em vertical única</td><td>Demo + métricas (adoção corretor / lead quality)</td><td>Semanas 4–8</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>AI Squad + conector FourBlox prioritário</td><td>Backlog trimestral + runbooks</td><td>Meses 3–5</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Expandir modernização ERP + segurança</td><td>MSA plurianual + governance board</td><td>Mês 6+</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3–5)</h4>
+            <div class="app-card">
+                <h4>Portal Coelho da Fonseca (catálogo / jornada digital)</h4>
+                <div class="url">https://www.coelhodafonseca.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Next.js (X-Powered-By)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado (API Next)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud / Edge</div><div class="v">Azion Edge + nginx</div></div>
+                    <div class="app-stack-item"><div class="k">API / Analytics</div><div class="v">GTM-KW9FMV6 · Segment · Meta</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>ERP proprietário (gestão imobiliária)</h4>
+                <div class="url">Interno — não localizado URL pública</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Desenvolvimento interno (~7 devs)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Hipótese: APIs limitadas</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Camada de conteúdo / social dos corretores</h4>
+                <div class="url">Agência internalizada (R$ 500/mês/corretor — Bloomberg)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Redes sociais / ferramentas de conteúdo</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Experiências AR/VR / spatial</h4>
+                <div class="url">Cases públicos com R2U / Apple Vision Pro (AG Art Residences)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">AR staging / Vision Pro</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Parceiro R2U (fonte vendor)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integração CRM citada pelo vendor</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="name">Edge + origin</div><div class="cmp">Site: Azion Edge (X-Azion-*) + nginx/Ubuntu origin; cloud do ERP: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="name">Sinais públicos limitados</div><div class="cmp">Cookie Law (OneTrust stub) no portal; programa de segurança interno: não localizado. LGPD crítica por perfil UHNW.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="name">IA comercial em rollout</div><div class="cmp">Busca conversacional/oral no site (Estadão); modelo de scoring de base (Bloomberg); AR/VR em empreendimentos (Imobi/R2U).</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="name">Martech + base histórica</div><div class="cmp">GTM, Segment, Meta Pixel no site; “base valiosa de 50 anos” citada pela diretoria — maturidade de DW/lake: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="name">ERP exclusivo interno</div><div class="cmp">Software de gestão proprietário (Imobi Report). Vendor de mercado: não publicado.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="name">Operação imobiliária</div><div class="cmp">Gestão de carteira/corretores/lançamentos via ERP; CRM nominal: não localizado publicamente.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="name">Portal + private brokers</div><div class="cmp">coelhodafonseca.com.br (Private Brokers), CF TV, conteúdo social assistido, visitas presenciais como ritual de venda.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.coelhodafonseca.com.br/</td><td><span class="status-200">200</span></td><td>Next.js</td><td>Azion Edge + nginx/1.18</td><td>GTM-KW9FMV6; Segment; Facebook; OneTrust; X-Azion-Edge-Location: CGH</td></tr>
+                    <tr><td>https://br.linkedin.com/company/coelho-da-fonseca</td><td><span class="status-200">200</span></td><td>LinkedIn</td><td>LinkedIn CDN</td><td>Company page ativa (Real Estate)</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 20/07/2026 (~16:32 BRT). Só o efetivamente inspecionado via HTTP headers/HTML.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4–6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · IA / Dados</div><h4>Base histórica sem trilho analítico industrializado</h4><p>Diretoria declara base única de 50 anos, mas maturidade de plataforma de dados não é pública — risco de IA “em slides”. Evidência setorial: proptechs competitivas monetizam dados de jornada.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Ecossistema fragmentado site–martech–ERP</h4><p>Portal moderno (Next/Azion) convive com ERP interno e operação de corretores. Sem iPaaS, cada piloto vira silo. Evidência: stack martech detectada + ERP citado à parte.</p><div class="offer">Oferta Foursys: FourBlox (Digibee)</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Core</div><h4>ERP proprietário sob pressão de roadmap</h4><p>Time de ~7 devs sustenta o core enquanto IA/AR exigem APIs. Débito técnico é hipótese forte em imobiliárias com software caseiro.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Experiência</div><h4>Expectativa digital do comprador jovem vs ritual presencial</h4><p>Sócios defendem corretor; mercado exige UX de produto. Gap: jornada digital premium consistente (busca → visita → proposta).</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Segurança</div><h4>Superfície UHNW + IA sem programa visível</h4><p>Clientes de alto patrimônio + novos modelos aumentam risco LGPD/reputação. Evidência pública de programa maduro: não localizada.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Cert. Innovation &amp; IT Management (edX) — demais: não localizado em detalhe</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">São Paulo, SP</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5–7)</h4>
+                <p>1. Use o nome completo profissional: André Luiz Telles — evita confusão com homônimos.<br>
+                2. Cite o IT Forum+ 2016: inovação como parte crítica sob a TI — mostra lição de casa.<br>
+                3. Ecoar “inovação sem ruptura” / “tecnologia vem depois das pessoas” (Podcafé nov/2025).<br>
+                4. Respeitar o culto ao corretor: qualquer pitch que soe “substituir atendimento” morre na mesa dos sócios.<br>
+                5. Perguntar sobre o ERP próprio com curiosidade técnica — é orgulho da casa.<br>
+                6. Trazer métrica de negócio (VGV assistido, taxa de proposta), não só stack.<br>
+                7. Sugerir incluir Luiz ou Alvaro Marco em follow-up — comitê familiar decide ritmo.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>Bloomberg Línea — IA e base histórica (50 anos)</li>
+                    <li>Estadão — investimento IA &gt; R$ 1 mi; busca conversacional</li>
+                    <li>Exame — tradição + tecnologia / nova geração</li>
+                    <li>Planilha CIOs IT Forum 2026 (CNPJ/UF/presença)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Imobi Report — ERP próprio + 7 desenvolvedores; AR/RV</li>
+                    <li>Verificação HTTP coelhodafonseca.com.br (Next.js, Azion, GTM)</li>
+                    <li>R2U — case Vision Pro / AR staging</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Casafy — panorama imobiliárias SP</li>
+                    <li>IstoÉ Dinheiro — private brokers / luxo</li>
+                    <li>Consulta CNPJ 46.384.335/0001-51</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn André Luiz Telles</li>
+                    <li>IT Forum — entrevista CIO Coelho da Fonseca (2016)</li>
+                    <li>Podcafé Tech — ep. nov/2025 (Head Inovação/TD)</li>
+                    <li>Salesgear / Adapt.io — cargo CIO</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>HTTP GET https://www.coelhodafonseca.com.br/ (20/07/2026)</li>
+                    <li>LinkedIn company Coelho da Fonseca (200)</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS) · ID 10
+    </div>
+</body>
+</html>

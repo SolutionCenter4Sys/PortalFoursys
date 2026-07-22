@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Vanderlei Teodoro Gomes | GRUPO ELFA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Vanderlei Teodoro Gomes</h1>
+                <h2>Head de TI · CISO · CSO — GRUPO ELFA</h2>
+                <div class="loc">Indústria Farmacêutica (distribuição saúde) · Brasília/DF · CNPJ 09.315.996/0001-07</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Porte nacional (R$ 5,6 bi)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Receita líquida 2024</div><div class="value">R$ 5,6 bi</div></div>
+                <div class="header-badge"><div class="label">EBITDA ajustado</div><div class="value">R$ 433 mi</div></div>
+                <div class="header-badge"><div class="label">Colaboradores</div><div class="value">2.500+</div></div>
+                <div class="header-badge"><div class="label">Hospitais atendidos</div><div class="value">7 mil</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: RI/resultados 2024–2025 + leitura de liderança de TI (Vanderlei como Head de TI/CISO/CSO; a cadeira de Diretor Executivo de Tecnologia ficou em transição após a saída de Rafael Tobara em nov/2025) + material de apresentação · Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>O Grupo Elfa (Elfa Medicamentos S.A.) é uma das principais redes de distribuição de medicamentos e materiais médico-hospitalares do Brasil, controlada por fundos do Pátria Investimentos. Conecta indústria, hospitais, clínicas e planos de saúde com malha logística nacional. Em 2024 encerrou com receita líquida de R$ 5,6 bilhões e EBITDA ajustado de R$ 433 milhões (+4,8% a/a). Agenda 2025–2026: eficiência operacional, consolidação de sites, GenAI (CotAI) e redução de despesas — com linha FINEP de R$ 82 milhões aprovada para inovação.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Elfa Medicamentos S.A. (Grupo Elfa)</div></div>
+                <div class="info-card"><div class="label">Sede (planilha)</div><div class="value">Brasília/DF</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Nacional · 21 empresas consolidadas</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">R$ 5,6 bi receita líquida 2024 (PR Newswire / RI)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">Mais de 2.500</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada · controlada Pátria Investimentos</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Vanderlei Teodoro Gomes</strong> — Head de TI | CISO | CSO no Grupo Elfa desde abr/2023 (LinkedIn). Lidera cibersegurança, governança de TI, conectividade, infraestrutura e Service Desk. Criou a estrutura de cyber do grupo; em jul/2023 assumiu infra/telecom; em jan/2024 criou Governança de TI. Trajetória: Louis Dreyfus (infra/segurança), Duratex/Dexco (cyber + cloud), Sapore (migração DC→cloud), Fundação Zerrenner/Ambev (sistemas + DevSecOps). Formação: Análise de Sistemas + MBA BSP + Escola de CIOs (Itaqui). Discursa board-level: "CIO que fala só tecnologia virou commodity".</p>
+            <p style="margin-top:12px"><strong>Leitura de liderança (atualizada):</strong> Rafael Tobara — que ocupou o cargo de Diretor Executivo de Tecnologia, Digital, Inovação e Customer Experience (dez/2020–nov/2025) — <strong>deixou o Grupo Elfa em novembro de 2025</strong> e hoje é Diretor Sênior de Inovação e Transformação Digital para a América Latina na Medtronic (fontes: LinkedIn, IT Forum 26/11/2025). Tobara serve apenas como <em>referência histórica</em> dos cases (CotAI, Valcann) — não é mais o CIO atual. O interlocutor de tecnologia hoje ativo na conta é <strong>Vanderlei Teodoro Gomes</strong>, Head de TI/CISO/CSO, que lidera cibersegurança, governança de TI, conectividade, infraestrutura e Service Desk. <em>Hipótese consultiva:</em> com a cadeira executiva de tecnologia em transição, decisões estratégicas e de budget passam pelo CEO José Roberto Ferraz e board (controle Pátria), com Vanderlei como dono técnico de risco, segurança, integração pós-M&amp;A e maturidade operacional — o ponto de entrada natural da Foursys.</p>
+            <div class="alert-box" style="margin-top:14px">⚠️ <strong>Não confundir cargo:</strong> Rafael Tobara <strong>não é mais o CIO</strong> (saiu em nov/2025). Centralizar toda a abordagem em <strong>Vanderlei Teodoro Gomes</strong> (Head de TI/CISO/CSO, ativo no LinkedIn), mapeando o sponsor de board (CEO Ferraz) para deals estratégicos. Presente no último IT Forum: <strong>NÃO</strong> (planilha).</div>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Distribuição B2B de medicamentos, materiais médico-hospitalares, cirúrgicos e dental, com serviços de gestão de estoque hospitalar e logística para pesquisa clínica. Posição: um dos líderes nacionais no canal hospitalar/clínicas, com participação citada pela própria liderança na casa de ~10% no privado e ~25% no público (fontes abertas NeoFeed/Panorama Farmacêutico). Cadeia de valor crítica: cotação em alto volume, cold chain, compliance sanitário, integração multi-empresa pós-aquisições. Pressões: endividamento pós-M&amp;A, foco em margem (oncologia/cirurgia/estética), desinvestimento de ativos não-core, concorrência de Viveo/Oncoprod e distribuidores regionais. Tendência 2026: GenAI no comercial, consolidação logística e TI como alavanca de custo de servir.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Integração pós-M&amp;A:</strong> 20+ unidades de negócio migradas para cloud em ~18 meses (Valcann) — legado heterogêneo e risco de silos.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Volume comercial não estruturado:</strong> ~800 mil itens/dia em cotações (PDF, planilha, imagem) — gargalo antes do CotAI.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Pressão de custo e alavancagem:</strong> reestruturação Pátria; despesas operacionais caíram R$ 63 mi em 2025 (RI) — TI precisa provar ROI contínuo.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Risco cibernético em dados de saúde/logística:</strong> Vanderlei elevou maturidade CIC Control (12%→62% citado no LinkedIn) — agenda ainda aberta.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Governança multi-empresa:</strong> políticas, compliance e Service Desk unificados sob Head de TI — tensão entre agilidade local e padrão corporativo.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Escalar GenAI além da cotação</span>
+                <span class="tag tag-priority">Reduzir custo de servir</span>
+                <span class="tag tag-priority">Resiliência cyber board-level</span>
+                <span class="tag tag-priority">Integração de dados/ERP-WMS-CRM</span>
+                <span class="tag tag-priority">TI falando EBITDA e risco</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">CotAI / GenAI comercial (AWS Bedrock)</span>
+                <span class="tag tag-active">Cloud AWS + DevOps CI/CD</span>
+                <span class="tag tag-active">Data Lake + Analytics (A3Data)</span>
+                <span class="tag tag-active">FINEP R$ 82 mi inovação</span>
+                <span class="tag tag-active">SIEM/SOC, firewalls, governança TI</span>
+                <span class="tag tag-active">Consolidação de sites / eficiência</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Multiagentes GenAI (roadmap citado FDC)</span>
+                <span class="tag tag-opportunity">Integração iPaaS pós-consolidação</span>
+                <span class="tag tag-opportunity">Modernização de apps legadas remanescentes</span>
+                <span class="tag tag-opportunity">SOC gerenciado / continuous compliance</span>
+                <span class="tag tag-opportunity">AI Squad para expansão CotAI a outras BUs</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">92/100</span></div>
+                <p>Encaixa direto no mandato CISO/CSO de Vanderlei: SIEM/SOC, maturidade de controles, proteção de dados de saúde e continuidade logística.</p>
+                <div class="reasons"><ul>
+                    <li>Criou área de cyber e roadmap de risco (LinkedIn: melhoria de 8%→93% em projeto citado).</li>
+                    <li>Distribuição de saúde = alto impacto de ransomware em operação e reputação.</li>
+                    <li>Foursys: ISO 27001/27701, 24 anos, 41.000+ projetos — linguagem de board que ele já usa.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">88/100</span></div>
+                <p>Ampliar CotAI e Robô de Cotações para outras BUs/WhatsApp/multiagentes — squad com ownership de produto GenAI sustentado por Vanderlei (governança/risco/segurança) e patrocínio de board (CEO Ferraz).</p>
+                <div class="reasons"><ul>
+                    <li>CotAI já gerou dezenas a centenas de milhões em vendas atribuídas (TI Inside / FDC / site Elfa).</li>
+                    <li>Parceiros atuais (A3Data, FCamara, Valcann) — espaço para aceleração/segunda onda, não substituição forçada.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (Digibee iPaaS)</h4><span class="score-badge">84/100</span></div>
+                <p>Integração ERP ↔ WMS ↔ CRM ↔ CotAI ↔ portais de cotação em grupo multi-empresa pós-M&amp;A.</p>
+                <div class="reasons"><ul>
+                    <li>Valcann cita integração a sistemas corporativos (ERP, WMS, CRM, BI).</li>
+                    <li>Consolidação logística e sites exige camadas de integração confiáveis e auditáveis.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">78/100</span></div>
+                <p>Evoluir esteiras CI/CD (já com SonarQube + Bedrock na Valcann) para produtos internos de distribuição e customer experience.</p>
+                <div class="reasons"><ul>
+                    <li>Case público de automação inteligente no desenvolvimento de software.</li>
+                    <li>Meta de reduzir time-to-feature (Valcann: até −40% no lançamento de funcionalidades).</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">72/100</span></div>
+                <p>Remanescentes das 20+ BUs migradas: apps ainda acopladas, débito técnico e risco operacional em pontas da malha.</p>
+                <div class="reasons"><ul>
+                    <li>Migração cloud não elimina modernização de aplicações de negócio.</li>
+                    <li>Agenda de eficiência 2026 pressiona custo de manutenção de legado.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>IT Forum Praia do Forte: falar a linguagem de Vanderlei — risco precificado, governança e arquitetura como instrumento de poder (não deck de features). Abrir com: "como o CotAI escala sem ampliar superfície de ataque e débito de integração?".</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Segunda onda GenAI (multiagentes / outras BUs) + reforço SOC/compliance contínuo sob pressão de eficiência Pátria. Timing: FINEP inovação + AFAC 1T2026 reforçam caixa para projetos de TI com ROI mensurável.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Combinar Cibersegurança + AI Squad + FourBlox sob um único interlocutor que traduz cyber, integração e GenAI em EBITDA e exposição financeira — exatamente o trio de idiomas que Vanderlei publica. ISO 27001/27701 e histórico de 41.000+ projetos sustentam credibilidade board.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Viveo</h4><p>Peer de distribuição médico-hospitalar com capital aberto e histórico de M&amp;A; mercado chegou a especular combinação com Elfa. Gap Elfa: precisa mostrar superioridade operacional via GenAI + integração, não só escala.</p></div>
+            <div class="competitor-card"><h4>Oncoprod</h4><p>Distribuição hospitalar relevante no mesmo tabuleiro consolidado. Gap: diferenciação Elfa em GenAI comercial (CotAI) e serviços de gestão de estoque — reforçar barreira tecnológica.</p></div>
+            <div class="competitor-card"><h4>GrupoSC / Panpharma</h4><p>Força em canal farma varejo (ePan). Gap Elfa: perfil mais hospitalar/especialidades; disputa regional e digitalização de pedidos — integração e CX digital importam.</p></div>
+            <div class="competitor-card"><h4>Distribuidores regionais (ex.: Santa Cruz e peers)</h4><p>Competem por cobertura e relacionamento local. Gap Elfa: custo de servir nacional vs agilidade local — TI e logística unificadas são a resposta.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Grupo Elfa — distribuição saúde nacional, Pátria, R$ 5,6 bi (2024), 7 mil hospitais / 250 mil clínicas.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Vanderlei Gomes — Head TI/CISO/CSO (desde 2023), interlocutor de tecnologia ativo. Board: CEO J.R. Ferraz (controle Pátria). Rafael Tobara saiu em nov/2025 (referência histórica).</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escalar GenAI + eficiência de custo + maturidade cyber sem travar integração multi-empresa.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">CotAI/GenAI, AWS, Data Lake, DevOps, FINEP R$ 82 mi, SIEM/SOC e governança (RI + cases Valcann/TI Inside).</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) Cibersegurança 2) AI Squad 3) FourBlox iPaaS</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 30 min no fórum: mapa de risco CotAI + diagnóstico integração ERP-WMS-CRM.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum 2026 + reforço de capital 1T2026 + agenda eficiência Pátria.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender "mais IA". Vender governança de risco + integração que permite a GenAI escalar sem explodir custo oculto de ops/security.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>De roll-up a plataforma</h4><p>Após dezenas de aquisições, Elfa migra 20+ BUs para AWS, cria CotAI e entra no ranking IT Forum 100+ Inovadoras. TI deixa de ser backoffice e vira motor de receita e margem.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Escalar sem quebrar</h4><p>Pressão Pátria por eficiência, dívida e desinvestimento. GenAI escala; superfície de ataque e integrações crescem. Vanderlei precisa traduzir cyber e governança em linguagem de conselho.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Foursys como segunda onda</h4><p>AI Squad + Cibersegurança + FourBlox fecham o ciclo: mais GenAI com controles, integração e modernização — sem brigar com AWS/Valcann, complementando.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Risco cibernético vs. escala GenAI</h4>
+                <p>Evidência: CotAI em Bedrock + volume massivo de documentos; Vanderlei publica maturidade CIC e SIEM/SOC.</p>
+                <div class="sub">Solução Foursys</div><p>Cibersegurança — hardening de pipeline GenAI, SOC e compliance contínuo alinhados a ISO 27001/27701.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual o controle de risco formal antes de colocar multiagentes GenAI em outras BUs?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de 90 min: superfície de ataque CotAI + roadmap de controles board-ready.</p>
+            </div>
+            <div class="business-card">
+                <h4>Integração multi-empresa pós-consolidação</h4>
+                <p>Evidência: migração 20+ unidades; menção a ERP/WMS/CRM/BI; consolidação de sites em RI 2025.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee) — iPaaS para orquestrar fluxos cotação→pedido→estoque→faturamento.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quantos conectores manuais ainda existem entre CotAI, CRM e WMS das BUs remanescentes?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Mapa de integração AS-IS em uma vertical (oncologia ou cirurgia) em 2 semanas.</p>
+            </div>
+            <div class="business-card">
+                <h4>Segunda onda de GenAI com ROI de margem</h4>
+                <p>Evidência: CotAI com R$ 75–240 mi atribuídos conforme fonte; plano de multiagentes e WhatsApp (FDC).</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — produto GenAI sob métricas de conversão e custo de servir, com Vanderlei no risco/governança e patrocínio de board (CEO Ferraz).</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual BU após Farma tem o maior backlog de cotação manual ainda não tocado pelo CotAI?</p>
+                <div class="sub">Gancho / próximo passo</div><p>PoC de 4 semanas em uma BU satélite com KPI de tempo de resposta e taxa de acurácia.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de risco GenAI para deixar com Vanderlei</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">Cibersegurança + AI Squad + FourBlox — porquê: mandato CISO + escala CotAI + integração pós-M&amp;A</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) GenAI em processos comerciais de alto volume documental; (2) integração logística/distribuição multi-site; (3) SOC/compliance em empresas de saúde ou dados sensíveis. Se case farma Foursys não estiver pronto, usar discurso de "segunda onda segura" ancorado nos números públicos do CotAI.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> O vendedor médio oferece "IA para cotação" — Elfa já tem. O ROI está em <em>governar e integrar</em> a GenAI para liberar margem sob o mandato Pátria de eficiência.</p>
+            <p style="margin-top:8px"><em>Discurso sugerido se material setorial incompleto: "Vocês já provaram GenAI em receita. Nós ajudamos a industrializar risco, integração e expansão para BUs sem aumentar o custo oculto de ops."</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>"O CotAI já venceu a prova de receita — o próximo jogo é risco, integração e escala controlada."</li>
+                <li>"Você fala três idiomas: capital, risco e arquitetura. Trouxemos as três ofertas amarradas, não um catálogo."</li>
+                <li>"Com a cadeira de tecnologia em transição, você é quem segura risco, governança e integração — é aí que a Foursys opera."</li>
+                <li>"FourBlox não substitui AWS — conecta ERP, WMS, CRM e GenAI sem criar nova dívida de ponto a ponto."</li>
+                <li>"FINEP e eficiência Pátria pedem projetos com KPI de EBITDA e exposição financeira, não de tickets."</li>
+                <li>"PoC de 4 semanas em uma BU satélite: acurácia, tempo de ciclo e controles — board-ready."</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Abordagem IT Forum + LinkedIn pós-evento</td><td>One-pager risco GenAI + agenda com Vanderlei (e sponsor de board)</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop cyber + mapa de integração CotAI</td><td>AS-IS de controles e conectores críticos</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>AI Squad em BU satélite OU hardening CotAI</td><td>KPI acurácia/tempo + relatório de risco</td><td>4–6 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>FourBlox em fluxo cotação→CRM→WMS</td><td>Pipeline integrado + runbook ops</td><td>8–12 semanas</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Programa anual cyber + GenAI + integração</td><td>MSA + OKRs de margem e maturidade</td><td>Q3–Q4 2026</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>CotAI — GenAI de cotação</h4><div class="url">https://grupoelfa.com.br/noticias/cotai-do-grupo-elfa-como-usamos-a-tecnologia-para-impulsionar-a-distribuicao-de-saude/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não publicado (integra CRM)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">GenAI / NLP sobre docs</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">AWS Bedrock (+ SageMaker cit.)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integração plataforma comercial</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Site institucional Grupo Elfa</h4><div class="url">https://grupoelfa.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">WordPress theme custom</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">PHP / WP</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado (HSTS ativo)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não aplicável (site)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Robô de Cotações (portais)</h4><div class="url">Site Elfa / notícias CotAI</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Automação portais B2B</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">IA + RPA (hipótese parcial)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">AWS (contexto grupo)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Portais de cotação externos</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Data Lake corporativo</h4><div class="url">Case Valcann/A3Data</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Analytics / BI</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Glue / Athena (cit.)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">AWS S3 Data Lake</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">12+ fontes integradas</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">AWS (EC2, RDS, S3) · migração 20+ BUs · parceiro Valcann · Terraform/Ansible citados</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">Firewalls, SIEM/SOC, monitoramento contínuo · roadmap CISO Vanderlei · LGPD implícita em saúde</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">CotAI (Bedrock), Robô de Cotações, SonarQube+Bedrock em Dev, multiagentes no roadmap</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">Data Lake AWS (S3/Glue/Athena) · A3Data · BI corporativo</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">ERP citado em cases Valcann — fabricante específico não publicado publicamente</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">CRM comercial, WMS/logística, portais de cotação, Service Desk corporativo</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">CX (área historicamente liderada por Tobara, que saiu em nov/2025) · NPS 79% (2024) · site WP · canal digital cotação/e-mail</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://grupoelfa.com.br/</td><td><span class="status-200">200</span></td><td>WordPress (theme grupoelfa)</td><td>Não identificado (sem CF-Ray)</td><td>HSTS max-age=15768000; X-Frame-Options SAMEORIGIN; scripts less.js / modernizr / eva-icons</td></tr>
+                    <tr><td>https://grupoelfa.com.br/noticias/cotai-...</td><td><span class="status-200">200</span></td><td>WP conteúdo</td><td>—</td><td>Case CotAI + quote histórico de Tobara (ex-diretor, saiu nov/2025)</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026 ~12:10 (America/Sao_Paulo). Só o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Segurança</div><h4>Governança GenAI em escala</h4><p>CotAI em produção com alto volume documental; expansão multiagente aumenta risco de vazamento e prompt abuse. Evidência setorial: dados comerciais + saúde sensíveis.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Conectores pós-M&amp;A</h4><p>20+ BUs na cloud não garantem modelo canônico de dados entre ERP/WMS/CRM. Distribuição hospitalar sofre com ruptura de pedido e estoque.</p><div class="offer">Oferta Foursys: FourBlox (Digibee)</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Dados</div><h4>Monetização do Data Lake</h4><p>Lake com 12+ fontes existe; hipótese: self-service e modelos prescritivos ainda desiguais entre BUs Farma vs especialidades.</p><div class="offer">Oferta Foursys: Engenharia Digital / AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Aplicações</div><h4>Débito técnico remanescente</h4><p>Migração lift-and-shift parcial típica em roll-ups; custo de manutenção compete com meta de −13,8% em despesas (RI 2025).</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Produto GenAI</div><h4>Cobertura incompleta de BUs</h4><p>CotAI forte no core comercial; roadmap público cita WhatsApp/multiagentes — execução precisa de squad com ownership.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Análise de Sistemas · MBA BSP · Escola de CIOs Itaqui</div></div>
+                <div class="info-card"><div class="label">Cidade / base</div><div class="value">Planilha: Brasília/DF · LinkedIn: São Paulo (trabalho)</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado (pt-BR confirmado)</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1. Cite o post "CIO que fala só tecnologia virou commodity" — mostre que leu a tese dele.<br>
+                2. Trate-o como o dono da agenda de tecnologia hoje ativa; não presuma um "CIO acima dele" (a cadeira executiva ficou em transição após a saída de Tobara em nov/2025).<br>
+                3. Traga números públicos do CotAI como respeito, não como novidade.<br>
+                4. Fale exposição financeira e EBITDA, não ferramentas.<br>
+                5. Reconheça parceiros AWS/Valcann/A3Data — posicione Foursys como complemento.<br>
+                6. Pergunte pela maturidade CIC Control e o próximo salto de 62% em diante.<br>
+                7. Evite pitch de ERP genérico — foque risco, integração e GenAI segura.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>PR Newswire — resultados 2024 (R$ 5,6 bi / EBITDA R$ 433 mi)</li>
+                    <li>Apresentações/resultados Grupo Elfa (MZIQ) — eficiência 2025, CotAI, FINEP R$ 82 mi</li>
+                    <li>Bloomberg Línea / NeoFeed / Panorama Farmacêutico — reestruturação Pátria</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Valcann — migração AWS + DevOps + Data Lake + GenAI</li>
+                    <li>Valcann — automação SonarQube + Amazon Bedrock</li>
+                    <li>TI Inside / site Grupo Elfa — CotAI</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>GlobalMed / Pipeline Valor — peers Viveo/Oncoprod</li>
+                    <li>FDC Seja Relevante — CotAI R$ 240 mi / multiagentes</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn Vanderlei Gomes (gomesvanderlei) — Head TI/CISO/CSO</li>
+                    <li>Quotes Tobara + Vanderlei no case Valcann</li>
+                    <li>Planilha CIOs Confirmados IT Forum 10.07 — ID 96, CNPJ, DF</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>HTTP GET grupoelfa.com.br (200, HSTS, WP)</li>
+                    <li>WebFetch notícia CotAI + case Valcann</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

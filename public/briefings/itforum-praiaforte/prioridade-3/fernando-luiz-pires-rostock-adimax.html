@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Fernando Luiz Pires Rostock | Adimax</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Fernando Luiz Pires Rostock</h1>
+                <h2>Head of Information Technology — Adimax</h2>
+                <div class="loc">Comércio Atacadista e Varejista · Salto de Pirapora/SP · CNPJ 03.887.324/0001-81</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · grande porte (pet food nacional)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Colaboradores</div><div class="value">~2.400–3.000</div></div>
+                <div class="header-badge"><div class="label">Plantas</div><div class="value">7+</div></div>
+                <div class="header-badge"><div class="label">PDTI 2026</div><div class="value">Consolidado</div></div>
+                <div class="header-badge"><div class="label">Último IT Forum</div><div class="value">SIM</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: PDTI (Lozinsky) + nomeação Head TI + expansão fabril + marcas pet food · Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>A <strong>Adimax Indústria e Comércio de Alimentos Ltda.</strong> (CNPJ 03.887.324/0001-81) é uma das maiores fabricantes brasileiras de alimentos para cães e gatos, com marcas <strong>Magnus, Fórmula Natural, Origens e Qualidy</strong>. Fundação ~2002; unidade industrial de referência em Salto de Pirapora/SP (Av. Agenor Leme dos Santos, 495) e sede administrativa citada em Sorocaba/SP. Estrutura: múltiplas fábricas (SP, MG, GO, PE, BA, nova unidade Mandirituba/PR com investimento ~R$ 140 mi), CDs, transportadora própria (Trans Adimax) e Instituto Adimax. Quase 2.400–3.000 colaboradores conforme fontes institucionais. Fontes: adimax.com.br; IT Forum; Revista Clínica Veterinária; TopView.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Adimax Indústria e Comércio de Alimentos Ltda.</div></div>
+                <div class="info-card"><div class="label">Sede / planta</div><div class="value">Salto de Pirapora / SP (adm. Sorocaba citada)</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Nacional · exportação citada · presença LATAM/UE no LinkedIn company</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">Não localizado oficialmente (estimativas de mercado não usadas)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~2.400–3.000 (fontes institucionais)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Ltda. privada · indústria pet food</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Fernando Luiz Pires Rostock, PhD</strong> é Head of Information Technology na Adimax (anúncio IT Forum 02/06/2025). Responsável por estratégia de TI alinhada ao negócio, budget CapEx/OpEx, infra, sistemas, projetos, fornecedores e cibersegurança. Trajetória: CIO Yamaha Motor (~4 anos); +24 anos General Motors; Votorantim Cimentos; Sascar/Michelin. Formação: Eng. Mecatrônica Poli-USP; pós Adm. FGV e Arquitetura/Redes Poli-USP; Mestrado e Doutorado em Administração FGV; especializações Chicago/Harvard/FDC. Membro IBGC e conselheiro CIONET. Em 2026 liderou consolidação do <strong>Plano Diretor de TI (PDTI)</strong> com Lozinsky Consultoria — pilares: robustez arquitetural, eficiência de processos, dados para decisão e novas tecnologias para eficiência operacional e crescimento. <strong>Poder de decisão:</strong> alto sobre roadmap TI; alinhamento a stakeholders de negócio/indústria.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Indústria de pet food (alimentos completos, específicos e coadjuvantes, secos e úmidos) com go-to-market atacado/varejo e marcas do popular ao superpremium. Cadeia: commodity agrícola → formulação → fabricação 24h → logística própria → PDV/e-commerce. Prioridades: capacidade produtiva multiplanta, qualidade/ISO, custo, dados comerciais e eficiência industrial. Pressões: Mars/Nestlé Purina/Premier etc. e marcas regionais. Posição: top player nacional em volume/marca; expansão geográfica ativa (PR).</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Execução do PDTI 2026+</strong> — plano consolidado; agora converter em projetos com throughput. FATO: LinkedIn Rostock / Lozinsky.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Arquitetura multiplanta</strong> — 7+ fábricas + CDs + frota; integração MES/ERP/logística. HIPÓTESE: heterogeneidade por site.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Dados para decisão comercial/industrial</strong> — PDTI cita habilitar dados. FATO: post PDTI.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Eficiência operacional / Indústria 4.0</strong> — linhas 24h e expansão Mandirituba. FATO: imprensa industrial.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Cibersegurança e confiabilidade</strong> — mandato explícito do Head TI. FATO: descrição LinkedIn.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Arquitetura tecnológica robusta</span>
+                <span class="tag tag-priority">Processos eficientes multiplanta</span>
+                <span class="tag tag-priority">Dados confiáveis para decisão</span>
+                <span class="tag tag-priority">Novas tecnologias com ROI operacional</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Portfólio PDTI 2026</span>
+                <span class="tag tag-active">Suporte à nova planta PR</span>
+                <span class="tag tag-active">Integração sistemas industriais</span>
+                <span class="tag tag-active">Dados &amp; analytics</span>
+                <span class="tag tag-active">Cibersegurança / infra</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Modernização de legado industrial/corporativo</span>
+                <span class="tag tag-opportunity">FourBlox — ERP↔MES↔TMS↔comercial</span>
+                <span class="tag tag-opportunity">AI Squad — qualidade, demanda, manutenção</span>
+                <span class="tag tag-opportunity">Engenharia Digital / e-commerce marcas</span>
+                <span class="tag tag-opportunity">Cibersegurança OT/IT</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">92/100</span></div>
+                <p>Programa alinhado ao PDTI: robustez arquitetural e descomissionamento de sistemas que travam eficiência multiplanta.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: PDTI 2026 prioriza arquitetura e eficiência.</li>
+                    <li>FATO: Head TI com background GM/Yamaha — responde a manufatura.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS) + Engenharia Digital</h4><span class="score-badge">88/100</span></div>
+                <p>Integração industrial entre plantas, CDs, Trans Adimax e canais comerciais das 4 marcas.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: rede multiplanta + logística própria.</li>
+                    <li>HIPÓTESE: ponto a ponto cresce com nova fábrica PR.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">84/100</span></div>
+                <p>IA para demanda, qualidade, manutenção preditiva e pricing — “novas tecnologias” do PDTI com ROI.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: PDTI cita novas tecnologias para eficiência e crescimento.</li>
+                    <li>HIPÓTESE: dados de linha 24h ainda subexplorados.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">78/100</span></div>
+                <p>Programa OT/IT para fábrica + corporativo, alinhado ao mandato explícito do Head TI.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: LinkedIn — políticas de cibersegurança no escopo.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">72/100</span></div>
+                <p>Evolução dos sites/marcas e jornadas digitais B2B/B2C (adimax.com.br e marcas).</p>
+                <div class="reasons"><ul>
+                    <li>FATO: portfólio multi-marca e conteúdo digital ativo em 2026.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>“O PDTI com a Lozinsky já definiu o norte — queremos ser o braço de execução de modernização, integração e IA com KPI de planta.”</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Priorizar 2–3 iniciativas do PDTI para PoC (integração multiplanta ou AI de qualidade/demanda) em 45–60 dias.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Modernização + FourBlox + AI Squad para Head TI com DNA automotivo/manufatura (GM/Yamaha) e governança CIONET/IBGC.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Mars Petcare / Nestlé Purina / Premier</h4><p>Escala global e brand. Gap Adimax: agilidade multiplanta BR e marcas locais; precisa de dados e OT no nível dos líderes.</p></div>
+            <div class="competitor-card"><h4>Outras indústrias pet food regionais</h4><p>Preço e distribuição. Gap: Adimax vence com portfólio amplo — TI deve sustentar mix e logística.</p></div>
+            <div class="competitor-card"><h4>Consultorias de PDTI (Lozinsky etc.)</h4><p>Diagnóstico e plano. Gap: execução de fábrica de projetos — espaço Foursys pós-PDTI.</p></div>
+            <div class="competitor-card"><h4>Integradores ERP/MES</h4><p>Dominam core. Gap: iPaaS, IA e modernização transversal fora do escopo do vendor único.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Adimax — pet food (Magnus, Fórmula Natural, Origens, Qualidy); CNPJ 03.887.324/0001-81.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Fernando Rostock, PhD — Head TI desde ~2025; ex-CIO Yamaha/GM; PDTI 2026.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Executar PDTI: arquitetura, processos, dados e novas techs com expansão fabril.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">PDTI 2026+ (Lozinsky): robustez, eficiência, dados, inovação operacional.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) Modernização de Legado; 2) FourBlox + Eng. Digital; 3) AI Squad.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 45 min IT Forum: shortlist PDTI → 2 PoCs.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum 2026 · presente no último · ano 1 do PDTI.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não competir com Lozinsky; vender execução pós-plano com KPI de planta.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Novo Head TI + PDTI</h4><p>Rostock chega da manufatura automotiva e consolida Plano Diretor com Lozinsky para 2026+.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Plano vs. capacidade de entregar</h4><p>Multiplanta, nova fábrica PR e quatro marcas pressionam integração, dados e ciber ao mesmo tempo.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Factory Foursys</h4><p>Modernização + iPaaS + AI Squad transformam PDTI em throughput mensurável.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Execução do PDTI (arquitetura e legado)</h4>
+                <p>Evidência: consolidação PDTI 2026; discurso de robustez arquitetural.</p>
+                <div class="sub">Solução Foursys</div><p>Modernização de Legado — roadmap técnico amarrado ao PDTI; resultado: menos risco e OpEx.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quais 3 sistemas do PDTI liberam mais valor se modernizados nos próximos 90 dias?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Alinhar shortlist PDTI + assessment 2 semanas.</p>
+            </div>
+            <div class="business-card">
+                <h4>Integração multiplanta + logística</h4>
+                <p>Evidência: 7+ plantas, CDs, Trans Adimax, nova unidade PR.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox — padrões de integração ERP/MES/TMS; resultado: visibilidade e menos ruptura.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quantas interfaces críticas ainda são ponto a ponto entre plantas e a transportadora?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>PoC iPaaS em 1 fluxo planta→CD.</p>
+            </div>
+            <div class="business-card">
+                <h4>IA operacional com ROI</h4>
+                <p>Evidência: PDTI cita novas tecnologias; linhas 24h; qualidade como diferencial.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — qualidade/demanda/manutenção; resultado: eficiência e crescimento sustentável.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Onde já existe dado de linha/qualidade que ainda não vira alerta automático?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Design sprint 1 semana + PoC com KPI de desvio/parada.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck 8–10 slides + matriz PDTI→ofertas Foursys + one-pager PoC</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">Modernização + FourBlox + AI Squad — porquê: PDTI 2026</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) modernização em manufatura multiplanta; (2) iPaaS ERP–logística; (3) AI Squad industrial — cases Foursys disponíveis.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> não rivalizar com a consultoria do PDTI; posicionar Foursys como <em>execution partner</em>.</p>
+            <p style="margin-top:8px"><em>Se material setorial não encaixar: discurso “do PDTI ao throughput de mudança em 90 dias”.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Vi o PDTI com a Lozinsky — queremos ajudar a transformar o plano em entregas com KPI de planta.”</li>
+                <li>“Seu background GM/Yamaha fala a mesma língua de manufatura que usamos em modernização.”</li>
+                <li>“FourBlox industrializa integrações entre plantas, CDs e Trans Adimax.”</li>
+                <li>“AI Squad só entra com caso de negócio (qualidade, demanda, manutenção) — sem theater.”</li>
+                <li>“Ciber OT/IT entra no mesmo pacote de confiabilidade que você já prioriza.”</li>
+                <li>“Proposta: shortlist de 3 itens do PDTI + PoC em 30–45 dias.”</li>
+                <li>“Presente no último IT Forum — retomar com avanço concreto 2026.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>IT Forum ângulo PDTI / execução</td><td>Agenda 45 min Rostock</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Leitura PDTI + mapa sistemas multiplanta</td><td>One-pager priorizado</td><td>1–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC modernização/iPaaS/AI (1 caso)</td><td>Demo + ROI</td><td>3–6 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad misto sob governança Adimax</td><td>Backlog 90 dias</td><td>1–3 meses</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Programa anual alinhado ao PDTI</td><td>MSA / SOW</td><td>3–6 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Site institucional Adimax</h4><div class="url">https://adimax.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">WordPress / marketing multi-marca</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">CMS</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não identificado no fetch</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Sites / páginas das marcas</h4><div class="url">https://adimax.com.br/magnus/ · origens · formula-natural · qualidy</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">WP marketing</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">CMS</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>ERP / core corporativo</h4><div class="url">Não público</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">ERP industrial (marca não publicada)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações planta/CD (hipótese)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Sistemas de chão de fábrica / qualidade</h4><div class="url">Não público</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">MES/qualidade (hipótese setorial)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Provável on-prem/híbrido</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Não detalhada publicamente; Head TI cita infra (redes, servers, DBs). Hipótese: híbrido multiplanta.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">Mandato explícito no cargo; ISO citadas na operação industrial. Ferramentas: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">PDTI abre espaço para novas tecnologias; linhas 24h. Maturidade IA: hipótese — início de jornada.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">PDTI: habilitar dados para decisão. Plataforma BI/lake: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">ERP corporativo/industrial: marca não publicada neste briefing.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">Produção, qualidade, WMS/CD, TMS (Trans Adimax), comercial multi-marca. CRM: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">adimax.com.br + marcas; redes sociais; Instituto Adimax; conteúdo pet care 2026.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://adimax.com.br/</td><td><span class="status-200">200</span></td><td>WordPress marketing</td><td>Não identificado</td><td>Marcas Magnus/Origens/Qualidy; notícias jun/2026</td></tr>
+                    <tr><td>https://itforum.com.br/noticias/rostock-novo-head-ti-adimax/</td><td><span class="status-200">200</span></td><td>Portal noticioso</td><td>Não identificado</td><td>Nomeação Head TI 02/06/2025; trajetória USP/FGV/GM/Yamaha</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026 (WebFetch).</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Legado</div><h4>Arquitetura vs. PDTI</h4><p>Plano existe; execução de modernização ainda a industrializar.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Multiplanta + TMS</h4><p>Expansão PR aumenta interfaces.</p><div class="offer">Oferta Foursys: FourBlox</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Dados/IA</div><h4>Dados ainda não viram decisão</h4><p>PDTI aponta o gap explicitamente.</p><div class="offer">Oferta Foursys: AI Squad / Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Segurança</div><h4>OT/IT fabril</h4><p>Mandato existe; maturidade pública opaca.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Experiência</div><h4>DX multi-marca</h4><p>Sites marketing; jornada B2B/B2C a evoluir.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Mecatrônica Poli-USP · MSc/PhD Adm. FGV · pós redes Poli</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">Grande São Paulo (empresa: Salto de Pirapora/Sorocaba)</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Reconhecer PhD FGV + CIONET/IBGC — conversa de governança, não só tech.<br>
+                2) Mencionar GM/Yamaha com respeito a manufatura e arquitetura.<br>
+                3) Posicionar Foursys como execução do PDTI, aliada à Lozinsky.<br>
+                4) Falar KPI de planta (OEE, ruptura, qualidade) — linguagem dele.<br>
+                5) Evitar pitch genérico de “cloud”; amarrar a robustez e confiabilidade.<br>
+                6) Citar presença no último IT Forum e continuidade 2026.<br>
+                7) Perguntar top 3 iniciativas do PDTI para o 2º semestre.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>IT Forum — Rostock Head TI Adimax (02/06/2025)</li>
+                    <li>LinkedIn Lozinsky / Rostock — PDTI 2026</li>
+                    <li>TopView — fábrica Mandirituba R$ 140 mi</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>adimax.com.br — canais digitais</li>
+                    <li>LinkedIn Fernando Rostock — escopo TI/ciber</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Revista Clínica Veterinária — perfil Adimax</li>
+                    <li>CNPJ 03.887.324/0001-81 (regulamento Fórmula Natural)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn — Fernando Luiz Rostock</li>
+                    <li>IT Forum — biografia formação/trajetória</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch 21/07/2026 — adimax.com.br · itforum.com.br</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+
+</html>
