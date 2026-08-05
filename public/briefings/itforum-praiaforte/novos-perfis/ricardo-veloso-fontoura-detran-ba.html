@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Ricardo Veloso Fontoura | DETRAN-BA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Ricardo Veloso Fontoura</h1>
+                <h2>Coordenador Geral de Tecnologia da Informação e Inovação — DETRAN-BA</h2>
+                <div class="loc">Governo e Setor Público · Salvador/BA · CNPJ 13.195.920/0001-54</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Ordem Planilha · participação presencial confirmada</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Serviços digitais</div><div class="value">28</div></div>
+                <div class="header-badge"><div class="label">Abrangência</div><div class="value">417</div></div>
+                <div class="header-badge"><div class="label">Experiência TI</div><div class="value">21+ anos</div></div>
+                <div class="header-badge"><div class="label">Case IA</div><div class="value">SUCESU 2025</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em 05/08/2026 · Escopo: validação institucional, iniciativas 2025–2026, leitura do comitê, canais digitais e material de apresentação · Presença no último encontro: não.</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#rapport">Rapport</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico · FATO</div>
+            <h3>A Empresa</h3>
+            <p><strong>FATO:</strong> o Departamento Estadual de Trânsito da Bahia é autarquia estadual vinculada à administração pública baiana, com autonomia administrativa e financeira e jurisdição em todo o território do Estado. O CNPJ informado foi validado como pertencente ao Departamento Estadual de Trânsito, com sede em Salvador. O órgão digitaliza serviços de habilitação, veículos e atendimento ao cidadão, mantendo operação descentralizada em unidades regionais. Fontes: portal institucional, página de equipe, LinkedIn institucional e cadastro público consultado em 05/08/2026.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Departamento Estadual de Trânsito</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">Salvador/BA</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Todo o Estado da Bahia</div></div>
+                <div class="info-card"><div class="label">Budget de TI</div><div class="value">Não localizado em fonte pública aberta</div></div>
+                <div class="info-card"><div class="label">Investimento</div><div class="value">Digitalização, IA, biometria, dados e segurança; valores de TI não localizados</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Autarquia estadual</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão · FATO</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>FATO:</strong> Ricardo Veloso Fontoura consta na equipe oficial, atualizada em 30/06/2026, como Coordenador Geral de Tecnologia da Informação e Inovação. Fonte setorial independente o descreve no posto desde 2023, mestre em Ciência da Informação pela UFBA e com mais de duas décadas em TI pública. Sua trajetória inclui Tribunal de Justiça da Bahia, Ministério Público, Secretaria do Planejamento, Secretaria da Administração e PRODEB. Em publicação própria, ele associa sua coordenação a IA, biometria, assinatura digital, autenticação gov.br, observabilidade, transformação digital e ciência de dados.</p>
+            <div class="alert-box" style="margin-top:14px">⚠️ <strong>Divergência de nomenclatura:</strong> a planilha o qualifica como CIO e o LinkedIn usa CIO/CTO; a fonte oficial registra “Coordenador Geral de Tecnologia da Informação e Inovação”. Vínculo confirmado. Usar o cargo oficial na abordagem.</div>
+            <p><strong>INFERÊNCIA:</strong> Ricardo influencia seleção técnica, arquitetura e priorização, mas contratações públicas também dependem da Direção Geral, áreas demandantes, Coordenação de Licitação, Administrativo-Financeiro, jurídico e controles internos. O orçamento discricionário de TI e sua alçada individual não foram localizados.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento & mercado · FATO</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p><strong>FATO:</strong> órgãos estaduais de trânsito operam serviços críticos de habilitação, registro veicular, fiscalização, educação e integração com bases nacionais e estaduais. O DETRAN-BA combina atendimento presencial, unidades regionais, carteiras digitais e portal integrado ao ecossistema ba.gov.br. As pressões relevantes são continuidade operacional, proteção de dados pessoais e biométricos, combate a fraude, interoperabilidade, auditabilidade de decisões automatizadas e experiência do cidadão. Não existe “market share” aplicável à autarquia; o benchmark adequado é maturidade digital entre órgãos públicos de trânsito.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões & lacunas · FATO + INFERÊNCIA</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>FATO:</strong> integrar serviços e identidades digitais com gov.br sem interromper jornadas críticas. Fonte: publicação de Ricardo Fontoura, 25/03/2025.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>FATO:</strong> proteger biometria, assinatura digital e dados de veículos em múltiplas integrações. Fontes: publicação do gestor e balanço institucional.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>FATO:</strong> sustentar IA em processos administrativos com conformidade à Lei de Licitações e normas estaduais. Fonte: SECOM Bahia, 22/08/2024.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>INFERÊNCIA:</strong> observabilidade ponta a ponta torna-se crítica quando portal, identidade, sistemas nacionais e parceiros tecnológicos compõem a mesma jornada.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>INFERÊNCIA:</strong> expansão de canais e automações eleva custo de manutenção se componentes e integrações permanecerem heterogêneos.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div><span class="tag tag-priority">Escalar serviços digitais</span><span class="tag tag-priority">Eficiência com IA</span><span class="tag tag-priority">Segurança e transparência</span><span class="tag tag-priority">Decisão orientada por dados</span></div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div><span class="tag tag-active">Expansão das plataformas digitais</span><span class="tag tag-active">IA administrativa e serviços ao cidadão</span><span class="tag tag-active">Fiscalização tecnológica</span><span class="tag tag-active">Integrações e identidade digital</span></div>
+            <p style="margin-top:8px"><strong>FATO:</strong> planejamento público para 2026 cita expansão de plataformas digitais, parcerias institucionais e fiscalização. Valores específicos de budget de TI não foram localizados.</p>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div><span class="tag tag-opportunity">Assessment de integrações</span><span class="tag tag-opportunity">Observabilidade de jornadas</span><span class="tag tag-opportunity">Governança de IA</span><span class="tag tag-opportunity">Segurança por desenho</span></div>
+            <p style="margin-top:8px"><strong>HIPÓTESE CONSULTIVA:</strong> não há evidência pública de processos abertos ou ausência de fornecedor nesses quatro temas; validar na reunião e no plano de contratações.</p>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio · HIPÓTESE CONSULTIVA</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">91/100</span></div>
+                <p>Apoia evolução dos canais e sistemas críticos com arquitetura evolutiva, práticas DevSecOps, confiabilidade e observabilidade nas camadas C1, C6 e C7.</p>
+                <div class="reasons"><ul><li>Transformação digital e observabilidade aparecem na agenda declarada do gestor.</li><li>Jornadas públicas integram portal, identidade e bases transacionais.</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">89/100</span></div>
+                <p>Industrializa casos de IA com engenharia, testes, monitoramento e governança, ampliando o ciclo iniciado por GDL, Beni, Mago e Mago IA.</p>
+                <div class="reasons"><ul><li>IA já gera entregas e reconhecimento público.</li><li>Próxima fronteira é escalar com segurança, métricas e reuso.</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">86/100</span></div>
+                <p>Protege dados pessoais, biometria, assinaturas e integrações com diagnóstico, segurança de aplicações, privacidade e continuidade. Diferenciais Foursys: ISO 27001 e ISO 27701.</p>
+                <div class="reasons"><ul><li>Serviços de trânsito tratam dados sensíveis e documentos de alto valor.</li><li>A expansão digital aumenta superfície de ataque e dependências externas.</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Digibee iPaaS</h4><span class="score-badge">82/100</span></div>
+                <p>Estrutura integrações, políticas de API e rastreabilidade entre camadas C5, C6 e C7 sem ampliar acoplamento.</p>
+                <div class="reasons"><ul><li>Há integrações com gov.br, sistemas veiculares e parceiros homologados.</li><li>Interoperabilidade é central à expansão dos serviços digitais.</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">76/100</span></div>
+                <p>Reduz risco de sistemas críticos e habilita modernização incremental por APIs, strangler pattern e sustentação orientada a indicadores.</p>
+                <div class="reasons"><ul><li>Fonte profissional cita equipe de sistemas mainframe e bases nacionais críticas.</li><li>Modernização incremental preserva continuidade do serviço público.</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox</h4><span class="score-badge">68/100</span></div>
+                <p>Componentes reutilizáveis podem padronizar jornadas, acessibilidade e segurança, reduzindo prazo e custo de novos serviços.</p>
+                <div class="reasons"><ul><li>Portfólio amplo de serviços digitais favorece reuso.</li><li>Fit depende de validação da arquitetura atual e regras de contratação.</li></ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account · HIPÓTESE CONSULTIVA</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>“Como escalar a inovação já reconhecida do DETRAN-BA sem transformar cada novo caso de IA ou serviço digital em uma ilha de integração, segurança e sustentação?”</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Propor workshop executivo de duas horas para mapear uma jornada crítica, suas integrações, controles de segurança e indicadores. Confirmar orçamento, ciclo de contratação e fornecedor incumbente antes de ofertar PoC.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Combinar AI Squad, engenharia, integração e segurança em uma trilha única, apoiada por 24 anos de mercado, mais de 41.000 projetos e certificações ISO 27001/27701.</p></div>
+            <div class="insight-box"><h4>Ângulo comercial</h4><p>O argumento não óbvio é custo de escala: o valor não está apenas em lançar mais uma automação, mas em reduzir o custo marginal e o risco de cada próxima jornada digital por meio de componentes, APIs, telemetria e controles reutilizáveis.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark · FATO + INFERÊNCIA</div>
+            <h3>Concorrentes & Gap Analysis</h3>
+            <div class="competitor-card"><h4>DETRAN-SP</h4><p><strong>INFERÊNCIA:</strong> benchmark de escala, autosserviço e integração digital. Comparar observabilidade, disponibilidade e governança de parceiros; avaliação técnica específica requer pesquisa conjunta.</p></div>
+            <div class="competitor-card"><h4>DETRAN-PR</h4><p><strong>INFERÊNCIA:</strong> benchmark regional para experiência digital e serviços veiculares. Validar padrões de autenticação, integração e acessibilidade antes de qualquer comparação conclusiva.</p></div>
+            <div class="competitor-card"><h4>DETRAN-PE</h4><p><strong>INFERÊNCIA:</strong> comparável no Nordeste para capilaridade e digitalização. Usar como referência de jornada, não como concorrente comercial.</p></div>
+            <div class="competitor-card"><h4>SENATRAN / Carteira Digital de Trânsito</h4><p><strong>FATO:</strong> infraestrutura federal condiciona integrações e experiência do cidadão. O gap consultivo é garantir compatibilidade, rastreabilidade e resiliência entre serviços estaduais e nacionais.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Autarquia estadual responsável por serviços de trânsito em toda a Bahia, com agenda ativa de digitalização.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Ricardo Fontoura, coordenador oficial de TI e Inovação, mestre pela UFBA e líder de iniciativas públicas de IA e dados.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escalar IA e canais digitais com integração, segurança, governança e continuidade.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">IA, biometria, assinatura digital, gov.br, observabilidade, dados e expansão de plataformas; valores não localizados.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">Engenharia Digital; AI Squad; Cibersegurança.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Workshop de jornada crítica com mapa de integrações, riscos e métricas.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Prioridades 2026 e encontro presencial confirmado; ciclo orçamentário deve ser validado.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Diminuir custo marginal e risco de cada nova entrega digital, não vender ferramenta isolada.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Inovação já saiu do discurso</h4><p>O DETRAN-BA digitaliza serviços, integra identidade pública e coloca IA em produção. Beni ganhou reconhecimento e novas iniciativas ampliam a ambição.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Escala multiplica dependências</h4><p>Cada serviço novo conecta dados, parceiros e sistemas críticos. Sem padrões comuns, custo, risco e tempo de sustentação crescem.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Inovação como capacidade</h4><p>A Foursys ajuda a criar esteira reutilizável de engenharia, IA, integração e segurança para entregar mais com controle.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio · HIPÓTESE CONSULTIVA</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Escalar serviços digitais sem ampliar fragilidade operacional</h4>
+                <p><strong>Evidência:</strong> expansão de plataformas digitais e integração ao gov.br aparecem em fontes institucionais e do gestor.</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital com observabilidade e modernização incremental para reduzir indisponibilidade e tempo de mudança.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual jornada hoje concentra mais chamados, integrações e risco de indisponibilidade?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment enxuto de uma jornada crítica com baseline técnico e operacional.</p>
+            </div>
+            <div class="business-card">
+                <h4>Transformar casos de IA em portfólio governado</h4>
+                <p><strong>Evidência:</strong> GDL, Beni, Mago e Mago IA mostram adoção crescente; Beni recebeu reconhecimento no SUCESU 2025.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad para engenharia de produto, testes, avaliação, monitoramento e governança de modelos.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quais critérios determinam se um caso de IA avança do piloto para operação e como o benefício é medido?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Canvas de governança e priorização aplicado a um caso real.</p>
+            </div>
+            <div class="business-card">
+                <h4>Proteger confiança em jornadas de alto valor</h4>
+                <p><strong>Evidência:</strong> biometria, assinatura digital, autenticação, dados veiculares e integrações externas fazem parte do ambiente público descrito.</p>
+                <div class="sub">Solução Foursys</div><p>Cibersegurança combinada com integração governada para privacidade, rastreabilidade e resiliência.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Onde hoje termina a responsabilidade do DETRAN-BA e começa a do parceiro em incidentes de uma jornada integrada?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Threat modeling e matriz de responsabilidades de uma jornada prioritária.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck executivo de 8 slides + one-pager técnico; conversa de 25 minutos; sem demo genérica</div></div>
+                <div class="info-card"><div class="label">Oferta Foursys âncora</div><div class="value">Engenharia Digital + AI Squad, porque o desafio provável é escalar entregas já existentes com governança</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos relevantes:</strong> apresentar somente cases Foursys autorizados de modernização de jornada crítica, industrialização de IA e segurança/LGPD. Na ausência de referência pública específica de governo, usar: blueprint de observabilidade de jornada; canvas de governança de IA; modelo de threat modeling com ISO 27001/27701.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> reduzir custo marginal, risco e tempo da próxima dezena de serviços, em vez de competir por uma solução pontual já contratada.</p>
+            <p style="margin-top:8px"><em>Discurso sugerido: “Vocês já provaram capacidade de inovar. Queremos entender o que impede essa capacidade de escalar com o mesmo nível de segurança e previsibilidade em todas as jornadas.”</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Ricardo, vimos que a inovação no DETRAN-BA já está em produção e recebeu reconhecimento; queremos conversar sobre escala, não sobre começar do zero.”</li>
+                <li>“Beni, Mago e as integrações digitais criam um ativo maior: uma capacidade institucional de entregar produtos públicos.”</li>
+                <li>“Nossa hipótese é que o próximo ganho está em padronizar integração, telemetria, segurança e governança entre as iniciativas.”</li>
+                <li>“A Foursys combina AI Squad, engenharia e cibersegurança, com ISO 27001 e 27701, sem separar inovação de operação.”</li>
+                <li>“Não presumimos lacuna nem fornecedor: queremos escolher uma jornada crítica e construir o diagnóstico com sua equipe.”</li>
+                <li>“Podemos sair da conversa com uma matriz curta de valor, risco, dependências e próximos passos, sem compromisso de plataforma.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 6 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Validar prioridade, alçada, contratos e jornada crítica</td><td>Mapa de contexto e decisores</td><td>1 semana</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Entrevistas técnicas, de negócio e segurança</td><td>Mapa da jornada, integrações, métricas e riscos</td><td>2 semanas</td></tr>
+                    <tr><td class="phase">3. Assessment</td><td>Baseline de arquitetura, operação, dados e IA</td><td>Backlog priorizado e business case</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">4. Prova de valor</td><td>Atacar um gargalo mensurável</td><td>Incremento funcional + evidências</td><td>4–6 semanas</td></tr>
+                    <tr><td class="phase">5. Squad piloto</td><td>Operar esteira com governança compartilhada</td><td>Produto piloto e indicadores</td><td>8–12 semanas</td></tr>
+                    <tr><td class="phase">6. Programa</td><td>Escalar componentes, APIs e controles reutilizáveis</td><td>Roadmap multi-jornada e modelo de sustentação</td><td>6–12 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico · FATO</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3)</h4>
+            <div class="app-card">
+                <h4>Portal Institucional e Serviços DETRAN-BA</h4><div class="url">https://www.ba.gov.br/detran</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações não expostas na página consultada</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Guia de Serviços do Estado da Bahia</h4><div class="url">https://servicos.ba.gov.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integração de catálogo não publicada</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Atende Multiempresas</h4><div class="url">Acesso regulado por solução tecnológica homologada pelo DETRAN-BA</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Fornecido por empresas homologadas</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Sistema do DETRAN-BA; tecnologia não publicada</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integração homologada conforme manual técnico</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp"><strong>FATO:</strong> requisitos de plataforma SaaS aparecem em norma para pátios e leilões; infraestrutura interna do órgão não publicada.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança & Compliance</div><div class="cmp"><strong>FATO:</strong> autenticação gov.br, biometria, assinatura digital, LGPD e integridade documental são componentes públicos; ferramentas internas não publicadas.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp"><strong>FATO:</strong> GDL, Beni, Mago, Mago IA e monitoramento viário com IA.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados & Analytics</div><div class="cmp"><strong>FATO:</strong> dashboards de gestão, ciência de dados e estatísticas de frota; plataforma analítica não publicada.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp"><strong>FATO:</strong> RENAVAM, RENAINF e RENACH são citados por fonte profissional; ERP financeiro não publicado.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp"><strong>FATO:</strong> Atende Multiempresas, GDL, gestão de pátios/leilões, habilitação e registro veicular; tecnologias internas não publicadas.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência & Engajamento</div><div class="cmp"><strong>FATO:</strong> portal institucional, Guia de Serviços, carteiras digitais e Detran Express.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime · verificação empírica</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.ba.gov.br/detran</td><td><span class="status-200">200</span></td><td>Não identificado pelo conteúdo retornado</td><td>Não identificado</td><td>Página retornou catálogo de serviços do DETRAN</td></tr>
+                    <tr><td>https://www.ba.gov.br/detran/equipe</td><td><span class="status-200">200</span></td><td>Não identificado pelo conteúdo retornado</td><td>Não identificado</td><td>Equipe atualizada em 30/06/2026; vínculo confirmado</td></tr>
+                    <tr><td>https://servicos.ba.gov.br/detalhe/servico/1180</td><td><span class="status-200">200</span></td><td>Não identificado pelo conteúdo retornado</td><td>Não identificado</td><td>Guia estadual retornou categorias e órgãos</td></tr>
+                    <tr><td>https://www.ba.gov.br/novabahia/balanco/detran/</td><td><span class="status-err">Bloqueado</span></td><td>Não inspecionado</td><td>Proteção institucional</td><td>Solicitação bloqueada por mecanismo de segurança</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 05/08/2026. Resultados limitados ao conteúdo efetivamente retornado por WebFetch; headers e tecnologias não foram expostos.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização · HIPÓTESE CONSULTIVA</div>
+            <h3>GAPs Tecnológicos (5)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · integração</div><h4>Governança de APIs e parceiros</h4><p>Evidência: gov.br, sistemas nacionais, Atende Multiempresas e soluções homologadas criam ecossistema distribuído. Lacuna interna não confirmada; validar catálogo, versionamento e monitoramento.</p><div class="offer">Oferta Foursys: Digibee iPaaS + Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · observabilidade</div><h4>Telemetria ponta a ponta</h4><p>Evidência: o próprio gestor cita observabilidade entre projetos estratégicos. Validar cobertura de jornada, correlação entre sistemas e indicadores de cidadão.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · IA</div><h4>Industrialização e governança de IA</h4><p>Evidência: múltiplos produtos de IA e reconhecimento público indicam escala crescente. Validar avaliação de modelos, explicabilidade, riscos, MLOps e métricas de benefício.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · segurança</div><h4>Segurança por desenho nas jornadas</h4><p>Evidência: biometria, assinatura, autenticação e dados veiculares elevam criticidade. Validar threat modeling, gestão de terceiros, AppSec, privacidade e continuidade.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · legado</div><h4>Modernização incremental do core</h4><p>Evidência: sistemas nacionais e equipe de mainframe aparecem em fonte profissional. Validar acoplamento, obsolescência e pontos de estrangulamento antes de propor migração.</p><div class="offer">Oferta Foursys: Modernização de Legado + FourBlox</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa · FATO</div>
+            <h3>Perfil Pessoal & Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Mestre em Ciência da Informação pela UFBA; pesquisa sobre IA e informação</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">Salvador/BA, conforme perfil profissional público</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado em fonte pública</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (6)</h4><p>1) Abra pelo reconhecimento ao case Beni, sem transformar a reunião em elogio genérico. 2) Pergunte como a pesquisa acadêmica influencia decisões práticas de IA. 3) Explore lições do SmartJud e da experiência no TJBA aplicáveis ao DETRAN-BA. 4) Fale de governança de dados, eficiência do cidadão e serviços críticos. 5) Pergunte como ele organiza equipe multidisciplinar entre desenvolvimento, infraestrutura, dados e fornecedores. 6) Evite presumir hobby, preferência pessoal, orçamento ou autonomia de contratação.</p></div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Institucional & CNPJ</h4><ul>
+                    <li>Equipe DETRAN-BA — https://www.ba.gov.br/detran/equipe — acesso em 05/08/2026</li>
+                    <li>Portal DETRAN-BA — https://www.ba.gov.br/detran — acesso em 05/08/2026</li>
+                    <li>Compras Públicas — https://www.ba.gov.br/detran/compras-publicas — acesso em 05/08/2026</li>
+                    <li>Cadastro CNPJ — https://www.econodata.com.br/consulta-empresa/13195920000154-departamento-estadual-de-transito — acesso em 05/08/2026</li>
+                    <li>Edital institucional com CNPJ — https://www.araci.ba.gov.br/Handler.ashx?f=f&amp;query=1fad662d-d896-4d81-859c-0155db60db31.pdf — acesso em 05/08/2026</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>CRDD-BA, perfil de Ricardo — https://crdd-ba.org.br/eventos/congressos/ — acesso em 05/08/2026</li>
+                    <li>LinkedIn, resultados da coordenação — https://pt.linkedin.com/posts/ricardo-fontoura_transformacaodigital-govba-detranba-activity-7310437111789162498-okBl — acesso em 05/08/2026</li>
+                    <li>UFBA, dissertação — https://repositorio.ufba.br/handle/ri/35052 — acesso em 05/08/2026</li>
+                </ul></div>
+                <div class="sources-card"><h4>Estratégia & iniciativas</h4><ul>
+                    <li>SECOM Bahia, GDL — http://www.ba.gov.br/comunicacao/2024/08/noticias/detran-ba-e-pioneiro-entre-orgaos-publicos-do-brasil-na-adocao-de-ia-em-processos-administrativos — acesso em 05/08/2026</li>
+                    <li>Voz da Bahia, Beni/SUCESU — https://vozdabahia.com.br/detran-ba-recebe-premio-de-melhor-case-no-sucesu-2025-com-plataforma-de-inteligencia-artificial/ — acesso em 05/08/2026</li>
+                    <li>Balanço institucional — https://www.ba.gov.br/novabahia/balanco/detran/ — acesso em 05/08/2026; WebFetch bloqueado, conteúdo localizado via busca</li>
+                    <li>Balanço 2025 — https://jornalgrandebahia.com.br/2025/12/detran-bahia-consolida-politicas-de-transito-seguro-com-investimentos-em-educacao-tecnologia-e-fiscalizacao-em-2025/ — acesso em 05/08/2026</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack & regulação</h4><ul>
+                    <li>Portaria Atende Multiempresas — https://www.ba.gov.br/detran/sites/site-detran/files/migracao_2024/arquivos/upload/portarias/portarias-3929878.pdf — acesso em 05/08/2026</li>
+                    <li>Portaria técnica 2026 — https://vistoriapro.com.br/portaria-ba.html — acesso em 05/08/2026</li>
+                    <li>Guia de Serviços BA — https://servicos.ba.gov.br/detalhe/servico/1180 — acesso em 05/08/2026</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch https://www.ba.gov.br/detran — 05/08/2026</li>
+                    <li>WebFetch https://www.ba.gov.br/detran/equipe — 05/08/2026</li>
+                    <li>WebFetch https://servicos.ba.gov.br/detalhe/servico/1180 — 05/08/2026</li>
+                    <li>WebFetch https://crdd-ba.org.br/eventos/congressos/ — 05/08/2026</li>
+                </ul></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Agosto 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

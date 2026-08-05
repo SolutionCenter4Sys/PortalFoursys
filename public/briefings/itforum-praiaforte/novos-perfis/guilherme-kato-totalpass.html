@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Guilherme Kato | TOTALPASS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Guilherme Kato</h1>
+                <h2>Chief Product and Technology Officer (CPTO) Latam — TOTALPASS</h2>
+                <div class="loc">Serviços Diversos · São Paulo/SP · CNPJ 27.059.627/0001-74</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · confirmado com voo</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Rede Brasil</div><div class="value">40 mil</div></div>
+                <div class="header-badge"><div class="label">Cidades</div><div class="value">1.900+</div></div>
+                <div class="header-badge"><div class="label">Usuários 4T25</div><div class="value">1,7 mi</div></div>
+                <div class="header-badge"><div class="label">Valuation est.</div><div class="value">R$ 1,5 bi</div></div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em 05/08/2026 · Escopo: validação institucional do CNPJ, liderança, estratégia 2025–2026, canais digitais, leitura de comitê e material de apresentação.</div>
+        </div>
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Zona B · Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p><span class="tag tag-active">FATO</span> A TotalPass Participações Ltda. oferece bem-estar corporativo integrado, conectando empresas e colaboradores a academias, estúdios e serviços de saúde mental e nutricional. Atua no Brasil e no México e integra o ecossistema Smart Fit. A fonte institucional confirma o CNPJ informado e sede em São Paulo. Em 2025, a controladora descreveu a TotalPass como plataforma agregadora estratégica, com crescimento de demanda, recorrência e diversificação de receita.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">TOTAL PASS PARTICIPACOES LTDA.</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">Avenida Paulista, São Paulo/SP</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Brasil e México</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">Não segregado publicamente</div></div>
+                <div class="info-card"><div class="label">Investimento em TI</div><div class="value">Budget não localizado em fonte pública</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Empresa privada do ecossistema Smart Fit</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><span class="tag tag-active">FATO</span> Guilherme Kato assumiu como CPTO Latam em setembro de 2025. O vínculo e o cargo aparecem no IT Forum e no perfil público do LinkedIn. É formado em Ciência da Computação pela PUC-SP, tem MBA Executivo pelo Insper e especialização citada pela imprensa na Stanford University. Sua trajetória inclui São Leopoldo Mandic, dr.consulta, Pluxee, Dasa e Walmart eCommerce, com atuação em produto, engenharia, arquitetura, dados, infraestrutura, operações, inteligência artificial e segurança.</p>
+            <p style="margin-top:12px"><span class="tag tag-tech">INFERÊNCIA</span> Como CPTO Latam, tende a influenciar arquitetura de produto, priorização de engenharia, dados, experiência digital e seleção técnica de parceiros. Budget, alçada formal, tamanho da equipe e reporte direto não foram localizados em fonte pública.</p>
+            <div class="alert-box" style="margin-top:14px"><strong>Comitê decisor provável — HIPÓTESE CONSULTIVA:</strong> CPTO Latam + CEO Latam Felipe Calbucci + responsáveis por Finanças, Pessoas/RH, Segurança/Privacidade e Operações. Validar governança, procurement e sponsor econômico na conversa.</div>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento & mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p><span class="tag tag-active">FATO</span> A TotalPass opera como agregadora B2B2C de bem-estar: vende o benefício a empresas, distribui acesso aos colaboradores e remunera parceiros conforme uso. Em 2026, ampliou monetização direta com check-ins extras, sem alterar o contrato corporativo. A pressão competitiva migra de cobertura de rede para engajamento, personalização, integração da jornada física/mental/nutricional, eficiência do repasse e confiabilidade da plataforma. A Exame posiciona a empresa entre as principais plataformas do setor; Wellhub permanece o concorrente de maior escala.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões & lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Escala transacional.</strong> <span class="tag tag-tech">INFERÊNCIA</span> Crescimento da rede, cidades e uso eleva volume de check-ins, pagamentos e reconciliações; a controladora aponta expansão acelerada.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Monetização sem fricção.</strong> <span class="tag tag-active">FATO</span> Check-in extra cria receita B2C dentro de um produto B2B e exige experiência, antifraude e observabilidade consistentes.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Integração do ecossistema.</strong> <span class="tag tag-tech">INFERÊNCIA</span> Empresas, usuários, academias, saúde mental e nutrição formam domínios e parceiros heterogêneos.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Privacidade.</strong> <span class="tag tag-active">FATO</span> A política institucional trata dados pessoais de usuários; escala e personalização aumentam criticidade de LGPD, identidade e consentimento.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Eficiência do crescimento.</strong> <span class="tag tag-active">FATO</span> O modelo asset-light melhora com escala e diluição de despesas gerais, segundo análise do BTG; engenharia precisa sustentar expansão com custo unitário controlado.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div><span class="tag tag-priority">Engajamento recorrente</span><span class="tag tag-priority">Receita incremental</span><span class="tag tag-priority">Saúde integrada</span><span class="tag tag-priority">Escala Latam</span></div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div><span class="tag tag-active">FATO: check-in extra</span><span class="tag tag-active">FATO: expansão da rede</span><span class="tag tag-active">FATO: experiência integrada 2026</span><span class="tag tag-tech">HIPÓTESE: dados e personalização</span></div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div><span class="tag tag-opportunity">HIPÓTESE: integração orientada a APIs</span><span class="tag tag-opportunity">HIPÓTESE: observabilidade de jornada</span><span class="tag tag-opportunity">HIPÓTESE: governança de IA</span><span class="tag tag-opportunity">HIPÓTESE: AppSec e IAM</span></div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card"><div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">88/100</span></div><p>Escala serviços, jornadas e observabilidade da plataforma em expansão, conectando aplicativo, portal corporativo e rede parceira.</p><div class="reasons"><ul><li>Crescimento e nova monetização aumentam criticidade e volume transacional.</li><li>Modelo flexível de squads reduz time-to-market sem inflar estrutura permanente.</li></ul></div></div>
+            <div class="oferta-card"><div class="oferta-header"><h4>Digibee iPaaS</h4><span class="score-badge">82/100</span></div><p>Padroniza integrações entre empresas clientes, parceiros de bem-estar, identidade, pagamentos e serviços externos.</p><div class="reasons"><ul><li>Ecossistema B2B2C depende de conectividade confiável.</li><li>A oportunidade é hipótese e deve ser validada por diagnóstico de integrações.</li></ul></div></div>
+            <div class="oferta-card"><div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">78/100</span></div><p>Fortalece identidade, privacidade, AppSec e continuidade nos canais digitais; Foursys possui ISO 27001 e ISO 27701.</p><div class="reasons"><ul><li>Política institucional confirma tratamento de dados pessoais.</li><li>Receita B2C adicional amplia superfície de fraude e risco operacional.</li></ul></div></div>
+            <div class="oferta-card"><div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">72/100</span></div><p>Testa casos de personalização, suporte e eficiência de engenharia com governança, métricas e human-in-the-loop.</p><div class="reasons"><ul><li>Kato tem histórico público em inteligência artificial e analytics.</li><li>A TotalPass posiciona experiência integrada e centrada na pessoa como prioridade 2026.</li></ul></div></div>
+            <div class="oferta-card"><div class="oferta-header"><h4>FourBlox</h4><span class="score-badge">65/100</span></div><p>Acelera componentes comuns de jornadas web e mobile, sujeito à validação do design system e arquitetura atuais.</p><div class="reasons"><ul><li>Múltiplos públicos exigem consistência de experiência.</li><li>Fit moderado: stack de frontend não foi confirmada publicamente.</li></ul></div></div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>“Como sustentar check-ins extras e saúde integrada com menor custo por transação, mais velocidade de produto e confiança operacional?” Começar por métricas de negócio, não por tecnologia.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Check-in extra, expansão de parceiros e posicionamento 2026 estão em execução. Propor workshop de 90 minutos para mapear jornada, integrações, riscos e três indicadores: conversão, falha transacional e custo por usuário ativo.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>24 anos, 41.000+ projetos, ISO 27001/27701 e combinação de engenharia, IA, segurança e integração. Entrar com diagnóstico curto e prova de valor, sem pressupor substituição da stack.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes & Gap Analysis</h3>
+            <div class="competitor-card"><h4>Wellhub</h4><p>Maior escala global e ampla oferta de bem-estar. Pressiona TotalPass em cobertura, marca, integrações corporativas e personalização.</p></div>
+            <div class="competitor-card"><h4>ClassPass</h4><p>Referência internacional em descoberta e flexibilidade de experiências. Benchmark para recomendação, disponibilidade e experiência de reserva.</p></div>
+            <div class="competitor-card"><h4>GoGood</h4><p>Plataforma brasileira de saúde corporativa. Compete por RH, engajamento e visão integrada de bem-estar.</p></div>
+            <div class="competitor-card"><h4>Flash Benefícios</h4><p>Concorrente adjacente pela centralidade no ecossistema de benefícios e integrações de RH; pode ampliar oferta própria ou parcerias.</p></div>
+            <div class="insight-box"><h4>Leitura do gap</h4><p><span class="tag tag-tech">HIPÓTESE CONSULTIVA</span> Diferenciação sustentável depende menos de catálogo isolado e mais de confiabilidade, inteligência de uso, integração com RH, velocidade de experimentação e custo operacional por jornada.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Plataforma B2B2C de bem-estar do ecossistema Smart Fit, presente no Brasil e México.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Guilherme Kato, CPTO Latam desde setembro de 2025, com trajetória multissetorial em produto e tecnologia.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escalar rede e monetização por check-in extra sem elevar fricção, risco ou custo unitário.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Budget não publicado. Sinais apontam para produto, integrações, dados, experiência e resiliência.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">Engenharia Digital; Digibee iPaaS; Cibersegurança.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Workshop executivo-técnico e assessment leve da jornada de check-in extra.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Imediata: funcionalidade e posicionamento 2026 já estão em mercado.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">O ROI maior pode estar em reduzir custo e falhas por transação enquanto a receita incremental escala.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>De benefício a plataforma estratégica</h4><p>A TotalPass cresce dentro do ecossistema Smart Fit, expande rede e ganha peso em demanda, recorrência e diversificação de receitas.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Mais uso, mais complexidade</h4><p>Check-in extra, múltiplos parceiros e saúde integrada ampliam integrações, dados, riscos e exigência de experiência contínua.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Escala com controle</h4><p>A Foursys ajuda a converter crescimento em plataforma resiliente, integrada, segura e mensurável, começando por uma prova de valor curta.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card"><h4>Escalar receita de check-in extra com confiabilidade</h4><p><strong>FATO:</strong> A funcionalidade cria compra avulsa e pacotes, com liberação gradual.</p><div class="sub">Solução Foursys</div><p>Engenharia Digital para instrumentar funil, resiliência, observabilidade e experimentação.</p><div class="sub">Pergunta de descoberta</div><p>Onde hoje ocorre maior perda: elegibilidade, pagamento, emissão, check-in ou conciliação?</p><div class="sub">Gancho / próximo passo</div><p>Mapear jornada e priorizar uma prova de valor com métrica financeira.</p></div>
+            <div class="business-card"><h4>Reduzir custo de integração do ecossistema</h4><p><strong>INFERÊNCIA:</strong> Rede extensa e múltiplos serviços elevam variedade de integrações.</p><div class="sub">Solução Foursys</div><p>Digibee iPaaS e engenharia de APIs para governança, reuso e monitoramento.</p><div class="sub">Pergunta de descoberta</div><p>Quanto do backlog e dos incidentes nasce de integrações ponto a ponto?</p><div class="sub">Gancho / próximo passo</div><p>Assessment de integrações com matriz valor × risco × esforço.</p></div>
+            <div class="business-card"><h4>Proteger confiança durante personalização</h4><p><strong>FATO:</strong> A TotalPass trata dados pessoais e oferece jornadas de saúde integradas.</p><div class="sub">Solução Foursys</div><p>Cibersegurança com privacy by design, AppSec, IAM e avaliação de continuidade.</p><div class="sub">Pergunta de descoberta</div><p>Como consentimento, segregação e acesso são governados entre produtos e parceiros?</p><div class="sub">Gancho / próximo passo</div><p>Threat modeling da jornada prioritária, apoiado pelas ISO 27001/27701 da Foursys.</p></div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck executivo de 8 slides + one-pager de oportunidade + demo conceitual navegável da jornada</div></div>
+                <div class="info-card"><div class="label">Oferta Foursys âncora</div><div class="value">Engenharia Digital, por conectar diretamente escala, receita incremental e confiabilidade</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos relevantes:</strong> case anonimizado de alta volumetria B2C; blueprint de observabilidade de jornada; acelerador de integração Digibee; credenciais ISO 27001/27701.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> tratar check-in extra como produto de margem e dados, não apenas feature; medir custo por transação bem-sucedida, falhas evitadas e velocidade de experimento.</p>
+            <p style="margin-top:8px"><em>Discurso sugerido se não houver case nominal do setor: “Não viemos substituir sua arquitetura. Propomos medir uma jornada que já gera receita, remover um gargalo verificável e decidir expansão pelos resultados.”</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Guilherme, sua chegada une produto e tecnologia num momento em que a TotalPass passa de escala de rede para escala de monetização.”</li>
+                <li>“O check-in extra cria receita nova, mas também torna cada falha de jornada imediatamente mensurável em dinheiro e confiança.”</li>
+                <li>“Nossa hipótese é que integração e observabilidade são alavancas de margem antes de serem projetos de arquitetura.”</li>
+                <li>“A Foursys combina engenharia, integração, IA e segurança com 24 anos e mais de 41 mil projetos entregues.”</li>
+                <li>“Não presumimos sua stack: sugerimos mapear uma jornada, estabelecer baseline e atacar um gargalo comprovado.”</li>
+                <li>“Com ISO 27001 e 27701, conseguimos desenhar velocidade de produto sem separar segurança e privacidade da entrega.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 6 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Validar prioridades, sponsor e métricas</td><td>Mapa de hipótese e agenda</td><td>1 semana</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Mapear jornada e integrações</td><td>Baseline de valor, risco e arquitetura</td><td>2 semanas</td></tr>
+                    <tr><td class="phase">3. Desenho</td><td>Priorizar gargalo e solução</td><td>Plano da prova de valor</td><td>1 semana</td></tr>
+                    <tr><td class="phase">4. PoC</td><td>Implementar recorte mensurável</td><td>Resultado técnico-financeiro</td><td>4–6 semanas</td></tr>
+                    <tr><td class="phase">5. Squad piloto</td><td>Industrializar e observar</td><td>Produto em produção com indicadores</td><td>8–12 semanas</td></tr>
+                    <tr><td class="phase">6. Programa/MSA</td><td>Escalar por jornadas</td><td>Roadmap trimestral multi-oferta</td><td>6–12 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3)</h4>
+            <div class="app-card"><h4>Site institucional TotalPass Brasil</h4><div class="url">https://totalpass.com/br/</div><div class="app-stack-grid"><div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não identificado pelo fetch</div></div><div class="app-stack-item"><div class="k">Backend</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">API</div><div class="v">Não publicada</div></div></div></div>
+            <div class="app-card"><h4>Aplicativo TotalPass</h4><div class="url">Aplicativo móvel citado e disponibilizado no site oficial</div><div class="app-stack-grid"><div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">Backend</div><div class="v">Sinais públicos: Ruby on Rails e Node.js</div></div><div class="app-stack-item"><div class="k">Banco</div><div class="v">Sinal público: PostgreSQL</div></div><div class="app-stack-item"><div class="k">API</div><div class="v">Existência inferida; padrão não publicado</div></div></div></div>
+            <div class="app-card"><h4>Portal / Central de Ajuda</h4><div class="url">https://ajuda.totalpass.com.br/</div><div class="app-stack-grid"><div class="app-stack-item"><div class="k">Frontend</div><div class="v">Central Zendesk, conforme domínio público</div></div><div class="app-stack-item"><div class="k">Backend</div><div class="v">Serviço gerenciado Zendesk</div></div><div class="app-stack-item"><div class="k">Cloud</div><div class="v">Gerenciada pelo fornecedor</div></div><div class="app-stack-item"><div class="k">API</div><div class="v">Integração não publicada</div></div></div></div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp"><strong>INFERÊNCIA:</strong> AWS aparece em fontes de recrutamento secundárias; arquitetura e escopo não confirmados institucionalmente.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança & Compliance</div><div class="cmp"><strong>FATO:</strong> Política de privacidade e canal para direitos LGPD publicados. Ferramentas de IAM, SIEM e AppSec não publicadas.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp"><strong>FATO sobre o gestor:</strong> histórico público em IA e analytics. Iniciativas atuais da TotalPass não localizadas.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados & Analytics</div><div class="cmp"><strong>INFERÊNCIA:</strong> personalização e monetização exigem analytics; plataforma, governança e ferramentas não publicadas.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">ERP, billing, conciliação e meios de pagamento: não publicados.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp"><strong>SINAIS PÚBLICOS:</strong> serviços centrais em Ruby on Rails, Node.js, TypeScript e PostgreSQL; uso exato por aplicação requer validação.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência & Engajamento</div><div class="cmp"><strong>FATO:</strong> site, aplicativo, central de ajuda e jornada de check-in extra. Frameworks e telemetria não publicados.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://totalpass.com/br/quem-somos/</td><td><span class="status-200">200</span></td><td>Não exposto pelo fetch</td><td>Não exposto</td><td>Conteúdo institucional, atuação e CNPJ obtidos</td></tr>
+                    <tr><td>https://totalpass.com/br/blog/sala-de-imprensa/totalpass-em-2026/</td><td><span class="status-200">200</span></td><td>Não exposto pelo fetch</td><td>Não exposto</td><td>Posicionamento e prioridades 2026 obtidos</td></tr>
+                    <tr><td>https://itforum.com.br/noticias/guilherme-kato-totalpass/</td><td><span class="status-200">200</span></td><td>Não exposto pelo fetch</td><td>Não exposto</td><td>Cargo, vínculo e trajetória confirmados</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 05/08/2026. O WebFetch confirmou conteúdo e resposta; headers, scripts e trackers não foram expostos e não são presumidos.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (5)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Integração</div><h4>Ecossistema heterogêneo</h4><p><strong>HIPÓTESE:</strong> escala de empresas, parceiros e serviços pressiona integrações; Exame registra 40 mil parceiros e nova monetização.</p><div class="offer">Oferta Foursys: Digibee iPaaS</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Observabilidade</div><h4>Jornada de receita ponta a ponta</h4><p><strong>HIPÓTESE:</strong> check-in extra exige visão de elegibilidade, pagamento, emissão e uso para evitar perda de conversão.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Segurança</div><h4>Identidade, fraude e privacidade</h4><p><strong>HIPÓTESE:</strong> dados pessoais e transações B2C ampliam riscos; política institucional comprova tratamento de dados.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Dados e IA</div><h4>Personalização governada</h4><p><strong>HIPÓTESE:</strong> saúde integrada e rotinas personalizadas pedem decisões orientadas a dados sem ultrapassar consentimento e finalidade.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Eficiência</div><h4>Velocidade com custo controlado</h4><p><strong>HIPÓTESE:</strong> expansão de 2025–2026 exige reuso e automação para preservar a alavancagem do modelo asset-light.</p><div class="offer">Oferta Foursys: FourBlox + Engenharia Digital</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal & Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Ciência da Computação — PUC-SP; MBA Executivo — Insper; especialização citada — Stanford</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">São Paulo/SP, conforme perfil profissional público</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizados em fonte pública</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (6)</h4><p>1) Pergunte o que mudou ao unir produto e tecnologia na função de CPTO. 2) Conecte saúde, educação e varejo pela experiência multissetorial. 3) Explore como ele traduz tecnologia em resultado de negócio. 4) Pergunte quais aprendizados de IA em saúde são transferíveis ao bem-estar. 5) Use o check-in extra como produto econômico, não como detalhe técnico. 6) Evite hobbies e preferências pessoais: não foram localizados publicamente.</p></div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Institucional & CNPJ</h4><ul><li>https://totalpass.com/br/quem-somos/ — acesso 05/08/2026</li><li>https://ajuda.totalpass.com.br/hc/pt-br/articles/19099025992731-Qual-%C3%A9-a-Pol%C3%ADtica-de-Privacidade-da-TotalPass — acesso 05/08/2026</li></ul></div>
+                <div class="sources-card"><h4>Estratégia & resultados</h4><ul><li>https://totalpass.com/br/blog/sala-de-imprensa/totalpass-em-2026/ — acesso 05/08/2026</li><li>https://api.mziq.com/mzfilemanager/v2/d/757d3905-6a2d-496a-bbb0-32ddd17de6a0/544a3617-557a-963c-e276-3ea9cc4f7243?origin=2 — acesso 05/08/2026</li><li>https://exame.com/negocios/mais-de-um-treino-por-dia-totalpass-vai-liberar-check-ins-extras-para-ter-nova-fonte-de-receita/ — acesso 05/08/2026</li></ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul><li>https://itforum.com.br/noticias/guilherme-kato-totalpass/ — acesso 05/08/2026</li><li>https://br.linkedin.com/in/gkato/pt — acesso 05/08/2026</li><li>https://slmandic.edu.br/comunicados/guilherme-kato-e-o-novo-diretor-de-ti-da-faculdade-sao-leopoldo-mandic/ — acesso 05/08/2026</li></ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul><li>https://linkedin.com/in/pedro-henrique-domingos-dos-santos-18876a39 — acesso 05/08/2026</li><li>https://linkedin.com/in/erdantas — acesso 05/08/2026</li><li>https://br.trabajo.org/emprego-4037-b493a1de2d6b306f4c7179e393e56666 — acesso 05/08/2026; fonte secundária</li></ul></div>
+                <div class="sources-card"><h4>Mercado & concorrência</h4><ul><li>https://content.btgpactual.com/research/files/file/pt-BR/2026-02-03T140308.929_Smart_Fit__SMFT3____TotalPass_vs__SmartFit.pdf — acesso 05/08/2026</li><li>https://pipelinevalor.globo.com/negocios/noticia/citi-avalia-a-totalpass-em-r-17-bi-quase-15percent-da-smart-fit.ghtml — acesso 05/08/2026</li></ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul><li>WebFetch https://totalpass.com/br/quem-somos/ — 05/08/2026</li><li>WebFetch https://totalpass.com/br/blog/sala-de-imprensa/totalpass-em-2026/ — 05/08/2026</li><li>WebFetch https://itforum.com.br/noticias/guilherme-kato-totalpass/ — 05/08/2026</li><li>WebFetch https://exame.com/negocios/mais-de-um-treino-por-dia-totalpass-vai-liberar-check-ins-extras-para-ter-nova-fonte-de-receita/ — 05/08/2026</li></ul></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Agosto 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

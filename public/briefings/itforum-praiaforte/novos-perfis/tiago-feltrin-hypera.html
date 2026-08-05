@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<!-- Briefing CIO IT Forum 2026 — ordem física B → A → C -->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Tiago Feltrin | HYPERA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Tiago Feltrin</h1>
+                <h2>Diretor de Tecnologia &amp; Digital (CIO) — HYPERA</h2>
+                <div class="loc">Indústria Farmacêutica · São Paulo/SP · CNPJ 02.932.074/0001-91</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Grande porte</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Receita 2025</div><div class="value">R$ 7,7 bi</div></div>
+                <div class="header-badge"><div class="label">Caixa operacional</div><div class="value">R$ 2,6 bi</div></div>
+                <div class="header-badge"><div class="label">PD&amp;I 2025</div><div class="value">R$ 513,6 mi</div></div>
+                <div class="header-badge"><div class="label">Sell-out 2025</div><div class="value">+6,8%</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em 05/08/2026 · Escopo: validação cadastral, RI deep-dive, vínculo executivo, iniciativas 2025–2026, stack pública e material de apresentação · Participação presencial confirmada em 28/07/2026.</div>
+        </div>
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B — CONTEXTO / PRÉ-VENDAS -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico · FATO</div>
+            <h3>A Empresa</h3>
+            <p><strong>FATO:</strong> Hypera S.A. é companhia aberta brasileira, sediada em São Paulo e focada no mercado farmacêutico. O CNPJ 02.932.074/0001-91 foi confirmado no Portal da Transparência e em documento societário da companhia. Em 2025, a empresa reportou receita líquida de R$ 7,7 bilhões, caixa operacional recorde de R$ 2,6 bilhões e investimentos relevantes em inovação, capacidade produtiva e mídia digital.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Hypera S.A.</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">São Paulo/SP</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Operação farmacêutica nacional</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">R$ 7,7 bi em 2025 · RI Hypera</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">Cerca de 10 mil · case AEVO 2026</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Sociedade anônima aberta · HYPE3</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão · FATO</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>FATO:</strong> Tiago Henrique Feltrin aparece como Diretor de Tecnologia &amp; Digital da Hypera no LinkedIn, como CIO em publicação institucional da SAP de 23/06/2026 e como CIO/CDO da Hypera no IT Forum. Lidera a agenda digital desde agosto de 2021, após longa trajetória em projetos e processos na companhia. Em 2026, associou publicamente a modernização do core a eficiência, escalabilidade e geração de valor.</p>
+            <p style="margin-top:12px"><strong>INFERÊNCIA:</strong> Seu poder de decisão é alto sobre arquitetura, parceiros e priorização digital; orçamento final deve envolver CEO, CFO/RI, áreas de negócio, compliance e operações. A mobilização pública de cerca de 35 especialistas digitais e mais de 200 usuários no programa de modernização mostra capacidade de patrocinar transformação transversal.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado · FATO</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p><strong>FATO:</strong> A Hypera opera medicamentos isentos de prescrição, prescrição, similares e genéricos, mercado institucional e skincare. A cadeia exige rastreabilidade, qualidade, farmacovigilância, disponibilidade industrial e comunicação regulada. A empresa se posiciona entre as líderes nacionais e sustenta crescimento por portfólio, inovação, marcas, capacidade produtiva e integração de aquisições.</p>
+            <p style="margin-top:12px"><strong>INFERÊNCIA:</strong> Pressões centrais para 2026: obter retorno da nova base transacional, reduzir custo operacional, acelerar lançamentos com controle regulatório, governar IA em escala e integrar experiências B2B/B2C sem fragmentar dados.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas · FATOS E HIPÓTESES</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>FATO:</strong> capturar benefícios pós-go-live em processos financeiros, administrativos e regulatórios; SAP/SAP News, 23/06/2026.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>FATO:</strong> escalar integração e governança de dados após substituição de ambiente fragmentado; SAP News.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>FATO:</strong> IA corporativa requer segurança, governança e revisão humana; case AEVO, 04/02/2026.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>FATO:</strong> atendimento já demandou integração de base, padronização e automação; case Eteg.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>INFERÊNCIA:</strong> disciplina de caixa aumenta exigência de business case, métricas e implantação incremental.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div><span class="tag tag-priority">Eficiência operacional</span><span class="tag tag-priority">Dados confiáveis em tempo real</span><span class="tag tag-priority">IA governada</span><span class="tag tag-priority">Velocidade de decisão</span></div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div><span class="tag tag-active">Pós-go-live e estabilização</span><span class="tag tag-active">PD&amp;I</span><span class="tag tag-active">Capacidade produtiva</span><span class="tag tag-active">Mídia digital</span><span class="tag tag-active">Automação analítica</span></div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div><span class="tag tag-opportunity">HIPÓTESE: FinOps e observabilidade de integrações</span><span class="tag tag-opportunity">HIPÓTESE: governança de agentes de IA</span><span class="tag tag-opportunity">HIPÓTESE: automação de testes regulados</span></div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio · HIPÓTESE CONSULTIVA</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card"><div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">88/100</span></div><p>Estabiliza integrações, APIs, observabilidade e automação no ecossistema pós-modernização.</p><div class="reasons"><ul><li>Core integrado cria demanda por evolução contínua.</li><li>Eficiência e confiabilidade são metas públicas.</li></ul></div></div>
+            <div class="oferta-card"><div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">84/100</span></div><p>Industrializa casos de IA com governança, métricas, segurança e humano no circuito.</p><div class="reasons"><ul><li>IA já gera resultado mensurado no programa de ideias.</li><li>Nova base transacional habilita novas aplicações analíticas.</li></ul></div></div>
+            <div class="oferta-card"><div class="oferta-header"><h4>Digibee iPaaS</h4><span class="score-badge">79/100</span></div><p>Orquestra integrações entre core, atendimento, dados e aplicações satélite.</p><div class="reasons"><ul><li>Fragmentação anterior foi motivador explícito da modernização.</li><li>Atendimento depende de sincronização de dados internos e externos.</li></ul></div></div>
+            <div class="oferta-card"><div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">75/100</span></div><p>Protege dados regulados e acelera adoção segura de IA com controles de identidade, privacidade e continuidade.</p><div class="reasons"><ul><li>Setor opera sob exigências rigorosas de compliance.</li><li>ISO 27001/27701 reforça credibilidade Foursys.</li></ul></div></div>
+            <div class="oferta-card"><div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">68/100</span></div><p>Ataca customizações e aplicações satélite ainda não cobertas pela modernização do core.</p><div class="reasons"><ul><li>Ambiente anterior continha operações customizadas.</li><li>Escopo satélite não foi detalhado publicamente.</li></ul></div></div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>“Como transformar estabilidade pós-go-live em ganhos mensuráveis por processo, sem abrir nova frente monolítica?” Propor diagnóstico de 2 semanas com mapa de valor e observabilidade.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p><strong>HIPÓTESE:</strong> janela imediata de hypercare, otimização, integrações e IA sobre a base recém-modernizada. Validar fornecedor atual, backlog e metas de captura de valor.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>24 anos, 41.000+ projetos, ISO 27001/27701 e combinação de engenharia, IA, integração e segurança em modelo incremental.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Eurofarma</h4><p>Escala industrial e expansão regional pressionam velocidade de inovação e governança de operações digitais.</p></div>
+            <div class="competitor-card"><h4>EMS</h4><p>Amplitude de portfólio e presença em genéricos elevam exigência por eficiência, dados comerciais e rapidez de lançamentos.</p></div>
+            <div class="competitor-card"><h4>Aché</h4><p>Marca, pesquisa e desenvolvimento reforçam disputa por inovação e relacionamento com profissionais de saúde.</p></div>
+            <div class="competitor-card"><h4>União Química</h4><p>Atuação diversificada no setor amplia competição por capacidade produtiva, compliance e canais institucionais.</p></div>
+            <div class="alert-box"><strong>INFERÊNCIA:</strong> oportunidade não é “trocar o core”, mas reduzir tempo entre dado, decisão e execução em processos regulados. Benchmark tecnológico detalhado dos concorrentes não foi localizado em fonte pública nesta pesquisa.</div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <!-- ZONA A — COMERCIAL -->
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Farmacêutica brasileira de grande porte, aberta, com portfólio diversificado e estratégia apoiada em inovação.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Tiago Feltrin, Diretor de Tecnologia &amp; Digital/CIO, líder da evolução digital e da modernização do core.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Converter nova base integrada em eficiência, dados confiáveis, IA governada e crescimento.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Pós-go-live, integração, analytics, automação e segurança; budget de TI não publicado.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">Engenharia Digital; AI Squad; Digibee iPaaS.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Workshop executivo de captura de valor com backlog priorizado e business case.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Pós-go-live 2026 e preparação do ciclo orçamentário de 2027.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Governar o “último quilômetro” entre core, aplicações satélite e IA para acelerar caixa e decisão.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div><h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Base pronta para próxima onda</h4><p>A Hypera fecha uma modernização estrutural e passa a operar com dados e processos mais integrados.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Valor precisa aparecer</h4><p>Disciplina de caixa e regulação exigem benefícios rápidos, rastreáveis e seguros nas aplicações satélite.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Entrega incremental</h4><p>Foursys conecta engenharia, integração, IA e segurança a KPIs por processo, sem reiniciar a transformação.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div><h3>Sugestão de Soluções</h3>
+            <div class="business-card"><h4>Captura de valor pós-go-live</h4><p><strong>FATO:</strong> eficiência, integração e redução de prazo de fechamento são benefícios esperados publicamente.</p><div class="sub">Solução Foursys</div><p>Engenharia Digital para observabilidade, automação e evolução de integrações.</p><div class="sub">Pergunta de descoberta</div><p>Quais três processos ainda não materializaram o benefício previsto?</p><div class="sub">Gancho / próximo passo</div><p>Assessment de valor em 2 semanas.</p></div>
+            <div class="business-card"><h4>IA com escala e controle</h4><p><strong>FATO:</strong> piloto de IA no programa de ideias reduziu lead time e manteve revisão humana.</p><div class="sub">Solução Foursys</div><p>AI Squad para priorizar casos, operar guardrails e medir retorno.</p><div class="sub">Pergunta de descoberta</div><p>Qual caso de IA tem dono, dado disponível e KPI financeiro?</p><div class="sub">Gancho / próximo passo</div><p>PoC de 6 semanas com critério de saída.</p></div>
+            <div class="business-card"><h4>Integração entre core e canais</h4><p><strong>FATO:</strong> ambiente fragmentado e atendimento descentralizado foram dores registradas.</p><div class="sub">Solução Foursys</div><p>Digibee iPaaS + engenharia para APIs governadas e redução de acoplamento.</p><div class="sub">Pergunta de descoberta</div><p>Onde reconciliação manual ainda atrasa decisão ou atendimento?</p><div class="sub">Gancho / próximo passo</div><p>Mapa de integrações críticas e piloto sobre um fluxo.</p></div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div><h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck executivo de 8 slides + one-pager de business case + demo curta</div></div>
+                <div class="info-card"><div class="label">Oferta Foursys âncora</div><div class="value">Engenharia Digital, por conectar pós-go-live a ganhos mensuráveis; AI Squad como expansão</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos relevantes:</strong> acelerador de observabilidade e APIs; framework de AI Squad com governança; referência de integração Digibee em ecossistema regulado. Validar cases nomináveis antes da reunião.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> vender captura de valor e redução de capital operacional, não “mais transformação”.</p>
+            <p style="margin-top:8px"><em>Discurso sugerido: “A base está pronta. Nossa proposta é encontrar três vazamentos de valor entre sistema, processo e decisão, provar um em seis semanas e escalar apenas o que pagar a próxima fase.”</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div><h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>Tiago, a modernização criou a base; agora o desafio é tornar o valor visível por processo.</li>
+                <li>Queremos começar por eficiência e caixa, não por uma nova agenda tecnológica.</li>
+                <li>A Foursys pode assumir um fluxo satélite e provar integração, observabilidade e ganho em poucas semanas.</li>
+                <li>Na indústria farmacêutica, velocidade só vale quando preserva rastreabilidade, segurança e validação humana.</li>
+                <li>Seu case de IA já mostra disciplina de piloto e KPI; podemos ajudar a industrializar esse método.</li>
+                <li>Nossas certificações ISO 27001/27701 reduzem fricção para avançar em dados e IA regulados.</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div><h3>Roadmap 6 Fases</h3>
+            <table class="data-table"><thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead><tbody>
+                <tr><td class="phase">1. Conexão</td><td>Alinhar tese com Tiago Feltrin</td><td>Hipóteses e patrocinadores</td><td>1 semana</td></tr>
+                <tr><td class="phase">2. Discovery</td><td>Mapear fluxo, custo e KPI</td><td>Value stream + baseline</td><td>2 semanas</td></tr>
+                <tr><td class="phase">3. Priorização</td><td>Comparar 3 casos</td><td>Business case e riscos</td><td>1 semana</td></tr>
+                <tr><td class="phase">4. PoC</td><td>Implementar caso controlado</td><td>Prova com critérios de saída</td><td>6 semanas</td></tr>
+                <tr><td class="phase">5. Squad piloto</td><td>Operar e medir em produção</td><td>KPIs, controles e runbook</td><td>8–12 semanas</td></tr>
+                <tr><td class="phase">6. Programa/MSA</td><td>Escalar backlog aprovado</td><td>Roadmap trimestral</td><td>12 meses</td></tr>
+            </tbody></table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <!-- ZONA C — APÊNDICE TÉCNICO -->
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico · FATOS PÚBLICOS</div><h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3)</h4>
+            <div class="app-card"><h4>Site institucional Hypera Pharma</h4><div class="url">https://hyperapharma.com.br/</div><div class="app-stack-grid"><div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">Backend</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">API</div><div class="v">Não publicado</div></div></div></div>
+            <div class="app-card"><h4>Portal de Relações com Investidores</h4><div class="url">https://ri.hypera.com.br/</div><div class="app-stack-grid"><div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">Backend</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">API</div><div class="v">Não publicado</div></div></div></div>
+            <div class="app-card"><h4>Atendimento e televendas</h4><div class="url">Canal público não individualizado no case Eteg</div><div class="app-stack-grid"><div class="app-stack-item"><div class="k">Frontend</div><div class="v">Zendesk Suite · FATO</div></div><div class="app-stack-item"><div class="k">Backend</div><div class="v">Aplicativo e chatbot · FATO</div></div><div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">API</div><div class="v">Integração com base de clientes · FATO</div></div></div></div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp"><strong>FATO:</strong> RISE with SAP/S/4HANA Cloud no core; demais provedores não publicados.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp"><strong>FATO:</strong> segurança validada no piloto AEVO e exigências regulatórias citadas; ferramentas não publicadas.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp"><strong>FATO:</strong> IA generativa no AEVO Innovate; chatbot com IA; recursos de IA na SAP Business Technology Platform.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp"><strong>FATO:</strong> dados integrados em tempo real e dashboards do programa de inovação; produtos específicos adicionais não publicados.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp"><strong>FATO:</strong> SAP S/4HANA Cloud via RISE with SAP, go-live no início de 2026.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp"><strong>FATO:</strong> Zendesk Suite e AEVO Innovate; demais CRM/HCM/SCM não publicados.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp"><strong>FATO:</strong> site institucional, marcas, atendimento integrado, chatbot e televendas.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div><h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table"><thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead><tbody>
+                <tr><td>https://hyperapharma.com.br/</td><td><span class="status-200">200</span></td><td>Não identificado pelo fetch textual</td><td>Não identificado</td><td>Conteúdo institucional e portfólio retornados</td></tr>
+                <tr><td>https://news.sap.com/brazil/2026/06/hypera-pharma-avanca-na-jornada-de-evolucao-tecnologica-apos-go-live-do-rise-with-sap/</td><td><span class="status-200">200</span></td><td>Não identificado pelo fetch textual</td><td>Não identificado</td><td>Publicação institucional com citação de Tiago Feltrin</td></tr>
+                <tr><td>https://pt.linkedin.com/posts/tiago-feltrin-986192b5_transformacaodigital-sap-inovacao-activity-7442756308874784768-qCyw</td><td><span class="status-200">200</span></td><td>Não identificado pelo fetch textual</td><td>Não identificado</td><td>Post público confirma cargo e narrativa de eficiência</td></tr>
+            </tbody></table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 05/08/2026. Headers, trackers e bibliotecas não foram expostos pela ferramenta textual; nenhum componente foi inferido.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização · HIPÓTESES CONSULTIVAS</div><h3>GAPs Tecnológicos (5)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Integração</div><h4>Aplicações satélite e core</h4><p>Fragmentação anterior e integração de atendimento indicam necessidade de governar APIs e reduzir reconciliações. Validar backlog real.</p><div class="offer">Oferta Foursys: Digibee iPaaS + Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Governança</div><h4>Captura de valor pós-go-live</h4><p>Benefícios esperados são públicos, mas KPIs realizados por processo não foram localizados.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · IA</div><h4>Industrialização com guardrails</h4><p>Case AEVO prova piloto governado; expansão corporativa exige catálogo, custo, acesso e monitoramento.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Segurança</div><h4>Identidade e dados regulados</h4><p>Setor e IA ampliam superfície de risco; arquitetura e ferramentas de segurança não são públicas.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Qualidade</div><h4>Testes de fluxos críticos</h4><p>Core novo, múltiplas integrações e operação que não pode parar elevam valor de automação e rastreabilidade de testes.</p><div class="offer">Oferta Foursys: Engenharia Digital + FourBlox</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div><h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Administração e Processamento de Dados · Fatec Sumaré, segundo LinkedIn</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">São Paulo/SP · contexto profissional público</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado em fonte pública</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (6)</h4><p>1) Reconheça a execução de dois anos e o papel das pessoas. 2) Pergunte por valor pós-go-live, não pela migração. 3) Explore eficiência, escalabilidade e geração de valor — termos usados por ele. 4) Conecte IA a governança e resultado mensurável. 5) Valorize experiência prévia em processos e customer service. 6) Evite prometer substituição ampla; proponha piloto com KPI e dono.</p></div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia · acesso em 05/08/2026</div><h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>https://api.mziq.com/mzfilemanager/v2/d/4be66703-ecd7-4134-a39e-224ce462b371/1dc888d6-cca9-b9e0-6391-56413dc094de?origin=2</li>
+                    <li>https://api.mziq.com/mzfilemanager/v2/d/4be66703-ecd7-4134-a39e-224ce462b371/36d56fff-9141-8f60-32c5-84c1fc7b1e89?origin=2</li>
+                    <li>https://hyperapharma.com.br/</li>
+                </ul></div>
+                <div class="sources-card"><h4>Cadastro &amp; CNPJ</h4><ul>
+                    <li>https://portaldatransparencia.gov.br/convenios/680438/pessoa-juridica/02932074000191-hypera-s-a-</li>
+                    <li>https://api.mziq.com/mzfilemanager/v2/d/4be66703-ecd7-4134-a39e-224ce462b371/b4b2d172-9d76-c30b-655b-7ba56d6ab160?origin=2</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>https://news.sap.com/brazil/2026/06/hypera-pharma-avanca-na-jornada-de-evolucao-tecnologica-apos-go-live-do-rise-with-sap/</li>
+                    <li>https://www.sap.com/brazil/assetdetail/2025/09/8457998e-227f-0010-bca6-c68f7e60039b.html</li>
+                    <li>https://blog.aevo.com.br/case-hypera/</li>
+                    <li>https://www.eteg.com.br/case-experiencia-cliente-automacao-hypera/</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>https://br.linkedin.com/in/tiago-feltrin-986192b5</li>
+                    <li>https://pt.linkedin.com/posts/tiago-feltrin-986192b5_transformacaodigital-sap-inovacao-activity-7442756308874784768-qCyw</li>
+                    <li>https://itforum.com.br/noticias/cios-executivo-ti-do-ano-2023/</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch https://hyperapharma.com.br/</li>
+                    <li>WebFetch SAP News e LinkedIn público de Tiago Feltrin</li>
+                </ul></div>
+            </div>
+            <div class="alert-box" style="margin-top:16px"><strong>Limites:</strong> budget específico de TI, composição completa do comitê, idiomas, fornecedores atuais e tecnologias não citadas acima não foram localizados em fonte pública. Itens derivados foram marcados como inferência ou hipótese consultiva.</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Agosto 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

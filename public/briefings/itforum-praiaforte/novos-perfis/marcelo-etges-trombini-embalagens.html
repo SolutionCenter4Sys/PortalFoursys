@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Marcelo Etges | TROMBINI EMBALAGENS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Marcelo Etges</h1>
+                <h2>Coordenador de TI — TROMBINI EMBALAGENS</h2>
+                <div class="loc">Serviços Diversos (planilha) · São Paulo/SP* · CNPJ 11.252.642/0001-02</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Ordem Planilha</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Posição nacional</div><div class="value">3ª</div></div>
+                <div class="header-badge"><div class="label">Plantas</div><div class="value">7</div></div>
+                <div class="header-badge"><div class="label">Reciclagem/mês</div><div class="value">27 mil t</div></div>
+                <div class="header-badge"><div class="label">Investimento recente</div><div class="value">R$ 350 mi</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em 05/08/2026 · Escopo: validação cadastral, vínculo do executivo, iniciativas 2025–2026, stack pública e material de apresentação · Participação presencial confirmada com voo em 10/07/2026; não esteve no último encontro.</div>
+        </div>
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico · FATO</div>
+            <h3>A Empresa</h3>
+            <p><strong>FATO:</strong> A Trombini fabrica embalagens de papel, caixas e chapas de papelão ondulado, sacos multifoliados e papéis reciclados. O site institucional a posiciona entre as maiores do país, com operação industrial no Sul e atendimento nacional e internacional. O CNPJ informado está ativo e corresponde à Trombini Embalagens S/A.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Trombini Embalagens S/A</div></div>
+                <div class="info-card"><div class="label">Sede cadastral</div><div class="value">São Paulo/SP</div></div>
+                <div class="info-card"><div class="label">Operação</div><div class="value">PR, SC e RS; mercado nacional e internacional</div></div>
+                <div class="info-card"><div class="label">Budget de TI</div><div class="value">Não localizado em fonte pública</div></div>
+                <div class="info-card"><div class="label">Capital social</div><div class="value">R$ 74.289.709,00 — base pública da Receita</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Sociedade anônima fechada</div></div>
+            </div>
+            <div class="alert-box" style="margin-top:16px"><strong>Divergências da planilha:</strong> “Serviços Diversos” diverge do CNAE e da atividade institucional, que caracterizam indústria de papel e embalagens. São Paulo/SP corresponde à sede cadastral; fontes corporativas apontam centro operacional e liderança em Curitiba/PR. Dados da planilha foram preservados e não substituídos silenciosamente.</div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão · FATO</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>FATO:</strong> Marcelo José Etges aparece publicamente como Coordenador de TI da Trombini desde junho de 2021, após atuar na supervisão de TI. Em julho de 2026, o Distrito o citou nominalmente na imersão executiva sobre IA generativa, governança e priorização de casos de uso. Em abril de 2026, parceiro de comércio exterior também o citou em reunião sobre eficiência e evolução operacional. <strong>Não foi localizado cargo de CIO ou CTO.</strong></p>
+            <div class="alert-box" style="margin-top:14px">⚠️ <strong>Atenção comercial:</strong> tratar Marcelo como Coordenador de TI e influenciador técnico, não como CIO. O comitê decisor provável inclui Marcelo, João Arthur Angnes (frente de IA), superintendências administrativa e industrial e diretoria; composição e alçadas devem ser validadas na reunião.</div>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento & mercado · FATO</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p><strong>FATO:</strong> A Trombini atua na cadeia industrial de papel e embalagens, atendendo demandas de proteção, logística, apresentação e sustentabilidade. Fontes recentes a posicionam entre líderes nacionais. Pressões centrais: integrar automação e dados entre plantas, reduzir desperdício, sustentar qualidade, ampliar eficiência energética, responder ao e-commerce e elevar rastreabilidade ambiental. <strong>INFERÊNCIA:</strong> expansão automatizada aumenta dependência de integração entre tecnologia operacional, sistemas corporativos, dados e segurança.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões & lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>FATO:</strong> integrar processos, dados e monitoramento em plantas automatizadas; executivos da empresa citam integração como desafio.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>FATO:</strong> controlar custo e desperdício enquanto aumenta produtividade e qualidade.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>FATO:</strong> capacitar equipes para operar processos digitalizados e automatizados.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>INFERÊNCIA:</strong> governar identidades, acessos e dados em ambiente distribuído e industrial.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>HIPÓTESE CONSULTIVA:</strong> reduzir atrito entre ERP, planejamento fabril, logística, IA e canais de relacionamento.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div><span class="tag tag-priority">Eficiência operacional</span><span class="tag tag-priority">Governança de IA</span><span class="tag tag-priority">Integração de dados</span><span class="tag tag-priority">Sustentabilidade mensurável</span></div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div><span class="tag tag-active">Casos de uso de IA</span><span class="tag tag-active">Automação e monitoramento</span><span class="tag tag-active">Eficiência energética</span><span class="tag tag-active">Logística e rotas</span></div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div><span class="tag tag-opportunity">Governança e industrialização de IA</span><span class="tag tag-opportunity">Integração corporativa-industrial</span><span class="tag tag-opportunity">Segurança de ecossistema distribuído</span></div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div><h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card"><div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">92/100</span></div><p>Transforma o roadmap recente de IA em pilotos governados, métricas de valor e soluções escaláveis.</p><div class="reasons"><ul><li>Imersão executiva e priorização de casos de uso confirmadas em julho de 2026.</li><li>Frente interna de IA já mobilizada.</li></ul></div></div>
+            <div class="oferta-card"><div class="oferta-header"><h4>Digibee iPaaS</h4><span class="score-badge">86/100</span></div><p>Integra ERP Oracle EBS, planejamento fabril Kiwiplan, logística e novos serviços por APIs governadas.</p><div class="reasons"><ul><li>Integração de processos é prioridade explícita.</li><li>Ecossistema industrial distribuído eleva custo de integrações ponto a ponto.</li></ul></div></div>
+            <div class="oferta-card"><div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">78/100</span></div><p>Assessment de identidade, continuidade, privacidade e riscos na convergência corporativa-industrial.</p><div class="reasons"><ul><li>Operações automatizadas e múltiplas plantas ampliam superfície de risco.</li><li>ISO 27001 e 27701 da Foursys apoiam abordagem de governança.</li></ul></div></div>
+            <div class="oferta-card"><div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">72/100</span></div><p>Constrói serviços de dados, observabilidade e aplicações que conectam produção, qualidade e logística.</p><div class="reasons"><ul><li>Monitoramento em tempo real e controle de qualidade são prioridades públicas.</li><li>Arquitetura observável reduz tempo de resposta operacional.</li></ul></div></div>
+            <div class="oferta-card"><div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">66/100</span></div><p>Evolui integrações e jornadas ao redor do core sem ruptura operacional.</p><div class="reasons"><ul><li>Oracle EBS e Kiwiplan são evidências públicas de core relevante.</li><li>Detalhes de versão e obsolescência não foram publicados.</li></ul></div></div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div><h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>“Como transformar os casos priorizados na imersão de IA em valor operacional mensurável, sem criar nova ilha tecnológica?”</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>A jornada de IA foi formalmente mobilizada em julho de 2026. Abrir discovery sobre governança, integração de dados e um piloto ligado a desperdício, qualidade ou manutenção.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Combinar AI Squad, integração Digibee e segurança numa entrega curta, com 24 anos de mercado, 41.000+ projetos e certificações ISO 27001/27701.</p></div>
+            <div class="insight-box"><h4>Ângulo comercial</h4><p><strong>HIPÓTESE CONSULTIVA:</strong> o maior retorno não está em chatbot corporativo. Está em ligar IA ao chão de fábrica e à logística com dados confiáveis, reduzindo perda, variabilidade e tempo de decisão. Budget de TI e modelo de contratação não foram publicados; validar sponsor, verba e alçada no evento.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div><h3>Concorrentes & Gap Analysis</h3>
+            <div class="competitor-card"><h4>Klabin</h4><p>Operação integrada e escala elevam referência em dados industriais, automação, sustentabilidade e rastreabilidade. Gap a testar: unificação de dados e métricas entre plantas.</p></div>
+            <div class="competitor-card"><h4>Irani Papel e Embalagem</h4><p>Empresa de embalagens e papel com exposição pública maior sobre eficiência, energia e agenda ESG. Gap a testar: transparência e instrumentação digital de resultados.</p></div>
+            <div class="competitor-card"><h4>WestRock / Smurfit Westrock</h4><p>Escala global e integração de soluções pressionam velocidade de inovação, qualidade e experiência B2B. Gap a testar: integração ponta a ponta de atendimento, produção e logística.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Fabricante nacional de embalagens de papel, com operação industrial distribuída e modernização recente.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Marcelo Etges, Coordenador de TI; vínculo e participação em agenda de IA confirmados.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Converter automação e IA em eficiência, governança e decisão integrada.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">IA, integração, monitoramento, logística e segurança; budget público não localizado.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">AI Squad; Digibee iPaaS; Cibersegurança.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Workshop de 90 minutos para escolher um caso de valor e mapear dados, integrações e riscos.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Imediata: imersão de IA ocorreu em julho de 2026 e encontro presencial está confirmado.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">IA aplicada a desperdício, qualidade e logística, não uma vitrine isolada.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div><h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Automação ganha escala</h4><p>A Trombini amplia capacidade, integra processos e coloca IA na agenda executiva.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Dados precisam acompanhar máquinas</h4><p>Sem integração e governança, produtividade local pode virar complexidade sistêmica.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Valor mensurável em ciclos curtos</h4><p>A Foursys conecta um caso de IA aos dados e controles necessários para escalar.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div><h3>Sugestão de Soluções</h3>
+            <div class="business-card"><h4>Industrializar o primeiro caso de IA</h4><p><strong>FATO:</strong> lideranças já priorizaram casos de uso e discutiram governança.</p><div class="sub">Solução Foursys</div><p>AI Squad para discovery, prova de valor e métrica operacional.</p><div class="sub">Pergunta de descoberta</div><p>Qual caso priorizado tem dado disponível e impacto financeiro validável em até doze semanas?</p><div class="sub">Gancho / próximo passo</div><p>Selecionar um processo de qualidade, perda ou logística para piloto.</p></div>
+            <div class="business-card"><h4>Reduzir custo de integração</h4><p><strong>FATO:</strong> automação, monitoramento e sistemas de planejamento conectam áreas críticas.</p><div class="sub">Solução Foursys</div><p>Digibee iPaaS e Engenharia Digital para APIs, eventos e observabilidade.</p><div class="sub">Pergunta de descoberta</div><p>Onde a equipe ainda reconcilia dados manualmente entre produção, estoque, vendas e logística?</p><div class="sub">Gancho / próximo passo</div><p>Mapa de integrações críticas e custo de falha.</p></div>
+            <div class="business-card"><h4>Proteger continuidade industrial</h4><p><strong>INFERÊNCIA:</strong> plantas automatizadas e distribuídas ampliam dependência digital.</p><div class="sub">Solução Foursys</div><p>Assessment de Cibersegurança com foco em identidade, terceiros, continuidade e privacidade.</p><div class="sub">Pergunta de descoberta</div><p>Quais integrações ou acessos de terceiros parariam produção se fossem comprometidos?</p><div class="sub">Gancho / próximo passo</div><p>Workshop de cenários críticos e plano de mitigação.</p></div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div><h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck executivo de 7 slides + one-pager de hipótese + storyboard de PoC</div></div>
+                <div class="info-card"><div class="label">Oferta Foursys âncora</div><div class="value">AI Squad, ancorada por integração Digibee e guardrails de segurança</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos relevantes:</strong> demo de priorização e ROI de casos de IA; arquitetura de referência para integração entre ERP, produção e dados; checklist de governança e segurança baseado em ISO 27001/27701.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> medir IA pelo custo evitado em desperdício, parada, retrabalho e atraso, não por quantidade de modelos ou prompts.</p>
+            <p style="margin-top:8px"><em>Sem case público específico da Foursys para papelão localizado neste briefing. Discurso sugerido: “começamos pelo processo e pelo indicador, conectamos somente os dados necessários e deixamos governança pronta para o segundo caso”.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div><h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Marcelo, vimos que a Trombini já saiu da discussão abstrata e reuniu lideranças para priorizar casos de IA.”</li>
+                <li>“Nossa hipótese é que o próximo gargalo não será o modelo, mas dado integrado, dono do processo e métrica de valor.”</li>
+                <li>“Podemos começar por perda, qualidade ou logística e provar impacto antes de escalar.”</li>
+                <li>“A planta automatizada cria valor quando produção, estoque, vendas e transporte compartilham sinais confiáveis.”</li>
+                <li>“A Foursys combina squad de IA, integração e segurança, sem separar inovação de continuidade.”</li>
+                <li>“Se fizer sentido, saímos do evento com um workshop agendado e três critérios para escolher o piloto.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div><h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Validar sponsor, casos priorizados e critérios financeiros.</td><td>Mapa de hipótese</td><td>Evento + 1 semana</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Mapear processo, dados, integrações, riscos e baseline.</td><td>Canvas de valor e arquitetura</td><td>2 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>Construir caso restrito com dados controlados.</td><td>Prova de valor e métricas</td><td>6–10 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Operacionalizar, observar e transferir conhecimento.</td><td>Produto mínimo governado</td><td>3 meses</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Escalar casos, integrações e controles entre plantas.</td><td>Roadmap multi-squad</td><td>6–12 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div><h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3)</h4>
+            <div class="app-card"><h4>Site institucional</h4><div class="url">https://trombini.com.br/</div><div class="app-stack-grid"><div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não identificado pelo WebFetch</div></div><div class="app-stack-item"><div class="k">Backend</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">API</div><div class="v">Não publicada</div></div></div></div>
+            <div class="app-card"><h4>Oracle E-Business Suite</h4><div class="url">Fonte institucional: https://trombini.com.br/carreiras/</div><div class="app-stack-grid"><div class="app-stack-item"><div class="k">Categoria</div><div class="v">ERP corporativo</div></div><div class="app-stack-item"><div class="k">Versão</div><div class="v">Não publicada</div></div><div class="app-stack-item"><div class="k">Banco</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">Integrações</div><div class="v">Não publicadas</div></div></div></div>
+            <div class="app-card"><h4>Kiwiplan Total Solution</h4><div class="url">https://www.advantive.com/case-studies/trombini/</div><div class="app-stack-grid"><div class="app-stack-item"><div class="k">Escopo</div><div class="v">Planejamento, chão de fábrica e coleta de dados</div></div><div class="app-stack-item"><div class="k">Estoque</div><div class="v">Papel e produtos acabados</div></div><div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicada</div></div><div class="app-stack-item"><div class="k">API</div><div class="v">Não publicada</div></div></div></div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Topologia e provedores não publicados. Operação distribuída em plantas industriais.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança & Compliance</div><div class="cmp">Ferramentas e certificações de TI não localizadas; continuidade industrial e LGPD devem ser validadas.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">Imersão executiva em IA generativa e governança; equipamentos BHS/BOBST, automação e monitoramento em tempo real.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados & Analytics</div><div class="cmp">Kiwiplan coleta dados fabris; arquitetura analítica corporativa não publicada.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">Oracle E-Business Suite confirmado em fonte institucional; versão e roadmap não publicados.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">Kiwiplan para planejamento, produção e estoque; monitoramento logístico citado publicamente.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência & Engajamento</div><div class="cmp">Site institucional público; portais B2B, CRM e automação de marketing não localizados.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div><h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table"><thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead><tbody>
+                <tr><td>https://trombini.com.br/</td><td><span class="status-200">200</span></td><td>Não identificado no conteúdo extraído</td><td>Não identificado</td><td>Site institucional respondeu e expôs catálogo, números e notícias.</td></tr>
+                <tr><td>https://trombini.com.br/carreiras/</td><td><span class="status-200">200</span></td><td>Não identificado no conteúdo extraído</td><td>Não identificado</td><td>Página institucional confirmou histórico do ERP Oracle EBS.</td></tr>
+                <tr><td>https://pt.linkedin.com/posts/distrito-me_inteligenciaartificial-transformacaocognitiva-activity-7478905150548471808-7eS2</td><td><span class="status-200">200</span></td><td>LinkedIn</td><td>Não inspecionado</td><td>Publicação confirmou imersão de IA e menção a Marcelo Etges.</td></tr>
+            </tbody></table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 05/08/2026. Resultados limitados ao conteúdo efetivamente retornado pelo WebFetch.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div><h3>GAPs Tecnológicos (5)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Governança de IA</div><h4>Da priorização à produção</h4><p><strong>HIPÓTESE:</strong> jornada recente exige critérios, segurança, dados, métricas e ciclo de vida. Evidência: workshop de governança e priorização em julho de 2026.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Core, fábrica e logística</h4><p><strong>HIPÓTESE:</strong> Oracle EBS, Kiwiplan, monitoramento e novos casos de IA podem gerar integrações ponto a ponto. Evidência: sistemas e processos públicos distintos.</p><div class="offer">Oferta Foursys: Digibee iPaaS</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Segurança</div><h4>Convergência corporativa-industrial</h4><p><strong>INFERÊNCIA:</strong> automação e plantas distribuídas elevam superfície de ataque e risco de continuidade. Controles atuais não foram publicados.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Dados</div><h4>Visão operacional comum</h4><p><strong>HIPÓTESE:</strong> dados de produção, qualidade, estoque, vendas e rotas precisam de semântica e observabilidade comuns. Evidência: integração é prioridade declarada.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Evolução do core</div><h4>APIs ao redor do legado</h4><p><strong>HIPÓTESE:</strong> preservar core e desacoplar novas jornadas reduz risco. Versão, customizações e obsolescência não foram publicadas.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div><h3>Perfil Pessoal & Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Não localizada em fonte pública acessível</div></div>
+                <div class="info-card"><div class="label">Cidade profissional</div><div class="value">Curitiba/PR, segundo perfil público</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizados em fonte pública</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (6)</h4><p>1) Começar pela imersão recente de IA. 2) Perguntar qual caso saiu no topo da priorização. 3) Explorar integração entre TI e operação industrial. 4) Reconhecer responsabilidade de evoluir sem interromper produção. 5) Conectar eficiência a sustentabilidade e desperdício. 6) Evitar tratá-lo como CIO; confirmar sua alçada e o sponsor executivo.</p></div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div><h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Cadastro & institucional</h4><ul><li>https://monitorcnpj.com.br/cnpj/11252642000102/ — acesso 05/08/2026</li><li>https://trombini.com.br/ — acesso 05/08/2026</li><li>https://trombini.com.br/carreiras/ — acesso 05/08/2026</li></ul></div>
+                <div class="sources-card"><h4>Estratégia & operação</h4><ul><li>https://www.nsctotal.com.br/noticias/trombini-aposta-em-tecnologia-e-sustentabilidade-na-industria-de-embalagens — acesso 05/08/2026</li><li>https://www.industrianews.com.br/2025/02/trombini-investe-r350-milhoes-e-amplia-producao-em-36/ — acesso 05/08/2026</li></ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul><li>https://www.advantive.com/case-studies/trombini/ — acesso 05/08/2026</li><li>https://portalpackaging.com.br/a-automacao-e-um-caminho-sem-volta-para-a-industria-diz-superintendente-da-trombini/ — acesso 05/08/2026</li></ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul><li>https://br.linkedin.com/in/marcelo-jos%C3%A9-etges-7878728 — pesquisa 05/08/2026; página direta bloqueou WebFetch</li><li>https://pt.linkedin.com/posts/distrito-me_inteligenciaartificial-transformacaocognitiva-activity-7478905150548471808-7eS2 — acesso 05/08/2026</li><li>https://pt.linkedin.com/posts/guihfaraujo_customersuccess-parceria-com%C3%A9rcioexterior-activity-7448074692751446016-yinR — pesquisa 05/08/2026</li></ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul><li>WebFetch https://trombini.com.br/ — 05/08/2026</li><li>WebFetch https://trombini.com.br/carreiras/ — 05/08/2026</li><li>WebFetch https://www.advantive.com/case-studies/trombini/ — 05/08/2026</li><li>WebFetch publicação Distrito/LinkedIn — 05/08/2026</li></ul></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Agosto 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>
