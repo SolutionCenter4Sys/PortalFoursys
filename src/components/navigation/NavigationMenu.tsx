@@ -19,6 +19,10 @@ import {
   Briefcase,
   FileText,
   Mic,
+  Compass,
+  Library,
+  Route,
+  Telescope,
   type LucideIcon,
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
@@ -34,6 +38,10 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
   'identity':        Users,
   'timeline':        Clock,
   'global':          Globe,
+  'portfolio-thesis': Compass,
+  'portfolio-offers': Library,
+  'portfolio-start':  Route,
+  'portfolio-future': Telescope,
   'offers-flagship': Star,
   'services':        LayoutGrid,
   'delivery':        Rocket,
@@ -58,12 +66,14 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
 const CATEGORY_COLORS: Record<string, string> = {
   'Início':       'text-foursys-primary',
   'Institucional':'text-slate-400',
+  'Portfólio':    'text-cyan-400',
   'Ofertas e Serviços': 'text-foursys-primary',
   'Provas':       'text-amber-400',
   'ESG':          'text-green-400',
   'Referência':   'text-slate-400',
   'Home':         'text-foursys-primary',
   'About Us':     'text-slate-400',
+  'Portfolio':    'text-cyan-400',
   'Solutions & Services': 'text-foursys-primary',
   'Proof Points': 'text-amber-400',
   'Reference':    'text-slate-400',
@@ -162,7 +172,7 @@ export function NavigationMenu() {
           if (items.length === 0) return null
 
           // Para categorias de cliente, usa a cor do cliente ativo
-          const coreCategories = ['Início', 'Institucional', 'Ofertas e Serviços', 'Provas', 'ESG', 'Referência', 'Home', 'About Us', 'Solutions & Services', 'Proof Points', 'Reference']
+          const coreCategories = ['Início', 'Institucional', 'Portfólio', 'Ofertas e Serviços', 'Provas', 'ESG', 'Referência', 'Home', 'About Us', 'Portfolio', 'Solutions & Services', 'Proof Points', 'Reference']
           const isClientCategory = !coreCategories.includes(category)
           const categoryColorClass = isClientCategory ? '' : (CATEGORY_COLORS[category] ?? 'text-foursys-text-dim')
 

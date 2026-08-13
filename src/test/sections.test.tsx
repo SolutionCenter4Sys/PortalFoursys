@@ -14,6 +14,10 @@ import { SectionInnovation } from '../components/sections/SectionInnovation'
 import { SectionAlliances } from '../components/sections/SectionAlliances'
 import { SectionAIFoursys } from '../components/sections/SectionAIFoursys'
 import { SectionKiamComparison } from '../components/sections/SectionKiamComparison'
+import { SectionPortfolioThesis } from '../components/sections/SectionPortfolioThesis'
+import { SectionPortfolioOffers } from '../components/sections/SectionPortfolioOffers'
+import { SectionPortfolioStart } from '../components/sections/SectionPortfolioStart'
+import { SectionPortfolioFuture } from '../components/sections/SectionPortfolioFuture'
 
 function renderWithProvider(ui: React.ReactElement) {
   return render(
@@ -81,6 +85,26 @@ describe('Section smoke tests', () => {
 
   it('SectionKiamComparison renders without crash', () => {
     const { container } = renderWithProvider(<SectionKiamComparison />)
+    expect(container).toBeTruthy()
+  })
+
+  it('SectionPortfolioThesis renders without crash', () => {
+    const { container } = renderWithProvider(<SectionPortfolioThesis />)
+    expect(container).toBeTruthy()
+  })
+
+  it('SectionPortfolioOffers renders without crash', () => {
+    const { container } = renderWithProvider(<SectionPortfolioOffers />)
+    expect(container).toBeTruthy()
+  })
+
+  it('SectionPortfolioStart renders without crash', () => {
+    const { container } = renderWithProvider(<SectionPortfolioStart />)
+    expect(container).toBeTruthy()
+  })
+
+  it('SectionPortfolioFuture renders without crash', () => {
+    const { container } = renderWithProvider(<SectionPortfolioFuture />)
     expect(container).toBeTruthy()
   })
 })

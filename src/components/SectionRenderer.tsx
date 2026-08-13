@@ -8,6 +8,10 @@ const SectionIdentity = lazy(() => import('./sections/SectionIdentity').then(m =
 const SectionTimeline = lazy(() => import('./sections/SectionTimeline').then(m => ({ default: m.SectionTimeline })))
 const SectionGlobal = lazy(() => import('./sections/SectionGlobal').then(m => ({ default: m.SectionGlobal })))
 const SectionWhyFoursys = lazy(() => import('./sections/SectionWhyFoursys').then(m => ({ default: m.SectionWhyFoursys })))
+const SectionPortfolioThesis = lazy(() => import('./sections/SectionPortfolioThesis').then(m => ({ default: m.SectionPortfolioThesis })))
+const SectionPortfolioOffers = lazy(() => import('./sections/SectionPortfolioOffers').then(m => ({ default: m.SectionPortfolioOffers })))
+const SectionPortfolioStart = lazy(() => import('./sections/SectionPortfolioStart').then(m => ({ default: m.SectionPortfolioStart })))
+const SectionPortfolioFuture = lazy(() => import('./sections/SectionPortfolioFuture').then(m => ({ default: m.SectionPortfolioFuture })))
 const SectionOffersFlag = lazy(() => import('./sections/SectionOffersFlag').then(m => ({ default: m.SectionOffersFlag })))
 const SectionServices = lazy(() => import('./sections/SectionServices').then(m => ({ default: m.SectionServices })))
 const SectionDelivery = lazy(() => import('./sections/SectionDelivery').then(m => ({ default: m.SectionDelivery })))
@@ -61,6 +65,12 @@ export function SectionRenderer() {
         {section === 'timeline'       && <SectionTimeline key="timeline" />}
         {section === 'global'         && <SectionGlobal key="global" />}
         {section === 'why-foursys'    && <SectionWhyFoursys key="why-foursys" />}
+
+        {/* ── Portfólio 2026 S2 ── */}
+        {section === 'portfolio-thesis' && <SectionPortfolioThesis key="portfolio-thesis" />}
+        {section === 'portfolio-offers' && <SectionPortfolioOffers key="portfolio-offers" />}
+        {section === 'portfolio-start'  && <SectionPortfolioStart key="portfolio-start" />}
+        {section === 'portfolio-future' && <SectionPortfolioFuture key="portfolio-future" />}
 
         {/* ── Ofertas e Serviços ── */}
         {section === 'offers-flagship' && <SectionOffersFlag key="offers-flagship" />}

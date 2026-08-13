@@ -32,6 +32,22 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
       { id: 'identity-mission', label: 'Missão, Visão e Valores', sectionId: 'identity' },
       { id: 'identity-timeline', label: 'Linha do Tempo', sectionId: 'identity' },
     ],
+    'portfolio-thesis': [
+      { id: 'portfolio-thesis-tese', label: 'Tese comercial', sectionId: 'portfolio-thesis' },
+      { id: 'portfolio-thesis-vitrine', label: 'Eixos de diferenciação', sectionId: 'portfolio-thesis' },
+      { id: 'portfolio-thesis-motor', label: 'Eixos de capacidade', sectionId: 'portfolio-thesis' },
+    ],
+    'portfolio-offers': [
+      { id: 'portfolio-offers-catalogo', label: 'Catálogo completo (12 ofertas)', sectionId: 'portfolio-offers' },
+    ],
+    'portfolio-start': [
+      { id: 'portfolio-start-personas', label: 'Shortlist por persona', sectionId: 'portfolio-start' },
+      { id: 'portfolio-start-segmentos', label: 'Prioridades por segmento', sectionId: 'portfolio-start' },
+    ],
+    'portfolio-future': [
+      { id: 'portfolio-future-visao', label: 'Visão de futuro', sectionId: 'portfolio-future' },
+      { id: 'portfolio-future-ativos', label: 'Ativos transversais', sectionId: 'portfolio-future' },
+    ],
     'offers-flagship': [
       { id: 'offers-ai-squad', label: 'AI Squad', sectionId: 'offers-flagship' },
       { id: 'offers-legacy', label: 'Modernização de Legado', sectionId: 'offers-flagship' },
@@ -69,6 +85,22 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
       { id: 'identity-kpis', label: 'Big Numbers', sectionId: 'identity' },
       { id: 'identity-mission', label: 'Mission, Vision and Values', sectionId: 'identity' },
       { id: 'identity-timeline', label: 'Timeline', sectionId: 'identity' },
+    ],
+    'portfolio-thesis': [
+      { id: 'portfolio-thesis-tese', label: 'Commercial thesis', sectionId: 'portfolio-thesis' },
+      { id: 'portfolio-thesis-vitrine', label: 'Differentiation axes', sectionId: 'portfolio-thesis' },
+      { id: 'portfolio-thesis-motor', label: 'Capacity axes', sectionId: 'portfolio-thesis' },
+    ],
+    'portfolio-offers': [
+      { id: 'portfolio-offers-catalogo', label: 'Full catalog (12 offers)', sectionId: 'portfolio-offers' },
+    ],
+    'portfolio-start': [
+      { id: 'portfolio-start-personas', label: 'Shortlist by persona', sectionId: 'portfolio-start' },
+      { id: 'portfolio-start-segmentos', label: 'Priorities by segment', sectionId: 'portfolio-start' },
+    ],
+    'portfolio-future': [
+      { id: 'portfolio-future-visao', label: 'Future vision', sectionId: 'portfolio-future' },
+      { id: 'portfolio-future-ativos', label: 'Cross-cutting assets', sectionId: 'portfolio-future' },
     ],
     'offers-flagship': [
       { id: 'offers-ai-squad', label: 'AI Squad', sectionId: 'offers-flagship' },

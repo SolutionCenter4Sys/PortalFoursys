@@ -164,6 +164,137 @@ export interface FAQItem {
 }
 
 
+// ─── Portfólio 2026 S2 ────────────────────────────────────────────────────────
+
+/** Classificação da Linha Mestra: vitrine abre a conversa, motor sustenta o ticket. */
+export type PortfolioRole = 'diferenciacao' | 'capacidade'
+
+/** Status de lastro de um número ou case, definido pelos kits comerciais. */
+export type EvidenceStatus = 'liberado' | 'em-validacao' | 'sem-lastro'
+
+export interface PortfolioAxis {
+  id: string
+  number: number
+  name: string
+  role: PortfolioRole
+  promise: string
+  audience: string
+  color: string
+  icon: string
+  /** Ofertas nomeadas na Linha Mestra que ainda não têm kit detalhado no ciclo. */
+  upcomingOffers?: string[]
+}
+
+export interface PortfolioPhase {
+  name: string
+  duration: string
+  focus: string
+}
+
+export interface PortfolioMarketStat {
+  stat: string
+  source: string
+}
+
+export interface PortfolioDifferential {
+  title: string
+  detail: string
+}
+
+export interface PortfolioPersonaFit {
+  role: string
+  value: string
+}
+
+export interface PortfolioProof {
+  status: EvidenceStatus
+  note: string
+  cases?: string[]
+}
+
+export interface PortfolioOffer {
+  id: string
+  code: string
+  axisId: string
+  role: PortfolioRole
+  /** Papel especial no portfólio: âncora, rampa de entrada, delivery puxado. */
+  portfolioRole?: string
+  name: string
+  headline: string
+  tagline: string
+  whatItIs: string
+  pain: string
+  entryTriggers?: string[]
+  outcomes: string[]
+  differentials: PortfolioDifferential[]
+  components?: string[]
+  assets?: string[]
+  phases: PortfolioPhase[]
+  totalDuration: string
+  marketStats: PortfolioMarketStat[]
+  regulatory?: string[]
+  personas: PortfolioPersonaFit[]
+  cta: string
+  connects: string[]
+  boundary?: string
+  /** Como esta oferta NÃO deve ser comunicada ao cliente. */
+  editorialCare?: string
+  proof: PortfolioProof
+  /** Onde o mesmo assunto vive na seção legada, para comparação. */
+  legacyEquivalent?: { label: string; section: AppSection }
+}
+
+export interface PortfolioPersona {
+  id: string
+  role: string
+  concern: string
+  icon: string
+  color: string
+  /** Códigos de oferta em ordem de abertura. */
+  shortlist: string[]
+}
+
+export interface PortfolioSegment {
+  id: string
+  name: string
+  pain: string
+  /** Códigos de oferta que sobem na prioridade neste segmento. */
+  priorityOffers: string[]
+}
+
+export interface PortfolioThesis {
+  label: string
+  sequence: string[]
+  description: string
+  principles: string[]
+}
+
+export interface PortfolioFutureItem {
+  id: string
+  name: string
+  description: string
+  horizon: string
+  icon: string
+}
+
+export interface PortfolioAsset {
+  id: string
+  name: string
+  description: string
+  icon: string
+}
+
+export interface PortfolioBundle {
+  thesis: PortfolioThesis
+  axes: PortfolioAxis[]
+  offers: PortfolioOffer[]
+  personas: PortfolioPersona[]
+  segments: PortfolioSegment[]
+  futureVision: PortfolioFutureItem[]
+  assets: PortfolioAsset[]
+  institutionalBacking: { value: string; label: string }[]
+}
+
 // ─── App Sections ─────────────────────────────────────────────────────────────
 
 export type AppSection =
@@ -173,6 +304,11 @@ export type AppSection =
   | 'global'
   | 'timeline'
   | 'why-foursys'
+  // Portfólio 2026 S2 (nova seção — sucessora candidata de Ofertas e Serviços)
+  | 'portfolio-thesis'
+  | 'portfolio-offers'
+  | 'portfolio-start'
+  | 'portfolio-future'
   // Ofertas
   | 'offers-flagship'
   // Serviços

@@ -41,6 +41,36 @@ const navigationItemsPt: NavigationItem[] = [
     description: 'Diferenciais competitivos que nos tornam a escolha certa',
   },
 
+  // ── Portfólio 2026 S2 ──────────────────────────────────────────────────────
+  {
+    id: 'portfolio-thesis',
+    label: 'Tese e Eixos de Valor',
+    icon: 'compass',
+    category: 'Portfólio',
+    description: 'Como o portfólio se organiza: 6 eixos, vitrine e motor',
+  },
+  {
+    id: 'portfolio-offers',
+    label: 'Catálogo de Ofertas',
+    icon: 'library',
+    category: 'Portfólio',
+    description: '12 ofertas com dor, entregáveis, método e lastro de prova',
+  },
+  {
+    id: 'portfolio-start',
+    label: 'Por Onde Começar',
+    icon: 'route',
+    category: 'Portfólio',
+    description: 'Shortlist de abertura por persona — CEO, CIO, COO, CFO e CDO',
+  },
+  {
+    id: 'portfolio-future',
+    label: 'Visão de Futuro e Ativos',
+    icon: 'telescope',
+    category: 'Portfólio',
+    description: 'Tokenização, ESG tecnológico, Machine as Customer e ativos transversais',
+  },
+
   // ── Ofertas e Serviços ─────────────────────────────────────────────────────
   {
     id: 'offers-flagship',
@@ -216,6 +246,36 @@ const navigationItemsEn: NavigationItem[] = [
     description: 'Competitive advantages that make us the right choice',
   },
 
+  // ── Portfolio 2026 H2 ──────────────────────────────────────────────────────
+  {
+    id: 'portfolio-thesis',
+    label: 'Thesis and Value Axes',
+    icon: 'compass',
+    category: 'Portfolio',
+    description: 'How the portfolio is organized: 6 axes, showcase and engine',
+  },
+  {
+    id: 'portfolio-offers',
+    label: 'Offer Catalog',
+    icon: 'library',
+    category: 'Portfolio',
+    description: '12 offers with pain, deliverables, method and evidence status',
+  },
+  {
+    id: 'portfolio-start',
+    label: 'Where to Start',
+    icon: 'route',
+    category: 'Portfolio',
+    description: 'Opening shortlist by persona — CEO, CIO, COO, CFO and CDO',
+  },
+  {
+    id: 'portfolio-future',
+    label: 'Future Vision and Assets',
+    icon: 'telescope',
+    category: 'Portfolio',
+    description: 'Tokenization, technology-driven ESG, Machine as Customer and cross-cutting assets',
+  },
+
   // ── Solutions & Services ───────────────────────────────────────────────────
   {
     id: 'offers-flagship',
@@ -354,6 +414,7 @@ const navigationItemsEn: NavigationItem[] = [
 const sectionCategoriesPt = [
   'Início',
   'Institucional',
+  'Portfólio',
   'Ofertas e Serviços',
   'Provas',
   'ESG',
@@ -363,6 +424,7 @@ const sectionCategoriesPt = [
 const sectionCategoriesEn = [
   'Home',
   'About Us',
+  'Portfolio',
   'Solutions & Services',
   'Proof Points',
   'ESG',

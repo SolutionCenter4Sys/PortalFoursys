@@ -8,6 +8,7 @@ import { alliances } from '../data/alliances'
 import { innovationTrends } from '../data/innovation'
 import { kpis, timeline } from '../data/kpis'
 import { showcaseClients } from '../data/clientShowcase'
+import { portfolioPt } from '../data/portfolio'
 import type { AppSection } from '../types'
 
 export type SearchResultKind =
@@ -21,6 +22,7 @@ export type SearchResultKind =
   | 'certification'
   | 'alliance'
   | 'innovation'
+  | 'portfolio-offer'
   | 'kpi'
   | 'timeline'
   | 'client'
@@ -195,6 +197,22 @@ export function buildSearchIndex(): SearchEntry[] {
       icon: 'sparkles',
       targetSection: 'innovation',
       category: 'Inovação',
+    })
+  }
+
+  for (const offer of portfolioPt.offers) {
+    const axis = portfolioPt.axes.find(a => a.id === offer.axisId)
+    entries.push({
+      id: `pf-${offer.id}`,
+      kind: 'portfolio-offer',
+      title: `${offer.code} · ${offer.name}`,
+      subtitle: `${axis?.name ?? 'Portfólio'} · ${offer.tagline}`,
+      searchable: norm(
+        `${offer.code} ${offer.name} ${offer.headline} ${offer.tagline} ${offer.whatItIs} ${offer.pain} ${offer.outcomes.join(' ')} ${offer.differentials.map(d => `${d.title} ${d.detail}`).join(' ')} ${offer.assets?.join(' ') ?? ''} ${axis?.name ?? ''}`
+      ),
+      icon: 'library',
+      targetSection: 'portfolio-offers',
+      category: 'Portfólio',
     })
   }
 

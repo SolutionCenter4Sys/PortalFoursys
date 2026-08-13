@@ -82,6 +82,16 @@ const CAIXAS_PT: ReadonlyArray<CaixaSecao> = [
   { id: 'innovation-trends', secao: 'innovation', rotulo: 'Tendências de Inovação',
     rotulos: ['tendencias', 'tendencias de inovacao', 'trends', 'inovacao'] },
 
+  // ── Portfólio 2026 S2 ───────────────────────────────────────────────────
+  { id: 'portfolio-axes-grid', secao: 'portfolio-thesis', rotulo: 'Eixos de Valor',
+    rotulos: ['eixos', 'eixos de valor', 'vitrine e motor', 'tese'] },
+  { id: 'portfolio-offers-grid', secao: 'portfolio-offers', rotulo: 'Catálogo de Ofertas',
+    rotulos: ['catalogo', 'catalogo de ofertas', 'doze ofertas'] },
+  { id: 'portfolio-personas-grid', secao: 'portfolio-start', rotulo: 'Personas',
+    rotulos: ['personas', 'por onde comecar', 'shortlist'] },
+  { id: 'portfolio-future-grid', secao: 'portfolio-future', rotulo: 'Visão de Futuro',
+    rotulos: ['visao de futuro', 'futuro', 'ativos transversais'] },
+
   // ── Offers Flagship ─────────────────────────────────────────────────────
   { id: 'offers-grid', secao: 'offers-flagship', rotulo: 'Principais Ofertas',
     rotulos: ['ofertas', 'ofertas flagship', 'ofertas principais', 'flagships'] },
@@ -148,6 +158,16 @@ const CAIXAS_EN: ReadonlyArray<CaixaSecao> = [
   // ── Innovation ──────────────────────────────────────────────────────────
   { id: 'innovation-trends', secao: 'innovation', rotulo: 'Innovation Trends',
     rotulos: ['trends', 'innovation trends', 'innovation'] },
+
+  // ── Portfolio 2026 H2 ───────────────────────────────────────────────────
+  { id: 'portfolio-axes-grid', secao: 'portfolio-thesis', rotulo: 'Value Axes',
+    rotulos: ['axes', 'value axes', 'showcase and engine', 'thesis'] },
+  { id: 'portfolio-offers-grid', secao: 'portfolio-offers', rotulo: 'Offer Catalog',
+    rotulos: ['catalog', 'offer catalog', 'twelve offers'] },
+  { id: 'portfolio-personas-grid', secao: 'portfolio-start', rotulo: 'Personas',
+    rotulos: ['personas', 'where to start', 'shortlist'] },
+  { id: 'portfolio-future-grid', secao: 'portfolio-future', rotulo: 'Future Vision',
+    rotulos: ['future vision', 'future', 'cross-cutting assets'] },
 
   // ── Offers Flagship ─────────────────────────────────────────────────────
   { id: 'offers-grid', secao: 'offers-flagship', rotulo: 'Main Offers',

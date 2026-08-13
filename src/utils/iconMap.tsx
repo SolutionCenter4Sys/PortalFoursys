@@ -10,7 +10,7 @@ import {
   Palette, Blocks, Ruler, BrickWall, AlertTriangle, Handshake,
   Sprout, Cpu, TrendingUp, Headphones, PackageCheck, Sparkles,
   Wallet, Wifi, Server, Newspaper, Tv, Linkedin, Instagram, Youtube, Mail,
-  ClipboardCheck, Scale,
+  ClipboardCheck, Scale, Compass, Library, Route,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -50,6 +50,9 @@ const ICON_MAP: Record<string, LucideIcon> = {
   target: Target,
   lightbulb: Lightbulb,
   lock: Lock,
+  compass: Compass,
+  library: Library,
+  route: Route,
   telescope: Telescope,
   'message-circle': MessageCircle,
   scissors: Scissors,
