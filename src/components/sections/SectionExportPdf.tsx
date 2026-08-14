@@ -46,7 +46,9 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
     ],
     'portfolio-future': [
       { id: 'portfolio-future-visao', label: 'Visão de futuro', sectionId: 'portfolio-future' },
-      { id: 'portfolio-future-ativos', label: 'Ativos transversais', sectionId: 'portfolio-future' },
+    ],
+    'portfolio-assets': [
+      { id: 'portfolio-assets-lista', label: 'Ativos transversais', sectionId: 'portfolio-assets' },
     ],
     'offers-flagship': [
       { id: 'offers-ai-squad', label: 'AI Squad', sectionId: 'offers-flagship' },
@@ -100,7 +102,9 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
     ],
     'portfolio-future': [
       { id: 'portfolio-future-visao', label: 'Future vision', sectionId: 'portfolio-future' },
-      { id: 'portfolio-future-ativos', label: 'Cross-cutting assets', sectionId: 'portfolio-future' },
+    ],
+    'portfolio-assets': [
+      { id: 'portfolio-assets-lista', label: 'Cross-cutting assets', sectionId: 'portfolio-assets' },
     ],
     'offers-flagship': [
       { id: 'offers-ai-squad', label: 'AI Squad', sectionId: 'offers-flagship' },

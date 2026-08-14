@@ -631,6 +631,7 @@ export const pt = {
       showcaseHint: 'Abrem a conversa e definem o posicionamento',
       engineHint: 'Sustentam a entrega e o volume',
       axisWord: 'Eixo',
+      audienceLabel: 'Para quem fala',
       offersInAxis: 'ofertas neste eixo',
       seeOffers: 'Ver ofertas do eixo',
       axisEmpty: 'Ofertas do eixo sem kit detalhado neste ciclo',
@@ -644,6 +645,7 @@ export const pt = {
       searchPlaceholder: 'Buscar oferta, dor ou entregável...',
       empty: 'Nenhuma oferta corresponde aos filtros.',
       resultCount: '{count} de {total} ofertas',
+      openDetail: 'Abrir detalhes da oferta {name}',
     },
     start: {
       title: 'Por onde começar',
@@ -653,13 +655,17 @@ export const pt = {
       then: 'Em seguida',
       concern: 'O que tira o sono',
       segments: 'O que sobe na prioridade por segmento',
+      openOffer: 'Abrir oferta {name}',
     },
     future: {
-      title: 'Visão de futuro e ativos transversais',
-      subtitle: 'O que está sendo construído para o próximo ciclo e os ativos que atravessam todas as ofertas.',
+      title: 'Visão de futuro',
+      subtitle: 'O que está sendo construído para o próximo ciclo — horizontes, teses e apostas em formação.',
       futureTitle: 'Visão de futuro',
-      assetsTitle: 'Ativos transversais',
       horizon: 'Horizonte',
+    },
+    assets: {
+      title: 'Ativos transversais',
+      subtitle: 'Plataformas, unidades e capacidades que atravessam todas as ofertas do portfólio.',
     },
     offer: {
       whatItIs: 'O que é',

@@ -90,7 +90,9 @@ const CAIXAS_PT: ReadonlyArray<CaixaSecao> = [
   { id: 'portfolio-personas-grid', secao: 'portfolio-start', rotulo: 'Personas',
     rotulos: ['personas', 'por onde comecar', 'shortlist'] },
   { id: 'portfolio-future-grid', secao: 'portfolio-future', rotulo: 'Visão de Futuro',
-    rotulos: ['visao de futuro', 'futuro', 'ativos transversais'] },
+    rotulos: ['visao de futuro', 'futuro', 'tokenizacao'] },
+  { id: 'portfolio-assets-grid', secao: 'portfolio-assets', rotulo: 'Ativos Transversais',
+    rotulos: ['ativos transversais', 'ativos', 'nexus', 'fourblox', 'zeragon'] },
 
   // ── Offers Flagship ─────────────────────────────────────────────────────
   { id: 'offers-grid', secao: 'offers-flagship', rotulo: 'Principais Ofertas',
@@ -167,7 +169,9 @@ const CAIXAS_EN: ReadonlyArray<CaixaSecao> = [
   { id: 'portfolio-personas-grid', secao: 'portfolio-start', rotulo: 'Personas',
     rotulos: ['personas', 'where to start', 'shortlist'] },
   { id: 'portfolio-future-grid', secao: 'portfolio-future', rotulo: 'Future Vision',
-    rotulos: ['future vision', 'future', 'cross-cutting assets'] },
+    rotulos: ['future vision', 'future', 'tokenization'] },
+  { id: 'portfolio-assets-grid', secao: 'portfolio-assets', rotulo: 'Cross-cutting Assets',
+    rotulos: ['cross-cutting assets', 'assets', 'nexus', 'fourblox', 'zeragon'] },
 
   // ── Offers Flagship ─────────────────────────────────────────────────────
   { id: 'offers-grid', secao: 'offers-flagship', rotulo: 'Main Offers',

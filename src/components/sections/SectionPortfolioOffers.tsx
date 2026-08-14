@@ -42,7 +42,7 @@ function EvidenceBadge({ status, compact = false }: { status: EvidenceStatus; co
       }`}
       style={{ color: style.color, borderColor: `${style.color}44`, backgroundColor: `${style.color}12` }}
     >
-      <Icon size={compact ? 9 : 11} />
+      <Icon size={compact ? 9 : 11} aria-hidden="true" />
       {t(`portfolio.evidence.${status}`)}
     </span>
   )
@@ -93,6 +93,14 @@ function OfferModal({
   const { t } = useLanguage()
   const accent = axis?.color ?? '#22D3EE'
 
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [onClose])
+
   const roleLabel =
     offer.role === 'diferenciacao'
       ? t('portfolio.thesis.showcase')
@@ -133,7 +141,7 @@ function OfferModal({
             data-voz-fechar-detalhe="true"
             className="absolute top-4 right-4 p-2 rounded-xl hover:bg-white/10 text-foursys-text-muted transition-colors"
           >
-            <X size={16} />
+            <X size={16} aria-hidden="true" />
           </button>
 
           <div className="flex items-center gap-2 flex-wrap mb-3 pr-10">
@@ -205,7 +213,7 @@ function OfferModal({
             <ul className="grid md:grid-cols-2 gap-2">
               {offer.outcomes.map(outcome => (
                 <li key={outcome} className="flex items-start gap-2.5 text-sm text-foursys-text-muted">
-                  <CheckCircle2 size={14} style={{ color: accent }} className="flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 size={14} style={{ color: accent }} className="flex-shrink-0 mt-0.5" aria-hidden="true" />
                   {outcome}
                 </li>
               ))}
@@ -351,7 +359,7 @@ function OfferModal({
                       className="text-[11px] px-2.5 py-1 rounded-lg border text-foursys-text-muted hover:text-white hover:border-white/20 transition-colors flex items-center gap-1.5"
                       style={{ borderColor: 'rgba(255,255,255,0.08)' }}
                     >
-                      <Link2 size={10} />
+                      <Link2 size={10} aria-hidden="true" />
                       <span className="font-mono font-bold">{target.code}</span> {target.name}
                     </button>
                   )
@@ -385,7 +393,7 @@ function OfferModal({
           {presenterMode && (
             <div className="p-4 rounded-xl border border-amber-500/25 bg-amber-500/[0.06] space-y-2">
               <h4 className="text-[11px] font-bold uppercase tracking-[0.14em] text-amber-400 flex items-center gap-1.5">
-                <Eye size={11} /> {t('portfolio.presenter.title')}
+                <Eye size={11} aria-hidden="true" /> {t('portfolio.presenter.title')}
               </h4>
               <div>
                 <span className="text-[10px] uppercase tracking-wider text-amber-400/70 font-bold">
@@ -424,7 +432,7 @@ function OfferModal({
                 {t('portfolio.offer.legacy')}:{' '}
                 <span className="text-foursys-text-muted">{offer.legacyEquivalent.label}</span>
               </span>
-              <ArrowRight size={13} className="text-foursys-text-dim flex-shrink-0" />
+              <ArrowRight size={13} className="text-foursys-text-dim flex-shrink-0" aria-hidden="true" />
             </button>
           )}
         </div>
@@ -450,18 +458,20 @@ function OfferCard({
   const accent = axis?.color ?? '#22D3EE'
 
   return (
-    <motion.div
+    <motion.button
+      type="button"
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: Math.min(index * 0.04, 0.3), duration: 0.35 }}
       onClick={onClick}
+      aria-label={t('portfolio.offers.openDetail').replace('{name}', offer.name)}
       data-voz-detalhe={`portfolio-offer-${offer.id}`}
       data-voz-detalhe-secao="portfolio-offers"
       data-voz-detalhe-rotulo={offer.name}
-      className="p-5 rounded-2xl bg-foursys-surface/30 border cursor-pointer hover:-translate-y-1 hover:bg-foursys-surface/45 transition-all duration-300 flex flex-col group"
+      className="p-5 text-left rounded-2xl bg-foursys-surface/30 border cursor-pointer hover:-translate-y-1 hover:bg-foursys-surface/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-all duration-300 flex flex-col group"
       style={{ borderColor: `${accent}2E` }}
     >
-      <div className="flex items-start justify-between gap-2 mb-3">
+      <div className="flex items-start justify-between gap-2 mb-3 w-full">
         <span
           className="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded flex-shrink-0"
           style={{ color: accent, backgroundColor: `${accent}18`, border: `1px solid ${accent}38` }}
@@ -480,25 +490,25 @@ function OfferCard({
         {offer.pain}
       </p>
 
-      <div className="space-y-1.5 mb-3">
+      <div className="space-y-1.5 mb-3 w-full">
         {offer.outcomes.slice(0, 2).map(outcome => (
           <div key={outcome} className="flex items-start gap-1.5 text-[11px] text-foursys-text-dim">
-            <CheckCircle2 size={11} style={{ color: accent }} className="flex-shrink-0 mt-0.5" />
+            <CheckCircle2 size={11} style={{ color: accent }} className="flex-shrink-0 mt-0.5" aria-hidden="true" />
             <span className="line-clamp-1">{outcome}</span>
           </div>
         ))}
       </div>
 
-      <div className="flex items-center justify-between gap-2 pt-3 border-t border-white/[0.06]">
+      <div className="flex items-center justify-between gap-2 pt-3 border-t border-white/[0.06] w-full">
         <span className="text-[10px] text-foursys-text-dim">{offer.totalDuration}</span>
         <span
           className="flex items-center gap-1 text-[11px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity"
           style={{ color: accent }}
         >
-          {t('common.seeMore')} <ArrowRight size={11} />
+          {t('common.seeMore')} <ArrowRight size={11} aria-hidden="true" />
         </span>
       </div>
-    </motion.div>
+    </motion.button>
   )
 }
 
@@ -579,7 +589,7 @@ export function SectionPortfolioOffers() {
           <div className="flex items-start md:items-end justify-between flex-wrap gap-3">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-400 mb-2 flex items-center gap-2">
-                <Library size={13} /> {t('portfolio.badge')}
+                <Library size={13} aria-hidden="true" /> {t('portfolio.badge')}
               </p>
               <h2 className="text-2xl md:text-4xl font-black text-white leading-none">
                 {t('portfolio.offers.title')}
@@ -600,7 +610,7 @@ export function SectionPortfolioOffers() {
                     : 'text-foursys-text-dim border-white/[0.08] bg-foursys-surface/40 hover:text-foursys-text-muted'
                 }`}
               >
-                {presenterMode ? <Eye size={12} /> : <EyeOff size={12} />}
+                {presenterMode ? <Eye size={12} aria-hidden="true" /> : <EyeOff size={12} aria-hidden="true" />}
                 {t('portfolio.presenter.toggle')}
               </button>
             </div>
@@ -618,7 +628,7 @@ export function SectionPortfolioOffers() {
         >
           <div className="flex flex-col md:flex-row gap-3 md:items-center">
             <div className="relative flex-1 max-w-md">
-              <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-foursys-text-dim" />
+              <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-foursys-text-dim" aria-hidden="true" />
               <input
                 type="search"
                 value={query}

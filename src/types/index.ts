@@ -309,6 +309,7 @@ export type AppSection =
   | 'portfolio-offers'
   | 'portfolio-start'
   | 'portfolio-future'
+  | 'portfolio-assets'
   // Ofertas
   | 'offers-flagship'
   // Serviços

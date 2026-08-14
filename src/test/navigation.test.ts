@@ -3,7 +3,7 @@ import { navigationItems, sectionCategories } from '../data/navigation'
 
 const SECTION_RENDERER_CASES = [
   'home', 'identity', 'timeline', 'global', 'why-foursys',
-  'portfolio-thesis', 'portfolio-offers', 'portfolio-start', 'portfolio-future',
+  'portfolio-thesis', 'portfolio-offers', 'portfolio-start', 'portfolio-future', 'portfolio-assets',
   'offers-flagship', 'services', 'delivery', 'alliances', 'innovation',
   'ai-foursys', 'kiam-comparison',
   'cases', 'testimonials', 'awards', 'clients-showcase', 'capabilities',

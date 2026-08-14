@@ -631,6 +631,7 @@ export const en = {
       showcaseHint: 'Open the conversation and set the positioning',
       engineHint: 'Sustain delivery and volume',
       axisWord: 'Axis',
+      audienceLabel: 'Who it speaks to',
       offersInAxis: 'offers in this axis',
       seeOffers: 'See offers in this axis',
       axisEmpty: 'Offers in this axis without a detailed kit in this cycle',
@@ -644,6 +645,7 @@ export const en = {
       searchPlaceholder: 'Search offer, pain or deliverable...',
       empty: 'No offer matches the filters.',
       resultCount: '{count} of {total} offers',
+      openDetail: 'Open details for offer {name}',
     },
     start: {
       title: 'Where to start',
@@ -653,13 +655,17 @@ export const en = {
       then: 'Next',
       concern: 'What keeps them awake',
       segments: 'What moves up in priority by segment',
+      openOffer: 'Open offer {name}',
     },
     future: {
-      title: 'Future vision and cross-cutting assets',
-      subtitle: 'What is being built for the next cycle and the assets that run across every offer.',
+      title: 'Future vision',
+      subtitle: 'What is being built for the next cycle — horizons, theses and bets taking shape.',
       futureTitle: 'Future vision',
-      assetsTitle: 'Cross-cutting assets',
       horizon: 'Horizon',
+    },
+    assets: {
+      title: 'Cross-cutting assets',
+      subtitle: 'Platforms, units and capabilities that run across every offer in the portfolio.',
     },
     offer: {
       whatItIs: 'What it is',

@@ -65,10 +65,17 @@ const navigationItemsPt: NavigationItem[] = [
   },
   {
     id: 'portfolio-future',
-    label: 'Visão de Futuro e Ativos',
+    label: 'Visão de Futuro',
     icon: 'telescope',
     category: 'Portfólio',
-    description: 'Tokenização, ESG tecnológico, Machine as Customer e ativos transversais',
+    description: 'Tokenização, ESG tecnológico, Machine as Customer e horizontes do próximo ciclo',
+  },
+  {
+    id: 'portfolio-assets',
+    label: 'Ativos Transversais',
+    icon: 'blocks',
+    category: 'Portfólio',
+    description: 'NEXUS, Fusion Teams, FourBlox, Zeragon, SharpOps e demais ativos que atravessam as ofertas',
   },
 
   // ── Ofertas e Serviços ─────────────────────────────────────────────────────
@@ -270,10 +277,17 @@ const navigationItemsEn: NavigationItem[] = [
   },
   {
     id: 'portfolio-future',
-    label: 'Future Vision and Assets',
+    label: 'Future Vision',
     icon: 'telescope',
     category: 'Portfolio',
-    description: 'Tokenization, technology-driven ESG, Machine as Customer and cross-cutting assets',
+    description: 'Tokenization, technology-driven ESG, Machine as Customer and next-cycle horizons',
+  },
+  {
+    id: 'portfolio-assets',
+    label: 'Cross-cutting Assets',
+    icon: 'blocks',
+    category: 'Portfolio',
+    description: 'NEXUS, Fusion Teams, FourBlox, Zeragon, SharpOps and assets that run across every offer',
   },
 
   // ── Solutions & Services ───────────────────────────────────────────────────

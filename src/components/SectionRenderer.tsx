@@ -12,6 +12,7 @@ const SectionPortfolioThesis = lazy(() => import('./sections/SectionPortfolioThe
 const SectionPortfolioOffers = lazy(() => import('./sections/SectionPortfolioOffers').then(m => ({ default: m.SectionPortfolioOffers })))
 const SectionPortfolioStart = lazy(() => import('./sections/SectionPortfolioStart').then(m => ({ default: m.SectionPortfolioStart })))
 const SectionPortfolioFuture = lazy(() => import('./sections/SectionPortfolioFuture').then(m => ({ default: m.SectionPortfolioFuture })))
+const SectionPortfolioAssets = lazy(() => import('./sections/SectionPortfolioAssets').then(m => ({ default: m.SectionPortfolioAssets })))
 const SectionOffersFlag = lazy(() => import('./sections/SectionOffersFlag').then(m => ({ default: m.SectionOffersFlag })))
 const SectionServices = lazy(() => import('./sections/SectionServices').then(m => ({ default: m.SectionServices })))
 const SectionDelivery = lazy(() => import('./sections/SectionDelivery').then(m => ({ default: m.SectionDelivery })))
@@ -71,6 +72,7 @@ export function SectionRenderer() {
         {section === 'portfolio-offers' && <SectionPortfolioOffers key="portfolio-offers" />}
         {section === 'portfolio-start'  && <SectionPortfolioStart key="portfolio-start" />}
         {section === 'portfolio-future' && <SectionPortfolioFuture key="portfolio-future" />}
+        {section === 'portfolio-assets' && <SectionPortfolioAssets key="portfolio-assets" />}
 
         {/* ── Ofertas e Serviços ── */}
         {section === 'offers-flagship' && <SectionOffersFlag key="offers-flagship" />}

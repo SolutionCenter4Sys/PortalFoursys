@@ -78,7 +78,7 @@ function ShortlistStep({
         <p className="text-xs text-foursys-text-muted leading-relaxed line-clamp-2">{offer.tagline}</p>
       </div>
 
-      <ArrowRight size={14} className="text-foursys-text-dim flex-shrink-0 mt-1" />
+      <ArrowRight size={14} className="text-foursys-text-dim flex-shrink-0 mt-1" aria-hidden="true" />
     </motion.button>
   )
 }
@@ -122,7 +122,7 @@ export function SectionPortfolioStart() {
           <div className="flex items-start md:items-end justify-between flex-wrap gap-3">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-400 mb-2 flex items-center gap-2">
-                <Route size={13} /> {t('portfolio.badge')}
+                <Route size={13} aria-hidden="true" /> {t('portfolio.badge')}
               </p>
               <h2 className="text-2xl md:text-4xl font-black text-white leading-none">
                 {t('portfolio.start.title')}
@@ -169,7 +169,7 @@ export function SectionPortfolioStart() {
                   className="w-9 h-9 rounded-xl flex items-center justify-center mb-3"
                   style={{ backgroundColor: `${p.color}1A`, border: `1px solid ${p.color}3A` }}
                 >
-                  <Icon size={16} style={{ color: p.color }} />
+                  <Icon size={16} style={{ color: p.color }} aria-hidden="true" />
                 </div>
                 <div className="text-sm font-black text-white leading-tight">{p.role}</div>
                 <p className="text-[11px] text-foursys-text-dim leading-snug mt-1 line-clamp-2">{p.concern}</p>
@@ -242,11 +242,16 @@ export function SectionPortfolioStart() {
                     const offer = offersByCode[code]
                     const axis = offer ? axesById[offer.axisId] : undefined
                     const accent = axis?.color ?? '#64748B'
+                    const label = offer
+                      ? t('portfolio.start.openOffer').replace('{name}', `${offer.code} ${offer.name}`)
+                      : code
                     return (
                       <button
                         key={code}
                         onClick={() => openOffer(code)}
-                        className="text-[10px] font-mono font-bold px-2 py-0.5 rounded border transition-opacity hover:opacity-75"
+                        aria-label={label}
+                        title={offer?.name ?? code}
+                        className="text-[10px] font-mono font-bold px-2 py-0.5 rounded border transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
                         style={{ color: accent, borderColor: `${accent}38`, backgroundColor: `${accent}12` }}
                       >
                         {code}
