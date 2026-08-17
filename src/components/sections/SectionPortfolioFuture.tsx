@@ -81,7 +81,7 @@ export function SectionPortfolioFuture() {
                   <h4 className="text-sm font-black text-white leading-tight mb-1.5">{item.name}</h4>
                   <p className="text-xs text-foursys-text-muted leading-relaxed flex-1">{item.description}</p>
                   <div className="mt-3 pt-3 border-t border-white/[0.06]">
-                    <span className="text-[9px] uppercase tracking-widest text-foursys-text-dim">
+                    <span className="text-[10px] uppercase tracking-widest text-foursys-text-dim">
                       {t('portfolio.future.horizon')}
                     </span>
                     <div className="text-[11px] font-semibold text-cyan-400/90">{item.horizon}</div>

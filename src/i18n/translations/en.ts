@@ -680,7 +680,10 @@ export const en = {
       futureHint: 'Macro offers taking shape',
       futureDesc: 'Emerging technologies and new digital economies: what is being built for the next cycle.',
       foundationTitle: 'Cross-cutting forces · the foundation',
-      foundationDesc: 'Platforms, units and capabilities that cross and strengthen every category of the portfolio — hover to see what each one delivers.',
+      foundationDesc: 'Platforms, units and capabilities that cross and strengthen every category of the portfolio — tap one to see what it delivers.',
+      openAxis: 'See offers in axis {name}',
+      openFuture: 'See future vision: {name}',
+      openAsset: 'See asset {name}',
     },
     offer: {
       whatItIs: 'What it is',

@@ -158,7 +158,7 @@ function AxisDetailPanel({
           <Icon size={18} style={{ color: axis.color }} aria-hidden="true" />
         </div>
         <div className="min-w-0">
-          <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim">
+          <div className="text-[11px] font-bold uppercase tracking-widest text-foursys-text-dim">
             {t('portfolio.thesis.axisWord')} {axis.number} ·{' '}
             {isShowcase ? t('portfolio.thesis.showcase') : t('portfolio.thesis.engine')}
           </div>
@@ -169,7 +169,7 @@ function AxisDetailPanel({
       <p className="text-foursys-text-muted text-sm leading-relaxed">{axis.promise}</p>
 
       <div className="mt-4 rounded-xl border border-white/[0.08] bg-white/[0.03] p-3.5">
-        <p className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-2">
+        <p className="text-[11px] font-bold uppercase tracking-widest text-foursys-text-dim mb-2">
           {t('portfolio.thesis.audienceLabel')}
         </p>
         <p className="text-xs text-foursys-text-muted leading-relaxed">{axis.audience}</p>
@@ -180,7 +180,7 @@ function AxisDetailPanel({
           {offerNames.map(offer => (
             <li key={offer.code} className="flex items-start gap-2.5 text-xs text-foursys-text-muted">
               <span
-                className="font-mono font-bold text-[10px] px-1.5 py-0.5 rounded flex-shrink-0"
+                className="font-mono font-bold text-[11px] px-1.5 py-0.5 rounded flex-shrink-0"
                 style={{ color: axis.color, backgroundColor: `${axis.color}15` }}
               >
                 {offer.code}
@@ -193,7 +193,7 @@ function AxisDetailPanel({
 
       {axis.upcomingOffers && axis.upcomingOffers.length > 0 && (
         <div className="mt-4 rounded-xl border border-dashed p-3" style={{ borderColor: `${axis.color}33` }}>
-          <p className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-2">
+          <p className="text-[11px] font-bold uppercase tracking-widest text-foursys-text-dim mb-2">
             {t('portfolio.thesis.axisEmpty')}
           </p>
           <ul className="space-y-1.5">
@@ -264,7 +264,7 @@ function AxisCard({
               <Icon size={18} style={{ color: axis.color }} aria-hidden="true" />
             </div>
             <div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim">
+              <div className="text-[11px] font-bold uppercase tracking-widest text-foursys-text-dim">
                 {t('portfolio.thesis.axisWord')} {axis.number}
               </div>
               <h3 className="text-base font-black text-white leading-tight">{axis.name}</h3>
@@ -281,12 +281,12 @@ function AxisCard({
 
         <div className="flex items-center gap-2 flex-wrap">
           <span
-            className="text-[10px] font-semibold px-2 py-0.5 rounded-full border"
+            className="text-[11px] font-semibold px-2 py-0.5 rounded-full border"
             style={{ color: axis.color, borderColor: `${axis.color}40`, backgroundColor: `${axis.color}12` }}
           >
             {offerNames.length} {t('portfolio.thesis.offersInAxis')}
           </span>
-          <span className="text-[10px] text-foursys-text-dim">{axis.audience}</span>
+          <span className="text-[11px] text-foursys-text-dim">{axis.audience}</span>
         </div>
       </button>
 
@@ -308,7 +308,7 @@ function AxisCard({
                 {offerNames.map(offer => (
                   <li key={offer.code} className="flex items-start gap-2.5 text-xs text-foursys-text-muted">
                     <span
-                      className="font-mono font-bold text-[10px] px-1.5 py-0.5 rounded flex-shrink-0"
+                      className="font-mono font-bold text-[11px] px-1.5 py-0.5 rounded flex-shrink-0"
                       style={{ color: axis.color, backgroundColor: `${axis.color}15` }}
                     >
                       {offer.code}
@@ -320,7 +320,7 @@ function AxisCard({
 
               {axis.upcomingOffers && axis.upcomingOffers.length > 0 && (
                 <div className="rounded-xl border border-dashed p-3" style={{ borderColor: `${axis.color}33` }}>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-foursys-text-dim mb-2">
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-foursys-text-dim mb-2">
                     {t('portfolio.thesis.axisEmpty')}
                   </p>
                   <ul className="space-y-1.5">
@@ -387,7 +387,7 @@ function RoleGroup({
         <div className="flex-1 h-px" style={{ background: `linear-gradient(90deg, ${accent}44, transparent)` }} />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
         {axes.map((axis, i) => (
           <AxisCard
             key={axis.id}
@@ -492,7 +492,7 @@ export function SectionPortfolioThesis() {
                   className="text-center px-3 md:px-4 py-1.5 md:py-2 rounded-xl bg-foursys-surface/40 border border-white/[0.08]"
                 >
                   <div className="text-base md:text-lg font-black text-cyan-400">{stat.value}</div>
-                  <div className="text-[10px] text-foursys-text-dim">{stat.label}</div>
+                  <div className="text-[11px] text-foursys-text-dim">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -509,8 +509,8 @@ export function SectionPortfolioThesis() {
           tabIndex={-1}
           className="focus:outline-none"
         >
-          {/* Desktop/Tablet: mandala + painel lateral */}
-          <div className="hidden md:block mb-6">
+          {/* Desktop: mandala + painel lateral (abaixo de lg não há folga para os rótulos) */}
+          <div className="hidden lg:block mb-6">
             <div className="flex items-center gap-4 flex-wrap mb-3 md:mb-4">
               <span className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-cyan-400">
                 <span className="w-3 h-3 rounded-full border-2 border-cyan-400/60" aria-hidden="true" />
@@ -523,13 +523,13 @@ export function SectionPortfolioThesis() {
               <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent" />
             </div>
 
-            <div className="grid md:grid-cols-[1.25fr_0.75fr] lg:grid-cols-[1.3fr_0.7fr] gap-5 lg:gap-8 xl:gap-10 items-center min-h-[min(68vh,640px)]">
+            <div className="grid lg:grid-cols-[1.3fr_0.7fr] gap-5 lg:gap-8 xl:gap-10 items-center min-h-[min(68vh,640px)]">
               <motion.div
                 ref={orbitRef}
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.1, duration: 0.5 }}
-                className="px-[118px] lg:px-[136px] py-10 flex items-center justify-center"
+                className="px-[140px] xl:px-[150px] py-12 xl:py-14 flex items-center justify-center"
               >
                 <AxisOrbitRing
                   axes={axes}
@@ -563,8 +563,8 @@ export function SectionPortfolioThesis() {
             </div>
           </div>
 
-          {/* Mobile: cards por papel ── */}
-          <div className="space-y-8 md:hidden">
+          {/* Mobile e tablet: cards por papel ── */}
+          <div className="space-y-8 lg:hidden">
           <RoleGroup
             variant="diferenciacao"
             axes={showcaseAxes}

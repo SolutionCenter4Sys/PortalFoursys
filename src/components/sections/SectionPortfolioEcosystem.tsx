@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import {
   Bot,
@@ -23,6 +23,7 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { InterestButton } from '../ui/InterestButton'
+import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import { getPortfolio } from '../../data/portfolio'
 import type { PortfolioAxis } from '../../types'
@@ -78,7 +79,7 @@ function PillarHeader({
           <h3 className="text-lg md:text-xl font-black leading-none" style={{ color: accent }}>
             {kicker}
           </h3>
-          <p className="text-[11px] text-foursys-text-dim mt-1 leading-tight">{hint}</p>
+          <p className="text-[11px] text-foursys-text-dim mt-1 leading-snug">{hint}</p>
         </div>
       </div>
       <p className="text-xs text-foursys-text-muted leading-relaxed">{description}</p>
@@ -91,24 +92,47 @@ function AxisCard({
   items,
   index,
   axisWord,
+  onOpen,
+  openLabel,
 }: {
   axis: PortfolioAxis
   items: string[]
   index: number
   axisWord: string
+  onOpen?: () => void
+  openLabel?: string
 }) {
   const Icon = ICONS[axis.icon] ?? Layers
+  const interactive = Boolean(onOpen)
 
   return (
     <motion.article
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.08 + index * 0.05, duration: 0.4 }}
-      whileHover={{ y: -4 }}
+      whileHover={interactive ? { y: -4 } : undefined}
+      onClick={onOpen}
+      onKeyDown={
+        interactive
+          ? e => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                onOpen?.()
+              }
+            }
+          : undefined
+      }
+      role={interactive ? 'button' : undefined}
+      tabIndex={interactive ? 0 : undefined}
+      aria-label={interactive ? openLabel : undefined}
       data-voz-detalhe={`portfolio-ecosystem-${axis.id}`}
       data-voz-detalhe-secao="portfolio-ecosystem"
       data-voz-detalhe-rotulo={axis.name}
-      className="group relative rounded-2xl bg-foursys-surface/30 border border-white/[0.07] p-4 overflow-hidden"
+      className={`group relative rounded-2xl bg-foursys-surface/30 border border-white/[0.07] p-4 overflow-hidden ${
+        interactive
+          ? 'cursor-pointer hover:border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60'
+          : ''
+      }`}
     >
       <div
         className="absolute inset-x-0 top-0 h-px opacity-60"
@@ -133,7 +157,7 @@ function AxisCard({
           <Icon size={16} style={{ color: axis.color }} aria-hidden="true" />
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-text-dim">
+          <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-foursys-text-dim">
             {axisWord} {axis.number}
           </p>
           <h4 className="text-sm font-black text-white leading-tight">{axis.name}</h4>
@@ -161,6 +185,7 @@ function AxisCard({
 /* ── Seção ─────────────────────────────────────────────────────────────────── */
 
 export function SectionPortfolioEcosystem() {
+  const { navigate, setDeepDiveHint } = useApp()
   const { t, lang } = useLanguage()
   const { axes, offers, futureVision, assets } = useMemo(() => getPortfolio(lang), [lang])
 
@@ -173,6 +198,30 @@ export function SectionPortfolioEcosystem() {
     return map
   }, [axes, offers])
 
+  const axesWithOffers = useMemo(
+    () => new Set(offers.map(o => o.axisId)),
+    [offers],
+  )
+
+  const openAxis = useCallback(
+    (axisId: string) => {
+      setDeepDiveHint(`axis:${axisId}`)
+      navigate('portfolio-offers')
+    },
+    [navigate, setDeepDiveHint],
+  )
+
+  const axisCardProps = useCallback(
+    (axis: PortfolioAxis) =>
+      axesWithOffers.has(axis.id)
+        ? {
+            onOpen: () => openAxis(axis.id),
+            openLabel: t('portfolio.ecosystem.openAxis').replace('{name}', axis.name),
+          }
+        : {},
+    [axesWithOffers, openAxis, t],
+  )
+
   const showcaseAxes = useMemo(() => axes.filter(a => a.role === 'diferenciacao'), [axes])
   const engineAxes = useMemo(() => axes.filter(a => a.role === 'capacidade'), [axes])
 
@@ -181,19 +230,19 @@ export function SectionPortfolioEcosystem() {
   return (
     <SectionWrapper>
       <div className="relative px-4 md:px-8 py-6 md:py-9 max-w-[1500px] mx-auto">
-        {/* Brilhos de fundo */}
-        <motion.div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-24 left-1/4 w-[420px] h-[420px] rounded-full bg-foursys-primary/[0.07] blur-[110px]"
-          animate={{ opacity: [0.5, 0.9, 0.5] }}
-          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          aria-hidden="true"
-          className="pointer-events-none absolute bottom-10 right-10 w-[360px] h-[360px] rounded-full bg-cyan-400/[0.06] blur-[110px]"
-          animate={{ opacity: [0.4, 0.8, 0.4] }}
-          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-        />
+        {/* Brilhos de fundo — confinados para não gerar rolagem horizontal */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+          <motion.div
+            className="absolute -top-24 left-1/4 w-[420px] h-[420px] rounded-full bg-foursys-primary/[0.07] blur-[110px]"
+            animate={{ opacity: [0.5, 0.9, 0.5] }}
+            transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <motion.div
+            className="absolute bottom-10 right-10 w-[360px] h-[360px] rounded-full bg-cyan-400/[0.06] blur-[110px]"
+            animate={{ opacity: [0.4, 0.8, 0.4] }}
+            transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+          />
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: -16 }}
@@ -249,6 +298,7 @@ export function SectionPortfolioEcosystem() {
                     items={itemsByAxis.get(axis.id) ?? []}
                     index={i}
                     axisWord={axisWord}
+                    {...axisCardProps(axis)}
                   />
                 ))}
               </div>
@@ -268,7 +318,8 @@ export function SectionPortfolioEcosystem() {
                 hint={t('portfolio.ecosystem.engineHint')}
                 description={t('portfolio.ecosystem.engineDesc')}
               />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {/* 2 colunas só a partir de xl: em lg esta coluna tem ~380px e os cards ficariam espremidos */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-3">
                 {engineAxes.map((axis, i) => (
                   <AxisCard
                     key={axis.id}
@@ -276,6 +327,7 @@ export function SectionPortfolioEcosystem() {
                     items={itemsByAxis.get(axis.id) ?? []}
                     index={i}
                     axisWord={axisWord}
+                    {...axisCardProps(axis)}
                   />
                 ))}
               </div>
@@ -299,16 +351,19 @@ export function SectionPortfolioEcosystem() {
                 {futureVision.map((item, i) => {
                   const Icon = ICONS[item.icon] ?? Rocket
                   return (
-                    <motion.article
+                    <motion.button
                       key={item.id}
+                      type="button"
                       initial={{ opacity: 0, y: 14 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.12 + i * 0.05, duration: 0.35 }}
                       whileHover={{ y: -4 }}
+                      onClick={() => navigate('portfolio-future')}
+                      aria-label={t('portfolio.ecosystem.openFuture').replace('{name}', item.name)}
                       data-voz-detalhe={`portfolio-ecosystem-${item.id}`}
                       data-voz-detalhe-secao="portfolio-ecosystem"
                       data-voz-detalhe-rotulo={item.name}
-                      className="group relative rounded-2xl bg-foursys-surface/30 border border-white/[0.07] p-4 overflow-hidden"
+                      className="group relative w-full text-left rounded-2xl bg-foursys-surface/30 border border-white/[0.07] p-4 overflow-hidden cursor-pointer hover:border-violet-400/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
                     >
                       <div
                         className="absolute inset-x-0 top-0 h-px opacity-60 bg-gradient-to-r from-transparent via-violet-400 to-transparent"
@@ -324,12 +379,12 @@ export function SectionPortfolioEcosystem() {
                         </div>
                         <div className="min-w-0">
                           <h4 className="text-sm font-black text-white leading-tight">{item.name}</h4>
-                          <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-violet-400/10 text-violet-300 border border-violet-400/25">
+                          <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-violet-400/10 text-violet-300 border border-violet-400/25">
                             {item.horizon}
                           </span>
                         </div>
                       </div>
-                    </motion.article>
+                    </motion.button>
                   )
                 })}
               </div>
@@ -365,21 +420,23 @@ export function SectionPortfolioEcosystem() {
                 {assets.map((asset, i) => {
                   const Icon = ICONS[asset.icon] ?? Wrench
                   return (
-                    <motion.div
+                    <motion.button
                       key={asset.id}
+                      type="button"
                       initial={{ opacity: 0, scale: 0.94 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.22 + i * 0.04, duration: 0.3 }}
                       whileHover={{ y: -2 }}
-                      title={asset.description}
+                      onClick={() => navigate('portfolio-assets')}
+                      aria-label={`${t('portfolio.ecosystem.openAsset').replace('{name}', asset.name)} — ${asset.description}`}
                       data-voz-detalhe={`portfolio-ecosystem-asset-${asset.id}`}
                       data-voz-detalhe-secao="portfolio-ecosystem"
                       data-voz-detalhe-rotulo={asset.name}
-                      className="flex items-center gap-2 px-3 py-2 rounded-xl bg-foursys-surface/40 border border-white/[0.08] hover:border-foursys-primary/40 hover:shadow-[0_0_20px_rgba(255,102,0,0.15)] transition-colors duration-300"
+                      className="flex items-center gap-2 px-3 py-2 min-h-[36px] rounded-xl bg-foursys-surface/40 border border-white/[0.08] hover:border-foursys-primary/40 hover:shadow-[0_0_20px_rgba(255,102,0,0.15)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-all duration-300"
                     >
                       <Icon size={14} className="text-foursys-primary flex-shrink-0" aria-hidden="true" />
                       <span className="text-xs font-bold text-white leading-none">{asset.name}</span>
-                    </motion.div>
+                    </motion.button>
                   )
                 })}
               </div>

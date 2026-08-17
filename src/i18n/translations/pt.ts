@@ -680,7 +680,10 @@ export const pt = {
       futureHint: 'Macro ofertas em formação',
       futureDesc: 'Tecnologias emergentes e novas economias digitais: o que está sendo construído para o próximo ciclo.',
       foundationTitle: 'Forças transversais · o alicerce',
-      foundationDesc: 'Plataformas, unidades e capacidades que cruzam e fortalecem todas as categorias do portfólio — passe o cursor para ver o que cada uma entrega.',
+      foundationDesc: 'Plataformas, unidades e capacidades que cruzam e fortalecem todas as categorias do portfólio — toque em uma delas para ver o que entrega.',
+      openAxis: 'Ver ofertas do eixo {name}',
+      openFuture: 'Ver a visão de futuro: {name}',
+      openAsset: 'Ver o ativo {name}',
     },
     offer: {
       whatItIs: 'O que é',

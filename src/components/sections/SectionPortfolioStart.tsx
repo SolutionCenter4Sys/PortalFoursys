@@ -62,13 +62,13 @@ function ShortlistStep({
 
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 flex-wrap mb-1">
-          <span className="font-mono text-[10px] font-bold" style={{ color: accent }}>
+          <span className="font-mono text-[11px] font-bold" style={{ color: accent }}>
             {offer.code}
           </span>
           <span className="text-sm font-bold text-white leading-tight">{offer.name}</span>
           {isOpening && (
             <span
-              className="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded"
+              className="text-[10px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded"
               style={{ color: accent, backgroundColor: `${accent}18` }}
             >
               {t('portfolio.start.opening')}
@@ -251,7 +251,7 @@ export function SectionPortfolioStart() {
                         onClick={() => openOffer(code)}
                         aria-label={label}
                         title={offer?.name ?? code}
-                        className="text-[10px] font-mono font-bold px-2 py-0.5 rounded border transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
+                        className="text-[11px] font-mono font-bold px-2.5 py-1.5 min-h-[28px] rounded-lg border transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
                         style={{ color: accent, borderColor: `${accent}38`, backgroundColor: `${accent}12` }}
                       >
                         {code}

@@ -39,7 +39,7 @@ function EvidenceBadge({ status, compact = false }: { status: EvidenceStatus; co
     <span
       title={t(`portfolio.evidence.${status}Hint`)}
       className={`inline-flex items-center gap-1.5 rounded-full border font-semibold ${
-        compact ? 'text-[9px] px-1.5 py-0.5' : 'text-[10px] px-2 py-1'
+        compact ? 'text-[10px] px-1.5 py-0.5' : 'text-[11px] px-2 py-1'
       }`}
       style={{ color: style.color, borderColor: `${style.color}44`, backgroundColor: `${style.color}12` }}
     >
@@ -161,7 +161,7 @@ function OfferModal({
             <span className="text-[10px] text-foursys-text-dim uppercase tracking-widest">{roleLabel}</span>
             {offer.portfolioRole && (
               <span
-                className="text-[10px] font-bold px-2 py-0.5 rounded-full border"
+                className="text-[11px] font-bold px-2 py-0.5 rounded-full border"
                 style={{ color: '#22D3EE', borderColor: '#22D3EE44', backgroundColor: '#22D3EE12' }}
               >
                 {offer.portfolioRole}
@@ -256,7 +256,7 @@ function OfferModal({
                   <div className="pb-2">
                     <div className="flex items-baseline gap-2 flex-wrap">
                       <span className="text-sm font-bold text-white">{phase.name}</span>
-                      <span className="text-[10px] text-foursys-text-dim">{phase.duration}</span>
+                      <span className="text-[11px] text-foursys-text-dim">{phase.duration}</span>
                     </div>
                     <p className="text-xs text-foursys-text-muted leading-relaxed mt-0.5">{phase.focus}</p>
                   </div>
@@ -305,7 +305,7 @@ function OfferModal({
                 {offer.marketStats.map(stat => (
                   <div key={stat.stat} className="p-3 rounded-xl bg-foursys-surface/25 border border-white/[0.06]">
                     <p className="text-sm text-white leading-snug">{stat.stat}</p>
-                    <p className="text-[10px] text-foursys-text-dim mt-1">{stat.source}</p>
+                    <p className="text-[11px] text-foursys-text-dim mt-1">{stat.source}</p>
                   </div>
                 ))}
               </div>
@@ -474,7 +474,7 @@ function OfferCard({
     >
       <div className="flex items-start justify-between gap-2 mb-3 w-full">
         <span
-          className="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded flex-shrink-0"
+          className="font-mono text-[11px] font-bold px-1.5 py-0.5 rounded flex-shrink-0"
           style={{ color: accent, backgroundColor: `${accent}18`, border: `1px solid ${accent}38` }}
         >
           {offer.code}
@@ -501,7 +501,7 @@ function OfferCard({
       </div>
 
       <div className="flex items-center justify-between gap-2 pt-3 border-t border-white/[0.06] w-full">
-        <span className="text-[10px] text-foursys-text-dim">{offer.totalDuration}</span>
+        <span className="text-[11px] text-foursys-text-dim">{offer.totalDuration}</span>
         <span
           className="flex items-center gap-1 text-[11px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity"
           style={{ color: accent }}
@@ -649,7 +649,8 @@ export function SectionPortfolioOffers() {
                 <button
                   key={role}
                   onClick={() => setRoleFilter(role)}
-                  className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold border transition-colors ${
+                  aria-pressed={roleFilter === role}
+                  className={`px-3 py-2 rounded-lg text-[11px] font-semibold border transition-colors ${
                     roleFilter === role
                       ? 'text-white border-cyan-400/40 bg-cyan-500/15'
                       : 'text-foursys-text-dim border-white/[0.08] hover:text-foursys-text-muted'
@@ -665,14 +666,16 @@ export function SectionPortfolioOffers() {
             </div>
           </div>
 
+          {/* Com 8 eixos os chips viram parede no celular: rolagem horizontal abaixo de md */}
           <div
             data-voz-filtro="portfolio-axis-filter"
             data-voz-filtro-secao="portfolio-offers"
-            className="flex items-center gap-1.5 flex-wrap"
+            className="flex items-center gap-1.5 overflow-x-auto stealth-scrollbar pb-1 -mx-1 px-1 md:flex-wrap md:overflow-x-visible md:pb-0 md:mx-0 md:px-0"
           >
             <button
               onClick={() => setAxisFilter('all')}
-              className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold border transition-colors ${
+              aria-pressed={axisFilter === 'all'}
+              className={`flex-shrink-0 whitespace-nowrap px-3 py-2 rounded-lg text-[11px] font-semibold border transition-colors ${
                 axisFilter === 'all'
                   ? 'text-white border-cyan-400/40 bg-cyan-500/15'
                   : 'text-foursys-text-dim border-white/[0.08] hover:text-foursys-text-muted'
@@ -686,7 +689,8 @@ export function SectionPortfolioOffers() {
                 <button
                   key={axis.id}
                   onClick={() => setAxisFilter(axis.id)}
-                  className="px-3 py-1.5 rounded-lg text-[11px] font-semibold border transition-colors"
+                  aria-pressed={active}
+                  className="flex-shrink-0 whitespace-nowrap px-3 py-2 rounded-lg text-[11px] font-semibold border transition-colors"
                   style={
                     active
                       ? { color: axis.color, borderColor: `${axis.color}55`, backgroundColor: `${axis.color}18` }
