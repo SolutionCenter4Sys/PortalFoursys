@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benchmark CIO — Tiago Piffer | Grupo Amil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#222239;--navy2:#2e2e4a;--dark:#181828;--orange:#FF5315;--orange2:#ff7848;--mint:#89BAB1;--vanilla:#FFE2A9;--off:#F7F6F2;--text:#222239;--muted:#626274;--border:#e3e1da;--shadow:0 3px 16px rgba(34,34,57,.09)}
+    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Nunito,system-ui,sans-serif;background:var(--off);color:var(--text);line-height:1.58}
+    .brand-bar{height:6px;background:linear-gradient(90deg,var(--navy),var(--orange));-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    header{background:linear-gradient(135deg,var(--dark),var(--navy) 58%,var(--navy2));color:#fff;padding:38px 26px 42px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .head{max-width:1160px;margin:auto;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}.logo{width:164px;height:34px}.logo text{font-family:Nunito,sans-serif;font-weight:900}.kicker{margin-top:18px;color:var(--orange2);font-size:12px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase}
+    h1{font-size:32px;line-height:1.15;margin-top:5px}header h2{font-size:17px;margin-top:7px;font-weight:600}.meta{opacity:.78;margin-top:8px;font-size:13px}.badges{display:flex;gap:10px;flex-wrap:wrap;align-content:flex-start}.badge{min-width:118px;padding:12px 15px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.09);border-radius:12px}.badge small{display:block;opacity:.72;text-transform:uppercase;font-size:10px;letter-spacing:.7px}.badge strong{font-size:16px}
+    main{max-width:1160px;margin:auto;padding:26px}.source{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;padding:16px 20px;border-radius:13px;margin-bottom:20px;box-shadow:var(--shadow);-webkit-print-color-adjust:exact;print-color-adjust:exact}.source strong{display:block;font-size:16px}.source span{font-size:13px}
+    nav{position:sticky;top:8px;z-index:5;display:flex;gap:6px;flex-wrap:wrap;background:#fff;border:1px solid var(--border);border-radius:999px;padding:9px 12px;margin-bottom:20px;box-shadow:var(--shadow)}nav a{color:var(--navy);text-decoration:none;font-size:12px;font-weight:800;padding:5px 10px;border-radius:999px}nav a:hover{background:var(--navy);color:#fff}
+    section{background:#fff;border-left:4px solid var(--orange);border-radius:15px;padding:25px;margin-bottom:19px;box-shadow:var(--shadow)}.eyebrow{color:var(--orange);font-size:11px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase}h3{font-size:21px;margin:5px 0 15px;padding-bottom:10px;border-bottom:2px solid var(--border)}h4{margin:15px 0 8px}.grid2,.grid3{display:grid;gap:13px}.grid2{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:repeat(3,1fr)}.card{background:var(--off);border-left:4px solid var(--navy2);border-radius:10px;padding:14px}.card small{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.6px;font-weight:800}.card strong{display:block;margin-top:3px;font-size:14px}.alert{background:var(--vanilla);border:1px solid #edc978;border-radius:10px;padding:13px 15px;margin-top:14px}.fact{background:#e8f3f0;border-color:var(--mint)}.tags{display:flex;flex-wrap:wrap;gap:7px}.tag{border-radius:999px;padding:5px 11px;font-size:12px;font-weight:800;background:#fff0e9;color:#b83a0b;border:1px solid #ffc0a6}.tag.ok{background:#e8f3f0;color:#326b61;border-color:var(--mint)}.tag.warn{background:#fff5d9;color:#75560a;border-color:#e6c15b}
+    table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}th{background:var(--navy);color:#fff;text-align:left;padding:10px;-webkit-print-color-adjust:exact;print-color-adjust:exact}td{padding:9px 10px;border-bottom:1px solid var(--border)}tr:nth-child(even) td{background:var(--off)}
+    .offer{border:1px solid var(--border);border-left:4px solid var(--mint);background:var(--off);border-radius:11px;padding:17px;margin-bottom:11px}.offer-head{display:flex;justify-content:space-between;gap:12px}.score{background:var(--orange);color:#fff;border-radius:999px;padding:3px 11px;font-size:12px;font-weight:900;white-space:nowrap}.offer ul{margin:8px 0 0 20px;color:var(--muted);font-size:13px}.story{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.act{padding:18px;border-radius:11px;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}.act:nth-child(1){background:var(--navy)}.act:nth-child(2){background:var(--orange)}.act:nth-child(3){background:#477d73}.act small{font-weight:900;text-transform:uppercase}.act h4{margin:5px 0}.questions li{margin:0 0 9px 20px}.sources li{margin:0 0 6px 20px;word-break:break-word}.footer{text-align:center;border-top:3px solid var(--orange);padding:23px;color:var(--muted);font-size:12px}
+    @media(max-width:760px){.grid2,.grid3,.story{grid-template-columns:1fr}nav{border-radius:16px;position:static}.badges{width:100%}.badge{flex:1}h1{font-size:26px}}
+    @media print{nav,.print{display:none}body{background:#fff}section{box-shadow:none;break-inside:avoid}.source,header,.act,th,.score{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+    .print{position:fixed;right:24px;bottom:24px;background:var(--orange);color:#fff;border:0;border-radius:10px;padding:12px 18px;font:800 13px Nunito;cursor:pointer;box-shadow:var(--shadow);z-index:10}
+  </style>
+</head>
+<body>
+  <button class="print" onclick="window.print()">Imprimir / PDF</button>
+  <div class="brand-bar"></div>
+  <header>
+    <div class="head">
+      <div>
+        <svg class="logo" viewBox="0 0 220 44" role="img" aria-label="Foursys">
+          <text x="0" y="31" fill="#fff" font-size="29">four</text><text x="57" y="31" fill="#FF5315" font-size="29">sys</text>
+          <path d="M138 11l12 11-12 11M153 11l12 11-12 11" fill="none" stroke="#FF5315" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="kicker">IT Forum Praia do Forte 2026 · Benchmark CIO</div>
+        <h1>Tiago Piffer</h1>
+        <h2>Diretor de TI — Infraestrutura e Cloud Services · Grupo Amil</h2>
+        <div class="meta">Saúde suplementar e serviços assistenciais · São Paulo/SP · Agenda Foursys confirmada</div>
+      </div>
+      <div class="badges">
+        <div class="badge"><small>Clientes</small><strong>5 milhões</strong></div>
+        <div class="badge"><small>Colaboradores</small><strong>33 mil</strong></div>
+        <div class="badge"><small>Telemedicina 2024</small><strong>1,27 milhão</strong></div>
+        <div class="badge"><small>Lucro 2024</small><strong>R$ 620 MM</strong></div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="source"><strong>Confirmado no IT Forum Praia do Forte 2026</strong><span>Planilha "CIOs Confirmados IT Forum Praia do Forte 2026 - 10.08.xlsx" · AMIL - SP · contato Tiago Piffer · Agenda Foursys = Sim. Dados de empresa: Relatório ESG 2024 do Grupo Amil e fatos societários oficiais.</span></div>
+    <nav><a href="#resumo">Resumo</a><a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#transformacao">Transformação</a><a href="#oportunidades">Oportunidades</a><a href="#ofertas">Ofertas</a><a href="#abordagem">Abordagem</a><a href="#benchmark">Benchmark</a><a href="#fontes">Fontes</a></nav>
+
+    <section id="resumo">
+      <div class="eyebrow">Leitura executiva</div><h3>Sumário de 1 página</h3>
+      <div class="grid3">
+        <div class="card"><small>Momento</small><strong>Reestruturação pós-saída da UHG, internalização de desenvolvimento e nova operação hospitalar via Rede Américas.</strong></div>
+        <div class="card"><small>Contato do evento</small><strong>Tiago Piffer — Diretor de TI de Infraestrutura e Cloud Services do Grupo Amil.</strong></div>
+        <div class="card"><small>Agenda Foursys</small><strong>Sim — reunião já sinalizada na planilha de confirmados.</strong></div>
+        <div class="card"><small>Domínio do gestor</small><strong>Multicloud (AWS, Azure, GCP, OCI), FinOps e infraestrutura em larga escala.</strong></div>
+        <div class="card"><small>Porta de entrada</small><strong>Otimização de custo cloud (FinOps), resiliência e integração de infraestrutura.</strong></div>
+        <div class="card"><small>Próximo passo</small><strong>Discovery de 90 min: mapa de nuvens, FinOps, resiliência e dependências pós-reestruturação.</strong></div>
+      </div>
+    </section>
+
+    <section id="empresa">
+      <div class="eyebrow">Conta</div><h3>Grupo Amil — estrutura atual</h3>
+      <p>A Amil é empresa brasileira de saúde suplementar, com planos médicos e odontológicos e presença nacional. O Relatório ESG 2024 registra <strong>5 milhões de clientes</strong>, <strong>33 mil colaboradores</strong>, mais de <strong>21 mil médicos e serviços credenciados</strong>, <strong>1,5 mil hospitais credenciados</strong>, lucro de <strong>R$ 620 milhões</strong> e investimento de <strong>R$ 213 milhões</strong>.</p>
+      <div class="grid3" style="margin-top:14px">
+        <div class="card"><small>Controle</small><strong>José Seripieri Filho desde 2024, após saída da UnitedHealth Group.</strong></div>
+        <div class="card"><small>Operadora</small><strong>Amil mantém planos e relacionamento com beneficiários.</strong></div>
+        <div class="card"><small>Rede Total Care</small><strong>Rede assistencial própria reorganizada sob gestão do grupo.</strong></div>
+        <div class="card"><small>Rede Américas</small><strong>Joint venture hospitalar 50/50 entre Amil e Dasa, operacional desde abril/2025.</strong></div>
+        <div class="card"><small>Escala da JV</small><strong>25 hospitais, cerca de 4,5 mil leitos e receita combinada estimada de R$ 10,6 bi em 2024.</strong></div>
+        <div class="card"><small>Governança</small><strong>Estruturas executivas independentes; TI da Amil não se confunde com a TI da Rede Américas.</strong></div>
+      </div>
+      <div class="alert"><strong>Qualificação de perímetro:</strong> antes do pitch, confirmar se a pauta pertence à operadora Amil, à Rede Total Care ou à Rede Américas. Cada frente tem governança, dados e decisores distintos.</div>
+    </section>
+
+    <section id="gestor">
+      <div class="eyebrow">Decisão</div><h3>Perfil de Tiago Piffer</h3>
+      <p>Tiago Piffer é <strong>Diretor de Tecnologia da Informação do Grupo Amil</strong>, com foco em <strong>Infraestrutura e Cloud Services</strong>. Reúne cerca de 17 anos de carreira em gestão de TI, com evolução interna na Amil (Coordenador → Gerente → Diretor). Especialista em orquestração <strong>multicloud (AWS, Azure, GCP e OCI)</strong> e em <strong>FinOps</strong> para governança de custo de nuvem.</p>
+      <div class="grid3" style="margin-top:14px">
+        <div class="card"><small>Cargo</small><strong>Diretor de TI · Infraestrutura e Cloud Services</strong></div>
+        <div class="card"><small>Especialidade</small><strong>Multicloud AWS/Azure/GCP/OCI e FinOps</strong></div>
+        <div class="card"><small>Experiência</small><strong>~17 anos em gestão de TI, carreira interna na Amil</strong></div>
+        <div class="card"><small>Contexto</small><strong>Integra a liderança de tecnologia sob a transformação do grupo</strong></div>
+        <div class="card"><small>Estilo de abordagem</small><strong>Técnico e orientado a custo, escala, disponibilidade e risco</strong></div>
+        <div class="card"><small>Agenda Foursys</small><strong>Reunião confirmada na planilha de 10/08</strong></div>
+      </div>
+      <div class="alert fact"><strong>Ângulo direto:</strong> por ser dono de infraestrutura e cloud, a conversa mais produtiva é FinOps, resiliência multicloud e modernização de infraestrutura com ROI/TCO claros — não demonstração genérica de IA.</div>
+    </section>
+
+    <section id="transformacao">
+      <div class="eyebrow">Fatos oficiais</div><h3>Tecnologia, dados e experiência</h3>
+      <table>
+        <thead><tr><th>Frente</th><th>Evidência pública</th><th>Implicação para Infra & Cloud</th></tr></thead>
+        <tbody>
+          <tr><td>Engenharia</td><td>Ampla reestruturação de TI em 2024 e internalização do desenvolvimento de sistemas.</td><td>Plataforma interna precisa de capacidade elástica, landing zones e automação.</td></tr>
+          <tr><td>Multicloud</td><td>Operação em múltiplas nuvens sob liderança de Infra & Cloud Services.</td><td>Padronização, observabilidade e FinOps entre provedores.</td></tr>
+          <tr><td>Dados e IA</td><td>Command Center unifica dados financeiros, suprimentos, gestão e assistência com IA.</td><td>Infraestrutura de dados escalável e custo sob controle.</td></tr>
+          <tr><td>Experiência</td><td>Novo app Amil, CRM próprio e telemedicina (1,27 milhão de atendimentos em 2024).</td><td>Disponibilidade, performance e continuidade como requisitos críticos.</td></tr>
+          <tr><td>Ciber e privacidade</td><td>Threat intelligence, detecção contínua de fraude/vazamento e anonimização de dados não produtivos.</td><td>Segurança de nuvem, identidade e proteção de dados sensíveis.</td></tr>
+          <tr><td>IA generativa</td><td>Agenda oficial discute agentes, ética, privacidade, risco e prototipação segura.</td><td>Infra de IA governada e com custo previsível.</td></tr>
+        </tbody>
+      </table>
+      <h4>Escala operacional 2024</h4>
+      <div class="tags"><span class="tag ok">89 milhões de procedimentos médicos</span><span class="tag ok">12 milhões de tratamentos odontológicos</span><span class="tag ok">1,27 milhão de teleatendimentos</span><span class="tag ok">52,6 mil atendimentos home care</span><span class="tag ok">462 mil empresas-clientes</span></div>
+    </section>
+
+    <section id="oportunidades">
+      <div class="eyebrow">Focos para discovery</div><h3>Oportunidades por perímetro do gestor</h3>
+      <div class="grid2">
+        <div class="card"><small>FinOps</small><strong>Custo multicloud em larga escala é dor natural do cargo; governança de gasto e otimização contínua.</strong></div>
+        <div class="card"><small>Resiliência</small><strong>Telemedicina e app 24x7 exigem alta disponibilidade, DR e continuidade entre nuvens.</strong></div>
+        <div class="card"><small>Landing zones</small><strong>Internalização acelerada demanda padronização, automação e segurança de nuvem.</strong></div>
+        <div class="card"><small>Integração</small><strong>Operadora, rede própria, credenciados e JV elevam a complexidade de infraestrutura e APIs.</strong></div>
+        <div class="card"><small>Observabilidade</small><strong>Visão única de custo, performance e disponibilidade entre AWS/Azure/GCP/OCI.</strong></div>
+        <div class="card"><small>Segurança</small><strong>Dados clínicos e financeiros ampliam superfície de ataque; zero trust e proteção de dados.</strong></div>
+      </div>
+    </section>
+
+    <section id="ofertas">
+      <div class="eyebrow">Fit Foursys</div><h3>Ofertas recomendadas</h3>
+      <div class="offer"><div class="offer-head"><h4>Cloud FinOps & Cost Governance</h4><span class="score">94/100 fit</span></div><p>Aderente direto ao mandato do gestor: reduzir e governar custo multicloud sem perder velocidade.</p><ul><li>Assessment de gasto AWS/Azure/GCP/OCI, unit economics e savings plan.</li><li>Guardrails, tagging e observabilidade de custo contínua.</li></ul></div>
+      <div class="offer"><div class="offer-head"><h4>Cloud & Infrastructure Modernization</h4><span class="score">92/100 fit</span></div><p>Landing zones padronizadas, resiliência e automação para sustentar app, CRM e telemedicina 24x7.</p><ul><li>IaC, DR multicloud e hardening.</li><li>SRE e observabilidade ponta a ponta.</li></ul></div>
+      <div class="offer"><div class="offer-head"><h4>FourBlox — APIs e integração</h4><span class="score">88/100 fit</span></div><p>Malha de integração entre canais, CRM, Command Center, core assistencial e parceiros, respeitando limites societários.</p></div>
+      <div class="offer"><div class="offer-head"><h4>Cybersecurity & Cloud Security</h4><span class="score">86/100 fit</span></div><p>Identidade, proteção de dados sensíveis, segurança de APIs e resposta a ameaças em ambiente multicloud.</p></div>
+    </section>
+
+    <section id="abordagem">
+      <div class="eyebrow">Go-to-account</div><h3>História e abordagem</h3>
+      <div class="story">
+        <div class="act"><small>Ato 1</small><h4>Autonomia recuperada</h4><p>Nova gestão e saída da UHG impulsionam reestruturação e internalização de TI.</p></div>
+        <div class="act"><small>Ato 2</small><h4>Nuvem em escala</h4><p>Multicloud, app, telemedicina e novo desenho hospitalar pressionam custo e resiliência.</p></div>
+        <div class="act"><small>Ato 3</small><h4>Infra governada</h4><p>Foursys entra com FinOps, resiliência e modernização de infraestrutura com ROI claro.</p></div>
+      </div>
+      <h4>Perguntas de discovery</h4>
+      <ol class="questions">
+        <li>Qual nuvem concentra hoje o maior custo e onde está a maior oportunidade de FinOps?</li>
+        <li>Como está a padronização de landing zones após a internalização do desenvolvimento?</li>
+        <li>Que serviços críticos (app, telemedicina) exigem DR/continuidade entre nuvens?</li>
+        <li>Quais plataformas de infraestrutura permanecem compartilhadas entre Amil e Rede Américas?</li>
+        <li>Como o custo e a disponibilidade multicloud são reportados hoje à liderança?</li>
+      </ol>
+      <div class="alert fact"><strong>Mensagem de abertura:</strong> “Com internalização e operação multicloud em plena escala, o ganho mais rápido é FinOps + resiliência: reduzir custo e aumentar disponibilidade das jornadas críticas sem travar o time interno.”</div>
+    </section>
+
+    <section id="benchmark">
+      <div class="eyebrow">Mercado</div><h3>Concorrentes e régua digital</h3>
+      <div class="grid2">
+        <div class="card"><small>Hapvida NotreDame Intermédica</small><strong>Escala verticalizada, unificação pós-fusão e forte pressão por eficiência.</strong></div>
+        <div class="card"><small>SulAmérica / Rede D'Or</small><strong>Integração entre seguros e rede hospitalar, canais digitais e modelo premium.</strong></div>
+        <div class="card"><small>Bradesco Saúde</small><strong>Distribuição corporativa, dados financeiros e ecossistema digital do conglomerado.</strong></div>
+        <div class="card"><small>Unimed</small><strong>Capilaridade cooperativista, diversidade de plataformas e modernização regional.</strong></div>
+      </div>
+      <div class="alert"><strong>Diferencial Amil:</strong> marca nacional, escala de dados assistenciais e investimento próprio em Command Center, CRM e app. <strong>Tensão de infra:</strong> sustentar isso em multicloud com custo controlado e alta disponibilidade.</div>
+    </section>
+
+    <section id="fontes">
+      <div class="eyebrow">Rastreabilidade</div><h3>Fontes consultadas</h3>
+      <ul class="sources">
+        <li><strong>Confirmação do evento:</strong> CIOs Confirmados IT Forum Praia do Forte 2026 - 10.08.xlsx — AMIL - SP · Tiago Piffer · Agenda Foursys = Sim.</li>
+        <li><strong>Cargo do gestor:</strong> perfil público Grupo Amil — Diretor de TI de Infraestrutura e Cloud Services (multicloud, FinOps).</li>
+        <li><strong>Grupo Amil — Relatório ESG 2024:</strong> https://institucional.amil.com.br/sites/institucional/files/2025-09/Amil_RA24_D6-01.pdf</li>
+        <li><strong>App Amil Clientes:</strong> https://amil.com.br/app-amil-clientes</li>
+        <li><strong>Telemedicina Amil:</strong> https://medxperience.amil.com.br/para-o-seu-paciente/telemedicina</li>
+        <li><strong>Dasa — fato relevante da associação:</strong> https://static.poder360.com.br/2025/04/fato-relevante-dasa-impar-1abr2025.pdf</li>
+        <li><strong>Rede Américas — governança:</strong> https://ri.saudeamericas.com.br/en/management-board-and-committees/</li>
+      </ul>
+    </section>
+  </main>
+  <div class="footer">four<strong style="color:#FF5315">sys</strong> · Pre-Sales Intelligence · IT Forum Praia do Forte 2026<br>Benchmark confidencial · Atualizado em 17/08/2026</div>
+</body>
+</html>
