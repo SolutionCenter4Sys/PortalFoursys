@@ -2,7 +2,27 @@ name: portalfoursys-v2
 
 services:
 
-  # ── Redis ───────────────────────────────────────────────────────────────────
+  # ── PostgreSQL + pgvector (banco local) ──────────────────────────────────────
+  postgres:
+    image: pgvector/pgvector:pg17        # PostgreSQL 17 com pgvector pré-instalado
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       "${POSTGRES_DB:-jarvis}"
+      POSTGRES_USER:     "${POSTGRES_USER:-jarvis}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-jarvisdev}"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Schema aplicado automaticamente na primeira inicialização do volume
+      - ./jarvis/supabase/migrations/000_jarvis_v2_clean_rag.sql:/docker-entrypoint-initdb.d/000_schema.sql:ro
+    ports:
+      - "5432:5432"          # expõe localmente para pgAdmin / seed scripts
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-jarvis} -d ${POSTGRES_DB:-jarvis}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis ─────────────────────────────────────────────────────────────────────
   redis:
     image: redis:7-alpine
     restart: unless-stopped
@@ -17,21 +37,24 @@ services:
       timeout: 5s
       retries: 5
 
-  # ── Jarvis (Next.js backend de voz) ─────────────────────────────────────────
+  # ── Jarvis (Next.js backend de voz) ──────────────────────────────────────────
   jarvis:
     build:
       context: ./jarvis
       dockerfile: Dockerfile
     restart: unless-stopped
     depends_on:
+      postgres:
+        condition: service_healthy
       redis:
         condition: service_healthy
     env_file:
       - .env.docker          # copie de .env.docker.example e preencha
     environment:
-      # Sobrescreve REDIS_URL para apontar para o container interno
-      REDIS_URL: "redis://:${REDIS_PASSWORD:-redisdev}@redis:6379"
-      NODE_ENV: production
+      NODE_ENV:   production
+      # URLs internas (sobrescrevem .env.docker para apontar aos containers)
+      DATABASE_URL: "postgresql://${POSTGRES_USER:-jarvis}:${POSTGRES_PASSWORD:-jarvisdev}@postgres:5432/${POSTGRES_DB:-jarvis}"
+      REDIS_URL:    "redis://:${REDIS_PASSWORD:-redisdev}@redis:6379"
     ports:
       - "3000:3000"          # expõe localmente para debug (opcional)
     healthcheck:
@@ -41,7 +64,7 @@ services:
       start_period: 60s
       retries: 3
 
-  # ── Portal (Vite SPA + nginx proxy) ─────────────────────────────────────────
+  # ── Portal (Vite SPA + nginx proxy) ──────────────────────────────────────────
   portal:
     build:
       context: ./portal
@@ -59,4 +82,5 @@ services:
       retries: 3
 
 volumes:
+  postgres_data:
   redis_data:

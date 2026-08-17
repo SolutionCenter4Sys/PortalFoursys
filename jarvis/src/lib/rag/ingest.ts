@@ -191,7 +191,7 @@ async function pruneOrphanDocuments(
 
   if (error || !existing?.length) return;
 
-  const orphans = existing.filter(
+  const orphans = (existing as { id: string; path: string }[]).filter(
     (d) => !keepPaths.has(d.path) || shouldSkipRagPath(d.path, pathScope),
   );
   if (orphans.length === 0) return;

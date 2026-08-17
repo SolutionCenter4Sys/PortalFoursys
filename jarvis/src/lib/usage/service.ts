@@ -105,9 +105,16 @@ export async function getUsageSnapshot(userId: string): Promise<UsageSnapshot> {
 }
 
 export async function assertVoiceAllowed(userId: string): Promise<UsageSnapshot> {
-  // Dev/POC bypass — desativa limite de minutos sem alterar lógica de produção
+  // Dev/POC bypass — desativa limite de minutos sem consultar o banco
   if (process.env.USAGE_LIMIT_DISABLED === "true") {
-    return getUsageSnapshot(userId);
+    return {
+      planId: "free",
+      planName: "Free",
+      limitMinutes: null,
+      minutesUsed: 0,
+      minutesRemaining: null,
+      periodMonth: currentUsageMonth(),
+    };
   }
   const snapshot = await getUsageSnapshot(userId);
   if (snapshot.planId === "pro") return snapshot;

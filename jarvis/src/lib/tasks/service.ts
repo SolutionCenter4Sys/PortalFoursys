@@ -511,7 +511,7 @@ async function fetchOpenLists(userId: string): Promise<TaskList[]> {
 
   if (!lists?.length) return [];
 
-  const ids = lists.map((l) => l.id);
+  const ids = (lists as { id: string }[]).map((l) => l.id);
   const { data: items } = await supabase
     .from("task_items")
     .select("id, list_id, content, done, position, created_at, updated_at")
@@ -526,8 +526,8 @@ async function fetchOpenLists(userId: string): Promise<TaskList[]> {
     byList.set(it.list_id, arr);
   }
 
-  return lists.map((l) => ({
-    ...(l as Omit<TaskList, "items">),
+  return (lists as { id: string }[]).map((l) => ({
+    ...(l as unknown as Omit<TaskList, "items">),
     items: byList.get(l.id) ?? [],
   }));
 }
