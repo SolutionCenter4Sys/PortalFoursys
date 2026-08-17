@@ -62,6 +62,9 @@ Edite `.env.docker` e preencha **pelo menos**:
 | `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Project Settings → API |
 
 > `.env.docker` está no `.gitignore`. **Nunca commite este arquivo.**
+>
+> `NEXT_PUBLIC_*` (VAD, site URL, Supabase anon) entra no **build** da imagem Jarvis.
+> Mudou alguma? rode `npm run docker:build` de novo — só `up` não basta.
 
 ---
 
@@ -81,9 +84,11 @@ copiado para dentro da imagem Docker pelo `Dockerfile` do Jarvis.
 ## 3. Build e subir
 
 ```bash
-# Na raiz do repo
-docker compose build
-docker compose up -d
+# Na raiz do repo (usa .env.docker para interpolar senhas e NEXT_PUBLIC_*)
+npm run docker:deploy
+# equivalente:
+# docker compose --env-file .env.docker build
+# docker compose --env-file .env.docker up -d
 ```
 
 **Primeira vez:** o build leva ~3–5 min (instala deps, compila Next.js em modo standalone).
