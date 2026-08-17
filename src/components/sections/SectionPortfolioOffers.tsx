@@ -15,6 +15,7 @@ import {
 } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { InterestButton } from '../ui/InterestButton'
+import { BackToOriginChip } from '../ui/BackToOriginChip'
 import { useApp } from '../../context/AppContext'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
 import { useLanguage } from '../../i18n'
@@ -578,6 +579,10 @@ export function SectionPortfolioOffers() {
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-6 md:py-10 max-w-7xl mx-auto">
+
+        <div className="mb-4">
+          <BackToOriginChip />
+        </div>
 
         {/* ── Header ── */}
         <motion.div

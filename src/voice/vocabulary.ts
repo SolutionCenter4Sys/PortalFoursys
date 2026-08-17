@@ -402,7 +402,7 @@ const ptBR: VocabularioVoz = {
     global: ['presenca global', 'global', 'mapa', 'paises', 'mundo'],
     timeline: ['trajetoria', 'historia', 'linha do tempo', 'evolucao'],
     'why-foursys': ['por que foursys', 'porque foursys', 'diferenciais', 'vantagens'],
-    'portfolio-thesis': ['portfolio', 'tese', 'eixos', 'eixos de valor', 'tese e eixos'],
+    'portfolio-thesis': ['portfolio', 'eixos', 'eixos de valor', 'tese', 'tese e eixos'],
     'portfolio-offers': ['catalogo de ofertas', 'catalogo', 'doze ofertas', 'ofertas do portfolio'],
     'portfolio-start': ['por onde comecar', 'personas', 'shortlist', 'sequencia recomendada'],
     'portfolio-future': ['visao de futuro', 'futuro', 'tokenizacao'],

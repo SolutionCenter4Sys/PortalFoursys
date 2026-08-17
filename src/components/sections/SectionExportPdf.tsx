@@ -33,7 +33,6 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
       { id: 'identity-timeline', label: 'Linha do Tempo', sectionId: 'identity' },
     ],
     'portfolio-thesis': [
-      { id: 'portfolio-thesis-tese', label: 'Tese comercial', sectionId: 'portfolio-thesis' },
       { id: 'portfolio-thesis-vitrine', label: 'Eixos de diferenciação', sectionId: 'portfolio-thesis' },
       { id: 'portfolio-thesis-motor', label: 'Eixos de capacidade', sectionId: 'portfolio-thesis' },
     ],
@@ -89,7 +88,6 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
       { id: 'identity-timeline', label: 'Timeline', sectionId: 'identity' },
     ],
     'portfolio-thesis': [
-      { id: 'portfolio-thesis-tese', label: 'Commercial thesis', sectionId: 'portfolio-thesis' },
       { id: 'portfolio-thesis-vitrine', label: 'Differentiation axes', sectionId: 'portfolio-thesis' },
       { id: 'portfolio-thesis-motor', label: 'Capacity axes', sectionId: 'portfolio-thesis' },
     ],

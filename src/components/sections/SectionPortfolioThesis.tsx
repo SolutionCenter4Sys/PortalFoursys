@@ -33,12 +33,12 @@ const AXIS_ICONS: Record<string, LucideIcon> = {
 function getLabelPosition(angleDeg: number) {
   const norm = ((angleDeg % 360) + 360) % 360
   if (norm > 280 || norm < 70)
-    return 'left-[calc(100%+10px)] top-1/2 -translate-y-1/2 text-left'
+    return 'left-[calc(100%+14px)] top-1/2 -translate-y-1/2 text-left'
   if (norm >= 70 && norm <= 110)
-    return 'left-1/2 -translate-x-1/2 top-[calc(100%+6px)] text-center'
+    return 'left-1/2 -translate-x-1/2 top-[calc(100%+12px)] text-center'
   if (norm > 110 && norm < 250)
-    return 'right-[calc(100%+10px)] top-1/2 -translate-y-1/2 text-right'
-  return 'left-1/2 -translate-x-1/2 bottom-[calc(100%+6px)] text-center'
+    return 'right-[calc(100%+14px)] top-1/2 -translate-y-1/2 text-right'
+  return 'left-1/2 -translate-x-1/2 bottom-[calc(100%+12px)] text-center'
 }
 
 function AxisOrbitRing({
@@ -59,21 +59,22 @@ function AxisOrbitRing({
 
   return (
     <div
-      className="relative aspect-square max-w-[380px] lg:max-w-[460px] xl:max-w-[520px] mx-auto"
+      className="relative aspect-square w-full max-w-[380px] lg:max-w-[460px] xl:max-w-[520px] mx-auto"
       role="radiogroup"
       aria-label={t('portfolio.thesis.title')}
     >
-      <div className="absolute inset-[6%] rounded-full border border-white/[0.05]" />
-      <div className="absolute inset-[18%] rounded-full border border-white/[0.07] bg-white/[0.015]" />
-      <div className="absolute inset-[32%] rounded-full border border-white/10 bg-foursys-surface/40 shadow-[0_0_60px_rgba(0,0,0,0.35)]" />
+      {/* Anel de órbita: passa pelo centro dos nós, mantendo os rótulos fora do desenho */}
+      <div className="absolute inset-[12%] rounded-full border border-white/[0.06]" />
+      <div className="absolute inset-[24%] rounded-full border border-white/[0.05] bg-white/[0.012]" />
+      <div className="absolute inset-[30%] rounded-full border border-white/10 bg-foursys-surface/40 shadow-[0_0_60px_rgba(0,0,0,0.35)]" />
 
       <div
-        className="absolute inset-[35%] rounded-full bg-[#23243D] border border-white/10 flex items-center justify-center transition-all duration-500"
+        className="absolute inset-[33%] rounded-full bg-[#23243D] border border-white/10 flex items-center justify-center transition-all duration-500"
         style={{ boxShadow: `0 0 40px ${activeColor}15, inset 0 0 30px rgba(0,0,0,0.3)` }}
       >
         <div className="text-center px-2">
-          <div className="text-lg md:text-xl lg:text-2xl font-black text-white leading-none">foursys</div>
-          <div className="text-[7px] md:text-[8px] uppercase tracking-[0.28em] text-foursys-text-dim mt-1">
+          <div className="text-xl md:text-2xl lg:text-3xl font-black text-white leading-none">foursys</div>
+          <div className="text-[8px] md:text-[9px] uppercase tracking-[0.28em] text-foursys-text-dim mt-1.5">
             {lang === 'pt' ? 'eixos de valor' : 'value axes'}
           </div>
         </div>
@@ -119,7 +120,7 @@ function AxisOrbitRing({
               <Icon size={22} style={{ color: axis.color }} strokeWidth={2.2} aria-hidden="true" />
             </span>
             <span
-              className={`absolute max-w-[110px] lg:max-w-[120px] text-[10px] lg:text-[11px] xl:text-[12px] font-bold leading-tight pointer-events-none text-white/90 ${labelPos}`}
+              className={`absolute w-[104px] lg:w-[120px] text-[11px] lg:text-[12px] font-bold leading-tight pointer-events-none text-white/90 ${labelPos}`}
             >
               {axis.name}
             </span>
@@ -402,7 +403,7 @@ function RoleGroup({
 export function SectionPortfolioThesis() {
   const { navigate, setDeepDiveHint } = useApp()
   const { t, lang } = useLanguage()
-  const { axes, offers, thesis, institutionalBacking } = useMemo(() => getPortfolio(lang), [lang])
+  const { axes, offers, institutionalBacking } = useMemo(() => getPortfolio(lang), [lang])
   const [expandedAxis, setExpandedAxis] = useState<string | null>(null)
   const [activeAxisId, setActiveAxisId] = useState<string>(axes[0]?.id ?? '')
   const orbitRef = useRef<HTMLDivElement>(null)
@@ -457,14 +458,14 @@ export function SectionPortfolioThesis() {
 
   return (
     <SectionWrapper>
-      <div className="px-4 md:px-8 py-6 md:py-10 max-w-7xl mx-auto">
+      <div className="px-4 md:px-8 py-5 md:py-7 max-w-[1400px] mx-auto">
 
         {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mb-6 md:mb-8"
+          className="mb-4 md:mb-5"
         >
           <div className="flex items-start md:items-end justify-between flex-wrap gap-3">
             <div>
@@ -493,42 +494,7 @@ export function SectionPortfolioThesis() {
             </div>
           </div>
 
-          <div className="mt-4 md:mt-6 h-px bg-gradient-to-r from-cyan-400/30 via-white/[0.06] to-transparent" />
-        </motion.div>
-
-        {/* ── Tese comercial ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.08, duration: 0.4 }}
-          className="mb-8 md:mb-10 rounded-2xl border border-cyan-400/20 bg-gradient-to-br from-cyan-500/[0.07] to-transparent p-5 md:p-7"
-        >
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-10">
-            <div className="lg:w-2/5">
-              <div className="flex items-center gap-2 mb-3 flex-wrap">
-                {thesis.sequence.map((step, i) => (
-                  <span key={step} className="flex items-center gap-2">
-                    {i > 0 && <ArrowRight size={13} className="text-cyan-400/60" aria-hidden="true" />}
-                    <span className="text-sm md:text-base font-black text-white">{step}</span>
-                  </span>
-                ))}
-              </div>
-              <p className="text-xs text-cyan-300/80 font-semibold uppercase tracking-wider">
-                {thesis.label}
-              </p>
-            </div>
-            <div className="lg:w-3/5 space-y-3">
-              <p className="text-sm text-foursys-text-muted leading-relaxed">{thesis.description}</p>
-              <ul className="space-y-2">
-                {thesis.principles.map(p => (
-                  <li key={p} className="flex items-start gap-2.5 text-sm text-foursys-text-muted">
-                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0 mt-1.5" />
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <div className="mt-3 md:mt-4 h-px bg-gradient-to-r from-cyan-400/30 via-white/[0.06] to-transparent" />
         </motion.div>
 
         {/* ── Eixos: vitrine e motor ── */}
@@ -540,8 +506,8 @@ export function SectionPortfolioThesis() {
           className="focus:outline-none"
         >
           {/* Desktop/Tablet: mandala + painel lateral */}
-          <div className="hidden md:block mb-10">
-            <div className="flex items-center gap-4 flex-wrap mb-4">
+          <div className="hidden md:block mb-6">
+            <div className="flex items-center gap-4 flex-wrap mb-3 md:mb-4">
               <span className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-cyan-400">
                 <span className="w-3 h-3 rounded-full border-2 border-cyan-400/60" aria-hidden="true" />
                 {t('portfolio.thesis.showcase')}
@@ -553,13 +519,13 @@ export function SectionPortfolioThesis() {
               <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent" />
             </div>
 
-            <div className="grid md:grid-cols-[1.1fr_0.9fr] lg:grid-cols-[1.15fr_0.85fr] gap-4 lg:gap-6 items-center">
+            <div className="grid md:grid-cols-[1.25fr_0.75fr] lg:grid-cols-[1.3fr_0.7fr] gap-5 lg:gap-8 xl:gap-10 items-center min-h-[min(68vh,640px)]">
               <motion.div
                 ref={orbitRef}
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.1, duration: 0.5 }}
-                className="px-4 lg:px-10 xl:px-14"
+                className="px-[110px] lg:px-[128px] py-8 flex items-center justify-center"
               >
                 <AxisOrbitRing
                   axes={axes}
@@ -576,7 +542,7 @@ export function SectionPortfolioThesis() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -16 }}
                   transition={{ duration: 0.25 }}
-                  className="rounded-[24px] border p-5 lg:p-6 transition-[border-color,box-shadow] duration-500"
+                  className="rounded-[24px] border p-5 lg:p-6 xl:p-7 transition-[border-color,box-shadow] duration-500 self-center"
                   style={{
                     borderColor: `${activeAxis.color}30`,
                     background: `linear-gradient(145deg, ${activeAxis.color}08 0%, transparent 55%), rgba(255,255,255,0.015)`,

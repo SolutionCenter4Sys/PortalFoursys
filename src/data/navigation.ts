@@ -44,7 +44,7 @@ const navigationItemsPt: NavigationItem[] = [
   // ── Portfólio 2026 S2 ──────────────────────────────────────────────────────
   {
     id: 'portfolio-thesis',
-    label: 'Tese e Eixos de Valor',
+    label: 'Eixos de Valor',
     icon: 'compass',
     category: 'Portfólio',
     description: 'Como o portfólio se organiza: 6 eixos, vitrine e motor',
@@ -256,7 +256,7 @@ const navigationItemsEn: NavigationItem[] = [
   // ── Portfolio 2026 H2 ──────────────────────────────────────────────────────
   {
     id: 'portfolio-thesis',
-    label: 'Thesis and Value Axes',
+    label: 'Value Axes',
     icon: 'compass',
     category: 'Portfolio',
     description: 'How the portfolio is organized: 6 axes, showcase and engine',
