@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Eduardo Mauricio Zalamena | HPE AUTOMOTORES DO BRASIL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid var(--border); }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Eduardo Mauricio Zalamena</h1>
+                <h2>Gerente de TI — HPE Automotores do Brasil Ltda.</h2>
+                <div class="loc">Autoindústria · São Paulo/SP (matriz) · CNPJ 54.305.743/0001-07</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Porte industrial + FOCO 4SYS</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Capacidade</div><div class="value">120k+/ano</div></div>
+                <div class="header-badge"><div class="label">Empregos</div><div class="value">~2.500</div></div>
+                <div class="header-badge"><div class="label">Área fábrica</div><div class="value">247 mil m²</div></div>
+                <div class="header-badge"><div class="label">Go Live ERP</div><div class="value">mai/2026</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: deep-dive pós-Projeto HUB (TOTVS) + parceria GAC 2027 + leitura de comitê + material de apresentação · Diferencia da edição anterior (Trancoso). · Presente no último IT Forum: NÃO</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>HPE Automotores do Brasil Ltda. é fabricante 100% nacional (desde 1998) e representante oficial das marcas Mitsubishi Motors e Suzuki Veículos no Brasil. Fábrica em Catalão (GO) com 247.000 m² construídos, capacidade acima de 120 mil veículos/ano e mais de 560 mil unidades produzidas desde a inauguração. Matriz em Vila Leopoldina, São Paulo/SP. Não confundir com Hewlett Packard Enterprise — CNPJ confirmado 54.305.743/0001-07 (Portal da Transparência / planilha IT Forum). Em março/2026 fechou parceria industrial com a chinesa GAC para produção CKD a partir de 2027 (capacidade inicial 50 mil un./ano), sem assumir comercialização da marca chinesa. Em maio/2026 concluiu o Go Live do Projeto HUB: migração do ERP global para o ecossistema TOTVS (Protheus, Gesplan, Fluig, DMS Varejo + MES PPI-Multitask em TOTVS Cloud).</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">HPE Automotores do Brasil Ltda.</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">São Paulo/SP · Fábrica Catalão/GO</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Brasil (rede Mitsubishi + manufatura multi-marca)</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">Não localizado em fontes abertas (empresa limitada)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~2 mil a 2.500+ (TI Inside / site HPE)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada · sociedade limitada · capital nacional</div></div>
+            </div>
+            <div class="alert-box" style="margin-top:14px">⚠️ <strong>Antifraude:</strong> CNPJ 54.305.743/0001-07 confirma HPE AUTOMOTORES DO BRASIL LTDA (CNAE fabricação de automóveis). Homônimo “HPE” ≠ Hewlett Packard Enterprise.</div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Eduardo Mauricio Zalamena</strong> — Gerente de TI na HPE Automotores do Brasil desde abril/2003 (23+ anos na casa). LinkedIn: perfil público com foco em estratégia, operação, projetos, segurança da informação e transformação digital. Formação: Administração com ênfase em TI, MBA em Gestão Empresarial, especialização em Desenvolvimento de Sistemas e mestrado em Planejamento Estratégico de TI; 30+ anos de carreira. Passagens anteriores: IT Manager na John Deere e analista/desenvolvedor na Fundimisa. No Projeto HUB (Go Live maio/2026) atuou como gerente do programa de migração para TOTVS Protheus — post LinkedIn reconhece squad interno e apoio da liderança (presidente Mauro Luis Correia). <strong>Nível de decisão:</strong> alto sobre roadmap de TI, PMO e stack operacional; budget estratégico compartilha com C-level (presidente). <strong>Leitura de comitê:</strong> Mauro Luis Correia (Presidente/CEO) — sponsor público do ERP TOTVS e da parceria GAC; Zalamena — executor técnico e interlocutor natural no IT Forum.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento & mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Atua na autoindústria de veículos leves de maior valor agregado (picapes médias e SUVs), com produção flexível de até 30 versões simultâneas em Catalão. Posição: player nacional consolidado no nicho Mitsubishi (Triton sucedendo a L200; Eclipse Cross; Outlander PHEV na linha comercial) e Suzuki, agora expandindo modelo de manufatura-as-a-service para a GAC. Cadeia: fornecedores de autopeças → planta GO → rede de concessionárias → cliente final (B2C) e frotas (B2B). Prioridades setoriais 2026: competitividade de preço frente a Hilux/Ranger/S10 e SUVs chineses; eletrificação/PHEV; conteúdo local e Programa Mover; OT/MES e dados de chão de fábrica; integração dealer DMS ↔ backoffice. Pressões: capacidade ociosa histórica (motivo da atração GAC), pressão de custo em picape média, e estabilização pós-migração de ERP. Tendência relevante para Foursys: fábrica multi-marca exige integração, governança de dados e cibersegurança OT além do core TOTVS recém-implantado.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões & lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Estabilização pós-Go Live (HUB):</strong> projeto TOTVS iniciado em 2024, cutover em mai/2026 — janela clássica de hypercare, débito de integração e performance (fonte: TI Inside).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Manufatura multi-marca 2027:</strong> GAC em linha dedicada/compartilhada exige MES, logística CKD e segregação de dados sem misturar operação Mitsubishi (fonte: AutoData / Valor).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Pressão comercial no segmento:</strong> picape média e SUVs sob ataque de volume e preço (Toyota, Ford, GM, chinesas) — TI precisa acelerar ciclo dealer e qualidade de dados de estoque/pedido.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>OT ↔ IT:</strong> MES PPI-Multitask no chão de fábrica amplia superfície de risco cibernético industrial (hipótese consultiva + fato de adoção MES publicada).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Capacidade ociosa histórica:</strong> cabine de pintura limita ~120 mil/ano; preencher volume com GAC sem degradar qualidade Mitsubishi é desafio operacional e de sistemas.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Confiabilidade e compliance pós-ERP</span>
+                <span class="tag tag-priority">Prontidão industrial GAC 2027</span>
+                <span class="tag tag-priority">Dados em tempo real fábrica↔financeiro</span>
+                <span class="tag tag-priority">Eficiência na rede DMS</span>
+                <span class="tag tag-priority">Segurança da informação / LGPD</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Hypercare / estabilização TOTVS Cloud</span>
+                <span class="tag tag-active">MES + automação chão de fábrica</span>
+                <span class="tag tag-active">Integração Fluig / workflows</span>
+                <span class="tag tag-active">Preparação linha/logística GAC (CKD)</span>
+                <span class="tag tag-active">DMS varejo automotivo + rede</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">iPaaS / integração multi-sistema pós-HUB</span>
+                <span class="tag tag-opportunity">AI Squad sobre dados industriais + dealer</span>
+                <span class="tag tag-opportunity">Cibersegurança OT/IT unificada</span>
+                <span class="tag tag-opportunity">Engenharia digital / modernização de integrações legado</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS Digibee) — integração pós-HUB + GAC</h4><span class="score-badge">92/100</span></div>
+                <p>Orquestrar Protheus, Gesplan, Fluig, DMS, MES e futuros fluxos CKD/GAC sem ponto-a-ponto frágil. Camada C5–C6 e prontidão 2027.</p>
+                <div class="reasons"><ul>
+                    <li>Go Live recente amplia demanda por integrações estáveis e observáveis.</li>
+                    <li>Parceiro industrial novo (GAC) exige segregação e APIs — tipicamente sem iPaaS maduro publicado.</li>
+                    <li>FourBlox: ISO 27001/27701, 24 anos Foursys, 41.000+ projetos.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital — estabilização & modernização de legado</h4><span class="score-badge">86/100</span></div>
+                <p>Squad para hypercare, refino de processos, APIs e eliminação de controles paralelos (papel/planilha) após cutover — alinhado ao discurso público de automação ponta a ponta.</p>
+                <div class="reasons"><ul>
+                    <li>Projeto HUB em período de estabilização (TI Inside).</li>
+                    <li>MES no chão de fábrica precisa de engenharia de dados e integração com backoffice.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança (IT + OT)</h4><span class="score-badge">81/100</span></div>
+                <p>Programa de segurança cobrindo TOTVS Cloud, rede industrial MES e canais digitais (sites marca + LGPD). Zalamena declara foco em segurança da informação no perfil.</p>
+                <div class="reasons"><ul>
+                    <li>Superfície OT cresce com MES PPI-Multitask.</li>
+                    <li>Empresa já estruturou Privacy Office / DPO (site institucional) — gancho de maturidade.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad — fábrica e rede</h4><span class="score-badge">74/100</span></div>
+                <p>Casos de uso em previsão de demanda dealer, qualidade de linha, detecção de anomalia OT e copilots de processo Fluig — após base de dados consolidada no Protheus.</p>
+                <div class="reasons"><ul>
+                    <li>Timing: IA depois da estabilização do core (não antes).</li>
+                    <li>Diferencia Foursys de fornecedor só de ERP.</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado — canais e apps satélite</h4><span class="score-badge">68/100</span></div>
+                <p>Sites institucionais/marca e possíveis apps satélite fora do núcleo TOTVS; evolução controlada sem reabrir o core.</p>
+                <div class="reasons"><ul>
+                    <li>Canais digitais heterogêneos (WordPress institucional vs. frontend Google na Mitsubishi).</li>
+                    <li>Evita “segundo ERP” — foco em experiência e APIs.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Reconhecer o Go Live do Projeto HUB (maio/2026) e a parceria GAC 2027. Abrir com: “o core já mudou — o próximo risco é integração e OT, não outro ERP.” Conversar com Zalamena no registro de PMO/governança; citar Mauro Correia só como alinhamento de sponsor.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Arquitetura de integração e prontidão industrial multi-marca (Mitsubishi/Suzuki + GAC CKD) sem fornecedor de iPaaS/cyber OT anunciado publicamente. Janela: hypercare 2H2026 → ramp-up GAC 2027.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>AI Squad + Engenharia Digital + FourBlox (Digibee) + Cibersegurança com ISO 27001/27701 e histórico de 41.000+ projetos — entra como parceiro de execução pós-TOTVS, não como concorrente do Protheus.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes & Gap Analysis</h3>
+            <div class="competitor-card"><h4>Toyota (Hilux / Corolla Cross)</h4><p>Referência de volume e disciplina industrial no Brasil. Gap HPE: escala menor; precisa compensar com flexibilidade multi-versão e qualidade de dados fábrica-rede. Oportunidade Foursys: analytics e integração dealer mais ágeis que o volume Toyota.</p></div>
+            <div class="competitor-card"><h4>Ford (Ranger) / GM (S10)</h4><p>Disputam picape média com redes digitais maduras. Gap: pressão de preço e ciclo comercial. Oportunidade: DMS + dados unificados pós-Protheus para encurtar lead time comercial.</p></div>
+            <div class="competitor-card"><h4>Montadoras chinesas (BYD, GWM, e a própria GAC no mercado)</h4><p>Velocidade de produto e preço em SUV/eletrificados. HPE produzirá para GAC sem vender a marca — tensão de capacidade e priorização de sistemas. Gap: governança multi-cliente industrial. Oportunidade: segregação de dados e MES multi-programa.</p></div>
+            <div class="competitor-card"><h4>Nissan Frontier (possível sinergia de plataforma Triton a partir de 2027 — fontes setoriais)</h4><p>Hipótese de mercado sobre compartilhamento futuro. Se confirmado, aumenta complexidade de planejamento e TI. Abordar como cenário, não fato fechado.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <!-- ZONA A -->
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Fabricante nacional em Catalão/GO; Mitsubishi + Suzuki; matriz SP; CNPJ 54.305.743/0001-07; parceria manufatura GAC 2027.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Eduardo Zalamena, Gerente de TI desde 2003; liderou Projeto HUB (TOTVS); comitê com Mauro Correia (CEO).</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Estabilizar ERP novo + preparar fábrica multi-marca sem perder qualidade Mitsubishi.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Fontes abertas: budget recente concentrado em ecossistema TOTVS (Protheus, Gesplan, Fluig, DMS, MES, Cloud) 2024–2026; próximo ciclo tende a integração, OT e prontidão GAC (hipótese consultiva).</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) FourBlox/iPaaS; 2) Engenharia Digital (hypercare); 3) Cibersegurança IT/OT.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 30 min no IT Forum: mapa de integrações pós-HUB + riscos GAC 2027.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Hypercare 2H2026 · ramp industrial GAC 1S2027 · evento Praia do Forte.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender ERP. Vender a camada que impede o segundo cutover doloroso quando a GAC entrar na planta.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Do ERP global ao HUB TOTVS</h4><p>Após anos em sistema internacional, HPE migrou o core para Protheus + Gesplan + Fluig + DMS + MES em TOTVS Cloud. Go Live maio/2026 — marco sob liderança de Zalamena e sponsor de Mauro Correia.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Estabilizar e abrir a fábrica</h4><p>Hypercare coincide com anúncio GAC: mesma planta, outro cliente industrial, CKD 50 mil un./ano. Integração, OT e governança de dados viram o gargalo — não o ERP em si.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Foursys como parceiro pós-core</h4><p>FourBlox + Engenharia Digital + Cyber OT + AI Squad levam a HPE de “ERP no ar” para “fábrica multi-marca orquestrada”, sem reabrir a decisão TOTVS.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Dor: risco de integração fragmentada pós-HUB</h4>
+                <p>Evidência: cutover mai/2026 com múltiplos módulos TOTVS + MES; estabilização ainda em curso (TI Inside).</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee) + Engenharia Digital — mapa de interfaces, APIs e observabilidade; redução de falhas de sincronismo financeiro/fábrica/rede.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quais integrações ainda estão em modo ponto-a-ponto ou planilha desde o Go Live?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de 2h: inventário de interfaces críticas (top 10) e quick wins de orquestração.</p>
+            </div>
+            <div class="business-card">
+                <h4>Oportunidade: prontidão industrial GAC 2027</h4>
+                <p>Evidência: AutoData/Valor — HPE só manufatura/logística; GAC comercializa; capacidade 50 mil CKD.</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital + FourBlox — segregação de dados, MES multi-programa, rastreabilidade CKD sem misturar lote Mitsubishi.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Como a TI vai separar master data, qualidade e logística quando a linha GAC entrar?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>One-pager de arquitetura multi-marca + PoC de integração logística.</p>
+            </div>
+            <div class="business-card">
+                <h4>Dor: superfície OT após MES</h4>
+                <p>Evidência: MES PPI-Multitask conectando máquinas ao chão digital (TI Inside); perfil do gestor enfatiza SI.</p>
+                <div class="sub">Solução Foursys</div><p>Cibersegurança IT/OT — assessment, segmentação, monitoramento e resposta alinhados a LGPD/Privacy Office já existentes.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“O MES e a rede OT já estão no mesmo programa de segurança do TOTVS Cloud?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment OT de 3 semanas com relatório executivo para CEO + TI.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck curto (8–10 slides) + one-pager de arquitetura pós-HUB · opcional PoC iPaaS</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">FourBlox + Engenharia Digital + Cibersegurança — porquê: core TOTVS já escolhido; gap é orquestração e OT</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) integração industrial / MES–ERP em manufatura discreta; (2) iPaaS Digibee em cadeias com múltiplos ERPs/DMS; (3) programa cyber OT em planta com automação — adaptar linguagem autoindústria (qualidade, lote, dealer).</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> o ROI não está em “trocar sistema de novo”; está em evitar o custo oculto do segundo cutover quando a GAC entrar — integrações frágeis viram parada de linha e disputa de prioridade entre marcas.</p>
+            <p style="margin-top:8px"><em>Se não houver case Mitsubishi/Suzuki pronto: discursar “pós-ERP + fábrica multi-cliente” com diagrama HUB atual → camada FourBlox → prontidão 2027. Não forçar case genérico de cloud.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Parabéns pelo Go Live do HUB — o core já está no lugar certo; o risco agora é a costura entre Protheus, MES, DMS e a futura linha GAC.”</li>
+                <li>“Não viemos vender outro ERP. Viemos proteger o investimento TOTVS com integração observável.”</li>
+                <li>“GAC 2027 muda o jogo: mesma fábrica, outro dono do produto — TI precisa de segregação e rastreabilidade CKD desde já.”</li>
+                <li>“MES no chão amplia OT: segurança industrial e LGPD precisam falar a mesma língua do Privacy Office.”</li>
+                <li>“FourBlox (Digibee) + squad Foursys encurtam hypercare e evitam integrações ponto-a-ponto que viram dívida em 2027.”</li>
+                <li>“AI Squad entra depois da estabilização — primeiro dados confiáveis, depois copilots de fábrica e rede.”</li>
+                <li>“Proposta concreta: mapa das 10 interfaces críticas em 15 dias e PoC de orquestração em 30.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>IT Forum + follow-up LinkedIn com Zalamena; CC discreto a sponsor se fizer sentido</td><td>Ata 1 página + interesse formal</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop interfaces HUB + riscos GAC</td><td>Mapa top 10 integrações / RACI</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC FourBlox em 1 fluxo crítico (ex.: MES↔Protheus ou DMS↔financeiro)</td><td>PoC mensurado (SLA, erros, tempo)</td><td>4–6 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Engenharia Digital + Cyber OT assessment</td><td>Squad 60–90 dias + relatório OT</td><td>Q3–Q4/2026</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Programa integração multi-marca + AI Squad seletivo</td><td>MSA / roadmap 2027 alinhado GAC</td><td>1S2027</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <!-- ZONA C -->
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Site institucional HPE Automotores</h4><div class="url">https://www.hpeautos.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">WordPress (sinais wp-content)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">PHP 8.2</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">ZENEDGE (edge/hosting)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado (site institucional)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Portal Mitsubishi Motors Brasil</h4><div class="url">https://www.mitsubishimotors.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">App moderna (Google Frontend)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado publicamente</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Google Frontend</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">GTM / analytics presentes</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Portal Suzuki Veículos</h4><div class="url">https://www.suzukiveiculos.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">WordPress</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Apache</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Cloudflare</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">GTM presente</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Core ERP / Backoffice (TOTVS)</h4><div class="url">Não público (TOTVS Cloud)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Protheus / Fluig UI</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Protheus + Gesplan + DMS</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">TOTVS Cloud (fato TI Inside)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações nativas + pontos a mapear</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>MES industrial</h4><div class="url">Chão de fábrica Catalão (PPI-Multitask)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Console MES / IHM</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">MES PPI-Multitask</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Híbrido OT (hipótese) + vínculo TOTVS</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Máquinas ↔ MES ↔ ERP</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">TOTVS Cloud para core (fato). Sites: ZENEDGE / Google Frontend / Cloudflare. Data center de fábrica: não localizado em detalhe.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança & Compliance</div><div class="cmp">Privacy Office, DPO e canal LGPD publicados no site HPE; Canal da Transparência (canalconfidencial). Programa OT unificado: não localizado — oportunidade.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">MES PPI-Multitask (automação de produção, eliminação de papel). IA generativa/analítica: não localizada publicamente.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados & Analytics</div><div class="cmp">Promessa pública de dados em tempo real via Protheus integrado; Gesplan no financeiro. BI/data lake dedicado: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">TOTVS Backoffice Linha Protheus (substituiu ERP global). NÃO há indicação pública de manutenção do ERP anterior.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">TOTVS Gestão Financeira Gesplan; TOTVS Varejo DMS; TOTVS Fluig (workflow/PMO); possíveis sistemas satélite dealer — detalhe não publicado.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência & Engajamento</div><div class="cmp">Sites marca Mitsubishi/Suzuki + institucional HPE; GTM; atendimento 0800; rede de concessionárias (experiência digital dealer parcialmente via DMS).</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.hpeautos.com.br/</td><td><span class="status-200">200</span></td><td>WordPress / PHP 8.2</td><td>ZENEDGE</td><td>Site institucional; política LGPD/Privacy Office</td></tr>
+                    <tr><td>https://www.mitsubishimotors.com.br/</td><td><span class="status-200">200</span></td><td>App moderna</td><td>Google Frontend</td><td>GTM presente; canal comercial principal</td></tr>
+                    <tr><td>https://www.suzukiveiculos.com.br/</td><td><span class="status-200">200</span></td><td>WordPress</td><td>Cloudflare + Apache</td><td>GTM presente</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 20/07/2026 via HTTP headers/HTML. Só o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Integração</div><h4>Camada iPaaS não publicada</h4><p>Ecossistema multi-módulo TOTVS + MES + DMS sem evidência pública de barramento/iPaaS maduro — risco clássico pós-cutover em autoindústria.</p><div class="offer">Oferta Foursys: FourBlox (Digibee)</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Indústria 4.0</div><h4>Prontidão multi-marca / CKD</h4><p>GAC 2027 exige segregação MES/logística; evidência AutoData de modelo “só manufatura” — complexidade de sistemas tipicamente subestimada.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Segurança</div><h4>OT vs programa corporativo</h4><p>MES conectando máquinas amplia superfície; Privacy Office existe no IT, mas programa OT unificado não localizado.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Dados</div><h4>Analytics além do ERP</h4><p>Tempo real prometido no Protheus; data platform / IA industrial não publicada — gap frente a rivais com analytics avançado de rede.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Experiência digital</div><h4>Stack web heterogênea</h4><p>Institucional WP + Mitsubishi Google Frontend + Suzuki WP/CF — possível dívida de UX/SEO e inconsistência de stack.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 6 · Hypercare</div><h4>Capacidade de squad pós-Go Live</h4><p>Projetos ERP grandes consomem time interno; Zalamena lidera PMO há décadas — reforço externo acelera estabilização sem trocar core.</p><div class="offer">Oferta Foursys: Engenharia Digital / Squad</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal & Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Adm TI · MBA · Esp. Sistemas · Mestrado Planejamento Estratégico de TI</div></div>
+                <div class="info-card"><div class="label">Cidade / base</div><div class="value">São Paulo/BR (LinkedIn); operação fábrica GO</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado com evidência pública</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Reconhecer os 23 anos na HPE — credibilidade de “guardião” da operação, não de consultor externo.<br>
+                2) Mencionar o Go Live HUB pelo nome e o reconhecimento público ao time — ele valoriza entrega coletiva.<br>
+                3) Trajetória John Deere: linguagem de manufatura e missão crítica ressoa.<br>
+                4) Evitar pitch de troca de ERP; posicionar-se como reforço do que ele acabou de entregar.<br>
+                5) Perguntar sobre governança/PMO e KPIs de estabilização — território natural dele.<br>
+                6) Trazer GAC como cenário de capacidade e qualidade, não como “ameaça comercial” à Mitsubishi.<br>
+                7) Tom direto, técnico-executivo, sem jargão de moda; evidência > slide.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia & RI</h4><ul>
+                    <li>TI Inside — “HPE Automotores troca ERP global por TOTVS” (29/06/2026)</li>
+                    <li>AutoData — GAC confirma produção na HPE Catalão (18/03/2026)</li>
+                    <li>Valor Econômico — GAC US$ 1,3 bi / produção GO (18/03/2026)</li>
+                    <li>Site hpeautos.com.br — história, fábrica, endereços</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>TI Inside — Protheus, Gesplan, Fluig, DMS, MES PPI-Multitask, TOTVS Cloud</li>
+                    <li>LinkedIn Zalamena — post Go Live Projeto HUB (mai–jun/2026)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Quatro Rodas / setorial — L200 → Triton</li>
+                    <li>Fenabrave / imprensa auto — concorrência picape média</li>
+                    <li>AutoIndústria — detalhes parceria GAC</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn: linkedin.com/in/eduardozalamena</li>
+                    <li>Portal da Transparência — CNPJ 54.305.743/0001-07 · Mauro Luis Correia</li>
+                    <li>Planilha CIOs IT Forum Praia do Forte 2026 (10.07)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch/HTTP: hpeautos.com.br · mitsubishimotors.com.br · suzukiveiculos.com.br (20/07/2026)</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

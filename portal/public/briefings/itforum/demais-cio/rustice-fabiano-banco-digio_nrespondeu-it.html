@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Rustice Fabiano | BANCO DIGIO</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Rustice Fabiano</h1>
+                <h2>CTO — BANCO DIGIO</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Bancos (Digital) | Barueri, SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Receita (Q1 2024)</div>
+                    <div class="value">R$ 391 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Carteira de Crédito</div>
+                    <div class="value">R$ 9,5 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Capital Integralizado</div>
+                    <div class="value">R$ 1,3 BI</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: BANCO DIGIO</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">O <strong>Banco Digio S.A.</strong> é um banco múltiplo digital com sede em Barueri (SP), na região de Alphaville. Fundado em 2013, opera como a plataforma digital do <strong>Bradesco</strong>, que adquiriu 100% do controle após comprar a fatia de 49,9% do Banco do Brasil por R$ 625 milhões. Em março de 2025, o Bradesco elevou o capital do Digio em <strong>R$ 500 milhões</strong>, totalizando <strong>R$ 1,323 bilhão</strong>, sinalizando forte aposta estratégica na operação digital. O banco atingiu <strong>11,1 milhões de contas</strong> (crescimento anual de 95%), carteira de crédito de <strong>R$ 9,5 bilhões</strong> (+163,9%) e receita de <strong>R$ 391 milhões</strong> (+21,8%) no Q1 2024. Atualmente opera cerca de 2 milhões de cartões de crédito e é responsável pela <strong>Uber Conta</strong>, parceria estratégica com a Uber para serviços financeiros a motoristas e entregadores. No campo tecnológico, o Digio migrou sua infraestrutura para <strong>AWS</strong> (com Nextios/Locaweb), utiliza <strong>IA e Machine Learning</strong> para análise de crédito (redução de 35% na inadimplência), e alcançou <strong>crescimento de 700%</strong> em vendas digitais via automação inteligente no WhatsApp. O banco se beneficia diretamente da estratégia <strong>"AI First"</strong> do Bradesco, que aumentou investimentos em tecnologia em 22% em 2025 e projeta +16% para 2026.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Nacional</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada — Subsidiária integral do Bradesco</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Crescimento</div>
+                        <div class="value">Forte expansão — contas +95% a.a., carteira de crédito +163%</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">500 a 1.000 (estimativa)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>O Banco Digio é o braço 100% digital do Bradesco, em <strong>fase acelerada de crescimento</strong> no competitivo mercado de bancos digitais brasileiros. Com um novo CTO (Fabiano Rustice, desde ago/2025) trazendo vasta experiência em transformação digital do varejo (Pernambucanas) e infraestrutura de pagamentos (Dock/Bradesco), o banco está posicionado para um ciclo de <strong>modernização tecnológica e escalabilidade</strong>. A capitalização de R$ 1,3 bilhão pelo Bradesco e a estratégia "AI First" da holding indicam forte investimento em tecnologia nos próximos 12-24 meses. O Digio compete diretamente com Nubank, Inter e C6 Bank, e precisa se diferenciar por <strong>agilidade tecnológica, experiência do cliente e inteligência de dados</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar a plataforma para suportar crescimento acelerado de contas (+95% a.a.)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adotar e escalar IA/ML e IA Generativa alinhado à estratégia "AI First" do Bradesco</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Diferenciar-se dos concorrentes (Nubank, Inter, C6) em experiência digital e produtos</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Garantir cibersegurança e conformidade regulatória (LGPD, Open Finance, BACEN)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar arquitetura de microsserviços e otimizar custos cloud (AWS)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Expandir ecossistema de parcerias (modelo Uber Conta) e canais digitais</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">IA / Machine Learning / IA Generativa</span>
+                        <span class="tag tag-priority">Plataforma Cloud &amp; Microsserviços</span>
+                        <span class="tag tag-priority">Cibersegurança &amp; Compliance</span>
+                    </div>
+                    <h4 style="margin-top:24px;margin-bottom:12px;color:var(--primary)">Investimentos Complementares</h4>
+                    <div>
+                        <span class="tag tag-active">Open Finance</span>
+                        <span class="tag tag-active">Automação de Processos (RPA/IA)</span>
+                        <span class="tag tag-active">Data Analytics &amp; Data Mesh</span>
+                        <span class="tag tag-active">Experiência do Cliente (CX)</span>
+                        <span class="tag tag-active">APIs &amp; Integrações</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses com base no contexto estratégico do Digio e do Bradesco:</p>
+            <div>
+                <span class="tag tag-active">IA Generativa &amp; LLMs</span>
+                <span class="tag tag-active">Cloud Optimization (AWS)</span>
+                <span class="tag tag-active">Open Finance / Open Banking</span>
+                <span class="tag tag-active">Cibersegurança &amp; Zero Trust</span>
+                <span class="tag tag-active">Automação Inteligente (WhatsApp/Canais)</span>
+                <span class="tag tag-active">Machine Learning para Crédito</span>
+                <span class="tag tag-active">Modernização de Core Banking</span>
+                <span class="tag tag-active">Data Platform &amp; Analytics</span>
+                <span class="tag tag-active">DevOps / SRE / Observabilidade</span>
+                <span class="tag tag-active">Experiência Digital (UX/UI)</span>
+                <span class="tag tag-opportunity">APIs &amp; Integração de Ecossistemas</span>
+                <span class="tag tag-opportunity">Prevenção a Fraudes com IA</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Com base na trajetória do CTO e no momento do Digio, as seguintes áreas representam oportunidades concretas:</p>
+            <div class="alert-box">
+                <strong>&#9888; CTO recém-chegado (ago/2025):</strong> Fabiano Rustice está montando sua agenda tecnológica e definindo parceiros estratégicos. Janela de oportunidade aberta para se posicionar como fornecedor-chave nos primeiros 12 meses de mandato.
+            </div>
+            <div class="alert-box">
+                <strong>&#9888; Capitalização recente de R$ 500 MM:</strong> O aporte do Bradesco em março/2025 indica que há budget disponível para investimentos em tecnologia e transformação digital.
+            </div>
+            <div class="alert-box">
+                <strong>&#9888; Estratégia AI First do Bradesco:</strong> A holding está investindo 22% a mais em tecnologia e exige alinhamento das subsidiárias à agenda de IA — o Digio precisa de parceiros especializados para executar essa visão.
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Rustice Fabiano</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Squads de IA &amp; Machine Learning</h4>
+                    <span class="score-badge">Fit 95%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Digio já usa ML para análise de crédito (PowerOfData) — precisa escalar e sofisticar modelos</li>
+                        <li>Estratégia "AI First" do Bradesco exige aceleração na adoção de IA generativa</li>
+                        <li>Fabiano liderou implementação de IA (Documentoscopia) na Pernambucanas — entende e valoriza o tema</li>
+                        <li>AI Squad da Foursys pode acelerar casos de uso em crédito, fraude e atendimento</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Automação Inteligente &amp; Integração (Digibee)</h4>
+                    <span class="score-badge">Fit 90%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Digio obteve 700% de crescimento via automação no WhatsApp — demanda por mais canais automatizados</li>
+                        <li>Open Finance exige integração robusta entre múltiplas instituições financeiras</li>
+                        <li>Parceria Foursys + Digibee é ideal para conectar sistemas legados do Bradesco com o Digio</li>
+                        <li>Redução de 10x no custo de aquisição via automação demonstra ROI claro</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Cloud &amp; DevOps / SRE</h4>
+                    <span class="score-badge">Fit 88%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Migração para AWS em fase final — precisa de otimização contínua e FinOps</li>
+                        <li>Crescimento de 95% a.a. em contas exige escalabilidade e resiliência da infraestrutura</li>
+                        <li>RPO e RTO já melhoraram significativamente (26% menos dados processados) — mas há espaço para otimizar</li>
+                        <li>Observabilidade e SRE são fundamentais para um banco digital em crescimento acelerado</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Cibersegurança &amp; Compliance</h4>
+                    <span class="score-badge">Fit 85%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Banco digital com 11 milhões de contas é alvo prioritário de ciberataques</li>
+                        <li>LGPD, Open Finance e regulações do BACEN exigem governança robusta de dados</li>
+                        <li>Certificações ISO 27001/27701 da Foursys são diferenciais diretos para o setor financeiro</li>
+                        <li>Fabiano tem experiência com prevenção a fraudes (American Express/Bradesco) — conversa técnica qualificada</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Squads de Desenvolvimento (Full-Stack / Mobile)</h4>
+                    <span class="score-badge">Fit 82%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Vagas abertas em Barueri para engenharia de software e arquitetura — sinal de demanda por capacidade</li>
+                        <li>Competição com Nubank e Inter exige velocidade no lançamento de features e melhoria contínua da UX</li>
+                        <li>Uber Conta e parcerias de private label demandam squads dedicados para cada vertical</li>
+                        <li>Modelo flexível da Foursys (Squads, Projetos, AMS) se adapta ao ritmo de um banco digital</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Fabiano Rustice é um CTO com DNA de <strong>transformação digital</strong> (10+ anos transformando a Pernambucanas) e <strong>infraestrutura de pagamentos</strong> (Dock, Bradesco). Iniciar a conversa demonstrando expertise Foursys em <strong>squads de IA para o setor financeiro</strong> e cases de automação com ROI mensurável. Mencionar a experiência Foursys com bancos e fintechs, e como a parceria com Digibee pode resolver desafios de integração Open Finance. Reforçar as certificações ISO 27001/27701 e os 24 anos de mercado com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Fabiano assumiu como CTO há menos de 8 meses. Este é o <strong>momento ideal</strong> para se posicionar como parceiro estratégico — CTOs recém-chegados estão formando sua rede de fornecedores e definindo a arquitetura tecnológica. O aporte de <strong>R$ 500 milhões</strong> do Bradesco sinaliza budget disponível. A estratégia <strong>"AI First"</strong> da holding cria demanda imediata por parceiros especializados em IA.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>AI Squad proprietário</strong> — aceleração de casos de uso de IA no setor financeiro (crédito, fraude, atendimento); (2) <strong>Parceria Digibee</strong> — integração ágil para Open Finance e conectividade entre sistemas legados e cloud-native; (3) <strong>Certificações ISO 27001/27701</strong> — essenciais para um banco digital regulado pelo BACEN; (4) <strong>Modelo flexível de entrega</strong> — squads dedicados que escalam com o crescimento acelerado do Digio.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. CTO em fase de construção de agenda:</strong> Fabiano saiu da Dock após apenas 4 meses e assumiu o Digio em agosto/2025. Está construindo sua visão tecnológica e formando parcerias — timing perfeito para a Foursys se posicionar como parceira de confiança antes que os slots sejam preenchidos.</p>
+                <p style="margin-bottom:12px"><strong>2. DNA de transformação digital com IA:</strong> Na Pernambucanas, Fabiano liderou a criação do "Documentoscopia" com Google Cloud, usando OCR e IA para processar 10 mil documentos/dia. Ele valoriza IA aplicada com resultados mensuráveis (redução de 80% em análise manual). Apresente cases Foursys de IA com métricas concretas.</p>
+                <p style="margin-bottom:12px"><strong>3. Pressão competitiva intensa:</strong> O Digio compete com Nubank (líder absoluto), Inter (SuperApp) e C6 Bank (investimentos internacionais). Cada feature lançada pelos concorrentes gera pressão para resposta rápida. Squads ágeis e capacity on-demand são diferenciais que ressoam com essa realidade.</p>
+                <p style="margin-bottom:12px"><strong>4. Estratégia AI First do Bradesco impacta o Digio:</strong> O Bradesco triplicou sua capacidade tecnológica, alcançou 118% de ganho de produtividade com IA e possui 500+ casos de uso na plataforma Bridge. O Digio precisa acompanhar esse ritmo — e pode precisar de parceiros externos especializados para executar a agenda de IA da holding.</p>
+                <p><strong>5. Automação como alavanca de crescimento:</strong> O case de automação via WhatsApp (crescimento de 700%, redução de 10x no CAC) prova que o Digio valoriza automação com ROI rápido. A Foursys pode propor quick wins em automação inteligente para canais de aquisição e atendimento.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Nubank (Líder de mercado)</h4>
+                <p><strong>Segmento:</strong> Banco digital full-service | <strong>Clientes:</strong> 100+ milhões (Brasil + LatAm)</p>
+                <p>Maior banco digital do mundo fora da Ásia. Lidera em NPS, experiência do cliente e inovação de produto. Oferece conta sem anuidade, rendimento de até 120% do CDI e ecossistema completo (crédito, investimentos, seguros, marketplace). Investimentos massivos em IA para personalização e prevenção a fraudes. Principal referência e desafio para o Digio em escala e brand awareness.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Banco Inter (SuperApp)</h4>
+                <p><strong>Segmento:</strong> SuperApp financeiro | <strong>Clientes:</strong> 35+ milhões</p>
+                <p>Diferencia-se pela estratégia de <strong>SuperApp</strong>, integrando serviços bancários, seguros, investimentos, marketplace de compras e cashback em uma única plataforma. Cartão sem anuidade, rendimento acima de 100% do CDI e programa de fidelidade Inter Loop. Aposta em diversificação de receitas e engajamento via marketplace — modelo que pressiona o Digio a expandir seu ecossistema de serviços.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>C6 Bank (Premium Digital)</h4>
+                <p><strong>Segmento:</strong> Banco digital premium | <strong>Clientes:</strong> 30+ milhões</p>
+                <p>Posiciona-se no segmento premium com cartões diferenciados (C6 Graphene), programa de pontos Átomos (sem expiração), conta global em dólar/euro e acesso a investimentos internacionais. Investimentos significativos em tecnologia e CX. Compete com o Digio especialmente em produtos de crédito e cartões, com proposta de valor mais sofisticada para clientes de maior renda.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>PicPay (Pagamentos + Banking)</h4>
+                <p><strong>Segmento:</strong> Pagamentos e serviços financeiros | <strong>Clientes:</strong> 35+ milhões</p>
+                <p>Nasceu como app de pagamentos e evoluiu para serviços bancários completos. Forte presença em pagamentos P2P, QR Code e cashback. Expansão agressiva para crédito, investimentos e seguros. Compete com o Digio na base de clientes de menor ticket e em estratégias de aquisição via parcerias (modelo similar ao Uber Conta do Digio).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Os concorrentes do Digio investem fortemente em: (1) <strong>IA para personalização</strong> — Nubank lidera com modelos de ML para recomendação e prevenção a fraudes em escala massiva; (2) <strong>SuperApps e ecossistemas</strong> — Inter e PicPay integram serviços não-financeiros para aumentar engajamento; (3) <strong>Experiência premium</strong> — C6 Bank diferencia-se por UX sofisticada e produtos internacionais. O Digio tem gaps potenciais em: (a) <strong>Escala de modelos de IA</strong> além de crédito (personalização, atendimento, pricing dinâmico); (b) <strong>Integração de ecossistema</strong> para competir com SuperApps; (c) <strong>Modernização contínua da plataforma</strong> para acompanhar a velocidade de lançamento dos concorrentes. A Foursys pode se posicionar como parceira para acelerar essas frentes com squads especializados em IA, automação (Digibee) e desenvolvimento ágil.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CTO (Chief Technology Officer) — Banco Digio</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Barueri, SP (Alphaville)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência</div>
+                        <div class="value">24+ anos em liderança de TI — Pernambucanas (10+ anos como CIO), Dock, Bradesco, American Express, Banco Ibi, Itautec</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">CST em Processamento de Dados (FATEC-SP) | Bacharelado em Física — Astronomia e Astrofísica (USP)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reconhecimento</div>
+                        <div class="value">CIO destaque no 4Network Award 2024 pela transformação digital da Pernambucanas</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil Técnico</div>
+                        <div class="value">Forte em cloud (Google Cloud, AWS), IA/ML aplicada, prevenção a fraudes e transformação digital de operações</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconheça a trajetória na Pernambucanas:</strong> 10+ anos de CIO com transformação digital premiada (4Network Award 2024) e criação do Documentoscopia com Google Cloud. Demonstrar que conhece essa jornada gera conexão imediata — ele claramente tem orgulho dessa conquista.</p>
+                <p style="margin-bottom:10px"><strong>2. Conecte-se pela formação incomum:</strong> Fabiano é bacharel em Física com habilitação em Astronomia e Astrofísica pela USP — uma formação rara no C-level de tecnologia. Mencionar isso demonstra que você pesquisou seu perfil a fundo e pode ser um ótimo ice-breaker.</p>
+                <p style="margin-bottom:10px"><strong>3. Fale de IA aplicada com resultados mensuráveis:</strong> Ele construiu o Documentoscopia (10 mil documentos/dia, -80% análise manual) e na Digio já usa ML para crédito (-35% inadimplência). Apresente cases com métricas concretas — ele valoriza IA que entrega resultado, não hype.</p>
+                <p style="margin-bottom:10px"><strong>4. Posicione-se como parceiro de crescimento:</strong> Fabiano está no início do mandato como CTO do Digio e precisa gerar resultados rapidamente. Ofereça quick wins e demonstre capacidade de ramp-up rápido — squads prontos para entregar em semanas, não meses.</p>
+                <p><strong>5. Explore a experiência bancária compartilhada:</strong> Ele trabalhou no Bradesco e American Express antes de ir para o varejo e voltar ao setor financeiro. Demonstre conhecimento do ecossistema Bradesco e como a Foursys pode navegar a dinâmica entre holding (Bradesco) e subsidiária (Digio).</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CTO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">C-Level — CTO reportando à diretoria executiva</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo</div>
+                        <div class="value">Tecnologia, arquitetura, engenharia de software e infraestrutura do Banco Digio</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Dinâmica com Holding</div>
+                        <div class="value">Alinhamento com a diretoria de tecnologia do Bradesco (Cíntia Scovine) e estratégia AI First</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão</div>
+                        <div class="value">Alto — define arquitetura, parceiros tecnológicos e roadmap de produto</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Contas Ativas</div>
+                        <div class="value">11,1 milhões (+95% a.a.)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">Estimativa: 150-300 (vagas abertas indicam crescimento ativo)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Stack Tecnológico</div>
+                        <div class="value">AWS (EC2, EBS, multi-AZ), microsserviços, ML/IA (PowerOfData), WhatsApp API (ColmeIA)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Negócio</div>
+                        <div class="value">Core business — banco 100% digital onde tecnologia é o produto</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada de Investimentos em TI</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Cloud (AWS) &amp; Infraestrutura</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+                <div class="bar"><div class="bar-label">Engenharia de Software</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+                <div class="bar"><div class="bar-label">IA / ML / Data</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#3949ab">18%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança &amp; Compliance</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">12%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas &amp; Capacitação</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria &amp; Parceiros</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Inovação &amp; Labs</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#9fa8da">2%</div></div></div>
+            </div>
+            <p style="margin-top:16px;font-size:12px;color:var(--text-light);text-align:center">* Estimativa baseada no perfil de banco digital cloud-native e na estratégia do Bradesco. Dados reais não disponíveis publicamente.</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor (Inferidas)</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios Prováveis de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Expertise técnica em IA/ML</span>
+                        <span class="tag tag-active">Velocidade de ramp-up</span>
+                        <span class="tag tag-active">Experiência no setor financeiro</span>
+                        <span class="tag tag-active">Certificações de segurança</span>
+                        <span class="tag tag-active">Flexibilidade de modelo</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Empresa de TI com expertise em IA, cloud e setor financeiro — porte médio/grande com agilidade de startup</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Provável</div>
+                        <div class="value">Squads dedicados e projetos pontuais com escopo definido e métricas de resultado</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

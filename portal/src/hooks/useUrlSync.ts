@@ -1,0 +1,45 @@
+import { useEffect } from 'react'
+import { useApp } from '../context/AppContext'
+import type { AppSection } from '../types'
+
+const VALID_SECTIONS: AppSection[] = [
+  'home', 'identity', 'global', 'timeline', 'why-foursys',
+  'portfolio-thesis', 'portfolio-offers', 'portfolio-start', 'portfolio-future', 'portfolio-assets',
+  'portfolio-ecosystem',
+  'offers-flagship', 'services', 'delivery', 'alliances', 'innovation',
+  'cases', 'testimonials', 'awards', 'clients-showcase', 'capabilities', 'benchmark',
+  'rh-talentos', 'media', 'esg',
+  'insights', 'faq', 'export-pdf',
+]
+
+export function useUrlSync() {
+  const { state, navigate } = useApp()
+
+  // On mount: read URL and navigate to section if valid
+  useEffect(() => {
+    const path = window.location.pathname.replace(/^\//, '') || 'home'
+    if (VALID_SECTIONS.includes(path as AppSection) && path !== state.currentSection) {
+      navigate(path as AppSection)
+    }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // On section change: update URL
+  useEffect(() => {
+    const targetPath = state.currentSection === 'home' ? '/' : `/${state.currentSection}`
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState(null, '', targetPath)
+    }
+  }, [state.currentSection])
+
+  // Handle browser back/forward
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname.replace(/^\//, '') || 'home'
+      if (VALID_SECTIONS.includes(path as AppSection)) {
+        navigate(path as AppSection)
+      }
+    }
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [navigate])
+}

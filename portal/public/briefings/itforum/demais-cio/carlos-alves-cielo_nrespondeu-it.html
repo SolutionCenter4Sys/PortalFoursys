@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Carlos Alves | CIELO</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Carlos Alves</h1>
+                <h2>VP Executivo de Tecnologia e Negocios (CPO/CTO/CDO) — CIELO</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Servicos Diversos (Meios de Pagamento) | Barueri - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Receita Liquida</div>
+                    <div class="value">R$ 10,9 BI (2025)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Lucro Liquido</div>
+                    <div class="value">R$ 1,9 BI (2025)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Controle</div>
+                    <div class="value">Bradesco + BB (100%)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Analise da Empresa: CIELO S.A.</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Cielo S.A.</strong> e a maior empresa de meios de pagamento da America Latina, com sede em Barueri (SP). Fundada em 1995, a companhia processa transacoes de credito, debito, Pix e pagamentos digitais para milhoes de estabelecimentos comerciais em todo o Brasil, aceitando <strong>26 bandeiras de cartao</strong> — lider do mercado. Em 2024, Bradesco e Banco do Brasil concluiram a OPA que resultou no <strong>fechamento de capital</strong> da empresa, adquirindo 100% das acoes e encerrando a negociacao na B3. O objetivo estrategico e integrar a adquirencia mais profundamente aos dois maiores bancos do pais, explorando sinergias comerciais e operacionais. Em 2025, a Cielo reportou receita liquida de <strong>R$ 10,9 bilhoes</strong> (+6,3% vs. 2024) e lucro liquido de <strong>R$ 1,9 bilhao</strong> (+31,2%). A empresa adotou uma estrategia <strong>AI-First</strong>, com mais de 500 frentes de inovacao envolvendo inteligencia artificial, resultando em aumento de 10% nas aprovacoes de e-commerce, reducao de 52 para 2 horas na entrega de maquininhas (economia de R$ 90 milhoes) e reducao de 50% em reclamacoes. Firmou parceria estrategica com a <strong>AWS</strong> para migracao de mais de 900 servidores para a nuvem, com uma superintendencia de Cloud de 60+ profissionais dedicados.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangencia</div>
+                        <div class="value">Nacional (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Capital Fechado (desde nov/2024) — Controlada por Bradesco e Banco do Brasil</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento (+6,3% em 2025)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Market Share</div>
+                        <div class="value">~50% do mercado de adquirencia brasileiro</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estrategico</h4>
+                <p>A Cielo vive um momento de <strong>profunda transformacao</strong> apos o fechamento de capital em 2024. Com controle integral de Bradesco e BB, a empresa acelera a integracao com os bancos controladores, adota estrategia <strong>AI-First</strong> com 500+ frentes de IA, migra infraestrutura para <strong>AWS Cloud</strong> e investe em pagamentos biometricos, Tap on Phone e Pix automatico. Carlos Alves, VP Executivo desde fev/2023, lidera simultaneamente as areas de Produto, Tecnologia, Dados e Inovacao — concentrando poder decisorio estrategico unico no mercado.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estrategicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar estrategia AI-First: orquestrar 500+ frentes de IA (ML, generativa e agentica) com governanca e ROI mensuravel</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Completar migracao para AWS Cloud: 900+ servidores, simplificacao arquitetural e reducao de custos</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar operacoes com Bradesco e BB: sinergias comerciais, dados unificados e cross-selling</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Manter lideranca competitiva contra fintechs (Stone, PagSeguro) com taxas agressivas e inovacao</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Transformacao cultural: gestores gerenciando pessoas e agentes de IA simultaneamente</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer ciberseguranca e compliance em ambiente de pagamentos cada vez mais digital</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Inteligencia Artificial (AI-First)</span>
+                        <span class="tag tag-priority">Cloud Migration (AWS)</span>
+                        <span class="tag tag-priority">Integracao Bancaria</span>
+                        <span class="tag tag-priority">Pagamentos Digitais / Pix</span>
+                        <span class="tag tag-priority">Ciberseguranca & Fraude</span>
+                    </div>
+                    <h4 style="margin-top:20px;margin-bottom:12px;color:var(--primary)">Inovacoes em Andamento</h4>
+                    <div>
+                        <span class="tag tag-active">Tap on Phone</span>
+                        <span class="tag tag-active">Pagamentos Biometricos</span>
+                        <span class="tag tag-active">Pix Automatico / Recorrente</span>
+                        <span class="tag tag-active">Pagamentos Invisiveis (IoT)</span>
+                        <span class="tag tag-active">IA Agentica</span>
+                        <span class="tag tag-active">eSIM (Thales SGP.32)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Proximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberao investimento nos proximos 12 meses com base na estrategia declarada:</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Inteligencia Artificial</div>
+                        <div class="value">Machine Learning, IA Generativa, IA Agentica — 500+ frentes ativas com foco em aprovacoes de e-commerce, logistica e deteccao de fraude</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cloud & Infraestrutura</div>
+                        <div class="value">Migracao massiva para AWS, 60+ profissionais dedicados, simplificacao arquitetural e reducao de custos de infra</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Pagamentos Digitais</div>
+                        <div class="value">Tap on Phone, Pix Automatico, pagamentos biometricos e invisiveis (IoT), checkout sem friccao</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Integracao & Dados</div>
+                        <div class="value">Unificacao de dados com Bradesco e BB, plataformas de cross-selling, APIs de integracao bancaria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Ciberseguranca</div>
+                        <div class="value">Deteccao de fraudes com IA, compliance PCI-DSS, seguranca de transacoes e terminais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Conectividade IoT</div>
+                        <div class="value">Tecnologia eSIM (Thales SGP.32) para comutacao remota entre operadoras em terminais POS — pioneirismo no Brasil</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <div class="grid-2">
+                <div class="alert-box">
+                    <strong>Migracao Cloud em Larga Escala</strong>
+                    <p style="font-size:14px;margin-top:8px">A Cielo esta migrando 900+ servidores para AWS. Projetos dessa magnitude exigem squads especializados em cloud migration, DevOps, containerizacao e otimizacao de custos (FinOps). Oportunidade para alocacao de times dedicados.</p>
+                </div>
+                <div class="alert-box">
+                    <strong>Governanca e Escalabilidade de IA</strong>
+                    <p style="font-size:14px;margin-top:8px">Com 500+ frentes de IA, a Cielo precisa de frameworks de governanca, MLOps, monitoramento de modelos e compliance. A orquestracao entre ML classico, IA generativa e IA agentica e um desafio de escala.</p>
+                </div>
+                <div class="alert-box">
+                    <strong>Integracao de Sistemas Bancarios</strong>
+                    <p style="font-size:14px;margin-top:8px">A integracao profunda com Bradesco e BB gera demanda por APIs, middleware, integracao de dados e plataformas de cross-selling. Parceria Digibee da Foursys e altamente relevante.</p>
+                </div>
+                <div class="alert-box">
+                    <strong>Transformacao Cultural & Letramento Digital</strong>
+                    <p style="font-size:14px;margin-top:8px">A Cielo reconhece que o principal desafio da IA e cultural, nao tecnologico. Programas de capacitacao, change management e letramento em IA sao oportunidades de consultoria.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Carlos Alves</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Analise de fit entre o portfolio Foursys e as necessidades identificadas. Ordenado por relevancia.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. AI Squad — Aceleracao com IA</h4>
+                    <div class="score-badge">Fit: 98%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Cielo tem 500+ frentes de IA ativas — necessidade de squads especializados para escalar e governar</li>
+                        <li>Demanda por MLOps, IA generativa e IA agentica alinhada com expertise Foursys</li>
+                        <li>Economia de R$ 90 milhoes ja comprovada com IA — apetite claro para mais investimento</li>
+                        <li>CEO declarou que gestores gerenciarao agentes de IA — oportunidade para frameworks e metodologias</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. Squads de Cloud & DevOps</h4>
+                    <div class="score-badge">Fit: 95%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Migracao massiva de 900+ servidores para AWS em andamento</li>
+                        <li>Superintendencia de Cloud com 60+ profissionais — pode precisar de reforco com squads dedicados</li>
+                        <li>Oportunidade em FinOps, containerizacao, arquitetura de microservicos e otimizacao de custos</li>
+                        <li>Alinhamento direto com a simplificacao arquitetural declarada pela empresa</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. Integracao & APIs (Parceria Digibee)</h4>
+                    <div class="score-badge">Fit: 92%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Integracao profunda com Bradesco e BB e prioridade estrategica pos-fechamento de capital</li>
+                        <li>Unificacao de dados, APIs bancarias e plataformas de cross-selling demandam integracao robusta</li>
+                        <li>Digibee como plataforma de integracao low-code acelera time-to-market</li>
+                        <li>Ecossistema de meios de pagamento exige interoperabilidade com multiplos sistemas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. Ciberseguranca & Compliance</h4>
+                    <div class="score-badge">Fit: 88%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Processamento de bilhoes de transacoes exige seguranca de nivel bancario</li>
+                        <li>Certificacoes ISO 27001/27701 da Foursys sao diferenciais diretos para o setor de pagamentos</li>
+                        <li>Deteccao de fraudes com IA e compliance PCI-DSS sao areas criticas</li>
+                        <li>Crescimento de pagamentos digitais (Pix, biometria) amplia superficie de ataque</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>5. Automacao de Processos & AMS</h4>
+                    <div class="score-badge">Fit: 85%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Reducao de 52h para 2h na entrega de maquininhas demonstra apetite por automacao</li>
+                        <li>Recorde no NPS e reducao de 50% em reclamacoes via automacao inteligente</li>
+                        <li>Oportunidade em RPA, automacao de backoffice e sustentacao de aplicacoes</li>
+                        <li>Modelo flexivel de AMS da Foursys e ideal para operacao de alta escala</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estrategia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Carlos Alves e um executivo com <strong>25+ anos de experiencia</strong> que combina visao de produto, tecnologia e dados. Ele fundou a Integra Commerce (adquirida pelo Magazine Luiza) e e precursor de marketplace/omnichannel no Brasil. Iniciar a conversa pelo tema de <strong>IA em escala</strong> — compartilhar como a Foursys tem acelerado resultados com seu AI Squad em empresas de grande porte, conectando com os R$ 90 milhoes de economia que a Cielo ja atingiu com IA. Demonstrar capacidade de ir alem com governanca, MLOps e IA agentica.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A <strong>migracao de 900+ servidores para AWS</strong> e a <strong>integracao com Bradesco/BB</strong> pos-fechamento de capital sao projetos massivos que demandam squads especializados. A Cielo esta em plena transformacao — janela de oportunidade para posicionar a Foursys como parceira de execucao em cloud, integracao e IA. O crescimento de 31% no lucro demonstra saude financeira para investir.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>AI Squad proprietario</strong> — aceleracao com IA alinhada a estrategia AI-First da Cielo; (2) <strong>Parceria Digibee</strong> — integracao de sistemas critica para a fusao operacional com Bradesco/BB; (3) <strong>Certificacoes ISO 27001/27701</strong> — seguranca de nivel bancario para o maior processador de pagamentos do Brasil; (4) <strong>Modelo flexivel de squads</strong> — escalabilidade para suportar 900+ servidores em migracao e 500+ frentes de IA.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negocio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. AI-First exige parceiros de escala:</strong> A Cielo tem 500+ frentes de IA em uso, incluindo ML (5 anos), generativa (1 ano) e agentica (6 meses). O proximo passo e orquestrar centenas de modelos simultaneamente — MLOps, governanca de dados e compliance exigem squads especializados que a Foursys pode entregar com seu AI Squad.</p>
+                <p style="margin-bottom:12px"><strong>2. Migracao Cloud e um mega-projeto em execucao:</strong> Com 900+ servidores migrando para AWS e 60+ profissionais dedicados, ha demanda clara por reforco de squads em DevOps, SRE, containerizacao e FinOps. A experiencia da Foursys em cloud migrations de grande porte e um diferencial.</p>
+                <p style="margin-bottom:12px"><strong>3. Integracao com bancos e prioridade #1 pos-OPA:</strong> O fechamento de capital (nov/2024) acelerou a integracao com Bradesco e BB. Unificar dados de adquirencia com dados bancarios para cross-selling e personalizacao exige plataformas de integracao robustas — exatamente onde a parceria Digibee da Foursys se destaca.</p>
+                <p style="margin-bottom:12px"><strong>4. Concorrencia de fintechs pressiona inovacao:</strong> Stone, PagSeguro e InfinitePay competem com taxas agressivas e experiencia superior. A Cielo precisa responder com velocidade de execucao e inovacao — modelo de squads ageis da Foursys e ideal para ciclos rapidos de desenvolvimento.</p>
+                <p><strong>5. Transformacao cultural e o maior desafio:</strong> O CEO da Cielo afirmou que em 2025 havera gestores gerindo pessoas e agentes de IA, e que o principal desafio e cultural, nao tecnologico. A Foursys pode apoiar com programas de letramento digital, change management e frameworks de adocao de IA.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Stone (Brasil)</h4>
+                <p><strong>Segmento:</strong> Adquirencia, banking e software para PMEs | <strong>Receita:</strong> ~R$ 12,5 bilhoes (2024)</p>
+                <p>Principal disruptora do mercado de adquirencia brasileiro. Estrategia focada em <strong>experiencia do cliente</strong>, atendimento presencial e ecossistema completo (maquininhas + conta digital + credito + software de gestao). Crescimento acelerado em banking e software, com aquisicoes como Linx e TAG. Investimentos fortes em IA para analise de credito e personalizacao de ofertas. Competitiva em taxas para PMEs e com NPS superior ao mercado.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>PagSeguro / PagBank (Brasil)</h4>
+                <p><strong>Segmento:</strong> Adquirencia, banco digital e marketplace financeiro | <strong>Receita:</strong> ~R$ 18 bilhoes (2024)</p>
+                <p>Evolucao de adquirente puro para <strong>banco digital completo</strong> (PagBank). Foco em microempreendedores e pequenos comerciantes com as menores taxas do mercado (Pix 0%, debito 0,99%). Ecossistema integrado de pagamentos, conta digital, investimentos e seguros. Listada na NYSE, com forte capitalizacao e capacidade de investimento em tecnologia e aquisicoes.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Rede (Itau Unibanco) (Brasil)</h4>
+                <p><strong>Segmento:</strong> Adquirencia integrada ao ecossistema Itau | <strong>Receita:</strong> Integrada ao Itau</p>
+                <p>Adquirente do <strong>Itau Unibanco</strong>, o maior banco privado do Brasil. Aceita 23 bandeiras de cartao. Estrategia de integracao total com a conta corrente Itau — clientes recebem vendas direto na conta, sem intermediarios. Forte presenca em e-commerce com o gateway <strong>e.Rede</strong>. Competitiva pela bundling de servicos bancarios + adquirencia + credito.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>GetNet (Santander) (Brasil)</h4>
+                <p><strong>Segmento:</strong> Adquirencia integrada ao ecossistema Santander | <strong>Receita:</strong> Integrada ao Santander</p>
+                <p>Adquirente do <strong>Santander Brasil</strong>, aceitando 26 bandeiras (empatada com a Cielo na lideranca). Fechou capital em 2023, antecipando o movimento da Cielo. Foco em integracao profunda com servicos bancarios do Santander, antecipacao de recebiveis e credito para lojistas. Modelo similar ao que a Cielo busca com Bradesco/BB — benchmark direto.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>O mercado de meios de pagamento esta em intensa consolidacao e verticalizacao bancaria. Stone e PagSeguro lideram em <strong>experiencia do cliente e agilidade</strong>, enquanto Rede e GetNet competem pela <strong>integracao bancaria</strong>. A Cielo, como a maior adquirente, precisa responder em tres frentes simultaneas: (1) <strong>Velocidade de inovacao</strong> — ciclos rapidos de desenvolvimento para nao perder share para fintechs; (2) <strong>Integracao de dados end-to-end</strong> — unificar dados de adquirencia com os ecossistemas de Bradesco e BB para criar ofertas personalizadas superiores; (3) <strong>Escalabilidade de IA</strong> — governanca e orquestracao de 500+ modelos para manter vantagem competitiva. A Foursys pode se posicionar como parceira para acelerar todas essas frentes com squads especializados em IA, cloud, integracao (Digibee) e automacao.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informacoes pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">VP Executivo de Tecnologia e Negocios — CPO, CTO, CDO e Inovacao na Cielo S.A.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localizacao</div>
+                        <div class="value">Barueri, SP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiencia</div>
+                        <div class="value">25+ anos integrando tecnologia e negocios. Precursor de marketplace e omnichannel no Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Na Cielo desde</div>
+                        <div class="value">Fevereiro de 2023</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetoria Anterior</div>
+                        <div class="value">Diretor Executivo de Produtos, Tecnologia, Dados e Inovacao na Riachuelo (2018-2023), liderando 1.100+ pessoas</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Empreendedorismo</div>
+                        <div class="value">Fundou a Integra Commerce, adquirida pelo Magazine Luiza em 2016. Atuou como Diretor de Marketplace no Magalu</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Conselhos</div>
+                        <div class="value">Membro do Conselho da Cateno (desde abr/2024) e Banco Tenpo (desde mar/2024). Diretor na ABComm desde 2016</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Lideranca</div>
+                        <div class="value">Combina visao de produto, tecnologia e negocios. Historico de exit empresarial (Integra > Magalu) e transformacao digital em varejo</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Conecte-se pela trajetoria empreendedora:</strong> Carlos fundou a Integra Commerce e vendeu para o Magazine Luiza — ele entende a perspectiva de startups, exits e construcao de negocios. Mencionar que a Foursys tambem tem cultura empreendedora e de inovacao cria conexao imediata.</p>
+                <p style="margin-bottom:10px"><strong>2. Reconheca os resultados concretos com IA:</strong> A economia de R$ 90 milhoes com IA na logistica de maquininhas e o aumento de 10% em aprovacoes de e-commerce sao numeros impressionantes. Demonstrar que voce conhece esses resultados mostra preparo e gera respeito.</p>
+                <p style="margin-bottom:10px"><strong>3. Aborde pelo angulo de produto, nao so tecnologia:</strong> Carlos e CPO, CTO e CDO simultaneamente — ele pensa em produto e impacto no negocio, nao apenas em tecnologia. Posicione soluces pelo valor de negocio (receita, NPS, conversao), nao por features tecnicas.</p>
+                <p style="margin-bottom:10px"><strong>4. Referencie a experiencia no varejo:</strong> Seus 5 anos na Riachuelo liderando 1.100+ pessoas em tecnologia, inovacao, R&D, digital e produto mostram que ele conhece profundamente o varejo. Conectar as solucoes ao impacto no lojista e no consumidor final ativa sua experiencia anterior.</p>
+                <p><strong>5. Mencione o contexto pos-fechamento de capital:</strong> A Cielo vive um momento unico — capital fechado, integracao com dois dos maiores bancos do Brasil. Demonstrar que voce entende esse cenario e posicionar a Foursys como parceira para acelerar a integracao mostra maturidade e preparo estrategico.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Executivo e Posicao de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Vice-Presidencia Executiva (C-Level)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo de Atuacao</div>
+                        <div class="value">CPO (Produto) + CTO (Tecnologia) + CDO (Dados) + Inovacao — concentracao unica de poder decisorio</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presenca em Conselhos</div>
+                        <div class="value">Membro do Conselho da Cateno e Banco Tenpo — influencia em subsidiarias estrategicas</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisao</div>
+                        <div class="value">Maximo: lidera todas as frentes de tecnologia, dados, produto e inovacao da empresa</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe Estimada</div>
+                        <div class="value">Centenas de profissionais (referencia: 1.100+ na Riachuelo, escala similar ou maior na Cielo)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cloud Team</div>
+                        <div class="value">Superintendencia dedicada com 60+ profissionais (AWS)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Estrategia de IA</div>
+                        <div class="value">AI-First: 500+ frentes de IA, incluindo ML (5 anos), generativa (1 ano) e agentica (6 meses)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Negocio</div>
+                        <div class="value">Protagonista: tecnologia E negocios sob mesma VP, tecnologia e o negocio em adquirencia</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuicao Estimada de Investimentos em TI</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Inteligencia Artificial</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+                <div class="bar"><div class="bar-label">Cloud & Infraestrutura</div><div class="bar-track"><div class="bar-fill" style="width:22%;background:#1a237e">22%</div></div></div>
+                <div class="bar"><div class="bar-label">Desenvolvimento de Produto</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#3949ab">18%</div></div></div>
+                <div class="bar"><div class="bar-label">Integracao & Dados</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">12%</div></div></div>
+                <div class="bar"><div class="bar-label">Ciberseguranca & Fraude</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas & Capacitacao</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#5c6bc0">7%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria & Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:6%;background:#9fa8da">6%</div></div></div>
+            </div>
+            <p style="margin-top:16px;font-size:12px;color:var(--text-light);text-align:center"><em>* Estimativa baseada nas prioridades declaradas publicamente. Nao representa dados oficiais da empresa.</em></p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferencias e Contexto de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Criterios Provaveis de Avaliacao</h4>
+                    <div>
+                        <span class="tag tag-active">Capacidade de Escala</span>
+                        <span class="tag tag-active">Expertise em IA</span>
+                        <span class="tag tag-active">Seguranca & Compliance</span>
+                        <span class="tag tag-active">Velocidade de Entrega</span>
+                        <span class="tag tag-active">Integracao de Sistemas</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Contexto Decisorio</div>
+                        <div class="value">Pos-fechamento de capital, a Cielo tem maior liberdade para escolha de fornecedores sem pressao de mercado — decisoes mais estrategicas e de longo prazo</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Perfil de Contratacao</div>
+                        <div class="value">Executivo com historico de liderar equipes de 1.000+ pessoas — busca parceiros que complementem e acelerem, nao que substituam</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

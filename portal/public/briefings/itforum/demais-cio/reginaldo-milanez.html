@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing Head de TI - Reginaldo Milanez | Sylvamo do Brasil</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Reginaldo Milanez</h1>
+                <h2>Head de TI — Sylvamo do Brasil</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Indústrias de base química e de transformação | Mogi Guaçu - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 6,1 BI a R$ 7 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 80,1 MM a R$ 100 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Será mantido</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Sylvamo do Brasil</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Sylvamo do Brasil</strong> (anteriormente International Paper do Brasil) é uma empresa global líder na produção de papéis para imprimir e escrever, com sede operacional em Mogi Guaçu (SP). Dona das marcas icônicas <strong>Chamex</strong>, <strong>Chamequinho</strong> e <strong>Chambril</strong>, opera três unidades industriais no Brasil — Mogi Guaçu (SP), Luiz Antônio (SP) e Três Lagoas (MS) — produzindo mais de <strong>1 milhão de toneladas de papel não revestido por ano</strong>. A empresa emprega cerca de 3.000 profissionais no país e mantém mais de 100.000 hectares de florestas de eucalipto e vegetação nativa, garantindo uma cadeia sustentável de fibra de madeira. Em 2024, a Sylvamo global reportou vendas líquidas de <strong>US$ 3,8 bilhões</strong>. A companhia está em um momento de eficiência operacional agressiva: o Projeto Horizon já alcançou US$ 144 milhões em economia, e há planos de investir aproximadamente US$ 145 milhões em projetos de capital de alto retorno nos próximos três anos. Certificada pelo FSC® e CERFLOR, a Sylvamo posiciona-se como referência em sustentabilidade, com 86% da energia de suas fábricas gerada a partir de biomassa renovável. Faz parte do grupo Sylvamo Corporation, sediado em Memphis, Tennessee, que emprega aproximadamente 6.500 pessoas na Europa, América Latina e América do Norte.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Estabilidade</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Indústrias de base química e de transformação</strong> com abrangência <strong>Global</strong>. Possui <strong>11 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>RFP/concorrência estruturada entre fornecedores qualificados</strong>. Perspectiva do orçamento de TI: <strong>Será mantido</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Atrair, desenvolver e engajar talentos</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Integrar equipes de TI e negócios para acelerar a entrega de valor</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Orquestrar transformação digital</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Otimizar custos e eficiência (FinOps/SecFinOps)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Posicionar a TI como área estratégica do negócio</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Provar valor e ROI sob pressão de custos</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">IA / ML</span>
+<span class="tag tag-priority">IA Generativa</span>
+<span class="tag tag-priority">CRM</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">CRM</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">Workplace e end-user computing</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">Realidade estendida (VR/AR/MR)</span>
+<span class="tag tag-active">CPaaS / UCaaS / CCaaS</span>
+<span class="tag tag-active">IoT / edge computing</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Nuvem pública</span>
+<span class="tag tag-opportunity">Nuvem Privada e híbrida</span>
+<span class="tag tag-opportunity">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-opportunity">IA / ML</span>
+<span class="tag tag-opportunity">IA Generativa</span>
+<span class="tag tag-opportunity">APIs e integração</span>
+<span class="tag tag-opportunity">Workplace e end-user computing</span>
+<span class="tag tag-opportunity">Mobile apps / superapps</span>
+<span class="tag tag-opportunity">Realidade estendida (VR/AR/MR)</span>
+<span class="tag tag-opportunity">CPaaS / UCaaS / CCaaS</span>
+<span class="tag tag-opportunity">IoT / edge computing</span>
+</div><div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria/assessment):</h4>
+                <div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Low-code / no-code</span>
+</div>
+            </div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Reginaldo Milanez</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML SEM fornecedor definido</li><li>IA / ML é prioridade Top 3 de investimento</li><li>IA Generativa SEM fornecedor definido</li><li>IA Generativa é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Nuvem pública SEM fornecedor definido</li><li>Nuvem Privada e híbrida SEM fornecedor definido</li><li>Workplace e end-user computing SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 65</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>APIs e integração SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 63</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Mobile apps / superapps SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 50</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Disaster recovery / continuidade de negócios SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Reginaldo Milanez tem como top prioridades <strong>IA / ML; IA Generativa; CRM</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>11 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 11 projetos definidos sem fornecedor: Nuvem pública, Nuvem Privada e híbrida, Disaster recovery / continuidade de negócios, IA / ML, IA Generativa e mais 6 temas. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Será mantido</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; Engenharia Digital; Modernização de Legado. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. Concorrentes já avançaram em IA — a janela está fechando:</strong> A Suzano já opera com IA generativa em fábrica (redução de 30% em tempo de resolução de problemas) e a Klabin adotou a IA Joule da SAP. Reginaldo tem IA/ML e IA Generativa como prioridades Top 3, mas ainda sem fornecedor. Usar esse senso de urgência competitiva.<br><br>
+                <strong>2. Projeto Horizon e cultura de eficiência:</strong> O Projeto Horizon da Sylvamo gerou US$ 144M em economia. O discurso para Reginaldo deve ser ancorado em ROI mensurável e redução de TCO — ele já opera sob pressão de "provar valor e ROI sob pressão de custos" e reporta ao CFO.<br><br>
+                <strong>3. Oportunidade de Indústria 4.0 nas florestas:</strong> A Sylvamo gerencia +100.000 hectares de florestas. Concorrentes como Eldorado já usam drones com IA e telemetria em operações florestais. IoT/Edge Computing está nos planos da Sylvamo sem fornecedor — conectar essa demanda ao portfólio Foursys de Engenharia Digital.<br><br>
+                <strong>4. Regulação ESG exige tecnologia:</strong> O EUDR (Regulamento de Desflorestação da UE) e as metas 2030 da Sylvamo demandam rastreabilidade digital de cadeia (Tree Trace). Soluções de APIs, integração e gestão de dados são críticas para compliance — todos temas em investimento sem fornecedor definido.<br><br>
+                <strong>5. Escala global requer integração:</strong> Com operações na Europa, América Latina e América do Norte e ~6.500 funcionários globais, a necessidade de plataformas unificadas de comunicação (CPaaS/UCaaS/CCaaS), workplace e mobile apps é estratégica — e todos esses temas estão sem fornecedor na Sylvamo.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>🏭 Suzano — Líder mundial em celulose | Receita: R$ 39,7 BI</h4>
+                <p>Maior produtora mundial de celulose e líder absoluta do setor brasileiro. Em parceria com a Microsoft, desenvolveu a <strong>"Ana Maria"</strong>, IA generativa integrada ao Teams via Azure OpenAI que auxilia operadores de fábrica em manutenção e resolução de problemas, reduzindo em <strong>30% o tempo de resolução</strong> e 15h no treinamento de novos profissionais. Assertividade do modelo superior a 90%. Planeja expandir a IA para todas as unidades, caminhando para a visão de <strong>"planta autônoma"</strong>. Investimento massivo em transformação digital desde 2019.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>📦 Klabin — Referência em embalagens sustentáveis | Receita: R$ 18 BI</h4>
+                <p>Segunda maior empresa do setor, a Klabin está em plena transformação digital com o <strong>Projeto SMART</strong> (Deloitte + SAP + AWS): migração para SAP S/4HANA, implementação de SAP Digital Manufacturing e SAP Analytics Cloud. É uma das <strong>primeiras empresas brasileiras a usar a IA Joule da SAP</strong>. Já realizou +125 workshops, 3.300 cenários de testes e 500h de treinamento. Posiciona-se na vanguarda da <strong>Indústria 5.0</strong>, integrando tecnologia com foco humano na produção de embalagens.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🌿 Eldorado Brasil — Eficiência operacional de classe mundial | Receita: R$ 5,7 BI</h4>
+                <p>Terceira maior do setor, a Eldorado opera uma das fábricas mais modernas do mundo em Três Lagoas (MS), com capacidade de 1,8M ton/ano. Destaque para o projeto <strong>"Fábrica Autônoma"</strong> com soluções de Indústria 4.0 e IA para manutenção preditiva e modelos virtuais que projetam produção com 12 meses de antecedência. Inaugurou em 2024 o <strong>ELDTECH</strong>, centro de tecnologia florestal de 728m² com 7 laboratórios avançados. Utiliza drones com IA, telemetria e sensoriamento remoto em toda a operação florestal.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🌐 Cenibra — Celulose de fibra curta | Exportação global</h4>
+                <p>A Celulose Nipo-Brasileira (Cenibra) é uma joint venture com capital japonês focada na produção de celulose de fibra curta de eucalipto para exportação. Localizada em Belo Oriente (MG), com capacidade de 1,2M ton/ano, a empresa investe em automação industrial e tecnologias de monitoramento florestal. Destaca-se pela gestão sustentável de florestas e pelo relacionamento com comunidades locais, sendo relevante concorrente regional.</p>
+            </div>
+            <div class="insight-box">
+                <h4>🔍 Gap Analysis: Sylvamo vs. Concorrentes</h4>
+                <p>A análise comparativa revela oportunidades significativas para a Sylvamo:<br><br>
+                <strong>1. IA Generativa na Operação:</strong> Enquanto a Suzano já opera com IA generativa em fábrica (Ana Maria) e a Klabin adota IA Joule da SAP, a Sylvamo ainda está em fase de definição — os projetos de IA/ML e IA Generativa estão <strong>sem fornecedor definido</strong>, criando janela ideal para posicionar a Foursys como parceira.<br><br>
+                <strong>2. Transformação Digital Integrada:</strong> A Klabin investiu pesado em SAP S/4HANA e Digital Manufacturing; a Eldorado caminha para a "Fábrica Autônoma". A Sylvamo precisa acelerar sua jornada digital para manter competitividade no setor.<br><br>
+                <strong>3. IoT e Edge Computing:</strong> Concorrentes já utilizam drones com IA, telemetria e sensoriamento remoto em operações florestais. A Sylvamo tem IoT/Edge Computing como área de investimento <strong>sem fornecedor definido</strong> — oportunidade clara.<br><br>
+                <strong>4. Modernização de Plataformas:</strong> Com 20 temas de investimento planejados e 11 sem fornecedor, a Sylvamo está em um momento decisivo de seleção de parceiros tecnológicos — posição que os concorrentes já avançaram com players como Microsoft, SAP e Deloitte.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Head of Technology — Sylvamo Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Campinas, São Paulo, Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe Direta</div>
+                        <div class="value">~29 profissionais no departamento de tecnologia</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte Direto</div>
+                        <div class="value">Jean-Michel Ribiéras (Chairman e CEO da Sylvamo)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Histórico Corporativo</div>
+                        <div class="value">Trajetória ligada à International Paper do Brasil, que se tornou Sylvamo após o spin-off em 2021</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Digital (LinkedIn)</div>
+                        <div class="value">500+ conexões, 643 seguidores. Engaja com temas de inovação, sustentabilidade e liderança em TI</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Interesses Profissionais</div>
+                        <div class="value">Inovação tecnológica, integração de trainees, sustentabilidade, diversidade e liderança feminina em TI</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Nível Hierárquico</div>
+                        <div class="value">Equivale a uma diretoria — posição C-Level de tecnologia</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa com Reginaldo</h4>
+                <p><strong>1. Valorize sua jornada International Paper → Sylvamo:</strong> Reginaldo vivenciou a transição de uma divisão de uma multinacional para uma empresa independente. Reconheça a complexidade de reestruturar TI durante um spin-off corporativo — é uma experiência rara e relevante que demonstra resiliência.<br><br>
+                <strong>2. Fale a linguagem de ROI e eficiência:</strong> Ele reporta ao CFO e tem "provar valor e ROI sob pressão de custos" como desafio declarado. Evite pitches genéricos — traga números concretos, cases com payback rápido e TCO comparativo. Projeto Horizon (US$ 144M de economia) mostra que a Sylvamo valoriza métricas tangíveis.<br><br>
+                <strong>3. Aborde inovação com pragmatismo industrial:</strong> Reginaldo lidera tecnologia em uma indústria de processo contínuo. Não é uma startup. Conecte IA e transformação digital com ganhos operacionais reais: uptime de máquinas, eficiência energética, rastreabilidade florestal — temas que fazem sentido no chão de fábrica.<br><br>
+                <strong>4. Demonstre interesse genuíno por sustentabilidade:</strong> Seus posts no LinkedIn mostram engajamento com sustentabilidade e cultura corporativa. A Sylvamo tem metas ESG ambiciosas para 2030 e exigências como o EUDR. Mostrar que a Foursys pode contribuir para esses objetivos gera afinidade imediata.<br><br>
+                <strong>5. Conecte-se pelo tema de pessoas e talentos:</strong> "Atrair, desenvolver e engajar talentos" é o primeiro desafio declarado. Ele acompanha integração de trainees e liderança feminina em TI. Compartilhar como a Foursys estrutura squads e capacita times (AI Squad, por exemplo) reforça parceria além da entrega técnica.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Head de TI e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CFO/Financeiro</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Regular: participa com frequência, sem ser membro.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Co-decisão TI + Negócios</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">50 a 99</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:35%;background:#1a237e">35%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">12%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#c5cae9">3%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Roadmap e inovação</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+<span class="tag tag-active">Capilaridade/cobertura regional</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Integrador / empresa de serviços (SI);Consultoria especializada;Start-up / scale-up;Fornecedor com cobertura global</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Serviço Gerenciado: 8 temas | Co-gerenciado: 6 temas | Projeto: 5 temas | Interno: 1 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

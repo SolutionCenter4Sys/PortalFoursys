@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing Diretor de TI - Pablo Damico | BAYER SA</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Pablo Damico</h1>
+                <h2>Diretor de TI — BAYER SA</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Agronegócio | SAO PAULO - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">Acima de R$ 15 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 30,1 MM a R$ 50 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Será mantido</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: BAYER SA</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Bayer SA</strong> é a operação brasileira do grupo alemão Bayer AG, um dos maiores conglomerados globais nos setores de <strong>saúde e agronegócio</strong>. No Brasil, a empresa emprega entre 5.000 e 9.999 colaboradores e registra faturamento superior a R$ 15 bilhões, atuando com forte presença nas divisões <strong>Crop Science</strong> (defensivos, sementes e soluções digitais para o campo) e <strong>Pharmaceuticals</strong> (medicamentos e saúde do consumidor). Após a aquisição global da Monsanto em 2018 — uma das maiores fusões do setor —, a Bayer consolidou-se como líder mundial em sementes e proteção de cultivos. Estrategicamente, a companhia tem como meta alcançar <strong>100% das vendas conectadas a elementos digitais até 2030</strong> e pretende <strong>dobrar a coleta de dados no campo</strong> no mesmo horizonte, acelerando a adoção de IA, machine learning e plataformas de agricultura de precisão. Em 2025, a divisão agrícola global registrou 21,6 bilhões de euros em vendas, com projeção de crescimento entre 1% e 4% para 2026. A operação brasileira adotou a plataforma Denodo para modernizar sua gestão de dados na América Latina, tornando análises até <strong>5× mais rápidas</strong> e reduzindo custos de manipulação de dados em 90%, integrando dados de sensores IoT e indicadores ESG. A empresa investe 2 bilhões de euros anuais em P&D e mantém parcerias estratégicas com Microsoft e outras big techs para fortalecer sua governança digital.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Estabilidade</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Agronegócio</strong> com abrangência <strong>Global</strong>. Possui <strong>1 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>RFP/concorrência estruturada entre fornecedores qualificados</strong>. Perspectiva do orçamento de TI: <strong>Será mantido</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar infraestrutura e redes</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar sistemas legados</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Orquestrar transformação digital</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Otimizar custos e eficiência (FinOps/SecFinOps)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Padronizar e otimizar arquiteturas híbridas e multicloud</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">IA Generativa</span>
+<span class="tag tag-priority">Low-code / no-code</span>
+<span class="tag tag-priority">Desenvolvimento e modernização de legados</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">CRM</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Workplace e end-user computing</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Disaster recovery / continuidade de negócios</span>
+</div><div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria/assessment):</h4>
+                <div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA / ML</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA Generativa</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Low-code / no-code</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Desenvolvimento e modernização de legados</span>
+</div>
+            </div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Pablo Damico</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 56</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Low-code / no-code é prioridade Top 3</li><li>Desenvolvimento e modernização de legados é prioridade Top 3</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Pablo Damico tem como top prioridades <strong>IA Generativa; Low-code / no-code; Desenvolvimento e modernização de legados</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>1 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 1 projetos definidos sem fornecedor: Disaster recovery / continuidade de negócios. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Será mantido</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: FourBlox. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <ul style="margin-left:20px;margin-top:8px;opacity:0.95;font-size:14px;line-height:2">
+                    <li><strong>Mercado agro brasileiro em expansão:</strong> O mercado de proteção de cultivos no Brasil está projetado para crescer de US$ 34,5 bi (2025) para US$ 45,2 bi até 2031 — trazendo pressão por escalabilidade digital e automação que a Foursys pode endereçar com squads ágeis e FourBlox.</li>
+                    <li><strong>Meta digital agressiva da Bayer:</strong> A empresa quer 100% das vendas conectadas a elementos digitais até 2030. Isso exige modernização massiva de legados, APIs e integrações — áreas onde a Foursys tem expertise comprovada (parceria Digibee + 41.000 projetos).</li>
+                    <li><strong>IA Generativa como prioridade declarada:</strong> Pablo D'Amico listou IA generativa como prioridade Top 1 e ainda não definiu fornecedor para implementação. O AI Squad proprietário da Foursys é um diferencial direto para capturar essa oportunidade.</li>
+                    <li><strong>Legado complexo pós-Monsanto:</strong> A fusão com a Monsanto em 2018 gerou um enorme desafio de integração de sistemas (18 processos de fusão/separação ao longo da história). A modernização desses legados é prioridade Top 3, sinalizando demanda por parceiros especializados em refatoração e migração.</li>
+                    <li><strong>Concorrentes avançando em digital:</strong> Syngenta já integrou GenAI ao Salesforce e fechou parceria com SAP; BASF expandiu o xarvio com IA preditiva para o Brasil. Esses movimentos criam urgência competitiva para a Bayer acelerar seus projetos digitais — oportunidade para a Foursys oferecer velocidade de entrega.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>🟢 Syngenta Group</h4>
+                <p><strong>Vendas globais 2025:</strong> US$ 28,4 bilhões | <strong>Foco digital:</strong> Plataforma Cropwise (agricultura de precisão) e SynGPT (IA generativa interna). Em 2026, firmou parceria estratégica com a SAP para implementar SAP Cloud ERP e Business Data Cloud em suas operações globais. No Brasil, lançou o Cropwise Planting, que aumenta o potencial produtivo em até 3% e reduz custos de fertilização em 25%. Integrou GenAI ao Salesforce para otimizar vendas e P&D.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🔵 BASF Agricultural Solutions</h4>
+                <p><strong>Ebitda agro 2025:</strong> €1,92 bi (+16,1%) | <strong>Foco digital:</strong> Plataforma xarvio® FIELD MANAGER com IA generativa para decisões de plantio e proteção de cultivos. Expandiu o xarvio para Brasil e Argentina em 2025, com funcionalidades de scouting baseadas em GPS e análises preditivas. Realiza o "Agro Digital Day" anual com foco em IA centrada no humano. Planeja IPO do negócio agrícola na Bolsa de Frankfurt em 2027, sinalizando forte investimento em inovação.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🟠 Corteva Agriscience</h4>
+                <p><strong>Posição:</strong> Líder global em sementes e proteção de cultivos (spin-off DowDuPont) | <strong>Foco digital:</strong> Migração completa de 130+ websites para plataforma cloud-first com Adobe Experience Manager e Analytics. Foco em experiência mobile (60-80% do tráfego é mobile). Investe em biotecnologia e biológicos (BlueN™, Kinsidro®) como diferencial competitivo. Lançou 6 produtos significativos em 2025 com tecnologia de ponta.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🟣 FMC Corporation</h4>
+                <p><strong>Posição:</strong> Top 5 global em proteção de cultivos | <strong>Foco digital:</strong> Forte investimento em plataformas digitais de precision agriculture e soluções biológicas. Presença crescente no Brasil com foco em soluções sustentáveis e digitalização da cadeia de insumos. Compete diretamente com a Bayer em defensivos químicos e biológicos, com estratégia agressiva de expansão no mercado latino-americano.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Onde a Bayer Pode Estar Atrás</h4>
+                <p>A Syngenta lidera em adoção de <strong>IA generativa integrada ao CRM (Salesforce)</strong> e já possui parceria firmada com SAP para cloud ERP — uma vantagem operacional significativa. A BASF está à frente com o <strong>xarvio FIELD MANAGER</strong>, uma plataforma de agricultura digital madura com IA preditiva já expandida para o Brasil. A Corteva se destaca em <strong>experiência digital mobile-first</strong>, com 80% do tráfego via dispositivos móveis. Para a Bayer, os gaps mais evidentes são: (1) necessidade de <strong>acelerar a integração de IA generativa</strong> nos processos internos e de vendas, (2) <strong>modernizar sistemas legados</strong> herdados da fusão com Monsanto, e (3) fortalecer a <strong>plataforma de disaster recovery</strong> — projeto que já está definido mas sem fornecedor. A Foursys pode posicionar-se exatamente nessas lacunas.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Licenciado em Sistemas — Universidad de Buenos Aires (UBA). MBA e Magíster em Finanças (UBA). Certificações: ITIL, PMP (PMI), Gestão de Métricas de TI (ITBA).</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória Profissional</div>
+                        <div class="value">+27 anos de experiência em TI. Na Bayer há +24 anos. Passou por Business Intelligence em Berlim/Leverkusen, Gerente de TI & Inovação no Cone Sul (2013-2020), IT Director Brasil & LATAM (2020-2025) e atualmente Global IT Transformation Principal Lead.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Nacionalidade & Idiomas</div>
+                        <div class="value">Argentino, radicado em São Paulo desde 2020 (mudou-se durante a pandemia). Fluente em espanhol, português e inglês. Viveu na Alemanha em projetos globais.</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reconhecimentos</div>
+                        <div class="value">Top 10 CIO nos anos de 2016 e 2017. Liderou crescimento de receita de +20% em 2023. Elevou satisfação de TI de 3.1 para 3.9. Criou o programa "IT Truck" atingindo 10.000 funcionários.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn ativo (Pablo D'Amico). Perfil destacado no Minders Group. Professor de Tecnologia da Informação na UBA desde 2004. Palestrante em fóruns de TI e inovação.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Interesses & Estilo</div>
+                        <div class="value">Apaixonado por inovação e metodologias ágeis (DSO — Dynamic Share Ownership). Certificado em Systematic Inventive Thinking (SIT). Especialização em agronegócio (Agro SkillCamp — sementes). Perfil hands-on e orientado a resultados mensuráveis.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa com Pablo D'Amico</h4>
+                <ul style="margin-left:20px;margin-top:8px;opacity:0.95;font-size:14px;line-height:2.2">
+                    <li><strong>Fale sobre transformação com métricas:</strong> Pablo é orientado a resultados quantificáveis — mencione o crescimento de +20% em receita e a elevação de satisfação de TI que ele mesmo liderou. Mostre que a Foursys também mede sucesso por KPIs concretos (41.000+ projetos, ISO 27001/27701).</li>
+                    <li><strong>Valorize a experiência multicultural:</strong> Ele viveu na Alemanha, gerenciou LATAM inteira (19 países, 23 mil usuários) e é argentino radicado no Brasil. Demonstre a capacidade global da Foursys e interesse genuíno por sua vivência internacional.</li>
+                    <li><strong>Aborde inovação com metodologia:</strong> Pablo é certificado em Systematic Inventive Thinking (SIT) e promoveu o modelo ágil DSO na Bayer. Conecte a conversa ao FourBlox como metodologia aceleradora, não apenas ferramenta — ele valoriza frameworks estruturados.</li>
+                    <li><strong>Toque no tema acadêmico:</strong> Ele é professor na UBA desde 2004 e valoriza formação de talentos. Mencione o compromisso da Foursys com capacitação e desenvolvimento de pessoas — é um tema que ressoa pessoalmente com ele.</li>
+                    <li><strong>Conecte-se pelo momento de transição:</strong> Pablo assumiu recentemente (jan/2025) um papel global como Transformation Principal Lead. Ele está moldando a próxima fase digital da Bayer globalmente — posicione a Foursys como parceira que entende a complexidade de escalar transformação, especialmente pós-fusão Monsanto.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Diretor de TI e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CFO/Financeiro</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Membro: assento permanente, com voto.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">10 a 29</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#5c6bc0">7%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:6%;background:#7986cb">6%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:4%;background:#9fa8da">4%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#c5cae9">3%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Roadmap e inovação</span>
+<span class="tag tag-active">Capilaridade/cobertura regional</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Especialista setorial / regulatório;Fornecedor com cobertura global</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 11 temas | Interno: 2 temas | Projeto: 1 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

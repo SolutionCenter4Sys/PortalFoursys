@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Thiago Parreira | Grupo EBD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+:root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Thiago Parreira</h1>
+                <h2>Diretor de Tecnologia (CIO) — Grupo EBD</h2>
+                <div class="loc">Comércio Atacadista e Varejista · Distribuição / Veículos / Agro · Ananindeua/PA · CNPJ 05.402.904/0001-67</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Média · Grupo multi-negócio Norte (porte relevante)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Operações EBD</div><div class="value">20 em 9 UFs</div></div>
+                <div class="header-badge"><div class="label">Marcas parceiras</div><div class="value">&gt;50</div></div>
+                <div class="header-badge"><div class="label">Colaboradores (faixa)</div><div class="value">~1–2 mil</div></div>
+                <div class="header-badge"><div class="label">Último IT Forum</div><div class="value">NÃO</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: site Grupo EBD + LinkedIn CIO (ERP/cloud/Equinix + Roteiro Inteligente) + CNG 2025 + leitura de distribuição Norte + material de apresentação · Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>O <strong>Grupo EBD</strong> (CNPJ 05.402.904/0001-67), sede em <strong>Ananindeua/PA</strong>, iniciou em 1977 como Empresa Brasileira de Distribuição. Atua em três frentes: (1) <strong>Distribuição</strong> de produtos de consumo — 20 operações em 9 estados e &gt;50 marcas parceiras; (2) <strong>Veículos</strong> — concessionárias desde 1995 (Fiat/Via Marconi Manaus; Ford, Hyundai, Toyota, Jeep, BMW em múltiplos estados); (3) <strong>Agronegócio</strong> — pecuária de corte. Não é companhia listada: faturamento consolidado <strong>não localizado</strong> em fontes abertas revisadas. LinkedIn company cita faixa de 1.000–2.000 colaboradores. Fontes: ebdgrupo.com.br; lojaebd.com.br/quem-somos.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Grupo EBD / Empresa Brasileira de Distribuição (CNPJ informado)</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">Ananindeua / PA</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">9 estados (distribuição) · concessionárias em 5 estados</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">Não localizado em fonte pública revisada</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~1.000–2.000 (LinkedIn company) · TI: &gt;50 diretos + 50 indiretos (CIO)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada · distribuição + retail auto + agro</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Thiago Parreira</strong> é <strong>Diretor de Tecnologia / Director of IT (CIO)</strong> do Grupo EBD. Reporta ao Presidente; lidera &gt;50 reportes diretos e 50 indiretos (LinkedIn). Entregas declaradas: rollout de migração ERP em todas as unidades (&gt;4.000 usuários impactados); migração de aplicações para cloud e relocação de Data Center para <strong>Equinix</strong>; padronização PMI/ITIL; agile em software; transformação digital em logística e vendas. Case premiado CIO Private Sectors 2025: <strong>“Roteiro Inteligente”</strong> (roteirização, dashboards, integração, redução de combustível). CNG 2025: apresentou IA como copiloto, automações e segurança. Trajetória: Expressa Distribuidora, Gafisa; M.Sc. citado no headline. <strong>Poder de decisão:</strong> alto sobre roadmap e budget de TI (reporte ao Presidente). <strong>Presente no último IT Forum:</strong> NÃO.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Distribuição atacadista/varejo de bens de consumo no Norte/Nordeste e expansão multiestado; adjacente a concessionárias automotivas e pecuária. Cadeia: armazenamento → venda → distribuição → execução no PDV (trade). Prioridades: fill rate, custo logístico, integração de sistemas multi-BU (distribuição × auto × agro), disponibilidade de DC/cloud, automação de rota e visibilidade de estoque. Pressões: grandes distribuidores nacionais, indústrias com DCs próprios, marketplaces B2B e montadoras exigentes em sistemas de concessionária. Tendência: roteirização inteligente, IA operacional, ERP unificado. Risco: complexidade multi-vertical sem arquitetura única.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>ERP pós-migração em escala</strong> — &gt;4.000 usuários; estabilização e extensões ainda consomem capacidade (LinkedIn CIO).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Logística multi-estado</strong> — Roteiro Inteligente premiado; industrializar para todas as operações.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Multi-negócio (distribuição + auto + agro)</strong> — stacks e processos distintos sob um CIO.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Cloud + Equinix</strong> — migração feita; FinOps, segurança e modernização de apps restantes.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>IA anunciada como próxima onda</strong> — CNG 2025; risco de pilots sem fábrica.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Sistemas integrados fim a fim</span>
+                <span class="tag tag-priority">Logística data-driven</span>
+                <span class="tag tag-priority">IA copiloto + automações</span>
+                <span class="tag tag-priority">Segurança e suporte ao negócio</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Estabilização/evolução ERP</span>
+                <span class="tag tag-active">Roteirização / logística inteligente</span>
+                <span class="tag tag-active">Cloud / Equinix / apps</span>
+                <span class="tag tag-active">IA e RPA</span>
+                <span class="tag tag-active">Cibersegurança</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">iPaaS entre ERP, WMS, TMS e DMS auto</span>
+                <span class="tag tag-opportunity">AI Squad em rota/previsão/demanda</span>
+                <span class="tag tag-opportunity">Modernização de apps legados pós-cloud</span>
+                <span class="tag tag-opportunity">Cibersegurança e observabilidade</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS Digibee) + Engenharia Digital</h4><span class="score-badge">90/100</span></div>
+                <p>Industrializar integrações ERP↔logística↔PDV↔concessionárias — reduz ponto a ponto após migração.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: migração ERP multi-BU e case de integração no Roteiro Inteligente.</li>
+                    <li>FATO: 20 operações + vertical auto/agro.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">86/100</span></div>
+                <p>Escalar IA além do discurso CNG: previsão de demanda, copiloto comercial e otimização de rota com governança.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: Thiago apresentou IA como copiloto na CNG 2025.</li>
+                    <li>FATO: case Roteiro Inteligente já prova cultura data-driven.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">82/100</span></div>
+                <p>Modernizar aplicações remanescentes pós-Equinix/cloud — strangler e dual-run controlado.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: migração de apps para cloud e DC Equinix (LinkedIn).</li>
+                    <li>HIPÓTESE: long tail de legado ainda on-prem ou monolítico.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">76/100</span></div>
+                <p>Programa de hardening, SOC e conformidade (ISO Foursys) para DC Equinix + rede multi-estado.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: segurança citada na agenda CNG do CIO.</li>
+                    <li>HIPÓTESE: superfície de 20 CDs/operações + concessionárias.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital (logística &amp; CX)</h4><span class="score-badge">72/100</span></div>
+                <p>Squads para evoluir Roteiro Inteligente, dashboards e canais digitais (lojaebd).</p>
+                <div class="reasons"><ul>
+                    <li>FATO: prêmio CIO Private Sectors 2025 no case logístico.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>“Vocês já migraram ERP, foram para Equinix e ganharam o case de Roteiro Inteligente. O próximo gargalo é industrializar integrações e IA — sem reinventar o caminhão a cada operação.”</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>PoC FourBlox em 1 fluxo crítico (pedido→estoque→rota) ou AI Squad em previsão/rota, com métricas de km/combustível e OTIF.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>FourBlox + AI Squad + Modernização com ISO — throughput para CIO que já entrega e precisa de fábrica, não de diagnóstico.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Grandes distribuidores nacionais</h4><p>Escala e sistemas maduros. Gap EBD: capilaridade Norte e relacionamento com marcas; precisa paridade digital logística.</p></div>
+            <div class="competitor-card"><h4>Redes de concessionárias</h4><p>DMS exigidos por montadoras. Gap: integração com ERP corporativo do grupo.</p></div>
+            <div class="competitor-card"><h4>Vendors de TMS/roteirização</h4><p>Podem ser parceiros ou incumbents do Roteiro Inteligente. Gap Foursys: integração e AI ao redor, não substituir o que funciona.</p></div>
+            <div class="competitor-card"><h4>Integradores ERP locais</h4><p>Sustentação. Gap: squads de modernização e iPaaS industrial.</p></div>
+            <div class="competitor-card"><h4>Hyperscalers / Equinix partners</h4><p>Infra pronta. Gap: aplicação e dados.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Grupo EBD (PA) — distribuição 20 ops/9 UFs + concessionárias + agro; privada.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Thiago Parreira — Diretor de TI/CIO; reporte ao Presidente; case Roteiro Inteligente 2025.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Pós-ERP/cloud: integrar multi-BU, escalar logística inteligente e IA com governança.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">ERP, Equinix/cloud, roteirização, IA/RPA, segurança — LinkedIn/CNG (sem RI público).</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) FourBlox; 2) AI Squad; 3) Modernização de Legado.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">IT Forum 45 min: mapa de integrações pós-ERP + PoC logística/IA.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum 2026 (1ª presença) · onda pós-case 2025.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “outro TMS”; vender fábrica de integração + IA sobre o que já premiaram.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>ERP + Equinix</h4><p>Thiago lidera migração ERP e DC na Equinix — base digital única para o grupo multi-negócio.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Escalar o que já funciona</h4><p>Roteiro Inteligente ganhou prêmio; IA e integrações precisam virar fábrica em 20 operações.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Factory Foursys</h4><p>iPaaS + AI Squad + modernização elevam throughput com a mesma cultura “fazer bem feito”.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Integrações pós-ERP multi-BU</h4>
+                <p>Evidência: rollout ERP &gt;4.000 usuários; distribuição + auto + agro (site/LinkedIn).</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox + Engenharia Digital — padrões de interface; resultado: menos ponto a ponto e menos incidente de pedido/estoque.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quantas integrações críticas ainda são scripts/ponto a ponto após o go-live do ERP?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop mapa de interfaces + PoC iPaaS.</p>
+            </div>
+            <div class="business-card">
+                <h4>Escalar Roteiro Inteligente + IA</h4>
+                <p>Evidência: case premiado 2025; CNG com IA copiloto.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — previsão/otimização com governança; resultado: km, combustível e OTIF.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Em quantas das 20 operações o Roteiro Inteligente já está 100% adotado?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>PoC em 1 praça com baseline de combustível.</p>
+            </div>
+            <div class="business-card">
+                <h4>Modernização pós-cloud</h4>
+                <p>Evidência: apps migrados + DC Equinix.</p>
+                <div class="sub">Solução Foursys</div><p>Modernização de Legado — long tail de apps; resultado: menor custo de run e mais velocidade.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Qual percentual do portfólio ainda impede releases semanais?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment de 3 apps críticos.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck 8 slides + one-pager Roteiro Inteligente→fábrica + diagrama integração ERP</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">FourBlox + AI Squad + Modernização — porquê: pós-ERP + logística + IA</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) iPaaS em distribuição multi-CD; (2) AI em rota/demanda; (3) modernização pós-migração cloud — cases Foursys (sem inventar métricas).</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> ele já tem case premiado; vender escala e integração, não “ideia nova de roteirização”.</p>
+            <p style="margin-top:8px"><em>Usar linguagem do grupo: #VamosBaterMeta / fazer bem feito — com substância técnica.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Parabéns pelo case Roteiro Inteligente — queremos ajudar a industrializar isso nas 20 operações.”</li>
+                <li>“Pós-ERP e Equinix, o gargalo costuma ser mapa de interfaces, não mais hardware.”</li>
+                <li>“FourBlox (Digibee) para ERP, WMS, TMS e DMS falarem a mesma língua.”</li>
+                <li>“AI Squad amarra o discurso de copiloto da CNG a KPI de combustível/OTIF.”</li>
+                <li>“Modernização do long tail libera o time de 50+ para produto, não para apagar incêndio.”</li>
+                <li>“Proposta: assessment de integrações + PoC em 30–45 dias.”</li>
+                <li>“Primeira presença no IT Forum — porta para programa anual.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>IT Forum / LinkedIn com ângulo pós-case</td><td>Agenda 45 min com Thiago</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Mapa ERP/integrações/logística</td><td>One-pager + hipóteses PoC</td><td>1–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC FourBlox ou AI rota/demanda</td><td>Demo + ROI</td><td>3–6 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad integração/IA</td><td>Backlog 90 dias</td><td>1–3 meses</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Programa multi-oferta</td><td>MSA / SOW</td><td>3–6 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Site Grupo EBD</h4><div class="url">https://ebdgrupo.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">PHP site</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">PHP 8.2 / nginx</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não identificado (nginx)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">N/A marketing</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Loja EBD</h4><div class="url">https://lojaebd.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">E-commerce / institucional</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Apache 2.4</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não identificado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>ERP corporativo</h4><div class="url">Interno — migração multi-BU (LinkedIn)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não público</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">ERP (marca não confirmada publicamente)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Apps migrados + Equinix DC</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações a logística/PDV</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Roteiro Inteligente</h4><div class="url">Case interno — CIO Private Sectors 2025</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Dashboards tempo real</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Roteirização + integração sistemas</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não detalhado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integração logística</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Migração de aplicações para cloud; Data Center em Equinix (LinkedIn CIO). Hyperscaler específico: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">Agenda explícita do CIO (CNG). Ferramentas: LinkedIn company cita Trend Micro/Veeam/Zabbix em stack pública agregada — validar.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">IA copiloto e automações (CNG); RPA citado em stack agregada; Roteiro Inteligente.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">Dashboards tempo real do case; Power BI / Looker citados em stack agregada LinkedIn — validar.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">ERP migrado em todas as BUs (marca não confirmada publicamente). Oracle aparece em stack agregada — tratar como hipótese até validar.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">WMS/TMS (hipótese operacional), DMS de montadoras, Salesforce citado em stack agregada, Bizagi/BPM.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">ebdgrupo.com.br (nginx/PHP); lojaebd.com.br (Apache); WhatsApp/trade (stack agregada).</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://ebdgrupo.com.br/</td><td><span class="status-200">200</span></td><td>PHP site</td><td>nginx</td><td>X-Powered-By PHP/8.2.30 · WebFetch</td></tr>
+                    <tr><td>https://lojaebd.com.br/</td><td><span class="status-200">200</span></td><td>Site/loja</td><td>Apache/2.4.55</td><td>HTTP 21/07/2026</td></tr>
+                    <tr><td>https://lojaebd.com.br/quem-somos</td><td><span class="status-200">200</span></td><td>Institucional</td><td>Apache</td><td>História 1977 / 9 estados / auto</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026. Só registrar o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Integração</div><h4>Pós-ERP multi-vertical</h4><p>Distribuição×auto×agro. Evidência: estrutura do grupo + migração ERP.</p><div class="offer">Oferta Foursys: FourBlox</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Escala</div><h4>Roteiro Inteligente em todas as ops</h4><p>Case premiado; gap é cobertura 20/20.</p><div class="offer">Oferta Foursys: Engenharia Digital / AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · IA</div><h4>Copiloto sem fábrica</h4><p>CNG anunciou; industrialização pendente típica.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Legado</div><h4>Long tail pós-cloud</h4><p>Equinix feito; apps remanescentes.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Segurança</div><h4>Superfície multi-estado</h4><p>20 operações + concessionárias.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 6 · Dados</div><h4>Única verdade de estoque/rota</h4><p>Distribuição sofre com latência de dados entre CDs.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">M.Sc. (headline LinkedIn) — detalhar na conversa</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">São Paulo citado no LinkedIn · grupo no Pará</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Começar pelo Roteiro Inteligente / prêmio 2025 — reconhecimento genuíno.<br>
+                2) Respeitar reporte ao Presidente — ele é C-level de TI de fato.<br>
+                3) Usar PMI/ITIL e linguagem de entrega (ele migrou ERP em escala).<br>
+                4) Não questionar a escolha Equinix; perguntar o long tail de apps.<br>
+                5) Conectar cultura EBD (“fazer bem feito”, garra) a métricas.<br>
+                6) Evitar pitch genérico de cloud — já migraram.<br>
+                7) IT Forum como 1º contato presencial — agenda de programa, não só PoC.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; empresa</h4><ul>
+                    <li>ebdgrupo.com.br — negócios distribuição/veículos/agro</li>
+                    <li>lojaebd.com.br/quem-somos — história 1977</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>LinkedIn Thiago Parreira — ERP, Equinix, cloud</li>
+                    <li>Case Roteiro Inteligente — CIO Private Sectors 2025</li>
+                    <li>HTTP headers ebdgrupo / lojaebd</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Distribuição Norte/multiestado</li>
+                    <li>CNPJ 05.402.904/0001-67 (briefing)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn — Thiago Parreira</li>
+                    <li>Posts CNG 2025 / Grupo EBD</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch/HTTP 21/07/2026 — ebdgrupo.com.br, lojaebd.com.br</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+
+</body>
+</html>

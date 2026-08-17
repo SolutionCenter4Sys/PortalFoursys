@@ -1,0 +1,105 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      screens: {
+        'xs': '375px',
+        'tablet': '820px',
+        '3xl': '1920px',
+      },
+      colors: {
+        foursys: {
+          primary:       'rgb(var(--c-primary) / <alpha-value>)',
+          'primary-light':'rgb(var(--c-primary-light) / <alpha-value>)',
+          'primary-dark': 'rgb(var(--c-primary-dark) / <alpha-value>)',
+          cyan:          'rgb(var(--c-cyan) / <alpha-value>)',
+          'cyan-light':  'rgb(var(--c-cyan-light) / <alpha-value>)',
+          dark:          'rgb(var(--c-dark) / <alpha-value>)',
+          'dark-2':      'rgb(var(--c-dark-2) / <alpha-value>)',
+          'dark-3':      'rgb(var(--c-dark-3) / <alpha-value>)',
+          'dark-4':      'rgb(var(--c-dark-4) / <alpha-value>)',
+          surface:       'rgb(var(--c-surface) / <alpha-value>)',
+          'surface-2':   'rgb(var(--c-surface-2) / <alpha-value>)',
+          text:          'rgb(var(--c-text) / <alpha-value>)',
+          'text-muted':  'rgb(var(--c-text-muted) / <alpha-value>)',
+          'text-dim':    'rgb(var(--c-text-dim) / <alpha-value>)',
+          accent:        'rgb(var(--c-accent) / <alpha-value>)',
+          success:       'rgb(var(--c-success) / <alpha-value>)',
+          warning:       'rgb(var(--c-warning) / <alpha-value>)',
+        },
+        evidence: {
+          proven:     'rgb(var(--c-evidence-proven) / <alpha-value>)',
+          validating: 'rgb(var(--c-evidence-validating) / <alpha-value>)',
+          none:       'rgb(var(--c-evidence-none) / <alpha-value>)',
+        },
+      },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      fontSize: {
+        // Escala em rem para acompanhar o corpo de texto do sistema (Dynamic Type)
+        meta:  ['0.625rem',  { lineHeight: '0.875rem' }],
+        label: ['0.6875rem', { lineHeight: '1rem' }],
+      },
+      minHeight: {
+        touch: '44px',
+      },
+      minWidth: {
+        touch: '44px',
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-foursys': 'linear-gradient(135deg, #FF6600 0%, #FF7A00 100%)',
+        'gradient-dark': 'linear-gradient(135deg, #060B14 0%, #1E2A3A 100%)',
+        'gradient-orange-glow': 'radial-gradient(ellipse at top, rgba(255,102,0,0.15) 0%, transparent 60%)',
+      },
+      animation: {
+        'count-up':    'countUp 2s ease-out forwards',
+        'pulse-slow':  'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'float':       'float 6s ease-in-out infinite',
+        'shimmer':     'shimmer 2s linear infinite',
+        'flame-sway':  'flameSway 3s ease-in-out infinite alternate',
+        'flame-inner': 'flameInner 2s ease-in-out infinite alternate',
+        'flame-glow':  'flameGlow 4s ease-in-out infinite alternate',
+        'ray-fade':    'rayFade 3s ease-in-out infinite alternate',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%':      { transform: 'translateY(-10px)' },
+        },
+        shimmer: {
+          '0%':   { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        flameSway: {
+          '0%':   { transform: 'translateX(-50%) scaleX(1)   scaleY(1)',    opacity: '0.9' },
+          '33%':  { transform: 'translateX(-48%) scaleX(0.96) scaleY(1.02)', opacity: '1'   },
+          '66%':  { transform: 'translateX(-52%) scaleX(1.04) scaleY(0.98)', opacity: '0.85' },
+          '100%': { transform: 'translateX(-50%) scaleX(0.97) scaleY(1.01)', opacity: '0.95' },
+        },
+        flameInner: {
+          '0%':   { transform: 'translateX(-50%) scaleX(1)    scaleY(1)',    opacity: '1'   },
+          '50%':  { transform: 'translateX(-49%) scaleX(0.94) scaleY(1.04)', opacity: '0.8' },
+          '100%': { transform: 'translateX(-51%) scaleX(1.06) scaleY(0.97)', opacity: '0.9' },
+        },
+        flameGlow: {
+          '0%':   { opacity: '0.4', transform: 'scale(1)'   },
+          '100%': { opacity: '0.7', transform: 'scale(1.15)' },
+        },
+        rayFade: {
+          '0%':   { opacity: '0.08' },
+          '100%': { opacity: '0.18' },
+        },
+      },
+      backdropBlur: {
+        xs: '2px',
+      }
+    },
+  },
+  plugins: [],
+}

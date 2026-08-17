@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Rodrigo Antonio Nardoni Goncales | B3</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Rodrigo Antonio Nardoni Goncales</h1>
+                <h2>CIO — B3</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Serviços financeiros | Sao paulo - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 10,1 BI a R$ 11 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 200,1 MM a R$ 300 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá até 10%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: B3</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>B3 S.A. – Brasil, Bolsa, Balcão</strong> é a maior infraestrutura de mercado financeiro da América Latina, resultado da fusão entre BM&amp;FBovespa e CETIP em 2017. Com sede em São Paulo e escritórios em Rio de Janeiro, Shanghai e Londres, a empresa opera sistemas de negociação em ambiente de bolsa e balcão, câmaras de compensação e liquidação, registro e depósito para as principais classes de ativos — de ações e renda fixa a derivativos, câmbio e commodities. A B3 encerrou 2024 com receita recorde de <strong>R$ 10,6 bilhões</strong>, sendo que quase 30% vieram de iniciativas lançadas nos últimos 5 anos, evidenciando sua forte diversificação de negócios. A empresa vive um momento estratégico de aceleração tecnológica: 46% dos seus ~2.700 colaboradores atuam em inovação e tecnologia. A latência média do sistema de negociação caiu de 1,2 milissegundos (2023) para 350 microssegundos (2024), com meta de menos de 300 microssegundos até 2026 — crucial para o high-frequency trading, que representa 40% do mercado acionário brasileiro. A B3 firmou acordo de dez anos com Microsoft e Oracle para migração à nuvem e mantém projetos de IA generativa corporativa, modernização de câmbio e plataformas de títulos eletrônicos, consolidando-se como referência global em tecnologia para mercados financeiros.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Serviços financeiros</strong> com abrangência <strong>Local (Brasil)</strong>. Todos os projetos definidos já possuem fornecedor selecionado. Modelo de compra: <strong>RFP/concorrência estruturada entre fornecedores qualificados</strong>. Perspectiva do orçamento de TI: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Aumentar confiabilidade e observabilidade (SRE)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Elevar a experiência de clientes e colaboradores (CX/EX)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar complexidade dos dados e qualidade da informação</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar sistemas legados</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Otimizar custos e eficiência (FinOps/SecFinOps)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Padronizar e otimizar arquiteturas híbridas e multicloud</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">IA Generativa</span>
+<span class="tag tag-priority">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-priority">Sistemas core</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Sistemas core</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades sem Fornecedor Definido</h3>
+            <p style="color:var(--text-light)"><strong>Todos os projetos definidos já possuem fornecedor selecionado.</strong> Abordagem deve ser por valor diferenciado e especialização.</p>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Rodrigo Antonio Nardoni Goncales</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <p style="color:var(--text-light)">Score insuficiente para recomendações automáticas — requer análise manual com base em pesquisa web.</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Rodrigo Antonio Nardoni Goncales tem como top prioridades <strong>IA Generativa; Desenvolvimento e modernização de legados; Sistemas core</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 0 projetos definidos sem fornecedor. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. Latência como vantagem competitiva:</strong> A B3 reduziu a latência de negociação de 1,2ms para 350μs em um ano — perguntar como a Foursys pode apoiar a próxima meta (<300μs até 2026) com squads especializados em otimização de performance e engenharia de baixa latência.</p>
+                <p style="margin-top:10px"><strong>2. Migração cloud em escala crítica:</strong> O acordo de 10 anos com Microsoft/Oracle para migração à nuvem está em andamento. O clearing de câmbio já iniciou a migração. A Foursys pode agregar com squads de modernização de legados e expertise em arquiteturas híbridas/multicloud — um dos desafios declarados do Rodrigo.</p>
+                <p style="margin-top:10px"><strong>3. IA Generativa corporativa em expansão:</strong> A B3 já criou um ChatGPT corporativo com dados internos em parceria com Microsoft. Oportunidade para a Foursys propor expansão com RAG (Retrieval-Augmented Generation) para áreas de compliance, atendimento ao cliente e análise de risco — alinhado com a prioridade #1 de investimento.</p>
+                <p style="margin-top:10px"><strong>4. Diversificação de receita exige velocidade:</strong> 30% da receita vem de produtos lançados nos últimos 5 anos (duplicatas eletrônicas, Digitas/cripto, gift cards de Tesouro). Essa velocidade de lançamento demanda squads ágeis — a Foursys pode oferecer capacidade adicional de desenvolvimento sem aumentar headcount fixo.</p>
+                <p style="margin-top:10px"><strong>5. Observabilidade e SRE como prioridade:</strong> Com disponibilidade de 99,99% e a necessidade de manter esse nível em ambiente cada vez mais complexo (multicloud + sistemas legados + novas plataformas), a Foursys pode posicionar expertise em SRE, FinOps e monitoramento avançado — todos listados nos desafios 2026 do CIO.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>&#127466;&#127480; Nasdaq — EUA</h4>
+                <p><strong>Foco tecnológico:</strong> A Nasdaq se posiciona como provedora global de tecnologia para bolsas de valores, oferecendo plataformas de negociação, vigilância de mercado e soluções de cloud marketplace para mais de 130 mercados. Investe fortemente em IA para detecção de fraudes e análise preditiva. A B3 adquiriu código-fonte da Nasdaq para desenvolver seu sistema de clearing de câmbio.</p>
+                <p style="margin-top:8px"><strong>Receita:</strong> ~US$ 7,4 bilhões (2024) | <strong>Funcionários:</strong> ~8.900</p>
+            </div>
+            <div class="competitor-card">
+                <h4>&#127468;&#127463; LSEG (London Stock Exchange Group) — Reino Unido</h4>
+                <p><strong>Foco tecnológico:</strong> Com a aquisição da Refinitiv (US$ 27 bi), a LSEG se tornou líder global em dados e analytics financeiros. Opera o LSEG Workspace (terminal de dados), a câmara LCH e índices FTSE Russell. Investe massivamente em plataformas de dados em nuvem e IA aplicada a analytics. Referência em diversificação de receita para além da negociação.</p>
+                <p style="margin-top:8px"><strong>Receita:</strong> ~£9,1 bilhões (2025) | <strong>Funcionários:</strong> ~25.000</p>
+            </div>
+            <div class="competitor-card">
+                <h4>&#127482;&#127480; CME Group — EUA</h4>
+                <p><strong>Foco tecnológico:</strong> Maior operadora mundial de bolsas de derivativos (CME, CBOT, NYMEX, COMEX). Em 2021, firmou parceria estratégica com Google Cloud, que investiu US$ 1 bilhão para migrar infraestrutura de negociação para nuvem. Opera a plataforma eletrônica CME Globex em ~150 países. Volume diário recorde de 23,3 milhões de contratos (2022).</p>
+                <p style="margin-top:8px"><strong>Receita:</strong> US$ 6,1 bilhões (2024) | <strong>Funcionários:</strong> ~3.760</p>
+            </div>
+            <div class="competitor-card">
+                <h4>&#127465;&#127466; Deutsche Börse — Alemanha</h4>
+                <p><strong>Foco tecnológico:</strong> Opera a Eurex (derivativos), Clearstream (pós-negociação) e a plataforma de dados Qontigo/STOXX. Investe em DLT (blockchain) para liquidação de títulos e em cloud-native trading. Referência europeia em regulação tecnológica e compliance automatizado. Forte atuação em ESG data e analytics.</p>
+                <p style="margin-top:8px"><strong>Receita:</strong> ~€5,8 bilhões (2024) | <strong>Funcionários:</strong> ~15.000</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — B3 vs. Concorrentes Globais</h4>
+                <p>A B3 tem vantagens competitivas como a <strong>verticalização completa</strong> (negociação + clearing + depósito + registro) e o <strong>monopólio natural do mercado brasileiro</strong>. Porém, há gaps relevantes: (1) <strong>Dados e Analytics:</strong> enquanto LSEG e Nasdaq monetizam dados como produto separado, a B3 ainda está em estágio inicial nessa frente; (2) <strong>Cloud migration:</strong> CME Group avançou com parceria Google (US$ 1 bi investidos), enquanto a B3 iniciou migração com Microsoft/Oracle em 2022 — ritmo precisa acelerar; (3) <strong>Escala global de tecnologia:</strong> Nasdaq fornece tecnologia para 130+ mercados, enquanto a B3 foca no mercado doméstico; (4) <strong>IA em produção:</strong> concorrentes já usam IA em vigilância de mercado e precificação, enquanto a B3 foca em produtividade interna — oportunidade de expandir para produtos IA-as-a-service para clientes.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Bacharelado em Análise de Sistemas — PUC Campinas<br>MBA em Gestão de Projetos — FGV<br>Especialização em Strategic Thinking &amp; Management — Wharton School<br>Market Disruption Theory — Harvard Business School Online</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória Profissional</div>
+                        <div class="value">Iniciou carreira como Desenvolvedor na PL Alcoran → Consultor de TI no Citibank e Bradesco → Diretor de TI e Pós-Trade na BM&amp;FBovespa (2010-2016) → CIO e PMO na BM&amp;FBovespa → Vice-Presidente de Tecnologia e Cibersegurança (CIO) na B3</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe Direta</div>
+                        <div class="value">+14 reportes diretos incluindo diretores de Engenharia de Software, Dados &amp; AI, Segurança Cibernética, Infraestrutura e Produtos de TI</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Estilo de Liderança</div>
+                        <div class="value">Perfil técnico-estratégico. Valoriza inovação com estabilidade. Fala com propriedade sobre latência, cloud e IA. Usa metáforas como "Disneyland para profissionais de tecnologia" ao descrever a cultura tech da B3.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Visão Declarada</div>
+                        <div class="value">"Queremos ser a plataforma que mais acelera a performance do mercado de capitais. Desenvolvimento tecnológico é nosso principal foco."</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p><strong>1. Fale a linguagem de performance:</strong> Rodrigo domina métricas técnicas (latência em microssegundos, uptime 99,99%). Demonstre que a Foursys entende engenharia de performance — cite números, não apenas conceitos.</p>
+                <p style="margin-top:8px"><strong>2. Valorize a formação internacional:</strong> Com passagens por Wharton e Harvard, ele aprecia referências a benchmarks globais. Mencione como a Foursys trabalha com padrões internacionais e cases de exchanges globais.</p>
+                <p style="margin-top:8px"><strong>3. Respeite a cultura "build" da B3:</strong> A empresa desenvolve muito internamente (comprou código-fonte da Nasdaq e adaptou in-house). Posicione a Foursys como parceira que potencializa o time interno, não que substitui — squads que se integram à cultura da casa.</p>
+                <p style="margin-top:8px"><strong>4. Conecte com a visão de diversificação:</strong> Rodrigo destaca que "a B3 é muito mais que bolsa". Mostre interesse genuíno nos negócios menos conhecidos (SNG de veículos, plataforma de apólices, Digitas/cripto, duplicatas eletrônicas).</p>
+                <p style="margin-top:8px"><strong>5. Aborde IA como produtividade, não hype:</strong> Ele declarou publicamente que IA deve ser vista como acelerador de produtividade, não substituto de empregos. Alinhe o discurso da Foursys com essa visão pragmática — mostre ganhos mensuráveis de produtividade com AI Squads.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma vice-presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Regular: participa com frequência, sem ser membro.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">200 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:40%;background:#1a237e">40%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#9fa8da">3%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#c5cae9">2%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Roadmap e inovação</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+<span class="tag tag-active">Capilaridade/cobertura regional</span>
+<span class="tag tag-active">Residência de dados no BR</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Consultoria especializada</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 5 temas | Interno: 4 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

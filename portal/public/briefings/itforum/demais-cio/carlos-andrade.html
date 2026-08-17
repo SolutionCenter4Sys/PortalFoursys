@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Carlos Andrade | Comporte</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Carlos Andrade</h1>
+                <h2>CIO — Comporte</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Transporte e logística | São Bernardo do Campo - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 3,1 BI a R$ 4 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 50,1 MM a R$ 80 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá entre 20% e 30%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Comporte</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">O <strong>Grupo Comporte</strong> (Comporte Participações S.A.) é uma das maiores holdings de transporte de passageiros do Brasil, fundada em 2002 pelo empresário Nenê Constantino, com sede em São Bernardo do Campo (SP). A empresa opera em <strong>13 unidades federativas</strong> e mais de <strong>700 cidades</strong>, com uma frota de aproximadamente <strong>7.200 ônibus</strong> nos segmentos urbano, suburbano, rodoviário e fretamento. Originalmente constituído como Grupo Áurea, adotou o nome Comporte em 2005 ao consolidar-se como holding. Sua trajetória inclui aquisições estratégicas de marcas tradicionais, como a Breda Turismo nos anos 1990. Nos últimos anos, o grupo diversificou-se para o <strong>setor ferroviário</strong>: em 2022 venceu a concessão do Metrô de Belo Horizonte e, em 2024, em parceria com a chinesa CRRC, conquistou o leilão para operar a Linha 7 Rubi de São Paulo e construir o TIC Eixo Norte (São Paulo–Campinas), com conclusão prevista para 2031. A empresa atua ainda no transporte de encomendas e transporte sobre trilhos, posicionando-se como um conglomerado multimodal em franca expansão.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Transporte e logística</strong> com abrangência <strong>Local (Brasil)</strong>. Possui <strong>1 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>Direto com fornecedoríbrido por categoria/ticket — varia conforme valor/risco.</strong>. Perspectiva do orçamento de TI: <strong>Crescerá entre 20% e 30%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Aumentar confiabilidade e observabilidade (SRE)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar complexidade dos dados e qualidade da informação</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Cibersegurança</span>
+<span class="tag tag-priority">Gestão de dados</span>
+<span class="tag tag-priority">HCM</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">HCM</span>
+<span class="tag tag-active">BPM</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">Sustentabilidade e green IT</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Conectividade e telecom</span>
+</div><div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria/assessment):</h4>
+                <div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Disaster recovery / continuidade de negócios</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Gestão de dados</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">BPM</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Mobile apps / superapps</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Sustentabilidade e green IT</span>
+</div>
+            </div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Carlos Andrade</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 60</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Cibersegurança é prioridade Top 3</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Carlos Andrade tem como top prioridades <strong>Cibersegurança; Gestão de dados; HCM</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>1 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 1 projetos definidos sem fornecedor: Conectividade e telecom. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá entre 20% e 30%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: Cibersegurança. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. Expansão Multimodal como Diferencial Estratégico:</strong> A Comporte é um dos poucos grupos de transporte no Brasil com operação simultânea em ônibus e trilhos. A concessão do Metrô de BH e o projeto da Linha 7 Rubi/TIC Eixo Norte demandam integração tecnológica entre modais — uma oportunidade para propor soluções de <strong>plataforma de dados unificada e APIs de integração</strong>.</p>
+                <p style="margin-bottom:12px"><strong>2. Pressão Regulatória e Competitiva:</strong> A Resolução 6.033 da ANTT dobrou os mercados rodoviários disponíveis (de 35.856 para 71.711) e aumentou em 60% as empresas habilitadas. A Comporte precisa de <strong>agilidade digital</strong> para capturar novas rotas e defender posições existentes contra entrantes como FlixBus e Buser.</p>
+                <p style="margin-bottom:12px"><strong>3. IA e Analytics na Operação de Frota:</strong> Com 7.200 ônibus e expansão ferroviária, a Comporte gera volumes massivos de dados operacionais. Aplicar <strong>IA/ML para manutenção preditiva, otimização de rotas e precificação dinâmica</strong> pode gerar economia significativa — concorrentes como Guanabara já investem fortemente em telemetria e centros de controle operacional.</p>
+                <p style="margin-bottom:12px"><strong>4. Cibersegurança e LGPD em Escala:</strong> Com 10.000+ colaboradores, milhões de passageiros e operações em 13 estados, a superfície de ataque é extensa. A bilhetagem digital, apps e Wi-Fi a bordo ampliam riscos de <strong>privacidade de dados de passageiros</strong> — tema alinhado com a prioridade declarada de cibersegurança.</p>
+                <p><strong>5. Sustentabilidade como Agenda Estratégica:</strong> O setor de transporte rodoviário enfrenta pressão crescente por descarbonização. A Comporte já sinalizou investimento em <strong>Sustentabilidade e Green IT</strong> — a Foursys pode posicionar soluções de monitoramento de pegada de carbono, otimização de consumo de combustível via IoT e relatórios ESG automatizados.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>🚌 Grupo JCA (Cometa, 1001, Catarinense)</h4>
+                <p><strong>Perfil:</strong> Holding com mais de 500 colaboradores, operando as viações Cometa, 1001, Catarinense, Expresso do Sul e Rápido Ribeirão. Referência em inovação no setor rodoviário desde 2001.</p>
+                <p style="margin-top:8px"><strong>Iniciativas Tecnológicas:</strong> Lançamento de aplicativos móveis com compra de passagens e embarque via QR Code; pioneirismo no Bilhete de Passagem Eletrônico (BPE); venda de passagens por chatbot no WhatsApp; Wi-Fi a bordo com tecnologia Zoox Smart Data em ~900 ônibus; tomadas USB individuais nas poltronas.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🚌 Grupo Guanabara</h4>
+                <p><strong>Perfil:</strong> Uma das maiores empresas de transporte rodoviário do Brasil, referência nacional em transformação digital. Investiu R$ 100 milhões em modernização de frota e capacitação até 2024.</p>
+                <p style="margin-top:8px"><strong>Iniciativas Tecnológicas:</strong> Centro de Controle Operacional com monitoramento GPS em tempo real; telemetria avançada (velocidade, frenagem, consumo); bilhetagem digital com QR Code; sistemas de segurança veicular (AEB, LDWS, antitombamento, ACC); câmeras inteligentes e analytics de dados para otimização de rotas.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🌐 FlixBus Brasil</h4>
+                <p><strong>Perfil:</strong> Empresa de tecnologia alemã atuando no Brasil desde 2021 com modelo asset-light — não opera ônibus, mas fornece plataforma digital para operadoras parceiras regulamentadas pela ANTT. Presente em 14 estados e DF, com 100+ partidas diárias.</p>
+                <p style="margin-top:8px"><strong>Iniciativas Tecnológicas:</strong> Plataforma digital integrada de vendas, precificação dinâmica, marketing e inteligência de rotas; app com passagens digitais via QR Code; sistema Monitriip transmitindo dados a cada 180 segundos; Plano de Excelência Regulatória com monitoramento contínuo de indicadores.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🚌 Grupo Águia Branca</h4>
+                <p><strong>Perfil:</strong> Tradicional viação do Espírito Santo em expansão agressiva — arrematou as 125 linhas da falida Itapemirim por R$ 36 milhões/ano, com receita projetada de R$ 523 milhões anuais. 60% do público com perfil e-commerce.</p>
+                <p style="margin-top:8px"><strong>Iniciativas Tecnológicas:</strong> Frota com 40+ ônibus Mercedes-Benz Euro 6 (redução de 75% em emissões); canais digitais avançados (site, app Android/iOS, WhatsApp, portal Águia Flex); descontos de até 30% para compras online; 80% dos passageiros usando dispositivos móveis regularmente.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Comporte</h4>
+                <p>Os concorrentes estão investindo fortemente em <strong>plataformas digitais integradas</strong> (apps, QR Code, WhatsApp), <strong>telemetria e centros de controle operacional</strong>, e <strong>precificação dinâmica</strong>. A Comporte, com sua escala de 7.200 ônibus e expansão ferroviária, precisa acelerar a digitalização da experiência do passageiro e a integração de dados multimodal (ônibus + trilhos). A entrada da FlixBus com modelo asset-light pressiona as operadoras tradicionais a otimizar custos via tecnologia. O Grupo Guanabara lidera em IoT veicular e segurança inteligente — área onde a Comporte pode se diferenciar com investimento em analytics e IA aplicada à operação. A abertura regulatória da ANTT (Resolução 6.033), que dobrou os mercados disponíveis, exige agilidade digital para capturar novas rotas antes dos concorrentes.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Bacharel em Tecnologia da Informação — PUC-Rio (1979–1981)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Profissional</div>
+                        <div class="value">40+ anos em TI — desenvolvedor, gerente, consultor e empreendedor. Na Comporte desde outubro de 2014 (11+ anos como CIO/Diretor de TI).</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Empreendedorismo</div>
+                        <div class="value">Fundou a Animus Tecnologia da Informação (1995–2014), atuando como consultor e empreendedor por quase 20 anos antes de ingressar na Comporte.</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Stack Tecnológico sob sua Gestão</div>
+                        <div class="value">SAP S/4 HANA, Salesforce Commerce, AWS, GCP, OCI, UiPath (RPA), Tableau (BI), Google Workspace, SharePoint</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Áreas de Expertise</div>
+                        <div class="value">Sistemas mission-critical, cloud multi-provider, LGPD/segurança da informação, governança de TI, apps mobile, bilhetagem digital, Wi-Fi para passageiros</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil LinkedIn</div>
+                        <div class="value"><a href="https://linkedin.com/in/csergioandrade" target="_blank" style="color:var(--primary-light)">linkedin.com/in/csergioandrade</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:8px"><strong>1. Valorize a trajetória empreendedora:</strong> Carlos fundou e dirigiu sua própria empresa de TI por quase 20 anos. Ele entende o lado do fornecedor — aborde-o como um par estratégico, não apenas como comprador. Referenciar desafios de quem já empreendeu gera conexão imediata.</p>
+                <p style="margin-bottom:8px"><strong>2. Fale a linguagem de SAP e cloud multi-provider:</strong> Ele gerencia SAP S/4 HANA e opera em AWS, GCP e OCI simultaneamente. Demonstre conhecimento prático em ambientes multi-cloud e integrações SAP — isso prova competência técnica e gera credibilidade rápida.</p>
+                <p style="margin-bottom:8px"><strong>3. Conecte com o desafio multimodal (ônibus + trilhos):</strong> A expansão ferroviária (Metrô BH, Linha 7 Rubi) é um marco na carreira dele. Perguntar sobre os desafios de integrar TI entre modais diferentes mostra que você pesquisou e entende a complexidade do momento.</p>
+                <p style="margin-bottom:8px"><strong>4. Respeite a senioridade (40+ anos de TI):</strong> Com formação na PUC-Rio desde 1979, Carlos vivenciou toda a evolução da TI brasileira. Evite tom condescendente ou excessivamente básico — prefira discussões de nível estratégico sobre governança, escalabilidade e ROI.</p>
+                <p><strong>5. Explore a liderança de equipes multidisciplinares:</strong> Ele lidera grandes times multidisciplinares com equipe de TI de 50-99 pessoas atendendo 10.000+ usuários. Abordagens sobre otimização de equipe, capacitação e modelos de squad podem ressoar diretamente com seus desafios de gestão.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Pontual: convidado ad hoc para temas específicos.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">50 a 99</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Coprotagonista: co-lidera estratégia e orçamento, influencia metas de negócio.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+<div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#3949ab">20%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Integrador / empresa de serviços (SI);Consultoria especializada;Start-up / scale-up;ISV de nicho / produto específico;Especialista setorial / regulatório</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 13 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

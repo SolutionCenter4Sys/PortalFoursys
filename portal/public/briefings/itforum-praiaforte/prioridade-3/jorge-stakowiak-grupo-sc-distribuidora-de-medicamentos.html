@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Jorge Stakowiak | GRUPO SC DISTRIBUIDORA DE MEDICAMENTOS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Jorge Stakowiak</h1>
+                <h2>Diretor de Tecnologia (CIO) - GrupoSC Distribuidora de Medicamentos</h2>
+                <div class="loc">Indústria Farmacêutica (distribuição atacadista) · Anápolis/GO · CNPJ 01.206.820/0001-05</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Porte (rede nacional de CDs)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">CDs</div><div class="value">37</div></div>
+                <div class="header-badge"><div class="label">Clientes</div><div class="value">+84 mil</div></div>
+                <div class="header-badge"><div class="label">Cobertura</div><div class="value">26 UF+DF</div></div>
+                <div class="header-badge"><div class="label">Municípios 2024</div><div class="value">5.464</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: fontes abertas (site + IT Forum + LinkedIn) + leitura de comitê TI/Inovação + material de apresentação · Diferencia da edição anterior (Trancoso). CIO novo desde nov/2025; não presente no último IT Forum.</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>O GrupoSC é o agrupamento das marcas SantaCruz, Panpharma e Oncoprod Sar, com missão "Mais Saúde para Mais pessoas". Atua como elo atacadista entre indústria farmacêutica e o varejo/clínicas/hospitais, com logística de alta frequência (entrega em até 16h em 26 estados + DF). Matriz cadastral em Anápolis/GO (CNPJ da planilha IT Forum); origem histórica em Laranjeiras do Sul/PR; LinkedIn da companhia aponta HQ operacional em São Paulo. Empresa privada - sem RI pública. FATO: site institucional lista 37 CDs, +15 mil SKUs, +84 mil clientes, ~14,5 mil clínicas/hospitais, 150 fornecedores e 5.464 municípios atendidos em 2024.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">SC Distribuição Ltda. (nome fantasia Grupo SC / GrupoSC)</div></div>
+                <div class="info-card"><div class="label">Sede (planilha)</div><div class="value">Anápolis/GO - CNPJ 01.206.820/0001-05</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Nacional (26 UF + DF) · rede de CDs</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">Não localizado (privado). Referência histórica: ~R$ 13 bi pós-aquisição Panpharma/Oncoprod (Estadão, 2016)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~2.000-3.000 (LinkedIn company, fontes abertas); narrativas de marca citam escala maior - confirmar</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada · Sociedade empresária limitada · holding de marcas de distribuição farma</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Jorge Stakowiak</strong> - IT Director / CIO no GrupoSC desde <strong>novembro/2025</strong> (São Paulo). Reporta ao <strong>Diretor Executivo de TI e Inovação Rodrigo Souza</strong> (IT Forum). Trajetória: Dasa (diretor de TI - hospitais, oncologia, diagnóstico, infra híbrida e core systems, 2021-2025); Natura &amp;Co (IT Latam Director - Infra &amp; Operations); Alelo (superintendente de infra/serviços/ops, orçamento ~R$ 40 MM/ano, disponibilidade crítica); Qualicorp, Rede (Redecard), EDS/HPE, Orbitall, HP. Formação: Bacharelado TI (Mackenzie), especialização PMI (FGV), MBA Executivo (Insper). Certificações: PMP (histórico), ITIL, AWS Digital Leaders (FDC/Amazon). Perfil forte em <em>infra, cloud, FinOps, DevOps, disponibilidade e governança</em> - encaixa no mandato público de "segurança da informação + modernização + uso estratégico de dados".</p>
+            <p style="margin-top:12px"><strong>Leitura de comitê (fontes abertas):</strong></p>
+            <ul style="margin:8px 0 0 20px;font-size:14px">
+                <li><strong>Rodrigo Souza</strong> - Diretor Executivo de TI e Inovação; agenda digital B2B/B2B2C (Farmácias App, Mypharma, TX4, Xmart Force). Sponsor estratégico acima do CIO.</li>
+                <li><strong>Jorge Stakowiak</strong> - CIO operacional/estratégico de TI corporativa (infra, segurança, dados, modernização). Contato principal no IT Forum 2026.</li>
+                <li><strong>Thiago Firmino</strong> - Head of IT · Digital Channel Development/Innovation (~70 pessoas, canais digitais). Influenciador técnico de plataforma/produto digital.</li>
+                <li><strong>Rodrigo Carvalho</strong> - Gerente-geral Farmácias APP (ecossistema Farmácias Digitais). ângulo produto/marketplace.</li>
+            </ul>
+            <p style="margin-top:12px;font-size:13.5px;color:var(--text-light)">LinkedIn: linkedin.com/in/stakowiak · Presente no último IT Forum (planilha): <strong>NÃO</strong> · Confirmação presencial Praia do Forte: 03/07/2026.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento & mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Distribuição atacadista de medicamentos e correlatos: pressão por eficiência logística, rastreabilidade sanitária, redução de ruptura e digitalização do varejo independente. O GrupoSC posiciona-se entre os grandes players nacionais após a consolidação SantaCruz + Panpharma + Oncoprod (2016), competindo com grupos como Profarma e demais redes regionais/nacionais. Diferencial declarado: escala logística + ecossistema digital próprio (Farmácias Digitais) que conecta indústria, lojista e consumidor. Tendências 2025-2026: IA para reposição/estoque (TX4), marketplace e e-commerce farma, last-mile, compliance regulatório e cibersegurança da cadeia. Risco setorial: consolidação nas pontas (redes de farmácia e big pharma) aperta margem de quem não tem eficiência operacional e integração de sistemas.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões & lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Integração pós-M&amp;A e multi-marca (SantaCruz / Panpharma / Oncoprod) - legados e processos heterogêneos (hipótese consultiva + padrão setorial de consolidação).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Disponibilidade e segurança da operação logística 24×7 em dezenas de CDs - falha = ruptura no varejo farma.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Escalabilidade dos canais digitais (App, e-commerce, TX4) sem degradar custo de cloud/ops - pressão típica de growth digital.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Governança de dados entre inteligência de mercado, indústria e lojista (LGPD + vantagem competitiva).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>CIO novo (nov/2025) precisa entregar quick wins em segurança/modernização sob sponsor de Inovação já maduro.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">TI como pilar de negócio</span>
+                <span class="tag tag-priority">Segurança da informação reforçada</span>
+                <span class="tag tag-priority">Uso estratégico de dados</span>
+                <span class="tag tag-priority">Modernização de processos</span>
+                <span class="tag tag-priority">Digitalização do varejo farma (ecossistema próprio)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Cibersegurança &amp; governança (mandato CIO - IT Forum)</span>
+                <span class="tag tag-active">Cloud / infra híbrida &amp; FinOps (perfil do gestor)</span>
+                <span class="tag tag-active">Plataformas Farmácias Digitais (App, TX4, e-commerce, Ads)</span>
+                <span class="tag tag-active">Dados &amp; inteligência comercial indústria→varejo</span>
+                <span class="tag tag-active">Expansão logística de CDs (ex.: Varginha/MG - fontes locais)</span>
+            </div>
+            <p style="margin-top:8px;font-size:12.5px;color:var(--text-light)">Direcionamento de budget: empresa privada sem RI - prioridades inferidas de anúncio do CIO + artigos do Diretor de Inovação + roadmap público do ecossistema digital (fontes abertas).</p>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Assessment de segurança e arquitetura pós-chegada do CIO</span>
+                <span class="tag tag-opportunity">Integração iPaaS multi-marca / multi-canal</span>
+                <span class="tag tag-opportunity">Squads de modernização legado + dados</span>
+                <span class="tag tag-opportunity">Observabilidade e resiliência de CDs + canais digitais</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">92/100</span></div>
+                <p>Mandato explícito do CIO (IT Forum): fortalecer segurança e governança para sustentar crescimento. Encaixa em operação regulada (medicamentos) + superfície digital ampliada (marketplace, apps, APIs indústria).</p>
+                <div class="reasons"><ul><li>Anúncio público prioriza segurança da informação</li><li>Cadeia farma exige rastreabilidade e proteção de dados sensíveis</li><li>ISO 27001/27701 Foursys como prova social</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">86/100</span></div>
+                <p>Grupo multi-marca pós-aquisição + perfil do CIO em integração de sistemas e infra híbrida (Dasa). Modernizar cores/integrações sem parar a operação logística.</p>
+                <div class="reasons"><ul><li>Histórico M&amp;A 2016 ainda ecoa em stack</li><li>CIO com case de transformação de landscape TI</li><li>Reduz risco operacional em CDs e pedidos</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS Digibee)</h4><span class="score-badge">84/100</span></div>
+                <p>Integração entre ERP/WMS/TMS, portais B2B, Farmácias Digitais e APIs de indústria. Acelera time-to-market de serviços digitais sem reescrever tudo.</p>
+                <div class="reasons"><ul><li>Ecossistema multi-produto (App, TX4, Docas Virtuais)</li><li>Pressão por integração indústria-varejo em tempo quase real</li><li>Parceria Digibee + compliance ISO</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">78/100</span></div>
+                <p>Escala de canais digitais e produtos (Thiago Firmino / Farmácias Digitais) com qualidade de engenharia, DevSecOps e product squads.</p>
+                <div class="reasons"><ul><li>Growth digital anunciado (milhares de farmácias no ecossistema)</li><li>Necessidade de delivery contínuo com segurança</li><li>Complementa (não compete) com Inovação interna</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">74/100</span></div>
+                <p>TX4 já usa IA para gôndola/estoque; oportunidade de industrializar MLOps, casos de demanda/ruptura e assistentes operacionais sob governança.</p>
+                <div class="reasons"><ul><li>IA já no discurso público do ecossistema</li><li>CIO cita tecnologias exponenciais (IA, IoT) em posts</li><li>Evitar "IA de slide" - squad com KPI de ruptura/OTIF</li></ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>IT Forum Praia do Forte: "Você chegou há poucos meses com mandato claro de segurança + dados + modernização. Em 90 dias, o que precisa estar no ar para o comitê (você + Rodrigo Souza) sentir que a TI corporativa acompanha o ritmo do Farmácias Digitais?"</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Janela de honeymoon do CIO novo (nov/2025 → 2026): assessment de ciber + mapa de integrações críticas CD→pedido→canal digital, antes do ciclo orçamentário consolidar vendors. Timing do evento: primeira presença no IT Forum (não veio no último).</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Não vender "mais um app farma" - eles já têm. Vender capacidade de engenharia, integração e segurança para a fábrica digital já existente escalar com governança (24 anos, 41.000+ projetos, ISO 27001/27701, FourBlox/Digibee).</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes & Gap Analysis</h3>
+            <div class="competitor-card"><h4>Profarma (e pares de distribuição nacional)</h4><p>Concorrência clássica em escala logística e share de distribuição. Gap do alvo: acelerar diferenciação via ecossistema digital próprio - exige TI corporativa tão madura quanto o braço de inovação.</p></div>
+            <div class="competitor-card"><h4>Redes de farmácia com plataforma própria (ex.: grandes redes verticais)</h4><p>Integram varejo + distribuição + app. Gap: GrupoSC atende independentes - precisa digitalizar o "meio" (lojista) sem virar software house lenta; parceria de engenharia ajuda.</p></div>
+            <div class="competitor-card"><h4>Healthtechs / marketplaces farma independentes</h4><p>Disputam atenção do consumidor e do lojista. Gap: Farmácias Digitais compete - stack de ads, delivery e dados precisa de integração e segurança de nível enterprise.</p></div>
+            <div class="competitor-card"><h4>Distribuidores regionais ágeis</h4><p>Podem vencer em nicho geográfico com serviço. Gap do alvo: manter OTIF nacional; TI de CDs e torres de controle → barreira defensiva.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A - Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo - 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">GrupoSC (SantaCruz + Panpharma + Oncoprod): distribuição farma nacional, 37 CDs, +84 mil clientes; matriz Anápolis/GO.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Jorge Stakowiak, CIO desde nov/2025; ex-Dasa/Natura/Alelo; reporta a Rodrigo Souza (TI &amp; Inovação).</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Alinhar TI corporativa (segurança, modernização, dados) ao ritmo do ecossistema Farmácias Digitais.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Fontes abertas: ciber + governança + dados + canais digitais (App/TX4/e-commerce). Sem RI - confirmar budget no discovery.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) Cibersegurança; 2) Modernização de Legado; 3) FourBlox (iPaaS).</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 45 min no Fórum: mapa de riscos críticos + proposta de assessment 3 semanas.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum 2026 + honeymoon do CIO (1ª ano) + ciclo 2026 de expansão digital.</div></div>
+                <div class="one-pager-block"><div class="lbl">ângulo comercial não óbvio</div><div class="val">Não pitchar marketplace. Pitchar "fábrica segura" que deixa a inovação escalar sem incidente que derrube OTIF.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 - O momento de virada</div><h4>CIO novo, mandato claro</h4><p>Em nov/2025 o GrupoSC traz Stakowiak para liderar TI com foco em inovação de processos, segurança e dados - sob Rodrigo Souza. O digital B2B já existe; falta blindar e industrializar a base.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 - A tensão</div><h4>Inovação rápida × operação crítica</h4><p>Farmácias Digitais escala (App, TX4, Docas). Cada CD e cada API é ponto de falha. Sem modernização e ciber maduros, o crescimento digital vira risco reputacional e sanitário.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 - A travessia</div><h4>Foursys como capacidade</h4><p>Assessment → quick wins de segurança → integração FourBlox → squads de modernização/dados. Resultado: inovação continua acelerando com TI corporativa no mesmo ritmo.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Blindar o crescimento digital sem frear o Farmácias Digitais</h4>
+                <p>Evidência: anúncio IT Forum (segurança como prioridade) + expansão pública do ecossistema com IA e milhares de farmácias conectadas.</p>
+                <div class="sub">Solução Foursys</div><p>Cibersegurança (assessment + roadmap + hardening) → menos risco de incidente em canais e CDs; suporte a compliance da cadeia.</p>
+                <div class="sub">Pergunta de descoberta</div><p>"Qual incidente ou near-miss nos últimos 12 meses mais preocupou o comitê - canal digital, CD ou integração com indústria?"</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de 2h: top 10 ativos críticos + heat de risco residual.</div>
+            </div>
+            <div class="business-card">
+                <h4>Integrar multi-marca e multi-canal sem projeto eterno</h4>
+                <p>Evidência: três marcas históricas + stack de produtos digitais (App, TX4, Docas Virtuais ligadas ao estoque do grupo).</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee) + Modernização seletiva de pontos de integração - OTIF e time-to-market de serviço.</p>
+                <div class="sub">Pergunta de descoberta</div><p>"Quantas integrações manuais ou batch ainda sustentam pedido, estoque e settlement com indústria?"</p>
+                <div class="sub">Gancho / próximo passo</div><p>Mapa de 5 fluxos críticos e PoC iPaaS em um fluxo (ex.: Docas Virtuais → WMS).</p>
+            </div>
+            <div class="business-card">
+                <h4>Dados e IA com governança - não só feature de produto</h4>
+                <p>Evidência: TX4 e artigos de Rodrigo Souza sobre inteligência de dados e redução de ruptura; CIO fala em IA/IoT como valor de negócio.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad + Engenharia Digital: industrializar casos com MLOps, qualidade de dado e KPI de ruptura/OTIF.</p>
+                <div class="sub">Pergunta de descoberta</div><p>"Quais modelos de IA já estão em produção versus piloto - e quem é dono do dado?"</p>
+                <div class="sub">Gancho / próximo passo</div><p>Canvas de 3 use cases priorizados com ROI em 90 dias.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">One-pager + deck curto (8-10 slides) + oferta de PoC/assessment 3 semanas</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">Cibersegurança + FourBlox + Modernização - porquê: mandato CIO + escala digital já existente</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) modernização/integração em cadeia logística ou health; (2) programa de cibersegurança com ISO 27001/27701; (3) iPaaS Digibee em ambiente multi-sistema de alto volume. Se case farma puro não estiver pronto, usar health/retail logistics com analogia explícita de OTIF e ruptura.</p>
+            <p style="margin-top:8px"><strong>ângulo comercial não óbvio:</strong> o ROI não está em "digitalizar a farmácia" (eles já fazem). Está em reduzir custo de falha (incidente + integração frágil) que limita o quanto a Inovação pode crescer.</p>
+            <p style="margin-top:8px"><em>Discurso sugerido se material setorial faltar: "Vocês já têm o produto digital. Nós trazemos a engenharia e a segurança para isso virar escala previsível."</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>"Não vim falar de marketplace - vim falar de como a TI corporativa segura o crescimento do Farmácias Digitais."</li>
+                <li>"Seu mandato público é segurança, dados e modernização; em 90 dias dá para ter um plano auditável, não só slide."</li>
+                <li>"Rodrigo Souza acelera inovação; você precisa de capacidade de integração e ciber no mesmo ritmo - isso é o encaixe Foursys."</li>
+                <li>"FourBlox/Digibee encurta a fila de integrações indústria-varejo-CD sem reescrever o core."</li>
+                <li>"AI Squad só entra com KPI de ruptura/OTIF - nada de IA decorativa."</li>
+                <li>"41.000+ projetos e ISO 27001/27701: prova social para comitê que já viu muito vendor de slide."</li>
+                <li>"Próximo passo concreto: assessment de 3 semanas nos 10 ativos críticos - saída → roadmap priorizado, não RFP genérico."</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Abordagem no IT Forum + follow-up com Jorge; CC opcional Rodrigo Souza</td><td>Ata + agenda discovery</td><td>0-7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Mapear comitê, budget 2026, top riscos, stack crítica</td><td>One-pager de hipóteses validadas</td><td>2-3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC / Assessment</td><td>Assessment ciber + 1 fluxo iPaaS crítico</td><td>Relatório gaps + estimativa</td><td>3-5 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Quick wins segurança + integração piloto</td><td>KPIs (risco residual, lead time integração)</td><td>60-90 dias</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Programa anual modernização + ciber + dados</td><td>MSA / SOW multi-wave</td><td>Trimestre seguinte</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C - Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Site institucional GrupoSC</h4><div class="url">https://gruposc.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Site marketing (conteúdo institucional)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado (WAF/anti-bot ativo - 403 em probes)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Portal do cliente (link no site)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Farmácias Digitais (hub)</h4><div class="url">https://www.farmaciasdigitais.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">WordPress (tema próprio - fontes abertas)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">WP + produtos do ecossistema</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado com certeza</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações com estoque GrupoSC (Docas Virtuais)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Farmácias App / E-commerce / TX4</h4><div class="url">Ecossistema (marketplace, loja própria, IA de gôndola)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Apps/web B2C e B2B (detalhe stack N/D)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Plataformas adquiridas/aceleradas pelo grupo</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Hipótese: cloud pública (padrão scale digital)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Indústria → varejo → dados de sell-out</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Operação logística / CDs (core)</h4><div class="url">Sistemas internos (WMS/TMS/ERP) - não publicados</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Hipótese: híbrido (perfil CIO)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações pedido/estoque/faturamento</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 - Infraestrutura Cloud</div><div class="name">Cloud / híbrido</div><div class="cmp">Não publicado oficialmente. Hipótese consultiva: ambiente híbrido (perfil Stakowiak em Dasa/Alelo). Site institucional com proteção anti-bot (403 em coleta automatizada).</div></div>
+            <div class="stack-layer"><div class="lbl">C2 - Cibersegurança &amp; Compliance</div><div class="name">Prioridade declarada 2025-2026</div><div class="cmp">Mandato CIO: segurança da informação e governança. Setor regulado (medicamentos) + LGPD em dados de sell-out. Detalhe de stack SOC/SIEM: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 - IA, Automação, Indústria 4.0</div><div class="name">TX4 + automação de reposição</div><div class="cmp">Farmácias TX4: IA/automação de gôndola e estoque (fontes do ecossistema). Espaço para MLOps e governança de modelos.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 - Dados &amp; Analytics</div><div class="name">Inteligência de mercado</div><div class="cmp">Agenda pública de dados indústria→varejo; Inteligência de Mercado citada por Rodrigo Souza. Plataforma analítica corporativa: não localizada.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 - Core Transacional (ERP)</div><div class="name">ERP / financeiro / fiscal</div><div class="cmp">Vendor de ERP não publicado em fontes abertas - registrar como "não localizado" até discovery. Não especular marca.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 - Aplicações de Negócio</div><div class="name">WMS/TMS + B2B + digitais</div><div class="cmp">Portal do cliente; Farmácias App, e-commerce, Ads, Delivery, Docas Virtuais; serviços TX4/Xmart Force (fontes abertas).</div></div>
+            <div class="stack-layer"><div class="lbl">C7 - Experiência &amp; Engajamento</div><div class="name">Marketplace e loja</div><div class="cmp">Experiência B2C (App) e B2B (lojista/indústria). BancoSC / canais comerciais no site institucional.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://gruposc.com.br/</td><td><span class="status-err">403*</span></td><td>Conteúdo acessível via fetch dedicado</td><td>WAF/anti-bot</td><td>*Probe automatizado bloqueado; WebFetch retornou conteúdo institucional (jul/2026)</td></tr>
+                    <tr><td>https://gruposc.com.br/sobre-nos/</td><td><span class="status-err">403*</span></td><td>Institucional</td><td>WAF/anti-bot</td><td>História SantaCruz→Panpharma/Oncoprod confirmada no conteúdo</td></tr>
+                    <tr><td>https://www.farmaciasdigitais.com.br/</td><td><span class="status-err">522/intermitente</span></td><td>WordPress (fontes)</td><td>n/d</td><td>Conteúdo do ecossistema validado via busca/cache público</td></tr>
+                    <tr><td>https://itforum.com.br/noticias/gruposc-anuncia-jorge-stakowiak-cio/</td><td><span class="status-200">200</span></td><td>CMS</td><td>Cloudflare</td><td>Anúncio CIO + reporte a Rodrigo Souza</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026. Só registrar o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Segurança</div><h4>Programa de ciber ainda em consolidação com CIO novo</h4><p>Evidência setorial: distribuição farma + canais digitais ampliam superfície de ataque; mandato público prioriza segurança. Lacuna típica: políticas, SOC e identidade não uniformes entre marcas/canais.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Multi-marca × multi-canal sem iPaaS maduro (hipótese)</h4><p>Evidência: Docas Virtuais ligam estoque do grupo ao lojista; TX4 liga indústria e varejo. Sem barramento moderno, cada produto novo vira projeto artesanal.</p><div class="offer">Oferta Foursys: FourBlox (Digibee)</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Legado</div><h4>Core operacional opaco publicamente - risco de dúvida técnica</h4><p>Evidência: ERP/WMS não divulgados; consolidação 2016 clássica gera heterogeneidade. Discovery necessário.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Dados</div><h4>Inteligência de mercado sem camada enterprise unificada (hipótese)</h4><p>Evidência: discurso forte de dados no ecossistema; falta transparência sobre lakehouse/governança corporativa.</p><div class="offer">Oferta Foursys: Engenharia Digital + AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Escala digital</div><h4>Engenharia de produto sob pressão de crescimento</h4><p>Evidência: metas públicas de milhares de farmácias digitalizadas; Head de canais digitais com time grande - gargalo de delivery/qualidade.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal & Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">TI Mackenzie · PMI FGV · MBA Insper</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">São Paulo, SP (atuação)</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado com detalhe · experiência US (EDS/BoA)</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Reconheça a chegada recente (nov/2025) e o mandato público - demonstra que leu o anúncio.<br>
+                2) Mencione o reporte a Rodrigo Souza sem bypassar: proponha valor para o duo Inovação + TI corporativa.<br>
+                3) Fale a língua dele: disponibilidade, FinOps, cloud híbrida, ITIL/DevOps - é o histórico Alelo/Dasa.<br>
+                4) Evite pitch de "criar o app da farmácia"; eles já têm Farmácias Digitais.<br>
+                5) Pergunte sobre o que ele herdou vs. o que quer construir nos primeiros 12 meses.<br>
+                6) Use analogias de health (Dasa) e alta disponibilidade (Alelo) - ele viveu os dois.<br>
+                7) Feche com próximo passo concreto (assessment 3 semanas), não com "vamos continuar o papo".</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>gruposc.com.br / sobre-nos (história, propósito)</li>
+                    <li>Estadão - aquisição Panpharma/Oncoprod (~R$ 13 bi, 2016)</li>
+                    <li>Empresa privada - sem RI; budget via fontes abertas</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>farmaciasdigitais.com.br - ecossistema App/TX4/e-commerce</li>
+                    <li>Revista da Farmácia / Jornal do Brás - TX4 e IA</li>
+                    <li>PFARMA - aquisições Farmácias App, MyPharma, TX4, Xmart Force</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Site GrupoSC - KPIs de CDs, clientes, municípios</li>
+                    <li>Economia SC - artigo Rodrigo Souza (digitalização varejo farma)</li>
+                    <li>Varginha Online - expansão CD (MG)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>IT Forum - "GrupoSC anuncia Jorge Stakowiak como novo diretor de tecnologia"</li>
+                    <li>LinkedIn Jorge Stakowiak (stakowiak)</li>
+                    <li>LinkedIn Rodrigo Souza / Thiago Firmino (comitê)</li>
+                    <li>Planilha CIOs Confirmados IT Forum 2026 (ID 98, CNPJ, UF)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch gruposc.com.br (conteúdo)</li>
+                    <li>HTTP probe itforum.com.br (200 Cloudflare)</li>
+                    <li>Probes gruposc 403 / farmaciasdigitais intermitente</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report - IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente - Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

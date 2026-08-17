@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Alexandre Hakomaru | FTD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+    <div class="header"><div class="header-content">
+        <div><div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div><h1>Alexandre Hakomaru</h1><h2>Diretor de TI — plataforma iônica — FTD Educação</h2><div class="loc">Educação · São Paulo/SP · CNPJ 61.186.490/0001-57</div><span class="badge-mode hibrido">Modo: Híbrido</span><span class="badge-prio">Prioridade: Alta · ORDEM PLANILHA</span></div>
+        <div class="header-badges"><div class="header-badge"><div class="label">Receita 2025</div><div class="value">R$ 1,5 bi</div></div><div class="header-badge"><div class="label">Tecnologia 2025</div><div class="value">R$ 26,9 mi</div></div><div class="header-badge"><div class="label">Meta 2030</div><div class="value">R$ 3 bi</div></div><div class="header-badge"><div class="label">Colaboradores</div><div class="value">1.818</div></div></div>
+    </div></div>
+    <div class="container">
+        <div class="zone-divider update-banner"><div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div><div class="meta">Revisado em 05/08/2026 · Escopo: validação cadastral, vínculo executivo, estratégia 2025–2026, leitura de comitê, stack pública e material de apresentação · Participação confirmada e presencial em 21/07/2026.</div></div>
+        <div class="anchor-nav"><a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a></div>
+
+        <div class="section" id="empresa"><div class="eyebrow">Mapeamento estratégico · FATO</div><h3>A Empresa</h3><p><strong>FATO:</strong> a Editora FTD S.A., nome fantasia FTD Educação, atua em conteúdo e soluções educacionais e integra o Grupo Marista. A fonte institucional confirma matriz em São Paulo, CNPJ e atuação nacional. Em 2024, investiu R$ 31,8 milhões em mais de 70 projetos de inovação e transformação; em 2025, registrou receita operacional líquida de R$ 1,5 bilhão e R$ 26,9 milhões em tecnologia educacional. Fontes: FTD, PublishNews e Relatório de Sustentabilidade repercutido em 2026.</p>
+            <div class="grid-3" style="margin-top:16px"><div class="info-card"><div class="label">Razão social</div><div class="value">Editora FTD S.A.</div></div><div class="info-card"><div class="label">Sede</div><div class="value">São Paulo/SP</div></div><div class="info-card"><div class="label">Abrangência</div><div class="value">Brasil; redes pública e privada</div></div><div class="info-card"><div class="label">Receita</div><div class="value">R$ 1,5 bi em 2025</div></div><div class="info-card"><div class="label">Colaboradores</div><div class="value">1.818 ao fim de 2024</div></div><div class="info-card"><div class="label">Categoria</div><div class="value">Sociedade anônima fechada</div></div></div>
+        </div>
+
+        <div class="section" id="gestor"><div class="eyebrow">Foco: decisão · FATO + RESSALVA</div><h3>Mapeamento do Gestor</h3><p><strong>FATO:</strong> o perfil público de Alexandre Hakomaru o identifica como executivo de tecnologia, especialista em arquitetura e transformação digital, com retorno à FTD em setembro de 2025 como Diretor de TI da plataforma iônica. A trajetória pública inclui arquitetura digital na Vibra, transformação digital na Telefônica Brasil e gestão de arquitetura e integração no Grupo Marista. O perfil cita experiência em Capex, Opex, liderança e entrega de produtos. <strong>INFERÊNCIA:</strong> seu provável poder de decisão concentra-se em arquitetura, confiabilidade, integração e evolução técnica da iônica; orçamento e reporte não foram localizados em fonte pública.</p>
+            <div class="alert-box" style="margin-top:14px">⚠️ <strong>Verificar antes da reunião:</strong> Alexandre publicou saída do Grupo Marista/FTD em 16/06/2023; seu LinkedIn atual registra retorno em setembro/2025. Leonardo Maschio aparece como Diretor de Tecnologia e Felipe Valle como Diretor de Plataformas Digitais em fontes públicas. Os escopos podem coexistir, mas a divisão de responsabilidades e o comitê decisor devem ser confirmados. Silvio Mendonça, diretor corporativo de Tecnologia do Grupo Marista, e Alexandre Olim, diretor de Inovação e Negócios Digitais, também aparecem em iniciativas recentes.</div>
+        </div>
+
+        <div class="section" id="segmento"><div class="eyebrow">Segmento & mercado · FATO</div><h3>Segmento e Posição de Mercado</h3><p>A FTD opera entre editora, sistemas de ensino e edtech. Atende escolas, redes públicas, professores, estudantes e famílias, com cadeia que combina produção editorial, parque gráfico, distribuição física, comércio digital e plataformas pedagógicas. A estratégia pública busca dobrar a receita até 2030 e ampliar soluções digitais e IA responsável. Pressões centrais: qualidade pedagógica, proteção de dados de menores, escala sazonal, integração público-privada, acessibilidade e comprovação de impacto educacional. Fonte: FTD, PublishNews, TI Inside e Conteúdo Aberto.</p></div>
+
+        <div class="section" id="tensoes"><div class="eyebrow">Tensões & lacunas · FATO + HIPÓTESE CONSULTIVA</div><h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>FATO:</strong> escalar IA sem perder curadoria, autoria, ética e segurança; a estratégia pública enfatiza esses controles.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>FATO:</strong> integrar ecossistema iônica, FTD Com Você, Flui, Pontue e comércio digital com jornadas consistentes.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>FATO:</strong> suportar picos sazonais; Adobe Commerce processou mais de 400 mil pedidos no último ano comercial.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>INFERÊNCIA:</strong> governar dados educacionais e modelos de IA em escala nacional com rastreabilidade e privacidade.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>INFERÊNCIA:</strong> converter mais de 70 projetos em capacidades reutilizáveis, evitando fragmentação técnica e custo duplicado.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4><div><span class="tag tag-priority">IA pedagógica responsável</span><span class="tag tag-priority">Plataforma iônica escalável</span><span class="tag tag-priority">Experiência omnicanal</span><span class="tag tag-priority">Meta de R$ 3 bi em 2030</span></div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4><div><span class="tag tag-active">Plataformas digitais</span><span class="tag tag-active">IA para docentes e estudantes</span><span class="tag tag-active">Adobe Commerce B2B</span><span class="tag tag-active">Google Cloud AIRA</span><span class="tag tag-active">Content supply chain</span></div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4><div><span class="tag tag-opportunity">HIPÓTESE: governança de IA</span><span class="tag tag-opportunity">HIPÓTESE: integração entre produtos</span><span class="tag tag-opportunity">HIPÓTESE: observabilidade ponta a ponta</span></div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);"><div class="eyebrow">Portfólio · HIPÓTESE CONSULTIVA</div><h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card"><div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">92/100</span></div><p>Governança, avaliação, engenharia e operação de casos de IA ligados à iônica e aos produtos pedagógicos.</p><div class="reasons"><ul><li>FTD lançou soluções de IA em 2026 e declara expansão estratégica.</li><li>Conversa deve começar por segurança pedagógica, qualidade e escala, não por modelo.</li></ul></div></div>
+            <div class="oferta-card"><div class="oferta-header"><h4>Digibee iPaaS</h4><span class="score-badge">86/100</span></div><p>Camada de integração governada para iônica, canais digitais, produtos de parceiros e processos B2B/B2C.</p><div class="reasons"><ul><li>Portfólio público combina múltiplas plataformas e parceiros.</li><li>Integração reduz tempo de lançamento e dependências ponto a ponto.</li></ul></div></div>
+            <div class="oferta-card"><div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">82/100</span></div><p>Confiabilidade, DevSecOps, observabilidade e evolução cloud-native da experiência iônica.</p><div class="reasons"><ul><li>Flui usa Google Cloud e integra-se à iônica.</li><li>Escala nacional exige telemetria técnica e de jornada.</li></ul></div></div>
+            <div class="oferta-card"><div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">78/100</span></div><p>Privacidade por design, gestão de riscos e segurança de aplicações e dados educacionais.</p><div class="reasons"><ul><li>Dados de estudantes e uso de IA elevam criticidade.</li><li>Foursys possui ISO 27001 e ISO 27701.</li></ul></div></div>
+            <div class="oferta-card"><div class="oferta-header"><h4>FourBlox</h4><span class="score-badge">68/100</span></div><p>Componentes reutilizáveis para acelerar jornadas administrativas e educacionais.</p><div class="reasons"><ul><li>Mais de 70 projetos sinalizam ganho potencial por reuso.</li><li>Fit depende de discovery do design system e arquitetura atuais.</li></ul></div></div>
+        </div>
+
+        <div class="section" id="estrategia"><div class="eyebrow">Go-to-account</div><h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>“Como a FTD está medindo segurança pedagógica, qualidade de resposta e confiabilidade operacional da IA na iônica, do piloto ao uso nacional?”</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>As soluções FTD Com Você e Flui foram lançadas em 2026; o momento favorece um assessment curto de integração, observabilidade e governança antes da próxima onda de escala.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Combinar produto, integração, engenharia e segurança em uma frente única; 24 anos, mais de 41 mil projetos e certificações ISO 27001/27701 reduzem risco de execução.</p></div>
+            <div class="insight-box"><h4>Comitê decisor provável — validar</h4><p><strong>HIPÓTESE CONSULTIVA:</strong> Alexandre Hakomaru lidera arquitetura e entrega da iônica; Alexandre Olim e Felipe Valle conectam produto e negócios digitais; Leonardo Maschio e Silvio Mendonça cobrem tecnologia corporativa; áreas pedagógica, jurídica/LGPD, segurança, marketing, compras e finanças influenciam. Budget detalhado e rito de contratação não foram localizados.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes"><div class="eyebrow">Benchmark</div><h3>Concorrentes & Gap Analysis</h3>
+            <div class="competitor-card"><h4>Santillana / Moderna</h4><p>Concorrência em conteúdo e sistemas de ensino; benchmark relevante para escala editorial, dados e IA educacional.</p></div>
+            <div class="competitor-card"><h4>Somos Educação</h4><p>Ecossistema de marcas e plataformas; pressiona interoperabilidade, experiência e velocidade de portfólio.</p></div>
+            <div class="competitor-card"><h4>Arco Educação</h4><p>Modelo digital e orientado a sistemas de ensino; eleva referência de dados, relacionamento com escolas e cadência de produto.</p></div>
+            <div class="competitor-card"><h4>Positivo Educação</h4><p>Integra conteúdo, tecnologia e serviços; benchmark em escala e soluções para redes públicas e privadas.</p></div>
+            <div class="insight-box"><h4>Leitura do gap</h4><p><strong>INFERÊNCIA:</strong> FTD já possui alcance, ativos e investimento. Diferencial competitivo dependerá menos de lançar mais ferramentas e mais de integrá-las, provar impacto pedagógico, governar IA e operar jornadas confiáveis.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+        <div class="one-pager" id="sumario"><h3>Sumário Executivo — 1 Página</h3><div class="one-pager-grid">
+            <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">FTD Educação: grupo educacional-editorial com receita de R$ 1,5 bi e meta de R$ 3 bi em 2030.</div></div>
+            <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Diretor de TI da iônica desde set/2025 segundo LinkedIn; escopo deve ser confirmado.</div></div>
+            <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escalar IA pedagógica e ecossistema digital com segurança, integração e confiabilidade.</div></div>
+            <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">R$ 26,9 mi em tecnologia educacional em 2025; prioridades públicas: IA, plataformas e experiência.</div></div>
+            <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">AI Squad; Digibee iPaaS; Engenharia Digital.</div></div>
+            <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Workshop de 90 minutos e assessment de 2 semanas para mapa de riscos e integrações.</div></div>
+            <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Pós-lançamentos Bett 2026 e preparação do ciclo orçamentário 2027.</div></div>
+            <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Monetizar confiança: evidência pedagógica e rastreabilidade como aceleradores de adoção.</div></div>
+        </div></div>
+
+        <div class="section" id="historia"><div class="eyebrow">A conta em 3 atos</div><h3>A História desta Conta</h3><div class="story-grid">
+            <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>De editora a ecossistema</h4><p>A FTD amplia IA, plataformas e comércio digital para dobrar receita até 2030.</p></div>
+            <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Escala sem perder confiança</h4><p>Mais produtos e parceiros elevam complexidade de integração, dados, segurança e operação.</p></div>
+            <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Confiança como plataforma</h4><p>Foursys estrutura governança, integração e engenharia para acelerar com controle.</p></div>
+        </div></div>
+
+        <div class="section" id="solucoes"><div class="eyebrow">Foco no negócio</div><h3>Sugestão de Soluções</h3>
+            <div class="business-card"><h4>Escalar IA pedagógica com evidência</h4><p><strong>FATO:</strong> FTD lançou FTD Com Você, Flui e Pontue e declara IA responsável como prioridade.</p><div class="sub">Solução Foursys</div><p>AI Squad para avaliação, guardrails, qualidade, telemetria e ciclo de vida de modelos.</p><div class="sub">Pergunta de descoberta</div><p>Quais métricas impedem uma funcionalidade de IA de avançar do piloto para milhares de escolas?</p><div class="sub">Gancho / próximo passo</div><p>Assessment de governança e uma prova de valor sobre caso crítico.</p></div>
+            <div class="business-card"><h4>Unificar ecossistema e acelerar lançamentos</h4><p><strong>FATO:</strong> iônica integra Flui; Adobe Commerce expande de B2C para B2B; parceiros ampliam portfólio.</p><div class="sub">Solução Foursys</div><p>Digibee iPaaS e Engenharia Digital para APIs, eventos, observabilidade e catálogo de integrações.</p><div class="sub">Pergunta de descoberta</div><p>Onde integrações ponto a ponto mais atrasam produto ou geram retrabalho?</p><div class="sub">Gancho / próximo passo</div><p>Mapa de integrações e priorização por impacto em receita, prazo e risco.</p></div>
+            <div class="business-card"><h4>Proteger dados e continuidade</h4><p><strong>INFERÊNCIA:</strong> produtos digitais para estudantes e docentes aumentam superfície de risco e exigência de privacidade.</p><div class="sub">Solução Foursys</div><p>Cibersegurança e Engenharia Digital com privacidade por design, DevSecOps e continuidade.</p><div class="sub">Pergunta de descoberta</div><p>Como risco de terceiros, dados de menores e modelos de IA entram hoje no mesmo processo de decisão?</p><div class="sub">Gancho / próximo passo</div><p>Workshop executivo de risco e plano de 90 dias.</p></div>
+        </div>
+
+        <div class="section" id="material"><div class="eyebrow">Preparação da reunião</div><h3>Sugestão de Material para Apresentação</h3><div class="grid-2">
+            <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck executivo de 7 slides + one-pager técnico + demonstração curta de PoC</div></div>
+            <div class="info-card"><div class="label">Oferta Foursys âncora</div><div class="value">AI Squad, apoiada por Digibee iPaaS; une qualidade pedagógica, integração e escala</div></div>
+        </div><p style="margin-top:14px"><strong>Cases/ativos relevantes:</strong> apresentar case anonimizado de governança e qualidade de IA; blueprint de integração de ecossistema por APIs/eventos; checklist Foursys ISO 27001/27701 para dados sensíveis. Não atribuir clientes ou resultados sem autorização.</p><p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> tratar rastreabilidade pedagógica como ativo de crescimento: reduz risco, aumenta confiança de redes e acelera adoção.</p><p style="margin-top:8px"><em>Discurso sugerido: “Não queremos substituir o que já funciona. Queremos tornar mensurável a confiança que a FTD promete, do conteúdo ao runtime.”</em></p></div>
+
+        <div class="section" id="mensagens"><div class="eyebrow">1ª conversa</div><h3>Mensagens-chave</h3><ol class="msg-list">
+            <li>“Alexandre, a iônica virou ponto de convergência entre produto, pedagogia e operação; queremos entender onde essa convergência mais pressiona arquitetura hoje.”</li>
+            <li>“A próxima fronteira não é lançar IA, mas provar qualidade, segurança e impacto em cada escala de uso.”</li>
+            <li>“A Foursys pode combinar squad de IA, integração e engenharia sem criar outra ilha de fornecedor.”</li>
+            <li>“O ganho de 40% de produtividade com Firefly mostra valor; nossa pergunta é como repetir ganho com controles comuns em todo o portfólio.”</li>
+            <li>“A integração iônica–Flui sinaliza caminho; queremos mapear quais produtos ainda dependem de conexões frágeis ou manuais.”</li>
+            <li>“ISO 27001 e 27701 entram como disciplina de execução, especialmente para dados educacionais e IA.”</li>
+            <li>“Propomos sair da conversa com um caso prioritário, uma métrica de negócio e um plano de duas semanas.”</li>
+        </ol></div>
+
+        <div class="section" id="roadmap"><div class="eyebrow">Engajamento Foursys → Cliente</div><h3>Roadmap 6 Fases</h3><table class="data-table"><thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead><tbody>
+            <tr><td class="phase">1. Conexão</td><td>Confirmar escopo de Alexandre e patrocinadores</td><td>Mapa de stakeholders</td><td>1 semana</td></tr>
+            <tr><td class="phase">2. Discovery</td><td>Workshop de IA, integrações e riscos</td><td>Hipóteses priorizadas</td><td>1 semana</td></tr>
+            <tr><td class="phase">3. Assessment</td><td>Inspecionar caso, APIs, dados e operação</td><td>Baseline e plano de 90 dias</td><td>2 semanas</td></tr>
+            <tr><td class="phase">4. PoC</td><td>Validar um fluxo de alto impacto</td><td>Prova com métricas</td><td>4–6 semanas</td></tr>
+            <tr><td class="phase">5. Squad piloto</td><td>Operar backlog e governança</td><td>Produto em produção</td><td>8–12 semanas</td></tr>
+            <tr><td class="phase">6. Programa</td><td>Escalar padrões e integrações</td><td>Roadmap multi-squad/MSA</td><td>6–12 meses</td></tr>
+        </tbody></table></div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+        <div class="section" id="stack"><div class="eyebrow">Apêndice técnico · FATO + NÃO PUBLICADO</div><h3>Mapeamento Técnico</h3><h4 style="margin-bottom:12px">Inventário de aplicações (4)</h4>
+            <div class="app-card"><h4>Portal institucional FTD</h4><div class="url">https://ftd.com.br/</div><div class="app-stack-grid"><div class="app-stack-item"><div class="k">Frontend</div><div class="v">HTML público; framework não confirmado</div></div><div class="app-stack-item"><div class="k">Backend</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">API</div><div class="v">Não publicada</div></div></div></div>
+            <div class="app-card"><h4>Plataforma iônica</h4><div class="url">Produto educacional FTD; URL de acesso público não localizada</div><div class="app-stack-grid"><div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">Backend</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">Cloud</div><div class="v">Integração Flui usa Google Cloud</div></div><div class="app-stack-item"><div class="k">API</div><div class="v">Integração confirmada; padrão não publicado</div></div></div></div>
+            <div class="app-card"><h4>Lumisfera / comércio digital</h4><div class="url">Canal de vendas citado em case público Adobe</div><div class="app-stack-grid"><div class="app-stack-item"><div class="k">Frontend</div><div class="v">Adobe Commerce confirmado</div></div><div class="app-stack-item"><div class="k">Backend</div><div class="v">Adobe Commerce; customizações não publicadas</div></div><div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">API</div><div class="v">Não publicada</div></div></div></div>
+            <div class="app-card"><h4>Flui</h4><div class="url">Solução de fluência leitora apresentada na Bett Brasil 2026</div><div class="app-stack-grid"><div class="app-stack-item"><div class="k">Frontend</div><div class="v">Integrado à iônica; não publicado</div></div><div class="app-stack-item"><div class="k">Backend</div><div class="v">Não publicado</div></div><div class="app-stack-item"><div class="k">Cloud</div><div class="v">Google Cloud AIRA</div></div><div class="app-stack-item"><div class="k">API</div><div class="v">Não publicada</div></div></div></div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp"><strong>FATO:</strong> Google Cloud AIRA no Flui. Demais provedores e topologia não publicados.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança & Compliance</div><div class="cmp">Ferramentas, IAM e SIEM não publicados. Requisitos de privacidade e segurança são críticos por contexto educacional.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp"><strong>FATO:</strong> Adobe Firefly, FTD Com Você, Flui e Pontue; governança técnica não publicada.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados & Analytics</div><div class="cmp">Flui classifica níveis de leitura e Pontue gera indicadores; arquitetura de dados não publicada.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">ERP e arquitetura financeira não localizados em fonte pública.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">Adobe Commerce, content supply chain e plataformas de parceiros; CRM/HCM não publicados.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência & Engajamento</div><div class="cmp">Portal FTD, Lumisfera, iônica, Conteúdo Aberto, FTD Com Você, Flui e Pontue.</div></div>
+        </div>
+
+        <div class="section" id="empirico"><div class="eyebrow">Runtime</div><h3>Verificação Empírica de Canais Digitais</h3><table class="data-table"><thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead><tbody>
+            <tr><td>https://ftd.com.br/sobre-nos/</td><td><span class="status-200">200</span></td><td>HTML renderizado; framework não exposto pelo fetch</td><td>Não identificado</td><td>Conteúdo institucional, CNPJ e endereço confirmados</td></tr>
+            <tr><td>https://portalconteudoaberto.com.br/educador/ftd-educacao-na-bett-brasil-2026/</td><td><span class="status-200">200</span></td><td>HTML renderizado; framework não identificado</td><td>Não identificado</td><td>Conteúdo e métricas de produtos 2026 confirmados</td></tr>
+        </tbody></table><p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 05/08/2026. WebFetch não expôs headers, scripts ou trackers; nenhum componente técnico foi inferido além do conteúdo retornado.</p></div>
+
+        <div class="section" id="gaps"><div class="eyebrow">Lacunas → monetização · HIPÓTESE CONSULTIVA</div><h3>GAPs Tecnológicos (5)</h3><div class="gap-grid">
+            <div class="gap-card"><div class="num">GAP 1 · Governança de IA</div><h4>Evidência e controles comuns</h4><p>FTD opera múltiplas soluções de IA e declara segurança e ética como princípios; controles transversais não são públicos.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+            <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Ecossistema multiproduto</h4><p>iônica, Flui, comércio digital e parceiros ampliam pontos de integração; catálogo e governança de APIs não são públicos.</p><div class="offer">Oferta Foursys: Digibee iPaaS</div></div>
+            <div class="gap-card"><div class="num">GAP 3 · Observabilidade</div><h4>Jornada ponta a ponta</h4><p>Escala nacional e picos de comércio exigem correlação entre experiência, aplicação e integrações; prática não publicada.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+            <div class="gap-card"><div class="num">GAP 4 · Segurança</div><h4>Dados educacionais e terceiros</h4><p>IA, estudantes e parceiros elevam risco de privacidade e cadeia de suprimentos; arquitetura de controles não publicada.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+            <div class="gap-card"><div class="num">GAP 5 · Reuso</div><h4>Velocidade entre mais de 70 projetos</h4><p>Volume de iniciativas cria oportunidade de componentes e padrões reutilizáveis; grau atual de reuso não localizado.</p><div class="offer">Oferta Foursys: FourBlox</div></div>
+        </div></div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);"><div class="eyebrow">Foco: pessoa</div><h3>Perfil Pessoal & Rapport</h3><div class="grid-3">
+            <div class="info-card"><div class="label">Formação</div><div class="value">MBA citado no perfil; instituição não localizada publicamente</div></div><div class="info-card"><div class="label">Cidade</div><div class="value">São Paulo/SP, conforme perfil profissional público</div></div><div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado em fonte pública</div></div>
+        </div><div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (6)</h4><p>1) Abra pela evolução da iônica, não pelo portfólio Foursys. 2) Reconheça sua trajetória em arquitetura e transformação. 3) Explore Capex/Opex e redução de custo de integração. 4) Pergunte como arquitetura e produto dividem decisões. 5) Conecte tecnologia à missão educacional, tema recorrente em suas publicações. 6) Evite presumir autoridade sobre toda TI; confirme o escopo atual.</p></div></div>
+
+        <div class="section" id="fontes"><div class="eyebrow">Bibliografia</div><h3>Fontes Consultadas</h3><div class="sources-grid">
+            <div class="sources-card"><h4>Institucional & CNPJ</h4><ul><li>FTD — https://ftd.com.br/sobre-nos/ — acesso 05/08/2026</li><li>Portal da Transparência — https://portaldatransparencia.gov.br/pessoa-juridica/61186490000157 — busca 05/08/2026; fetch bloqueado por HTTP 405</li></ul></div>
+            <div class="sources-card"><h4>Estratégia & investimento</h4><ul><li>PublishNews — https://www.publishnews.com.br/materias/2025/06/09/ftd-educacao-amplia-praticas-esg-e-projeta-dobrar-de-tamanho-ate-2030 — acesso 05/08/2026</li><li>Business Moment — https://businessmoment.com.br/ftd-educacao-recicla-mais-de-13-mil-toneladas-de-papel-por-ano-e-investe-r-269-milhoes-em-tecnologia-educacional/ — busca 05/08/2026</li></ul></div>
+            <div class="sources-card"><h4>Stack & produtos</h4><ul><li>TI Inside — https://tiinside.com.br/27/08/2025/em-parceria-com-adobe-ftd-educacao-aposta-em-ia-e-mira-transformacao-no-setor-educacional/ — acesso 05/08/2026</li><li>Conteúdo Aberto — https://portalconteudoaberto.com.br/educador/ftd-educacao-na-bett-brasil-2026/ — acesso 05/08/2026</li></ul></div>
+            <div class="sources-card"><h4>Liderança</h4><ul><li>LinkedIn Alexandre Hakomaru — https://linkedin.com/in/ahakomaru — busca 05/08/2026</li><li>Publicação de saída em 2023 — https://pt.linkedin.com/posts/ahakomaru_queridos-amigos-hoje-encerro-meu-ciclo-activity-7075532738933497857-Lwai — acesso 05/08/2026</li><li>The Org Leonardo Maschio — https://theorg.com/org/ftd-educacao/org-chart/leonardo-maschio — busca 05/08/2026</li><li>LinkedIn Felipe Valle — https://br.linkedin.com/in/fmvalle — busca 05/08/2026</li></ul></div>
+            <div class="sources-card"><h4>Verificação empírica</h4><ul><li>WebFetch https://ftd.com.br/sobre-nos/ — 05/08/2026</li><li>WebFetch https://portalconteudoaberto.com.br/educador/ftd-educacao-na-bett-brasil-2026/ — 05/08/2026</li></ul></div>
+        </div></div>
+    </div>
+    <div class="footer"><div class="brand-line"></div>four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>Gerado automaticamente — Confidencial | Agosto 2026 | Agente Hunter (Foursys DS)</div>
+</body>
+</html>

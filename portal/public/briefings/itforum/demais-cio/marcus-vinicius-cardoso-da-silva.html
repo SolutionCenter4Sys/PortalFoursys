@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CTO - Marcus Vinicius Cardoso da Silva | GDM Seeds</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Marcus Vinicius Cardoso da Silva</h1>
+                <h2>CTO — GDM Seeds</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Agronegócio | Campinas - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 12,1 BI a R$ 13 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 200,1 MM a R$ 300 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá entre 20% e 30%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: GDM Seeds</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>GDM Seeds</strong> é uma líder global em genética vegetal para culturas extensivas, fundada no início dos anos 80 na Argentina e com mais de 41 anos de trajetória. A empresa é responsável por <strong>45% da produção mundial de soja</strong> com sua genética e detém <strong>38% de participação</strong> no mercado brasileiro de sementes de soja — superando a Bayer (antiga Monsanto) e consolidando-se como líder absoluta no país. O Brasil representa <strong>55% dos negócios globais</strong> da companhia, que opera 11 sites no território nacional e comercializa as marcas <strong>Brasmax</strong>, <strong>DonMario</strong> e <strong>Neogen</strong>. A GDM controla cerca de 80% do mercado de germoplasma licenciado de soja no Brasil. Anualmente, a empresa testa mais de 2 milhões de parcelas em 15 países, com testes em 1.200 locais ao redor do mundo. Recentemente, concluiu a ampliação de seu laboratório em Londrina (PR), focado em pesquisa de <strong>edição gênica</strong> para resistência a pragas e doenças. No momento estratégico atual, a empresa investe fortemente em IA Generativa, integração via APIs e modernização de ERP, com perspectiva de crescimento de 20% a 30% no orçamento de TI — sinalizando um ciclo de transformação digital acelerada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Agronegócio</strong> com abrangência <strong>Global</strong>. Todos os projetos definidos já possuem fornecedor selecionado. Modelo de compra: <strong>RFP/concorrência estruturada entre fornecedores qualificados</strong>. Perspectiva do orçamento de TI: <strong>Crescerá entre 20% e 30%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Atrair, desenvolver e engajar talentos</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos e operações para ganho de eficiência</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Elevar a experiência de clientes e colaboradores (CX/EX)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar complexidade dos dados e qualidade da informação</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Integrar equipes de TI e negócios para acelerar a entrega de valor</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">IA Generativa</span>
+<span class="tag tag-priority">APIs e integração</span>
+<span class="tag tag-priority">ERP</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">CRM</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">HCM</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">Sistemas core</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades de Consultoria</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Todos os projetos definidos já possuem fornecedor. No entanto, há temas <strong>sem projeto definido</strong> — oportunidade de assessment/consultoria:</p>
+            <div><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Infraestrutura de redes</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Disaster recovery / continuidade de negócios</span>
+</div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Marcus Vinicius Cardoso da Silva</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 75</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA Generativa é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 75</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>APIs e integração é prioridade Top 3 de investimento</li><li>ERP é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Marcus Vinicius Cardoso da Silva tem como top prioridades <strong>IA Generativa; APIs e integração; ERP</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 0 projetos definidos sem fornecedor. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá entre 20% e 30%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; Modernização de Legado. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px">📌 <strong>IA no Agro em 2026:</strong> Investimentos em tecnologia no agronegócio brasileiro ultrapassam R$ 25,6 bilhões (+21% vs. 2024). Empresas do setor destinam 10-20% do orçamento de TI para inovação — a GDM, com perspectiva de 20-30% de crescimento, está acima da média setorial.</p>
+                <p style="margin-bottom:12px">📌 <strong>Edição Gênica + IA = Vantagem Competitiva:</strong> A GDM testa 2M+ parcelas/ano em 15 países. A aplicação de IA preditiva e visão computacional nesse volume de dados genômicos pode acelerar ciclos de melhoramento de 8-10 anos para 4-5 anos — um diferencial que concorrentes como Syngenta já perseguem com US$ 2B/ano em P&D.</p>
+                <p style="margin-bottom:12px">📌 <strong>Rastreabilidade e ESG:</strong> Compradores europeus e asiáticos exigem rastreabilidade crescente. IA pode quantificar sequestro de carbono e gerar relatórios ESG automáticos — desbloqueando financiamentos verdes e prêmios de mercado para sementes com procedência digital comprovada.</p>
+                <p style="margin-bottom:12px">📌 <strong>Produtividade Mensurável:</strong> Produtores que adotam plataformas digitais integradas colhem até 20% mais soja. A GDM, com 80% do germoplasma licenciado, poderia capturar esse valor com uma plataforma própria que conecte genética → plantio → resultados.</p>
+                <p>📌 <strong>Marcus já é evangelista de IA:</strong> Ele liderou a adoção de Microsoft Copilot, IA generativa para desenvolvimento de software e ferramentas de interação com clientes na GDM. Abordar com cases de escalabilidade e governança de IA — exatamente os desafios Top 1 que ele declarou para 2026.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>🌱 Bayer Crop Science</h4>
+                <p><strong>Participação:</strong> ~20% do mercado de sementes de soja no Brasil (2ª posição, atrás da GDM).</p>
+                <p><strong>Iniciativas Tech:</strong> Plataforma <strong>Climate FieldView™</strong> para agricultura digital com recomendações agronômicas por IA. FieldView Advisor compara variedades e otimiza densidades de plantio. O Brasil foi escolhido como principal vetor global de crescimento digital da Bayer, com a primeira equipe de desenvolvimento regional do mundo. Produtores nos programas Bayer reportam +20% de produtividade vs. média CONAB.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🧬 Corteva Agriscience</h4>
+                <p><strong>Participação:</strong> Player global de sementes com portfólio diversificado (soja, milho, sorgo, cana). Presença crescente no Brasil.</p>
+                <p><strong>Iniciativas Tech:</strong> Robô <strong>Cortevano</strong> com IA para atendimento a agricultores. Tecnologias proprietárias como <strong>Enlist®</strong> e <strong>PowerCore® Ultra</strong>. Plataforma de Agricultura Digital com ciência de dados para otimização de produção. Forte investimento em defensivos biológicos e tratamentos de sementes para safra 2025/26.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🔬 Syngenta Seeds</h4>
+                <p><strong>Participação:</strong> Apenas ~3% no germoplasma de soja no Brasil, mas com meta de crescer 3,5x via marca <strong>Golden Harvest</strong> (lançada em 2022).</p>
+                <p><strong>Iniciativas Tech:</strong> Investe <strong>US$ 2 bilhões anuais</strong> em P&D de novas variedades com IA e visão computacional. Foco em análise de qualidade de sementes com classificadores ópticos e machine learning. Busca recuperar protagonismo que teve entre 2014-2015.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🌾 TMG (Tropical Melhoramento & Genética)</h4>
+                <p><strong>Participação:</strong> ~4,5% a 6,5% do mercado de soja (já chegou a quase 20% há 10-15 anos). Player nacional com foco em cultivares tropicais.</p>
+                <p><strong>Iniciativas Tech:</strong> Programa de melhoramento genético focado em adaptação tropical. Parcerias com instituições de pesquisa brasileiras. Abordagem mais tradicional em comparação com os líderes globais, o que pode representar oportunidade de modernização tecnológica.</p>
+            </div>
+            <div class="insight-box">
+                <h4>📊 Gap Analysis: Onde a GDM pode se Diferenciar</h4>
+                <p>A GDM lidera com folga o mercado de germoplasma (80%), mas enfrenta <strong>3 gaps competitivos em tecnologia</strong>: (1) <strong>Agricultura digital integrada</strong> — Bayer e Corteva já oferecem plataformas digitais completas para o produtor (FieldView, Cortevano), enquanto a GDM foca mais na genética pura; (2) <strong>IA aplicada à análise de sementes</strong> — Syngenta e startups como Singular SeedS avançam em visão computacional para controle de qualidade, área onde a GDM poderia liderar dado seu volume de 2M+ parcelas/ano; (3) <strong>Ecossistema de dados</strong> — concorrentes integram dados agronômicos end-to-end (plantio → colheita → comercialização), enquanto a GDM tem oportunidade de construir um ecossistema proprietário conectando sua base de produtores licenciados. A Foursys pode posicionar-se como parceira na construção dessas capacidades digitais.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo</div>
+                        <div class="value">Gerente Global de TI (CIO) — GDM Seeds</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Campinas, São Paulo</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Eventos</div>
+                        <div class="value">Moderador no Vision Tech Summit Agro 2024 (Ribeirão Preto/SP) — painel de Tecnologia, Inovação e Transformação Digital</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Temas de Expertise</div>
+                        <div class="value">IoT, IA/ML, IA Generativa, integração de sistemas, data analytics aplicados à otimização agrícola</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Iniciativas Lideradas</div>
+                        <div class="value">Adoção de Microsoft Copilot, IA Generativa para dev/segurança, ferramentas de interação com clientes por IA</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil</div>
+                        <div class="value">Líder técnico com visão de negócio — transita entre TI e operação agrícola, focado em resultados mensuráveis</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>🎯 5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:8px"><strong>1. Fale a língua do agro:</strong> Marcus atua na interseção TI + agronegócio. Referencie "safra", "parcelas", "produtividade por hectare" — demonstre que a Foursys entende o contexto de negócio, não apenas tecnologia.</p>
+                <p style="margin-bottom:8px"><strong>2. Mencione o Vision Tech Summit:</strong> Ele moderou painéis de transformação digital no agro. Pergunte sobre os aprendizados e tendências que ele viu — ele gosta de compartilhar visões sobre inovação no setor.</p>
+                <p style="margin-bottom:8px"><strong>3. Reconheça a liderança em IA:</strong> Marcus já implementou Copilot e IA Generativa na GDM. Não "venda" IA básica — posicione a conversa em nível de governança, escalabilidade e ROI de IA, que são seus desafios declarados para 2026.</p>
+                <p style="margin-bottom:8px"><strong>4. Conecte com o orgulho GDM:</strong> A empresa saiu de startup argentina para líder global com 45% da soja mundial. Reconheça essa trajetória e posicione a Foursys como parceira que ajuda líderes a manterem a vantagem competitiva tecnológica.</p>
+                <p><strong>5. Aborde o equilíbrio global-local:</strong> Marcus é Gerente Global de TI — gerencia operações em 15 países. Explore desafios de padronização vs. customização regional, integração de sistemas multi-país e governança de dados global, temas onde a Foursys pode agregar com experiência em projetos complexos.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CTO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma gerência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CFO/Financeiro</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Regular: participa com frequência, sem ser membro.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Co-decisão TI + Negócios</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">200 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+<div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#5c6bc0">2%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#7986cb">1%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#9fa8da">1%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#c5cae9">1%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Consultoria especializada;Especialista setorial / regulatório;Fornecedor com cobertura global</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 7 temas | Interno: 4 temas | Projeto: 2 temas | Serviço Gerenciado: 2 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

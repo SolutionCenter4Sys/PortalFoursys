@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Roberto Castejon | SKY (VRIO CORP)</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .tag-invest { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Roberto Castejon</h1>
+                <h2>CIO — SKY (VRIO CORP)</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Serviços Diversos (TV por Assinatura) | São Paulo, SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento Grupo</div>
+                    <div class="value">R$ 2 BI a R$ 5 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Investimento Brasil</div>
+                    <div class="value">R$ 1 BI até 2026</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Diversificação Acelerada</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: SKY (VRIO CORP)</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>SKY Brasil</strong> é a segunda maior operadora de TV por assinatura do Brasil, com aproximadamente <strong>2,1 milhões de assinantes</strong> e <strong>27,8% de market share</strong> no segmento de TV paga (dez/2025). Controlada pela <strong>VRIO Corp</strong>, que por sua vez pertence ao <strong>Grupo Werthein</strong> (Argentina), a empresa opera sob a recém-criada holding <strong>Waiken ILW</strong>, anunciada em dezembro de 2025, que unifica operações de tecnologia e telecomunicações na América Latina. O grupo enfrenta um cenário desafiador: o mercado brasileiro de TV por assinatura caiu de 19,6 milhões para 7,6 milhões de assinantes entre 2014 e 2025 — uma retração de mais de 60%. Em resposta, a SKY executa uma <strong>transformação radical</strong>, diversificando para: <strong>fintech</strong> (SKX, lançada em 2025), <strong>internet via satélite</strong> (parceria com Amazon Project Kuiper/LEO), <strong>fibra óptica</strong> (SKY Fibra em 400+ cidades via redes neutras), <strong>telefonia móvel</strong> (SKY Móvel, MVNO lançada em abril de 2026) e <strong>energia solar</strong>. O portfólio do grupo inclui ainda a <strong>Overlabs</strong> (software), <strong>Illumia</strong> (IA para atendimento) e operações DirecTV em 11 países. Investimento planejado de <strong>R$ 1 bilhão</strong> no Brasil até 2026 e <strong>US$ 450 milhões</strong> na região entre 2026-2031.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">América Latina (11 países)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada (Grupo Werthein / Waiken ILW)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Negócio</div>
+                        <div class="value">Diversificação — de operadora de TV para plataforma integrada de serviços</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">~1.500+ (SKY Brasil)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>A SKY (VRIO CORP) vive o momento mais transformador de sua história. O core business de TV por assinatura está em declínio acelerado (-60% de base desde 2014), forçando uma reinvenção completa do modelo de negócio. A empresa está se reposicionando como <strong>plataforma integrada de conectividade, entretenimento, finanças e energia</strong>, com investimentos massivos em tecnologia. O CIO Roberto Castejon opera em um cenário de alta complexidade: precisa simultaneamente sustentar operações legadas de TV via satélite, construir novas plataformas digitais (fintech, MVNO, IoT), integrar parceria tecnológica com a Amazon (Project Kuiper) e modernizar infraestrutura para suportar o novo portfólio multi-serviço. Este é um momento de <strong>máxima demanda por parceiros tecnológicos</strong> que acelerem a transformação.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Diversificar receita além da TV paga em declínio acelerado (-1,6M clientes em 2025)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar e orquestrar múltiplas plataformas (TV, fintech SKX, MVNO, fibra, satélite LEO)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Construir infraestrutura tecnológica para operação multi-serviço (triple play + fintech)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar parceria com Amazon (Project Kuiper) para internet LEO B2B em 9 países</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Garantir cibersegurança e compliance regulatório (Bacen, Anatel, LGPD) para fintech e telecom</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir churn da base de TV paga com IA preditiva e cross-sell de novos serviços</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Plataforma Fintech (SKX)</span>
+                        <span class="tag tag-priority">Internet via Satélite (Amazon LEO)</span>
+                        <span class="tag tag-priority">MVNO / SKY Móvel</span>
+                        <span class="tag tag-priority">Integração de Sistemas Multi-Serviço</span>
+                        <span class="tag tag-priority">Cibersegurança & Compliance</span>
+                        <span class="tag tag-priority">IA / Machine Learning (Illumia)</span>
+                    </div>
+                    <h4 style="margin-top:20px;margin-bottom:12px;color:var(--primary)">Empresas do Ecossistema Tecnológico</h4>
+                    <div>
+                        <span class="tag tag-active">Overlabs (Software)</span>
+                        <span class="tag tag-active">Illumia (IA Atendimento)</span>
+                        <span class="tag tag-active">Zaaz (Fibra Óptica)</span>
+                        <span class="tag tag-active">SKX (Fintech)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses, baseados nas iniciativas públicas do grupo:</p>
+            <div>
+                <span class="tag tag-invest">Infraestrutura de Satélite (LEO)</span>
+                <span class="tag tag-invest">Plataforma Fintech / Open Finance</span>
+                <span class="tag tag-invest">MVNO / Telefonia Móvel</span>
+                <span class="tag tag-invest">Fibra Óptica (FTTH)</span>
+                <span class="tag tag-invest">Inteligência Artificial / ML</span>
+                <span class="tag tag-invest">Integração de Dados & APIs</span>
+                <span class="tag tag-invest">Cibersegurança & LGPD</span>
+                <span class="tag tag-invest">Cloud & Infraestrutura</span>
+                <span class="tag tag-invest">Streaming / Sky+ / Conteúdo Digital</span>
+                <span class="tag tag-invest">Energia Solar (Crédito)</span>
+                <span class="tag tag-invest">CRM & Experiência do Cliente</span>
+                <span class="tag tag-invest">Automação de Processos (RPA/BPM)</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <div class="alert-box">
+                <strong>Momento crítico de transformação:</strong> A SKY está construindo simultaneamente uma fintech, uma MVNO, um serviço de internet via satélite e uma plataforma de energia solar — tudo sobre infraestrutura legada de TV por assinatura. A demanda por parceiros de tecnologia é máxima.
+            </div>
+            <div class="grid-2">
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Integração Multi-Plataforma</h4>
+                        <span class="score-badge">ALTA</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Necessidade de integrar sistemas de TV, fintech SKX, MVNO, fibra e satélite LEO</li>
+                            <li>Unificação de dados de cliente entre múltiplas linhas de negócio</li>
+                            <li>APIs e middleware para orquestrar ecossistema Waiken ILW</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Plataforma Fintech & Compliance</h4>
+                        <span class="score-badge">ALTA</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>SKX precisa de compliance com Bacen, LGPD e regulações financeiras</li>
+                            <li>Desenvolvimento de plataformas de pagamento, crédito e cartões</li>
+                            <li>Integração com sistemas existentes de billing e CRM</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Cibersegurança Multi-Setor</h4>
+                        <span class="score-badge">ALTA</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Operação em telecom + fintech exige cibersegurança robusta</li>
+                            <li>Múltiplos reguladores (Anatel, Bacen, ANPD)</li>
+                            <li>Proteção de dados financeiros e de comunicações</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>IA Preditiva Anti-Churn</h4>
+                        <span class="score-badge">MÉDIA-ALTA</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Base de TV paga perdendo clientes aceleradamente</li>
+                            <li>Modelos de ML para prever cancelamento e acionar cross-sell</li>
+                            <li>Já possuem Illumia (IA), mas precisam escalar e integrar</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Roberto Castejon</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas da SKY/VRIO. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. Engenharia Digital — Modernização & Integração de Plataformas</h4>
+                    <span class="score-badge">Score 95/100</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px"><strong>Por quê:</strong> A SKY precisa integrar 6+ plataformas (TV, fintech SKX, MVNO, fibra, satélite LEO, energia) sobre infraestrutura legada.</p>
+                    <ul>
+                        <li>Modernização de sistemas legados de billing e CRM de TV por assinatura</li>
+                        <li>Construção de camada de integração (APIs/middleware) entre linhas de negócio</li>
+                        <li>Squads dedicados para desenvolvimento da plataforma multi-serviço</li>
+                        <li>Experiência Foursys em telecom e integração de sistemas complexos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. Cibersegurança — Proteção Multi-Regulatória</h4>
+                    <span class="score-badge">Score 92/100</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px"><strong>Por quê:</strong> Operação simultânea em telecom + fintech + IoT exige segurança de nível bancário.</p>
+                    <ul>
+                        <li>Certificações ISO 27001/27701 da Foursys são diferencial direto</li>
+                        <li>Compliance com Bacen (fintech), Anatel (telecom) e ANPD (LGPD)</li>
+                        <li>Security by Design para novas plataformas (SKX, SKY Móvel)</li>
+                        <li>Gestão de riscos e resposta a incidentes para operação 24/7</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. Dados & Inteligência Artificial — Anti-Churn & Cross-Sell</h4>
+                    <span class="score-badge">Score 90/100</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px"><strong>Por quê:</strong> Com 1,6M de clientes perdidos em 2025, IA preditiva para retenção é urgência #1.</p>
+                    <ul>
+                        <li>Modelos preditivos de churn usando dados de consumo, billing e interações</li>
+                        <li>IA generativa para personalização de ofertas cross-sell (TV → fibra → fintech)</li>
+                        <li>Evolução e integração da Illumia (IA de atendimento já existente no grupo)</li>
+                        <li>AI Squad Foursys com experiência em hiperautomação e IA preditiva</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. Agilidade & Org Design — Transformação Organizacional</h4>
+                    <span class="score-badge">Score 85/100</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px"><strong>Por quê:</strong> A transição de operadora de TV para plataforma multi-serviço exige redesenho organizacional.</p>
+                    <ul>
+                        <li>Desenho de modelo operacional para empresa multi-vertical</li>
+                        <li>Implantação de squads ágeis para acelerar entregas em paralelo</li>
+                        <li>Otimização de fluxos entre subsidiárias (SKY, SKX, Zaaz, Overlabs, Illumia)</li>
+                        <li>Capacitação ágil e cultura de produto para times legados de TV</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>5. Estratégia & Inovação — Open Finance e Novos Modelos</h4>
+                    <span class="score-badge">Score 82/100</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px"><strong>Por quê:</strong> A fintech SKX é negócio novo e demanda expertise em design de produtos financeiros.</p>
+                    <ul>
+                        <li>Consultoria em design de produtos financeiros (Open Finance, PIX, crédito)</li>
+                        <li>Governança de inovação para pipeline de novos serviços</li>
+                        <li>Benchmark de operadoras de telecom que entraram em fintech (Nubank/claro, Vivo Pay)</li>
+                        <li>Experiência Foursys com bancos, seguros e regulação financeira</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Roberto Castejon está no epicentro de uma das maiores transformações corporativas do Brasil: converter uma operadora de TV por assinatura em declínio (-60% de base) numa plataforma integrada de serviços. Iniciar a conversa reconhecendo a complexidade e ambição deste movimento — fintech, MVNO, satélite LEO, fibra e energia rodando em paralelo. Demonstrar que a Foursys entende o desafio de <strong>orquestrar múltiplas verticais de negócio sobre infraestrutura legada</strong>, com cases de integração de sistemas complexos, squads multi-disciplinares e aceleração via IA. As certificações ISO 27001/27701 são relevância direta para quem opera simultaneamente em telecom e fintech.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A SKY está executando <strong>5 projetos estratégicos simultaneamente</strong> (fintech SKX, SKY Móvel, Amazon LEO, SKY Fibra, energia solar), todos demandando desenvolvimento de software, integração de sistemas, cibersegurança e governança de dados. O investimento confirmado é de <strong>R$ 1 bilhão até 2026</strong> no Brasil, com US$ 450 milhões adicionais para 2026-2031 na América Latina. Este é possivelmente o maior ciclo de investimento em tecnologia da história da empresa — a janela de oportunidade é agora.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>Experiência em telecom E em finanças</strong> — a Foursys atende ambos os setores, diferencial raro para quem precisa integrar os dois mundos; (2) <strong>AI Squad proprietário</strong> para IA preditiva anti-churn e automação, respondendo à demanda imediata de reter clientes de TV enquanto faz cross-sell para novos serviços; (3) <strong>Certificações ISO 27001/27701</strong> que atendem requisitos de Anatel E Bacen simultaneamente; (4) <strong>Modelo flexível de squads</strong> que permite escalar e desescalar rapidamente conforme cada projeto avança.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. A corrida contra o tempo da TV paga:</strong> O mercado perdeu 1,6 milhão de clientes em 2025 e a SKY opera com apenas 2,1 milhões de assinantes. A cada trimestre sem diversificação efetiva, a base de receita encolhe. Modelos de IA anti-churn e estratégias de cross-sell (TV → fibra → SKX → SKY Móvel) são urgências operacionais que a Foursys pode endereçar com seu AI Squad.</p>
+                <p style="margin-bottom:12px"><strong>2. Fintech sem experiência bancária é risco regulatório:</strong> A SKX está entrando no mercado financeiro (pagamentos, crédito, cartões) sem o histórico regulatório de um banco. A Foursys, com clientes no setor bancário e certificação ISO 27001, pode ser o parceiro que garante compliance com Bacen e LGPD desde o design da plataforma.</p>
+                <p style="margin-bottom:12px"><strong>3. Amazon LEO é oportunidade B2B massiva:</strong> A parceria com a Amazon para internet via satélite em 9 países alcançará 15 milhões de empresas. A infraestrutura de TI para gerenciar provisioning, billing e suporte B2B em escala continental demanda integração de sistemas de missão crítica — competência central da Foursys.</p>
+                <p style="margin-bottom:12px"><strong>4. SKY Móvel (MVNO) acabou de nascer:</strong> Lançada em abril de 2026, a operadora móvel virtual ainda está em estágio inicial. Toda a camada de software (BSS/OSS), integração com a rede da Surf Telecom, CRM e experiência do cliente está sendo construída — oportunidade de entrar como parceiro de desenvolvimento desde o início.</p>
+                <p><strong>5. A holding Waiken ILW precisa de dados unificados:</strong> Com 20+ marcas em 11 países, a necessidade de uma plataforma de dados integrada (data lake, analytics, BI) é estrutural. A Foursys pode posicionar seu studio de Dados & IA para construir a fundação de dados que permita visão 360° do cliente entre TV, fibra, fintech e móvel.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Claro TV (Grupo América Móvil)</h4>
+                <p><strong>Segmento:</strong> TV por assinatura, banda larga, móvel | <strong>Market Share TV Paga:</strong> 53,7% (dez/2025)</p>
+                <p>Líder absoluta em TV por assinatura com 4,09 milhões de acessos. Diferencial massivo: opera como triple play completo (TV + internet + móvel) sob uma única marca, com infraestrutura própria de fibra e rede móvel. Oferece Claro TV+ com integração de Netflix, Globoplay, Max, Disney+ e Apple TV+. A integração vertical permite bundles agressivos que a SKY, com MVNO terceirizada e fibra via rede neutra, não consegue replicar facilmente.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Vivo (Telefônica Brasil)</h4>
+                <p><strong>Segmento:</strong> Telecom integrada (móvel, fibra, TV, digital) | <strong>Market Share TV Paga:</strong> 9,6%</p>
+                <p>Maior operadora de telecomunicações do Brasil em receita. Embora tenha menor share em TV paga, lidera em fibra óptica e móvel. Lançou Vivo Pay (fintech) e investe fortemente em IA, 5G e IoT. Tem infraestrutura própria massiva que permite bundling agressivo. Referência em transformação digital de telecom no Brasil, com plataforma de dados e IA madura.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>DirecTV (EUA/LatAm)</h4>
+                <p><strong>Segmento:</strong> TV por satélite e streaming | <strong>Relação:</strong> Operação irmã dentro da Waiken ILW</p>
+                <p>Embora parte do mesmo grupo (Waiken ILW), a DirecTV Latin America opera em outros mercados da região com desafios similares de declínio de TV paga e migração para streaming. A integração e compartilhamento de tecnologia entre SKY Brasil e DirecTV LATAM é uma oportunidade de escala que pode gerar sinergias em plataformas, dados e IA.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Starlink (SpaceX)</h4>
+                <p><strong>Segmento:</strong> Internet via satélite LEO | <strong>Market Share:</strong> 46% da internet via satélite na LatAm</p>
+                <p>Principal concorrente direto no segmento de internet via satélite, onde a SKY está entrando via parceria com Amazon Kuiper. A Starlink tem vantagem de first-mover na América Latina, mas detém apenas 0,5% da banda larga brasileira total. A SKY pode competir com vantagem na distribuição (presença em 99% do território brasileiro) e atendimento local.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>A SKY enfrenta um gap estrutural em relação à Claro e à Vivo: enquanto estas possuem <strong>infraestrutura própria integrada</strong> (fibra + móvel + TV), a SKY opera com <strong>rede neutra de terceiros</strong> (FiBrasil, V.tal) e <strong>MVNO</strong> (Surf Telecom). Isso torna a <strong>camada de software e integração</strong> ainda mais crítica — é ali que a SKY pode criar diferencial competitivo. Os gaps identificados são: (1) <strong>Plataforma unificada de cliente</strong> que integre TV, fibra, fintech, móvel e satélite — a Claro já tem isso nativamente; (2) <strong>IA e analytics maduros</strong> para personalização e retenção — Vivo está anos à frente com Vivo Pay e plataforma de dados; (3) <strong>Compliance multi-regulatório</strong> para fintech + telecom — competência rara no mercado. A Foursys pode se posicionar como a <strong>parceira que constrói a inteligência de software</strong> que compensa a falta de infraestrutura própria.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CIO — SKY (VRIO CORP)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">São Paulo, SP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Idiomas</div>
+                        <div class="value">Português, Espanhol, Inglês</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Contexto Corporativo</div>
+                        <div class="value">Grupo multinacional argentino (Werthein) com operações em 11 países da América Latina via holding Waiken ILW</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Momento da Empresa</div>
+                        <div class="value">Transformação radical: de operadora de TV para plataforma multi-serviço (fintech, telecom, energia, satélite)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Desafio Central</div>
+                        <div class="value">Construir arquitetura tecnológica para 5+ novas verticais de negócio simultaneamente</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconheça a ambição da transformação:</strong> A SKY não está fazendo uma evolução incremental — está se reinventando completamente. Abrir a conversa reconhecendo a complexidade e coragem desse movimento (fintech + MVNO + satélite LEO + fibra + energia em paralelo) demonstra que você entende o cenário e gera respeito imediato.</p>
+                <p style="margin-bottom:10px"><strong>2. Conecte-se pelo desafio de integração:</strong> O maior pain point de um CIO que gerencia 5+ verticais nascendo ao mesmo tempo é a integração. Pergunte como está a estratégia de dados unificados entre SKY, SKX, SKY Móvel e Zaaz — isso demonstra profundidade técnica e interesse genuíno.</p>
+                <p style="margin-bottom:10px"><strong>3. Mencione o lançamento recente da SKY Móvel:</strong> A MVNO foi lançada em abril de 2026 — é notícia fresquíssima. Demonstrar conhecimento sobre esta iniciativa mostra preparo e acompanhamento ativo da empresa.</p>
+                <p style="margin-bottom:10px"><strong>4. Referencie o contexto latino-americano:</strong> Roberto opera em um grupo com presença em 11 países. Mencionar os desafios de escalar tecnologia para múltiplos mercados regulatórios (Argentina, Chile, Colômbia...) abre portas para conversar sobre governança e compliance multi-jurisdicional.</p>
+                <p><strong>5. Posicione-se como parceiro de construção, não de manutenção:</strong> Este é um momento de build, não de run. A Foursys deve se apresentar como parceira para construir o novo — plataformas, integrações, IA — e não como fornecedora de sustentação de sistemas legados. O tom deve ser de co-criação e inovação.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Diretoria / C-Level</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO (Gustavo Fonseca) e holding Waiken ILW</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Estrutura do Grupo</div>
+                        <div class="value">Holding Waiken ILW → VRIO Corp → SKY Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão</div>
+                        <div class="value">Alto — momento de construção de novas plataformas demanda autonomia tecnológica</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores SKY Brasil</div>
+                        <div class="value">~1.500+</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Clientes Atendidos</div>
+                        <div class="value">~4 milhões (TV paga + fibra + streaming)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Territorial</div>
+                        <div class="value">99% do território brasileiro via satélite; 400+ cidades com fibra</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Protagonista: TI é o eixo central da estratégia de diversificação — cada novo negócio depende de plataforma tecnológica</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada do Investimento em Tecnologia (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Novas Plataformas Digitais</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+                <div class="bar"><div class="bar-label">Infraestrutura (Satélite/Fibra/MVNO)</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+                <div class="bar"><div class="bar-label">Integração & Middleware</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança & Compliance</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+                <div class="bar"><div class="bar-label">IA / ML / Analytics</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+                <div class="bar"><div class="bar-label">Operação Legada (TV Satélite)</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#7986cb">7%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas & Capacitação</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+            </div>
+            <p style="margin-top:12px;font-size:12px;color:var(--text-light);text-align:center;font-style:italic">* Estimativa baseada em iniciativas públicas e investimentos anunciados — não reflete dados internos da empresa.</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências e Contexto de Fornecedores</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">O que a SKY Busca em Parceiros</h4>
+                    <div>
+                        <span class="tag tag-active">Experiência multi-setor (telecom + fintech)</span>
+                        <span class="tag tag-active">Capacidade de escala rápida</span>
+                        <span class="tag tag-active">Compliance regulatório (Bacen + Anatel)</span>
+                        <span class="tag tag-active">Modelo flexível de contratação</span>
+                        <span class="tag tag-active">Experiência em integração de sistemas</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Empresa de tecnologia com experiência comprovada em múltiplos setores regulados e capacidade de atuar em projetos de construção (build), não apenas sustentação</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Parceiros Tecnológicos Conhecidos</div>
+                        <div class="value">Amazon (Project Kuiper/LEO), Surf Telecom (MVNO), FiBrasil, V.tal, I-Systems, American Tower (redes neutras), Zurich (seguros)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CTO/CIO - Diego Neufert | Novamed (Grupo NC)</title>
+    <style>
+        :root { --primary: #1a237e; --primary-light: #3949ab; --accent: #00b894; --accent-orange: #e17055; --bg: #f5f6fa; --card-bg: #ffffff; --text: #2d3436; --text-light: #636e72; --border: #dfe6e9; --shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; } .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-new { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .summary-stat { text-align: center; padding: 20px; }
+        .summary-stat .number { font-size: 36px; font-weight: 800; color: var(--primary); }
+        .summary-stat .desc { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Diego Neufert</h1>
+                <h2>CTO / CIO (NC Tech) — Novamed (Grupo NC)</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Farmacêutico (manufatura) | Manaus - AM (Zona Franca)</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Destaque Global</div>
+                    <div class="value">Top 5 Mundial</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Localização</div>
+                    <div class="value">Zona Franca Manaus</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="alert-box">
+                <strong>Destaque:</strong> A Novamed é uma das <strong>cinco maiores e mais modernas fábricas de medicamentos sólidos do mundo</strong>. Foi a primeira empresa a produzir medicamentos na Zona Franca de Manaus. Foco em Indústria 4.0 e automação industrial. TI centralizada via NC Tech.
+            </div>
+            <div class="grid-3">
+                <div class="summary-stat">
+                    <div class="number">Top 5</div>
+                    <div class="desc">Maior fábrica de medicamentos sólidos do mundo</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number">1ª</div>
+                    <div class="desc">Empresa a produzir medicamentos na Zona Franca de Manaus</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number">4.0</div>
+                    <div class="desc">Indústria 4.0 — foco em automação e IoT</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Novamed</h3>
+            <p style="margin-bottom:20px;line-height:1.8">A Novamed é o braço de manufatura de alta capacidade do Grupo NC, localizada na Zona Franca de Manaus. Reconhecida como uma das cinco maiores e mais modernas fábricas de medicamentos sólidos do mundo, possui alta automação industrial. Benefícios fiscais da Zona Franca (redução de IPI, ICMS e importação) tornam a operação estratégica para o grupo.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Sede</div>
+                        <div class="value">Manaus, AM — Zona Franca</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Especialidade</div>
+                        <div class="value">Produção de medicamentos sólidos em larga escala</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Benefício Fiscal</div>
+                        <div class="value">Incentivos Zona Franca de Manaus (SUFRAMA)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Liderança TI</div>
+                        <div class="value">Diego Neufert (CTO/CIO NC Tech)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Áreas Tecnológicas Prioritárias — Indústria 4.0</h3>
+            <div>
+                <span class="tag tag-active">IoT Industrial / Sensores</span>
+                <span class="tag tag-active">Gêmeos Digitais</span>
+                <span class="tag tag-active">Automação de Produção</span>
+                <span class="tag tag-active">MES (Manufacturing Execution System)</span>
+                <span class="tag tag-active">Manutenção Preditiva com IA</span>
+                <span class="tag tag-active">Controle de Qualidade com ML</span>
+                <span class="tag tag-active">SCADA / Supervisório</span>
+                <span class="tag tag-active">Sistemas Paperless (GMP)</span>
+                <span class="tag tag-active">SAP integrado ao grupo</span>
+                <span class="tag tag-active">Edge Computing</span>
+                <span class="tag tag-active">Rastreabilidade ANVISA</span>
+                <span class="tag tag-active">Cibersegurança OT</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark: Concorrentes em Manufatura Farmacêutica</h3>
+            <div class="competitor-card">
+                <h4>Eurofarma (Fábrica Itapevi)</h4>
+                <p>Planta industrial com alto grau de automação, robótica em linhas de embalagem, MES integrado ao SAP, IoT para monitoramento ambiental e sistemas paperless certificados.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Brainfarma (Grupo Hypera)</h4>
+                <p>Complexo industrial em Anápolis-GO com Indústria 4.0, automação de linhas de produção, sistemas LIMS para laboratórios e integração MES-ERP.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Catalent / Patheon (CDMO Global)</h4>
+                <p>Referência global em manufatura farmacêutica terceirizada. Gêmeos digitais de fábricas, IA para otimização de processos, plataformas de dados em tempo real e automação robótica.</p>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>Oportunidade de Indústria 4.0</h4>
+                <p>Como uma das Top 5 fábricas de medicamentos do mundo, a Novamed é candidata natural para implementação de <strong>Gêmeos Digitais, IoT industrial avançado e IA para manutenção preditiva</strong>. Redução de até 25% em testes físicos substituídos por simulações virtuais e 80% menos uso de materiais em P&D são benchmarks do setor para 2026.</p>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 92</span>
+                </div>
+                <p>IA para manutenção preditiva, controle de qualidade automatizado e otimização de processos industriais farmacêuticos.</p>
+                <div class="reasons"><strong>Por que oferecer:</strong><ul><li>Fábrica de escala mundial precisa de IA industrial</li><li>Manutenção preditiva reduz paradas não planejadas</li><li>Controle de qualidade com ML garante conformidade GMP</li><li>Otimização de processos produtivos com dados em tempo real</li></ul></div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 88</span>
+                </div>
+                <p>Plataformas IoT, edge computing, integração de dados de chão de fábrica e infraestrutura cloud para Indústria 4.0.</p>
+                <div class="reasons"><strong>Por que oferecer:</strong><ul><li>IoT industrial com edge computing (Zona Franca exige baixa latência)</li><li>Integração de dados de produção em tempo real</li><li>DevOps para sistemas industriais</li><li>Observabilidade de operações críticas 24/7</li></ul></div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança OT</h4>
+                    <span class="score-badge">Score: 80</span>
+                </div>
+                <p>Segurança de sistemas OT (Operational Technology), proteção de redes industriais SCADA/ICS e conformidade regulatória.</p>
+                <div class="reasons"><strong>Por que oferecer:</strong><ul><li>Fábrica de classe mundial é alvo de ataques</li><li>Convergência IT/OT exige segurança especializada</li><li>Proteção de propriedade intelectual de processos</li></ul></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>A Novamed como Top 5 mundial é uma referência. Abordar via Diego Neufert com foco em <strong>Indústria 4.0</strong>: IoT industrial, gêmeos digitais e IA para manutenção preditiva. Demonstrar cases de manufatura inteligente e ROI comprovado em redução de paradas e aumento de qualidade.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Setor farmacêutico registra redução de até <strong>50% no time-to-market</strong> e <strong>35% nos custos totais</strong> com digitalização. A Novamed, com escala e modernidade, é candidata ideal para projetos de Indústria 4.0 de referência no Grupo NC.</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | Grupo NC</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CTO/CIO - Diego Neufert | EMS (Grupo NC)</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .summary-stat { text-align: center; padding: 20px; }
+        .summary-stat .number { font-size: 36px; font-weight: 800; color: var(--primary); }
+        .summary-stat .desc { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px 14px; text-align: left; font-size: 14px; border-bottom: 1px solid var(--border); }
+        th { background: #f8f9ff; color: var(--primary); font-weight: 600; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Diego Neufert</h1>
+                <h2>CTO / CIO — EMS (Grupo NC)</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Farmacêutico | Hortolândia - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento Grupo NC</div>
+                    <div class="value">R$ 22 BI (2025)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Investimento TI (NC Tech)</div>
+                    <div class="value">R$ 150 MM+</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Líder de Mercado</div>
+                    <div class="value">19 anos consecutivos</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+
+        <!-- 1. Análise da Empresa -->
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa</h3>
+            <p style="margin-bottom:20px;line-height:1.8">A EMS é a maior farmacêutica do Brasil, líder de mercado há 19 anos consecutivos. Faz parte do Grupo NC, que faturou R$ 22 bilhões em 2025. A EMS responde por ~90% do faturamento total do grupo. Possui o maior centro de P&D da América Latina em Hortolândia-SP, com fábricas em 4 estados. A empresa atua em genéricos, similares, medicamentos de marca e OTC, com plano de ampliar a receita hospitalar de 8% para 25%. Expansão internacional em andamento com aquisições no México.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Nacional com expansão internacional (EUA via Brace Pharma, México, Sérvia via Galenika)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada — Grupo NC (família Sanchez)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento acelerado — Receita crescendo 17% a.a.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Setor Hospitalar (2026)</div>
+                        <div class="value">Projeção de R$ 1,35 BI (inclui Fresenius Kabi)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Resumo Executivo -->
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="alert-box">
+                <strong>Oportunidade Estratégica:</strong> A EMS é a <strong>maior farmacêutica do Brasil</strong> e lidera o Grupo NC. A NC Tech centraliza a TI de todas as empresas do grupo, criando uma porta de entrada única para um conglomerado de R$ 22 bilhões. Diego Neufert comanda a transformação de "TI Estratégica" para "TI Geradora de Negócios".
+            </div>
+        </div>
+
+        <!-- 3. Desafios Estratégicos e Prioridades -->
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Desafios e Prioridades 2025-2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Evolução para TI Geradora de Negócios</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>IA aplicada a P&D e farmacovigilância</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Digitalização da cadeia de suprimentos (Indústria 4.0)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Gêmeos digitais e sistemas paperless</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Governança de IA e conformidade ANVISA/LGPD</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Expansão do time de TI (+50%)</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Inteligência Artificial / ML</span>
+                        <span class="tag tag-priority">IoT Industrial</span>
+                        <span class="tag tag-priority">Cloud & DevOps</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Mapa de Investimentos -->
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Áreas de Investimento Ativo</h4>
+                    <div>
+                        <span class="tag tag-active">Inteligência Artificial / ML</span>
+                        <span class="tag tag-active">IA Generativa</span>
+                        <span class="tag tag-active">IoT Industrial</span>
+                        <span class="tag tag-active">Ciência de Dados</span>
+                        <span class="tag tag-active">Blockchain</span>
+                        <span class="tag tag-active">Apps Mobile</span>
+                        <span class="tag tag-active">Cloud & DevOps</span>
+                        <span class="tag tag-active">Cibersegurança</span>
+                        <span class="tag tag-active">SAP / ERP</span>
+                        <span class="tag tag-active">UX / Produtos Digitais</span>
+                        <span class="tag tag-active">Automação de Processos</span>
+                        <span class="tag tag-active">Dados em Tempo Real</span>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Projetos em Andamento (60+)</h4>
+                    <div>
+                        <span class="tag tag-active">Conexão de dados em tempo real</span>
+                        <span class="tag tag-active">Blockchain para supply chain</span>
+                        <span class="tag tag-active">IA para otimização de processos</span>
+                        <span class="tag tag-active">Plataformas digitais para colaboradores</span>
+                        <span class="tag tag-active">DevOps e infraestrutura cloud</span>
+                        <span class="tag tag-active">Aplicativos móveis corporativos</span>
+                        <span class="tag tag-active">Ciência de dados aplicada</span>
+                        <span class="tag tag-active">Segurança da informação</span>
+                        <span class="tag tag-active">Automação industrial (IoT)</span>
+                        <span class="tag tag-active">UX e design de produtos digitais</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Ofertas Foursys Recomendadas -->
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Diego Neufert / EMS</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>IA/ML é prioridade central da NC Tech com 60+ projetos</li>
+                        <li>Necessidade de expandir time de TI em 50% — AI Squad preenche gap</li>
+                        <li>IA para P&D farmacêutico (descoberta de fármacos, farmacovigilância)</li>
+                        <li>Automação de processos industriais com IA</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 90</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>Conglomerado com 10+ empresas que precisam integrar sistemas</li>
+                        <li>Evolução de SAP/ERP para unificar operações</li>
+                        <li>Parceria Digibee ideal para integrar ecossistema diversificado</li>
+                        <li>Modernização de fábricas em 4 estados diferentes</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 85</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>NC Tech busca DevOps e infraestrutura cloud</li>
+                        <li>Plataformas digitais para 15.000 colaboradores</li>
+                        <li>Necessidade de arquitetura cloud-native para 60+ projetos</li>
+                        <li>Observabilidade e SRE para operações críticas farmacêuticas</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 80</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>NC Tech inclui Segurança da Informação como pilar</li>
+                        <li>Indústria farmacêutica é alvo frequente de ciberataques</li>
+                        <li>Conformidade LGPD e ANVISA exigem robustez</li>
+                        <li>Proteção de propriedade intelectual (P&D)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 70</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul>
+                        <li>60+ projetos simultâneos demandam aceleração</li>
+                        <li>Necessidade de apps mobile corporativos</li>
+                        <li>Expansão do time — componentes reutilizáveis reduzem curva de aprendizado</li>
+                        <li>Automação de processos internos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Estratégia de Abordagem -->
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Diego Neufert lidera a NC Tech com 60+ projetos e busca expandir o time em 50%. Iniciar a conversa demonstrando como a Foursys pode <strong>acelerar a execução dos projetos em andamento</strong> com AI Squad e squads especializados. Reforçar experiência de 24 anos, 41.000+ projetos e certificações ISO 27001/27701. Mencionar cases no setor farmacêutico e industrial.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A NC Tech está em plena expansão com R$ 150M+ de investimento. Com 60+ projetos em paralelo e necessidade de aumentar o time em 50%, a EMS precisa de parceiro qualificado que entregue <strong>velocity e qualidade</strong>. A Foursys pode se posicionar como parceira de longo prazo para as frentes de IA, Modernização e Engenharia Digital.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conta mega: <strong>AI Squad</strong> (produto proprietário de IA), <strong>Modernização de Legado</strong> (Digibee para integração de 10+ empresas), <strong>Engenharia Digital</strong> (DevOps/Cloud para escala). A Foursys se diferencia pelo tamanho e capacidade de entregar squads em escala para um conglomerado de R$ 22 bilhões.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p>1. O setor farmacêutico brasileiro cresce <strong>10,6% em 2026</strong>. IA já é usada por 55% das pharmas globais em P&D.<br>
+                2. A EMS está expandindo para o <strong>setor hospitalar</strong> (de 8% para 25% da receita) — nova vertical que demandará tecnologia.<br>
+                3. Aquisições recentes no México ampliam complexidade de integração — oportunidade para Modernização de Legado com Digibee.<br>
+                4. O plano de evolução para <strong>"TI Geradora de Negócios"</strong> demonstra maturidade e abertura para parceiros estratégicos.<br>
+                5. Diego Neufert tem experiência com <strong>SAP S/4HANA</strong> (implementou na Obramax) — conversar sobre evolução SAP na EMS.</p>
+            </div>
+        </div>
+
+        <!-- 8. Benchmark de Concorrentes -->
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Eurofarma</h4>
+                <p>2ª maior farmacêutica brasileira. Forte investimento em transformação digital, IA para P&D, automação de fábricas (Indústria 4.0), SAP S/4HANA e plataformas de dados. Expansão na América Latina com 7 plantas industriais.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Aché Laboratórios</h4>
+                <p>3ª maior farmacêutica nacional. Investimento em inovação digital, automação laboratorial, sistemas de farmacovigilância com IA, e plataformas omnichannel para profissionais de saúde.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Hypera Pharma</h4>
+                <p>Líder em OTC e prescrição médica. Forte digitalização comercial, CRM avançado, analytics preditivo para demanda, e modernização de sistemas legados com cloud-first strategy.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Cimed</h4>
+                <p>Crescimento acelerado no mercado farmacêutico. Investimento em marketing digital, e-commerce farmacêutico, automação de processos industriais e supply chain digital.</p>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>Gap Analysis vs Concorrentes</h4>
+                <p>A EMS, com o maior faturamento e P&D do setor, já lidera com a NC Tech. A oportunidade está em: acelerar a execução dos 60+ projetos com parceiro externo qualificado, preencher gaps de talentos (expansão de 50% do time), e implementar soluções de IA/ML em escala industrial. A Eurofarma e Hypera já avançaram em SAP S/4HANA e cloud — a EMS pode se beneficiar de aceleração nesses temas.</p>
+            </div>
+        </div>
+
+        <!-- Separador -->
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <!-- 9. Perfil Pessoal & Rapport -->
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal & Dicas de Rapport — Diego Neufert</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">MBA — Fundação Dom Cabral; Programas executivos em IA e Liderança Digital — MIT e Cornell University</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Experiência</div>
+                        <div class="value">20+ anos em tecnologia e liderança executiva</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">No cargo desde</div>
+                        <div class="value">Agosto de 2022</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Atividades paralelas</div>
+                        <div class="value">Business Mentor na G4 Educação (desde set/2024)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Trajetória Marcante</div>
+                        <div class="value">CIO na Obramax (implementou SAP S/4HANA, e-commerce Magento/VTEX); Head of IT, CX e Innovation no TCP Terminal de Contêineres de Paranaguá (criou TCP Labs, startup interna de produtos digitais)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn: 17.000+ seguidores. Publicações frequentes sobre inovação, IA e transformação digital.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Reconhecimentos</div>
+                        <div class="value">Prêmio Avant 2024 do Grupo NC para a NC Tech (melhores indicadores e resultados)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Perfil de Liderança</div>
+                        <div class="value">Orientado a resultados, foco em inovação, experiência em startups internas (TCP Labs) e transformação ágil</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:16px">
+                <h4>Dicas para Conversa Amistosa</h4>
+                <p>1. <strong>MIT e Cornell:</strong> Pergunte sobre os programas executivos em IA e Liderança Digital — temas que ele valoriza e publica sobre no LinkedIn.<br>
+                2. <strong>TCP Labs:</strong> A experiência de criar uma startup interna de produtos digitais no TCP Terminal mostra seu perfil inovador — ótimo gancho para falar de inovação.<br>
+                3. <strong>G4 Educação:</strong> Como mentor na G4, ele valoriza educação executiva e desenvolvimento de talentos — conectar com ofertas de capacitação.<br>
+                4. <strong>Prêmio Avant:</strong> A NC Tech ganhou o prêmio interno do Grupo NC em 2024 — reconheça a conquista e pergunte sobre os resultados que levaram ao prêmio.<br>
+                5. <strong>Fundação Dom Cabral:</strong> MBA na FDC é um ponto em comum com muitos executivos do ecossistema — pode ser um bom quebra-gelo.</p>
+            </div>
+        </div>
+
+        <!-- 10. Perfil do CIO/Executivo e Posição de TI -->
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CTO/CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo</div>
+                        <div class="value">CTO / CIO do Grupo NC e EMS Pharma</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Área sob Gestão</div>
+                        <div class="value">NC Tech — Hub que unifica TI, Digital e Segurança da Informação</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Todas as empresas do Grupo NC (EMS, Legrand, Germed, Novamed, Nova Química, Multilab, Underskin, Ofta)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Plano Evolutivo</div>
+                        <div class="value">TI Estratégica → TI Transformacional → TI Geradora de Negócios</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores EMS</div>
+                        <div class="value">~15.000 funcionários</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Fábricas</div>
+                        <div class="value">Hortolândia (SP), Manaus (AM), Brasília (DF), Jaguariúna (SP)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">P&D</div>
+                        <div class="value">Maior Centro de P&D farmacêutico da América Latina (Hortolândia)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Crescimento Receita</div>
+                        <div class="value">Média de 17% ao ano nos últimos 5 anos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | Grupo NC</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CTO - Rafael Rosa | SLC Agricola</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Rafael Rosa</h1>
+                <h2>CTO — SLC Agricola</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Agronegócio | Porto Alegre - RS</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 8,1 BI a R$ 9 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 80,1 MM a R$ 100 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá até 10%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: SLC Agricola</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>SLC Agrícola</strong> (Schneider Logemann & Cia, B3: SLCE3) é uma das maiores produtoras agrícolas do Brasil, fundada em 1977 pelo Grupo SLC — conglomerado gaúcho com raízes na fabricação de colheitadeiras desde 1945, incluindo uma joint venture de 20 anos com a John Deere. Controlada pela família Logemann, a empresa foi pioneira ao ser a primeira do setor de grãos e algodão a abrir capital na bolsa brasileira, em 2007. Atualmente opera 16 fazendas em seis estados, totalizando mais de 460 mil hectares cultivados com soja, algodão, milho, café e trigo. A companhia expandiu significativamente em 2021 com a incorporação da Terra Santa por R$ 753 milhões, adicionando seis fazendas e 145 mil hectares de capacidade produtiva. Mantém joint ventures estratégicas com a japonesa Mitsui e o Grupo Dois Vales, além da subsidiária LandCo para gestão de terras. Com faturamento na faixa de R$ 8 a 9 bilhões e sede em Porto Alegre/RS, a SLC Agrícola investe fortemente em pesquisa agrícola — realizando cerca de 190 testes de campo anuais — e adota práticas de plantio direto e rotação de culturas para sustentabilidade e eficiência operacional. No momento estratégico atual, a empresa enfrenta o desafio de escalar sua transformação digital com IA, automação e integração de sistemas em operações geograficamente dispersas.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Estabilidade</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Agronegócio</strong> com abrangência <strong>Local (Brasil)</strong>. Todos os projetos definidos já possuem fornecedor selecionado. Modelo de compra: <strong>RFP/concorrência estruturada entre fornecedores qualificados</strong>. Perspectiva do orçamento de TI: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Atrair, desenvolver e engajar talentos</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos e operações para ganho de eficiência</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Fomentação da cultura de inovação na área de TI e organização</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Integrar equipes de TI e negócios para acelerar a entrega de valor</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Provar valor e ROI sob pressão de custos</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Automação de processos / RPA</span>
+<span class="tag tag-priority">Hiperautomação</span>
+<span class="tag tag-priority">ITSM/ESM e service desk</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">ITSM/ESM e service desk</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades de Consultoria</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Todos os projetos definidos já possuem fornecedor. No entanto, há temas <strong>sem projeto definido</strong> — oportunidade de assessment/consultoria:</p>
+            <div><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Gestão de dados</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA / ML</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA Generativa</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">APIs e integração</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">ERP</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Low-code / no-code</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Automação de processos / RPA</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Hiperautomação</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">ITSM/ESM e service desk</span>
+</div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Rafael Rosa</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 90</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML com investimento inicial previsto</li><li>IA Generativa com investimento inicial previsto</li><li>Hiperautomação com investimento inicial previsto</li><li>Hiperautomação é prioridade Top 3 de investimento</li><li>Automação de processos / RPA com investimento inicial previsto</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Rafael Rosa tem como top prioridades <strong>Automação de processos / RPA; Hiperautomação; ITSM/ESM e service desk</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 0 projetos definidos sem fornecedor. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. Mercado de AgTech em expansão acelerada:</strong> O mercado de IoT agrícola no Brasil atingiu US$ 758 milhões em 2024 e deve alcançar US$ 2,1 bilhões até 2032 (CAGR 13,6%). Com mais de 1.500 startups de agritech operando no país e investimentos crescendo 85% no 1º trimestre de 2025, a SLC não pode ficar fora dessa onda de inovação.</p>
+                <p style="margin-top:12px"><strong>2. IA como alavanca de produtividade agrícola:</strong> A adoção de IA no agro brasileiro projeta aumentos de até 20% na produtividade das safras. Considerando que a SLC opera 460 mil hectares, mesmo ganhos marginais de eficiência com IA preditiva e automação podem representar dezenas de milhões em receita adicional.</p>
+                <p style="margin-top:12px"><strong>3. Drones e sensoriamento — redução de custos comprovada:</strong> O mercado de drones agrícolas cresceu 2.100% entre 2021-2024 no Brasil. Agricultores que adotam agricultura de precisão reportam redução de até 30% no uso de pesticidas e aumento de 12% nas margens líquidas — dados que sustentam o business case para investimentos em automação.</p>
+                <p style="margin-top:12px"><strong>4. Operações distribuídas = desafio de integração:</strong> Com 16 fazendas em 6 estados, a SLC enfrenta um desafio único de integração de dados e padronização de processos. Soluções de APIs e integração (tema de investimento previsto) combinadas com RPA e hiperautomação podem unificar operações e gerar visibilidade em tempo real para a gestão.</p>
+                <p style="margin-top:12px"><strong>5. Pressão ESG e rastreabilidade digital:</strong> A SLC Agrícola enfrenta escrutínio internacional sobre práticas ambientais no Cerrado. Investir em rastreabilidade digital com IA e gestão de dados pode transformar um ponto de vulnerabilidade em diferencial competitivo, fortalecendo a narrativa ESG perante investidores e mercado internacional.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Grupo Amaggi</h4>
+                <p><strong>Faturamento:</strong> ~US$ 9,2 bilhões (2022) | <strong>Sede:</strong> Cuiabá/MT | <strong>Fundação:</strong> 1977</p>
+                <p>Conglomerado privado fundado por André Maggi, atuando em commodities, agronegócio, logística e energia. Opera em toda a cadeia da soja — da produção ao trading — com forte presença em Mato Grosso. Investe em logística integrada (hidrovias, rodovias, portos) e rastreabilidade digital da cadeia produtiva. Possui programas de sustentabilidade e certificação de commodities com blockchain.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Cosan / Raízen</h4>
+                <p><strong>Faturamento:</strong> ~US$ 45,5 bilhões (Raízen, safra 2023/24) | <strong>Sede:</strong> São Paulo/SP | <strong>Fundação:</strong> 1936 (Cosan)</p>
+                <p>Conglomerado diversificado em agronegócio, energia, gás e logística. A Raízen (JV com Shell) opera 35 usinas de etanol, açúcar e bioenergia, processando 105 milhões de toneladas de cana/ano. Referência em transformação digital no agro, com uso intensivo de IA para otimização de colheita, drones para monitoramento de lavouras e plataformas de gestão integrada de operações agrícolas e industriais.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>BrasilAgro (B3: AGRO3)</h4>
+                <p><strong>Segmento:</strong> Produção agrícola e gestão imobiliária rural | <strong>Sede:</strong> São Paulo/SP | <strong>Fundação:</strong> 2006</p>
+                <p>Empresa de capital aberto focada na aquisição, desenvolvimento e comercialização de propriedades rurais. Opera fazendas em estados como Bahia, Mato Grosso, Goiás, Piauí e Maranhão, produzindo soja, milho, algodão e cana-de-açúcar. Utiliza plataformas de agricultura de precisão com sensores IoT, análise de dados geoespaciais e automação de máquinas para maximizar a valorização e produtividade das terras.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Vanguarda Agro / Grupo Horita</h4>
+                <p><strong>Segmento:</strong> Produção de grãos e algodão em larga escala | <strong>Sede:</strong> Mato Grosso | <strong>Concorrente direto:</strong> SLC Agrícola</p>
+                <p>Considerada concorrente direta da SLC Agrícola no segmento de grãos e algodão, opera grandes extensões no cerrado brasileiro. Tem investido em sistemas de gestão de fazendas com sensoriamento remoto e automação de processos de plantio e colheita. Foco em eficiência operacional e escala, com adoção crescente de tecnologias de precision farming e integração de dados de campo.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidade Foursys</h4>
+                <p>Enquanto concorrentes como <strong>Cosan/Raízen</strong> e <strong>Amaggi</strong> já possuem programas avançados de transformação digital com IA e automação integrada, a SLC Agrícola está em fase de <strong>investimento inicial</strong> em IA/ML, IA Generativa e hiperautomação — sem projetos definidos nessas áreas. Este gap representa uma janela estratégica: a Foursys pode posicionar-se como aceleradora da maturidade digital da SLC, oferecendo AI Squads para implementar rapidamente soluções de IA que os concorrentes já utilizam (otimização de safra, manutenção preditiva de equipamentos, automação de processos corporativos), reduzindo o risco de defasagem competitiva no setor.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo</div>
+                        <div class="value">CTO — SLC Agrícola</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Porto Alegre, RS — sede corporativa da SLC</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Nível Hierárquico</div>
+                        <div class="value">Diretoria, com reporte direto ao CEO/Presidência e assento permanente em comitês com direito a voto</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão</div>
+                        <div class="value">Aprovadora (dentro do budget) — orçamento de TI de R$ 80-100 MM com perspectiva de crescimento de até 10%</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe sob Gestão</div>
+                        <div class="value">100 a 199 profissionais de TI, atendendo 1.000 a 4.999 usuários</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel Estratégico da TI</div>
+                        <div class="value">Estratégica: participa das discussões de negócio, define roadmap tecnológico e contribui na formulação do orçamento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Modelo de Compra</div>
+                        <div class="value">RFP / concorrência estruturada entre fornecedores qualificados — valoriza consultoria especializada e ISVs de nicho</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Eventos</div>
+                        <div class="value">Participante do IT Forum ATI Trancoso 2026 — indica perfil de networking ativo e interesse em benchmarking setorial</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p><strong>1. Fale a linguagem do agro:</strong> Demonstre conhecimento sobre safras, cotações de commodities e desafios operacionais do campo. Referências a plantio direto, rotação de culturas e eficiência por hectare mostram que você entende o negócio dele, não apenas a tecnologia.</p>
+                <p style="margin-top:10px"><strong>2. Valorize a escala e complexidade:</strong> Gerir TI para 16 fazendas em 6 estados é um desafio logístico único. Reconheça essa complexidade e conecte com experiências da Foursys em operações distribuídas — isso gera identificação imediata.</p>
+                <p style="margin-top:10px"><strong>3. Traga dados de ROI concretos:</strong> O perfil do Rafael indica forte valorização de Preço, ROI estimado e TCO em 3 anos. Chegue com números reais de cases anteriores — percentuais de redução de custo, ganhos de produtividade e payback comprovado.</p>
+                <p style="margin-top:10px"><strong>4. Aborde IA com pragmatismo:</strong> Ele listou IA/ML e IA Generativa como desafios e investimentos, mas com foco em governança e escalabilidade. Evite hype e posicione a conversa em torno de casos de uso práticos: predição de safra, automação de processos corporativos, otimização de supply chain.</p>
+                <p style="margin-top:10px"><strong>5. Explore o orgulho gaúcho e a herança da empresa:</strong> A SLC tem raízes profundas no RS — desde a fabricação de colheitadeiras em Horizontina até a JV histórica com a John Deere. Reconhecer essa trajetória de inovação da empresa cria conexão emocional e mostra que você fez a lição de casa.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CTO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Membro: assento permanente, com voto.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">100 a 199</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+<div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#3949ab">20%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">Crédito/Financiamento</span>
+<span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Consultoria especializada;ISV de nicho / produto específico</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 7 temas | Interno: 2 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

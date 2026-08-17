@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Patricia Pereira Camara | Sodexo</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Patricia Pereira Camara</h1>
+                <h2>CIO — Sodexo</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Serviços especializados | SÃO PAULO - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 6,1 BI a R$ 7 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 80,1 MM a R$ 100 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá entre 10% e 20%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Sodexo</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A Sodexo é uma multinacional francesa presente no Brasil há mais de 45 anos, atuando em dois segmentos principais: <strong>Serviços de Alimentação</strong> (refeições corporativas, hospitalares e educacionais) e <strong>Serviços de Facilities</strong> (limpeza, hospitalidade, manutenção de infraestrutura e gestão de áreas verdes). Em 2023, a divisão de benefícios (vale-refeição e alimentação) foi separada e rebatizada como <strong>Pluxee</strong>, em preparação para IPO independente, permitindo que a Sodexo focasse em serviços on-site. A empresa atende setores corporativos, saúde, energia, educação e recursos naturais, com mais de 10.000 colaboradores no país. É certificada <strong>Top Employer 2026</strong> e reconhecida pela "A List" do CDP em sustentabilidade. Seu plano estratégico <strong>"Better Tomorrow 2028"</strong> direciona investimentos em tecnologia de rastreabilidade nutricional em tempo real, sustentabilidade (Green IT) e digitalização de operações. O momento é de crescimento projetado de 10% a 20% no orçamento de TI, com foco em IA/ML, IoT para operações de facilities e integração de plataformas via APIs.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Serviços especializados</strong> com abrangência <strong>Global</strong>. Todos os projetos definidos já possuem fornecedor selecionado. Modelo de compra: <strong>RFP/concorrência estruturada entre fornecedores qualificados</strong>. Perspectiva do orçamento de TI: <strong>Crescerá entre 10% e 20%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar complexidade dos dados e qualidade da informação</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Integrar equipes de TI e negócios para acelerar a entrega de valor</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Otimizar custos e eficiência (FinOps/SecFinOps)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Posicionar a TI como área estratégica do negócio</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Provar valor e ROI sob pressão de custos</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">IA / ML</span>
+<span class="tag tag-priority">APIs e integração</span>
+<span class="tag tag-priority">IoT / edge computing</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">IoT / edge computing</span>
+<span class="tag tag-active">Sustentabilidade e green IT</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades de Consultoria</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Todos os projetos definidos já possuem fornecedor. No entanto, há temas <strong>sem projeto definido</strong> — oportunidade de assessment/consultoria:</p>
+            <div><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Sustentabilidade e green IT</span>
+</div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Patricia Pereira Camara</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <p style="color:var(--text-light)">Score insuficiente para recomendações automáticas — requer análise manual com base em pesquisa web.</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Patricia Pereira Camara tem como top prioridades <strong>IA / ML; APIs e integração; IoT / edge computing</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 0 projetos definidos sem fornecedor. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá entre 10% e 20%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. Regulação como catalisador de transformação:</strong> O Decreto 12.712/2025 reduziu taxas de benefícios de 7% para 3,6% e exige interoperabilidade. A Pluxee (spin-off da Sodexo) já revisou metas para 2026. Para a Sodexo on-site, isso significa pressão para agregar valor digital aos serviços de alimentação e facilities, justificando investimentos em plataformas integradas.</p>
+                <p style="margin-bottom:12px"><strong>2. IoT em facilities é o próximo campo de batalha:</strong> Com IoT/edge computing como top 3 de prioridades, a Sodexo pode liderar a digitalização de facilities com sensores para gestão preditiva de manutenção, controle de qualidade alimentar em tempo real e otimização energética — áreas onde a Foursys tem capacidade de implementação com seu modelo de squads.</p>
+                <p style="margin-bottom:12px"><strong>3. IA para escala operacional:</strong> Com mais de 10.000 colaboradores e operações em múltiplos sites, a adoção de IA/ML pode gerar ROI imediato em previsão de demanda de refeições, otimização de cardápios nutricionais, e automação de processos de facilities — reduzindo desperdício e custo operacional.</p>
+                <p style="margin-bottom:12px"><strong>4. Integração pós-spin-off:</strong> A separação da Pluxee criou necessidade de desacoplamento de sistemas legados. APIs e integração (top 3 prioridades) são críticas para garantir que a Sodexo opere independentemente com seus próprios sistemas de gestão, ERP e plataformas de clientes.</p>
+                <p><strong>5. Sustentabilidade como diferencial competitivo:</strong> A estratégia "Better Tomorrow 2028" e o investimento em Green IT são oportunidade para posicionar tecnologia como habilitadora de metas ESG — rastreabilidade de fornecedores, métricas de desperdício alimentar e relatórios de carbono automatizados.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>🟠 Pluxee (ex-Sodexo Benefits) — Concorrente direto / spin-off</h4>
+                <p><strong>Posição:</strong> Spin-off da própria Sodexo, opera em 31 países com 6 milhões de usuários diários no Brasil e 140 mil clientes. Investe 10% da receita anual em tecnologia e inovação.</p>
+                <p style="margin-top:8px"><strong>Iniciativas tech:</strong> Cartão multi-wallet digital com 7 categorias de benefícios, pagamento por aproximação (contactless), plataforma digital unificada e contratação de 1.000 profissionais de tecnologia globalmente. Revisou metas para 2026 devido a mudanças regulatórias no PAT.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🔵 Alelo (Banco do Brasil + Bradesco) — Líder de mercado (~30%)</h4>
+                <p><strong>Posição:</strong> Maior player do mercado com mais de 10 milhões de usuários, 100 mil empresas-clientes e a maior rede de estabelecimentos afiliados do Brasil. Potencial alvo de aquisição pelo iFood (R$ 5-6 bilhões).</p>
+                <p style="margin-top:8px"><strong>Iniciativas tech:</strong> Laboratório de Inovação com 15 pessoas dedicadas a antecipar tendências, adoção de Salesforce Sales Cloud com metodologia Agile, inovação aberta via parcerias (Inovabra, Plug and Play, Distrito). Em 2026, lançou parceria com TotalPass para ecossistema de bem-estar integrado.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🟢 Ticket (Grupo Edenred) — Concorrente global direto</h4>
+                <p><strong>Posição:</strong> +7 milhões de usuários ativos, +800 mil estabelecimentos e +130 mil empresas-clientes no Brasil. Parte do grupo Edenred com 60 milhões de usuários em 45 países.</p>
+                <p style="margin-top:8px"><strong>Iniciativas tech:</strong> Cartão digital ativo desde o primeiro dia de trabalho (Google Wallet/Apple Pay), novo cartão com 7 benefícios unificados, Pix como meio de pagamento (créditos em 4h), e EVA — assistente virtual com IA que já realizou +4,5 milhões de atendimentos personalizados.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🔴 iFood Benefícios — Disruptor digital agressivo</h4>
+                <p><strong>Posição:</strong> Entrante com crescimento de 400% no primeiro trimestre após lançamento, aceito em +11 milhões de estabelecimentos (bandeira Elo), zero taxa de adesão/administração. Premiado pelo Reclame AQUI 2024 em Cartões de Benefícios.</p>
+                <p style="margin-top:8px"><strong>Iniciativas tech:</strong> Painel de dados com insights de consumo (LGPD compliant), recarga rápida com configurações prévias, gestão unificada de múltiplos CNPJs, área exclusiva de RH no app, e negociação avançada para aquisição da Alelo — o que pode redefinir o mercado.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Onde a Sodexo pode perder terreno</h4>
+                <p>O mercado de benefícios corporativos (R$ 150 bilhões/ano) vive um momento de ruptura regulatória com o Decreto 12.712/2025, que reduz taxas de 7% para 3,6% e impõe interoperabilidade de cartões. Enquanto concorrentes como <strong>iFood</strong> investem pesadamente em plataformas de dados e experiência mobile-first, e <strong>Ticket</strong> já opera com IA (EVA) no atendimento, a Sodexo — focada em serviços on-site pós spin-off da Pluxee — precisa acelerar a digitalização de suas operações de alimentação e facilities para não perder relevância na jornada digital dos clientes corporativos. A oportunidade para a <strong>Foursys</strong> está em ajudar a Sodexo a construir integrações robustas (APIs), implementar IoT em operações de facilities e escalar soluções de IA/ML para otimização de custos e qualidade de serviço.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CIO / Brazil Chief Tech, Data & Digital — Sodexo (desde jan/2022)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Ciência da Computação (UNA-MG) · MBA em Gestão de TI · Pós em Marketing (PUC-MG) · Especialização em Transformação Digital (MIT)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Certificações</div>
+                        <div class="value">PMP · Six Sigma Black Belt · Agile Scrum</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Total</div>
+                        <div class="value">+29 anos em TI e tecnologia</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória Profissional</div>
+                        <div class="value">CIO Makro Brasil (2017–2021) · CIO LatAm GE Water & Process Technologies (2014–2017) · GE Transportation</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Expertise Técnica</div>
+                        <div class="value">Estratégia de TI · Transformação Digital · ERP (SAP e Oracle) · BI · Infraestrutura · Segurança da Informação · Metodologias Ágeis</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Internacional</div>
+                        <div class="value">EUA, Canadá, México, Argentina, Chile, Peru e Europa · Fluente em inglês e espanhol</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Setores de Atuação</div>
+                        <div class="value">Ferroviário · Químico · Varejo · Educação · Alimentação & Facilities</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Valorize a formação no MIT:</strong> Patricia fez especialização em Transformação Digital no MIT. Mencione cases de transformação digital de ponta ou referências acadêmicas — ela valoriza embasamento técnico sólido e metodologias comprovadas.</p>
+                <p style="margin-bottom:10px"><strong>2. Fale a linguagem de processos:</strong> Com certificações PMP e Six Sigma Black Belt, Patricia tem perfil orientado a métricas, ROI e eficiência operacional. Apresente propostas com TCO, KPIs claros e metodologia estruturada — evite abordagens vagas.</p>
+                <p style="margin-bottom:10px"><strong>3. Explore a experiência multissetorial:</strong> Ela passou por GE (indústria), Makro (varejo) e Sodexo (serviços). Faça paralelos entre desafios de setores diferentes que a Foursys já atendeu — ela aprecia visão cross-industry e benchmarks de outros segmentos.</p>
+                <p style="margin-bottom:10px"><strong>4. Respeite o contexto global:</strong> Com reporte matricial (regional/global e local) e experiência em 7+ países, Patricia navega entre exigências globais e necessidades locais. Demonstre capacidade de operar em ambientes multinacionais com governança e compliance internacional.</p>
+                <p><strong>5. Conecte com Agile e squads:</strong> Sendo certificada em Agile Scrum e com histórico de implementações ágeis (como o Salesforce na Alelo-like approach), ela tende a preferir entregas incrementais com feedback rápido. Posicione o modelo de Squads Foursys como alinhado ao mindset ágil dela.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma vice-presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte matricial (regional/global e local)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Pontual: convidado ad hoc para temas específicos.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">50 a 99</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:35%;background:#1a237e">35%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:6%;background:#5c6bc0">6%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#9fa8da">3%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#c5cae9">1%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Referências e cases BR</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Consultoria especializada;Fornecedor com cobertura global</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Interno: 8 temas | Projeto: 1 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing VP Vendas LATAM - Renato Morsch | OpenText</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } .header-content { flex-direction: column; text-align: center; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .tag-international { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .global-card { background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%); color: white; border-radius: 12px; padding: 18px; margin-bottom: 12px; }
+        .global-card h4 { margin-bottom: 6px; font-size: 16px; }
+        .global-card .city { font-size: 13px; opacity: 0.9; margin-bottom: 8px; }
+        .global-card .desc { font-size: 13px; opacity: 0.95; line-height: 1.6; }
+        .career-timeline { position: relative; padding-left: 28px; }
+        .career-timeline::before { content: ''; position: absolute; left: 10px; top: 4px; bottom: 4px; width: 2px; background: var(--primary-light); }
+        .career-item { position: relative; margin-bottom: 18px; }
+        .career-item::before { content: ''; position: absolute; left: -23px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 3px solid white; box-shadow: 0 0 0 2px var(--primary-light); }
+        .career-item h4 { color: var(--primary); font-size: 15px; margin-bottom: 4px; }
+        .career-item .period { font-size: 12px; color: var(--text-light); margin-bottom: 4px; }
+        .career-item .desc { font-size: 13px; color: var(--text); }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } body { background: white; } .section { box-shadow: none; border: 1px solid #eee; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Renato Morsch</h1>
+                <h2>Vice-Presidente de Vendas América Latina — OpenText</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Software Enterprise — Information Management &amp; IA | LATAM (sede global em Waterloo, Canadá)</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Receita Global (Q2 FY26)</div>
+                    <div class="value">US$ 1,33 bi</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Países de Operação</div>
+                    <div class="value">180</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Clientes Globais</div>
+                    <div class="value">+120 mil</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">ARR Nuvem</div>
+                    <div class="value">US$ 1,06 bi</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- NOTA DE CARGO -->
+        <div class="section" style="border: 2px solid #f57f17">
+            <div class="alert-box" style="margin-bottom:0">
+                <strong>Esclarecimento sobre o cargo:</strong> Renato Morsch é <strong>Vice-Presidente de Vendas para América Latina</strong> da OpenText, cargo C-level comercial regional (não CIO). Como a OpenText é uma software house global, o "CIO" tradicional está alocado na matriz canadense (Waterloo). Para o mercado brasileiro e latino-americano, <strong>Renato Morsch é o principal tomador de decisão executivo da operação</strong> — responsável pela estratégia comercial, relacionamento com parceiros, canais e grandes contas na região. Esse perfil é o <strong>interlocutor ideal da Foursys</strong> em uma estratégia de parceria/co-opetição no Brasil.
+            </div>
+        </div>
+
+        <!-- ANÁLISE DA EMPRESA -->
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: OpenText Corporation</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>OpenText Corporation</strong> é uma empresa canadense com sede em <strong>Waterloo, Ontário</strong>, líder global em <strong>Enterprise Information Management (EIM)</strong> e uma das maiores software houses do mundo. Fundada em 1991 como spin-off de um projeto da Universidade de Waterloo, hoje opera em <strong>180 países</strong> com mais de <strong>120 mil organizações clientes</strong>. A empresa é listada na NASDAQ/TSX (OTEX) e reportou <strong>US$ 1,327 bilhão em receita no Q2 FY2026</strong> (encerrado em dez/2025), com <strong>US$ 1,060 bilhão de ARR (Annual Recurring Revenue)</strong> e 20 trimestres consecutivos de crescimento orgânico em nuvem. Seu portfólio cobre <strong>gestão de conteúdo (Documentum, eDOCS, Extended ECM)</strong>, <strong>experiência digital</strong>, <strong>DevOps (AMC, LoadRunner, ALM)</strong>, <strong>análise de dados (Vertica, Magellan)</strong>, <strong>cibersegurança (ArcSight, Fortify, Voltage)</strong> e a nova geração de assistentes de IA corporativa <strong>Aviator (MyAviator, DevOps Aviator, Aviator Studio)</strong>, lançada com a plataforma <strong>Cloud Editions 25.3 e 25.4</strong>. Tem <strong>parceria estratégica profunda com SAP</strong> (Content Cloud for SAP é qualificada SAP Premium) e integrações com Salesforce, Microsoft, AWS, Google Cloud e ServiceNow. Entre clientes globais públicos estão <strong>Air France-KLM, Saipem, Linde, Verizon, DirectTV Latin America</strong> e governos regionais (cidade de Jacksonville). No Brasil, opera com site localizado (<em>opentext.com.br</em>), suporte em português e rede de parceiros certificados.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Razão Social</div>
+                        <div class="value">Open Text Corporation (OTEX — NASDAQ/TSX)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Sede Global</div>
+                        <div class="value">Waterloo, Ontário, Canadá (fundação 1991)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Empresa pública (NASDAQ/TSX) — multinacional de software enterprise</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Receita FY2026 (Q2)</div>
+                        <div class="value">US$ 1,327 bi/trimestre; ARR US$ 1,06 bi; guidance +1% a +2% FY26</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">CEO Global</div>
+                        <div class="value">Mark J. Barrenechea (Vice-Presidente do Conselho, CEO e CTO)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Liderança LATAM</div>
+                        <div class="value">Renato Morsch (VP de Vendas América Latina)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores Globais</div>
+                        <div class="value">~25.000 profissionais (pós-aquisição Micro Focus em 2023)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Clientes Referência</div>
+                        <div class="value">Air France-KLM, Saipem, Linde, Verizon, DirectTV LATAM, gov. Jacksonville + +120 mil organizações</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DESTAQUE: ATUAÇÃO INTERNACIONAL -->
+        <div class="section" style="border: 2px solid #1565c0">
+            <h3><span class="icon">&#127758;</span> Atuação Internacional — Empresa Global com Escopo Regional</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">A OpenText é uma empresa <strong>global por natureza</strong>, com matriz no Canadá e operações diretas em <strong>180 países</strong>. Renato Morsch lidera a operação da <strong>América Latina inteira</strong> — um escopo que vai muito além do Brasil.</p>
+
+            <div class="grid-2" style="margin-bottom:20px">
+                <div class="global-card">
+                    <h4>&#127464;&#127462; Canadá — Sede Global</h4>
+                    <div class="city">Waterloo, Ontário | HQ com P&amp;D global</div>
+                    <div class="desc">Sede corporativa, centro de decisões estratégicas, P&amp;D global e cultura canadense que Morsch menciona como diferencial. É de Waterloo que partem as diretrizes de produto (Cloud Editions, Aviator, Titanium X).</div>
+                </div>
+                <div class="global-card" style="background: linear-gradient(135deg, #c62828 0%, #d32f2f 100%);">
+                    <h4>&#127482;&#127480; Estados Unidos — Maior Mercado</h4>
+                    <div class="city">Boston, New Jersey, São Francisco, múltiplas cidades</div>
+                    <div class="desc">Maior operação em receita. Centros de desenvolvimento, suporte global e aquisições históricas (Documentum ex-EMC, Micro Focus 2023). Reporta diretamente à matriz de Waterloo.</div>
+                </div>
+                <div class="global-card" style="background: linear-gradient(135deg, #00695c 0%, #00897b 100%);">
+                    <h4>&#127466;&#127482; Europa (EMEA)</h4>
+                    <div class="city">Reading (Reino Unido), Múnich, Madri, Paris, Milão e outras</div>
+                    <div class="desc">Forte presença com clientes como Air France-KLM, Saipem e Linde. Setor público europeu, regulamentações GDPR e mercado de ECM maduro.</div>
+                </div>
+                <div class="global-card" style="background: linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%);">
+                    <h4>&#127758; América Latina — Escopo de Renato Morsch</h4>
+                    <div class="city">Brasil (SP), México, Argentina, Chile, Colômbia + cobertura regional</div>
+                    <div class="desc"><strong>Todo o portfólio comercial da LATAM reporta ao Renato Morsch.</strong> Brasil é o principal mercado regional. DirectTV Latin America é cliente referência. Mercado em expansão pós-aquisição Micro Focus (ArcSight, Fortify, Vertica).</div>
+                </div>
+                <div class="global-card" style="background: linear-gradient(135deg, #37474f 0%, #546e7a 100%);">
+                    <h4>&#127757; Ásia-Pacífico (APAC)</h4>
+                    <div class="city">Austrália, Índia, Singapura, Japão, China</div>
+                    <div class="desc">Centros de engenharia e suporte global (Índia) e mercados estratégicos. Forte em setor governamental na Austrália e serviços financeiros em Singapura.</div>
+                </div>
+                <div class="global-card" style="background: linear-gradient(135deg, #ef6c00 0%, #f57c00 100%);">
+                    <h4>&#128640; Aquisição Histórica — Micro Focus (2023)</h4>
+                    <div class="city">Maior aquisição da história da OpenText: US$ 6 bi</div>
+                    <div class="desc">Trouxe portfólio completo de <strong>DevOps, cibersegurança (ArcSight/Fortify/Voltage), mainframe, ITSM (SMAX)</strong> e outros. Ainda em fase de integração completa em 2026. Expande TAM da OpenText para muito além de ECM.</div>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <strong>Insight estratégico:</strong> Renato Morsch não é um CIO interno da OpenText — é o <strong>principal executivo comercial de toda a América Latina</strong>. Isso significa que a Foursys, ao dialogar com ele, tem acesso ao tomador de decisão de <strong>parcerias de canal, implementação e go-to-market</strong> em uma região inteira. Uma parceria estratégica desbloqueia oportunidades em múltiplos países simultaneamente, não apenas Brasil.
+            </div>
+
+            <div>
+                <span class="tag tag-international">Empresa pública (NASDAQ: OTEX)</span>
+                <span class="tag tag-international">180 países</span>
+                <span class="tag tag-international">+120 mil clientes globais</span>
+                <span class="tag tag-international">US$ 6 bi em aquisição Micro Focus (2023)</span>
+                <span class="tag tag-international">20 trimestres consecutivos de cloud growth</span>
+                <span class="tag tag-international">SAP Premium Qualified Partner</span>
+            </div>
+        </div>
+
+        <!-- RESUMO EXECUTIVO -->
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico &amp; Posicionamento de Mercado</h4>
+                <p>A OpenText é um dos <strong>maiores fabricantes de software enterprise do mundo</strong>, focada em Information Management, DevOps, Cibersegurança e IA corporativa (Aviator). Após a <strong>mega-aquisição da Micro Focus em 2023 (US$ 6 bilhões)</strong>, o portfólio da empresa dobrou de tamanho e hoje cobre áreas onde a Foursys tem forte expertise (modernização de legado, cibersegurança, DevOps, integração). O cenário é singular: <strong>a OpenText não é um cliente típico de pré-vendas Foursys — é uma fornecedora de produtos/plataformas</strong> que <strong>precisa de integradoras locais</strong> para vender e implementar sua tecnologia nos clientes finais. O perfil de relação ideal é de <strong>parceria estratégica de canal</strong>: Foursys como <strong>System Integrator (SI)</strong> certificado que leva OpenText ao mercado brasileiro/LATAM, implementa, sustenta (AMS) e integra com o ecossistema do cliente (SAP, Salesforce, legados). Renato Morsch, como VP de Vendas LATAM, é o <strong>decisor principal de expansão de canal na região</strong> — possui histórico de 30+ anos vendendo software enterprise (IBM, SAP, Salesforce, Software AG, OpenText) e é conhecido por construir redes de parceiros como alavanca de crescimento regional.</p>
+            </div>
+        </div>
+
+        <!-- DESAFIOS E PRIORIDADES -->
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026 (LATAM)</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios da OpenText na Região</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Acelerar adoção de Cloud Editions 25.x</strong> em clientes legados (Documentum on-prem, eDOCS) na região</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Monetizar a IA Aviator</strong> (MyAviator, DevOps Aviator, Aviator Studio) — produto novo e diferenciador</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Integrar portfólio Micro Focus</strong> na venda LATAM (ArcSight, Fortify, Voltage, SMAX, Vertica) — ainda em fase de onboarding de parceiros</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Ampliar cobertura via canais/SIs</strong> — OpenText não tem escala de consultoria própria para atender todos os clientes da região</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Defender posição vs. Microsoft</strong> (SharePoint/Copilot) e <strong>IBM FileNet</strong> em grandes contas</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Atingir crescimento orgânico positivo</strong> — OpenText teve -0,6% YoY no Q2 FY26; meta global é +1% a +2% FY26</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Renovação &amp; migração de base instalada Documentum</strong> para Core Content no modelo SaaS</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades Comerciais 2026</h4>
+                    <div>
+                        <span class="tag tag-priority">Expansão de Canais / SIs</span>
+                        <span class="tag tag-priority">Aviator &amp; IA Corporativa</span>
+                        <span class="tag tag-priority">Cloud Editions 25.x Migrations</span>
+                        <span class="tag tag-priority">Cibersegurança (ArcSight/Fortify)</span>
+                        <span class="tag tag-priority">SAP Content Cloud Partnership</span>
+                        <span class="tag tag-priority">Extended ECM para setor regulado</span>
+                        <span class="tag tag-priority">DevOps Aviator + GitHub Copilot</span>
+                        <span class="tag tag-priority">ITSM SMAX (ex-Micro Focus)</span>
+                    </div>
+                    <div class="alert-box" style="margin-top:16px">
+                        <strong>Sinal-chave do mercado:</strong> Morsch é conhecido por "montar times de campo e rede de parceiros" — foi assim que transformou a Software AG (9º presidente em 10 anos, "resultados estelares"). Na OpenText, a expectativa é que replique o modelo, <strong>abrindo conversas com SIs brasileiros de médio/grande porte</strong> que possam complementar a força de vendas direta.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAPA DE INVESTIMENTOS -->
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Portfólio OpenText — Áreas de Investimento Comercial</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Áreas do portfólio OpenText onde há maior aposta de crescimento em 2026 — e onde um System Integrator como a Foursys pode agregar valor:</p>
+            <div>
+                <span class="tag tag-active">Documentum / Core Content Management (EIM)</span>
+                <span class="tag tag-active">Extended ECM para SAP (parceria premium)</span>
+                <span class="tag tag-active">eDOCS (mercado jurídico)</span>
+                <span class="tag tag-active">Aviator — IA corporativa (MyAviator + Studio)</span>
+                <span class="tag tag-active">DevOps Aviator + GitHub Copilot (CE 25.4)</span>
+                <span class="tag tag-active">ArcSight (SIEM — ex-Micro Focus)</span>
+                <span class="tag tag-active">Fortify (AppSec — ex-Micro Focus)</span>
+                <span class="tag tag-active">Voltage (Data Privacy — ex-Micro Focus)</span>
+                <span class="tag tag-active">SMAX — IT Service Management</span>
+                <span class="tag tag-active">Vertica — Analytics &amp; Data</span>
+                <span class="tag tag-opportunity">Implementação local Cloud Editions 25.x</span>
+                <span class="tag tag-opportunity">Migração Documentum on-prem → SaaS</span>
+                <span class="tag tag-opportunity">AMS / Sustentação de soluções OpenText</span>
+                <span class="tag tag-opportunity">Integração OpenText + SAP + legados</span>
+                <span class="tag tag-opportunity">Adoção Aviator em casos de uso regulados</span>
+                <span class="tag tag-opportunity">Squads de co-delivery com canais</span>
+            </div>
+            <p style="margin-top:12px;font-size:12px;color:var(--text-light)"><span class="tag tag-active" style="font-size:11px">Verde</span> = Linhas de produto OpenText em foco &nbsp; <span class="tag tag-opportunity" style="font-size:11px">Laranja</span> = Serviços que a Foursys pode prestar complementarmente</p>
+        </div>
+
+        <!-- OPORTUNIDADES SEM FORNECEDOR DEFINIDO -->
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Quentes — Modelo de Parceria de Canal</h3>
+            <div class="alert-box">
+                <strong>Janela de oportunidade:</strong> A OpenText, especialmente após a aquisição da Micro Focus (2023), tem <strong>portfólio muito maior do que sua capacidade direta de delivery</strong> na América Latina. Renato Morsch assumiu recentemente a VP de Vendas LATAM e precisa de <strong>rede robusta de integradores locais</strong> para acelerar o go-to-market. A Foursys, com 24 anos, 41.000+ projetos e presença consolidada no Brasil, é candidata natural a se tornar parceira <strong>Gold/Platinum</strong>.
+            </div>
+            <div class="grid-2">
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Parceria SI Certificado — Modelo Resell + Delivery</h4>
+                        <span class="score-badge">Alta Sinergia</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Foursys como canal certificado OpenText no Brasil — revende licenças e entrega implementação</li>
+                            <li>Receita compartilhada via resell + serviços profissionais da Foursys</li>
+                            <li>Modelo já usado por Foursys com Digibee — replicável com OpenText</li>
+                            <li>Morsch tem histórico de construir redes de canal (Software AG, Salesforce)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Co-venda OpenText + SAP em Clientes Foursys/Numen</h4>
+                        <span class="score-badge">Cross-Sell</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>OpenText Content Cloud for SAP é solução premium qualificada SAP</li>
+                            <li>Foursys tem histórico de projetos SAP grandes (integração, modernização)</li>
+                            <li>Potencial de levar OpenText para base Foursys e parceiros SAP (como a própria Numen)</li>
+                            <li>Mercado farma, manufatura, governo, serviços financeiros — alto fit</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Cibersegurança — ArcSight + Fortify + Voltage</h4>
+                        <span class="score-badge">Complementar</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Foursys tem certificações ISO 27001/27701 — credibilidade em segurança</li>
+                            <li>Portfólio ex-Micro Focus é pouco explorado na região — oportunidade enorme</li>
+                            <li>Foursys pode implementar ArcSight (SIEM) em clientes financeiros e críticos</li>
+                            <li>Fortify (AppSec) conecta com oferta de engenharia digital da Foursys</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Aviator (IA) — Implementação em Clientes Regulados</h4>
+                        <span class="score-badge">IA Aplicada</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Aviator é produto novo (CE 25.3/25.4) e OpenText precisa de cases LATAM</li>
+                            <li>Foursys tem AI Squad e pode implementar casos de uso em farmas, bancos, governo</li>
+                            <li>MyAviator + Aviator Studio exigem integração com dados do cliente — expertise Foursys</li>
+                            <li>Posicionamento premium com clientes sensíveis à segurança corporativa</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OFERTAS FOURSYS -->
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para a Conversa com Renato Morsch</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">OpenText é uma <strong>fornecedora de software</strong> (não cliente final típico). O foco é apresentar a Foursys como <strong>System Integrator (SI) estratégico de canal</strong> — com ofertas que complementam o produto OpenText no delivery ao cliente final.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. Modernização de Legado &amp; Integração (Digibee iPaaS)</h4>
+                    <span class="score-badge">Score 92</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Integração OpenText (Documentum, Extended ECM, Core Content) com ecossistema do cliente (SAP, Salesforce, legados) via Foursys + Digibee.</p>
+                    <ul>
+                        <li>Clientes OpenText raramente usam apenas OpenText — há sempre SAP, Salesforce, CRM legado, apps internos para integrar</li>
+                        <li>Parceria Foursys-Digibee oferece iPaaS robusto sem competir com OpenText</li>
+                        <li>Content Cloud for SAP exige integração profunda — expertise Foursys agrega valor imediato</li>
+                        <li>Modelo resell + implementação + sustentação (AMS) — 3 vetores de receita compartilhada</li>
+                        <li>Acelera adoção de Cloud Editions 25.x em clientes com ambiente híbrido</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. Cibersegurança &amp; Privacidade — Parceria ArcSight/Fortify/Voltage</h4>
+                    <span class="score-badge">Score 90</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Implementação e sustentação de soluções de cibersegurança ex-Micro Focus agora OpenText, com credibilidade ISO 27001/27701.</p>
+                    <ul>
+                        <li>Portfólio cibersegurança Micro Focus é pouco explorado na LATAM — gap de canais certificados</li>
+                        <li>Foursys tem certificações ISO 27001 e 27701 — credenciais únicas para RFPs regulados</li>
+                        <li>ArcSight (SIEM), Fortify (AppSec), Voltage (Data Privacy) — stack completo</li>
+                        <li>Clientes em bancos, farmas, telecom e governo precisam de SI brasileiro confiável</li>
+                        <li>LGPD + GDPR + SOX — combinação ideal com Voltage para dados sensíveis</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. Engenharia Digital — Cloud, DevOps &amp; Observabilidade</h4>
+                    <span class="score-badge">Score 82</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Implementação de Cloud Editions 25.x, DevOps Aviator e integração com GitHub Copilot para entrega regulada de software.</p>
+                    <ul>
+                        <li>Foursys tem prática sólida de DevOps, SRE, cloud-native (AWS, Azure, GCP)</li>
+                        <li>DevOps Aviator + GitHub Copilot (CE 25.4) exige parceiro com expertise em engenharia moderna</li>
+                        <li>Migração Documentum on-prem → Core Content SaaS é projeto massivo nos próximos 24 meses</li>
+                        <li>Observabilidade e SRE para ambientes OpenText enterprise críticos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. AI Squad — Implementação Aviator em Casos de Uso Regulados</h4>
+                    <span class="score-badge">Score 80</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Squads especializados em IA para implementar MyAviator, Aviator Studio e construir casos de uso em setores regulados.</p>
+                    <ul>
+                        <li>Aviator é produto novo — OpenText precisa de cases LATAM para evangelização</li>
+                        <li>AI Squad da Foursys atua com IA generativa e hiperautomação</li>
+                        <li>Casos de uso: busca inteligente em contratos, contracheques, prontuários, laudos técnicos</li>
+                        <li>Alinhamento com clientes regulados (farma, financeiro, jurídico, governo)</li>
+                        <li>OpenText venceria concorrência com Microsoft Copilot mostrando cases reais</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>5. FourBlox — Aceleração de Aplicações ao Redor do OpenText</h4>
+                    <span class="score-badge">Score 65</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Plataforma de componentes reutilizáveis para acelerar portais, interfaces e integrações que orbitam o OpenText.</p>
+                    <ul>
+                        <li>Clientes OpenText frequentemente precisam de portais customizados, apps mobile e dashboards</li>
+                        <li>FourBlox acelera entrega, reduz time-to-market de projetos de conteúdo</li>
+                        <li>Reuso entre clientes do mesmo setor (jurídico com eDOCS, farma com Documentum)</li>
+                        <li>Diferencial de margem para projetos OpenText</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESTRATÉGIA DE ABORDAGEM -->
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Renato Morsch é um VP de Vendas LATAM <strong>recém-posicionado</strong> na OpenText, vindo de 7 anos na Software AG onde transformou a operação regional ("resultados estelares" nas próprias palavras dele). O gancho ideal NÃO é vender serviços — é <strong>propor uma parceria de canal</strong> que ajude ele a replicar o sucesso da Software AG agora na OpenText. Iniciar a conversa por: (1) <strong>parabenizar pela chegada</strong> e reconhecer o case Software AG; (2) posicionar a Foursys como <strong>SI experiente com 24 anos e 41.000+ projetos</strong>, que pode atuar como canal certificado OpenText no Brasil; (3) apresentar <strong>3 frentes naturais de parceria</strong>: integração de conteúdo com SAP (onde Foursys tem expertise), cibersegurança ex-Micro Focus (onde ISO 27001/27701 da Foursys agrega credencial única) e implementação Aviator em casos de uso regulados.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente — Expansão de Canal Pós Micro Focus</h4>
+                <p>A OpenText está em momento <strong>único e irrepetível</strong>: após a aquisição de US$ 6 bi da Micro Focus em 2023, o portfólio duplicou mas a rede de parceiros latino-americana <strong>ainda não foi reconstruída</strong> para a nova escala. Muitas soluções ex-Micro Focus (ArcSight, Fortify, Voltage, SMAX, Vertica) têm <strong>poucos SIs certificados no Brasil</strong>. Morsch precisa preencher esse vazio rápido para atingir o guidance de +1% a +2% de crescimento FY26. A Foursys se encaixa perfeitamente: grande porte, credenciais de segurança ISO, experiência com SAP/ERP enterprise, portfólio proprietário (FourBlox, AI Squad) e relacionamento sólido em setores regulados. Timing é agora — próximos 12 meses definem quem entra na nova rede de canais estratégicos da OpenText LATAM.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para uma conversa com VP de Vendas LATAM de software house global, destacar: (1) <strong>24 anos de mercado e 41.000+ projetos</strong> — solidez para suportar grandes contas OpenText no Brasil; (2) <strong>Certificações ISO 27001 e 27701</strong> — credenciais raras no mercado brasileiro, necessárias para setor regulado; (3) <strong>Experiência SAP profunda</strong> — Content Cloud for SAP é uma das joias do portfólio OpenText, exige parceiro com DNA SAP; (4) <strong>AI Squad e FourBlox</strong> — aceleradores proprietários que reduzem tempo de implementação Aviator; (5) <strong>Parceria Digibee (iPaaS)</strong> — integração com legados que todo projeto OpenText exige; (6) <strong>Modelo flexível</strong> — squads, projetos, AMS, co-delivery com canal OpenText direto. A proposta é de <strong>parceria Gold/Platinum de canal</strong>, não de fornecedor.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. Morsch vem transformando operações regionais há 7 anos:</strong> Na Software AG ele foi "o 9º presidente em 10 anos" e estabilizou a operação LATAM com "resultados estelares". Ele valoriza <strong>parceiros que tragam estabilidade e execução previsível</strong>, não aventuras. A Foursys, com 24 anos, comunica isso muito bem.</p>
+                <p style="margin-bottom:12px"><strong>2. Cultura canadense como elemento diferencial:</strong> Morsch mencionou publicamente a "nova cultura canadense" da OpenText como fator positivo de atração. Isso contrasta com culturas americanas mais agressivas (IBM, Salesforce) e alemãs mais formais (SAP, Software AG). A cultura canadense valoriza <strong>colaboração, respeito e relações de longo prazo</strong> — argumentos fortes para posicionar parceria de confiança, não transacional.</p>
+                <p style="margin-bottom:12px"><strong>3. Aquisição Micro Focus é o grande desafio e oportunidade:</strong> US$ 6 bi investidos, portfólio dobrado, integração complexa em curso. Ecossistema de canais em LATAM ainda é fraco para a nova escala. Qualquer parceiro que entre agora <strong>surfa a onda inteira de go-to-market</strong> nos próximos 3-5 anos.</p>
+                <p style="margin-bottom:12px"><strong>4. IA Aviator é a aposta de diferenciação:</strong> Microsoft Copilot está atacando o território da OpenText com SharePoint + IA. Aviator é a resposta — mas precisa de cases LATAM comprovados. A Foursys, com AI Squad e expertise em setor regulado, pode co-criar cases que Morsch use para evangelizar o mercado.</p>
+                <p style="margin-bottom:12px"><strong>5. Parceria SAP é joia da coroa:</strong> Content Cloud for SAP é qualificada SAP Premium. Grandes clientes SAP no Brasil (indústria, farma, varejo) precisam dessa solução. Foursys tem raízes SAP e pode abrir portas que a OpenText direta não alcança.</p>
+                <p><strong>6. Morsch é "construtor de times de campo":</strong> Reputação de formar equipes comerciais, treinar parceiros, sustentar resultados por anos. Uma parceria formal com a Foursys, com planos trimestrais, metas compartilhadas e co-investimento em marketing, é exatamente o modelo operacional que ele conhece e prefere.</p>
+            </div>
+        </div>
+
+        <!-- BENCHMARK DE CONCORRENTES -->
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes (Enterprise Content Management &amp; EIM)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Principais concorrentes da OpenText no mercado global e brasileiro de ECM/EIM, ordenados por participação de mercado:</p>
+            <div class="competitor-card">
+                <h4>Microsoft SharePoint / Microsoft 365 + Copilot — Redmond, EUA</h4>
+                <p><strong>Segmento:</strong> ECM + colaboração + IA | <strong>Market Share ECM:</strong> 11,3% (líder)</p>
+                <p>Concorrente nº 1 global. Vantagens: integração nativa com Office 365, Teams, Azure AD, licenciamento embutido no M365. Copilot ataca diretamente o território Aviator com IA generativa. Desvantagens: menos profundo em indústrias reguladas (farma, jurídico, energia), compliance específico e retenção de longo prazo.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>IBM FileNet / IBM ECM — Armonk, EUA</h4>
+                <p><strong>Segmento:</strong> ECM enterprise + BPM | <strong>Market Share:</strong> 6,2% (FileNet) + 2,5% (ECM)</p>
+                <p>Concorrente tradicional em grandes contas (bancos, governo). Forte em compliance e BPM. Implementação complexa, custo alto, ecossistema envelhecido comparado a ofertas SaaS modernas. OpenText, após Micro Focus, ultrapassou IBM em amplitude de portfólio.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Alfresco (Hyland) — Atlanta, EUA</h4>
+                <p><strong>Segmento:</strong> ECM open-source + SaaS | <strong>Market Share:</strong> 7,8%</p>
+                <p>Comprado pela Hyland em 2020. Modelo open-source e cloud-native. Vantagens: menor custo, comunidade ativa, APIs abertas. Desvantagens: profundidade em compliance regulado, ecossistema de integrações menor que OpenText.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Box — Redwood City, EUA</h4>
+                <p><strong>Segmento:</strong> Cloud Content Management | <strong>Market Share:</strong> 3,8%</p>
+                <p>Concorrente nativo de nuvem, foco em colaboração e mobile-first. Forte em US Mid-Market. Menos profundo em casos de uso enterprise regulados. Integrações com Salesforce, Google Workspace, Microsoft 365.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Hyland OnBase &amp; Nuxeo — Westlake, EUA</h4>
+                <p><strong>Segmento:</strong> ECM + Automação de Processos | <strong>Foco:</strong> Seguros, saúde, governo</p>
+                <p>Forte competidor em verticais específicos (saúde, seguradoras, governo local). Automação de workflow é diferencial. Presença crescente no Brasil por canais locais.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Adobe Experience Manager — San Jose, EUA</h4>
+                <p><strong>Segmento:</strong> DAM + Digital Experience | <strong>Foco:</strong> Marketing digital</p>
+                <p>Concorrente em DAM (Digital Asset Management) e marketing content. Forte em experiência digital e customer journey. Menos concorrente em ECM enterprise tradicional.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Posicionamento da OpenText no Mercado Global</h4>
+                <p>A OpenText mantém posição de <strong>top 3 em ECM global</strong> e é a <strong>mais completa em amplitude de portfólio</strong> após a aquisição Micro Focus (ECM + Cibersegurança + DevOps + ITSM + Analytics). Diferencial principal: <strong>profundidade em casos de uso regulados</strong> (farma com Documentum, jurídico com eDOCS, financeiro com Extended ECM). Ameaças: Microsoft Copilot comoditizando IA no conteúdo; Box e Alfresco ganhando em SaaS-first; IA generativa mudando o paradigma de busca e descoberta. Oportunidades para um SI como a Foursys: (1) <strong>Implementação Aviator</strong> em cases LATAM vencedores vs. Copilot; (2) <strong>Migrações Documentum on-prem → Cloud Editions</strong> — grande volume nos próximos 24 meses; (3) <strong>Posicionamento Extended ECM for SAP</strong> em clientes SAP médios/grandes; (4) <strong>Portfólio ex-Micro Focus</strong> com pouquíssimos canais certificados na região.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <!-- PERFIL PESSOAL & RAPPORT -->
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport — Renato Morsch</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações públicas sobre o VP de Vendas LATAM da OpenText, sua trajetória e dicas de conversa.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Nome Completo</div>
+                        <div class="value">Renato Morsch</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Vice-Presidente de Vendas para América Latina — OpenText</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Engenharia de Produção — UFRJ (Universidade Federal do Rio de Janeiro)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Pós-Graduação</div>
+                        <div class="value">MBA em Administração — Fundação Dom Cabral</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Tempo de Mercado</div>
+                        <div class="value">30+ anos em vendas e liderança de software enterprise</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Última Posição</div>
+                        <div class="value">Presidente e COO América Latina — Software AG (7 anos)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Palco Público Recente</div>
+                        <div class="value">OpenText Summit Brasil 2025 — Abertura Executiva Oficial</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn ativo com posts sobre liderança, cultura e transições de carreira</div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 style="color:var(--primary);margin-bottom:16px;margin-top:24px">Trajetória Profissional Completa</h4>
+            <div class="career-timeline">
+                <div class="career-item">
+                    <h4>IBM Brasil</h4>
+                    <div class="period">1999 – 2006 (7 anos)</div>
+                    <div class="desc">Início de carreira em software enterprise. Formação comercial em ambiente corporativo global. Base sólida em vendas B2B de tecnologia.</div>
+                </div>
+                <div class="career-item">
+                    <h4>SAP Brasil / LATAM</h4>
+                    <div class="period">~4 anos como Vice-Presidente de Vendas</div>
+                    <div class="desc">Passagem executiva em vendas enterprise SAP. Aprofundamento no mercado de ERP e grandes clientes corporativos.</div>
+                </div>
+                <div class="career-item">
+                    <h4>Salesforce LATAM</h4>
+                    <div class="period">2014 – 2016 (2 anos)</div>
+                    <div class="desc">Diretor de Vendas Enterprise América Latina. Experiência em cloud-first, modelo SaaS e cultura moderna de vendas.</div>
+                </div>
+                <div class="career-item">
+                    <h4>Software AG — América Latina</h4>
+                    <div class="period">~2018 – 2025 (7 anos)</div>
+                    <div class="desc">Presidente Regional e COO. Foi <strong>o 9º presidente em 10 anos</strong> e estabilizou a operação com "resultados estelares" (nas próprias palavras). Forte em transformação cultural e go-to-market regional. Experiência em iPaaS (webMethods), APM (ARIS), IoT (Cumulocity).</div>
+                </div>
+                <div class="career-item">
+                    <h4>OpenText — Posição Atual</h4>
+                    <div class="period">2025 – Presente</div>
+                    <div class="desc">Vice-Presidente de Vendas América Latina. Responsável por expansão comercial da OpenText em toda a região, incluindo rede de canais, grandes contas e parcerias estratégicas. Liderança da "nova cultura canadense" como elemento diferencial.</div>
+                </div>
+            </div>
+
+            <div class="insight-box" style="margin-top:24px">
+                <h4>6 Dicas de Rapport para a Conversa com Renato</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconheça o case Software AG:</strong> A trajetória de Morsch na Software AG é notável — "9º presidente em 10 anos" que conseguiu estabilizar e entregar resultados. Citar isso mostra que você estudou a história dele. Frase sugerida: "<em>acompanhei sua jornada na Software AG — transformar uma operação com tanta rotatividade em resultados estelares é conquista rara. Deve ser ótimo replicar isso agora com o portfólio OpenText</em>."</p>
+                <p style="margin-bottom:10px"><strong>2. Explore a "cultura canadense" que ele destacou:</strong> Morsch mencionou publicamente que a cultura canadense foi um dos atrativos da OpenText. Isso sugere valorização de <strong>colaboração, respeito, relações de longo prazo</strong> — diferente das culturas agressivas de SAP (alemã) ou Salesforce (americana). Adote um tom consultivo, não transacional.</p>
+                <p style="margin-bottom:10px"><strong>3. Fale a linguagem de vendedor enterprise:</strong> Morsch tem 30+ anos em vendas B2B. Ele entende ciclo longo, relacionamento com C-level, RFPs, canais, co-venda e margem compartilhada. Evite jargão técnico excessivo — fale em <strong>pipeline, enablement, go-to-market, account planning e revenue impact</strong>.</p>
+                <p style="margin-bottom:10px"><strong>4. Traga discussão de mercado LATAM (não só Brasil):</strong> Seu escopo é toda a América Latina. Conversas sobre México, Argentina, Chile, Colômbia são bem-vindas. A Foursys pode posicionar capacidade de apoiar projetos regionais (remote delivery, nearshoring) como diferencial em uma região fragmentada.</p>
+                <p style="margin-bottom:10px"><strong>5. Conecte pela UFRJ + Fundação Dom Cabral:</strong> Engenheiro de Produção pela UFRJ + MBA Dom Cabral é formação sólida e respeitada. Se a Foursys tem executivos com formações similares ou conexões acadêmicas, mencione. É terreno comum para construir confiança.</p>
+                <p style="margin-bottom:10px"><strong>6. Proponha modelo de parceria estruturado:</strong> Morsch é organizado — vem de empresas com método (IBM, SAP, Salesforce, Software AG). Apresentar um <strong>plano de parceria com QBRs, metas trimestrais, enablement técnico, co-marketing e pipeline compartilhado</strong> é falar a linguagem dele. Evite propostas abertas do tipo "vamos ver o que dá".</p>
+                <p><strong>Bônus — Tom de conversa:</strong> Morsch é direto, executivo, orientado a resultado e numericamente racional. Traga dados: participação de mercado, receita potencial, pipeline estimado, margens. Nada de abstrações.</p>
+            </div>
+        </div>
+
+        <!-- PERFIL DO EXECUTIVO E POSIÇÃO NA EMPRESA -->
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Executivo e Posição na Empresa</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Vice-Presidente Regional — topo da operação comercial LATAM. Reporta à liderança global de Sales (potencialmente EVP Chief Revenue Officer global)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte Provável</div>
+                        <div class="value">EVP Worldwide Sales ou Chief Revenue Officer global da OpenText (matriz Waterloo, Canadá)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reportes Diretos (estimado)</div>
+                        <div class="value">Country Managers/Diretores de Vendas do Brasil, México e outros países LATAM, Channels &amp; Alliances, Sales Engineering, Customer Success regional</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão</div>
+                        <div class="value">Máximo na operação comercial LATAM — define estratégia regional, canais, co-investimento em marketing, metas e planos de ativação</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Foco Estratégico Atual</div>
+                        <div class="value">Acelerar adoção Cloud Editions 25.x, expandir rede de canais LATAM, integrar portfólio ex-Micro Focus, monetizar Aviator</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Tempo no Cargo</div>
+                        <div class="value">Recém-empossado (2025) — momento ótimo para engajamento (está formando o time dele e desenhando o plano)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo Geográfico</div>
+                        <div class="value">Toda a América Latina (Brasil, México, Argentina, Chile, Colômbia, Peru e demais)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Posicionamento de Mercado</div>
+                        <div class="value">Executivo sênior de confiança, com histórico de transformação cultural e comercial em operações regionais</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DISTRIBUIÇÃO DE RECEITA OPENTEXT -->
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição de Receita OpenText (Q2 FY2026)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Customer Support</div><div class="bar-track"><div class="bar-fill" style="width:44%;background:#1a237e">44% (US$ 582 mi)</div></div></div>
+                <div class="bar"><div class="bar-label">Cloud Services &amp; Subscriptions</div><div class="bar-track"><div class="bar-fill" style="width:36%;background:#1a237e">36% (US$ 478 mi)</div></div></div>
+                <div class="bar"><div class="bar-label">License Revenue</div><div class="bar-track"><div class="bar-fill" style="width:14%;background:#3949ab">14% (US$ 184 mi)</div></div></div>
+                <div class="bar"><div class="bar-label">Professional Services &amp; Other</div><div class="bar-track"><div class="bar-fill" style="width:6%;background:#5c6bc0">6% (US$ 83 mi)</div></div></div>
+            </div>
+            <p style="margin-top:12px;font-size:12px;color:var(--text-light);text-align:center">* Dados oficiais do Q2 FY2026 (trimestre encerrado em 31/12/2025). Total: US$ 1,327 bi.</p>
+            <div class="alert-box" style="margin-top:16px">
+                <strong>Leitura estratégica:</strong> <strong>Professional Services é apenas 6% da receita</strong> — ou seja, a OpenText <strong>depende fortemente de SIs parceiros</strong> para entrega de projetos. Cloud cresce (+3,4% YoY, 20 trimestres consecutivos) e Licença tradicional cai — a migração para SaaS é o grande movimento do portfólio, abrindo espaço massivo para SIs que ajudem clientes nessa transição.
+            </div>
+        </div>
+
+        <!-- PREFERÊNCIAS DE PARCERIA -->
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Perfil de Parceiro que a OpenText Procura em LATAM</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios Esperados em Parceiros de Canal</h4>
+                    <div>
+                        <span class="tag tag-active">Capacidade de Delivery Enterprise</span>
+                        <span class="tag tag-active">Expertise em SAP / Salesforce / Cloud</span>
+                        <span class="tag tag-active">Certificações de Segurança (ISO)</span>
+                        <span class="tag tag-active">Presença em setores regulados</span>
+                        <span class="tag tag-active">Cobertura Regional LATAM</span>
+                        <span class="tag tag-active">Investimento em Enablement</span>
+                        <span class="tag tag-active">Pipeline conjunto mensurável</span>
+                        <span class="tag tag-active">Capacidade de AMS / Sustentação</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Modelo de Parceria</div>
+                        <div class="value">Partner Program OpenText com níveis (Silver/Gold/Platinum/Strategic). Inclui resell, influence, services delivery, co-sell e co-marketing.</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Rampa Esperada para Parceria</div>
+                        <div class="value">6-12 meses para certificações técnicas iniciais, enablement comercial, primeiros deals conjuntos. Programa típico de onboarding de SI em software house global.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>Recomendação Final de Posicionamento Foursys</h4>
+                <p>Apresentar a Foursys a Renato Morsch como <strong>parceira SI sênior</strong> com ambição de atingir status <strong>Gold/Platinum no Partner Program OpenText</strong>. O caminho ideal é: (1) <strong>identificar 2-3 deals conjuntos em andamento</strong> em clientes onde a Foursys já atua e há demanda OpenText latente (ECM, SAP Content, cibersegurança); (2) propor <strong>plano de enablement conjunto</strong> com investimento Foursys em certificações técnicas; (3) estruturar <strong>QBRs trimestrais</strong> com metas de pipeline, go-lives e receita compartilhada; (4) explorar <strong>co-marketing</strong> em eventos (SAP Summit, OpenText Summit, tech events Foursys). A meta de longo prazo é posicionar a Foursys como <strong>parceira preferencial de canal LATAM em setores regulados</strong> (farma, financeiro, jurídico, governo, indústria SAP), complementando a cobertura direta da OpenText. O timing é agora: Morsch está montando o time e a rede — os próximos 6 meses definem o mapa de parceiros estratégicos da era dele.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | OpenText — VP Vendas LATAM Renato Morsch</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+        <p style="margin-top:8px;font-size:11px">Fontes: opentext.com, itforum.com.br, baguete.com.br, vidamoderna.com.br, peerspot.com, investors.opentext.com, LinkedIn público</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Fabio Felizatti | CREDSYSTEM</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Fabio Felizatti</h1>
+                <h2>CIO — CREDSYSTEM</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Serviços financeiros | Barueri - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 10,1 BI a R$ 11 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 80,1 MM a R$ 100 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá até 10%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: CREDSYSTEM</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">Fundada em 1996, a <strong>Credsystem</strong> é uma instituição financeira brasileira especializada em soluções de crédito e cartões para o varejo, com foco nas classes econômicas emergentes — incluindo autônomos e pessoas sem comprovação formal de renda, que representam 34% de sua base. Com mais de <strong>130 parcerias comerciais</strong> e <strong>5.000 pontos de venda</strong> em todo o Brasil, a empresa já emitiu mais de <strong>44 milhões de cartões</strong> ao longo de sua história (4,6 milhões apenas em 2024) e processou mais de <strong>120 milhões de transações</strong> em 2024. Seus principais produtos são o Cartão Mais! (bandeira Mastercard), cartões Private Label e Co-branded. A Credsystem se diferencia pelo cadastro digital com aprovação automática em 4 minutos, plataforma de relacionamento com ofertas personalizadas e inteligência de dados com machine learning. Vencedora do <strong>Prêmio ReclameAQUI por 4 edições consecutivas</strong> (2020–2023), a empresa vive um momento de transformação digital significativo, tendo migrado sua infraestrutura on-premises para a nuvem e substituído sistemas monolíticos legados por uma arquitetura de microsserviços baseada na plataforma Mendix, selecionada após avaliação do Gartner Magic Quadrant.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Estabilidade</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Serviços financeiros</strong> com abrangência <strong>Local (Brasil)</strong>. Todos os projetos definidos já possuem fornecedor selecionado. Modelo de compra: <strong>Direto com fornecedoríbrido por categoria/ticket — varia conforme valor/risco.</strong>. Perspectiva do orçamento de TI: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Elevar a experiência de clientes e colaboradores (CX/EX)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Fomentação da cultura de inovação na área de TI e organização</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar sistemas legados</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Priorizar portfólio em meio a excesso de demandas</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Infraestrutura de redes</span>
+<span class="tag tag-priority">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-priority">Nuvem pública</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">Workplace e end-user computing</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">CPaaS / UCaaS / CCaaS</span>
+<span class="tag tag-active">GRC, compliance e auditoria</span>
+<span class="tag tag-active">Sistemas core</span>
+<span class="tag tag-active">ITSM/ESM e service desk</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades de Consultoria</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Todos os projetos definidos já possuem fornecedor. No entanto, há temas <strong>sem projeto definido</strong> — oportunidade de assessment/consultoria:</p>
+            <div><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Conectividade e telecom</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">CPaaS / UCaaS / CCaaS</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">GRC, compliance e auditoria</span>
+</div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Fabio Felizatti</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 72</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Infraestrutura de redes é prioridade Top 3</li><li>Nuvem pública é prioridade Top 3</li><li>Conectividade e telecom com investimento previsto</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 60</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Segurança de dados e privacidade (LGPD/DLP) com investimento inicial previsto</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Fabio Felizatti tem como top prioridades <strong>Infraestrutura de redes; Armazenamento, backup e imutabilidade; Nuvem pública</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 0 projetos definidos sem fornecedor. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: Engenharia Digital; Cibersegurança. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. Modernização de legados como vantagem competitiva:</strong> A Credsystem já migrou para Mendix/microsserviços na nuvem — perguntar como está a maturidade dessa jornada e se há gargalos em observabilidade, CI/CD ou gestão de APIs. A Foursys pode agregar com squads de engenharia digital e parceria Digibee.</p>
+                <p style="margin-top:8px"><strong>2. IA Generativa no crédito ao consumidor:</strong> Com 120 milhões de transações/ano e inteligência de dados com ML já implementada, a Credsystem está em posição ideal para escalar IA Generativa em análise de risco, atendimento automatizado e personalização de ofertas. O AI Squad da Foursys pode acelerar esses casos de uso.</p>
+                <p style="margin-top:8px"><strong>3. Pressão regulatória LGPD/Open Finance:</strong> O setor de cartões está sob escrutínio crescente do Banco Central e da ANPD. Com 44 milhões de cartões emitidos, a governança de dados é crítica. A Foursys pode posicionar suas soluções de segurança de dados/DLP e GRC como habilitadores de compliance.</p>
+                <p style="margin-top:8px"><strong>4. Concorrentes digitalizando mais rápido:</strong> Midway já tem conta digital com Pix, Realize opera com squads ágeis e DMCard usa reconhecimento facial. A Credsystem precisa manter ritmo acelerado de inovação para não perder relevância — a Foursys pode ser parceira estratégica nessa corrida.</p>
+                <p style="margin-top:8px"><strong>5. Orçamento de TI crescente com foco em nuvem:</strong> Com 30% do orçamento de TI em nuvem e perspectiva de crescimento de até 10%, há espaço para otimização de custos cloud (FinOps), disaster recovery e cibersegurança — áreas onde a Foursys tem expertise comprovada.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>🏦 Midway Financeira (Grupo Guararapes / Riachuelo)</h4>
+                <p><strong>Posição:</strong> Maior carteira de cartões private label do Brasil, com mais de 30 milhões de clientes. Joint venture do Grupo Guararapes, criada em 2008.</p>
+                <p><strong>Iniciativas tech:</strong> Conta digital com Pix (1 milhão de contas em 5 meses), cartão digital com gestão mobile/web, primeiro co-branded contactless do Brasil (2018, parceria Visa), app com 2,8 milhões de downloads. Investimento contínuo em onboarding digital ultra-rápido.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🏦 Realize CFI (Lojas Renner S.A.)</h4>
+                <p><strong>Posição:</strong> Braço financeiro da Renner desde 2017, com carteira de crédito de R$ 3,70 bilhões. Atende ecossistema Renner, Camicado, Youcom e Ashua.</p>
+                <p><strong>Iniciativas tech:</strong> Squads ágeis em modelo fintech, aprovação de cartões em ~2 min via app, biometria facial e assinatura digital nos PDVs, checkout via WhatsApp, integração Pix, e cultura data-driven. 80% dos clientes ativos em canais digitais.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🏦 DMCard</h4>
+                <p><strong>Posição:</strong> Especialista em cartões private label para supermercados e materiais de construção, com +3 milhões de cartões emitidos em +2.300 lojas de 360 redes. Recebeu aporte de R$ 100 milhões da Vinci Partners em 2024.</p>
+                <p><strong>Iniciativas tech:</strong> Primeiro pagamento por reconhecimento facial em cartão de marca própria no varejo (2024, parceria Payface). Plataforma CRM integrada com programa de fidelidade (.SOU+) e emissão automatizada de cartões no checkout.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🏦 LuizaCred (Magazine Luiza + Itaú Unibanco)</h4>
+                <p><strong>Posição:</strong> Parceria entre Magazine Luiza e Itaú desde 2001. Base de 5,7 milhões de cartões, faturamento de R$ 60,8 bilhões em 2025 e TPV de R$ 101,9 bilhões. Aporte de R$ 1 bilhão em 2024.</p>
+                <p><strong>Iniciativas tech:</strong> Análise de crédito com inteligência artificial, sistemas de pagamento digital integrados ao ecossistema Magalu, e forte investimento em redução de custo de funding por meio de tecnologia.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Onde a Credsystem Pode Ser Superada</h4>
+                <p>1. <strong>Conta digital e banking:</strong> Midway e Realize já oferecem contas digitais completas com Pix; a Credsystem foca primariamente em cartões, o que pode limitar retenção.<br>
+                2. <strong>Escala de investimento:</strong> LuizaCred recebeu R$ 1 bilhão de aporte e DMCard R$ 100 milhões da Vinci — a Credsystem precisa garantir funding competitivo para sustentar inovação.<br>
+                3. <strong>Biometria e pagamentos inovadores:</strong> DMCard lidera em reconhecimento facial e a Realize em biometria nos PDVs; a Credsystem pode ficar defasada se não acelerar essas frentes.<br>
+                4. <strong>Modelo ágil de desenvolvimento:</strong> Realize opera com squads ágeis em modelo fintech; a migração da Credsystem para Mendix/microsserviços é positiva, mas exige maturidade contínua em DevOps e cloud-native.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Diretor de Tecnologia e Inovação (CIO/CTO) — Credsystem</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reconhecimento</div>
+                        <div class="value">Eleito entre os "100 CIOs mais influentes do Brasil" pela Computerworld (2009)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Especialidades</div>
+                        <div class="value">Soluções de TI, ambientes complexos, gestão de crises e projetos</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Continuada</div>
+                        <div class="value">MIT Professional Education — Transformação Digital, Design de Soluções de Alto Impacto, Blockchain e Cultural Awareness (2024–2025)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn: linkedin.com/in/ffelizatti</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Projeto de Destaque</div>
+                        <div class="value">Liderou migração da Credsystem de on-premises para nuvem com Mendix (microsserviços), após avaliação do Gartner Magic Quadrant</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p><strong>1. Mencione o MIT:</strong> Fabio investiu recentemente em certificações pelo MIT Professional Education (transformação digital, blockchain). Pergunte sobre os aprendizados e como ele está aplicando na Credsystem — demonstra que você pesquisou e valoriza desenvolvimento contínuo.</p>
+                <p style="margin-top:8px"><strong>2. Reconheça a jornada de modernização:</strong> Ele liderou pessoalmente a migração para Mendix/microsserviços. Elogie a decisão baseada no Gartner Magic Quadrant e pergunte sobre os próximos passos — ele terá orgulho de compartilhar.</p>
+                <p style="margin-top:8px"><strong>3. Fale sobre impacto social:</strong> A Credsystem atende autônomos e desbancarizados (34% da base). Conecte a conversa ao propósito de inclusão financeira — Fabio provavelmente se identifica com essa missão.</p>
+                <p style="margin-top:8px"><strong>4. Aborde gestão de crises:</strong> Uma de suas especialidades declaradas é gestão de crises. Compartilhe cases Foursys de disaster recovery e continuidade de negócios — é um tema que ressoa com sua experiência e está no radar de investimentos.</p>
+                <p style="margin-top:8px"><strong>5. Nível VP com voto em conselho:</strong> Fabio tem poder de decisão real (aprovador dentro do budget, assento com voto). Trate-o como executivo estratégico, não apenas técnico — ele se envolve em discussões de negócio e roadmap, não só infraestrutura.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma vice-presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Membro: assento permanente, com voto.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">100 a 199</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#9fa8da">3%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#c5cae9">2%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Referências e cases BR</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Roadmap e inovação</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+<span class="tag tag-active">Capilaridade/cobertura regional</span>
+<span class="tag tag-active">Residência de dados no BR</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Consultoria especializada;Hiperscaler / parceiro cloud</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 19 temas | Interno: 1 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre-Sales Intelligence — iFood | Foco Salesforce</title>
+<style>
+:root{
+  --primary:#1a237e; --primary-light:#3949ab; --accent:#00b894; --accent-orange:#e17055;
+  --sf:#00a1e0; --sf-dark:#032d60;
+  --bg:#f5f6fa; --card-bg:#ffffff; --text:#2d3436; --text-light:#636e72;
+  --border:#dfe6e9; --shadow:0 2px 12px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding-bottom:80px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(135deg,var(--sf-dark) 0%,#0b5cab 55%,var(--sf) 100%);color:#fff;padding:42px 0 34px}
+header .logo{font-size:14px;letter-spacing:.5px;opacity:.92;margin-bottom:18px}
+header .logo b{font-weight:800}
+header h1{font-size:34px;font-weight:800;margin-bottom:4px}
+header h2{font-size:18px;font-weight:500;opacity:.95;margin-bottom:6px}
+header .loc{font-size:14px;opacity:.85;margin-bottom:16px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.badge{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:6px 14px;font-size:12.5px;font-weight:600}
+.badge-mode-hibrido{background:linear-gradient(90deg,#00b894 0%,#1a237e 100%);color:#fff;border:none}
+.anchor-nav{display:flex;flex-wrap:wrap;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:10px 14px;margin:24px auto;box-shadow:var(--shadow);position:sticky;top:12px;z-index:50}
+.anchor-nav a{text-decoration:none;color:var(--primary);font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:999px;transition:background .2s}
+.anchor-nav a:hover{background:var(--bg)}
+section{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:26px 28px;margin-bottom:22px;box-shadow:var(--shadow)}
+h3.sec{font-size:21px;color:var(--primary);margin-bottom:6px}
+.sec-sub{font-size:13.5px;color:var(--text-light);margin-bottom:18px}
+h4{color:var(--primary);font-size:16px;margin:14px 0 8px}
+p{margin-bottom:10px}
+.muted{color:var(--text-light)}
+.hyp{border-left:3px solid var(--accent-orange);background:#fff7f3;padding:4px 10px;border-radius:4px;font-size:13px}
+.fact{border-left:3px solid var(--accent);background:#f0fbf6;padding:4px 10px;border-radius:4px;font-size:13px}
+/* one-pager */
+.one-pager{background:linear-gradient(135deg,#fff 0%,#fafbfc 100%);border:2px solid var(--sf);border-radius:16px;padding:26px 30px;margin-bottom:24px;box-shadow:var(--shadow)}
+.one-pager h3{font-size:17px;color:var(--sf-dark);margin-bottom:16px;text-transform:uppercase;letter-spacing:.6px}
+.one-pager-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.one-pager-block{padding:12px 14px;border-left:3px solid var(--sf)}
+.one-pager-block .lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--text-light);font-weight:700;margin-bottom:4px}
+.one-pager-block .val{font-size:13.5px;font-weight:600;color:var(--text);line-height:1.4}
+/* story */
+.story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.story-act{color:#fff;padding:22px 24px;border-radius:12px}
+.story-act .act-lbl{font-size:11px;text-transform:uppercase;letter-spacing:1px;opacity:.85;font-weight:700;margin-bottom:6px}
+.story-act h4{font-size:17px;margin-bottom:10px;color:#fff}
+.story-act p{color:#fff;opacity:.97;font-size:13.5px}
+.story-act-1{background:linear-gradient(135deg,#6c5ce7 0%,#a29bfe 100%)}
+.story-act-2{background:linear-gradient(135deg,#e17055 0%,#d63031 100%)}
+.story-act-3{background:linear-gradient(135deg,#00b894 0%,#00cec9 100%)}
+/* business cards */
+.business-card{border:1px solid var(--border);border-left:5px solid var(--sf);border-radius:12px;padding:18px 20px;margin-bottom:16px;background:#fafdff}
+.business-card h4{margin-top:0}
+.business-card .q{font-size:13px;color:var(--sf-dark);background:#e8f6fd;border-radius:8px;padding:10px 12px;margin-top:10px}
+/* messages */
+.msg-list{counter-reset:msg;list-style:none;padding:0}
+.msg-list li{counter-increment:msg;background:#fafbfc;border-left:4px solid #6c5ce7;padding:14px 18px 14px 56px;margin-bottom:10px;border-radius:8px;position:relative}
+.msg-list li::before{content:counter(msg);position:absolute;left:14px;top:12px;width:30px;height:30px;background:#6c5ce7;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+/* roadmap */
+.roadmap-table,.empirical-table,.master-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px}
+.roadmap-table th{background:#6c5ce7;color:#fff;padding:10px 12px;text-align:left}
+.roadmap-table td{padding:12px;border-bottom:1px solid var(--border)}
+.roadmap-table .phase{font-weight:700;color:var(--primary)}
+/* info grid */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:14px}
+.info-card{background:#fafbfc;border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.info-card .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-light);font-weight:700}
+.info-card .v{font-size:14px;font-weight:600;margin-top:4px}
+/* decisores */
+.decisor-card{border:1px solid var(--border);border-radius:14px;padding:0;margin-bottom:20px;overflow:hidden;box-shadow:var(--shadow)}
+.decisor-head{display:flex;align-items:center;gap:16px;padding:18px 22px;color:#fff}
+.decisor-head.dh-anna{background:linear-gradient(135deg,#00a1e0 0%,#032d60 100%)}
+.decisor-head.dh-flavio{background:linear-gradient(135deg,#1a237e 0%,#3949ab 100%)}
+.decisor-head.dh-thiago{background:linear-gradient(135deg,#6c5ce7 0%,#a29bfe 100%)}
+.decisor-avatar{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;flex-shrink:0}
+.decisor-head .nm{font-size:19px;font-weight:800;line-height:1.2}
+.decisor-head .rl{font-size:13px;opacity:.92;margin-top:2px}
+.decisor-role-tag{margin-left:auto;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:5px 14px;font-size:11.5px;font-weight:700;white-space:nowrap}
+.decisor-body{padding:18px 22px}
+.decisor-body p{font-size:13.8px}
+.decisor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:14px 0}
+.decisor-grid .di{background:#fafbfc;border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+.decisor-grid .di .k{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-light);font-weight:700}
+.decisor-grid .di .v{font-size:13px;font-weight:600;margin-top:3px}
+.decisor-sub{font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--primary);font-weight:800;margin:14px 0 6px;border-bottom:1px solid var(--border);padding-bottom:4px}
+.decisor-list{margin:0 0 6px 18px;font-size:13.5px}
+.decisor-list li{margin-bottom:5px}
+.quote{background:#f0f7ff;border-left:4px solid var(--sf);border-radius:0 8px 8px 0;padding:10px 14px;font-style:italic;font-size:13.5px;color:var(--sf-dark);margin:10px 0}
+.angle-box{background:#f0fbf6;border:1px solid #a5d6a7;border-radius:8px;padding:12px 14px;font-size:13.5px;margin-top:10px}
+.angle-box b{color:#2e7d32}
+@media(max-width:768px){.decisor-role-tag{display:none}}
+/* tags */
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.tag{padding:5px 12px;border-radius:999px;font-size:12.5px;font-weight:600}
+.tag-opportunity{background:#fff3e0;color:#e65100;border:1px solid #ffcc80}
+.tag-active{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
+.tag-priority{background:#fce4ec;color:#c62828;border:1px solid #ef9a9a}
+.tag-tech{background:#e3f2fd;color:#0d47a1;border:1px solid #90caf9}
+/* market */
+.market-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:14px}
+.market-card{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:#fff;border-radius:12px;padding:18px}
+.market-card .lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;opacity:.9;margin-bottom:6px}
+.market-card .val{font-size:22px;font-weight:800}
+.market-card .src{font-size:11px;opacity:.8;margin-top:6px}
+/* b2b */
+.b2b-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.b2b-card{background:#fafbfc;border:1px solid var(--border);border-top:4px solid var(--accent);border-radius:10px;padding:16px 18px}
+.b2b-card h4{margin-top:0}
+.b2b-card .sub{font-size:12px;color:var(--text-light);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-top:10px;margin-bottom:4px}
+/* timeline */
+.timeline{list-style:none;padding-left:8px}
+.timeline li{position:relative;padding:0 0 14px 26px;border-left:2px solid var(--border);margin-left:6px}
+.timeline li::before{content:'';position:absolute;left:-7px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--accent-orange)}
+/* offers */
+.oferta-card{border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:14px;background:#fff}
+.oferta-card .head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.oferta-card h4{margin:0}
+.score{font-weight:800;color:#fff;border-radius:999px;padding:5px 14px;font-size:13px}
+.s90{background:#00b894}.s80{background:#3949ab}.s70{background:#6c5ce7}
+.oferta-card ul{margin:10px 0 0 18px;font-size:13.5px}
+/* approach */
+.approach-card{color:#fff;border-radius:12px;padding:18px 20px;margin-bottom:12px}
+.approach-green{background:linear-gradient(135deg,#00b894 0%,#00cec9 100%)}
+.approach-red{background:linear-gradient(135deg,#e17055 0%,#d63031 100%)}
+.approach-purple{background:linear-gradient(135deg,#6c5ce7 0%,#a29bfe 100%)}
+.approach-card h4{color:#fff;margin-top:0}
+.insight-box{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;border-radius:12px;padding:20px 22px;margin-top:14px}
+.insight-box h4{color:#fff;margin-top:0}
+/* competitors */
+.competitor-card{background:#fafbfc;border:1px solid var(--border);border-left:4px solid var(--accent-orange);border-radius:10px;padding:14px 18px;margin-bottom:12px}
+.competitor-card h4{margin-top:0}
+/* apps / stack */
+.app-card{background:#fafbfc;border:1px solid var(--border);border-left:4px solid var(--primary-light);border-radius:10px;padding:18px 20px;margin-bottom:14px}
+.app-card h4{margin:0 0 4px}
+.app-card .url{font-size:12.5px;color:var(--text-light);margin-bottom:12px;word-break:break-all}
+.app-stack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.app-stack-item{background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+.app-stack-item .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-light);font-weight:700}
+.app-stack-item .v{font-size:13px;font-weight:600;margin-top:4px}
+.master-table th{background:#f1f3f5;color:var(--primary);text-align:left;padding:9px 10px;border-bottom:2px solid var(--border);font-size:12.5px}
+.master-table td{padding:9px 10px;border-bottom:1px solid var(--border);font-size:12.5px}
+.master-table tr:nth-child(even) td{background:#fafbfc}
+.stack-layer{background:#fafbfc;border-left:5px solid var(--primary-light);border-radius:8px;padding:14px 18px;margin-bottom:10px}
+.stack-layer .lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--primary-light);font-weight:700;margin-bottom:4px}
+.stack-layer .name{font-size:15px;font-weight:700;color:var(--primary);margin-bottom:6px}
+.stack-layer .cmp{font-size:13.5px}
+.empirical-table th{background:#f1f3f5;color:var(--primary);text-align:left;padding:10px 12px;border-bottom:2px solid var(--border)}
+.empirical-table td{padding:10px 12px;border-bottom:1px solid var(--border)}
+.status-200{background:#e8f5e9;color:#2e7d32;font-weight:700;padding:2px 8px;border-radius:999px;font-size:12px}
+.status-err{background:#fde2e2;color:#c0392b;font-weight:700;padding:2px 8px;border-radius:999px;font-size:12px}
+/* gaps */
+.gap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:14px}
+.gap-card{background:linear-gradient(135deg,#e17055 0%,#d63031 100%);color:#fff;border-radius:12px;padding:18px 20px}
+.gap-card .num{font-size:11px;text-transform:uppercase;letter-spacing:1px;opacity:.85;margin-bottom:6px;font-weight:700}
+.gap-card h4{font-size:16px;margin:0 0 8px;color:#fff}
+.gap-card p{color:#fff;opacity:.95;font-size:13.5px}
+.gap-card .offer{background:rgba(255,255,255,.2);padding:6px 10px;border-radius:6px;margin-top:10px;font-size:12.5px;font-weight:700}
+/* sources */
+.sources-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:14px}
+.sources-card{background:#fafbfc;border:1px solid var(--border);border-radius:8px;padding:14px}
+.sources-card h4{font-size:13px;margin:0 0 8px;text-transform:uppercase;letter-spacing:.5px}
+.sources-card ul{padding-left:18px;font-size:12.5px}
+.sources-card li{margin-bottom:4px}
+.zone-divider{margin:50px 0 30px;border:0;height:24px;background:linear-gradient(90deg,transparent 0%,var(--border) 50%,transparent 100%);position:relative}
+.zone-divider::after{content:attr(data-label);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--bg);padding:4px 18px;color:var(--text-light);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;font-weight:700}
+.print-btn{position:fixed;bottom:30px;right:30px;background:var(--sf);color:#fff;border:none;border-radius:999px;padding:14px 22px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);z-index:99}
+footer{text-align:center;color:var(--text-light);font-size:12.5px;padding:30px 0}
+@media(max-width:768px){.one-pager-grid,.story-grid{grid-template-columns:1fr}header h1{font-size:26px}}
+@media print{.print-btn,.anchor-nav{display:none}body{background:#fff;padding:0}section,.one-pager{box-shadow:none;page-break-inside:avoid}.one-pager{page-break-after:always}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo"><b>Pre-Sales Intelligence</b> · Conta Estratégica Salesforce</div>
+    <h1>iFood</h1>
+    <h2>Sponsor Salesforce: Anna Vidal — Diretora de Customer Experience (CX)</h2>
+    <div class="loc">Food delivery & ecossistema de serviços digitais · Osasco/São Paulo (SP), Brasil · Controlada pela Prosus</div>
+    <div class="badges">
+      <span class="badge badge-mode-hibrido">Modo: Híbrido</span>
+      <span class="badge">Receita ~R$ 7 bi (FY25) · GMV &gt; R$ 10 bi/mês</span>
+      <span class="badge">Investimento R$ 17 bi (abr/25–mar/26)</span>
+      <span class="badge">~82% market share delivery BR</span>
+      <span class="badge">Cliente Salesforce ativo (Sales + Service + Agentforce)</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+<nav class="anchor-nav">
+  <a href="#sumario">Sumário</a>
+  <a href="#historia">História</a>
+  <a href="#solucoes">Soluções SF</a>
+  <a href="#gatilhos">Gatilhos</a>
+  <a href="#mensagens">Mensagens</a>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#empresa">Empresa</a>
+  <a href="#gestor">Gestor</a>
+  <a href="#segmento">Mercado</a>
+  <a href="#ofertas">Ofertas SF</a>
+  <a href="#concorrentes">Concorrentes</a>
+  <a href="#stack">Stack</a>
+  <a href="#empirico">Empírico</a>
+  <a href="#gaps">GAPs</a>
+  <a href="#fontes">Fontes</a>
+</nav>
+
+<!-- ====================== ZONA A ====================== -->
+
+<!-- A2 Sumário -->
+<div class="one-pager" id="sumario">
+  <h3>Sumário de 1 Página — Por que o iFood é uma conta Salesforce de altíssimo valor</h3>
+  <div class="one-pager-grid">
+    <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Líder absoluta de food delivery no Brasil (~82% share), ecossistema com 60M usuários, 440 mil entregadores e 460 mil estabelecimentos. Controlada pela Prosus.</div></div>
+    <div class="one-pager-block"><div class="lbl">Quem é o sponsor</div><div class="val">Anna Vidal, Diretora de CX — patrocinadora declarada da migração para Service Cloud e do programa Agentforce. CTO: Flávio Stecca.</div></div>
+    <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Meta pública de 2.000 agentes de IA (Agentforce); guerra competitiva com Keeta e 99Food; pressão para personalizar a 200M de pedidos/mês.</div></div>
+    <div class="one-pager-block"><div class="lbl">3 frentes Salesforce recomendadas</div><div class="val">1) Fábrica de Agentforce + AgentOps · 2) Data Cloud (CDP unificado) · 3) Otimização Service Cloud + Marketing Cloud.</div></div>
+    <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Workshop executivo de "Agentforce em escala": de 20 para 1.000 agentes com governança, qualidade e ROI mensurável.</div></div>
+    <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Ciclo de investimento R$ 17 bi em curso (abr/25–mar/26) + meta de 1.000 agentes em ~6 meses = decisão acontecendo AGORA.</div></div>
+  </div>
+</div>
+
+<!-- A3 História -->
+<section id="historia">
+  <h3 class="sec">A História desta Conta em 3 Atos</h3>
+  <div class="story-grid">
+    <div class="story-act story-act-1">
+      <div class="act-lbl">Ato 1 — O momento de virada</div>
+      <h4>De foodtech a "empresa de IA"</h4>
+      <p>O iFood deixou de se chamar empresa de tecnologia e passou a se posicionar como empresa de IA. Em set/2024 decidiu unificar CX na Salesforce e entregou a migração em 70 dias. A casa está em ordem para escalar.</p>
+    </div>
+    <div class="story-act story-act-2">
+      <div class="act-lbl">Ato 2 — A tensão</div>
+      <h4>Guerra de bilhões + ambição de 2.000 agentes</h4>
+      <p>Keeta (Meituan) e 99Food (DiDi) entram com R$ bilhões e subsídio agressivo. O iFood precisa defender 82% de share personalizando o atendimento de 60M usuários — mas só tem 20 agentes Agentforce em dev hoje.</p>
+    </div>
+    <div class="story-act story-act-3">
+      <div class="act-lbl">Ato 3 — A travessia</div>
+      <h4>Da prova de conceito à escala industrial</h4>
+      <p>O parceiro Salesforce certo transforma 20 agentes em 1.000+ com governança, dados unificados (Data Cloud) e ROI medido. É a diferença entre "demo bonita" e impacto de EBITDA — e o relógio competitivo está correndo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- A4 Soluções foco negócio -->
+<section id="solucoes">
+  <h3 class="sec">Soluções Salesforce com Foco no Negócio (Top 3)</h3>
+  <p class="sec-sub">As 3 frentes de maior fit, em linguagem de negócio. As demais ofertas estão na Zona B (#ofertas).</p>
+
+  <div class="business-card">
+    <h4>1. Fábrica de Agentforce + AgentOps (de 20 para 2.000 agentes)</h4>
+    <p><b>Dor/Oportunidade:</b> O iFood declarou meta de 1.000 agentes em ~6 meses e 2.000 no total, mas tem apenas 20 em desenvolvimento. <span class="fact">Fato: Anna Vidal, em entrevistas (Época Negócios, Gizmodo, IT Forum).</span> Escalar isso sem fábrica, padrões e governança trava o roadmap.</p>
+    <p><b>Solução:</b> Esteira de produção de agentes (templates, prompts versionados, testes), Centro de Excelência Agentforce e disciplina de <b>AgentOps</b> (observabilidade, qualidade, guardrails, custo por interação).</p>
+    <p><b>Impacto esperado:</b> Acelerar o tempo de "ideia → agente em produção", reduzir retrabalho e dar previsibilidade ao roadmap de 2.000 agentes — com ROI auditável por caso de uso.</p>
+    <div class="q"><b>Pergunta de descoberta:</b> "Dos 1.000 agentes que vocês querem em 6 meses, quantos hoje têm dono, métrica de sucesso e processo de teste antes de subir para produção?"</div>
+  </div>
+
+  <div class="business-card">
+    <h4>2. Data Cloud — o CDP que alimenta cada agente e cada personalização</h4>
+    <p><b>Dor/Oportunidade:</b> O iFood tinha 3 sistemas que "não conversavam" (entregador, restaurante, consumidor) e unificou o atendimento no Service Cloud. <span class="fact">Fato: Anna Vidal.</span> Mas dado de atendimento ≠ dado de cliente unificado. Para personalizar 200M de pedidos/mês e alimentar agentes, falta uma camada de cliente 360.</p>
+    <p><b>Solução:</b> <b>Salesforce Data Cloud</b> como CDP, ingerindo eventos do ecossistema AWS/Kafka e ativando perfis em tempo real para Agentforce, Marketing e Service.</p>
+    <p><b>Impacto esperado:</b> Personalização proativa real (não só reativa), maior retenção (o clube já entrega +70% de retenção) e agentes que respondem com contexto completo do cliente.</p>
+    <div class="q"><b>Pergunta de descoberta:</b> "Quando um agente atende, ele enxerga o cliente como consumidor, como assinante do clube e como usuário do iFood Card ao mesmo tempo — ou ainda em silos?"</div>
+  </div>
+
+  <div class="business-card">
+    <h4>3. Otimização do Service Cloud + Marketing Cloud orquestrado</h4>
+    <p><b>Dor/Oportunidade:</b> 60–75% do atendimento já é por IA e a migração foi feita em 70 dias (modo "sonhar grande, ter pressa"). <span class="fact">Fato: Anna Vidal / Everymind.</span> Projeto entregue em velocidade recorde tende a deixar dívida de configuração, automação e canais (voz, WhatsApp/Ailo) a destravar.</p>
+    <p><b>Solução:</b> Health-check do Service Cloud, expansão de canais digitais e voz, e <b>Marketing Cloud</b> conectado ao Data Cloud para campanhas de performance e ciclo de vida.</p>
+    <p><b>Impacto esperado:</b> Reduzir custo por atendimento, fechar o loop marketing→serviço→agente e elevar CSAT nas três verticais (consumidor, restaurante, entregador).</p>
+    <div class="q"><b>Pergunta de descoberta:</b> "O que ficou no backlog de 'fazer depois' quando vocês cortaram um projeto de 8–18 meses para 70 dias?"</div>
+  </div>
+</section>
+
+<!-- Gatilhos -->
+<section id="gatilhos">
+  <h3 class="sec">Gatilhos Comerciais Prontos para Usar</h3>
+  <p class="sec-sub">Sinais públicos recentes que abrem conversa imediata. Cada gatilho conecta um fato a uma oferta Salesforce sua.</p>
+  <ul class="timeline">
+    <li><b>Gatilho "2.000 agentes":</b> meta pública e ousada, mas só 20 agentes em dev → ofereça fábrica + AgentOps. <span class="muted">(Época Negócios, Gizmodo, jun/2025)</span></li>
+    <li><b>Gatilho "guerra competitiva":</b> Keeta e 99Food investindo bilhões → personalização e retenção viram defesa de share. <span class="muted">(NeoFeed, Valor, 2025/2026)</span></li>
+    <li><b>Gatilho "70 dias":</b> migração relâmpago do Service Cloud → conversa de otimização/dívida técnica de CX. <span class="muted">(IT Forum, Inforchannel)</span></li>
+    <li><b>Gatilho "Ailo + WhatsApp":</b> assistente GenAI próprio no WhatsApp → integração com Agentforce/Service Cloud no canal conversacional. <span class="muted">(Institucional iFood)</span></li>
+    <li><b>Gatilho "30% do EBITDA via IA":</b> IA já é linha de resultado → fácil justificar investimento em CRM+IA com ROI. <span class="muted">(Thiago Cardoso, ProXXIma 2026)</span></li>
+    <li><b>Gatilho "R$ 17 bi de capex":</b> maior ciclo de investimento da história → orçamento disponível agora. <span class="muted">(iFood MOVE 2025)</span></li>
+    <li><b>Gatilho "iFood Card / fintech":</b> vertical de benefícios e crédito crescendo → Financial Services Cloud / novos agentes de vendas. <span class="muted">(Baguete)</span></li>
+  </ul>
+</section>
+
+<!-- A5 Mensagens -->
+<section id="mensagens">
+  <h3 class="sec">Mensagens-chave para a 1ª Conversa</h3>
+  <p class="sec-sub">Frases prontas para dizer ao sponsor (Anna Vidal / time de CX e Tecnologia).</p>
+  <ol class="msg-list">
+    <li>"Vocês fizeram em 70 dias o que o mercado faz em 12–18 meses. Quero ajudar a transformar essa base de Service Cloud na maior operação de Agentforce da América Latina."</li>
+    <li>"A próxima fronteira não é ter 20 agentes — é ter uma fábrica que coloca 1.000 em produção com governança e custo sob controle. É aí que entramos."</li>
+    <li>"Com Keeta e 99Food queimando caixa em subsídio, sua defesa de margem é personalização. E personalização em escala começa com Data Cloud por baixo do Agentforce."</li>
+    <li>"75% do atendimento ao consumidor já é IA. O salto agora é qualidade e contexto: o agente precisa ver consumidor, restaurante e entregador como um cliente só."</li>
+    <li>"Vocês têm 27 mil agentes internos e a meta de 2.000 no Agentforce. Sem AgentOps, isso vira dívida operacional. Trazemos a disciplina de medir, testar e dar guardrail."</li>
+    <li>"O Ailo no WhatsApp mostra que vocês querem o cliente em qualquer canal. Dá para orquestrar isso dentro do Service Cloud sem refazer o que já existe."</li>
+    <li>"IA já vale 30% do seu EBITDA. Cada agente bem feito tem ROI. Queremos abrir a conversa por caso de uso de maior retorno, não por licença."</li>
+  </ol>
+</section>
+
+<!-- A6 Roadmap -->
+<section id="roadmap">
+  <h3 class="sec">Roadmap de Engajamento (Parceiro Salesforce → iFood)</h3>
+  <table class="roadmap-table">
+    <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+    <tbody>
+      <tr><td class="phase">1. Conexão</td><td>Reunião com Anna Vidal (CX) e liderança de Engenharia de Plataforma</td><td>Alinhamento de visão "Agentforce em escala"</td><td>Semana 1–2</td></tr>
+      <tr><td class="phase">2. Discovery</td><td>Assessment do Service Cloud atual + maturidade de dados (Data Cloud readiness)</td><td>Relatório de gaps + mapa de casos de uso de agente priorizados por ROI</td><td>Semana 3–6</td></tr>
+      <tr><td class="phase">3. POC / Prova de valor</td><td>1 agente Agentforce ponta-a-ponta com AgentOps e métrica de negócio</td><td>Agente em produção controlada + dashboard de ROI</td><td>Mês 2–3</td></tr>
+      <tr><td class="phase">4. Squad Pilot</td><td>Fábrica de agentes (3–5 casos) + camada Data Cloud inicial</td><td>Esteira de produção + Centro de Excelência</td><td>Mês 3–6</td></tr>
+      <tr><td class="phase">5. Escala</td><td>Programa multi-squad rumo a 1.000 agentes + Marketing Cloud/integração MuleSoft</td><td>Plano de escala com governança e FinOps de IA</td><td>Mês 6–12</td></tr>
+      <tr><td class="phase">6. Programa contínuo</td><td>Modelo de sustentação (AMS) + evolução para 2.000 agentes</td><td>Contrato recorrente / MSA</td><td>12 meses+</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="zone-divider" data-label="Zona B — Pré-vendas">
+
+<!-- ====================== ZONA B ====================== -->
+
+<!-- B1 Empresa -->
+<section id="empresa">
+  <h3 class="sec">Mapeamento Estratégico da Empresa</h3>
+  <p>O iFood é a maior plataforma de food delivery da América Latina e o ativo central do ecossistema da Prosus (holandesa) no Brasil. Fundado em 2011, evoluiu de app de entrega de refeições para um ecossistema de serviços: delivery, mantimentos/farmácia, dine-in, fintech (iFood Card, crédito), benefícios e publicidade. Posiciona-se publicamente como "empresa de IA".</p>
+  <div class="info-grid">
+    <div class="info-card"><div class="k">Razão / Controle</div><div class="v">iFood (Movile / Prosus N.V.)</div></div>
+    <div class="info-card"><div class="k">Sede</div><div class="v">Osasco/São Paulo (SP)</div></div>
+    <div class="info-card"><div class="k">Fundação</div><div class="v">2011</div></div>
+    <div class="info-card"><div class="k">Colaboradores</div><div class="v">8.600+ (mais da metade das novas vagas em tech)</div></div>
+    <div class="info-card"><div class="k">Engenheiros/cientistas</div><div class="v">~3.000</div></div>
+    <div class="info-card"><div class="k">Receita FY25</div><div class="v">~US$ 1,3 bi / ~R$ 7 bi (CAGR 28%)</div></div>
+    <div class="info-card"><div class="k">GMV</div><div class="v">&gt; R$ 10 bi/mês (2025)</div></div>
+    <div class="info-card"><div class="k">Margem EBITDA</div><div class="v">~19% (faturamento anualizado ~R$ 10 bi)</div></div>
+    <div class="info-card"><div class="k">Abrangência</div><div class="v">1.500–1.580 cidades</div></div>
+    <div class="info-card"><div class="k">Pedidos/mês</div><div class="v">122M (recorde nov/25: 180M totais)</div></div>
+  </div>
+  <div class="tags">
+    <span class="tag tag-tech">Cloud: AWS (100%)</span>
+    <span class="tag tag-tech">CRM: Salesforce (Sales + Service + Agentforce)</span>
+    <span class="tag tag-tech">Dados: Data Lake AWS + Kafka/Confluent</span>
+    <span class="tag tag-tech">IA: LCM próprio + 27 mil agentes internos</span>
+  </div>
+</section>
+
+<!-- B2 Gestor -->
+<section id="gestor">
+  <h3 class="sec">Mapeamento dos Decisores</h3>
+  <p class="sec-sub">Foco em DECISÃO — quem decide, o que move cada um e como você abre a conversa. Perfil pessoal/rapport está na Zona C (#rapport).</p>
+
+  <!-- ANNA VIDAL -->
+  <div class="decisor-card">
+    <div class="decisor-head dh-anna">
+      <div class="decisor-avatar">AV</div>
+      <div>
+        <div class="nm">Anna Vidal</div>
+        <div class="rl">Diretora de Customer Experience (CX) · sponsor Salesforce</div>
+      </div>
+      <div class="decisor-role-tag">PONTO DE ENTRADA Nº 1</div>
+    </div>
+    <div class="decisor-body">
+      <p>É a face pública da estratégia Salesforce do iFood. Patrocinou a migração de CX para o Service Cloud em 70 dias e lidera o programa Agentforce (meta de 2.000 agentes). Pensa e fala em linguagem de negócio: satisfação das três verticais (consumidor, restaurante, entregador), produtividade e atendimento proativo. <b>É a porta de entrada natural — e a defensora interna de qualquer iniciativa Salesforce.</b></p>
+
+      <div class="decisor-grid">
+        <div class="di"><div class="k">Formação</div><div class="v">Marketing (USP) · MBA Engenharia Financeira (FIA)</div></div>
+        <div class="di"><div class="k">Experiência</div><div class="v">~15 anos: Ambev, Whirlpool e iFood</div></div>
+        <div class="di"><div class="k">Trajetória interna</div><div class="v">Passou por 7 áreas no iFood (inclui Head de Growth & Expansão)</div></div>
+        <div class="di"><div class="k">Reconhecimento</div><div class="v">Case vencedor "SMART 2024" de IA em CX</div></div>
+      </div>
+
+      <div class="decisor-sub">O que ela já entregou (evidência)</div>
+      <ul class="decisor-list">
+        <li>Migração das 3 verticais para o <b>Service Cloud em 70 dias</b> (decisão out/2024), com Natal, Ano Novo e Black Friday no meio.</li>
+        <li>Operação com <b>+150 modelos de IA</b> automatizando <b>~70% dos tickets</b> (75% no consumidor) com 5 assistentes virtuais (Rose, Karen, Jhow, Almir, Sancho).</li>
+        <li>Programa <b>Agentforce</b>: 20 agentes em dev → meta de 1.000 em 6 meses → 2.000. Primeiro agente já fecha vendas do Anota AI.</li>
+        <li>Projeto interno de CX que analisa milhões de tickets para dar <b>plano de melhoria individual</b> a cada atendente.</li>
+      </ul>
+
+      <div class="decisor-sub">Como ela pensa (citações públicas)</div>
+      <div class="quote">"A IA faz parte do DNA de 100% das áreas do iFood. Se você não está usando IA no que faz, está fazendo errado."</div>
+      <div class="quote">"Antes de melhorar, simplifique. Depois, questione se o processo precisa existir. Só então, automatize."</div>
+
+      <div class="decisor-sub">Gatilhos de decisão</div>
+      <ul class="decisor-list">
+        <li>Satisfação (CSAT/SESAT) e produtividade das 3 verticais acima de tudo.</li>
+        <li>Separar regra de negócio do agente; "começar pequeno, errar rápido, aprender" (cultura de teste).</li>
+        <li>Visão de aquisição 360 (puxar cliente do online para o offline e vice-versa via cupom/dados).</li>
+      </ul>
+
+      <div class="angle-box"><b>Seu ângulo com ela:</b> reconheça os 70 dias e o case SMART, e proponha a "próxima fronteira" — fábrica de Agentforce com governança e ROI por caso de uso. Ela compra ambição com método, não licença.</div>
+    </div>
+  </div>
+
+  <!-- FLÁVIO STECCA -->
+  <div class="decisor-card">
+    <div class="decisor-head dh-flavio">
+      <div class="decisor-avatar">FS</div>
+      <div>
+        <div class="nm">Flávio Stecca</div>
+        <div class="rl">CTO (desde jun/2018) · ex-Movile</div>
+      </div>
+      <div class="decisor-role-tag">DECISOR TÉCNICO</div>
+    </div>
+    <div class="decisor-body">
+      <p>Arquiteto da escala do iFood. Comanda a engenharia que sustenta ~2.000 microsserviços event-driven na AWS e 60M+ de requisições/min. É o guardião do "Clean Core" técnico: qualquer integração CRM ↔ ecossistema (Kafka/EventBridge, MuleSoft) e a estratégia de agentes em produção passam pelo crivo dele. Decisor obrigatório para validar arquitetura e segurança.</p>
+
+      <div class="decisor-grid">
+        <div class="di"><div class="k">Formação</div><div class="v">Ciência da Computação — PUC Goiás</div></div>
+        <div class="di"><div class="k">Educação executiva</div><div class="v">Stanford · MIT · Harvard Business School</div></div>
+        <div class="di"><div class="k">Trajetória</div><div class="v">Movile desde 2004 (dev → gerente → CTO); PlayKids (presidente/conselho)</div></div>
+        <div class="di"><div class="k">Conselhos</div><div class="v">Membro do conselho da Tmov (logtech) desde 2021</div></div>
+      </div>
+
+      <div class="decisor-sub">O que ele valoriza (evidência)</div>
+      <ul class="decisor-list">
+        <li>Escala e resiliência: liderou a migração para <b>Amazon EKS</b> (Karpenter, Bottlerocket) buscando 99,9% de disponibilidade e -20% de overhead.</li>
+        <li>Arquitetura orientada a eventos e <b>desacoplamento</b> (Kafka/Confluent, EventBridge, ~2.000 microsserviços).</li>
+        <li>Plataforma de engenharia interna (<b>Tompero</b>) e cultura de "build vs buy" criteriosa.</li>
+        <li>Discurso recorrente em palestras: "sonhar grande, ter foco e se desenvolver constantemente" — frameworks de escala de produto.</li>
+      </ul>
+
+      <div class="decisor-sub">Gatilhos de decisão</div>
+      <ul class="decisor-list">
+        <li>Não comprometer o core: Salesforce convive como SaaS integrado, sem virar gargalo da plataforma AWS.</li>
+        <li>Governança de integração e segurança (edge próprio, HSTS, time jurídico forte no setor).</li>
+        <li>FinOps: custo por requisição/interação sob controle (já fazem compressão de Kafka para economizar).</li>
+      </ul>
+
+      <div class="angle-box"><b>Seu ângulo com ele:</b> fale arquitetura, não funcionalidade. Posicione MuleSoft/eventos e AgentOps como camadas que respeitam o ecossistema AWS event-driven dele — e tragam observabilidade e FinOps de IA. Ele decide o "como", a Anna decide o "porquê".</div>
+    </div>
+  </div>
+
+  <!-- THIAGO CARDOSO -->
+  <div class="decisor-card">
+    <div class="decisor-head dh-thiago">
+      <div class="decisor-avatar">TC</div>
+      <div>
+        <div class="nm">Thiago Cardoso</div>
+        <div class="rl">Diretor Sênior de Dados & IA · ex-fundador da Hekima</div>
+      </div>
+      <div class="decisor-role-tag">ALIADO DE IA / ROI</div>
+    </div>
+    <div class="decisor-body">
+      <p>O cérebro de IA do iFood e o melhor aliado para o discurso de ROI. Cofundou a startup de machine learning <b>Hekima</b> (2009), adquirida pelo iFood no fim de 2019, quando passou a liderar dados e IA. Quantifica o valor da IA em número de board: <b>~30% do EBITDA</b>. É quem dá credibilidade técnica e econômica a uma tese de "CRM + IA com retorno".</p>
+
+      <div class="decisor-grid">
+        <div class="di"><div class="k">Formação/Origem</div><div class="v">Cofundador e CTO da Hekima (ML enterprise)</div></div>
+        <div class="di"><div class="k">No iFood desde</div><div class="v">2019 (via aquisição da Hekima)</div></div>
+        <div class="di"><div class="k">Escopo</div><div class="v">+150 modelos de IA em produção; bilhões de predições</div></div>
+        <div class="di"><div class="k">Curiosidade</div><div class="v">Competidor de CTF (segurança); achou falha nas urnas eletrônicas BR (2017)</div></div>
+      </div>
+
+      <div class="decisor-sub">O que ele defende (evidência)</div>
+      <ul class="decisor-list">
+        <li><b>IA sistêmica e democratizada:</b> meta de cada colaborador criar seu agente → 27 mil agentes internos em operação.</li>
+        <li>Primeiro grande case foi <b>antifraude</b> (2020), reduzindo bloqueio de transações legítimas.</li>
+        <li>Governança digital como ponto-chave: plataforma interna monitora acessos, dados sensíveis e chamadas de API.</li>
+        <li>Cultura data-driven desde 2018; barra técnica alta e "time de primeira linha".</li>
+      </ul>
+
+      <div class="decisor-sub">Como ele pensa (citações públicas)</div>
+      <div class="quote">"Para viver nesse cenário de flexibilidade e volume que operamos, IA não é opção e sim necessidade."</div>
+      <div class="quote">"O maior impacto da IA hoje está na forma como as pessoas trabalham. Todo mundo se vê como desenvolvedor de soluções."</div>
+
+      <div class="angle-box"><b>Seu ângulo com ele:</b> traga AgentOps, governança de modelos/agentes e FinOps de IA. Ele já vive o problema de escalar 27 mil agentes internos com qualidade — e fala a língua de impacto no EBITDA. É o endosso técnico que destrava orçamento.</div>
+    </div>
+  </div>
+
+  <h4>Mapa de poder — como os 3 se conectam</h4>
+  <p>O fluxo de decisão de uma expansão Salesforce tende a ser: <b>Anna Vidal (sponsor / dona da dor de CX)</b> puxa a iniciativa → <b>Flávio Stecca (CTO)</b> valida arquitetura, segurança e integração com o core AWS → <b>Thiago Cardoso (IA)</b> endossa a tese de IA/ROI e governança de agentes. Acima deles, o CEO <b>Diego Barreto</b> (que também lidera o ecossistema Prosus na América Latina e acompanha quantas interações de IA cada diretor tem) e o novo CFO <b>Pedro Pereira</b> (ex-Bank of America, traz disciplina de capital) definem apetite de investimento. Cultura: "sonhar grande e ter pressa" — favorece propostas ousadas, exige métrica de impacto.</p>
+
+  <h4 style="margin-top:16px">Stakeholders fornecidos por você (a confirmar cargo)</h4>
+  <p class="hyp">Hipótese consultiva: os nomes a seguir foram fornecidos como contatos no iFood, mas <b>não têm perfil público confirmável</b> nas fontes consultadas. Não atribuímos cargo para não induzir erro — confirmar função e relação com o programa Salesforce/CX antes da reunião: <b>Guilherme Goes, Pedro Delfino, Felipe Boné, Lucélia Pereira, Alessandra Paulo, Roberson Prado, Adriel Piedade.</b> Sugestão: validar no LinkedIn quais pertencem a CX, Tecnologia, Procurement ou às verticais (iFood Card, restaurantes).</p>
+</section>
+
+<!-- B3 Segmento + Mercado -->
+<section id="segmento">
+  <h3 class="sec">Segmento + Mercado Quantificado</h3>
+  <p>O Brasil é o 4º maior mercado de delivery do mundo (atrás de China, EUA e Coreia do Sul). O modelo do iFood é marketplace de três lados (consumidores, restaurantes, entregadores) com camadas adjacentes de fintech, publicidade e mantimentos — exatamente o tipo de operação onde dado unificado e atendimento em escala definem a vantagem competitiva.</p>
+  <div class="market-grid">
+    <div class="market-card"><div class="lbl">Mercado delivery BR 2025</div><div class="val">R$ 79 bi</div><div class="src">Getnet/Abrasel (+12,7% a/a)</div></div>
+    <div class="market-card"><div class="lbl">Mercado em US$ (2024)</div><div class="val">US$ 21 bi</div><div class="src">Statista Market Forecast</div></div>
+    <div class="market-card"><div class="lbl">Projeção 2030</div><div class="val">US$ 29,5 bi</div><div class="src">Statista</div></div>
+    <div class="market-card"><div class="lbl">Share iFood</div><div class="val">~80–82%</div><div class="src">Abrasel</div></div>
+    <div class="market-card"><div class="lbl">Usuários BR delivery</div><div class="val">63M → 90,5M</div><div class="src">Statista (em ~3 anos)</div></div>
+  </div>
+  <h4 style="margin-top:18px">Prioridades e pressões setoriais</h4>
+  <div class="tags">
+    <span class="tag tag-priority">Defesa de market share vs entrantes chineses</span>
+    <span class="tag tag-priority">Retenção e fidelização (clube)</span>
+    <span class="tag tag-priority">Eficiência de custo (FinOps)</span>
+    <span class="tag tag-active">Personalização por IA</span>
+    <span class="tag tag-active">Atendimento proativo nas 3 verticais</span>
+    <span class="tag tag-opportunity">Regulação CADE / cláusulas de exclusividade</span>
+  </div>
+</section>
+
+<!-- B4 B2B downstream -->
+<section id="b2b">
+  <h3 class="sec">Cadeia B2B Downstream (clientes do iFood)</h3>
+  <p class="sec-sub">Públicos que o iFood atende e onde CRM/IA geram valor — útil para posicionar casos de uso de agente.</p>
+  <div class="b2b-grid">
+    <div class="b2b-card">
+      <h4>Restaurantes & estabelecimentos</h4>
+      <div class="sub">Confirmado</div><div>460 mil estabelecimentos digitalizados; agente Agentforce já vende o software Anota AI para restaurantes.</div>
+      <div class="sub">Oportunidade SF</div><div>Sales Cloud + agentes de vendas/onboarding de parceiros.</div>
+    </div>
+    <div class="b2b-card">
+      <h4>Entregadores</h4>
+      <div class="sub">Confirmado</div><div>~440 mil entregadores; vertical unificada no Service Cloud.</div>
+      <div class="sub">Oportunidade SF</div><div>Agentes de suporte e resolução proativa de incidentes de entrega.</div>
+    </div>
+    <div class="b2b-card">
+      <h4>Consumidores</h4>
+      <div class="sub">Confirmado</div><div>60M usuários; 75% do atendimento já por IA; Ailo no WhatsApp.</div>
+      <div class="sub">Oportunidade SF</div><div>Data Cloud + Marketing Cloud + Agentforce conversacional.</div>
+    </div>
+    <div class="b2b-card">
+      <h4>Fintech / iFood Card / Anunciantes</h4>
+      <div class="sub">Confirmado</div><div>Crédito a empreendedores (~R$ 2 bi), iFood Card, retail media.</div>
+      <div class="sub">Oportunidade SF</div><div>Financial Services Cloud + agentes de atendimento da vertical de benefícios.</div>
+    </div>
+  </div>
+</section>
+
+<!-- B5 Resumo executivo -->
+<section id="executivo">
+  <h3 class="sec">Resumo Executivo</h3>
+  <div class="insight-box">
+    <h4>Por que agora</h4>
+    <p>O iFood é, ao mesmo tempo, um dos maiores cases Salesforce do Brasil e uma conta de expansão óbvia. Já comprou a visão (migrou CX em 70 dias, declarou-se "empresa de IA", apostou no Agentforce). Falta a engenharia de escala: sair de 20 para 1.000+ agentes com governança, dados unificados e ROI. Esse é exatamente o espaço de um parceiro de serviços Salesforce.</p>
+    <p>O timing é raro: o maior ciclo de capex da história da empresa (R$ 17 bi) coincide com a guerra competitiva de Keeta e 99Food. Personalização e atendimento viram arma de defesa de margem — e ambos passam pelo stack Salesforce. Quem trouxer método (AgentOps + Data Cloud) em vez de licença ganha a conversa.</p>
+    <p>O risco de não agir: o iFood é movido a velocidade ("sonhar grande, ter pressa"). Se o parceiro atual (Everymind/Summit) ocupar todo o espaço de Agentforce e Data Cloud, a janela fecha. A abordagem deve ser complementar e orientada a casos de uso de alto ROI, não a disputa de licença.</p>
+  </div>
+</section>
+
+<!-- B6 Tensões -->
+<section id="tensoes">
+  <h3 class="sec">Tensões, Lacunas e Oportunidades</h3>
+
+  <h4>6.1 Top Dores Estruturais (com evidência)</h4>
+  <ul class="timeline">
+    <li><b>Escalar agentes sem fábrica:</b> meta de 1.000 agentes em 6 meses com apenas 20 em dev. <span class="muted">(Anna Vidal)</span></li>
+    <li><b>Dados de cliente ainda fragmentados</b> entre verticais apesar da unificação do atendimento. <span class="muted">(Anna Vidal: "3 sistemas que não conversavam")</span></li>
+    <li><b>Dívida de um projeto de 70 dias:</b> velocidade recorde gera backlog de configuração e automação. <span class="muted">(IT Forum)</span></li>
+    <li><b>Pressão competitiva</b> de players com caixa para subsídio (Keeta, 99Food). <span class="muted">(NeoFeed, Valor)</span></li>
+    <li><b>Custo de IA em escala (FinOps):</b> 27 mil agentes internos + crescimento exigem controle de custo por interação. <span class="muted">(tech.ifood Kafka/FinOps)</span></li>
+    <li><b>Governança/qualidade de agentes:</b> sem AgentOps, agentes em produção viram risco de marca e compliance (CADE em cima do setor).</li>
+  </ul>
+
+  <h4>6.2 Top Desejos Estratégicos</h4>
+  <div class="tags">
+    <span class="tag tag-priority">Ser referência mundial em IA aplicada</span>
+    <span class="tag tag-priority">Personalização 1:1 em escala de 200M pedidos/mês</span>
+    <span class="tag tag-priority">Atendimento proativo e preditivo</span>
+    <span class="tag tag-priority">Defender liderança de mercado</span>
+    <span class="tag tag-priority">Expandir fintech e retail media</span>
+  </div>
+
+  <h4 style="margin-top:14px">6.3 Mapa de Investimentos (12 meses)</h4>
+  <div class="tags">
+    <span class="tag tag-active">R$ 17 bi capex (abr/25–mar/26)</span>
+    <span class="tag tag-active">Agentforce — meta 1.000 agentes</span>
+    <span class="tag tag-active">+1.100 colaboradores (maioria tech)</span>
+    <span class="tag tag-active">LCM / GenAI próprio (com Prosus)</span>
+  </div>
+
+  <h4 style="margin-top:14px">6.4 Oportunidades sem Fornecedor Claramente Definido</h4>
+  <div class="tags">
+    <span class="tag tag-opportunity">AgentOps / governança de agentes</span>
+    <span class="tag tag-opportunity">Data Cloud (CDP) acionável</span>
+    <span class="tag tag-opportunity">Integração CRM ↔ Kafka/EventBridge (MuleSoft)</span>
+    <span class="tag tag-opportunity">Marketing Cloud orquestrado</span>
+  </div>
+  <p class="hyp" style="margin-top:10px">Hipótese consultiva: Everymind (Summit Partner) lidera Service Cloud/Agentforce. Os espaços acima são onde um parceiro complementar pode entrar sem colidir frontalmente.</p>
+</section>
+
+<!-- B7 Ofertas Salesforce -->
+<section id="ofertas" style="border:2px solid var(--sf)">
+  <h3 class="sec">Ofertas Salesforce Recomendadas (ordenadas por fit)</h3>
+  <p class="sec-sub">Scoring 0–100. Adaptado ao seu portfólio de serviços e produtos Salesforce.</p>
+
+  <div class="oferta-card">
+    <div class="head"><h4>Agentforce em Escala + AgentOps</h4><span class="score s90">95</span></div>
+    <p>Fábrica de agentes, Centro de Excelência, governança, testes e observabilidade de agentes.</p>
+    <ul>
+      <li>Meta declarada de 2.000 agentes — necessidade explícita e urgente.</li>
+      <li>Só 20 agentes em dev hoje: gap enorme entre ambição e capacidade de produção.</li>
+      <li>Atende diretamente o sponsor (Anna Vidal) e o discurso de ROI (Thiago Cardoso).</li>
+    </ul>
+  </div>
+
+  <div class="oferta-card">
+    <div class="head"><h4>Salesforce Data Cloud (CDP)</h4><span class="score s90">92</span></div>
+    <p>Unificação de perfil de cliente e ativação em tempo real para Agentforce, Service e Marketing.</p>
+    <ul>
+      <li>Dados ainda em silos entre consumidor/restaurante/entregador.</li>
+      <li>Pré-requisito para personalização real e agentes com contexto completo.</li>
+      <li>Conecta-se ao Data Lake AWS e ao streaming Kafka/Confluent já existentes.</li>
+    </ul>
+  </div>
+
+  <div class="oferta-card">
+    <div class="head"><h4>Otimização / Expansão Service Cloud</h4><span class="score s80">85</span></div>
+    <p>Health-check pós-migração, novos canais (voz, WhatsApp/Ailo), automação e CSAT.</p>
+    <ul>
+      <li>Migração feita em 70 dias deixa espaço de otimização garantido.</li>
+      <li>75% do atendimento já em IA — base instalada madura para evoluir.</li>
+    </ul>
+  </div>
+
+  <div class="oferta-card">
+    <div class="head"><h4>Marketing Cloud + Personalization</h4><span class="score s80">80</span></div>
+    <p>Campanhas de performance, ciclo de vida e fidelização (clube) ativadas por Data Cloud.</p>
+    <ul>
+      <li>60M usuários e clube com +70% de retenção — terreno fértil para 1:1.</li>
+      <li>iFood já usa IA para campanhas e personalização — fit cultural.</li>
+    </ul>
+  </div>
+
+  <div class="oferta-card">
+    <div class="head"><h4>MuleSoft (integração CRM ↔ ecossistema)</h4><span class="score s70">75</span></div>
+    <p>APIs e eventos conectando Salesforce ao ambiente event-driven (Kafka, EventBridge, ~2.000 microsserviços).</p>
+    <ul>
+      <li>Arquitetura event-driven madura precisa de governança de integração com o CRM.</li>
+      <li>Habilita agentes a agir sobre sistemas core (pedidos, logística, fintech).</li>
+    </ul>
+  </div>
+
+  <div class="oferta-card">
+    <div class="head"><h4>CRM Analytics / Tableau</h4><span class="score s70">70</span></div>
+    <p>Dashboards de CX, ROI de agentes e FinOps de IA para o discurso de resultado.</p>
+    <ul>
+      <li>Cultura data-driven desde 2018 — apetite por métrica é alto.</li>
+      <li>Suporta a narrativa de "IA = 30% do EBITDA" com números auditáveis.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- B8 Estratégia -->
+<section id="estrategia">
+  <h3 class="sec">Estratégia de Abordagem</h3>
+  <div class="approach-card approach-green">
+    <h4>Gancho de entrada</h4>
+    <p>Entrar pelo tema "Agentforce em escala com ROI" — não por licença. Reconhecer publicamente o feito dos 70 dias e propor o próximo capítulo: a fábrica que leva de 20 a 1.000 agentes com governança.</p>
+  </div>
+  <div class="approach-card approach-red">
+    <h4>Oportunidade quente</h4>
+    <p>Ciclo de R$ 17 bi em curso + meta de 1.000 agentes em ~6 meses + guerra competitiva. Decisão acontecendo agora. AgentOps e Data Cloud são espaços ainda abertos.</p>
+  </div>
+  <div class="approach-card approach-purple">
+    <h4>Diferencial competitivo</h4>
+    <p>Posicionar-se como parceiro de <b>método e escala</b> (AgentOps, FinOps de IA, casos de uso por ROI), complementar ao incumbente de implementação. Falar a língua de negócio do CX e a língua de arquitetura do CTO.</p>
+  </div>
+  <div class="insight-box">
+    <h4>Insights de negócio</h4>
+    <p>O iFood compra velocidade e ousadia, mas o novo CFO (ex-BofA) traz disciplina de capital. A proposta vencedora combina ambição ("a maior operação Agentforce da AL") com rigor de ROI por caso de uso. Evite competir de frente com a Everymind; ofereça a camada de governança/escala que falta.</p>
+  </div>
+</section>
+
+<!-- B9 Concorrentes -->
+<section id="concorrentes">
+  <h3 class="sec">Benchmark de Concorrentes + Gap Analysis</h3>
+  <div class="competitor-card"><h4>Keeta (Meituan) — China</h4><p>Maior empresa de delivery do mundo. Entrou pelo Brasil (Santos/SP), R$ 5,6 bi em 5 anos, 40 mil restaurantes, 115 mil entregadores. Modelo de subsídio pesado e tecnologia própria de IA/logística. <b>Gap p/ iFood:</b> defender retenção via personalização — terreno Salesforce.</p></div>
+  <div class="competitor-card"><h4>99Food (DiDi) — China</h4><p>Retornou em 2025 com R$ 1–2 bi, taxa zero para restaurantes, 60–70 cidades, meta de 100. <b>Gap p/ iFood:</b> proteger base de restaurantes — Sales Cloud + agentes de onboarding/retenção de parceiros.</p></div>
+  <div class="competitor-card"><h4>Rappi — Colômbia</h4><p>R$ 1,4 bi de investimento, taxa zero, 70 cidades, modelo super-app. <b>Gap p/ iFood:</b> experiência cross-vertical (food, mercado, fintech) — Data Cloud unificando o 360.</p></div>
+  <div class="insight-box">
+    <h4>Gap analysis</h4>
+    <p>Todos os entrantes competem por preço/subsídio — guerra que destrói margem. O iFood, líder com 82%, não vence por preço; vence por <b>experiência, dados e relacionamento</b>. Isso é, na prática, a tese de valor do Salesforce. Quanto mais agressiva a guerra, mais estratégico fica o CRM+IA — esse é o seu vento de cauda comercial.</p>
+  </div>
+</section>
+
+<hr class="zone-divider" data-label="Zona C — Apêndice Técnico">
+
+<!-- ====================== ZONA C ====================== -->
+
+<!-- C1 Stack -->
+<section id="stack">
+  <h3 class="sec">Mapeamento Técnico Detalhado</h3>
+
+  <h4>C1.1 — Inventário de Aplicações</h4>
+  <div class="app-card">
+    <h4>App do consumidor / marketplace (Institucional: Experiência)</h4>
+    <div class="url">www.ifood.com.br · app iOS/Android</div>
+    <div class="app-stack-grid">
+      <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Apps nativos + web (não publicado em detalhe)</div></div>
+      <div class="app-stack-item"><div class="k">Backend</div><div class="v">Kotlin (predominante), Java, Rust, Go</div></div>
+      <div class="app-stack-item"><div class="k">API</div><div class="v">REST + event-driven (BFF)</div></div>
+      <div class="app-stack-item"><div class="k">Banco</div><div class="v">PostgreSQL, DynamoDB, Redis</div></div>
+      <div class="app-stack-item"><div class="k">Mensageria</div><div class="v">Kafka/Confluent, SQS, EventBridge</div></div>
+      <div class="app-stack-item"><div class="k">Cloud</div><div class="v">AWS (EKS, Karpenter, Bottlerocket)</div></div>
+    </div>
+  </div>
+  <div class="app-card">
+    <h4>Plataforma de CX / Atendimento (CRM)</h4>
+    <div class="url">Salesforce Service Cloud (+ Sales Cloud histórico, + Agentforce)</div>
+    <div class="app-stack-grid">
+      <div class="app-stack-item"><div class="k">CRM</div><div class="v">Salesforce Service Cloud</div></div>
+      <div class="app-stack-item"><div class="k">IA</div><div class="v">Agentforce (20 agentes em dev)</div></div>
+      <div class="app-stack-item"><div class="k">Integrações</div><div class="v">ReclameAqui, Gov.br migrados</div></div>
+      <div class="app-stack-item"><div class="k">Implementador</div><div class="v">Everymind (Summit Partner)</div></div>
+      <div class="app-stack-item"><div class="k">Escala</div><div class="v">3 mil atendentes; 75% atendimento por IA</div></div>
+      <div class="app-stack-item"><div class="k">CDP</div><div class="v">Não publicado (oportunidade Data Cloud)</div></div>
+    </div>
+  </div>
+  <div class="app-card">
+    <h4>Site institucional (Experiência/Conteúdo)</h4>
+    <div class="url">institucional.ifood.com.br — verificado empiricamente</div>
+    <div class="app-stack-grid">
+      <div class="app-stack-item"><div class="k">CMS</div><div class="v">WordPress + Elementor 4.0.7</div></div>
+      <div class="app-stack-item"><div class="k">Performance</div><div class="v">WP Rocket 3.17.2</div></div>
+      <div class="app-stack-item"><div class="k">Analytics</div><div class="v">Google Site Kit (GA4/GTM)</div></div>
+      <div class="app-stack-item"><div class="k">Server</div><div class="v">Apache + edge próprio (X-iFood-Request-Id)</div></div>
+      <div class="app-stack-item"><div class="k">Segurança</div><div class="v">HSTS habilitado</div></div>
+      <div class="app-stack-item"><div class="k">Status</div><div class="v">HTTP 200</div></div>
+    </div>
+  </div>
+  <div class="app-card">
+    <h4>Plataforma de Engenharia Interna</h4>
+    <div class="url">Tompero (CLI) · GenPlat (IA p/ devs) · LCM (Large Commerce Model)</div>
+    <div class="app-stack-grid">
+      <div class="app-stack-item"><div class="k">Eng. Platform</div><div class="v">Tompero CLI (gestão microsserviços, testes de carga)</div></div>
+      <div class="app-stack-item"><div class="k">Observabilidade</div><div class="v">Datadog</div></div>
+      <div class="app-stack-item"><div class="k">Microsserviços</div><div class="v">~2.000 (event-driven)</div></div>
+      <div class="app-stack-item"><div class="k">IA própria</div><div class="v">LCM (com Prosus) — base do Ailo</div></div>
+    </div>
+  </div>
+
+  <h4>C1.2 — Tabela Mestra Cross-Aplicação</h4>
+  <table class="master-table">
+    <thead><tr><th>Aplicação</th><th>Frontend/CMS</th><th>Linguagem</th><th>API</th><th>Banco</th><th>Cloud</th><th>Container</th></tr></thead>
+    <tbody>
+      <tr><td>App consumidor</td><td>Nativo + web</td><td>Kotlin/Java/Rust/Go</td><td>REST + eventos</td><td>PostgreSQL/DynamoDB/Redis</td><td>AWS</td><td>EKS</td></tr>
+      <tr><td>CX / CRM</td><td>Salesforce UI</td><td>Apex/Flow</td><td>Salesforce APIs</td><td>Salesforce</td><td>SaaS (SF)</td><td>n/a</td></tr>
+      <tr><td>Site institucional</td><td>WordPress/Elementor</td><td>PHP</td><td>WP REST</td><td>MySQL (provável)</td><td>Apache</td><td>Não publicado</td></tr>
+      <tr><td>Eng. interna</td><td>CLI (Tompero)</td><td>Multi</td><td>Internas</td><td>Diversos</td><td>AWS</td><td>EKS/K8s</td></tr>
+    </tbody>
+  </table>
+
+  <h4 style="margin-top:18px">C1.3 — Stack em 7 Camadas</h4>
+  <div class="stack-layer"><div class="lbl">C7 — Experiência & Engajamento</div><div class="name">App iOS/Android, web, WordPress institucional, Ailo (WhatsApp), retail media</div><div class="cmp">Oportunidade: Marketing Cloud + Personalization conectados ao Data Cloud.</div></div>
+  <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="name">Salesforce Sales Cloud + Service Cloud + Agentforce</div><div class="cmp">Base instalada madura; expansão para Data Cloud, Marketing Cloud, FSC.</div></div>
+  <div class="stack-layer"><div class="lbl">C5 — Core Transacional</div><div class="name">Pedidos, logística, pagamentos, iFood Card/crédito (event-driven, ~2.000 microsserviços)</div><div class="cmp">Integração via MuleSoft é o elo natural com o CRM.</div></div>
+  <div class="stack-layer"><div class="lbl">C4 — Dados & Analytics</div><div class="name">Data Lake AWS, Kafka/Confluent, ksqlDB, Datadog; cultura data-driven desde 2018</div><div class="cmp">Gap de CDP acionável no CRM → Data Cloud.</div></div>
+  <div class="stack-layer"><div class="lbl">C3 — IA, Automação & GenAI</div><div class="name">LCM próprio, 27 mil agentes internos, Agentforce (20→2.000), GenPlat</div><div class="cmp">Gap de AgentOps/governança em escala.</div></div>
+  <div class="stack-layer"><div class="lbl">C2 — Cibersegurança & Compliance</div><div class="name">HSTS, edge próprio, área jurídica forte (processo anti-espionagem); CADE no setor</div><div class="cmp">Agentes em produção exigem guardrails e trilha de auditoria.</div></div>
+  <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="name">AWS 100% — EKS, Karpenter, Bottlerocket; 60M req/min; 99,9% disponibilidade</div><div class="cmp">Salesforce convive como SaaS integrado via APIs/eventos.</div></div>
+</section>
+
+<!-- C2 Empírico -->
+<section id="empirico">
+  <h3 class="sec">Verificação Empírica de Canais Digitais</h3>
+  <p class="sec-sub">Inspeção direta via requisições HTTP em 29/05/2026.</p>
+  <table class="empirical-table">
+    <thead><tr><th>URL</th><th>Status</th><th>Frontend detectado</th><th>Server/Edge</th><th>Observação</th></tr></thead>
+    <tbody>
+      <tr><td>institucional.ifood.com.br</td><td><span class="status-200">200</span></td><td>WordPress + Elementor 4.0.7 + WP Rocket 3.17.2</td><td>Apache + X-iFood-Request-Id</td><td>Google Site Kit (GA4/GTM); HSTS ativo</td></tr>
+      <tr><td>www.ifood.com.br</td><td><span class="status-err">403</span></td><td>—</td><td>WAF/bot protection</td><td>Bloqueio a requisição automatizada (proteção anti-bot ativa)</td></tr>
+      <tr><td>parceiros.ifood.com.br</td><td><span class="status-err">404</span></td><td>—</td><td>—</td><td>Subdomínio não resolveu nessa rota</td></tr>
+    </tbody>
+  </table>
+  <p class="muted" style="margin-top:10px"><b>Trackers/tecnologias detectados (institucional):</b> Google Tag Manager, gtag/GA4 (Site Kit), Elementor, WP Rocket. Servidor Apache com header proprietário <code>X-iFood-Request-Id</code> (camada de edge própria). <br>Verificação realizada em 29/05/2026, 08h37 (UTC-3).</p>
+</section>
+
+<!-- C3 GAPs -->
+<section id="gaps">
+  <h3 class="sec">GAPs Tecnológicos Numerados (cruzados com oferta Salesforce)</h3>
+  <div class="gap-grid">
+    <div class="gap-card"><div class="num">GAP 1 · IA / governança</div><h4>AgentOps inexistente em escala</h4><p>Meta de 2.000 agentes com apenas 20 em dev e sem framework público de testes/observabilidade/guardrails. Evidência: declarações de Anna Vidal. Risco: agentes em produção sem qualidade nem controle de custo.</p><div class="offer">→ Agentforce em Escala + AgentOps</div></div>
+    <div class="gap-card"><div class="num">GAP 2 · Dados</div><h4>Cliente 360 ainda em silos</h4><p>Atendimento unificado no Service Cloud, mas dados de consumidor/restaurante/entregador não formam um perfil único acionável. Evidência: "3 sistemas que não conversavam". Risco: personalização limitada.</p><div class="offer">→ Salesforce Data Cloud (CDP)</div></div>
+    <div class="gap-card"><div class="num">GAP 3 · Integração</div><h4>CRM ↔ ecossistema event-driven</h4><p>~2.000 microsserviços em Kafka/EventBridge precisam de governança de integração com o CRM para que agentes ajam sobre pedidos/logística/fintech. Evidência: AWS/Confluent cases.</p><div class="offer">→ MuleSoft</div></div>
+    <div class="gap-card"><div class="num">GAP 4 · Experiência</div><h4>Marketing e serviço não orquestrados em loop</h4><p>IA usada em campanhas e atendimento, mas sem evidência de loop fechado marketing→serviço→agente sobre um dado único. Evidência: relatos de uso de IA por canal.</p><div class="offer">→ Marketing Cloud + Data Cloud</div></div>
+    <div class="gap-card"><div class="num">GAP 5 · FinOps de IA</div><h4>Custo por interação de IA em escala</h4><p>27 mil agentes internos + crescimento exigem controle de custo. O time já faz FinOps em Kafka (compressão de tópicos), mas não há métrica pública de custo por agente. Evidência: tech.ifood.</p><div class="offer">→ CRM Analytics / Tableau + AgentOps</div></div>
+  </div>
+</section>
+
+<!-- C4 Rapport -->
+<section id="rapport" style="border:2px solid #667eea">
+  <h3 class="sec">Perfil Pessoal & Rapport</h3>
+  <p class="sec-sub">Foco em PESSOA. Use para conexão humana com os decisores.</p>
+  <div class="info-grid">
+    <div class="info-card"><div class="k">Sponsor principal</div><div class="v">Anna Vidal (Diretora de CX)</div></div>
+    <div class="info-card"><div class="k">Decisor técnico</div><div class="v">Flávio Stecca (CTO, ex-Movile)</div></div>
+    <div class="info-card"><div class="k">Aliado de IA</div><div class="v">Thiago Cardoso (Dir. Sênior de IA)</div></div>
+    <div class="info-card"><div class="k">Sede</div><div class="v">SP — cultura ágil e "orgulho tech"</div></div>
+  </div>
+  <div class="insight-box">
+    <h4>Dicas de conversa (rapport)</h4>
+    <p>1. Elogie genuinamente o feito dos "70 dias" — é motivo de orgulho interno e quebra o gelo.<br>
+    2. Use o vocabulário da casa: "sonhar grande", "ter pressa", "empresa de IA", "ecossistema de três lados".<br>
+    3. Fale de impacto e número (ROI, EBITDA), não de funcionalidade — o time é data-driven desde 2018.<br>
+    4. Reconheça o momento competitivo (Keeta/99Food) com respeito, sem alarmismo — eles já vivem isso todo dia.<br>
+    5. Mostre que entende a diferença entre as três verticais (consumidor, restaurante, entregador) — credibilidade instantânea.<br>
+    6. Traga um caso de Agentforce/Data Cloud de outro setor com número real — eles valorizam prova, não promessa.<br>
+    7. Respeite o incumbente (Everymind): posicione-se como complemento de escala/governança, não como troca de fornecedor.</p>
+  </div>
+</section>
+
+<!-- C5 Posição -->
+<section id="posicao">
+  <h3 class="sec">Posição da Tecnologia & CRM na Empresa</h3>
+  <div class="info-grid">
+    <div class="info-card"><div class="k">Papel da TI</div><div class="v">Core do negócio — "empresa de IA"</div></div>
+    <div class="info-card"><div class="k">Maturidade de IA</div><div class="v">Altíssima (LCM próprio, 27 mil agentes)</div></div>
+    <div class="info-card"><div class="k">Maturidade Salesforce</div><div class="v">Cliente histórico; expandindo p/ Agentforce</div></div>
+    <div class="info-card"><div class="k">Parceiro SF atual</div><div class="v">Everymind (Summit)</div></div>
+    <div class="info-card"><div class="k">Reporte de CX</div><div class="v">Diretoria dedicada (Anna Vidal)</div></div>
+    <div class="info-card"><div class="k">Apetite de investimento</div><div class="v">Alto (R$ 17 bi capex) c/ disciplina nova de CFO</div></div>
+  </div>
+</section>
+
+<!-- C8 Fontes -->
+<section id="fontes">
+  <h3 class="sec">Fontes Consultadas</h3>
+  <div class="sources-grid">
+    <div class="sources-card"><h4>Estratégia & Operação</h4><ul>
+      <li>NeoFeed — receita R$ 7 bi / CAGR 28%</li>
+      <li>Institucional iFood — releases MOVE 2025, R$ 17 bi, FIPE</li>
+      <li>Tecnovix — metas 2028</li>
+      <li>Overcentral — novo CFO Pedro Pereira</li>
+    </ul></div>
+    <div class="sources-card"><h4>Salesforce / CX</h4><ul>
+      <li>IT Forum — migração CX em 70 dias</li>
+      <li>Baguete — agentes Agentforce</li>
+      <li>Época Negócios — meta 2.000 agentes</li>
+      <li>Gizmodo / Inforchannel — Anna Vidal, Everymind</li>
+    </ul></div>
+    <div class="sources-card"><h4>Stack Tecnológica</h4><ul>
+      <li>AWS Case Study — EKS, 60M req/min</li>
+      <li>AWS for Industries — middleware financeiro event-driven</li>
+      <li>Confluent — Kafka, ~2.000 microsserviços</li>
+      <li>tech.ifood.com.br — FinOps Kafka, Datadog</li>
+      <li>Institucional iFood — Kotlin/Java/Rust, Tompero</li>
+    </ul></div>
+    <div class="sources-card"><h4>Mercado</h4><ul>
+      <li>NeoFeed / Getnet — R$ 79 bi, 82% share</li>
+      <li>Valor Econômico — Statista US$ 21→29,5 bi</li>
+      <li>Capitalist / Brasil247 — concorrência e CADE</li>
+    </ul></div>
+    <div class="sources-card"><h4>Talento & Liderança</h4><ul>
+      <li>LinkedIn — Diego Barreto (CEO)</li>
+      <li>ContactOut / me.sh — Flávio Stecca (CTO)</li>
+      <li>Meio&amp;Mensagem — Thiago Cardoso (IA)</li>
+    </ul></div>
+    <div class="sources-card"><h4>Verificação empírica direta</h4><ul>
+      <li>institucional.ifood.com.br (HTTP 200, WordPress/Elementor)</li>
+      <li>www.ifood.com.br (HTTP 403, WAF)</li>
+      <li>parceiros.ifood.com.br (HTTP 404)</li>
+      <li>Realizada em 29/05/2026</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- C9 Glossário -->
+<section id="glossario">
+  <h3 class="sec">Glossário Setorial</h3>
+  <p><b>Agentforce</b> — plataforma de agentes autônomos de IA da Salesforce. <br>
+  <b>AgentOps</b> — práticas de operação, governança, teste e observabilidade de agentes de IA em produção (análogo a DevOps/MLOps para agentes). <br>
+  <b>Data Cloud / CDP</b> — plataforma de dados de cliente que unifica perfis e os ativa em tempo real. <br>
+  <b>LCM (Large Commerce Model)</b> — modelo de IA proprietário do iFood/Prosus para comércio, base do assistente Ailo. <br>
+  <b>Event-driven</b> — arquitetura orientada a eventos (Kafka/EventBridge), onde serviços reagem a acontecimentos em vez de chamadas síncronas. <br>
+  <b>FinOps</b> — disciplina de gestão de custo de nuvem/tecnologia. <br>
+  <b>GMV</b> — Gross Merchandise Value, volume total transacionado na plataforma.</p>
+</section>
+
+<footer>
+  <b>Pre-Sales Intelligence Report</b> · Conta iFood · Foco em oportunidades Salesforce<br>
+  Gerado automaticamente — Confidencial | Maio 2026 · Agente "Hunter" v3 · Modo: Híbrido (--full)
+</footer>
+</div>
+
+<button class="print-btn" onclick="window.print()">🖨 Imprimir / PDF</button>
+</body>
+</html>

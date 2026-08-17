@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<!-- Briefing CIO IT Forum 2026 — Daniel Lopes Martins | CBMM — DS Foursys B→A→C -->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Daniel Lopes Martins | CBMM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Daniel Lopes Martins</h1>
+                <h2>CIO (Chief Information Officer) — CBMM</h2>
+                <div class="loc">Metalurgia e Siderurgia · Araxá/MG · CNPJ 33.131.541/0001-08</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Sede MG + porte bilionário</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Receita líquida 2025</div><div class="value">R$ 14,5 bi</div></div>
+                <div class="header-badge"><div class="label">EBITDA 2025</div><div class="value">R$ 10,2 bi</div></div>
+                <div class="header-badge"><div class="label">Vendas 2025</div><div class="value">100 mil t+</div></div>
+                <div class="header-badge"><div class="label">Share nióbio</div><div class="value">~70–80%</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: deep-dive fontes abertas (resultados 2025, Capex 2030, Indústria 4.0, IA) + leitura de comitê + material de apresentação · Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>A Companhia Brasileira de Metalurgia e Mineração (CBMM) é líder mundial em produtos e tecnologias de nióbio, com sede e complexo industrial em Araxá (MG). Atua em mais de 50 países, com escritórios e subsidiárias em São Paulo, EUA, Europa e Ásia. Em 2025 bateu recorde de vendas (acima de 100 mil toneladas de ferronióbio equivalente), com receita líquida de R$ 14,5 bilhões e EBITDA de R$ 10,2 bilhões (Diário do Comércio). Planeja Capex de cerca de R$ 11 bilhões até 2030 (O Tempo, jun/2026), metade em expansão de capacidade, além de R$ 250–300 milhões/ano em P&amp;D. Não é listada em bolsa (privada; família Moreira Salles + consórcios asiáticos) — inteligência de investimento em TI vem de fontes abertas e entrevistas do CIO.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Companhia Brasileira de Metalurgia e Mineração</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">Araxá / MG</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Global (50+ países)</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">R$ 14,5 bi (2025) — Diário do Comércio</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~1.000–2.000 (LinkedIn Company; faixa)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada · PPP Codemig/MG renovada</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Daniel Lopes Martins</strong> é CIO da CBMM desde agosto/2017 (quase 9 anos no cargo; LinkedIn), com mandato explícito de estratégia de TI, estratégia digital e tecnologias industriais. Também referido como CDO em entrevistas (BNamericas). Trajetória longa dentro da própria CBMM (analista desde 2001; gerente de sistemas 2007–2015; retorno em 2017 após passagem como CIO na Woli). Formação: Ciência da Computação (Unitri), MBA em Informática Empresarial (Unifran) e MBA em Gestão de Projetos (FGV). Perfil hands-on de transformação: liderou a revitalização da plataforma empresarial (go-live ~2025, +100 colaboradores internos — TI Inside), fala publicamente de Indústria 4.0 desde Trancoso e, em 2025/2026, elevou a agenda de IA (painel Gen AI Summit Deloitte; curso MIT Sloan “Leading the AI-Driven Organization”). Premiado Executivo de TI do Ano 2025 (IT Forum — setor siderurgia/metalurgia/mineração). <strong>Nível de decisão:</strong> C-level de TI com acesso a comitês executivos de projeto; influencia Capex tecnológico e parceiros. <strong>Leitura de comitê:</strong> aproximar também Rafael Mesquita (diretor de tecnologia / P&amp;D de aplicações de nióbio — Valor) para temas de inovação de produto; e líderes de dados/OT (ex.: Felipe Alves Barros — Tech Lead Data, LinkedIn) quando o pitch for lakehouse/IA operacional.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento & mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Negócio B2B de mineração-metalurgia de mineral crítico: produz e comercializa ferronióbio, óxidos e ligas de alto valor, com ferronióbio ainda dominante nas aplicações (aço automotivo, infra, máquinas, defesa). A CBMM é o player dominante global; CMOC (Catalão/GO) é o segundo produtor; Magris/Niobec e novos entrantes (ex.: St. George em Araxá, anunciado para até 2028 — Valor) pressionam diversificação de supply por clientes. Cadeia de valor: mina + 15 unidades produtivas e 160+ processos em Araxá → P&amp;D de novas aplicações (baterias, materiais avançados) → distribuição global. Prioridades setoriais: eficiência operacional e segurança OT, descarbonização/ESG com indicadores em tempo real, expansão de capacidade à frente da demanda, e digitalização do chão de fábrica. Risco comercial para Foursys: conta madura em transformação (já passou pelo “big bang” de core); oportunidade está na <em>próxima onda</em> — IA com governança, digital twins, homogeneização de maturidade entre plantas antigas e novas, e integração TI/OT.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões & lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Heterogeneidade tecnológica entre plantas antigas e novas no mesmo complexo (BNamericas — CIO)</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Integração completa OT↔TI e manutenção da eficiência financeira na jornada 4.0 (IT Forum Trancoso)</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>OT com requisito de baixa latência impede “lift-and-shift” total para nuvem pública (hipótese operacional confirmada pelo CIO: OT on-prem por anos)</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>IA ainda em fase de entendimento de valor antes de escala (conversas com Microsoft/Google citadas)</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Pressão competitiva de novos players em Araxá e CMOC — necessidade de produtividade e time-to-market em novas aplicações</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Gestão data-driven com data lake híbrido</span>
+                <span class="tag tag-priority">Digital twins para manutenção</span>
+                <span class="tag tag-priority">Automação + robotização</span>
+                <span class="tag tag-priority">IA com governança e valor operacional</span>
+                <span class="tag tag-priority">Indicadores ESG em tempo real</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Capex ciclo R$ 11 bi até 2030 (capacidade + inovação)</span>
+                <span class="tag tag-active">P&amp;D R$ 250–300 mi/ano</span>
+                <span class="tag tag-active">Pós-go-live core + automação/IA (TI Inside abr/2025)</span>
+                <span class="tag tag-active">Infra TI/TO consolidada (Cisco/Nutanix — case HYPE)</span>
+                <span class="tag tag-active">MES/PIMS/SCADA (Schneider/AVEVA)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Provedor de digital twin (CIO: decisão em aberto)</span>
+                <span class="tag tag-opportunity">Programa GenAI/MLOps industrial com governança</span>
+                <span class="tag tag-opportunity">Homogeneização de maturidade digital entre unidades</span>
+                <span class="tag tag-opportunity">iPaaS / integração event-driven OT–backoffice</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">92/100</span></div>
+                <p>Squads de IA com produto proprietário para acelerar casos de uso industriais (manutenção preditiva, qualidade, energia) com governança — exatamente a “próxima etapa” declarada após a fundação digital de 2025.</p>
+                <div class="reasons"><ul>
+                    <li>CIO em agenda pública de GenAI (Deloitte Summit + MIT Sloan).</li>
+                    <li>Base única de dados pós-modernização do core pronta para modelos.</li>
+                    <li>Evita pitch genérico de chatbot: foca Smart Ops / chão de fábrica.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital (Indústria 4.0 / Digital Twin)</h4><span class="score-badge">88/100</span></div>
+                <p>Arquitetura e entrega de gêmeos digitais, integração MES/PIMS/SCADA e equalização de maturidade entre as 15 unidades produtivas.</p>
+                <div class="reasons"><ul>
+                    <li>Digital twin citado pelo CIO como próximo passo com provedor ainda a definir.</li>
+                    <li>Complexo com 160+ processos — ROI claro em manutenção e disponibilidade.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS Digibee)</h4><span class="score-badge">78/100</span></div>
+                <p>Camada de integração ISO 27001/27701 para conectar OT (baixa latência on-prem), CRM Salesforce, HCM, data lake Azure e parceiros B2B sem acoplamento frágil.</p>
+                <div class="reasons"><ul>
+                    <li>Dor explícita: integração completa de sistemas na jornada 4.0.</li>
+                    <li>Ambiente híbrido (Azure + datacenters próprios) exige iPaaS maduro.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">74/100</span></div>
+                <p>Programa OT/IT security (ZTNA, segmentação, SOC/SIEM, AppSec) alinhado a histórico ISO 27001 da companhia e à expansão de superfície com IoT/robots.</p>
+                <div class="reasons"><ul>
+                    <li>Convergência TI/TO aumenta risco cibernético industrial.</li>
+                    <li>Mineral crítico + PPP longa com Estado de MG eleva exigência de resiliência.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">68/100</span></div>
+                <p>Modernização seletiva de plantas “em maturidade tecnológica diferente” (palavras do CIO) — não reabrir o core, e sim equalizar OT/edge e apps satélite.</p>
+                <div class="reasons"><ul>
+                    <li>Challenge estrutural documentado: trazer parque antigo ao mesmo estágio das unidades novas.</li>
+                    <li>Encaixa Capex de capacidade até 2030.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Reconhecer o go-live do core em 2025 e o prêmio IT Forum 2025 — e abrir com a pergunta: “qual o primeiro caso de IA/digital twin que precisa provar ROI em 90 dias no complexo de Araxá?”. Tom de peer-to-peer com CIO premiado, não de discovery genérico.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Seleção de provedor de digital twin + programa GenAI com governança (pós-MIT / pós-painel Deloitte). Timing: IT Forum Praia do Forte 2026 + ciclo Capex 2026–2030.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>AI Squad + Engenharia Digital + FourBlox sob um único MSA, com 24 anos e 41.000+ projetos, ISO 27001/27701 — encaixa narrativa de parceiro de execução industrial, não só software house de ERP (já coberto por Deloitte/core).</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes & Gap Analysis</h3>
+            <div class="competitor-card"><h4>CMOC Brasil (Catalão/GO)</h4><p>Segundo maior produtor global (~10 mil t/ano ferronióbio). Escala menor que CBMM, mas reforça pressão de clientes por diversificação de supply. Gap CBMM: manter liderança via produtividade digital e novas aplicações (baterias), não só volume.</p></div>
+            <div class="competitor-card"><h4>Magris / Niobec (Canadá)</h4><p>Player consolidado no hemisfério Norte; relevante em narrativas de critical minerals para OEM/defesa. Gap: CBMM precisa acelerar evidências digitais de rastreabilidade ESG e resiliência OT para clientes sensíveis a single-source.</p></div>
+            <div class="competitor-card"><h4>St. George (projeto Araxá até 2028)</h4><p>Entrante potencial na mesma região (Valor, mar/2026). Gap: janela para CBMM blindar eficiência unitária e time-to-insight antes da nova capacidade concorrente local.</p></div>
+            <div class="competitor-card"><h4>Taboca / CNMC (AM)</h4><p>Produção de nióbio com volumes não públicos. Gap competitivo indireto: reforça tese de mineral estratégico brasileiro e necessidade de excelência operacional da CBMM como referência.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Líder mundial de nióbio (Araxá/MG), receita R$ 14,5 bi em 2025, Capex ~R$ 11 bi até 2030.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Daniel Lopes Martins, CIO desde 2017; Executivo de TI do Ano 2025; agenda IA + Indústria 4.0.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Pós-modernização do core: monetizar dados, digital twin, GenAI operacional e equalizar maturidade das plantas.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Fontes abertas: infra híbrida Azure+on-prem, MES/PIMS Schneider, data lake, IA cautelosa, Capex capacidade+P&amp;D. Sem RI (privada).</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">AI Squad; Engenharia Digital (twin/4.0); FourBlox iPaaS.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Workshop 90 min “ROI do 1º digital twin + caso GenAI OT” no IT Forum ou follow-up Araxá/SP.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum Praia do Forte 2026 + orçamento Capex 2026–2030 + agenda pós-prêmio 2025.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “mais ERP”. Vender a ponte OT→valor: twin + MLOps + integração, onde Deloitte/core já saiu de cena.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Fundação digital concluída</h4><p>Em 2025 a CBMM concluiu a revitalização do core com governança forte (+100 pessoas). O CIO colhe reconhecimento setorial e prepara a próxima curva: dados, IA e gêmeos digitais.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>15 plantas, maturidades desiguais</h4><p>OT exige on-prem; nuvem Azure no backoffice; integração ainda incompleta; IA em “modo estudo”. Concorrência de supply pressiona produtividade.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Foursys como executor da 2ª onda</h4><p>AI Squad + Engenharia Digital + FourBlox entregam o primeiro twin/MLOps com governança e integração segura — sem reabrir o core.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Disponibilidade e manutenção preditiva no complexo de Araxá</h4>
+                <p>Evidência: CIO declara digital twin prioritário para manutenção; 15 unidades / 160+ processos (BNamericas).</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital + AI Squad — PoC de twin em 1 unidade crítica com KPIs de MTBF/MTTR e energia.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual unidade antiga concentra mais perda de disponibilidade e ainda não está no mesmo estágio digital das plantas novas?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Mapa de 2 semanas das fontes OT (MES/PIMS/SCADA) elegíveis ao twin.</p>
+            </div>
+            <div class="business-card">
+                <h4>IA com valor operacional (não laboratório)</h4>
+                <p>Evidência: painel GenAI Summit; curso MIT; declaração de cautela antes de escala (Microsoft/Google em conversa).</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad com governança de modelos + casos Smart Ops (qualidade, yield, ESG).</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quais decisões de planta ainda dependem de planilha/expert e poderiam virar modelo supervisionado em 1 trimestre?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Backlog priorizado de 3 use cases com owner de negócio e dado já no lake.</p>
+            </div>
+            <div class="business-card">
+                <h4>Integração híbrida OT–backoffice sem latência tóxica</h4>
+                <p>Evidência: OT on-prem por latência; Azure no data lake; dor de integração citada em Trancoso.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee) + Cibersegurança — padrões de integração e zona desmilitarizada OT/IT.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quantas interfaces ponto a ponto ainda amarram MES/PIMS ao core e ao CRM Salesforce?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment de 10 integrações críticas e score de risco.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck 8–10 slides + one-pager de PoC (PDF) · opcional vídeo 2 min de twin industrial</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad + Engenharia Digital (+ FourBlox como enabler) — pós-core, foco em valor OT</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) narrativa Smart Ops mineração/metalurgia (manutenção preditiva / yield); (2) integração híbrida cloud+OT com governança ISO; (3) programa GenAI com MLOps em indústria de processo — se não houver case CBMM-like pronto, usar discurso de “ponte pós-ERP” sem forçar logo de cliente.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> A Deloitte já “fechou” a onda do core. O budget emocional do CIO agora é provar IA/twin com risco controlado. Foursys vende a <em>segunda curva de valor</em>, não a troca de plataforma.</p>
+            <p style="margin-top:8px"><em>Discurso sugerido se material setorial faltar: “Vocês construíram a fundação em 2025. Em 90 dias mostramos um twin + um modelo com governança numa unidade — métrica de negócio, não demo de slides.”</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Parabéns pelo ciclo 2025 — core estável e reconhecimento no IT Forum. A pergunta agora é qual unidade de Araxá paga o primeiro ROI de twin/IA.”</li>
+                <li>“Não viemos discutir ERP. Viemos discutir como o data lake híbrido vira decisão de manutenção e energia.”</li>
+                <li>“Vocês têm 15 plantas com maturidades diferentes — equalizar isso é Capex de produtividade, não de moda digital.”</li>
+                <li>“OT precisa ficar on-prem por latência; cloud no backoffice. FourBlox + segurança OT/IT resolvem a costura sem quebrar o chão de fábrica.”</li>
+                <li>“GenAI sem MLOps vira piloto eterno. AI Squad entrega caso com owner, dado e governança em um trimestre.”</li>
+                <li>“Com Capex de R$ 11 bi até 2030, cada ponto de disponibilidade liberado financia a próxima linha de baterias/nióbio.”</li>
+                <li>“Proposta concreta: workshop de 90 minutos no Praia do Forte — backlog de 3 use cases ranqueados por EBITDA.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Abordagem no IT Forum + LinkedIn (referência prêmio 2025 / painel GenAI)</td><td>Agenda 30–45 min confirmada</td><td>0–2 semanas</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Entrevista CIO + líder de dados/OT; mapa de unidades e fontes</td><td>One-pager de hipóteses + score de fit</td><td>2–4 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC twin OU caso GenAI OT em 1 unidade</td><td>KPI baseline vs resultado; go/no-go</td><td>6–10 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>AI Squad + integração FourBlox no caso vencedor</td><td>Runbook, governança, handover</td><td>1 trimestre</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Escala multi-unidade + cybersecurity OT</td><td>MSA plurianual / SOW Capex 2027+</td><td>2–3 trimestres</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Site institucional CBMM</h4><div class="url">https://cbmm.com/pt</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Vue.js (evidência HTML)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud / CDN</div><div class="v">Cloudflare (hint) · GTM/GA</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Core transacional empresarial</h4><div class="url">Interno (não público)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Escopo</div><div class="v">Materiais, produção, manutenção, finanças, SC, vendas, pessoas</div></div>
+                    <div class="app-stack-item"><div class="k">Status</div><div class="v">Migração concluída 2025 (TI Inside)</div></div>
+                    <div class="app-stack-item"><div class="k">Parceiro</div><div class="v">Deloitte (projeto 4US — fontes abertas)</div></div>
+                    <div class="app-stack-item"><div class="k">Vendor</div><div class="v">Omitido por política de briefing</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>MES / PIMS / SCADA (chão de fábrica)</h4><div class="url">OT — complexo Araxá</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">MES/PIMS</div><div class="v">Schneider Electric</div></div>
+                    <div class="app-stack-item"><div class="k">SCADA</div><div class="v">AVEVA (unidade Schneider) — modernização</div></div>
+                    <div class="app-stack-item"><div class="k">Histórico</div><div class="v">OSIsoft PI / Ampla citados no histórico do CIO</div></div>
+                    <div class="app-stack-item"><div class="k">Latência</div><div class="v">OT on-prem (requisito)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>CRM comercial</h4><div class="url">Salesforce (BNamericas)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Plataforma</div><div class="v">Salesforce</div></div>
+                    <div class="app-stack-item"><div class="k">Status</div><div class="v">Em atualização contínua</div></div>
+                    <div class="app-stack-item"><div class="k">Integração</div><div class="v">Ligada ao core e canais B2B</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">SaaS</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Data platform / BI</h4><div class="url">Azure + on-prem (híbrido)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Microsoft Azure</div></div>
+                    <div class="app-stack-item"><div class="k">Stack dados</div><div class="v">Synapse, Databricks, Fabric, Power BI (LinkedIn time dados)</div></div>
+                    <div class="app-stack-item"><div class="k">Modelo</div><div class="v">Data lake híbrido</div></div>
+                    <div class="app-stack-item"><div class="k">Objetivo</div><div class="v">Gestão data-driven</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Híbrida: datacenters próprios (OT/baixa latência) + Microsoft Azure (data lake/backoffice). Consolidação recente Cisco UCS X-Series + Nutanix AHV (TO) / VMware e Hyper-V (TI), gestão Cisco Intersight, replicação síncrona entre DCs (case HYPE Solutions — redução ~60% infra TI).</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança & Compliance</div><div class="cmp">Histórico de gestão ISO 27001 (carreira do CIO). Superfície OT/IT em expansão com IoT/robotização — maturidade pública de SOC/ZTNA não detalhada (hipótese: oportunidade de programa dedicado).</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">Automação disseminada; robotização em estudo; digital twin com provedor a selecionar; GenAI em fase de entendimento (Microsoft/Google). Agenda pública 2025–2026 de IA operacional.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados & Analytics</div><div class="cmp">Data lake híbrido Azure; stack citada por time interno: Synapse, Databricks, Microsoft Fabric, Power BI. Meta: decisão data-driven pós-core.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">Core empresarial renovado com go-live em 2025 (materiais, produção, manutenção, finanças, controladoria, pessoas, supply chain, vendas) — vendor omitido por política do briefing. Parceiro de implementação: Deloitte (fontes abertas).</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">CRM Salesforce; HCM corporativo em nuvem (workforce) citado em entrevistas; MES/PIMS Schneider; SCADA AVEVA; histórico Microsoft Dynamics CRM/EPM em projetos internacionais do CIO.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência & Engajamento</div><div class="cmp">Site cbmm.com (Vue + GTM/GA, Cloudflare). Portais B2B detalhados: não localizados publicamente. Relação cliente é predominantemente força comercial global + CRM.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://cbmm.com/pt</td><td><span class="status-200">200</span></td><td>Vue.js</td><td>Cloudflare (hint)</td><td>GTM + GA detectados</td></tr>
+                    <tr><td>https://cbmm.com/</td><td><span class="status-200">200</span></td><td>Vue.js</td><td>Cloudflare (hint)</td><td>Versão EN; mesmos trackers</td></tr>
+                    <tr><td>https://www.cbmm.com/pt</td><td><span class="status-200">200</span></td><td>Vue.js</td><td>Cloudflare (hint)</td><td>Espelho www</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 20/07/2026 via HTTP headers/HTML. Só o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Indústria 4.0</div><h4>Digital twin sem provedor</h4><p>CIO declarou intenção de contratar parceiro para gêmeos digitais focados em manutenção — decisão ainda aberta (BNamericas).</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · IA / MLOps</div><h4>GenAI ainda sem escala industrial</h4><p>Empresa em conversas com hiperescaladores, mas sem programa público de MLOps/governança — típico de mineração que evita hype (evidência setorial + declarações do CIO).</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Integração</div><h4>Costura OT–TI incompleta</h4><p>Dor citada em Trancoso: integração plena de sistemas e eficiência financeira da jornada 4.0; ambiente híbrido aumenta interfaces ponto a ponto.</p><div class="offer">Oferta Foursys: FourBlox (Digibee)</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Modernização</div><h4>Maturidade desigual entre plantas</h4><p>Unidades antigas vs novas no mesmo complexo — desafio estrutural admitido pelo CIO.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Segurança</div><h4>Superfície OT/IT em expansão</h4><p>Consolidação infra + IoT/robots eleva risco; detalhamento público de SOC/ZTNA insuficiente — gap consultivo típico de metalurgia crítica.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 6 · Dados</div><h4>Do lake à decisão operacional</h4><p>Data lake híbrido em construção/evolução; falta evidência pública de catálogo/governança de dados industrial ponta a ponta (hipótese).</p><div class="offer">Oferta Foursys: AI Squad + Engenharia Digital</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal & Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Ciência da Computação (Unitri) · MBAs Unifran e FGV</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">Araxá / MG</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Português e Inglês (nativo/bilíngue — LinkedIn)</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Comece pelo reconhecimento do prêmio IT Forum 2025 e do go-live 2025 — ele valoriza time e governança, não “hero CIO”.<br>
+                2) Fale a língua de Indústria 4.0 (eficiência, segurança, flexibilidade) que ele usou em Trancoso.<br>
+                3) Mencione MIT Sloan / GenAI Summit só se for para aprofundar governança — ele está maduro no tema.<br>
+                4) Evite pitch de troca de core; respeite o investimento Deloitte/time interno.<br>
+                5) Traga pergunta concreta sobre qual planta antiga mais “dói” em disponibilidade.<br>
+                6) Se possível, cite ESG/indicadores em tempo real — ele amarra tecnologia a sustentabilidade.<br>
+                7) Tom: peer técnico-executivo mineiro, direto, com evidência — sem jargão de consultoria genérica.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia & resultados</h4><ul>
+                    <li>Diário do Comércio — vendas 100 mil t / receita 2025</li>
+                    <li>O Tempo (jun/2026) — Capex R$ 11 bi até 2030</li>
+                    <li>Valor Econômico — concorrência Araxá / P&amp;D</li>
+                    <li>Planilha CIOs IT Forum 2026 (CNPJ, UF, setor)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>BNamericas — digitization spotlight (MES, Azure, twin, IA)</li>
+                    <li>TI Inside (abr/2025) — conclusão modernização core</li>
+                    <li>HYPE Solutions — consolidação infra Cisco/Nutanix</li>
+                    <li>LinkedIn Felipe Alves Barros — Synapse/Databricks/Fabric</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Wikipedia / SFA Oxford — posição nióbio</li>
+                    <li>cbmm.com — institucional</li>
+                    <li>Econodata — CNPJ 33.131.541/0001-08</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn Daniel Lopes Martins</li>
+                    <li>IT Forum — Indústria 4.0 Trancoso</li>
+                    <li>Post prêmio Executivo de TI 2025</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch / HTTP: https://cbmm.com/pt</li>
+                    <li>WebFetch: TI Inside; BNamericas</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

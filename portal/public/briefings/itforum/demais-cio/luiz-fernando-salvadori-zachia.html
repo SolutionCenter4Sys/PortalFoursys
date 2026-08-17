@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing Presidente - Luiz Fernando Salvadori Zachia | Procergs</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Luiz Fernando Salvadori Zachia</h1>
+                <h2>Presidente — Procergs</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Setor público | Porto Alegre - RS</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 500,1 MM a R$ 600 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 400,1 MM a R$ 500 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá entre 20% e 30%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Procergs</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>PROCERGS — Centro de Tecnologia da Informação e Comunicação do Estado do Rio Grande do Sul S.A.</strong> — é uma sociedade de economia mista fundada em 1972, responsável por prover soluções tecnológicas para 100% dos órgãos do Executivo estadual gaúcho. Com mais de 900 sistemas em operação, a empresa processa diariamente milhões de transações críticas nas áreas de saúde, educação, segurança pública e fazenda — incluindo as Notas Fiscais Eletrônicas do RS e de outros 13 estados. Em maio de 2024, a empresa enfrentou seu maior desafio: a enchente histórica de Porto Alegre inundou seu datacenter principal, deixando serviços fora do ar por cerca de três semanas. O governo estadual destinou <strong>R$ 94 milhões</strong> para a reconstrução da infraestrutura, incluindo elevação da estrutura elétrica em sete metros para prevenir futuros alagamentos. Sob a presidência de Luiz Fernando Zachia (desde outubro/2023), a Procergs investiu R$ 87 milhões em capital e destinou <strong>R$ 20 milhões especificamente para cibersegurança</strong>, consolidando a transformação digital do governo gaúcho — com 95% dos serviços estaduais já disponíveis digitalmente na plataforma rs.gov.br. O momento é de reconstrução, resiliência e modernização acelerada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Pública</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Setor público</strong> com abrangência <strong>Local (Brasil)</strong>. Possui <strong>2 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>Licitação pública  (edital/pregão</strong>. Perspectiva do orçamento de TI: <strong>Crescerá entre 20% e 30%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Atrair, desenvolver e engajar talentos</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Aumentar confiabilidade e observabilidade (SRE)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer processos e políticas de governança / compliance</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar sistemas legados</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Priorizar portfólio em meio a excesso de demandas</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Cibersegurança</span>
+<span class="tag tag-priority">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-priority">IA / ML</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">CPaaS / UCaaS / CCaaS</span>
+<span class="tag tag-active">GRC, compliance e auditoria</span>
+<span class="tag tag-active">ITSM/ESM e service desk</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">IA / ML</span>
+<span class="tag tag-opportunity">IA Generativa</span>
+</div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Luiz Fernando Salvadori Zachia</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 90</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Cibersegurança é prioridade Top 3</li><li>Disaster recovery / continuidade de negócios é prioridade Top 3</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 85</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML SEM fornecedor definido</li><li>IA / ML é prioridade Top 3 de investimento</li><li>IA Generativa SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Luiz Fernando Salvadori Zachia tem como top prioridades <strong>Cibersegurança; Disaster recovery / continuidade de negócios; IA / ML</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>2 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 2 projetos definidos sem fornecedor: IA / ML, IA Generativa. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá entre 20% e 30%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: Cibersegurança; AI Squad. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. Reconstrução pós-enchente como catalisador:</strong> A Procergs está reconstruindo seu datacenter com R$ 94 milhões — momento ideal para propor soluções de disaster recovery, continuidade de negócios e infraestrutura resiliente. A experiência da enchente de 2024 tornou DR a prioridade #1 da gestão.</p>
+                <p style="margin-top:10px"><strong>2. IA/ML é projeto definido sem fornecedor:</strong> Enquanto Prodesp e Celepar já operam plataformas de IA Generativa, a Procergs busca parceiro para implementação. O AI Squad Foursys com produto proprietário é diferencial direto para essa demanda.</p>
+                <p style="margin-top:10px"><strong>3. Cibersegurança com orçamento dedicado:</strong> R$ 20 milhões já alocados especificamente para cibersegurança. Com apenas 2% do orçamento de TI destinado a segurança atualmente, há espaço significativo para crescimento — especialmente considerando que cibersegurança é prioridade Top 3 e o modelo de compra é licitação pública.</p>
+                <p style="margin-top:10px"><strong>4. 55% do orçamento em pessoas:</strong> A Procergs gasta mais da metade do orçamento de TI com pessoal, enfrenta desafio de atração de talentos e tem 200+ profissionais de TI. Modelo de squads e outsourcing da Foursys pode otimizar custos e acelerar entregas sem ampliar quadro próprio.</p>
+                <p style="margin-top:10px"><strong>5. 95% dos serviços já digitais:</strong> O avanço da plataforma rs.gov.br gera demanda crescente por modernização de legados, integração de sistemas e observabilidade (SRE) — todos desafios declarados para 2026. A maturidade digital cria demanda por parceiros de próximo nível.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise comparativa com empresas públicas estaduais de TI similares à Procergs no Brasil:</p>
+
+            <div class="competitor-card">
+                <h4>Prodesp — Companhia de Processamento de Dados do Estado de São Paulo</h4>
+                <p><strong>Destaque:</strong> Investiu R$ 716 milhões em transformação digital em 2024 (+65,8% vs. 2023). Lançou a <strong>Plataforma de IA Generativa Ativa</strong> para automação jurídica e análise documental. Opera o <strong>Prodesp Shield</strong> com 7 camadas de cibersegurança e possui certificação ISO 27001. Referência nacional com o programa Poupatempo (serviços ao cidadão) e infraestrutura em nuvem própria (CS-Nuvem).</p>
+            </div>
+
+            <div class="competitor-card">
+                <h4>Celepar — Companhia de TI e Comunicação do Paraná</h4>
+                <p><strong>Destaque:</strong> Pioneira em IA aplicada ao setor público com o <strong>"Aprendiz Inteligente"</strong> (IA generativa e preditiva para educação), <strong>"Detran Inteligente"</strong> (reconhecimento facial com antispoofing) e chatbots com IA generativa (IAra, Copiloto). Implementou o <strong>SmartGov DataHub</strong> — Data Lake governamental com conformidade LGPD. Apresentou cases no Smart City Expo Curitiba 2025.</p>
+            </div>
+
+            <div class="competitor-card">
+                <h4>Prodemge — Companhia de TI do Estado de Minas Gerais</h4>
+                <p><strong>Destaque:</strong> Conquistou 7 prêmios nacionais em 2024 (TI pública, agilidade, soluções digitais). Implementou o <strong>Data Lake MG</strong>, regulamentado oficialmente como repositório central de dados do Executivo estadual (decreto 49.009/2025). Mais de 83% dos serviços já digitais via <strong>MGApp</strong> (270+ serviços). Criou o Comitê Gestor de Governança de Dados (CGGD).</p>
+            </div>
+
+            <div class="competitor-card">
+                <h4>Prodest — Instituto de Tecnologia da Informação do Espírito Santo</h4>
+                <p><strong>Destaque:</strong> Referência em governo digital estadual com plataforma integrada de serviços. Atua como coordenadora do ecossistema de TIC capixaba, provendo infraestrutura, conectividade e segurança para os órgãos do estado. Integra a rede colaborativa de empresas públicas estaduais de TI.</p>
+            </div>
+
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidade Foursys</h4>
+                <p>A Procergs possui desafios que suas pares já endereçaram: <strong>(1)</strong> Prodesp e Celepar já implementaram plataformas de IA Generativa operacionais — a Procergs tem IA/ML como projeto sem fornecedor definido; <strong>(2)</strong> Prodemge e Celepar possuem Data Lakes governamentais consolidados — a Procergs pode se beneficiar de solução similar; <strong>(3)</strong> A reconstrução pós-enchente oferece janela única para modernizar infraestrutura com disaster recovery robusto — Prodesp já opera nuvem própria e Shield multicamadas; <strong>(4)</strong> Enquanto pares investem em chatbots com IA e automação de serviços, a Procergs pode acelerar essa adoção com squads especializados. A Foursys pode posicionar-se como parceira de implementação para fechar essas lacunas.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Administração de Empresas (PUCRS); Pós-graduação em Gestão, Marketing e Direito Desportivo (FGV/Cies/Fifa); Especialização em Governança Corporativa em Estatais (Feevale)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Profissional</div>
+                        <div class="value">36 anos de carreira entre setor público e privado. Presidente da EGR (Empresa Gaúcha de Rodovias) de jan/2022 a out/2023. Presidente da Procergs desde 30/10/2023.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Carreira Política</div>
+                        <div class="value">Vereador em Porto Alegre por 3 mandatos (1993-2003), presidente da Câmara em 2001. Deputado Estadual por 2 mandatos (2003-2010), presidente da Assembleia Legislativa em 2006. Deputado Federal em 2015. Secretário de Estado do Desenvolvimento e Relações Internacionais (2008-2009).</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">LinkedIn</div>
+                        <div class="value"><a href="https://linkedin.com/in/luiz-fernando-zachia-5494061b1" target="_blank" style="color:var(--primary-light)">linkedin.com/in/luiz-fernando-zachia</a></div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Liderança</div>
+                        <div class="value">Gestor com forte background político e institucional. Perfil executivo com visão de governo e experiência em gestão de empresas estatais (EGR e Procergs). Articulador político com passagem pelo Legislativo municipal, estadual e federal.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Momento Atual</div>
+                        <div class="value">Liderando a reconstrução pós-enchente da Procergs (R$ 94 MM investidos). Gestão marcada por resiliência — restabeleceu datacenter em ~3 semanas após enchente histórica de maio/2024. Foco em cibersegurança (R$ 20 MM) e digitalização do governo gaúcho.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p><strong>1. Reconheça a resiliência pós-enchente:</strong> Demonstre conhecimento genuíno sobre o desafio que a Procergs enfrentou em maio/2024 e a rapidez da recuperação (~3 semanas). Evite tom de pena — valorize a capacidade de reação e gestão de crise da equipe dele.</p>
+                <p style="margin-top:8px"><strong>2. Fale a linguagem de gestão pública, não só de TI:</strong> Zachia é administrador e gestor público, não um tecnólogo. Aborde resultados, eficiência, impacto social e governança — não jargões técnicos. Ele valoriza governança corporativa (tem especialização no tema).</p>
+                <p style="margin-top:8px"><strong>3. Respeite o modelo de licitação:</strong> Ele opera via licitação pública (edital/pregão). Demonstre experiência da Foursys com processos licitatórios e conformidade regulatória. Mencione cases com outros órgãos públicos.</p>
+                <p style="margin-top:8px"><strong>4. Conecte com sua visão de governo digital:</strong> 95% dos serviços estaduais já são digitais — ele se orgulha disso. Proponha o próximo nível: IA, automação, observabilidade. Mencione o que pares como Celepar e Prodesp estão fazendo para estimular benchmarking saudável.</p>
+                <p style="margin-top:8px"><strong>5. Valorize a trajetória institucional:</strong> Zachia é um articulador político de carreira longa (vereador, deputado estadual/federal, secretário). Tratá-lo com a deferência de um líder institucional — ele entende dinâmicas de poder e busca parceiros que compreendam o ecossistema público.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Presidente e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Membro: assento permanente, com voto.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Co-decisão TI + Negócios</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">200 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:55%;background:#1a237e">55%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#1a237e">15%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#5c6bc0">2%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#7986cb">1%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#9fa8da">1%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:1%;background:#c5cae9">1%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Referências e cases BR</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 14 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

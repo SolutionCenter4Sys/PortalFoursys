@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pre-Sales Intelligence — Kleber Couto · Pagar</title>
+<style>
+    :root {
+        --primary: #1a237e;
+        --primary-light: #3949ab;
+        --accent: #00b894;
+        --accent-orange: #e17055;
+        --bg: #f5f6fa;
+        --card-bg: #ffffff;
+        --text: #2d3436;
+        --text-light: #636e72;
+        --border: #dfe6e9;
+        --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 24px 80px;
+    }
+
+    /* HEADER */
+    .header {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        color: #fff;
+        padding: 48px 40px;
+        border-radius: 16px;
+        margin-bottom: 32px;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(0,184,148,0.18) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .brand {
+        font-size: 14px;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        opacity: 0.92;
+        margin-bottom: 18px;
+        font-weight: 600;
+    }
+
+    .brand span.accent { color: var(--accent); }
+    .brand .pipe { opacity: 0.55; margin: 0 10px; }
+
+    .header h1 {
+        font-size: 44px;
+        font-weight: 700;
+        line-height: 1.15;
+        margin-bottom: 8px;
+    }
+
+    .header h2 {
+        font-size: 22px;
+        font-weight: 500;
+        opacity: 0.95;
+        margin-bottom: 8px;
+    }
+
+    .header .meta {
+        font-size: 16px;
+        opacity: 0.88;
+        margin-bottom: 22px;
+    }
+
+    .badges {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+    }
+
+    .badge {
+        background: rgba(255,255,255,0.18);
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(255,255,255,0.25);
+        padding: 8px 16px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+    .badge.green { background: var(--accent); border-color: var(--accent); }
+
+    /* SECTIONS */
+    .section {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 32px;
+        margin-bottom: 24px;
+        box-shadow: var(--shadow);
+    }
+
+    .section h3 {
+        font-size: 22px;
+        color: var(--primary);
+        margin-bottom: 18px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--border);
+    }
+
+    .section p { margin-bottom: 12px; color: var(--text); }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+        margin-top: 18px;
+    }
+
+    .info-card {
+        background: #fafbfc;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 16px;
+    }
+
+    .info-card .label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--text-light);
+        font-weight: 700;
+        margin-bottom: 6px;
+    }
+
+    .info-card .value {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.4;
+    }
+
+    /* INSIGHT BOX (purple) */
+    .insight-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+        padding: 24px 26px;
+        border-radius: 12px;
+        margin-top: 16px;
+    }
+    .insight-box h4 {
+        font-size: 17px;
+        margin-bottom: 10px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+    }
+    .insight-box p { color: #fff; opacity: 0.97; margin-bottom: 8px; }
+    .insight-box ul { padding-left: 22px; margin-top: 10px; }
+    .insight-box li { margin-bottom: 6px; }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 28px; margin-top: 14px; }
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 6px; top: 6px; bottom: 6px;
+        width: 2px;
+        background: var(--border);
+    }
+    .timeline-item {
+        position: relative;
+        margin-bottom: 18px;
+    }
+    .timeline-dot {
+        position: absolute;
+        left: -28px; top: 6px;
+        width: 14px; height: 14px;
+        background: var(--primary-light);
+        border-radius: 50%;
+        border: 3px solid #fff;
+        box-shadow: 0 0 0 2px var(--primary-light);
+    }
+    .timeline-item h4 {
+        font-size: 15px;
+        margin-bottom: 4px;
+        color: var(--primary);
+    }
+    .timeline-item p {
+        font-size: 14px;
+        color: var(--text-light);
+    }
+
+    /* TAGS */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tag {
+        font-size: 12.5px;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+    }
+    .tag-priority   { background: #fce4ec; color: #c62828; border-color: #ef9a9a; }
+    .tag-active     { background: #e8f5e9; color: #2e7d32; border-color: #a5d6a7; }
+    .tag-opportunity{ background: #fff3e0; color: #e65100; border-color: #ffcc80; }
+
+    /* SECTION VARIATIONS */
+    .section.opportunity { border: 2px solid var(--accent-orange); }
+    .section.foursys { border: 2px solid var(--accent); }
+    .section.rapport { border: 2px solid #667eea; }
+
+    .section.opportunity h3 { color: var(--accent-orange); }
+    .section.foursys h3 { color: var(--accent); }
+    .section.rapport h3 { color: #667eea; }
+
+    /* OFERTAS */
+    .oferta-card {
+        background: #fafbfc;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px 22px;
+        margin-bottom: 14px;
+        position: relative;
+    }
+    .oferta-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 10px;
+    }
+    .oferta-card h4 {
+        font-size: 18px;
+        color: var(--primary);
+    }
+    .score-badge {
+        background: var(--accent);
+        color: #fff;
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: 0.5px;
+    }
+    .oferta-card .descricao {
+        font-size: 14px;
+        color: var(--text-light);
+        margin-bottom: 10px;
+    }
+    .oferta-card ul {
+        padding-left: 22px;
+        font-size: 14px;
+        color: var(--text);
+    }
+    .oferta-card li { margin-bottom: 4px; }
+
+    /* APPROACH CARDS */
+    .approach-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 14px;
+        margin-top: 16px;
+    }
+    .approach-card {
+        color: #fff;
+        padding: 22px;
+        border-radius: 12px;
+    }
+    .approach-card h4 {
+        font-size: 16px;
+        margin-bottom: 8px;
+        letter-spacing: 0.3px;
+    }
+    .approach-card p { color: #fff; opacity: 0.97; font-size: 14px; }
+    .approach-card ul { padding-left: 22px; font-size: 14px; margin-top: 8px; }
+    .approach-card li { margin-bottom: 5px; color: #fff; }
+
+    .approach-green  { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); }
+    .approach-red    { background: linear-gradient(135deg, #e17055 0%, #d63031 100%); }
+    .approach-purple { background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%); }
+
+    /* COMPETITOR CARDS */
+    .competitor-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 14px;
+        margin-top: 14px;
+    }
+    .competitor-card {
+        background: #fafbfc;
+        border-left: 4px solid var(--primary-light);
+        padding: 18px;
+        border-radius: 8px;
+    }
+    .competitor-card h4 {
+        color: var(--primary);
+        font-size: 16px;
+        margin-bottom: 6px;
+    }
+    .competitor-card p { font-size: 13.5px; color: var(--text-light); }
+
+    /* BARS */
+    .bar-row {
+        display: flex; align-items: center; gap: 12px;
+        margin-bottom: 12px;
+    }
+    .bar-label { width: 220px; font-size: 14px; color: var(--text); font-weight: 500; }
+    .bar-track {
+        flex: 1;
+        height: 22px;
+        background: var(--border);
+        border-radius: 999px;
+        overflow: hidden;
+    }
+    .bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary-light), var(--accent));
+        display: flex; align-items: center; justify-content: flex-end;
+        padding-right: 10px;
+        color: #fff; font-weight: 700; font-size: 12px;
+    }
+
+    /* DIVIDER */
+    .divider {
+        margin: 40px 0 28px;
+        border: 0;
+        border-top: 1px dashed var(--border);
+    }
+
+    /* FOOTER */
+    footer {
+        text-align: center;
+        margin-top: 42px;
+        padding: 28px 0 0;
+        border-top: 1px solid var(--border);
+        color: var(--text-light);
+        font-size: 13px;
+    }
+    footer .brand-line { font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+
+    /* PRINT BUTTON */
+    .print-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        padding: 14px 22px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 6px 22px rgba(26,35,126,0.35);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .print-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(26,35,126,0.45); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+        .header { padding: 32px 24px; }
+        .header h1 { font-size: 30px; }
+        .header h2 { font-size: 18px; }
+        .section { padding: 22px; }
+        .bar-label { width: 130px; font-size: 13px; }
+    }
+
+    /* PRINT */
+    @media print {
+        body { background: #fff; }
+        .container { padding: 0; max-width: 100%; }
+        .print-btn { display: none !important; }
+        .section, .header { box-shadow: none; break-inside: avoid; }
+        .header::before { display: none; }
+        .approach-card, .insight-box { break-inside: avoid; }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+
+    <!-- 1. HEADER -->
+    <header class="header">
+        <div class="brand">four<span class="accent">sys</span> <span class="pipe">|</span> Pre-Sales Intelligence</div>
+        <h1>Kleber Couto</h1>
+        <h2>Diretor de Tecnologia &amp; Inovação · Pagar (pagar.com.br)</h2>
+        <div class="meta">Fintech de Gestão Financeira &amp; Pagamentos · Sede em Minas Gerais · Capital Privado · 6 anos de mercado</div>
+        <div class="badges">
+            <span class="badge green">Foco em IA Generativa &amp; Open Finance</span>
+            <span class="badge">Atendimento a grandes contas corporativas e governamentais</span>
+            <span class="badge">Fintech early-stage · 4 colaboradores · +500% YoY</span>
+            <span class="badge">Capital privado fechado — sem balanço público</span>
+        </div>
+    </header>
+
+    <!-- 2. ANÁLISE DA EMPRESA -->
+    <section class="section">
+        <h3>Análise da Empresa</h3>
+        <p>
+            A <strong>Pagar (pagar.com.br)</strong> é uma fintech brasileira sediada em <strong>Minas Gerais</strong>,
+            com aproximadamente <strong>seis anos de atuação</strong> no mercado de pagamentos e gestão financeira.
+            Posiciona-se como plataforma digital especializada em simplificar processos financeiros para empresas,
+            entregando agilidade, autonomia e eficiência operacional aos clientes.
+        </p>
+        <p>
+            O diferencial declarado da Pagar é a combinação de <strong>Inteligência Artificial</strong> com
+            <strong>Open Finance</strong>, alavancando dados regulados pelo Banco Central para gerar redução de
+            custos e ganhos de receita aos clientes. A empresa mira <strong>grandes contas corporativas e
+            governamentais</strong>, perfil que exige maturidade em segurança, integração e governança — três
+            frentes nas quais Kleber Couto vem pilotando a estratégia de TI desde outubro/2023.
+        </p>
+        <p>
+            Em 2025, a Pagar formalizou parceria com a <strong>agência Encaso Comunicação</strong> para
+            estruturar narrativa, reputação e visibilidade de mercado, sinalizando movimento de consolidação
+            de marca e preparação para próxima fase de escala (provável captação ou expansão comercial).
+        </p>
+        <div class="info-grid">
+            <div class="info-card"><div class="label">Sede</div><div class="value">Minas Gerais — Brasil</div></div>
+            <div class="info-card"><div class="label">Abrangência</div><div class="value">Nacional · Foco em B2B (corporativo + governo)</div></div>
+            <div class="info-card"><div class="label">Categoria</div><div class="value">Capital privado · Fintech early-stage</div></div>
+            <div class="info-card"><div class="label">Tempo de Mercado</div><div class="value">~6 anos (fundada por volta de 2019)</div></div>
+            <div class="info-card"><div class="label">Porte (LinkedIn confirmado)</div><div class="value">4 colaboradores diretos · +500% YoY · Modelo enxuto</div></div>
+            <div class="info-card"><div class="label">Tecnologias-Chave</div><div class="value">IA Generativa · Open Finance · Cloud · APIs</div></div>
+            <div class="info-card"><div class="label">Setor</div><div class="value">Serviços Financeiros · Pagamentos · BaaS</div></div>
+            <div class="info-card"><div class="label">Movimento Recente (2025)</div><div class="value">Estruturação de marca via Encaso Comunicação</div></div>
+        </div>
+    </section>
+
+    <!-- 2.1. DADOS FINANCEIROS & RESULTADO -->
+    <section class="section">
+        <h3>Dados Financeiros &amp; Resultado</h3>
+        <p style="font-size: 14.5px;">
+            <strong>Importante — limitação de transparência:</strong> a Pagar (pagar.com.br) é uma fintech de
+            <strong>capital privado fechado</strong> (Sociedade Limitada / Anônima Fechada), <strong>não
+            negociada em bolsa</strong> (não confundir com PagBank/PagSeguro [NYSE: PAGS] nem com Pagar.me
+            [Stone Co.]). Como tal, <em>não publica balanços, demonstrações de resultado, faturamento ou
+            indicadores financeiros em fontes públicas</em> (CVM, SEC, B3, RI). As estimativas abaixo são
+            <strong>qualitativas e baseadas em sinais públicos</strong> (porte de equipe declarado no
+            LinkedIn, posicionamento de cliente-alvo, parcerias e benchmarks setoriais de fintechs
+            brasileiras early-stage).
+        </p>
+
+        <div class="info-grid" style="margin-top: 16px;">
+            <div class="info-card"><div class="label">Categoria Jurídica</div><div class="value">Capital privado fechado · Sem obrigação de divulgação</div></div>
+            <div class="info-card"><div class="label">Negociação em Bolsa</div><div class="value">Não — empresa privada</div></div>
+            <div class="info-card"><div class="label">Headcount Declarado (LinkedIn)</div><div class="value">4 colaboradores diretos · +500% YoY</div></div>
+            <div class="info-card"><div class="label">Modelo de Equipe</div><div class="value">Núcleo enxuto interno + squads/parceiros externos</div></div>
+            <div class="info-card"><div class="label">Tempo de Mercado</div><div class="value">~6 anos (operação desde ~2019)</div></div>
+            <div class="info-card"><div class="label">Crescimento de Pessoas</div><div class="value">Forte aceleração recente (4× headcount em 12 meses)</div></div>
+        </div>
+
+        <h4 style="margin-top: 24px; color: var(--primary); font-size: 16px;">Estimativa Qualitativa de Faturamento (Sinais Públicos)</h4>
+        <p style="font-size: 14px;">
+            Aplicando benchmarks de fintechs B2B brasileiras early-stage (faixa de R$ 250–800 mil de receita
+            anual por colaborador FTE em modelo SaaS/Take Rate sobre Open Finance e pagamentos), a faixa
+            estimada de receita anual <em>recorrente</em> da Pagar em 2025 estaria entre:
+        </p>
+        <div style="margin-top: 14px;">
+            <div class="bar-row">
+                <div class="bar-label">Cenário Conservador</div>
+                <div class="bar-track"><div class="bar-fill" style="width: 25%;">R$ 1–3 mi/ano</div></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Cenário Base</div>
+                <div class="bar-track"><div class="bar-fill" style="width: 50%;">R$ 3–8 mi/ano</div></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Cenário Otimista (com governo)</div>
+                <div class="bar-track"><div class="bar-fill" style="width: 80%;">R$ 8–20 mi/ano</div></div>
+            </div>
+        </div>
+        <p style="font-size: 13px; color: var(--text-light); margin-top: 12px;">
+            <em>Nota:</em> as faixas pressupõem alavancagem por squads externos, take rate de Open
+            Finance/pagamentos e contratos B2B com tickets médios de R$ 50–500 mil/ano. Não substituem
+            confirmação direta com a empresa ou consulta a balanços oficiais.
+        </p>
+
+        <h4 style="margin-top: 24px; color: var(--primary); font-size: 16px;">Estimativa Qualitativa de Resultado</h4>
+        <p style="font-size: 14px;">
+            Fintechs brasileiras early-stage (4 colaboradores, 6 anos de mercado, foco B2B com IA + Open
+            Finance) tipicamente operam em uma das três fases abaixo. Sinais públicos sobre a Pagar
+            (estruturação de marca via Encaso, expansão recente de equipe, foco em contas grandes)
+            sugerem fase de <strong>transição entre 2 e 3</strong>:
+        </p>
+        <div class="info-grid" style="margin-top: 14px;">
+            <div class="info-card">
+                <div class="label">Fase 1 — Pré-Receita</div>
+                <div class="value">EBITDA negativo · queima de capital · pré-PMF<br><span style="font-weight: 400; color: var(--text-light); font-size: 13px;">Pouco provável (Pagar tem 6 anos de operação)</span></div>
+            </div>
+            <div class="info-card" style="border-color: var(--accent);">
+                <div class="label" style="color: var(--accent);">Fase 2 — Receita Recorrente, Resultado Marginal</div>
+                <div class="value">EBITDA próximo a zero · reinveste em produto/IA<br><span style="font-weight: 400; color: var(--text-light); font-size: 13px;">Cenário mais provável dada a estrutura enxuta</span></div>
+            </div>
+            <div class="info-card" style="border-color: var(--accent-orange);">
+                <div class="label" style="color: var(--accent-orange);">Fase 3 — Pré-Captação / Expansão</div>
+                <div class="value">EBITDA positivo · prepara round / contratos públicos<br><span style="font-weight: 400; color: var(--text-light); font-size: 13px;">Sinais convergentes (Encaso, +500% headcount)</span></div>
+            </div>
+        </div>
+
+        <div class="insight-box" style="margin-top: 22px;">
+            <h4>Diferenciação Crítica — Não Confundir</h4>
+            <ul>
+                <li><strong>Pagar (pagar.com.br) ≠ Pagar.me</strong> · Pagar.me (CNPJ 18.727.053/0001-74, capital social R$ 1,73 bi, 366+ funcionários, sede SP) pertence à Stone Co. — empresa diferente.</li>
+                <li><strong>Pagar (pagar.com.br) ≠ PagBank/PagSeguro</strong> · PAGS na NYSE, lucro líquido recorrente de R$ 565 mi (2T25), 33+ milhões de clientes — universo distinto.</li>
+                <li><strong>Pagar (pagar.com.br) ≠ Paag Tecnologia</strong> · Paag (CNPJ 41.388.405/0001-26, BH/MG) é fintech de apostas esportivas com participação do Banco BS2.</li>
+                <li><strong>Pagar (pagar.com.br) é fintech autônoma</strong> sediada em Minas Gerais, ~6 anos de operação, capital privado fechado, foco em IA Generativa e Open Finance para contas corporativas e governamentais.</li>
+            </ul>
+        </div>
+
+        <div class="insight-box" style="margin-top: 16px;">
+            <h4>Como Validar Dados Financeiros na Conversa Comercial</h4>
+            <ul>
+                <li>Solicitar diretamente ao Kleber Couto / liderança comercial uma <em>"snapshot de business"</em> (faixa de receita, número de clientes, ticket médio, ARR).</li>
+                <li>Consultar dados de CNPJ na Receita Federal (sistema CNPJá, Econodata, Serasa) — capital social, sócios e atividade declarada.</li>
+                <li>Identificar parceiros bancários (Banco Central — registros de Iniciador de Pagamento ou Instituição de Pagamento) caso a Pagar seja IP regulada.</li>
+                <li>Mapear cases públicos de clientes — volume, segmento, contrato (sinaliza ARR).</li>
+                <li>Em uma RFP grande, exigir balanço dos últimos 3 anos como pré-qualificação financeira.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 3. RESUMO EXECUTIVO -->
+    <section class="section">
+        <h3>Resumo Executivo</h3>
+        <div class="insight-box">
+            <h4>Contexto Estratégico &amp; Timing</h4>
+            <p>
+                A Pagar vive um <strong>momento de transição entre fintech early-stage e player consolidado</strong>:
+                tem proposta tecnicamente diferenciada (IA + Open Finance), porte declarado ainda enxuto
+                (1–10 colaboradores no LinkedIn) e ambição clara de atender contas corporativas e
+                governamentais — mercado que exige maturidade em <strong>segurança, compliance, integração e SLAs</strong>.
+            </p>
+            <p>
+                Kleber Couto, IT Director desde out/2023, traz DNA de transformação digital de grandes
+                corporações (<em>Roche, Unilever, Abbott, Shire, Prudential, Prevenir Assistencial</em>) e
+                fluência em todo o stack moderno de IA generativa, MLOps, Cloud e DevOps. Ele é o
+                <strong>decisor técnico e estratégico</strong> ideal para a venda consultiva: respira IA aplicada,
+                conhece o desafio de M&amp;A/integrações e é citado como liderança que "coloca a mão na massa".
+            </p>
+            <p>
+                A janela de oportunidade está aberta para Foursys posicionar <strong>AI Squad, Engenharia
+                Digital, Cibersegurança ISO 27001/27701 e Modernização de Plataformas com Digibee</strong>
+                como aceleradores do crescimento da Pagar — especialmente em contratos governamentais,
+                onde os requisitos de segurança e governança são determinantes.
+            </p>
+        </div>
+    </section>
+
+    <!-- 4. DESAFIOS ESTRATÉGICOS -->
+    <section class="section">
+        <h3>Desafios Estratégicos &amp; Prioridades</h3>
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="timeline-dot"></span>
+                <h4>Escalar a operação tecnológica preservando o time enxuto</h4>
+                <p>Atender grandes contas corporativas e governamentais com headcount de 1–10 demanda parceiros que assumam squads completos, AMS e governança — sem inflar fixed cost.</p>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-dot"></span>
+                <h4>Materializar a promessa de IA Generativa em produto</h4>
+                <p>O posicionamento de mercado declara IA + Open Finance como diferencial; é necessário transformar isso em features observáveis (recomendação financeira, automação de conciliação, copilot bancário, agentes de cobrança).</p>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-dot"></span>
+                <h4>Compliance e segurança para clientes de governo</h4>
+                <p>Contratos com setor público no Brasil exigem ISO 27001, conformidade LGPD, DPO, controles de PCI-DSS, auditoria SOC 2, planos de DR e gestão de riscos formais. Foursys já entrega esse pacote pré-vendido.</p>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-dot"></span>
+                <h4>Open Finance em ritmo regulatório do BCB</h4>
+                <p>As fases do Open Finance avançam (dados → iniciação → seguros → câmbio); manter a integração viva e em conformidade demanda squad especializado em APIs reguladas e iPaaS.</p>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-dot"></span>
+                <h4>Antifraude &amp; prevenção a riscos financeiros</h4>
+                <p>Operações de pagamento têm exposição direta a fraude, lavagem e disputas; modelos de ML para scoring e detecção em tempo real são críticos para sustentar contratos B2B.</p>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-dot"></span>
+                <h4>Concorrência acirrada de fintechs B2B em consolidação</h4>
+                <p>Stark Bank, Cora, Conta Simples, Asaas e iPaaS bancários estão capitalizados; a Pagar precisa de diferenciação técnica clara para defender a tese.</p>
+            </div>
+        </div>
+
+        <h4 style="margin-top: 24px; color: var(--primary); font-size: 16px;">Prioridades de Investimento</h4>
+        <div class="tags">
+            <span class="tag tag-priority">IA Generativa em Produto</span>
+            <span class="tag tag-priority">Open Finance &amp; APIs Reguladas</span>
+            <span class="tag tag-priority">Cibersegurança &amp; LGPD</span>
+            <span class="tag tag-priority">Compliance Setor Público</span>
+            <span class="tag tag-priority">Antifraude &amp; Risk Engine</span>
+            <span class="tag tag-priority">Cloud &amp; Observabilidade (SRE)</span>
+            <span class="tag tag-priority">Squads Externos (alavancagem)</span>
+        </div>
+    </section>
+
+    <!-- 5. MAPA DE INVESTIMENTOS -->
+    <section class="section">
+        <h3>Mapa de Investimentos nos Próximos 12 Meses</h3>
+        <p>Temas com sinais de investimento ativo (declarações públicas, perfil do Diretor de TI, posicionamento de marca):</p>
+        <div class="tags">
+            <span class="tag tag-active">IA Generativa aplicada à operação financeira</span>
+            <span class="tag tag-active">Integrações Open Finance (BCB)</span>
+            <span class="tag tag-active">Plataforma SaaS / API-first</span>
+            <span class="tag tag-active">Segurança &amp; compliance corporativo/governamental</span>
+            <span class="tag tag-active">Branding &amp; reputação (Encaso)</span>
+            <span class="tag tag-active">Squads externos / parcerias técnicas</span>
+        </div>
+        <p style="margin-top: 18px; font-size: 14px; color: var(--text-light);">
+            <strong>Distinção:</strong> os itens acima representam <em>continuidade</em> de tese estratégica.
+            Janelas de <strong>investimento inicial</strong> identificadas: certificação ISO 27001/27701,
+            squad de IA Generativa para CRM/cobrança/conciliação, observabilidade e SRE para SLA enterprise,
+            DLP e prevenção a fraude com ML, AMS de plataforma para liberar o time interno em produto.
+        </p>
+    </section>
+
+    <!-- 6. OPORTUNIDADES SEM FORNECEDOR DEFINIDO -->
+    <section class="section opportunity">
+        <h3>Oportunidades sem Fornecedor Definido</h3>
+        <p>Frentes onde o vendor incumbente não foi identificado publicamente e há sinais claros de demanda em construção:</p>
+        <div class="tags">
+            <span class="tag tag-opportunity">Squad de IA Generativa para produto financeiro</span>
+            <span class="tag tag-opportunity">Engenharia de plataforma cloud-native (microsserviços + API)</span>
+            <span class="tag tag-opportunity">Implantação Digibee iPaaS para Open Finance</span>
+            <span class="tag tag-opportunity">Cibersegurança ofensiva e DLP para fintech</span>
+            <span class="tag tag-opportunity">Adequação ISO 27001 / 27701 e LGPD</span>
+            <span class="tag tag-opportunity">Antifraude com ML em tempo real</span>
+            <span class="tag tag-opportunity">AMS especializado em fintech (sustentação 24x7)</span>
+            <span class="tag tag-opportunity">Aceleradores FourBlox para front e jornadas B2B</span>
+        </div>
+    </section>
+
+    <!-- 7. OFERTAS FOURSYS -->
+    <section class="section foursys">
+        <h3>Ofertas Foursys Recomendadas</h3>
+
+        <div class="oferta-card">
+            <div class="oferta-header">
+                <h4>1. AI Squad — Squads de IA Generativa &amp; Hiperautomação</h4>
+                <span class="score-badge">SCORE 95</span>
+            </div>
+            <p class="descricao">Squads de IA com produto proprietário Foursys que acelera ciclos de desenvolvimento,
+            geração de código, automação de testes, IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+            <ul>
+                <li>IA Generativa é o pilar declarado da Pagar — Kleber tem stack completo (LangChain, LangGraph, AutoGen, CrewAI, Pinecone, Qdrant) e busca expansão real em produto.</li>
+                <li>Casos de uso concretos: copilot financeiro, conciliação automática, agentes de cobrança, scoring de crédito com LLM, antifraude com embeddings.</li>
+                <li>Modelo de squad dedicado encaixa-se ao porte enxuto da Pagar — alavancagem sem onerar headcount fixo.</li>
+                <li>Foursys posicionada como parceira de IA na vanguarda do varejo brasileiro e setor financeiro — argumento direto.</li>
+            </ul>
+        </div>
+
+        <div class="oferta-card">
+            <div class="oferta-header">
+                <h4>2. Cibersegurança &amp; Privacidade (LGPD / DLP / ISO 27001-27701)</h4>
+                <span class="score-badge">SCORE 92</span>
+            </div>
+            <p class="descricao">Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos,
+            continuidade de negócios e disaster recovery. Foursys com ISO 27001 e ISO 27701 certificadas — pré-requisito para vender a corporativos e governo.</p>
+            <ul>
+                <li>Atender contas governamentais exige certificações maduras de segurança e privacidade — gap natural para fintechs early-stage.</li>
+                <li>Foursys já tem ISO 27001 e 27701 — pode atuar como "selo" de credibilidade ao lado da Pagar em RFPs públicas.</li>
+                <li>DLP, antifraude e DR são frentes onde fintechs perdem contratos B2B grandes — terreno fértil para serviços contínuos.</li>
+                <li>Open Finance amplia superfície de ataque — defesa proativa é exigência regulatória do BCB.</li>
+            </ul>
+        </div>
+
+        <div class="oferta-card">
+            <div class="oferta-header">
+                <h4>3. Engenharia Digital — Plataformas Cloud-Native, Microsserviços &amp; SRE</h4>
+                <span class="score-badge">SCORE 88</span>
+            </div>
+            <p class="descricao">Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade.
+            Modernização de arquiteturas e jornadas digitais para sustentar SLA enterprise.</p>
+            <ul>
+                <li>Plataformas de pagamento exigem alta disponibilidade (≥ 99,95%), latência baixa e observabilidade granular — Pagar precisa profissionalizar essa camada para escalar.</li>
+                <li>Kleber tem fluência em Kubernetes, Terraform, OpenTelemetry, Grafana, ELK — fala a mesma linguagem do squad Foursys.</li>
+                <li>Cliente corporativo/governamental contrata por SLA — SRE é venda obrigatória nesse perfil.</li>
+                <li>Permite à Pagar focar em produto enquanto Foursys garante a base de plataforma.</li>
+            </ul>
+        </div>
+
+        <div class="oferta-card">
+            <div class="oferta-header">
+                <h4>4. Modernização de Legado &amp; Integração (Digibee iPaaS)</h4>
+                <span class="score-badge">SCORE 85</span>
+            </div>
+            <p class="descricao">Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências,
+            construção de plataformas e sustentação (AMS). Parceria oficial com <strong>Digibee</strong> para iPaaS.</p>
+            <ul>
+                <li>Open Finance é, na essência, um problema de integração regulada — Digibee é referência nacional em conectores bancários.</li>
+                <li>Cliente corporativo demanda integração com ERPs (Sankhya, TOTVS, SAP, Oracle) — Kleber tem experiência direta com esse ecossistema.</li>
+                <li>iPaaS reduz time-to-deploy de novas integrações de bancos parceiros, agindo como aceleradora de receita.</li>
+                <li>AMS especializado libera o time interno enxuto da Pagar para foco em produto e relacionamento comercial.</li>
+            </ul>
+        </div>
+
+        <div class="oferta-card">
+            <div class="oferta-header">
+                <h4>5. FourBlox — Aceleração de Desenvolvimento</h4>
+                <span class="score-badge">SCORE 72</span>
+            </div>
+            <p class="descricao">Plataforma proprietária de componentes reutilizáveis para acelerar projetos digitais,
+            jornadas B2B, portais corporativos e backoffice. Reduz time-to-market e custo total de propriedade.</p>
+            <ul>
+                <li>Operação enxuta da Pagar precisa entregar muito com pouco — componentes reutilizáveis encurtam ciclos de release.</li>
+                <li>Portal de cliente corporativo, dashboards de gestão financeira e jornadas de onboarding são candidatos naturais ao FourBlox.</li>
+                <li>Combina com squad ágil e modelo "produto digital" preferido por Kleber.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 8. ESTRATÉGIA DE ABORDAGEM -->
+    <section class="section">
+        <h3>Estratégia de Abordagem</h3>
+        <div class="approach-grid">
+            <div class="approach-card approach-green">
+                <h4>Gancho de Entrada</h4>
+                <p><strong>Tema:</strong> "Como transformar a tese de IA + Open Finance da Pagar em diferencial defensável contra Stark Bank, Cora e Asaas — sem onerar headcount fixo?"</p>
+                <ul>
+                    <li>Iniciar pelo livro do Kleber ("Empresas Emocionais") como sinal de leitura cuidadosa do perfil.</li>
+                    <li>Trazer cases Foursys de fintech / setor financeiro com squads de IA Generativa em produção.</li>
+                    <li>Mencionar parceria Digibee como aceleradora de Open Finance e ISO 27001/27701 como argumento para o canal governo.</li>
+                </ul>
+            </div>
+            <div class="approach-card approach-red">
+                <h4>Oportunidade Quente</h4>
+                <p><strong>Janela:</strong> ciclo orçamentário 2026 da Pagar + estruturação de marca via Encaso (sinal de captação ou expansão).</p>
+                <ul>
+                    <li>Squad de IA Generativa para produto financeiro — vendor não identificado publicamente.</li>
+                    <li>Adequação ISO 27001/27701 e LGPD para qualificação em RFPs governamentais.</li>
+                    <li>SRE / observabilidade para sustentar SLA enterprise (acordos B2B).</li>
+                    <li>AMS &amp; sustentação para liberar o time enxuto a focar em comercial e produto.</li>
+                </ul>
+            </div>
+            <div class="approach-card approach-purple">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p><strong>Por que Foursys:</strong></p>
+                <ul>
+                    <li>24 anos de mercado, 41.000+ projetos entregues — track record para conta governamental.</li>
+                    <li>AI Squad com produto proprietário, FourBlox e parceria Digibee — combinação rara entre concorrentes.</li>
+                    <li>ISO 27001 e 27701 — pré-qualificação direta em segurança e privacidade.</li>
+                    <li>Modelo flexível (squad, projeto, AMS, co-gerenciado) — encaixa no porte enxuto da Pagar.</li>
+                    <li>Experiência Foursys no setor financeiro brasileiro — fala o idioma do cliente final corporativo.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="insight-box" style="margin-top: 20px;">
+            <h4>Insights de Negócio para a Conversa</h4>
+            <ul>
+                <li>Mercado brasileiro de fintechs B2B em consolidação: Stark Bank, Cora, Asaas, Conta Simples já capitalizadas — Pagar precisa de diferenciação técnica visível.</li>
+                <li>Open Finance avança com novas fases (iniciação, seguros, câmbio) — quem dominar a integração regulada lidera a próxima onda.</li>
+                <li>IA Generativa em fintech está em fase de transição da prova-de-conceito para produção — janela rara para construir vantagem competitiva.</li>
+                <li>Setor público brasileiro acelerou contratação de fintechs em 2024-2025 (folha de pagamentos, repasses, programas sociais) — exige certificação madura.</li>
+                <li>Atenção: Pagar.com.br não deve ser confundida com Pagar.me (Stone Co.) — diferença óbvia ao perfil de Kleber, mas vale validar a posição na conversa.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 9. BENCHMARK DE CONCORRENTES -->
+    <section class="section">
+        <h3>Benchmark de Concorrentes &amp; Gap Analysis</h3>
+        <div class="competitor-grid">
+            <div class="competitor-card">
+                <h4>Stark Bank</h4>
+                <p>Fintech B2B com foco em corporações grandes. Plataforma API-first para pagamentos automatizados, conta corporativa, conciliação e crédito. Forte em engenharia, equipes técnicas robustas e integração nativa com ERPs.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Cora</h4>
+                <p>Conta PJ digital com foco em PMEs e médio mercado. Cobrança, gestão de despesas e crédito. Capitalizada com grandes rodadas (Tiger Global, Lightrock) e marca conhecida no segmento.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Asaas</h4>
+                <p>Plataforma de gestão financeira automatizada para PMEs e profissionais liberais. Forte em cobrança, conta digital, antecipação de recebíveis e integração com sistemas. Valuation expressivo e crescimento agressivo.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Conta Simples</h4>
+                <p>Conta PJ + cartões corporativos + gestão de despesas. Atende PMEs e mid-market. Diferencia-se em UX e relatórios financeiros. Capitalizada por Valor Capital, Kaszek e Base10.</p>
+            </div>
+        </div>
+
+        <div class="insight-box" style="margin-top: 20px;">
+            <h4>Gap Analysis — Onde a Pagar pode Avançar</h4>
+            <ul>
+                <li><strong>Tese diferenciada (IA + Open Finance + Governo):</strong> nenhum dos concorrentes mira simultaneamente IA, Open Finance e setor público — Pagar tem espaço para liderar esse nicho.</li>
+                <li><strong>Engenharia / SRE:</strong> Stark Bank é referência em engenharia; a Pagar precisa profissionalizar plataforma para sustentar tese em larga escala.</li>
+                <li><strong>Compliance e governança:</strong> Stark Bank, Cora e Asaas têm controles maduros pelo porte e tempo de operação; Pagar precisa acelerar ISO/SOC 2 para fechar contratos enterprise.</li>
+                <li><strong>Storytelling / marca:</strong> Cora e Asaas têm presença digital robusta; Pagar começou a estruturar via Encaso — momento certo para investir em produto + marketing técnico (cases, white papers, eventos).</li>
+                <li><strong>Antifraude e risco:</strong> todos investem; modelo regulado de ML em tempo real é fronteira competitiva clara.</li>
+            </ul>
+        </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- 10. PERFIL PESSOAL & RAPPORT -->
+    <section class="section rapport">
+        <h3>Perfil Pessoal &amp; Rapport com Kleber Couto</h3>
+        <p>
+            Kleber Couto é executivo de TI sênior com <strong>28+ anos de experiência</strong>, perfil
+            <em>"founder's DNA + corporate"</em> — co-fundou em 1995 a <strong>Estilingue</strong> (uma das
+            primeiras agências de e-commerce do Brasil, parte do início do Shopping UOL) e construiu carreira
+            em multinacionais. É <strong>autor do livro "Empresas Emocionais"</strong> (Alta Books, 2023),
+            tem patente registrada (BR 10 2014 005719 6 A2) e venceu <strong>17 Cannes Lions</strong> com a
+            campanha "Dove Real Beauty Sketches" pela Unilever em 2013. Trilíngue (português, inglês, espanhol).
+        </p>
+
+        <div class="info-grid">
+            <div class="info-card" style="border-color: #b9b3ff;"><div class="label">Localização</div><div class="value">Barueri / SP — Brasil</div></div>
+            <div class="info-card" style="border-color: #b9b3ff;"><div class="label">LinkedIn</div><div class="value">linkedin.com/in/klebercouto · 3.734 seguidores · 500+ conexões</div></div>
+            <div class="info-card" style="border-color: #b9b3ff;"><div class="label">GitHub</div><div class="value">@klebercouto (perfil ativo — incomum em líderes seniores, sinaliza viés tech real)</div></div>
+            <div class="info-card" style="border-color: #b9b3ff;"><div class="label">Idiomas</div><div class="value">Português · Inglês · Espanhol (todos nativo/bilíngue)</div></div>
+            <div class="info-card" style="border-color: #b9b3ff;"><div class="label">Formação</div><div class="value">Ciência da Computação (UNINOVE) · MBA Tech Management (FIA)</div></div>
+            <div class="info-card" style="border-color: #b9b3ff;"><div class="label">Pós Recente</div><div class="value">Bachelor em Empreendedorismo (UNIP, 2020-2023)</div></div>
+            <div class="info-card" style="border-color: #b9b3ff;"><div class="label">Certificações</div><div class="value">PMP · ITIL v3 · SAFe® (2021)</div></div>
+            <div class="info-card" style="border-color: #b9b3ff;"><div class="label">Trajetória</div><div class="value">Roche → Unilever → Abbott → Shire → Prudential → Prevenir → Pagar</div></div>
+            <div class="info-card" style="border-color: #b9b3ff;"><div class="label">Diferencial</div><div class="value">17 Cannes Lions (Dove) · Patente BR · Livro publicado</div></div>
+            <div class="info-card" style="border-color: #b9b3ff;"><div class="label">Estilo de Liderança</div><div class="value">"Mão na massa" · transferência de conhecimento · pressão fora da zona de conforto (relato de pares)</div></div>
+            <div class="info-card" style="border-color: #b9b3ff;"><div class="label">Atual cargo</div><div class="value">IT Director · Pagar — desde out/2023</div></div>
+            <div class="info-card" style="border-color: #b9b3ff;"><div class="label">Departamento / Nível</div><div class="value">Engineering and Technical · Director (decisor técnico)</div></div>
+        </div>
+
+        <div class="insight-box" style="margin-top: 20px;">
+            <h4>5 Dicas de Conversa para Rapport</h4>
+            <ul>
+                <li><strong>1. "Empresas Emocionais" como porta de entrada:</strong> ele publicou pela Alta Books em maio/2023 — citar uma ideia do livro (gestão emocional × resultado de negócio) sinaliza preparo e gera conexão imediata.</li>
+                <li><strong>2. Falar a linguagem de IA Generativa moderna:</strong> ele domina LangChain, LangGraph, AutoGen, CrewAI, Pinecone, Qdrant — discutir RAG, agentes autônomos e MLOps é território natural; nada de papo de "chatbot".</li>
+                <li><strong>3. Reconhecer a trajetória rara (Roche → Unilever → Cannes → fintech):</strong> ele combina marketing digital + tecnologia + empreendedorismo. Um "executivo-fundador" gosta de pares que respeitam essa multiplicidade.</li>
+                <li><strong>4. Postura de parceria, não de fornecedor:</strong> recomendações públicas o descrevem como líder que "coloca a mão na massa" — chegue com hipóteses técnicas concretas, não com brochures.</li>
+                <li><strong>5. Conectar com a tese da Pagar:</strong> "IA + Open Finance + governo" é o ângulo competitivo dele — provoque sobre como Foursys (ISO 27001, Digibee, AI Squad) protege e acelera essa tese, em vez de vender squads soltos.</li>
+                <li><strong>Bônus — patente BR e Cannes Lions:</strong> são vitórias inegociáveis em sua biografia; reconhecê-las (sem bajulação) demonstra que você fez o dever de casa.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 11. PERFIL DO CIO E POSIÇÃO DA EMPRESA -->
+    <section class="section">
+        <h3>Perfil do Diretor de TI &amp; Posição da Empresa</h3>
+        <p style="font-size: 14px; color: var(--text-light);">
+            <strong>Nota:</strong> Kleber Couto está registrado como <em>IT Director</em> da Pagar desde
+            outubro/2023. O perfil LinkedIn pode estar desatualizado quanto ao tempo total de cargo —
+            recomenda-se confirmar no primeiro contato se ele segue ativo no papel e qual a estrutura
+            atual de TI da Pagar (a fintech aparece com 1–10 colaboradores diretos no LinkedIn, mas
+            opera com squads externos e parceiros tecnológicos).
+        </p>
+        <div class="info-grid" style="margin-top: 20px;">
+            <div class="info-card"><div class="label">Hierarquia (Kleber)</div><div class="value">IT Director — reporte direto ao C-Level / fundador</div></div>
+            <div class="info-card"><div class="label">Reporte (provável)</div><div class="value">CEO / Sócios-fundadores</div></div>
+            <div class="info-card"><div class="label">Abrangência</div><div class="value">Infraestrutura, segurança, produto técnico, IA, parcerias</div></div>
+            <div class="info-card"><div class="label">Equipe</div><div class="value">Time enxuto interno + squads e parceiros externos (modelo fintech)</div></div>
+            <div class="info-card"><div class="label">Papel da TI</div><div class="value">Driver estratégico — IA + Open Finance são o "produto"</div></div>
+            <div class="info-card"><div class="label">Estrutura</div><div class="value">Centralizada · Mix interno + outsourcing especializado</div></div>
+            <div class="info-card"><div class="label">Decisão de Compra</div><div class="value">Decisor técnico forte — alta autonomia em arquitetura, ferramentas e parcerias</div></div>
+            <div class="info-card"><div class="label">Maturidade Digital</div><div class="value">Alta no discurso técnico — implementação ainda em construção (porte)</div></div>
+        </div>
+    </section>
+
+    <!-- 12. DISTRIBUIÇÃO DE INVESTIMENTO -->
+    <section class="section">
+        <h3>Distribuição Estimada de Investimento Tecnológico</h3>
+        <p style="font-size: 14px; color: var(--text-light);">
+            Estimativa qualitativa baseada em sinais públicos (LinkedIn de Kleber, declarações da empresa,
+            stack referenciado, perfil de cliente-alvo). Não é alocação orçamentária oficial.
+        </p>
+        <div style="margin-top: 18px;">
+            <div class="bar-row">
+                <div class="bar-label">IA Generativa &amp; ML</div>
+                <div class="bar-track"><div class="bar-fill" style="width: 28%;">28%</div></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Plataforma &amp; Engenharia</div>
+                <div class="bar-track"><div class="bar-fill" style="width: 22%;">22%</div></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Open Finance &amp; Integrações</div>
+                <div class="bar-track"><div class="bar-fill" style="width: 18%;">18%</div></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Cibersegurança &amp; LGPD</div>
+                <div class="bar-track"><div class="bar-fill" style="width: 15%;">15%</div></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Cloud &amp; Observabilidade (SRE)</div>
+                <div class="bar-track"><div class="bar-fill" style="width: 10%;">10%</div></div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">Antifraude / Risk Engine</div>
+                <div class="bar-track"><div class="bar-fill" style="width: 7%;">7%</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 13. PREFERÊNCIAS DE FORNECEDOR -->
+    <section class="section">
+        <h3>Preferências de Fornecedor</h3>
+        <p>Critérios de alta relevância identificados a partir do perfil de Kleber Couto e do posicionamento da Pagar:</p>
+        <div class="tags">
+            <span class="tag tag-active">Foco em produto digital (não em horas)</span>
+            <span class="tag tag-active">Squads ágeis &amp; entrega contínua</span>
+            <span class="tag tag-active">Maturidade real em IA Generativa &amp; LLMs</span>
+            <span class="tag tag-active">Compliance LGPD / ISO 27001 / 27701</span>
+            <span class="tag tag-active">Aceleradores próprios (FourBlox, AI Squad)</span>
+            <span class="tag tag-active">Capacidade de M&amp;A / due diligence técnica</span>
+            <span class="tag tag-active">Track record em setor financeiro</span>
+            <span class="tag tag-active">Modelo flexível (squad / projeto / AMS)</span>
+        </div>
+
+        <div class="info-grid" style="margin-top: 20px;">
+            <div class="info-card"><div class="label">Perfil de Fornecedor Buscado</div><div class="value">Parceiro consultivo, com produto + squad, capaz de co-criar e medir resultado</div></div>
+            <div class="info-card"><div class="label">Modelo de Contratação Preferido</div><div class="value">Squads dedicados &amp; produto digital · projetos com escopo evolutivo · AMS</div></div>
+            <div class="info-card"><div class="label">Critério de Decisão</div><div class="value">Track record + cultura ágil + governança de dados + diferencial em IA + certificações</div></div>
+            <div class="info-card"><div class="label">Argumentos Decisivos</div><div class="value">ISO 27001/27701 · Digibee iPaaS · AI Squad próprio · 41.000+ projetos · 24 anos</div></div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="brand-line">four<span style="color: var(--accent);">sys</span> | Pre-Sales Intelligence Report</div>
+        <div>Bench Empresas — Pagar (pagar.com.br) · Kleber Couto · Diretor de Tecnologia</div>
+        <div style="margin-top: 4px;">Gerado automaticamente — Confidencial | Maio de 2026</div>
+    </footer>
+
+</div>
+
+<button class="print-btn" onclick="window.print()">🖨️ Imprimir / Exportar PDF</button>
+
+</body>
+</html>

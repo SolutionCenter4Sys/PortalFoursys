@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vendor Ecosystem &amp; Competitive Battle Cards — Bank of America Brasil | Foursys Pre-Sales</title>
+<style>
+    :root {
+        --primary: #1a237e;
+        --primary-light: #3949ab;
+        --accent: #00b894;
+        --accent-orange: #e17055;
+        --bofa-red: #e31837;
+        --bofa-blue: #012169;
+        --bg: #f5f6fa;
+        --card-bg: #ffffff;
+        --text: #2d3436;
+        --text-light: #636e72;
+        --border: #dfe4ea;
+        --purple: #6c5ce7;
+        --purple-dark: #4834d4;
+        --confirmed: #00876c;
+        --signal: #e17055;
+        --inferred: #6c5ce7;
+        --warning: #d63031;
+        --code-bg: #1e1e2e;
+        --code-fg: #cdd6f4;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+        font-size: 14.5px;
+    }
+
+    .container {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 32px 24px;
+    }
+
+    /* HEADER */
+    .header {
+        background: linear-gradient(135deg, var(--bofa-blue) 0%, var(--primary) 60%, var(--purple-dark) 100%);
+        color: #fff;
+        padding: 36px 32px;
+        border-radius: 12px;
+        margin-bottom: 24px;
+        box-shadow: 0 6px 24px rgba(1, 33, 105, 0.25);
+        position: relative;
+        overflow: hidden;
+    }
+    .header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 420px;
+        height: 420px;
+        background: radial-gradient(circle, rgba(0, 184, 148, 0.18), transparent 70%);
+        pointer-events: none;
+    }
+    .header .brand {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        opacity: 0.85;
+        margin-bottom: 8px;
+    }
+    .header h1 {
+        font-size: 28px;
+        font-weight: 800;
+        margin-bottom: 6px;
+        letter-spacing: -0.5px;
+    }
+    .header h2 {
+        font-size: 16px;
+        font-weight: 500;
+        opacity: 0.92;
+        margin-bottom: 14px;
+    }
+    .header .meta {
+        font-size: 13.5px;
+        opacity: 0.88;
+        line-height: 1.55;
+        max-width: 980px;
+    }
+    .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+    }
+    .badge {
+        background: rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(8px);
+        padding: 5px 12px;
+        border-radius: 999px;
+        font-size: 11.5px;
+        font-weight: 600;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+    .badge.accent { background: linear-gradient(135deg, var(--accent), #00cec9); border: none; }
+    .badge.red { background: linear-gradient(135deg, var(--bofa-red), #d63031); border: none; }
+    .badge.orange { background: linear-gradient(135deg, var(--accent-orange), #d63031); border: none; }
+    .badge.purple { background: linear-gradient(135deg, var(--purple), var(--purple-dark)); border: none; }
+
+    /* ANCHOR NAV */
+    .anchor-nav {
+        background: var(--card-bg);
+        padding: 14px 20px;
+        border-radius: 10px;
+        margin-bottom: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        position: sticky;
+        top: 12px;
+        z-index: 100;
+    }
+    .anchor-nav a {
+        color: var(--primary);
+        text-decoration: none;
+        font-size: 12.5px;
+        font-weight: 600;
+        padding: 5px 11px;
+        border-radius: 6px;
+        background: rgba(26, 35, 126, 0.06);
+        transition: all 0.18s;
+    }
+    .anchor-nav a:hover {
+        background: var(--primary);
+        color: #fff;
+        transform: translateY(-1px);
+    }
+
+    /* SECTIONS */
+    .section {
+        background: var(--card-bg);
+        padding: 28px 32px;
+        border-radius: 12px;
+        margin-bottom: 22px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    .section h3 {
+        font-size: 21px;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 14px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .section h3 .num {
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        color: #fff;
+        padding: 5px 12px;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 700;
+        min-width: 38px;
+        text-align: center;
+    }
+    .section h3 .num.red { background: linear-gradient(135deg, var(--bofa-red), #d63031); }
+    .section h3 .num.accent { background: linear-gradient(135deg, var(--accent), #00cec9); }
+    .section h3 .num.purple { background: linear-gradient(135deg, var(--purple), var(--purple-dark)); }
+    .section h3 .num.orange { background: linear-gradient(135deg, var(--accent-orange), #d63031); }
+    .section h4 {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--primary-light);
+        margin: 18px 0 10px 0;
+    }
+    .section p { margin-bottom: 12px; }
+
+    /* OVERVIEW STATS */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        margin: 18px 0;
+    }
+    .stat-card {
+        background: linear-gradient(135deg, #fff, #f7f9fd);
+        padding: 18px 16px;
+        border-radius: 12px;
+        text-align: center;
+        border-top: 4px solid var(--primary);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    .stat-card.confirmed { border-top-color: var(--confirmed); }
+    .stat-card.signal { border-top-color: var(--signal); }
+    .stat-card.inferred { border-top-color: var(--inferred); }
+    .stat-card.red { border-top-color: var(--bofa-red); }
+    .stat-card .stat-val {
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--primary);
+        line-height: 1;
+        margin-bottom: 4px;
+    }
+    .stat-card.confirmed .stat-val { color: var(--confirmed); }
+    .stat-card.signal .stat-val { color: var(--signal); }
+    .stat-card.inferred .stat-val { color: var(--inferred); }
+    .stat-card.red .stat-val { color: var(--bofa-red); }
+    .stat-card .stat-lbl {
+        font-size: 12px;
+        color: var(--text-light);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* VENDOR TABLE */
+    .vendor-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 14px 0;
+        font-size: 13px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    }
+    .vendor-table thead {
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        color: #fff;
+    }
+    .vendor-table.confirmed thead { background: linear-gradient(135deg, var(--confirmed), #00b894); }
+    .vendor-table.signal thead { background: linear-gradient(135deg, var(--signal), #d63031); }
+    .vendor-table.inferred thead { background: linear-gradient(135deg, var(--inferred), var(--purple-dark)); }
+    .vendor-table th, .vendor-table td {
+        padding: 11px 14px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+    }
+    .vendor-table th {
+        font-weight: 700;
+        font-size: 12.5px;
+        letter-spacing: 0.4px;
+    }
+    .vendor-table tbody tr:nth-child(even) { background: #fafbfd; }
+    .vendor-table tbody tr:hover { background: #f1f5fb; }
+    .vendor-table td.vendor-name { font-weight: 700; color: var(--primary); white-space: nowrap; }
+    .vendor-table.confirmed td.vendor-name { color: var(--confirmed); }
+    .vendor-table.signal td.vendor-name { color: var(--signal); }
+    .vendor-table.inferred td.vendor-name { color: var(--inferred); }
+
+    /* TIER LABEL */
+    .tier-label {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+    .tier-label.confirmed { background: var(--confirmed); color: #fff; }
+    .tier-label.signal { background: var(--signal); color: #fff; }
+    .tier-label.inferred { background: var(--inferred); color: #fff; }
+
+    /* CATEGORY GROUPS */
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 12px;
+        margin: 16px 0;
+    }
+    .category-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 14px 16px;
+        border-left: 4px solid var(--primary);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+    .category-card.audit { border-left-color: #f39c12; }
+    .category-card.cloud { border-left-color: #3498db; }
+    .category-card.data { border-left-color: #9b59b6; }
+    .category-card.security { border-left-color: var(--bofa-red); }
+    .category-card.outsourcing { border-left-color: var(--accent-orange); }
+    .category-card.payments { border-left-color: var(--accent); }
+    .category-card .cat-title {
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--text-light);
+        margin-bottom: 8px;
+    }
+    .category-card ul { list-style: none; padding: 0; }
+    .category-card li {
+        font-size: 13px;
+        padding: 4px 0;
+        color: var(--text);
+        border-bottom: 1px dashed var(--border);
+    }
+    .category-card li:last-child { border-bottom: none; }
+    .category-card li strong { color: var(--primary); }
+
+    /* PATTERN CARDS */
+    .pattern-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin: 18px 0;
+    }
+    .pattern-card {
+        display: grid;
+        grid-template-columns: 140px 1fr 1fr;
+        gap: 0;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    }
+    .pattern-num {
+        background: linear-gradient(135deg, var(--bofa-blue), var(--primary));
+        color: #fff;
+        padding: 18px 14px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+    .pattern-num .n {
+        font-size: 32px;
+        font-weight: 800;
+        line-height: 1;
+        margin-bottom: 4px;
+    }
+    .pattern-num .lbl {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        opacity: 0.9;
+    }
+    .pattern-body, .pattern-impl {
+        background: #fff;
+        padding: 16px 18px;
+    }
+    .pattern-body {
+        border-right: 1px solid var(--border);
+    }
+    .pattern-body strong, .pattern-impl strong { color: var(--primary); }
+    .pattern-impl {
+        background: linear-gradient(135deg, #e8fff5, #fff);
+        border-left: 3px solid var(--accent);
+    }
+    .pattern-tag {
+        display: inline-block;
+        font-size: 10.5px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--text-light);
+        margin-bottom: 6px;
+    }
+    .pattern-tag.imp { color: var(--accent); }
+
+    /* COMPETITOR MATRIX */
+    .comp-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 14px 0;
+        font-size: 13px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+    }
+    .comp-table thead {
+        background: linear-gradient(135deg, var(--bofa-red), #d63031);
+        color: #fff;
+    }
+    .comp-table th, .comp-table td {
+        padding: 11px 14px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+    }
+    .comp-table th { font-weight: 700; font-size: 12.5px; }
+    .comp-table tbody tr:nth-child(even) { background: #fafbfd; }
+    .comp-table td.comp-name {
+        font-weight: 700;
+        color: var(--text);
+        white-space: nowrap;
+        background: #f7f9fd;
+    }
+    .comp-table td.priority {
+        font-size: 11px;
+        font-weight: 800;
+        text-align: center;
+        padding: 4px 8px;
+    }
+    .priority-high { background: var(--bofa-red); color: #fff; }
+    .priority-med { background: var(--accent-orange); color: #fff; }
+    .priority-low { background: var(--text-light); color: #fff; }
+
+    /* BATTLE CARDS */
+    .battle-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin: 20px 0;
+    }
+    .battle-card {
+        background: #fff;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+    }
+    .battle-header {
+        padding: 18px 24px;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+    .battle-header.wipro { background: linear-gradient(135deg, #4a148c, #6a1b9a); }
+    .battle-header.stefanini { background: linear-gradient(135deg, #b71c1c, #d32f2f); }
+    .battle-header.tcs { background: linear-gradient(135deg, #1b5e20, #2e7d32); }
+    .battle-header.capgemini { background: linear-gradient(135deg, #0277bd, #039be5); }
+    .battle-header.accenture { background: linear-gradient(135deg, #311b92, #512da8); }
+    .battle-header.cit { background: linear-gradient(135deg, #ff6f00, #ff8f00); }
+    .battle-header.indra { background: linear-gradient(135deg, #00695c, #00897b); }
+    .battle-header.ey { background: linear-gradient(135deg, #ef6c00, #f57c00); }
+    .battle-header h4 {
+        font-size: 19px;
+        font-weight: 800;
+        margin: 0;
+        color: #fff;
+    }
+    .battle-header .threat-level {
+        font-size: 12px;
+        background: rgba(0, 0, 0, 0.25);
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .battle-body {
+        padding: 20px 24px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+    }
+    @media (max-width: 720px) {
+        .battle-body { grid-template-columns: 1fr; }
+        .pattern-card { grid-template-columns: 1fr; }
+        .pattern-num { padding: 12px; }
+    }
+    .battle-col h5 {
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        padding-bottom: 6px;
+        border-bottom: 2px solid;
+    }
+    .battle-col.strengths h5 { color: var(--text-light); border-bottom-color: var(--border); }
+    .battle-col.weakness h5 { color: var(--bofa-red); border-bottom-color: var(--bofa-red); }
+    .battle-col ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .battle-col li {
+        font-size: 13px;
+        padding: 6px 0 6px 22px;
+        position: relative;
+        line-height: 1.5;
+    }
+    .battle-col.strengths li::before {
+        content: "+";
+        position: absolute;
+        left: 0;
+        top: 6px;
+        color: var(--text-light);
+        font-weight: 800;
+        font-size: 15px;
+    }
+    .battle-col.weakness li::before {
+        content: "−";
+        position: absolute;
+        left: 0;
+        top: 6px;
+        color: var(--bofa-red);
+        font-weight: 800;
+        font-size: 15px;
+    }
+    .battle-footer {
+        background: linear-gradient(135deg, #e8fff5, #fff);
+        padding: 16px 24px;
+        border-top: 3px solid var(--accent);
+    }
+    .battle-footer .lbl {
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 6px;
+    }
+    .battle-footer .quote {
+        font-size: 13.5px;
+        font-style: italic;
+        line-height: 1.55;
+        color: var(--text);
+    }
+    .battle-footer .quote strong { color: var(--primary); font-style: normal; }
+
+    /* FAQ */
+    .faq-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin: 16px 0;
+    }
+    .faq-item {
+        background: linear-gradient(135deg, #f7f9fd, #fff);
+        padding: 16px 20px;
+        border-radius: 10px;
+        border-left: 4px solid var(--purple);
+    }
+    .faq-item .q {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--purple-dark);
+        margin-bottom: 8px;
+    }
+    .faq-item .q::before {
+        content: "Q: ";
+        font-weight: 800;
+        color: var(--purple);
+    }
+    .faq-item .a {
+        font-size: 13px;
+        color: var(--text);
+        line-height: 1.6;
+    }
+    .faq-item .a::before {
+        content: "A: ";
+        font-weight: 800;
+        color: var(--accent);
+    }
+
+    /* INSIGHT BOX */
+    .insight-box {
+        background: linear-gradient(135deg, #fff5f5, #fff);
+        border-left: 5px solid var(--bofa-red);
+        padding: 16px 20px;
+        border-radius: 8px;
+        margin: 16px 0;
+    }
+    .insight-box.accent {
+        background: linear-gradient(135deg, #e8fff5, #fff);
+        border-left-color: var(--accent);
+    }
+    .insight-box.purple {
+        background: linear-gradient(135deg, #f3eeff, #fff);
+        border-left-color: var(--purple);
+    }
+    .insight-box.orange {
+        background: linear-gradient(135deg, #fff8e7, #fff);
+        border-left-color: var(--accent-orange);
+    }
+    .insight-box .lbl {
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--bofa-red);
+        margin-bottom: 6px;
+    }
+    .insight-box.accent .lbl { color: var(--accent); }
+    .insight-box.purple .lbl { color: var(--purple); }
+    .insight-box.orange .lbl { color: var(--accent-orange); }
+
+    /* CHEAT SHEET */
+    .cheat-sheet {
+        background: linear-gradient(135deg, var(--bofa-blue), var(--primary));
+        color: #fff;
+        padding: 28px 32px;
+        border-radius: 14px;
+        margin: 20px 0;
+        box-shadow: 0 6px 24px rgba(1, 33, 105, 0.3);
+    }
+    .cheat-sheet h4 {
+        color: #fff;
+        font-size: 18px;
+        margin-bottom: 16px;
+        font-weight: 800;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        padding-bottom: 8px;
+    }
+    .cheat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+    }
+    .cheat-item {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        padding: 14px 16px;
+        border-radius: 10px;
+        border-left: 3px solid var(--accent);
+    }
+    .cheat-item .cheat-lbl {
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        opacity: 0.85;
+        margin-bottom: 6px;
+    }
+    .cheat-item .cheat-val {
+        font-size: 13.5px;
+        line-height: 1.5;
+        font-weight: 600;
+    }
+
+    /* FOOTER */
+    .footer {
+        text-align: center;
+        margin-top: 28px;
+        padding: 22px;
+        color: var(--text-light);
+        font-size: 12px;
+        background: var(--card-bg);
+        border-radius: 10px;
+    }
+    .footer strong { color: var(--primary); }
+
+    /* PRINT BUTTON */
+    .print-btn {
+        position: fixed;
+        bottom: 22px;
+        right: 22px;
+        background: linear-gradient(135deg, var(--accent), #00cec9);
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 999px;
+        font-size: 13.5px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 5px 18px rgba(0, 184, 148, 0.4);
+        z-index: 200;
+    }
+    .print-btn:hover { transform: translateY(-2px); }
+
+    @media print {
+        body { background: #fff; }
+        .container { max-width: none; padding: 0; }
+        .anchor-nav, .print-btn { display: none; }
+        .section, .header, .cheat-sheet { box-shadow: none; page-break-inside: avoid; }
+        .battle-card { page-break-inside: avoid; }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<header class="header">
+    <div class="brand">four<span style="color: var(--accent)">sys</span> | Competitive Intelligence</div>
+    <h1>Vendor Ecosystem &amp; Competitive Battle Cards</h1>
+    <h2>Bank of America Brasil — quem atende hoje, contra quem a Foursys compete, e como vencer Procurement</h2>
+    <div class="meta">
+        Documento de apoio para a primeira reunião com <strong>Cristiane Badejo</strong> (Procurement Manager), <strong>Jaqueline N.</strong> (Procurement Specialist) e gestores TI. Endereça três perguntas que aparecem em <strong>todo</strong> processo de vendor onboarding em banco global:
+        <strong>(i)</strong> quem já atende o BofA Brasil hoje;
+        <strong>(ii)</strong> contra quais vendors a Foursys realmente compete;
+        <strong>(iii)</strong> &quot;por que vocês e não a Wipro / Stefanini / TCS / Capgemini / Accenture / CI&amp;T?&quot;.
+    </div>
+    <div class="badges">
+        <span class="badge accent">9 vendors confirmados</span>
+        <span class="badge orange">10+ vendors com forte sinal</span>
+        <span class="badge purple">8 concorrentes diretos mapeados</span>
+        <span class="badge red">Battle cards prontas para Procurement</span>
+        <span class="badge">Fonte: pública + LinkedIn + vagas BofA + breach notifications</span>
+    </div>
+</header>
+
+<!-- ANCHOR NAV -->
+<nav class="anchor-nav">
+    <a href="#overview">Visão geral</a>
+    <a href="#confirmados">Confirmados</a>
+    <a href="#sinais">Sinais fortes</a>
+    <a href="#inferidos">Inferíveis</a>
+    <a href="#categorias">Por categoria</a>
+    <a href="#padroes">4 Padrões</a>
+    <a href="#matriz">Matriz concorrência</a>
+    <a href="#battle">Battle Cards</a>
+    <a href="#faq">FAQ Procurement</a>
+    <a href="#cheat">Cheat Sheet</a>
+    <a href="#tatica">Tática</a>
+</nav>
+
+<!-- 1. OVERVIEW -->
+<section class="section" id="overview">
+    <h3><span class="num">1</span> Panorama em números</h3>
+    <p>O BofA Brasil opera com um ecossistema vendor que combina <strong>parceiros estratégicos globais</strong> (que entram via contrato corporativo de Charlotte) com <strong>vendors locais especializados</strong> (que entram via Procurement Brasil). A Foursys disputa o segundo grupo — onde Wipro, Stefanini, TCS, Capgemini, Accenture e CI&amp;T jogam diariamente.</p>
+
+    <div class="stats-grid">
+        <div class="stat-card confirmed">
+            <div class="stat-val">9</div>
+            <div class="stat-lbl">Vendors confirmados oficialmente</div>
+        </div>
+        <div class="stat-card signal">
+            <div class="stat-val">10+</div>
+            <div class="stat-lbl">Vendors com forte sinal</div>
+        </div>
+        <div class="stat-card inferred">
+            <div class="stat-val">15+</div>
+            <div class="stat-lbl">Vendors inferíveis (padrão IB)</div>
+        </div>
+        <div class="stat-card red">
+            <div class="stat-val">8</div>
+            <div class="stat-lbl">Concorrentes diretos Foursys</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-val">US$ 13,5 bi</div>
+            <div class="stat-lbl">Tech spend global BofA/ano</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-val">GEP SMART</div>
+            <div class="stat-lbl">Vendor management platform</div>
+        </div>
+    </div>
+
+    <div class="insight-box accent">
+        <div class="lbl">Resumo executivo em 4 linhas</div>
+        <ul style="margin: 0 0 0 20px;">
+            <li>Foursys <strong>não compete</strong> com PwC, EY, Microsoft, AWS, LSEG, Bloomberg, Matera — esses são pilares estruturais multi-anos.</li>
+            <li>Foursys <strong>compete diretamente</strong> com Wipro, Stefanini, TCS, Capgemini, Accenture, CI&amp;T, Indra, Sonda no anel de <em>specialized nearshore IT services</em>.</li>
+            <li>Janela competitiva: <strong>Bank Python expertise + Projeto Matera em curso + timezone BR + ISO 27001+27701 dupla + AI Pair Programmer próprio</strong>.</li>
+            <li>Posicionamento defensável vs. body shops globais: &quot;Não somos vendor genérico de capacity — somos squad especializado em IB/Markets, com ramp-up 3× mais rápido.&quot;</li>
+        </ul>
+    </div>
+</section>
+
+<!-- 2. CONFIRMADOS -->
+<section class="section" id="confirmados">
+    <h3><span class="num accent">2</span> Vendors confirmados oficialmente</h3>
+    <p><span class="tier-label confirmed">Confirmados</span> Vendors com fonte documental pública direta: registro Bacen, demonstrativos, press releases, breach notifications, vagas BofA, ou parceria divulgada pelo próprio banco.</p>
+
+    <table class="vendor-table confirmed">
+        <thead>
+            <tr>
+                <th style="width: 22%;">Vendor</th>
+                <th style="width: 28%;">Função / Escopo</th>
+                <th style="width: 50%;">Fonte da confirmação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="vendor-name">PricewaterhouseCoopers (PwC)</td>
+                <td>Auditor independente do BofA Merrill Lynch Banco Múltiplo S.A.</td>
+                <td>Registro oficial no portal do Banco Central + demonstrativo financeiro 2022 + cadastro qualobanco</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">Microsoft (Azure + O365)</td>
+                <td>Cloud + produtividade. Meta declarada: <strong>80% das workloads em plataformas virtuais</strong></td>
+                <td>Press release Microsoft (2017) — Howard Boville, CTO BofA · contrato estratégico multi-anos</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">AWS (Amazon Web Services)</td>
+                <td>Cloud Security + workloads específicas</td>
+                <td>Vaga ativa BofA Careers — <strong>&quot;AWS Cloud Security Assurance Manager&quot;</strong> (Job ID 26012361) menciona CSPM, CWPP, cloud risk monitoring</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">LSEG (London Stock Exchange Group / Refinitiv)</td>
+                <td>Data, analytics, workflow + LSEG Workspace + <strong>World Check</strong> (compliance/screening)</td>
+                <td>Partnership multi-anos divulgada por Fernando Vicario (CEO Merrill International) + Gianluca Biagini (LSEG)</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">Bloomberg</td>
+                <td>Terminal + Reference Data (5.000+ campos, 10M+ instrumentos)</td>
+                <td>Bloomberg PT-BR docs + cobertura WatersTechnology sobre tech stack BofA</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">Infosys McCamish Systems</td>
+                <td><strong>Deferred compensation plans</strong> — administração de planos de remuneração diferida</td>
+                <td>Breach notification 2023-2024 ao AG do Maine — 57.028 clientes BofA afetados</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">Ernst &amp; Young (EY)</td>
+                <td>Consultoria + serviços específicos (escopo restrito)</td>
+                <td>Breach notification (incidente Clop / MOVEit Transfer)</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">NCB Management Services</td>
+                <td>Cobrança / recovery services</td>
+                <td>Breach notification — vendor de cobrança</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">GEP SMART</td>
+                <td><strong>Plataforma de procurement + vendor management</strong> — sistema usado por Cristiane e Jaqueline diariamente</td>
+                <td>BofA Supplier portal oficial — citação direta + suporte global publicado (USA, Asia, Europe)</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- 3. SINAIS FORTES -->
+<section class="section" id="sinais">
+    <h3><span class="num orange">3</span> Vendors com forte sinal — mencionados em vagas BofA + contexto IB</h3>
+    <p><span class="tier-label signal">Forte sinal</span> Vendors cuja presença foi inferida a partir de vagas internas BofA, descrições técnicas em job posts, anotações de mapas de relacionamento (LinkedIn) ou cobertura jornalística contextual.</p>
+
+    <table class="vendor-table signal">
+        <thead>
+            <tr>
+                <th style="width: 22%;">Vendor</th>
+                <th style="width: 28%;">Função / Escopo</th>
+                <th style="width: 50%;">Fonte do sinal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="vendor-name">Matera Systems</td>
+                <td><strong>Projeto Matera Customizado</strong> — core banking, Pix, SPB, Drex</td>
+                <td>LinkedIn de Roberta Bordin (SVP GCIBT &amp; GTS Tech CIO) — anotação direta &quot;Projeto Matera Customizado&quot;. <strong>Hot signal do relatório.</strong></td>
+            </tr>
+            <tr>
+                <td class="vendor-name">ITRS Geneos</td>
+                <td>Monitoring de trading systems (padrão IB global)</td>
+                <td>Vaga BofA GBS India menciona <em>Geneos</em> em monitoring stack</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">Citrix</td>
+                <td>VDI / Workspace virtualization (ambiente de dev e front office)</td>
+                <td>Vaga BofA — Citrix listado em monitoring stack</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">Sybase + SQL Server + Oracle</td>
+                <td>Bases de dados (Sybase legado em trading, SQL Server e Oracle em IB)</td>
+                <td>Vagas BofA + relato Hacker News de ex-funcionário Quartz</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">TIBCO</td>
+                <td>Middleware / message bus / EAI</td>
+                <td>Vaga BofA — Tibco listado em stack</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">PEGA</td>
+                <td>BPM / workflow / case management</td>
+                <td>Vaga BofA — PEGA</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">Splunk</td>
+                <td>SIEM / observability / log management</td>
+                <td>Vaga BofA Cyber Security menciona Splunk explicitamente</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">ArcSight (OpenText/Micro Focus)</td>
+                <td>SIEM legado — coexistindo com Splunk</td>
+                <td>Vaga BofA Cyber Security menciona ArcSight</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">Coral 8 (SAP)</td>
+                <td>CEP engine (Complex Event Processing) para electronic trading</td>
+                <td>Vaga BofA — Coral 8 em monitoring stack</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">Sercanto / agências de RH</td>
+                <td>Pipeline de talento para alocação — vaga &quot;.NET sênior para atuar no cliente Bank of America&quot;</td>
+                <td>Sercanto job posting (São Paulo) — confirma modelo de body shop allocation no BofA Brasil</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- 4. INFERIDOS -->
+<section class="section" id="inferidos">
+    <h3><span class="num purple">4</span> Vendors inferíveis (padrão IB global + ausência de sinal contrário)</h3>
+    <p><span class="tier-label inferred">Inferíveis</span> Vendors que não temos confirmação direta no BofA Brasil, mas que são <strong>padrão dominante</strong> em IB top-tier e seria estranho o BofA <em>não</em> os usar. Tratar como hipótese alta de uso.</p>
+
+    <table class="vendor-table inferred">
+        <thead>
+            <tr>
+                <th style="width: 26%;">Vendor</th>
+                <th style="width: 28%;">Função / Escopo</th>
+                <th style="width: 46%;">Por que é provável</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="vendor-name">Murex OU Calypso (Nasdaq/Adenza)</td>
+                <td>Risk + Trading Platform</td>
+                <td>Padrão dominante IB global. Quartz cobre muito, mas BofA usa Murex/Calypso em frentes específicas (FX exotic, structured notes) — confirmado por DataIntelo IT Spending Report</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">FactSet</td>
+                <td>Research + portfolio analytics + sell-side workflow</td>
+                <td>Padrão IB para sell-side research, conexão direta com a Equities desk</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">CIP, B3, Selic, Tecban</td>
+                <td>Infraestrutura nacional obrigatória — clearing, custódia, pagamentos</td>
+                <td>Bacen 4.658 — qualquer banco BR conecta a esses sistemas. Não é &quot;vendor de mercado&quot;, mas é integração obrigatória</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">Serasa Experian + Boa Vista + Quod</td>
+                <td>Bureaus de crédito</td>
+                <td>Compulsório para análise corporate + AML/KYC</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">CrowdStrike OU SentinelOne</td>
+                <td>EDR / endpoint security</td>
+                <td>Padrão IB top-tier global. BofA é cliente CrowdStrike historicamente</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">Palo Alto Networks</td>
+                <td>Network security / NGFW / SASE</td>
+                <td>Padrão IB. Banco Inter (peer BR) opera Cortex XSIAM</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">ServiceNow</td>
+                <td>ITSM / workflow / incident management</td>
+                <td>Padrão financial services global</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">Atlassian (Jira + Confluence) OU Azure DevOps</td>
+                <td>DevOps tooling + collaboration</td>
+                <td>Padrão dev. Com Microsoft como parceiro, Azure DevOps é opção forte</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">GitHub Enterprise</td>
+                <td>Source control + Copilot Enterprise</td>
+                <td>Padrão IB moderno (substituiu Bitbucket/Perforce em ondas 2022-2025)</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">Confluent Kafka</td>
+                <td>Event streaming</td>
+                <td>Padrão Bank Python event-driven — Quartz usa Kafka como event bus</td>
+            </tr>
+            <tr>
+                <td class="vendor-name">Wipro, Stefanini, TCS, Capgemini, Accenture, CI&amp;T, Indra, Sonda, BRQ, Compass UOL, DBC</td>
+                <td>Body shops + digital transformation</td>
+                <td>Mercado natural — Stefanini é dominante BR; TCS e Wipro têm forte presença em IB BR; Capgemini é parceiro tradicional financial services. <strong>Esses são os concorrentes diretos da Foursys</strong></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- 5. POR CATEGORIA -->
+<section class="section" id="categorias">
+    <h3><span class="num">5</span> Visão por categoria — onde Foursys joga e onde não joga</h3>
+
+    <div class="category-grid">
+        <div class="category-card audit">
+            <div class="cat-title">Auditoria &amp; Consultoria estratégica</div>
+            <ul>
+                <li><strong>PwC</strong> (auditor)</li>
+                <li><strong>EY</strong> (serviços)</li>
+                <li>Big 4 (KPMG, Deloitte — provável)</li>
+                <li style="color: var(--text-light); font-size: 11px; margin-top: 6px;"><em>Foursys NÃO compete aqui</em></li>
+            </ul>
+        </div>
+        <div class="category-card cloud">
+            <div class="cat-title">Cloud &amp; Infraestrutura</div>
+            <ul>
+                <li><strong>Microsoft Azure</strong></li>
+                <li><strong>AWS</strong></li>
+                <li>Private cloud própria BofA</li>
+                <li>Citrix (VDI)</li>
+                <li style="color: var(--text-light); font-size: 11px; margin-top: 6px;"><em>Foursys NÃO vende cloud, mas vende squad para operar essas plataformas</em></li>
+            </ul>
+        </div>
+        <div class="category-card data">
+            <div class="cat-title">Market Data &amp; Analytics</div>
+            <ul>
+                <li><strong>LSEG / Refinitiv</strong></li>
+                <li><strong>Bloomberg</strong></li>
+                <li>FactSet (provável)</li>
+                <li>Morningstar (provável)</li>
+                <li style="color: var(--text-light); font-size: 11px; margin-top: 6px;"><em>Foursys NÃO compete aqui</em></li>
+            </ul>
+        </div>
+        <div class="category-card security">
+            <div class="cat-title">Cibersegurança</div>
+            <ul>
+                <li><strong>Splunk</strong> (SIEM)</li>
+                <li>ArcSight (SIEM legado)</li>
+                <li>CrowdStrike (provável)</li>
+                <li>Palo Alto (provável)</li>
+                <li style="color: var(--accent); font-size: 11px; margin-top: 6px;"><em>Foursys complementa com serviços ISO 27001+27701</em></li>
+            </ul>
+        </div>
+        <div class="category-card payments">
+            <div class="cat-title">Core Banking &amp; Pagamentos</div>
+            <ul>
+                <li><strong>Matera</strong> (hot signal — Roberta)</li>
+                <li>CIP, B3, Selic, Tecban</li>
+                <li>Bacen (integração obrigatória)</li>
+                <li style="color: var(--accent); font-size: 11px; margin-top: 6px;"><em>Foursys atua como squad de customização Matera</em></li>
+            </ul>
+        </div>
+        <div class="category-card outsourcing" style="background: linear-gradient(135deg, #fff8e7, #fff); border: 2px solid var(--accent-orange);">
+            <div class="cat-title" style="color: var(--accent-orange);">IT Services / Body Shop / Nearshore</div>
+            <ul>
+                <li><strong>Wipro</strong></li>
+                <li><strong>Stefanini</strong></li>
+                <li><strong>TCS</strong></li>
+                <li><strong>Capgemini</strong></li>
+                <li><strong>Accenture</strong></li>
+                <li><strong>CI&amp;T</strong></li>
+                <li><strong>Indra Group</strong></li>
+                <li><strong>Sonda, BRQ, Compass UOL</strong></li>
+                <li><strong>Sercanto</strong> e outras agências locais</li>
+                <li style="color: var(--bofa-red); font-size: 12px; font-weight: 800; margin-top: 8px;"><strong>FOURSYS COMPETE AQUI</strong></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- 6. PADROES -->
+<section class="section" id="padroes">
+    <h3><span class="num">6</span> Os 4 padrões de compra do BofA Brasil — leitura comercial</h3>
+    <p>Decodificar como o BofA Brasil compra é mais importante que listar quem ele compra. Quatro padrões estruturais definem todo o jogo:</p>
+
+    <div class="pattern-grid">
+        <div class="pattern-card">
+            <div class="pattern-num">
+                <div class="n">1</div>
+                <div class="lbl">Padrão</div>
+            </div>
+            <div class="pattern-body">
+                <div class="pattern-tag">O que o BofA faz</div>
+                <strong>Cloud privada own-built + cloud pública seletiva.</strong> Hari Gopalkrishnan (Group CTIO) declarou economia de US$ 2 bi/ano com cloud própria. Workloads críticas (Quartz, risk, regulatory) ficam internas; periferia migra para Azure + AWS.
+            </div>
+            <div class="pattern-impl">
+                <div class="pattern-tag imp">Implicação para Foursys</div>
+                Não vender &quot;modernização para cloud pública total&quot;. Vender <strong>migração seletiva</strong> + <strong>integração com private cloud BofA</strong>. Squad com domínio dos dois mundos (legacy + hybrid).
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-num" style="background: linear-gradient(135deg, var(--primary), var(--primary-light));">
+                <div class="n">2</div>
+                <div class="lbl">Padrão</div>
+            </div>
+            <div class="pattern-body">
+                <div class="pattern-tag">O que o BofA faz</div>
+                <strong>Vendor para &quot;data + workflow&quot; sob contrato multi-anos.</strong> LSEG partnership é o template — vendor estratégico assina contrato 3-5 anos com escopo amplo + APIs integradas + integração via LSEG Workspace.
+            </div>
+            <div class="pattern-impl">
+                <div class="pattern-tag imp">Implicação para Foursys</div>
+                Posicionar Foursys como <strong>&quot;capacity partner multi-ano&quot;</strong>, não como &quot;vendor de squad pontual&quot;. Linguagem alinhada ao gosto do banco: MSA Staff Augmentation com cláusula de scale up/down.
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-num" style="background: linear-gradient(135deg, var(--primary-light), var(--purple));">
+                <div class="n">3</div>
+                <div class="lbl">Padrão</div>
+            </div>
+            <div class="pattern-body">
+                <div class="pattern-tag">O que o BofA faz</div>
+                <strong>Back-office terceirizado para grandes consultorias.</strong> EY, Infosys McCamish, NCB atendem operações administrativas — não squads tech especializadas. Esse anel é fechado para boutiques.
+            </div>
+            <div class="pattern-impl">
+                <div class="pattern-tag imp">Implicação para Foursys</div>
+                <strong>Não tentar competir aqui.</strong> Competir no anel <strong>&quot;specialized tech for IB/Markets&quot;</strong> — onde nem EY nem Infosys McCamish entram. Pauta: FICC, Quartz, Risk, Markets tech.
+            </div>
+        </div>
+
+        <div class="pattern-card">
+            <div class="pattern-num" style="background: linear-gradient(135deg, var(--purple), var(--purple-dark));">
+                <div class="n">4</div>
+                <div class="lbl">Padrão</div>
+            </div>
+            <div class="pattern-body">
+                <div class="pattern-tag">O que o BofA faz</div>
+                <strong>Body shop dedicado por sub-LOB.</strong> Vaga &quot;.NET sênior para BofA&quot; via Sercanto mostra: cada LOB (Markets, GTS, IB, Wealth) contrata seu vendor de allocation separadamente. Não há master contract único de TI.
+            </div>
+            <div class="pattern-impl">
+                <div class="pattern-tag imp">Implicação para Foursys</div>
+                Entrar <strong>LOB por LOB</strong>, não tentar contrato master único. Sequência sugerida: GCIBT/GTS (Roberta) → Payments (Geraldo) → EM FICC (Victor) → Fraude (Lusmary) → IB (Leonardo).
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 7. MATRIZ DE CONCORRENCIA -->
+<section class="section" id="matriz">
+    <h3><span class="num red">7</span> Matriz de concorrência direta da Foursys — quem realmente disputa com a gente</h3>
+    <p>Mapeamento dos vendors com quem a Foursys cruza no anel de <em>specialized nearshore IT services for banking</em>. Cada concorrente está classificado por <strong>nível de ameaça competitiva</strong> (alto, médio, baixo) e por <strong>onde ele ganha hoje</strong> + <strong>vulnerabilidade que a Foursys explora</strong>.</p>
+
+    <table class="comp-table">
+        <thead>
+            <tr>
+                <th>Concorrente</th>
+                <th style="text-align: center; width: 90px;">Ameaça</th>
+                <th>Onde ganha hoje</th>
+                <th>Vulnerabilidade que Foursys explora</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="comp-name">CI&amp;T</td>
+                <td class="priority priority-high">ALTA</td>
+                <td>Digital + AI nearshore Brasil. Narrativa AI muito forte (CI&amp;T tem produto próprio); footprint forte em fintechs e bancos médios.</td>
+                <td>Sem track record IB top-tier (Quartz/Bank Python). Falta dupla ISO 27001+27701. Sem expertise FICC profundo.</td>
+            </tr>
+            <tr>
+                <td class="comp-name">Wipro (Capco)</td>
+                <td class="priority priority-high">ALTA</td>
+                <td>5 escritórios BR (Curitiba, SP, RJ, POA) + 1.200 pessoas + Capco como braço de banking consulting. Master vendor BofA global.</td>
+                <td>Timezone híbrido Curitiba+Bangalore complica. Falta especialização Bank Python para BofA Brasil. Velocity menor em squads enxutas.</td>
+            </tr>
+            <tr>
+                <td class="comp-name">Stefanini</td>
+                <td class="priority priority-high">ALTA</td>
+                <td>Maior body shop BR. Relacionamento histórico com bancos. Footprint regional Latam. Sourcing rápido.</td>
+                <td>Vocabulário pouco especializado em IB/FICC. Sem AI Pair Programmer próprio. Foco em volume vs. especialização.</td>
+            </tr>
+            <tr>
+                <td class="comp-name">TCS (Tata Consultancy Services)</td>
+                <td class="priority priority-med">MÉDIA</td>
+                <td>Escala global + presença BR forte + experiência em mainframe e core banking. Tem MSA com vários bancos top-3.</td>
+                <td>Mesmo de Wipro — força é volume, fraqueza é especialização IB Brasil. Hourly rate competitivo, mas onboarding lento.</td>
+            </tr>
+            <tr>
+                <td class="comp-name">Capgemini</td>
+                <td class="priority priority-med">MÉDIA</td>
+                <td>Banking consulting forte (especialmente após aquisição Capco no Wipro foi competitor — Capgemini ainda tem Sogeti). Top of mind para CIO global.</td>
+                <td>Caro. Lento para mobilizar squad nearshore BR. Foco em advisory mais que em delivery contínuo.</td>
+            </tr>
+            <tr>
+                <td class="comp-name">Accenture</td>
+                <td class="priority priority-med">MÉDIA</td>
+                <td>Top of mind para CIO. Oferta de &quot;agentic AI&quot; própria. Footprint massivo BR.</td>
+                <td>Caro. Sem foco específico em Bank Python. <strong>Conflito de interesse</strong> com sua oferta de AI agents — concorre com o próprio cliente.</td>
+            </tr>
+            <tr>
+                <td class="comp-name">Indra Group</td>
+                <td class="priority priority-low">BAIXA</td>
+                <td>SAP + financial services + escritórios em SP e RJ. Forte no setor regulatório.</td>
+                <td>Foco SAP — não compete em IB tech profundo. Sem expertise Bank Python.</td>
+            </tr>
+            <tr>
+                <td class="comp-name">Sonda, BRQ, DBC, Compass UOL</td>
+                <td class="priority priority-low">BAIXA</td>
+                <td>Body shops médios BR. Bons em volume + nearshore. Preço competitivo.</td>
+                <td>Sem track record IB top-tier. Sem certificações duplas. Foco varejo bancário, não IB.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="insight-box orange">
+        <div class="lbl">3 concorrentes que importam de verdade</div>
+        <p style="margin: 0;">Em 80% dos cenários a Foursys vai disputar com 3 nomes específicos: <strong>CI&amp;T</strong> (narrativa AI nearshore), <strong>Wipro</strong> (master vendor BofA global + Capco), <strong>Stefanini</strong> (incumbente BR). Os 5 demais entram em cenários específicos ou pontuais. As <strong>battle cards a seguir cobrem todos os 8</strong> — comece estudando esses 3.</p>
+    </div>
+</section>
+
+<!-- 8. BATTLE CARDS -->
+<section class="section" id="battle">
+    <h3><span class="num red">8</span> Battle Cards — &quot;Por que Foursys e não X?&quot;</h3>
+    <p>Material direto para resposta de Procurement. Cada card mostra <strong>como o concorrente vai se vender</strong> (forças que ele cita), <strong>onde ele é vulnerável</strong> (que Foursys pode mencionar sem ser desrespeitoso) e <strong>frase-âncora de fechamento</strong> (a resposta de 30 segundos para Cristiane/Jaqueline).</p>
+
+    <div class="battle-grid">
+
+        <!-- CI&T -->
+        <div class="battle-card">
+            <div class="battle-header cit">
+                <h4>vs. CI&amp;T</h4>
+                <span class="threat-level">Ameaça ALTA</span>
+            </div>
+            <div class="battle-body">
+                <div class="battle-col strengths">
+                    <h5>Como CI&amp;T se vende</h5>
+                    <ul>
+                        <li>Narrativa AI nearshore forte e consolidada</li>
+                        <li>Produto AI próprio (FLOW e variantes)</li>
+                        <li>Footprint global (USA, Brasil, Reino Unido, Japão)</li>
+                        <li>Cases públicos em bancos digitais e fintechs</li>
+                        <li>Marketing maturo, presença em conferências</li>
+                        <li>Capital aberto (NYSE: CINT), credibilidade reforçada</li>
+                    </ul>
+                </div>
+                <div class="battle-col weakness">
+                    <h5>Onde CI&amp;T é vulnerável</h5>
+                    <ul>
+                        <li>Sem track record IB top-tier (Quartz, Bank Python, FICC)</li>
+                        <li>Foco em fintechs/bancos médios — não em IB institucional</li>
+                        <li>Sem dupla certificação ISO 27001+27701</li>
+                        <li>Produto AI próprio gera conflito: cliente prefere agnóstico</li>
+                        <li>Hourly rate alto comparado a peers BR</li>
+                        <li>Sem academia dedicada a Bank Python pattern</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="battle-footer">
+                <div class="lbl">Frase-âncora para Procurement</div>
+                <div class="quote">&quot;<strong>CI&amp;T tem narrativa AI excelente para varejo e fintechs.</strong> Foursys é especializada em <strong>IB institucional + Bank Python (Quartz/Athena)</strong>: temos squad com track record FICC + dupla ISO 27001+27701 + AI Pair Programmer agnóstico (Cursor/Copilot, sem product lock-in). Para BofA IB, somos o fit técnico mais direto.&quot;</div>
+            </div>
+        </div>
+
+        <!-- WIPRO -->
+        <div class="battle-card">
+            <div class="battle-header wipro">
+                <h4>vs. Wipro (incluindo Capco)</h4>
+                <span class="threat-level">Ameaça ALTA</span>
+            </div>
+            <div class="battle-body">
+                <div class="battle-col strengths">
+                    <h5>Como Wipro se vende</h5>
+                    <ul>
+                        <li>Master vendor BofA global (relacionamento histórico)</li>
+                        <li>5 escritórios BR + 1.200 pessoas locais</li>
+                        <li>Capco como braço de banking consulting (M&amp;A 2021, US$ 1,45 bi)</li>
+                        <li>Aquisição de IVIA (2020) + InfoSERVER + Enabler</li>
+                        <li>Escala global — pode mobilizar centenas de pessoas</li>
+                        <li>Preço competitivo via blend BR + Índia</li>
+                    </ul>
+                </div>
+                <div class="battle-col weakness">
+                    <h5>Onde Wipro é vulnerável</h5>
+                    <ul>
+                        <li>Timezone híbrido Curitiba+Bangalore complica overlap com Charlotte</li>
+                        <li>Falta especialização Bank Python para BofA Brasil</li>
+                        <li>Velocity baixa em squads enxutas — modelo voltado para mega-projeto</li>
+                        <li>Capco é consultoria estratégica, não delivery contínuo</li>
+                        <li>Atrito interno BR/Índia em escopo Latam</li>
+                        <li>Retenção menor em devs sêniors (turnover 25-35%)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="battle-footer">
+                <div class="lbl">Frase-âncora para Procurement</div>
+                <div class="quote">&quot;<strong>Wipro é forte em escala e em mega-projetos.</strong> Para squads enxutas e especializadas em IB/Markets — onde o ciclo Matera ou IPO 2027 vai exigir velocidade — a Foursys entrega <strong>ramp-up 3× mais rápido</strong> com squad 100% Brasil (zero atrito BR/Índia) e <strong>retenção &lt;10%</strong> vs. 25-35% do modelo blended.&quot;</div>
+            </div>
+        </div>
+
+        <!-- STEFANINI -->
+        <div class="battle-card">
+            <div class="battle-header stefanini">
+                <h4>vs. Stefanini</h4>
+                <span class="threat-level">Ameaça ALTA</span>
+            </div>
+            <div class="battle-body">
+                <div class="battle-col strengths">
+                    <h5>Como Stefanini se vende</h5>
+                    <ul>
+                        <li>Maior body shop brasileiro</li>
+                        <li>Relacionamento histórico com bancos top-3 BR</li>
+                        <li>Footprint Latam (BR + MX + AR + CO)</li>
+                        <li>Sourcing rápido — banco de talentos amplo</li>
+                        <li>Preço muito competitivo</li>
+                        <li>Capacidade de service desk + L1/L2/L3</li>
+                    </ul>
+                </div>
+                <div class="battle-col weakness">
+                    <h5>Onde Stefanini é vulnerável</h5>
+                    <ul>
+                        <li>Vocabulário pouco especializado em IB/FICC</li>
+                        <li>Sem AI Pair Programmer próprio</li>
+                        <li>Foco em volume vs. especialização técnica</li>
+                        <li>Cases públicos em IB top-tier são raros</li>
+                        <li>Dev médio com curva longa em Bank Python</li>
+                        <li>Velocity alta em volume, mas baixa em squad pequena de alta qualidade</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="battle-footer">
+                <div class="lbl">Frase-âncora para Procurement</div>
+                <div class="quote">&quot;<strong>Stefanini tem escala invejável.</strong> Quando o escopo é volume genérico, são parceiros excelentes. Para o escopo BofA — <strong>IB + Quartz + Projeto Matera</strong> — o ramp-up exige squad com curva curta em Bank Python e dupla ISO 27001+27701. Para esses 20-50 perfis específicos, a Foursys é mais eficiente; para 200+ pessoas commodity, Stefanini complementa.&quot;</div>
+            </div>
+        </div>
+
+        <!-- TCS -->
+        <div class="battle-card">
+            <div class="battle-header tcs">
+                <h4>vs. TCS (Tata Consultancy Services)</h4>
+                <span class="threat-level">Ameaça MÉDIA</span>
+            </div>
+            <div class="battle-body">
+                <div class="battle-col strengths">
+                    <h5>Como TCS se vende</h5>
+                    <ul>
+                        <li>Escala global gigante (600 mil pessoas)</li>
+                        <li>MSA com top-3 bancos BR + globais</li>
+                        <li>Experiência em mainframe + core banking legado</li>
+                        <li>BaNCS (core banking próprio) — credibilidade no setor</li>
+                        <li>Hourly rate muito competitivo (blended Mumbai)</li>
+                        <li>Cases longos em IB tier-1 (sell-side research, post-trade)</li>
+                    </ul>
+                </div>
+                <div class="battle-col weakness">
+                    <h5>Onde TCS é vulnerável</h5>
+                    <ul>
+                        <li>Onboarding lento (12-18 semanas no Quartz)</li>
+                        <li>Overlap mínimo com Charlotte (Mumbai timezone)</li>
+                        <li>Velocity baixa em squad enxuta + ágil</li>
+                        <li>Vocabulário PT-BR não nativo (CDI, IPCA, PTAX)</li>
+                        <li>Transferência internacional de dados — fricção LGPD</li>
+                        <li>Retenção em devs sêniors é desafio</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="battle-footer">
+                <div class="lbl">Frase-âncora para Procurement</div>
+                <div class="quote">&quot;<strong>TCS é referência em escala global.</strong> Para escopos LGPD-sensíveis e que exigem overlap com Charlotte (FICC pricing, real-time risk), o modelo Mumbai gera atrito. Foursys oferece <strong>squad 100% BR + 6-9h de overlap com Charlotte + dado local + ramp-up 6 semanas vs. 12-18</strong>. Em quesitos onde o LGPD não pesa, TCS continua opção; onde pesa, Foursys ganha por design.&quot;</div>
+            </div>
+        </div>
+
+        <!-- CAPGEMINI -->
+        <div class="battle-card">
+            <div class="battle-header capgemini">
+                <h4>vs. Capgemini</h4>
+                <span class="threat-level">Ameaça MÉDIA</span>
+            </div>
+            <div class="battle-body">
+                <div class="battle-col strengths">
+                    <h5>Como Capgemini se vende</h5>
+                    <ul>
+                        <li>Banking consulting estratégico forte</li>
+                        <li>Top of mind para CIO global</li>
+                        <li>Footprint Europeu (importante para BofA Merrill UK/EMEA)</li>
+                        <li>Sogeti como braço de delivery</li>
+                        <li>Cases públicos em transformação digital de bancos</li>
+                        <li>Posicionamento &quot;advisory + delivery&quot; integrado</li>
+                    </ul>
+                </div>
+                <div class="battle-col weakness">
+                    <h5>Onde Capgemini é vulnerável</h5>
+                    <ul>
+                        <li>Caro — TCO 30-50% acima de body shops BR</li>
+                        <li>Lento para mobilizar squad nearshore BR</li>
+                        <li>Foco em advisory mais que delivery contínuo</li>
+                        <li>Sem expertise Bank Python específica</li>
+                        <li>Modelo &quot;long engagement&quot; — não squad pod ágil</li>
+                        <li>Retenção média em devs sêniors no BR</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="battle-footer">
+                <div class="lbl">Frase-âncora para Procurement</div>
+                <div class="quote">&quot;<strong>Capgemini é forte em advisory estratégico.</strong> Para execução squad nearshore BR continuada, com SLA de ramp-up auditado, Foursys é 30-50% mais eficiente em TCO blended rate. Capgemini define o &quot;o que&quot;; Foursys entrega o &quot;como&quot; com velocity mensurável.&quot;</div>
+            </div>
+        </div>
+
+        <!-- ACCENTURE -->
+        <div class="battle-card">
+            <div class="battle-header accenture">
+                <h4>vs. Accenture</h4>
+                <span class="threat-level">Ameaça MÉDIA</span>
+            </div>
+            <div class="battle-body">
+                <div class="battle-col strengths">
+                    <h5>Como Accenture se vende</h5>
+                    <ul>
+                        <li>Top of mind absoluto para C-level</li>
+                        <li>Oferta &quot;agentic AI&quot; própria (com produtos)</li>
+                        <li>Footprint massivo BR (mais de 10.000 pessoas)</li>
+                        <li>Banking practice forte globalmente</li>
+                        <li>Cases públicos em transformação AI</li>
+                        <li>Capacidade end-to-end (estratégia → execução → operação)</li>
+                    </ul>
+                </div>
+                <div class="battle-col weakness">
+                    <h5>Onde Accenture é vulnerável</h5>
+                    <ul>
+                        <li>Caríssima — TCO mais alto do mercado BR</li>
+                        <li>Sem foco específico em Bank Python</li>
+                        <li><strong>Conflito de interesse com IP próprio AI</strong> — vendor pode preferir vender seu produto</li>
+                        <li>Modelo &quot;land &amp; expand&quot; longo — ciclo de venda demorado</li>
+                        <li>Cliente paga premium por marca, não por especialização técnica IB</li>
+                        <li>Velocity menor em squads enxutas (modelo voltado para programa)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="battle-footer">
+                <div class="lbl">Frase-âncora para Procurement</div>
+                <div class="quote">&quot;<strong>Accenture é referência em programa de transformação.</strong> Para squad nearshore BR especializada — sem IP próprio competindo, sem premium de marca — Foursys é a opção mais limpa: <strong>squad agnóstico, AI Pair Programmer baseado em Cursor/Copilot (não em produto Foursys)</strong>, TCO 40-60% menor, ramp-up auditado. Sem conflito de interesse.&quot;</div>
+            </div>
+        </div>
+
+        <!-- INDRA -->
+        <div class="battle-card">
+            <div class="battle-header indra">
+                <h4>vs. Indra Group</h4>
+                <span class="threat-level">Ameaça BAIXA</span>
+            </div>
+            <div class="battle-body">
+                <div class="battle-col strengths">
+                    <h5>Como Indra se vende</h5>
+                    <ul>
+                        <li>Forte presença em SAP + financial services</li>
+                        <li>Escritórios SP + RJ</li>
+                        <li>Posicionamento &quot;Espanha — Latam&quot; — gateway EMEA</li>
+                        <li>Setor regulatório financeiro como nicho</li>
+                        <li>Custo competitivo em projetos SAP</li>
+                        <li>Cases em S/4HANA + regulatory tech</li>
+                    </ul>
+                </div>
+                <div class="battle-col weakness">
+                    <h5>Onde Indra é vulnerável</h5>
+                    <ul>
+                        <li>Foco SAP — não compete em IB tech profundo</li>
+                        <li>Sem expertise Bank Python / Quartz</li>
+                        <li>Cases em IB top-tier são raros</li>
+                        <li>Time BR menor que Stefanini/Wipro</li>
+                        <li>Sem AI Pair Programmer próprio</li>
+                        <li>Vocabulário FICC limitado</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="battle-footer">
+                <div class="lbl">Frase-âncora para Procurement</div>
+                <div class="quote">&quot;<strong>Indra é forte em SAP + regulatório.</strong> Para escopo IB/Markets/Bank Python — onde o stack do BofA é Quartz, Python e ReactJS — Foursys é fit direto; Indra cobre uma fatia muito específica que não conflita.&quot;</div>
+            </div>
+        </div>
+
+        <!-- EY (caso entre como serviços tech) -->
+        <div class="battle-card">
+            <div class="battle-header ey">
+                <h4>vs. EY (se vier propor serviços tech)</h4>
+                <span class="threat-level">Ameaça BAIXA</span>
+            </div>
+            <div class="battle-body">
+                <div class="battle-col strengths">
+                    <h5>Como EY se vende</h5>
+                    <ul>
+                        <li>Relacionamento estabelecido com BofA (incumbente)</li>
+                        <li>Vendor já onboarded — sem fricção burocrática</li>
+                        <li>Credibilidade Big 4 — peso no comitê de auditoria (Eduardo Alcalay)</li>
+                        <li>Capacidade end-to-end (advisory → tech)</li>
+                        <li>Footprint global + presença regulatória</li>
+                        <li>Reputação corporativa máxima</li>
+                    </ul>
+                </div>
+                <div class="battle-col weakness">
+                    <h5>Onde EY é vulnerável</h5>
+                    <ul>
+                        <li>Tech delivery não é DNA — é capability auxiliar</li>
+                        <li>TCO altíssimo (premium Big 4)</li>
+                        <li>Sem squad pod nearshore especializado em IB</li>
+                        <li>Sem AI Pair Programmer dedicado</li>
+                        <li>Histórico de incidente MOVEit/Clop (vulnerabilidade vendor)</li>
+                        <li>Modelo &quot;advisory-led&quot; não casa com delivery contínuo de squad ágil</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="battle-footer">
+                <div class="lbl">Frase-âncora para Procurement</div>
+                <div class="quote">&quot;<strong>EY é parceira indispensável em advisory e regulatório.</strong> Para tech delivery especializado em IB/Markets, Foursys complementa: <strong>squad nearshore + AI Pair Programmer + TCO 3-5× menor que premium Big 4</strong>. EY define a estratégia regulatória, Foursys constrói o código.&quot;</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- 9. FAQ PROCUREMENT -->
+<section class="section" id="faq">
+    <h3><span class="num purple">9</span> FAQ de Procurement — perguntas que Cristiane e Jaqueline vão fazer</h3>
+    <p>Antecipar perguntas é metade da venda. Lista de 10 perguntas que aparecem em <strong>todo</strong> processo de vendor onboarding em banco global, com respostas Foursys prontas:</p>
+
+    <div class="faq-grid">
+        <div class="faq-item">
+            <div class="q">Por que vocês e não a Wipro, que já é vendor BofA global?</div>
+            <div class="a">A Wipro é parceira valiosa para escala — mega-projetos com 200+ pessoas. Para squads enxutas e especializadas em IB/Markets/Bank Python — que é onde o ciclo Matera ou IPO 2027 vai exigir velocidade — a Foursys entrega ramp-up 3× mais rápido com squad 100% Brasil. Não somos substituta, somos complementar para escopos onde Wipro tem fricção (timezone Mumbai + retenção 25-35% + velocity em squad pequena).</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">Vocês já têm cases em banco internacional como BofA?</div>
+            <div class="a">Sim — temos histórico em IB tier-1 e bancos top-3 BR. Posso enviar 3 referência clientes (com NDA) cobrindo: (i) squad Quartz-like em FICC/Treasury; (ii) modernização Pix/SPB; (iii) AI Pair Programmer em ambiente air-gapped. Tempo médio de ramp-up auditado: 6 semanas vs. 12-18 do GBS Mumbai.</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">Qual o blended rate e estrutura de TCO?</div>
+            <div class="a">Posso enviar TCO completo com cenários otimista/base/pessimista. Para squad nearshore BR ramp-up 6 semanas (vs. 12-18 GBS), economia média de 4.000-8.000h por 10 devs/ano. ROI 4-6× sobre o investimento em academia. TCO 30-50% menor que Capgemini/Accenture; 10-20% acima de Stefanini/TCS bruto, mas 30-40% menor em TCO ajustado por ramp-up + retenção.</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">Vocês têm ISO 27001? E LGPD compliance?</div>
+            <div class="a">Sim — Foursys possui ISO 27001 + ISO 27701 (dupla rara local), SOC 2 Type II, LGPD compliance auditada, código de conduta supplier alinhado a BofA Global Supplier Code, e data residency 100% Brasil. Estamos prontos para due diligence em 30 dias se houver fast track.</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">Vocês usam IA? Como protegem o IP do BofA?</div>
+            <div class="a">Nosso AI Pair Programmer roda <strong>dentro do VDI BofA</strong>, com privacy-by-design: RAG indexa apenas conteúdo público (Hull, BIS, ISDA, QuantLib) — código BofA nunca entra no índice; LLM com no-training guarantee (Azure OpenAI ou Bedrock); logs auditáveis 100%; red-teaming pré-aprovado pela security do banco. Zero exfiltração de código. Cláusula contratual de IP residency + revogação imediata em caso de incident.</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">Qual a curva de turnover? Quantos devs vocês perdem por ano?</div>
+            <div class="a">Turnover Foursys em squads dedicadas: &lt;10% anual (vs. 25-40% típico de body shops globais blended India/Manila). Modelo squad pod + carreira clara + remuneração competitiva BR. Bench disponível para substituição: 2 semanas (vs. 4-6 semanas mercado).</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">Como vocês escalam de 5 para 50 pessoas se a parceria evoluir?</div>
+            <div class="a">Pool nearshore Brasil pré-vetted, com curriculum QuartzReady L1 já aplicado, capaz de mobilizar +5 pessoas/mês continuamente. Não dependemos de hire externo — temos academia interna que forma squad antes da alocação. Capacidade total atual: ~150 pessoas em IB/Markets tech.</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">Vocês podem aceitar cláusula de auditoria de fornecedor e penalty por SLA?</div>
+            <div class="a">Sim — aceitamos auditoria semestral pelo BofA (incluindo PwC ou EY como auditor independente), penalty por SLA de ramp-up (6 semanas auditado), penalty por retention (&lt;10% anual), e cláusula de revogação de squad em 30 dias se NPS interno BofA cair abaixo de threshold acordado.</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">Vocês conseguem aceitar nossos Master Service Agreement standard?</div>
+            <div class="a">Sim — temos histórico de aceitar MSAs de bancos top-3 BR com cláusulas: data residency, IP global supplier code, anti-bribery (FCPA), background check, treinamento mandatório anual, certificações pré-aprovadas (ISO 27001+27701, SOC 2), termo de NDA estendido. Time jurídico Foursys pronto para revisão em 2-3 semanas.</div>
+        </div>
+        <div class="faq-item">
+            <div class="q">Vocês conseguem entregar squads que falam inglês com Charlotte?</div>
+            <div class="a">100% dos devs em squads BofA-direcionadas têm inglês fluente comprovado (TOEIC 850+ ou equivalente). Time tem 6-9h de overlap com Charlotte (NC) por timezone — vs. 0-2h de vendors Mumbai/Manila. Vocabulário FICC/Bank Python treinado na academia QuartzReady antes da alocação.</div>
+        </div>
+    </div>
+</section>
+
+<!-- 10. CHEAT SHEET -->
+<section class="section" id="cheat">
+    <h3><span class="num">10</span> Cheat Sheet — frases para levar na reunião</h3>
+    <p>Frases curtas, memorizáveis, prontas para uso na primeira conversa com Procurement, IT Leadership ou Decision Makers. Cada uma neutraliza uma objeção específica:</p>
+
+    <div class="cheat-sheet">
+        <h4>One-liners para sustentar a posição Foursys</h4>
+        <div class="cheat-grid">
+            <div class="cheat-item">
+                <div class="cheat-lbl">Quando perguntarem &quot;por que não Wipro?&quot;</div>
+                <div class="cheat-val">&quot;Wipro é excelente em escala. Foursys é excelente em squad pequeno e especializado. Coexistem.&quot;</div>
+            </div>
+            <div class="cheat-item">
+                <div class="cheat-lbl">Quando perguntarem &quot;por que não CI&amp;T?&quot;</div>
+                <div class="cheat-val">&quot;CI&amp;T é forte em digital. Foursys é forte em IB institucional — Bank Python, FICC, Quartz.&quot;</div>
+            </div>
+            <div class="cheat-item">
+                <div class="cheat-lbl">Quando perguntarem &quot;por que não Stefanini?&quot;</div>
+                <div class="cheat-val">&quot;Stefanini é volume. Foursys é especialização. Use os dois — cada um onde ganha.&quot;</div>
+            </div>
+            <div class="cheat-item">
+                <div class="cheat-lbl">Quando perguntarem &quot;por que não TCS/Mumbai?&quot;</div>
+                <div class="cheat-val">&quot;Timezone Charlotte + LGPD — onde dado fica no Brasil pesa, Foursys ganha por design.&quot;</div>
+            </div>
+            <div class="cheat-item">
+                <div class="cheat-lbl">Quando perguntarem &quot;por que não Accenture?&quot;</div>
+                <div class="cheat-val">&quot;Accenture vende seu produto AI. Foursys é agnóstica — Cursor, Copilot, sem lock-in.&quot;</div>
+            </div>
+            <div class="cheat-item">
+                <div class="cheat-lbl">Quando perguntarem &quot;por que não EY/Big 4?&quot;</div>
+                <div class="cheat-val">&quot;EY define estratégia regulatória. Foursys entrega o código. Complementares.&quot;</div>
+            </div>
+            <div class="cheat-item">
+                <div class="cheat-lbl">Pergunta sobre AI segura</div>
+                <div class="cheat-val">&quot;AI Pair Programmer no VDI BofA, no-training, RAG só com público, logs 100% auditáveis.&quot;</div>
+            </div>
+            <div class="cheat-item">
+                <div class="cheat-lbl">Pergunta sobre ramp-up</div>
+                <div class="cheat-val">&quot;6 semanas para productivity — vs. 12-18 do GBS. Auditável, com SLA contratual.&quot;</div>
+            </div>
+            <div class="cheat-item">
+                <div class="cheat-lbl">Pergunta sobre certificações</div>
+                <div class="cheat-val">&quot;ISO 27001 + 27701 (dupla rara local) + SOC 2 + LGPD + data residency BR.&quot;</div>
+            </div>
+            <div class="cheat-item">
+                <div class="cheat-lbl">Pergunta sobre TCO</div>
+                <div class="cheat-val">&quot;Posso enviar planilha com 3 cenários, blended rate, curva de aprendizado quantificada.&quot;</div>
+            </div>
+            <div class="cheat-item">
+                <div class="cheat-lbl">Pergunta sobre retenção</div>
+                <div class="cheat-val">&quot;Turnover &lt;10% anual em squads dedicadas. Bench substituição: 2 semanas.&quot;</div>
+            </div>
+            <div class="cheat-item">
+                <div class="cheat-lbl">Pergunta sobre escalabilidade</div>
+                <div class="cheat-val">&quot;Capacidade atual ~150 pessoas IB/Markets. Mobilizamos +5/mês contínuo.&quot;</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 11. TATICA -->
+<section class="section" id="tatica">
+    <h3><span class="num accent">11</span> Tática de posicionamento — síntese executiva</h3>
+
+    <div class="insight-box accent">
+        <div class="lbl">Curto prazo (próximas conversas com BofA)</div>
+        <ol style="margin: 0 0 0 20px;">
+            <li><strong>Não tentar deslocar PwC, EY, Microsoft, AWS, LSEG, Bloomberg, Matera</strong> — esses são pilares estruturais multi-anos. Não há ROI em batalhar.</li>
+            <li><strong>Atacar o anel de specialized nearshore IT services</strong> onde Wipro, Stefanini, TCS, CI&amp;T jogam — é lá que a Foursys tem fit + vantagem competitiva.</li>
+            <li><strong>Aproveitar o sinal Matera (Roberta Bordin)</strong> — projeto em curso, escopo específico, sponsor mapeado. <strong>Não atacar a Matera Systems</strong> — se posicionar como squad que customiza a implementação Matera, virando aliado do vendor e do banco.</li>
+            <li><strong>Pedir ao Sergio Donizeti warm intro com Cristiane Badejo</strong> para entender quais categorias do GEP SMART têm vagas de vendor (cloud engineering, AI/ML, cyber, data engineering).</li>
+            <li><strong>Apresentar Foursys como vendor candidato</strong> para 1-2 categorias específicas — não como &quot;fornecedor geral&quot;.</li>
+        </ol>
+    </div>
+
+    <div class="insight-box purple">
+        <div class="lbl">Médio prazo (6-12 meses)</div>
+        <ol style="margin: 0 0 0 20px;">
+            <li><strong>Construir argumento &quot;Foursys vs. Wipro/Stefanini/CI&amp;T&quot; explícito:</strong> timezone, Bank Python expertise, ISO dupla, retenção, nearshore Brasil, AI Pair Programmer próprio.</li>
+            <li><strong>Pedir referência cruzada de outros bancos</strong> — se a Foursys já atende Santander, Itaú, BTG em IB tech, esse é o argumento de credibilidade vs. body shops genéricos.</li>
+            <li><strong>Não competir com EY/PwC em consultoria estratégica</strong>; <strong>complementar</strong> — Foursys executa o que esses recomendam.</li>
+            <li><strong>Empacotar caso QuartzReady</strong> para vender JPMorgan, Citi, Morgan Stanley Brasil — mesma plataforma, custo marginal baixo.</li>
+        </ol>
+    </div>
+
+    <div class="insight-box orange">
+        <div class="lbl">Sinal estratégico para diretoria Foursys</div>
+        <p style="margin: 0;">O BofA Brasil tem <strong>~30-50 vendors ativos no GEP SMART</strong>, dos quais <strong>~5-8 são especializados em IT services / nearshore</strong>. <strong>Wipro e CI&amp;T são os concorrentes mais próximos</strong>. A janela competitiva da Foursys está em (i) Bank Python expertise (Quartz), (ii) Projeto Matera em curso, (iii) timezone Brasil, (iv) ISO 27001+27701 dupla local, (v) AI Pair Programmer próprio. Posicionamento defensável: &quot;<strong>Foursys = squad de IT services especializado em IB/Markets, com AI Pair Programmer próprio, ramp-up 3× mais rápido que body shop genérico</strong>.&quot;</p>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p><strong>four<span style="color: var(--accent)">sys</span> | Competitive Intelligence — Vendor Ecosystem &amp; Battle Cards</strong></p>
+    <p>Documento de apoio competitivo complementar ao Pre-Sales Intelligence Report do Bank of America Brasil (CIO Edson G. Pereira Filho · 11 contatos · 4 anéis)</p>
+    <p><strong>8 battle cards</strong> · <strong>10 FAQs Procurement</strong> · <strong>12 cheat one-liners</strong> · <strong>9 vendors confirmados</strong> · <strong>~25+ vendors mapeados</strong></p>
+    <p>Hot signal: <strong>Projeto Matera Customizado</strong> (Roberta Bordin) — entrada estratégica como squad de customização sem conflito vendor</p>
+    <p>Gerado automaticamente — Confidencial Foursys | Maio/2026</p>
+    <p>Agente Hunter v3 · Anexo competitivo / battle deck</p>
+</div>
+
+</div>
+
+<button class="print-btn" onclick="window.print()">Imprimir / Salvar PDF</button>
+
+</body>
+</html>

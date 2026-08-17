@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<!--
+  Briefing CIO — Julio Silvestre | BE8 ENERGY (BE8 S.A.)
+  IT Forum 2026 — Praia do Forte | Agente Hunter | Modo --full (B→A→C)
+  Design System Foursys — CSS idêntico ao template canônico
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Julio Silvestre | BE8 ENERGY</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Julio Silvestre</h1>
+                <h2>Global Head of IT &amp; Digital — BE8 ENERGY (BE8 S.A.)</h2>
+                <div class="loc">Energia / Biocombustíveis · Passo Fundo/RS · CNPJ 07.322.382/0001-19</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Sul (RS) + porte (R$ 10 bi)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Receita 2025</div><div class="value">R$ 10 bi</div></div>
+                <div class="header-badge"><div class="label">EBITDA 2025</div><div class="value">R$ 809 mi</div></div>
+                <div class="header-badge"><div class="label">Cap. biodiesel</div><div class="value">1,71 bi L</div></div>
+                <div class="header-badge"><div class="label">Share BR</div><div class="value">~15%</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: fontes abertas (Relato Integrado 2025 via imprensa) + leitura de comitê TI + material de apresentação · Diferencia da edição anterior (Trancoso). CIO não esteve no último IT Forum.</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>A BE8 S.A. (nome fantasia Be8; ex-BSBIOS) é produtora global de energia renovável do Grupo ECB, sede em Passo Fundo/RS. FATO: encerrou 2025 com receita líquida de R$ 10 bilhões (+36%), EBITDA de R$ 809 milhões e lucro líquido de R$ 488 milhões (Relato Integrado divulgado à imprensa em abr/2026). Lidera o mercado brasileiro de biodiesel em capacidade instalada (1,71 bilhão de litros/ano, seis unidades) e projeta participação nacional acima de 15%. Expande para etanol de cereais (planta pioneira em Passo Fundo, operação prevista para o fim de 2026), BeVant®, hidrogênio verde e captura/comercialização de CO₂ biogênico (acordo Air Liquide). Presença industrial no Brasil, Paraguai e Suíça; escritórios em São Paulo, Genebra e Dubai.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">BE8 S.A.</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">Passo Fundo / RS (BR-285, Petrópolis)</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">BR + PY + CH; comercial EU/MEA</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">R$ 10 bi (2025) — Relato Integrado / imprensa</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~600–700 (LinkedIn company; +20% YoY)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">S.A. fechada · Grupo ECB</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Julio Silvestre</strong> é Global Head of IT &amp; Digital da Be8 desde jan/2025 (Passo Fundo/RS). Trajetória de ~25+ anos em TI/transformação digital em agro, química, papel/floresta e energia renovável. Passou ~8 anos na Bracell (IT Digital Transformation Corporate Lead; Head of IT Business). Perfil LinkedIn: Data, AI &amp; Industry Automation, Cloud, Security, ERP; certificações de core ERP e APICS (mencionadas no perfil). Nível de decisão: head global — orquestra estrutura de TI multi-país, programa Be8Drive (unificação do core ERP global) e suporte digital ao M&amp;A de usinas. <strong>Leitura de comitê:</strong> Erasmo Carlos Battistella (Presidente) patrocina transformação; Markus Kneubühler e Dayanne Luza aparecem com Julio na comunicação da nova estrutura de TI (out/2025); parceiros SI do Be8Drive (SPRO, MOVE.ON) já estão no core — Foursys não compete no kickoff ERP, compete nas camadas adjacentes (integração M&amp;A, OT/IT, IA industrial, cyber).</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Negócio: produção e comercialização de biodiesel e derivados renováveis, com diversificação para etanol de trigo/triticale, proteína vegetal (glúten vital/DDGS), combustível drop-in BeVant® e vetores de transição (H₂ verde, CO₂ biogênico). Cadeia: agricultura familiar / oleaginosas → usinas → distribuidoras/ANP (mandato B15) → frota pesada e indústria. Prioridades setoriais: escala e logística pós-aquisições, produtividade das plantas incorporadas (+41% médio citado após melhorias), compliance RenovaBio/CBIOs, rastreabilidade de matéria-prima e internacionalização. Pressões: volatilidade de commodities, concorrência de trading houses integradas (ADM, Cargill, Caramuru) e exigência de digital twin operacional multi-site. Posição do alvo: líder em capacidade e share de biodiesel no Brasil, com aposta estrutural no Sul via planta de etanol em Passo Fundo.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Integração de usinas adquiridas (MT, PI, PA, Alto Araguaia) com ERPs e processos legados heterogêneos — Be8Drive existe justamente para unificar.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Ramp-up digital da planta de etanol (fim/2026): OT, MES, qualidade, energia e compliance ambientais em greenfield.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Superfície de ataque OT/IT cresce com seis plantas + sites internacionais — industrial cyber ainda pouco visível em fontes abertas.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Pressão por produtividade e yield nas plantas incorporadas (já houve +41% médio — expectativa de sustentação via dados/IA).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Rastreabilidade e CBIOs: volume e auditoria de créditos de descarbonização sobem com escala (FATO: 32.100 CBIOs no programa 2SC em ciclo anterior citado no branded content Valor).</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Empresa integrada multi-país</span>
+                <span class="tag tag-priority">Decisão data-driven em tempo real</span>
+                <span class="tag tag-priority">Liderança na transição energética</span>
+                <span class="tag tag-priority">Onboarding rápido de M&amp;A</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Be8Drive — ERP global unificado</span>
+                <span class="tag tag-active">Planta etanol Passo Fundo (BNDES ~R$ 730 mi)</span>
+                <span class="tag tag-active">Integração de usinas M&amp;A</span>
+                <span class="tag tag-active">CO₂ biogênico / Air Liquide</span>
+                <span class="tag tag-active">Estrutura TI multi-região</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">iPaaS / integração planta→corporativo</span>
+                <span class="tag tag-opportunity">IA industrial / AI Squad em yield</span>
+                <span class="tag tag-opportunity">Cyber OT multi-site</span>
+                <span class="tag tag-opportunity">Modernização satélites pós-aquisição</span>
+                <span class="tag tag-opportunity">Engenharia digital / MES etanol</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS Digibee) — Onboarding M&amp;A + Be8Drive</h4><span class="score-badge">92/100</span></div>
+                <p>Camada de integração para conectar usinas adquiridas, sistemas satélite e o core unificado do Be8Drive sem customizações frágeis. ISO 27001/27701; 24 anos e 41.000+ projetos Foursys.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: Be8 incorporou múltiplas plantas em 2025–26 (+17% capacidade) — cada site traz stack residual.</li>
+                    <li>Parceiros SI já no ERP; gap típico fica na orquestração planta↔corporate↔trade.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança — OT/IT multi-planta</h4><span class="score-badge">86/100</span></div>
+                <p>Assessment + hardening de perímetro industrial, segmentação OT/IT e playbooks de resposta para usinas e greenfield de etanol.</p>
+                <div class="reasons"><ul>
+                    <li>Expansão geográfica multiplica superfície OT; pouco sinal público de programa cyber industrial maduro.</li>
+                    <li>Regulação e clientes B2B (distribuidoras, export) elevam exigência de continuity.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad — Yield &amp; operações industriais</h4><span class="score-badge">81/100</span></div>
+                <p>Squads multidisciplinares para casos de uso de otimização de processo, preditiva de manutenção e qualidade em biodiesel/etanol.</p>
+                <div class="reasons"><ul>
+                    <li>Companhia já extraiu +41% de produtividade média em unidades adquiridas — próximo salto exige dados/IA.</li>
+                    <li>Perfil do CIO prioriza Data, AI &amp; Industry Automation (LinkedIn).</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital — Planta etanol 2026</h4><span class="score-badge">78/100</span></div>
+                <p>Arquitetura digital do greenfield: integração MES/historiadores, gemelo operacional, dashboards de energia/efluentes e APIs para corporativo.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: planta com cogeração, zero efluente líquido e captura de CO₂ — complexidade OT alta.</li>
+                    <li>Janela: ramp-up operacional fim/2026 = timing de design agora.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado — Satélites pós-M&amp;A</h4><span class="score-badge">72/100</span></div>
+                <p>Inventário e racionalização de aplicações locais das usinas adquiridas (qualidade, balança, laboratório, manutenção) antes/depois do cutover Be8Drive.</p>
+                <div class="reasons"><ul>
+                    <li>Hipótese: múltiplos ERPs/satélites herdados (declarado no discurso público do Be8Drive sobre unificação).</li>
+                    <li>Reduz shadow IT e custo de integração permanente.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>IT Forum 2026: "Como acelerar o onboarding digital das usinas M&amp;A sem travar o Be8Drive — integração e OT/cyber como trilha paralela ao SI de ERP."</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Planta de etanol Passo Fundo (go-live fim/2026) + seis usinas de biodiesel: necessidade imediata de camada de integração e segurança OT; SI do core já definido (SPRO/MOVE.ON).</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Não disputar o core ERP. Entregar velocidade de integração (FourBlox/Digibee), AI Squad com ISO e histórico de 41.000+ projetos, e engenharia digital para indústria de processo — linguagem que Julio já usa (pessoas + tecnologia + multi-site).</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>ADM do Brasil</h4><p>Trading + biodiesel integrado (plantas MT/SC); forte narrativa de soja rastreável e RenovaBio. Gap Be8 vs ADM: escala global de dados da trading house — Be8 precisa compensar com integração multi-usina e inteligência operacional própria.</p></div>
+            <div class="competitor-card"><h4>Cargill</h4><p>Player de volume em biodiesel/óleos; stack corporativa madura e supply chain digital. Gap: Be8 compete em agilidade regional e inovação de produto (etanol de trigo, BeVant) — precisa paridade em integração e analytics.</p></div>
+            <div class="competitor-card"><h4>Caramuru Alimentos</h4><p>Processadora com biodiesel e diversificação (girassol); investe em autossuficiência de óleo nas plantas. Gap tecnológico típico do setor: digitalização de planta ainda desigual — Be8 pode liderar se fechar OT+dados no Sul.</p></div>
+            <div class="competitor-card"><h4>Binatural</h4><p>Produtor especializado em biodiesel; foco operacional. Gap: menor diversificação vs Be8 — Be8 diferencia por portfólio (etanol/proteína/H₂), mas carrega complexidade de sistemas maior.</p></div>
+            <div class="competitor-card"><h4>Acelen Renováveis (referência SAF)</h4><p>Move agenda SAF/macaúba e parcerias globais. Gap: Be8 ainda mais biodiesel/etanol; oportunidade de copiar rigor digital de compliance e rastreio de carbono.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">BE8 S.A. — líder biodiesel BR (~15% share; 1,71 bi L), receita R$ 10 bi (2025), etanol Passo Fundo 2026.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Julio Silvestre — Global Head IT &amp; Digital (desde jan/2025); ex-Bracell; comanda Be8Drive e TI multi-país.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Unificar core pós-M&amp;A + digitalizar greenfield de etanol sem perder velocidade operacional.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Fontes abertas: Be8Drive (ERP global), estrutura TI multi-região, suporte a M&amp;A e planta etanol (CAPEX industrial BNDES ~R$ 730 mi). Sem breakdown % TI público.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">FourBlox iPaaS; Cibersegurança OT/IT; AI Squad industrial.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 45 min no IT Forum: mapa de integração das usinas + escopo PoC iPaaS em 1 planta.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Be8Drive em curso + go-live etanol fim/2026 + IT Forum Praia do Forte 2026.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender ERP (já tem SI). Vender a "esteira de usinas" — integração + OT cyber + IA de yield.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>De líder regional a plataforma multi-usina</h4><p>Be8 cruza R$ 10 bi, compra capacidade e constrói etanol no RS. Julio chega em 2025 para profissionalizar TI global e lançar Be8Drive.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Core unificado vs. fronteira das plantas</h4><p>Enquanto o ERP global avança com SI parceiro, usinas M&amp;A e o greenfield de etanol geram dívida técnica, risco OT e pressão por dados em tempo real.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Foursys na camada de execução</h4><p>FourBlox conecta plantas; Cyber protege OT; AI Squad e Engenharia Digital aceleram yield e ramp-up do etanol — sem colidir com o SI do core.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Dor: usinas novas no perímetro sem integração estável</h4>
+                <p>FATO: +4 usinas em 2025–26 e +17% de capacidade; discurso público do Be8Drive cita ERPs legados das aquisições.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (Digibee) + Modernização de Legado — onboarding padrão de planta em semanas, não em meses de ponto-a-ponto.</p>
+                <div class="sub">Pergunta de descoberta</div><p>"Qual o tempo médio hoje entre o close de uma usina e a visão consolidada de estoque/produção no corporativo?"</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de 1 dia: mapa AS-IS de 1 usina M&amp;A + desenho to-be iPaaS.</p>
+            </div>
+            <div class="business-card">
+                <h4>Dor: risco operacional no greenfield de etanol</h4>
+                <p>FATO: planta com cogeração, zero efluente e captura de CO₂; operação prevista fim/2026; tecnologia de processo com parceiros internacionais.</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital + Cibersegurança OT — arquitetura segura desde o comissionamento.</p>
+                <div class="sub">Pergunta de descoberta</div><p>"Quem está desenhando a camada de dados/segurança OT da planta de etanol além do fornecedor de processo?"</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment OT de 2 semanas com relatório executivo para o comitê Be8Drive.</p>
+            </div>
+            <div class="business-card">
+                <h4>Oportunidade: sustentar o salto de produtividade pós-M&amp;A</h4>
+                <p>FATO: +41,2% de produtividade média nas unidades adquiridas após melhorias de gestão/tecnologia (imprensa abr/2026).</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — casos de uso de yield, qualidade e manutenção preditiva com squad dedicado.</p>
+                <div class="sub">Pergunta de descoberta</div><p>"Quais KPIs de planta ainda dependem de planilha ou consolidação semanal?"</p>
+                <div class="sub">Gancho / próximo passo</div><p>PoC de 6–8 semanas em 1 KPI de processo com ROI mensurável.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck 10–12 slides + one-pager de PoC iPaaS (PDF)</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">FourBlox + Ciber OT + AI Squad — porquê: SI do ERP já definido; gap está na esteira de plantas</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) Integração multi-planta / M&amp;A industrial com iPaaS Digibee; (2) Hardening OT em indústria de processo/energia; (3) Squad de IA para otimização de yield em manufatura contínua. Se case biofuel específico não estiver pronto, usar analogia agro/indústria de commodities e declarar a transferência.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> ROI está no tempo de onboarding de usina e na redução de risco de parada OT — não no "upgrade de ERP". Julio já comprou essa narrativa com o Be8Drive; Foursys completa a fronteira.</p>
+            <p style="margin-top:8px"><em>Discurso sugerido se material setorial faltar: "Vocês unificam o cérebro corporativo; nós conectamos e protegemos os músculos das usinas — sem mexer no SI do core."</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>"Parabéns pelo Be8Drive — nossa proposta não compete com o SI do core; acelera o que fica fora dele."</li>
+                <li>"Cada usina M&amp;A sem padrão de integração vira dívida técnica silenciosa no EBITDA."</li>
+                <li>"A planta de etanol em Passo Fundo é greenfield raro: dá para nascer com OT segura e dados prontos para IA."</li>
+                <li>"Vocês já mostraram +41% de produtividade em plantas compradas — o próximo degrau é AI Squad com KPI."</li>
+                <li>"FourBlox (Digibee) + ISO 27001/27701: integração com governança, não spaghetti."</li>
+                <li>"Comitê sugerido: você + Markus (estrutura TI) + sponsor de Operações da usina piloto."</li>
+                <li>"PoC em 1 planta, 6–8 semanas, critério de sucesso acordado no dia 1."</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Encontro IT Forum + follow-up LinkedIn</td><td>Ata + one-pager PoC</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop AS-IS 1 usina M&amp;A + perímetro etanol</td><td>Mapa de integração + riscos OT</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>FourBlox: 2–3 fluxos críticos planta→corporate</td><td>PoC medido (SLA/tempo/erro)</td><td>6–8 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>AI Squad ou Cyber OT em 1 site</td><td>Runbook + ROI 90 dias</td><td>1 trimestre</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Esteira multi-usina + suporte etanol go-live</td><td>MSA / SOW multi-ano</td><td>2º semestre 2026</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Site institucional Be8</h4><div class="url">https://be8energy.com/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Nuxt/Vue (sinais HTML) + jQuery CDN</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">ASP.NET MVC 5.2 (header X-AspNetMvc-Version)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado (CDN jsDelivr/Cloudflare assets)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado publicamente</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Be8Drive — Core ERP unificado (global)</h4><div class="url">Programa interno (comunicado LinkedIn/SI parceiros)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Core ERP cloud privado (programa global)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Nuvem privada do vendor (hipótese parceiro SI)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações via parceiros SI — gap iPaaS</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Analytics / automação (sinais públicos)</h4><div class="url">LinkedIn company tech signals + CSP site</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Sinais: UiPath, Tableau (LinkedIn stack — validar)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Sinal Google Cloud (LinkedIn — validar)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Camada industrial OT (usinas)</h4><div class="url">Não público — típico SCADA/historiador</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">IHM/SCADA (não publicado)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Sinais LinkedIn: SCADA, Zabbix, Grafana</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Provável híbrido planta/corporate</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Sinal público de Google Cloud (LinkedIn company — validar em discovery). Site em ASP.NET MVC. Multi-site BR/PY/CH exige conectividade corporativa robusta.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">HSTS e CSP no site institucional. Programa OT/industrial não localizado em fontes abertas — GAP prioritário.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">CIO declara foco em AI &amp; Industry Automation; sinais UiPath/ML (LinkedIn). Casos de uso industriais ainda pouco públicos — oportunidade AI Squad.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">Sinais Tableau; necessidade de visão unificada pós-M&amp;A e para CBIOs/rastreio. Data platform corporativa não detalhada publicamente.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">Programa Be8Drive: unificação global do core ERP e substituição de ERPs legados das aquisições (FATO declarado pelo CIO/parceiros SI). SI: SPRO e MOVE.ON. Vendor de ERP omitido no pitch (regra do briefing).</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">Sinais HCM/SuccessFactors, Coupa, Workday (LinkedIn stack — validar). Commodities/contratos agrícolas historicamente relevantes (citado por parceiro SI).</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">Site be8energy.com (Nuxt/Vue + GTM/GA). Canais LinkedIn/empresa ativos. Portal B2B cliente não localizado.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://be8energy.com/</td><td><span class="status-200">200</span></td><td>Nuxt/Vue + jQuery</td><td>jsDelivr / Cloudflare assets</td><td>ASP.NET MVC 5.2; GTM+GA; CSP restritiva; HSTS</td></tr>
+                    <tr><td>https://www.be8energy.com/pt</td><td><span class="status-200">200</span></td><td>Idem</td><td>Idem</td><td>Cookie idioma; mesmo stack</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 20/07/2026 ~17:16 (UTC-3). Só registrar o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Integração</div><h4>Esteira de usinas M&amp;A sem iPaaS padrão</h4><p>Evidência: +4 plantas e discurso de ERPs legados das aquisições. Setor biodiesel sofre com integrações ponto-a-ponto pós-compra.</p><div class="offer">Oferta Foursys: FourBlox (Digibee)</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Segurança</div><h4>Cyber OT multi-site pouco visível</h4><p>Evidência: expansão industrial + greenfield etanol; ausência de programa OT público. Energia/processo é alvo clássico de ransomware.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Dados/IA</div><h4>Yield ainda sob gestão, não sob modelo</h4><p>Evidência: +41% produtividade via gestão/tecnologia; próximo ciclo setorial exige preditiva e otimização contínua.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Engenharia</div><h4>Digitalização do greenfield de etanol</h4><p>Evidência: planta pioneira trigo→etanol+glúten com cogeração e CO₂; risco de nascer com silos de dados OT.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Legado</div><h4>Satélites locais pós-aquisição</h4><p>Evidência setorial: usinas trazem balança, lab, CMMS e qualidade fora do core. Be8Drive resolve ERP; satélites ficam.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Não localizado em detalhe público</div></div>
+                <div class="info-card"><div class="label">Base / atuação</div><div class="value">Passo Fundo/RS (cargo); histórico SP (Bracell/SJC)</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">PT (público); EN provável (multi-país — hipótese)</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1. Reconhecer Be8Drive e o trabalho com a alta liderança — ele comunica com orgulho o kickoff.<br>
+                2. Falar "pessoas + tecnologia + multi-região" (linguagem dele na reestruturação de TI).<br>
+                3. Mencionar Bracell só como respeito à trajetória multi-site, sem comparar empregadores.<br>
+                4. Trazer pergunta de negócio (tempo de onboarding de usina), não slide de features.<br>
+                5. Incluir Operações no próximo passo — Julio escala com comitê, não sozinho.<br>
+                6. Evitar empurrar vendor de ERP; ele já escolheu SI.<br>
+                7. Sul/Passo Fundo: valorizar o greenfield de etanol como orgulho regional da Be8.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>Relato Integrado 2025 via imprensa (Grupo Ceres / Cenário Energia, abr/2026) — receita R$ 10 bi, EBITDA, capacidade, M&amp;A</li>
+                    <li>be8energy.com — notícias planta etanol / BeVant / internacionalização</li>
+                    <li>Valor Econômico (conteúdo de marca Be8, mai/2025) — inovação, CBIOs, Selo Social</li>
+                    <li>BNDES — financiamento ~R$ 729,7 mi planta etanol (notícia Be8)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Headers HTTP be8energy.com (ASP.NET MVC 5.2, CSP, GTM)</li>
+                    <li>LinkedIn posts Julio Silvestre / SPRO — Be8Drive (jun/2026)</li>
+                    <li>LinkedIn company Be8 — sinais de stack (validar)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>ANP / rankings de contratação biodiesel (imprensa setorial)</li>
+                    <li>Concorrentes: ADM, Cargill, Caramuru, Binatural, Acelen (fontes abertas)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn Julio Silvestre — Global Head IT &amp; Digital Be8</li>
+                    <li>Comitê: Erasmo Battistella; Markus Kneubühler; Dayanne Luza (posts Be8/Julio)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebRequest https://be8energy.com/ e /pt — 20/07/2026</li>
+                    <li>Planilha CIOs IT Forum 2026 — ID 48, CNPJ 07.322.382/0001-19</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

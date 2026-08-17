@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Fernando Pereira Campilho | BRADESCO SEGUROS</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Fernando Pereira Campilho</h1>
+                <h2>CIO / Diretor de TI — BRADESCO SEGUROS</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Seguradoras | São Paulo - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 118,5 BI (2025)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Lucro Líquido</div>
+                    <div class="value">R$ 10,1 BI (+11,2%)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescimento</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: BRADESCO SEGUROS</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">O <strong>Grupo Bradesco Seguros</strong> é o maior conglomerado segurador da América Latina, atuando nos segmentos de seguros, previdência complementar e capitalização. Subsidiária do Banco Bradesco, a empresa registrou em 2025 um desempenho excepcional: faturamento de <strong>R$ 118,5 bilhões</strong>, lucro líquido de <strong>R$ 10,1 bilhões</strong> (alta de 11,2%) e resultado operacional de <strong>R$ 22,3 bilhões</strong> (+16,1%). O grupo retornou à sociedade R$ 60,7 bilhões em indenizações e benefícios. Em 2026, a empresa foca em <strong>eficiência, tecnologia e acesso ao seguro</strong>, com prioridades em produtos para Vida, Saúde, Previdência e PMEs, além de endereçar riscos emergentes como cibersegurança, eventos climáticos e proteção de dados. No campo tecnológico, a Bradesco Seguros desenvolveu a plataforma proprietária de IA generativa <strong>Bridge</strong>, que já impacta mais de 3 milhões de clientes e 80 mil colaboradores com 200+ iniciativas. A parceria com a <strong>GFT</strong> (solução Wynxx) gerou aumento de 40% na produtividade das squads e redução de até 80% no tempo de correção de vulnerabilidades.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Nacional (com operações LATAM)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada (subsidiária Banco Bradesco)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento sustentado (+11,2% em 2025)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Seguros, Previdência e Capitalização</strong> com abrangência <strong>Nacional/LATAM</strong>. O Grupo Bradesco Seguros é líder de mercado no Brasil, concentrando entre 50-55% do mercado junto com os top 5 players. Em 2026, o foco estratégico está em <strong>eficiência operacional com IA</strong>, <strong>ampliação de acesso ao seguro</strong> e <strong>digitalização da jornada do corretor</strong>. A empresa investe pesadamente em inteligência artificial generativa (plataforma Bridge), machine learning, visão computacional e biometria. O corretor mantém papel central na estratégia comercial, com investimentos contínuos em capacitação digital.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar IA generativa com governança e compliance em todas as operações de seguros</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos de subscrição, sinistros e precificação com machine learning</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer cibersegurança e proteção de dados frente à LGPD e riscos emergentes</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Digitalizar e empoderar a rede de corretores com ferramentas de IA e analytics</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar canais digitais com experiência omnichannel (app Minhas Proteções)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Endereçar riscos emergentes: ciberseguros, eventos climáticos, proteção de dados</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Inteligência Artificial / IA Generativa</span>
+                        <span class="tag tag-priority">Cibersegurança e Proteção de Dados</span>
+                        <span class="tag tag-priority">Automação e Eficiência Operacional</span>
+                        <span class="tag tag-priority">Cloud e Arquitetura Multi-Cloud</span>
+                        <span class="tag tag-priority">Digitalização de Canais e Experiência do Cliente</span>
+                    </div>
+                    <h4 style="margin-top:20px;margin-bottom:12px;color:var(--primary)">Iniciativas em Andamento</h4>
+                    <div>
+                        <span class="tag tag-active">Bridge (IA Generativa proprietária)</span>
+                        <span class="tag tag-active">Wynxx/GFT (GenAI para squads)</span>
+                        <span class="tag tag-active">BIA Assistente Virtual (90% resolutividade)</span>
+                        <span class="tag tag-active">Minhas Proteções (super app)</span>
+                        <span class="tag tag-active">Com Você Corretor On (gamificação)</span>
+                        <span class="tag tag-active">Biometria facial para reembolsos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos Tecnológicos</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que estão recebendo investimento ativo na Bradesco Seguros:</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">IA Generativa & Machine Learning</div>
+                        <div class="value">Plataforma Bridge (200+ iniciativas), parceria GFT/Wynxx, assistente BIA, análise de sentimentos, visão computacional</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Automação & Eficiência</div>
+                        <div class="value">Automação de subscrição, precificação inteligente, emissão automatizada de apólices, combate a fraudes com IA</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cloud & Infraestrutura</div>
+                        <div class="value">Arquitetura multi-cloud (Azure, AWS), integração com ServiceNow e Power Platform, modelo agnóstico de modelos de IA</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Digital & Experiência</div>
+                        <div class="value">App Minhas Proteções (40+ serviços), biometria facial, assistentes virtuais com linguagem natural, integração omnichannel</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Capacitação Digital</div>
+                        <div class="value">Programa "Com Você Corretor On" (gamificação, Instagram), 200+ profissionais capacitados em GenAI, treinamento de squads</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cibersegurança & LGPD</div>
+                        <div class="value">Proteção de dados, riscos emergentes em ciberseguros, compliance regulatório, prevenção de fraudes com ML</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <div class="alert-box">
+                <strong>Alto potencial de entrada:</strong> A Bradesco Seguros está em plena expansão de suas iniciativas de IA e automação, com orçamento crescente e demanda por parceiros especializados. A empresa já trabalha com GFT para GenAI e utiliza arquitetura multi-cloud — há espaço para novos parceiros em squads de desenvolvimento, integração e automação.
+            </div>
+            <div class="grid-2">
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 1</div>
+                    <div class="value">Squads de IA/ML para escalar as 200+ iniciativas da plataforma Bridge além das frentes atuais</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 2</div>
+                    <div class="value">Automação de processos de sinistros e subscrição com RPA + IA (expansão do que já fazem)</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 3</div>
+                    <div class="value">Integração e APIs para conectar sistemas legados com novas plataformas digitais (Digibee fit)</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 4</div>
+                    <div class="value">Cibersegurança e governança de dados — compliance LGPD e riscos emergentes</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Fernando Campilho</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>AI Squad — Squads de IA/ML Especializados</h4>
+                    <span class="score-badge">Score: 95/100</span>
+                </div>
+                <div class="reasons">
+                    <p style="font-size:14px;margin-bottom:8px">Squads multidisciplinares com expertise em IA generativa, machine learning e visão computacional para escalar iniciativas da plataforma Bridge.</p>
+                    <ul>
+                        <li>Bradesco Seguros opera 200+ iniciativas de IA — precisa de capacidade adicional de squads</li>
+                        <li>Parceria atual com GFT demonstra abertura para múltiplos fornecedores de IA</li>
+                        <li>AI Squad Foursys pode acelerar frentes de precificação, fraudes e subscrição automatizada</li>
+                        <li>Experiência em modelos multi-cloud (Azure, AWS) alinha com arquitetura da Bridge</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Automação Inteligente & Integração (Digibee)</h4>
+                    <span class="score-badge">Score: 90/100</span>
+                </div>
+                <div class="reasons">
+                    <p style="font-size:14px;margin-bottom:8px">Plataforma de integração e APIs para conectar sistemas legados de seguros com novas plataformas digitais e parceiros.</p>
+                    <ul>
+                        <li>40+ serviços digitais no app Minhas Proteções exigem integração robusta entre sistemas</li>
+                        <li>Modelo multi-cloud (Azure, ServiceNow, Power Platform) demanda orquestração de APIs</li>
+                        <li>Digitalização do corretor requer integração entre CRM, ferramentas de venda e sistemas de apólices</li>
+                        <li>Parceria Foursys-Digibee é diferencial direto para este cenário de integração complexa</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Squads de Desenvolvimento Ágil</h4>
+                    <span class="score-badge">Score: 88/100</span>
+                </div>
+                <div class="reasons">
+                    <p style="font-size:14px;margin-bottom:8px">Squads full-stack para desenvolvimento e evolução de produtos digitais (apps, portais, microsserviços).</p>
+                    <ul>
+                        <li>Evolução contínua do app Minhas Proteções e novos canais digitais</li>
+                        <li>Programa "Com Você Corretor On" indica demanda por plataformas de capacitação e gamificação</li>
+                        <li>Necessidade de squads para evolução da BIA e assistentes virtuais com NLP</li>
+                        <li>Modelo Foursys de squads com aceleração por IA pode entregar +40% de produtividade</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Cibersegurança & Governança de Dados</h4>
+                    <span class="score-badge">Score: 85/100</span>
+                </div>
+                <div class="reasons">
+                    <p style="font-size:14px;margin-bottom:8px">Consultoria e implementação de frameworks de segurança, LGPD e governança de IA para o setor de seguros.</p>
+                    <ul>
+                        <li>Cibersegurança é risco emergente declarado pelo CEO Ivan Gontijo para 2026</li>
+                        <li>Operação com dados de 3M+ clientes exige governança robusta de privacidade</li>
+                        <li>Certificações ISO 27001/27701 da Foursys são diferencial direto</li>
+                        <li>Novo mercado de ciberseguros requer expertise em avaliação de riscos digitais</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Fernando Campilho é um líder técnico com forte background em IA, cloud e transformação digital. Iniciar a conversa demonstrando conhecimento sobre a <strong>plataforma Bridge</strong> e os resultados impressionantes (200+ iniciativas, 40% de produtividade com GenAI). Posicionar a Foursys como parceira capaz de <strong>escalar as iniciativas de IA</strong> já em andamento com squads especializados e acelerar novas frentes com o <strong>AI Squad proprietário</strong>. Reforçar experiência de 24 anos, 41.000+ projetos e certificações ISO 27001/27701.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A Bradesco Seguros está em fase de <strong>escala massiva de IA</strong> (de 200 para centenas de novas iniciativas), com orçamento de TI em crescimento e demanda declarada por eficiência operacional. A parceria atual com GFT para GenAI mostra que a empresa trabalha com <strong>múltiplos fornecedores especializados</strong> — há espaço para a Foursys entrar como parceira complementar em squads de IA, automação e integração. Perspectiva do faturamento: <strong>crescimento sustentado</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>AI Squad proprietário</strong> — aceleração de desenvolvimento com IA, alinhado com a visão de produtividade que Fernando já busca; (2) <strong>Parceria Digibee</strong> — integração/APIs críticas para o ecossistema multi-cloud e multi-produto da Bradesco Seguros; (3) <strong>Certificações ISO 27001/27701</strong> — segurança e privacidade como pré-requisitos no setor financeiro/seguros; (4) <strong>Modelo flexível de squads</strong> — escalabilidade sob demanda para suportar picos de projetos.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. Escala de IA é o desafio central:</strong> A Bradesco Seguros já possui a plataforma Bridge com 200+ iniciativas e parceria com GFT que gerou +40% de produtividade. O próximo passo é escalar para todas as linhas de negócio (Vida, Saúde, Previdência, Capitalização, PMEs) — exigindo mais squads com expertise em IA/ML. A Foursys pode se posicionar como parceira de escala com seu AI Squad.</p>
+                <p style="margin-bottom:12px"><strong>2. Integração é gargalo crítico:</strong> Com 40+ serviços no app Minhas Proteções, arquitetura multi-cloud (Azure, AWS, ServiceNow, Power Platform) e modelo agnóstico de modelos de IA, a complexidade de integração cresce exponencialmente. A parceria Foursys-Digibee é um diferencial direto para orquestração de APIs e conectividade entre sistemas legados e novas plataformas.</p>
+                <p style="margin-bottom:12px"><strong>3. Corretor digital é prioridade estratégica:</strong> O programa "Com Você Corretor On" e o foco declarado na digitalização do corretor abrem oportunidade para plataformas de capacitação, gamificação e ferramentas de venda assistida por IA — área onde squads de desenvolvimento podem agregar valor imediato.</p>
+                <p style="margin-bottom:12px"><strong>4. Cibersegurança e novos produtos:</strong> O CEO Ivan Gontijo declarou cibersegurança, eventos climáticos e proteção de dados como riscos emergentes prioritários para 2026. Isso significa tanto necessidade interna de fortalecer defesas quanto oportunidade de novos produtos (ciberseguros). As certificações ISO da Foursys e expertise em governança de dados são relevantes.</p>
+                <p><strong>5. Background acadêmico do CIO é vantagem:</strong> Fernando Campilho foi professor de MBA na FIAP e tem background em consultoria (Accenture). Ele valoriza fundamentação técnica e abordagem consultiva — a conversa deve ser técnica, baseada em dados e cases, não apenas comercial.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Porto Seguro</h4>
+                <p><strong>Segmento:</strong> Seguros, serviços financeiros e proteção | <strong>Posição:</strong> #1 em confiabilidade, líder em seguro auto (28,11% de market share)</p>
+                <p>Líder em seguros de automóvel e referência em inovação no setor. Implementou IA em cálculo de preços, regulação de sinistros e monitoramento de riscos em tempo real. O app Porto atingiu 2,2 milhões de usuários ativos (+25% ano-a-ano). Investimentos em soluções inclusivas e ferramentas digitais para 37 mil corretores. Forte presença em seguros residenciais com monitoramento de alagamentos por IA.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>SulAmérica</h4>
+                <p><strong>Segmento:</strong> Saúde, odontológico, vida e previdência | <strong>Posição:</strong> #3 em confiabilidade, forte em saúde</p>
+                <p>Uma das maiores seguradoras independentes do Brasil, com foco principal em saúde e previdência. Após a integração com a Rede D'Or, a empresa ampliou sua rede de atendimento e capacidade de investimento em tecnologia. Forte atuação em telemedicina, plataformas digitais de saúde e programas de bem-estar preventivo. Concorre diretamente com Bradesco Seguros nos segmentos de saúde e previdência.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Tokio Marine Seguradora</h4>
+                <p><strong>Segmento:</strong> Auto, residencial, vida, empresarial | <strong>Posição:</strong> #4 em confiabilidade, 13,32% market share auto</p>
+                <p>Referência em tecnologia no setor, a Tokio Marine utiliza <strong>IA generativa em parceria com AWS</strong> para automação de análise de documentos e reembolsos. Faturamento de R$ 1,15 bilhão na região RJ/ES (+15,4% em 2025), com meta de R$ 1,3 bilhão para 2026. Patrocinadora oficial do CQCS Insurtech & Inovação 2025. Forte investimento em inovação, eficiência e suporte digital aos corretores.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Allianz Seguros</h4>
+                <p><strong>Segmento:</strong> Auto, residencial, empresarial, vida | <strong>Posição:</strong> #6 em confiabilidade, 3ª em auto com 13% market share</p>
+                <p>Subsidiária do grupo alemão Allianz SE, conquistou a 3ª posição em seguro auto em 2025 com R$ 5,5 bilhões em prêmios emitidos, superando a Tokio Marine. Forte presença global que permite importar práticas de IA e digitalização da matriz europeia. Aposta em tecnologia para crescer acima do mercado e expandir participação em seguros corporativos e para PMEs.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Os concorrentes da Bradesco Seguros estão investindo agressivamente em <strong>IA aplicada a sinistros e precificação</strong> (Porto Seguro), <strong>IA generativa com AWS</strong> (Tokio Marine) e <strong>digitalização de corretores</strong> (todos). A Bradesco Seguros lidera com a plataforma Bridge e parceria GFT, mas pode ter gaps em: (1) <strong>Velocidade de escala</strong> — precisa de mais squads para escalar de 200 para 500+ iniciativas de IA; (2) <strong>Integração end-to-end</strong> — 40+ serviços no app exigem orquestração de APIs cada vez mais complexa; (3) <strong>Govarnança de IA em produção</strong> — MLOps e monitoramento de modelos em escala para garantir compliance regulatório (SUSEP, LGPD); (4) <strong>Produtos de nicho digital</strong> — ciberseguros e seguros parametrizados para eventos climáticos demandam expertise técnica especializada. A Foursys pode se posicionar como parceira de aceleração com squads de IA, integração (Digibee) e governança de dados.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Superintendente Sênior de Tecnologia — Bradesco Seguros (CIO/Diretor de TI)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">São Paulo, SP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória Profissional</div>
+                        <div class="value">Accenture (consultoria de transformação digital) → Icaro Tech (tecnologia) → Bradesco Seguros</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Atuação Acadêmica</div>
+                        <div class="value">Professor de MBA na FIAP — demonstra perfil técnico-acadêmico e valorização de fundamentação</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Eventos</div>
+                        <div class="value">Palestrante no CQCS Insurtech & Inovação 2025 (São Paulo); presente na Febraban Tech 2025</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Expertise Técnica</div>
+                        <div class="value">Cloud Computing, Inteligência Artificial, Desenvolvimento de Software, Transformação Digital em Seguros</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Abra pela IA aplicada a seguros:</strong> Fernando é expert em IA e cloud — demonstre conhecimento sobre a plataforma Bridge e os resultados de 40% de produtividade com GenAI. Pergunte sobre os próximos passos de escala e mostre como o AI Squad Foursys pode complementar.</p>
+                <p style="margin-bottom:10px"><strong>2. Referencie o CQCS Insurtech:</strong> Ele foi palestrante no maior evento de insurtech da América Latina. Mencionar que acompanhou os debates ou os temas do evento cria conexão profissional imediata e mostra que você entende o ecossistema de seguros.</p>
+                <p style="margin-bottom:10px"><strong>3. Valorize o perfil consultivo-acadêmico:</strong> Fernando foi professor na FIAP e veio da Accenture — ele valoriza conversas fundamentadas em dados, tendências e benchmarks. Traga números, comparativos de mercado e cases documentados, não apenas pitch comercial.</p>
+                <p style="margin-bottom:10px"><strong>4. Conecte-se pelo momento excepcional da empresa:</strong> R$ 10,1 bilhões de lucro (+11,2%) e R$ 118,5 bilhões de faturamento. Reconheça o momentum e posicione a Foursys como parceira para sustentar e acelerar este crescimento com mais capacidade técnica.</p>
+                <p><strong>5. Fale a linguagem do setor de seguros:</strong> Use termos como sinistralidade, subscrição, precificação, SUSEP, Open Insurance. Fernando atua exclusivamente no setor segurador — demonstrar fluência setorial diferencia a Foursys de fornecedores genéricos.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Superintendência Sênior (equivale a diretoria)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Diretoria Executiva / Presidência do Grupo Bradesco Seguros (Ivan Gontijo)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo de Atuação</div>
+                        <div class="value">Tecnologia e transformação digital para todas as linhas de negócio (Vida, Saúde, Auto, Previdência, Capitalização)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Tecnologia</div>
+                        <div class="value">Decisor técnico — influencia seleção de fornecedores, plataformas e arquitetura</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores do Grupo</div>
+                        <div class="value">10.000 ou mais (80 mil impactados pela Bridge)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Clientes Impactados</div>
+                        <div class="value">3 milhões+ (através da plataforma Bridge)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Modelo de Trabalho com Fornecedores</div>
+                        <div class="value">Múltiplos parceiros especializados (GFT, Microsoft, AWS, ServiceNow)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Protagonista: tecnologia é pilar estratégico declarado do CEO para 2026</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Ecossistema Tecnológico Identificado</h3>
+            <div class="chart-container" style="max-width:100%">
+                <div class="grid-2">
+                    <div>
+                        <div class="bar"><div class="bar-label">IA & Machine Learning</div><div class="bar-track"><div class="bar-fill" style="width:95%;background:#1a237e">95%</div></div></div>
+                        <div class="bar"><div class="bar-label">Cloud (Azure/AWS)</div><div class="bar-track"><div class="bar-fill" style="width:85%;background:#1a237e">85%</div></div></div>
+                        <div class="bar"><div class="bar-label">Automação de Processos</div><div class="bar-track"><div class="bar-fill" style="width:80%;background:#3949ab">80%</div></div></div>
+                        <div class="bar"><div class="bar-label">Apps & Canais Digitais</div><div class="bar-track"><div class="bar-fill" style="width:75%;background:#3949ab">75%</div></div></div>
+                    </div>
+                    <div>
+                        <div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:70%;background:#5c6bc0">70%</div></div></div>
+                        <div class="bar"><div class="bar-label">Integração/APIs</div><div class="bar-track"><div class="bar-fill" style="width:65%;background:#5c6bc0">65%</div></div></div>
+                        <div class="bar"><div class="bar-label">Data Analytics</div><div class="bar-track"><div class="bar-fill" style="width:80%;background:#7986cb">80%</div></div></div>
+                        <div class="bar"><div class="bar-label">Biometria & Visão Comp.</div><div class="bar-track"><div class="bar-fill" style="width:60%;background:#9fa8da">60%</div></div></div>
+                    </div>
+                </div>
+                <p style="margin-top:16px;font-size:12px;color:var(--text-light);text-align:center">* Nível estimado de maturidade/investimento por área, baseado em fontes públicas</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Parceiros e Fornecedores Atuais</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Fornecedores de Tecnologia Identificados</h4>
+                    <div>
+                        <span class="tag tag-active">GFT (IA Generativa / Wynxx)</span>
+                        <span class="tag tag-active">Microsoft Azure</span>
+                        <span class="tag tag-active">AWS</span>
+                        <span class="tag tag-active">ServiceNow</span>
+                        <span class="tag tag-active">Microsoft Power Platform</span>
+                    </div>
+                    <h4 style="margin-top:16px;margin-bottom:12px;color:var(--primary)">Ecossistema de Eventos</h4>
+                    <div>
+                        <span class="tag tag-opportunity">CQCS Insurtech & Inovação (Patrocínio Platinum)</span>
+                        <span class="tag tag-opportunity">Febraban Tech</span>
+                        <span class="tag tag-opportunity">IT Forum</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Modelo de Parceria Preferido</div>
+                        <div class="value">Parceiros especializados por domínio (não um único fornecedor para tudo)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Critério de Seleção Principal</div>
+                        <div class="value">Expertise técnica comprovada + resultados mensuráveis (ex: +40% produtividade com GFT)</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Janela de Entrada para Foursys</div>
+                        <div class="value">Posicionar como parceira complementar à GFT em squads de IA, automação e integração — a empresa demonstra abertura para múltiplos fornecedores</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

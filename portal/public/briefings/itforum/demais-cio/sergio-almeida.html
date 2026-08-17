@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Sergio Almeida | BAUMINAS</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Sergio Almeida</h1>
+                <h2>CIO — BAUMINAS</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Indústrias de base química e de transformação | Cataguases - MG</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 2,1 BI a R$ 3 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 80,1 MM a R$ 100 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá entre 10% e 20%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: BAUMINAS</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">O <strong>Grupo BAUMINAS</strong> é uma empresa 100% brasileira com mais de 60 anos de história, sediada em Cataguases (MG), atuando nos setores de mineração e química. O grupo é composto por quatro divisões: <strong>BAUMINAS Águas</strong> (líder nacional em coagulantes para tratamento de água e efluentes), <strong>BAUMINAS Mineração</strong> (produção de minérios de alta qualidade para sais de alumínio e férricos), <strong>BAUMINAS Log</strong> (logística de produtos químicos) e <strong>BAUMINAS Hidroazul</strong> (líder em tratamento de água para piscinas). Opera com <strong>21 unidades no Brasil</strong> — 17 fábricas, 4 unidades de mineração e 2 escritórios administrativos — com presença em todas as regiões do país. A empresa possui certificações ISO 14001 e SASSMAQ, refletindo seu compromisso com sustentabilidade e segurança. O momento estratégico é de consolidação tecnológica: entre 2020 e 2021, a empresa conduziu uma ampla avaliação de segurança cibernética (9 players, 5 fabricantes), implementou soluções Fortinet com SOC 24x7, e está investindo em modernização de ERP (Protheus), Power BI, CSC unificado e automação com IA. O setor de indústria química no Brasil enfrenta desafios de ociosidade (acima de 35%) e pressão logística, mas aposta fortemente em digitalização, IA e descarbonização para 2026.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Estabilidade</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Indústrias de base química e de transformação</strong> com abrangência <strong>Local (Brasil)</strong>. Possui <strong>4 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>Direto com fornecedoríbrido por categoria/ticket — varia conforme valor/risco.</strong>. Perspectiva do orçamento de TI: <strong>Crescerá entre 10% e 20%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Atrair, desenvolver e engajar talentos</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar complexidade dos dados e qualidade da informação</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Integrar equipes de TI e negócios para acelerar a entrega de valor</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Provar valor e ROI sob pressão de custos</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Cibersegurança</span>
+<span class="tag tag-priority">IA / ML</span>
+<span class="tag tag-priority">Automação de processos / RPA</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">HCM</span>
+<span class="tag tag-active">BPM</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">IoT / edge computing</span>
+<span class="tag tag-active">GRC, compliance e auditoria</span>
+<span class="tag tag-active">Sistemas core</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Conectividade e telecom</span>
+<span class="tag tag-opportunity">Cibersegurança</span>
+<span class="tag tag-opportunity">Automação de processos / RPA</span>
+<span class="tag tag-opportunity">IoT / edge computing</span>
+</div><div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria/assessment):</h4>
+                <div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Nuvem pública</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Nuvem Privada e híbrida</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Gestão de dados</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA / ML</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA Generativa</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">APIs e integração</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">GRC, compliance e auditoria</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Sistemas core</span>
+</div>
+            </div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Sergio Almeida</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML com investimento inicial previsto</li><li>IA / ML é prioridade Top 3 de investimento</li><li>IA Generativa com investimento inicial previsto</li><li>Automação de processos / RPA SEM fornecedor definido</li><li>Automação de processos / RPA é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Cibersegurança SEM fornecedor definido</li><li>Cibersegurança é prioridade Top 3</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 66</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Conectividade e telecom SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 61</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Automação de processos / RPA SEM fornecedor definido</li><li>Automação de processos / RPA é prioridade Top 3</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 60</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>APIs e integração com investimento inicial previsto</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Sergio Almeida tem como top prioridades <strong>Cibersegurança; IA / ML; Automação de processos / RPA</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>4 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 4 projetos definidos sem fornecedor: Conectividade e telecom, Cibersegurança, Automação de processos / RPA, IoT / edge computing. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá entre 10% e 20%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; Cibersegurança; Engenharia Digital. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. Ociosidade do setor químico como alavanca de eficiência:</strong> A indústria química brasileira opera com ociosidade média superior a 35% em 2026. Para a BAUMINAS, automação com IA e RPA pode otimizar a utilização das 17 fábricas e 4 unidades de mineração, reduzindo custo por tonelada produzida — conectar diretamente com o AI Squad Foursys.</p>
+                <p style="margin-top:10px"><strong>2. Concorrentes investem em plataformas digitais IoT:</strong> Kemira, Buckman e Solenis já possuem plataformas proprietárias de monitoramento em tempo real (Kemiconnect, Ackumen, OnGuard). A BAUMINAS pode se diferenciar criando uma solução equivalente integrando IoT/edge computing — um dos projetos sem fornecedor definido.</p>
+                <p style="margin-top:10px"><strong>3. LGPD e compliance como urgência setorial:</strong> Com 21 unidades, milhares de colaboradores e dados de clientes do setor público (saneamento), a conformidade com LGPD é crítica. O fato de Sergio acumular o papel de DPO evidencia a relevância — posicionar as ofertas de Cibersegurança e GRC da Foursys.</p>
+                <p style="margin-top:10px"><strong>4. Modernização de ERP como porta de entrada:</strong> A BAUMINAS está em processo de revitalização do ERP Protheus com plano de contas único e dashboards Power BI. Essa jornada abre espaço para integração via APIs (parceria Foursys-Digibee), automação de processos adjacentes e modernização de legados.</p>
+                <p style="margin-top:10px"><strong>5. Cibersegurança em expansão:</strong> Embora a empresa já possua FortiGate/FortiAnalyzer com SOC 24x7 (Brasiline, desde 2021), o tema aparece como projeto sem fornecedor definido — indicando que há novas frentes de segurança sendo planejadas (possivelmente WAF, DLP avançado ou Zero Trust). A Foursys com ISO 27001/27701 tem credenciais para complementar.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>SNF Group</h4>
+                <p><strong>Perfil:</strong> Líder global em polímeros solúveis em água e coagulantes orgânicos, com faturamento de US$ 4,9 bilhões (2022). Opera no Brasil desde 1996 (Guarulhos/SP) e possui unidade industrial em Camaçari/BA desde 2019.</p>
+                <p style="margin-top:8px"><strong>Iniciativas Tecnológicas:</strong> Forte investimento em automação industrial, monitoramento digital de processos produtivos e plataformas de e-commerce B2B para distribuição. Utiliza IoT em plantas para controle de qualidade em tempo real e manutenção preditiva.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Kemira</h4>
+                <p><strong>Perfil:</strong> Empresa finlandesa com quase 100 anos de experiência em soluções de tratamento de água. Atua globalmente com coagulantes, polímeros e anti-incrustantes certificados NSF/FDA. Faturamento de €3,4 bilhões e forte presença no Brasil.</p>
+                <p style="margin-top:8px"><strong>Iniciativas Tecnológicas:</strong> Pioneira em gêmeos digitais para simulação de processos químicos, plataforma digital Kemira Kemiconnect para monitoramento de dosagem em tempo real, e forte investimento em IA para otimização de consumo de químicos nas ETAs.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Buckman</h4>
+                <p><strong>Perfil:</strong> Empresa global de especialidades químicas fundada em 1945, com unidade em Sumaré/SP. Oferece coagulantes (EBC1), biocidas (Oxamine®), dispersantes e inibidores de incrustação para indústrias de energia, papel, celulose e etanol.</p>
+                <p style="margin-top:8px"><strong>Iniciativas Tecnológicas:</strong> Plataforma Ackumen® de inteligência conectada com IoT e analytics para monitoramento contínuo de processos de tratamento de água. Investimentos em machine learning para dosagem preditiva e blockchain para rastreabilidade da cadeia de suprimentos.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Solenis (ex-Ashland Water Technologies)</h4>
+                <p><strong>Perfil:</strong> Multinacional focada em químicos especiais para tratamento de água e processos industriais. Resultado da fusão com Diversey em 2023, ampliando portfólio. Presença global com operações significativas na América Latina.</p>
+                <p style="margin-top:8px"><strong>Iniciativas Tecnológicas:</strong> Plataforma OnGuard™ com sensores IoT para monitoramento 24/7 de sistemas de tratamento, analytics avançado para otimização de processos e investimentos em sustentabilidade digital com redução de pegada de carbono via IA.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Onde a BAUMINAS pode se diferenciar</h4>
+                <p>Os concorrentes multinacionais investem fortemente em <strong>plataformas digitais proprietárias com IoT e analytics</strong> (Kemira Kemiconnect, Buckman Ackumen, Solenis OnGuard). A BAUMINAS, como líder nacional, tem a oportunidade de criar sua própria plataforma digital integrada com monitoramento em tempo real e IA preditiva. Além disso, enquanto os concorrentes globais possuem <strong>cadeias de suprimentos digitalizadas com blockchain</strong>, a BAUMINAS pode alavancar sua capilaridade de 21 unidades no Brasil com um ecossistema digital próprio — integrando logística (BAUMINAS Log), mineração e produção química. O gap mais crítico está na <strong>automação de processos internos e modernização de ERP</strong>, onde a empresa já iniciou ações mas ainda há espaço significativo para acelerar com RPA e IA Generativa.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">MBA em Tecnologia da Informação — FIAP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Certificações</div>
+                        <div class="value">AI for Leaders · DPO (Data Protection Officer)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papéis Acumulados</div>
+                        <div class="value">CIO · CISO · DPO — tríplice responsabilidade de tecnologia, segurança e privacidade</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência</div>
+                        <div class="value">+20 anos em TI · Lidera equipe de ~70 profissionais (19 diretos + 50 indiretos)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reconhecimento</div>
+                        <div class="value">3º lugar — Prêmio Executivo de TI do Ano 2024 (IT Forum) — categoria Indústria Química/Petroquímica</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">LinkedIn</div>
+                        <div class="value"><a href="https://linkedin.com/in/sergiorobertoalmeida" target="_blank" style="color:var(--primary-light)">linkedin.com/in/sergiorobertoalmeida</a></div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:16px">
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Projetos de Destaque</div>
+                    <div class="value">CSC unificado (TI + Jurídico + Fiscal + Contábil + Facilities) · Revitalização ERP Protheus com plano de contas único · Implementação FortiGate/FortiAnalyzer + SOC 24x7 · Datacenter, WAF, DLP · Automações com IA</div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p><strong>1. Reconheça a premiação:</strong> Sergio ficou em 3º lugar no Prêmio Executivo de TI do Ano 2024 pelo IT Forum. Mencionar isso demonstra que você fez a lição de casa e valoriza suas conquistas — "Vi que você foi reconhecido no prêmio do IT Forum, parabéns pela trajetória".</p>
+                <p style="margin-top:8px"><strong>2. Valorize a tríplice função CIO/CISO/DPO:</strong> Acumular três responsabilidades estratégicas é raro e desafiador. Demonstre empatia com a complexidade de liderar tecnologia, segurança e privacidade simultaneamente — isso cria conexão imediata e abre portas para ofertar soluções que aliviem essa carga.</p>
+                <p style="margin-top:8px"><strong>3. Fale sobre o case do CSC:</strong> A criação de um Centro de Serviços Compartilhados unificando TI, jurídico, fiscal e facilities é um projeto ambicioso e inovador. Pergunte sobre os resultados e lições aprendidas — executivos adoram compartilhar conquistas de projetos transformadores.</p>
+                <p style="margin-top:8px"><strong>4. Conecte-se pela FIAP e IA:</strong> Sergio tem MBA pela FIAP e certificação "AI for Leaders", indicando interesse genuíno em IA e formação contínua. Compartilhe tendências de IA aplicada à indústria química e cases do AI Squad Foursys — ele provavelmente tem apetite técnico para discussões mais profundas.</p>
+                <p style="margin-top:8px"><strong>5. Aborde a cultura de 60 anos:</strong> A BAUMINAS é uma empresa com 60 anos de história e cultura consolidada. Demonstre respeito pela tradição enquanto apresenta a modernização — "Empresas com essa solidez que abraçam a transformação digital têm uma vantagem enorme". Isso conecta o legado com a visão de futuro que Sergio está construindo.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao COO/Operações</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Regular: participa com frequência, sem ser membro.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">50 a 99</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#c5cae9">5%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Referências e cases BR</span>
+<span class="tag tag-active">Liderança e solidez</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Roadmap e inovação</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+<span class="tag tag-active">Capilaridade/cobertura regional</span>
+<span class="tag tag-active">Residência de dados no BR</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Integrador / empresa de serviços (SI);Consultoria especializada;Start-up / scale-up</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Projeto: 21 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

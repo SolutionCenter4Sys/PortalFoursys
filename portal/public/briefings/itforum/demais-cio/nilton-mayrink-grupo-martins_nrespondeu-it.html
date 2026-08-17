@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Nilton Mayrink | GRUPO MARTINS</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Nilton Mayrink</h1>
+                <h2>CIO &amp; Head of Digital Transformation — GRUPO MARTINS</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Comércio Atacadista | Uberlândia - MG</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 7 BI ~ R$ 8,3 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Projeção 2025</div>
+                    <div class="value">R$ 8,3 BI (+17%)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescimento</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: GRUPO MARTINS</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">O <strong>Grupo Martins</strong> é o maior atacadista-distribuidor do Brasil, fundado em 1953 em Uberlândia (MG). A empresa atende mensalmente mais de <strong>118 mil clientes corporativos</strong> em mais de <strong>5.500 municípios</strong>, realizando <strong>320 mil entregas por mês</strong> através de 5 centros de distribuição e 60+ hubs logísticos. Em 2024, o faturamento atingiu <strong>R$ 7 bilhões</strong>, com projeção de <strong>R$ 8,3 bilhões</strong> para 2025 (+17%), impulsionado pelos segmentos farmacêutico, materiais de construção e marketplace. A empresa opera o <strong>Sistema Martins (SIM)</strong>, ecossistema integrado que oferece distribuição, crédito, educação, adquirência e e-commerce. Destaque para a assistente virtual <strong>Mari</strong> (IA), que apoia representantes comerciais via WhatsApp, e a plataforma <strong>SAS Viya</strong> para analytics avançado. O marketplace de terceiros (3P) já representa 6-7% do faturamento com meta de 9% até o final de 2025. Aproximadamente 62% da base de clientes está em cidades com até 100 mil habitantes, exigindo soluções tecnológicas de amplo alcance e capilaridade logística única.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Nacional — presente em 5.500+ municípios</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada (familiar)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento acelerado (+17% projetado)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">~4.500 funcionários</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa líder do setor de <strong>Comércio Atacadista Distribuidor</strong> com abrangência <strong>Nacional</strong>. Nilton Mayrink lidera simultaneamente a <strong>Diretoria de TI</strong> e a <strong>área de Transformação Digital e Analytics</strong>, atuando como protagonista na digitalização do negócio. Possui mais de 32 anos de experiência em TI, planejamento estratégico e gestão de vendas digitais B2B/B2C. A empresa investe fortemente em <strong>analytics (SAS Viya)</strong>, <strong>IA (assistente Mari)</strong>, <strong>marketplace</strong> e <strong>omnicanalidade</strong>, com plano estratégico até 2028 focado em digitalização e inovação.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar IA generativa e analytics avançado para toda a operação comercial e logística</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Expandir e consolidar o marketplace 3P com integração logística e de serviços</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer cibersegurança e proteção de dados em ecossistema omnichannel</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar canais físicos e digitais com experiência unificada para o varejista</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar infraestrutura para suportar crescimento de 17% a.a.</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Democratizar cultura data-driven para 1.500+ usuários internos</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Analytics &amp; IA / Data-Driven</span>
+                        <span class="tag tag-priority">Plataformas Digitais / Marketplace</span>
+                        <span class="tag tag-priority">Integração &amp; Automação de Processos</span>
+                    </div>
+                    <h4 style="margin-top:24px;margin-bottom:12px;color:var(--primary)">Tecnologias em Uso</h4>
+                    <div>
+                        <span class="tag tag-active">SAS Viya / Visual Analytics</span>
+                        <span class="tag tag-active">IA — Assistente Mari (WhatsApp)</span>
+                        <span class="tag tag-active">Marketplace 3P</span>
+                        <span class="tag tag-active">SAS Marketing Automation</span>
+                        <span class="tag tag-active">Sistema Martins (SIM)</span>
+                        <span class="tag tag-active">E-commerce efácil</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses com base no plano estratégico 2028:</p>
+            <div>
+                <span class="tag tag-opportunity">IA Generativa &amp; Machine Learning</span>
+                <span class="tag tag-opportunity">Analytics Avançado &amp; Data Governance</span>
+                <span class="tag tag-opportunity">Marketplace &amp; E-commerce</span>
+                <span class="tag tag-opportunity">Omnicanalidade &amp; Integração de Canais</span>
+                <span class="tag tag-opportunity">Automação de Processos (RPA/BPM)</span>
+                <span class="tag tag-opportunity">Cibersegurança &amp; Proteção de Dados</span>
+                <span class="tag tag-opportunity">Infraestrutura Cloud &amp; Escalabilidade</span>
+                <span class="tag tag-opportunity">Logística Inteligente &amp; IoT</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Áreas com alto potencial de engajamento para a Foursys, baseado na análise do perfil tecnológico e plano estratégico do Grupo Martins.</p>
+            <div class="alert-box">
+                <strong>&#9888; Oportunidade Alta:</strong> A expansão do marketplace 3P (de 7% para 9%+ do faturamento) e o plano estratégico 2028 demandam integração de sistemas, APIs, automação e governança de dados — áreas onde a Foursys tem expertise comprovada.
+            </div>
+            <div class="alert-box">
+                <strong>&#9888; Oportunidade Alta:</strong> A democratização de analytics para 1.500+ usuários (hoje ~650) exige governança de dados, pipelines de dados robustos e possivelmente migração/modernização da plataforma — oportunidade para squads de dados e engenharia.
+            </div>
+            <div class="alert-box">
+                <strong>&#9888; Oportunidade Média:</strong> Evolução da assistente Mari com IA generativa mais sofisticada — LLMs, RAG, integração com sistemas internos — alinhada com a oferta do AI Squad Foursys.
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Nilton Mayrink</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. AI Squad — Aceleração com IA &amp; Analytics</h4>
+                    <span class="score-badge">Fit: 95%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Grupo Martins já utiliza IA (Mari) e analytics (SAS Viya) — pronto para escalar com IA generativa</li>
+                        <li>Evolução da assistente Mari com LLMs, RAG e integração a sistemas internos</li>
+                        <li>Automação inteligente de processos comerciais e logísticos com ML</li>
+                        <li>Governança de modelos de IA para democratização segura de analytics</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. Squads de Desenvolvimento — Plataformas Digitais</h4>
+                    <span class="score-badge">Fit: 90%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Expansão do marketplace 3P requer desenvolvimento ágil contínuo</li>
+                        <li>Evolução da plataforma efácil (B2C) e do Sistema Martins (SIM)</li>
+                        <li>Integração omnichannel entre canais físicos e digitais</li>
+                        <li>Modelo de squads flexível, ideal para escalar time de desenvolvimento sem onerar headcount fixo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. Integração &amp; APIs (Parceria Digibee)</h4>
+                    <span class="score-badge">Fit: 88%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Ecossistema SIM com múltiplos serviços (crédito, educação, adquirência, e-commerce) exige integração robusta</li>
+                        <li>Marketplace 3P demanda APIs abertas e integrações com sellers e parceiros logísticos</li>
+                        <li>Capilaridade de 5.500+ municípios requer orquestração de dados em tempo real</li>
+                        <li>Digibee como iPaaS low-code acelera integrações sem complexidade técnica excessiva</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. Data &amp; Analytics — Engenharia de Dados</h4>
+                    <span class="score-badge">Fit: 85%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Expansão de 650 para 1.500+ usuários de analytics exige pipelines de dados escaláveis</li>
+                        <li>Governança e qualidade de dados para suportar decisões data-driven em 20+ áreas</li>
+                        <li>Modernização de data lake/warehouse para suportar IA generativa e ML avançado</li>
+                        <li>Foursys possui experiência com plataformas SAS, Azure e AWS</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>5. Automação de Processos (RPA &amp; BPM)</h4>
+                    <span class="score-badge">Fit: 80%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>320 mil entregas/mês e 118 mil clientes geram volume massivo de processos operacionais</li>
+                        <li>Automação de backoffice (faturamento, crédito, logística) para ganho de eficiência</li>
+                        <li>Integração de RPA com analytics para processos inteligentes end-to-end</li>
+                        <li>Redução de custos operacionais alinhada com meta de crescimento rentável</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Nilton Mayrink é um CIO orientado a resultados e dados, com histórico comprovado de transformação digital (vendas digitais de 7% para 35%, redução de 97% no tempo de implementação de modelos). Iniciar a conversa demonstrando conhecimento sobre a <strong>jornada de analytics do Grupo Martins com SAS Viya</strong> e propor a evolução para <strong>IA generativa integrada ao ecossistema existente</strong>. Destacar o AI Squad Foursys como acelerador para escalar a assistente Mari e criar novos casos de uso com LLMs.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>O plano estratégico 2028 do Grupo Martins tem a digitalização como pilar central. Com crescimento projetado de 17% ao ano, a empresa precisa de parceiros que acelerem a <strong>expansão do marketplace</strong>, a <strong>integração omnichannel</strong> e a <strong>democratização de analytics</strong> — sem sobrecarregar a equipe interna de TI (~4.500 colaboradores no grupo, mas equipe de tecnologia enxuta). A Foursys pode se posicionar como extensão estratégica do time de Nilton.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>AI Squad proprietário</strong> — aceleração com IA generativa, alinhado com a evolução da Mari e analytics; (2) <strong>Parceria Digibee</strong> — integração iPaaS ideal para conectar o ecossistema SIM; (3) <strong>Modelo flexível de squads</strong> — permite escalar desenvolvimento sem aumentar headcount fixo; (4) <strong>Experiência em varejo/atacado B2B</strong> — conhecimento do setor; (5) <strong>Certificações ISO 27001/27701</strong> — segurança e privacidade para proteger dados de 118 mil clientes corporativos.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. A corrida do marketplace define o futuro:</strong> O marketplace 3P do Grupo Martins projeta saltar de 7% para 9% do faturamento. Essa expansão exige desenvolvimento ágil, APIs robustas e integração logística — a Foursys pode ser o parceiro de implementação que acelera esse roadmap antes dos concorrentes.</p>
+                <p style="margin-bottom:12px"><strong>2. Analytics precisa escalar 3x:</strong> Mayrink já expandiu de 3 para 650 usuários de analytics. A meta de 1.500 usuários (30% da empresa) demanda pipelines de dados mais robustos, governança e talvez modernização da stack — oportunidade direta para squads de engenharia de dados.</p>
+                <p style="margin-bottom:12px"><strong>3. IA generativa é a próxima fronteira:</strong> A assistente Mari funciona bem para tarefas operacionais. O próximo salto é IA generativa para recomendações personalizadas, pricing dinâmico e previsão de demanda — áreas onde o AI Squad Foursys pode agregar imediatamente.</p>
+                <p style="margin-bottom:12px"><strong>4. Concorrentes estão investindo pesado em digital:</strong> Assaí tem 16 milhões de usuários no app e lança Assaí Pay. Tambasa investe em automação com transelevadores e picking by light. O Grupo Martins precisa manter a liderança digital, e cada trimestre conta.</p>
+                <p><strong>5. Capilaridade extrema gera complexidade de integração:</strong> Operar em 5.500+ municípios com 320 mil entregas/mês, 60 hubs logísticos e múltiplos canais digitais cria uma complexidade de integração massiva — terreno perfeito para a parceria Foursys+Digibee.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Assaí Atacadista</h4>
+                <p><strong>Segmento:</strong> Atacado de autosserviço (cash &amp; carry) | <strong>Receita:</strong> ~R$ 72 bilhões (2024)</p>
+                <p>Maior varejista alimentar brasileiro com mais de 300 lojas. Investimentos agressivos em digital: app "Meu Assaí" com 16 milhões de clientes, parcerias com Rappi e iFood para delivery, lançamento do Assaí Pay (serviços financeiros) e projeto "Mundo Saúde" com farmácias piloto. Embora atue em modelo diferente (autosserviço vs. distribuição), compete pela atenção e orçamento dos varejistas.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Tambasa Atacadista</h4>
+                <p><strong>Segmento:</strong> Atacado distribuidor | <strong>Receita:</strong> R$ 6,3 bilhões (2024)</p>
+                <p>Segundo maior atacadista-distribuidor de Minas Gerais, sediada em Contagem. Investe em tecnologia de ponta: transelevadores, miniloads, picking by light e usina solar com 10 mil placas. Atende 230 mil clientes ativos em 95% das cidades brasileiras. Projeta crescimento de 8% em 2025 com expansão de mix de 35 mil para 40 mil itens. Concorrente direto do Martins em MG.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Atacadão (Grupo Carrefour Brasil)</h4>
+                <p><strong>Segmento:</strong> Atacado de autosserviço e distribuição | <strong>Receita:</strong> Líder no Sudeste</p>
+                <p>Líder na região Sudeste e principal marca do Grupo Carrefour Brasil. Combina modelo de atacado de autosserviço com distribuição para comerciantes. Conta com o ecossistema digital e financeiro do Carrefour como vantagem competitiva, incluindo soluções de crédito e programas de fidelidade integrados.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Decminas / Vila Nova Atacadista</h4>
+                <p><strong>Segmento:</strong> Atacado distribuidor regional | <strong>Receita:</strong> R$ 2,8 - R$ 2,9 bilhões (2024)</p>
+                <p>Concorrentes regionais em Minas Gerais ocupando a terceira e quarta posição no ranking estadual. Embora menores em faturamento, competem pela mesma base de varejistas de pequeno e médio porte, especialmente no interior mineiro — o core do Grupo Martins.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Os concorrentes do Grupo Martins estão avançando em frentes distintas: o <strong>Assaí</strong> lidera em experiência digital B2C (app com 16M de usuários) e fintech (Assaí Pay); a <strong>Tambasa</strong> investe em automação de armazém com tecnologia de ponta. O Grupo Martins tem vantagem em <strong>analytics/IA</strong> (SAS Viya, assistente Mari) e <strong>ecossistema integrado</strong> (SIM), mas pode ter gaps em: (1) <strong>Automação de processos end-to-end</strong> entre vendas, logística e financeiro; (2) <strong>Evolução da IA para IA generativa</strong> nos canais de atendimento e comercial; (3) <strong>Integração de dados em tempo real</strong> entre 60+ hubs logísticos e marketplace; (4) <strong>Cibersegurança</strong> para proteger dados de 118 mil clientes em ambiente cada vez mais digital. A Foursys pode se posicionar como parceira para fechar esses gaps com squads especializados em IA, integração (Digibee) e automação.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CIO / IT Director &amp; Head of Digital Transformation and Analytics — Grupo Martins</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Uberlândia, MG</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência</div>
+                        <div class="value">32+ anos no mercado corporativo em TI, planejamento estratégico e gestão de vendas digitais B2B/B2C</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória no Grupo Martins</div>
+                        <div class="value">IT Director (2014), Head Digital Sales B2B (2017), Head Digital Sales B2C efácil (2019), Head Digital Transformation &amp; Analytics (2021)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Temas de Interesse Público</div>
+                        <div class="value">Analytics como vantagem competitiva, transformação digital no atacado, cultura data-driven, IA aplicada a vendas</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil Profissional</div>
+                        <div class="value">Digital Strategy, IT Governance, Business Transformation, Data, Cybersecurity, Operational Efficiency</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconheça os resultados mensuráveis:</strong> Nilton é orientado por métricas — redução de 97% no tempo de implementação, vendas digitais de 7% para 35%, expansão de 3 para 650 usuários de analytics. Mencionar esses números mostra que você estudou a trajetória dele e gera credibilidade imediata.</p>
+                <p style="margin-bottom:10px"><strong>2. Fale a linguagem do atacado distribuidor:</strong> Ele está há mais de 10 anos no Grupo Martins e conhece profundamente o setor. Demonstrar entendimento dos desafios únicos do atacado (capilaridade, crédito, mix extenso, margem baixa) diferencia a Foursys de fornecedores genéricos.</p>
+                <p style="margin-bottom:10px"><strong>3. Conecte-se pelo tema de analytics e dados:</strong> Mayrink foi o protagonista da parceria com SAS e da cultura data-driven no Martins. Pergunte sobre os próximos passos — ele provavelmente terá muito a dizer sobre IA generativa e evolução da plataforma de dados.</p>
+                <p style="margin-bottom:10px"><strong>4. Valorize a visão de ecossistema:</strong> O conceito do SIM (Sistema Martins) mostra que ele pensa em plataforma, não em soluções isoladas. Posicione a Foursys como parceira que entende integração de ecossistemas — a Digibee é o gancho perfeito.</p>
+                <p><strong>5. Aborde a dupla responsabilidade:</strong> Nilton gerencia TI e transformação digital simultaneamente — isso gera pressão de entrega constante. Posicione os squads Foursys como extensão do time dele, aliviando a carga de execução enquanto ele foca na estratégia.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Tempo na Posição</div>
+                        <div class="value">IT Director desde 2014 (12 anos); Head Digital Transformation desde 2021</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo de Atuação</div>
+                        <div class="value">TI + Transformação Digital + Analytics + Vendas Digitais B2B/B2C</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão</div>
+                        <div class="value">Alto — lidera múltiplas frentes estratégicas com autonomia sobre investimentos em tecnologia</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores da Empresa</div>
+                        <div class="value">~4.500 funcionários</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de Analytics</div>
+                        <div class="value">~650 (meta: 1.500 — 30% da empresa)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Parceiros Tecnológicos Atuais</div>
+                        <div class="value">SAS (analytics/Viya), Microsoft Azure (cloud), ATS (gestão empresarial)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Protagonista: TI e Digital são pilares centrais do plano estratégico 2028</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Plataformas Digitais / E-commerce</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+                <div class="bar"><div class="bar-label">Analytics &amp; IA</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+                <div class="bar"><div class="bar-label">Infraestrutura / Cloud</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#3949ab">18%</div></div></div>
+                <div class="bar"><div class="bar-label">Software / Licenciamento</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Operação e Suporte</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas / Capacitação</div><div class="bar-track"><div class="bar-fill" style="width:4%;background:#7986cb">4%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria / Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#9fa8da">3%</div></div></div>
+            </div>
+            <p style="margin-top:12px;font-size:12px;color:var(--text-light);text-align:center">* Estimativa baseada em análise do perfil público e prioridades declaradas. Dados não confirmados pelo CIO.</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Resultados Mensuráveis (ROI)</span>
+                        <span class="tag tag-active">Conhecimento do Setor Atacadista</span>
+                        <span class="tag tag-active">Flexibilidade e Escalabilidade</span>
+                        <span class="tag tag-active">Capacidade de Integração</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Parceiro estratégico com expertise em dados, IA e plataformas digitais — capaz de entregar resultados rápidos e mensuráveis</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Projetos orientados a resultado e squads dedicados — valoriza parcerias de longo prazo (ex: SAS desde 2006)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

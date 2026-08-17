@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Henrique Rabenhorst | Azul Linhas Aereas</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Henrique Rabenhorst</h1>
+                <h2>CIO — Azul Linhas Aereas</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Transporte e logística | São Paulo - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">Acima de R$ 15 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 500,1 MM a R$ 1 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá até 10%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Azul Linhas Aereas</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Azul Linhas Aéreas Brasileiras</strong> é a terceira maior companhia aérea do Brasil por participação de mercado (~30,7%), fundada em 2008 por David Neeleman. Opera a maior malha aérea do país, com cerca de <strong>80% de suas rotas sem concorrência direta</strong>, conectando cidades de médio e pequeno porte por meio de seu hub principal em Viracopos (Campinas-SP). Em 2025, a companhia registrou receita de <strong>R$ 21,9 bilhões</strong> (+12% YoY) e EBITDA recorde de R$ 2,1 bilhões no 4T25. A Azul concluiu com sucesso seu processo de reestruturação financeira (Chapter 11 nos EUA) em fevereiro de 2026, eliminando aproximadamente <strong>US$ 2,5 bilhões em dívidas</strong> e reduzindo a alavancagem líquida para menos de 2,5x. Recebeu US$ 850 milhões em novos aportes, incluindo investimentos estratégicos da United Airlines (US$ 100M) e American Airlines (US$ 100M). Com mais de 14.000 colaboradores, a empresa opera também nos segmentos de fidelidade (TudoAzul), carga (Azul Cargo Express) e turismo (Azul Viagens). O momento atual é de <strong>retomada com disciplina financeira</strong>, crescimento seletivo de capacidade e expansão internacional.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Transporte e logística</strong> com abrangência <strong>Local (Brasil)</strong>. Possui <strong>4 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>RFP/concorrência estruturada entre fornecedores qualificados</strong>. Perspectiva do orçamento de TI: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos e operações para ganho de eficiência</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Fomentação da cultura de inovação na área de TI e organização</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar complexidade dos dados e qualidade da informação</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Otimizar custos e eficiência (FinOps/SecFinOps)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Provar valor e ROI sob pressão de custos</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">IA / ML</span>
+<span class="tag tag-priority">IA Generativa</span>
+<span class="tag tag-priority">Automação de processos / RPA</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">Workplace e end-user computing</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">Sistemas core</span>
+<span class="tag tag-active">ITSM/ESM e service desk</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">IA / ML</span>
+<span class="tag tag-opportunity">IA Generativa</span>
+<span class="tag tag-opportunity">Automação de processos / RPA</span>
+<span class="tag tag-opportunity">Hiperautomação</span>
+</div><div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria/assessment):</h4>
+                <div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Armazenamento, backup e imutabilidade</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Cibersegurança</span>
+</div>
+            </div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Henrique Rabenhorst</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML SEM fornecedor definido</li><li>IA / ML é prioridade Top 3 de investimento</li><li>IA Generativa SEM fornecedor definido</li><li>IA Generativa é prioridade Top 3 de investimento</li><li>Hiperautomação SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 60</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Potencial para plataformas digitais e cloud</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Henrique Rabenhorst tem como top prioridades <strong>IA / ML; IA Generativa; Automação de processos / RPA</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>4 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 4 projetos definidos sem fornecedor: IA / ML, IA Generativa, Automação de processos / RPA, Hiperautomação. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; Engenharia Digital. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. IA é prioridade #1 dos CEOs de aviação global:</strong> 66% priorizam confiabilidade operacional e 56% já investem em IA para precificação dinâmica e gestão de receita. A Azul está na posição ideal para implementar — os projetos estão definidos, mas sem fornecedor.</p>
+                <p style="margin-bottom:12px"><strong>2. Manutenção preditiva reduz custos em até 30%:</strong> 53% dos CEOs de companhias aéreas investem em IA para manutenção preditiva. Com uma frota diversificada (Embraer, Airbus, ATR), a Azul pode obter ganhos significativos automatizando previsão de falhas e otimizando MRO (Maintenance, Repair & Overhaul).</p>
+                <p style="margin-bottom:12px"><strong>3. Gap competitivo real com LATAM:</strong> A LATAM já resolve 70% das demandas com IA e possui AmelIA para 35 mil colaboradores. A Azul precisa acelerar para não ampliar essa distância — o novo CIO chega com mandato claro de transformação digital.</p>
+                <p style="margin-bottom:12px"><strong>4. Pós-reestruturação = momento de investir:</strong> Com dívida reduzida em US$ 2,5 bi e novos aportes de US$ 850 milhões, a Azul entra em 2026 com balanço limpo e capacidade renovada de investimento. O orçamento de TI (R$ 500M-1B) com perspectiva de crescimento de até 10% confirma essa janela.</p>
+                <p><strong>5. Aviação regional como diferencial estratégico:</strong> Com o fim da Voepass e 80% das rotas sem concorrência, a Azul pode usar hiperautomação e RPA para escalar operações regionais com eficiência — otimizando processos de ground handling, cargo e atendimento em aeroportos menores com equipes enxutas.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>🏆 LATAM Airlines Brasil — Market Share: ~38,2%</h4>
+                <p>Líder do mercado doméstico brasileiro com presença dominante em aeroportos premium (Congonhas, Santos Dumont). Investimento pesado em IA: já identifica automaticamente <strong>90% dos clientes</strong> no atendimento via IA, reduziu em 20% o tempo de atendimento e lançou o projeto <strong>"70/50/2"</strong> com meta de 70% das demandas resolvidas por bots até 2026. Desenvolveu a assistente <strong>AmelIA</strong> (baseada em GPT-4) usada por 35 mil colaboradores em 6 países. Estratégia orientada por dados com plataformas NDC para varejo digital personalizado.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>✈️ GOL Linhas Aéreas — Market Share: ~31,0%</h4>
+                <p>Modelo low-cost focado em rotas troncais de alta frequência entre capitais. Também em reestruturação financeira (Chapter 11). Primeira companhia aérea das Américas a lançar <strong>busca de passagens com IA</strong> no site, permitindo pesquisa por preferências naturais (temperatura, orçamento, período). Histórico de pioneirismo digital: check-in digital, Wi-Fi a bordo e acompanhamento de voo em tempo real. Campanha institucional <strong>"Inteligência faz a gente voar"</strong> posicionando inovação como diferencial de marca.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🌐 Companhias Aéreas Internacionais (United, American, Delta)</h4>
+                <p>As majors norte-americanas são referência global em transformação digital no setor. A <strong>United Airlines</strong> (investidora estratégica da Azul) utiliza IA preditiva para manutenção de frota, precificação dinâmica e gestão de receita. A <strong>Delta</strong> lidera em experiência digital com reconhecimento facial, bags tracking e app personalizado com IA. Essas companhias investem bilhões em plataformas de dados e automação, servindo de benchmark para o que a Azul pode aspirar com escala adequada.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>📊 Aviação Regional — Voepass (encerrada) e novos entrantes</h4>
+                <p>A <strong>Voepass encerrou operações em 2025</strong>, gerando oportunidade e desafio para a Azul, que absorve rotas regionais sem concorrência via Azul Conecta. O mercado regional encolheu significativamente, mas o programa governamental <strong>AmpliAR</strong> de concessões de aeroportos regionais (19 terminais na Amazônia e Nordeste) pode reativar demanda. Companhias menores como Abaeté operam nichos turísticos na Bahia.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Posicionamento da Azul vs. Concorrentes</h4>
+                <p>A LATAM lidera significativamente em maturidade de IA (projeto 70/50/2, AmelIA com 35 mil usuários, 90% de identificação automática), enquanto a Azul está <strong>no início da jornada de IA</strong> com a chegada recente do novo CIO. A GOL também avança com IA no front-end de vendas. <strong>Oportunidade clara:</strong> a Azul pode acelerar o gap implementando IA/ML em operações (manutenção preditiva, gestão de tripulação, otimização de malha), automação de processos (back-office, check-in, cargo) e IA generativa para atendimento — exatamente os projetos que Henrique listou como <strong>sem fornecedor definido</strong>. A Foursys pode posicionar seu AI Squad como acelerador dessa transformação, aproveitando a janela de oportunidade antes que os concorrentes ampliem ainda mais a vantagem.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Ciência da Computação — UNESP | MBA em E-commerce — FGV | Especializações em Governança de TI e Gestão de Projetos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência</div>
+                        <div class="value">+20 anos em tecnologia: IHS Towers (Dir. TI, 3 anos) → General Mills (Dir. TI, 7 anos) → Sanofi → BASF → Accenture (2004-2008) → Print Laser → IBM</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Liderança</div>
+                        <div class="value">Especialista em transformação digital, modernização de infraestrutura e adoção de novas tecnologias. Reporta diretamente ao presidente Abhi Shah.</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Tempo na Azul</div>
+                        <div class="value">Desde agosto/2025 — ainda em fase de construção da agenda tecnológica e composição de time</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn ativo — perfil destaca Digital Transformation Specialist e Leader of High-Performance Teams</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Setores Anteriores</div>
+                        <div class="value">Telecomunicações (IHS Towers), Bens de Consumo (General Mills), Farmacêutica (Sanofi), Química (BASF), Consultoria (Accenture/IBM)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconheça a diversidade setorial:</strong> Henrique passou por telecom, bens de consumo, farma, química e consultoria antes de chegar à aviação. Elogie essa versatilidade e pergunte como ele está aplicando aprendizados de outros setores na Azul — líderes com trajetória multisetorial valorizam quando isso é reconhecido.</p>
+                <p style="margin-bottom:10px"><strong>2. Explore o momento de "primeiros 100 dias":</strong> Ele entrou na Azul em agosto/2025, no meio da reestruturação financeira. Pergunte sobre como está priorizando a agenda de TI nesse momento de reconstrução — CIOs recém-chegados geralmente estão ávidos por parceiros que entendam seu contexto e possam entregar rápido.</p>
+                <p style="margin-bottom:10px"><strong>3. Fale a linguagem de governança e processos:</strong> Com especializações em Governança de TI e passagem pela Accenture/IBM, Henrique valoriza metodologia e estrutura. Destaque as certificações ISO da Foursys e a abordagem consultiva com frameworks claros de delivery.</p>
+                <p style="margin-bottom:10px"><strong>4. Conecte com a experiência em General Mills:</strong> Sete anos em bens de consumo (empresa com forte cultura de supply chain e operações) sugere familiaridade com otimização operacional e automação. Use analogias de eficiência operacional ao falar de hiperautomação e RPA na aviação.</p>
+                <p><strong>5. Aborde IA como acelerador, não como projeto:</strong> Seu perfil no LinkedIn destaca "Technology Strategy & Innovation". Posicione o AI Squad da Foursys não como um fornecedor de projeto, mas como um parceiro estratégico que acelera a agenda de IA — isso ressoa com líderes que pensam em transformação sistêmica, não em entregas pontuais.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Regular: participa com frequência, sem ser membro.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">200 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+<div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#c5cae9">5%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Referências e cases BR</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Roadmap e inovação</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Consultoria especializada;Start-up / scale-up;ISV de nicho / produto específico;Especialista setorial / regulatório</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 13 temas | Interno: 3 temas | Projeto: 1 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

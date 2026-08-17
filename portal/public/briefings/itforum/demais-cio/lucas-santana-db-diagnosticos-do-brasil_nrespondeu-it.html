@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Lucas Santana | DB DIAGNOSTICOS DO BRASIL</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Lucas Santana</h1>
+                <h2>CIO / Head of Digital Business — DB DIAGNÓSTICOS DO BRASIL</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Saúde (Diagnósticos) | São José dos Pinhais - PR</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 1,8 BI (2025)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Crescimento</div>
+                    <div class="value">+20% ao ano</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Expansão Orgânica</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: DB DIAGNÓSTICOS DO BRASIL</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">O <strong>DB Diagnósticos do Brasil</strong> (Diagnósticos do Brasil) é o único laboratório exclusivamente dedicado ao apoio diagnóstico no mercado brasileiro, sendo referência nacional no segmento. Com sede em <strong>São José dos Pinhais (PR)</strong>, a empresa projeta faturamento de <strong>R$ 1,8 bilhão para 2025</strong> (+19% sobre o ano anterior), sustentado por um modelo de crescimento 100% orgânico — sem fusões ou aquisições. A empresa opera <strong>10 unidades regionais</strong> (6 de análises clínicas e 3 especializadas em toxicologia, análises moleculares e anatomia patológica), além de mais de <strong>30 unidades regionais de apoio</strong> distribuídas pelo país. Processa até <strong>35 milhões de exames por mês</strong>, atendendo mais de <strong>10 mil laboratórios</strong> em <strong>2.400+ municípios</strong> brasileiros. Conta com aproximadamente <strong>3.000 colaboradores</strong>, incluindo mais de 80 médicos especialistas (mestres e doutores). Recentemente, adquiriu a healthtech <strong>S2 Labs</strong> (plataforma de e-commerce de exames), lançou o programa gamificado <strong>PontuAh!</strong> para laboratórios parceiros e criou a unidade <strong>DB Genômica</strong> para exames genéticos e genômicos. A empresa já investiu <strong>R$ 40 milhões em IA, IoT e Big Data</strong>, incluindo plataformas com visão 360° do cliente, IA embarcada em guias de exames e portais B2B, novo ERP/CRM e IoT para monitoramento preditivo de equipamentos. Foi premiada pelo <strong>IT Forum</strong> e reconhecida entre as dez melhores logísticas do país pelo ranking "100 Best Fleets".</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Nacional (2.400+ municípios)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada — Capital Nacional</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento acelerado (+20% a.a.)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">~3.000 (incluindo 80+ médicos especialistas)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa líder no segmento de <strong>apoio diagnóstico laboratorial</strong> com abrangência <strong>nacional</strong>. Em plena expansão orgânica com crescimento de 20%+ ao ano. Investimento declarado de <strong>R$ 40 milhões em tecnologia</strong> (IA, IoT, Big Data, Cloud). O CIO Lucas Santana assumiu em maio/2024 com mandato de <strong>transformação digital e negócios digitais</strong>. Empresa premiada pelo IT Forum, demonstrando valorização da área de TI como ativo estratégico. Modelo de negócio B2B (lab-to-lab) com forte dependência de infraestrutura tecnológica para processamento de alto volume (35M exames/mês).</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios Identificados</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar infraestrutura para suportar crescimento de 20%+ a.a. sem perda de SLA</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Consolidar transformação digital: novo ERP, CRM e plataformas B2B integradas</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Expandir IA embarcada em diagnósticos, genômica e manutenção preditiva (IoT)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Garantir segurança e compliance (LGPD) para dados sensíveis de saúde</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar operações de 10+ unidades regionais com visão 360° unificada</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Posicionar TI como motor de diferenciação competitiva no modelo lab-to-lab</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Prioridades de Investimento Declaradas</h4>
+                    <div>
+                        <span class="tag tag-priority">IA / Machine Learning</span>
+                        <span class="tag tag-priority">IoT / Manutenção Preditiva</span>
+                        <span class="tag tag-priority">Big Data / Analytics</span>
+                        <span class="tag tag-priority">Cloud Computing</span>
+                        <span class="tag tag-priority">ERP / CRM / Plataformas B2B</span>
+                        <span class="tag tag-priority">Cibersegurança / LGPD</span>
+                    </div>
+                    <div style="margin-top:16px">
+                        <h4 style="margin-bottom:12px;color:var(--primary)">Pilares Estratégicos de TI</h4>
+                        <span class="tag tag-active">Pessoas</span>
+                        <span class="tag tag-active">Processos</span>
+                        <span class="tag tag-active">Tecnologia</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses com base em declarações públicas e perfil do CIO:</p>
+            <div>
+                <span class="tag tag-opportunity">Inteligência Artificial Embarcada</span>
+                <span class="tag tag-opportunity">Plataforma de E-commerce (S2 Labs)</span>
+                <span class="tag tag-opportunity">IoT para Monitoramento de Equipamentos</span>
+                <span class="tag tag-opportunity">Big Data &amp; Analytics Diagnóstico</span>
+                <span class="tag tag-opportunity">Cloud Computing &amp; Escalabilidade</span>
+                <span class="tag tag-opportunity">Integração de Sistemas (ERP/CRM)</span>
+                <span class="tag tag-opportunity">Automação de Processos Laboratoriais</span>
+                <span class="tag tag-opportunity">Genômica &amp; Bioinformática</span>
+                <span class="tag tag-opportunity">LGPD / Privacidade de Dados de Saúde</span>
+                <span class="tag tag-opportunity">Logística Inteligente (Last-Mile)</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <div class="alert-box">
+                <strong>Contexto crítico:</strong> Lucas Santana assumiu como CIO em maio/2024 — está no período de reestruturação e seleção de parceiros tecnológicos. A empresa declarou R$ 40 milhões em investimentos em tecnologia (IA, IoT, Big Data) e está implementando novo ERP, CRM e plataformas digitais. Janela de oportunidade para posicionamento como parceiro estratégico.
+            </div>
+            <div class="grid-2">
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Implementação e Integração ERP/CRM</h4>
+                        <div class="score-badge">Alta</div>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Empresa em processo de implementação de novo ERP e CRM</li>
+                            <li>Lucas Santana tem experiência prévia com SAP e TOTVS</li>
+                            <li>Necessidade de integração entre 10+ unidades regionais</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>IA &amp; Automação Inteligente</h4>
+                        <div class="score-badge">Alta</div>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Investimento declarado de R$ 40M inclui IA como pilar central</li>
+                            <li>IA embarcada em guias de exames e portais B2B já em andamento</li>
+                            <li>Oportunidade de expandir para diagnósticos assistidos por IA</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Plataformas Digitais &amp; APIs</h4>
+                        <div class="score-badge">Alta</div>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Aquisição da S2 Labs exige integração com sistemas legados</li>
+                            <li>Necessidade de APIs para conectar 10 mil laboratórios parceiros</li>
+                            <li>Digibee como parceira Foursys para integração em escala</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Cibersegurança &amp; LGPD</h4>
+                        <div class="score-badge">Média-Alta</div>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Dados de saúde são classificados como sensíveis pela LGPD</li>
+                            <li>Lucas Santana tem background em LGPD/privacidade (ex-Pardini)</li>
+                            <li>Volume massivo de dados de pacientes exige governança robusta</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Lucas Santana</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. AI Squad — IA Aplicada a Diagnósticos</h4>
+                    <div class="score-badge">Fit 95%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>DB investiu R$ 40M em IA, IoT e Big Data — precisa de especialistas para escalar</li>
+                        <li>IA embarcada em guias de exames e portais B2B precisa de evolução contínua</li>
+                        <li>Genômica e bioinformática demandam modelos de ML especializados</li>
+                        <li>AI Squad Foursys pode acelerar entregas com governança e MLOps integrados</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. Integração &amp; APIs (Digibee)</h4>
+                    <div class="score-badge">Fit 92%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>10 mil laboratórios parceiros conectados exigem integração massiva</li>
+                        <li>Novo ERP/CRM precisa se integrar com plataforma S2 Labs e portais B2B</li>
+                        <li>30+ unidades regionais com sistemas heterogêneos para unificar</li>
+                        <li>Digibee é ideal para integração low-code em escala no setor de saúde</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. Squads de Desenvolvimento — Plataformas Digitais</h4>
+                    <div class="score-badge">Fit 88%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Plataforma S2 Labs (e-commerce de exames) em evolução contínua</li>
+                        <li>Portais B2B com visão 360° do cliente precisam de squads dedicados</li>
+                        <li>PontuAh! (gamificação) e DB Genômica demandam desenvolvimento ágil</li>
+                        <li>Modelo de squads Foursys oferece flexibilidade e escalabilidade</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. Cibersegurança &amp; Compliance LGPD</h4>
+                    <div class="score-badge">Fit 85%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Dados de saúde são dados sensíveis — LGPD exige proteção reforçada</li>
+                        <li>ISO 27001/27701 da Foursys é diferencial direto para o setor de saúde</li>
+                        <li>CIO tem background em LGPD e governança de dados (ex-Pardini)</li>
+                        <li>Volume de 35M exames/mês gera exposição massiva a riscos de vazamento</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>5. IoT &amp; Automação Industrial</h4>
+                    <div class="score-badge">Fit 80%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Plataforma IoT para monitoramento de produção já em implantação</li>
+                        <li>Manutenção preditiva de equipamentos laboratoriais (Roche, Sysmex)</li>
+                        <li>Foursys pode complementar com analytics avançado sobre dados de IoT</li>
+                        <li>Logística de coleta e transporte pode se beneficiar de IoT + IA</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Lucas Santana é um CIO com perfil de <strong>transformação digital e negócios digitais</strong>, com mais de 20 anos de experiência e formações em MIT e FDC. Iniciar a conversa demonstrando conhecimento sobre a jornada de R$ 40M em tecnologia da DB e como a Foursys pode acelerar os 3 pilares declarados (Pessoas, Processos, Tecnologia) com <strong>AI Squad, Integração via Digibee e Squads de Desenvolvimento</strong>. Mencionar a experiência da Foursys no setor de saúde e as certificações ISO 27001/27701 como diferencial para dados sensíveis de pacientes.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Lucas assumiu como CIO em <strong>maio/2024</strong> — está na fase de consolidação de parceiros e execução de projetos transformacionais. A empresa está implementando <strong>novo ERP, CRM, plataforma S2 Labs e IoT</strong> simultaneamente, o que cria demanda por parceiros com capacidade de entrega em múltiplas frentes. Faturamento em forte crescimento (+20% a.a.) indica orçamento de TI em expansão.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>AI Squad proprietário</strong> — aceleração de IA com governança, ideal para IA em diagnósticos; (2) <strong>Parceria Digibee</strong> — integração low-code para conectar 10 mil laboratórios e 30+ unidades; (3) <strong>ISO 27001/27701</strong> — certificações de segurança essenciais para dados de saúde; (4) <strong>Modelo flexível</strong> (Squads, Projetos, AMS) que acompanha o crescimento acelerado da empresa; (5) <strong>24 anos, 41.000+ projetos</strong> — robustez e confiabilidade.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. Crescimento orgânico exige escalabilidade tecnológica:</strong> A DB cresce 20%+ ao ano sem M&A, o que significa que toda a escala precisa vir de eficiência operacional e tecnologia. Processam 35M exames/mês e projetam R$ 1,8 bi em 2025 — a TI é o alicerce desse crescimento. Posicione a Foursys como parceira de escalabilidade.</p>
+                <p style="margin-bottom:12px"><strong>2. CIO com DNA de transformação digital no setor de saúde:</strong> Lucas Santana veio do Grupo Pardini (3 anos liderando TI) e tem experiência com LGPD, bioinformática e analytics em saúde. Ele conhece profundamente os desafios do setor — a abordagem deve ser técnica e direta, sem generalidades.</p>
+                <p style="margin-bottom:12px"><strong>3. Integração é o gargalo oculto:</strong> Com aquisição da S2 Labs, novo ERP/CRM, portais B2B e IoT, a DB está em múltiplas frentes de integração simultaneamente. Conectar 10 mil laboratórios parceiros com sistemas heterogêneos é um desafio massivo — a Digibee via Foursys é uma resposta direta.</p>
+                <p style="margin-bottom:12px"><strong>4. LGPD é risco existencial no setor de saúde:</strong> Dados de exames laboratoriais são dados sensíveis pela LGPD. Com 35M exames/mês em 2.400 municípios, a superfície de exposição é enorme. As certificações ISO 27001/27701 da Foursys são um diferencial competitivo imediato.</p>
+                <p><strong>5. Competição com gigantes exige diferenciação digital:</strong> Dasa e Fleury/Pardini investem pesado em tecnologia. A DB se diferencia pelo modelo B2B puro (lab-to-lab), mas precisa de plataformas digitais superiores para manter a liderança. A Foursys pode ser a parceira que acelera essa vantagem competitiva.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Dasa (Diagnósticos da América)</h4>
+                <p><strong>Segmento:</strong> Medicina diagnóstica e hospitais | <strong>Receita:</strong> ~R$ 4 bilhões/ano</p>
+                <p>Líder do mercado de diagnósticos no Brasil, operando 34 laboratórios (Delboni Auriemo, Lavoisier, Sérgio Franco, Bronstein) e processando 250+ milhões de exames/ano. Modelo integrado com hospitais próprios (Hospital 9 de Julho, etc.). Forte investimento em plataforma digital Nav, telemedicina e IA diagnóstica. Diferente da DB, atua no B2C e opera tanto diagnósticos quanto atendimento hospitalar. Desafio atual: integração de operações pós-aquisições e rentabilidade.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Grupo Fleury (inclui Hermes Pardini)</h4>
+                <p><strong>Segmento:</strong> Medicina diagnóstica e Lab-to-Lab | <strong>Receita:</strong> R$ 7,7 bilhões (2024)</p>
+                <p>Segunda maior empresa do setor, consolidada após aquisição do Hermes Pardini em 2023. Lucro cresceu 32% em 2024. Realizou 149,3 milhões de exames e continua em expansão com aquisições (Hemolab em 2025). Concorre diretamente com a DB no segmento lab-to-lab, investindo em novos centros de processamento. Diferencial: marca premium no B2C e escala crescente no B2B. Ameaça direta ao core business da DB no apoio laboratorial.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Hapvida NotreDame Intermédica</h4>
+                <p><strong>Segmento:</strong> Operadora de saúde integrada verticalmente | <strong>Receita:</strong> ~R$ 28 bilhões (2024)</p>
+                <p>Maior operadora de saúde do Brasil após fusão em 2022. Opera ~301 unidades laboratoriais próprias e 500+ credenciadas em 27 capitais. Modelo de verticalização completa (plano de saúde → hospital → laboratório). Embora não concorra diretamente no lab-to-lab, reduz a base de clientes potenciais da DB ao internalizar diagnósticos. Investimentos em digitalização para reduzir custos operacionais.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Alliar (Centro de Imagem Diagnósticos)</h4>
+                <p><strong>Segmento:</strong> Diagnósticos por imagem e análises clínicas | <strong>Receita:</strong> ~R$ 1,5 bilhão</p>
+                <p>Focada em diagnósticos por imagem (ressonância, tomografia, raio-X) com operações de análises clínicas. Presente principalmente em centros urbanos com unidades de alta complexidade. Concorre de forma tangencial com a DB, especialmente em exames de maior valor agregado. Investimentos em IA para diagnóstico por imagem representam tendência que a DB pode explorar na análise clínica.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Os concorrentes da DB estão investindo fortemente em: (1) <strong>Plataformas digitais B2C</strong> (Dasa Nav, Fleury Digital) enquanto a DB foca no B2B — oportunidade de tornar a plataforma B2B da DB a mais avançada do mercado; (2) <strong>IA diagnóstica</strong> — tanto Dasa quanto Fleury investem em IA para laudos automatizados, a DB pode se diferenciar com IA no apoio laboratorial; (3) <strong>Integração vertical</strong> — Hapvida internaliza diagnósticos, pressionando a DB a oferecer valor digital superior para reter clientes lab-to-lab. A Foursys pode se posicionar como parceira para: <strong>acelerar plataformas digitais B2B</strong> (squads + Digibee), <strong>escalar IA embarcada</strong> (AI Squad) e <strong>garantir compliance LGPD</strong> (ISO 27001/27701) — criando vantagem competitiva sustentável para a DB no mercado de apoio diagnóstico.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CIO / Head of Digital Business — DB Diagnósticos (desde mai/2024)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">São José dos Pinhais, PR (sede DB)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação</div>
+                        <div class="value">Sistemas de Informação | Pós em Gestão de Projetos | Certificação PROSCI (Change Management) | Programas MIT e FDC</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Anterior</div>
+                        <div class="value">CTO/Diretor Executivo na PJUS (2022-2024) | Gerente Executivo e Corporativo de TI no Grupo Pardini (2019-2022)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Competências-chave</div>
+                        <div class="value">Transformação Digital | LGPD/Privacidade | Bioinformática | Analytics | SAP/TOTVS | Governança de TI</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Tempo de Experiência</div>
+                        <div class="value">20+ anos em tecnologia e transformação digital, com passagens por ERP (SAP/TOTVS), saúde (Pardini, Oncoclínicas) e jurídico (PJUS)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Conecte-se pelo setor de saúde:</strong> Lucas trabalhou 3+ anos no Grupo Pardini (agora parte do Fleury) e conhece profundamente o mercado de diagnósticos. Demonstrar conhecimento sobre os desafios específicos do lab-to-lab e de apoio diagnóstico gera credibilidade imediata — ele percebe rapidamente quem entende o setor.</p>
+                <p style="margin-bottom:10px"><strong>2. Valorize a trajetória PROSCI + MIT + FDC:</strong> Lucas investe em formação de alto nível (Change Management, MIT, FDC). Isso indica um perfil que valoriza metodologia e fundamentação. Aborde com frameworks e cases estruturados, não com jargão comercial — ele responde melhor a argumentos embasados.</p>
+                <p style="margin-bottom:10px"><strong>3. Mencione a jornada de transformação da DB:</strong> O investimento de R$ 40M em IA, IoT e Big Data é um feito relevante para uma empresa de capital nacional no setor de saúde. Reconhecer esse movimento demonstra preparo e posiciona a conversa em nível executivo. Pergunte sobre os resultados já obtidos.</p>
+                <p style="margin-bottom:10px"><strong>4. Explore a experiência com LGPD:</strong> No Grupo Pardini, Lucas liderou a implementação de LGPD e privacidade de dados. Dados de saúde são dados sensíveis pela legislação — demonstrar que a Foursys tem certificações ISO 27001/27701 e experiência em compliance cria um vínculo de confiança profissional.</p>
+                <p><strong>5. Aborde integração como dor real:</strong> Vindo do Pardini para a DB, Lucas conhece os desafios de integrar sistemas heterogêneos em redes laboratoriais distribuídas. A DB tem 10+ unidades, 10 mil labs parceiros e acabou de adquirir a S2 Labs — integração é uma dor ativa. Posicione a Digibee/Foursys como solução concreta.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Diretoria / C-Level (CIO &amp; Head of Digital Business)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte Provável</div>
+                        <div class="value">CEO (Tobias Thabet Martins)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo de Atuação</div>
+                        <div class="value">TI + Negócios Digitais — perfil híbrido tecnologia/negócio</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe Estimada de TI</div>
+                        <div class="value">50-80 profissionais (estimativa com base em empresas similares)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores da Empresa</div>
+                        <div class="value">~3.000</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Prévia em Equipes</div>
+                        <div class="value">Liderou equipe de 75 pessoas (Pardini) e 60 pessoas (PJUS)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI na Empresa</div>
+                        <div class="value">Estratégico: TI como motor de crescimento orgânico e diferenciação competitiva no modelo lab-to-lab</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reconhecimento</div>
+                        <div class="value">Empresa premiada pelo IT Forum, indicando TI como área de destaque</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Cloud Computing</div><div class="bar-track"><div class="bar-fill" style="width:22%;background:#1a237e">22%</div></div></div>
+                <div class="bar"><div class="bar-label">Desenvolvimento / Plataformas</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+                <div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">IA / Big Data / Analytics</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">ERP / CRM / Sistemas</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#5c6bc0">12%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas / Equipe</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança / LGPD</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+                <div class="bar"><div class="bar-label">IoT / Automação</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#9fa8da">3%</div></div></div>
+            </div>
+            <p style="text-align:center;margin-top:12px;font-size:12px;color:var(--text-light)">* Estimativa baseada em declarações públicas e perfil do setor. Investimento total declarado em tecnologia: R$ 40 milhões.</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios Prováveis de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Expertise no Setor de Saúde</span>
+                        <span class="tag tag-active">Capacidade de Integração</span>
+                        <span class="tag tag-active">Certificações de Segurança</span>
+                        <span class="tag tag-active">Escalabilidade</span>
+                        <span class="tag tag-active">Track Record em IA</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Empresa com expertise comprovada em saúde, capaz de entregar em múltiplas frentes (IA, integração, desenvolvimento) com certificações de segurança</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Provável</div>
+                        <div class="value">Squads dedicados / Projetos com escopo definido (baseado em experiência prévia com equipes internas grandes)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

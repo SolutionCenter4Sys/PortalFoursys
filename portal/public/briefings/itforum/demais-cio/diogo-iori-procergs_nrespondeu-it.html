@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Diogo Iori | PROCERGS</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Diogo Iori</h1>
+                <h2>Diretor de Infraestrutura e Operações — PROCERGS</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Governo e Setor Público (Empresa de TI do Estado do RS) | Porto Alegre - RS</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Investimento Recente</div>
+                    <div class="value">R$ 87,9 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Ciber Segurança</div>
+                    <div class="value">R$ 20 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Expansão Pós-Crise</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: PROCERGS</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>PROCERGS</strong> (Centro de Tecnologia da Informação e Comunicação do Estado do Rio Grande do Sul S.A.) é a empresa pública responsável por toda a infraestrutura de TI e serviços digitais do governo gaúcho. Fundada em 1972, é a <strong>4ª maior empresa pública de informática do Brasil</strong> e a <strong>1ª colocada entre estatais estaduais de TI</strong> no ranking "As 100 Mais Inovadoras no Uso de TI" (10º lugar geral em 2025). A empresa conta com aproximadamente <strong>1.684 colaboradores</strong>, dos quais 72% possuem mais de 11 anos de casa. O Rio Grande do Sul conquistou pela <strong>4ª vez o 1º lugar</strong> no Índice de Oferta de Serviços Públicos Digitais (IOSPD) em 2025, resultado direto do trabalho da PROCERGS. Em 2024, a empresa enfrentou seu maior desafio: as enchentes de maio alagaram o datacenter em Porto Alegre, que ficou fora do ar por até 23 dias. A resposta foi exemplar — migração emergencial para Oracle Cloud em apenas <strong>9 horas</strong> e criação do Portal SOS Rio Grande do Sul em <strong>48 horas</strong>, que atendeu 2,3 milhões de afetados em 478 municípios. O governo destinou <strong>R$ 87,9 milhões</strong> (Funrigs) para reconstrução do datacenter, incluindo elevação de 7 metros da estrutura elétrica, além de <strong>R$ 20 milhões em cibersegurança</strong>. Em 2025, lançou a <strong>GurIA</strong>, assistente de IA generativa integrada ao portal rs.gov.br, que atende cidadãos por texto, áudio e WhatsApp.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Estadual (Rio Grande do Sul)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Empresa Pública Estadual (Economia Mista)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Investimento</div>
+                        <div class="value">Expansão — reconstrução pós-enchente + modernização</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">~1.684 (72% com mais de 11 anos)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa pública do setor <strong>Governo e Setor Público</strong> com abrangência <strong>Estadual</strong>, responsável por toda a TI do governo do Rio Grande do Sul. Momento único: reconstrução pós-enchente com investimentos de <strong>R$ 87,9 milhões</strong> em datacenter e <strong>R$ 20 milhões em cibersegurança</strong>. Modelo de contratação: <strong>Licitação pública / Pregão eletrônico</strong>. A PROCERGS atua como <strong>broker tecnológico</strong> para 13 empresas estaduais de TI do país, liderando pregões multicloud de até R$ 281 milhões. Perspectiva: investimento em expansão com foco em cloud híbrida, IA e resiliência de infraestrutura.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Reconstrução e modernização do datacenter com resiliência contra desastres naturais</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar a GurIA (IA generativa) para todos os serviços públicos estaduais</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Migração para cloud híbrida com governança e soberania de dados públicos</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer cibersegurança pós-incidente e proteger dados de 11 milhões de cidadãos</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Consolidar liderança nacional em governo digital (IOSPD 1º lugar)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar infraestrutura legada e integrar sistemas de múltiplas secretarias</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Infraestrutura &amp; Datacenter</span>
+                        <span class="tag tag-priority">Cibersegurança</span>
+                        <span class="tag tag-priority">Cloud Híbrida</span>
+                    </div>
+                    <h4 style="margin-top:20px;margin-bottom:12px;color:var(--primary)">Investimentos Confirmados</h4>
+                    <div>
+                        <span class="tag tag-active">R$ 87,9 MM — Datacenter</span>
+                        <span class="tag tag-active">R$ 20 MM — Cibersegurança</span>
+                        <span class="tag tag-active">Licitação Cloud Multiestadual</span>
+                        <span class="tag tag-active">GurIA — IA Generativa</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses com base em notícias públicas e declarações oficiais:</p>
+            <div>
+                <span class="tag tag-active">Reconstrução de Datacenter</span>
+                <span class="tag tag-active">Cibersegurança (R$ 20 MM)</span>
+                <span class="tag tag-active">Cloud Híbrida (Oracle / Microsoft)</span>
+                <span class="tag tag-active">IA Generativa (GurIA)</span>
+                <span class="tag tag-active">Portal rs.gov.br (evolução)</span>
+                <span class="tag tag-opportunity">Integração de Sistemas</span>
+                <span class="tag tag-opportunity">Automação de Processos</span>
+                <span class="tag tag-opportunity">Monitoramento &amp; Observabilidade</span>
+                <span class="tag tag-opportunity">Disaster Recovery</span>
+                <span class="tag tag-opportunity">DevSecOps</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades de Entrada</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Como empresa pública, a PROCERGS contrata via <strong>licitação/pregão eletrônico</strong>. Janelas de oportunidade identificadas:</p>
+            <div class="alert-box">
+                <strong>&#9888; Licitação Cloud em andamento:</strong> A PROCERGS lidera pregão para serviços de nuvem que atenderá 13 empresas estaduais de TI. Contrato de 36 meses com fornecedores como Oracle, Microsoft e AWS. Oportunidade para a Foursys atuar como parceira de implementação/migração.
+            </div>
+            <div class="alert-box">
+                <strong>&#9888; Reconstrução do Datacenter:</strong> Investimento de R$ 87,9 milhões em andamento. Demanda serviços especializados de infraestrutura, automação, monitoramento e segurança que podem gerar contratos adjacentes.
+            </div>
+            <div class="alert-box">
+                <strong>&#9888; Expansão da GurIA:</strong> A IA generativa do governo RS está em fase de escalonamento para 497 municípios. Demanda expertise em IA, MLOps, governança de dados e integração.
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Diogo Iori</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas da PROCERGS. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Cibersegurança &amp; Privacidade de Dados</h4>
+                    <span class="score-badge">Fit 95%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>R$ 20 milhões confirmados para investimento em cibersegurança</li>
+                        <li>Datacenter sofreu ataque ambiental (enchente) — necessidade de resiliência e plano de DR robusto</li>
+                        <li>Diogo Iori foi palestrante em painel de Cibersegurança no Governo Municipal (setembro 2025)</li>
+                        <li>Foursys possui certificações ISO 27001/27701, match direto com exigências do setor público</li>
+                        <li>Proteção de dados de 11 milhões de cidadãos gaúchos — LGPD é mandatória</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital — Modernização &amp; Integração</h4>
+                    <span class="score-badge">Fit 90%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>758 serviços públicos digitais precisam de integração entre múltiplas secretarias e órgãos</li>
+                        <li>Portal rs.gov.br em evolução constante — demanda squads de desenvolvimento</li>
+                        <li>Parceria Foursys-Digibee para integração/APIs é diferencial para conectar sistemas legados do governo</li>
+                        <li>Modelo de squads ágeis pode acelerar entregas sem aumentar o quadro fixo de servidores</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Dados &amp; Inteligência Artificial</h4>
+                    <span class="score-badge">Fit 88%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>GurIA (IA generativa) precisa de governança, MLOps e escalabilidade para 497 municípios</li>
+                        <li>PROCERGS apresentou no South Summit Brazil 2026 necessidade de IA com "privacy by design"</li>
+                        <li>AI Squad Foursys pode acelerar desenvolvimento de novos modelos sem sobrecarregar equipe interna</li>
+                        <li>Demanda de IA para automação de tarefas de servidores públicos (60.000+ usuários potenciais)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Sustentação / AMS — Application Management Services</h4>
+                    <span class="score-badge">Fit 82%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>72% da equipe tem mais de 11 anos de casa — risco de aposentadoria e perda de conhecimento</li>
+                        <li>Concurso público com 62 vagas em 2025 indica necessidade de reposição de quadro técnico</li>
+                        <li>Modelo AMS Foursys complementa equipe interna sem necessidade de concurso público</li>
+                        <li>Portfólio crescente de aplicações (Portal SOS, GurIA, Farmácia Digital, Produtor On-line) exige sustentação contínua</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Diogo Iori é <strong>Diretor de Infraestrutura e Operações</strong> — o tema central dele é resiliência, disponibilidade e performance. Iniciar a conversa mencionando a admirável resposta da PROCERGS na enchente de 2024 (migração para Oracle Cloud em 9 horas) e explorar como a Foursys pode contribuir para garantir que a nova infraestrutura seja ainda mais resiliente. Posicionar a Foursys como parceira de <strong>cibersegurança com ISO 27001/27701</strong> e experiência em disaster recovery — temas diretamente ligados ao investimento de R$ 87,9 MM em curso.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A PROCERGS está em momento de <strong>reconstrução e expansão simultâneas</strong>: datacenter novo, cloud híbrida em licitação, GurIA escalando, e R$ 20 MM alocados para cibersegurança. Esta é uma janela rara em que uma empresa pública tem orçamento aprovado e urgência de execução. O modelo de contratação via licitação exige preparação antecipada — a Foursys deve se credenciar e mapear editais.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>Certificações ISO 27001/27701</strong> — essenciais para fornecimento ao governo e match direto com o investimento em cibersegurança; (2) <strong>Parceria Digibee</strong> para integração de sistemas legados governamentais; (3) <strong>AI Squad</strong> para apoiar escalabilidade da GurIA com governança; (4) <strong>Modelo flexível</strong> de squads/AMS que complementa equipe pública sem necessidade de concurso; (5) <strong>Experiência em setor público</strong> e compliance com LGPD.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. Resiliência é a palavra-chave:</strong> Diogo Iori viveu na pele o impacto de 23 dias sem datacenter durante as enchentes de 2024. Qualquer solução apresentada deve começar por resiliência, redundância e disaster recovery. Mostrar cases de DR e continuidade de negócio gera conexão imediata com sua experiência recente.</p>
+                <p style="margin-bottom:12px"><strong>2. Cloud híbrida é a estratégia, não full cloud:</strong> A PROCERGS mantém cloud privada com VMware (mais de 50% de consumo) e usa Oracle Cloud Infrastructure como backup/expansão. A abordagem deve ser de otimização do modelo híbrido, não de convencer a migrar tudo para nuvem pública. A Foursys pode ajudar na orquestração e gestão desse ambiente multicloud.</p>
+                <p style="margin-bottom:12px"><strong>3. GurIA abre porta para IA:</strong> O assistente de IA generativa do governo RS é um projeto-bandeira que precisa escalar. Governança de IA, privacy by design e MLOps são demandas que a equipe interna possivelmente não tem em profundidade. O AI Squad da Foursys se encaixa como acelerador.</p>
+                <p style="margin-bottom:12px"><strong>4. Equipe envelhecendo — oportunidade de AMS:</strong> Com 72% dos funcionários com mais de 11 anos e um concurso público para repor apenas 62 vagas, a PROCERGS enfrenta risco real de perda de conhecimento. Modelo de sustentação/AMS da Foursys é solução de médio prazo que não depende de processo público de contratação de pessoal.</p>
+                <p><strong>5. Papel de broker multiestadual amplifica o impacto:</strong> A PROCERGS lidera licitações de cloud para 13 empresas estaduais de TI do Brasil. Se a Foursys se posicionar bem com a PROCERGS, o efeito cascata para outras estatais é significativo — um único contrato pode abrir portas em todo o país.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Pares — Empresas Estaduais de TI</h3>
+            <div class="competitor-card">
+                <h4>Prodesp (São Paulo)</h4>
+                <p><strong>Segmento:</strong> TI do Estado de São Paulo | <strong>Destaque:</strong> Poupatempo</p>
+                <p>A Prodesp é referência em serviços digitais ao cidadão, operando o Poupatempo há mais de duas décadas. Oferece soluções de transformação digital incluindo desenvolvimento customizado, integração de sistemas, nuvem, suporte e consultoria. Maior estatal de TI estadual do país em volume, com ecossistema maduro de fornecedores credenciados. Pode servir como benchmark de modernização para a PROCERGS.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Prodemge (Minas Gerais)</h4>
+                <p><strong>Segmento:</strong> TI do Estado de Minas Gerais | <strong>Destaque:</strong> SEI! Municípios</p>
+                <p>Oferece sistemas de informação, serviços de rede e business intelligence com atendimento 24h. Desenvolveu o SEI! Municípios para digitalização da gestão pública. Infraestrutura que suporta órgãos críticos como a Polícia Civil. Nível de maturidade digital inferior ao RS, mas com projetos inovadores de digitalização municipal.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Celepar (Paraná)</h4>
+                <p><strong>Segmento:</strong> TI do Estado do Paraná | <strong>Destaque:</strong> PIÁ (plataforma de serviços)</p>
+                <p>A Celepar opera a plataforma PIÁ de serviços digitais do Paraná, competindo diretamente com o modelo rs.gov.br. Forte em automação de processos governamentais e integração entre secretarias. O Paraná frequentemente disputa posições com o RS nos rankings de governo digital.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Serpro (Federal)</h4>
+                <p><strong>Segmento:</strong> TI do Governo Federal | <strong>Receita:</strong> ~R$ 4 bilhões</p>
+                <p>Maior empresa pública de TI do Brasil. Opera sistemas críticos nacionais (Receita Federal, SISCOMEX, etc.). Referência em escala e segurança. Colabora com estatais estaduais em oficinas de capacitação e compartilhamento de práticas. A PROCERGS participa de iniciativas conjuntas com o Serpro para padronização e interoperabilidade de serviços.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Comparada aos pares, a PROCERGS <strong>lidera em governo digital</strong> (1ª no IOSPD quatro vezes) mas enfrentou um revés significativo com a enchente. Os gaps identificados são: (1) <strong>Disaster Recovery e Business Continuity</strong> — a enchente revelou vulnerabilidade; a reconstrução precisa de expertise externa para garantir resiliência de classe mundial; (2) <strong>Integração multicloud</strong> — com VMware (privada), Oracle Cloud e potencialmente AWS/Microsoft, precisa de orquestração sofisticada que a equipe interna pode não dominar; (3) <strong>MLOps e Governança de IA</strong> — a GurIA é inovadora mas precisa de frameworks de governança, monitoramento de modelos e compliance com LGPD em escala; (4) <strong>Modernização de legado</strong> — 758 serviços digitais incluem sistemas legados de múltiplas décadas que precisam de refatoração e integração via APIs. A Foursys pode se posicionar como parceira especializada em todos esses gaps.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Diretor de Infraestrutura e Operações — PROCERGS</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Porto Alegre, RS</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória na PROCERGS</div>
+                        <div class="value">Na empresa desde dezembro de 2009 (~16 anos). Evoluiu de Técnico de Operação → Gestor de Incidentes → Diretor de Infraestrutura e Operações</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Tecnologia em Redes de Computadores — Faculdade Senac</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Eventos</div>
+                        <div class="value">Palestrante: "Conversas Digitais" (Instituto Caldeira, maio 2025 — IA no serviço público); Painel de Cibersegurança no Governo Municipal (CanoasTec, set 2025)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Temas de Interesse</div>
+                        <div class="value">Infraestrutura resiliente, cibersegurança no setor público, IA aplicada a serviços públicos, operações de datacenter, cloud híbrida</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconheça a resiliência pessoal e profissional:</strong> Diogo viveu a crise da enchente de 2024 como líder de infraestrutura — gerenciar um datacenter alagado por semanas é uma experiência que marca. Reconhecer essa resiliência com genuína admiração cria conexão emocional imediata.</p>
+                <p style="margin-bottom:10px"><strong>2. Valorize a trajetória "de dentro":</strong> Ele cresceu dentro da PROCERGS por 16 anos, de técnico a diretor. Isso indica profundo conhecimento do ambiente e orgulho institucional. Evite postura de quem "sabe mais" — posicione-se como parceiro que complementa, não substitui.</p>
+                <p style="margin-bottom:10px"><strong>3. Fale a linguagem de infraestrutura:</strong> Formado em Redes de Computadores e com carreira em operações, Diogo é técnico por formação. Conversas com dados concretos, métricas de disponibilidade (SLA), RPO/RTO e referências técnicas geram mais credibilidade do que slides corporativos genéricos.</p>
+                <p style="margin-bottom:10px"><strong>4. Conecte-se pelo evento "Conversas Digitais":</strong> Ele palestrou sobre "Transformação do Serviço Público com IA" no Instituto Caldeira em maio de 2025. Mencionar que acompanhou o evento ou conhece a iniciativa demonstra pesquisa e respeito pelo seu trabalho.</p>
+                <p><strong>5. Contexto gaúcho importa:</strong> A PROCERGS é orgulho do RS — líderes no IOSPD 4 vezes, Portal SOS que atendeu milhões durante a tragédia. O sentimento de pertencimento gaúcho e de missão pública é forte. Demonstrar conhecimento da importância social do trabalho da PROCERGS abre portas.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Diretor e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Diretoria Executiva — um dos 4 diretores da empresa</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Diretor-Presidente da PROCERGS / Conselho de Administração</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo de Responsabilidade</div>
+                        <div class="value">Datacenter, redes, operações, monitoramento, cloud, infraestrutura de TI de todo o governo do RS</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Influenciador/Especificador técnico (licitação pública requer processo formal)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores PROCERGS</div>
+                        <div class="value">~1.684</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI Atendidos</div>
+                        <div class="value">60.000+ servidores públicos + 11 milhões de cidadãos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Serviços Digitais Operados</div>
+                        <div class="value">758 serviços públicos (96% digitalizados)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Governo</div>
+                        <div class="value">Hub tecnológico estratégico — co-lidera transformação digital com a Secretaria de Planejamento (SPGG)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada dos Investimentos de TI</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Datacenter / Infra On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:35%;background:#1a237e">35%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+                <div class="bar"><div class="bar-label">Cloud Híbrida</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#3949ab">18%</div></div></div>
+                <div class="bar"><div class="bar-label">Desenvolvimento / Aplicações</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">12%</div></div></div>
+                <div class="bar"><div class="bar-label">IA / Inovação (GurIA)</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas / Capacitação</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria / Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#9fa8da">2%</div></div></div>
+            </div>
+            <p style="margin-top:16px;font-size:12px;color:var(--text-light);text-align:center">* Estimativa baseada nos investimentos públicos anunciados (R$ 87,9 MM datacenter + R$ 20 MM cibersegurança). Distribuição real pode variar.</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor &amp; Modelo de Contratação</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Contratação (Setor Público)</h4>
+                    <div>
+                        <span class="tag tag-active">Licitação / Pregão Eletrônico</span>
+                        <span class="tag tag-active">Compliance com Lei 14.133/2021</span>
+                        <span class="tag tag-active">Certificações de Segurança</span>
+                        <span class="tag tag-active">Experiência Comprovada</span>
+                        <span class="tag tag-active">Melhor Preço / Técnica e Preço</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Modelo de Contratação</div>
+                        <div class="value">Pregão eletrônico e Registro de Preços (a PROCERGS lidera pregões multiestado para cloud)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Fornecedores Atuais Conhecidos</div>
+                        <div class="value">Oracle (banco de dados + cloud), Microsoft (cloud + produtividade), VMware (virtualização), AX4B e LTA-RH (integradores cloud)</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Ponto de Atenção</div>
+                        <div class="value">Como empresa pública, relacionamento e rapport não substituem processo licitatório. A Foursys precisa estar credenciada e participar ativamente dos editais.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

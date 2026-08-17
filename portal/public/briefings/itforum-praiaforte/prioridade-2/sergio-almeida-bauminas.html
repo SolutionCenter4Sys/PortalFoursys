@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Sergio Almeida | BAUMINAS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Sergio Almeida</h1>
+                <h2>Head de Tecnologia e Segurança da Informação (CIO/CISO/DPO) — Grupo BAUMINAS</h2>
+                <div class="loc">Química, Petroquímica, Óleo e Gás · Campinas/SP (operacional) · Sede Cataguases/MG · CNPJ 19.525.278/0001-00</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Sede MG + porte (~R$ 2 bi)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Faturamento</div><div class="value">~R$ 2 bi</div></div>
+                <div class="header-badge"><div class="label">Orçamento TI</div><div class="value">~R$ 90 MM/ano</div></div>
+                <div class="header-badge"><div class="label">Unidades</div><div class="value">21 no BR</div></div>
+                <div class="header-badge"><div class="label">Perspectiva TI</div><div class="value">+10% a +20%</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: deep-dive fontes abertas + leitura de comitê (CIO/CISO/DPO) + material de apresentação · Diferencia da edição anterior (Trancoso). Identificação antifraude: BAUMINAS QUIMICA LTDA — CNPJ 19.525.278/0001-00 (planilha IT Forum).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>O <strong>Grupo BAUMINAS</strong> é empresa 100% brasileira com ~60 anos, líder nacional em coagulantes para tratamento de água e efluentes. Opera quatro frentes: <strong>BAUMINAS Águas</strong>, <strong>BAUMINAS Mineração</strong>, <strong>BAUMINAS Log</strong> e <strong>BAUMINAS Hidroazul</strong>. Razão social confirmada na Receita: <strong>BAUMINAS QUIMICA LTDA</strong> (CNPJ 19.525.278/0001-00, matriz Cataguases/MG; capital social R$ 200 MM). A planilha do IT Forum aponta o CIO em Campinas/SP (há filial administrativa). Capilaridade: ~21 unidades (fábricas + mineração + escritórios), &gt;1.000 colaboradores, atendimento a milhares de municípios e clientes de saneamento/indústria (COMPESA, EMASA, Veracel citados no site). Momento tecnológico: ERP Protheus unificado em nuvem, Power BI, CSC, Fortinet + SOC 24x7 (Brasiline), evolução do portal SmartPlan (integrações logísticas) e oferta comercial “Gestão 4.0” (telemetria, dosagem, BI) para clientes de ETA/ETE.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">BAUMINAS QUIMICA LTDA</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">Cataguases/MG (matriz) · CIO em Campinas/SP</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Nacional (21 unidades) · presença citada em PT/IE</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">~R$ 2 bi/ano (fontes abertas; grupo familiar)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">1.000+ (grupo) · equipe TI ~70 (19+50)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada · Ltda (Grupo / holding BAUMINAS Participações)</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Sergio Almeida</strong> permanece Head de Tecnologia e Segurança da Informação do Grupo BAUMINAS (LinkedIn atual; presente no último IT Forum = SIM). Acumula CIO + CISO + DPO, com reporte à Vice-Presidência. Responsável por orçamento de TI &gt; R$ 90 MM/ano; lidera ~19 diretos e 50+ indiretos. Trajetória: Stefanini, TOTVS (gestão de serviços) e indústria — perfil de quem compra SI/integrador com linguagem de ROI e TCO. Realizações públicas: revitalização Protheus (base única + plano de contas), Power BI, CSC (TI+Fiscal+Contábil+Financeiro+Jurídico+Facilities), Fortinet/SOC, 150+ projetos de TI em 2024. Reconhecimento: 3º lugar Prêmio Executivo de TI do Ano 2024 (IT Forum/Deloitte) — categoria química/petroquímica. Formação: MBA TI (FIAP); certificação AI for Leaders. Poder de decisão: aprovador dentro do budget; TI estratégica no planejamento. <em>Leitura de comitê:</em> VP/COO no loop de CapEx maior; Jurídico/Compliance no eixo DPO; Operações/Logística no SmartPlan e IoT de planta.</p>
+            <div class="grid-2" style="margin-top:14px">
+                <div class="info-card"><div class="label">LinkedIn</div><div class="value"><a href="https://linkedin.com/in/sergiorobertoalmeida" target="_blank" rel="noopener">linkedin.com/in/sergiorobertoalmeida</a></div></div>
+                <div class="info-card"><div class="label">Nível de decisão</div><div class="value">Aprovador (budget TI) · reporte VP · tríplice CIO/CISO/DPO</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento & mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Atua na interseção <strong>química inorgânica / saneamento ambiental</strong>: coagulantes, mineração de insumos, logística química e tratamento de água para piscinas. Posição: <strong>líder nacional em coagulantes</strong> para água e efluentes — competindo com multinacionais (Kemira, SNF, Buckman, Solenis) que empurram plataformas digitais IoT proprietárias. Cadeia de valor crítica: ETA/ETE públicas e industriais, contratos de fornecimento contínuo + assessoria técnica in loco + logística. Prioridades setoriais 2026: eficiência sob ociosidade elevada da indústria química nacional (Abiquim), pressão de custo energético, digitalização 4.0 ainda madura em poucos players, descarbonização e compliance (LGPD, SASSMAQ, ISO ambiental). Risco/oportunidade: clientes de saneamento exigem continuidade, telemetria e evidência de performance — BAUMINAS já vende “Solução Integrada / Gestão 4.0”, o que cria espelho interno (TI precisa entregar a mesma maturidade que o produto promete ao mercado).</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões & lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Ociosidade e custo por tonelada</strong> — setor químico com ociosidade crítica (Abiquim ~41% em 2025); pressão por produtividade nas 17+ fábricas e 4 minas. (FATO setorial)</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Tríplice carga CIO/CISO/DPO</strong> — mesmo executivo carrega segurança, privacidade e delivery; risco de gargalo de priorização. (FATO perfil LinkedIn)</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Gap digital vs rivais globais</strong> — Kemira/Buckman/Solenis já empacotam IoT+analytics como produto; BAUMINAS precisa acelerar plataforma própria / integração. (HIPÓTESE consultiva ancorada em benchmark)</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Integração multiempresa pós-ERP</strong> — Protheus unificado abre demanda de APIs, OMS/frete, manutenção de frota (SmartPlan + Autotrack + Raboot). (FATO Innovare 2026)</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Provar ROI de IA sob pressão de custo</strong> — prioridade declarada IT Forum: IA/ML + automação com governança. (FATO pesquisa IT Forum / briefing P1)</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Superfície de ataque distribuída</strong> — 21 unidades + clientes públicos; cibersegurança continua tema quente mesmo com Fortinet/SOC. (FATO Brasiline 2026 + pesquisa)</div></div>
+
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Governança e escala de IA</span>
+                <span class="tag tag-priority">Automação / RPA com ROI</span>
+                <span class="tag tag-priority">Plataforma IoT/edge para plantas e clientes</span>
+                <span class="tag tag-priority">Integração APIs / OMS / logística</span>
+                <span class="tag tag-priority">CSC digital e dados confiáveis</span>
+            </div>
+
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses (fontes abertas + pesquisa IT Forum)</h4>
+            <div>
+                <span class="tag tag-active">Cibersegurança / SOC</span>
+                <span class="tag tag-active">IA / ML e GenAI</span>
+                <span class="tag tag-active">Automação / RPA</span>
+                <span class="tag tag-active">Nuvem híbrida</span>
+                <span class="tag tag-active">Integração / APIs</span>
+                <span class="tag tag-active">Dados / Power BI</span>
+                <span class="tag tag-active">IoT / edge</span>
+                <span class="tag tag-active">ERP / core</span>
+                <span class="tag tag-active">DR / continuidade</span>
+                <span class="tag tag-active">LGPD / DLP</span>
+            </div>
+
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido (pesquisa IT Forum — preservar)</h4>
+            <div>
+                <span class="tag tag-opportunity">Conectividade e telecom</span>
+                <span class="tag tag-opportunity">Cibersegurança (novas frentes)</span>
+                <span class="tag tag-opportunity">Automação de processos / RPA</span>
+                <span class="tag tag-opportunity">IoT / edge computing</span>
+            </div>
+            <p style="margin-top:12px;font-size:13px;color:var(--text-light)">Também sinalizados sem definição plena: nuvem, gestão de dados, IA/GenAI, APIs, GRC, sistemas core — janela de consultoria/assessment.</p>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">95/100</span></div>
+                <p>Squads de IA (estratégia, GenAI, hiperautomação, preditiva) para CSC, qualidade, manutenção e dosagem — alinhado à certificação “AI for Leaders” e à prioridade Top 3 de investimento.</p>
+                <div class="reasons"><ul>
+                    <li>IA/ML e GenAI com budget previsto e sem fornecedor pleno</li>
+                    <li>Pressão setorial por eficiência sob ociosidade</li>
+                    <li>150+ projetos/ano — precisa industrializar delivery com IA</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">92/100</span></div>
+                <p>Complemento ao stack Fortinet/SOC: Zero Trust, DLP/LGPD, GRC, DR e maturidade ISO 27001/27701 Foursys — Sergio é CISO/DPO e o tema segue como projeto aberto.</p>
+                <div class="reasons"><ul>
+                    <li>Projeto cibersegurança SEM fornecedor definido (pesquisa)</li>
+                    <li>Operação multiunidade + dados de clientes públicos</li>
+                    <li>Case Brasiline/Fortinet mostra apetite por parceiro especializado</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox + Digibee (iPaaS)</h4><span class="score-badge">78/100</span></div>
+                <p>Aceleração de integrações Protheus ↔ SmartPlan ↔ Autotrack ↔ Raboot e APIs B2B; reduz custo de customização e time-to-market de OMS/logística.</p>
+                <div class="reasons"><ul>
+                    <li>Frente Innovare 2026 prova demanda ativa de integração</li>
+                    <li>APIs listadas no mapa de investimento</li>
+                    <li>Parceria Digibee = fit com modernização pós-ERP único</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">72/100</span></div>
+                <p>Plataformas cloud-native, observabilidade, DevOps/SRE e produtos digitais (portal cliente, telemetria Gestão 4.0) para competir com Kemiconnect/Ackumen/OnGuard.</p>
+                <div class="reasons"><ul>
+                    <li>IoT/edge sem fornecedor definido</li>
+                    <li>Produto comercial já vende Gestão 4.0 — gap de plataforma</li>
+                    <li>Conectividade/telecom aberta na pesquisa</li>
+                </ul></div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">68/100</span></div>
+                <p>AMS, APIs, desacoplamento de customizações Protheus e sustento do CSC digital — consolida a “revolução tecnológica” pós-revitalização ERP.</p>
+                <div class="reasons"><ul>
+                    <li>ERP revitalizado, mas ecossistema adjacente ainda em evolução</li>
+                    <li>Preferência por integrador/consultoria (pesquisa)</li>
+                    <li>Modelo de contratação orientado a projetos (21 temas)</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Abrir pela tríplice agenda de Sergio (IA + automação + cibersegurança) e pelo reconhecimento no Prêmio Executivo de TI 2024. Mostrar como AI Squad + Cibersegurança Foursys (ISO 27001/27701) aliviam a carga CIO/CISO/DPO sem trocar o stack Fortinet já instalado — complementar, não substituir.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Quatro frentes sem fornecedor (telecom, ciber novas, RPA, IoT/edge) + budget TI crescendo 10–20% + integrações SmartPlan ativas. Timing: Praia do Forte 2026, com CIO já engajado no circuito IT Forum (esteve em Trancoso).</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>AI Squad proprietário, ciber com ISO 27001/27701, FourBlox + Digibee para iPaaS, 24 anos / 41.000+ projetos, modelo Squads/Projetos/AMS. Ângulo: ajudar a BAUMINAS a digitalizar o produto (Gestão 4.0) com a mesma disciplina que digitalizou o ERP.</p></div>
+            <div class="insight-box" style="margin-top:8px">
+                <h4>Insights de negócio (preservados e atualizados)</h4>
+                <p><strong>1.</strong> Ociosidade química (Abiquim) → narrativa de eficiência por tonelada via IA/RPA nas plantas.</p>
+                <p style="margin-top:8px"><strong>2.</strong> Rivais com plataformas IoT → gap de produto digital; IoT/edge é projeto aberto.</p>
+                <p style="margin-top:8px"><strong>3.</strong> DPO + clientes públicos → LGPD/GRC como urgência, não commodity.</p>
+                <p style="margin-top:8px"><strong>4.</strong> Pós-Protheus: integrações SmartPlan (OMS/frete/manutenção) = porta FourBlox/Digibee.</p>
+                <p style="margin-top:8px"><strong>5.</strong> Fortinet/Brasiline consolidado → Foursys entra em camadas adjacentes (Zero Trust, DLP, GenAI segura, AMS).</p>
+            </div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes & Gap Analysis</h3>
+            <div class="competitor-card"><h4>Kemira</h4><p><strong>Perfil:</strong> multinacional finlandesa de químicos para água. <strong>Tech:</strong> Kemiconnect, gêmeos digitais, IA para dosagem. <strong>Gap BAUMINAS:</strong> empacotar telemetria/analytics como produto digital escalável, não só serviço técnico.</p></div>
+            <div class="competitor-card"><h4>SNF Group</h4><p><strong>Perfil:</strong> líder global em polímeros/coagulantes; planta BR (ex.: Camaçari). <strong>Tech:</strong> automação industrial, IoT e e-commerce B2B. <strong>Gap:</strong> canal digital B2B e manutenção preditiva em escala.</p></div>
+            <div class="competitor-card"><h4>Buckman</h4><p><strong>Perfil:</strong> especialidades químicas (Sumaré/SP). <strong>Tech:</strong> Ackumen (IoT + analytics). <strong>Gap:</strong> plataforma conectada de monitoramento contínuo para clientes ETA.</p></div>
+            <div class="competitor-card"><h4>Solenis</h4><p><strong>Perfil:</strong> químicos de água/processo (pós-fusão Diversey). <strong>Tech:</strong> OnGuard (sensores IoT 24/7). <strong>Gap:</strong> oferta “always-on” com analytics e sustentabilidade digital.</p></div>
+            <div class="insight-box"><h4>Gap analysis</h4><p>Rivais monetizam software+IoT junto do químico. BAUMINAS tem capilaridade nacional e Solução Integrada, mas o gap crítico é <strong>plataforma + integração + IA operacional</strong>. Internamente, RPA/IA e novas frentes de ciber são as alavancas de conversa Foursys — sem precisar “trocar Fortinet”.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Grupo químico BR (~R$ 2 bi), líder em coagulantes; 21 unidades; CNPJ 19.525.278/0001-00 (Cataguases/MG).</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Sergio Almeida — CIO/CISO/DPO; budget ~R$ 90 MM; 3º Prêmio TI 2024; LinkedIn ativo.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escalar IA/RPA/IoT e novas camadas de ciber pós-ERP unificado, competindo com plataformas digitais dos rivais.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Ciber, IA/GenAI, RPA, nuvem híbrida, APIs, dados (Power BI), IoT — budget TI +10–20% (fontes abertas / pesquisa IT Forum). Sem RI listada.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) AI Squad · 2) Cibersegurança · 3) FourBlox/Digibee (integração)</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 45 min no Praia do Forte: discovery RPA+IoT+ciber adjacente + proposta de PoC 4–6 semanas.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum 2026 + ciclo de expansão pós-Protheus/SmartPlan + orçamento TI em crescimento.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “mais firewall”. Vender industrialização do CSC + produto digital Gestão 4.0 (mesmo padrão de disciplina do ERP) — ROI em custo/ton e retenção de clientes de saneamento.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>ERP único e CSC no ar</h4><p>Sergio consolidou Protheus, Power BI, CSC e Fortinet/SOC. A “revolução tecnológica” interna saiu do PowerPoint — agora a pressão é escalar valor.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>IA, IoT e rivais digitais</h4><p>Budget sobe, mas ociosidade setorial aperta. Multinacionais já vendem IoT+analytics. Quatro projetos sem fornecedor e a tríplice função CIO/CISO/DPO criam gargalo.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Foursys como fábrica de valor</h4><p>AI Squad + ciber adjacente + iPaaS (FourBlox/Digibee) transformam integrações e automação em programa mensurável — sem descartar parceiros atuais.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Dor: automação e IA sem fábrica de entrega</h4>
+                <p>Prioridade Top 3 em IA/ML e RPA; 150+ projetos/ano; certificação AI for Leaders. Evidência: pesquisa IT Forum + LinkedIn.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad com casos de CSC (fiscal/financeiro), qualidade e manutenção preditiva — meta: reduzir lead time de projetos e custo operacional por tonelada.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Qual processo do CSC ou da planta gera mais retrabalho manual hoje — e qual seria o ROI se cortássemos 30% em 90 dias?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de 2h de priorização + backlog de 3 automações candidatas a PoC.</p>
+            </div>
+            <div class="business-card">
+                <h4>Dor: cibersegurança além do perímetro já contratado</h4>
+                <p>Fortinet + Brasiline SOC ativos; tema ainda aparece como projeto sem fornecedor (novas frentes). Sergio é CISO/DPO.</p>
+                <div class="sub">Solução Foursys</div><p>Assessment Zero Trust / DLP / GRC LGPD complementar; playbooks de resposta e maturidade ISO 27001/27701.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Onde ainda falta visibilidade — OT/plantas, identidade, dados de clientes de saneamento ou cadeia de fornecedores?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>One-pager de gaps vs NIST/CIS + proposta de quick wins em 30 dias.</p>
+            </div>
+            <div class="business-card">
+                <h4>Oportunidade: integração logística e produto digital Gestão 4.0</h4>
+                <p>Innovare avança SmartPlan (Protheus OMS, Autotrack, Raboot). Site vende telemetria/dosagem/BI aos clientes.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox + Digibee para iPaaS; Engenharia Digital para camada de experiência/telemetria competitiva com Kemiconnect/Ackumen.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quantas integrações ainda são manuais ou ponto a ponto — e o que trava o roadmap do SmartPlan / Gestão 4.0?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Mapa de integração AS-IS/TO-BE em 1 semana + estimativa de TCO 3 anos.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck 8–10 slides + one-pager de PoC (PDF) · opcional: demo iPaaS Digibee 5 min</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">AI Squad + Cibersegurança (+ FourBlox/Digibee como 3ª lâmina) — aliviam carga CIO/CISO/DPO e fecham projetos abertos</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) automação/IA em indústria de processo ou CSC multiempresa; (2) integração ERP–logística via iPaaS; (3) programa de ciber/LGPD em operação multiunidade. Se não houver case químico idêntico, usar narrativa de indústria de base + saneamento (continuidades OT/IT).</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> posicionar Foursys como “braço de produto digital” da Solução Integrada — não como supplier de TI genérico. O ROI fala a linguagem do cliente final (ETA): menos desvio de dosagem, menos ruptura logística, mais compliance.</p>
+            <p style="margin-top:8px"><em>Se material setorial não estiver pronto: discurso “Do ERP único à fábrica de valor — IA, integração e ciber no mesmo ritmo do Protheus”.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Parabéns pelo 3º lugar no Prêmio Executivo de TI 2024 — queremos entender o que vem depois do Protheus unificado.”</li>
+                <li>“Vocês já têm Fortinet/SOC; nossa tese é complementar Zero Trust, DLP e GRC — sem rip-and-replace.”</li>
+                <li>“Com ociosidade setorial alta, cada ponto de automação no CSC ou na planta vira competitividade por tonelada.”</li>
+                <li>“SmartPlan + OMS/frete mostra que integração é o próximo gargalo — Digibee/FourBlox encaixa aí.”</li>
+                <li>“Kemira e Buckman vendem software IoT junto do químico; dá para acelerar a Gestão 4.0 com Engenharia Digital.”</li>
+                <li>“Como CISO/DPO, você precisa de parceiro que fale LGPD e delivery no mesmo contrato — ISO 27001/27701 Foursys.”</li>
+                <li>“Proposta concreta: PoC de 4–6 semanas em RPA/IA ou integração crítica, com critério de go/no-go.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Abordagem no Praia do Forte / follow-up LinkedIn citando prêmio e SmartPlan</td><td>Agenda 45 min com Sergio (+ TI Ops se possível)</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop dores CSC/plantas/ciber adjacente; mapear 4 projetos abertos</td><td>Documento de hipóteses + ranking ROI</td><td>1–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC RPA/IA ou integração Protheus–SmartPlan ( Digibee )</td><td>Demo + métricas (tempo ciclo, erros, TCO)</td><td>4–6 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>AI Squad ou squad integração + checklist ciber</td><td>Backlog trimestral + rituais de valor</td><td>1–2 trimestres</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>AMS + roadmap Gestão 4.0 / IoT + GRC</td><td>MSA multiano / SOW rolling</td><td>6–12 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Site institucional Grupo BAUMINAS</h4>
+                <div class="url">https://bauminas.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Site institucional (proteção Cloudflare)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado publicamente</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Cloudflare (CDN/WAF challenge)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não localizado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Solução Integrada / Gestão 4.0 (produto digital)</h4>
+                <div class="url">https://bauminas.com.br/solucao-integrada/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Mobirise (legado de site)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Mesmo domínio / Cloudflare</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Telemetria/dosagem (descrito; stack não publicada)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>ERP TOTVS Protheus (core)</h4>
+                <div class="url">não público (nuvem — post Sergio)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Clientes Protheus / web</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Protheus multiempresa</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">ERP migrado para nuvem (FATO LinkedIn)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações OMS/SmartPlan em curso</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Portal SmartPlan (logística/distribuição)</h4>
+                <div class="url">não público (parceiro Innovare)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portal web</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Integra Protheus OMS, Autotrack, Raboot</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações ativas (2026)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Microsoft 365 / Power BI / Teams</h4>
+                <div class="url">ecossistema corporativo</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Teams / Power BI</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">M365</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Microsoft Cloud</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Dashboards CSC / gestão</div></div>
+                </div>
+            </div>
+
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">ERP em nuvem; nuvem pública/híbrida no roadmap; datacenter histórico; Cloudflare no site público. Detalhes de hyperscaler: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança & Compliance</div><div class="cmp">Fortinet (FortiGate/FortiAnalyzer) + SOC 24x7 Brasiline; DPO interno; ISO 14001/SASSMAQ no negócio; LGPD/DLP no mapa de investimento.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">Prioridade IA/ML/GenAI e RPA; Gestão 4.0 (telemetria, dosagem); IoT/edge como projeto aberto. Maturidade interna: hipótese — em aceleração pós-ERP.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados & Analytics</div><div class="cmp">Power BI; BI citado na Solução Integrada; qualidade de dados e governança como dor estrutural (pesquisa).</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">TOTVS Protheus revitalizado — base única, plano de contas único, multiempresa do Grupo.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">SmartPlan (OMS/frete/manutenção); CSC unificado; HCM/BPM no mapa de investimento; CRM específico: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência & Engajamento</div><div class="cmp">Site bauminas.com.br; páginas de produto (Solução Integrada); LinkedIn corporativo; portal/cliente digital — oportunidade de modernização (Mobirise legado).</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://bauminas.com.br/</td><td><span class="status-err">403*</span></td><td>Bloqueio bot</td><td>Cloudflare</td><td>*Challenge CF (cf-mitigated: challenge). Conteúdo acessível via fetch humano; Server: cloudflare · CF-RAY GRU</td></tr>
+                    <tr><td>https://bauminas.com.br/solucao-integrada/</td><td><span class="status-200">200**</span></td><td>Mobirise v4.12.3</td><td>Cloudflare</td><td>**Conteúdo obtido via WebFetch; descreve Gestão 4.0 (telemetria, dosagem, BI)</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026 (~11:20 BRT). Headers via curl; corpo via WebFetch. Só o inspecionado foi registrado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Automação</div><h4>RPA/IA sem fábrica de escala</h4><p>Prioridade explícita e projetos sem fornecedor; CSC e plantas ainda dependem de esforço manual sob ociosidade setorial (Abiquim).</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Segurança</div><h4>Camadas além do perímetro Fortinet</h4><p>SOC instalado, mas pesquisa marca novas frentes ciber abertas; DPO + clientes públicos elevam exigência LGPD/DLP/Zero Trust.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Integração</div><h4>Ecossistema pós-Protheus fragmentado</h4><p>SmartPlan exige OMS, Autotrack, Raboot — padrão clássico de ponto a ponto; APIs no mapa de investimento.</p><div class="offer">Oferta Foursys: FourBlox + Digibee</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Produto digital</div><h4>Gestão 4.0 vs plataformas rivais</h4><p>Kemiconnect/Ackumen/OnGuard mostram padrão IoT+analytics; BAUMINAS vende o conceito, stack de plataforma pouco publicada.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Experiência</div><h4>Canal digital institucional legado</h4><p>Página Solução Integrada em Mobirise antigo; site sob WAF agressivo — oportunidade de modernizar jornada B2B.</p><div class="offer">Oferta Foursys: Engenharia Digital / Modernização</div></div>
+                <div class="gap-card"><div class="num">GAP 6 · Dados</div><h4>Qualidade e governança multiunidade</h4><p>Power BI existe; dor declarada de complexidade/qualidade de dados em 21 unidades e CSC unificado.</p><div class="offer">Oferta Foursys: AI Squad + Modernização de Legado</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal & Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">MBA TI — FIAP · AI for Leaders · DPO</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">Campinas/SP (planilha) · base SP (LinkedIn)</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado publicamente</div></div>
+            </div>
+            <div class="grid-2" style="margin-top:12px">
+                <div class="info-card"><div class="label">Reconhecimento</div><div class="value">3º — Prêmio Executivo de TI 2024 (IT Forum/Deloitte)</div></div>
+                <div class="info-card"><div class="label">Presente no último IT Forum</div><div class="value">SIM (planilha) · engajado no circuito (post Trancoso)</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p><strong>1.</strong> Reconheça o prêmio 2024 — sinal de respeito e preparação.</p>
+                <p style="margin-top:8px"><strong>2.</strong> Empatia com a tríplice CIO/CISO/DPO — oferta que “tira carga”, não que adiciona projeto.</p>
+                <p style="margin-top:8px"><strong>3.</strong> Pergunte pelo CSC: executivos compartilham lições de projetos transformadores.</p>
+                <p style="margin-top:8px"><strong>4.</strong> Conecte FIAP + AI for Leaders a cases do AI Squad (apetite técnico real).</p>
+                <p style="margin-top:8px"><strong>5.</strong> Respeite os 60 anos da BAUMINAS: modernizar sem apagar cultura familiar/industrial.</p>
+                <p style="margin-top:8px"><strong>6.</strong> Cite SmartPlan/integrações só como curiosidade bem pesquisada — não como auditoria.</p>
+                <p style="margin-top:8px"><strong>7.</strong> Fale de Praia do Forte vs Trancoso: ele já refletiu publicamente sobre o papel do CIO na estratégia.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia & identidade</h4><ul>
+                    <li>Planilha CIOs Confirmados IT Forum Praia do Forte 2026 (ID 47)</li>
+                    <li>Receita/consultas CNPJ 19.525.278/0001-00 — BAUMINAS QUIMICA LTDA</li>
+                    <li>Origem das Marcas / fontes abertas (~R$ 2 bi, 21 unidades)</li>
+                    <li>Briefing P1 Trancoso (Demais CIO\Sergio Almeida - BAUMINAS.html) — preservado</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>LinkedIn Sergio Almeida (Protheus, Teams, Power BI, CSC, budget TI)</li>
+                    <li>InnovareTI — SmartPlan / Protheus OMS / Autotrack / Raboot (2026)</li>
+                    <li>Brasiline — case Fortinet/SOC BAUMINAS (2026)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Abiquim — ociosidade indústria química ~41% (2025)</li>
+                    <li>ForneceB2B — tendências digitalização química 2025-2026</li>
+                    <li>Sites Kemira / Buckman / Solenis / SNF (benchmark plataformas)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>https://linkedin.com/in/sergiorobertoalmeida</li>
+                    <li>Posts LinkedIn (ERP, IT Forum Trancoso, prêmio 2024)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch https://bauminas.com.br/</li>
+                    <li>WebFetch https://bauminas.com.br/solucao-integrada/</li>
+                    <li>curl headers (Cloudflare 403 challenge) — 21/07/2026</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS) · ID 47
+    </div>
+</body>
+</html>

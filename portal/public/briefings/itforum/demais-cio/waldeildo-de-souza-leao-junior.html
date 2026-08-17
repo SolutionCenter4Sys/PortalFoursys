@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing Gerente de TI - Waldeildo de Souza Leao Junior | COMPESA</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Waldeildo de Souza Leao Junior</h1>
+                <h2>Gerente de TI — COMPESA</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Utilities | Recife - PE</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 2,1 BI a R$ 3 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 80,1 MM a R$ 100 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá até 10%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: COMPESA</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>COMPESA (Companhia Pernambucana de Saneamento)</strong> é a empresa pública responsável pelo abastecimento de água e esgotamento sanitário no estado de Pernambuco, com sede na Rua da Aurora, 777, Recife. Atende mais de 170 municípios pernambucanos, com uma força de trabalho entre 1.000 e 4.999 colaboradores. A companhia vive um momento estratégico decisivo: lançou o programa <strong>Águas de Pernambuco</strong>, com investimentos de <strong>R$ 6,1 bilhões</strong> em obras de abastecimento de água (R$ 3,9 bi), esgotamento sanitário (R$ 2,2 bi) e segurança hídrica, distribuídos entre Sertão, Agreste, Matas e Região Metropolitana do Recife. Além disso, está em andamento a <strong>concessão parcial da COMPESA</strong>, que deverá atrair R$ 19 bilhões em investimentos privados ao longo de 35 anos, alinhada ao Marco Legal do Saneamento que exige universalização até 2033 (99% água e 90% esgoto). No campo da inovação, a COMPESA investiu R$ 4,2 milhões em soluções tecnológicas — incluindo IA, nanotecnologia e modelagem preditiva — e lançou o programa <strong>Águas Digitais</strong> em parceria com o Porto Digital, primeiro edital de inovação aberta do setor de saneamento no Brasil na modalidade CPSI, com R$ 1 milhão para startups e pesquisadores.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Pública</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Estabilidade</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Utilities</strong> com abrangência <strong>Local (Brasil)</strong>. Possui <strong>5 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>Licitação pública  (edital/pregão</strong>. Perspectiva do orçamento de TI: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Atrair, desenvolver e engajar talentos</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Fomentação da cultura de inovação na área de TI e organização</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer processos e políticas de governança / compliance</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar complexidade dos dados e qualidade da informação</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Orquestrar transformação digital</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Conectividade e telecom</span>
+<span class="tag tag-priority">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-priority">Gestão de dados</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">IoT / edge computing</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Infraestrutura de redes</span>
+<span class="tag tag-opportunity">Conectividade e telecom</span>
+<span class="tag tag-opportunity">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-opportunity">APIs e integração</span>
+<span class="tag tag-opportunity">Mobile apps / superapps</span>
+</div><div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria/assessment):</h4>
+                <div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Nuvem Privada e híbrida</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Disaster recovery / continuidade de negócios</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Gestão de dados</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA / ML</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA Generativa</span>
+</div>
+            </div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Waldeildo de Souza Leao Junior</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 84</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Infraestrutura de redes SEM fornecedor definido</li><li>Nuvem Privada e híbrida com investimento previsto</li><li>Conectividade e telecom SEM fornecedor definido</li><li>Conectividade e telecom é prioridade Top 3</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 80</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Disaster recovery / continuidade de negócios com investimento inicial previsto</li><li>Disaster recovery / continuidade de negócios é prioridade Top 3</li><li>Segurança de dados e privacidade (LGPD/DLP) SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Waldeildo de Souza Leao Junior tem como top prioridades <strong>Conectividade e telecom; Disaster recovery / continuidade de negócios; Gestão de dados</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>5 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 5 projetos definidos sem fornecedor: Infraestrutura de redes, Conectividade e telecom, Segurança de dados e privacidade (LGPD/DLP), APIs e integração, Mobile apps / superapps. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá até 10%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: Engenharia Digital; Cibersegurança. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. Universalização sob pressão regulatória:</strong> O Marco Legal do Saneamento exige 99% de cobertura de água e 90% de esgoto até 2033. A COMPESA precisa acelerar drasticamente a execução dos R$ 6,1 bilhões do programa Águas de Pernambuco — tecnologia e integração de sistemas são habilitadores críticos para cumprir esse prazo.</p>
+                <p style="margin-bottom:12px"><strong>2. Concessão parcial = transformação de TI obrigatória:</strong> A concessão parcial da COMPESA (R$ 19 bi em 35 anos) exigirá sistemas robustos de medição, faturamento, gestão de ativos e interoperabilidade com operadores privados. A TI precisa estar preparada para esse novo modelo híbrido público-privado.</p>
+                <p style="margin-bottom:12px"><strong>3. Gap crítico em IoT e medição inteligente:</strong> Enquanto a Sabesp investe R$ 3,8 bilhões no maior projeto de IoT do mundo e a Iguá já tem 40% de medição remota, a COMPESA ainda está em estágio inicial. Sensores inteligentes e IA para detecção de perdas podem reduzir os índices de perda de água que chegam a 50% no Nordeste.</p>
+                <p style="margin-bottom:12px"><strong>4. Águas Digitais como porta de entrada:</strong> O programa de inovação aberta com o Porto Digital demonstra apetite por transformação digital, mas os 5 desafios mapeados (gestão de ativos, cadastro de clientes, equipes de campo, qualidade da água, otimização de abastecimento) são exatamente áreas onde a Foursys pode agregar com plataformas digitais, APIs e mobile.</p>
+                <p><strong>5. Nordeste como região prioritária para investimentos ESG:</strong> A região Norte/Nordeste mantém os piores indicadores de saneamento do Brasil. Investidores e agências multilaterais estão priorizando projetos ESG nessas regiões, o que pode destravar financiamentos adicionais para projetos de tecnologia da COMPESA.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>🏢 Sabesp (São Paulo)</h4>
+                <p><strong>Receita:</strong> Maior empresa de saneamento do Brasil, entre as 100 maiores do país. Privatizada em 2024.</p>
+                <p><strong>Iniciativas Tech:</strong> Iniciou o <strong>maior projeto de IoT do mundo</strong> para medição de água, com investimento de R$ 3,8 bilhões para substituir 4,4 milhões de hidrômetros por modelos inteligentes. Implantou 1.289 sensores com IA para monitoramento preditivo de redes de esgoto em tempo real, antecipando falhas em 36.341 ligações e beneficiando mais de 200 mil pessoas.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🏢 Aegea Saneamento (Nacional)</h4>
+                <p><strong>Receita:</strong> Segunda maior do setor por receita líquida. Presença em múltiplos estados.</p>
+                <p><strong>Iniciativas Tech:</strong> Criou <strong>gêmeo digital 3D</strong> de suas operações com R$ 10 milhões de investimento, mapeando 1.317 plantas e 29 mil ativos com drones. Migrou infraestrutura para Microsoft Azure, utiliza satélites israelitas para detecção de vazamentos por resíduos de cloro e mantém o AegeaHub — centro de inovação de 1.260 m² para IA, fraudes e riscos climáticos.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🏢 Copasa (Minas Gerais)</h4>
+                <p><strong>Receita:</strong> Segundo maior ativo listado do setor. Em processo de privatização (governo MG com 50,3% das ações).</p>
+                <p><strong>Iniciativas Tech:</strong> Planeja investir quase <strong>R$ 17 bilhões entre 2025-2029</strong> (R$ 2,5 bi a R$ 3,8 bi/ano), com foco em expansão de rede, eficiência operacional e redução de perdas. Forte movimento de modernização tecnológica associado ao processo de desestatização.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>🏢 Iguá Saneamento (Nacional)</h4>
+                <p><strong>Receita:</strong> Player de alto crescimento. Presente em Cuiabá, Rio de Janeiro, Paranaguá e Sergipe.</p>
+                <p><strong>Iniciativas Tech:</strong> Líder em medição inteligente com <strong>40% da água medida por IoT</strong> e maior percentual de medição remota do Brasil. Possui Centro de Controle Operacional (CCO) com monitoramento remoto, arquitetura integrada (Salesforce, SAP S/4 Hana na AWS, Oracle, Azure) e o programa Move Iguá Inova. Investiu R$ 200 milhões em redução de perdas (2024-2025).</p>
+            </div>
+            <div class="insight-box">
+                <h4>📊 Gap Analysis: COMPESA vs. Concorrentes</h4>
+                <p>A análise revela gaps significativos que representam oportunidade para a Foursys: <strong>(1) IoT e Medição Inteligente</strong> — enquanto Sabesp investe R$ 3,8 bi em hidrômetros inteligentes e Iguá já tem 40% de medição remota, a COMPESA ainda está em fase inicial com o programa Águas Digitais; <strong>(2) Gêmeo Digital e Monitoramento Preditivo</strong> — Aegea opera gêmeos digitais 3D e Sabesp usa 1.289 sensores com IA, enquanto a COMPESA tem oportunidade de implementar soluções similares para seus ativos; <strong>(3) Infraestrutura Cloud</strong> — concorrentes já migraram para Azure/AWS com arquiteturas modernas, área onde a COMPESA pode acelerar com apoio da Foursys; <strong>(4) Centro de Inovação</strong> — a parceria com Porto Digital é promissora, mas ainda incipiente comparada ao AegeaHub e ao programa da Iguá. A Foursys pode posicionar-se como parceira de aceleração tecnológica para fechar esses gaps, especialmente nos projetos sem fornecedor definido.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Graduação em Sistemas de Informação — Universidade de Pernambuco (2007-2011). Pós-graduação em Gestão Estratégica de TI — Estácio (2013-2014).</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória Profissional</div>
+                        <div class="value">Líder de Equipe na G3 Informática (2012-2013) → Desenvolvedor na Pitang (2013-2015) → Analista de Gestão na COMPESA (2015-2017) → Gerente de TIC na COMPESA (desde out/2017). Experiência de 13+ anos na área.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn ativo com 500+ conexões e 1.139 seguidores. Perfil: linkedin.com/in/waldeildo-de-souza-leão-júnior</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil Técnico</div>
+                        <div class="value">Profissional com background em desenvolvimento de software que evoluiu para gestão estratégica de TI. Conhece o "chão de fábrica" da tecnologia e entende a complexidade técnica de projetos.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Tempo na COMPESA</div>
+                        <div class="value">Mais de 10 anos na empresa (desde 2015), sendo 8+ anos como Gerente de TIC. Profundo conhecimento da operação e dos desafios da companhia.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Ecossistema Local</div>
+                        <div class="value">Atuou na Pitang (empresa do Porto Digital de Recife), o que indica proximidade com o ecossistema de inovação pernambucano.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>💡 5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Valorize sua trajetória técnica:</strong> Waldeildo começou como desenvolvedor e líder técnico antes de assumir gestão. Reconheça essa jornada — ele aprecia conversas com profundidade técnica, não apenas slides corporativos. Evite simplificações excessivas.</p>
+                <p style="margin-bottom:10px"><strong>2. Conecte com o ecossistema Recife/Porto Digital:</strong> Ele trabalhou na Pitang (empresa do Porto Digital) e hoje a COMPESA tem parceria com o Porto Digital no Águas Digitais. Use isso como ponte — pergunte sobre a experiência com inovação aberta e como a Foursys pode complementar esse ecossistema.</p>
+                <p style="margin-bottom:10px"><strong>3. Respeite a complexidade do setor público:</strong> Com 10+ anos na COMPESA, ele domina os processos de licitação e pregão. Demonstre familiaridade com contratações públicas e mostre flexibilidade da Foursys para se adaptar a esses modelos (editais, atas de registro de preço, CPSI).</p>
+                <p style="margin-bottom:10px"><strong>4. Aborde o momento de transformação:</strong> A COMPESA vive uma fase única com o programa Águas de Pernambuco (R$ 6,1 bi) e a concessão parcial (R$ 19 bi). Pergunte sobre os desafios de preparar a TI para esse novo cenário e posicione a Foursys como parceira de aceleração.</p>
+                <p><strong>5. Fale de resultados mensuráveis:</strong> Ele reporta diretamente ao CEO/Presidência e precisa justificar investimentos. Traga cases com métricas concretas — redução de perdas, tempo de implantação, ROI de projetos similares em utilities. Dados falam mais alto que promessas.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Gerente de TI e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Pontual: convidado ad hoc para temas específicos.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">30 a 49</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#3949ab">20%</div></div></div>
+<div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#c5cae9">5%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+<span class="tag tag-active">Capilaridade/cobertura regional</span>
+<span class="tag tag-active">Residência de dados no BR</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Integrador / empresa de serviços (SI);Especialista setorial / regulatório;Fornecedor com cobertura global</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Projeto: 4 temas | Co-gerenciado: 3 temas | Interno: 3 temas | Serviço Gerenciado: 2 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

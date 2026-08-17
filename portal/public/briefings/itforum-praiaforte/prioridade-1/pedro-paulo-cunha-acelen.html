@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<!--
+  Briefing CIO — Pedro Paulo Cunha | ACELEN
+  IT Forum 2026 Praia do Forte · Design System Foursys · Ordem B→A→C
+  AÇÃO: CRIAR_NOVO · ID 37 · Modo --full
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Pedro Paulo Cunha | ACELEN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Pedro Paulo Cunha</h1>
+                <h2>Contato TI IT Forum — ACELEN (cargo formal público: não localizado)</h2>
+                <div class="loc">Energia · São Paulo/SP · CNPJ 41.777.706/0010-32</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Porte (2ª refinaria / Mubadala / biorrefinaria)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Capacidade</div><div class="value">~300 kbpd</div></div>
+                <div class="header-badge"><div class="label">Share BR</div><div class="value">~14%</div></div>
+                <div class="header-badge"><div class="label">Invest. moderniz.</div><div class="value">R$ 3 bi+</div></div>
+                <div class="header-badge"><div class="label">Colaboradores</div><div class="value">1,1 mil+</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: RI/site institucional + leitura de comitê (VP Tecnologia / transformação) + material de apresentação · Diferencia da edição anterior (Trancoso). Presente no último IT Forum: NÃO (planilha 10.07).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>Acelen é a empresa de energia criada pelo Mubadala Capital para operar a Refinaria de Mataripe (ex-RLAM/Petrobras) e ativos logísticos na Bahia, com agenda explícita de transição energética (SolarPark I + Acelen Renováveis / biorrefinaria SAF-HVO a partir de macaúba). Razão social pública: <strong>Refinaria de Mataripe S.A.</strong> (nome fantasia Acelen). Identificação antifraude: CNPJ da planilha IT Forum <strong>41.777.706/0010-32</strong> (estabelecimento); matriz amplamente citada em bases públicas como 41.777.706/0001-41 (São Francisco do Conde/BA). Capacidade de processamento acima de 300 mil barris/dia (~14% do refining brasileiro e mais da metade do abastecimento do Nordeste — RI Acelen). Desde 2021, imprensa e site corporativo reportam mais de R$ 3 bilhões investidos em modernização, automação e digitalização, com economia operacional citada em torno de R$ 121 milhões em iniciativas digitais/manutenção. Quadro: mais de 1,1 mil colaboradores diretos (~81% na Bahia) e ~3,5 mil indiretos (site institucional).</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Refinaria de Mataripe S.A. (Acelen)</div></div>
+                <div class="info-card"><div class="label">Sede (planilha)</div><div class="value">São Paulo / SP</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Mataripe/BA + NE combustíveis; renováveis BA/MG</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">Não localizado (privado / RI sem DRE público completo)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">1,1 mil+ diretos · ~3,5 mil indiretos (site)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada · controlada Mubadala Capital</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Pedro Paulo Cunha</strong> (LinkedIn: <em>ppcunha</em>) é o contato de TI listado na planilha de CIOs confirmados do IT Forum 2026. Em publicação recente no LinkedIn, declara envolvimento em tornar a <strong>Acelen Renewables</strong> operacional (biorrefinaria) <em>junto com a transformação da TI da Acelen</em>, em horizonte de ~3 anos de projetos de transformação. Perfil público: ~30+ anos em tecnologia e liderança (bancos JP Morgan, Deutsche Bank, Itaú-Unibanco; engenharia naval + ciência da computação + gestão); menciona atuação entre Suíça e Brasil e vínculo com ÁguilaHub em textos de perfil. <strong>Cargo formal atual na Acelen (CIO/Diretor/Head): não localizado em fontes públicas oficiais</strong> — tratar como contato de transformação/TI do evento, não inventar título.</p>
+            <div class="alert-box" style="margin-top:14px">⚠️ <strong>Leitura de comitê (obrigatória):</strong> o porta-voz público de TI/IA em 2025–2026 é <strong>Pedro Estrela</strong>, VP de Tecnologia, Planejamento Estratégico e Competitividade (AcelenGPT, AI Week, finalista IT Forum 100+). Histórico: <strong>Fernando G. Birman</strong> aparece como CIO em cases Digibee (desacoplamento pós-Petrobras). Abordar Pedro Paulo no Forum e mapear se decide budget, influencia roadmap ou é PM/advisory de transformação Renováveis+TI. Se budget estiver com Estrela, pedir warm intro no próprio evento.</div>
+            <h4 style="margin:14px 0 8px">Comitê relevante</h4>
+            <ul style="margin-left:18px;font-size:14px">
+                <li><strong>Luiz de Mendonça</strong> — CEO: produtividade, competitividade, crescimento e narrativa de transição.</li>
+                <li><strong>Pedro Estrela</strong> — VP Tecnologia / Planejamento / Competitividade: IA generativa, AcelenGPT, cultura digital.</li>
+                <li><strong>Celso Ferreira</strong> — VP Operações: CAPEX de paradas, diesel S10, confiabilidade industrial.</li>
+                <li><strong>Paulo Danilovic / Alexandre Perazzo</strong> — finanças / investimentos / Mubadala: alocação de capital biorrefinaria e modernização.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Atua no refining e na cadeia de combustíveis/petroquímicos do Nordeste, com posição de ativo estratégico: segunda maior refinaria do país em capacidade, suprindo parcela majoritária do NE. Cadeia de valor: petróleo (incluindo importação citada em imprensa vs. disputa com Petrobras no Cade), processamento Mataripe, terminais/dutos (~669 km), distribuição B2B (distribuidores, indústria, aviação, bunker). Prioridades setoriais 2026: eficiência e confiabilidade da planta fóssil; descarbonização (SolarPark I 161 MWp já em operação; biorrefinaria SAF/HVO com financiamento anunciado de US$ 1,5 bi e investimento-alvo de ordem de US$ 3 bi em renováveis); digitalização industrial (CIM, drones, IA de ativos) e GenAI corporativa. Pressões: relação competitiva/fornecedor com Petrobras; volatilidade de feedstock; expectativa ESG de fundo soberano; escala de greenfield renovável exigindo TI greenfield em paralelo à planta legada. Tendência consultiva: quem amarra OT–IT–dados–integração na transição “duas empresas em uma” (refino + renováveis) captura o budget de transformação — não só o de manutenção.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Dívida técnica pós-desacoplamento Petrobras: dezenas de sistemas críticos já integrados via iPaaS Digibee (~40 pipelines) — evolução contínua de fluxos Salesforce, industrial e corporativos.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Dupla agenda: modernizar Mataripe (R$ 3 bi+ desde 2021) e erguer greenfield de renováveis (FID/financiamento US$ 1,5 bi) — risco de TI fragmentada entre “planta velha” e “empresa nova”.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Superfície OT/IT enorme (CIM &gt;700 equipamentos, Baker Hughes Cordant estático/dinâmico, AVEVA/Pi) — downtime e ciber industriais são risco de caixa, não só de compliance.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>GenAI em escala (AcelenGPT: 900+ usuários/dia, 25 assistentes) exige governança de dados, isolamento e produto — não só licença de modelo.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Pressão de relacionamento com Petrobras (feedstock/preço) e incerteza estratégica sobre eventual recompra da refinaria — TI precisa de resiliência e separabilidade (Renováveis em outro CNPJ).</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">TI como alavanca de competitividade (não suporte)</span>
+                <span class="tag tag-priority">IA generativa segura e produtiva (AcelenGPT)</span>
+                <span class="tag tag-priority">Confiabilidade e integridade de ativos</span>
+                <span class="tag tag-priority">Operacionalizar Acelen Renewables em 3 anos</span>
+                <span class="tag tag-priority">Autossuficiência energética / descarbonização</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Modernização Mataripe (ciclo R$ 3 bi+ · foco automação/segurança)</span>
+                <span class="tag tag-active">AcelenGPT + AI Week / letramento digital</span>
+                <span class="tag tag-active">CIM + Cordant Asset Health / Strategy (Baker Hughes)</span>
+                <span class="tag tag-active">Biorrefinaria — financing US$ 1,5 bi · construção → 2029</span>
+                <span class="tag tag-active">SolarPark I (161 MWp) em operação</span>
+                <span class="tag tag-active">Evolução iPaaS Digibee (fluxos remanescentes)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Arquitetura TI greenfield Renováveis (dados, integração, cyber, produtos)</span>
+                <span class="tag tag-opportunity">Produto/plataforma ao redor do AcelenGPT (além dos 25 assistentes)</span>
+                <span class="tag tag-opportunity">Camada analítica unificada OT–IT para comitês</span>
+                <span class="tag tag-opportunity">Programa cyber OT/IT end-to-end (hipótese consultiva)</span>
+                <span class="tag tag-opportunity">Modernização de satélites legados pós-integração inicial</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (parceria Digibee iPaaS) + Engenharia Digital</h4><span class="score-badge">92/100</span></div>
+                <p>Acelen já escolheu Digibee para ~40 integrações críticas no desacoplamento Petrobras. FourBlox (ISO 27001/27701; 24 anos; 41.000+ projetos) entra como parceiro de execução para evoluir a malha (Renováveis, Salesforce remanescente, OT–ERP) sem trocar a plataforma — monetiza a plataforma instalada.</p>
+                <div class="reasons"><ul>
+                    <li>Fit técnico e político: não brigar com Digibee; acelerar o que Digibee já habilitou.</li>
+                    <li>Greenfield Renováveis precisa de integração desde o dia 1 — janela de 3 anos citada por Pedro Paulo.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">88/100</span></div>
+                <p>AcelenGPT e AI Week mostram apetite e budget cultural para GenAI. AI Squad Foursys transforma assistentes em produtos com ROI (manutenção, engenharia, planejamento) e governança — alinhado ao discurso de Pedro Estrela.</p>
+                <div class="reasons"><ul>
+                    <li>900+ usuários/dia e salto de tokens em 2025 = demanda de industrialização, não PoC.</li>
+                    <li>Gartner Open Innovation Awards (catalisadores com IA) valida apetite por IA industrial.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">82/100</span></div>
+                <p>Ambiente isolado do AcelenGPT + planta crítica OT (CIM, Cordant, AVEVA) pedem programa unificado IT/OT, identity e resposta a incidentes — tipicamente fragmentado após spin-off de estatal.</p>
+                <div class="reasons"><ul>
+                    <li>Refino + fundo soberano = expectativa alta de controles e evidência.</li>
+                    <li>Expansão Renováveis amplia superfície sem necessariamente herdar o mesmo SOC.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">74/100</span></div>
+                <p>Após First Impact (40+ fluxos), sobram satélites industriais/corporativos e dívida de UX/processo. Modernização seletiva reduz custo de AMS e acelera dados para IA.</p>
+                <div class="reasons"><ul>
+                    <li>Case Digibee deixa claro o perímetro enorme pós-Petrobras.</li>
+                    <li>Evita “ilha” só no iPaaS enquanto apps satélite envelhecem.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital (produtos / experiência)</h4><span class="score-badge">66/100</span></div>
+                <p>Canais WordPress + GTM e jornada de talentos/ESG pedem produtos digitais internos (portais operação, conhecimento AcelenGPT) e externos alinhados à marca de transição energética.</p>
+                <div class="reasons"><ul>
+                    <li>AI Week e assistentes internos já criam demanda de UX de produto.</li>
+                    <li>Diferencia Foursys de integradores puramente industriais.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>“Vocês já venceram o First Impact com Digibee e agora escalam GenAI com AcelenGPT — o próximo risco é a biorrefinaria nascer com uma TI paralela à de Mataripe. Queremos ajudar a arquitetar a mesma malha de integração/dados/cyber para as duas faces do negócio.” Timing: primeiro IT Forum presencial pós-Trancoso (não esteve no último); Acelen finalista 100+ Inovadoras.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Janela de 3 anos Acelen Renewables + evolução Cordant (Asset Health+ em 2026, per Baker Hughes) + industrialização do AcelenGPT: discovery conjunto de integração Renováveis + AI productization + cyber OT.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>FourBlox sobre Digibee já instalado + AI Squad + Cyber com credencial ISO e escala de projetos — squad único falando a língua de Estrela (IA/estratégia) e de Operações (uptime), sem reabrir guerra de plataforma.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Petrobras (refino / feedstock)</h4><p>Maior player de refining e, segundo imprensa, principal fornecedor de petróleo e concorrente em combustíveis — com histórico de disputa no Cade e conversas de recompra. Gap do alvo: Acelen precisa de TI que maximize eficiência unitária e separabilidade (Renováveis em outro CNPJ) independentemente do desfecho societário.</p></div>
+            <div class="competitor-card"><h4>Outras refinarias privadas (ex.: Raízen/Refinaria Riograndense peers regionais)</h4><p>Peers investem em digital twin, reliability e descarbonização. Gap: Acelen já tem CIM/Cordant/AcelenGPT — falta evidência pública de plataforma de dados unificada planta–comercial–ESG (hipótese consultiva).</p></div>
+            <div class="competitor-card"><h4>Majors de energia renovável / SAF (global)</h4><p>Greenfields SAF nascem cloud-native e data-driven. Gap: se Mataripe carregar padrões legados para a biorrefinaria, Acelen perde velocidade vs entrantes — oportunidade Foursys de “Renováveis digital birthright”.</p></div>
+            <div class="competitor-card"><h4>Integradores Big4 / industriais (Accenture no carve-out inicial)</h4><p>Accenture apoiou Compressed Transformation no take-over. Gap: Big4 caros para squads contínuos de produto/IA; Foursys compete em delivery ágil pós-estabilização, não no carve-out histórico.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Acelen (Refinaria de Mataripe S.A.), Mubadala; ~300 kbpd; CNPJ planilha 41.777.706/0010-32; contato SP; planta BA.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Pedro Paulo Cunha — contato IT Forum; envolvido em Renováveis + transformação TI (LinkedIn). Cargo formal: não localizado. Comitê: Pedro Estrela (VP Tech).</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escalar GenAI e OT digital na planta E nascer TI greenfield da biorrefinaria sem fragmentar stack.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Fontes abertas (sem linha de budget RI detalhada): (1) digitalização/automação industrial (CIM, Cordant), (2) GenAI AcelenGPT, (3) iPaaS Digibee, (4) TI da agenda Renováveis US$ 1,5–3 bi. CAPEX físico domina; TI compete por eficiência e time-to-operate.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">FourBlox/Digibee; AI Squad; Cibersegurança.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">30 min no Forum: confirmar papel de Pedro Paulo + intro Estrela; mapa integrações Renováveis vs Mataripe.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Pós-FID biorrefinaria; Cordant Health+ 2026; ciclo orçamentário TI 2026/27; evento Praia do Forte.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “mais IA”. Vender arquitetura única Mataripe↔Renováveis sobre Digibee já pago — ROI = evitar segunda dívida técnica greenfield.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Da carve-out à plataforma de energia</h4><p>Em 2021 a Acelen herdou Mataripe e, em meses, reconstruiu integrações com Digibee. Em 2025–26 virou finalista de inovação em TI com AcelenGPT e aprovou financing da biorrefinaria.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Duas fábricas, um risco digital</h4><p>Planta fóssil digitalizada e greenfield renovável competem por talentos, padrões e budget. Sem arquitetura comum, nascem dois legados.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Foursys na malha já escolhida</h4><p>FourBlox + AI Squad + Cyber amarram Mataripe e Renováveis na mesma linguagem de integração, dados e risco — do First Impact ao First Drop de SAF.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Integração Renováveis sem “segunda Petrobras”</h4>
+                <p>Evidência: Digibee integrou ~40 soluções no carve-out; Pedro Paulo amarra Renováveis + transformação TI em horizonte de 3 anos; financing US$ 1,5 bi aprovado.</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox + Engenharia Digital — playbook de integrações greenfield reutilizando padrões Digibee já em produção.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quais sistemas da biorrefinaria já estão no roadmap e quais ainda seriam ponto a ponto?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop ½ dia: target architecture Mataripe ↔ Renováveis (12 fluxos críticos).</p>
+            </div>
+            <div class="business-card">
+                <h4>Industrializar AcelenGPT com ROI de planta</h4>
+                <p>Evidência: 900+ usuários/dia, 25 assistentes, AI Week; Gartner award em monitoramento de catalisadores com IA; discurso de Estrela ligando GenAI a eficiência e baixo carbono.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — agents com métricas de manutenção/engenharia/planejamento e governança de dados.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quais dos 25 assistentes geram decisão operacional vs. só produtividade de escritório?</p>
+                <div class="sub">Gancho / próximo passo</div><p>PoC 6–8 semanas em 1 domínio OT (ex.: ordem de manutenção) com KPI de tempo/custo.</p>
+            </div>
+            <div class="business-card">
+                <h4>Cyber OT/IT como seguro do CAPEX</h4>
+                <p>Evidência: CIM monitora &gt;700 equipamentos; Cordant em expansão; GenAI em ambiente isolado — superfície ampla pós-spin-off.</p>
+                <div class="sub">Solução Foursys</div><p>Cibersegurança — assessment IT/OT, identity, segmentação e runbook de resposta alinhado a ISO.</p>
+                <div class="sub">Pergunta de descoberta</div><p>O SOC e as políticas OT já cobrem o perímetro Renováveis ou só Mataripe?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Readiness review de 2 semanas com relatório para comitê de risco.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck 8–10 slides + one-pager de arquitetura Mataripe↔Renováveis (PDF)</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">FourBlox (Digibee) + AI Squad + Cyber — porquê: stack Digibee já instalada + GenAI pública + OT crítica</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) case Digibee/Acelen de carve-out (~40 integrações em 8 meses) como prova de que a plataforma é a base — Foursys amplia execução; (2) narrativa Baker Hughes Cordant de asset health em refining; (3) cases Foursys de AI Squad e cyber em indústrias de processo (adaptar linguagem OT, sem forçar vertical se case exato não existir — preferir discurso de ROI).</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> o maior ROI não é “mais chatbot”. É impedir que a biorrefinaria de US$ 1,5–3 bi nasça com uma segunda dívida técnica — reusando Digibee/padrões e industrializando AcelenGPT onde o downtime custa barris.</p>
+            <p style="margin-top:8px"><em>Se material setorial pronto não encaixar: discurso “First Impact → First Drop” (do carve-out ao primeiro litro renovável) com diagrama de 7 camadas e 3 perguntas de discovery.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Vocês já pagaram o preço do First Impact com Digibee — queremos que a biorrefinaria herde essa malha, não reinvente.”</li>
+                <li>“AcelenGPT com 900 usuários/dia pede produto e governança; PoC isolado não escala para parada de manutenção.”</li>
+                <li>“FourBlox não compete com Digibee: executa e estende o que já está em produção.”</li>
+                <li>“OT no CIM/Cordant e GenAI no escritório precisam do mesmo mapa de risco — cyber unificado.”</li>
+                <li>“Pedro, no Forum: quem fecha budget de TI Renováveis vs Mataripe — você, Estrela ou Operações?”</li>
+                <li>“Janela: Cordant Health+ 2026 + construção da biorrefinaria — arquitetura agora ou dívida depois.”</li>
+                <li>“Foursys: 24 anos, 41.000+ projetos, ISO 27001/27701 — squad pronto para comitê Mubadala.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>IT Forum Praia do Forte com Pedro Paulo; pedir intro Estrela/Operações</td><td>Ata + mapa de stakeholders</td><td>Evento + 48h</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop integrações Mataripe↔Renováveis + inventário AcelenGPT</td><td>Target architecture 1 página + backlog</td><td>2–3 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC AI Squad em 1 domínio OT/engenharia OU piloto FourBlox em 3 fluxos Renováveis</td><td>KPI report + demo comitê</td><td>6–8 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad misto integração + AI + cyber shadow</td><td>Runbooks + 1º valor em produção</td><td>1 trimestre</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Programa multi-ano alinhado ao ramp da biorrefinaria</td><td>MSA + roadmap 24 meses</td><td>Semestre seguinte</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3–5)</h4>
+            <div class="app-card">
+                <h4>Site institucional Acelen</h4><div class="url">https://www.acelen.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">WordPress (sinais HTML)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">CMS WP</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Cloudflare (proxy)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não inspecionado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Portal de RI</h4><div class="url">https://ri.acelen.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portal RI (W3TC/CDN)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Cloudflare</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não inspecionado</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>AcelenGPT (interno)</h4><div class="url">Ambiente corporativo isolado (não público)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Interface unificada (imprensa)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Multi-LLM (GPT / Gemini / Claude / Deepseek citados)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Ambiente isolado homologado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">25 assistentes internos</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Camada iPaaS Digibee</h4><div class="url">Plataforma de integração (case público)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Console Digibee</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Pipelines iPaaS (~40+)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">iPaaS cloud Digibee</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">ERP, CRM, OT, RH, financeiro</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Hub industrial (CIM / Cordant / AVEVA-Pi)</h4><div class="url">OT — Mataripe (cases Baker Hughes / Digibee)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Dashboards manutenção/ativos</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Cordant / historiadores Pi / AVEVA</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Híbrido OT (hipótese parcial)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integração via Digibee citada</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Cloudflare nos canais públicos; nuvem corporativa/industrial não detalhada em fontes abertas (hipótese: híbrida pós-carve-out). Accenture citou Compressed Transformation no take-over.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">AcelenGPT em ambiente isolado/homologado; headers públicos com X-Frame-Options / nosniff; programa OT/IT unificado: evidência pública insuficiente (GAP).</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">AcelenGPT; AI Week; IA de catalisadores (Gartner award); Cordant Asset Strategy/Health; drones e escaneamento 3D citados em ESG.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">CIM como hub de dados de manutenção; PiWeb/historiadores; analytics GenAI sobre base corporativa — governança/MDM: não localizado.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">ERP corporativo integrado via Digibee no carve-out (nome de produto omitido por política de briefing). Evolução/AMS: não localizado em detalhe.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">Salesforce (CRM/fluxos); Fieldglass; Success Factory; Apollus; Neolude; Finnet; Thomson; BACEN; Transpetro; Prisma — citados no case Digibee.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">Site WP + GTM/GA; RI; canais ESG/talentos; UX interna via assistentes AcelenGPT.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.acelen.com.br/</td><td><span class="status-200">200</span></td><td>WordPress</td><td>Cloudflare</td><td>GTM + GA; X-Frame-Options SAMEORIGIN</td></tr>
+                    <tr><td>https://ri.acelen.com.br/</td><td><span class="status-200">200</span></td><td>Portal RI</td><td>Cloudflare + W3TC</td><td>XSS protection header</td></tr>
+                    <tr><td>https://www.acelen.com.br/renovaveis/</td><td><span class="status-200">200</span></td><td>WordPress</td><td>Cloudflare</td><td>Landing Renováveis</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 20/07/2026 (~17:30 BRT). Só o efetivamente inspecionado via HTTP HEAD/GET.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4–6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Integração</div><h4>Greenfield Renováveis vs malha Mataripe</h4><p>Evidência: carve-out usou Digibee em 40+ fluxos; biorrefinaria com financing US$ 1,5 bi e horizonte de construção — risco clássico de stack paralela em O&amp;G/energia.</p><div class="offer">Oferta Foursys: FourBlox + Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · IA</div><h4>De assistentes a produtos com KPI de planta</h4><p>Evidência setorial: AcelenGPT escala usuários/tokens, mas imprensa enfatiza produtividade de escritório; awards de IA industrial existem — falta ponte sistemática GenAI↔OT.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Cyber</div><h4>Programa OT/IT end-to-end pouco visível</h4><p>Evidência: CIM/Cordant ampliam superfície; GenAI isolado mostra preocupação, mas não substitui SOC OT unificado — típico gap pós-privatização de refinaria.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Dados</div><h4>Camada analítica unificada planta–comercial–ESG</h4><p>Evidência: múltiplos historiadores/plataformas (Pi, Cordant, CIM) + GenAI; governança/MDM pública não localizada — gap de decisão de comitê em tempo real.</p><div class="offer">Oferta Foursys: Engenharia Digital + AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Legado</div><h4>Satélites pós-First Impact</h4><p>Evidência: case Digibee lista dezenas de apps (Fieldglass, Apollus, Neolude…); modernização seletiva evita AMS eterno e alimenta melhor a IA.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Eng. naval + CS + gestão (perfil LinkedIn)</div></div>
+                <div class="info-card"><div class="label">Base</div><div class="value">Suíça ↔ Brasil (perfil)</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">PT / EN (hipótese forte — carreira global)</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5–7)</h4>
+                <p>1) Chame-o de PP se o contexto permitir — ele usa o apelido no LinkedIn.<br>
+                2) Fale de grandes programas de transformação (carve-out, greenfield), não de “suporte de TI”.<br>
+                3) Mergulho técnico / underwater photography é paixão declarada — rapport humano fora do pitch.<br>
+                4) Respeite o comitê: mencione Estrela e Operações cedo; demonstre que entende governança.<br>
+                5) Traga diagrama Digibee→FourBlox (evolução, não substituição).<br>
+                6) Conecte SAF/HVO macaúba a dados/integração — ele amarra Renováveis + TI na mesma frase.<br>
+                7) Evite assumir título de CIO; pergunte o mandato atual com curiosidade genuína.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; RI</h4><ul>
+                    <li>ri.acelen.com.br — Corporate Profile</li>
+                    <li>acelen.com.br/a-acelen/ — Quem somos / lideranças</li>
+                    <li>Brasil Energia — entrevista Celso Ferreira (BOGE 2026)</li>
+                    <li>Bahia Econômica — 4 anos Mataripe; finalista TI</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Baguete / IT Forum / Computer Weekly — Digibee ~40 integrações</li>
+                    <li>Baker Hughes Cordant — case Acelen</li>
+                    <li>Muita Informação — AcelenGPT / Pedro Estrela</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>InvestNews — Petrobras x Acelen / feedstock</li>
+                    <li>Portal Energia Limpa / ESG — R$ 3 bi e economia R$ 121 mi</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn ppcunha — post Acelen Renewables + transformação TI</li>
+                    <li>Planilha CIOs IT Forum 10.07 (ID 37)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>HTTP HEAD/GET acelen.com.br, ri.acelen.com.br, /renovaveis/ — 20/07/2026</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+
+</html>

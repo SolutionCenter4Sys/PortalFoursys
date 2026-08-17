@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Igor Freitas | COGNA EDUCAÇÃO</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Igor Freitas</h1>
+                <h2>VP de Tecnologia (CIO/CTO) — COGNA EDUCAÇÃO</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Educação | São Paulo - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Receita Líquida 2025</div>
+                    <div class="value">R$ 6+ Bilhões</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Investimento IFC</div>
+                    <div class="value">US$ 100 Milhões</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescimento</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: COGNA EDUCAÇÃO</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Cogna Educação S.A.</strong> (B3: COGN3) é a maior empresa de educação do Brasil e uma das maiores do mundo, com sede em São Paulo (SP). Fundada em 1966 como Pitágoras, a empresa passou por diversas transformações, incluindo a fusão com a Anhanguera em 2014 e o rebranding de Kroton Educacional para Cogna em 2019. Opera sob mais de <strong>60 marcas educacionais</strong>, atendendo aproximadamente <strong>2,4 milhões de estudantes</strong> em todos os níveis — da educação básica à pós-graduação. Em 2025, a receita líquida ultrapassou <strong>R$ 6 bilhões</strong>, com lucro líquido de R$ 625,52 milhões. As operações são divididas em quatro unidades de negócio: <strong>Kroton</strong> (~75% da receita — ensino superior presencial e EaD), <strong>Vasta</strong> (~20% — plataforma de soluções educacionais para escolas K-12), <strong>Saber</strong> (~5% — editora e conteúdo educacional) e <strong>Platos</strong> (pós-graduação). A empresa captou <strong>US$ 100 milhões do IFC</strong> (Banco Mundial) para financiar a transformação digital da Kroton. Com mais de <strong>120 projetos de IA generativa</strong> implementados, a Cogna está entre os 4% das empresas globais que aplicam IA em escala, incluindo o assistente inteligente Plu (107 mil usuários únicos), correção automatizada de trabalhos (redução de 60% no tempo) e automação do processo de matrícula (de 4 minutos para 40 segundos).</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Nacional (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Capital Aberto (B3: COGN3)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento de dois dígitos esperado em 2026</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">26.000+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>A Cogna Educação vive um momento de <strong>transformação digital acelerada</strong>, liderada pelo VP de Tecnologia Igor Freitas, com foco em integração de sistemas legados de 60+ marcas, modernização da infraestrutura em Azure e aplicação massiva de IA generativa (120+ projetos). O investimento de <strong>US$ 100 milhões do IFC</strong> para digitalização da Kroton sinaliza comprometimento de longo prazo com tecnologia. A empresa busca parceiros com expertise em <strong>integração de sistemas, IA/ML, cloud e segurança da informação</strong> para acelerar sua jornada digital e melhorar a experiência de 2,4 milhões de estudantes.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integração de sistemas legados de 60+ marcas num ecossistema unificado</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar IA generativa com governança e guardrails para uso educacional</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar a arquitetura tecnológica (Backbone Educacional em Azure)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir taxa de evasão (>20% em EaD) com experiência digital aprimorada</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Evolução contínua de cibersegurança e conformidade LGPD</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Maximizar potencial de dados com IA para gerar receita incremental</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento (Igor Freitas)</h4>
+                    <div>
+                        <span class="tag tag-priority">Modernização e Integração de Aplicações</span>
+                        <span class="tag tag-priority">Soluções White Label</span>
+                        <span class="tag tag-priority">Segurança da Informação</span>
+                        <span class="tag tag-priority">Inteligência Artificial e Dados</span>
+                    </div>
+                    <div style="margin-top:20px">
+                        <h4 style="margin-bottom:12px;color:var(--primary)">Investimentos Confirmados</h4>
+                        <span class="tag tag-active">IA Generativa (120+ projetos)</span>
+                        <span class="tag tag-active">Cloud Azure (Backbone Educacional)</span>
+                        <span class="tag tag-active">Plataformas Digitais de Ensino</span>
+                        <span class="tag tag-active">Automação de Processos</span>
+                        <span class="tag tag-active">Capacitação em IA (1.000+ colaboradores)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses com base em declarações públicas de Igor Freitas e da Cogna:</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Transformação Digital Kroton</div>
+                        <div class="value">US$ 100 milhões (IFC) — modernização de plataformas de ensino superior presencial, EaD e híbrido</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">IA Generativa em Escala</div>
+                        <div class="value">Expansão dos 120+ projetos de GenAI para novos domínios: retenção de alunos, personalização de ensino e novos negócios</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Backbone Educacional (Azure)</div>
+                        <div class="value">Unificação de dados e processos das 4 unidades de negócio (Kroton, Vasta, Saber, Platos) em infraestrutura cloud</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Segurança da Informação e LGPD</div>
+                        <div class="value">Evolução contínua com foco em proteção de dados de 2,4 milhões de estudantes e conformidade regulatória</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Plataformas White Label</div>
+                        <div class="value">Fortalecimento de soluções educacionais revendáveis para escolas parceiras (Vasta) e corporativo</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Automação e Eficiência Operacional</div>
+                        <div class="value">1.500+ processos mapeados para aplicação de IA — marketplace interno com agentes especializados</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <div class="grid-2">
+                <div class="alert-box">
+                    <strong>🔥 Integração de Sistemas Legados</strong>
+                    <p style="font-size:14px;margin-top:8px;color:var(--text-light)">Com 60+ marcas adquiridas ao longo dos anos, a Cogna enfrenta o desafio de unificar dezenas de sistemas legados heterogêneos. Igor Freitas declarou que esta é sua prioridade #1. Oportunidade direta para soluções de integração (iPaaS/APIs).</p>
+                </div>
+                <div class="alert-box">
+                    <strong>🔥 Governança de IA em Escala</strong>
+                    <p style="font-size:14px;margin-top:8px;color:var(--text-light)">120+ projetos de IA rodando simultaneamente exigem frameworks de governança, MLOps, curadoria de dados e guardrails robustos — especialmente em contexto educacional com menores de idade.</p>
+                </div>
+                <div class="alert-box">
+                    <strong>🔥 Cibersegurança e LGPD</strong>
+                    <p style="font-size:14px;margin-top:8px;color:var(--text-light)">Proteção de dados sensíveis de 2,4 milhões de estudantes (incluindo menores). Conformidade LGPD é crítica. Igor Freitas listou segurança como uma de suas 4 prioridades estratégicas.</p>
+                </div>
+                <div class="alert-box">
+                    <strong>🔥 Automação de Processos</strong>
+                    <p style="font-size:14px;margin-top:8px;color:var(--text-light)">1.500 processos mapeados para automação com IA. Marketplace interno de agentes em construção. Oportunidade para squads de desenvolvimento e automação inteligente.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Igor Freitas</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>🤖 AI Squad — Aceleração com IA Generativa</h4>
+                    <div class="score-badge">Fit: 98%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Cogna tem 120+ projetos de IA em andamento — demanda ativa por squads especializados em GenAI</li>
+                        <li>Marketplace interno de agentes de IA em construção — experiência da Foursys em arquitetura de agentes é diferencial</li>
+                        <li>Curadoria de documentos e guardrails para IA educacional são desafios declarados por Igor Freitas</li>
+                        <li>Capacitação de 1.000+ colaboradores em IA indica cultura receptiva e maturidade para projetos avançados</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>🔗 Integração &amp; APIs (Parceria Digibee)</h4>
+                    <div class="score-badge">Fit: 95%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>60+ marcas com sistemas legados heterogêneos — integração é a prioridade #1 de Igor Freitas</li>
+                        <li>Backbone Educacional em Azure requer conectores para dezenas de sistemas acadêmicos e administrativos</li>
+                        <li>Plataforma iPaaS Digibee acelera integração sem código, reduzindo tempo e risco de projetos de unificação</li>
+                        <li>Unificação de dados entre Kroton, Vasta, Saber e Platos demanda abordagem enterprise de integração</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>🛡️ Cibersegurança &amp; LGPD</h4>
+                    <div class="score-badge">Fit: 90%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Proteção de dados de 2,4 milhões de estudantes (incluindo menores) é imperativo regulatório e reputacional</li>
+                        <li>Igor Freitas é responsável direto por cibersegurança e LGPD na Cogna</li>
+                        <li>Certificações ISO 27001/27701 da Foursys são diferencial direto para este contexto regulatório</li>
+                        <li>Expansão de IA exige framework de segurança e privacidade adaptado</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>👥 Squads Dedicados — Modernização de Aplicações</h4>
+                    <div class="score-badge">Fit: 88%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Modernização de sistemas legados de dezenas de marcas adquiridas requer capacidade massiva de desenvolvimento</li>
+                        <li>Plataformas de ensino híbrido e EaD em contínua evolução — demanda por squads ágeis</li>
+                        <li>Modelo Foursys de squads flexíveis (projetos, AMS, outsourcing) atende a diferentes fases da transformação</li>
+                        <li>Experiência de 24 anos e 41.000+ projetos da Foursys transmite confiança para engajamentos de grande porte</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>☁️ Cloud &amp; Infraestrutura (Azure)</h4>
+                    <div class="score-badge">Fit: 85%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Backbone Educacional sendo construído em Azure — oportunidade de suporte especializado em cloud</li>
+                        <li>Migração de sistemas on-premises para nuvem é parte do investimento de US$ 100 milhões</li>
+                        <li>Gestão de custos de cloud (FinOps) será crítica com a escala de 2,4 milhões de usuários</li>
+                        <li>Infraestrutura para 120+ modelos de IA exige arquitetura cloud robusta e otimizada</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Igor Freitas tem como top prioridade a <strong>integração de 60+ marcas educacionais num ecossistema unificado</strong> e a <strong>governança de IA em escala</strong>. Iniciar a conversa demonstrando cases Foursys de integração enterprise com Digibee e squads de IA generativa, mostrando como a Foursys pode acelerar a unificação do Backbone Educacional e a governança de 120+ projetos de IA com menor risco. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A Cogna captou <strong>US$ 100 milhões do IFC</strong> especificamente para transformação digital da Kroton nos próximos 3 anos. Esta é a principal janela de oportunidade — o orçamento está aprovado e a execução precisa de parceiros. Igor Freitas busca modernização de aplicações, integração e IA como prioridades declaradas. A Foursys pode se posicionar como parceira de implementação para os projetos mais estratégicos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>AI Squad proprietário</strong> — alinhado com os 120+ projetos de IA da Cogna; (2) <strong>Parceria Digibee</strong> — solução ideal para integrar 60+ marcas com sistemas legados; (3) <strong>Certificações ISO 27001/27701</strong> — essencial para proteção de dados de 2,4 milhões de alunos; (4) <strong>Modelo flexível de entrega</strong> (Squads, Projetos, AMS) — escala e adaptabilidade para a transformação de longo prazo da Cogna.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. IA como motor de receita, não só de eficiência:</strong> O CEO da Cogna declarou que IA trará "mais receita do que redução de custos". A Foursys pode se posicionar com o AI Squad para ajudar a criar novos produtos digitais com IA — como a expansão do assistente Plu para novos segmentos e a personalização de jornadas de aprendizagem em escala.</p>
+                <p style="margin-bottom:12px"><strong>2. Evasão é o problema #1 do negócio:</strong> Taxa de evasão superior a 20% no EaD é um dreno de receita significativo. A melhoria da experiência digital é a aposta da Cogna para reduzir cancelamentos. Squads especializados em UX/plataformas digitais podem gerar ROI direto e mensurável.</p>
+                <p style="margin-bottom:12px"><strong>3. Integração de sistemas legados é dor aguda:</strong> Com mais de 60 marcas adquiridas ao longo de décadas, a Cogna opera com dezenas de ERPs, CRMs acadêmicos e plataformas LMS diferentes. Igor Freitas declarou que integração é sua prioridade #1. A parceria Digibee da Foursys é um diferencial competitivo direto para resolver essa dor.</p>
+                <p style="margin-bottom:12px"><strong>4. Segurança de dados é sensível no setor educação:</strong> A Cogna armazena dados de 2,4 milhões de estudantes, incluindo menores de idade. Vazamentos teriam impacto regulatório (LGPD com multas de até 2% do faturamento) e reputacional devastador. As certificações ISO da Foursys são um ativo valioso nesta conversa.</p>
+                <p><strong>5. Competidores investem em digital — urgência de execução:</strong> Yduqs investe 50% do capex em digital, Ânima adquiriu edtechs de IA (VivaE + Ada), e Ser Educacional cresce em eficiência. A Cogna precisa executar rápido para manter a liderança — parceiros com capacidade de entrega acelerada ganham preferência.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Yduqs (YDUQ3)</h4>
+                <p><strong>Segmento:</strong> Ensino superior presencial, EaD e premium (Ibmec, Idomed) | <strong>Receita 2025:</strong> R$ 5,5 bilhões</p>
+                <p>Segunda maior empresa de educação do Brasil. Investe 50% do capex total em transformação digital desde 2018. Possui a edtech EnsineMe para produção de conteúdo digital. Foco em personalização por IA e expansão do segmento premium (Ibmec — margem EBITDA de 45%). Fluxo de caixa livre recorde de R$ 1,05 bilhão em 2025. Captação de alunos cresceu 16% no último ciclo. Ponto forte: ecossistema digital integrado com professores de renome. Gap: menor escala de projetos de IA comparado à Cogna.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Ânima Educação (ANIM3)</h4>
+                <p><strong>Segmento:</strong> Ensino superior, medicina (Inspirali) e educação digital | <strong>Receita 2025:</strong> R$ 4,02 bilhões</p>
+                <p>Terceira maior do setor, com forte posicionamento em medicina (Inspirali) e marca premium. Investiu R$ 217 milhões em capex em 2025 (5,4% da receita), focando em tecnologia e plataformas. Realizou combinação de negócios entre VivaE e Ada — adicionando trilhas de upskilling em TI e plataforma de IA para retenção B2B. Lucro de R$ 123,8 milhões (+45,3% vs 2024). Ponto forte: diversificação de segmentos (medicina, digital, B2B). Gap: menor base de alunos e menor investimento absoluto em IA.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Ser Educacional (SEER3)</h4>
+                <p><strong>Segmento:</strong> Ensino superior presencial e EaD, foco no Norte e Nordeste | <strong>Receita 2025:</strong> Em crescimento robusto</p>
+                <p>Quarta maior empresa de educação, com forte presença regional no Norte e Nordeste brasileiro. Lucro líquido cresceu 112% no Q4 2025. EBITDA ajustado de R$ 150,5 milhões (+22,8%). Reduziu dívida em 30% e geração de caixa operacional cresceu 228%. J.P. Morgan manteve classificação de "compra". Ponto forte: eficiência operacional e desalavancagem agressiva. Gap: menor investimento declarado em IA e transformação digital comparado aos líderes.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Cruzeiro do Sul Educacional</h4>
+                <p><strong>Segmento:</strong> Ensino superior presencial, EaD e pós-graduação | <strong>Receita 2025:</strong> ~R$ 2,5 bilhões (estimativa)</p>
+                <p>Quinto maior grupo educacional brasileiro, com fortes marcas como Universidade Cruzeiro do Sul e Universidade Cidade de São Paulo (Unicid). Focado em expansão via aquisições e crescimento orgânico do EaD. Investimentos em plataformas digitais e ensino híbrido. Ponto forte: presença consolidada em São Paulo e forte reputação acadêmica. Gap: menor visibilidade em iniciativas de IA e transformação digital comparado à Cogna.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Os concorrentes da Cogna estão investindo em <strong>plataformas digitais integradas</strong> (Yduqs EnsineMe), <strong>edtechs de IA</strong> (Ânima VivaE+Ada) e <strong>eficiência operacional</strong> (Ser Educacional). A Cogna lidera em volume de projetos de IA (120+), mas pode ter gaps em: (1) <strong>Integração enterprise end-to-end</strong> entre 60+ marcas — um problema que nenhum concorrente enfrenta na mesma escala; (2) <strong>Governança centralizada de IA</strong> para garantir qualidade, segurança e compliance em todos os projetos simultaneamente; (3) <strong>Personalização de aprendizagem em escala</strong> — Yduqs projeta 2-3 anos para implementação plena, criando oportunidade para quem entregar primeiro; (4) <strong>Segurança de dados educacionais</strong> — com a maior base de alunos do mercado, a Cogna tem a maior superfície de risco. A Foursys pode se posicionar como parceira estratégica para acelerar todas essas frentes com squads especializados, integração Digibee e AI Squad.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">VP de Tecnologia (CIO/CTO) — Cogna Educação (desde Jan/2024)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">São Paulo, SP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência</div>
+                        <div class="value">+25 anos em tecnologia — atuação em Itaú Unibanco (9 anos), Livelo (CIO/CTO/CDO), XP Inc., Zamp (Burger King/Popeyes)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Liderança</div>
+                        <div class="value">Membro do comitê executivo da Cogna. Responsável por engenharia de TI, arquitetura, infraestrutura/cloud, cibersegurança, LGPD e estratégia digital</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Temas de Interesse Público</div>
+                        <div class="value">IA aplicada à educação, integração de ecosistemas complexos, transformação digital, governança de IA, segurança da informação</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Background Diferenciado</div>
+                        <div class="value">Experiência em múltiplos setores (financeiro, varejo/food service, fidelidade, educação) — visão cross-industry rica</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Lidere pela integração de ecossistemas:</strong> Igor veio de empresas com ecossistemas complexos (Itaú, XP) e seu maior desafio na Cogna é unificar 60+ marcas. Abrir a conversa com cases de integração enterprise mostra que você entende sua dor principal e gera conexão imediata.</p>
+                <p style="margin-bottom:10px"><strong>2. Reconheça a escala impressionante de IA:</strong> Com 120+ projetos de IA generativa, a Cogna está entre os 4% das empresas globais nessa maturidade. Elogiar esse avanço é genuíno e demonstra que você pesquisou. Pergunte sobre os próximos desafios de escala — ele terá muito a compartilhar.</p>
+                <p style="margin-bottom:10px"><strong>3. Conecte-se pela trajetória cross-industry:</strong> Igor passou por bancos (Itaú), fintech (XP), fidelidade (Livelo) e food service (Zamp). Essa riqueza de experiências é rara e vale ser reconhecida — mostra versatilidade e visão ampla. Compartilhe cases de outros setores que dialoguem com educação.</p>
+                <p style="margin-bottom:10px"><strong>4. Fale em resultados de negócio, não apenas tecnologia:</strong> O CEO da Cogna espera que IA gere mais receita do que redução de custos. Igor está sob pressão para demonstrar valor de negócio. Apresente ROI concreto e métricas de impacto em receita, retenção de alunos e NPS.</p>
+                <p><strong>5. Referencie o IT Forum:</strong> Igor foi destaque no IT Forum com entrevistas sobre seus primeiros 100 dias na Cogna e sobre o impacto da IA em milhares de alunos. Mencionar que acompanhou essas publicações e que concorda com sua visão sobre guardrails de IA cria vínculo profissional imediato.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Vice-Presidência (C-Level)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO (Roberto Valério)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Membro do comitê executivo da Cogna</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Alta influência — VP responsável por toda a estratégia tecnológica</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores da Empresa</div>
+                        <div class="value">26.000+</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI / Alunos</div>
+                        <div class="value">2,4 milhões de estudantes + 90 mil professores + 6 mil escolas</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo de Responsabilidade</div>
+                        <div class="value">Engenharia de TI, Arquitetura, Infraestrutura/Cloud, Cibersegurança, LGPD, Segurança da Informação, Transformação Digital</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Protagonista: TI é motor central da estratégia de negócio — IA e digital são os pilares de crescimento da Cogna</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada de Foco Tecnológico (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">IA / Machine Learning</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+                <div class="bar"><div class="bar-label">Cloud (Azure)</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+                <div class="bar"><div class="bar-label">Integração de Sistemas</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#3949ab">20%</div></div></div>
+                <div class="bar"><div class="bar-label">Plataformas Digitais / EdTech</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança / LGPD</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Automação de Processos</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#7986cb">3%</div></div></div>
+                <div class="bar"><div class="bar-label">Capacitação / Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#9fa8da">2%</div></div></div>
+            </div>
+            <p style="margin-top:16px;font-size:12px;color:var(--text-light);text-align:center;font-style:italic">* Estimativa baseada em declarações públicas de Igor Freitas e comunicados da Cogna. Percentuais representam foco estratégico relativo, não alocação orçamentária exata.</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências e Contexto de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Parceiros Tecnológicos Conhecidos</h4>
+                    <div>
+                        <span class="tag tag-active">Microsoft Azure (Cloud principal)</span>
+                        <span class="tag tag-active">IFC / Banco Mundial (Financiamento)</span>
+                    </div>
+                    <h4 style="margin-top:20px;margin-bottom:12px;color:var(--primary)">Tecnologias em Uso</h4>
+                    <div>
+                        <span class="tag tag-opportunity">Azure Cloud</span>
+                        <span class="tag tag-opportunity">IA Generativa (OpenAI/Azure)</span>
+                        <span class="tag tag-opportunity">Plataforma Plurall</span>
+                        <span class="tag tag-opportunity">Cogna AI (plataforma interna)</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Parceiros com expertise em IA, integração e cloud — capazes de operar em escala enterprise com governança</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Modelo de Contratação</div>
+                        <div class="value">Squads dedicados, projetos e parcerias estratégicas de longo prazo (horizonte de 3+ anos com funding IFC)</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Critérios de Decisão Estimados</div>
+                        <div class="value">Capacidade técnica em IA, experiência em integração de ecossistemas complexos, certificações de segurança, ROI comprovado</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

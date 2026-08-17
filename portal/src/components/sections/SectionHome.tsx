@@ -1,0 +1,380 @@
+import { motion } from 'framer-motion'
+import { BrainCircuit } from 'lucide-react'
+import { useCountUp } from '../../hooks/useCountUp'
+import { useApp } from '../../context/AppContext'
+import { useLanguage } from '../../i18n'
+import { SectionWrapper } from '../ui/SectionWrapper'
+import { CertificationBadge } from '../ui/CertificationBadge'
+import { PartnerLogo, type PartnerId } from '../ui/PartnerLogos'
+import { heroStats } from '../../data/kpis'
+
+// ─── Dados ────────────────────────────────────────────────────────────────────
+
+const allianceLogos: { id: PartnerId; label: string }[] = [
+  { id: 'adobe',        label: 'Adobe' },
+  { id: 'aws',          label: 'AWS' },
+  { id: 'databricks',   label: 'Databricks' },
+  { id: 'digibee',      label: 'Digibee' },
+  { id: 'google-cloud', label: 'Google Cloud' },
+  { id: 'intel',        label: 'Intel' },
+  { id: 'microsoft',    label: 'Microsoft' },
+  { id: 'pega',         label: 'Pega' },
+  { id: 'snowflake',    label: 'Snowflake' },
+]
+
+// ─── Chama Foursys ────────────────────────────────────────────────────────────
+
+function FoursysLogo() {
+  return (
+    <div className="relative select-none flex items-center justify-center py-2 lg:py-3">
+      {/* Ambient glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255,102,0,0.25) 0%, rgba(255,80,0,0.08) 45%, transparent 75%)',
+          filter: 'blur(30px)',
+          transform: 'scale(1.6)',
+        }}
+      />
+
+      {/* Stage light beams */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'conic-gradient(from 180deg at 50% 120%, transparent 30%, rgba(255,100,0,0.06) 40%, transparent 50%, rgba(255,100,0,0.04) 60%, transparent 70%)',
+          filter: 'blur(8px)',
+          transform: 'scale(2)',
+        }}
+      />
+
+      {/* Floor reflection */}
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-52 h-10 rounded-full"
+        style={{
+          background: 'radial-gradient(ellipse, rgba(255,80,0,0.4) 0%, transparent 70%)',
+          filter: 'blur(12px)',
+        }}
+      />
+
+      {/* Logo */}
+      <motion.div
+        className="relative z-10"
+        animate={{ y: [0, -5, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <svg
+          width="280"
+          height="102"
+          viewBox="0 0 220 80"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="max-w-full h-auto drop-shadow-[0_0_24px_rgba(255,100,0,0.5)]"
+        >
+          <defs>
+            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FF8C00" />
+              <stop offset="50%" stopColor="#FF6600" />
+              <stop offset="100%" stopColor="#CC4400" />
+            </linearGradient>
+            <linearGradient id="logoShine" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#FFB366" />
+              <stop offset="40%" stopColor="#FF6600" />
+              <stop offset="100%" stopColor="#993D00" />
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          {/* Accent line */}
+          <rect x="20" y="16" width="4" height="28" rx="2" fill="url(#logoGrad)" opacity="0.9" />
+
+          {/* Main text: foursys */}
+          <text
+            x="34"
+            y="42"
+            fontFamily="system-ui, -apple-system, sans-serif"
+            fontSize="38"
+            fontWeight="900"
+            letterSpacing="-1"
+            fill="url(#logoShine)"
+            filter="url(#glow)"
+          >
+            foursys
+          </text>
+
+          {/* Tagline */}
+          <text
+            x="36"
+            y="60"
+            fontFamily="system-ui, -apple-system, sans-serif"
+            fontSize="9"
+            fontWeight="600"
+            letterSpacing="5"
+            fill="rgba(255,255,255,0.35)"
+          >
+            DIGITAL SOLUTIONS
+          </text>
+
+          {/* Decorative dot */}
+          <circle cx="198" cy="30" r="4" fill="url(#logoGrad)" opacity="0.7" />
+        </svg>
+      </motion.div>
+    </div>
+  )
+}
+
+// ─── Componente principal ─────────────────────────────────────────────────────
+
+// ─── Frases de dor contextualizadas ─────────────────────────────────────────
+
+function getPainStatement(sector: string | null, role: string | null, t: (key: string) => string): string | null {
+  if (!sector) return null
+  const sectorKey = ['financeiro', 'saude', 'seguros'].includes(sector) ? sector : 'outro'
+  if (role) {
+    const key = `home.painStatements.${sectorKey}.${role}`
+    const result = t(key)
+    if (result !== key) return result
+  }
+  const defaultKey = `home.painStatements.${sectorKey}.default`
+  const defaultResult = t(defaultKey)
+  if (defaultResult !== defaultKey) return defaultResult
+  const fallback = t('home.painStatements.outro.default')
+  return fallback !== 'home.painStatements.outro.default' ? fallback : null
+}
+
+export function SectionHome() {
+  const { navigate, state } = useApp()
+  const { lang, t } = useLanguage()
+
+  const kpi1 = useCountUp(heroStats.years,      1400)
+  const kpi2 = useCountUp(30,                   1800)
+  const kpi3 = useCountUp(8,                    1600)
+
+  const painStatement = getPainStatement(state.sessionProfile?.sector ?? null, state.sessionProfile?.role ?? null, t)
+
+  const flagshipOffers = [
+    t('home.offers.aiSquad'),
+    t('home.offers.legacyModernization'),
+    t('home.offers.cybersecurity'),
+    t('home.offers.fourBlox'),
+    t('home.offers.qaWithAI'),
+  ]
+
+  const kpis = [
+    { ref: kpi1, suffix: ` ${t('common.years')}`,  label: t('home.kpiYears') },
+    { ref: kpi2, suffix: 'K+',     label: t('home.kpiProjects') },
+    { ref: kpi3, suffix: '',       label: t('home.kpiCities') },
+  ]
+
+  return (
+    <SectionWrapper>
+      <div className="h-full flex flex-col overflow-y-auto overflow-x-hidden">
+
+        {/* ── Área principal: 1 col mobile / 3 col desktop ── */}
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-[2.5fr_3fr_2.5fr]">
+
+          {/* ── Coluna central (em mobile vem primeiro): Chama + tagline ── */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="section-hero flex flex-col items-center justify-center py-4 lg:py-3 cursor-pointer order-1 lg:order-2"
+            onClick={() => navigate('identity')}
+            role="button"
+            tabIndex={0}
+            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate('identity') } }}
+          >
+            <FoursysLogo />
+
+            <motion.button
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.55, duration: 0.5 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="mt-3 mb-1 inline-flex items-center gap-2 px-5 py-2 rounded-full bg-foursys-primary/10 border border-foursys-primary/30 cursor-pointer hover:bg-foursys-primary/20 hover:border-foursys-primary/50 transition-colors duration-300"
+              onClick={e => { e.stopPropagation(); navigate('ai-foursys') }}
+            >
+              <BrainCircuit size={15} className="text-foursys-primary" />
+              <span className="text-xs font-bold uppercase tracking-[0.15em] text-foursys-primary">
+                {lang === 'pt' ? 'Inteligência Artificial' : 'Artificial Intelligence'}
+              </span>
+            </motion.button>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
+              className="mt-2 text-center px-6"
+            >
+              <h1 className="text-lg md:text-xl font-black text-white leading-snug mb-2">
+                {t('home.headline')}
+                <br />
+                <span className="text-foursys-primary">{t('home.headlineHighlight')}</span>
+              </h1>
+
+              {painStatement && (
+                <motion.div
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.0 }}
+                  className="mt-3 px-4 py-2.5 rounded-xl bg-foursys-primary/10 border border-foursys-primary/25 text-foursys-primary text-sm font-semibold leading-snug"
+                >
+                  "{painStatement}"
+                </motion.div>
+              )}
+
+              <div
+                className="text-xs font-semibold tracking-[0.22em] uppercase mt-3 hidden lg:block"
+                style={{ color: 'rgba(255,255,255,0.35)' }}
+              >
+                {t('home.clickToStart')}
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* ── Coluna esquerda: KPIs ── */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            data-voz-caixa="home-kpis"
+            data-voz-caixa-secao="home"
+            data-voz-caixa-rotulo={t('home.foundedIn')}
+            tabIndex={-1}
+            className="flex flex-col justify-center px-5 md:px-8 py-4 md:py-5 gap-3 md:gap-5 order-2 lg:order-1 border-t lg:border-t-0 lg:border-r border-white/[0.06] focus:outline-none"
+          >
+            <div>
+              <span className="text-xs font-bold tracking-[0.18em] uppercase text-foursys-primary">
+                {t('home.foundedIn')}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-3 lg:grid-cols-1 gap-4 lg:gap-5">
+              {kpis.map(({ ref, suffix, label }, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 + i * 0.12, duration: 0.5 }}
+                  className="border-l-[3px] border-foursys-primary pl-3 lg:pl-5"
+                >
+                  <div className="text-3xl md:text-5xl lg:text-[56px] leading-none font-black text-white tracking-tight tabular-nums">
+                    {ref.count}
+                    <span className="text-xl md:text-2xl lg:text-4xl">{suffix}</span>
+                  </div>
+                  <div className="text-[10px] md:text-sm text-foursys-text-muted mt-1 font-medium leading-tight">{label}</div>
+                </motion.div>
+              ))}
+            </div>
+
+          </motion.div>
+
+          {/* ── Coluna direita: Ofertas Flagship ── */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            data-voz-caixa="home-ofertas"
+            data-voz-caixa-secao="home"
+            data-voz-caixa-rotulo={t('home.mainOffers')}
+            tabIndex={-1}
+            className="flex flex-col justify-center px-5 md:px-8 py-4 md:py-5 gap-2 md:gap-3 order-3 border-t lg:border-t-0 lg:border-l border-white/[0.06] focus:outline-none"
+          >
+            <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-foursys-primary mb-1">
+              {t('home.mainOffers')}
+            </div>
+            <div className="grid grid-cols-2 lg:grid-cols-1 gap-2 lg:gap-3">
+              {flagshipOffers.map((offer, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.25 + i * 0.08, duration: 0.4 }}
+                  className="border-l-[3px] border-foursys-primary pl-3 lg:pl-5 cursor-pointer hover:border-foursys-primary/80 transition-colors"
+                  onClick={() => navigate('offers-flagship')}
+                >
+                  <span className="text-sm md:text-lg font-semibold text-white leading-snug">{offer}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* ── Barra inferior ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.5 }}
+          className="grid grid-cols-1 sm:grid-cols-3 border-t border-white/[0.08]"
+        >
+          {/* Estrutura de entrega */}
+          <div
+            data-voz-caixa="home-modelos-entrega"
+            data-voz-caixa-secao="home"
+            data-voz-caixa-rotulo={t('home.deliveryModels')}
+            tabIndex={-1}
+            className="px-5 md:px-8 py-3 md:py-4 border-b sm:border-b-0 sm:border-r border-white/[0.06] focus:outline-none"
+          >
+            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-2">
+              {t('home.deliveryModels')}
+            </div>
+            <div className="text-xs md:text-sm text-foursys-text-muted leading-relaxed">
+              {t('home.deliveryList')}
+            </div>
+          </div>
+
+          {/* Certificações */}
+          <div
+            data-voz-caixa="home-certificacoes"
+            data-voz-caixa-secao="home"
+            data-voz-caixa-rotulo={t('home.certifications')}
+            tabIndex={-1}
+            className="px-5 md:px-8 py-3 md:py-4 border-b sm:border-b-0 sm:border-r border-white/[0.06] focus:outline-none"
+          >
+            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-2">
+              {t('home.certifications')}
+            </div>
+            <div className="flex items-center gap-3 flex-wrap">
+              {['ISO 9001', 'ISO 27001', 'ISO 27701', 'ISO 14001', 'SAFe'].map(cert => (
+                <CertificationBadge key={cert} label={cert} size="sm" />
+              ))}
+            </div>
+          </div>
+
+          {/* Alianças */}
+          <div
+            data-voz-caixa="home-aliancas"
+            data-voz-caixa-secao="home"
+            data-voz-caixa-rotulo={t('home.strategicAlliances')}
+            tabIndex={-1}
+            className="px-5 md:px-8 py-3 md:py-4 focus:outline-none"
+          >
+            <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-primary mb-2">
+              {t('home.strategicAlliances')}
+            </div>
+            <div className="flex items-center gap-4 md:gap-5 flex-wrap">
+              {allianceLogos.map(a => (
+                <div
+                  key={a.id}
+                  className="flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity duration-200"
+                  title={a.label}
+                >
+                  <PartnerLogo id={a.id} size={18} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+      </div>
+    </SectionWrapper>
+  )
+}

@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pre-Sales Intelligence — Izaias Gomes · Grupo Piracanjuba (Hunter v3 · Híbrido)</title>
+<style>
+    :root {
+        --primary: #1a237e;
+        --primary-light: #3949ab;
+        --accent: #00b894;
+        --accent-orange: #e17055;
+        --bg: #f5f6fa;
+        --card-bg: #ffffff;
+        --text: #2d3436;
+        --text-light: #636e72;
+        --border: #dfe6e9;
+        --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    /* HEADER */
+    .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: #fff; padding: 48px 40px; border-radius: 16px; margin-bottom: 24px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+    .header::before { content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,184,148,0.18) 0%, transparent 70%); pointer-events: none; }
+    .brand { font-size: 14px; letter-spacing: 1.2px; text-transform: uppercase; opacity: 0.92; margin-bottom: 18px; font-weight: 600; }
+    .brand span.accent { color: var(--accent); }
+    .brand .pipe { opacity: 0.55; margin: 0 10px; }
+    .header h1 { font-size: 44px; font-weight: 700; line-height: 1.15; margin-bottom: 8px; }
+    .header h2 { font-size: 22px; font-weight: 500; opacity: 0.95; margin-bottom: 8px; }
+    .header .meta { font-size: 16px; opacity: 0.88; margin-bottom: 22px; }
+    .badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+    .badge { background: rgba(255,255,255,0.18); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.25); padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+    .badge.green { background: var(--accent); border-color: var(--accent); }
+    .badge-mode-hibrido { background: linear-gradient(90deg, #00b894 0%, #1a237e 100%); color: #fff; border: none; }
+
+    /* BARRA DE ÂNCORAS */
+    .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 12px; z-index: 50; }
+    .anchor-nav a { text-decoration: none; color: var(--primary); font-size: 12.5px; font-weight: 600; padding: 6px 12px; border-radius: 999px; transition: background 0.2s; }
+    .anchor-nav a:hover { background: var(--bg); }
+
+    /* SUMÁRIO 1 PÁGINA */
+    .one-pager { background: linear-gradient(135deg, #fff 0%, #fafbfc 100%); border: 2px solid var(--primary); border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; box-shadow: var(--shadow); page-break-after: always; }
+    .one-pager h3 { font-size: 18px; color: var(--primary); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+    .one-pager-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--accent); }
+    .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 700; margin-bottom: 4px; }
+    .one-pager-block .val { font-size: 13.5px; font-weight: 600; color: var(--text); line-height: 1.4; }
+    @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+    /* HISTÓRIA 3 ATOS */
+    .story-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
+    .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; }
+    .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.85; font-weight: 700; margin-bottom: 6px; }
+    .story-act h4 { font-size: 17px; margin-bottom: 10px; }
+    .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+    .story-act-1 { background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%); }
+    .story-act-2 { background: linear-gradient(135deg, #e17055 0%, #d63031 100%); }
+    .story-act-3 { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); }
+    @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+    /* SECTIONS */
+    .section { background: var(--card-bg); border-radius: 16px; padding: 32px; margin-bottom: 24px; box-shadow: var(--shadow); }
+    .section h3 { font-size: 22px; color: var(--primary); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+    .section h4.sub { font-size: 16px; color: var(--primary); margin-top: 20px; margin-bottom: 10px; }
+    .section p { margin-bottom: 12px; color: var(--text); }
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 18px; }
+    .info-card { background: #fafbfc; border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+    .info-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 700; margin-bottom: 6px; }
+    .info-card .value { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.4; }
+
+    /* INSIGHT BOX */
+    .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 24px 26px; border-radius: 12px; margin-top: 16px; }
+    .insight-box h4 { font-size: 17px; margin-bottom: 10px; font-weight: 700; letter-spacing: 0.3px; }
+    .insight-box p { color: #fff; opacity: 0.97; margin-bottom: 8px; }
+    .insight-box ul { padding-left: 22px; margin-top: 10px; }
+    .insight-box li { margin-bottom: 6px; }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 28px; margin-top: 14px; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 2px; background: var(--border); }
+    .timeline-item { position: relative; margin-bottom: 18px; }
+    .timeline-dot { position: absolute; left: -28px; top: 6px; width: 14px; height: 14px; background: var(--primary-light); border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 2px var(--primary-light); }
+    .timeline-item h4 { font-size: 15px; margin-bottom: 4px; color: var(--primary); }
+    .timeline-item p { font-size: 14px; color: var(--text-light); }
+
+    /* TAGS */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tag { font-size: 12.5px; font-weight: 600; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); }
+    .tag-priority   { background: #fce4ec; color: #c62828; border-color: #ef9a9a; }
+    .tag-active     { background: #e8f5e9; color: #2e7d32; border-color: #a5d6a7; }
+    .tag-opportunity{ background: #fff3e0; color: #e65100; border-color: #ffcc80; }
+    .tag-tech       { background: #e3f2fd; color: #0d47a1; border-color: #90caf9; }
+
+    /* SECTION VARIATIONS */
+    .section.opportunity { border: 2px solid var(--accent-orange); }
+    .section.foursys     { border: 2px solid var(--accent); }
+    .section.rapport     { border: 2px solid #667eea; }
+    .section.business    { border: 2px solid #6c5ce7; }
+    .section.opportunity h3 { color: var(--accent-orange); }
+    .section.foursys h3     { color: var(--accent); }
+    .section.rapport h3     { color: #667eea; }
+    .section.business h3    { color: #6c5ce7; }
+
+    /* OFERTAS */
+    .oferta-card { background: #fafbfc; border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; margin-bottom: 14px; position: relative; }
+    .oferta-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
+    .oferta-card h4 { font-size: 18px; color: var(--primary); }
+    .score-badge { background: var(--accent); color: #fff; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 13px; letter-spacing: 0.5px; }
+    .oferta-card .descricao { font-size: 14px; color: var(--text-light); margin-bottom: 10px; }
+    .oferta-card ul { padding-left: 22px; font-size: 14px; color: var(--text); }
+    .oferta-card li { margin-bottom: 4px; }
+
+    /* APPROACH CARDS */
+    .approach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 16px; }
+    .approach-card { color: #fff; padding: 22px; border-radius: 12px; }
+    .approach-card h4 { font-size: 16px; margin-bottom: 8px; letter-spacing: 0.3px; }
+    .approach-card p { color: #fff; opacity: 0.97; font-size: 14px; }
+    .approach-card ul { padding-left: 22px; font-size: 14px; margin-top: 8px; }
+    .approach-card li { margin-bottom: 5px; color: #fff; }
+    .approach-green  { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); }
+    .approach-red    { background: linear-gradient(135deg, #e17055 0%, #d63031 100%); }
+    .approach-purple { background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%); }
+
+    /* BUSINESS SOLUTION CARDS */
+    .business-card { background: #fafbfc; border-left: 4px solid #6c5ce7; border-radius: 12px; padding: 20px 22px; margin-bottom: 16px; }
+    .business-card h4 { font-size: 17px; color: #4a3d99; margin-bottom: 10px; }
+    .business-card .block { margin-top: 12px; }
+    .business-card .block-label { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.5px; color: #6c5ce7; font-weight: 700; margin-bottom: 6px; }
+    .business-card .block p, .business-card .block li { font-size: 14px; color: var(--text); }
+    .business-card ul { padding-left: 22px; }
+
+    /* COMPETITOR CARDS */
+    .competitor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 14px; }
+    .competitor-card { background: #fafbfc; border-left: 4px solid var(--primary-light); padding: 18px; border-radius: 8px; }
+    .competitor-card h4 { color: var(--primary); font-size: 16px; margin-bottom: 6px; }
+    .competitor-card p { font-size: 13.5px; color: var(--text-light); }
+
+    /* BARS */
+    .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .bar-label { width: 240px; font-size: 14px; color: var(--text); font-weight: 500; }
+    .bar-track { flex: 1; height: 22px; background: var(--border); border-radius: 999px; overflow: hidden; }
+    .bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary-light), var(--accent)); display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: #fff; font-weight: 700; font-size: 12px; }
+
+    /* INVENTÁRIO DE APLICAÇÕES */
+    .app-card { background: #fafbfc; border: 1px solid var(--border); border-left: 4px solid var(--primary-light); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+    .app-card h4 { font-size: 16px; color: var(--primary); margin-bottom: 6px; }
+    .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+    .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+    .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+    .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 700; }
+    .app-stack-item .v { font-size: 13px; font-weight: 600; color: var(--text); margin-top: 4px; }
+
+    /* STACK 7 CAMADAS */
+    .stack-layer { background: #fafbfc; border-left: 5px solid var(--primary-light); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+    .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--primary-light); font-weight: 700; margin-bottom: 4px; }
+    .stack-layer .name { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+    .stack-layer .cmp { font-size: 13.5px; color: var(--text); }
+
+    /* VERIFICAÇÃO EMPÍRICA */
+    .empirical-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+    .empirical-table th { background: #f1f3f5; color: var(--primary); text-align: left; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    .empirical-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .empirical-table tr:nth-child(even) td { background: #fafbfc; }
+    .status-200 { background: #e8f5e9; color: #2e7d32; font-weight: 700; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+    .status-err { background: #fde2e2; color: #c0392b; font-weight: 700; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+    /* MERCADO */
+    .market-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 14px; }
+    .market-card { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: #fff; border-radius: 12px; padding: 18px; }
+    .market-card .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.9; margin-bottom: 6px; }
+    .market-card .val { font-size: 22px; font-weight: 800; }
+
+    /* CADEIA B2B */
+    .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 14px; }
+    .b2b-card { background: #fafbfc; border: 1px solid var(--border); border-top: 4px solid var(--accent); border-radius: 10px; padding: 16px 18px; }
+    .b2b-card h4 { color: var(--primary); font-size: 16px; margin-bottom: 8px; }
+    .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-top: 10px; margin-bottom: 4px; }
+    .b2b-card ul { padding-left: 18px; font-size: 13.5px; }
+
+    /* GAPs */
+    .gap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 14px; }
+    .gap-card { background: linear-gradient(135deg, #e17055 0%, #d63031 100%); color: #fff; border-radius: 12px; padding: 18px 20px; }
+    .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.85; margin-bottom: 6px; font-weight: 700; }
+    .gap-card h4 { font-size: 16px; margin-bottom: 8px; color: #fff; }
+    .gap-card p { color: #fff; opacity: 0.95; font-size: 13.5px; }
+    .gap-card .offer { background: rgba(255,255,255,0.2); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 700; display: inline-block; }
+
+    /* ROADMAP */
+    .roadmap-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 13.5px; }
+    .roadmap-table th { background: #6c5ce7; color: #fff; padding: 10px 12px; text-align: left; }
+    .roadmap-table td { padding: 12px; border-bottom: 1px solid var(--border); }
+    .roadmap-table .phase { font-weight: 700; color: var(--primary); }
+
+    /* MENSAGENS-CHAVE */
+    .msg-list { counter-reset: msg; list-style: none; padding: 0; margin-top: 14px; }
+    .msg-list li { counter-increment: msg; background: #fafbfc; border-left: 4px solid #6c5ce7; padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+    .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: #6c5ce7; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+
+    /* FONTES */
+    .sources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 14px; }
+    .sources-card { background: #fafbfc; border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+    .sources-card h4 { font-size: 13.5px; color: var(--primary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .sources-card ul { padding-left: 18px; font-size: 12.5px; color: var(--text); }
+    .sources-card li { margin-bottom: 4px; }
+
+    /* GLOSSÁRIO */
+    .glossary { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-top: 12px; }
+    .glossary-item { background: #fafbfc; border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+    .glossary-item .term { font-weight: 700; color: var(--primary); font-size: 13.5px; }
+    .glossary-item .def { font-size: 12.5px; color: var(--text-light); margin-top: 4px; }
+
+    /* DIVISORES DE ZONA */
+    .zone-divider { margin: 56px 0 32px; border: 0; height: 24px; background: linear-gradient(90deg, transparent 0%, var(--border) 50%, transparent 100%); position: relative; }
+    .zone-divider::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 700; }
+
+    /* FOOTER */
+    footer { text-align: center; margin-top: 42px; padding: 28px 0 0; border-top: 1px solid var(--border); color: var(--text-light); font-size: 13px; }
+    footer .brand-line { font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+
+    /* PRINT BUTTON */
+    .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: #fff; border: none; padding: 14px 22px; border-radius: 999px; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 6px 22px rgba(26,35,126,0.35); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .print-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(26,35,126,0.45); }
+
+    @media (max-width: 768px) {
+        .header { padding: 32px 24px; }
+        .header h1 { font-size: 30px; }
+        .header h2 { font-size: 18px; }
+        .section { padding: 22px; }
+        .bar-label { width: 140px; font-size: 13px; }
+        .anchor-nav { position: relative; top: 0; }
+    }
+    @media print {
+        body { background: #fff; }
+        .container { padding: 0; max-width: 100%; }
+        .print-btn { display: none !important; }
+        .anchor-nav { display: none !important; }
+        .section, .header { box-shadow: none; break-inside: avoid; }
+        .header::before { display: none; }
+        .approach-card, .insight-box, .business-card, .oferta-card, .gap-card, .b2b-card, .app-card { break-inside: avoid; }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+
+    <!-- A1. HEADER -->
+    <header class="header">
+        <div class="brand">four<span class="accent">sys</span> <span class="pipe">|</span> Pre-Sales Intelligence · Hunter v3</div>
+        <h1>Izaias Gomes</h1>
+        <h2>Diretor de TI · Grupo Piracanjuba (Laticínios Bela Vista S.A.)</h2>
+        <div class="meta">Indústria de Laticínios &amp; Alimentos · Sede em Goiânia/GO · Matriz em Bela Vista de Goiás · 70 anos de mercado · CNPJ 02.089.969/0001-06</div>
+        <div class="badges">
+            <span class="badge badge-mode-hibrido">[Modo: Híbrido]</span>
+            <span class="badge green">R$ 12 bilhões projetados em 2025</span>
+            <span class="badge">2ª maior captação de leite do Brasil — 1,9 bi de litros/ano</span>
+            <span class="badge">10 unidades industriais · 4.000+ colaboradores</span>
+            <span class="badge">SAP S/4HANA + GCP + Salesforce + AWS CloudFront</span>
+        </div>
+    </header>
+
+    <!-- BARRA DE ÂNCORAS -->
+    <nav class="anchor-nav">
+        <a href="#sumario">Sumário 1pg</a>
+        <a href="#historia">História 3 atos</a>
+        <a href="#solucoes">Soluções foco no negócio</a>
+        <a href="#mensagens">Mensagens-chave</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#empresa">Empresa</a>
+        <a href="#gestor">Gestor</a>
+        <a href="#segmento">Segmento &amp; Mercado</a>
+        <a href="#b2b">Cadeia B2B</a>
+        <a href="#tensoes">Tensões &amp; Oportunidades</a>
+        <a href="#ofertas">Ofertas Foursys</a>
+        <a href="#concorrentes">Concorrentes</a>
+        <a href="#stack">Stack Técnico</a>
+        <a href="#empirico">Verificação Empírica</a>
+        <a href="#gaps">GAPs</a>
+        <a href="#rapport">Rapport</a>
+        <a href="#fontes">Fontes</a>
+    </nav>
+
+    <!-- A2. SUMÁRIO 1 PÁGINA -->
+    <section class="one-pager" id="sumario">
+        <h3>Sumário Executivo — 1 Página</h3>
+        <div class="one-pager-grid">
+            <div class="one-pager-block">
+                <div class="lbl">Quem é a empresa</div>
+                <div class="val">Grupo Piracanjuba, 70 anos, R$ 12 bi/2025, 2º maior laticínio do Brasil (1,9 bi L/ano), 10 fábricas, sede em Goiânia.</div>
+            </div>
+            <div class="one-pager-block">
+                <div class="lbl">Quem é o gestor</div>
+                <div class="val">Izaias Gomes — Diretor de TI desde set/2025. Origem CISO/DPO (CPDPO Opice Blum, EXIN PDPP, Auditor ISO 27001). Cresceu no grupo em 4 anos.</div>
+            </div>
+            <div class="one-pager-block">
+                <div class="lbl">O que está em jogo agora</div>
+                <div class="val">Integrar Básel Lácteos e fórmulas infantis no S/4HANA Clean Core, escalar IA do marketing para a operação e fortalecer cyber em 10 fábricas + Salesforce + GCP.</div>
+            </div>
+            <div class="one-pager-block">
+                <div class="lbl">3 soluções recomendadas</div>
+                <div class="val">(1) AI Squad p/ operação industrial · (2) Cyber ISO 27001/27701 + AppSec · (3) Plataforma de Dados unificada (SAP Datasphere + BigQuery + Digibee).</div>
+            </div>
+            <div class="one-pager-block">
+                <div class="lbl">Próximo passo recomendado</div>
+                <div class="val">Workshop executivo "Clean Core + IA aplicada à operação" + assessment de maturidade Cyber/LGPD em 60 dias.</div>
+            </div>
+            <div class="one-pager-block">
+                <div class="lbl">Janela de timing</div>
+                <div class="val">Ciclo orçamentário 2026 aberto após promoção do Izaias. Aquisição da Básel em homologação CADE. Entrada em fórmulas infantis em 2026.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- A3. HISTÓRIA EM 3 ATOS -->
+    <section class="section" id="historia">
+        <h3>A História desta Conta em 3 Atos</h3>
+        <div class="story-grid">
+            <div class="story-act story-act-1">
+                <div class="act-lbl">Ato 1 — Momento de virada</div>
+                <h4>O 2º maior do Brasil em modo de crescimento agressivo</h4>
+                <p>Piracanjuba cresce orgânica e por M&amp;A: 70 anos completos, R$ 12 bi projetados em 2025, aquisição da Básel Lácteos em homologação no CADE, ingresso em fórmulas infantis e linhas premium (ProForce, Zquad). Cada nova fábrica multiplica a complexidade do core SAP e a superfície de ataque cibernético.</p>
+            </div>
+            <div class="story-act story-act-2">
+                <div class="act-lbl">Ato 2 — A tensão</div>
+                <h4>Maturidade SAP recém-conquistada, mas IA ainda só no marketing</h4>
+                <p>S/4HANA via RISE rodou em 2023 com Clean Core. Marketing entregou +244% de menções em IAs em 2025. Mas a IA aplicada à <strong>operação industrial</strong> ainda não chegou (vs Nestlé com 45 modelos preditivos). Salesforce, RD Station e SAP rodam em silos sem iPaaS declarado. Polyfill.io comprometido segue ativo no CSP.</p>
+            </div>
+            <div class="story-act story-act-3">
+                <div class="act-lbl">Ato 3 — A travessia</div>
+                <h4>Foursys como parceira multi-frente de orquestração</h4>
+                <p>Da maturidade técnica conquistada para resultado de negócio mensurável: AI Squad na operação, Cyber ISO 27001/27701 alinhado ao perfil DPO do Izaias, integração SAP↔Salesforce↔RD Station via Digibee, e plataforma de dados unificada do campo (ProCampo) ao DRE. Tudo sob governança ISO 20000 que o Izaias já cultiva.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- A4. SOLUÇÕES FOCO NO NEGÓCIO -->
+    <section class="section business" id="solucoes">
+        <h3>Sugestão de Soluções com Foco no Negócio</h3>
+
+        <div class="business-card">
+            <h4>1. AI Squad: do marketing para a operação industrial</h4>
+            <div class="block">
+                <div class="block-label">Dor de Negócio</div>
+                <p>Em uma operação de R$ 12 bi, cada % de erro de forecast ou ruptura em PDV custa milhões. Hoje a IA está concentrada em SEO/GEO e ITSM (Freshworks). Falta IA na linha de produção, na previsão de demanda e no atendimento B2B.</p>
+            </div>
+            <div class="block">
+                <div class="block-label">Solução Consultiva</div>
+                <p>Squad de IA conectado a <strong>SAP IBP, EWM e BigQuery</strong> para previsão de demanda, manutenção preditiva, qualidade no chão de fábrica e GenAI no SAC. Plataforma única com MLOps e governança alinhada à ISO 20000 do Izaias.</p>
+            </div>
+            <div class="block">
+                <div class="block-label">Próximo Passo Comercial</div>
+                <p>Workshop executivo "IA aplicada à operação láctea" com casos comparáveis (Nestlé com 45 modelos, BRF/MBRF com R$ 485M de sinergia projetada).</p>
+            </div>
+        </div>
+
+        <div class="business-card">
+            <h4>2. Cyber + LGPD para sustentar a expansão</h4>
+            <div class="block">
+                <div class="block-label">Dor de Negócio</div>
+                <p>10 fábricas + Salesforce sandbox + AWS + GCP + entrada em fórmulas infantis (categoria altamente regulada pela ANVISA). Um incidente em fórmulas infantis ou em dados de produtores destrói a marca. Polyfill.io ainda ativo no CSP (biblioteca comprometida em 2024) é risco real e detectável.</p>
+            </div>
+            <div class="block">
+                <div class="block-label">Solução Consultiva</div>
+                <p>Programa Cyber + Privacidade alinhado a ISO 27001/27701 (Foursys certificada), com módulos AppSec, segurança OT, DPO as a Service e DLP. Roadmap integrado ao Clean Core e à plataforma de dados.</p>
+            </div>
+            <div class="block">
+                <div class="block-label">Próximo Passo Comercial</div>
+                <p>Assessment de maturidade ISO 27001 + privacidade em 45 dias, com gap analysis e roadmap de 12 meses. Audit imediato de AppSec começando por <code>cdn.polyfill.io</code>.</p>
+            </div>
+        </div>
+
+        <div class="business-card">
+            <h4>3. Plataforma de Dados unificada (Campo → DRE)</h4>
+            <div class="block">
+                <div class="block-label">Dor de Negócio</div>
+                <p>SAP S/4HANA, BigQuery, Looker, Salesforce, RD Station e Freshworks rodam em silos. Cada fábrica nova multiplica os fluxos. Não há iPaaS declarado.</p>
+            </div>
+            <div class="block">
+                <div class="block-label">Solução Consultiva</div>
+                <p>Engenharia Digital + AI Squad sobre <strong>SAP Datasphere + BigQuery</strong>, com governança e produtos de dados por domínio. Integrações via <strong>Digibee (iPaaS)</strong> conectando SAP ↔ Salesforce ↔ RD Station ↔ Freshworks ↔ ProCampo.</p>
+            </div>
+            <div class="block">
+                <div class="block-label">Próximo Passo Comercial</div>
+                <p>Diagnóstico Datasphere + BigQuery + Digibee em 30 dias com benchmark setorial (Lactalis, Nestlé).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- A5. MENSAGENS-CHAVE -->
+    <section class="section" id="mensagens">
+        <h3>Mensagens-chave para a 1ª Conversa</h3>
+        <ol class="msg-list">
+            <li><strong>Reconhecer a virada:</strong> "Izaias, subir de Coordenador de SI para Diretor de TI em 4 anos numa indústria como a Piracanjuba é um movimento raro — parabéns pela promoção em setembro. Imagino que o orçamento 2026 está sendo desenhado agora."</li>
+            <li><strong>Posicionar a próxima fronteira:</strong> "Vocês acertaram o RISE com SAP em 2023 e estão entrando em Datasphere, EWM, IBP e Sustainability Control Tower. A próxima onda não é mais implementar — é orquestrar Clean Core + IA + Cyber sem inflar TCO."</li>
+            <li><strong>Conectar com o escopo dele:</strong> "Sua origem em SI e a certificação CPDPO te coloca em posição rara para responder o que ANVISA e LGPD vão exigir das fórmulas infantis — a Foursys traz ISO 27001/27701 e DPO as a Service para esse jogo."</li>
+            <li><strong>Falar a linguagem dele:</strong> "Vimos no SAP House em São Paulo a discussão sobre Clean Core com Dexco e Natura. Vocês têm uma vantagem rara: o S/4HANA novo + Salesforce sandbox e o time de Originação de Lácteos crescendo. A questão é quem integra tudo sem quebrar o core."</li>
+            <li><strong>Demonstrar entendimento setorial:</strong> "O ranking ABRALEITE 2025 mostra Top 3 (Lactalis, Piracanjuba, UNIUM) com 59% do volume. Nestlé já tem 45 modelos preditivos com governança; vocês têm Clarity, Hotjar e Freshworks com IA pontuais. Tem um gap claro de plataforma corporativa de IA — e a Foursys tem AI Squad próprio."</li>
+            <li><strong>Trazer evidência empírica detectada:</strong> "Inspecionamos o seu site institucional. O CSP está rigoroso, o OneTrust está configurado, mas ainda tem o polyfill.io ativo — biblioteca comprometida em 2024. Levamos isso como um quick-win de cyber na primeira reunião."</li>
+            <li><strong>Convidar para o passo concreto:</strong> "Posso reservar 90 minutos com você e seu time para um workshop 'Clean Core + IA aplicada à operação' nas próximas 3 semanas? Vou trazer 2 cases de indústrias alimentícias com ROI medido."</li>
+        </ol>
+    </section>
+
+    <!-- A6. ROADMAP DE ENGAJAMENTO -->
+    <section class="section" id="roadmap">
+        <h3>Roadmap de Engajamento Foursys → Piracanjuba</h3>
+        <table class="roadmap-table">
+            <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+            <tbody>
+                <tr><td class="phase">1. Conexão Inicial</td><td>Reunião exploratória com Izaias Gomes + apresentação do mapa de inteligência</td><td>Apresentação executiva "Clean Core + IA aplicada à operação" + 2 quick-wins de Cyber</td><td>Mai-Jun/2026</td></tr>
+                <tr><td class="phase">2. Discovery Workshop</td><td>Sessão técnica com TI, Originação de Lácteos, Industrial e Comercial</td><td>Mapa de gaps SAP ↔ Salesforce ↔ RD Station ↔ BigQuery + plano para fórmulas infantis</td><td>Jun-Jul/2026</td></tr>
+                <tr><td class="phase">3. POC Direcionado</td><td>Prova de valor em uma frente única: forecast de demanda OU integração ProCampo OU AppSec do site</td><td>POC funcional com KPI de negócio + ROI mensurado</td><td>Ago-Out/2026</td></tr>
+                <tr><td class="phase">4. Squad Pilot</td><td>Squad dedicado para um epic estruturante (Datasphere ou AI Squad ou Cyber ISO 27001)</td><td>Release com retrospectiva e business case validado</td><td>Q4/2026</td></tr>
+                <tr><td class="phase">5. Programa Multi-Squad</td><td>Expansão para 3-5 squads (SAP, IA, Cyber, Integração Digibee, AMS)</td><td>Master Service Agreement plurianual com SLA e governança ISO 20000</td><td>2027-2028</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <hr class="zone-divider" data-label="Zona B — Miolo (Pré-vendas)" />
+
+    <!-- B1. EMPRESA -->
+    <section class="section" id="empresa">
+        <h3>Mapeamento Estratégico da Empresa</h3>
+        <p>O <strong>Grupo Piracanjuba</strong> (Laticínios Bela Vista S.A., CNPJ 02.089.969/0001-06) é a 2ª maior indústria de laticínios do Brasil. Fundado em 1955 em Bela Vista de Goiás, comemora 70 anos em 2025 com projeção de R$ 12 bilhões de faturamento. Captou 1,9 bilhão de litros de leite em 2024 (ABRALEITE), atende 8 estados e processa até 6 milhões de litros/dia.</p>
+        <p>Está em ciclo agressivo de expansão: aquisição da Básel Lácteos (queijos finos, Serra da Mantiqueira/MG) anunciada em out/2025 levando a 10 unidades industriais, ingresso no mercado de <strong>fórmulas infantis</strong> e nova linha premium ProForce. Em paralelo, conduz transformação digital com SAP, Google Cloud, Salesforce, Freshworks e estratégia de marca apoiada em IA.</p>
+        <div class="info-grid">
+            <div class="info-card"><div class="label">Razão Social</div><div class="value">Laticínios Bela Vista S.A.</div></div>
+            <div class="info-card"><div class="label">Sede / Matriz Industrial</div><div class="value">Goiânia/GO · Matriz em Bela Vista de Goiás</div></div>
+            <div class="info-card"><div class="label">Abrangência</div><div class="value">Sul, Sudeste, Centro-Oeste e Nordeste · 8 estados</div></div>
+            <div class="info-card"><div class="label">Categoria</div><div class="value">Capital privado · Grupo industrial brasileiro</div></div>
+            <div class="info-card"><div class="label">Tempo de Mercado</div><div class="value">70 anos (1955)</div></div>
+            <div class="info-card"><div class="label">Colaboradores</div><div class="value">4.000+ · 1.542 no LinkedIn (+15% YoY)</div></div>
+            <div class="info-card"><div class="label">Capacidade Produtiva</div><div class="value">6 mi de litros/dia · 200+ SKUs</div></div>
+            <div class="info-card"><div class="label">Marcas-chave</div><div class="value">Piracanjuba, ProForce, Pirakids, Zquad, Excellence, Seleção, Milky Moo</div></div>
+        </div>
+        <div class="tags" style="margin-top: 14px;">
+            <span class="tag tag-tech">SAP S/4HANA (RISE)</span>
+            <span class="tag tag-tech">Google Cloud · BigQuery · Looker</span>
+            <span class="tag tag-tech">Salesforce (Service + Experience Cloud)</span>
+            <span class="tag tag-tech">RD Station</span>
+            <span class="tag tag-tech">Freshworks · Freshservice</span>
+            <span class="tag tag-tech">AWS S3 + CloudFront</span>
+            <span class="tag tag-tech">OneTrust LGPD</span>
+            <span class="tag tag-tech">Microsoft Clarity · Hotjar</span>
+            <span class="tag tag-tech">Leanbot · Hyperflow</span>
+            <span class="tag tag-tech">ISO 20000 · ISO 27001 (alvo)</span>
+        </div>
+    </section>
+
+    <!-- B2. GESTOR -->
+    <section class="section" id="gestor">
+        <h3>Mapeamento do Gestor — Foco em Decisão</h3>
+        <p><strong>Izaias Francisco Gomes</strong> é o Diretor de TI do Grupo Piracanjuba desde <strong>setembro de 2025</strong>, após trajetória de 4 anos no grupo (Coord. Segurança da Informação → Gerente de Operações de TI e SI → Diretor de TI). Soma <strong>16 anos de TI</strong>, com origem em Segurança da Informação, Privacidade de Dados, Governança ISO 20000 e Infraestrutura.</p>
+        <div class="info-grid">
+            <div class="info-card"><div class="label">Cargo</div><div class="value">Diretor de TI (CIO funcional · DPO interno)</div></div>
+            <div class="info-card"><div class="label">Reporte Provável</div><div class="value">CEO / Diretoria Executiva</div></div>
+            <div class="info-card"><div class="label">Hierarquia</div><div class="value">Diretoria única de TI no grupo (centralizada em Goiânia)</div></div>
+            <div class="info-card"><div class="label">Tempo no Grupo</div><div class="value">~4 anos (nov/2021 → atual)</div></div>
+            <div class="info-card"><div class="label">Tempo no Cargo Atual</div><div class="value">~6 meses como Diretor</div></div>
+            <div class="info-card"><div class="label">Trajetória Anterior</div><div class="value">SONDA (Coord. SI · 3a 9m) · CTIS (Analista Sr. SI · 3a 6m) · Sec. Turismo DF (Coord. TI)</div></div>
+            <div class="info-card"><div class="label">Formação</div><div class="value">IGTI · Instituto de Gestão e Tecnologia da Informação (2020-2021)</div></div>
+            <div class="info-card"><div class="label">Certificações</div><div class="value">CPDPO (Opice Blum, 2025) · EXIN PDPP/PDPF/ISFS · Auditor Interno ISO 27001 · Scrum Foundation · LPIC-1</div></div>
+            <div class="info-card"><div class="label">Pilares de Atuação</div><div class="value">Segurança da Informação · Privacidade (LGPD) · Sustentação de Infra/Sistemas · Governança ISO 20000</div></div>
+            <div class="info-card"><div class="label">Capacidade de Decisão</div><div class="value">Alta — autonomia sobre orçamento e fornecedores de TI</div></div>
+        </div>
+        <h4 class="sub">Estilo de Liderança &amp; Realizações Comprováveis</h4>
+        <ul style="padding-left: 22px;">
+            <li><strong>Profissional orientado a resultado e P&amp;L</strong>, com foco em otimização de custos e governança ISO 20000.</li>
+            <li><strong>Background raro em InfoSec + LGPD virando Diretoria de TI</strong> — base estratégica para indústria em fase de expansão regulada.</li>
+            <li>Liderou sustentação durante <strong>migração SAP S/4HANA (RISE with SAP, jan/2023)</strong> e aquisições recentes.</li>
+            <li>Implantou <strong>Freshworks (Freshservice) com IA</strong> com ~75% de economia em licenciamento de ITSM.</li>
+            <li>Participa publicamente do <strong>CIO Brasil 2026 (TrueChange) e SAP House (Clean Core)</strong>.</li>
+            <li>Posts reconhecem time publicamente e priorizam estabilidade durante M&amp;A.</li>
+        </ul>
+    </section>
+
+    <!-- B3. SEGMENTO + MERCADO -->
+    <section class="section" id="segmento">
+        <h3>Mapeamento do Segmento &amp; Mercado Quantificado</h3>
+        <p>O setor lácteo brasileiro vive 2025 sob lógica de <strong>consolidação e ganho de escala</strong>: as 17 maiores empresas captaram 11 bi de litros (+6,5% a/a), com Top 3 (Lactalis, Piracanjuba, UNIUM) concentrando 59% do volume total (ABRALEITE 2025). Pressão por sustentabilidade na cadeia, premiunização (queijos finos, fórmulas infantis, linhas proteicas) e regulação ANVISA crescente.</p>
+        <div class="market-grid">
+            <div class="market-card"><div class="lbl">Mercado lácteo BR 2024</div><div class="val">~R$ 75 bi</div></div>
+            <div class="market-card"><div class="lbl">CAGR estimado 2024-2030</div><div class="val">~4%/ano</div></div>
+            <div class="market-card"><div class="lbl">Captação Top 17 (2024)</div><div class="val">11 bi L (+6,5%)</div></div>
+            <div class="market-card"><div class="lbl">Piracanjuba (2024)</div><div class="val">1,9 bi L · 2ª</div></div>
+            <div class="market-card"><div class="lbl">Mercado lácteo Global 2024</div><div class="val">USD 1,03 tri</div></div>
+            <div class="market-card"><div class="lbl">Projeção Global 2030</div><div class="val">USD 1,38 tri</div></div>
+        </div>
+        <p style="margin-top:16px; font-size:13px; color: var(--text-light);"><em>Fontes: 29º Ranking ABRALEITE 2025, MilkPoint, ABIQ, Fortune Business Insights (Dairy Market Report 2024-2030).</em></p>
+        <div class="info-grid" style="margin-top: 14px;">
+            <div class="info-card"><div class="label">Tipo de Negócio</div><div class="value">Indústria alimentícia B2B (varejo, food service, distribuidores) + marca forte B2B2C</div></div>
+            <div class="info-card"><div class="label">Cadeia de Valor</div><div class="value">Produtor rural → ProCampo → Indústria (10 plantas) → Logística → Varejo/Food Service → Consumidor</div></div>
+            <div class="info-card"><div class="label">Prioridades Setoriais 2026</div><div class="value">Eficiência industrial · ESG · rastreabilidade · premiunização · expansão · IA no campo e na operação</div></div>
+            <div class="info-card"><div class="label">Pressões Competitivas</div><div class="value">Consolidação M&amp;A · margens pressionadas no UHT · disputa por leite captado · plant-based · fórmulas infantis</div></div>
+            <div class="info-card"><div class="label">Regulação &amp; Compliance</div><div class="value">MAPA · ANVISA (fórmulas infantis) · LGPD · ESG · rastreabilidade da cadeia</div></div>
+            <div class="info-card"><div class="label">Tendências Tecnológicas</div><div class="value">Cloud ERP · Data &amp; AI · IoT/OT na fábrica · GenAI no atendimento e marketing</div></div>
+        </div>
+    </section>
+
+    <!-- B4. CADEIA B2B -->
+    <section class="section" id="b2b">
+        <h3>Cadeia B2B Downstream — Clientes da Piracanjuba</h3>
+        <div class="b2b-grid">
+            <div class="b2b-card">
+                <h4>1. Varejo (grandes redes)</h4>
+                <p>Categoria onde a Piracanjuba é a 7ª marca mais consumida nos lares brasileiros (2025).</p>
+                <div class="sub">Públicos confirmados</div>
+                <p style="font-size:13px;">Distribuição declarada em 8 estados via grandes redes nacionais.</p>
+                <div class="sub">Segmentos-alvo (prováveis sob NDA)</div>
+                <ul><li>GPA / Pão de Açúcar / Extra</li><li>Carrefour / Atacadão</li><li>Assaí</li><li>Tenda Atacado</li><li>Mateus, Muffato, Coop regionais</li></ul>
+            </div>
+            <div class="b2b-card">
+                <h4>2. Food Service</h4>
+                <p>Linha Food Service oficial no portfólio (creme de leite, leite condensado, queijos industriais).</p>
+                <div class="sub">Públicos confirmados</div>
+                <p style="font-size:13px;">Linha de produtos Food Service em packs industriais (Queijo Mussarela 4kg, Parmesão 5kg, etc.).</p>
+                <div class="sub">Segmentos-alvo</div>
+                <ul><li>Redes de pizzaria e fast food</li><li>Padarias industriais</li><li>Hotéis e redes de food service</li><li>Operadores de catering</li></ul>
+            </div>
+            <div class="b2b-card">
+                <h4>3. Indústria de Panificação &amp; Confeitaria</h4>
+                <div class="sub">Segmentos-alvo</div>
+                <ul><li>Grandes redes de padaria industrial</li><li>Indústria de chocolates e doces (leite condensado, creme)</li><li>Fabricantes de biscoitos e snacks (manteiga/leite em pó)</li></ul>
+            </div>
+            <div class="b2b-card">
+                <h4>4. Distribuidores Regionais</h4>
+                <div class="sub">Segmentos-alvo</div>
+                <ul><li>Distribuidores do Centro-Oeste, Norte e Nordeste</li><li>Atacadistas regionais</li><li>Sazonal: pequeno e médio varejo regional</li></ul>
+            </div>
+            <div class="b2b-card">
+                <h4>5. Cooperativas Produtoras (upstream)</h4>
+                <p>Programa <strong>ProCampo</strong> formaliza a relação com produtores rurais (16 postos de resfriamento + Diretoria de Originação de Lácteos).</p>
+                <div class="sub">Públicos confirmados</div>
+                <ul><li>Convenção Piracanjuba ProCampo 2026 (Águas de Lindóia/SP)</li><li>Embaixadores ProCampo divulgados publicamente</li></ul>
+            </div>
+        </div>
+        <div class="insight-box">
+            <h4>Por que isso importa para a venda consultiva</h4>
+            <p>Piracanjuba opera simultaneamente como <strong>fornecedora B2B</strong> (varejo, food service, indústria, distribuidores) e <strong>compradora B2B</strong> (cooperativas, produtores rurais). Cada elo desse exige integração de sistemas, rastreabilidade e dados — território fértil para Digibee (iPaaS), AI Squad (previsão de demanda B2B) e Engenharia Digital (portal do produtor).</p>
+        </div>
+    </section>
+
+    <!-- B5. RESUMO EXECUTIVO -->
+    <section class="section" id="executivo">
+        <h3>Resumo Executivo (densificado)</h3>
+        <div class="insight-box">
+            <h4>Contexto Estratégico, Timing &amp; Janela</h4>
+            <p>Piracanjuba combina <strong>escala industrial</strong> (R$ 12 bi/2025, 2º maior laticínio do Brasil), <strong>ambição de crescimento</strong> (M&amp;A Básel, fórmulas infantis, ProForce, Zquad) e <strong>maturidade SAP recém-conquistada</strong> (S/4HANA via RISE em 2023, roadmap Clean Core declarado). É exatamente o perfil de cliente que mais retorna em programas plurianuais de modernização + IA + Cyber.</p>
+            <p>Izaias Gomes, recém-promovido a Diretor de TI (set/2025), tem mandato claro para <strong>consolidar SAP + Cloud + Dados + Segurança + Salesforce</strong> em uma operação integrando novas fábricas e ingressando em categorias premium reguladas. O ciclo orçamentário 2026 estará especialmente sensível a parceiros que entreguem <strong>valor de negócio mensurável, mantenham Clean Core e protejam a marca</strong>.</p>
+            <p>Janela ideal para a Foursys posicionar <strong>AI Squad (operação industrial), Engenharia Digital (Datasphere/EWM/IBP/Clean Core), Cibersegurança ISO 27001/27701, Modernização de Legado com Digibee (integração SAP↔Salesforce↔RD Station↔ProCampo) e FourBlox (aceleração de squads)</strong> como programa multi-frente.</p>
+        </div>
+    </section>
+
+    <!-- B6. TENSÕES, LACUNAS E OPORTUNIDADES -->
+    <section class="section opportunity" id="tensoes">
+        <h3>Tensões, Lacunas e Oportunidades</h3>
+
+        <h4 class="sub">6.1 — Top Dores Estruturais</h4>
+        <div class="timeline">
+            <div class="timeline-item"><div class="timeline-dot"></div><h4>1. Integrar M&amp;A ao core SAP sem comprometer Clean Core</h4><p>Básel Lácteos e nova fábrica de fórmulas infantis precisam ser absorvidas sem inflar customizações.</p></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><h4>2. Levar IA do marketing para a operação</h4><p>+244% de menções em IAs em marketing (Base Digital, 2025); chão de fábrica ainda sem IA preditiva. Nestlé já tem 45 modelos com governança.</p></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><h4>3. Sustentar maturidade Cyber + LGPD em ambiente OT industrial</h4><p>Política formal de SI no site; perfil DPO/CISO. Próximo passo é evidência (ISO 27001/27701, SOC, AppSec).</p></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><h4>4. Plataforma de dados unificada</h4><p>SAP Datasphere é roadmap declarado. Integrar com BigQuery/Looker e ProCampo é o próximo lago.</p></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><h4>5. Integrar SAP ↔ Salesforce ↔ RD Station ↔ Freshworks</h4><p>4 sistemas críticos rodando sem iPaaS declarado (lacuna confirmada na verificação empírica).</p></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><h4>6. Atender ANVISA na entrada de fórmulas infantis</h4><p>Privacy by Design + rastreabilidade obrigatória em categoria premium altamente regulada.</p></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><h4>7. Sustentar produtividade do time de TI</h4><p>Vagas abertas em Dados Sr., SAP Sr. e Sistemas; pressão para entregar projetos estruturantes sem queimar squad.</p></div>
+        </div>
+
+        <h4 class="sub">6.2 — Top Desejos Estratégicos</h4>
+        <div class="tags">
+            <span class="tag tag-priority">Clean Core SAP sustentado durante M&amp;A</span>
+            <span class="tag tag-priority">IA aplicada à operação industrial</span>
+            <span class="tag tag-priority">Cyber + LGPD evidenciados (ISO)</span>
+            <span class="tag tag-priority">Plataforma de Dados unificada</span>
+            <span class="tag tag-priority">Privacy by Design para fórmulas infantis</span>
+            <span class="tag tag-priority">Integração end-to-end (iPaaS)</span>
+            <span class="tag tag-priority">Sustentabilidade auditável (ESG)</span>
+            <span class="tag tag-priority">Otimização de TCO</span>
+        </div>
+
+        <h4 class="sub">6.3 — Mapa de Investimentos 12 meses</h4>
+        <div class="tags">
+            <span class="tag tag-active">SAP Datasphere (analytics)</span>
+            <span class="tag tag-active">SAP EWM (gestão de armazém)</span>
+            <span class="tag tag-active">SAP IBP (planejamento)</span>
+            <span class="tag tag-active">SAP Sustainability Control Tower</span>
+            <span class="tag tag-active">Jornada Clean Core</span>
+            <span class="tag tag-active">Expansão BigQuery + Looker</span>
+            <span class="tag tag-active">Freshworks AI · evolução ITSM</span>
+            <span class="tag tag-active">Cyber + LGPD (continuidade)</span>
+            <span class="tag tag-active">Integração Básel S/4HANA</span>
+            <span class="tag tag-active">Plataforma digital de marca (SEO + GEO + IA)</span>
+        </div>
+
+        <h4 class="sub">6.4 — Oportunidades sem Fornecedor Definido</h4>
+        <div class="tags">
+            <span class="tag tag-opportunity">IA aplicada à operação industrial</span>
+            <span class="tag tag-opportunity">Cyber industrial / OT &amp; SCADA</span>
+            <span class="tag tag-opportunity">Programa LGPD/ISO 27701 evidenciado</span>
+            <span class="tag tag-opportunity">AMS SAP S/4HANA co-gerenciado</span>
+            <span class="tag tag-opportunity">Integração ProCampo via Digibee</span>
+            <span class="tag tag-opportunity">Plataforma de Dados unificada (Datasphere + BigQuery)</span>
+            <span class="tag tag-opportunity">DevSecOps / AppSec do site (polyfill.io comprometido)</span>
+            <span class="tag tag-opportunity">FourBlox para apps internos</span>
+            <span class="tag tag-opportunity">Privacy by Design para fórmulas infantis</span>
+        </div>
+    </section>
+
+    <!-- B7. OFERTAS FOURSYS -->
+    <section class="section foursys" id="ofertas">
+        <h3>Ofertas Foursys Recomendadas</h3>
+
+        <div class="oferta-card">
+            <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">SCORE 92</span></div>
+            <p class="descricao">Squads de IA com produto proprietário para acelerar desenvolvimento, geração de código, automação de testes, IA Generativa, hiperautomação e inteligência preditiva aplicada ao negócio. <strong>Atende camadas C3, C4 e C7</strong>.</p>
+            <ul>
+                <li>IA hoje concentrada em SEO/GEO (Base Digital) e ITSM (Freshworks). <strong>Operação industrial sem IA preditiva</strong> (vs Nestlé com 45 modelos).</li>
+                <li>Oportunidade clara em previsão de demanda, qualidade no chão de fábrica, manutenção preditiva e GenAI no SAC.</li>
+                <li>Conecta com SAP IBP, EWM, BigQuery e Salesforce já em produção.</li>
+                <li>Izaias acompanha publicamente Clean Core + Cloud + IA (SAP House) — mensagem ressoa.</li>
+            </ul>
+        </div>
+
+        <div class="oferta-card">
+            <div class="oferta-header"><h4>Cibersegurança (ISO 27001 / 27701 · LGPD · AppSec · OT)</h4><span class="score-badge">SCORE 91</span></div>
+            <p class="descricao">Segurança da Informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade e disaster recovery. Foursys certificada ISO 27001/27701. <strong>Atende C2, C7 e governança</strong>.</p>
+            <ul>
+                <li>Diretor de TI é <strong>CISO de origem + DPO certificado (CPDPO, EXIN PDPP/PDPF)</strong> — fala "nosso idioma".</li>
+                <li><strong>Polyfill.io detectado no CSP do site institucional</strong> — biblioteca comprometida em 2024. Quick-win imediato de AppSec.</li>
+                <li>Entrada em fórmulas infantis amplia exigência de Privacy by Design + Cyber Industrial.</li>
+                <li>CSP rigoroso + HSTS + OneTrust já implementados sinalizam maturidade — falta a certificação.</li>
+            </ul>
+        </div>
+
+        <div class="oferta-card">
+            <div class="oferta-header"><h4>Engenharia Digital (SAP Datasphere · EWM · IBP · Clean Core · Cloud)</h4><span class="score-badge">SCORE 89</span></div>
+            <p class="descricao">Plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização alinhada ao roadmap SAP S/4HANA. <strong>Atende C1, C4, C5 e C6</strong>.</p>
+            <ul>
+                <li>Roadmap declarado: SAP Datasphere, EWM, IBP, Sustainability Control Tower e Clean Core.</li>
+                <li>SRE + observabilidade para S/4HANA + GCP + Salesforce + Freshworks em operação 24/7.</li>
+                <li>Plataforma de dados conectando SAP, BigQuery e ProCampo (originação rural).</li>
+                <li>Suporte aos requisitos ESG via Sustainability Control Tower.</li>
+            </ul>
+        </div>
+
+        <div class="oferta-card">
+            <div class="oferta-header"><h4>Modernização de Legado &amp; Integração (Digibee · APIs · AMS)</h4><span class="score-badge">SCORE 86</span></div>
+            <p class="descricao">Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e plataformas, e sustentação (AMS). Parceria Digibee. <strong>Atende C5, C6 e integrações cross-camada</strong>.</p>
+            <ul>
+                <li><strong>4 sistemas críticos sem iPaaS declarado</strong>: SAP, Salesforce, RD Station e Freshworks (confirmado via CSP do site).</li>
+                <li>ProCampo, fábricas adquiridas (Básel) e parceiros logísticos vivem fora do core SAP.</li>
+                <li>iPaaS Digibee acelera onboarding de fábricas e fornecedores sem inflar customizações S/4HANA.</li>
+                <li>AMS co-gerenciado libera time interno para projetos estratégicos (Datasphere, IA).</li>
+            </ul>
+        </div>
+
+        <div class="oferta-card">
+            <div class="oferta-header"><h4>FourBlox</h4><span class="score-badge">SCORE 74</span></div>
+            <p class="descricao">Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. <strong>Atende C7 (apps internos e jornadas digitais)</strong>.</p>
+            <ul>
+                <li>Time interno em expansão (vagas em Dados, SAP, Sistemas) — fila de demandas longa.</li>
+                <li>Apps internos (qualidade, manutenção, mobilidade) + jornadas digitais (marca, ProCampo).</li>
+                <li>Reduz custo unitário e padroniza UX sob governança ISO 20000.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- B8. ESTRATÉGIA -->
+    <section class="section" id="estrategia">
+        <h3>Estratégia de Abordagem</h3>
+        <div class="approach-grid">
+            <div class="approach-card approach-green">
+                <h4>Gancho de Entrada</h4>
+                <p>Abrir pela dupla <strong>Clean Core SAP + IA aplicada à operação</strong>, com referência ao SAP House (Clean Core) e ao roadmap declarado (Datasphere, EWM, IBP). Trazer <strong>quick-win imediato</strong>: o polyfill.io no CSP — biblioteca comprometida em 2024 — como evidência de cuidado da Foursys com a marca.</p>
+                <p style="margin-top:10px;"><strong>Provas:</strong> ISO 27001/27701, AI Squad em indústrias, parceria Digibee.</p>
+            </div>
+            <div class="approach-card approach-red">
+                <h4>Oportunidade Quente</h4>
+                <p>Ciclo orçamentário 2026 aberto após promoção do Izaias (set/2025). Roadmap declarado em jan/2025 (Datasphere, EWM, IBP, Sustainability, Clean Core) <strong>sem fornecedor exclusivo</strong>.</p>
+                <p style="margin-top:10px;"><strong>Janelas:</strong> integração Básel (CADE em aprovação), entrada em fórmulas infantis e ANVISA, expansão ProForce/Zquad.</p>
+            </div>
+            <div class="approach-card approach-purple">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>(i) ISO 27001/27701 certificadas alinhadas ao perfil DPO/CISO do Izaias; (ii) AI Squad com IP próprio; (iii) FourBlox para aceleração; (iv) Digibee como parceiro de integração; (v) 24 anos / 41.000+ projetos.</p>
+                <p style="margin-top:10px;">Foursys atua como <strong>parceira multi-frente</strong> (AI + Cyber + Engenharia + Modernização + AMS) sob uma única governança — reduzindo dor de gerenciar 5 contratos.</p>
+            </div>
+        </div>
+        <div class="insight-box">
+            <h4>Insights de Negócio para a Conversa</h4>
+            <ul>
+                <li>Setor lácteo BR cresceu 6,5% em volume em 2025 (ABRALEITE); Top 3 concentra 59%.</li>
+                <li>Mercado lácteo global: USD 1,03 tri (2024) → USD 1,38 tri (2030).</li>
+                <li>SAP pressionando o mercado por Clean Core + Cloud + IA — alinhado ao discurso Foursys.</li>
+                <li>LGPD + ANVISA (fórmulas infantis) elevam drasticamente exigência regulatória.</li>
+                <li>+244% de menções da Piracanjuba em IAs em 2025 (Base Digital) — cultura aberta a IA.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- B9. CONCORRENTES -->
+    <section class="section" id="concorrentes">
+        <h3>Benchmark de Concorrentes &amp; Gap Analysis</h3>
+        <div class="competitor-grid">
+            <div class="competitor-card"><h4>Lactalis Brasil</h4><p>Líder ABRALEITE 2024 (2,7 bi L). Multinacional francesa, SAP global, forte em queijos premium. Vantagem via portfólio global e M&amp;A.</p></div>
+            <div class="competitor-card"><h4>UNIUM (Frísia · Castrolanda · Capal)</h4><p>3ª (1,4 bi L). Cooperativa paranaense, governança cooperativa e originação muito eficiente.</p></div>
+            <div class="competitor-card"><h4>Nestlé Brasil</h4><p>4ª (1 bi L). Benchmark de excelência em IA (45 modelos preditivos, R$ 70M/ano de economia), sustentabilidade auditada e marca.</p></div>
+            <div class="competitor-card"><h4>Italac / Goiasminas</h4><p>Concorrente regional goiano. Pressão direta no UHT popular.</p></div>
+            <div class="competitor-card"><h4>Vigor / Lala</h4><p>Forte em iogurtes, queijos e refrigerados premium. Concorre com ProForce/Zquad em proteicos.</p></div>
+        </div>
+        <div class="insight-box">
+            <h4>Gap Analysis — Onde a Piracanjuba pode acelerar</h4>
+            <ul>
+                <li><strong>vs Lactalis:</strong> Lactalis tem ferramenta global de IA/dados consolidada; Piracanjuba ainda construindo plataforma de dados unificada → Datasphere + AI Squad.</li>
+                <li><strong>vs Nestlé:</strong> Nestlé tem 45 modelos preditivos com governança; Piracanjuba tem IA pontual (Clarity, Freshworks, Leanbot) → AI Squad + MLOps.</li>
+                <li><strong>vs Italac:</strong> ambas em GO — vantagem Piracanjuba é escala + premiumização → IA + Cyber como alavancas de margem.</li>
+                <li><strong>vs UNIUM:</strong> UNIUM tem originação cooperada eficiente → Piracanjuba responde com IA em ProCampo + iPaaS Digibee.</li>
+            </ul>
+        </div>
+    </section>
+
+    <hr class="zone-divider" data-label="Zona C — Apêndice Técnico (Squad)" />
+
+    <!-- C1. STACK TÉCNICO -->
+    <section class="section" id="stack">
+        <h3>Mapeamento Técnico Detalhado</h3>
+
+        <h4 class="sub">C1.1 — Inventário de Aplicações</h4>
+
+        <div class="app-card">
+            <h4>Site Institucional &amp; Portfólio de Marca</h4>
+            <div class="url">https://www.piracanjuba.com.br · https://piracanjuba.com.br</div>
+            <div class="app-stack-grid">
+                <div class="app-stack-item"><div class="k">Frontend</div><div class="v">jQuery + Bootstrap + DataTables · HTML5/CSS3</div></div>
+                <div class="app-stack-item"><div class="k">Linguagem</div><div class="v">PHP (provável · CMS custom)</div></div>
+                <div class="app-stack-item"><div class="k">Backend</div><div class="v">Apache</div></div>
+                <div class="app-stack-item"><div class="k">Banco</div><div class="v">Não publicado (provável MySQL/MariaDB)</div></div>
+                <div class="app-stack-item"><div class="k">API</div><div class="v">REST (interno)</div></div>
+                <div class="app-stack-item"><div class="k">CDN/WAF</div><div class="v">AWS CloudFront (GRU3-P11)</div></div>
+                <div class="app-stack-item"><div class="k">Cloud</div><div class="v">AWS (S3 sa-east-1 · CloudFront)</div></div>
+                <div class="app-stack-item"><div class="k">HTTP/3</div><div class="v">Habilitado (Alt-Svc h3)</div></div>
+            </div>
+        </div>
+
+        <div class="app-card">
+            <h4>Site Corporativo da Holding</h4>
+            <div class="url">https://www.grupopiracanjuba.com.br</div>
+            <div class="app-stack-grid">
+                <div class="app-stack-item"><div class="k">Frontend</div><div class="v">HTML estático (single-page)</div></div>
+                <div class="app-stack-item"><div class="k">Backend</div><div class="v">Amazon S3 direto (sem servidor app)</div></div>
+                <div class="app-stack-item"><div class="k">CDN</div><div class="v">AWS CloudFront (GRU3-P12)</div></div>
+                <div class="app-stack-item"><div class="k">Segurança</div><div class="v">HSTS + preload</div></div>
+            </div>
+        </div>
+
+        <div class="app-card">
+            <h4>Portal Salesforce (Service + Experience Cloud)</h4>
+            <div class="url">https://piracanjubabr.my.site.com · sandbox piracanjubabr--sh4</div>
+            <div class="app-stack-grid">
+                <div class="app-stack-item"><div class="k">Plataforma</div><div class="v">Salesforce Experience Cloud + Service Cloud</div></div>
+                <div class="app-stack-item"><div class="k">Servidor</div><div class="v">sfdcedge (Salesforce Edge)</div></div>
+                <div class="app-stack-item"><div class="k">Chat/SCRT</div><div class="v">my.salesforce-scrt.com</div></div>
+                <div class="app-stack-item"><div class="k">Ambientes</div><div class="v">Produção + Sandbox dedicado (sh4)</div></div>
+                <div class="app-stack-item"><div class="k">Integração</div><div class="v">Embed no site institucional via CSP</div></div>
+                <div class="app-stack-item"><div class="k">Maturidade</div><div class="v">Enterprise (não trial)</div></div>
+            </div>
+        </div>
+
+        <div class="app-card">
+            <h4>CDN de Mídia / Imagens</h4>
+            <div class="url">https://images.piracanjuba.com.br · res.cloudinary.com · dvfreowpsau6f.cloudfront.net</div>
+            <div class="app-stack-grid">
+                <div class="app-stack-item"><div class="k">Storage</div><div class="v">AWS S3 (sa-east-1)</div></div>
+                <div class="app-stack-item"><div class="k">CDN principal</div><div class="v">CloudFront distribution dvfreowpsau6f</div></div>
+                <div class="app-stack-item"><div class="k">DAM secundário</div><div class="v">Cloudinary</div></div>
+                <div class="app-stack-item"><div class="k">Ambientes</div><div class="v">prd + hml separados</div></div>
+            </div>
+        </div>
+
+        <div class="app-card">
+            <h4>SAP S/4HANA (Core Transacional)</h4>
+            <div class="url">SAP RISE (Cloud SAP) · não exposto publicamente</div>
+            <div class="app-stack-grid">
+                <div class="app-stack-item"><div class="k">Versão</div><div class="v">S/4HANA via RISE with SAP</div></div>
+                <div class="app-stack-item"><div class="k">Go live</div><div class="v">Jan/2023 (consultoria MIGNOW)</div></div>
+                <div class="app-stack-item"><div class="k">Frontend</div><div class="v">SAP Fiori + SAPUI5</div></div>
+                <div class="app-stack-item"><div class="k">Backend</div><div class="v">ABAP</div></div>
+                <div class="app-stack-item"><div class="k">Banco</div><div class="v">SAP HANA (in-memory columnar)</div></div>
+                <div class="app-stack-item"><div class="k">API</div><div class="v">OData v4 + REST + RFC</div></div>
+                <div class="app-stack-item"><div class="k">Módulos</div><div class="v">FI, CO, MM, WM, PS, PM, QM, PP, DMS, LES-TRA, CLM</div></div>
+                <div class="app-stack-item"><div class="k">Integração</div><div class="v">SAP Integration Suite</div></div>
+            </div>
+        </div>
+
+        <h4 class="sub">C1.2 — Tabela Mestra Consolidada</h4>
+        <div style="overflow-x: auto;">
+        <table class="empirical-table">
+            <thead><tr><th>Aplicação</th><th>Frontend</th><th>Linguagem</th><th>Backend</th><th>Banco</th><th>API</th><th>Cloud</th><th>CDN</th></tr></thead>
+            <tbody>
+                <tr><td>Site Institucional</td><td>jQuery + Bootstrap</td><td>PHP (provável)</td><td>Apache</td><td>MySQL (provável)</td><td>REST</td><td>AWS S3</td><td>CloudFront</td></tr>
+                <tr><td>Site Holding</td><td>HTML estático</td><td>-</td><td>S3 direto</td><td>-</td><td>-</td><td>AWS S3</td><td>CloudFront</td></tr>
+                <tr><td>Portal Salesforce</td><td>Lightning Aura/LWC</td><td>Apex</td><td>sfdcedge</td><td>Salesforce</td><td>REST/SOAP</td><td>Salesforce</td><td>SFDC</td></tr>
+                <tr><td>CDN Mídia</td><td>-</td><td>-</td><td>S3 + Cloudinary</td><td>-</td><td>-</td><td>AWS + Cloudinary</td><td>CloudFront</td></tr>
+                <tr><td>SAP S/4HANA</td><td>Fiori + SAPUI5</td><td>ABAP</td><td>ABAP</td><td>SAP HANA</td><td>OData/REST/RFC</td><td>SAP Cloud (RISE)</td><td>-</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <h4 class="sub">C1.3 — Stack em 7 Camadas Arquiteturais</h4>
+
+        <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="name">Site institucional · Marca · Atendimento</div><div class="cmp">Site Apache/PHP/jQuery · RD Station (marketing automation) · OneTrust (CMP/LGPD) · Cloudinary (DAM) · Microsoft Clarity (heatmap) · Hotjar (UX) · HandTalk (acessibilidade Libras) · Leanbot &amp; Hyperflow (chatbots) · Google Tag Manager · Google Analytics · TikTok Pixel · Meta Pixel · YouTube embeds</div></div>
+
+        <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="name">CRM · ITSM · Procurement · HCM</div><div class="cmp">Salesforce Service Cloud + Experience Cloud (sandbox sh4 dedicado) · Freshworks Freshservice (com IA, -75% licenciamento) · SAP Ariba (presumível via Diretoria de Originação) · SAP SuccessFactors (presumível) · SAP Integration Suite · SAP Fiori</div></div>
+
+        <div class="stack-layer"><div class="lbl">C5 — Core Transacional</div><div class="name">ERP + Planejamento Integrado</div><div class="cmp">SAP S/4HANA via RISE with SAP (jan/2023) · 11 módulos · 650+ transações homologadas · SAP IBP · SAP Sustainability Control Tower (em implementação) · SAP EWM (roadmap declarado)</div></div>
+
+        <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="name">DWH + BI + Roadmap Datasphere</div><div class="cmp">Google Cloud Platform · BigQuery (refresh SAP a cada 10 min, via Sauter Digital) · Looker (dashboards financeiros) · SAP Datasphere (roadmap declarado jan/2025) · MDM e governança formal não declarados publicamente</div></div>
+
+        <div class="stack-layer"><div class="lbl">C3 — IA, Automação &amp; Indústria 4.0</div><div class="name">IA pontual em marketing e ITSM</div><div class="cmp">Estratégia SEO + GEO (Base Digital, 2025) · +244% de menções em IAs · IA da Freshworks (-75% licenciamento) · Microsoft Clarity (behavior analytics) · Leanbot (chatbot IA brasileiro) · Hyperflow (chatbot enterprise) · IA na operação industrial — não declarado · MLOps / Governança corporativa de IA — não declarado</div></div>
+
+        <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="name">CSP rigoroso + LGPD ativo</div><div class="cmp">CSP estrito + HSTS (1 ano + includeSubDomains) · X-Frame-Options SAMEORIGIN · X-Content-Type-Options nosniff · Referrer-Policy strict-origin · Permissions-Policy configurada · reCAPTCHA Google · OneTrust (privacyportal-br.onetrust.com + cookielaw.org) · Política formal de Segurança da Informação publicada · ISO 27001 (alvo) · ISO 20000 (governança) · DPO interno certificado (Izaias Gomes · CPDPO)</div></div>
+
+        <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="name">AWS principal · SAP Cloud · GCP</div><div class="cmp">AWS S3 (região sa-east-1) · CloudFront (PoP GRU3-P11 e GRU3-P12) · CloudFront distribution dvfreowpsau6f · Buckets piracanjuba-institucional-prd e -hml (ambientes separados) · HTTP/3 habilitado (Alt-Svc h3:443) · SAP Cloud (RISE with SAP) · Google Cloud Platform · 10 unidades industriais (infra OT/SCADA — não publicada)</div></div>
+    </section>
+
+    <!-- C2. VERIFICAÇÃO EMPÍRICA -->
+    <section class="section" id="empirico">
+        <h3>Verificação Empírica de Canais Digitais</h3>
+        <p style="font-size: 13.5px;">Inspeção via WebFetch e HTTP HEAD em 19 de maio de 2026.</p>
+
+        <h4 class="sub">Tabela de URLs Verificadas</h4>
+        <div style="overflow-x: auto;">
+        <table class="empirical-table">
+            <thead><tr><th>URL</th><th>Status</th><th>Servidor</th><th>CDN / Proxy</th><th>Observação</th></tr></thead>
+            <tbody>
+                <tr><td>www.piracanjuba.com.br</td><td><span class="status-200">200</span></td><td>Apache</td><td>AWS CloudFront (GRU3-P11)</td><td>Site institucional, CSP rigoroso, OneTrust ativo</td></tr>
+                <tr><td>piracanjuba.com.br</td><td><span class="status-200">200</span></td><td>Apache</td><td>AWS CloudFront (Hit cache)</td><td>Mesmo servidor, redireciona para www</td></tr>
+                <tr><td>www.grupopiracanjuba.com.br</td><td><span class="status-200">200</span></td><td>AmazonS3</td><td>AWS CloudFront (GRU3-P12)</td><td>Site holding hospedado direto em S3</td></tr>
+                <tr><td>piracanjubabr.my.site.com</td><td><span class="status-200">200</span></td><td>sfdcedge</td><td>Salesforce Edge</td><td>Portal Salesforce Experience Cloud ativo</td></tr>
+                <tr><td>images.piracanjuba.com.br</td><td><span class="status-err">400</span></td><td>AWS</td><td>AWS CloudFront</td><td>Endpoint S3 (responde com path específico)</td></tr>
+                <tr><td>loja.piracanjuba.com.br</td><td><span class="status-err">DNS</span></td><td>-</td><td>-</td><td><strong>Não resolve · sem e-commerce próprio</strong></td></tr>
+                <tr><td>shop.piracanjuba.com.br</td><td><span class="status-err">DNS</span></td><td>-</td><td>-</td><td>Não resolve</td></tr>
+                <tr><td>procampo.piracanjuba.com.br</td><td><span class="status-err">DNS</span></td><td>-</td><td>-</td><td>Não resolve (programa ProCampo é interno)</td></tr>
+                <tr><td>carreiras.piracanjuba.com.br</td><td><span class="status-err">DNS</span></td><td>-</td><td>-</td><td>Não resolve (carreiras provavelmente via LinkedIn)</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <h4 class="sub">Trackers / Pixels / CDP detectados via CSP (Content Security Policy)</h4>
+        <div class="tags">
+            <span class="tag tag-tech">Google Tag Manager</span>
+            <span class="tag tag-tech">Google Analytics (GA4)</span>
+            <span class="tag tag-tech">Google Ads / DoubleClick</span>
+            <span class="tag tag-tech">Microsoft Clarity</span>
+            <span class="tag tag-tech">Hotjar (UX)</span>
+            <span class="tag tag-tech">Meta Pixel (Facebook)</span>
+            <span class="tag tag-tech">TikTok Pixel</span>
+            <span class="tag tag-tech">YouTube embeds</span>
+            <span class="tag tag-tech">reCAPTCHA Google</span>
+            <span class="tag tag-tech">OneTrust (CMP/LGPD)</span>
+            <span class="tag tag-tech">RD Station (MA)</span>
+            <span class="tag tag-tech">Leanbot (chatbot)</span>
+            <span class="tag tag-tech">Hyperflow (chatbot)</span>
+            <span class="tag tag-tech">Cloudinary (DAM)</span>
+            <span class="tag tag-tech">HandTalk (acessibilidade)</span>
+        </div>
+
+        <h4 class="sub">Headers de Segurança Confirmados (positivo)</h4>
+        <ul style="padding-left: 22px; font-size: 13.5px;">
+            <li><code>Strict-Transport-Security: max-age=31536000; includeSubDomains</code> (HSTS 1 ano)</li>
+            <li><code>Content-Security-Policy</code> extensivo com whitelist explícita de cada domínio externo</li>
+            <li><code>X-Content-Type-Options: nosniff</code></li>
+            <li><code>X-XSS-Protection: 1; mode=block</code></li>
+            <li><code>X-Frame-Options: SAMEORIGIN</code></li>
+            <li><code>Referrer-Policy: strict-origin-when-cross-origin</code></li>
+            <li><code>Permissions-Policy</code> configurada para todos os sensores</li>
+            <li><code>upgrade-insecure-requests</code> ativo</li>
+        </ul>
+
+        <h4 class="sub">Achados de Atenção (oportunidades para Foursys)</h4>
+        <ul style="padding-left: 22px; font-size: 13.5px;">
+            <li><strong>cdn.polyfill.io</strong> ainda permitido no CSP — biblioteca comprometida em jun/2024 (supply chain attack). Quick-win imediato de AppSec.</li>
+            <li><strong>Server: Apache</strong> exposto (sem versão, mas detectável) — endurecimento básico de cabeçalhos.</li>
+            <li>Ausência de header <code>X-Powered-By</code> oculto é positivo, mas <code>Server</code> ainda revela tecnologia.</li>
+            <li>Site institucional roda em <strong>Apache + PHP + jQuery + Bootstrap + DataTables</strong> — stack tradicional, candidato a Headless CMS no médio prazo.</li>
+            <li>Não há e-commerce próprio (loja.* não resolve) — gap em D2C em setor onde a marca cresceu 50% em buscas orgânicas em 2025.</li>
+        </ul>
+    </section>
+
+    <!-- C3. GAPS TECNOLÓGICOS -->
+    <section class="section" id="gaps">
+        <h3>GAPs Tecnológicos Numerados</h3>
+        <div class="gap-grid">
+            <div class="gap-card">
+                <div class="num">GAP 1 · Integração</div>
+                <h4>iPaaS / Integração end-to-end SAP ↔ Salesforce ↔ RD Station ↔ Freshworks</h4>
+                <p><strong>Evidência:</strong> CSP do site institucional revela 4 sistemas críticos rodando em paralelo sem barramento de integração declarado publicamente. Nestlé já tem iPaaS estruturado; UNIUM integra via cooperativa.</p>
+                <span class="offer">Oferta: Modernização de Legado · Digibee (iPaaS)</span>
+            </div>
+            <div class="gap-card">
+                <div class="num">GAP 2 · Segurança (AppSec)</div>
+                <h4>Polyfill.io comprometido ainda ativo no CSP</h4>
+                <p><strong>Evidência:</strong> <code>cdn.polyfill.io</code> aparece na whitelist do site institucional. Biblioteca foi comprometida em jun/2024 com injeção de malware em sites globais. Risco direto de supply chain attack na marca.</p>
+                <span class="offer">Oferta: Cibersegurança (AppSec audit + remediação)</span>
+            </div>
+            <div class="gap-card">
+                <div class="num">GAP 3 · Experiência</div>
+                <h4>Ausência de E-commerce próprio (D2C)</h4>
+                <p><strong>Evidência:</strong> DNS de <code>loja.piracanjuba.com.br</code> não resolve. Setor cresce 50% em buscas orgânicas (Base Digital, 2025). Linha ProForce +900% em menções em IAs. Concorrentes (Nestlé com Garoto Store) já têm D2C.</p>
+                <span class="offer">Oferta: Engenharia Digital (Headless Commerce)</span>
+            </div>
+            <div class="gap-card">
+                <div class="num">GAP 4 · IA / Governança</div>
+                <h4>Plataforma Corporativa de IA / MLOps</h4>
+                <p><strong>Evidência:</strong> IA hoje é pontual (Microsoft Clarity, Freshworks AI, Leanbot, GEO/SEO). Nestlé tem 45 modelos preditivos com governança. Piracanjuba ainda não declarou MLOps, observabilidade de modelos ou catálogo de IA.</p>
+                <span class="offer">Oferta: AI Squad (MLOps · Plataforma de IA)</span>
+            </div>
+            <div class="gap-card">
+                <div class="num">GAP 5 · Dados</div>
+                <h4>Data Catalog / Governança formal de Dados</h4>
+                <p><strong>Evidência:</strong> SAP + BigQuery + Looker rodam, mas Collibra/Purview/Atlan/MDM não declarados. Entrada em fórmulas infantis (ANVISA) exige rastreabilidade auditável e lineage. SAP Sustainability Control Tower demanda governança ESG auditável.</p>
+                <span class="offer">Oferta: Engenharia Digital (Data Governance · Datasphere)</span>
+            </div>
+            <div class="gap-card">
+                <div class="num">GAP 6 · Indústria 4.0</div>
+                <h4>MES / Camada OT industrial nas 10 fábricas</h4>
+                <p><strong>Evidência:</strong> SAP rodando como core, mas MES (Siemens Opcenter, AVEVA, GE Proficy, Rockwell) não declarado publicamente para 10 plantas. Ambientes OT/SCADA sem cibersegurança industrial declarada. M&amp;A (Básel) traz complexidade adicional de chão de fábrica.</p>
+                <span class="offer">Oferta: Engenharia Digital (Indústria 4.0) + Cyber OT</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- C4. RAPPORT -->
+    <section class="section rapport" id="rapport">
+        <h3>Perfil Pessoal &amp; Rapport com Izaias Gomes</h3>
+        <p>Izaias é sênior, de <strong>origem em Segurança da Informação</strong>, que cresceu na Piracanjuba em 4 anos saindo de Coord. SI para Diretor de TI. Certificações recentes de DPO (Opice Blum 2024/2025). Atua em Goiânia/GO. Ativo no LinkedIn (~3.950 seguidores). Valoriza fortemente o time. Perfil colaborativo, técnico-estratégico, abertura para parceiros que aceleram resultado sem aumentar complexidade.</p>
+        <div class="info-grid">
+            <div class="info-card" style="border-color: #667eea;"><div class="label">Cidade de Atuação</div><div class="value">Goiânia/GO</div></div>
+            <div class="info-card" style="border-color: #667eea;"><div class="label">LinkedIn</div><div class="value">linkedin.com/in/izaias-francisco-gomes</div></div>
+            <div class="info-card" style="border-color: #667eea;"><div class="label">E-mail Corporativo</div><div class="value">izaias.gomes@piracanjuba.com.br</div></div>
+            <div class="info-card" style="border-color: #667eea;"><div class="label">Formação</div><div class="value">IGTI · Instituto de Gestão e Tecnologia da Informação (BH)</div></div>
+            <div class="info-card" style="border-color: #667eea;"><div class="label">Idiomas</div><div class="value">Português (nativo) · Inglês técnico</div></div>
+            <div class="info-card" style="border-color: #667eea;"><div class="label">Eventos / Comunidade</div><div class="value">CIO Brasil 2026 · SAP House (Clean Core) · Convenção ProCampo</div></div>
+            <div class="info-card" style="border-color: #667eea;"><div class="label">Trajetória</div><div class="value">SONDA · CTIS · Sec. Turismo DF · Minauro Informática</div></div>
+            <div class="info-card" style="border-color: #667eea;"><div class="label">Temas Recorrentes</div><div class="value">SI · LGPD · ISO · Estabilidade durante M&amp;A · Reconhecimento de time</div></div>
+        </div>
+        <div class="insight-box">
+            <h4>5 Dicas de Conversa para Rapport</h4>
+            <ul>
+                <li><strong>Reconhecer a virada de carreira</strong>: "subir de Coord. SI para Diretor de TI em 4 anos é raro — parabéns pela promoção em set/2025".</li>
+                <li><strong>Falar a língua dele</strong>: ISO 27001/27701, LGPD, Privacy by Design, Clean Core SAP, ISO 20000.</li>
+                <li><strong>Citar a equipe</strong>: ele elogia o time publicamente — reconhecer entrega coletiva durante M&amp;A e inaugurações.</li>
+                <li><strong>Trazer "IA aplicada ao negócio"</strong>: ele curtiu posts SAP House sobre Clean Core + Cloud + IA — foque em casos reais e ROI.</li>
+                <li><strong>Respeitar Goiânia como centro de decisão</strong>: TI centralizada — trate como hub estratégico, não filial.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- C5. POSIÇÃO -->
+    <section class="section" id="posicao">
+        <h3>Perfil do CIO &amp; Posição da Empresa</h3>
+        <div class="info-grid">
+            <div class="info-card"><div class="label">Cargo</div><div class="value">Diretor de TI (CIO / DPO funcional)</div></div>
+            <div class="info-card"><div class="label">Reporte Provável</div><div class="value">CEO / Diretoria Executiva</div></div>
+            <div class="info-card"><div class="label">Hierarquia</div><div class="value">Diretoria única de TI no grupo</div></div>
+            <div class="info-card"><div class="label">Abrangência</div><div class="value">10 fábricas · 16 postos de resfriamento · 8 estados</div></div>
+            <div class="info-card"><div class="label">Estrutura</div><div class="value">Centralizada em Goiânia + parceiros (SAP, cloud, segurança)</div></div>
+            <div class="info-card"><div class="label">Papel da TI</div><div class="value">Alavanca de eficiência, segurança, dados e expansão · ativa em M&amp;A</div></div>
+            <div class="info-card"><div class="label">Decisão</div><div class="value">Alta autonomia · mandato recente para próximo ciclo</div></div>
+            <div class="info-card"><div class="label">Tempo no Cargo</div><div class="value">~6 meses Diretor · ~4 anos no grupo</div></div>
+        </div>
+    </section>
+
+    <!-- C6. DISTRIBUIÇÃO -->
+    <section class="section">
+        <h3>Distribuição Estimada de Investimento</h3>
+        <p style="font-size: 14px;"><em>Hipótese consultiva baseada em roadmaps SAP publicados (TI Inside, Inforchannel, Decision Report jan/2025), perfil InfoSec/DPO do Izaias e momento de M&amp;A. Sujeita a validação direta.</em></p>
+        <div style="margin-top: 14px;">
+            <div class="bar-row"><div class="bar-label">SAP / Clean Core / Datasphere</div><div class="bar-track"><div class="bar-fill" style="width: 35%;">~35%</div></div></div>
+            <div class="bar-row"><div class="bar-label">Cibersegurança &amp; LGPD</div><div class="bar-track"><div class="bar-fill" style="width: 18%;">~18%</div></div></div>
+            <div class="bar-row"><div class="bar-label">Dados, Analytics &amp; IA aplicada</div><div class="bar-track"><div class="bar-fill" style="width: 18%;">~18%</div></div></div>
+            <div class="bar-row"><div class="bar-label">Integração (Digibee/iPaaS) &amp; M&amp;A</div><div class="bar-track"><div class="bar-fill" style="width: 12%;">~12%</div></div></div>
+            <div class="bar-row"><div class="bar-label">Sustentação / AMS / ITSM</div><div class="bar-track"><div class="bar-fill" style="width: 10%;">~10%</div></div></div>
+            <div class="bar-row"><div class="bar-label">Apps internos &amp; jornadas digitais</div><div class="bar-track"><div class="bar-fill" style="width: 7%;">~7%</div></div></div>
+        </div>
+    </section>
+
+    <!-- C7. PREFERÊNCIAS -->
+    <section class="section">
+        <h3>Preferências de Fornecedor (hipóteses consultivas)</h3>
+        <div class="tags">
+            <span class="tag tag-active">Certificações ISO 27001 / 27701</span>
+            <span class="tag tag-active">Domínio SAP S/4HANA + Clean Core</span>
+            <span class="tag tag-active">Track record em indústria alimentícia ou regulada</span>
+            <span class="tag tag-active">IA Generativa aplicada (não só PoC)</span>
+            <span class="tag tag-active">Parceria com ecossistema SAP/GCP/Salesforce/Digibee</span>
+            <span class="tag tag-active">Privacidade e LGPD com DPO experiente</span>
+            <span class="tag tag-active">Modelo flexível (Squad, Projeto, AMS, Co-gerenciado)</span>
+            <span class="tag tag-active">Governança ISO 20000</span>
+        </div>
+        <h4 class="sub">Modelo de Contratação Preferido (hipótese)</h4>
+        <ul style="padding-left: 22px;">
+            <li>Programa multi-frente plurianual com SLAs e indicadores de negócio</li>
+            <li>Squads dedicados para IA, Dados, Cyber/AppSec em modelo co-gerenciado</li>
+            <li>AMS SAP flexível para liberar time interno para projetos estruturantes</li>
+            <li>Provas de valor (PoV) objetivas antes da escala (60–90 dias)</li>
+        </ul>
+    </section>
+
+    <!-- C8. FONTES -->
+    <section class="section" id="fontes">
+        <h3>Fontes Consultadas</h3>
+        <div class="sources-grid">
+            <div class="sources-card">
+                <h4>Estratégia &amp; Operação</h4>
+                <ul>
+                    <li>Empreender em Goiás (jul/2025) — R$ 12 bi projetados</li>
+                    <li>Portal 6 (jul/2025) — 70 anos · expansão</li>
+                    <li>Portal GO 020 (jul/2025) — Top marcas mais consumidas</li>
+                    <li>Wikipedia — Piracanjuba (empresa)</li>
+                    <li>Econodata · CNPJ 02.089.969/0001-06</li>
+                    <li>piracanjuba.com.br · grupopiracanjuba.com.br</li>
+                </ul>
+            </div>
+            <div class="sources-card">
+                <h4>Stack Tecnológica</h4>
+                <ul>
+                    <li>TI Inside · Inforchannel · Decision Report (jan/2025) — RISE with SAP</li>
+                    <li>MIGNOW (case Piracanjuba) — Migração S/4HANA</li>
+                    <li>Sauter Digital (case) — GCP + BigQuery + Looker</li>
+                    <li>Portal ERP · Baguete — Freshworks</li>
+                    <li>Brasil Open Badge — Equipe SAP S/4 HANA</li>
+                    <li><strong>Verificação empírica direta</strong> (HTTP HEAD · 19/05/2026)</li>
+                </ul>
+            </div>
+            <div class="sources-card">
+                <h4>Mercado &amp; Setor</h4>
+                <ul>
+                    <li>29º Ranking ABRALEITE 2025</li>
+                    <li>MilkPoint — Ranking 2025 dos maiores laticínios</li>
+                    <li>ABIQ — Captação 2024</li>
+                    <li>EDairy News Brasil — Fusões e aquisições 2025</li>
+                    <li>Fortune Business Insights — Dairy Market 2024-2030</li>
+                </ul>
+            </div>
+            <div class="sources-card">
+                <h4>Talento &amp; Liderança</h4>
+                <ul>
+                    <li>LinkedIn · linkedin.com/in/izaias-francisco-gomes</li>
+                    <li>LinkedIn Pulse — Piracanjuba segurança da informação</li>
+                    <li>Opice Blum Academy — Certificações CPDPO/DPO</li>
+                    <li>IGTI — Formação MBA</li>
+                </ul>
+            </div>
+            <div class="sources-card">
+                <h4>Marketing &amp; Marca</h4>
+                <ul>
+                    <li>Samais — Conteúdo estratégico Piracanjuba</li>
+                    <li>SuperVarejo · Marcas Mais · Coletiva (set/2025) — SEO + GEO</li>
+                    <li>ABC da Comunicação — Estratégia digital</li>
+                    <li>Base Digital — Estratégia de conteúdo</li>
+                    <li>ASSERJ — IA no setor lácteo</li>
+                </ul>
+            </div>
+            <div class="sources-card">
+                <h4>Concorrência</h4>
+                <ul>
+                    <li>Documentos públicos: Lactalis Brasil, Nestlé Brasil, UNIUM</li>
+                    <li>Security Leaders — IA e cibersegurança em CISOs</li>
+                    <li>Documentos públicos sobre M&amp;A do setor</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- C9. GLOSSÁRIO -->
+    <section class="section">
+        <h3>Glossário Setorial</h3>
+        <div class="glossary">
+            <div class="glossary-item"><div class="term">RISE with SAP</div><div class="def">Pacote SAP que entrega S/4HANA + cloud + IA + serviços de transformação em modelo de assinatura.</div></div>
+            <div class="glossary-item"><div class="term">Clean Core</div><div class="def">Filosofia SAP de manter o S/4HANA padronizado, com customizações fora do core (extensibilidade lateral) para absorver inovações futuras.</div></div>
+            <div class="glossary-item"><div class="term">SAP Datasphere</div><div class="def">Plataforma SAP de dados unificada para análise integrada SAP + não-SAP, sucessora do SAP DWC.</div></div>
+            <div class="glossary-item"><div class="term">SAP IBP</div><div class="def">Integrated Business Planning — planejamento integrado de demanda, oferta e finanças.</div></div>
+            <div class="glossary-item"><div class="term">SAP EWM</div><div class="def">Extended Warehouse Management — gestão avançada de armazém.</div></div>
+            <div class="glossary-item"><div class="term">Sustainability Control Tower</div><div class="def">Solução SAP para monitorar emissões, métricas ESG e compliance regulatório.</div></div>
+            <div class="glossary-item"><div class="term">Polyfill.io</div><div class="def">Biblioteca JS de compatibilidade que foi comprometida em jun/2024 com injeção de malware. Hoje é vetor de supply chain attack.</div></div>
+            <div class="glossary-item"><div class="term">CSP (Content Security Policy)</div><div class="def">Política HTTP que restringe quais recursos externos um site pode carregar — defesa contra XSS.</div></div>
+            <div class="glossary-item"><div class="term">iPaaS</div><div class="def">Integration Platform as a Service — plataformas de integração em nuvem (ex.: Digibee, MuleSoft, Boomi).</div></div>
+            <div class="glossary-item"><div class="term">MLOps</div><div class="def">Práticas de engenharia para colocar e operar modelos de IA em produção com governança e observabilidade.</div></div>
+            <div class="glossary-item"><div class="term">MES</div><div class="def">Manufacturing Execution System — software que orquestra o chão de fábrica (Siemens Opcenter, AVEVA, GE Proficy).</div></div>
+            <div class="glossary-item"><div class="term">GEO (Generative Engine Optimization)</div><div class="def">Otimização de conteúdo para aparecer como fonte em respostas de IA generativa (ChatGPT, Gemini, Perplexity).</div></div>
+            <div class="glossary-item"><div class="term">DPO</div><div class="def">Data Protection Officer — encarregado de proteção de dados pessoais exigido pela LGPD.</div></div>
+            <div class="glossary-item"><div class="term">ISO 27001 / 27701</div><div class="def">Normas de Sistema de Gestão de Segurança da Informação (27001) e extensão de privacidade (27701).</div></div>
+            <div class="glossary-item"><div class="term">ABRALEITE</div><div class="def">Associação Brasileira dos Produtores de Leite — publica o ranking anual dos maiores laticínios.</div></div>
+        </div>
+    </section>
+
+    <!-- C10. FOOTER -->
+    <footer>
+        <div class="brand-line">foursys | Pre-Sales Intelligence Report | Grupo Piracanjuba</div>
+        <div>Gerado automaticamente — Confidencial | Data: Maio/2026</div>
+        <div style="margin-top: 4px;">Hunter v3 · Modo: <strong>Híbrido</strong> · Saída: <strong>--full</strong> · Verificação empírica em 19/05/2026</div>
+    </footer>
+</div>
+
+<!-- BOTÃO IMPRIMIR -->
+<button class="print-btn" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
+
+</body>
+</html>

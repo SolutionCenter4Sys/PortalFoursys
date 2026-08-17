@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Alessandro Fernandes | Grupo Polimix</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } .header-content { flex-direction: column; text-align: center; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .tag-international { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .alert-box-red { background: #ffebee; border: 1px solid #ffcdd2; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c62828; }
+        .global-card { background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%); color: white; border-radius: 12px; padding: 18px; margin-bottom: 12px; }
+        .global-card h4 { margin-bottom: 6px; font-size: 16px; }
+        .global-card .city { font-size: 13px; opacity: 0.9; margin-bottom: 8px; }
+        .global-card .desc { font-size: 13px; opacity: 0.95; line-height: 1.6; }
+        .empresa-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--accent); margin-bottom: 12px; }
+        .empresa-card h5 { color: var(--primary); font-size: 15px; margin-bottom: 4px; }
+        .empresa-card p { font-size: 13px; color: var(--text-light); }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } body { background: white; } .section { box-shadow: none; border: 1px solid #eee; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Alessandro Miranda Fernandes</h1>
+                <h2>Ex-CTO Polimix Energia | CIO Destaque 2024 | 4 anos 100+ Inovadoras IT Forum</h2>
+                <p style="opacity:0.8;margin-top:8px">Briefing: Grupo Polimix (Concreto, Cimento, Agregados, Energia, Logística, Porto)</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Países</div>
+                    <div class="value">6</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Unidades Concreto</div>
+                    <div class="value">270</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Fábricas Mizu</div>
+                    <div class="value">10</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Porto Central</div>
+                    <div class="value">US$ 650 mi</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- ALERTA DE TRANSPARÊNCIA -->
+        <div class="section" style="border: 2px solid #c62828">
+            <h3 style="color:#c62828"><span class="icon">&#9888;</span> Nota Importante de Inteligência — Transição de Carreira</h3>
+            <div class="alert-box-red">
+                <strong>Alessandro Fernandes não está mais no Grupo Polimix.</strong> Segundo o IT Forum (publicação recente) e Baguete, ele <strong>deixou a Polimix Energia (onde atuou como CTO por ~2 anos)</strong> e <strong>assumiu recentemente como Diretor de Digital e Tecnologia / CIO Global da Omni Táxi Aéreo</strong> (Grupo Omni Helicopters International — mobilidade aérea, resgate e aeromédico).
+                <br><br>
+                <strong>Recomendação de abordagem:</strong>
+                <ul style="margin-left:24px;margin-top:8px">
+                    <li>Se o encontro do IT Forum for <strong>com o Alessandro pessoalmente</strong>: tratar o relacionamento como <strong>estratégico de longo prazo</strong> — Polimix é o "case" pessoal dele (100+ Inovadoras 4x, CIO Destaque 2024), mas a <strong>oportunidade de negócio agora é a Omni Táxi Aéreo</strong> (onde ele está contratando / definindo stack). Este documento cobre Polimix para lastrear conversa de rapport e, ao final, aponta pontos de continuidade para Omni.</li>
+                    <li>Se o encontro é <strong>sobre o Grupo Polimix</strong>: a Foursys precisa identificar o <strong>novo líder de TI/CTO do Grupo Polimix</strong> (pós-Alessandro) antes do contato efetivo. O Grupo continua um alvo muito relevante (R$ 650 mi em Porto, +270 unidades, 6 países, M&amp;A ativo).</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- DESCOBERTA DO SUCESSOR -->
+        <div class="section" style="border: 2px solid #f57f17">
+            <h3 style="color:#f57f17"><span class="icon">&#128269;</span> Como Descobrir o Sucessor de Alessandro na Polimix</h3>
+
+            <div class="alert-box">
+                <strong>Status atual da inteligência (abril/2026):</strong> Após múltiplas buscas em IT Forum, Baguete, releases corporativos da Polimix, cases públicos e LinkedIn, <strong>não há anúncio público do sucessor de Alessandro Fernandes como CTO/CIO do Grupo Polimix</strong>. Alessandro saiu em <strong>novembro/2025</strong> (após 1 ano e 10 meses como CTO da Polimix Concreto, segundo seu LinkedIn). Grupo de capital fechado e gestão familiar — não há obrigação de divulgação pública de mudanças executivas.
+            </div>
+
+            <h4 style="color:var(--primary);margin-top:24px;margin-bottom:16px">Estrutura conhecida de TI no Grupo Polimix (abaixo do nível CIO)</h4>
+            <div class="grid-2">
+                <div>
+                    <div class="empresa-card" style="border-left-color:#f57f17">
+                        <h5>Gustavo Strey &mdash; Líder de TI (Mizu Cimentos)</h5>
+                        <p><strong>Único nome recorrente em cases públicos de tecnologia da Polimix/Mizu</strong> (case Brasiline 2024, sobre cibersegurança Fortinet). A Mizu é o <strong>"centro de TI" do grupo</strong> (data center integrado que ampara quase todas as operações), portanto liderar TI na Mizu tem peso estratégico real. <em>Posição tática — não consta como CIO corporativo.</em></p>
+                    </div>
+                    <div class="empresa-card" style="border-left-color:#f57f17">
+                        <h5>Eduardo Vidaurre &mdash; Coordenador de Projetos de TI (Mizu/Polimix)</h5>
+                        <p>Citado em case público da Brasiline. Responsável pela coordenação de projetos de TI no perímetro Mizu/Polimix. Camada operacional, mas com visibilidade de quais projetos estão sendo priorizados.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="empresa-card" style="border-left-color:#f57f17">
+                        <h5>Hipóteses plausíveis sobre o sucessor</h5>
+                        <p>(1) <strong>Promoção interna não anunciada</strong> — Gustavo Strey ou outro nome da camada logo abaixo pode ter assumido. Comum em grupos familiares fechados.<br>(2) <strong>Cargo vago / liderança compartilhada</strong> — TI redistribuída entre diretorias de negócio (Mizu, Polimix Concreto, Energia, TPK).<br>(3) <strong>Busca executiva em curso</strong> — Substituição de CIO Destaque costuma levar 3-9 meses.</p>
+                    </div>
+                    <div class="empresa-card" style="border-left-color:#f57f17">
+                        <h5>José Maria Vieira de Novaes &mdash; Conselho TPK / Família controladora</h5>
+                        <p>Presidente do conselho do Porto Central (TPK Logística). Executivo de referência da família. Em grupos familiares, decisões sobre liderança de TI passam pelo conselho — caminho indireto via patrocínio executivo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h4 style="color:var(--primary);margin-top:24px;margin-bottom:16px">Plano de Descoberta — 5 Caminhos em Ordem de ROI</h4>
+
+            <div class="approach-card">
+                <h4>&#127919; Caminho 1 (RECOMENDADO) &mdash; Pergunta direta ao Alessandro no IT Forum</h4>
+                <p><strong>Script sugerido:</strong> <em>"Alessandro, quem assumiu seu papel na Polimix? Gostaria de manter proximidade com a cultura de inovação que você construiu lá &mdash; sem atropelar, claro."</em><br><br>
+                Por quê funciona: é elegante, respeitoso, reconhece o legado dele e abre porta para indicação <strong>oficial</strong> (vale mais que qualquer busca pública). Pode revelar inclusive que a posição ainda está em transição. <strong>Custo zero, ROI altíssimo, único momento certo é agora no evento.</strong></p>
+            </div>
+
+            <div class="approach-card" style="background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);">
+                <h4>&#128279; Caminho 2 &mdash; LinkedIn Sales Navigator (filtro estruturado)</h4>
+                <p><strong>Filtros recomendados:</strong></p>
+                <ul style="margin-left:24px;margin-top:6px;font-size:14px;opacity:0.95">
+                    <li><strong>Empresa:</strong> "Polimix Concreto", "Mizu Cimentos", "Polimix Energia", "TPK Logística", "Polimix Agregados", "Logmix"</li>
+                    <li><strong>Cargos:</strong> CIO, Diretor de TI, Head de TI, CTO, Diretor de Tecnologia, Superintendente de TI, Gerente Sênior de TI</li>
+                    <li><strong>Geografia:</strong> Brasil &mdash; foco em Serra/ES (sede), Santana de Parnaíba/SP (escritório SP), Vitória/ES, Salvador/BA</li>
+                    <li><strong>Senioridade:</strong> Diretor / VP / C-level</li>
+                </ul>
+                <p style="margin-top:12px"><strong>Sinal de validação:</strong> alguém com mudança de empresa ou de cargo entre <strong>Nov/2025 e Abr/2026</strong> dentro do grupo Polimix &mdash; janela típica de assunção pós-Alessandro.</p>
+            </div>
+
+            <div class="approach-card" style="background: linear-gradient(135deg, #00838f 0%, #00acc1 100%);">
+                <h4>&#129309; Caminho 3 &mdash; Abordagem Gustavo Strey (Mizu) como ponto de entrada</h4>
+                <p>Mesmo que Gustavo não seja o CIO corporativo, ele é hoje <strong>o nome técnico de referência</strong> publicamente conhecido. Abordagem técnica (não comercial) tende a ressoar:</p>
+                <ul style="margin-left:24px;margin-top:6px;font-size:14px;opacity:0.95">
+                    <li><strong>Pretexto técnico:</strong> "Acompanhamos o case da Mizu com Brasiline em cibersegurança OT &mdash; gostaríamos de trocar experiência sobre como temos evoluído SOC e privacidade (ISO 27701) em ambientes industriais multi-país."</li>
+                    <li><strong>Tom:</strong> peer-to-peer, não fornecedor-comprador. Buscar conversa técnica, não pitch.</li>
+                    <li><strong>Resultado esperado:</strong> ele indica quem hoje toma a decisão estratégica de TI no grupo.</li>
+                </ul>
+            </div>
+
+            <div class="approach-card" style="background: linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%);">
+                <h4>&#128176; Caminho 4 &mdash; Entrada pela área de negócio (CFO / M&amp;A / Operações)</h4>
+                <p>Em grupos familiares, o líder de TI muitas vezes é melhor identificado por quem o contrata (CFO) ou por quem mais consome TI (Diretoria de Operações ou de M&amp;A). Pretextos:</p>
+                <ul style="margin-left:24px;margin-top:6px;font-size:14px;opacity:0.95">
+                    <li><strong>Para CFO/M&amp;A:</strong> "Foursys é especialista em integração tecnológica pós-aquisição (Digibee iPaaS). Vimos a aquisição da Cimentos do Maranhão e o arrendamento das centrais ex-InterCement &mdash; gostaríamos de apresentar nossa abordagem ao líder de tecnologia responsável pelas integrações."</li>
+                    <li><strong>Para Diretoria de Operações:</strong> "Trabalhamos com IA aplicada a previsão de demanda e otimização logística para grupos industriais multi-planta &mdash; para qual líder de TI/digital seria mais útil enviar nosso material?"</li>
+                </ul>
+            </div>
+
+            <div class="approach-card" style="background: linear-gradient(135deg, #c62828 0%, #d32f2f 100%);">
+                <h4>&#127942; Caminho 5 &mdash; Eventos setoriais (caça em ambiente neutro)</h4>
+                <p>Líderes de TI da Polimix/Mizu costumam aparecer em:</p>
+                <ul style="margin-left:24px;margin-top:6px;font-size:14px;opacity:0.95">
+                    <li><strong>IT Forum</strong> &mdash; já que a Polimix foi 100+ Inovadoras 4x, é provável manter presença mesmo após Alessandro. <strong>Verificar agora no evento corrente</strong>.</li>
+                    <li><strong>SNIC (Sindicato Nacional Indústria do Cimento)</strong> &mdash; congressos técnicos, eventos de associação setorial.</li>
+                    <li><strong>ABESC (Associação Brasileira das Empresas de Serviço de Concretagem)</strong> &mdash; networking direto com peers.</li>
+                    <li><strong>FEBRACON, Construmat, Concrete Show</strong> &mdash; feiras setoriais com participação corporativa do grupo.</li>
+                    <li><strong>Eventos Fortinet/Brasiline</strong> &mdash; o stack Fortinet da Mizu é ativo; presença em casos de sucesso e webinars do parceiro é provável.</li>
+                </ul>
+            </div>
+
+            <h4 style="color:var(--primary);margin-top:24px;margin-bottom:16px">Roteiro de 4 Perguntas para o Alessandro (sequência sugerida no IT Forum)</h4>
+            <div class="grid-2">
+                <div>
+                    <div class="empresa-card">
+                        <h5>1. Abertura &mdash; reconhecimento</h5>
+                        <p><em>"Alessandro, parabéns pelo CIO Destaque 2024 e pelos 4 anos consecutivos no 100+ Inovadoras na Polimix &mdash; é um feito raro para um setor tradicional de cimento. O que você considera que foi o maior multiplicador desse resultado?"</em></p>
+                    </div>
+                    <div class="empresa-card">
+                        <h5>2. Transição &mdash; entender a nova frente</h5>
+                        <p><em>"E como está sendo essa transição para a Omni Táxi Aéreo? Sair de uma operação industrial multi-planta pra mobilidade aérea é uma virada de chave grande &mdash; o que está sendo mais desafiador?"</em></p>
+                    </div>
+                </div>
+                <div>
+                    <div class="empresa-card">
+                        <h5>3. Pergunta-chave &mdash; descoberta do sucessor</h5>
+                        <p><em>"E na Polimix, quem assumiu seu papel? Queremos manter proximidade com a cultura de inovação que você construiu lá &mdash; sem atropelar, claro."</em><br><br><strong>&#9888; Esta é a pergunta-chave.</strong> Faça depois das duas anteriores, quando o tom já é de confiança.</p>
+                    </div>
+                    <div class="empresa-card" style="border-left-color:var(--accent-orange)">
+                        <h5>4. Fechamento &mdash; pedido de introdução</h5>
+                        <p><em>"Faz sentido você fazer uma introdução por e-mail? Prometo respeitar tempo dele(a) &mdash; nosso interesse é entender contexto antes de qualquer proposta."</em><br><br><strong>Sinal de aceitação:</strong> se ele topar, peça para enviar você mesmo um draft do e-mail de apresentação para ele revisar e encaminhar &mdash; reduz fricção e garante o follow-up.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert-box" style="margin-top:20px">
+                <strong>Plano B (se Alessandro recusar a indicação):</strong> não insista. Em grupos familiares, ex-executivos costumam se manter em "modo silencioso" sobre sucessores. Nesse caso: agradeça, mantenha o relacionamento ativo focado na <strong>Omni Táxi Aéreo</strong> (oportunidade real de negócio agora) e parta para os Caminhos 2-5 para descoberta independente do sucessor da Polimix.
+            </div>
+        </div>
+
+        <!-- ANÁLISE DA EMPRESA -->
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Grupo Polimix (Organização Polimix)</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Organização Polimix</strong> é um dos maiores grupos industriais privados brasileiros do setor de materiais de construção e infraestrutura. Fundada em <strong>1976 em Serra (ES)</strong> como "Concaprex", é um <strong>grupo familiar controlado pela família Vieira</strong> e opera hoje em um amplo portfólio vertical: <strong>concreto, cimento, agregados, argamassa, logística, concreto fino, energia renovável, economia circular e infraestrutura portuária</strong>. A <strong>Polimix Concreto</strong> possui <strong>270 unidades e presença em 6 países</strong> (Brasil, Argentina, Bolívia, Peru, Colômbia e Estados Unidos — Flórida), com capacidade para <strong>12 milhões de m³ de concreto/ano</strong>. A marca de cimento <strong>Mizu Cimentos</strong> (criada em 1998) opera <strong>10 fábricas e 13 centros de distribuição</strong>, com capacidade de <strong>8,25 milhões de toneladas/ano</strong>. A <strong>Polimix Agregados</strong> soma 18 unidades e 20 milhões de toneladas/ano. A <strong>Logmix</strong> opera 500 equipamentos e transporta +2,5 milhões de toneladas/ano. O grupo é o <strong>4º maior produtor de cimento do Brasil</strong> (via Mizu, entre os 5 grupos que controlam ~80% do mercado) e lidera junto com outros players o adensamento recente via M&amp;A (aquisição da Cimentos do Maranhão, arrendamento de ativos da InterCement na BA/RS, etc). Em infraestrutura, o grupo controla via <strong>TPK Logística (70%)</strong> o projeto <strong>Porto Central (Presidente Kennedy, ES)</strong> — complexo portuário de investimento total estimado em <strong>+US$ 2 bilhões</strong>, com 1ª fase de <strong>US$ 650 milhões</strong> (terminal de granéis líquidos para petróleo com capacidade ship-to-ship de 1,2 milhão de barris/dia). Sob a liderança de tecnologia de Alessandro Fernandes (até recentemente), o grupo conquistou <strong>4 anos consecutivos como uma das "100+ Inovadoras no Uso de TI" do IT Forum</strong> — feito raro para uma empresa de setor tradicional de "concreto e cimento".</p>
+
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Razão Social / Controle</div>
+                        <div class="value">Polimix Concreto Ltda (uma das holdings operacionais — CNPJ múltiplos). Grupo de capital fechado, controle familiar (Família Vieira)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Fundação &amp; Sede</div>
+                        <div class="value">1976 em Serra (ES) — origem "Concaprex"; escritórios em SP, GO, ES, entre outros</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Setores de Atuação</div>
+                        <div class="value">Concreto, Cimento (Mizu), Agregados, Argamassa (Ecomix/Construcola), Logística (Logmix), Concreto Fino (GreenMix), Energia Renovável, Trading, Porto (TPK/Porto Central)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores estimados</div>
+                        <div class="value">+7.000 pessoas (Polimix Concreto + Mizu + agregados + logística)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Ranking Cimento (Brasil)</div>
+                        <div class="value">4º lugar via Mizu (top 5 controlam ~80% do mercado) — atrás de Votorantim, CSN Cimentos e InterCement</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Internacional</div>
+                        <div class="value">6 países: Brasil, Argentina (2007), Colômbia (2009, marca Tremix), Bolívia (2012), Peru (2014), EUA/Flórida (2014)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Investimentos Recentes</div>
+                        <div class="value">R$ 250 mi na revitalização da fábrica Mizu em Sergipe; aquisição Cimentos do Maranhão; arrendamento 8 centrais InterCement; Porto Central US$ 650 mi (fase 1)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reconhecimento em TI</div>
+                        <div class="value">4x consecutivas no IT Forum 100+ Inovadoras no Uso de TI (2020-2023) — maior case de inovação digital do setor de materiais de construção no Brasil</div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 style="color:var(--primary);margin-top:24px;margin-bottom:16px">Empresas &amp; Marcas do Grupo em Detalhe</h4>
+            <div class="grid-2">
+                <div>
+                    <div class="empresa-card">
+                        <h5>Polimix Concreto</h5>
+                        <p>Carro-chefe histórico. <strong>270 unidades em 6 países</strong>. 12 milhões de m³/ano. Mercado de concretagem pronto para obra (service-to-site), forte integração com construtoras e grandes obras de infraestrutura.</p>
+                    </div>
+                    <div class="empresa-card">
+                        <h5>Mizu Cimentos</h5>
+                        <p>Marca de cimento do grupo, fundada 1998. <strong>10 fábricas, 13 centros de distribuição, 8,25 mi ton/ano</strong>. Opera em 13 estados brasileiros. Centro de TI da organização — data center integrado que ampara quase todos os ramos da Polimix.</p>
+                    </div>
+                    <div class="empresa-card">
+                        <h5>Polimix Agregados</h5>
+                        <p>Mineração de agregados para construção (brita, areia). <strong>18 unidades, ~600 colaboradores, 20 milhões de ton/ano</strong>. Operação verticalizada que alimenta concreto e cimento do grupo.</p>
+                    </div>
+                    <div class="empresa-card">
+                        <h5>Ecomix &amp; Construcola (Argamassas)</h5>
+                        <p>Marcas de argamassa industrializada do grupo. <strong>Capacidade de 680 mil toneladas/ano</strong>. Produto de maior valor agregado na cadeia de materiais.</p>
+                    </div>
+                    <div class="empresa-card">
+                        <h5>Logmix (Logística)</h5>
+                        <p>Braço logístico do grupo. <strong>Frota de 500 equipamentos</strong>, transporte de +2,5 mi ton/ano. Operação industrial complexa (cimento, agregados, cargas para obra).</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="empresa-card">
+                        <h5>GreenMix (Concreto Fino)</h5>
+                        <p>Marca de concreto autonivelante e soluções especiais. <strong>6 unidades no Brasil + 2 na Colômbia</strong>. Linha premium de concreto tecnológico para obras industriais e infraestrutura.</p>
+                    </div>
+                    <div class="empresa-card">
+                        <h5>Polimix USA (Flórida, EUA)</h5>
+                        <p>Operação americana. Unidades em <strong>Medley, Deerfield Beach e Riviera Beach (Flórida)</strong>. Concretagem para o mercado da Flórida, expandindo capilaridade em 2023-2024.</p>
+                    </div>
+                    <div class="empresa-card">
+                        <h5>TPK Logística — Porto Central (70%)</h5>
+                        <p>Controladora do <strong>Porto Central (ES)</strong>. Investimento 1ª fase <strong>US$ 650 milhões</strong> (granéis líquidos, terminal VLCC 25m calado). Contratos firmados com Petrobras e 3 outras petroleiras. Investimento total estimado em <strong>+US$ 2 bilhões</strong>.</p>
+                    </div>
+                    <div class="empresa-card">
+                        <h5>Polimix Energia</h5>
+                        <p>Braço de energia renovável e economia circular. <strong>Geração e projetos de energia, reciclagem de materiais, etanol</strong>. Onde Alessandro Fernandes atuou como CTO até recentemente.</p>
+                    </div>
+                    <div class="empresa-card">
+                        <h5>Tremix (Colômbia)</h5>
+                        <p>Marca sob a qual o grupo opera na Colômbia desde 2009. Concretagem e soluções de materiais para o mercado colombiano e andino.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DESTAQUE: JORNADA DE INOVAÇÃO -->
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#128640;</span> Jornada de TI &amp; Inovação na Polimix — o legado Alessandro</h3>
+            <div class="insight-box">
+                <h4>O Case da Polimix em Uma Frase</h4>
+                <p>Sob a liderança de Alessandro Fernandes (ex-CTO Polimix Energia, com autoridade e influência horizontal em tecnologia para o Grupo), a Polimix conquistou <strong>4 anos consecutivos no IT Forum 100+ Inovadoras no Uso de TI</strong> — tornando-se <strong>referência nacional de inovação tecnológica em um setor tradicional</strong> (materiais de construção). O stack conhecido combina <strong>cibersegurança Fortinet (FortiEDR com IA, FortiGate, Secure SD-WAN, FortiAnalyzer, FortiManager)</strong> como espinha dorsal, <strong>data center integrado via Mizu</strong>, e iniciativas declaradas de <strong>IA, Analytics, Cloud e M&amp;A</strong>. Agora que Alessandro saiu, a Polimix entra em um ciclo de <strong>continuidade / nova liderança de TI</strong> — janela clássica de entrada para novos parceiros.</p>
+            </div>
+
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">O que já está rodando / Stack conhecido</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Cibersegurança Fortinet</strong> — FortiEDR (com IA), FortiClient, FortiAnalyzer, FortiManager, FortiGate, Secure SD-WAN. Proteção contra ransomware e zero-day em redes industrial + administrativa. Parceiro de implementação: Brasiline Tecnologia</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Data Center integrado (Mizu)</strong> — Mizu Cimentos é o "centro de TI" do grupo; data center integrado ampara quase todos os ramos de atuação</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Cultura "100+ Inovadoras"</strong> — reconhecimento IT Forum 4 anos consecutivos; cases declarados em IA, Analytics, Cloud e M&amp;A</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Aquisições &amp; integração</strong> — grupo com forte agenda de M&amp;A (Cimentos do Maranhão, arrendamento InterCement, Porto Central). Cada aquisição gera onda de integração de sistemas</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Polimix Energia &amp; economia circular</strong> — negócio novo do grupo, onde Alessandro atuou e que ficará sob nova liderança</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Frentes em aberto / Oportunidades prováveis</h4>
+                    <div>
+                        <span class="tag tag-opportunity">Nova liderança de TI (transição)</span>
+                        <span class="tag tag-opportunity">ERP / SAP em ambiente multi-empresa</span>
+                        <span class="tag tag-opportunity">Integração pós-M&amp;A (iPaaS)</span>
+                        <span class="tag tag-opportunity">IA aplicada a operações/previsão de demanda</span>
+                        <span class="tag tag-opportunity">IoT em plantas industriais &amp; logística</span>
+                        <span class="tag tag-opportunity">Aplicações/Portais para construtoras</span>
+                        <span class="tag tag-opportunity">Governança de dados &amp; LGPD multi-país</span>
+                        <span class="tag tag-opportunity">Cibersegurança OT/IT (fábricas)</span>
+                        <span class="tag tag-opportunity">Gestão digital de obra/canteiro</span>
+                        <span class="tag tag-opportunity">Sistemas para Porto Central (terminal)</span>
+                    </div>
+                    <div class="alert-box" style="margin-top:16px">
+                        <strong>Timing crítico:</strong> A combinação <strong>(saída de CTO + M&amp;A recentes + expansão internacional + construção do Porto Central)</strong> cria múltiplas frentes tecnológicas simultâneas. A Foursys deve mapear quem assumiu a liderança de TI pós-Alessandro e entrar como parceiro estratégico de continuidade.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ATUAÇÃO INTERNACIONAL -->
+        <div class="section" style="border: 2px solid #1565c0">
+            <h3><span class="icon">&#127758;</span> Atuação Internacional — 6 países (Brasil + 5 exterior)</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">A Polimix é uma das poucas multilatinas brasileiras genuínas no setor de materiais de construção. Sua expansão internacional começou em 2007 e já soma <strong>17+ anos de operação fora do Brasil</strong>:</p>
+
+            <div class="grid-2" style="margin-bottom:20px">
+                <div class="global-card">
+                    <h4>&#127463;&#127479; Brasil — Sede &amp; Core</h4>
+                    <div class="city">Sede em Serra (ES); operações em 20+ estados</div>
+                    <div class="desc">Mizu (13 estados), Polimix Concreto (20+ estados), Agregados, Logmix, GreenMix, Energia. Porto Central em Presidente Kennedy (ES). Cerca de 90%+ da operação.</div>
+                </div>
+                <div class="global-card" style="background: linear-gradient(135deg, #00838f 0%, #00acc1 100%);">
+                    <h4>&#127462;&#127479; Argentina — 1º passo internacional (2007)</h4>
+                    <div class="city">Buenos Aires — início da operação</div>
+                    <div class="desc">Primeira operação fora do Brasil. Concretagem para o mercado argentino, forte concorrência com Loma Negra (LafargeHolcim) e Minetti.</div>
+                </div>
+                <div class="global-card" style="background: linear-gradient(135deg, #00695c 0%, #00897b 100%);">
+                    <h4>&#127464;&#127476; Colômbia — marca Tremix (2009)</h4>
+                    <div class="city">Operação colombiana</div>
+                    <div class="desc">Concretagem sob a marca Tremix. Inclui 2 unidades GreenMix no país. Mercado andino estratégico.</div>
+                </div>
+                <div class="global-card" style="background: linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%);">
+                    <h4>&#127463;&#127476; Bolívia (2012)</h4>
+                    <div class="city">Operação boliviana</div>
+                    <div class="desc">Concretagem no mercado boliviano, país em crescimento de infraestrutura e demanda por materiais de construção.</div>
+                </div>
+                <div class="global-card" style="background: linear-gradient(135deg, #bf360c 0%, #d84315 100%);">
+                    <h4>&#127477;&#127466; Peru (2014)</h4>
+                    <div class="city">Operação peruana</div>
+                    <div class="desc">Concretagem para o mercado peruano. Disputa com Cementos Pacasmayo, UNACEM e Cemex Peru. Peru tem forte demanda de mineração e infraestrutura.</div>
+                </div>
+                <div class="global-card" style="background: linear-gradient(135deg, #c62828 0%, #d32f2f 100%);">
+                    <h4>&#127482;&#127480; Estados Unidos — Flórida (2014)</h4>
+                    <div class="city">Medley, Deerfield Beach e Riviera Beach (Flórida)</div>
+                    <div class="desc">Polimix USA — operações de concretagem no mercado de Miami e Flórida. Expansão recente com nova unidade em Riviera Beach. Única multilatina brasileira de concreto em operação nos EUA.</div>
+                </div>
+            </div>
+
+            <div class="alert-box">
+                <strong>Leitura estratégica:</strong> A Polimix é uma das <strong>únicas multilatinas brasileiras</strong> do setor de concreto/cimento com operação direta nos EUA. Isso significa que qualquer <strong>ERP, plataforma de dados ou sistema de gestão</strong> do grupo precisa ser pensado para <strong>operação multi-país, multi-moeda, multi-regulação (incluindo compliance USA)</strong>. A Foursys pode posicionar <strong>expertise em arquiteturas globais, Digibee iPaaS para integração LATAM + EUA, e AI Squad com modelos multi-idioma/multi-região</strong> como diferenciais.
+            </div>
+
+            <div>
+                <span class="tag tag-international">Capital 100% brasileiro</span>
+                <span class="tag tag-international">6 países (Brasil + 5)</span>
+                <span class="tag tag-international">Operação nos EUA desde 2014</span>
+                <span class="tag tag-international">17+ anos de histórico internacional</span>
+                <span class="tag tag-international">Multi-marca (Polimix, Mizu, Tremix, GreenMix, Ecomix)</span>
+                <span class="tag tag-international">Primeira multilatina BR de concreto</span>
+            </div>
+        </div>
+
+        <!-- RESUMO EXECUTIVO -->
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico &amp; Posicionamento</h4>
+                <p>O Grupo Polimix é um <strong>alvo estratégico de primeira linha</strong> para a Foursys: conglomerado industrial brasileiro com <strong>6 países, 270 unidades de concreto, 10 fábricas de cimento, porto bilionário em construção e agenda ativa de M&amp;A</strong>. É o <strong>4º maior produtor de cimento do Brasil</strong> e a <strong>única multilatina brasileira de concreto com operação nos EUA</strong>. Sob Alessandro Fernandes, virou <strong>referência nacional em inovação em TI</strong> (4x IT Forum 100+ Inovadoras) — o que prova que a <strong>cultura de investimento em tecnologia está consolidada no grupo</strong>. Agora, com a <strong>saída de Alessandro para a Omni Táxi Aéreo</strong>, a Polimix inicia um ciclo de <strong>continuidade sob nova liderança</strong> — janela clássica para reavaliação de parceiros, revisão de stack e novas contratações. A combinação <strong>M&amp;A recente (Cimentos Maranhão, InterCement) + construção do Porto Central (US$ 650 mi) + expansão Flórida + nova liderança de TI</strong> cria múltiplas frentes tecnológicas simultâneas. Foursys tem diferenciais muito aderentes: ISO 27001/27701 (raras no mercado, importantes para ambientes regulados e multi-país), Digibee iPaaS (integração pós-M&amp;A), AI Squad (continuidade da agenda de IA do Alessandro), FourBlox (aceleração de aplicações corporativas) e Engenharia Digital. O relacionamento com Alessandro permanece estratégico — agora como <strong>porta de entrada para a Omni Táxi Aéreo</strong> e como <strong>referência técnica</strong> com credibilidade para indicar a Foursys ao seu sucessor na Polimix.</p>
+            </div>
+        </div>
+
+        <!-- DESAFIOS E PRIORIDADES -->
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="color:var(--primary);margin-bottom:12px">Desafios operacionais</h4>
+                    <div class="info-card" style="margin-bottom:10px">
+                        <div class="label">1. Transição de liderança de TI</div>
+                        <div class="value">Substituir a expertise de Alessandro — manter o nível de inovação conquistado (100+ Inovadoras 4x) com nova gestão. Parceiros estratégicos são críticos nessa fase.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:10px">
+                        <div class="label">2. Integração pós-M&amp;A</div>
+                        <div class="value">Cimentos do Maranhão, 8 centrais ex-InterCement, novas unidades nos EUA — cada aquisição demanda integração de ERP, dados, processos e cibersegurança.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:10px">
+                        <div class="label">3. Porto Central — sistemas &amp; automação</div>
+                        <div class="value">Terminal portuário bilionário exige Terminal Operating System (TOS), integração com Petrobras e petroleiras, sistemas de controle industrial (OT), cibersegurança de infraestrutura crítica.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:10px">
+                        <div class="label">4. Operação multi-país &amp; multi-moeda</div>
+                        <div class="value">6 países, múltiplas regulações (LGPD Brasil, legislações LATAM, USA). Governança de dados cross-border e compliance multi-regime.</div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color:var(--primary);margin-bottom:12px">Prioridades estratégicas</h4>
+                    <div class="info-card" style="margin-bottom:10px">
+                        <div class="label">1. Continuar a agenda de IA &amp; Analytics</div>
+                        <div class="value">Manter o legado "100+ Inovadoras" — expandir IA em operações (previsão de demanda de cimento/concreto, otimização logística, manutenção preditiva em fábricas Mizu).</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:10px">
+                        <div class="label">2. Cibersegurança OT/IT (fábricas)</div>
+                        <div class="value">Mizu tem 10 fábricas + redes industriais (OT). A base Fortinet já existe, mas há oportunidade em governança, privacidade (LGPD), SOC 24x7 e resposta a incidentes.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:10px">
+                        <div class="label">3. Cloud &amp; Modernização de legado</div>
+                        <div class="value">Evolução do data center Mizu para hybrid-cloud; modernização de ERPs e sistemas de gestão de obra; experiência do cliente (construtoras) via portais digitais.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:10px">
+                        <div class="label">4. Energia &amp; economia circular (ESG)</div>
+                        <div class="value">Polimix Energia (ex-área do Alessandro) tem agenda de energia renovável e reciclagem de materiais. Plataformas de medição de carbono, rastreabilidade e ESG são prioridade regulatória.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OFERTAS FOURSYS RECOMENDADAS -->
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Ofertas Foursys Recomendadas — Fit com o Grupo Polimix</h3>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. Modernização de Legado &amp; Integração (Digibee iPaaS)</h4>
+                    <span class="score-badge">Score 10/10</span>
+                </div>
+                <p style="color:var(--text-light);font-size:14px">Foursys é parceira Digibee. iPaaS brasileiro, líder em integrações para empresas com M&amp;A recorrente.</p>
+                <div class="reasons">
+                    <ul>
+                        <li><strong>M&amp;A ativo</strong>: aquisição Cimentos Maranhão, arrendamento 8 centrais ex-InterCement, expansão Flórida — cada onda exige integração de ERP, dados, cibersegurança</li>
+                        <li><strong>Multi-empresa</strong>: Polimix Concreto + Mizu + Agregados + Logmix + GreenMix + Ecomix + Polimix USA + Energia + TPK — +10 empresas com sistemas e processos para integrar</li>
+                        <li><strong>Multi-país</strong>: 6 países, múltiplas moedas e regulações — cenário típico para iPaaS de alta produtividade</li>
+                        <li><strong>Porto Central</strong>: integração TOS + Petrobras + petroleiras + sistemas portuários demanda arquitetura robusta de APIs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. AI Squad &amp; Engenharia de Dados</h4>
+                    <span class="score-badge">Score 10/10</span>
+                </div>
+                <p style="color:var(--text-light);font-size:14px">Squad multidisciplinar de IA da Foursys para aplicações industriais (previsão, otimização, manutenção preditiva).</p>
+                <div class="reasons">
+                    <ul>
+                        <li><strong>Legado Alessandro em IA</strong>: CIO declaradamente focado em IA, Analytics e Cloud; agenda precisa ter continuidade sob nova liderança</li>
+                        <li><strong>Casos de uso claros</strong>: previsão de demanda de concreto (cidade por cidade), otimização de frota Logmix (500 equipamentos), manutenção preditiva em 10 fábricas Mizu, recomendação de mix para construtoras</li>
+                        <li><strong>100+ Inovadoras</strong>: a cultura é "inovar publicamente" — ideal para cases externáveis com AI Squad</li>
+                        <li><strong>ESG &amp; energia</strong>: IA para otimização de consumo energético em fábricas de cimento (grandes consumidoras)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. Cibersegurança &amp; Privacidade (ISO 27001 + ISO 27701)</h4>
+                    <span class="score-badge">Score 9/10</span>
+                </div>
+                <p style="color:var(--text-light);font-size:14px">A Foursys é das pouquíssimas empresas brasileiras com ISO 27001 + ISO 27701 certificadas.</p>
+                <div class="reasons">
+                    <ul>
+                        <li><strong>Fortinet já implantada</strong>: perímetro coberto, mas há espaço em governança, SOC 24x7, privacidade (LGPD), resposta a incidentes e maturidade OT</li>
+                        <li><strong>Ambientes industriais (OT)</strong>: 10 fábricas Mizu + 270 unidades Polimix + agregados = superfície de ataque ampla; infraestrutura crítica no Porto Central</li>
+                        <li><strong>Multi-país &amp; LGPD</strong>: 6 países com regulações distintas (Brasil, Argentina, Colômbia, Peru, Bolívia, EUA) — privacidade e proteção de dados são críticas</li>
+                        <li><strong>M&amp;A</strong>: empresas adquiridas trazem dívidas de segurança e exposições — necessidade contínua de assessment e remediação</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. FourBlox — Aceleração de Aplicações Corporativas</h4>
+                    <span class="score-badge">Score 9/10</span>
+                </div>
+                <p style="color:var(--text-light);font-size:14px">Plataforma proprietária Foursys para acelerar desenvolvimento de aplicações corporativas (low-code corporativo + squads).</p>
+                <div class="reasons">
+                    <ul>
+                        <li><strong>Portal B2B para construtoras</strong>: Polimix Concreto e Mizu atendem 10.000+ construtoras — portal unificado de pedidos, acompanhamento, faturamento e SAC</li>
+                        <li><strong>Apps mobile para operação</strong>: gestão de obra/canteiro, conferência de entrega de concreto, checklists de qualidade em fábricas, apps para motoristas Logmix</li>
+                        <li><strong>Portais internos multi-empresa</strong>: intranet, governança, onboarding de empresas adquiridas</li>
+                        <li><strong>Sistema TOS &amp; operações portuárias</strong>: aplicações para Porto Central</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>5. Engenharia Digital &amp; SRE</h4>
+                    <span class="score-badge">Score 8/10</span>
+                </div>
+                <p style="color:var(--text-light);font-size:14px">Squads de engenharia digital (DevSecOps, Cloud, SRE) para sustentar a operação e acelerar mudanças.</p>
+                <div class="reasons">
+                    <ul>
+                        <li><strong>Data center Mizu</strong>: jornada de evolução para hybrid-cloud, governança FinOps, SRE para sustentabilidade</li>
+                        <li><strong>Cloud multi-país</strong>: gestão de cargas em AWS/Azure/GCP com governança de custos e segurança</li>
+                        <li><strong>Observabilidade industrial</strong>: telemetria das 10 fábricas Mizu, das 270 unidades Polimix e da frota Logmix</li>
+                        <li><strong>Disponibilidade crítica</strong>: operação de concreto é "just-in-time" (concreto não pode parar na obra) — SRE é crítico</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESTRATÉGIA DE ABORDAGEM -->
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Estratégia de Abordagem — Duas Pistas Paralelas</h3>
+
+            <div class="approach-card">
+                <h4>&#127937; Pista A — Relacionamento com Alessandro (Longo Prazo &amp; Multi-conta)</h4>
+                <p>Alessandro é <strong>CIO Destaque 2024</strong>, ativo em redes, mentor, bem relacionado no ecossistema brasileiro de CIOs. O objetivo dessa pista é <strong>tornar-se parte do círculo de confiança técnica dele em sua nova fase (Omni Táxi Aéreo)</strong>. Abordagem: (1) <strong>rapport genuíno</strong> reconhecendo seu legado na Polimix (100+ Inovadoras 4x, CIO Destaque); (2) <strong>conteúdo de alto nível</strong> (IA industrial, SRE, cibersegurança OT — temas que ele publica); (3) <strong>oferecer a Foursys como parceiro de continuidade</strong> na Omni — onde ele está desenhando stack agora; (4) <strong>pedir indicação</strong> para o seu sucessor na Polimix após consolidado o relacionamento.</p>
+            </div>
+
+            <div class="approach-card" style="background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);">
+                <h4>&#127970; Pista B — Entrada no Grupo Polimix (Novo Líder de TI)</h4>
+                <p>Mapear quem assumiu a liderança de TI do Grupo Polimix pós-Alessandro. Estratégias: (1) consulta ao próprio Alessandro (se relacionamento permitir) pedindo introdução ao sucessor; (2) mapeamento via LinkedIn (filtro: "Polimix Concreto", "Mizu Cimentos", "TI/CIO/CTO"); (3) abordagem via eventos setoriais (IT Forum, FEBRACON, Construmat); (4) pela presença da Foursys em outros grupos familiares brasileiros do setor industrial, buscar referência cruzada. Abordagem inicial: apresentar-se como <strong>referência em continuidade de jornada digital e M&amp;A</strong>, trazendo o <strong>case implícito</strong> de que o nível de inovação conquistado por Alessandro pode ser mantido e ampliado com parceiros certos.</p>
+            </div>
+
+            <div class="approach-card" style="background: linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%);">
+                <h4>&#128200; Pista C — Porto Central (Projeto de Greenfield Bilionário)</h4>
+                <p>O Porto Central é um <strong>projeto greenfield de US$ 650 mi (fase 1) / +US$ 2 bi (total)</strong>, 70% controlado pela Polimix via TPK Logística. Presidente do conselho: <strong>José Maria Vieira de Novaes</strong>. Como greenfield, <strong>todo o stack tecnológico está em definição</strong> — Terminal Operating System (TOS), integração com Petrobras e petroleiras, cibersegurança de infraestrutura crítica (ICS/SCADA), plataformas de gestão. Abordagem paralela direcionada à TPK Logística — pode envolver a Foursys desde arquitetura até operação, com alta margem e 3-5 anos de engajamento.</p>
+            </div>
+        </div>
+
+        <!-- PERFIL EXECUTIVO -->
+        <div class="section">
+            <h3><span class="icon">&#128100;</span> Perfil Executivo — Alessandro Miranda Fernandes</h3>
+
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Diretor de Digital e Tecnologia (CIO Global) — Omni Táxi Aéreo (Grupo Omni Helicopters International). Assumiu recentemente.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Anterior</div>
+                        <div class="value">CTO — Polimix Energia (~2 anos). Responsabilidade técnica ampla no Grupo Polimix.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória Profissional</div>
+                        <div class="value">Board Club → Polimix Energia (CTO) → Taesa (liderança de TI por muitos anos) → UTC → Prime IT Services → Brasilcap → BNDES (head de TI). Transição para Omni.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação</div>
+                        <div class="value">Ciência da Computação — Universidade Candido Mendes; Pós em Gerenciamento de Projetos; <strong>MIT — Leadership and Innovation (2020)</strong>; <strong>FGV — Gestão Estratégica de TI (2022)</strong>; <strong>Fundação Dom Cabral — Liderança Transformadora (2021)</strong>; APG Senior Amana-Key (2019)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Certificação Adicional</div>
+                        <div class="value">PFCC — Programa de Formação e Certificação de Conselheiros (Board Academy BR, 2024). Começa a atuar como conselheiro.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Idiomas</div>
+                        <div class="value">Português (nativo), Espanhol (bilíngue), Inglês (bilíngue)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Áreas de Especialidade</div>
+                        <div class="value">Transformação Digital, Inovação, IA, Analytics, Cloud Computing, M&amp;A, Liderança de TI, Inovação Aberta</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Prêmios &amp; Reconhecimentos</div>
+                        <div class="value"><strong>CIO Destaque 2024</strong> (Optimize/Innovation Meeting); <strong>CIO Destaque 2020/2021</strong> (4Network — 4CIO); <strong>100+ Inovadoras no Uso de TI</strong> 4x consecutivas na Polimix (2020-2023); <strong>1º Lugar Categoria Utilities</strong> 2x (2020 e 2021) na Taesa; 13.000+ seguidores no LinkedIn</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trabalho Voluntário</div>
+                        <div class="value">Anjos do Brasil (Ciência e Tecnologia) — desde 2023. Mentor ativo via LinkedIn.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Estilo de Liderança</div>
+                        <div class="value">Mentor, transformador, comunicador, orientado a resultados. Publica artigos regularmente sobre liderança, mentoria, inovação e transformação humana no trabalho.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Publicações Recentes (2025)</div>
+                        <div class="value">Série "Leis da Inovação" (Letramento, Foco, Tecnologia Estratégica, Transparência, Infinito). Tom pessoal, reflexivo — valoriza "transformar juntos" mais que "ensinar".</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">LinkedIn</div>
+                        <div class="value">linkedin.com/in/alessandromirandafernandes (+13.000 seguidores, 500+ conexões, 8 recomendações)</div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 style="color:var(--primary);margin-top:24px;margin-bottom:16px">Dicas de Rapport (5+1) para Conversas com Alessandro</h4>
+            <div class="grid-2">
+                <div>
+                    <div class="empresa-card">
+                        <h5>1. Reconheça o legado Polimix antes de falar de Omni</h5>
+                        <p>"Sei do seu case na Polimix — 4 anos consecutivos no 100+ Inovadoras do IT Forum foi uma marca histórica, ainda mais num setor de cimento/concreto. Como está sendo a transição dessa cultura para a mobilidade aérea?"</p>
+                    </div>
+                    <div class="empresa-card">
+                        <h5>2. Conecte-se com a pauta "mentoria &amp; transformação humana"</h5>
+                        <p>Ele publica semanalmente sobre liderança e mentoria. Cite um tema específico dos artigos dele (Letramento, Foco, "Respira, vai dar certo"). Mostra que houve leitura real, não genérico.</p>
+                    </div>
+                    <div class="empresa-card">
+                        <h5>3. Fale o idioma "IA aplicada &amp; Analytics"</h5>
+                        <p>São as áreas declaradas dele. Traga casos reais da Foursys em IA industrial, agentes, observabilidade de dados. Evite buzzwords — ele sabe filtrar.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="empresa-card">
+                        <h5>4. Use o gancho MIT / Dom Cabral / FGV</h5>
+                        <p>Alessandro valoriza formação estruturada. Mencionar programas da Foursys de formação técnica e de liderança (se houver) cria afinidade.</p>
+                    </div>
+                    <div class="empresa-card">
+                        <h5>5. Posicione a Foursys como parceira de continuidade</h5>
+                        <p>"Assumir uma nova operação em uma vertical totalmente nova (mobilidade aérea) é um desafio gigante. Como parceiros, nosso papel é dar continuidade à agenda de inovação que você já construiu, agora nesse novo contexto."</p>
+                    </div>
+                    <div class="empresa-card" style="border-left-color:var(--accent-orange)">
+                        <h5>&#9733; +1 Bônus — Pedido de Indicação Elegante</h5>
+                        <p>Ao final (e só se o relacionamento avançar): "Quem você indicaria para conversarmos na Polimix agora? Queremos manter proximidade com a cultura que você construiu lá — sem atropelar, é claro." Pedido respeitoso + reconhecimento + ação.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONCORRENTES -->
+        <div class="section">
+            <h3><span class="icon">&#127942;</span> Benchmark de Concorrentes — Cimento &amp; Concreto Brasil</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">O setor de cimento é <strong>concentrado (top 5 controlam ~80% do mercado)</strong> e o de concreto é ainda mais pulverizado. Principais concorrentes diretos:</p>
+
+            <div class="grid-2">
+                <div>
+                    <div class="competitor-card">
+                        <h4>Votorantim Cimentos</h4>
+                        <p><strong>Líder absoluto do mercado.</strong> 24 fábricas (16 integradas + 8 moagem) — inclui a maior fábrica de cimento da América do Sul (Rio Branco do Sul/PR). Presente em todas as 5 regiões. Escala global — opera também em Índia, Turquia, Argentina, América do Norte, Espanha.</p>
+                    </div>
+                    <div class="competitor-card">
+                        <h4>CSN Cimentos</h4>
+                        <p><strong>2º colocado.</strong> 21% de market share (13 mi ton vendidas em 2023). Em 2024 firmou acordo de exclusividade para adquirir a InterCement — se concluída a aquisição, pode virar líder nacional. Braço do Grupo CSN (Companhia Siderúrgica Nacional).</p>
+                    </div>
+                    <div class="competitor-card">
+                        <h4>InterCement</h4>
+                        <p><strong>3ª posição.</strong> 14% do mercado (8,6 mi ton em 2023). 15 fábricas no Brasil. Em processo de venda para a CSN Cimentos. Anteriormente, arrendou 8 concreteiras à Polimix em 2016 — há relacionamento histórico.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="competitor-card">
+                        <h4>Buzzi Unicem (via Brennand)</h4>
+                        <p>Grupo italiano. Adquiriu Brennand Cimentos em 2020, ampliando atuação no Nordeste e Sudeste. Um dos top 5 do mercado brasileiro.</p>
+                    </div>
+                    <div class="competitor-card">
+                        <h4>Engemix (Votorantim Concreto)</h4>
+                        <p>Braço de concreto do Votorantim — <strong>concorrente direto da Polimix Concreto</strong>. Rede extensa de unidades em todo o Brasil. Grande competidor em obras de infraestrutura e grandes construtoras.</p>
+                    </div>
+                    <div class="competitor-card">
+                        <h4>Supermix, Cemex Brasil, Holcim Brasil</h4>
+                        <p>Players adicionais no mercado de concreto/cimento. Cemex e Holcim são multinacionais; Supermix é concorrente brasileiro de médio porte.</p>
+                    </div>
+                    <div class="competitor-card">
+                        <h4>Concorrentes internacionais (LATAM)</h4>
+                        <p>Em Argentina (Loma Negra — LafargeHolcim, Minetti), Colômbia (Cemex, Argos), Peru (Cementos Pacasmayo, UNACEM, Cemex Peru), Bolívia (Soboce), EUA/Flórida (Cemex USA, Titan America, Argos USA).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DISTRIBUIÇÃO ESTIMADA DE INVESTIMENTO -->
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Distribuição Estimada de Oportunidade — Grupo Polimix (próximos 24 meses)</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Estimativa Foursys baseada em: (1) perfil declarado de investimento em inovação; (2) porte de um grupo com +270 unidades em 6 países e porto em construção; (3) agenda de M&amp;A ativa; (4) média setorial de investimento em TI para grandes grupos industriais brasileiros. Valores são <strong>estimativas orientativas</strong> — sem base pública oficial do budget de TI da Polimix.</p>
+
+            <div class="chart-container">
+                <div class="bar">
+                    <div class="bar-label">Integração pós-M&amp;A (iPaaS)</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:85%;background:linear-gradient(90deg,#1a237e,#3949ab)">25%</div></div>
+                </div>
+                <div class="bar">
+                    <div class="bar-label">IA, Dados &amp; Analytics</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:75%;background:linear-gradient(90deg,#3949ab,#5c6bc0)">22%</div></div>
+                </div>
+                <div class="bar">
+                    <div class="bar-label">Cibersegurança OT/IT &amp; LGPD</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:68%;background:linear-gradient(90deg,#00b894,#00cec9)">18%</div></div>
+                </div>
+                <div class="bar">
+                    <div class="bar-label">Porto Central — TOS &amp; Automação</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:55%;background:linear-gradient(90deg,#6a1b9a,#8e24aa)">15%</div></div>
+                </div>
+                <div class="bar">
+                    <div class="bar-label">Aplicações &amp; Portais (FourBlox)</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:45%;background:linear-gradient(90deg,#e17055,#fb7e53)">12%</div></div>
+                </div>
+                <div class="bar">
+                    <div class="bar-label">Cloud, SRE &amp; Engenharia Digital</div>
+                    <div class="bar-track"><div class="bar-fill" style="width:30%;background:linear-gradient(90deg,#546e7a,#78909c)">8%</div></div>
+                </div>
+            </div>
+
+            <div class="alert-box" style="margin-top:24px">
+                <strong>Leitura Foursys:</strong> O Grupo Polimix é um "<strong>alvo multi-oferta</strong>" — <strong>todas as 5 principais ofertas da Foursys têm fit alto</strong>. O diferencial competitivo da Foursys aqui é <strong>ser um parceiro único que cobre M&amp;A + IA + Segurança + Apps + Cloud</strong>, evitando fragmentação entre múltiplos fornecedores — algo valioso para um grupo em plena expansão e em transição de liderança de TI.
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p><strong>Foursys | Pre-Sales Intelligence</strong> — Briefing confidencial para uso interno.</p>
+            <p>Fontes: Polimix.com.br, Polimixusa.com, Mizu.com.br, IT Forum (100+ Inovadoras &amp; publicações de executivos), LinkedIn, Baguete, Estadão, Valor Econômico, BNamericas, ABOL, Econodata, CBInsights, SAP News, Brasiline Tecnologia. Informações da trajetória de Alessandro Fernandes obtidas via LinkedIn público e releases do IT Forum.</p>
+            <p style="margin-top:12px"><em>Última atualização: abril/2026. Janela de execução do SAPHE: 2023-2026. Porto Central: obra em andamento (fase 1). Alessandro Fernandes: transicionou para Omni Táxi Aéreo recentemente.</em></p>
+        </div>
+    </div>
+</body>
+</html>

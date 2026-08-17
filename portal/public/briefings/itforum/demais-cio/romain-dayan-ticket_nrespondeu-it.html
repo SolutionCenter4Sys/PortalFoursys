@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Romain Dayan | TICKET (Grupo Edenred)</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Romain Dayan</h1>
+                <h2>CIO / Head of Global Technology Americas — TICKET (Grupo Edenred)</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Serviços (Benefícios/Vouchers) | São Paulo, SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Receita Global</div>
+                    <div class="value">€ 3,0 BI (2025)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Investimento Tech</div>
+                    <div class="value">€ 480 MM/ano</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Pressão regulatória</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: TICKET (Grupo Edenred)</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Ticket</strong> é a marca de benefícios ao trabalhador da <strong>Edenred Brasil</strong>, multinacional francesa líder global em soluções de pagamentos e benefícios corporativos. No Brasil, a Ticket atende <strong>7 milhões de empregados beneficiados</strong>, <strong>130 mil empresas-clientes</strong> e <strong>720 mil comerciantes credenciados</strong>. A plataforma processa aproximadamente <strong>3,7 bilhões de mensagens de API por mês</strong> globalmente, operando uma arquitetura de quatro camadas (infraestrutura cloud, APIs via Mulesoft, aplicações de negócio e experiência do usuário) com disponibilidade de 99,99%. O Grupo Edenred encerrou 2025 com receita recorde de <strong>€ 3,0 bilhões</strong> (+5,7%), EBITDA de <strong>€ 1.360 milhões</strong> (margem de 45,9%) e fluxo de caixa livre de <strong>€ 1,1 bilhão</strong> (+34%). Desde 2016, a Edenred investiu cerca de <strong>€ 2,4 bilhões em inovação tecnológica</strong> nos 45 países onde atua. No Brasil, a empresa enfrenta um cenário regulatório desafiador com o Decreto 12.712/2025 (PAT), que impõe teto de taxas (3,6%), limita tarifas de intercâmbio (2%) e exige interoperabilidade entre bandeiras até novembro de 2026 — com impacto estimado de <strong>8-12% no EBITDA</strong> da operação brasileira.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global — 45 países</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Multinacional listada (Euronext Paris: EDEN)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Negócio</div>
+                        <div class="value">Pressão por regulação + transformação digital acelerada</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">~12.000 (global) | ~573 (Brasil)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>A Ticket/Edenred Brasil atravessa um momento de <strong>disrupção regulatória massiva</strong> com o novo decreto do PAT que ameaça comprimir margens em 8-12%. Simultaneamente, a empresa precisa <strong>acelerar a transformação digital</strong> para competir num mercado que se move para arranjos abertos, pagamentos digitais e benefícios flexíveis. Romain Dayan lidera a estratégia tecnológica não apenas do Brasil, mas de toda a operação nas Américas (9 países), tendo que equilibrar modernização de plataformas, conformidade regulatória, cibersegurança de meios de pagamento e inovação acelerada. O cenário exige parceiros tecnológicos capazes de entregar velocidade com segurança — janela de oportunidade clara para a Foursys.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Conformidade regulatória PAT:</strong> Adaptar plataforma para interoperabilidade entre bandeiras, teto de taxas (3,6%) e liquidação em 15 dias até novembro de 2026</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Modernização de plataforma de pagamentos:</strong> Migrar para arranjo aberto (Mastercard/Visa) mantendo segurança e performance em 720 mil estabelecimentos</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Escalar IA e automação:</strong> Expandir capacidades da EVA (assistente IA com 10 anos) com IA generativa e automação proativa</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Cibersegurança de meios de pagamento:</strong> Proteger €100 bi em volume transacional global com conformidade PCI-DSS, LGPD e regulações financeiras</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Eficiência operacional sob pressão de margem:</strong> Entregar mais com menos, compensando perda de receita por regulação com automação e otimização</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Integração e APIs em escala:</strong> Gerenciar 3,7 bi de chamadas API/mês e 200+ parceiros conectados com governança robusta</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Plataforma de Pagamentos Digitais</span>
+                        <span class="tag tag-priority">Cibersegurança e Compliance</span>
+                        <span class="tag tag-priority">IA Generativa e Automação</span>
+                        <span class="tag tag-priority">Integração de APIs / Middleware</span>
+                        <span class="tag tag-priority">Cloud e Infraestrutura Serverless</span>
+                        <span class="tag tag-priority">Experiência Digital do Usuário</span>
+                    </div>
+                    <div style="margin-top:20px">
+                        <h4 style="margin-bottom:12px;color:var(--primary)">Iniciativas Recentes Confirmadas</h4>
+                        <span class="tag tag-active">Cartão digital Day-1 (Google Wallet/Apple Pay)</span>
+                        <span class="tag tag-active">Pagamento via Pix (24/7)</span>
+                        <span class="tag tag-active">EVA com IA Generativa</span>
+                        <span class="tag tag-active">Ticket Presente Perfeito Digital</span>
+                        <span class="tag tag-active">Mulesoft API Platform</span>
+                        <span class="tag tag-active">Arquitetura Serverless / Edge Computing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses, inferidos a partir de movimentos estratégicos públicos:</p>
+            <div>
+                <span class="tag tag-opportunity">Conformidade PAT / Arranjo Aberto</span>
+                <span class="tag tag-opportunity">Migração para Bandeiras Abertas</span>
+                <span class="tag tag-opportunity">IA Generativa (evolução EVA)</span>
+                <span class="tag tag-opportunity">Pagamentos Digitais (Pix, Wallets)</span>
+                <span class="tag tag-opportunity">Automação de Processos (RPA/IA)</span>
+                <span class="tag tag-opportunity">APIs e Integrações (Mulesoft)</span>
+                <span class="tag tag-opportunity">Cibersegurança e Antifraude</span>
+                <span class="tag tag-opportunity">Cloud Nativa / Serverless</span>
+                <span class="tag tag-opportunity">Data Analytics e Data Platform</span>
+                <span class="tag tag-opportunity">Experiência Digital (App / UX)</span>
+                <span class="tag tag-opportunity">Benefícios Flexíveis / Multibenefício</span>
+                <span class="tag tag-opportunity">Compliance LGPD / PCI-DSS</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades sem Fornecedor Definido</h3>
+            <div class="alert-box">
+                <strong>ALERTA — Janela de Oportunidade Regulatória:</strong> O Decreto 12.712/2025 obriga todas as operadoras de benefícios a adequar suas plataformas para arranjo aberto até novembro de 2026. Este é um projeto de transformação massiva que exige integração com bandeiras abertas (Mastercard/Visa), reestruturação de fluxos de liquidação e compliance regulatório — potencialmente demandando parceiros externos de tecnologia.
+            </div>
+            <div class="grid-2">
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 1</div>
+                    <div class="value">Integração com arranjos abertos de pagamento — desenvolvimento, testes e migração de toda a base transacional para operar com qualquer bandeira em qualquer adquirente</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 2</div>
+                    <div class="value">Evolução da EVA com IA Generativa — a assistente virtual está em fase de testes com capacidades proativas e GenAI, potencialmente necessitando de squads especializados em LLMs e NLP</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 3</div>
+                    <div class="value">Automação de processos de compliance e liquidação — novos prazos de repasse (15 dias) e regras de teto de taxas exigem automação end-to-end da cadeia de liquidação financeira</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 4</div>
+                    <div class="value">Modernização de sistemas legados — migração para arquitetura cloud-nativa e serverless para sustentar crescimento de pagamentos digitais (já 10% das transações)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Romain Dayan</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. Squads de Desenvolvimento / Fábrica de Software</h4>
+                    <div class="score-badge">Fit: 95%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Demanda urgente de adequação ao Decreto PAT exige capacidade extra de desenvolvimento para migração de plataforma de pagamentos</li>
+                        <li>Prazo regulatório rígido (nov/2026) cria pressão por escala rápida de equipes — modelo de squads é ideal</li>
+                        <li>Experiência Foursys com 41.000+ projetos e entrega via squads multidisciplinares</li>
+                        <li>Necessidade de integração com bandeiras abertas (Mastercard/Visa) em 720 mil estabelecimentos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. Integração e APIs (Parceria Digibee)</h4>
+                    <div class="score-badge">Fit: 92%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>A Edenred já processa 3,7 bi de chamadas API/mês via Mulesoft — escalar integrações é missão crítica</li>
+                        <li>Migração para arranjo aberto exige novas integrações com adquirentes, bandeiras e meios de pagamento</li>
+                        <li>Parceria Foursys-Digibee oferece alternativa/complemento ao Mulesoft com menor custo operacional</li>
+                        <li>200+ parceiros conectados (Deliveroo, Uber Eats) demandam governança de APIs robusta</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. AI Squad — IA Generativa e Automação Inteligente</h4>
+                    <div class="score-badge">Fit: 90%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>EVA (assistente IA) está em evolução para IA generativa — necessidade de expertise em LLMs/NLP</li>
+                        <li>2.500 colaboradores Edenred já usam GenAI internamente — escala exige governança e otimização</li>
+                        <li>Pressão por eficiência operacional (margem comprimida) torna automação inteligente imperativa</li>
+                        <li>AI Squad Foursys pode acelerar projetos de IA com metodologia proprietária</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. Cibersegurança e Compliance</h4>
+                    <div class="score-badge">Fit: 88%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Romain Dayan tem background em segurança (ex-CISO do Grupo Edenred) — tema de alta prioridade pessoal</li>
+                        <li>Processamento de ~€100 bi em volume transacional exige segurança de nível financeiro (PCI-DSS, LGPD)</li>
+                        <li>Certificações ISO 27001/27701 da Foursys são diferencial direto para esta conversa</li>
+                        <li>Mudança para arranjo aberto amplia superfície de ataque — novos vetores de risco</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>5. AMS — Application Management Services</h4>
+                    <div class="score-badge">Fit: 82%</div>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Com 3,6 milhões de usuários ativos no app e 17 milhões de atendimentos automatizados, sustentação é crítica</li>
+                        <li>Modelo AMS permite que time interno foque na transformação enquanto Foursys garante operação contínua</li>
+                        <li>Disponibilidade de 99,99% exige parceiro de sustentação maduro e com SLAs rigorosos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Abrir a conversa pelo <strong>impacto do Decreto PAT na plataforma tecnológica</strong>. Romain Dayan está sob pressão para adaptar toda a infraestrutura de pagamentos para arranjo aberto até novembro de 2026. Demonstrar conhecimento técnico sobre os desafios de integração com bandeiras abertas e como a Foursys pode fornecer squads especializados para acelerar essa migração sem comprometer a operação corrente. Mencionar a experiência com integrações de meios de pagamento e a parceria com Digibee como alternativa ágil ao Mulesoft.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A <strong>adequação regulatória ao Decreto 12.712/2025</strong> é a maior oportunidade imediata. A Edenred estimou impacto de 8-12% no EBITDA — a empresa precisa simultaneamente (1) adequar a plataforma para arranjo aberto, (2) reestruturar fluxos de liquidação para 15 dias, e (3) automatizar compliance. Este é um projeto de transformação forçada com deadline rígido, que tipicamente exige parceiros externos. Adicionalmente, a evolução da EVA para IA Generativa representa uma segunda frente de oportunidade com horizonte de 6-12 meses.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para Romain Dayan, destacar: (1) <strong>Experiência em meios de pagamento e fintechs</strong> — projetos com processamento transacional de alta volumetria; (2) <strong>Parceria Digibee</strong> para integração de APIs como complemento/alternativa ao Mulesoft, com menor custo; (3) <strong>ISO 27001/27701</strong> — certificações que falam diretamente ao ex-CISO; (4) <strong>AI Squad proprietário</strong> para acelerar a evolução da EVA com GenAI; (5) <strong>Modelo flexível</strong> (Squads, Projetos, AMS) que permite escalar rápido para cumprir deadline regulatório e depois ajustar.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. Regulação como catalisador de transformação:</strong> O Decreto PAT não é apenas um problema — é uma oportunidade de modernizar a plataforma inteira. A Edenred pode sair dessa regulação com uma infraestrutura mais robusta, interoperável e competitiva. Posicionar a Foursys como parceira que ajuda a transformar uma obrigação regulatória em vantagem competitiva.</p>
+                <p style="margin-bottom:12px"><strong>2. Pagamentos digitais são o futuro do setor:</strong> Os pagamentos digitais já representam 10% das transações da plataforma e crescem rapidamente (Google Wallet, Apple Pay, Pix). A infraestrutura precisa suportar essa aceleração — serverless, edge computing e APIs em escala são investimentos inevitáveis.</p>
+                <p style="margin-bottom:12px"><strong>3. IA é pilar estratégico consolidado:</strong> A EVA tem 10 anos de maturidade, 17 milhões de atendimentos e 93% de assertividade. O próximo salto é IA generativa proativa — a Edenred já tem 2.500 colaboradores usando GenAI internamente. Demonstrar capacidade de escalar IA com governança.</p>
+                <p style="margin-bottom:12px"><strong>4. Competição feroz exige velocidade:</strong> Pluxee (ex-Sodexo) investe 10% da receita em tech, Alelo integra TotalPass e educação, VR lança conta digital com SuperApp de 4 milhões de usuários. A Ticket precisa de velocidade de execução para não perder terreno — squads ágeis são a resposta.</p>
+                <p><strong>5. Background multicultural é ponte de conexão:</strong> Romain é francês, trabalhou na Itália e Espanha, e agora lidera 9 países nas Américas. Demonstrar que a Foursys entende os desafios de operar tecnologia em múltiplas geografias, regulações e culturas — experiência com 41.000+ projetos em contextos diversos.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Pluxee (ex-Sodexo Benefícios)</h4>
+                <p><strong>Segmento:</strong> Benefícios corporativos, refeição, alimentação, mobilidade | <strong>Alcance Brasil:</strong> 6,5 milhões de trabalhadores, 175 mil empresas, 750 mil estabelecimentos</p>
+                <p>Spin-off da Sodexo em 2024, a Pluxee é o principal concorrente direto da Ticket no Brasil. Investe <strong>10% da receita anual em tecnologia</strong>, contratou ~1.000 profissionais de tech e dados, e foca em plataforma digital unificada com benefícios flexíveis (alimentação, mobilidade, home office, saúde). Estratégia agressiva de expansão em PMEs e soluções de bem-estar integrado.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Alelo (Grupo Elo — Bradesco + Banco do Brasil)</h4>
+                <p><strong>Segmento:</strong> Benefícios corporativos, alimentação, mobilidade, educação | <strong>Alcance Brasil:</strong> 10+ milhões de usuários</p>
+                <p>Oito vezes campeã do Top of Mind de RH. Em 2025-2026, expandiu agressivamente para novos verticais: <strong>parceria com TotalPass</strong> (6 mil academias), <strong>benefício educação</strong> (parceria com Unico Skill, 26 mil opções de cursos) e plataforma digital de carros compartilhados. Diferencial: backing bancário (Bradesco/BB) que facilita integração com serviços financeiros e ampla rede de aceitação via bandeira Elo.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>VR Benefícios</h4>
+                <p><strong>Segmento:</strong> Benefícios corporativos, soluções financeiras | <strong>Alcance Brasil:</strong> 4 milhões de usuários, 120 mil empresas</p>
+                <p>Evolução acelerada para <strong>fintech</strong>: lançou SuperApp com arquitetura de microsserviços (atualizado a cada 15 dias), conta digital (Smart VR Conta Benefício com Unibanco), adiantamento salarial, consignado e previdência. IA para recomendações personalizadas e assistente virtual com GenAI em roadmap. Projeta adicionar 1 milhão de cartões em 2026. Ameaça por diversificação financeira.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>iFood Benefícios</h4>
+                <p><strong>Segmento:</strong> Benefícios alimentação/refeição via plataforma digital | <strong>Alcance:</strong> Em expansão agressiva</p>
+                <p>Novo entrante com forte base tecnológica e marca reconhecida pelo consumidor final. Aproveita a regulação de arranjo aberto para competir com infraestrutura digital nativa, sem legado de sistemas. Representa ameaça disruptiva às operadoras tradicionais, especialmente em empresas jovens e startups que valorizam experiência do usuário.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>O mercado de benefícios brasileiro está em plena disrupção. Os concorrentes da Ticket estão: (1) <strong>diversificando para fintech</strong> (VR com conta digital, Alelo com serviços bancários via Elo) — a Ticket pode precisar de squads para acelerar oferta financeira; (2) <strong>expandindo verticais</strong> (educação, saúde, mobilidade) — cada novo vertical exige integrações e APIs adicionais; (3) <strong>investindo massivamente em tech talent</strong> (Pluxee contratou 1.000 profissionais) — a Foursys pode complementar como parceira de capacidade; (4) <strong>usando IA como diferencial</strong> (VR com GenAI no SuperApp) — a EVA da Ticket precisa evoluir rápido para não ficar defasada. A Foursys pode se posicionar como o parceiro que acelera a execução em todas essas frentes simultaneamente.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Diretor de Tecnologia da Informação (CIO) — Ticket | Diretor Global Technology Americas — Edenred</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Nacionalidade</div>
+                        <div class="value">Francesa — vive e trabalha no Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação</div>
+                        <div class="value">Mestrado em TI (European Institute of Technology, Paris) | Executivo HEC-Paris (2017) | Diploma EPITECH (2007)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência na Edenred</div>
+                        <div class="value">+15 anos — iniciou como analista de segurança em 2007 (AccorHotels/Accor Services)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória Internacional</div>
+                        <div class="value">França → Brasil → Itália (CIO Europe do Sul) → Espanha → Brasil (GTA Americas). Geriu soluções para EUA, México, Europa, Oriente Médio e Índia</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Background em Segurança</div>
+                        <div class="value">Ex-RSSI (CISO) do Grupo Edenred desde 2015 — segurança é tema pessoal e profissional forte</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Posição na Organização</div>
+                        <div class="value">Integra Diretoria Executiva da Edenred Brasil + Comitê de Direção da Ticket</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Temas de Interesse Público</div>
+                        <div class="value">Data, IA, plataformas, pagamentos digitais, segurança da informação, transformação digital multicultural</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Fale sobre o desafio regulatório como oportunidade:</strong> Romain está no epicentro da transformação forçada pelo Decreto PAT. Em vez de lamentar a regulação, posicione a conversa como "como transformar compliance em vantagem competitiva" — isso mostra maturidade e alinhamento estratégico.</p>
+                <p style="margin-bottom:10px"><strong>2. Reconheça sua trajetória de segurança:</strong> Ele foi CISO do Grupo Edenred antes de ser CIO. Mencionar que a Foursys tem ISO 27001/27701 e que segurança é DNA da empresa cria conexão imediata com sua identidade profissional. Ele entende e valoriza segurança como poucos CIOs.</p>
+                <p style="margin-bottom:10px"><strong>3. Conecte-se pela experiência multicultural:</strong> Romain trabalhou em 4+ países e gere 9 nas Américas. Pergunte sobre os desafios de alinhar tecnologia em mercados com regulações tão diferentes — isso demonstra compreensão da complexidade do seu papel e abre espaço para conversa genuína.</p>
+                <p style="margin-bottom:10px"><strong>4. Referencie a EVA e seus 10 anos:</strong> A assistente virtual é motivo de orgulho — pioneira no setor com 17 milhões de atendimentos. Elogie a visão de longo prazo e pergunte sobre os próximos passos com IA generativa — isso ativa entusiasmo e demonstra que você pesquisou a fundo.</p>
+                <p><strong>5. Use dados concretos do mercado:</strong> Mencione números dos concorrentes (Pluxee investindo 10% da receita em tech, VR com SuperApp de 4M usuários, Alelo com 10M+ usuários e parcerias em educação). Romain respeita dados — mostrar que você entende o cenário competitivo gera credibilidade instantânea.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Diretoria Executiva — integra C-Level da Edenred Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo Geográfico</div>
+                        <div class="value">Americas — 9 países (Brasil, EUA, México + 6 outros)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Comitês</div>
+                        <div class="value">Comitê de Direção da Ticket + Diretoria Executiva Edenred Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão</div>
+                        <div class="value">Decisor — lidera visão tecnológica e execução de TI em escala regional</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores Edenred (Global)</div>
+                        <div class="value">~12.000</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários da Plataforma (Brasil)</div>
+                        <div class="value">3,6 milhões de usuários ativos mensais no app</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Volume Transacional</div>
+                        <div class="value">~€100 bilhões/ano (global) | 3,7 bi chamadas API/mês</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Negócio</div>
+                        <div class="value">Central — Edenred se define como plataforma tecnológica de pagamentos. TI É o negócio.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada do Investimento em Tecnologia</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Plataforma de Pagamentos</div><div class="bar-track"><div class="bar-fill" style="width:28%;background:#1a237e">28%</div></div></div>
+                <div class="bar"><div class="bar-label">Cloud / Infraestrutura</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+                <div class="bar"><div class="bar-label">APIs e Integrações</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança / Compliance</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">12%</div></div></div>
+                <div class="bar"><div class="bar-label">IA e Data Analytics</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Experiência Digital (App/UX)</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas / Capacitação</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria / Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#9fa8da">2%</div></div></div>
+            </div>
+            <p style="margin-top:16px;font-size:12px;color:var(--text-light);text-align:center">* Estimativa baseada em informações públicas e perfil da empresa. Edenred investiu €480 milhões em tecnologia em 2023 (+25% vs 2022).</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor (Inferidas)</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Segurança e Compliance (PCI-DSS, LGPD)</span>
+                        <span class="tag tag-active">Escalabilidade e Performance</span>
+                        <span class="tag tag-active">Experiência em Meios de Pagamento</span>
+                        <span class="tag tag-active">Capacidade de Entrega Ágil</span>
+                        <span class="tag tag-active">Expertise em APIs e Integrações</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Parceiro tecnológico com expertise em pagamentos digitais, segurança e capacidade de escalar rapidamente</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Potencial</div>
+                        <div class="value">Squads dedicados para projetos de transformação + AMS para sustentação contínua</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

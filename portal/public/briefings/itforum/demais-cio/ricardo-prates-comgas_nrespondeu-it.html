@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Ricardo Prates | COMGÁS</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Ricardo Prates</h1>
+                <h2>CIO / Diretor de TI &mdash; COMG&Aacute;S (Compass G&aacute;s e Energia)</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Qu&iacute;mica, Petroqu&iacute;mica, &Oacute;leo e G&aacute;s (Distribui&ccedil;&atilde;o de G&aacute;s) | S&atilde;o Paulo - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Receita L&iacute;quida</div>
+                    <div class="value">R$ 15,4 BI (2024)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">EBITDA</div>
+                    <div class="value">R$ 3,7 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Lucro L&iacute;quido</div>
+                    <div class="value">R$ 1,79 BI (+27%)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> An&aacute;lise da Empresa: COMG&Aacute;S</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Comg&aacute;s</strong> (Companhia de G&aacute;s de S&atilde;o Paulo) &eacute; a <strong>maior distribuidora de g&aacute;s natural encanado da Am&eacute;rica Latina</strong>, controlada pela <strong>Compass G&aacute;s e Energia</strong> (grupo Cosan). A empresa opera em <strong>96 munic&iacute;pios</strong> do estado de S&atilde;o Paulo, com mais de <strong>23 mil km de rede de distribui&ccedil;&atilde;o</strong> atendendo <strong>2,6 milh&otilde;es de clientes</strong> nos segmentos residencial, comercial, industrial, automotivo e cogera&ccedil;&atilde;o. Em 2024, a Comg&aacute;s registrou receita l&iacute;quida de <strong>R$ 15,4 bilh&otilde;es</strong> (+1,9%), lucro l&iacute;quido de <strong>R$ 1,79 bilh&atilde;o</strong> (+27,2%) e EBITDA de <strong>R$ 3,7 bilh&otilde;es</strong> (+6,7%). Os investimentos totalizaram R$ 1,5 bilh&atilde;o. No campo tecnol&oacute;gico, a empresa migrou <strong>90% da infraestrutura para a nuvem Azure</strong>, processou <strong>mais de 55 TB de dados</strong> em sua plataforma anal&iacute;tica, desenvolveu algoritmos pr&oacute;prios de IA para previs&atilde;o de consumo, chatbots com an&aacute;lise de sentimento e automa&ccedil;&atilde;o de compras. Opera um <strong>Centro de Controle Operacional (CCO)</strong> que monitora mais de 2 mil ativos de rede e 10 mil equipamentos via sensores em tempo real.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrang&ecirc;ncia</div>
+                        <div class="value">Nacional (96 munic&iacute;pios em SP)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada (Grupo Cosan / Compass)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento (+27,2% lucro em 2024)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">~1.200 diretos / 3.000+ indiretos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estrat&eacute;gico</h4>
+                <p>Empresa do setor de <strong>Qu&iacute;mica, Petroqu&iacute;mica, &Oacute;leo e G&aacute;s</strong> com abrang&ecirc;ncia <strong>Nacional</strong>, l&iacute;der absoluta em distribui&ccedil;&atilde;o de g&aacute;s natural encanado na Am&eacute;rica Latina. A Comg&aacute;s est&aacute; em plena transforma&ccedil;&atilde;o digital com migra&ccedil;&atilde;o cloud-first para Azure, desenvolvimento de solu&ccedil;&otilde;es de IA/ML pr&oacute;prias e moderniza&ccedil;&atilde;o do monitoramento operacional. O grupo Compass (controlador) registrou EBITDA de R$ 5 bilh&otilde;es (+11%) e investimentos de R$ 2,2 bilh&otilde;es em 2025, sinalizando forte apetite por inova&ccedil;&atilde;o e expans&atilde;o. Ricardo Prates, como CIO, lidera a estrat&eacute;gia tecnol&oacute;gica com foco em lideran&ccedil;a amb&iacute;destra e gest&atilde;o da mudan&ccedil;a organizacional.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estrat&eacute;gicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar IA/ML al&eacute;m de previs&atilde;o de consumo para toda cadeia operacional</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Otimizar infraestrutura cloud (de lift-and-shift para cloud-native)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar monitoramento de rede com IoT e an&aacute;lise preditiva</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer ciberseguran&ccedil;a em infraestrutura cr&iacute;tica (OT/IT)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos corporativos e operacionais</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar dados entre Comg&aacute;s, GasBrasiliano e Sulg&aacute;s (ecossistema Compass)</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Cloud Optimization (Azure)</span>
+                        <span class="tag tag-priority">IA / Machine Learning</span>
+                        <span class="tag tag-priority">IoT &amp; Monitoramento Operacional</span>
+                        <span class="tag tag-priority">Ciberseguran&ccedil;a OT/IT</span>
+                        <span class="tag tag-priority">Integra&ccedil;&atilde;o de Dados &amp; Analytics</span>
+                    </div>
+                    <h4 style="margin-top:20px;margin-bottom:12px;color:var(--primary)">Iniciativas J&aacute; em Andamento</h4>
+                    <div>
+                        <span class="tag tag-active">90% infra em Azure</span>
+                        <span class="tag tag-active">55+ TB dados processados</span>
+                        <span class="tag tag-active">IA previs&atilde;o de consumo</span>
+                        <span class="tag tag-active">CCO em tempo real</span>
+                        <span class="tag tag-active">Medi&ccedil;&atilde;o remota de g&aacute;s</span>
+                        <span class="tag tag-active">Assinatura digital (65% ganho)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Pr&oacute;ximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receber&atilde;o investimento nos pr&oacute;ximos 12 meses, com base na an&aacute;lise do perfil e tend&ecirc;ncias do setor:</p>
+            <div>
+                <span class="tag tag-opportunity">Otimiza&ccedil;&atilde;o Cloud-Native</span>
+                <span class="tag tag-opportunity">IA Generativa &amp; Copilots</span>
+                <span class="tag tag-opportunity">IoT Industrial / Sensoriamento</span>
+                <span class="tag tag-opportunity">An&aacute;lise Preditiva de Rede</span>
+                <span class="tag tag-opportunity">Seguran&ccedil;a OT (SCADA/ICS)</span>
+                <span class="tag tag-opportunity">Integra&ccedil;&atilde;o de Sistemas (APIs)</span>
+                <span class="tag tag-opportunity">Automa&ccedil;&atilde;o de Processos (RPA/IA)</span>
+                <span class="tag tag-opportunity">Data Lakehouse &amp; Governan&ccedil;a</span>
+                <span class="tag tag-opportunity">Experi&ecirc;ncia Digital do Cliente</span>
+                <span class="tag tag-opportunity">Sustentabilidade &amp; ESG Digital</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <div class="alert-box">
+                <strong>&#9888; Janela de Oportunidade:</strong> A Comg&aacute;s est&aacute; em fase de transi&ccedil;&atilde;o de lift-and-shift para otimiza&ccedil;&atilde;o cloud-native. Com 131 aplica&ccedil;&otilde;es j&aacute; em Azure, o pr&oacute;ximo passo &eacute; modernizar, refatorar e automatizar &mdash; criando demanda por servi&ccedil;os especializados.
+            </div>
+            <div class="grid-2">
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 1</div>
+                    <div class="value">Moderniza&ccedil;&atilde;o de aplica&ccedil;&otilde;es legacy para cloud-native (131 apps em Azure precisam de refactoring)</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 2</div>
+                    <div class="value">Expans&atilde;o de IA/ML para al&eacute;m de previs&atilde;o de consumo: detec&ccedil;&atilde;o de fraudes, manuten&ccedil;&atilde;o preditiva, otimiza&ccedil;&atilde;o log&iacute;stica</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 3</div>
+                    <div class="value">Integra&ccedil;&atilde;o de dados entre subsidiárias Compass (Comg&aacute;s, GasBrasiliano, Sulg&aacute;s) via plataforma unificada</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 4</div>
+                    <div class="value">Ciberseguran&ccedil;a convergente OT/IT para infraestrutura cr&iacute;tica de distribui&ccedil;&atilde;o de g&aacute;s</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Ricardo Prates</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">An&aacute;lise de fit entre o portf&oacute;lio Foursys e as necessidades identificadas. Ordenado por relev&acirc;ncia.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>AI Squad &mdash; Escala&ccedil;&atilde;o de IA/ML</h4>
+                    <span class="score-badge">Fit: 95%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Comg&aacute;s j&aacute; possui IA para previs&atilde;o de consumo operacional h&aacute; 4 anos &mdash; momento ideal para escalar</li>
+                        <li>55+ TB de dados processados criam base s&oacute;lida para novos modelos (manuten&ccedil;&atilde;o preditiva, detec&ccedil;&atilde;o de vazamentos, otimiza&ccedil;&atilde;o de rotas)</li>
+                        <li>AI Squad Foursys pode acelerar desenvolvimento de novos casos de uso com governan&ccedil;a (MLOps)</li>
+                        <li>Potencial para IA Generativa em atendimento ao cliente e an&aacute;lise de documentos t&eacute;cnicos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Moderniza&ccedil;&atilde;o de Aplica&ccedil;&otilde;es &amp; Cloud-Native</h4>
+                    <span class="score-badge">Fit: 90%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>131 aplica&ccedil;&otilde;es em Azure foram migradas via lift-and-shift &mdash; pr&oacute;ximo passo &eacute; otimiza&ccedil;&atilde;o</li>
+                        <li>Refatora&ccedil;&atilde;o para containers, serverless e microsservi&ccedil;os pode reduzir custos em 30-40%</li>
+                        <li>Foursys tem experi&ecirc;ncia comprovada em moderniza&ccedil;&atilde;o de aplica&ccedil;&otilde;es em Azure</li>
+                        <li>Modelo de squads permite execu&ccedil;&atilde;o paralela de m&uacute;ltiplas frentes de moderniza&ccedil;&atilde;o</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Integra&ccedil;&atilde;o de Sistemas (Digibee / APIs)</h4>
+                    <span class="score-badge">Fit: 88%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Ecossistema Compass com 3 distribuidoras (Comg&aacute;s, GasBrasiliano, Sulg&aacute;s) demanda integra&ccedil;&atilde;o unificada</li>
+                        <li>Parceria Foursys + Digibee oferece plataforma low-code de integra&ccedil;&atilde;o ideal para o cen&aacute;rio</li>
+                        <li>Integra&ccedil;&atilde;o de dados entre CCO, ERP, CRM e plataforma anal&iacute;tica Azure</li>
+                        <li>APIs para abertura do mercado de g&aacute;s (Nova Lei do G&aacute;s) e fornecedores privados</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Ciberseguran&ccedil;a &mdash; Converg&ecirc;ncia OT/IT</h4>
+                    <span class="score-badge">Fit: 85%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Infraestrutura cr&iacute;tica de distribui&ccedil;&atilde;o de g&aacute;s requer seguran&ccedil;a convergente OT/IT</li>
+                        <li>2 mil ativos de rede e 10 mil equipamentos monitorados criam superf&iacute;cie de ataque ampla</li>
+                        <li>Certifica&ccedil;&otilde;es ISO 27001/27701 da Foursys s&atilde;o diferencial direto</li>
+                        <li>Regula&ccedil;&atilde;o ANEEL/ANP exige compliance rigoroso em seguran&ccedil;a de infraestrutura</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>Automa&ccedil;&atilde;o Inteligente de Processos</h4>
+                    <span class="score-badge">Fit: 82%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>J&aacute; obtiveram 65% de ganho com assinatura digital &mdash; apetite comprovado para automa&ccedil;&atilde;o</li>
+                        <li>IA para an&aacute;lise de propostas de fornecedores indica maturidade para expandir RPA+IA</li>
+                        <li>Processos de campo (medi&ccedil;&atilde;o, inspe&ccedil;&atilde;o, manuten&ccedil;&atilde;o) t&ecirc;m alto potencial de automa&ccedil;&atilde;o</li>
+                        <li>Foursys pode combinar AI Squad + automa&ccedil;&atilde;o para processos de back-office e opera&ccedil;&otilde;es</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estrat&eacute;gia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Ricardo Prates lidera a transforma&ccedil;&atilde;o digital de uma empresa que j&aacute; migrou 90% para a nuvem e processa 55+ TB de dados. O gancho ideal &eacute; <strong>otimiza&ccedil;&atilde;o cloud-native e escalabilidade de IA</strong>: "Voc&ecirc;s fizeram um trabalho impressionante migrando 131 aplica&ccedil;&otilde;es para Azure. A Foursys pode acelerar o pr&oacute;ximo passo &mdash; refatorar para cloud-native e expandir os modelos de IA para novas fronteiras como manuten&ccedil;&atilde;o preditiva de rede e detec&ccedil;&atilde;o de anomalias."</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A transi&ccedil;&atilde;o de lift-and-shift para cloud-native &eacute; a <strong>principal janela de oportunidade</strong>. Com 131 aplica&ccedil;&otilde;es precisando de otimiza&ccedil;&atilde;o, h&aacute; demanda real e imediata por squads especializados. Al&eacute;m disso, a abertura do mercado de g&aacute;s (Nova Lei do G&aacute;s) gera demanda por integra&ccedil;&atilde;o com novos fornecedores privados &mdash; fit direto com a parceria Foursys + Digibee.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>AI Squad propriet&aacute;rio</strong> para escalar modelos de IA no setor de utilities; (2) <strong>Parceria Digibee</strong> para integra&ccedil;&atilde;o low-code entre subsidiarias Compass; (3) <strong>Certifica&ccedil;&otilde;es ISO 27001/27701</strong> cr&iacute;ticas para infraestrutura de g&aacute;s; (4) <strong>Modelo flex&iacute;vel de squads</strong> que permite escalar e desescalar conforme demanda de projetos de moderniza&ccedil;&atilde;o.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Neg&oacute;cio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. De lift-and-shift para cloud-native &eacute; o momento cr&iacute;tico:</strong> A Comg&aacute;s j&aacute; migrou 90% da infra para Azure, mas reconhece que precisa redimensionar aplica&ccedil;&otilde;es. Este momento de otimiza&ccedil;&atilde;o &eacute; onde se captura o real valor da nuvem &mdash; e onde parceiros especializados fazem a diferen&ccedil;a. Destacar cases de moderniza&ccedil;&atilde;o em Azure com redu&ccedil;&atilde;o de custos comprovada.</p>
+                <p style="margin-bottom:12px"><strong>2. IA j&aacute; &eacute; realidade, n&atilde;o promessa:</strong> Com IA para previs&atilde;o de consumo operacional h&aacute; 4 anos e chatbots com an&aacute;lise de sentimento, a Comg&aacute;s tem maturidade para escalar. O desafio agora &eacute; governan&ccedil;a (MLOps), novos casos de uso (manuten&ccedil;&atilde;o preditiva, fraude) e IA Generativa. O AI Squad da Foursys fala diretamente com essa necessidade.</p>
+                <p style="margin-bottom:12px"><strong>3. Abertura do mercado de g&aacute;s cria demanda de integra&ccedil;&atilde;o:</strong> A Nova Lei do G&aacute;s permite que 12 distribuidoras contratem fornecedores privados (Compass, Galp, Origen). Isso exige APIs, integra&ccedil;&atilde;o B2B e gest&atilde;o de contratos digitais &mdash; exatamente o que a Digibee + Foursys entregam.</p>
+                <p style="margin-bottom:12px"><strong>4. Infraestrutura cr&iacute;tica exige seguran&ccedil;a convergente:</strong> Com 23 mil km de rede, 2 mil ativos e monitoramento em tempo real via CCO, a superf&iacute;cie de ataque &eacute; enorme. Seguran&ccedil;a OT/IT convergente n&atilde;o &eacute; opcional &mdash; &eacute; regulat&oacute;ria e operacional. As certifica&ccedil;&otilde;es ISO da Foursys s&atilde;o credencial direta.</p>
+                <p><strong>5. Lideran&ccedil;a amb&iacute;destra &eacute; tema pessoal de Ricardo:</strong> Ele fala publicamente sobre "lideran&ccedil;a no caos" e gest&atilde;o de diferen&ccedil;as geracionais. Conectar-se por esse tema mostra que a Foursys entende n&atilde;o s&oacute; de tecnologia, mas de gest&atilde;o de pessoas e transforma&ccedil;&atilde;o cultural &mdash; essencial para quem lidera 1.200 colaboradores diretos numa empresa centenária.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Naturgy Brasil (CEG, CEG Rio, G&aacute;s Natural SP Sul)</h4>
+                <p><strong>Segmento:</strong> Distribui&ccedil;&atilde;o de g&aacute;s natural | <strong>Rede:</strong> 51.255 km | <strong>Clientes:</strong> 2,5 milh&otilde;es</p>
+                <p>Principal concorrente da Comg&aacute;s, operando no Rio de Janeiro e interior de SP. Est&aacute; acelerando transforma&ccedil;&atilde;o digital com <strong>plataforma ArcGIS geoespacial</strong> para gest&atilde;o centralizada de ativos, digitaliza&ccedil;&atilde;o de inspe&ccedil;&otilde;es e manuten&ccedil;&atilde;o em campo com aplica&ccedil;&otilde;es m&oacute;veis (Survey123) e sincroniza&ccedil;&atilde;o autom&aacute;tica de dados. Foco em efici&ecirc;ncia operacional atrav&eacute;s de geoposicionamento inteligente.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Bahig&aacute;s (Bahia)</h4>
+                <p><strong>Segmento:</strong> Distribui&ccedil;&atilde;o de g&aacute;s natural (economia mista) | <strong>Estado:</strong> Bahia</p>
+                <p>Distribuidora baiana que lan&ccedil;ou em 2025 o <strong>HuBG&aacute;s</strong> &mdash; descrita como a primeira plataforma digital do Brasil com IA para gest&atilde;o de programa&ccedil;&atilde;o e aloca&ccedil;&atilde;o de g&aacute;s natural. A plataforma integra <strong>IA (SAS)</strong> para previs&atilde;o de demanda, otimiza&ccedil;&atilde;o de estoque e gest&atilde;o de riscos. Portf&oacute;lio mais diversificado de fornecedores privados. Inova&ccedil;&atilde;o agressiva para uma distribuidora de menor porte.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Energisa (ES G&aacute;s)</h4>
+                <p><strong>Segmento:</strong> Distribui&ccedil;&atilde;o de g&aacute;s natural e energia el&eacute;trica | <strong>Estado:</strong> Esp&iacute;rito Santo</p>
+                <p>Entrou no mercado de distribui&ccedil;&atilde;o de g&aacute;s em 2023 com a aquisi&ccedil;&atilde;o da ES G&aacute;s, tornando-se a 3&ordf; maior operadora privada do setor. Traz expertise de transforma&ccedil;&atilde;o digital do setor el&eacute;trico (smart grids, telemedição, automação de subestações) que pode ser aplicada ao gás. A sinergia entre distribui&ccedil;&atilde;o de eletricidade e g&aacute;s representa modelo de utilidade integrada.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Fornecedores Privados (Galp, Origen Energia)</h4>
+                <p><strong>Segmento:</strong> Comercializa&ccedil;&atilde;o de g&aacute;s natural | <strong>Volume:</strong> Galp 2,1MM m&sup3;/dia | Origen 1,7MM m&sup3;/dia</p>
+                <p>Com a Nova Lei do G&aacute;s, fornecedores privados como <strong>Galp</strong> e <strong>Origen Energia</strong> passaram a competir com a pr&oacute;pria Compass no fornecimento de mol&eacute;cula. A Galp possui o portf&oacute;lio mais diversificado e a Origen cresce rapidamente. Esses players investem em <strong>plataformas digitais de trading</strong> e gest&atilde;o de contratos &mdash; criando press&atilde;o competitiva por digitaliza&ccedil;&atilde;o em toda a cadeia.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis &mdash; Oportunidades para a Foursys</h4>
+                <p>Os concorrentes da Comg&aacute;s est&atilde;o investindo em <strong>plataformas digitais especializadas</strong> (Naturgy com ArcGIS, Bahig&aacute;s com HuBG&aacute;s/SAS) e <strong>IA para gest&atilde;o de g&aacute;s</strong>. A Energisa traz expertise de digitaliza&ccedil;&atilde;o do setor el&eacute;trico. A Comg&aacute;s tem vantagem em escala e maturidade cloud (90% Azure), mas pode ter gaps em: (1) <strong>Plataforma unificada de integra&ccedil;&atilde;o</strong> para o ecossistema Compass com 3 distribuidoras; (2) <strong>IA para manuten&ccedil;&atilde;o preditiva de rede</strong> &mdash; concorrentes j&aacute; avan&ccedil;am neste tema; (3) <strong>Seguran&ccedil;a OT convergente</strong> para 23 mil km de rede cr&iacute;tica; (4) <strong>Moderniza&ccedil;&atilde;o de apps legacy</strong> (131 aplica&ccedil;&otilde;es ainda em modelo lift-and-shift). A Foursys pode posicionar-se como parceira para fechar esses gaps com squads especializados em cloud-native, IA e integra&ccedil;&atilde;o (Digibee).</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informa&ccedil;&otilde;es pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CIO / Diretor de TI &mdash; Comg&aacute;s (Compass G&aacute;s e Energia / Grupo Cosan)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localiza&ccedil;&atilde;o</div>
+                        <div class="value">S&atilde;o Paulo, SP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Lideran&ccedil;a</div>
+                        <div class="value">Defensor da "lideran&ccedil;a amb&iacute;destra" e "lideran&ccedil;a no caos" &mdash; equilibra inova&ccedil;&atilde;o com opera&ccedil;&atilde;o est&aacute;vel</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presen&ccedil;a em Eventos</div>
+                        <div class="value">Participante do IT Forum; entrevistas na m&iacute;dia especializada (IT Forum, InfoQ)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Temas de Interesse P&uacute;blico</div>
+                        <div class="value">Gest&atilde;o de diferen&ccedil;as geracionais, sa&uacute;de mental no trabalho, transforma&ccedil;&atilde;o cultural em TI</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Vis&atilde;o Declarada</div>
+                        <div class="value">"A diferen&ccedil;a geracional faz parte da lideran&ccedil;a no caos" &mdash; valoriza equil&iacute;brio entre resultados e bem-estar</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Reconhe&ccedil;a a complexidade de liderar TI em infraestrutura cr&iacute;tica:</strong> Distribui&ccedil;&atilde;o de g&aacute;s n&atilde;o &eacute; um app que pode ficar fora do ar &mdash; &eacute; seguran&ccedil;a p&uacute;blica. Demonstrar compreens&atilde;o dessa responsabilidade (23 mil km de rede, 2,6 milh&otilde;es de clientes) cria conex&atilde;o imediata.</p>
+                <p style="margin-bottom:10px"><strong>2. Conecte-se pelo tema de lideran&ccedil;a geracional:</strong> Ricardo fala abertamente sobre os desafios de gerenciar equipes multi-geracionais e sa&uacute;de mental. Perguntar como ele equilibra inova&ccedil;&atilde;o r&aacute;pida com bem-estar da equipe mostra que voc&ecirc; o pesquisou al&eacute;m do cargo.</p>
+                <p style="margin-bottom:10px"><strong>3. Valorize a migra&ccedil;&atilde;o cloud j&aacute; realizada:</strong> 90% da infra em Azure com 131 aplica&ccedil;&otilde;es &eacute; um feito significativo. Come&ccedil;ar reconhecendo essa conquista antes de falar de "pr&oacute;ximos passos" evita parecer que voc&ecirc; est&aacute; minimizando o trabalho j&aacute; feito.</p>
+                <p style="margin-bottom:10px"><strong>4. Fale a l&iacute;ngua de utilities:</strong> Use termos do setor &mdash; CCO, medi&ccedil;&atilde;o remota, SCADA, press&atilde;o de rede, compliance ANP/ARSESP. Isso diferencia a Foursys de vendedores gen&eacute;ricos de TI e posiciona como parceiro que entende o neg&oacute;cio.</p>
+                <p><strong>5. Posicione-se como extens&atilde;o da equipe, n&atilde;o substituto:</strong> A Comg&aacute;s desenvolveu IA internamente (previs&atilde;o de consumo operacional h&aacute; 4 anos). Ricardo valoriza capacita&ccedil;&atilde;o interna. O modelo de squads Foursys deve ser apresentado como "acelerador" que transfere conhecimento, n&atilde;o como "terceiriza&ccedil;&atilde;o".</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posi&ccedil;&atilde;o de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria executiva</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Grupo Controlador</div>
+                        <div class="value">Compass G&aacute;s e Energia (Cosan)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo de Atua&ccedil;&atilde;o</div>
+                        <div class="value">Tecnologia, inova&ccedil;&atilde;o e transforma&ccedil;&atilde;o digital para Comg&aacute;s e ecossistema Compass</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Maturidade Digital</div>
+                        <div class="value">Alta &mdash; 90% cloud, IA operacional, CCO em tempo real, 55+ TB de dados</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores Diretos</div>
+                        <div class="value">~1.200 (Comg&aacute;s)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Base de Clientes</div>
+                        <div class="value">2,6 milh&otilde;es de consumidores</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Infraestrutura</div>
+                        <div class="value">131 aplica&ccedil;&otilde;es em Azure | 23 mil km de rede | CCO com 2.000+ ativos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estrat&eacute;gica: TI &eacute; habilitadora da opera&ccedil;&atilde;o e da expans&atilde;o do neg&oacute;cio de g&aacute;s</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribui&ccedil;&atilde;o Estimada de Investimentos em TI</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Opera&ccedil;&atilde;o em Nuvem (Azure)</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+                <div class="bar"><div class="bar-label">Infraestrutura OT/SCADA</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+                <div class="bar"><div class="bar-label">IA / Analytics / Dados</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#3949ab">18%</div></div></div>
+                <div class="bar"><div class="bar-label">Software &amp; Aplica&ccedil;&otilde;es</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">12%</div></div></div>
+                <div class="bar"><div class="bar-label">Ciberseguran&ccedil;a</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas &amp; Capacita&ccedil;&atilde;o</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#5c6bc0">7%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+            </div>
+            <p style="margin-top:16px;font-size:12px;color:var(--text-light);text-align:center">* Estimativa baseada no perfil de investimentos do setor de utilities e nas iniciativas p&uacute;blicas da Comg&aacute;s</p>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Prefer&ecirc;ncias de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Crit&eacute;rios de Alta Relev&acirc;ncia</h4>
+                    <div>
+                        <span class="tag tag-active">Expertise no setor de utilities</span>
+                        <span class="tag tag-active">Capacidade de escala (squads)</span>
+                        <span class="tag tag-active">Certifica&ccedil;&otilde;es de seguran&ccedil;a</span>
+                        <span class="tag tag-active">Transfer&ecirc;ncia de conhecimento</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Parceiro estrat&eacute;gico com vis&atilde;o de longo prazo e capacidade t&eacute;cnica especializada</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Ecossistema Tecnol&oacute;gico Atual</div>
+                        <div class="value">Microsoft Azure (cloud), Power BI (analytics), IA/ML custom, QualiSign (assinatura digital)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente &mdash; Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

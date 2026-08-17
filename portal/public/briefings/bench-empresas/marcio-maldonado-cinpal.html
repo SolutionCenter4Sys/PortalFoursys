@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Marcio Maldonado | CINPAL</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } .header-content { flex-direction: column; text-align: center; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } body { background: white; } .section { box-shadow: none; border: 1px solid #eee; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Marcio Maldonado</h1>
+                <h2>Head de TI — CINPAL (Companhia Industrial de Peças para Automóveis)</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Indústria de Autopeças (Forjados, Fundidos e Usinados) | Taboão da Serra, SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Colaboradores</div>
+                    <div class="value">+2.000</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Fundação</div>
+                    <div class="value">1950 (75 anos)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Plantas Fabris</div>
+                    <div class="value">3 unidades</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- ANÁLISE DA EMPRESA -->
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: CINPAL</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>CINPAL — Companhia Industrial de Peças para Automóveis</strong> é uma empresa brasileira fundada em 1950, com mais de 75 anos de atuação no setor de autopeças. Sediada em <strong>Taboão da Serra (SP)</strong>, a empresa é referência global na fabricação de peças <strong>forjadas, fundidas e usinadas</strong> para caminhões, ônibus, equipamentos agrícolas e de mineração. Opera três plantas fabris com moderna infraestrutura, incluindo linha robótica de forjamento com prensa de <strong>12.500 toneladas</strong> e capacidade mensal de <strong>6.000 toneladas em forjaria</strong> e <strong>4.000 toneladas em fundição</strong>. A empresa fornece peças originais (OEM) para as principais montadoras de veículos pesados — <strong>Iveco, MAN, Mercedes-Benz, Scania, Volvo e Volkswagen Trucks & Bus</strong> — além de atuar fortemente no mercado de reposição (<strong>Aftermarket</strong>) em todo o Brasil e América Latina. Seus produtos incluem conjuntos volantes de cremalheiras, tambores de freio, eixos de comando, engrenagens e conjuntos coroa e pinhão. A CINPAL utiliza <strong>SAP ERP</strong> em seus processos de planejamento e controle, e possui alto índice de retenção de talentos (72% dos colaboradores com mais de 11 anos de empresa). Presidida por <strong>Giancarlo Arduini</strong>, a empresa é uma sociedade anônima fechada com conselho de administração atuante.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Nacional e América Latina (OEM + Aftermarket)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Sociedade Anônima Fechada (privada)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Sede</div>
+                        <div class="value">Taboão da Serra, São Paulo, Brasil</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presidente</div>
+                        <div class="value">Giancarlo Arduini</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">+2.000 (alto índice de retenção — 72% com +11 anos)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Receita operacional cresceu 20,91% em 2024; EBITDA +21,66%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESUMO EXECUTIVO -->
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>A CINPAL é uma empresa industrial tradicional de autopeças com mais de 75 anos de mercado, posicionada como fornecedora OEM de montadoras de veículos pesados de primeira linha. O setor de autopeças brasileiro movimentou <strong>R$ 184 bilhões em 2023</strong> e vive um momento de <strong>aceleração digital forçada</strong>: concorrentes como Tupy (R$ 58M do BNDES para transformação digital), Iochpe-Maxion (R$ 36,7M em digitalização + R$ 357,3M da Finep) e MAHLE Metal Leve (R$ 110M da Finep) estão investindo pesadamente em Indústria 4.0, IA, IoT e modernização de ERP. A CINPAL utiliza SAP ERP mas as informações públicas sugerem que a empresa ainda está em estágio inicial de transformação digital comparada aos concorrentes. <strong>Este é o momento crítico</strong>: empresas que adotaram processos digitais registraram ganhos de até 20% em produtividade e 15% em redução de custos. A eletrificação veicular (crescimento de 89% em 2024) e a pressão de fabricantes asiáticos exigem modernização urgente para manutenção da competitividade. Marcio Maldonado, como Head de TI, é o decisor-chave para essa transformação.</p>
+            </div>
+        </div>
+
+        <!-- DESAFIOS E PRIORIDADES -->
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernização digital da manufatura — fechar o gap com concorrentes que investem pesadamente em Indústria 4.0</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Evolução do SAP ERP — migração para SAP S/4HANA ou modernização do landscape ERP atual</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Implementação de IoT e MES no chão de fábrica — monitoramento em tempo real de 3 plantas com prensas, fundição e CNC</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Rastreabilidade completa de produtos — exigência crescente das montadoras OEM (Mercedes-Benz, Scania, Volvo)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Cibersegurança industrial — proteção de sistemas OT (tecnologia operacional) e dados de engenharia</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adaptação ao mercado de veículos elétricos — novos componentes e processos para eletrificação</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento Estimadas</h4>
+                    <div>
+                        <span class="tag tag-priority">Indústria 4.0 &amp; IoT</span>
+                        <span class="tag tag-priority">Modernização SAP/ERP</span>
+                        <span class="tag tag-priority">MES &amp; Rastreabilidade</span>
+                        <span class="tag tag-priority">IA para Qualidade &amp; Manutenção Preditiva</span>
+                        <span class="tag tag-priority">Cibersegurança OT/IT</span>
+                        <span class="tag tag-priority">Integração de Sistemas</span>
+                    </div>
+                    <div class="alert-box" style="margin-top:16px">
+                        <strong>Contexto competitivo urgente:</strong> Concorrentes diretos (Tupy, Iochpe-Maxion, MAHLE Metal Leve) receberam juntos mais de R$ 560 milhões em financiamento do BNDES e Finep para Indústria 4.0 e transformação digital. A CINPAL precisa acelerar sua digitalização para não perder competitividade no fornecimento OEM.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAPA DE INVESTIMENTOS -->
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos Tecnológicos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que devem receber investimento com base no contexto do setor, perfil da empresa e movimentos dos concorrentes:</p>
+            <div>
+                <span class="tag tag-active">SAP ERP (uso confirmado)</span>
+                <span class="tag tag-active">Máquinas CNC de última geração</span>
+                <span class="tag tag-active">Linha robótica de forjamento</span>
+                <span class="tag tag-active">Controle de qualidade automatizado</span>
+                <span class="tag tag-opportunity">MES — Manufacturing Execution System</span>
+                <span class="tag tag-opportunity">IoT no chão de fábrica</span>
+                <span class="tag tag-opportunity">Manutenção preditiva com IA/ML</span>
+                <span class="tag tag-opportunity">Rastreabilidade digital de produtos</span>
+                <span class="tag tag-opportunity">Migração SAP S/4HANA</span>
+                <span class="tag tag-opportunity">Integração via APIs</span>
+                <span class="tag tag-opportunity">Cibersegurança IT/OT</span>
+                <span class="tag tag-opportunity">Cloud &amp; infraestrutura</span>
+                <span class="tag tag-opportunity">BI &amp; Analytics para produção</span>
+            </div>
+            <p style="margin-top:12px;font-size:12px;color:var(--text-light)"><span class="tag tag-active" style="font-size:11px">Verde</span> = Investimentos confirmados/em andamento &nbsp; <span class="tag tag-opportunity" style="font-size:11px">Laranja</span> = Oportunidades identificadas por análise</p>
+        </div>
+
+        <!-- OPORTUNIDADES SEM FORNECEDOR DEFINIDO -->
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Quentes Identificadas</h3>
+            <div class="alert-box">
+                <strong>Janela de oportunidade:</strong> O setor de autopeças vive um momento de transformação acelerada. 75% das empresas automotivas anteciparam investimentos em tecnologia. Concorrentes diretos da CINPAL estão acessando linhas do BNDES Mais Inovação e Finep para financiar projetos de Indústria 4.0. A CINPAL, com 3 plantas fabris e operação intensiva em capital, precisa de parceiros tecnológicos para digitalizar a manufatura e manter competitividade OEM.
+            </div>
+            <div class="grid-2">
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Indústria 4.0 &amp; MES</h4>
+                        <span class="score-badge">Urgência Alta</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Tupy já implementou MES próprio e tem ML no chão de fábrica</li>
+                            <li>Iochpe-Maxion implementou SCADA e rastreabilidade DataMatrix</li>
+                            <li>CINPAL opera 3 plantas com forjaria robótica — cenário ideal para IoT e MES</li>
+                            <li>Montadoras OEM (Mercedes, Volvo) exigem cada vez mais rastreabilidade digital</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Modernização SAP &amp; Integração</h4>
+                        <span class="score-badge">Alta Prioridade</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>CINPAL já utiliza SAP ERP — potencial migração para S/4HANA</li>
+                            <li>Integração entre SAP e sistemas de chão de fábrica (MES, SCADA) é gap crítico</li>
+                            <li>Concorrentes como Tupy e Iochpe-Maxion já modernizaram seus ERPs</li>
+                            <li>Parceria Foursys-Digibee pode conectar sistemas legados sem substituição</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OFERTAS FOURSYS -->
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Marcio Maldonado</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas da CINPAL. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. Modernização de Legado &amp; Integração (Digibee)</h4>
+                    <span class="score-badge">Score 90</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Modernização do SAP ERP, integração de sistemas legados via iPaaS Digibee e construção de plataformas digitais para manufatura.</p>
+                    <ul>
+                        <li>CINPAL já usa SAP — migração para S/4HANA ou modernização do landscape ERP é demanda provável</li>
+                        <li>Integração SAP ↔ chão de fábrica (MES, SCADA, IoT) via Digibee elimina silos de dados entre TI e OT</li>
+                        <li>APIs para conectar sistemas de qualidade, engenharia, produção e comercial</li>
+                        <li>Parceria Foursys-Digibee oferece iPaaS sem necessidade de substituir legados — reduz risco e custo</li>
+                        <li>Modelo de sustentação (AMS) garante evolução contínua pós-implementação</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. AI Squad — Inteligência Artificial &amp; Automação</h4>
+                    <span class="score-badge">Score 85</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Squads especializados em IA para manutenção preditiva, controle de qualidade inteligente e otimização de processos industriais.</p>
+                    <ul>
+                        <li>IA para inspeção visual automatizada de peças forjadas e fundidas — redução de rejeições e retrabalho</li>
+                        <li>Manutenção preditiva com ML para prensa de 12.500 toneladas e linhas de fundição — evitar paradas não programadas</li>
+                        <li>Otimização de parâmetros de forjamento e fundição com modelos de aprendizado de máquina</li>
+                        <li>Concorrente Tupy já utiliza ML em Joinville — CINPAL precisa atingir paridade</li>
+                        <li>Produto proprietário Foursys acelera ciclos de desenvolvimento com IA Generativa</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. Engenharia Digital — Plataformas &amp; DevOps</h4>
+                    <span class="score-badge">Score 80</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Construção de plataformas digitais para manufatura inteligente, microsserviços, cloud-native e observabilidade.</p>
+                    <ul>
+                        <li>Plataforma de rastreabilidade digital end-to-end para atender exigências das montadoras OEM</li>
+                        <li>Dashboard de produção em tempo real para 3 plantas fabris — visão unificada de capacidade e eficiência</li>
+                        <li>Portal digital B2B para rede de distribuidores Aftermarket no Brasil e América Latina</li>
+                        <li>Infraestrutura cloud para elasticidade e redução de custos de TI on-premise</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. Cibersegurança &amp; Privacidade</h4>
+                    <span class="score-badge">Score 75</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Segurança da informação para ambientes IT/OT, privacidade de dados (LGPD), continuidade de negócios e proteção de propriedade intelectual.</p>
+                    <ul>
+                        <li>Convergência IT/OT com IoT no chão de fábrica cria novos vetores de ataque cibernético</li>
+                        <li>Proteção de dados de engenharia e propriedade intelectual — diferencial competitivo da CINPAL</li>
+                        <li>Conformidade LGPD para dados de colaboradores (+2.000) e parceiros comerciais</li>
+                        <li>Certificações ISO 27001/27701 da Foursys são diferencial direto — alinhadas com exigências das montadoras</li>
+                        <li>Plano de continuidade de negócios e disaster recovery para operação industrial 24/7</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>5. FourBlox — Aceleração de Desenvolvimento</h4>
+                    <span class="score-badge">Score 60</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Plataforma de componentes reutilizáveis para acelerar o desenvolvimento de aplicações industriais e portais.</p>
+                    <ul>
+                        <li>Componentes pré-construídos para portais de gestão de produção e qualidade</li>
+                        <li>Redução de time-to-market para aplicações internas (manutenção, qualidade, engenharia)</li>
+                        <li>Reutilização entre as 3 plantas fabris — desenvolvimento uma vez, deploy em todas as unidades</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESTRATÉGIA DE ABORDAGEM -->
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Marcio Maldonado é o Head de TI de uma empresa industrial tradicional de 75 anos com +2.000 colaboradores, que opera em um setor sob forte pressão de modernização digital. O gancho ideal é o <strong>benchmark competitivo</strong>: demonstrar que concorrentes diretos (Tupy, Iochpe-Maxion, MAHLE Metal Leve) receberam juntos mais de <strong>R$ 560 milhões em financiamento público</strong> para Indústria 4.0 e transformação digital. Iniciar a conversa mostrando que a Foursys possui experiência em <strong>integração de sistemas industriais (SAP + MES + IoT) via parceria Digibee</strong>, e cases de <strong>IA aplicada a manufatura</strong>. Para uma empresa que já usa SAP, a conversa sobre <strong>modernização do ERP e integração com chão de fábrica</strong> é imediatamente relevante.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente — Indústria 4.0 e Competitividade</h4>
+                <p>O setor de autopeças enfrenta uma <strong>corrida pela digitalização</strong>. Empresas que adotaram processos digitais registraram ganhos de até <strong>20% em produtividade e 15% em redução de custos</strong>. A Tupy já implementou MES próprio e machine learning em fábrica; a Iochpe-Maxion investiu R$ 36,7M em digitalização com aumento de 32% na capacidade produtiva. A CINPAL, com 3 plantas fabris e operação de alta capacidade (6.000 ton/mês em forjaria + 4.000 ton/mês em fundição), tem potencial enorme para ganhos com IoT, MES e manutenção preditiva. O timing é crítico: as montadoras OEM estão exigindo <strong>rastreabilidade digital completa</strong> e os competidores asiáticos pressionam por preços — a digitalização é o caminho para manter margens e competitividade.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>Parceria Digibee</strong> — iPaaS ideal para integrar SAP com sistemas de chão de fábrica sem substituir legados, reduzindo risco e custo; (2) <strong>AI Squad</strong> — squads especializados em IA industrial para manutenção preditiva e controle de qualidade inteligente; (3) <strong>Certificações ISO 27001/27701</strong> — segurança e privacidade certificadas, exigência crescente das montadoras OEM; (4) <strong>24 anos de experiência e 41.000+ projetos</strong> — solidez e confiabilidade que uma empresa de 75 anos como a CINPAL valoriza; (5) <strong>Modelo flexível</strong> — squads, projetos ou AMS, adaptável ao ritmo de investimento de uma empresa industrial de capital fechado.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. O setor está em corrida pela Indústria 4.0:</strong> O mercado de autopeças movimentou R$ 184 bilhões em 2023 e 75% das empresas anteciparam investimentos em tecnologia. Concorrentes da CINPAL estão acessando linhas do BNDES e Finep para financiar transformação digital. Demonstrar conhecimento dessas linhas de financiamento abre portas — a Foursys pode ajudar a CINPAL a estruturar projetos elegíveis.</p>
+                <p style="margin-bottom:12px"><strong>2. Eletrificação muda o jogo de autopeças:</strong> O crescimento de 89% em veículos elétricos em 2024 exige novos componentes (sensores de bateria, cabos de alta voltagem, módulos eletrônicos). A CINPAL, focada em powertrain tradicional (engrenagens, eixos de comando, coroa e pinhão), precisa diversificar e desenvolver capacidade de engenharia digital para novos produtos.</p>
+                <p style="margin-bottom:12px"><strong>3. Montadoras exigem rastreabilidade digital:</strong> Mercedes-Benz, Scania e Volvo — todos clientes OEM da CINPAL — estão exigindo rastreabilidade end-to-end de cada peça. A Iochpe-Maxion já implementou DataMatrix QR Code automatizado. A CINPAL precisa de sistema similar para manter contratos OEM.</p>
+                <p style="margin-bottom:12px"><strong>4. CINPAL é empresa de capital fechado com gestão familiar:</strong> A presidência de Giancarlo Arduini e a presença de Alessandro Arduini no conselho indicam gestão familiar. Empresas familiares valorizam relacionamento de longo prazo, confiança e ROI tangível. Posicionar a Foursys como parceira de longo prazo, não como fornecedora transacional.</p>
+                <p><strong>5. Alto índice de retenção sugere cultura conservadora:</strong> 72% dos colaboradores com mais de 11 anos indica uma cultura estável mas potencialmente resistente a mudanças. A abordagem de transformação digital deve ser gradual, com quick wins visíveis que gerem adesão interna. O modelo de squads da Foursys permite começar pequeno e escalar.</p>
+            </div>
+        </div>
+
+        <!-- BENCHMARK DE CONCORRENTES -->
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Tupy S.A. — Joinville, SC</h4>
+                <p><strong>Segmento:</strong> Fundição e componentes estruturais para veículos pesados | <strong>Cap. Mercado:</strong> ~US$ 279M</p>
+                <p>Líder global em fundição de ferro. Investiu pesadamente em transformação digital: <strong>R$ 58 milhões do BNDES</strong> para digitalização das plantas de Betim e Joinville. Já implementou <strong>SAP</strong>, <strong>MES próprio</strong> (desenvolvido internamente), <strong>machine learning em produção</strong> (modelos rodando em Joinville) e infraestrutura de IoT com fibra óptica e servidores para coleta de dados de máquinas. Criou MBA interno em "Fundição 4.0" com SENAI/SC para capacitar colaboradores. Referência em Indústria 4.0 no setor.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Iochpe-Maxion S.A. — Cruzeiro, SP</h4>
+                <p><strong>Segmento:</strong> Rodas e componentes estruturais automotivos (líder global) | <strong>Cap. Mercado:</strong> ~US$ 268M</p>
+                <p>Líder mundial em rodas e componentes estruturais. Recebeu <strong>R$ 36,7 milhões do BNDES</strong> para digitalização da produção de longarinas (aumento de 32% na capacidade) e <strong>R$ 357,3 milhões da Finep</strong> para inovação em 4 anos. Implementou <strong>SAP global</strong>, <strong>SCADA</strong> para monitoramento supervisório, <strong>DataMatrix QR Code</strong> para rastreabilidade automatizada e linhas de pintura automatizadas. Investiu R$ 208,2M internamente em P&D.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>MAHLE Metal Leve S.A. — Jundiaí, SP</h4>
+                <p><strong>Segmento:</strong> Componentes de motor, filtros e gerenciamento térmico | <strong>Cap. Mercado:</strong> ~US$ 827M</p>
+                <p>Subsidiária brasileira do grupo alemão MAHLE. Recebeu <strong>R$ 110 milhões da Finep</strong> para Plano Estratégico de Inovação (3 anos), incluindo digitalização de produtos e serviços. Inaugurou expansão do Centro de Engenharia das Américas em Jundiaí (2025). Lançou a linha <strong>MAHLE chargeBIG</strong> para infraestrutura de recarga de veículos elétricos (+3.000 pontos na Europa). Forte foco em mobilidade sustentável, células de combustível e motores a hidrogênio.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Schulz S.A. — Joinville, SC</h4>
+                <p><strong>Segmento:</strong> Fundição e compressores industriais | <strong>Cap. Mercado:</strong> ~US$ 321M</p>
+                <p>Fabricante de peças fundidas e compressores. Implementou <strong>Schulz Link</strong> — plataforma IoT que conecta equipamentos a nuvem com monitoramento em tempo real (pressão, temperatura, vazão). Utiliza <strong>MES da SKA</strong> com dashboards visuais de produção e metas. Oferece modelo de locação (Schulz Rental) com conectividade digital integrada. Pioneira em IoT aplicado a produtos industriais no setor de autopeças.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Os concorrentes diretos da CINPAL estão em estágios avançados de transformação digital: a <strong>Tupy</strong> já opera com MES e machine learning; a <strong>Iochpe-Maxion</strong> implementou rastreabilidade automatizada via DataMatrix e SAP global; a <strong>MAHLE Metal Leve</strong> investe R$ 110M em inovação e digitalização; a <strong>Schulz</strong> criou plataforma IoT proprietária. Os principais gaps da CINPAL são: (1) <strong>Ausência de MES integrado ao SAP</strong> — dados de chão de fábrica provavelmente isolados do ERP; (2) <strong>Rastreabilidade digital</strong> — montadoras OEM exigem tracking end-to-end que concorrentes já oferecem; (3) <strong>IA/ML em produção</strong> — manutenção preditiva e controle de qualidade inteligente ainda não implementados; (4) <strong>IoT no chão de fábrica</strong> — prensas de 12.500 ton e linhas de fundição geram dados valiosos não coletados; (5) <strong>Plataforma digital B2B para Aftermarket</strong> — e-commerce de autopeças crescerá para R$ 17 bilhões em 2026. A Foursys pode posicionar-se como integradora de ecossistemas industriais (SAP + MES + IoT) com Digibee, aceleradora de IA industrial com AI Squad e garantidora de segurança OT/IT com certificações ISO.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <!-- PERFIL PESSOAL & RAPPORT -->
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Nome</div>
+                        <div class="value">Marcio Maldonado</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Cargo</div>
+                        <div class="value">Head de TI — CINPAL</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Empresa</div>
+                        <div class="value">CINPAL — Companhia Industrial de Peças para Automóveis (75 anos, +2.000 colaboradores)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Localização da Empresa</div>
+                        <div class="value">Taboão da Serra, São Paulo, SP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Setor</div>
+                        <div class="value">Indústria de Autopeças — Forjados, Fundidos e Usinados para Veículos Pesados</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Perfil Digital Público</div>
+                        <div class="value">Dados insuficientes — perfil público limitado. Requer pesquisa adicional via LinkedIn ou networking direto.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert-box">
+                <strong>Nota:</strong> O perfil público de Marcio Maldonado como Head de TI da CINPAL possui informações limitadas nas fontes pesquisadas (LinkedIn, imprensa, sites setoriais). As dicas de rapport abaixo são baseadas no perfil da empresa e do setor. Recomenda-se pesquisa complementar via rede de contatos ou LinkedIn Sales Navigator antes da abordagem.
+            </div>
+            <div class="insight-box" style="margin-top:16px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Valorize a tradição e solidez da CINPAL:</strong> Um profissional de TI em uma empresa de 75 anos com alto índice de retenção de talentos provavelmente valoriza estabilidade, confiabilidade e resultados comprovados. Aborde a Foursys como parceira de longo prazo com 24 anos de mercado e 41.000+ projetos — não como startup ou empresa de modismos tecnológicos.</p>
+                <p style="margin-bottom:10px"><strong>2. Fale a linguagem da manufatura:</strong> O Head de TI de uma indústria de autopeças pensa em "tempo de ciclo", "OEE (eficiência de equipamento)", "scrap rate", "downtime" e "qualidade PPM". Conectar tecnologia a esses KPIs industriais mostra que você entende o negócio dele. Evite jargão de TI puro — traduza para impacto no chão de fábrica.</p>
+                <p style="margin-bottom:10px"><strong>3. Use o benchmark competitivo como alavanca:</strong> Mostrar que Tupy, Iochpe-Maxion e MAHLE Metal Leve estão investindo centenas de milhões em Indústria 4.0 é uma alavanca poderosa. Não é ameaça — é urgência. Posicione como: "seus concorrentes estão nesse estágio, a Foursys pode ajudar a CINPAL a chegar lá mais rápido e com menos risco".</p>
+                <p style="margin-bottom:10px"><strong>4. Proponha quick wins tangíveis:</strong> Em uma empresa de capital fechado com gestão familiar, o ROI precisa ser visível rapidamente. Sugira um piloto de manutenção preditiva em uma linha específica (ex: prensa de 12.500 ton) ou rastreabilidade em uma família de produtos. Quick win gera confiança para projetos maiores.</p>
+                <p><strong>5. Respeite a cultura organizacional:</strong> Com 72% dos colaboradores com mais de 11 anos de casa, a CINPAL tem uma cultura forte e estabelecida. A transformação digital deve ser posicionada como evolução, não revolução. Gestão de mudança é tão importante quanto tecnologia. A Foursys, com modelo de squads que trabalham lado a lado com o time interno, é ideal para essa abordagem gradual.</p>
+            </div>
+        </div>
+
+        <!-- PERFIL DO EXECUTIVO E POSIÇÃO DE TI -->
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Executivo e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil Profissional</div>
+                        <div class="value">Head de TI em indústria de manufatura pesada com operação intensiva em capital</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Contexto Organizacional</div>
+                        <div class="value">Empresa de 75 anos, gestão familiar (Arduini), capital fechado — decisões de investimento tendem a ser conservadoras e orientadas a ROI</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Stack Tecnológico Confirmado</div>
+                        <div class="value">SAP ERP (confirmado em vagas e processos de planejamento e manutenção)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão Estimado</div>
+                        <div class="value">Alto para decisões de TI — como Head de TI em empresa de +2.000 colaboradores, influencia diretamente investimentos em tecnologia</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Desafio Central</div>
+                        <div class="value">Fechar o gap de Indústria 4.0 com concorrentes que investem centenas de milhões em digitalização</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI (estimada)</div>
+                        <div class="value">20-50 profissionais (empresa de +2.000 colaboradores com operação industrial)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Negócio</div>
+                        <div class="value">Em transição: de suporte operacional para habilitador estratégico de Indústria 4.0 e competitividade</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte Provável</div>
+                        <div class="value">Diretoria Administrativa/Operacional — reporta a um dos diretores (Andre Dameto, Rodnei Martins Porto ou Walter Medeiros)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DISTRIBUIÇÃO DE INVESTIMENTOS -->
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada de Investimentos TI</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">ERP (SAP) &amp; Sistemas Core</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+                <div class="bar"><div class="bar-label">Infraestrutura &amp; Redes</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+                <div class="bar"><div class="bar-label">Automação Industrial &amp; IoT</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#3949ab">18%</div></div></div>
+                <div class="bar"><div class="bar-label">Segurança da Informação</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">12%</div></div></div>
+                <div class="bar"><div class="bar-label">BI &amp; Analytics</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+                <div class="bar"><div class="bar-label">Suporte &amp; Helpdesk</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#7986cb">8%</div></div></div>
+                <div class="bar"><div class="bar-label">Inovação &amp; Novos Projetos</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:#9fa8da">7%</div></div></div>
+            </div>
+            <p style="margin-top:12px;font-size:12px;color:var(--text-light);text-align:center">* Distribuição estimada com base nas prioridades do setor e perfil da empresa. Não declarada oficialmente.</p>
+        </div>
+
+        <!-- PREFERÊNCIAS DE FORNECEDOR -->
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor (Estimadas)</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância (baseados no perfil)</h4>
+                    <div>
+                        <span class="tag tag-active">Experiência em Indústria / Manufatura</span>
+                        <span class="tag tag-active">Conhecimento de SAP / ERP</span>
+                        <span class="tag tag-active">Capacidade de Integração IT/OT</span>
+                        <span class="tag tag-active">Certificações de Segurança (ISO)</span>
+                        <span class="tag tag-active">Modelo Flexível e Gradual</span>
+                        <span class="tag tag-active">ROI Demonstrável com Quick Wins</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Empresa de tecnologia sólida, com experiência em manufatura e capacidade de integrar sistemas industriais. Empresa de capital fechado com gestão tradicional tende a preferir parceiros estáveis e com histórico comprovado.</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Provável</div>
+                        <div class="value">Projetos com escopo definido e ROI mensurável para aprovação da diretoria. Potencial para modelo de sustentação (AMS) após implementação bem-sucedida. Squads co-gerenciados para transferência de conhecimento.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | CINPAL — Companhia Industrial de Peças para Automóveis</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

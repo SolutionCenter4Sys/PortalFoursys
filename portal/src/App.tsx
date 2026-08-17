@@ -1,0 +1,209 @@
+import { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { AppProvider, useApp } from './context/AppContext'
+import { ThemeProvider, useTheme } from './context/ThemeContext'
+import { LanguageProvider, useLanguage } from './i18n'
+import { TopBar } from './components/navigation/TopBar'
+import { NavigationMenu } from './components/navigation/NavigationMenu'
+import { SearchOverlay } from './components/navigation/SearchOverlay'
+import { SessionPanel } from './components/session/SessionPanel'
+import { SessionWizard } from './components/session/SessionWizard'
+import { SectionRenderer } from './components/SectionRenderer'
+import { ClientSelector } from './components/client/ClientSelector'
+import { useKeyboard } from './hooks/useKeyboard'
+import { useUrlSync } from './hooks/useUrlSync'
+import { useSwipe } from './hooks/useSwipe'
+import { useSessionPersistence } from './hooks/useSessionPersistence'
+import { SectionOverview } from './components/navigation/SectionOverview'
+import { ExportPdfModal } from './components/export/ExportPdfModal'
+import { VoiceProvider, useVoice } from './voice/VoiceProvider'
+import { VoiceHelpDialog } from './voice/VoiceHelpDialog'
+import { VoiceLiveIndicator } from './voice/VoiceLiveIndicator'
+import { JarvisOverlay } from './components/jarvis/JarvisOverlay'
+import type { AppSection } from './types'
+
+function AppInner() {
+  const { state, toggleFullscreen, toggleMenu, navigate, activeNavigationItems, toggleOverview } = useApp()
+  const { isDark } = useTheme()
+  const { lang, t } = useLanguage()
+  const voice = useVoice()
+  const mainRef = useRef<HTMLDivElement>(null)
+  const [jarvisOpen, setJarvisOpen] = useState(false)
+
+  function toggleJarvis() {
+    setJarvisOpen((o) => !o)
+  }
+  useKeyboard()
+  useUrlSync()
+  useSessionPersistence()
+
+  // Atalhos: "V" abre/fecha Jarvis · "?" ajuda touchless (legado)
+  useEffect(() => {
+    function isTypingTarget(target: EventTarget | null): boolean {
+      const el = target as HTMLElement | null
+      if (!el) return false
+      const tag = el.tagName?.toLowerCase()
+      if (tag === 'input' || tag === 'textarea' || tag === 'select') return true
+      if ((el as HTMLElement).isContentEditable) return true
+      return false
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.ctrlKey || e.metaKey || e.altKey) return
+      if (isTypingTarget(e.target)) return
+      if (e.key === 'v' || e.key === 'V') {
+        e.preventDefault()
+        setJarvisOpen((o) => !o)
+      } else if (e.key === '?') {
+        e.preventDefault()
+        if (voice.ajudaAberta) voice.fecharAjuda()
+        else voice.abrirAjuda()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [voice])
+
+  // Swipe hint — aparece uma única vez na primeira visita em mobile
+  const [showSwipeHint, setShowSwipeHint] = useState(() => {
+    return !localStorage.getItem('foursys_swipe_hint_seen')
+  })
+
+  useEffect(() => {
+    if (!showSwipeHint) return
+    const t = setTimeout(() => {
+      setShowSwipeHint(false)
+      localStorage.setItem('foursys_swipe_hint_seen', '1')
+    }, 3500)
+    return () => clearTimeout(t)
+  }, [showSwipeHint])
+
+  // Swipe para navegar entre seções no mobile
+  const currentIndex = activeNavigationItems.findIndex(n => n.id === state.currentSection)
+  useSwipe(mainRef, {
+    onSwipeLeft: () => {
+      setShowSwipeHint(false)
+      const next = activeNavigationItems[currentIndex + 1]
+      if (next) navigate(next.id as AppSection)
+    },
+    onSwipeRight: () => {
+      setShowSwipeHint(false)
+      const prev = activeNavigationItems[currentIndex - 1]
+      if (prev) navigate(prev.id as AppSection)
+    },
+  })
+
+  return (
+    <div className={`flex h-[100dvh] overflow-hidden bg-foursys-dark-2 pt-[env(safe-area-inset-top)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] pb-[env(safe-area-inset-bottom)] landscape-compact transition-colors duration-300`}>
+
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-foursys-primary focus:text-white focus:text-sm focus:font-semibold"
+      >
+        {t('common.skipToContent')}
+      </a>
+
+      {/* Ambient background */}
+      {isDark && (
+        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute -top-60 -left-60 w-[500px] h-[500px] bg-foursys-primary/10 rounded-full blur-3xl" />
+          <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-foursys-primary/6 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-foursys-primary/4 rounded-full blur-3xl" />
+        </div>
+      )}
+
+      {/* Backdrop drawer mobile */}
+      {state.isMenuOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
+          onClick={toggleMenu}
+        />
+      )}
+
+      {/* Sidebar — desktop sempre visível / mobile: drawer deslizante */}
+      <div className={`
+        fixed lg:static inset-y-0 left-0 z-50
+        transform transition-transform duration-300 ease-in-out
+        ${state.isMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        ${state.isFullscreen ? 'hidden' : ''}
+      `}>
+        <NavigationMenu />
+      </div>
+
+      {/* Main content */}
+      <div className="flex-1 flex flex-col overflow-hidden min-w-0 relative w-full">
+        <TopBar
+          jarvisOpen={jarvisOpen}
+          onJarvisToggle={toggleJarvis}
+        />
+        <main
+          ref={mainRef}
+          id="main-content"
+          data-voz-scroll-root
+          className="flex-1 relative overflow-y-auto overflow-x-hidden overscroll-contain"
+        >
+          <SectionRenderer />
+        </main>
+      </div>
+
+      {/* Overlays */}
+      <SearchOverlay />
+      <SessionPanel />
+      <ClientSelector />
+      <SessionWizard />
+
+      {/* Swipe hint — mobile, primeira visita */}
+      <AnimatePresence>
+        {showSwipeHint && (
+          <motion.div
+            className="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-black/70 backdrop-blur-sm text-white text-sm px-5 py-2.5 rounded-full pointer-events-none lg:hidden"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.4 }}
+          >
+            <span>{t('common.swipeHint')}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Fullscreen hint */}
+      {state.isFullscreen && (
+        <div className="fixed bottom-4 right-4 z-30 flex items-center gap-2 pointer-events-auto">
+          <button
+            type="button"
+            onClick={toggleFullscreen}
+            className="text-xs text-foursys-text-dim hover:text-white/60 transition-colors select-none bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-lg cursor-pointer"
+          >
+            {t('common.escFullscreen')}
+          </button>
+        </div>
+      )}
+
+      <SectionOverview isOpen={state.isOverviewOpen} onClose={toggleOverview} />
+      <ExportPdfModal />
+      <VoiceHelpDialog />
+      {!jarvisOpen && <VoiceLiveIndicator />}
+      <JarvisOverlay
+        open={jarvisOpen}
+        onClose={() => setJarvisOpen(false)}
+        lang={lang}
+      />
+    </div>
+  )
+}
+
+function App() {
+  return (
+    <LanguageProvider>
+      <ThemeProvider>
+        <AppProvider>
+          <VoiceProvider>
+            <AppInner />
+          </VoiceProvider>
+        </AppProvider>
+      </ThemeProvider>
+    </LanguageProvider>
+  )
+}
+
+export default App

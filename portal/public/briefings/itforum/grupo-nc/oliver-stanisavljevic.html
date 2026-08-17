@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CTO - Oliver Stanisavljević | Galenika (Grupo NC)</title>
+    <style>
+        :root { --primary: #1a237e; --primary-light: #3949ab; --accent: #00b894; --accent-orange: #e17055; --bg: #f5f6fa; --card-bg: #ffffff; --text: #2d3436; --text-light: #636e72; --border: #dfe6e9; --shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; } .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Oliver Stanisavljević</h1>
+                <h2>CTO — Galenika Pharmacia (Grupo NC)</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Farmacêutico | Belgrado - Sérvia</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Fundação</div>
+                    <div class="value">1945 (80 anos)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">No Grupo NC desde</div>
+                    <div class="value">2017</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Diretor Geral</div>
+                    <div class="value">Ricardo Vian Marques</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="alert-box">
+                <strong>Contexto Internacional:</strong> A Galenika é a <strong>empresa farmacêutica mais antiga dos Bálcãs</strong>, fundada em 1945 em Belgrado, Sérvia. O Grupo NC adquiriu a Galenika em 2017. O CTO é <strong>Oliver Stanisavljević</strong> (no cargo desde 2012, 14+ anos de experiência, engenheiro mecânico). O Diretor Geral é o brasileiro <strong>Ricardo Vian Marques</strong> (desde 2020). Comemorou 80 anos em 2025.
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CTO</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Nome</div>
+                        <div class="value">Oliver Stanisavljević</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo</div>
+                        <div class="value">Chief Technology Officer (CTO)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">No cargo desde</div>
+                        <div class="value">Fevereiro de 2012</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação</div>
+                        <div class="value">Mestrado em Engenharia Mecânica — Universidade de Belgrado (2005-2011)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência</div>
+                        <div class="value">14+ anos em tecnologia farmacêutica</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Coordenação com Grupo NC</div>
+                        <div class="value">Potencial integração com NC Tech (Diego Neufert)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Galenika</h3>
+            <p style="margin-bottom:20px;line-height:1.8">A Galenika é a empresa farmacêutica mais antiga da região dos Bálcãs, nomeada em homenagem a Galeno, fundador da farmácia científica. Com 80 anos de história, é referência na Sérvia e na região. Desde 2017 sob controle do Grupo NC brasileiro, com gestão do brasileiro Ricardo Vian Marques. A empresa é porta de entrada do Grupo NC para os mercados europeu e dos Bálcãs.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Sede</div>
+                        <div class="value">Belgrado, Sérvia</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Mercados</div>
+                        <div class="value">Sérvia, Bálcãs, Europa (expansão regional)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Importância Estratégica</div>
+                        <div class="value">Porta de entrada para mercado europeu do Grupo NC</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Desafio de Integração</div>
+                        <div class="value">Sistemas locais + ecossistema NC Tech (Brasil)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades de Integração Internacional</h3>
+            <div>
+                <span class="tag tag-opportunity">Integração ERP Galenika ↔ NC Tech</span>
+                <span class="tag tag-opportunity">Unificação de sistemas de qualidade (GMP)</span>
+                <span class="tag tag-opportunity">Supply chain cross-border (Sérvia-Brasil)</span>
+                <span class="tag tag-opportunity">Cibersegurança internacional</span>
+                <span class="tag tag-opportunity">Cloud híbrida (compliance EU + Brasil)</span>
+                <span class="tag tag-opportunity">Farmacovigilância multi-regulatório (ANVISA + EMA)</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 92</span>
+                </div>
+                <p>Integração de sistemas Galenika (Sérvia) com ecossistema NC Tech (Brasil) via APIs e iPaaS. Unificação de processos e dados cross-border.</p>
+                <div class="reasons"><strong>Por que oferecer:</strong><ul><li>Aquisição em 2017 pode ter sistemas legados não integrados</li><li>Necessidade de unificar ERP, qualidade e supply chain</li><li>Compliance multi-jurisdicional (EMA + ANVISA)</li><li>Parceria Digibee ideal para integração internacional</li></ul></div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 85</span>
+                </div>
+                <p>Segurança de dados cross-border, conformidade GDPR (Europa) + LGPD (Brasil), proteção de túneis de comunicação internacionais.</p>
+                <div class="reasons"><strong>Por que oferecer:</strong><ul><li>Dados transitando entre Sérvia e Brasil</li><li>Conformidade GDPR obrigatória para Europa</li><li>Proteção de propriedade intelectual transnacional</li></ul></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Abordar via <strong>Diego Neufert (NC Tech)</strong> no Brasil e referenciar a necessidade de integração com a operação Galenika na Sérvia. O Diretor Geral é brasileiro (Ricardo Vian Marques), facilitando a comunicação. Foco: <strong>integração de sistemas internacionais</strong> e <strong>compliance multi-jurisdicional</strong>.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Nota sobre o CTO</h4>
+                <p>Oliver Stanisavljević é CTO local (Sérvia) com foco em tecnologia de produção farmacêutica (formação em engenharia mecânica). A decisão de TI estratégica provavelmente passa por Diego Neufert no Brasil (NC Tech). A abordagem deve ser feita via Brasil, com execução local na Sérvia.</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | Grupo NC</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

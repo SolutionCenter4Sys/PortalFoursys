@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — José Quinto | Banco da Amazônia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>José Maria de Lima Quinto Filho</h1>
+                <h2>Diretor Executivo de TI (DITEC) — Banco da Amazônia S.A. · citado como José Quinto</h2>
+                <div class="loc">Bancos · Belém/PA · CNPJ 04.902.979/0001-44</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Alta · Porte federal / Amazônia Legal</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Lucro líq. 2025</div><div class="value">R$ 1,11 bi</div></div>
+                <div class="header-badge"><div class="label">Carteira crédito</div><div class="value">R$ 66,8 bi</div></div>
+                <div class="header-badge"><div class="label">Ativos totais</div><div class="value">R$ 63,3 bi</div></div>
+                <div class="header-badge"><div class="label">Patrim. líq.</div><div class="value">R$ 7,2 bi</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: RI deep-dive (1S25 + 4T25) + leitura de comitê DITEC + material de apresentação · Diferencia da edição anterior (Trancoso). Presente no último IT Forum: NÃO.</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>O Banco da Amazônia S.A. (BASA) é sociedade de economia mista de capital aberto, controlada pela União, com sede em Belém/PA. Atua como principal agente financeiro do desenvolvimento sustentável da Amazônia Legal: administra exclusivamente o Fundo Constitucional de Financiamento do Norte (FNO) e opera crédito comercial, microfinanças e, desde 2025, novas frentes de cartões, adquirência e investimentos. Em 2025 registrou lucro líquido de R$ 1,11 bilhão (−2,4%), patrimônio líquido de R$ 7,2 bilhões e carteira de crédito total de R$ 66,8 bilhões (+20,4%), enquanto os ativos totais somaram R$ 63,3 bilhões (+16,6%). <em>Nota de coerência (Earnings Release 2025 / RA 4T25):</em> a Carteira de Crédito Total inclui os repasses do Fundo Constitucional de Financiamento do Norte (FNO) — por isso o saldo de crédito (R$ 66,8 bi) supera os ativos próprios do balanço (R$ 63,3 bi); os dois rótulos estão corretos e não devem ser confundidos. A instituição executa um programa amplo de transformação digital (core Temenos, Super App, Data Lake, ServiceNow, Red Hat, Open Finance) sob a DITEC liderada por José Maria de Lima Quinto Filho.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Banco da Amazônia S.A.</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">Belém / PA (Av. Pres. Vargas, 800)</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">9 estados Amazônia Legal + SP + DF</div></div>
+                <div class="info-card"><div class="label">Faturamento / resultado</div><div class="value">Lucro R$ 1,11 bi (2025) — RI</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~2.810 (dez/2025)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Sociedade de economia mista (federal)</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>José Maria de Lima Quinto Filho</strong> (citado como José Quinto) é Diretor Executivo de TI (DITEC) do Banco da Amazônia desde maio/2023 (LinkedIn; Diretoria Executiva BASA / RI). Também aparece em atos societários como responsável pela Diretoria de Infraestrutura do Negócio (DINEG). Nível estatutário — decide roadmap tecnológico, priorização de backlog DITEC e parcerias (Temenos, Red Hat, Google Cloud/Gemini, ServiceNow). Em mídia (COP30 / O Liberal), articula o programa de transformação digital (~2 anos) e produtos como o cartão Verdinho. Participou de visita estratégica à sede do Google em SP com diretoria e coordenadores para IA generativa. Tempo de casa ~3 anos; poder de decisão alto em TI e canais digitais. Comitê relevante: Diretoria Executiva (pres. Luiz Cláudio Moreira Lessa), Secretários Executivos e Coordenadores DITEC, Compliance/Ciber e áreas de Crédito/Canais.</p>
+            <p style="margin-top:10px;font-size:13.5px;color:var(--text-light)"><strong>LinkedIn:</strong> linkedin.com/in/josé-quinto-4136746a — cargo Diretor Executivo de TI · Belém/PA · May 2023–presente.</p>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento & mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Banco de desenvolvimento regional com mandato público: crédito de fomento (FNO), agro familiar e empresarial, microcrédito e, em expansão, produtos comerciais (cartão, adquirência, plataforma de investimentos com Genial). Compete com bancos públicos de desenvolvimento (BNB), bancos comerciais com rede na região (BB, Caixa), bancos estaduais (Banpará) e cooperativas. Pressões 2025–2026: inadimplência agro (impacto CMN 4.966), necessidade de funding mais barato via base digital nacional, COP30/ESG como vitrine, e corrida por canais digitais (conta 100% digital ainda em implantação). Posição: líder de fomento na Amazônia Legal e um dos bancos regionais federais de maior relevância em carteira de crédito no Norte.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões & lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Legado vs. core novo: PoC Temenos concluída e parceiro selecionado, mas implantação e convivência com sistemas atuais ainda em curso (RI 4T25) — risco de dual-run prolongado.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Onboarding ainda presencial: abertura de conta exige agência/assinatura física (Valor, jul/2025) — atrito vs. Super App e meta de crescimento de base nacional.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Pressão de fraude Pix e PLD: aumento de ocorrências e reforço de score/monitoramento (RI 4T25) — ciber e antifraude competem por budget com inovação.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Integração multicanal incompleta: APIs Gate Layer / FAPI iniciadas, mas unificação agência–digital–correspondente ainda em desenho.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div>Operação de adquirência instável em troca de fornecedor (Entrepay) — resiliência de parceiros e iPaaS sob pressão (fontes abertas 2026).</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Concluir etapas do Core Temenos em 2026</span>
+                <span class="tag tag-priority">Super App / banco digital</span>
+                <span class="tag tag-priority">Lending assistido por IA</span>
+                <span class="tag tag-priority">Cyber Fusion Center</span>
+                <span class="tag tag-priority">Expansão funding via base digital</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Core bancário Temenos</span>
+                <span class="tag tag-active">Data Lake / analytics</span>
+                <span class="tag tag-active">ServiceNow (ITSM + automação)</span>
+                <span class="tag tag-active">HCI / infra hiperconvergente</span>
+                <span class="tag tag-active">Open Finance & Gate Layer</span>
+                <span class="tag tag-active">IA generativa (Google Gemini)</span>
+                <span class="tag tag-active">Cartões / adquirência / Verdinho</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Squads de integração core↔canais (além do SI Temenos)</span>
+                <span class="tag tag-opportunity">Modernização de jornadas legado / BASA Digital</span>
+                <span class="tag tag-opportunity">Orquestração iPaaS (FourBlox/Digibee) entre adquirência, cartões e FNO</span>
+                <span class="tag tag-opportunity">PoC IA crédito rural + antifraude</span>
+                <span class="tag tag-opportunity">Aceleração Cyber Fusion / SOC gerenciado</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado + Engenharia Digital (core ↔ canais)</h4><span class="score-badge">92/100</span></div>
+                <p>Apoiar convivência Temenos/legado, BIAN, APIs Gate Layer e jornadas Super App — camada C5–C7 e backlog DITEC.</p>
+                <div class="reasons"><ul>
+                    <li>RI 4T25: PoC core concluída, seleção de parceiro e artefatos de planejamento — janela de squads satélite.</li>
+                    <li>Onboarding ainda físico (Valor) cria urgência de engenharia de jornada digital.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad (crédito rural + atendimento + Gemini)</h4><span class="score-badge">88/100</span></div>
+                <p>Squads de IA generativa e lending assistido alinhados à imersão Google e ao Temenos Community Forum 2026.</p>
+                <div class="reasons"><ul>
+                    <li>Agenda pública de IA no crédito e eficiência operacional (Brasil 61 / LinkedIn DITEC).</li>
+                    <li>Data Lake com governança já iniciada — base para modelos de risco e personalização.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (Digibee iPaaS) — integração adquirência/cartões/FNO</h4><span class="score-badge">84/100</span></div>
+                <p>Orquestração segura entre parceiros de adquirência, emissão de cartões, Open Finance e core — ISO 27001/27701.</p>
+                <div class="reasons"><ul>
+                    <li>Incidente de troca de fornecedor na adquirência evidencia fragilidade de integrações ponto a ponto.</li>
+                    <li>Gate Layer FAPI/CIBA e multicanalidade pedem barramento maduro além do Red Hat ESB.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança (Cyber Fusion / antifraude Pix)</h4><span class="score-badge">81/100</span></div>
+                <p>Evolução para modelo Cyber Fusion Center, IAM, resposta a incidentes e score transacional — camada C2.</p>
+                <div class="reasons"><ul>
+                    <li>RI 4T25: aumento de fraudes Pix e estratégia explícita de Fusion Center.</li>
+                    <li>Banco público sujeito a auditoria TCU/CGU e regulação BC — compliance vende junto.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital — ServiceNow + automação de processos</h4><span class="score-badge">76/100</span></div>
+                <p>Expandir ServiceNow além ITSM para workflows de crédito, ouvidoria e governança de demandas.</p>
+                <div class="reasons"><ul>
+                    <li>Plataforma já em implantação no plano diretor de TI (1S25).</li>
+                    <li>Ouvidoria modernizada — oportunidade de unificar fila de demandas com TI.</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>IT Forum + narrativa COP30/Amazônia: “como acelerar o dual-run Temenos→Super App sem travar o FNO e o crédito rural” — linguagem de negócio, não de vendor de core.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Prioridade 2026 declarada: conclusão das etapas do Core + Super App + IA no crédito. Squads de integração, jornadas e ciber antifraude ainda abertos a parceiros além do SI Temenos.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>AI Squad + Modernização + FourBlox (Digibee) + Ciber com ISO 27001/27701; 24 anos e 41.000+ projetos — encaixa em banco público que já usa Red Hat/containers e precisa de velocidade de entrega sem substituir o core.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes & Gap Analysis</h3>
+            <div class="competitor-card"><h4>Banco do Nordeste (BNB)</h4><p>Peer federal de desenvolvimento regional (FNE). Digitalização e app mais maduros em massa; BASA compete por narrativa ESG/Amazônia e agora por Super App — gap: velocidade de onboarding digital.</p></div>
+            <div class="competitor-card"><h4>Banco do Brasil</h4><p>Presença forte no agro e rede na Amazônia Legal. Stack digital e Open Finance avançados; BASA diferencia no mandato FNO, mas perde em jornada de conta digital completa.</p></div>
+            <div class="competitor-card"><h4>Caixa Econômica Federal</h4><p>Escala em crédito social e canais digitais; pressão competitiva em inclusão financeira. Gap BASA: escala de canais vs. especialização regional.</p></div>
+            <div class="competitor-card"><h4>Banpará / bancos estaduais</h4><p>Proximidade estadual e relacionamento local. BASA supera em capital e FNO; compete em experiência de agência e app no Pará.</p></div>
+            <div class="competitor-card"><h4>Cooperativas (Sicredi / Sicoob)</h4><p>Crescimento em crédito rural e digitalização cooperativa. Gap: BASA precisa de UX e time-to-credit competitivos via IA e core novo.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Banco federal de desenvolvimento da Amazônia (FNO); lucro R$ 1,11 bi; carteira R$ 66,8 bi; sede Belém.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">José Quinto — Diretor Executivo de TI desde mai/2023; estatutário; porta-voz da transformação digital.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Implantar core Temenos + Super App + IA no crédito sem interromper FNO e sob pressão de fraude/inadimplência.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">Plano diretor: core, Data Lake, ServiceNow, HCI, Open Finance, ciber Fusion Center, cartões/adquirência (RI 1S25/4T25).</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) Modernização/Engenharia Digital core↔canais; 2) AI Squad crédito; 3) FourBlox + Ciber.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Reunião 45 min no IT Forum: discovery dual-run Temenos + oferta de PoC IA lending rural.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Prioridades 2026 no RI; pós-COP30; ciclo orçamentário de transformação em curso.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender “outro core”: vender velocidade segura do dual-run e integração adquirência/FNO — onde o SI Temenos não cobre.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Banco de fomento vira plataforma digital</h4><p>Com Quinto na DITEC (2023+), o BASA contratou Temenos, lançou produtos (cartão, adquirência) e usou a COP30 como vitrine. A meta 2026 é concluir o core e o Super App.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Dual-run, fraude e agro sob pressão</h4><p>Legado ainda carrega o FNO; onboarding físico atrasa base nacional; Pix fraudulento e inadimplência agro apertam budget entre inovação e controle.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Squads Foursys ao lado do core</h4><p>Engenharia de integração, AI Squad no crédito rural e FourBlox/ciber aceleram a travessia sem trocar o parceiro Temenos — entregando valor em 90 dias.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Acelerar dual-run Core Temenos ↔ canais digitais</h4>
+                <p>Evidência: RI 4T25 (PoC concluída, parceiro selecionado, BIAN); Valor (conta ainda presencial).</p>
+                <div class="sub">Solução Foursys</div><p>Modernização de Legado + Engenharia Digital: APIs, jornadas Super App, desacoplamento de lotes FNO.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Qual percentual do backlog DITEC 2H26 está bloqueado por dependência do go-live Temenos?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de 2 dias mapeando 3 jornadas críticas (onboarding, crédito rural, cartão virtual).</p>
+            </div>
+            <div class="business-card">
+                <h4>Lending assistido por IA no crédito Amazônia</h4>
+                <p>Evidência: Temenos Forum 2026 / Brasil 61; Data Lake com governança (RI); imersão Google Gemini.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad: scoring assistido, triagem documental, copiloto para gerentes de agência de negócios.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Onde o tempo médio de liberação do FNO/PRONAF ainda depende de análise 100% humana?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>PoC 6–8 semanas em uma superintendência piloto com métrica de SLA de crédito.</p>
+            </div>
+            <div class="business-card">
+                <h4>Resiliência de integrações e antifraude Pix</h4>
+                <p>Evidência: RI (fraudes Pix, Fusion Center); instabilidade adquirência pós-Entrepay (fontes abertas).</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox (iPaaS Digibee) + Cibersegurança: orquestração de parceiros e monitoramento transacional.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quantas integrações críticas ainda são ponto a ponto fora do Gate Layer?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment de 10 fluxos (adquirência, cartões, Open Finance) com heat map de risco.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck 8–10 slides + one-pager (PDF) — sem PoC genérica de core</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">Modernização/Engenharia Digital + AI Squad + FourBlox/Ciber — cabem no plano diretor já publicado</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) modernização de canais/APIs em instituições financeiras com convivência legado; (2) AI Squad para crédito/análise documental; (3) integração iPaaS Digibee (FourBlox) em ecossistemas com múltiplos parceiros de pagamento — adaptar discurso ao mandato FNO/ESG Amazônia.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> o maior ROI não é “substituir Temenos”, e sim reduzir o custo e o risco do dual-run enquanto o Super App e o onboarding digital liberam funding mais barato — tese que o presidente Lessa já verbalizou publicamente.</p>
+            <p style="margin-top:8px"><em>Discurso sugerido se não houver case Amazônia pronto: “Aceleramos a ponte entre o core que vocês já contrataram e o crédito que a região não pode esperar.”</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Vocês já escolheram o core — a pergunta agora é quem acelera o dual-run sem travar o FNO.”</li>
+                <li>“Onboarding ainda presencial custa funding: cada mês sem conta digital nacional é spread mais caro.”</li>
+                <li>“Data Lake e Gemini já estão na mesa; AI Squad transforma isso em SLA de crédito rural mensurável.”</li>
+                <li>“Adquirência e cartões multiplicam integrações — iPaaS com ISO 27001 evita o próximo ponto único de falha.”</li>
+                <li>“Fraude Pix subiu no RI: Fusion Center precisa de operação, não só de roadmap.”</li>
+                <li>“COP30 deu vitrine; 2026 cobra entrega — squads de 90 dias cabem no plano diretor.”</li>
+                <li>“Foursys não compete com Temenos/Red Hat: completa a orquestra com engenharia, IA e integração.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Encontro IT Forum com Quinto + follow-up LinkedIn/e-mail DITEC</td><td>Ata + one-pager personalizado Amazônia</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop dual-run (core, Gate Layer, 3 jornadas)</td><td>Mapa de gaps + heat map backlog</td><td>2–4 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC AI lending OU assessment iPaaS 10 fluxos</td><td>Resultado com KPI de SLA/risco</td><td>6–8 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad integração canais ou ciber antifraude</td><td>Release em produção limitada</td><td>1 trimestre</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Contrato guarda-chuva DITEC (licitação/ata se aplicável)</td><td>MSA + roadmap 12 meses</td><td>2º semestre 2026</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Site institucional Banco da Amazônia</h4><div class="url">https://www.bancoamazonia.com.br</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Next.js (RSC / Turbopack)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Next.js middleware</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud / CDN</div><div class="v">CloudFront + nginx 1.24</div></div>
+                    <div class="app-stack-item"><div class="k">API / Analytics</div><div class="v">GTM · CSP estrita</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>BASA Digital / App mobile</h4><div class="url">Canais digitais (app lojas + internet banking)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">App nativo / híbrido (não publicado detalhe)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">APIs + Red Hat OpenShift</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Containers / hybrid (case Red Hat)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Gate Layer FAPI/CIBA</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Core bancário (implantação)</h4><div class="url">Parceiro: Temenos (contrato público)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Canais / Super App (em construção)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Temenos core + BIAN</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado (hipótese hybrid)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integração com Gate Layer</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>SIGAF / Portal da Transparência</h4><div class="url">Site institucional — contratos/licitações</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portal web</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">SIGAF (gestão adm./financeira)</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não localizado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Extração para portal</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>ServiceNow</h4><div class="url">Plataforma ITSM / automação (RI)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">ServiceNow UI</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Workflows IT/negócio</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">SaaS ServiceNow</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações ITSM</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="name">Hybrid / HCI + containers</div><div class="cmp">Implantação HCI; Red Hat OpenShift/containers; site em nginx + CloudFront; migração cloud em curso (case Red Hat).</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança & Compliance</div><div class="name">IAM + antifraude + Fusion Center</div><div class="cmp">Controles de acesso, vulnerabilidades, score Pix, PLD/FTP; estratégia Cyber Fusion Center (RI 4T25); Open Finance FAPI.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="name">IA generativa + automação</div><div class="cmp">Imersão Google Gemini; agenda lending assistido por IA; ServiceNow para automação de processos; diretrizes de uso seguro de IA.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados & Analytics</div><div class="name">Data Lake + Data View</div><div class="cmp">Novo Data Lake com sanitização/governança; pipelines contínuos; modelagem para core, adquirência e cartões.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="name">Core bancário Temenos (implantação)</div><div class="cmp">PoC concluída; parceiro selecionado; framework BIAN; SIGAF no administrativo. ERP administrativo: SIGAF (não confundir com core bancário).</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="name">Crédito FNO, cartões, adquirência, investimentos</div><div class="cmp">Carteiras FNO/comercial; emissão cartão (Verdinho); adquirência; plataforma investimentos (parceria Genial); microfinanças BASA Acredita.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência & Engajamento</div><div class="name">App + site + agências de negócios</div><div class="cmp">11,1 mi transações digitais (2025); Super App em roadmap; 124 agências (95 tradicionais / 29 negócios); site Next.js rebrand.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.bancoamazonia.com.br</td><td><span class="status-200">200</span></td><td>Next.js (X-Powered-By)</td><td>CloudFront (CSP img) + nginx/1.24 Ubuntu</td><td>GTM; CSP nonce; headers RSC Next</td></tr>
+                    <tr><td>https://www.bancoamazonia.com.br/o-banco</td><td><span class="status-200">200</span></td><td>Next.js / Turbopack chunks</td><td>Mesmo stack</td><td>HTML ~462 KB; locale pt-BR</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026 ~12:03 (BRT). Só registrar o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Core & canais</div><h4>Dual-run Temenos vs. legado FNO</h4><p>PoC e seleção feitas; convivência e desacoplamento de lotes/crédito ainda são o gargalo típico de bancos regionais em troca de core.</p><div class="offer">Oferta Foursys: Modernização de Legado + Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Experiência</div><h4>Onboarding digital incompleto</h4><p>Conta ainda exige presença física (Valor) enquanto Super App e base nacional são prioridade 2026 — gap vs. BNB/BB digitais.</p><div class="offer">Oferta Foursys: Engenharia Digital (jornadas + APIs)</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Integração</div><h4>Ecossistema adquirência/cartões frágil</h4><p>Troca de fornecedor e Gate Layer recente sugerem integrações ainda maduras demais em ponto a ponto.</p><div class="offer">Oferta Foursys: FourBlox (Digibee iPaaS)</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · IA aplicada</div><h4>IA ainda em exploração, não em fábrica</h4><p>Visita Gemini e discurso de lending assistido existem; falta industrializar modelos no Data Lake com governança.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Ciber</div><h4>Fusion Center em evolução sob pressão Pix</h4><p>RI admite aumento de fraudes e roadmap Fusion Center — gap entre intenção e operação 24×7 madura.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 6 · Dados</div><h4>Data Lake jovem vs. demanda de cartões/core</h4><p>Governança e pipelines iniciados; modelagem ainda “inicial” para serviços novos — risco de shadow data.</p><div class="offer">Oferta Foursys: Engenharia Digital (dados) + AI Squad</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal & Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Não localizado em fontes abertas detalhadas</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">Belém / PA</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Trate-o como José Quinto / José Maria Quinto Filho — diretor estatutário, não “CIO de fornecedor”.<br>
+                2) Cite o programa de ~2 anos de transformação digital que ele próprio narra na imprensa (Verdinho/COP30).<br>
+                3) Pergunte pelo estágio pós-PoC Temenos e pelo Super App — temas que ele prioriza publicamente.<br>
+                4) Conecte Amazônia + crédito rural + inclusão: missão institucional, não só “cloud”.<br>
+                5) Reconheça Red Hat/OpenShift e Google como parceiros já na mesa — posicione Foursys como acelerador, não substituto.<br>
+                6) Evite pitch genérico de core banking; foque dual-run, integrações e IA no crédito.<br>
+                7) IT Forum é primeira presença (não esteve no último) — use para rapport e discovery, não hard sell.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia & RI</h4><ul>
+                    <li>Relatório da Administração 1S25 (BASA / Poder360)</li>
+                    <li>Relatório da Administração 4T25 (RI BASA / MZiQ)</li>
+                    <li>Earnings Release 2025 (BASA)</li>
+                    <li>Valor Econômico / Valor International — tech push & lucro 2025</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Red Hat Success Story — BASA Digital / OpenShift</li>
+                    <li>RI: ServiceNow, Data Lake, HCI, Gate Layer FAPI, Temenos</li>
+                    <li>Brasil 61 — Temenos Community Forum 2026 / IA crédito</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Planilha CIOs Confirmados IT Forum 2026 (10.07)</li>
+                    <li>MonitorCNPJ / Receita — CNPJ 04.902.979/0001-44</li>
+                    <li>BankTrack — perfil institucional BASA</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn José Quinto (josé-quinto-4136746a)</li>
+                    <li>O Liberal — cartão Verdinho / COP30 (cita Quinto)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch/Head https://www.bancoamazonia.com.br (21/07/2026)</li>
+                    <li>Headers: Next.js, nginx, CloudFront, GTM, CSP</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

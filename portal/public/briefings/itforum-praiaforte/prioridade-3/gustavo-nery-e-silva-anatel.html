@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Gustavo Nery e Silva | Anatel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+:root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Gustavo Nery e Silva</h1>
+                <h2>Superintendente de Gestão Interna da Informação (CIO) — Anatel</h2>
+                <div class="loc">Telecomunicações · Setor Público · Brasília/DF · CNPJ 02.030.715/0001-12</div>
+                <span class="badge-mode consultivo">Modo: Consultivo</span>
+                <span class="badge-prio">Prioridade: Média · Agência reguladora (compras públicas)</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Dados armazenados</div><div class="value">138 TB</div></div>
+                <div class="header-badge"><div class="label">Analytics processado</div><div class="value">&gt;1.000 TB</div></div>
+                <div class="header-badge"><div class="label">APIs integradas</div><div class="value">280</div></div>
+                <div class="header-badge"><div class="label">Último IT Forum</div><div class="value">NÃO</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: perfil SGI Anatel + TI Inside (IA soberana/dados abr/2026) + cloud híbrido Serpro + leitura de compras públicas + material de apresentação · Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>A <strong>Agência Nacional de Telecomunicações (Anatel)</strong> (CNPJ 02.030.715/0001-12), sede em Brasília/DF, é a autarquia federal reguladora do setor de telecomunicações. Não opera como empresa comercial: gera valor público via regulação, fiscalização, certificação, atendimento ao consumidor e dados abertos. Em entrevista TI Inside (abr/2026), a SGI reporta escala de dados: <strong>138 TB</strong> armazenados, &gt;1.000 TB processados em analytics, dados de &gt;27 mil entidades reguladas, 18 bases / 24 repositórios, <strong>280 APIs</strong>, ~1,4 mi de registros anuais de interações com consumidores, &gt;150 painéis públicos e &gt;1.000 dashboards internos. Fonte: gov.br/anatel; TI Inside 16/04/2026.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Agência Nacional de Telecomunicações — Anatel</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">Brasília / DF</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Nacional · regulação telecom</div></div>
+                <div class="info-card"><div class="label">Orçamento / receita</div><div class="value">Órgão público — orçamento federal (não é faturamento comercial)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">SGI: equipe de dados/analytics enxuta citada (governança ~3 pessoas no núcleo; TI ampliada na superintendência)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Autarquia federal · compras via licitação/contratos públicos</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>Gustavo Nery e Silva</strong> é <strong>Superintendente de Gestão Interna da Informação (SGI)</strong> da Anatel desde <strong>out/2024</strong> (TELETIME; ato do Conselho Diretor). Atua como CIO da agência: dados, analytics, infraestrutura, transformação digital e IA soberana. Formação: Ciências Econômicas (UnB) e Ciências Jurídicas (IESB); servidor federal desde 2011 (carreira de Especialista em Regulação). Passagens: Planejamento, Comunicações, Economia (TransformaGov / Programa de Gestão e Desempenho); na Anatel, SRC, assessorias a conselheiros e Chefe de Gabinete de Alexandre Freire. Discursos: sair de TI reativa para TI de negócio; Qlik; self-service BI (&gt;400 servidores capacitados); renovação de data center; cloud broker Serpro + AWS/Microsoft; SEI-IA. <strong>Poder de decisão:</strong> alto técnico-orçamentário da SGI, limitado por Conselho Diretor, jurídico e regime de licitações. <strong>Presente no último IT Forum:</strong> NÃO.</p>
+            <div class="alert-box" style="margin-top:14px">⚠️ <strong>Contexto de compras:</strong> qualquer proposta comercial deve considerar Lei 14.133/2021, pregão/ata/contratos com Serpro e fornecedores já instalados (ex.: Qlik). Não tratar como venda privada de CIO.</div>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento &amp; mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Regulação de telecom no Brasil: qualidade de serviço, espectro, certificação de produtos, direitos do consumidor, competição e dados setoriais. Cadeia de valor pública: coleta → governança → analytics → fiscalização/decisão → transparência. Prioridades: soberania de dados, IA corporativa segura, migração de data center, cloud híbrido, painéis para sociedade e eficiência de servidores. Pressões: volume de dados de operadoras, expectativa de transparência, restrições orçamentárias e compliance (LGPD, segurança da informação gov). Tendência: IA soberana e self-service BI no setor público. Risco: lock-in de ferramentas e migração de legado sensível.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões &amp; lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Migração de data center</strong> — renovação prevista; ponto sensível é migrar legado com continuidade (TI Inside).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Cloud híbrido soberano</strong> — Serpro como broker + AWS/Microsoft; governança de dados sensíveis vs. serviços avançados.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>IA sem vazamento</strong> — risco de servidores usarem IAs públicas com dados sensíveis; construção de camada corporativa (SEI-IA).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Escala de APIs e bases</strong> — 280 APIs / 18 bases; dívida de integração e qualidade de dados.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Capacidade interna limitada</strong> — governança de dados com núcleo mínimo; dependência de fornecedores e capacitação.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">TI estratégica (não reativa)</span>
+                <span class="tag tag-priority">IA soberana integrada ao SEI</span>
+                <span class="tag tag-priority">Cloud híbrido com controle</span>
+                <span class="tag tag-priority">Transparência e painéis públicos</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">Novo data center / migração</span>
+                <span class="tag tag-active">Cloud broker Serpro</span>
+                <span class="tag tag-active">Qlik / analytics avançado</span>
+                <span class="tag tag-active">Camada corporativa de IA</span>
+                <span class="tag tag-active">Capacitação self-service BI</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Squads de migração/modernização sob contrato público</span>
+                <span class="tag tag-opportunity">Integração/APIs (iPaaS) com governança</span>
+                <span class="tag tag-opportunity">AI Squad soberano (SEI + analytics)</span>
+                <span class="tag tag-opportunity">Cibersegurança e conformidade gov</span>
+            </div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">88/100</span></div>
+                <p>Apoio a migração de sistemas/dados para novo DC e ambiente híbrido com continuidade operacional — aderente ao discurso do superintendente.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: TI Inside — migração é o ponto mais sensível da renovação do data center.</li>
+                    <li>HIPÓTESE: backlog de sistemas legados exige factory sob rito público.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad (soberano / governado)</h4><span class="score-badge">86/100</span></div>
+                <p>Evolução da camada de IA corporativa (SEI-IA e analytics) com trilha de auditoria e sem vazamento para IAs públicas.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: Anatel prioriza IA soberana e assistente no SEI (TI Inside).</li>
+                    <li>FATO: avaliação de IA embarcada em plataforma analítica (Qlik citada).</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox (iPaaS Digibee) + Engenharia Digital</h4><span class="score-badge">80/100</span></div>
+                <p>Industrializar integrações entre 280 APIs, bases e painéis — reduz ponto a ponto e acelera fiscalização/transparência.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: 280 APIs e múltiplos repositórios (TI Inside).</li>
+                    <li>HIPÓTESE: crescimento de dados pressiona governança de interfaces.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">78/100</span></div>
+                <p>Hardening, threat modeling e conformidade (ISO Foursys) para DC híbrido e dados regulatórios sensíveis.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: dados sensíveis em nuvem de governo + hyperscalers.</li>
+                    <li>HIPÓTESE: superfície de APIs e painéis públicos exige monitoramento contínuo.</li>
+                </ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital (dados &amp; DX)</h4><span class="score-badge">72/100</span></div>
+                <p>Squads para qualidade de dados, APIs e evolução de painéis públicos/internos sob self-service BI.</p>
+                <div class="reasons"><ul>
+                    <li>FATO: &gt;150 painéis públicos e cultura self-service (TI Inside).</li>
+                </ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>“Vocês já democratizaram analytics (Qlik) e anunciaram IA soberana. O gargalo agora é migrar o legado do DC e industrializar integrações/IA sem quebrar continuidade — sob o rito público.”</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Workshop técnico (não pitch comercial agressivo): mapa de migração DC + PoC de governança de IA/integração, preparando enquadramento em ata/contrato futuro.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Modernização + AI Squad + FourBlox com ISO 27001/27701 e experiência em programas complexos — linguagem de valor público, não de “vendor cloud”.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes &amp; Gap Analysis</h3>
+            <div class="competitor-card"><h4>Serpro</h4><p>Cloud broker e serviços gov. Gap Foursys: complementar com squads de modernização/IA/integração, não competir frontalmente com broker.</p></div>
+            <div class="competitor-card"><h4>Qlik / parceiros analytics</h4><p>Plataforma analítica instalada. Gap: Foursys atua na camada de engenharia de dados, APIs e IA governada ao redor.</p></div>
+            <div class="competitor-card"><h4>Hyperscalers (AWS/Microsoft)</h4><p>Capacidade de nuvem via broker. Gap: execução de migração e applications modernization.</p></div>
+            <div class="competitor-card"><h4>Consultorias públicas tradicionais</h4><p>Contratos longos de sustentação. Gap: throughput ágil com governança e ISO.</p></div>
+            <div class="competitor-card"><h4>Outras agências (referência)</h4><p>Benchmark de maturidade digital no Executivo. Gap Anatel: escala de dados setoriais exige excelência contínua.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Anatel — reguladora federal de telecom; operação intensiva em dados (138 TB; 280 APIs).</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Gustavo Nery — Superintendente SGI/CIO desde out/2024; carreira regulatória UnB/IESB.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Migrar DC + cloud híbrido soberano + IA corporativa sem vazamento.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">DC, Serpro broker, Qlik, SEI-IA, capacitação BI — fontes abertas TI Inside.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1) Modernização de Legado; 2) AI Squad soberano; 3) FourBlox.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Conversa consultiva no IT Forum: mapa de migração + enquadramento contratual.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">IT Forum 2026 (1ª presença) · ciclo de renovação DC 2026.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender cloud; vender continuidade da migração + IA auditável sob Lei 14.133.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>SGI sob Nery</h4><p>Desde out/2024, a SGI acelera dados, analytics e reposiciona TI como agente estratégico da Anatel.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Escala vs. soberania</h4><p>TB de dados, APIs e IA convivem com migração de DC e risco de shadow AI em dados sensíveis.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Parceiro de execução</h4><p>Foursys apoia modernização, integrações e AI Squad soberano — no ritmo e rito do setor público.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Migração de data center com continuidade</h4>
+                <p>Evidência: renovação de DC e migração como ponto mais sensível (TI Inside abr/2026).</p>
+                <div class="sub">Solução Foursys</div><p>Modernização de Legado — dual-run controlado e observabilidade; resultado: menos risco operacional na virada.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quais sistemas críticos ainda não têm plano de cutover com rollback testado?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment técnico de 2 semanas (escopo público).</p>
+            </div>
+            <div class="business-card">
+                <h4>IA soberana além do SEI</h4>
+                <p>Evidência: assistente SEI-IA e preocupação com IAs públicas (TI Inside).</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad — casos internos com trilha de auditoria; resultado: produtividade sem vazamento.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Quais processos ainda usam ferramentas externas não governadas?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Design de política + PoC controlado.</p>
+            </div>
+            <div class="business-card">
+                <h4>Industrializar 280 APIs</h4>
+                <p>Evidência: volume de APIs e bases (TI Inside).</p>
+                <div class="sub">Solução Foursys</div><p>FourBlox + Engenharia Digital — padrões e catálogo; resultado: menos ponto a ponto e mais velocidade de painéis.</p>
+                <div class="sub">Pergunta de descoberta</div><p>“Qual percentual das APIs tem contrato de serviço e monitoramento?”</p>
+                <div class="sub">Gancho / próximo passo</div><p>Mapa de interfaces + PoC iPaaS em 1 cadeia fiscalização/transparência.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">One-pager consultivo + diagrama DC híbrido + nota de enquadramento Lei 14.133</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">Modernização + AI Squad + FourBlox — porquê: DC/IA/APIs</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> (1) modernização/migração em órgão público; (2) IA governada; (3) integração de APIs em escala — usar apenas cases Foursys autorizados para setor público.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> o valor não é “mais Qlik”; é continuidade da migração e IA sem shadow usage.</p>
+            <p style="margin-top:8px"><em>Evitar deck de vendas agressivo; preferir conversa de discovery com jurídico/contratos no loop.</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Li a entrevista sobre IA soberana e o novo DC — queremos ajudar no ponto sensível: a migração.”</li>
+                <li>“Self-service BI já é cultura; o próximo salto é industrializar APIs e IA com trilha.”</li>
+                <li>“Não competimos com Serpro/Qlik — complementamos com fábrica de execução.”</li>
+                <li>“AI Squad alinhado a SEI-IA e risco de ferramentas públicas.”</li>
+                <li>“FourBlox para governar integrações em escala de 280 APIs.”</li>
+                <li>“Proposta: workshop técnico + assessment enquadrável em contratação pública.”</li>
+                <li>“Primeira presença no IT Forum — porta de relacionamento de longo prazo.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Abordagem consultiva no IT Forum</td><td>Agenda 45 min com Gustavo (+ equipe SGI)</td><td>0–7 dias</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Mapa DC/APIs/IA + restrições legais</td><td>One-pager público + hipóteses de escopo</td><td>1–4 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>PoC controlado (se instrumento permitir)</td><td>Demo + relatório técnico</td><td>4–8 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad sob contrato/ata</td><td>Backlog 90 dias</td><td>2–4 meses</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Programa plurianual (se aplicável)</td><td>Instrumento contratual</td><td>4–12 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3-5)</h4>
+            <div class="app-card">
+                <h4>Portal Anatel (gov.br)</h4><div class="url">https://www.gov.br/anatel/pt-br</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Portal gov.br / Plone-like</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">CMS governo</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Infraestrutura governo</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Dados abertos / serviços</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Painéis públicos / analytics</h4><div class="url">&gt;150 painéis (claim SGI)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Qlik (declarado)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Bases regulatórias</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Híbrido (próprio + broker)</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações a 280 APIs</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>SEI + SEI-IA</h4><div class="url">Sistema Eletrônico de Informações</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">SEI</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Assistente IA interno</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Ambiente governado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integração multi-cloud em evolução</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Perfil do Superintendente</h4><div class="url">https://www.gov.br/anatel/.../gustavo-nery-e-silva</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Página institucional</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">CMS Anatel</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">gov.br</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">N/A</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">DC próprio em renovação; cloud broker Serpro; integração AWS e Microsoft (TI Inside). Modelo híbrido.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="cmp">Soberania de dados, LGPD e segurança da informação gov. Detalhes de SOC: não localizados publicamente.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">SEI-IA; avaliação de IA embarcada em analytics; política contra uso descontrolado de IAs públicas.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="cmp">Qlik desde ~2017; contratação avançada 2021; self-service BI; 138 TB / &gt;1.000 TB processados.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">Sistemas administrativos federais — não detalhados publicamente. SEI como core documental.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">Fiscalização, certificação, atendimento consumidor, obrigações de prestadoras, painéis.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="cmp">gov.br/anatel; painéis públicos (ex.: certificação com &gt;600 mil acessos citados).</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.gov.br/anatel/pt-br</td><td><span class="status-200">200</span></td><td>Portal gov.br</td><td>Não identificado</td><td>HTTP 21/07/2026</td></tr>
+                    <tr><td>Perfil Gustavo Nery (gov.br)</td><td><span class="status-err">timeout/parcial</span></td><td>CMS</td><td>—</td><td>WebFetch timeout; conteúdo confirmado via busca/TELETIME</td></tr>
+                    <tr><td>https://tiinside.com.br/.../anatel-aposta-em-dados...</td><td><span class="status-200">200</span></td><td>Notícia</td><td>—</td><td>WebFetch 21/07/2026 — fonte primária stack</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026. Só registrar o efetivamente inspecionado.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (4-6)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Legado</div><h4>Migração DC</h4><p>Renovação anunciada; risco de downtime e dual-run. Evidência: TI Inside.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · IA</div><h4>Sombra de IAs públicas</h4><p>Risco explícito citado pelo superintendente.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Integração</div><h4>280 APIs sem fábrica</h4><p>Escala de interfaces típica de órgãos reguladores.</p><div class="offer">Oferta Foursys: FourBlox</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Cloud</div><h4>Híbrido soberano operacional</h4><p>Broker Serpro + hyperscalers exige FinOps e padrões.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Segurança</div><h4>Dados regulatórios sensíveis</h4><p>Superfície de painéis + APIs + nuvem.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 6 · Capacidade</div><h4>Núcleo enxuto vs. demanda</h4><p>Governança com poucas pessoas; precisa de parceiro de throughput.</p><div class="offer">Oferta Foursys: Squads gerenciados</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal &amp; Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Economia UnB · Direito IESB</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">Brasília, DF</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (5-7)</h4>
+                <p>1) Reconhecer TransformaGov / gestão pública — ele veio desse mundo.<br>
+                2) Falar valor público e transparência, não “ROI de shareholder”.<br>
+                3) Citar números da entrevista (138 TB, 280 APIs, SEI-IA) com precisão.<br>
+                4) Respeitar Qlik/Serpro como instalados — posicionar complementaridade.<br>
+                5) Evitar hard sell; perguntar restrições de contratação cedo.<br>
+                6) Tom técnico-jurídico leve (ele é regulador + TI).<br>
+                7) IT Forum como 1º contato presencial — construir confiança.</p>
+            </div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia &amp; institucional</h4><ul>
+                    <li>gov.br/anatel — composição SGI / Gustavo Nery</li>
+                    <li>TELETIME — mudança de superintendências (out/2024)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>TI Inside 16/04/2026 — dados, Qlik, Serpro, SEI-IA</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>Contexto regulatório telecom BR</li>
+                    <li>CNPJ 02.030.715/0001-12 (briefing)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn — Gustavo Nery e Silva</li>
+                    <li>Página oficial Anatel</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch/HTTP 21/07/2026 — gov.br/anatel, TI Inside</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS)
+    </div>
+
+</body>
+</html>

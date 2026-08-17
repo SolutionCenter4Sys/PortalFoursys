@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<!-- Briefing atualizado a partir de referência anterior. Ordem física: B → A → C. -->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Paulo Henrique Scrideli | FLEETCOR (SEM PARAR)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Paulo Henrique Scrideli</h1>
+                <h2>VP Sênior de Tecnologia e Digital — FLEETCOR (SEM PARAR)</h2>
+                <div class="loc">Serviços Financeiros · São Paulo/SP · CNPJ 04.088.208/0001-65</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: ordem da planilha</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Corpay 2025</div><div class="value">US$ 4,53 bi</div></div>
+                <div class="header-badge"><div class="label">Brasil 1T26</div><div class="value">US$ 211 mi</div></div>
+                <div class="header-badge"><div class="label">Tags</div><div class="value">7,5 mi+</div></div>
+                <div class="header-badge"><div class="label">Presença</div><div class="value">7 mil+</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em 05/08/2026 · Escopo: validação cadastral, liderança, RI, iniciativas 2025–2026, comitê, material de apresentação e apêndice técnico · Atualiza e reformata briefing anterior de Trancoso.</div>
+        </div>
+
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ZONA B — CONTEXTO / PRÉ-VENDAS -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico · FATO</div>
+            <h3>A Empresa</h3>
+            <p><strong>FATO.</strong> Sem Parar Instituição de Pagamento Ltda. opera o ecossistema brasileiro de pagamentos automáticos e mobilidade controlado pela Corpay. A própria empresa confirma origem em 2000, aquisição pela Corpay em 2016, cobertura nacional e mais de cinco milhões de clientes; o relatório anual da controladora descreve a rede proprietária Sem Parar e mais de 7,5 milhões de tagholders. <a href="https://www.semparar.com.br/sobre-nos">Fonte institucional</a>; <a href="https://investor.corpay.com/static-files/aa3968eb-9fd9-4749-a1f1-b8481f87d756">Corpay 10-K 2025</a>.</p>
+            <p style="margin-top:10px"><strong>FATO CADASTRAL.</strong> O CNPJ informado, 04.088.208/0001-65, aparece em página institucional da própria Sem Parar com razão social e endereço em São Paulo. Portanto, é compatível com empresa, cidade e vínculo recebidos. <a href="https://www.semparar.com.br/flex-2024">Fonte institucional</a>.</p>
+            <div class="alert-box" style="margin-top:14px"><strong>Divergências registradas:</strong> a planilha usa “FLEETCOR”, denominação anterior da atual Corpay, preservada no título para rastreabilidade; “Serviços Finançeiros” foi normalizado para “Serviços Financeiros”; o CNPJ bruto sem zero inicial foi normalizado para 14 dígitos, sem alterar a entidade.</div>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Sem Parar Instituição de Pagamento Ltda.</div></div>
+                <div class="info-card"><div class="label">Sede cadastral</div><div class="value">São Paulo/SP</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">Brasil; controladora global Corpay</div></div>
+                <div class="info-card"><div class="label">Receita controladora</div><div class="value">US$ 4,53 bi em 2025 (RI Corpay)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">Não localizado em fonte institucional atual</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Privada; controlada pela Corpay</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão · FATO</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p><strong>FATO.</strong> Paulo Henrique Scrideli é VP Sênior de Tecnologia e Digital da Corpay Brasil, responsável pela tecnologia que suporta Sem Parar e Sem Parar Empresas. Cargo e vínculo aparecem no IT Forum e no perfil profissional público, fornecendo duas evidências convergentes. O executivo tem mais de três décadas em tecnologia, passou por Universo Online, Tivit, GVT e Telefônica, e liderou a Comunidade Turbo AI. <a href="https://itforum.com.br/noticias/lideranca-scrideli-corpay-atendimento-cliente-ia/">IT Forum</a>; <a href="https://br.linkedin.com/in/scrideli">LinkedIn</a>.</p>
+            <p style="margin-top:10px"><strong>FATO.</strong> Seu modelo de gestão privilegia squads, autonomia e TI integrada ao negócio. A governança de IA conecta produtividade, processos internos, atendimento, retenção e vendas. Isso indica influência direta sobre arquitetura, dados, segurança, engenharia e parceiros de entrega, embora alçadas formais de orçamento e reporte não estejam publicadas. <a href="https://itforum.com.br/noticias/lideranca-scrideli-corpay-atendimento-cliente-ia/">IT Forum</a>.</p>
+            <div class="alert-box" style="margin-top:14px"><strong>Status do vínculo:</strong> confirmado por evidências públicas recentes. Não há sinal público localizado de saída. Convite recebido: confirmado com voo, participação presencial, presente no último encontro.</div>
+        </div>
+
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento & mercado · FATO</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p><strong>FATO.</strong> O Sem Parar combina instituição de pagamento, mobilidade, gestão de veículos, benefícios e canais digitais. A cadeia de valor reúne motoristas, frotistas, concessionárias, estacionamentos, postos, emissores, adquirentes e órgãos reguladores. A competição migra da tag isolada para ecossistemas integrados de pagamentos, dados, crédito, seguros e gestão veicular. Prioridades setoriais: confiança transacional, prevenção a fraude, integração de parceiros, disponibilidade, personalização e conformidade. <a href="https://www.semparar.com.br/sobre-nos">Sem Parar</a>; <a href="https://www.sempararempresas.com.br/sobre">Sem Parar Empresas</a>; <a href="https://investor.corpay.com/static-files/aa3968eb-9fd9-4749-a1f1-b8481f87d756">Corpay 10-K</a>.</p>
+        </div>
+
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões & lacunas · FATO / INFERÊNCIA / HIPÓTESE</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>FATO — escala de IA:</strong> Copiloto de Atendimento e Comunidade Turbo AI exigem qualidade, governança e operação contínua. <a href="https://itforum.com.br/noticias/lideranca-scrideli-corpay-atendimento-cliente-ia/">Fonte</a>.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>FATO — integração:</strong> free flow via WhatsApp depende de integrações graduais com concessionárias e canal Meta. <a href="https://tiinside.com.br/08/06/2026/sem-parar-e-uma-das-primeiras-empresas-no-brasil-a-co-criar-com-meta-business-agent/">Fonte</a>.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>FATO — fraude:</strong> páginas falsas de pagamento de free flow elevam risco de confiança e segurança de canal. <a href="https://tiinside.com.br/08/06/2026/sem-parar-e-uma-das-primeiras-empresas-no-brasil-a-co-criar-com-meta-business-agent/">Fonte</a>.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>INFERÊNCIA — complexidade pós-aquisição:</strong> expansão em débitos veiculares por Zapay e Gringo aumenta necessidade de governança de APIs, dados e observabilidade. <a href="https://investor.corpay.com/static-files/8438eb1b-4bdb-49d9-bbc9-e0f4be509c06">RI Corpay</a>.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>INFERÊNCIA — custo e eficiência:</strong> crescimento transacional pressiona custo por interação, disponibilidade e velocidade de entrega; não foi localizado budget de TI específico do Brasil.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div><span class="tag tag-priority">Escalar IA responsável</span><span class="tag tag-priority">Integrar ecossistema veicular</span><span class="tag tag-priority">Reduzir atrito no free flow</span><span class="tag tag-priority">Aumentar eficiência operacional</span><span class="tag tag-priority">Preservar confiança financeira</span></div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div><span class="tag tag-active">FATO: Meta Business Agent</span><span class="tag tag-active">FATO: débitos veiculares</span><span class="tag tag-active">FATO: IA em atendimento</span><span class="tag tag-active">INFERÊNCIA: integração e observabilidade</span><span class="tag tag-active">INFERÊNCIA: segurança de canais</span></div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div><span class="tag tag-opportunity">HIPÓTESE: governança de IA em produção</span><span class="tag tag-opportunity">HIPÓTESE: camada de integração escalável</span><span class="tag tag-opportunity">HIPÓTESE: proteção de jornadas free flow</span></div>
+        </div>
+
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio · HIPÓTESE CONSULTIVA</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">94/100</span></div>
+                <p>Escalar casos da Comunidade Turbo AI e do atendimento para ciclos controlados de produto, avaliação e operação.</p>
+                <div class="reasons"><ul><li>IA já é prioridade explícita e patrocinada pelo executivo.</li><li>Conecta C3, C4 e C7 com eficiência e experiência.</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Digibee iPaaS</h4><span class="score-badge">90/100</span></div>
+                <p>Acelerar integrações entre concessionárias, canais, débitos veiculares e plataformas adquiridas.</p>
+                <div class="reasons"><ul><li>Expansão de cobertura exige novas integrações.</li><li>Reduz acoplamento e tempo de entrada de parceiros.</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">87/100</span></div>
+                <p>Proteger identidades, APIs, pagamentos e canais contra fraude, com privacidade e segurança por desenho.</p>
+                <div class="reasons"><ul><li>Free flow já sofre exploração por sites falsos.</li><li>Foursys possui ISO 27001 e 27701.</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">84/100</span></div>
+                <p>Evoluir jornadas de alta escala, observabilidade e resiliência em canais web, mobile e mensageria.</p>
+                <div class="reasons"><ul><li>SuperApp e WhatsApp tornam experiência parte do core.</li><li>Atende C1, C6 e C7.</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">78/100</span></div>
+                <p>Desacoplar capacidades antigas e absorver aquisições sem interromper transações críticas.</p>
+                <div class="reasons"><ul><li>RI Corpay declara modernização do core como pilar tecnológico.</li><li>Conecta C5 e C6 à expansão do portfólio.</li></ul></div>
+            </div>
+        </div>
+
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account · HIPÓTESE CONSULTIVA</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>“Como levar a governança da Comunidade Turbo AI para uma fábrica de resultados mensuráveis, sem aumentar risco operacional nem custo por jornada?” Abrir por escala e governança, não por ferramenta.</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>Conectar Meta Business Agent, free flow e novas plataformas de débitos veiculares em um discovery de integração, segurança e observabilidade. Fornecedor atual ou processo de contratação não foram localizados.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>Combinar AI Squad, Digibee e segurança certificada em uma frente única. Foursys traz 24 anos, 41.000+ projetos e certificações ISO 27001/27701, reduzindo handoffs entre fornecedores.</p></div>
+            <div class="insight-box"><h4>Comitê decisor provável — validar em discovery</h4><p><strong>INFERÊNCIA:</strong> Scrideli patrocina tecnologia e digital; Gabriel Porto, CMPO citado no projeto Meta, influencia produto e canal; áreas de Segurança, Dados, Atendimento, Jurídico/Privacidade, Riscos/Compliance, Operações e Compras devem participar conforme escopo. Alçadas, nomes adicionais e budget não estão publicados. Perguntar sobre sponsor econômico, dono do P&amp;L, arquitetura, segurança e procurement antes de propor PoC.</p></div>
+        </div>
+
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark · FATO / INFERÊNCIA</div>
+            <h3>Concorrentes & Gap Analysis</h3>
+            <div class="competitor-card"><h4>Veloe</h4><p>Compete em tag, pedágio, estacionamento e frotas, apoiada por ecossistema financeiro. <strong>INFERÊNCIA:</strong> pressiona distribuição e preço; Sem Parar precisa diferenciar por dados, cobertura e jornada integrada.</p></div>
+            <div class="competitor-card"><h4>ConectCar</h4><p>Concorre em pagamentos automáticos com distribuição via parceiros. <strong>INFERÊNCIA:</strong> reforça necessidade de onboarding simples e alta disponibilidade.</p></div>
+            <div class="competitor-card"><h4>C6 Tag</h4><p>Integra mobilidade à experiência bancária digital. <strong>INFERÊNCIA:</strong> aumenta expectativa por experiência financeira sem fricção.</p></div>
+            <div class="competitor-card"><h4>Mercado Pago</h4><p>Ecossistema digital com escala em pagamentos e carteira. <strong>INFERÊNCIA:</strong> eleva padrão de personalização, risco e velocidade de produto.</p></div>
+            <p><strong>Nota:</strong> comparativos refletem posicionamento público geral; métricas atuais e fornecedores de tecnologia dos concorrentes exigem validação específica antes de uso externo.</p>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <!-- ZONA A — COMERCIAL / PITCH -->
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Ecossistema de pagamentos e mobilidade da Corpay no Brasil, com rede proprietária e expansão para serviços veiculares.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">VP Sênior de Tecnologia e Digital; líder de squads, transformação e governança de IA.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Escalar IA, integrar aquisições e parceiros e proteger jornadas de free flow.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">RI aponta estratégia digital, modernização do core e dados; budget Brasil não publicado.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">AI Squad; Digibee iPaaS; Cibersegurança.</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Workshop executivo de 90 minutos e mapa de uma jornada crítica.</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Antes da expansão integral do free flow e durante incorporação de novas integrações em 2026.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">O maior ROI pode vir de reduzir custo e risco por integração, não de criar outro canal.</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>Da tag ao ecossistema</h4><p>Sem Parar amplia pagamentos, serviços veiculares e canais enquanto a Corpay acelera crescimento e aquisições no Brasil.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Escala traz acoplamento e risco</h4><p>Cada nova jornada exige integração, dados confiáveis, segurança e operação contínua sem elevar custo por cliente.</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>Uma fábrica segura de evolução</h4><p>Foursys conecta IA, integração e engenharia para transformar experimentos em capacidades operacionais mensuráveis.</p></div>
+            </div>
+        </div>
+
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio · HIPÓTESE CONSULTIVA</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Escalar IA sem perder governança</h4>
+                <p><strong>Evidência:</strong> Comunidade Turbo AI e Copiloto de Atendimento já apoiam eficiência e experiência.</p>
+                <div class="sub">Solução Foursys</div><p>AI Squad com backlog de valor, avaliação, guardrails, FinOps e operação assistida.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Qual caso de uso está travado entre piloto e produção, e qual métrica impede priorização?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Escolher um caso e construir scorecard de valor, risco, custo e prontidão em duas semanas.</p>
+            </div>
+            <div class="business-card">
+                <h4>Acelerar integração do ecossistema</h4>
+                <p><strong>Evidência:</strong> novas concessionárias e canais são incorporados gradualmente ao free flow via WhatsApp.</p>
+                <div class="sub">Solução Foursys</div><p>Digibee iPaaS e Engenharia Digital para catálogo de APIs, contratos e observabilidade.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Quanto tempo e retrabalho hoje separam um parceiro assinado de uma jornada disponível?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Mapear uma integração representativa e estimar lead time, falhas e custo de mudança.</p>
+            </div>
+            <div class="business-card">
+                <h4>Proteger confiança no free flow</h4>
+                <p><strong>Evidência:</strong> fontes públicas registram crescimento de páginas falsas de pagamento.</p>
+                <div class="sub">Solução Foursys</div><p>Cibersegurança aplicada a identidade, API, antifraude, privacidade e resposta a incidentes.</p>
+                <div class="sub">Pergunta de descoberta</div><p>Como fraude de canal é detectada, correlacionada e comunicada hoje?</p>
+                <div class="sub">Gancho / próximo passo</div><p>Threat modeling da jornada e plano de controles priorizado por impacto.</p>
+            </div>
+        </div>
+
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck executivo de 7 slides + one-pager técnico + demo curta</div></div>
+                <div class="info-card"><div class="label">Oferta Foursys âncora</div><div class="value">AI Squad, amarrada a Digibee e segurança para provar valor ponta a ponta</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos relevantes:</strong> demonstração do acelerador AI Squad/FourBlox; blueprint de integração Digibee para onboarding de parceiro; checklist de segurança e privacidade baseado nas ISO 27001/27701. Confirmar internamente autorização, resultados e referências antes de citar clientes.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> vender redução do custo total de mudança por jornada — tempo de integração, falhas, incidentes e retrabalho — e não mais um projeto isolado de IA.</p>
+            <p style="margin-top:8px"><em>Discurso sugerido: “Vocês já provaram que IA gera valor. Nossa proposta é tornar cada nova jornada mais barata, segura e rápida de integrar, usando uma esteira comum de IA, APIs e controles.”</em></p>
+        </div>
+
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>“Paulo, a Comunidade Turbo AI mostra que vocês resolveram o patrocínio e a cultura; queremos entender onde a escala ainda trava.”</li>
+                <li>“A próxima fronteira parece menos criar casos de IA e mais operar valor, risco e custo como portfólio.”</li>
+                <li>“O free flow via WhatsApp transforma integração e confiança em parte do produto, não em infraestrutura invisível.”</li>
+                <li>“Nossa hipótese é reduzir o tempo entre parceiro contratado e jornada disponível, com APIs observáveis e segurança por desenho.”</li>
+                <li>“Foursys combina AI Squad, Digibee e certificações ISO em um único modelo de entrega.”</li>
+                <li>“Podemos começar pequeno: uma jornada, métricas atuais, threat model e blueprint de integração.”</li>
+            </ol>
+        </div>
+
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Alinhar objetivo, sponsor e jornada crítica.</td><td>Hipótese de valor e agenda.</td><td>1 semana</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Mapear processo, arquitetura, controles, custos e comitê.</td><td>Mapa AS-IS e baseline.</td><td>2 semanas</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>Provar uma integração ou caso de IA com métricas.</td><td>Prova de valor e riscos.</td><td>4–6 semanas</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Industrializar esteira, observabilidade e segurança.</td><td>Jornada em produção controlada.</td><td>8–12 semanas</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Escalar backlog por domínios e resultados.</td><td>Modelo contínuo e governança.</td><td>Trimestral</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <!-- ZONA C — APÊNDICE TÉCNICO -->
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico · FATO / NÃO PUBLICADO</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (4)</h4>
+            <div class="app-card">
+                <h4>Site institucional Sem Parar</h4><div class="url">https://www.semparar.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não identificado no WebFetch</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Não publicada</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Sem Parar Empresas</h4><div class="url">https://www.sempararempresas.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Não identificado no WebFetch</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações B2B confirmadas; tecnologia não publicada</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>SuperApp Sem Parar</h4><div class="url">https://www.semparar.com.br/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Aplicativo mobile; framework não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Serviços proprietários; detalhes não publicados</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações de mobilidade; contratos não públicos</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Jornada free flow no WhatsApp</h4><div class="url">https://tiinside.com.br/08/06/2026/sem-parar-e-uma-das-primeiras-empresas-no-brasil-a-co-criar-com-meta-business-agent/</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">WhatsApp / Meta Business Agent</div></div>
+                    <div class="app-stack-item"><div class="k">Backend</div><div class="v">Não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">Cloud</div><div class="v">Não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">API</div><div class="v">Integrações com concessionárias confirmadas</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp"><strong>FATO:</strong> Corpay declara plataformas críticas, investimentos e modernização contínua; provedores específicos do Brasil não publicados no RI consultado.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança & Compliance</div><div class="cmp"><strong>FATO:</strong> pagamentos, dados pessoais e fraude de canais tornam segurança crítica. Ferramentas internas não publicadas.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp"><strong>FATO:</strong> Comunidade Turbo AI, Copiloto de Atendimento e Meta Business Agent.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados & Analytics</div><div class="cmp"><strong>FATO:</strong> dados são um dos três pilares da transformação tecnológica da Corpay; plataformas específicas do Brasil não publicadas.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">ERP e componentes do core não localizados em fonte pública confiável. RI confirma modernização de core systems.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp"><strong>FATO:</strong> rede Sem Parar, débitos veiculares, gestão de frotas, benefícios e pagamentos. Produtos internos e fornecedores não publicados.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência & Engajamento</div><div class="cmp"><strong>FATO:</strong> site, app, SuperApp e WhatsApp; foco em mobilidade sem fricção e atendimento.</div></div>
+        </div>
+
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>https://www.semparar.com.br/sobre-nos</td><td><span class="status-200">Conteúdo obtido</span></td><td>Não identificado</td><td>Não identificado</td><td>WebFetch retornou conteúdo institucional.</td></tr>
+                    <tr><td>https://www.sempararempresas.com.br/sobre</td><td><span class="status-200">Conteúdo obtido</span></td><td>Não identificado</td><td>Não identificado</td><td>WebFetch retornou trajetória e proposta B2B.</td></tr>
+                    <tr><td>https://portaldatransparencia.gov.br/pessoa-juridica/04088208000165</td><td><span class="status-err">405 no WebFetch</span></td><td>Não inspecionado</td><td>Não identificado</td><td>Busca exibiu cadastro, mas fetch recusou método.</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 05/08/2026. Headers, scripts, trackers e CDN não foram expostos pelo WebFetch; nenhuma tecnologia foi inferida.</p>
+        </div>
+
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização · HIPÓTESE CONSULTIVA</div>
+            <h3>GAPs Tecnológicos (5)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Governança de IA</div><h4>Do caso de uso à operação mensurável</h4><p>Sinal: portfólio crescente de IA. Validar avaliação, monitoramento, custo e ownership de modelos.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Integração</div><h4>Onboarding de parceiros e aquisições</h4><p>Sinal: integrações graduais com concessionárias e expansão em débitos veiculares. Validar lead time e retrabalho.</p><div class="offer">Oferta Foursys: Digibee iPaaS</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Segurança</div><h4>Confiança em canais de pagamento</h4><p>Sinal: fraude pública em jornadas free flow. Validar identidade, proteção de APIs, detecção e resposta.</p><div class="offer">Oferta Foursys: Cibersegurança</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Observabilidade</div><h4>Visão ponta a ponta da jornada</h4><p>Sinal: múltiplos canais e parceiros. Validar rastreabilidade transacional e metas de disponibilidade.</p><div class="offer">Oferta Foursys: Engenharia Digital</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · Core</div><h4>Evolução sem acoplamento</h4><p>Sinal: RI Corpay mantém modernização de core como pilar. Validar legado, dependências e estratégia de estrangulamento.</p><div class="offer">Oferta Foursys: Modernização de Legado</div></div>
+            </div>
+        </div>
+
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa · FATO</div>
+            <h3>Perfil Pessoal & Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Engenharia Mecânica, Poli-USP; MBA Executivo FGV; programa executivo Ohio University</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">São Paulo/SP, conforme evento e atuação; residência não confirmada</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Português nativo e inglês avançado, segundo LinkedIn público</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (6)</h4><p>1) Reconheça a Comunidade Turbo AI e pergunte pela evolução pós-prêmio. 2) Explore a passagem do modelo “pedido e entrega” para squads. 3) Conecte engenharia e escala à confiabilidade transacional. 4) Pergunte pelo aprendizado de integrar negócio e TI desde o início. 5) Traga free flow como jornada de confiança, não só de automação. 6) Evite pitch genérico: proponha uma métrica e uma jornada concreta.</p></div>
+        </div>
+
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia · acesso em 05/08/2026</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia & RI</h4><ul>
+                    <li><a href="https://investor.corpay.com/static-files/aa3968eb-9fd9-4749-a1f1-b8481f87d756">https://investor.corpay.com/static-files/aa3968eb-9fd9-4749-a1f1-b8481f87d756</a></li>
+                    <li><a href="https://investor.corpay.com/static-files/acd5063d-1a21-4004-9b7b-05e78c4c4302">https://investor.corpay.com/static-files/acd5063d-1a21-4004-9b7b-05e78c4c4302</a></li>
+                    <li><a href="https://www.corpay.com/pt/corporate-newsroom/20096/corpay-reports-first-quarter-financial-results">https://www.corpay.com/pt/corporate-newsroom/20096/corpay-reports-first-quarter-financial-results</a></li>
+                </ul></div>
+                <div class="sources-card"><h4>Empresa & cadastro</h4><ul>
+                    <li><a href="https://www.semparar.com.br/sobre-nos">https://www.semparar.com.br/sobre-nos</a></li>
+                    <li><a href="https://www.semparar.com.br/flex-2024">https://www.semparar.com.br/flex-2024</a></li>
+                    <li><a href="https://www.sempararempresas.com.br/sobre">https://www.sempararempresas.com.br/sobre</a></li>
+                    <li><a href="https://portaldatransparencia.gov.br/pessoa-juridica/04088208000165">https://portaldatransparencia.gov.br/pessoa-juridica/04088208000165</a> — fetch 405</li>
+                </ul></div>
+                <div class="sources-card"><h4>Inovação & stack</h4><ul>
+                    <li><a href="https://tiinside.com.br/08/06/2026/sem-parar-e-uma-das-primeiras-empresas-no-brasil-a-co-criar-com-meta-business-agent/">https://tiinside.com.br/08/06/2026/sem-parar-e-uma-das-primeiras-empresas-no-brasil-a-co-criar-com-meta-business-agent/</a></li>
+                    <li><a href="https://www.siliconweek.com.br/sem-parar-aprimora-atendimento-com-ia-30130.html">https://www.siliconweek.com.br/sem-parar-aprimora-atendimento-com-ia-30130.html</a></li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li><a href="https://itforum.com.br/noticias/lideranca-scrideli-corpay-atendimento-cliente-ia/">https://itforum.com.br/noticias/lideranca-scrideli-corpay-atendimento-cliente-ia/</a></li>
+                    <li><a href="https://br.linkedin.com/in/scrideli">https://br.linkedin.com/in/scrideli</a></li>
+                    <li><a href="https://itforum.com.br/noticias/vencedores-executivo-ti-ano-2025/">https://itforum.com.br/noticias/vencedores-executivo-ti-ano-2025/</a></li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>WebFetch: https://www.semparar.com.br/sobre-nos</li>
+                    <li>WebFetch: https://www.sempararempresas.com.br/sobre</li>
+                    <li>WebFetch: https://itforum.com.br/noticias/lideranca-scrideli-corpay-atendimento-cliente-ia/</li>
+                </ul></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Agosto 2026 | Agente Hunter (Foursys DS)
+    </div>
+</body>
+</html>

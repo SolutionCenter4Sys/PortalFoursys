@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Felipe Avila | LIVELO</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Felipe Avila</h1>
+                <h2>CPTO (Chief Product &amp; Technology Officer) — LIVELO S.A.</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Serviços Diversos (Programa de Fidelidade) | Barueri, SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 5,9 BI (2024)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Base de Clientes</div>
+                    <div class="value">58 milhões+</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescimento (+9% a.a.)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: LIVELO S.A.</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Livelo S.A.</strong> é o maior ecossistema de recompensas e fidelidade do Brasil, fundada em 2016 como joint venture entre <strong>Bradesco (50,01%)</strong> e <strong>Banco do Brasil (49,99%)</strong> através da holding EloPar. Com sede em Barueri (SP), na região de Alphaville, a empresa opera uma plataforma digital que conecta mais de <strong>58 milhões de participantes</strong> a um ecossistema de <strong>450+ parceiros</strong>. Em 2024, a Livelo registrou faturamento de <strong>R$ 5,9 bilhões</strong> (+9% vs 2023), lucro líquido de <strong>R$ 681 milhões</strong> e distribuiu <strong>R$ 1,45 bilhão em dividendos</strong>. O Clube Livelo (assinatura premium) cresceu 31,67% em base de assinantes, e os resgates de viagem subiram 15%. Destaque estratégico: a Livelo adquiriu <strong>20,52% da Cielo</strong> por R$ 2,9 bilhões, sinalizando expansão para meios de pagamento. No campo tecnológico, lançou o <strong>Hub de Inovação</strong> (14 projetos em andamento) e o <strong>Livelo Expert</strong>, assistente de IA generativa baseado em <strong>AWS Bedrock</strong>. Parceria com <strong>Compass UOL/AWS</strong> gerou economia de US$ 700K no primeiro ano e ganho de produtividade de 30% para engenheiros via Amazon Q Developer.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Nacional</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada (Joint Venture Bradesco + BB)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">CNPJ</div>
+                        <div class="value">12.888.241/0001-06</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento consistente (+9% a.a., mercado +14% a.a.)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">~500 (estimativa 2025)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Ecossistema</div>
+                        <div class="value">450+ parceiros, 58M+ participantes</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Serviços Diversos — Programas de Fidelidade</strong>, líder absoluta no Brasil com abrangência <strong>Nacional</strong>. A Livelo é uma empresa <strong>digital-native</strong> com toda infraestrutura em nuvem (AWS + IBM Cloud), investindo agressivamente em <strong>IA Generativa</strong>, <strong>personalização em escala</strong> e <strong>expansão do ecossistema</strong>. Felipe Avila, promovido a CPTO em dezembro/2024, acumula responsabilidades de tecnologia, produto e dados — perfil decisor de alto impacto. Finalista do <strong>Prêmio Executivo de TI do Ano 2025</strong> pelo IT Forum. O mercado de fidelidade brasileiro cresce 14% ao ano, e a Livelo está posicionada para capturar essa expansão com inovação tecnológica.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar IA Generativa e personalização para 58M+ usuários com governança de dados (LGPD/Open Finance)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer segurança da informação e prevenção a fraudes em ecossistema aberto com 450+ parceiros</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Integrar e orquestrar o ecossistema expandido (Cielo, parceiros, Open Finance) com alta disponibilidade</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Acelerar time-to-market de inovações via Hub de Inovação (meta: reduzir pela metade o tempo de implantação)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar plataforma para suportar novos modelos de negócio: mídia ativa, blockchain/tokens e gamificação</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Atrair e reter talentos de tecnologia em mercado competitivo (engenharia de dados, ML, cloud security)</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">IA Generativa &amp; Dados</span>
+                        <span class="tag tag-priority">Segurança da Informação &amp; Fraude</span>
+                        <span class="tag tag-priority">Integração de Ecossistema &amp; APIs</span>
+                    </div>
+                    <h4 style="margin-top:24px;margin-bottom:12px;color:var(--primary)">Tecnologias em Uso Identificadas</h4>
+                    <div>
+                        <span class="tag tag-active">AWS (Bedrock, Q Developer)</span>
+                        <span class="tag tag-active">IBM Cloud/SoftLayer</span>
+                        <span class="tag tag-active">Amazon Q Developer &amp; Kiro</span>
+                        <span class="tag tag-active">PRTG Network Monitor</span>
+                        <span class="tag tag-active">DevOps / CI-CD</span>
+                        <span class="tag tag-active">Compass UOL (parceiro)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses, com base em movimentos públicos da empresa:</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">IA Generativa &amp; Machine Learning</div>
+                        <div class="value">Expansão do Livelo Expert, novos modelos de personalização, Amazon Q Developer para produtividade de engenharia</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Engenharia de Dados</div>
+                        <div class="value">Plataforma de dados para 58M+ usuários — personalização em tempo real, analytics avançado, data mesh</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Segurança &amp; Compliance</div>
+                        <div class="value">Cloud security (AWS nativo), prevenção a fraudes, LGPD, conformidade regulatória bancária</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hub de Inovação</div>
+                        <div class="value">14+ projetos com startups, beta testing com usuários, pipeline de inovação aberta</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Integração &amp; APIs</div>
+                        <div class="value">Orquestração do ecossistema de 450+ parceiros, integração Cielo, Open Finance</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cloud &amp; Infraestrutura</div>
+                        <div class="value">Otimização multi-cloud (AWS + IBM), observabilidade, escalabilidade para picos de demanda</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades sem Fornecedor Definido</h3>
+            <div class="alert-box">
+                <strong>⚠ Janelas de Oportunidade Identificadas:</strong> A Livelo é digital-native e trabalha com parceiros como Compass UOL e AWS, mas há áreas onde fornecedores não estão consolidados:
+            </div>
+            <div class="grid-2">
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Governança e Escalabilidade de IA</h4>
+                        <span class="score-badge">Alta</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Hub de Inovação tem 14 projetos simultâneos — precisa de framework de governança para escalar modelos de IA</li>
+                            <li>Livelo Expert ainda em beta — oportunidade para acelerar produtização e monitoring de LLMs</li>
+                            <li>Sem parceiro claro para MLOps e AI governance</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Integração e Orquestração de Ecossistema</h4>
+                        <span class="score-badge">Alta</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>450+ parceiros exigem plataforma robusta de integração — oportunidade para middleware/iPaaS</li>
+                            <li>Aquisição da Cielo (20,52%) demanda integrações complexas de sistemas financeiros</li>
+                            <li>Open Finance aumenta necessidade de APIs padronizadas e seguras</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Automação de Processos Corporativos</h4>
+                        <span class="score-badge">Média-Alta</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Empresa de ~500 colaboradores gerindo R$ 5,9 BI — automação é imperativo de eficiência</li>
+                            <li>Processos de backoffice, reconciliação financeira e gestão de parceiros são candidatos</li>
+                            <li>Sem evidência de parceiro dedicado para RPA/hiperautomação</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="oferta-card">
+                    <div class="oferta-header">
+                        <h4>Squads Especializados / Staff Augmentation</h4>
+                        <span class="score-badge">Média-Alta</span>
+                    </div>
+                    <div class="reasons">
+                        <ul>
+                            <li>Equipe interna enxuta (~500) para escopo crescente — pressão por capacidade técnica adicional</li>
+                            <li>Recrutamento ativo de Cloud Security, Data Engineering e ML — gaps de talento evidentes</li>
+                            <li>Modelo de squads se encaixa na cultura ágil e digital-first da empresa</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Felipe Avila</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. AI Squad — Aceleração com IA Generativa</h4>
+                    <span class="score-badge">Fit 95%</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Squads especializados em IA para acelerar o pipeline de inovação da Livelo.</p>
+                    <ul>
+                        <li><strong>Livelo Expert em beta</strong> — AI Squad pode acelerar produtização, monitoring de LLMs e expansão de casos de uso</li>
+                        <li><strong>Hub de Inovação com 14 projetos</strong> — necessidade de capacidade adicional para escalar experimentações</li>
+                        <li><strong>Personalização para 58M+ usuários</strong> — modelos de recomendação, segmentação inteligente e real-time scoring</li>
+                        <li><strong>Amazon Q Developer já em uso</strong> — Foursys pode potencializar com práticas de AI-assisted development</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. Integração &amp; APIs com Digibee</h4>
+                    <span class="score-badge">Fit 90%</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Plataforma de integração low-code para orquestrar o ecossistema massivo de parceiros.</p>
+                    <ul>
+                        <li><strong>450+ parceiros</strong> — Digibee oferece iPaaS cloud-native para orquestração de APIs em escala</li>
+                        <li><strong>Aquisição Cielo</strong> — integrações financeiras complexas demandam plataforma robusta e governada</li>
+                        <li><strong>Open Finance</strong> — conectores prontos e compliance regulatório do setor financeiro</li>
+                        <li><strong>Time-to-market</strong> — abordagem low-code reduz tempo de integração de novos parceiros</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. Squads de Desenvolvimento — Staff Augmentation</h4>
+                    <span class="score-badge">Fit 85%</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Equipes multidisciplinares para ampliar capacidade de entrega em áreas críticas.</p>
+                    <ul>
+                        <li><strong>Cloud Security</strong> — vagas abertas indicam gap que squads Foursys podem suprir imediatamente</li>
+                        <li><strong>Data Engineering</strong> — plataforma de dados para 58M+ usuários requer engenheiros especializados</li>
+                        <li><strong>Backend/Microsserviços</strong> — modernização contínua da plataforma de fidelidade</li>
+                        <li><strong>24 anos de experiência Foursys</strong> — modelo flexível (Squads, Projetos, AMS) se adapta à cultura digital</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. Cibersegurança &amp; Compliance</h4>
+                    <span class="score-badge">Fit 80%</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Consultoria e operação de segurança para ecossistema financeiro regulado.</p>
+                    <ul>
+                        <li><strong>Dados sensíveis de 58M+ clientes</strong> — LGPD, PCI-DSS e regulação bancária exigem postura robusta</li>
+                        <li><strong>Ecossistema aberto (450+ parceiros)</strong> — superfície de ataque ampliada requer monitoramento contínuo</li>
+                        <li><strong>ISO 27001/27701 Foursys</strong> — certificações alinhadas às exigências de acionistas bancários (Bradesco/BB)</li>
+                        <li><strong>Prevenção a fraudes</strong> — área sob responsabilidade direta de Felipe Avila</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>5. Automação Inteligente (RPA + IA)</h4>
+                    <span class="score-badge">Fit 75%</span>
+                </div>
+                <div class="reasons">
+                    <p style="margin-bottom:8px;font-size:14px">Hiperautomação de processos operacionais e financeiros.</p>
+                    <ul>
+                        <li><strong>Reconciliação financeira</strong> — R$ 5,9 BI em transações requerem automação de alto volume</li>
+                        <li><strong>Gestão de parceiros</strong> — onboarding, gestão de contratos e liquidação de pontos</li>
+                        <li><strong>Operações de backoffice</strong> — equipe enxuta para receita bilionária demanda eficiência máxima</li>
+                        <li><strong>IA + RPA</strong> — combinar automação com IA para processos decisórios (anti-fraude, compliance)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Felipe Avila é um líder técnico orientado a inovação que acaba de ser promovido a CPTO — momento ideal para oferecer capacidade de execução. Iniciar a conversa referenciando o <strong>Livelo Expert</strong> e o <strong>Hub de Inovação</strong>, demonstrando conhecimento profundo da agenda tecnológica da empresa. Conectar com cases Foursys de <strong>IA Generativa em escala</strong> e <strong>integração de ecossistemas</strong> (Digibee). Destacar que a Foursys pode ser o parceiro que acelera a transição de "projetos em beta" para "produtos em produção com governança".</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>A Livelo está em um ponto de inflexão: <strong>faturamento de R$ 5,9 BI</strong> com equipe de apenas ~500 pessoas, Hub de Inovação com 14 projetos simultâneos, e investimento pesado em IA generativa (Livelo Expert ainda em beta). A aquisição de <strong>20,52% da Cielo</strong> adiciona complexidade de integração. Felipe precisa de <strong>capacidade de execução especializada</strong> para escalar sem comprometer qualidade — janela aberta para Foursys com modelo de Squads e AI Squad.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>AI Squad proprietário</strong> — aceleração com IA alinhada ao DNA de inovação da Livelo; (2) <strong>Parceria Digibee</strong> — iPaaS cloud-native para orquestrar 450+ parceiros; (3) <strong>Certificações ISO 27001/27701</strong> — credibilidade perante acionistas bancários (Bradesco e BB); (4) <strong>Modelo flexível de entrega</strong> — Squads que escalam conforme a demanda, ideal para empresa enxuta com crescimento acelerado; (5) <strong>41.000+ projetos em 24 anos</strong> — maturidade que complementa a agilidade startup da Livelo.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. O paradoxo "empresa bilionária com equipe startup":</strong> A Livelo fatura R$ 5,9 BI com ~500 colaboradores — uma das maiores receitas per capita do Brasil. Isso gera pressão enorme por produtividade e automação. A Foursys pode se posicionar como extensão estratégica da equipe, oferecendo squads especializados que mantêm a agilidade sem aumentar o headcount fixo.</p>
+                <p style="margin-bottom:12px"><strong>2. IA Generativa é a aposta central:</strong> O Livelo Expert (AWS Bedrock) demonstra que Felipe Avila está all-in em GenAI. Com a parceria Compass UOL já gerando US$ 700K/ano de economia via Amazon Q Developer, há apetite comprovado para investir em IA. A oportunidade é em governança, escalabilidade de modelos e novos casos de uso (anti-fraude, personalização, atendimento).</p>
+                <p style="margin-bottom:12px"><strong>3. Aquisição da Cielo muda o jogo:</strong> A compra de 20,52% da Cielo por R$ 2,9 BI sinaliza que a Livelo quer dominar a cadeia completa: fidelidade + pagamentos. Isso exige integrações financeiras complexas, compliance adicional e possivelmente nova arquitetura de dados — demandas onde Foursys (Digibee + squads) pode brilhar.</p>
+                <p style="margin-bottom:12px"><strong>4. Hub de Inovação precisa escalar:</strong> 14 projetos com startups e 3,4 milhões de pontos resgatados via inovações mostram tração. Mas a meta de "reduzir pela metade o tempo de implantação" exige mais capacidade de engineering. Posicionar Foursys como aceleradora do pipeline de inovação.</p>
+                <p><strong>5. Mercado de fidelidade em ebulição:</strong> O setor cresce 14% a.a. com 320M+ cadastros no Brasil. Os três pilares para 2026 — mídia ativa, personalização em escala e blockchain — são todos intensivos em tecnologia. A Livelo precisa se mover rápido para manter liderança frente a Esfera, Dotz e fintechs.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Esfera (Santander)</h4>
+                <p><strong>Segmento:</strong> Programa de fidelidade bancário | <strong>Posição:</strong> 2º maior do Brasil</p>
+                <p>Programa de recompensas do Santander, aberto ao público geral desde 2022. Diferencia-se pela qualidade das condições de acúmulo e resgate, com foco em experiências premium. Mais de 70 parceiros online e presença em restaurantes. Pontos sem expiração como diferencial competitivo. Investe em integração com o ecossistema Santander (PagoNxt, Getnet) para criar ciclo fechado de fidelidade + pagamentos.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Dotz</h4>
+                <p><strong>Segmento:</strong> Fidelidade + Techfin | <strong>EBITDA 12m:</strong> R$ 43,5 milhões (+254% 9M24)</p>
+                <p>Ecossistema digital que combina fidelidade, crédito e pagamentos. Empresa listada em bolsa com crescimento acelerado: EBITDA recorde de R$ 15,8M no 2T25 (+151% a.a.), margem bruta de 69%. Opera três pilares: Loyalty (coalizão com BB, Caixa, C6), Techfin (produtos financeiros +52%) e Dotz Pay (CRM + BNPL com +41% em contratos). Parceria com Americanas para expansão física. Ameaça direta na convergência fidelidade-fintech.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Nubank Rewards / Ultravioleta</h4>
+                <p><strong>Segmento:</strong> Fidelidade de fintech | <strong>Base:</strong> 100M+ clientes Nubank</p>
+                <p>Programa de pontos do maior banco digital da América Latina. Sem taxas de adesão, pontos sem validade e alta rentabilidade. O cartão Ultravioleta oferece 1% de cashback em NuCoins (criptomoeda proprietária). Com 100M+ de clientes e tecnologia nativa, Nubank pode escalar programa de fidelidade rapidamente, capturando audiência jovem e digital-first que é target da Livelo.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Programas de Companhias Aéreas (Smiles/Latam Pass/TudoAzul)</h4>
+                <p><strong>Segmento:</strong> Milhas aéreas | <strong>Modelo:</strong> Fidelidade vertical (viagens)</p>
+                <p>Programas de milhas com base leal de viajantes frequentes. Smiles (GOL) e Latam Pass são referências em transferência de pontos. Competem com Livelo principalmente no resgate de viagens (+15% em 2024). Diferencial é a exclusividade de rotas e experiências de viagem. Risco: consolidação do setor aéreo pode fortalecer programas verticais contra ecossistemas horizontais como Livelo.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>A concorrência está se intensificando em três frentes: (1) <strong>Convergência fidelidade-fintech</strong> — Dotz e Nubank estão criando ecossistemas financeiros integrados; a aquisição da Cielo pela Livelo responde a isso, mas exige integração técnica complexa que a Foursys pode acelerar com Digibee. (2) <strong>Personalização com IA</strong> — todos os players estão investindo em dados e IA; a Livelo precisa manter vantagem com GenAI em produção (não apenas beta), e o AI Squad Foursys pode ser o diferencial. (3) <strong>Escala de ecossistema</strong> — com 450+ parceiros vs ~70 da Esfera, a Livelo tem vantagem de rede mas precisa de plataforma de integração mais robusta para manter qualidade. A Foursys se posiciona como parceira para manter e ampliar a liderança tecnológica da Livelo frente a competidores com orçamentos maiores (Santander, Itaú, Nubank).</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">CPTO (Chief Product &amp; Technology Officer) — Livelo S.A. (desde dez/2024)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Barueri, SP (Alphaville)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória na Livelo</div>
+                        <div class="value">Entrou como Diretor de TI (jul/2022) → promovido a CPTO com acúmulo de Produto e Dados (dez/2024)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação</div>
+                        <div class="value">Sistemas de Informação (Univ. Gama Filho) + Marketing (Estácio)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Anterior</div>
+                        <div class="value">SulAmérica (Head Digital), Banco Original (Head Open Banking/BaaS), Ciclic (CTO), Brasilcap (11 anos, Gerente Executivo)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reconhecimentos</div>
+                        <div class="value">Finalista do Prêmio Executivo de TI do Ano 2025 — IT Forum (categoria Serviços Especializados)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Temas de Interesse Público</div>
+                        <div class="value">Inovação aberta, IA Generativa aplicada a negócio, cultura digital, gestão de produto e tecnologia integrados</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Visão Declarada</div>
+                        <div class="value">"A Livelo nasceu digital, com a inovação enraizada em seu DNA" — defende inovação contínua e experimentação ágil</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Parabenize pela promoção e pelo prêmio:</strong> Felipe foi promovido a CPTO em dez/2024 e é finalista do Executivo de TI do Ano 2025. Reconhecer essas conquistas cria conexão imediata — ele é um líder em ascensão que valoriza reconhecimento do mercado.</p>
+                <p style="margin-bottom:10px"><strong>2. Fale a língua de produto, não só de TI:</strong> Ao contrário de um CIO tradicional, Felipe acumula produto + tecnologia + dados. Aborde a conversa com visão de "outcome de negócio" (conversão, engajamento, LTV) e não apenas "entrega de projetos". Isso demonstra que você entende seu papel duplo.</p>
+                <p style="margin-bottom:10px"><strong>3. Referencie o Hub de Inovação e o Livelo Expert:</strong> Mencionar que acompanhou o lançamento do Hub de Inovação e os resultados do Livelo Expert (IA generativa com AWS Bedrock) mostra preparo. Pergunte sobre os próximos casos de uso — ativa interesse genuíno em compartilhar visão.</p>
+                <p style="margin-bottom:10px"><strong>4. Conecte-se pela experiência em Open Banking/BaaS:</strong> Felipe vem do Banco Original, onde liderou Open Banking. Mencionar tendências de Open Finance e como isso impacta ecossistemas de fidelidade mostra que você entende sua trajetória e o futuro convergente de banking + loyalty.</p>
+                <p><strong>5. Posicione-se como acelerador, não como fornecedor tradicional:</strong> A Livelo é digital-native com cultura de startup — fornecedores burocráticos não engajam. Posicione a Foursys como "aceleradora de capacidade" que escala conforme demanda, com squads ágeis que falam a língua de produto e engenharia.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">C-Level (CPTO — reporte direto ao CEO)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo de Responsabilidade</div>
+                        <div class="value">Tecnologia + Produto + Dados — tríplice responsabilidade estratégica</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Áreas sob gestão</div>
+                        <div class="value">Arquitetura, Infraestrutura, Engenharia de Sistemas, Segurança, Fraude, Data Engineering, Operações, Governança de TI, Produto</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Alto — C-Level com escopo ampliado, decisor em tecnologia, produto e dados</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores da Empresa</div>
+                        <div class="value">~500 (estimativa 2025)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários da Plataforma</div>
+                        <div class="value">58 milhões+ participantes ativos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de Tecnologia</div>
+                        <div class="value">Estimativa: 100-200 profissionais (recrutamento ativo em Cloud Security, Data Eng, ML)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Protagonista: empresa digital-native onde tecnologia É o negócio — produto, engenharia e dados são o core</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada do Investimento em TI</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estimativa baseada no perfil de empresa digital-native com infraestrutura 100% cloud:</p>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Operação em Nuvem (AWS/IBM)</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+                <div class="bar"><div class="bar-label">Desenvolvimento / Produto</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:#1a237e">25%</div></div></div>
+                <div class="bar"><div class="bar-label">Dados, IA &amp; Analytics</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:#3949ab">15%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas (equipe interna)</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">12%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança &amp; Fraude</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria / Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Software / Licenças</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#7986cb">3%</div></div></div>
+                <div class="bar"><div class="bar-label">Inovação / Hub</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#9fa8da">2%</div></div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor (Análise Comportamental)</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância (inferidos)</h4>
+                    <div>
+                        <span class="tag tag-active">Inovação e Capacidade Técnica</span>
+                        <span class="tag tag-active">Agilidade e Time-to-Market</span>
+                        <span class="tag tag-active">Expertise em Cloud &amp; IA</span>
+                        <span class="tag tag-active">Cultura Ágil / Product-Driven</span>
+                        <span class="tag tag-active">ROI Mensurável</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Parceiro técnico ágil com expertise em IA, cloud e integração — não um outsourcing tradicional</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Modelo de Contratação Provável</div>
+                        <div class="value">Squads dedicados / projetos com escopo + outcomes definidos</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Parceiros Tecnológicos Atuais</div>
+                        <div class="value">AWS (cloud + IA), Compass UOL (engineering), IBM Cloud (infra legada), PRTG/Paessler (monitoring)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

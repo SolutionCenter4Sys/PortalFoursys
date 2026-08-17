@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Quartz Architecture &amp; QuartzReady Program — Bank of America | Foursys Technical Brief</title>
+<style>
+    :root {
+        --primary: #1a237e;
+        --primary-light: #3949ab;
+        --accent: #00b894;
+        --accent-orange: #e17055;
+        --bofa-red: #e31837;
+        --bofa-blue: #012169;
+        --bg: #f5f6fa;
+        --card-bg: #ffffff;
+        --text: #2d3436;
+        --text-light: #636e72;
+        --border: #dfe4ea;
+        --purple: #6c5ce7;
+        --purple-dark: #4834d4;
+        --code-bg: #1e1e2e;
+        --code-fg: #cdd6f4;
+        --code-accent: #89b4fa;
+        --code-string: #a6e3a1;
+        --code-keyword: #cba6f7;
+        --code-comment: #6c7086;
+        --layer-1: #0f3460;
+        --layer-2: #16537e;
+        --layer-3: #1e88e5;
+        --layer-4: #42a5f5;
+        --layer-5: #90caf9;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+        font-size: 14.5px;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 32px 24px;
+    }
+
+    /* HEADER */
+    .header {
+        background: linear-gradient(135deg, var(--bofa-blue) 0%, var(--primary) 60%, var(--primary-light) 100%);
+        color: #fff;
+        padding: 36px 32px;
+        border-radius: 12px;
+        margin-bottom: 24px;
+        box-shadow: 0 6px 24px rgba(1, 33, 105, 0.25);
+        position: relative;
+        overflow: hidden;
+    }
+    .header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(227, 24, 55, 0.2), transparent 70%);
+        pointer-events: none;
+    }
+    .header .brand {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        opacity: 0.85;
+        margin-bottom: 8px;
+    }
+    .header h1 {
+        font-size: 30px;
+        font-weight: 800;
+        margin-bottom: 6px;
+        letter-spacing: -0.5px;
+    }
+    .header h2 {
+        font-size: 17px;
+        font-weight: 500;
+        opacity: 0.92;
+        margin-bottom: 14px;
+    }
+    .header .meta {
+        font-size: 13.5px;
+        opacity: 0.88;
+        line-height: 1.55;
+        max-width: 920px;
+    }
+    .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+    }
+    .badge {
+        background: rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(8px);
+        padding: 5px 12px;
+        border-radius: 999px;
+        font-size: 11.5px;
+        font-weight: 600;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+    .badge.accent { background: linear-gradient(135deg, var(--accent), #00cec9); border: none; }
+    .badge.red { background: linear-gradient(135deg, var(--bofa-red), #d63031); border: none; }
+    .badge.orange { background: linear-gradient(135deg, var(--accent-orange), #d63031); border: none; }
+    .badge.purple { background: linear-gradient(135deg, var(--purple), var(--purple-dark)); border: none; }
+    .badge.hot {
+        background: linear-gradient(135deg, #ff6b35, #f72585);
+        border: none;
+        animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(247, 37, 133, 0.4); }
+        50% { box-shadow: 0 0 0 6px rgba(247, 37, 133, 0); }
+    }
+
+    /* ANCHOR NAV */
+    .anchor-nav {
+        background: var(--card-bg);
+        padding: 14px 20px;
+        border-radius: 10px;
+        margin-bottom: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        position: sticky;
+        top: 12px;
+        z-index: 100;
+    }
+    .anchor-nav a {
+        color: var(--primary);
+        text-decoration: none;
+        font-size: 12.5px;
+        font-weight: 600;
+        padding: 5px 11px;
+        border-radius: 6px;
+        background: rgba(26, 35, 126, 0.06);
+        transition: all 0.18s;
+    }
+    .anchor-nav a:hover {
+        background: var(--primary);
+        color: #fff;
+        transform: translateY(-1px);
+    }
+
+    /* SECTIONS */
+    .section {
+        background: var(--card-bg);
+        padding: 28px 32px;
+        border-radius: 12px;
+        margin-bottom: 22px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    .section h3 {
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 14px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .section h3 .num {
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        color: #fff;
+        padding: 5px 12px;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 700;
+        min-width: 38px;
+        text-align: center;
+    }
+    .section h3 .num.red { background: linear-gradient(135deg, var(--bofa-red), #d63031); }
+    .section h3 .num.accent { background: linear-gradient(135deg, var(--accent), #00cec9); }
+    .section h3 .num.purple { background: linear-gradient(135deg, var(--purple), var(--purple-dark)); }
+    .section h4 {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--primary-light);
+        margin: 18px 0 10px 0;
+    }
+    .section p { margin-bottom: 12px; }
+    .section ul, .section ol { margin: 10px 0 12px 22px; }
+    .section li { margin-bottom: 6px; }
+
+    /* INFO GRID + CARDS */
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 12px;
+        margin: 14px 0;
+    }
+    .info-card {
+        background: linear-gradient(135deg, #f8f9fc, #ffffff);
+        padding: 14px 16px;
+        border-radius: 10px;
+        border-left: 4px solid var(--primary);
+    }
+    .info-card.red { border-left-color: var(--bofa-red); }
+    .info-card.accent { border-left-color: var(--accent); }
+    .info-card.purple { border-left-color: var(--purple); }
+    .info-card.orange { border-left-color: var(--accent-orange); }
+    .info-card .label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-light);
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+    .info-card .value {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.5;
+    }
+
+    /* INSIGHT BOX */
+    .insight-box {
+        background: linear-gradient(135deg, #fff5f5, #fff);
+        border-left: 5px solid var(--bofa-red);
+        padding: 16px 20px;
+        border-radius: 8px;
+        margin: 16px 0;
+    }
+    .insight-box.accent {
+        background: linear-gradient(135deg, #e8fff5, #fff);
+        border-left-color: var(--accent);
+    }
+    .insight-box.purple {
+        background: linear-gradient(135deg, #f3eeff, #fff);
+        border-left-color: var(--purple);
+    }
+    .insight-box .lbl {
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--bofa-red);
+        margin-bottom: 6px;
+    }
+    .insight-box.accent .lbl { color: var(--accent); }
+    .insight-box.purple .lbl { color: var(--purple); }
+
+    /* ARCHITECTURE STACK DIAGRAM */
+    .arch-stack {
+        margin: 22px 0;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 6px 22px rgba(15, 52, 96, 0.18);
+    }
+    .arch-layer {
+        padding: 16px 22px;
+        color: #fff;
+        position: relative;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    .arch-layer:last-child { border-bottom: none; }
+    .arch-layer .layer-title {
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+        opacity: 0.95;
+    }
+    .arch-layer .layer-body {
+        font-size: 13.5px;
+        opacity: 0.92;
+        line-height: 1.55;
+    }
+    .arch-layer.l1 { background: linear-gradient(135deg, var(--layer-5), #bbdefb); color: #0d1b2a; }
+    .arch-layer.l2 { background: linear-gradient(135deg, var(--layer-4), var(--layer-5)); color: #0d1b2a; }
+    .arch-layer.l3 { background: linear-gradient(135deg, var(--layer-3), var(--layer-4)); }
+    .arch-layer.l4 { background: linear-gradient(135deg, var(--layer-2), var(--layer-3)); }
+    .arch-layer.l5 { background: linear-gradient(135deg, var(--layer-1), var(--layer-2)); }
+
+    /* TABLES */
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 14px 0;
+        font-size: 13.5px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    }
+    .data-table thead {
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        color: #fff;
+    }
+    .data-table th, .data-table td {
+        padding: 11px 14px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+    }
+    .data-table th {
+        font-weight: 700;
+        font-size: 12.5px;
+        letter-spacing: 0.4px;
+    }
+    .data-table tbody tr:nth-child(even) { background: #fafbfd; }
+    .data-table tbody tr:hover { background: #f1f5fb; }
+    .data-table.compact td, .data-table.compact th { padding: 9px 12px; font-size: 13px; }
+
+    /* PILLAR CARDS */
+    .pillars-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 14px;
+        margin: 18px 0;
+    }
+    .pillar-card {
+        background: linear-gradient(135deg, #fff, #f7f9fd);
+        padding: 18px 20px;
+        border-radius: 12px;
+        border-top: 4px solid var(--primary);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.15s;
+    }
+    .pillar-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+    .pillar-num {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        color: #fff;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 30px;
+        font-weight: 800;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    .pillar-card h5 {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 8px;
+    }
+    .pillar-card .how {
+        font-size: 13px;
+        color: var(--text);
+        line-height: 1.55;
+        margin-bottom: 8px;
+    }
+    .pillar-card .why {
+        font-size: 12.5px;
+        color: var(--text-light);
+        background: rgba(26, 35, 126, 0.06);
+        padding: 8px 10px;
+        border-radius: 6px;
+        font-style: italic;
+    }
+    .pillar-card .why strong { color: var(--primary); font-style: normal; }
+
+    /* FRICTION CARDS */
+    .friction-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 12px;
+        margin: 16px 0;
+    }
+    .friction-card {
+        background: linear-gradient(135deg, #fff5f5, #fff);
+        border-left: 4px solid var(--bofa-red);
+        padding: 14px 16px;
+        border-radius: 8px;
+    }
+    .friction-card .friction-tag {
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        color: var(--bofa-red);
+        text-transform: uppercase;
+        margin-bottom: 6px;
+    }
+    .friction-card h5 {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 6px;
+        color: var(--text);
+    }
+    .friction-card p { font-size: 13px; color: var(--text-light); margin: 0; }
+
+    /* PHASE TIMELINE */
+    .phases {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin: 18px 0;
+    }
+    .phase-card {
+        display: grid;
+        grid-template-columns: 130px 1fr;
+        gap: 0;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    }
+    .phase-header {
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        color: #fff;
+        padding: 18px 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+    .phase-header.accent { background: linear-gradient(135deg, var(--accent), #00cec9); }
+    .phase-header.orange { background: linear-gradient(135deg, var(--accent-orange), #d63031); }
+    .phase-header.purple { background: linear-gradient(135deg, var(--purple), var(--purple-dark)); }
+    .phase-header .phase-num {
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        opacity: 0.88;
+        margin-bottom: 4px;
+    }
+    .phase-header .phase-name {
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 1.2;
+    }
+    .phase-header .phase-time {
+        font-size: 12px;
+        opacity: 0.85;
+        margin-top: 6px;
+    }
+    .phase-body {
+        background: #fff;
+        padding: 16px 20px;
+    }
+    .phase-body p { margin-bottom: 8px; }
+    .phase-body p:last-child { margin-bottom: 0; }
+
+    /* AI STACK */
+    .ai-stack-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+        gap: 14px;
+        margin: 16px 0;
+    }
+    .ai-card {
+        background: linear-gradient(135deg, #f6f0ff, #fff);
+        border-radius: 12px;
+        padding: 16px 18px;
+        border-top: 4px solid var(--purple);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+    .ai-card h5 {
+        font-size: 14.5px;
+        font-weight: 700;
+        color: var(--purple-dark);
+        margin-bottom: 8px;
+    }
+    .ai-card .ai-func {
+        font-size: 13px;
+        color: var(--text);
+        margin-bottom: 8px;
+        line-height: 1.5;
+    }
+    .ai-card .ai-tech {
+        font-size: 12px;
+        color: var(--text-light);
+        background: rgba(108, 92, 231, 0.08);
+        padding: 6px 10px;
+        border-radius: 6px;
+    }
+    .ai-card .ai-tech strong { color: var(--purple-dark); }
+
+    /* PITCH CARDS */
+    .pitch-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 14px;
+        margin: 18px 0;
+    }
+    .pitch-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 18px 20px;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+        border-top: 4px solid var(--primary);
+    }
+    .pitch-card.roberta { border-top-color: var(--bofa-blue); }
+    .pitch-card.edson { border-top-color: var(--primary); }
+    .pitch-card.leonardo { border-top-color: var(--primary-light); }
+    .pitch-card.camila { border-top-color: var(--accent); }
+    .pitch-card.victor { border-top-color: var(--accent-orange); }
+    .pitch-card.jaqueline { border-top-color: var(--purple); }
+    .pitch-card .pitch-who {
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 4px;
+    }
+    .pitch-card.roberta .pitch-who { color: var(--bofa-blue); }
+    .pitch-card.camila .pitch-who { color: var(--accent); }
+    .pitch-card.victor .pitch-who { color: var(--accent-orange); }
+    .pitch-card.jaqueline .pitch-who { color: var(--purple); }
+    .pitch-card .pitch-role {
+        font-size: 11.5px;
+        color: var(--text-light);
+        margin-bottom: 10px;
+        font-style: italic;
+    }
+    .pitch-card .pitch-quote {
+        font-size: 13px;
+        line-height: 1.6;
+        color: var(--text);
+        background: #f7f9fd;
+        padding: 12px 14px;
+        border-radius: 8px;
+        position: relative;
+        font-style: italic;
+    }
+    .pitch-card .pitch-quote::before {
+        content: """;
+        font-size: 38px;
+        color: var(--primary-light);
+        position: absolute;
+        top: -8px;
+        left: 6px;
+        opacity: 0.3;
+    }
+
+    /* ROADMAP */
+    .roadmap-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+        font-size: 13.5px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+    }
+    .roadmap-table thead {
+        background: linear-gradient(135deg, var(--accent-orange), #d63031);
+        color: #fff;
+    }
+    .roadmap-table th, .roadmap-table td {
+        padding: 12px 14px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+    }
+    .roadmap-table th { font-weight: 700; font-size: 12.5px; }
+    .roadmap-table td.window {
+        font-weight: 700;
+        color: var(--accent-orange);
+        white-space: nowrap;
+    }
+
+    /* TAGS */
+    .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin: 10px 0;
+    }
+    .tag {
+        background: linear-gradient(135deg, #ebf2fc, #f7fafd);
+        color: var(--primary);
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 11.5px;
+        font-weight: 600;
+        border: 1px solid rgba(26, 35, 126, 0.12);
+    }
+    .tag.red { background: linear-gradient(135deg, #ffe6ea, #fff5f5); color: var(--bofa-red); border-color: rgba(227, 24, 55, 0.2); }
+    .tag.accent { background: linear-gradient(135deg, #d9f5ec, #eafff7); color: #00876c; border-color: rgba(0, 184, 148, 0.25); }
+    .tag.purple { background: linear-gradient(135deg, #e9e4ff, #f5f1ff); color: var(--purple-dark); border-color: rgba(108, 92, 231, 0.25); }
+    .tag.orange { background: linear-gradient(135deg, #ffe9dc, #fff4ec); color: var(--accent-orange); border-color: rgba(225, 112, 85, 0.3); }
+
+    /* DOMAIN GRID */
+    .domain-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+        margin: 14px 0;
+    }
+    .domain-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 14px 16px;
+        border: 1px solid var(--border);
+    }
+    .domain-card h5 {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 6px;
+    }
+    .domain-card ul { margin: 0 0 0 16px; }
+    .domain-card li {
+        font-size: 12.5px;
+        margin-bottom: 3px;
+        color: var(--text-light);
+    }
+
+    /* CODE BLOCK */
+    .code-block {
+        background: var(--code-bg);
+        color: var(--code-fg);
+        padding: 16px 18px;
+        border-radius: 10px;
+        font-family: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+        font-size: 12.5px;
+        line-height: 1.6;
+        overflow-x: auto;
+        margin: 14px 0;
+        box-shadow: 0 3px 14px rgba(30, 30, 46, 0.3);
+    }
+    .code-block .kw { color: var(--code-keyword); }
+    .code-block .str { color: var(--code-string); }
+    .code-block .cmt { color: var(--code-comment); font-style: italic; }
+    .code-block .acc { color: var(--code-accent); }
+
+    /* DIFFERENTIATION TABLE */
+    .diff-table th:first-child { width: 38%; }
+    .diff-table td.market { color: var(--text-light); }
+    .diff-table td.foursys {
+        background: linear-gradient(135deg, #e8fff5, #fff);
+        font-weight: 700;
+        color: #00876c;
+    }
+
+    /* NEXT STEPS */
+    .next-steps {
+        background: linear-gradient(135deg, #fff8e7, #fff);
+        border-left: 5px solid var(--accent-orange);
+        padding: 18px 22px;
+        border-radius: 10px;
+        margin: 18px 0;
+    }
+    .next-steps h4 {
+        color: var(--accent-orange);
+        margin-top: 0;
+    }
+    .next-steps ol { margin-left: 20px; }
+    .next-steps li { font-size: 13.5px; margin-bottom: 6px; }
+
+    /* FOOTER */
+    .footer {
+        text-align: center;
+        margin-top: 28px;
+        padding: 22px;
+        color: var(--text-light);
+        font-size: 12px;
+        background: var(--card-bg);
+        border-radius: 10px;
+    }
+    .footer strong { color: var(--primary); }
+
+    /* PRINT */
+    .print-btn {
+        position: fixed;
+        bottom: 22px;
+        right: 22px;
+        background: linear-gradient(135deg, var(--accent), #00cec9);
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 999px;
+        font-size: 13.5px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 5px 18px rgba(0, 184, 148, 0.4);
+        z-index: 200;
+    }
+    .print-btn:hover { transform: translateY(-2px); }
+
+    @media print {
+        body { background: #fff; }
+        .container { max-width: none; padding: 0; }
+        .anchor-nav, .print-btn { display: none; }
+        .section, .header { box-shadow: none; page-break-inside: avoid; }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<header class="header">
+    <div class="brand">four<span style="color: var(--accent)">sys</span> | Technical Brief</div>
+    <h1>Quartz Architecture &amp; QuartzReady Program</h1>
+    <h2>Bank of America Merrill Lynch — Bank Python platform · Acelerador de Ramp-up com IA</h2>
+    <div class="meta">
+        Documento técnico-comercial complementar ao mapa de relacionamento BofA Brasil. Endereça três frentes:
+        <strong>(i)</strong> arquitetura da plataforma Quartz (Bank Python pattern);
+        <strong>(ii)</strong> diagnóstico das fricções que tornam o ramp-up de 12-18 semanas a norma de mercado;
+        <strong>(iii)</strong> programa Foursys QuartzReady — academia pré-alocação + AI Pair Programmer dentro do VDI BofA — capaz de entregar dev produtivo em <strong>6 semanas</strong>.
+    </div>
+    <div class="badges">
+        <span class="badge accent">Bank Python · Quartz</span>
+        <span class="badge red">FICC / IB / GTS Tech</span>
+        <span class="badge orange">Ramp-up 6 semanas (vs. 12-18)</span>
+        <span class="badge purple">AI Pair Programmer Foursys</span>
+        <span class="badge hot">Hot ally: Roberta Bordin (Projeto Matera)</span>
+    </div>
+</header>
+
+<!-- ANCHOR NAV -->
+<nav class="anchor-nav">
+    <a href="#overview">Visão geral</a>
+    <a href="#pilares">5 Pilares</a>
+    <a href="#stack">Stack técnica</a>
+    <a href="#dominios">Domínios</a>
+    <a href="#fricoes">Fricções</a>
+    <a href="#programa">Programa QuartzReady</a>
+    <a href="#ai-stack">AI Stack</a>
+    <a href="#pitch">Pitch por stakeholder</a>
+    <a href="#roadmap">Roadmap 120 dias</a>
+    <a href="#diferencial">Diferencial</a>
+    <a href="#next">Próximos passos</a>
+</nav>
+
+<!-- 1. OVERVIEW -->
+<section class="section" id="overview">
+    <h3><span class="num">1</span> Quartz — o que é, de onde veio</h3>
+    <p>Quartz é a plataforma de tecnologia proprietária do <strong>Bank of America Merrill Lynch</strong> para banking e trading, em produção desde 2018 (Markets Media). Não é um produto comercial — é a infraestrutura tecnológica core do banco. É um caso clássico do que a indústria de IB chama de <strong>&quot;Bank Python&quot;</strong>: uma escola de engenharia financeira que combina Python estendido, Object Database centralizado e monorepo gigantesco.</p>
+
+    <h4>Linhagem do Bank Python</h4>
+    <div class="info-grid">
+        <div class="info-card"><div class="label">Pai espiritual</div><div class="value">Goldman Sachs — SecDB + linguagem Slang (anos 90). Original do conceito Object DB + linguagem proprietária para precificação.</div></div>
+        <div class="info-card accent"><div class="label">Refinamento</div><div class="value">JPMorgan — Athena (Python). Substituiu Slang por Python convencional estendido. ~$1B investido.</div></div>
+        <div class="info-card red"><div class="label">Caso BofA</div><div class="value">Quartz — go-live 2018 (BAML, ex-Merrill Lynch). Mesma filosofia Athena, customizado para FICC/Equities/Wealth.</div></div>
+        <div class="info-card purple"><div class="label">Demais pares</div><div class="value">Morgan Stanley (variantes MX.3 + Python interno), Citi (Athena-like), Barclays (BARX tech).</div></div>
+    </div>
+
+    <div class="insight-box">
+        <div class="lbl">Por que isso importa para a Foursys</div>
+        <p style="margin: 0;">Quem domina <strong>um</strong> Bank Python (Quartz, Athena, SecDB) tem ramp-up curto em <strong>todos os outros</strong>. A academia QuartzReady da Foursys, uma vez construída, é alavancável para JPMorgan, Citi, Morgan Stanley e Barclays no Brasil — não é IP perdido em um cliente só. <strong>É plataforma de vendor preferencial estrutural para Bank Python tier.</strong></p>
+    </div>
+</section>
+
+<!-- 2. PILARES -->
+<section class="section" id="pilares">
+    <h3><span class="num">2</span> Os 5 pilares arquiteturais — o que torna Quartz diferente de Python convencional</h3>
+    <p>Dev Python experiente <strong>não</strong> é dev Quartz. Os 5 pilares abaixo explicam porque a curva é vertical:</p>
+
+    <div class="pillars-grid">
+        <div class="pillar-card">
+            <div class="pillar-num">1</div>
+            <h5>Object Database centralizado</h5>
+            <div class="how">Tudo é objeto Python persistente (<code>Trade</code>, <code>Instrument</code>, <code>Curve</code>, <code>MarketData</code>, <code>RiskModel</code>) versionado no Object DB. Source-of-truth única para todo o banco.</div>
+            <div class="why"><strong>Impacto:</strong> não há ORM. Não há SQL no fluxo principal. O dev pensa em objetos vivos, não em tabelas — paradigma alheio à maioria dos devs Python web.</div>
+        </div>
+
+        <div class="pillar-card">
+            <div class="pillar-num">2</div>
+            <h5>Monorepo Python único</h5>
+            <div class="how">Milhões de linhas de Python em uma única árvore de código. Todo o banco escreve no mesmo repo. Build massivo, testes integrados ao commit, code review centralizado.</div>
+            <div class="why"><strong>Impacto:</strong> dependency hell vira dependency-by-design. PRs competem por &quot;terreno&quot;. Onboarding técnico exige aprender a navegar uma base que é maior que o Linux kernel.</div>
+        </div>
+
+        <div class="pillar-card">
+            <div class="pillar-num">3</div>
+            <h5>Hot-reload em produção</h5>
+            <div class="how">Código pode ser atualizado em processos rodando sem restart. Pricing engines, risk grids e trade lifecycle continuam vivos enquanto absorvem mudanças.</div>
+            <div class="why"><strong>Impacto:</strong> o conceito de &quot;deploy&quot; web não existe. Mudanças propagam em segundos. Code de dev mal feito pode quebrar runtime de produção — disciplina extrema é mandatória.</div>
+        </div>
+
+        <div class="pillar-card">
+            <div class="pillar-num">4</div>
+            <h5>Custom type system + Python estendido</h5>
+            <div class="how">Sistema de tipos próprio, anterior a <code>typing</code> do Python 3. Interpretador Python customizado com extensões em C++ (Cython/pybind11) para performance crítica.</div>
+            <div class="why"><strong>Impacto:</strong> type hints convencionais não bastam. Há vocabulário próprio (<code>Instrument</code>, <code>Curve</code>, <code>MarketData</code>, <code>RiskModel</code>) que toma semanas para se internalizar.</div>
+        </div>
+
+        <div class="pillar-card">
+            <div class="pillar-num">5</div>
+            <h5>Event-driven pricing</h5>
+            <div class="how">Tick de market data dispara re-cálculo automático de todos os derivativos dependentes. Grid in-memory distribuído em milhares de cores. Computação reativa em DAG.</div>
+            <div class="why"><strong>Impacto:</strong> conceito de &quot;função pura&quot; é raro; quase tudo tem efeito colateral em cadeia. Dev precisa pensar em <strong>DAGs reativas</strong>, não em fluxo procedural.</div>
+        </div>
+    </div>
+</section>
+
+<!-- 3. STACK -->
+<section class="section" id="stack">
+    <h3><span class="num">3</span> Stack técnica (composição reconstituída a partir de vagas + papers)</h3>
+    <p>BofA não publica documentação oficial. A reconstituição abaixo é baseada em vagas públicas no BoA Careers, papers do Calum Paterson (&quot;The New Stack&quot;), Markets Media (cobertura do go-live 2018) e analogia com Athena (JPM, mais documentado).</p>
+
+    <div class="arch-stack">
+        <div class="arch-layer l1">
+            <div class="layer-title">UI Layer</div>
+            <div class="layer-body"><strong>ReactJS</strong> (apps novas, padrão atual) · <strong>Tk/Win32</strong> (legado em sunset) · Electron para desktop apps de traders · TypeScript onde o stack permite</div>
+        </div>
+        <div class="arch-layer l2">
+            <div class="layer-title">Application Layer</div>
+            <div class="layer-body"><strong>Pricing tools</strong> · <strong>Risk reports</strong> (V@R, sensitivities, stress) · <strong>Regulatory</strong> (FRTB SA/IMA, IFRS9, BCBS239, Dodd-Frank) · <strong>Pre-trade analytics</strong> · <strong>PnL attribution</strong> · <strong>Trade lifecycle</strong> (booking, confirmation FpML, settlement)</div>
+        </div>
+        <div class="arch-layer l3">
+            <div class="layer-title">Domain Layer</div>
+            <div class="layer-body"><strong>Instruments</strong>: FICC (IRS, OIS, basis swaps, FRAs, FX forwards, NDFs, options), Equities (cash, derivatives, structured), Credit, Commodities · <strong>Models</strong>: Black-Scholes, LIBOR Market Model, Hull-White, SABR, local vol, Heston · <strong>Curves</strong>: OIS, basis, credit, FX forward</div>
+        </div>
+        <div class="arch-layer l4">
+            <div class="layer-title">Core Layer (Bank Python heart)</div>
+            <div class="layer-body"><strong>Object DB</strong> proprietário (hot in RAM, cold em disco distribuído) · <strong>Python estendido</strong> com type system customizado · <strong>Event bus</strong> (Kafka + proprietário) · <strong>Grid computing</strong> (in-memory, milhares de cores para risk run noturno)</div>
+        </div>
+        <div class="arch-layer l5">
+            <div class="layer-title">Infrastructure Layer</div>
+            <div class="layer-body"><strong>Linux RHEL</strong> · <strong>C++</strong> para pricing engines críticos (quants escrevem em Python, vai para C++ no runtime hot) · <strong>PostgreSQL / Oracle</strong> (persistência cold) · <strong>Kubernetes</strong> (serviços satélite, não core Object DB) · <strong>Hadoop / Spark</strong> (batch risk &amp; regulatory)</div>
+        </div>
+    </div>
+
+    <h4>Exemplo conceitual — código Bank Python idiomático</h4>
+    <p style="font-size: 13px; color: var(--text-light);">Reprodução pedagógica (não código real do BofA). Ilustra hot-reload, Object DB e event-driven pricing.</p>
+    <div class="code-block"><span class="cmt"># Definição de instrumento — vive no Object DB, versionado, auditável</span>
+<span class="kw">class</span> <span class="acc">IRSwap</span>(<span class="acc">Instrument</span>):
+    <span class="cmt"># Type system custom: campos validados em build-time</span>
+    notional: <span class="acc">Money</span>
+    fixed_rate: <span class="acc">Rate</span>
+    floating_index: <span class="acc">RateIndex</span>  <span class="cmt"># ex: USD_SOFR_3M</span>
+    start: <span class="acc">Date</span>
+    maturity: <span class="acc">Date</span>
+    pay_freq: <span class="acc">Frequency</span>
+
+    <span class="kw">def</span> <span class="acc">pv</span>(self, market: <span class="acc">MarketData</span>) -> <span class="acc">Money</span>:
+        <span class="cmt"># Event-driven: se a curve mudar, este pv é re-calculado automaticamente</span>
+        fixed_leg = market.discount_curve.pv_fixed(self)
+        float_leg = market.forecast_curve.pv_floating(self)
+        <span class="kw">return</span> fixed_leg - float_leg
+
+<span class="cmt"># Hot-reload: editar este arquivo recompila o módulo em runtime</span>
+<span class="cmt"># Pricing engines vivos absorvem a nova lógica sem restart</span>
+<span class="cmt"># Object DB versiona o objeto IRSwap — audit trail completo</span></div>
+</section>
+
+<!-- 4. DOMAINS -->
+<section class="section" id="dominios">
+    <h3><span class="num">4</span> Domínios funcionais cobertos pelo Quartz</h3>
+    <p>Quartz não é uma plataforma de pricing. É <strong>toda</strong> a infraestrutura de tecnologia do BofA Merrill Lynch para o front-to-back de banking institucional.</p>
+
+    <div class="domain-grid">
+        <div class="domain-card">
+            <h5>FICC</h5>
+            <ul>
+                <li>Bonds (gov, corp, EM)</li>
+                <li>IRS / OIS / basis swaps</li>
+                <li>FRAs, FX forwards/swaps, NDFs</li>
+                <li>Options vanilla + exotic</li>
+                <li>Structured notes</li>
+                <li>Credit derivatives (CDS, CDX)</li>
+            </ul>
+        </div>
+        <div class="domain-card">
+            <h5>Equities</h5>
+            <ul>
+                <li>Cash equities pricing</li>
+                <li>Market making</li>
+                <li>Prime brokerage</li>
+                <li>Securities lending</li>
+                <li>Equity derivatives</li>
+                <li>ETF creation/redemption</li>
+            </ul>
+        </div>
+        <div class="domain-card">
+            <h5>Risk Management</h5>
+            <ul>
+                <li>V@R histórico + paramétrico</li>
+                <li>Sensitivities (Greeks)</li>
+                <li>Stress testing</li>
+                <li>IM/VM (UMR)</li>
+                <li>FRTB SA + IMA</li>
+                <li>XVA (CVA, FVA, KVA, MVA)</li>
+            </ul>
+        </div>
+        <div class="domain-card">
+            <h5>Trade Lifecycle</h5>
+            <ul>
+                <li>Booking</li>
+                <li>Confirmation (FpML)</li>
+                <li>Settlement</li>
+                <li>Lifecycle events</li>
+                <li>Reconciliação</li>
+                <li>Trade compression</li>
+            </ul>
+        </div>
+        <div class="domain-card">
+            <h5>Quant Research</h5>
+            <ul>
+                <li>Calibração de modelos</li>
+                <li>Backtesting</li>
+                <li>PnL attribution</li>
+                <li>Model risk validation</li>
+                <li>Volatility surfaces</li>
+                <li>Curve construction</li>
+            </ul>
+        </div>
+        <div class="domain-card">
+            <h5>Regulatory</h5>
+            <ul>
+                <li>BCBS 239 (risk data)</li>
+                <li>FRTB (mkt risk)</li>
+                <li>IFRS 9 / CECL</li>
+                <li>Dodd-Frank + EMIR</li>
+                <li>Volcker Rule</li>
+                <li>Bacen 4.658 (Brasil)</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- 5. FRICOES -->
+<section class="section" id="fricoes">
+    <h3><span class="num red">5</span> Por que o ramp-up é tão lento — as 4 fricções estruturais</h3>
+    <p>Vendors típicos (Bangalore, Manila, Mexico City) entregam dev com <strong>30-50% de productivity</strong> nos primeiros 3 meses no Quartz. Isto é a norma — não exceção. Quatro forças combinam:</p>
+
+    <div class="friction-grid">
+        <div class="friction-card">
+            <div class="friction-tag">Fricção 1</div>
+            <h5>Zero documentação pública</h5>
+            <p>Tudo é tribal knowledge. Onboarding depende de seniores disponíveis (raros e caros). Não há &quot;Quartz docs&quot; ou Stack Overflow.</p>
+        </div>
+        <div class="friction-card">
+            <div class="friction-tag">Fricção 2</div>
+            <h5>Vocabulário financeiro denso</h5>
+            <p>Dev &quot;Python convencional&quot; não sabe a diferença entre IRS e OIS, nem o que é negative basis trade, nem por que Greeks são caros de calcular. Glossário leva semanas.</p>
+        </div>
+        <div class="friction-card">
+            <div class="friction-tag">Fricção 3</div>
+            <h5>Idiom Bank Python</h5>
+            <p>Programadores Python tradicionais escrevem código que não roda bem no Object DB — vazam memória, quebram hot-reload, criam tight coupling indesejado, ignoram event propagation.</p>
+        </div>
+        <div class="friction-card">
+            <div class="friction-tag">Fricção 4</div>
+            <h5>VDI restrito + ambiente air-gapped</h5>
+            <p>Dev trabalha dentro do VDI do banco. Não consegue testar localmente, copiar código, ou usar IA online &quot;padrão&quot;. Aprender por tentativa e erro é proibitivamente lento.</p>
+        </div>
+    </div>
+
+    <div class="insight-box">
+        <div class="lbl">Tese central da Foursys</div>
+        <p style="margin: 0;">Se atacarmos as 4 fricções de uma vez — com <strong>academia pré-alocação</strong> (resolve fricções 1, 2, 3 antes do VDI) + <strong>AI Pair Programmer dentro do VDI</strong> (resolve fricção 4 sem violar compliance) — entregamos dev com <strong>80-100% de productivity em 6 semanas</strong>. Isso é diferencial defensável vs. qualquer body shop do mundo.</p>
+    </div>
+</section>
+
+<!-- 6. PROGRAMA -->
+<section class="section" id="programa">
+    <h3><span class="num accent">6</span> Programa &quot;Foursys QuartzReady&quot; — 3 fases para ramp-up de 6 semanas</h3>
+
+    <div class="phases">
+        <div class="phase-card">
+            <div class="phase-header orange">
+                <div class="phase-num">Fase 0</div>
+                <div class="phase-name">Academia pré-alocação</div>
+                <div class="phase-time">4 semanas · antes do dev pisar no BofA</div>
+            </div>
+            <div class="phase-body">
+                <p>Curso interno Foursys obrigatório para todos os candidatos a alocação BofA. Investimento alto na pessoa, retorno em ramp-up acelerado dentro do cliente.</p>
+                <table class="data-table compact" style="margin-top: 10px;">
+                    <thead>
+                        <tr><th>Módulo</th><th>Conteúdo</th><th>Carga</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Bank Python pattern</strong></td><td>Object DB conceitual, monorepo, hot-reload, event-driven pricing, custom types</td><td>30h</td></tr>
+                        <tr><td><strong>Sandbox replicado</strong></td><td>Mini-ambiente open source que simula Bank Python (Beancount + custom layer Foursys)</td><td>40h</td></tr>
+                        <tr><td><strong>Finanças aplicadas</strong></td><td>FICC (IRS, OIS, FX swaps), Equities, Derivatives (vanilla + exotics), Greeks, V@R, IM/VM</td><td>50h</td></tr>
+                        <tr><td><strong>Code reading drills</strong></td><td>Leitura assistida por IA de código open source equivalente (QuantLib, Riskfolio, Pyfolio)</td><td>30h</td></tr>
+                        <tr><td><strong>Mentoria sênior</strong></td><td>1:1 semanal com ex-banco (BofA/JPM/Citi) — Foursys investe em rede de mentors</td><td>8h</td></tr>
+                        <tr><td><strong>Certificação L1</strong></td><td>Avaliação prática: implementar pricing FX option + risk metrics no sandbox</td><td>exame</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="phase-card">
+            <div class="phase-header accent">
+                <div class="phase-num">Fase 1</div>
+                <div class="phase-name">Onboarding BofA com co-piloto IA</div>
+                <div class="phase-time">Semanas 1-6 no cliente</div>
+            </div>
+            <div class="phase-body">
+                <p>Dev entra no BofA com <strong>AI Pair Programmer Foursys</strong> já configurado e rodando dentro do VDI. Esse é o diferencial-chave — onboarding deixa de depender exclusivamente de seniores BofA disponíveis.</p>
+                <div class="code-block" style="font-size: 12px;">Dev BofA + Cursor/Copilot Enterprise
+            ↓
+   <span class="acc">Foursys QuartzReady Agent</span> (RAG privado dentro do VDI)
+   ├── Conhecimento financeiro embarcado (Hull, BIS, CFA, ISDA)
+   ├── Bank Python idioms (padrões pré-treinados)
+   ├── Glossário FICC bilíngue PT-EN
+   └── Test scaffold generator (unit tests + edge cases financeiros)
+            ↓
+   <span class="str">Mentor sênior Foursys</span> (check-ins semanais)
+            ↓
+   <span class="kw">Onboarding analytics dashboard</span> (Edson/Camila/Roberta veem)</div>
+                <p style="margin-top: 10px;"><strong>Métricas semanais visíveis ao cliente:</strong> PRs aceitos, defect rate, velocity vs. baseline GBS, NPS interno do squad.</p>
+            </div>
+        </div>
+
+        <div class="phase-card">
+            <div class="phase-header purple">
+                <div class="phase-num">Fase 2</div>
+                <div class="phase-name">Productivity steady</div>
+                <div class="phase-time">Semana 6+</div>
+            </div>
+            <div class="phase-body">
+                <p>Dev opera com <strong>80-100% da velocity esperada</strong>. AI continua como acelerador (não como muleta — métricas mostram independência crescente). Mentor sênior Foursys reduz para 1:1 quinzenal.</p>
+                <p>Acumulação de capital: cada dev formado vira <strong>asset reutilizável</strong> — pode mentorar próxima leva, gerar material de academia, contribuir para o RAG financeiro. O programa <strong>auto-melhora</strong> com escala.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 7. AI STACK -->
+<section class="section" id="ai-stack">
+    <h3><span class="num purple">7</span> Stack técnico do AI Pair Programmer Foursys — 6 componentes</h3>
+    <p>O Pair Programmer Foursys roda <strong>dentro do VDI BofA</strong> sem exfiltração de código. Cada componente foi desenhado para resolver uma fricção específica do ramp-up, com privacy-by-design.</p>
+
+    <div class="ai-stack-grid">
+        <div class="ai-card">
+            <h5>1. RAG financeiro privado</h5>
+            <div class="ai-func">Embeddings de Hull (Options/Futures/Derivatives), BIS papers, ISDA defs, CFA curriculum, QuantLib docs. Busca semântica durante codificação — dev pergunta &quot;como precifico FX barrier option?&quot; e recebe contexto teórico + exemplo de código.</div>
+            <div class="ai-tech"><strong>Stack:</strong> Vector DB local (pgvector/Qdrant) no VDI · Embeddings sentence-transformers ou OpenAI ada-002 · LangChain orchestration</div>
+        </div>
+        <div class="ai-card">
+            <h5>2. Code-aware Q&amp;A bot</h5>
+            <div class="ai-func">&quot;Explica esse módulo de pricing FX option&quot; → resposta com contexto do codebase Quartz + financial reasoning. Aceita anexar trecho de código e devolve interpretação contextual.</div>
+            <div class="ai-tech"><strong>Stack:</strong> LLM via Bedrock / Azure OpenAI com <strong>no-training guarantee</strong> · Streaming response · Logs auditáveis para compliance</div>
+        </div>
+        <div class="ai-card">
+            <h5>3. AI Pair Programmer</h5>
+            <div class="ai-func">Sugestão de código em tempo real, contextualizada com Bank Python idiom. Conhece padrões: hot-reload-safe, Object DB-aware, event-propagation correct.</div>
+            <div class="ai-tech"><strong>Stack:</strong> Cursor Enterprise / GitHub Copilot Enterprise como base · <code>.cursorrules</code> Foursys customizado · Prompts pré-tuned para Quartz/Athena/SecDB</div>
+        </div>
+        <div class="ai-card">
+            <h5>4. Test generation engine</h5>
+            <div class="ai-func">Dada uma função em Quartz, gera unit tests + edge cases financeiros: zero coupon, deep OTM, vol → 0, barrier just touched, negative interest rates, FX inverted quote.</div>
+            <div class="ai-tech"><strong>Stack:</strong> LLM + property-based testing (Hypothesis) · Mutation testing (mutmut) · Pytest integration</div>
+        </div>
+        <div class="ai-card">
+            <h5>5. Documentation surfacer</h5>
+            <div class="ai-func">Lê código Python, gera markdown documentation. Preenche o vácuo documental do Quartz — toda doc é tribal knowledge, então cada módulo lido pelo Surfacer fica <strong>permanentemente documentado</strong>.</div>
+            <div class="ai-tech"><strong>Stack:</strong> LLM + AST parsing (libcst, ast) · MkDocs generation · Versionamento Git-style das docs geradas</div>
+        </div>
+        <div class="ai-card">
+            <h5>6. Onboarding analytics dashboard</h5>
+            <div class="ai-func">Para CIO/COO ver: tempo médio de ramp-up por dev, retention rate, defect rate por sprint, velocity vs. baseline GBS, NPS interno BofA do squad. Transparência total.</div>
+            <div class="ai-tech"><strong>Stack:</strong> Grafana / PowerBI · Coletores no GitHub Enterprise / Jira · Visível ao cliente em real-time</div>
+        </div>
+    </div>
+
+    <h4 style="margin-top: 22px;">Privacy-by-design — pontos críticos para Camila Maciel (Office of the CIO governance)</h4>
+    <div class="info-grid">
+        <div class="info-card accent"><div class="label">RAG isolado</div><div class="value">Indexa <strong>apenas conteúdo público</strong> (Hull, QuantLib, BIS, ISDA, CFA). Código BofA <strong>nunca</strong> entra no índice. Vector DB no VDI, não na nuvem.</div></div>
+        <div class="info-card accent"><div class="label">LLM com no-training guarantee</div><div class="value">Azure OpenAI Service ou AWS Bedrock com contrato explícito de <strong>não-treinamento</strong> em dados do cliente. Logs aprovados pela auditoria.</div></div>
+        <div class="info-card accent"><div class="label">Tudo dentro do VDI</div><div class="value">Stack inteiro roda no perímetro BofA. Zero exfiltração de código, prompts ou respostas. Air-gap preservado.</div></div>
+        <div class="info-card accent"><div class="label">Logs auditáveis</div><div class="value">Cada prompt + resposta + timestamp + dev ID gravado. Compliance pode revisar 100% das interações. SOC 2 aligned.</div></div>
+        <div class="info-card accent"><div class="label">Red-teaming pré-aprovado</div><div class="value">Foursys submete suite de adversarial prompts à security do BofA <strong>antes</strong> do go-live. Vulnerabilidades testadas e fechadas.</div></div>
+        <div class="info-card accent"><div class="label">Cláusula contratual</div><div class="value">IP residency BR + data residency LGPD-compliant + Bacen 4.658 controls + cláusula de revogação imediata em caso de incident.</div></div>
+    </div>
+</section>
+
+<!-- 8. PITCH -->
+<section class="section" id="pitch">
+    <h3><span class="num">8</span> Pitch customizado por stakeholder — 30 segundos cada</h3>
+    <p>Cada decisor do mapa de relacionamento tem uma versão da história. Memorizar e usar em ordem de prioridade.</p>
+
+    <div class="pitch-grid">
+        <div class="pitch-card roberta">
+            <div class="pitch-who">→ Roberta Bordin</div>
+            <div class="pitch-role">SVP GCIBT &amp; GTS Tech CIO · sponsor natural do Projeto Matera</div>
+            <div class="pitch-quote">Para acelerar o Projeto Matera + o backlog Corporate/IB Tech, oferecemos squad QuartzReady com ramp-up de <strong>6 semanas vs. 12-18 do GBS</strong>. Significa entregar capacity 2-3× mais rápido para a janela IPO 2027. Track record bancário Brasil + Bank Python pattern internalizado.</div>
+        </div>
+        <div class="pitch-card edson">
+            <div class="pitch-who">→ Edson G. Pereira Filho</div>
+            <div class="pitch-role">CIO Brasil · decisor de orçamento e vendor onboarding</div>
+            <div class="pitch-quote">Programa de academia pré-alocação + AI Pair Programmer dentro do VDI = velocity dashboard auditado, métricas de ramp-up, retention &gt;90%. <strong>Sem nada do código BofA saindo do ambiente.</strong> Cobertura LGPD + Bacen 4.658 + OCC heightened standards.</div>
+        </div>
+        <div class="pitch-card leonardo">
+            <div class="pitch-who">→ Leonardo Meira</div>
+            <div class="pitch-role">IT Director IB · validador técnico, gatekeeper Quartz</div>
+            <div class="pitch-quote">Devs vetted em Bank Python pattern, FICC/Greeks/V@R, com certificação interna Foursys QuartzReady L1. Mentor sênior ex-banco em check-in semanal. <strong>Sem dev verde caindo no Quartz</strong> — chega com 80% da curva já vencida.</div>
+        </div>
+        <div class="pitch-card camila">
+            <div class="pitch-who">→ Camila Maciel</div>
+            <div class="pitch-role">Brazil Technology COO · Office of the CIO · governance</div>
+            <div class="pitch-quote">AI stack roda no VDI BofA, no-training guarantee no LLM, RAG só com material público (Hull/BIS/QuantLib), logs auditáveis 100%. <strong>ISO 27001 + 27701 + SOC 2.</strong> Red-teaming pré-aprovado pela security do banco antes do go-live.</div>
+        </div>
+        <div class="pitch-card victor">
+            <div class="pitch-who">→ Victor Negrini</div>
+            <div class="pitch-role">VP EM FICC Tech · Tesouraria · matricial · Insper</div>
+            <div class="pitch-quote">Squad bilíngue PT-EN com vocabulário FICC pronto — <strong>não vai te pedir glossário de Greek toda hora</strong>. Translator AI traduz docs em real-time durante code review. Insper como rapport. Encurtamos a fila do EM FICC sem aumentar headcount.</div>
+        </div>
+        <div class="pitch-card jaqueline">
+            <div class="pitch-who">→ Jaqueline N.</div>
+            <div class="pitch-role">Procurement Specialist · Economia + MBA USP Esalq · análise TCO</div>
+            <div class="pitch-quote">Dev BofA hoje = 12-18 semanas de ramp-up × hourly rate = <strong>~400-720h wasted por contratação</strong>. QuartzReady reduz para 6 semanas (~240h). Para 20 devs/ano = economia de ~8.000h. <strong>ROI 4-6× sobre o investimento em academia</strong>. Posso te enviar TCO com cenários.</div>
+        </div>
+    </div>
+</section>
+
+<!-- 9. ROADMAP -->
+<section class="section" id="roadmap">
+    <h3><span class="num">9</span> Roadmap de execução interno Foursys — próximos 120 dias</h3>
+    <p>Construção do QuartzReady é projeto interno Foursys. Não esperar o cliente — começar <strong>antes</strong> da primeira conversa formal com Roberta/Edson. Quando o pitch acontecer, o produto já existe demonstrável.</p>
+
+    <table class="roadmap-table">
+        <thead>
+            <tr>
+                <th>Janela</th>
+                <th>Entregável</th>
+                <th>Investimento Foursys</th>
+                <th>Risco / Mitigação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="window">0-30 dias</td>
+                <td><strong>Academia QuartzReady L1</strong> — currículo (Bank Python + finanças + sandbox) + materiais + certificação interna</td>
+                <td>2 sêniors ex-banco em sourcing · 1 instructional designer · 1 PO</td>
+                <td>Risco: encontrar mentors ex-BofA/JPM. Mitigação: começar com ex-Itaú Treasury (perfil próximo) + LinkedIn outreach a aposentados.</td>
+            </tr>
+            <tr>
+                <td class="window">30-60 dias</td>
+                <td><strong>MVP do AI Pair Programmer</strong> — Cursor Enterprise + RAG financeiro + <code>.cursorrules</code> Bank Python + test gen engine</td>
+                <td>1 squad interno (4 pessoas, 8 semanas) · licenças Cursor/Copilot Enterprise</td>
+                <td>Risco: privacy-by-design não bater com requisitos BofA. Mitigação: arquitetura zero-trust desde o dia 0; consultoria externa de security.</td>
+            </tr>
+            <tr>
+                <td class="window">60-90 dias</td>
+                <td><strong>Dossiê técnico + demo gravado</strong> + benchmark de velocity em ambiente sandbox · whitepaper público</td>
+                <td>1 sales engineer · 1 técnico líder · 1 designer</td>
+                <td>Risco: demo parecer &quot;canned&quot;. Mitigação: gravar com dev real fazendo onboarding ao vivo, não roteiro.</td>
+            </tr>
+            <tr>
+                <td class="window">90-120 dias</td>
+                <td><strong>Reunião executiva com Roberta + Leonardo + Edson</strong> → propor POC piloto de 3-5 devs no Projeto Matera. Vendor onboarding com Cristiane em paralelo.</td>
+                <td>Conta + pré-vendas + diretor comercial · materiais finais</td>
+                <td>Risco: Procurement travar timeline. Mitigação: começar onboarding Cristiane via Sergio Donizeti <strong>já no dia 60</strong>, em paralelo ao MVP.</td>
+            </tr>
+            <tr>
+                <td class="window">120-180 dias</td>
+                <td>POC piloto in-flight · primeiros 3-5 devs em Projeto Matera · onboarding analytics rodando · marketing case Foursys</td>
+                <td>Squad operacional + management overhead Foursys</td>
+                <td>Risco: ramp-up real não bater 6 semanas. Mitigação: SLA explícito + plano B de bench de troca + ajuste contínuo do programa.</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- 10. DIFERENCIAL -->
+<section class="section" id="diferencial">
+    <h3><span class="num red">10</span> Diferencial competitivo defensável — por que isso ganha vs. body shops globais</h3>
+    <p>TCS, Wipro, Infosys, Capgemini, Stefanini, EY, Accenture <strong>não conseguem replicar</strong> facilmente o programa QuartzReady. Três barreiras estruturais protegem a vantagem Foursys:</p>
+
+    <table class="data-table diff-table">
+        <thead>
+            <tr>
+                <th>Dimensão competitiva</th>
+                <th>Body shop global (Bangalore / Manila)</th>
+                <th>Foursys QuartzReady (Brasil)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Time-to-productivity em Quartz/Bank Python</strong></td>
+                <td class="market">12-18 semanas</td>
+                <td class="foursys">6 semanas (squad pré-treinado)</td>
+            </tr>
+            <tr>
+                <td><strong>Retenção anual</strong></td>
+                <td class="market">25-40% turnover</td>
+                <td class="foursys">&lt;10% turnover</td>
+            </tr>
+            <tr>
+                <td><strong>Overlap com Charlotte (NC)</strong></td>
+                <td class="market">0-2h por dia</td>
+                <td class="foursys">6-9h por dia (mesmo fuso)</td>
+            </tr>
+            <tr>
+                <td><strong>Bench disponível para troca</strong></td>
+                <td class="market">4-6 semanas</td>
+                <td class="foursys">2 semanas</td>
+            </tr>
+            <tr>
+                <td><strong>Compliance LGPD + dado em BR</strong></td>
+                <td class="market">Difícil (transferência internacional)</td>
+                <td class="foursys">Default (dado nunca sai do país)</td>
+            </tr>
+            <tr>
+                <td><strong>Certificações</strong></td>
+                <td class="market">Variável por delivery center</td>
+                <td class="foursys">ISO 27001 + 27701 (rara dupla local) + SOC 2</td>
+            </tr>
+            <tr>
+                <td><strong>Cultural fit financeiro BR</strong></td>
+                <td class="market">Vocabulário global apenas (CDI, IPCA, PTAX, CIP, Selic não estão em curriculum)</td>
+                <td class="foursys">Home turf — dialeto financeiro BR + LGPD/Bacen 4.658/Drex domínio nativo</td>
+            </tr>
+            <tr>
+                <td><strong>AI Pair Programmer dentro do VDI</strong></td>
+                <td class="market">Não oferecido</td>
+                <td class="foursys">Diferencial proprietário Foursys</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>Três barreiras estruturais que protegem o moat</h4>
+    <div class="info-grid">
+        <div class="info-card red"><div class="label">Barreira 1 — Timezone hostil</div><div class="value">Para Bangalore mentorar com ex-banco BR/US em horário comercial é fisicamente complicado. Foursys mentora em horário Charlotte/SP overlap natural.</div></div>
+        <div class="info-card red"><div class="label">Barreira 2 — Cultural fit BR</div><div class="value">Vocabulário CDI/IPCA/PTAX/CIP/Selic/Bacen é específico. Curriculum global de body shops não cobre. Replicar exigiria construir delivery center BR — que eles não têm.</div></div>
+        <div class="info-card red"><div class="label">Barreira 3 — Custo de replicação</div><div class="value">Construir QuartzReady em Mumbai significa repetir investimento de academia + IA stack + mentorship rede. Para a Foursys é home turf — custo marginal, retorno alto.</div></div>
+    </div>
+
+    <div class="insight-box accent">
+        <div class="lbl">Janela de oportunidade alavancável</div>
+        <p style="margin: 0;">Uma vez construído, o programa QuartzReady serve <strong>todos os bancos globais com presença Brasil que usam Bank Python tier</strong>: <strong>JPMorgan (Athena), Citi (Athena-like), Morgan Stanley, Barclays</strong>. Não é IP perdido em um cliente só — é plataforma de vendor preferencial estrutural para investment banking global no Brasil. O CAC do segundo cliente é uma fração do primeiro.</p>
+    </div>
+</section>
+
+<!-- 11. NEXT STEPS -->
+<section class="section" id="next">
+    <h3><span class="num accent">11</span> Próximos passos práticos</h3>
+
+    <div class="next-steps">
+        <h4>Ação imediata — semana 1</h4>
+        <ol>
+            <li><strong>Validar tese interna Foursys</strong>: alinhar com a diretoria sobre investir 4-6 meses em construir QuartzReady. Custo estimado: 4-6 FTE × 4 meses + licenças Cursor/Copilot Enterprise + LLM API + Vector DB.</li>
+            <li><strong>Sourcing de mentors ex-banco</strong>: começar outreach a ex-BofA Brasil, ex-Itaú Treasury, ex-JPM Brasil, ex-Citi IB. Linkedin Sales Navigator + warm intros via rede FGV/Insper.</li>
+            <li><strong>Mapear curriculum existente</strong>: levantar o que a Foursys já tem em treinamento de banking/finance — não começar do zero.</li>
+        </ol>
+
+        <h4>Curto prazo — semanas 2-8</h4>
+        <ol>
+            <li><strong>Construir Academia L1</strong> com 6 módulos (Bank Python, sandbox, finanças, code reading, mentoria, certificação) e MVP do AI Pair Programmer em paralelo.</li>
+            <li><strong>Vendor onboarding Cristiane Badejo via Sergio Donizeti</strong> — não esperar o produto pronto para começar burocracia.</li>
+            <li><strong>Gravar demo</strong> com dev real fazendo onboarding ao vivo no sandbox + AI agent — material para reunião com Roberta.</li>
+        </ol>
+
+        <h4>Médio prazo — semanas 9-16</h4>
+        <ol>
+            <li><strong>Reunião executiva</strong> com Roberta Bordin focada no Projeto Matera Customizado — pitch QuartzReady como acelerador do escopo dela.</li>
+            <li><strong>Triangulação com Edson + Camila</strong> para governance approval do AI stack dentro do VDI.</li>
+            <li><strong>Submeter compliance pack completo</strong> à Jaqueline (TCO model) + Cristiane (vendor onboarding).</li>
+            <li><strong>Negociar POC piloto</strong>: 3-5 devs em escopo concreto (Matera customization) com SLA de ramp-up auditado em 6 semanas.</li>
+        </ol>
+
+        <h4>Longo prazo — semanas 16+</h4>
+        <ol>
+            <li><strong>Operar o piloto</strong> com dashboard de saúde visível a Roberta/Edson/Camila. Ajustar programa em tempo real.</li>
+            <li><strong>Empacotar case</strong> para vender JPMorgan, Citi, Morgan Stanley Brasil — mesma plataforma, custo marginal baixo.</li>
+            <li><strong>Iterar QuartzReady L2 e L3</strong>: certificação avançada para tech leads + arquitetos.</li>
+        </ol>
+    </div>
+
+    <div class="insight-box purple">
+        <div class="lbl">Recomendação executiva final</div>
+        <p style="margin-bottom: 10px;">QuartzReady é um <strong>investimento de plataforma</strong>, não um produto para um cliente. Foursys deve construí-lo independente do desfecho da conversa BofA, porque:</p>
+        <ul style="margin: 0 0 0 20px;">
+            <li>Custo: 4-6 FTE × 4-6 meses = razoavelmente baixo para o impacto comercial</li>
+            <li>Retorno: 1 cliente Bank Python (BofA, JPM, Citi, MS) = revenue de 8-15 dígitos baixos em 2-3 anos</li>
+            <li>Defensibility: barreiras estruturais (timezone, cultural fit, custo de replicação) protegem por 24-36 meses</li>
+            <li>Effetto rede: cada dev formado vira mentor, cada projeto vira material da academia, o sistema auto-melhora</li>
+        </ul>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p><strong>four<span style="color: var(--accent)">sys</span> | Technical Brief — Quartz Architecture &amp; QuartzReady Program</strong></p>
+    <p>Documento técnico-comercial complementar ao Pre-Sales Intelligence Report do Bank of America Brasil (CIO Edson G. Pereira Filho · 11 contatos · 4 anéis)</p>
+    <p>Hot ally identificada: <strong>Roberta Bordin</strong> — SVP GCIBT &amp; GTS Tech CIO · Projeto Matera Customizado em curso</p>
+    <p>Gerado automaticamente — Confidencial Foursys | Maio/2026</p>
+    <p>Agente Hunter v3 · Anexo técnico-arquitetural</p>
+</div>
+
+</div>
+
+<button class="print-btn" onclick="window.print()">Imprimir / Salvar PDF</button>
+
+</body>
+</html>

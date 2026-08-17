@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing Head de TI - Marcelo Przyczynski | TK Elevator</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Marcelo Przyczynski</h1>
+                <h2>Head de TI — TK Elevator</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Engenharia e construção | Guaiba - RS</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 2,1 BI a R$ 3 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 100,1 MM a R$ 200 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Será mantido</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: TK Elevator</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>TK Elevator</strong> (anteriormente thyssenkrupp Elevator) é uma das maiores empresas globais de mobilidade vertical, com operações em mais de 100 países, cerca de 50.000 colaboradores e faturamento de aproximadamente €8 bilhões. Em 2020, a divisão de elevadores foi desmembrada do grupo thyssenkrupp e adquirida por um consórcio liderado por Advent International e Cinven, tornando-se uma empresa independente. No Brasil, a TK Elevator possui sede em Guaíba (RS) e atende segmentos como residencial, hospitalar, hoteleiro, varejo, transportes, educação e indústria, com portfólio completo de elevadores, escadas rolantes, esteiras rolantes e plataformas elevatórias. A empresa tem investido fortemente em transformação digital, com destaque para a plataforma preditiva <strong>MAX</strong> (baseada em IoT e nuvem) e o elevador <strong>EOX</strong> (ecológico e digital). Com 25.000 técnicos especializados e atendimento 24/7, a TK Elevator mantém uma estratégia de crescimento focada em serviços digitais, manutenção conectada e eficiência operacional, além de parcerias tecnológicas como a integração via APIs com a Sensedia, que processa cerca de 11 milhões de requisições mensais.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Global</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Estabilidade</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Engenharia e construção</strong> com abrangência <strong>Global</strong>. Todos os projetos definidos já possuem fornecedor selecionado. Modelo de compra: <strong>RFP/concorrência estruturada entre fornecedores qualificados</strong>. Perspectiva do orçamento de TI: <strong>Será mantido</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer processos e políticas de governança / compliance</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar infraestrutura e redes</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar sistemas legados</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Otimizar custos e eficiência (FinOps/SecFinOps)</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Nuvem pública</span>
+<span class="tag tag-priority">Cibersegurança</span>
+<span class="tag tag-priority">IA Generativa</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Armazenamento, backup e imutabilidade</span>
+<span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">CRM</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">HCM</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Desenvolvimento e modernização de legados</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">CPaaS / UCaaS / CCaaS</span>
+<span class="tag tag-active">GRC, compliance e auditoria</span>
+<span class="tag tag-active">Sistemas core</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades sem Fornecedor Definido</h3>
+            <p style="color:var(--text-light)"><strong>Todos os projetos definidos já possuem fornecedor selecionado.</strong> Abordagem deve ser por valor diferenciado e especialização.</p>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Marcelo Przyczynski</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 60</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Cibersegurança é prioridade Top 3</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Marcelo Przyczynski tem como top prioridades <strong>Nuvem pública; Cibersegurança; IA Generativa</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 0 projetos definidos sem fornecedor. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Será mantido</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: Cibersegurança. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p><strong>1. Manutenção Preditiva como Diferencial Competitivo:</strong> A plataforma MAX da TK Elevator compete diretamente com o Otis ONE e o Schindler Ahead. A governança de IA e a escalabilidade dessa plataforma são críticas — a Foursys pode posicionar seu AI Squad para ajudar a TK Elevator a acelerar a adoção de IA Generativa aplicada à manutenção preditiva e atendimento ao cliente.</p>
+                <p style="margin-top:10px"><strong>2. Integração e APIs como Pilar Estratégico:</strong> A TK Elevator já processa ~11 milhões de requisições de API por mês (parceria Sensedia). Há oportunidade para a Foursys atuar na modernização de integrações legadas, governança de APIs e hiperautomação de processos de campo e backoffice.</p>
+                <p style="margin-top:10px"><strong>3. Cibersegurança em Ambientes IoT Industriais:</strong> Com milhares de elevadores conectados e dados sensíveis trafegando na nuvem, a segurança da infraestrutura IoT é uma preocupação crescente. As certificações ISO 27001/27701 da Foursys são um diferencial direto para esse cenário.</p>
+                <p style="margin-top:10px"><strong>4. Transformação Digital de Campo:</strong> Marcelo liderou a digitalização de 25% de ganho no tempo de resposta e 15% no tempo de execução de serviços com apps mobile para técnicos. O próximo passo natural é IA Generativa para suporte técnico, automação de diagnósticos e otimização de rotas — temas no roadmap do mercado de elevadores.</p>
+                <p style="margin-top:10px"><strong>5. Orçamento Estável + Modelo Co-Gerenciado:</strong> Com orçamento de TI mantido e preferência por modelo co-gerenciado, a Foursys pode propor um Squad híbrido de cibersegurança e IA que se integre à equipe de 100-199 profissionais de TI, agregando capacidade sem aumento de headcount fixo.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Otis Worldwide — Líder Global</h4>
+                <p>Maior fabricante de elevadores do mundo, com US$ 14,3 bilhões em vendas (2024) e 2,4 milhões de unidades mantidas globalmente. No Brasil, opera como Otis Elevadores. Aposta pesada em IoT com a plataforma <strong>Otis ONE™</strong> (monitoramento preditivo 24/7), elevadores conectados da geração <strong>Gen360™</strong> com câmeras 360° e diagnóstico remoto, e o app <strong>eCall™ Plus</strong> para chamada touchless via smartphone. Referência em experiência digital do passageiro.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Atlas Schindler — Líder Nacional</h4>
+                <p>Líder do mercado brasileiro de transporte vertical. Destaque para a plataforma <strong>Schindler Ahead</strong> (IoT), lançada em 2018, com crescimento anual de 70% em conexões de equipamentos. O Centro de Operações Técnicas monitora equipamentos 24/7, resolvendo remotamente mais de 3.000 ocorrências e reduzindo tempo de atendimento em 34%. Possui tecnologias como <strong>Schindler PORT</strong> (otimização de fluxo), <strong>MetaCore</strong> (reconfiguração de edifícios) e <strong>R.I.S.E</strong> (instalação robótica).</p>
+            </div>
+            <div class="competitor-card">
+                <h4>KONE Corporation — Referência em Sustentabilidade</h4>
+                <p>Multinacional finlandesa com forte presença global e expansão na América Latina. Líder em eficiência energética com o <strong>KONE UltraRope®</strong> (cabos ultraleves), <strong>EcoDisc®</strong> (economia de 50-70% de energia) e drive regenerativo. Oferece o <strong>KONE 24/7 Connected Services</strong> com manutenção preditiva em tempo real. Possui medalha de ouro EcoVadis e classificação no topo do CDP Clima. Seu maior centro de P&D fora da sede fica na China, investindo em IA e IoT.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Mitsubishi Electric — Força em Alta Velocidade</h4>
+                <p>Player relevante no segmento de elevadores de alta velocidade e edifícios de grande porte. Investe em sistemas de controle inteligente com IA para otimização de tráfego, manutenção preditiva e segurança. Forte presença em projetos de infraestrutura e edifícios corporativos de alto padrão, com diferencial em engenharia de precisão e confiabilidade operacional.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>Todos os grandes concorrentes da TK Elevator estão investindo agressivamente em <strong>plataformas IoT proprietárias</strong>, <strong>manutenção preditiva com IA</strong> e <strong>experiência digital do cliente</strong>. A Atlas Schindler lidera no Brasil com 60%+ de equipamentos conectados e instalação robótica. A Otis avança com elevadores nativamente conectados (Gen360). Para a TK Elevator se manter competitiva, é crítico: (1) escalar a plataforma MAX com governança de IA — área onde a Foursys pode atuar; (2) fortalecer a camada de cibersegurança sobre a infraestrutura IoT em nuvem; (3) modernizar sistemas legados de gestão de serviços de campo e integrações via APIs, tema em que a parceria TK Elevator/Sensedia já demonstra maturidade e onde a Foursys pode agregar valor com sua expertise em integração e modernização de legados.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">MBA em Gestão Financeira, Controladoria e Auditoria — FGV (2013-2015). Graduação em Gestão Empresarial e Análise de Sistemas — PUC-RS.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória Profissional</div>
+                        <div class="value">29+ anos em TI. Na TK Elevator/thyssenkrupp desde 2000 — evoluiu de Analista de Suporte → Coordenador de Infraestrutura → IT Manager Brasil → IT Manager LATAM → Head of IT BU Latin America (desde 2019).</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">Porto Alegre / Guaíba, RS</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn ativo. Participação em eventos do setor como IT Forum.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Conquistas Notáveis</div>
+                        <div class="value">Liderou digitalização de campo com apps mobile para técnicos: +25% resposta, -15% tempo de execução, -18.000 chamadas/mês ao call center.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Liderança</div>
+                        <div class="value">Líder técnico com forte visão de negócio (MBA em finanças). Escopo regional LATAM. Perfil hands-on com histórico de crescimento orgânico na empresa.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p><strong>1. Valorize a longevidade:</strong> Marcelo está na TK Elevator há 25+ anos — reconheça essa trajetória rara e o conhecimento profundo que ele tem da operação. Pergunte sobre a evolução que ele vivenciou desde a era thyssenkrupp.</p>
+                <p style="margin-top:8px"><strong>2. Fale a linguagem de ROI:</strong> Com MBA em Gestão Financeira e Controladoria (FGV), Marcelo valoriza métricas de retorno. Apresente cases com números concretos de TCO e payback — ele já demonstrou isso ao medir os 25% de ganho em resposta de campo.</p>
+                <p style="margin-top:8px"><strong>3. Conecte com o desafio LATAM:</strong> Como Head de TI para toda a América Latina, ele lida com complexidade multi-país. Aborde temas de padronização, compliance regional e escalabilidade de soluções cross-border.</p>
+                <p style="margin-top:8px"><strong>4. Contexto gaúcho:</strong> Marcelo é de Porto Alegre e formado pela PUC-RS. Se houver conexão com o RS (escritório Foursys, profissionais gaúchos), mencione. Demonstre proximidade e conhecimento do ecossistema tech do Sul.</p>
+                <p style="margin-top:8px"><strong>5. Digitalização de campo como ponto de orgulho:</strong> O projeto de apps para técnicos foi um case de sucesso significativo que ele liderou. Mencione conhecer esse projeto e pergunte sobre os próximos passos — isso demonstra preparo e gera engajamento imediato.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do Head de TI e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte matricial (regional/global e local)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Pontual: convidado ad hoc para temas específicos.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Co-decisão TI + Negócios</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">5.000 a 9.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">100 a 199</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:35%;background:#1a237e">35%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#1a237e">10%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#c5cae9">5%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Preço</span>
+<span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Segurança e compliance</span>
+<span class="tag tag-active">Integração e APIs</span>
+<span class="tag tag-active">Roadmap e inovação</span>
+<span class="tag tag-active">Flexibilidade contratual</span>
+<span class="tag tag-active">Customização e configuração</span>
+<span class="tag tag-active">Abordagem consultiva</span>
+<span class="tag tag-active">Capacitação do time</span>
+<span class="tag tag-active">Ecossistema de parceiros</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Consultoria especializada;MSP / outsourcing gerenciado;Hiperscaler / parceiro cloud;Especialista setorial / regulatório;Fornecedor com cobertura global</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 7 temas | Projeto: 5 temas | Serviço Gerenciado: 4 temas | Interno: 1 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

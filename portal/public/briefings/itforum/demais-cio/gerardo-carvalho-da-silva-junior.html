@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Gerardo Carvalho da Silva Junior | Dia a Dia Atacadista</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Gerardo Carvalho da Silva Junior</h1>
+                <h2>CIO — Dia a Dia Atacadista</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Comércio atacadista e varejista | Brasilia - DF</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 6,1 BI a R$ 7 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 30,1 MM a R$ 50 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá entre 20% e 30%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Dia a Dia Atacadista</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">O <strong>Atacadão Dia a Dia</strong> é uma das maiores redes de atacarejo do Centro-Oeste brasileiro, com faturamento superior a <strong>R$ 5 bilhões anuais</strong> e mais de <strong>30 lojas</strong> distribuídas pelo Distrito Federal, Goiás, Tocantins e Bahia. Fundada com o conceito de <strong>"atacarejo premium"</strong>, a rede se diferencia ao oferecer preços de atacado combinados com serviços típicos de varejo — como açougue com cortes especiais, padaria, rotisseria, hortifrúti selecionado e adega com mais de mil rótulos. A empresa é reconhecida como uma das líderes do segmento de atacado e autosserviço na região segundo a ABAD e conquistou <strong>4 vezes o prêmio "As 100+ Inovadoras no Uso de TI"</strong> (2019, 2022, 2024 e 2025), sendo a única na categoria de varejo alimentar. Sob a liderança tecnológica de Gerardo Carvalho desde 2018, o Dia a Dia passou por intensa transformação digital: criou mais de 100 robôs de RPA e IA, implementou a plataforma "Fiscal Remoto" (que reduziu o tempo de cancelamento de pedidos em 90%), implantou e-commerce, cartão private label e iniciou a adoção do SAP S/4HANA Retail. A empresa opera dois centros de distribuição e um centro administrativo, empregando mais de 10.000 colaboradores, e mantém trajetória de expansão acelerada com abertura contínua de novas unidades.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Local (Brasil)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Privada</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa do setor de <strong>Comércio atacadista e varejista</strong> com abrangência <strong>Local (Brasil)</strong>. Possui <strong>8 projetos SEM fornecedor definido</strong> — janela de oportunidade. Modelo de compra: <strong>RFP/concorrência estruturada entre fornecedores qualificados</strong>. Perspectiva do orçamento de TI: <strong>Crescerá entre 20% e 30%</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Automatizar processos e operações para ganho de eficiência</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Fomentação da cultura de inovação na área de TI e organização</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar complexidade dos dados e qualidade da informação</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Orquestrar transformação digital</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Provar valor e ROI sob pressão de custos</div></div>
+<div class="timeline-item"><div class="timeline-dot"></div><div>Reduzir riscos e fortalecer cibersegurança</div></div>
+
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-priority">IA Generativa</span>
+<span class="tag tag-priority">Automação de processos / RPA</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses:</p>
+            <div>
+                <span class="tag tag-active">Infraestrutura de redes</span>
+<span class="tag tag-active">Conectividade e telecom</span>
+<span class="tag tag-active">Nuvem pública</span>
+<span class="tag tag-active">Nuvem Privada e híbrida</span>
+<span class="tag tag-active">Cibersegurança</span>
+<span class="tag tag-active">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-active">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-active">Gestão de dados</span>
+<span class="tag tag-active">IA / ML</span>
+<span class="tag tag-active">IA Generativa</span>
+<span class="tag tag-active">APIs e integração</span>
+<span class="tag tag-active">CRM</span>
+<span class="tag tag-active">ERP</span>
+<span class="tag tag-active">HCM</span>
+<span class="tag tag-active">BPM</span>
+<span class="tag tag-active">Low-code / no-code</span>
+<span class="tag tag-active">Automação de processos / RPA</span>
+<span class="tag tag-active">Hiperautomação</span>
+<span class="tag tag-active">Workplace e end-user computing</span>
+<span class="tag tag-active">Mobile apps / superapps</span>
+<span class="tag tag-active">IoT / edge computing</span>
+<span class="tag tag-active">GRC, compliance e auditoria</span>
+<span class="tag tag-active">Sistemas core</span>
+<span class="tag tag-active">ITSM/ESM e service desk</span>
+
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong>:</p>
+            <div><span class="tag tag-opportunity">Cibersegurança</span>
+<span class="tag tag-opportunity">Disaster recovery / continuidade de negócios</span>
+<span class="tag tag-opportunity">Segurança de dados e privacidade (LGPD/DLP)</span>
+<span class="tag tag-opportunity">Gestão de dados</span>
+<span class="tag tag-opportunity">IA / ML</span>
+<span class="tag tag-opportunity">IA Generativa</span>
+<span class="tag tag-opportunity">APIs e integração</span>
+<span class="tag tag-opportunity">ITSM/ESM e service desk</span>
+</div><div style="margin-top:20px">
+                <h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria/assessment):</h4>
+                <div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Low-code / no-code</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Hiperautomação</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Workplace e end-user computing</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Mobile apps / superapps</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IoT / edge computing</span>
+<span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">GRC, compliance e auditoria</span>
+</div>
+            </div></div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Gerardo Carvalho da Silva Junior</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>IA / ML SEM fornecedor definido</li><li>IA Generativa SEM fornecedor definido</li><li>IA Generativa é prioridade Top 3 de investimento</li><li>Automação de processos / RPA é prioridade Top 3 de investimento</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 95</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Cibersegurança SEM fornecedor definido</li><li>Disaster recovery / continuidade de negócios SEM fornecedor definido</li><li>Segurança de dados e privacidade (LGPD/DLP) SEM fornecedor definido</li><li>Segurança de dados e privacidade (LGPD/DLP) é prioridade Top 3</li><li>GRC, compliance e auditoria com investimento inicial previsto</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 65</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>APIs e integração SEM fornecedor definido</li></ul>
+                </div>
+            </div>
+<div class="oferta-card" style="border-left: 4px solid #74b9ff;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 60</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Workplace e end-user computing com investimento previsto</li></ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Gerardo Carvalho da Silva Junior tem como top prioridades <strong>Segurança de dados e privacidade (LGPD/DLP); IA Generativa; Automação de processos / RPA</strong>, iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados nessas áreas com menor risco. Destacar que existem <strong>8 projetos sem fornecedor</strong> — janela de oportunidade direta. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 8 projetos definidos sem fornecedor: Cibersegurança, Disaster recovery / continuidade de negócios, Segurança de dados e privacidade (LGPD/DLP), Gestão de dados, IA / ML e mais 3 temas. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação. Perspectiva do orçamento: <strong>Crescerá entre 20% e 30%</strong>.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; Cibersegurança; Modernização de Legado. A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. IA Generativa no Atacarejo é o Diferencial de 2026:</strong> 72% dos executivos do varejo alimentar consideram IA e automação essenciais para competitividade. O Dia a Dia já criou 100+ robôs de RPA/IA e uma plataforma de IA generativa para treinamento de 8.000 funcionários — posicione a Foursys como parceira para escalar essas iniciativas com squads especializados e governança de IA.</p>
+                <p style="margin-bottom:12px"><strong>2. Automação de Frente de Loja é Corrida Competitiva:</strong> Concorrentes como Assaí (1.000+ self-checkouts) e Atacadão (190+ lojas com autoatendimento) estão à frente. O Dia a Dia com sua solução "Fiscal Remoto" já demonstrou capacidade de inovação em PDV — a próxima onda é self-checkout inteligente com prevenção de perdas via IA, área onde a Foursys pode agregar com cibersegurança e integração.</p>
+                <p style="margin-bottom:12px"><strong>3. Dados como Ativo Estratégico:</strong> 78,3% dos consumidores consideram ofertas personalizadas decisivas para fidelização. O Assaí provou que clientes identificados gastam 30% mais e compram 59% mais frequentemente. Com o desafio declarado de "gerenciar complexidade dos dados e qualidade da informação", o Dia a Dia precisa de uma plataforma robusta de gestão de dados — oportunidade direta para a oferta Foursys de Gestão de Dados e Analytics.</p>
+                <p style="margin-bottom:12px"><strong>4. SAP S/4HANA Retail como Catalisador:</strong> A implementação em curso do SAP S/4HANA Retail no Dia a Dia é um projeto transformacional que demanda integrações complexas (APIs, CRM, HCM, BPM) e equipe especializada. A Foursys pode posicionar sua oferta de Modernização de Legado e integração via Digibee para conectar os sistemas existentes ao novo ERP.</p>
+                <p><strong>5. Cibersegurança é Urgência Regulatória:</strong> Com a LGPD cada vez mais fiscalizada e o setor de varejo sendo alvo frequente de ataques (dados de cartão, CPF de clientes), o Dia a Dia tem Segurança de Dados como prioridade Top 3 e SEM fornecedor definido. O custo médio de uma violação de dados no varejo brasileiro é de R$ 6,2 milhões — argumento direto para ROI da oferta de Cibersegurança Foursys.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Assaí Atacadista</h4>
+                <p><strong>302 lojas | 40 milhões de clientes/mês | R$ 70+ bilhões de faturamento</strong></p>
+                <p style="margin-top:8px">Maior rede de atacarejo do Brasil. Investimento massivo em tecnologia: <strong>14 milhões de usuários ativos no app "Meu Assaí"</strong> (clientes identificados compram 59% mais), mais de <strong>1.000 caixas de autoatendimento</strong> implantados, assistente virtual com IA generativa para 88 mil colaboradores, e o <strong>Assaí Lab</strong> como hub de inovação com startups. Expansão agressiva de e-commerce via iFood, Rappi e Cornershop com crescimento de 100%+ ao ano. Uso intensivo de RPA para processamento de notas fiscais e reconciliações.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Atacadão (Grupo Carrefour Brasil)</h4>
+                <p><strong>400+ lojas | Líder nacional em atacarejo | Parte do Grupo Carrefour (R$ 100+ bilhões)</strong></p>
+                <p style="margin-top:8px">Maior bandeira de atacarejo do país. App <strong>"Meu Atacadão" com 5 milhões de usuários</strong>, self-checkout implantado em <strong>190+ lojas</strong>, e-commerce ativo em <strong>250 unidades</strong> com entrega e retirada. Uso de <strong>IA para previsão de demanda, ajuste de estoques e otimização de rotas logísticas</strong>. Integração de dados e algoritmos para personalização de ofertas via WhatsApp (2 milhões de clientes cadastrados). Forte investimento em etiquetas eletrônicas e precificação dinâmica.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Fort Atacadista (Grupo Pereira)</h4>
+                <p><strong>110 lojas em 7 estados | R$ 17,5 bilhões de faturamento (Grupo Pereira) | 5º maior atacarejo do país</strong></p>
+                <p style="margin-top:8px">Concorrente direto no DF e Goiás, com presença em Taguatinga, Ceilândia e Valparaíso. Investimento de <strong>R$ 250 milhões</strong> na abertura de 4 lojas simultâneas em 2024. Destaque tecnológico: <strong>app "Betina"</strong> para gestão de 20 mil colaboradores, <strong>totem de feedback com reconhecimento de voz</strong> em fase de teste, e a <strong>Instivo Retail Tech</strong> (parceria com Zanthus) desenvolvendo software customizado para varejo. Patrocinador do Varejo Tech Day (ACATE) por 3 anos consecutivos. Meta de dobrar de tamanho até 2027.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Bretas / Cencosud (Grupo Cencosud)</h4>
+                <p><strong>60+ lojas em MG e GO | Parte do grupo chileno Cencosud | Presença regional relevante</strong></p>
+                <p style="margin-top:8px">Rede supermercadista com forte presença em Goiás e Minas Gerais, competindo diretamente com o Dia a Dia na região. Parte do <strong>Grupo Cencosud</strong>, multinacional com operações em 5 países e investimentos globais em digitalização. Foco em programas de fidelidade integrados, plataforma de e-commerce com last-mile delivery e adoção de ferramentas de analytics para gestão de sortimento e precificação regional.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis: Onde o Dia a Dia Pode Avançar</h4>
+                <p style="margin-bottom:8px"><strong>1. Escala de autoatendimento:</strong> Enquanto Assaí opera 1.000+ self-checkouts e Atacadão tem cobertura em 190+ lojas, o Dia a Dia tem oportunidade de acelerar essa implantação para reduzir filas e custos operacionais.</p>
+                <p style="margin-bottom:8px"><strong>2. App e CRM com base ativa massiva:</strong> Assaí possui 14 milhões de usuários ativos no app; Atacadão tem 5 milhões. O Dia a Dia precisa escalar sua base digital e explorar dados de comportamento para personalização de ofertas — área onde a Foursys pode contribuir com IA e analytics.</p>
+                <p style="margin-bottom:8px"><strong>3. Hub de inovação estruturado:</strong> Assaí possui o "Assaí Lab" e Fort tem a "Instivo Retail Tech". O Dia a Dia, apesar dos prêmios de inovação, pode se beneficiar de um programa formal de inovação aberta com parceiros tecnológicos.</p>
+                <p><strong>4. Cibersegurança e LGPD:</strong> Com 8 projetos sem fornecedor definido nesta área, o Dia a Dia reconhece uma lacuna importante. Concorrentes maiores já possuem estruturas dedicadas de segurança e compliance — esta é a janela de oportunidade mais imediata para a Foursys.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Graduações em TI e Administração | MBA em Gestão Empresarial (FGV) | Inovação Exponencial (Singularity University) | Mestrado em Transformação Digital (UNEATLANTICO — em andamento)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Trajetória Profissional</div>
+                        <div class="value">25+ anos em TI e Inovação. Anterior: Gerente Corporativo de TI no Terral Shopping Centers. Desde set/2018 como Diretor Estatutário de TI, Processos e Inovação no Atacadão Dia a Dia.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Atuação Institucional</div>
+                        <div class="value">Co-fundador e Diretor do CIO Cerrado (desde 2013) — maior rede de executivos de TI do Centro-Oeste. Presidente do Comitê de Tecnologia, Inovação e IA da ABAAS (desde abr/2025).</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reconhecimentos</div>
+                        <div class="value">4x premiado "100+ Inovadores em TI do Brasil" | LinkedIn Top Voice em Tecnologia | Único premiado na categoria varejo alimentar</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn ativo — publica sobre transformação digital, liderança humanizada, resiliência e inovação no varejo. Usa hashtags como #atacadaodiaadia #ciocerrado #inovação</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Liderança</div>
+                        <div class="value">Estilo hands-on: estudou operações do caixa ao CD antes de transformar a TI. Valoriza empatia, gratidão e superação. Divide sua atuação entre "gestor de tecnologia" e "gestor de negócios".</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:20px">
+                <h4>5 Dicas de Rapport para a Conversa com Gerardo</h4>
+                <p style="margin-bottom:10px"><strong>1. Valorize a jornada de inovação no varejo:</strong> Gerardo veio do setor de shopping centers sem experiência em varejo alimentar — elogie como ele construiu uma operação de TI premiada 4 vezes do zero. Pergunte sobre o "Fiscal Remoto", que é seu case de maior orgulho.</p>
+                <p style="margin-bottom:10px"><strong>2. Conecte-se pela visão de "TI como negócio":</strong> Ele se posiciona como gestor de negócios tanto quanto de tecnologia. Aborde a conversa por resultados de negócio (redução de custos, experiência do cliente, expansão de lojas) em vez de apenas especificações técnicas.</p>
+                <p style="margin-bottom:10px"><strong>3. Mencione o CIO Cerrado e a ABAAS:</strong> Como co-fundador do CIO Cerrado e presidente do Comitê de Tecnologia da ABAAS, Gerardo valoriza networking e troca de experiências entre executivos. Ofereça cases e conexões com outros CIOs do portfólio Foursys.</p>
+                <p style="margin-bottom:10px"><strong>4. Demonstre conhecimento sobre o setor:</strong> Ele fez Singularity University e está cursando Mestrado em Transformação Digital — é um executivo que consome conhecimento avançado. Traga dados de mercado, tendências globais de atacarejo e referências internacionais para elevar a conversa.</p>
+                <p><strong>5. Explore a liderança humanizada:</strong> Seus posts no LinkedIn revelam forte valorização de resiliência, empatia e gratidão. Ele lidera uma equipe de TI de 50-99 pessoas num ambiente de 10.000+ colaboradores — aborde como a tecnologia pode empoderar as pessoas (treinamento com IA generativa para 8.000 funcionários é exemplo disso), não substituí-las.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Equivale a uma diretoria</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Membro: assento permanente, com voto.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div></div>
+                <div><div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">10.000 ou mais</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">1.000 a 4.999</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">50 a 99</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Coprotagonista: co-lidera estratégia e orçamento, influencia metas de negócio.</div>
+                    </div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+<div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:#1a237e">20%</div></div></div>
+<div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#3949ab">10%</div></div></div>
+<div class="bar"><div class="bar-label">Operação em Nuvem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+<div class="bar"><div class="bar-label">Cibersegurança</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+<div class="bar"><div class="bar-label">Consultoria/Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#7986cb">5%</div></div></div>
+<div class="bar"><div class="bar-label">Capacitação/Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#9fa8da">5%</div></div></div>
+<div class="bar"><div class="bar-label">Inovação/P&amp;D/Transf. Digital</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#c5cae9">5%</div></div></div>
+
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">ROI estimado</span>
+<span class="tag tag-active">TCO horizonte 3 anos</span>
+<span class="tag tag-active">SLA/Disponibilidade</span>
+<span class="tag tag-active">Suporte técnico</span>
+<span class="tag tag-active">TMA</span>
+<span class="tag tag-active">Referências e cases BR</span>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Integrador / empresa de serviços (SI);Consultoria especializada</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Co-gerenciado: 11 temas | Projeto: 6 temas | Serviço Gerenciado: 4 temas | Interno: 3 temas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

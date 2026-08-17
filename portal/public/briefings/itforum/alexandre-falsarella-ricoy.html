@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Alexandre Falsarella Ricoy | Bertoldo Transportes e Logística Ltda - EPP</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-new { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 180px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .summary-stat { text-align: center; padding: 20px; }
+        .summary-stat .number { font-size: 36px; font-weight: 800; color: var(--primary); }
+        .summary-stat .desc { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px 14px; text-align: left; font-size: 14px; border-bottom: 1px solid var(--border); }
+        th { background: #f8f9ff; color: var(--primary); font-weight: 600; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Alexandre Falsarella Ricoy</h1>
+                <h2>CIO — Bertoldo Transportes e Logística Ltda - EPP</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Transporte e logística | Londrina - PR</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 1,1 BI a R$ 2 BI</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Orçamento TI</div>
+                    <div class="value">R$ 50,1 MM a R$ 80 MM</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescerá mais de 30%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- RESUMO EXECUTIVO -->
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="grid-3">
+                <div class="summary-stat">
+                    <div class="number">15</div>
+                    <div class="desc">Temas com investimento ativo nos próximos 12 meses</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number">5</div>
+                    <div class="desc">Projetos SEM fornecedor definido (oportunidade)</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number">7</div>
+                    <div class="desc">Ofertas Foursys com fit identificado</div>
+                </div>
+            </div>
+            <div class="alert-box" style="margin-top:20px">
+                <strong>Timing:</strong> Maiores investimentos planejados para o <strong>3º trimestre</strong> de 2026.
+                Modelo de compra: <strong>RFP/concorrência estruturada entre fornecedores qualificados</strong>
+            </div>
+        </div>
+
+        <!-- PERFIL DO CIO E EMPRESA -->
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia do CIO</div>
+                        <div class="value">Equivale a uma vice-presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Reporte</div>
+                        <div class="value">Reporte ao CEO/Presidência</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Conselho/Comitês</div>
+                        <div class="value">Membro: assento permanente, com voto.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão em Aquisições</div>
+                        <div class="value">Aprovadora (dentro do budget)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">100 a 499</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Usuários de TI</div>
+                        <div class="value">100 a 499</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Equipe de TI</div>
+                        <div class="value">30 a 49</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Estratégica: participa das discussões, define roadmap e contribui no orçamento.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DISTRIBUIÇÃO DO ORÇAMENTO -->
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição do Orçamento de TI (%)</h3>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Pessoas</div><div class="bar-track"><div class="bar-fill" style="width:40%;background:#1a237e">40%</div></div></div><div class="bar"><div class="bar-label">Infra/Hardware On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div><div class="bar"><div class="bar-label">Software On-Prem</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div><div class="bar"><div class="bar-label">Inovação/P&amp;D</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:#5c6bc0">10%</div></div></div>
+            </div>
+        </div>
+
+        <!-- DESAFIOS E PRIORIDADES -->
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 6 Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adoção, governança, escalabilidade de IA/ML e IA Generativa</div></div><div class="timeline-item"><div class="timeline-dot"></div><div>Elevar a experiência de clientes e colaboradores (CX/EX)</div></div><div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer processos e políticas de governança / compliance</div></div><div class="timeline-item"><div class="timeline-dot"></div><div>Gerenciar complexidade dos dados e qualidade da informação</div></div><div class="timeline-item"><div class="timeline-dot"></div><div>Modernizar infraestrutura e redes</div></div><div class="timeline-item"><div class="timeline-dot"></div><div>Priorizar portfólio em meio a excesso de demandas</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top 3 Prioridades de Investimento</h4>
+                    <div style="margin-bottom:20px">
+                        <span class="tag tag-priority">Infraestrutura de redes</span><span class="tag tag-priority">IA Generativa</span><span class="tag tag-priority">CRM</span>
+                    </div>
+                    <h4 style="margin-bottom:12px;color:var(--primary);margin-top:20px">Temas que Precisam de Maturidade</h4>
+                    <div>
+                        <span class="tag tag-new">Infraestrutura de redes</span><span class="tag tag-new">Armazenamento, backup e imutabilidade</span><span class="tag tag-new">Nuvem pública</span><span class="tag tag-new">Cibersegurança</span><span class="tag tag-new">IA / ML</span><span class="tag tag-new">IA Generativa</span><span class="tag tag-new">CRM</span><span class="tag tag-new">HCM</span><span class="tag tag-new">BPM</span><span class="tag tag-new">Low-code / no-code</span><span class="tag tag-new">Hiperautomação</span><span class="tag tag-new">IoT / edge computing</span><span class="tag tag-new">Sistemas core</span><span class="tag tag-new">ITSM/ESM e service desk</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAPA DE INVESTIMENTOS -->
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos Ativos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento (verde = continuidade / azul = investimento inicial):</p>
+            <div><span class="tag tag-active">Armazenamento, backup e imutabilidade</span><span class="tag tag-active">Conectividade e telecom</span><span class="tag tag-new">Nuvem pública</span><span class="tag tag-new">Nuvem Privada e híbrida</span><span class="tag tag-active">Cibersegurança</span><span class="tag tag-active">Disaster recovery / continuidade de negócios</span><span class="tag tag-active">Gestão de dados</span><span class="tag tag-active">IA / ML</span><span class="tag tag-active">IA Generativa</span><span class="tag tag-active">APIs e integração</span><span class="tag tag-active">CRM</span><span class="tag tag-active">ERP</span><span class="tag tag-active">HCM</span><span class="tag tag-active">BPM</span><span class="tag tag-active">Mobile apps / superapps</span></div>
+        </div>
+
+        <!-- OPORTUNIDADES SEM FORNECEDOR -->
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades: Projetos SEM Fornecedor Definido</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Estes projetos já possuem definição, mas <strong>ainda não têm fornecedor selecionado</strong> — janela de oportunidade para a Foursys:</p>
+            <div><span class="tag tag-opportunity">Conectividade e telecom</span><span class="tag tag-opportunity">Nuvem pública</span><span class="tag tag-opportunity">Nuvem Privada e híbrida</span><span class="tag tag-opportunity">Cibersegurança</span><span class="tag tag-opportunity">Disaster recovery / continuidade de negócios</span></div>
+            <div style="margin-top:20px"><h4 style="color:var(--text-light)">Projetos sem definição (oportunidade de consultoria):</h4><div style="margin-top:8px"><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">Gestão de dados</span><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA / ML</span><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">IA Generativa</span><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">APIs e integração</span><span class="tag" style="background:#f3e5f5;color:#7b1fa2;border:1px solid #ce93d8">CRM</span></div></div>
+        </div>
+
+        <!-- ANÁLISE DA EMPRESA -->
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: Bertoldo Transportes e Logística Ltda - EPP</h3>
+            <p style="margin-bottom:20px;line-height:1.8">Empresa de transporte rodoviário sediada em Londrina-PR, com mais de 200 veículos (leves e pesados), frota 100% assegurada. Filiais em Cascavel-PR, São José dos Pinhais-PR, Gov. Celso Ramos-SC e Gravataí-RS. Serviços: cargas fracionadas, lotação, armazenagem, paletização, cross docking e rastreamento em tempo real. Faturamento entre R$ 1,1 BI e R$ 2 BI.</p>
+            
+            <div class="info-card" style="margin-bottom:12px">
+                <div class="label">Abrangência</div>
+                <div class="value">Local (Brasil)</div>
+            </div>
+            <div class="info-card" style="margin-bottom:12px">
+                <div class="label">Categoria</div>
+                <div class="value">Privada</div>
+            </div>
+            <div class="info-card">
+                <div class="label">Perspectiva de Faturamento</div>
+                <div class="value">Crescimento</div>
+            </div>
+        </div>
+
+        <!-- BENCHMARK CONCORRENTES -->
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark: O Que os Concorrentes Estão Fazendo</h3>
+            
+            <div class="competitor-card">
+                <h4>Braspress</h4>
+                <p>Líder em encomendas e cargas fracionadas no Brasil, investiu fortemente em automação de terminais com esteiras inteligentes e sorting automatizado. Utiliza IA para roteirização e previsão de demanda. Possui sistema de rastreamento avançado integrado a APIs para clientes.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Jadlog</h4>
+                <p>Uma das maiores transportadoras de encomendas do Brasil, pioneira em integração com marketplaces (Mercado Livre, Shopee). Investe em hubs automatizados, lockers de autoatendimento e machine learning para last-mile.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>TNT/FedEx</h4>
+                <p>Operação global com tecnologia de ponta: rastreamento em tempo real com IoT, plataforma digital unificada, robótica em centros de distribuição e análise preditiva para otimização de rotas.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Sequoia Logística</h4>
+                <p>Tecnologia como core business: plataforma proprietária de gestão logística, IA para roteirização, visibilidade end-to-end via app e integração nativa com e-commerce.</p>
+            </div>
+            <div class="insight-box" style="margin-top:20px"><h4>Gap Analysis vs Concorrentes</h4><p>Concorrentes de porte similar já investem em automação de terminais, IA para roteirização, integração com ecossistemas de e-commerce e plataformas digitais proprietárias. Bertoldo tem oportunidade de acelerar em: plataforma digital de gestão, IA/ML para otimização de rotas e previsão de demanda, integração via APIs com clientes e marketplaces, e cibersegurança para proteção de dados logísticos.</p></div>
+        </div>
+
+        <!-- CULTURA DE INOVAÇÃO -->
+        <div class="section">
+            <h3><span class="icon">&#128161;</span> Maturidade e Cultura de Inovação</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Maturidade de Inovação</div>
+                        <div class="value">Emergente: diretrizes básicas, cada área toca sua agenda</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI na Inovação</div>
+                        <div class="value">Gestora: gera, incuba e/ou gerencia a maioria dos projetos.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Origem do Budget de Inovação</div>
+                        <div class="value">TI</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">% do Orçamento para Inovação</div>
+                        <div class="value">De 20% a 30%</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Adoção Ágil</div>
+                        <div class="value">Alguns projetos: adoção parcial por times/áreas</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Profissionais Dedicados a Inovação</div>
+                        <div class="value">Não</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Dificuldade com Talentos</div>
+                        <div class="value">Sim, na contratação</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Gaps de Soft Skills</div>
+                        <div class="value">Pensamento crítico;Adaptabilidade;Aprendizagem ativa</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PREFERÊNCIAS DE FORNECEDOR -->
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">ROI_estimado</span><span class="tag tag-active">TCO_horizonte_3_anos</span><span class="tag tag-active">SLAdisponibilidade</span><span class="tag tag-active">Suporte técnico</span><span class="tag tag-active">TMA</span><span class="tag tag-active">Referências e cases BR</span><span class="tag tag-active">Liderança e solidez</span><span class="tag tag-active">Segurança e compliance</span><span class="tag tag-active">Integração e APIs</span><span class="tag tag-active">Roadmap e inovação</span><span class="tag tag-active">Flexibilidade contratual</span><span class="tag tag-active">Customização e configuração</span><span class="tag tag-active">Abordagem consultiva</span><span class="tag tag-active">Capacitação do time</span><span class="tag tag-active">Ecossistema de parceiros (implementação)</span><span class="tag tag-active">Capilaridade/cobertura regional</span><span class="tag tag-active">Residência de dados no BR</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Grande empresa de TI;Start-up / scale-up;ISV de nicho / produto específico;Especialista setorial / regulatório</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">
+                            Projeto: 13 temas | 
+                            Co-gerenciado: 0 temas | 
+                            Serv. Gerenciado: 0 temas
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OFERTAS FOURSYS RECOMENDADAS -->
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Alexandre Falsarella Ricoy</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas do CIO. Ordenado por relevância.</p>
+            
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>AI Squad</h4>
+                    <span class="score-badge">Score: 18</span>
+                </div>
+                <p>Squads de IA com produto proprietário que acelera ciclos de desenvolvimento, geração de código e automação de testes. Inclui IA Generativa, estratégia de IA, hiperautomação e inteligência preditiva.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Alinhado com prioridade: IA Generativa</li><li>Alinhado com prioridade: IA</li><li>Alinhado com prioridade: Low-code</li><li>Alinhado com prioridade: Hiperautomação</li></ul>
+                </div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Cibersegurança</h4>
+                    <span class="score-badge">Score: 16</span>
+                </div>
+                <p>Segurança da informação, privacidade de dados (LGPD/DLP), prevenção de fraudes, gestão de riscos, continuidade de negócios e disaster recovery. ISO 27001 e 27701 certificadas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Sem fornecedor definido em: Cibersegurança</li><li>Alinhado com prioridade: Cibersegurança</li><li>Alinhado com prioridade: Compliance</li><li>Sem fornecedor definido em: Disaster recovery / continuidade de negócios</li></ul>
+                </div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #00b894;">
+                <div class="oferta-header">
+                    <h4>Engenharia Digital</h4>
+                    <span class="score-badge">Score: 11</span>
+                </div>
+                <p>Construção de plataformas digitais, microsserviços, cloud-native, DevOps, SRE e observabilidade. Modernização de arquiteturas.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Alinhado com prioridade: Nuvem</li><li>Alinhado com prioridade: Infraestrutura</li><li>Sem fornecedor definido em: Nuvem pública</li></ul>
+                </div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #fdcb6e;">
+                <div class="oferta-header">
+                    <h4>Modernização de Legado</h4>
+                    <span class="score-badge">Score: 6</span>
+                </div>
+                <p>Modernização de sistemas legados, integração de ecossistemas via APIs, design de produtos e experiências, construção de plataformas e sustentação (AMS). Parceria com Digibee para iPaaS.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Alinhado com prioridade: Sistemas core</li><li>Alinhado com prioridade: BPM</li></ul>
+                </div>
+            </div>
+            <div class="oferta-card" style="border-left: 4px solid #fdcb6e;">
+                <div class="oferta-header">
+                    <h4>FourBlox</h4>
+                    <span class="score-badge">Score: 6</span>
+                </div>
+                <p>Plataforma proprietária de componentes reutilizáveis para aceleração de desenvolvimento. Reduz time-to-market e custos de projetos de software.</p>
+                <div class="reasons">
+                    <strong>Por que oferecer:</strong>
+                    <ul><li>Alinhado com prioridade: Automação</li><li>Alinhado com prioridade: Low-code</li></ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESTRATÉGIA DE ABORDAGEM -->
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Considerando que Alexandre Falsarella Ricoy tem como top prioridades <strong>Infraestrutura de redes;IA Generativa;CRM</strong>, 
+                iniciar a conversa demonstrando cases Foursys nesses temas e como a empresa pode acelerar resultados 
+                nessas áreas com menor risco. Reforçar as certificações ISO 27001/27701 e a experiência de 24 anos com 41.000+ projetos.</p>
+            </div>
+            
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>Existem 5 projetos definidos sem fornecedor: Conectividade e telecom, Nuvem pública, Nuvem Privada e híbrida, Cibersegurança, Disaster recovery / continuidade de negócios. Esta é a principal janela de oportunidade para posicionar a Foursys como parceira de implementação.</p>
+            </div>
+            
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: AI Squad; Cibersegurança; Engenharia Digital. 
+                A Foursys se diferencia com seu AI Squad proprietário (aceleração com IA), certificações de segurança (ISO 27001/27701), 
+                parceria com Digibee (integração/APIs) e modelo flexível de entrega (Squads, Projetos, AMS).</p>
+            </div>
+            
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p>1. O setor de <strong>Transporte e logística</strong> está passando por transformação digital acelerada com IA e automação. 
+                Concorrentes já investem em plataformas digitais proprietárias e IA para otimização.<br>
+                2. Concorrentes de porte similar já investem em automação de terminais, IA para roteirização, integração com ecossistemas de e-commerce e plataformas digitais proprietárias. Bertoldo tem oportunidade de acelerar em: plataforma digital de gestão, IA/ML para otimização de rotas e previsão de demanda, int<br>
+                3. O orçamento de TI está com perspectiva de <strong>Crescerá mais de 30%</strong>, 
+                e o maior investimento será no <strong>3º trimestre</strong> — planejar approach comercial para 30-60 dias antes.</p>
+            </div>
+        </div>
+    </div>
+    
+        <!-- PERFIL PESSOAL & RAPPORT -->
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal & Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Análise de Sistemas e TI — PUC-Campinas; MBA em TI e Administração de Negócios — FGV; MBA — FIA. Professor titular do MBA de TI da FGV e do MBA da FIA.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Cidade / Região</div>
+                        <div class="value">São Paulo, SP — com fortes raízes em Campinas, onde estudou na PUC-Campinas</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Idiomas</div>
+                        <div class="value">Português (nativo), Inglês (proficiente), Espanhol (proficiente) — perfil trilíngue com atuação em multinacionais na América do Sul</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Dupla Nacionalidade</div>
+                        <div class="value">Brasileiro e Italiano — indicado pela bandeira italiana em seu perfil profissional. Possível conexão familiar com a Itália.</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Interesses & Perfil</div>
+                        <div class="value">Professor de MBA (FGV e FIA) — educador por vocação. Certificações em Design Thinking, Scrum, DevOps, ITIL e 6Sigma Green Belt. Perfil que combina gestão, tecnologia e educação.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Trajetória Marcante</div>
+                        <div class="value">Carreira diversificada: Merck (farmacêutica), Avery Dennison (6+ anos na América do Sul), Linx (ERP para varejo), Havas (publicidade), Poliedro Educação, Odontocompany (saúde). Versatilidade impressionante em setores.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Especialidades Técnicas</div>
+                        <div class="value">Implementação de ERPs (SAP, Datasul, QAD, Visual Linx, RM Totvs), infraestrutura de datacenter, governança de TI, segurança da informação e otimização de processos.</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px;border-left-color:#667eea">
+                        <div class="label">Presença Digital</div>
+                        <div class="value">LinkedIn: 500+ conexões, 30.000+ seguidores — audiência significativa. Publicações sobre inovação, governança e liderança em TI.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="insight-box" style="margin-top:16px">
+                <h4>Dicas para Conversa Amistosa</h4>
+                <p>1. <strong>Professor de MBA:</strong> Ele leciona na FGV e FIA — pergunte sobre a experiência de ensinar executivos. Professores adoram falar sobre educação e formação de talentos.<br>
+                2. <strong>Descendência Italiana:</strong> A dupla nacionalidade (Brasil/Itália) indica raízes italianas. Gastronomia italiana, viagens à Itália ou cultura são ótimos icebreakers.<br>
+                3. <strong>PUC-Campinas:</strong> Se alguém da equipe Foursys estudou em Campinas, há um ponto de conexão imediato — rede de alumni.<br>
+                4. <strong>Diversidade de Setores:</strong> De farmacêutica a publicidade, de educação a saúde — pergunte qual setor mais o surpreendeu e por quê.<br>
+                5. <strong>Avery Dennison:</strong> 6+ anos na América do Sul em multinacional — provavelmente tem histórias de viagens e projetos internacionais na região.<br>
+                6. <strong>30k Seguidores:</strong> Uma audiência expressiva no LinkedIn demonstra que ele é formador de opinião — reconhecer isso como mérito é um bom rapport.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

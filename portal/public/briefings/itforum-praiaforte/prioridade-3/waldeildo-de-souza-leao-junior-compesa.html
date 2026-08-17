@@ -1,0 +1,583 @@
+﻿<!DOCTYPE html>
+<!--
+  Briefing CIO IT Forum 2026 (Praia do Forte) — COMPESA · Waldeildo de Souza Leão Júnior
+  Design System Foursys. Ordem de zonas: B → A → C. Modo --full · Híbrido.
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO — Waldeildo de Souza Leão Júnior | COMPESA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #222239;
+            --navy-2: #2e2e4a;
+            --navy-3: #181828;
+            --orange: #FF5315;
+            --orange-light: #ff7848;
+            --mint: #89BAB1;
+            --vanilla: #FFE2A9;
+            --offwhite: #F7F6F2;
+            --card-bg: #ffffff;
+            --text: #222239;
+            --text-light: #5c5c6e;
+            --border: #e4e2db;
+            --shadow: 0 2px 14px rgba(34,34,57,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', system-ui, -apple-system, sans-serif; background: var(--offwhite); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Brand bar */
+        .brand-bar { height: 6px; width: 100%; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 45%, var(--orange) 100%); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 55%, var(--navy-2) 100%); color: #fff; padding: 38px 0 42px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+        .foursys-logo { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+        .foursys-logo span { color: var(--orange); }
+        .foursys-logo .sep { color: rgba(255,255,255,0.4); font-weight: 400; margin: 0 6px; }
+        .foursys-logo .sub { font-weight: 700; font-size: 15px; opacity: 0.85; }
+        .header h1 { font-size: 30px; font-weight: 900; margin-top: 16px; }
+        .header h2 { font-size: 17px; font-weight: 600; opacity: 0.92; margin-top: 4px; }
+        .header .loc { opacity: 0.75; margin-top: 8px; font-size: 14px; }
+        .header-badges { display: flex; gap: 14px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); padding: 12px 20px; border-radius: 12px; text-align: center; min-width: 92px; }
+        .header-badge .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 19px; font-weight: 800; margin-top: 2px; }
+        .badge-mode { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; }
+        .badge-mode.consultivo { background: var(--mint); color: var(--navy); }
+        .badge-mode.tecnico { background: var(--vanilla); color: var(--navy); }
+        .badge-mode.hibrido { background: linear-gradient(90deg, var(--mint), var(--vanilla)); color: var(--navy); }
+        .badge-prio { display: inline-block; margin-top: 14px; margin-left: 8px; padding: 6px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: var(--orange); color: #fff; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 28px 30px; }
+
+        /* Anchor nav */
+        .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 10px; z-index: 50; }
+        .anchor-nav a { text-decoration: none; color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 6px 13px; border-radius: 999px; transition: all 0.2s; }
+        .anchor-nav a:hover { background: var(--navy); color: #fff; }
+
+        /* Sections */
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--orange); }
+        .eyebrow { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 6px; }
+        .section h3 { font-size: 21px; color: var(--navy); margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h4 { color: var(--navy); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .header-content { flex-direction: column; } }
+
+        .info-card { background: var(--offwhite); border-radius: 12px; padding: 16px; border-left: 4px solid var(--navy-2); }
+        .info-card .label { font-size: 11.5px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; font-weight: 700; }
+        .info-card .value { font-size: 15px; font-weight: 700; }
+
+        /* Update banner (obrigatório no topo do conteúdo) */
+        .zone-divider { margin: 8px 0 26px; border: 0; border-radius: 14px; padding: 18px 24px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .update-banner { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; box-shadow: var(--shadow); }
+        .update-banner .tit { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+        .update-banner .meta { font-size: 13.5px; opacity: 0.96; margin-top: 6px; }
+        .zone-sep { margin: 50px 0 30px; border: 0; height: 22px; background: linear-gradient(90deg, transparent, var(--border) 50%, transparent); position: relative; }
+        .zone-sep::after { content: attr(data-label); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background: var(--offwhite); padding: 4px 18px; color: var(--text-light); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; }
+
+        /* Tags */
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 12.5px; margin: 4px 4px 4px 0; font-weight: 700; }
+        .tag-opportunity { background: #fff0e6; color: var(--orange); border: 1px solid #ffc4a8; }
+        .tag-active { background: #eaf3f1; color: #3d7a6e; border: 1px solid var(--mint); }
+        .tag-priority { background: #fbe9e7; color: #c0392b; border: 1px solid #f0b7ae; }
+        .tag-tech { background: #f3f2ec; color: var(--navy); border: 1px solid var(--border); }
+
+        /* One-pager */
+        .one-pager { background: linear-gradient(135deg,#fff 0%, var(--offwhite) 100%); border: 2px solid var(--navy); border-radius: 16px; padding: 26px 30px; margin-bottom: 22px; box-shadow: var(--shadow); }
+        .one-pager h3 { font-size: 17px; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.6px; }
+        .one-pager-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+        .one-pager-block { padding: 12px 14px; border-left: 3px solid var(--orange); background: #fff; border-radius: 8px; }
+        .one-pager-block .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); font-weight: 800; margin-bottom: 4px; }
+        .one-pager-block .val { font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+        @media (max-width: 768px) { .one-pager-grid { grid-template-columns: 1fr; } }
+
+        /* Story 3 atos */
+        .story-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+        .story-act { color: #fff; padding: 22px 24px; border-radius: 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .story-act .act-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; font-weight: 800; margin-bottom: 6px; }
+        .story-act h4 { color: #fff; font-size: 16px; margin-bottom: 10px; }
+        .story-act p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+        .story-act-1 { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .story-act-2 { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .story-act-3 { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
+
+        /* Business / approach / insight cards */
+        .business-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
+        .business-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .business-card .sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--orange); font-weight: 800; margin-top: 10px; }
+        .approach-card { color: #fff; border-radius: 14px; padding: 22px; margin-bottom: 14px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .approach-green { background: linear-gradient(135deg, #3d7a6e 0%, var(--mint) 100%); }
+        .approach-orange { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+        .approach-navy { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); }
+        .approach-card h4 { color: #fff; margin-bottom: 8px; }
+        .approach-card p { opacity: 0.96; font-size: 14px; }
+        .insight-box { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 14px; padding: 24px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .insight-box h4 { color: #fff; margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+
+        /* Msg list */
+        .msg-list { counter-reset: msg; list-style: none; padding: 0; }
+        .msg-list li { counter-increment: msg; background: var(--offwhite); border-left: 4px solid var(--orange); padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+        .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: var(--orange); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; }
+
+        /* Tables */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+        .data-table th { background: var(--navy); color: #fff; text-align: left; padding: 11px 12px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .data-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tr:nth-child(even) td { background: var(--offwhite); }
+        .data-table .phase { font-weight: 800; color: var(--orange); }
+        .status-200 { background: #eaf3f1; color: #3d7a6e; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+        .status-err { background: #fbe9e7; color: #c0392b; font-weight: 800; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+        /* Timeline */
+        .timeline-item { display: flex; gap: 14px; margin-bottom: 16px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); margin-top: 7px; flex-shrink: 0; }
+
+        /* Market / b2b / gap / app / stack / oferta / competitor / sources */
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 12px; margin-top: 14px; }
+        .market-card { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; border-radius: 12px; padding: 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .market-card .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; opacity: 0.85; margin-bottom: 6px; }
+        .market-card .val { font-size: 22px; font-weight: 900; }
+        .b2b-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .b2b-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 4px solid var(--mint); border-radius: 10px; padding: 16px 18px; }
+        .b2b-card h4 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+        .b2b-card .sub { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; margin-top: 10px; margin-bottom: 4px; }
+        .gap-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 14px; margin-top: 14px; }
+        .gap-card { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); color: #fff; border-radius: 12px; padding: 18px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .gap-card .num { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; margin-bottom: 6px; font-weight: 800; }
+        .gap-card h4 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+        .gap-card p { color: #fff; opacity: 0.96; font-size: 13.5px; }
+        .gap-card .offer { background: rgba(255,255,255,0.22); padding: 6px 10px; border-radius: 6px; margin-top: 10px; font-size: 12.5px; font-weight: 800; }
+        .app-card { background: var(--offwhite); border: 1px solid var(--border); border-left: 4px solid var(--navy-2); border-radius: 10px; padding: 18px 20px; margin-bottom: 14px; }
+        .app-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+        .app-card .url { font-size: 12.5px; color: var(--text-light); margin-bottom: 12px; word-break: break-all; }
+        .app-stack-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 10px; }
+        .app-stack-item { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+        .app-stack-item .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 800; }
+        .app-stack-item .v { font-size: 13px; font-weight: 700; margin-top: 4px; }
+        .stack-layer { background: var(--offwhite); border-left: 5px solid var(--orange); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+        .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--orange); font-weight: 800; margin-bottom: 4px; }
+        .stack-layer .name { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+        .stack-layer .cmp { font-size: 13.5px; }
+        .oferta-card { background: var(--offwhite); border-radius: 12px; padding: 20px; margin-bottom: 14px; border: 1px solid var(--border); border-left: 4px solid var(--mint); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+        .oferta-header h4 { color: var(--navy); font-size: 17px; }
+        .score-badge { background: var(--orange); color: #fff; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .competitor-card { background: var(--offwhite); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid var(--border); }
+        .competitor-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .sources-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 14px; margin-top: 14px; }
+        .sources-card { background: var(--offwhite); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+        .sources-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .sources-card ul { padding-left: 18px; font-size: 12.5px; }
+        .sources-card li { margin-bottom: 4px; }
+
+        .alert-box { background: var(--vanilla); border: 1px solid #f0cf7f; border-radius: 12px; padding: 16px; margin-bottom: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .alert-box strong { color: #8a6d1a; }
+        .alert-box-red { background: #fbe9e7; border: 1px solid #f0b7ae; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box-red strong { color: #c0392b; }
+
+        .footer { text-align: center; padding: 28px; color: var(--text-light); font-size: 13px; }
+        .footer .brand-line { height: 3px; width: 120px; margin: 0 auto 16px; background: linear-gradient(90deg, var(--navy), var(--orange)); border-radius: 3px; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--orange); color: #fff; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 800; font-family: inherit; box-shadow: 0 4px 20px rgba(34,34,57,0.25); z-index: 100; }
+        .print-btn:hover { background: var(--orange-light); }
+        @media print { .print-btn, .anchor-nav { display: none; } body { background: #fff; } .section { box-shadow: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+    <div class="brand-bar"></div>
+
+    <!-- ============ HEADER ============ -->
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span><span class="sep">|</span><span class="sub">Pre-Sales Intelligence</span></div>
+                <h1>Waldeildo de Souza Leão Júnior</h1>
+                <h2>Gerente de TIC — COMPESA (Companhia Pernambucana de Saneamento)</h2>
+                <div class="loc">Utilities · Saneamento · Recife/PE · CNPJ 09.769.035/0001-64</div>
+                <span class="badge-mode hibrido">Modo: Híbrido</span>
+                <span class="badge-prio">Prioridade: Média (P3) · Estatal NE de porte; fora do eixo MG/Sul e em ciclo de licitação</span>
+            </div>
+            <div class="header-badges">
+                <div class="header-badge"><div class="label">Receita líq. 2024</div><div class="value">R$ 2,45 bi</div></div>
+                <div class="header-badge"><div class="label">Atendimento água</div><div class="value">6,4 mi hab.</div></div>
+                <div class="header-badge"><div class="label">Concessão Lote 2</div><div class="value">R$ 17,4 bi</div></div>
+                <div class="header-badge"><div class="label">Meta universalização</div><div class="value">2033</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- ============ DIVISÓRIA DE ATUALIZAÇÃO (OBRIGATÓRIA) ============ -->
+        <div class="zone-divider update-banner">
+            <div class="tit">🔄 Atualização IT Forum 2026 — Praia do Forte</div>
+            <div class="meta">Revisado em julho/2026 · Escopo: deep-dive na concessão parcial 2026 + programa +Água/AFD + leitura de comitê (Gerente de TIC × Diretor de Tecnologia) + verificação empírica do portal + material de apresentação. Diferencia da edição anterior (Trancoso).</div>
+        </div>
+
+        <!-- ============ ANCHOR NAV (ordem B → A → C) ============ -->
+        <div class="anchor-nav">
+            <a href="#empresa">Empresa</a><a href="#gestor">Gestor</a><a href="#segmento">Segmento</a><a href="#tensoes">Tensões</a><a href="#ofertas">Ofertas</a><a href="#estrategia">Estratégia</a><a href="#concorrentes">Concorrentes</a><a href="#sumario">Sumário</a><a href="#historia">História</a><a href="#solucoes">Soluções</a><a href="#material">Material</a><a href="#mensagens">Mensagens</a><a href="#roadmap">Roadmap</a><a href="#stack">Stack</a><a href="#gaps">GAPs</a><a href="#fontes">Fontes</a>
+        </div>
+
+        <!-- ============ ZONA B — CONTEXTO / PRÉ-VENDAS ============ -->
+
+        <!-- B1. Empresa -->
+        <div class="section" id="empresa">
+            <div class="eyebrow">Mapeamento estratégico</div>
+            <h3>A Empresa</h3>
+            <p>A COMPESA é a estatal de saneamento de Pernambuco e vive a maior reengenharia de seu modelo em 54 anos. Sociedade de economia mista de capital fechado, controlada pelo Governo do Estado via Secretaria de Infraestrutura e Recursos Hídricos (Seinfra), a companhia fechou 2024 com receita líquida de R$ 2,452 bilhões, EBITDA de R$ 345 milhões e lucro líquido de R$ 142,17 milhões (fonte: Demonstrações Financeiras 2024). Em abril de 2026, o Governo de PE assinou a concessão parcial da distribuição e do esgotamento a operadores privados (Basa Saneamento no Lote 2 e Grupo Pátria/Vita Sertão no Lote 1), com <strong>R$ 17,4 bi de investimento previsto no Lote 2</strong> (RMR-Pajeú, 151 municípios, assinado em 29/04/2026) e <strong>~R$ 20,6 bi somando os dois lotes</strong> (Lote 1/Sertão da Vita Sertão: R$ 3,2 bi, assinado em 07/04/2026) — além de ~R$ 4,8 bi em outorgas (fonte: G1 e Diario de Pernambuco, abr/2026). Na prática, a COMPESA migra para o "upstream" — produção e tratamento de água — enquanto a distribuição vai para as concessionárias. É uma janela rara de reorganização de sistemas, dados e integrações.</p>
+            <div class="grid-3" style="margin-top:16px">
+                <div class="info-card"><div class="label">Razão social</div><div class="value">Companhia Pernambucana de Saneamento — COMPESA</div></div>
+                <div class="info-card"><div class="label">Sede</div><div class="value">Av. Cruz Cabugá, 1387 — Santo Amaro, Recife/PE</div></div>
+                <div class="info-card"><div class="label">Abrangência</div><div class="value">172–173 de 185 municípios de PE + Fernando de Noronha</div></div>
+                <div class="info-card"><div class="label">Faturamento</div><div class="value">R$ 2,452 bi líq. (2024, DFs)</div></div>
+                <div class="info-card"><div class="label">Colaboradores</div><div class="value">~482 (LinkedIn — hipótese)</div></div>
+                <div class="info-card"><div class="label">Categoria</div><div class="value">Estatal — economia mista, controle do Estado de PE</div></div>
+            </div>
+        </div>
+
+        <!-- B2. Gestor (foco DECISÃO) -->
+        <div class="section" id="gestor">
+            <div class="eyebrow">Foco: decisão</div>
+            <h3>Mapeamento do Gestor</h3>
+            <p>Waldeildo é o executor de tecnologia da casa, não o decisor final. É <strong>Gerente de TIC desde outubro de 2017</strong> (~8 anos no cargo), tendo entrado como Analista de Gestão em 2015 (fonte: LinkedIn). Nível hierárquico: Gerência, dentro da estrutura de Engenharia e Técnica. Essa longevidade é ativo raro: ele conhece o legado, os sistemas comerciais e a operação de TIC melhor que qualquer recém-chegado — é a memória técnica da companhia num momento de troca de comando.</p>
+            <p style="margin-top:10px">Acima dele está <strong>Kleber Coelho Paz, Diretor Comercial e de Tecnologia desde set/2025</strong> — 36 anos de Caixa Econômica Federal, cedido pelo governo, com discurso público forte: "a TI precisa se ver como negócio, não como back office" e governança/compliance "inegociáveis" em ambiente regulado (fonte: SambaTalks/LinkedIn). O presidente da companhia é Douglas Balduíno Guedes da Nóbrega (fonte: AESBE).</p>
+            <div class="alert-box" style="margin-top:14px">⚠️ <strong>Leitura de comitê (estatal):</strong> Waldeildo (Gerente de TIC) é o dono técnico e o mapa do legado; <strong>Kleber Coelho Paz (Diretor de Tecnologia)</strong> é quem carrega a decisão de investimento e a narrativa "TI como negócio". Compras seguem a <strong>Lei 14.133/2021</strong> (licitação) — envolver cedo a área de licitações/jurídico e desenhar prova de valor que caiba em edital. Abordar Waldeildo pelo domínio técnico e Kleber pelo caso de negócio.</div>
+        </div>
+
+        <!-- B3. Segmento -->
+        <div class="section" id="segmento">
+            <div class="eyebrow">Segmento & mercado</div>
+            <h3>Segmento e Posição de Mercado</h3>
+            <p>Saneamento é o setor de infraestrutura mais pressionado do país agora. O Marco Legal do Saneamento (Lei 14.026/2020) exige universalização de água e esgoto até 2033, e a ANA padronizou as regras via Norma de Referência 11/2024 (Resolução 230/2024), com foco em redução de perdas e obrigação de canais digitais ao cidadão. O ritmo de investimento setorial ainda fica aquém do necessário para as metas de universalização — o que acelera concessões e PPPs (fonte: Instituto Trata Brasil/GO Associados).</p>
+            <p style="margin-top:10px">A COMPESA está no pelotão das grandes estatais estaduais (comparável a Embasa/BA e Sanepar/Copasa em porte regional), mas atrás de Sabesp e Copasa em maturidade digital e à frente de operadores menores. Sua posição acaba de mudar de natureza: com a concessão parcial, deixa de ser operadora ponta a ponta e passa a produtora/tratadora de água que precisa <strong>interoperar</strong> com concessionárias privadas. Quem domina a camada de integração e dados nesse novo arranjo multi-operador domina a conta por anos. É venda consultiva de plataforma, não de projeto pontual.</p>
+        </div>
+
+        <!-- B6. Tensões -->
+        <div class="section" id="tensoes">
+            <div class="eyebrow">Tensões & lacunas</div>
+            <h3>Dores, Desejos e Investimentos</h3>
+            <h4 style="margin-bottom:10px">Top dores estruturais</h4>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Handover de sistemas para as concessionárias.</strong> A migração da distribuição para Basa e Vita Sertão exige separar, integrar e sincronizar dados comerciais, de faturamento e de ativos entre COMPESA (upstream) e privados (downstream) — sem uma camada de integração, o risco operacional e regulatório é alto (fonte: G1/Investindo Por Aí, 2026).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Perdas de água.</strong> ~40% da água tratada se perde no Brasil (citado pelo próprio Diretor Kleber); o programa +Água prevê telemetria, setorização, controle de pressão e eficiência energética — dependente de IoT/OT e analytics em escala.</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Legado comercial e modelagem hidráulica.</strong> Projetos como os "Grandes Anéis do Recife" (29 distritos de medição/controle, 38 bairros) exigem simulação e dados confiáveis; a IA hoje entra por editais e universidades, sem plataforma corporativa própria (fonte: CIn-UFPE/Folha PE).</div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div><strong>Canais digitais exigidos por regulação.</strong> A NR 11/2024 (Art. 55) obriga web/app ao usuário com histórico de ≥12 meses de cobrança e medição — pressão direta sobre experiência digital.</div></div>
+            <h4 style="margin:16px 0 10px">Desejos estratégicos</h4>
+            <div>
+                <span class="tag tag-priority">Eficiência operacional e redução de perdas</span>
+                <span class="tag tag-priority">TI vista como negócio (agenda Kleber)</span>
+                <span class="tag tag-priority">Governança e compliance em ambiente regulado</span>
+                <span class="tag tag-priority">Universalização até 2033</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Mapa de investimentos 12 meses</h4>
+            <div>
+                <span class="tag tag-active">+Água Pernambuco / AFD — ~R$ 1,2 bi (200 mi €)</span>
+                <span class="tag tag-active">Águas Digitais — R$ 1 mi (inovação aberta)</span>
+                <span class="tag tag-active">FACEPE / P&amp;D tecnológico — R$ 4,2 mi (+R$ 900 mil projetados)</span>
+                <span class="tag tag-active">Grandes Anéis do Recife — R$ 139 mi (Seinfra)</span>
+            </div>
+            <h4 style="margin:16px 0 10px">Oportunidades sem fornecedor definido</h4>
+            <div>
+                <span class="tag tag-opportunity">Camada de integração COMPESA ↔ concessionárias (iPaaS)</span>
+                <span class="tag tag-opportunity">Plataforma corporativa de dados/IA (perdas, qualidade)</span>
+                <span class="tag tag-opportunity">App/portal do cidadão conforme NR 11</span>
+                <span class="tag tag-opportunity">AppSec/DevSecOps e IAM corporativo</span>
+            </div>
+        </div>
+
+        <!-- B7. Ofertas Foursys -->
+        <div class="section" id="ofertas" style="border-left-color: var(--mint);">
+            <div class="eyebrow">Portfólio</div>
+            <h3>Ofertas Foursys Recomendadas</h3>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Modernização de Legado</h4><span class="score-badge">88/100</span></div>
+                <p>Ancora a conta. A concessão parcial obriga a separar e reintegrar sistemas comerciais, de faturamento e de ativos entre COMPESA e as concessionárias. Integração via APIs e iPaaS (Digibee) sustenta o novo modelo multi-operador — camada C5/C6.</p>
+                <div class="reasons"><ul><li>Handover para Basa/Vita Sertão exige integração e sincronização de dados agora.</li><li>Programa +Água/AFD tem pilar de "fortalecimento institucional" (modernização de sistemas) com funding internacional — menos atrito de orçamento.</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Engenharia Digital</h4><span class="score-badge">82/100</span></div>
+                <p>Plataformas para telemetria, setorização e automação do +Água; apps de campo (desafio "gestão de equipes de campo" do Águas Digitais); portal do cidadão exigido pela NR 11. Microsserviços, cloud-native, DevOps e observabilidade — camadas C3/C7.</p>
+                <div class="reasons"><ul><li>+Água prevê telemetria, controle de pressão e eficiência energética — precisa de plataforma escalável.</li><li>NR 11/2024 obriga web/app ao usuário com histórico de 12 meses.</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>AI Squad</h4><span class="score-badge">78/100</span></div>
+                <p>Traz a IA para dentro de casa. Hoje a IA entra por editais (FACEPE) e universidades (UFPE), sem plataforma corporativa. Modelagem preditiva de perdas, análise de qualidade da água e atendimento — camada C3/C4, alinhado ao discurso pró-inovação do Diretor Kleber.</p>
+                <div class="reasons"><ul><li>IA aplicada já validada em pilotos acadêmicos — falta industrializar (MLOps/governança).</li><li>Diretor de Tecnologia declara IA e transformação digital como prioridade.</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>Cibersegurança</h4><span class="score-badge">72/100</span></div>
+                <p>Estatal com dados de 6–7 milhões de clientes, sob LGPD e ambiente regulado. WAF F5 detectado no portal (hipótese), mas AppSec, DevSecOps e IAM corporativo não são públicos. ISO 27001/27701 da Foursys endereça a exigência de governança "inegociável" — camada C2.</p>
+                <div class="reasons"><ul><li>Volume de dados pessoais + LGPD + regulação ANA aumentam a superfície de risco.</li><li>Governança e compliance declarados inegociáveis pela diretoria.</li></ul></div>
+            </div>
+            <div class="oferta-card">
+                <div class="oferta-header"><h4>FourBlox</h4><span class="score-badge">68/100</span></div>
+                <p>Acelera portais e apps do programa de transformação com componentes reutilizáveis e reduz time-to-market em editais com prazo. Complementa a integração via Digibee iPaaS no arranjo multi-operador.</p>
+                <div class="reasons"><ul><li>Vários frontes simultâneos (portal, apps de campo, cidadão) pedem reuso e velocidade.</li><li>Reduz custo/prazo — argumento forte em contratação pública.</li></ul></div>
+            </div>
+        </div>
+
+        <!-- B8. Estratégia de abordagem -->
+        <div class="section" id="estrategia">
+            <div class="eyebrow">Go-to-account</div>
+            <h3>Estratégia de Abordagem</h3>
+            <div class="approach-card approach-green"><h4>Gancho de entrada</h4><p>Entrar pela dor do momento: "Como a COMPESA vai interoperar com Basa e Vita Sertão sem perder controle dos dados e do faturamento?" É a pergunta que ninguém no edital respondeu ainda — e conecta direto com a agenda de Kleber de "TI como negócio".</p></div>
+            <div class="approach-card approach-orange"><h4>Oportunidade quente</h4><p>A camada de integração/dados entre COMPESA e concessionárias não tem fornecedor definido e é urgente (concessão assinada em abr/2026). Pilar de "fortalecimento institucional" do +Água/AFD (~R$ 1,2 bi) é a fonte de recurso com menos atrito de orçamento estadual.</p></div>
+            <div class="approach-card approach-navy"><h4>Diferencial competitivo Foursys</h4><p>24 anos, 41.000+ projetos, ISO 27001/27701 e Digibee iPaaS: o combo raro de integração + segurança + governança que um ambiente regulado e uma transição multi-operador exigem. Posicionar como backbone de integração e dados — não como mais um fornecedor de projeto pontual.</p></div>
+        </div>
+
+        <!-- B9. Concorrentes -->
+        <div class="section" id="concorrentes">
+            <div class="eyebrow">Benchmark</div>
+            <h3>Concorrentes & Gap Analysis</h3>
+            <div class="competitor-card"><h4>Sabesp (SP)</h4><p>Referência nacional de maturidade digital em saneamento (privatizada em 2024): telemetria em escala, app maduro e uso avançado de IA/dados. Gap COMPESA: plataforma corporativa de dados/IA ainda incipiente vs. Sabesp.</p></div>
+            <div class="competitor-card"><h4>Copasa (MG) &amp; Sanepar (PR)</h4><p>Investem forte em redução de perdas, telemetria e apps ao cliente. Gap COMPESA: canais digitais e analytics de perdas menos consolidados; oportunidade de saltar etapas com plataforma moderna.</p></div>
+            <div class="competitor-card"><h4>Embasa (BA)</h4><p>Estatal nordestina de porte comparável — bom espelho de benchmark regional. Comparar iniciativas digitais reforça o argumento de que a COMPESA não pode ficar para trás na transição regulatória.</p></div>
+            <div class="competitor-card"><h4>Basa Saneamento &amp; Vita Sertão (concessionárias PE) — coopetição</h4><p>Não são concorrentes de mercado, mas trarão stack próprio e definirão padrões de integração. Ganham peso de decisão sobre a interoperabilidade — mapear seus fornecedores de TI é parte da estratégia de conta.</p></div>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona A — Comercial (pitch)">
+
+        <!-- ============ ZONA A — COMERCIAL / PITCH ============ -->
+
+        <!-- A2. Sumário de 1 página -->
+        <div class="one-pager" id="sumario">
+            <h3>Sumário Executivo — 1 Página</h3>
+            <div class="one-pager-grid">
+                <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">Estatal de saneamento de PE (R$ 2,45 bi líq. 2024), migrando para produção/tratamento com a concessão parcial da distribuição.</div></div>
+                <div class="one-pager-block"><div class="lbl">Quem é o gestor</div><div class="val">Waldeildo — Gerente de TIC desde 2017, dono técnico do legado. Decisor de investimento é o Diretor Kleber Coelho Paz.</div></div>
+                <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Interoperar com Basa e Vita Sertão sem perder dados/faturamento; cumprir metas 2033 e NR 11.</div></div>
+                <div class="one-pager-block"><div class="lbl">Direcionamento de investimento TI</div><div class="val">+Água/AFD ~R$ 1,2 bi (pilar institucional = sistemas); Águas Digitais R$ 1 mi; FACEPE R$ 4,2 mi. Compras via Lei 14.133.</div></div>
+                <div class="one-pager-block"><div class="lbl">3 soluções Foursys recomendadas</div><div class="val">1. Modernização de Legado (iPaaS Digibee); 2. Engenharia Digital (telemetria/apps); 3. AI Squad (perdas/qualidade).</div></div>
+                <div class="one-pager-block"><div class="lbl">Próximo passo</div><div class="val">Workshop executivo de integração multi-operador com Waldeildo + Kleber; desenhar PoC "caixa de edital".</div></div>
+                <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Concessão assinada em abr/2026; execução do +Água em curso — necessidade de integração é imediata.</div></div>
+                <div class="one-pager-block"><div class="lbl">Ângulo comercial não óbvio</div><div class="val">Não vender transformação a uma operação que encolhe — vender o backbone de integração/dados que serve COMPESA E as concessionárias. Quem detém a camada, detém a conta.</div></div>
+                <div class="one-pager-block"><div class="lbl">Como compram</div><div class="val">Licitação (Lei 14.133/2021). Envolver licitações/jurídico cedo; usar funding AFD para reduzir atrito orçamentário.</div></div>
+            </div>
+        </div>
+
+        <!-- A3. História em 3 atos -->
+        <div class="section" id="historia">
+            <div class="eyebrow">A conta em 3 atos</div>
+            <h3>A História desta Conta</h3>
+            <div class="story-grid">
+                <div class="story-act story-act-1"><div class="act-lbl">Ato 1 — O momento de virada</div><h4>A estatal se parte em duas</h4><p>Em abril de 2026, PE assinou a concessão parcial: a distribuição vai para operadores privados e a COMPESA vira produtora/tratadora de água. 54 anos de operação ponta a ponta viram um modelo multi-operador — e todo o mapa de sistemas precisa ser redesenhado.</p></div>
+                <div class="story-act story-act-2"><div class="act-lbl">Ato 2 — A tensão</div><h4>Interoperar ou travar</h4><p>Dados comerciais, faturamento e ativos precisam fluir entre COMPESA e concessionárias, sob metas 2033 e a NR 11. Perdas de ~40%, IA presa em pilotos acadêmicos e legado sem camada de integração. O relógio regulatório corre e o comando de TI acaba de mudar (Kleber, set/2025).</p></div>
+                <div class="story-act story-act-3"><div class="act-lbl">Ato 3 — A travessia</div><h4>O backbone que sustenta o novo modelo</h4><p>A Foursys entra como a camada de integração, segurança e dados que faz o arranjo multi-operador funcionar — iPaaS Digibee, ISO 27001/27701 e squads de IA. De legado fragmentado a plataforma que serve todos os players, financiada em parte pelo +Água/AFD.</p></div>
+            </div>
+        </div>
+
+        <!-- A4. Soluções foco no negócio -->
+        <div class="section" id="solucoes">
+            <div class="eyebrow">Foco no negócio</div>
+            <h3>Sugestão de Soluções</h3>
+            <div class="business-card">
+                <h4>Interoperabilidade COMPESA ↔ concessionárias</h4>
+                <p>A concessão parcial (abr/2026) obriga troca contínua de dados de faturamento, medição e ativos entre a estatal e Basa/Vita Sertão. Sem camada de integração, cada operador reinventa a roda e o risco regulatório sobe.</p>
+                <div class="sub">Solução Foursys</div><p>Modernização de Legado + FourBlox com Digibee iPaaS: barramento de integração que padroniza o intercâmbio entre operadores. Resultado: continuidade operacional e controle de dados na transição.</p>
+                <div class="sub">Pergunta de descoberta</div><p>"Como vocês estão garantindo que o faturamento e o cadastro de clientes não se percam no handover para as concessionárias?"</p>
+                <div class="sub">Gancho / próximo passo</div><p>Workshop de arquitetura de integração multi-operador com TIC e a diretoria — mapear os fluxos críticos antes do go-live das concessionárias.</p>
+            </div>
+            <div class="business-card">
+                <h4>Redução de perdas com telemetria e IA</h4>
+                <p>~40% da água tratada se perde no país; o +Água prevê telemetria, setorização e controle de pressão. A IA hoje entra por editais e universidades, sem industrialização.</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital + AI Squad: plataforma de telemetria/IoT e modelos preditivos de perdas e qualidade da água, com MLOps e observabilidade. Resultado: menos perda física e comercial, receita preservada.</p>
+                <div class="sub">Pergunta de descoberta</div><p>"Os modelos de perdas e qualidade da água já rodam em produção, ou ainda vivem em pilotos de universidade?"</p>
+                <div class="sub">Gancho / próximo passo</div><p>Diagnóstico de maturidade de dados/IA sobre um distrito de medição (ex.: Grandes Anéis do Recife) como prova de valor.</p>
+            </div>
+            <div class="business-card">
+                <h4>Experiência digital do cidadão conforme NR 11</h4>
+                <p>A ANA (NR 11/2024, Art. 55) obriga web/app ao usuário com histórico de ≥12 meses de cobrança e medição. É requisito regulatório com prazo, não um "nice to have".</p>
+                <div class="sub">Solução Foursys</div><p>Engenharia Digital + FourBlox: portal/app do cidadão modernos, integrados ao core comercial, entregues rápido com componentes reutilizáveis. Resultado: conformidade regulatória e satisfação do usuário.</p>
+                <div class="sub">Pergunta de descoberta</div><p>"O app atual já atende ao mínimo exigido pela NR 11 — histórico de 12 meses de medição e cobrança?"</p>
+                <div class="sub">Gancho / próximo passo</div><p>Assessment express do portal servicos.compesa.com.br contra o checklist da NR 11.</p>
+            </div>
+        </div>
+
+        <!-- A(material). Sugestão de Material para Apresentação -->
+        <div class="section" id="material">
+            <div class="eyebrow">Preparação da reunião</div>
+            <h3>Sugestão de Material para Apresentação</h3>
+            <div class="grid-2">
+                <div class="info-card"><div class="label">Tipo / formato</div><div class="value">Deck executivo curto (8–10 slides) + one-pager de arquitetura de integração multi-operador. Reunião de relacionamento no IT Forum, não pitch de produto.</div></div>
+                <div class="info-card"><div class="label">Ofertas Foursys âncora</div><div class="value">Modernização de Legado + FourBlox (Digibee iPaaS) como backbone; Engenharia Digital para telemetria/apps. Porquê: são as que resolvem a dor #1 (interoperabilidade na concessão).</div></div>
+            </div>
+            <p style="margin-top:14px"><strong>Cases/ativos do setor:</strong> Case público específico de saneamento no acervo Foursys — <em>não localizado</em>. Recomenda-se levar cases de <strong>integração via iPaaS/Digibee em ambientes multi-sistema</strong> e de <strong>modernização em setores regulados</strong> (financeiro/utilities), ajustando a narrativa ao contexto de saneamento e Lei 14.133.</p>
+            <p style="margin-top:8px"><strong>Ângulo comercial não óbvio:</strong> o maior ROI não está em transformar a operação que encolhe, e sim em ser o <strong>backbone de integração e dados que serve COMPESA e as concessionárias ao mesmo tempo</strong> — uma posição que se paga por anos e ainda cria pontes para Basa e Vita Sertão.</p>
+            <p style="margin-top:8px"><em>Como nenhum material pronto de saneamento encaixa 100%, o discurso deve liderar: abrir pela pergunta da interoperabilidade e sustentar com 24 anos / 41.000+ projetos, ISO 27001/27701 e Digibee — sem forçar um case que não existe.</em></p>
+        </div>
+
+        <!-- A5. Mensagens-chave -->
+        <div class="section" id="mensagens">
+            <div class="eyebrow">1ª conversa</div>
+            <h3>Mensagens-chave</h3>
+            <ol class="msg-list">
+                <li>"Vocês estão vivendo a maior virada em 54 anos: com a concessão, a COMPESA vira produtora de água e precisa conversar com Basa e Vita Sertão o tempo todo. Quem cuida dessa ponte de dados?"</li>
+                <li>"O Kleber tem falado que TI precisa se ver como negócio. A integração multi-operador é exatamente isso: TI virando a espinha dorsal do novo modelo, não back office."</li>
+                <li>"Waldeildo, você conhece esse legado melhor que ninguém — 8 anos à frente da TIC. Nosso papel é te dar a plataforma para orquestrar essa transição sem perder o controle."</li>
+                <li>"Perder 40% da água é perder receita. Telemetria e modelos preditivos rodando em produção — não só em piloto de universidade — mudam esse número."</li>
+                <li>"A NR 11 já exige app com histórico de 12 meses. Isso é prazo regulatório; conseguimos entregar rápido com componentes prontos."</li>
+                <li>"Somos ISO 27001 e 27701, com Digibee para integração. Em ambiente regulado e com dados de milhões de clientes, governança não é discurso, é certificação."</li>
+                <li>"Podemos desenhar uma prova de valor que caiba num edital da 14.133 e, se fizer sentido, usar o funding do +Água/AFD para reduzir o atrito de orçamento."</li>
+            </ol>
+        </div>
+
+        <!-- A6. Roadmap de engajamento -->
+        <div class="section" id="roadmap">
+            <div class="eyebrow">Engajamento Foursys → Cliente</div>
+            <h3>Roadmap 5 Fases</h3>
+            <table class="data-table">
+                <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+                <tbody>
+                    <tr><td class="phase">1. Conexão</td><td>Conversa de relacionamento no IT Forum com Waldeildo; pedir apresentação ao Diretor Kleber.</td><td>Reunião de follow-up agendada</td><td>Evento + 1 semana</td></tr>
+                    <tr><td class="phase">2. Discovery</td><td>Workshop de arquitetura de integração multi-operador (COMPESA × concessionárias) com TIC e diretoria.</td><td>Mapa de fluxos e gaps críticos</td><td>30–45 dias</td></tr>
+                    <tr><td class="phase">3. PoC</td><td>Prova de valor "caixa de edital" sobre um fluxo de integração ou um distrito de medição (perdas).</td><td>PoC com métricas e enquadramento em 14.133</td><td>60–90 dias</td></tr>
+                    <tr><td class="phase">4. Squad piloto</td><td>Squad de integração/dados sobre o primeiro caso prioritário, com governança ISO.</td><td>Barramento iPaaS ou modelo em produção</td><td>3–6 meses</td></tr>
+                    <tr><td class="phase">5. Programa/MSA</td><td>Contrato de programa via licitação, possivelmente ancorado em recurso +Água/AFD.</td><td>MSA / AMS multi-frente</td><td>6–12 meses</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr class="zone-sep" data-label="Zona C — Apêndice técnico">
+
+        <!-- ============ ZONA C — APÊNDICE TÉCNICO ============ -->
+
+        <!-- C1. Stack técnica -->
+        <div class="section" id="stack">
+            <div class="eyebrow">Apêndice técnico</div>
+            <h3>Mapeamento Técnico</h3>
+            <h4 style="margin-bottom:12px">Inventário de aplicações (3)</h4>
+            <div class="app-card">
+                <h4>Portal institucional e de serviços</h4><div class="url">www.compesa.com.br → servicos.compesa.com.br</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend/CMS</div><div class="v">WordPress + Elementor + LayerSlider</div></div>
+                    <div class="app-stack-item"><div class="k">Bibliotecas</div><div class="v">jQuery · Google Fonts</div></div>
+                    <div class="app-stack-item"><div class="k">SEO</div><div class="v">All in One SEO Pro 4.9.9</div></div>
+                    <div class="app-stack-item"><div class="k">Segurança</div><div class="v">reCAPTCHA · WAF F5 (cookie TS01 — hipótese)</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Agência Virtual / Autoatendimento</h4><div class="url">servicos.compesa.com.br (2ª via, consumo, solicitações) — hipótese</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Integrado ao portal WordPress (hipótese)</div></div>
+                    <div class="app-stack-item"><div class="k">Backend/Core</div><div class="v">Sistema comercial/faturamento — não publicado</div></div>
+                    <div class="app-stack-item"><div class="k">Conformidade</div><div class="v">Requisito NR 11: histórico ≥12 meses</div></div>
+                    <div class="app-stack-item"><div class="k">Trackers</div><div class="v">GTM · GA4 · UA (legado) · Meta Pixel</div></div>
+                </div>
+            </div>
+            <div class="app-card">
+                <h4>Águas Digitais — inovação aberta</h4><div class="url">aguasdigitaiscompesa.com.br (Porto Digital + CESAR)</div>
+                <div class="app-stack-grid">
+                    <div class="app-stack-item"><div class="k">Natureza</div><div class="v">Portal de submissão de desafios/soluções</div></div>
+                    <div class="app-stack-item"><div class="k">Escopo</div><div class="v">Ativos, clientes, campo, qualidade, abastecimento</div></div>
+                    <div class="app-stack-item"><div class="k">Ecossistema</div><div class="v">Startups, ICTs, UFPE, CESAR</div></div>
+                    <div class="app-stack-item"><div class="k">Stack técnico</div><div class="v">Não inspecionado nesta rodada</div></div>
+                </div>
+            </div>
+            <h4 style="margin:18px 0 10px">Stack em 7 camadas</h4>
+            <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="cmp">Não publicado. Portal em WordPress hospedado sob domínio servicos.compesa.com.br. Sistemas corporativos provavelmente on-premise/híbrido (hipótese). +Água/AFD prevê modernização de sistemas.</div></div>
+            <div class="stack-layer"><div class="lbl">C2 — Cibersegurança & Compliance</div><div class="cmp">WAF F5 BIG-IP inferido pelo cookie TS01 (hipótese); reCAPTCHA no portal. LGPD aplicável (6–7 mi de clientes). Certificações ISO e IAM corporativo não publicados — <strong>gap AppSec/DevSecOps</strong>.</div></div>
+            <div class="stack-layer"><div class="lbl">C3 — IA, Automação, Indústria 4.0</div><div class="cmp">IA aplicada via FACEPE/UFPE (modelagem, simulações preditivas); automação de abastecimento e telemetria/setorização no +Água; IoT/OT em 29 distritos de medição/controle (Grandes Anéis). SCADA provável (hipótese). Falta plataforma corporativa/MLOps.</div></div>
+            <div class="stack-layer"><div class="lbl">C4 — Dados & Analytics</div><div class="cmp">Modelagem computacional (UFPE), análise de qualidade da água e de cadastro de clientes (desafios Águas Digitais). Data platform corporativa madura não publicada — <strong>gap de governança de dados</strong>.</div></div>
+            <div class="stack-layer"><div class="lbl">C5 — Core Transacional (ERP)</div><div class="cmp">Não publicado. Sistema comercial/faturamento próprio ou de mercado (hipótese). Ponto crítico do handover para as concessionárias.</div></div>
+            <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="cmp">Gestão de ativos, gestão de equipes de campo e cadastro de clientes (mapeados como desafios no Águas Digitais). Portal de licitações/fornecedor sob Lei 14.133.</div></div>
+            <div class="stack-layer"><div class="lbl">C7 — Experiência & Engajamento</div><div class="cmp">Portal servicos.compesa.com.br (WordPress/Elementor), autoatendimento/agência virtual. NR 11 exige web/app com histórico ≥12 meses — pressão de modernização.</div></div>
+        </div>
+
+        <!-- C2. Verificação empírica -->
+        <div class="section" id="empirico">
+            <div class="eyebrow">Runtime</div>
+            <h3>Verificação Empírica de Canais Digitais</h3>
+            <table class="data-table">
+                <thead><tr><th>URL</th><th>Status</th><th>Frontend</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+                <tbody>
+                    <tr><td>www.compesa.com.br → servicos.compesa.com.br</td><td><span class="status-200">200</span></td><td>WordPress · Elementor · LayerSlider · jQuery</td><td>WAF F5 BIG-IP (cookie TS01 — hipótese); header Server omitido</td><td>Trackers: GTM, GA4 (gtag/G-), Universal Analytics legado (UA-), Meta Pixel. reCAPTCHA. SEO: AIOSEO Pro 4.9.9. Google Fonts. Cookies ls-popup (LayerSlider).</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:10px;font-size:12.5px;color:var(--text-light)">Verificado em 21/07/2026, ~16h (UTC-3), via inspeção de headers e HTML. O domínio www redireciona para servicos.compesa.com.br. Apenas o efetivamente inspecionado foi registrado; a coexistência de UA legado e GA4 sugere migração de analytics não concluída.</p>
+        </div>
+
+        <!-- C3. GAPs -->
+        <div class="section" id="gaps">
+            <div class="eyebrow">Lacunas → monetização</div>
+            <h3>GAPs Tecnológicos (5)</h3>
+            <div class="gap-grid">
+                <div class="gap-card"><div class="num">GAP 1 · Integração</div><h4>Interoperabilidade multi-operador</h4><p>Concessão parcial (abr/2026) exige troca contínua de dados entre COMPESA e Basa/Vita Sertão. Sem iPaaS, integrações ponto a ponto frágeis. Evidência: G1/Investindo Por Aí, 2026.</p><div class="offer">Oferta Foursys: Modernização de Legado + FourBlox (Digibee iPaaS)</div></div>
+                <div class="gap-card"><div class="num">GAP 2 · Dados/IA</div><h4>IA presa em pilotos</h4><p>Modelos de perdas e qualidade rodam via editais FACEPE/UFPE, sem plataforma corporativa nem MLOps. Sabesp/Copasa já industrializaram analytics de perdas. Evidência: Folha PE / CIn-UFPE.</p><div class="offer">Oferta Foursys: AI Squad</div></div>
+                <div class="gap-card"><div class="num">GAP 3 · Segurança</div><h4>AppSec / DevSecOps / IAM</h4><p>Dados de 6–7 mi de clientes sob LGPD; WAF presente, mas AppSec, DevSecOps e IAM corporativo não publicados. Ambiente regulado exige governança. Evidência: verificação empírica + fala do Diretor Kleber.</p><div class="offer">Oferta Foursys: Cibersegurança (ISO 27001/27701)</div></div>
+                <div class="gap-card"><div class="num">GAP 4 · Experiência</div><h4>Canais digitais NR 11</h4><p>Portal em WordPress; NR 11/2024 (Art. 55) obriga web/app com histórico ≥12 meses de cobrança/medição. Prazo regulatório. Evidência: Resolução ANA 230/2024.</p><div class="offer">Oferta Foursys: Engenharia Digital + FourBlox</div></div>
+                <div class="gap-card"><div class="num">GAP 5 · IA/IoT</div><h4>Telemetria e redução de perdas</h4><p>~40% de perda no país; +Água prevê telemetria, setorização e controle de pressão, dependentes de IoT/OT e observabilidade em escala. Evidência: programa +Água/AFD.</p><div class="offer">Oferta Foursys: Engenharia Digital + AI Squad</div></div>
+            </div>
+        </div>
+
+        <!-- C4. Rapport (foco PESSOA) -->
+        <div class="section" id="rapport" style="border-left-color: var(--vanilla);">
+            <div class="eyebrow">Foco: pessoa</div>
+            <h3>Perfil Pessoal & Rapport</h3>
+            <div class="grid-3">
+                <div class="info-card"><div class="label">Formação</div><div class="value">Não localizado publicamente</div></div>
+                <div class="info-card"><div class="label">Cidade</div><div class="value">Recife/PE</div></div>
+                <div class="info-card"><div class="label">Idiomas</div><div class="value">Não localizado</div></div>
+            </div>
+            <div class="insight-box" style="margin-top:16px"><h4>Dicas de conversa (6)</h4><p>
+                1. <strong>Valorize a longevidade:</strong> ~8 anos à frente da TIC — ele é a memória técnica da casa; reconheça isso, não passe por cima.<br>
+                2. <strong>Respeite o legado:</strong> evite o discurso de "rasgar tudo"; fale em orquestrar e integrar, não em substituir por substituir.<br>
+                3. <strong>Sensibilidade à transição:</strong> parte da operação está saindo para concessionárias — posicione a Foursys como quem dá controle nesse momento, não incerteza.<br>
+                4. <strong>Ecossistema local:</strong> Porto Digital, CESAR e UFPE são parceiros de inovação da COMPESA — conhecer esse ecossistema recifense gera afinidade imediata.<br>
+                5. <strong>Ambiente regulado:</strong> demonstre fluência em Lei 14.133 e NR 11 da ANA — falar a língua da licitação transmite segurança.<br>
+                6. <strong>Ponte com a diretoria:</strong> trate Waldeildo como aliado técnico e peça a ele o caminho até Kleber; não force o pulo hierárquico.
+            </p></div>
+        </div>
+
+        <!-- C8. Fontes -->
+        <div class="section" id="fontes">
+            <div class="eyebrow">Bibliografia</div>
+            <h3>Fontes Consultadas</h3>
+            <div class="sources-grid">
+                <div class="sources-card"><h4>Estratégia & RI</h4><ul>
+                    <li>Demonstrações Financeiras COMPESA 2024 (balanço, Folha PE/D4Sign)</li>
+                    <li>G1 — Governo de PE assina concessão parcial (abr/2026)</li>
+                    <li>Investindo Por Aí — financiamento AFD / programa +Água</li>
+                </ul></div>
+                <div class="sources-card"><h4>Stack tecnológica</h4><ul>
+                    <li>Porto Digital — Águas Digitais (inovação aberta)</li>
+                    <li>Folha PE — R$ 4,2 mi em tecnologia via FACEPE</li>
+                    <li>CIn-UFPE — modelagem hidráulica Grandes Anéis do Recife</li>
+                </ul></div>
+                <div class="sources-card"><h4>Mercado</h4><ul>
+                    <li>ANA — Resolução 230/2024 / NR 11 (condições gerais)</li>
+                    <li>G1/Trata Brasil-GO Associados — investimento no setor (jul/2026)</li>
+                    <li>Marco Legal do Saneamento (Lei 14.026/2020)</li>
+                </ul></div>
+                <div class="sources-card"><h4>Liderança</h4><ul>
+                    <li>LinkedIn — Waldeildo de Souza Leão Júnior (Gerente de TIC)</li>
+                    <li>SambaTalks / LinkedIn — Kleber Coelho Paz (Diretor)</li>
+                    <li>AESBE — presidência e perfil institucional</li>
+                </ul></div>
+                <div class="sources-card"><h4>Verificação empírica</h4><ul>
+                    <li>Inspeção de headers/HTML de www.compesa.com.br → servicos.compesa.com.br (21/07/2026)</li>
+                    <li>Detecção de CMS, trackers e WAF em runtime</li>
+                </ul></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="brand-line"></div>
+        four<strong style="color:var(--orange)">sys</strong> | Pre-Sales Intelligence Report — IT Forum 2026 Praia do Forte<br>
+        Gerado automaticamente — Confidencial | Julho 2026 | Agente Hunter (Foursys DS) · Modo --full · Híbrido
+    </div>
+</body>
+</html>

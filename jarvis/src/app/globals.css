@@ -1,0 +1,161 @@
+@import "../styles/tokens.css";
+@import "../styles/orb.css";
+@import "tailwindcss";
+
+:root {
+  --background: var(--jarvis-bg);
+  --foreground: var(--jarvis-fg);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--jarvis-font-sans);
+  --animate-spin-slow: spin 2s linear infinite;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+html:has([data-jarvis-embed]),
+html[data-jarvis-embed],
+html:has([data-jarvis-embed]) body,
+html[data-jarvis-embed] body {
+  background: transparent !important;
+  color-scheme: normal !important;
+}
+
+html:has([data-jarvis-embed]) [data-brand-bar],
+html[data-jarvis-embed] [data-brand-bar] {
+  display: none;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes jarvis-wave {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+@keyframes jarvis-typing {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}
+
+@keyframes jarvis-toast-in {
+  from {
+    transform: translateX(1rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes jarvis-toast-out {
+  to {
+    transform: translateX(0.5rem);
+    opacity: 0;
+  }
+}
+
+@keyframes jarvis-fade-up {
+  from {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-spin-slow {
+  animation: spin 2s linear infinite;
+}
+
+.animate-jarvis-wave {
+  animation: jarvis-wave 1.8s ease-out infinite;
+}
+
+.animate-jarvis-typing {
+  animation: jarvis-typing 1.2s ease-in-out infinite;
+}
+
+.animate-toast-in {
+  animation: jarvis-toast-in 0.25s ease-out both;
+}
+
+.animate-toast-out {
+  animation: jarvis-toast-out 0.25s ease-in both;
+}
+
+.animate-fade-up {
+  animation: jarvis-fade-up 0.3s ease-out both;
+}
+
+/* entrada dos widgets contextuais — desliza da direita (mesmo keyframe do toast) */
+.animate-slide-in-right {
+  animation: jarvis-toast-in 0.3s ease-out both;
+}
+
+/* scroll sem barra visível — imersão (rolagem continua funcionando) */
+.scrollbar-invisible {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-invisible::-webkit-scrollbar {
+  display: none;
+}
+
+/* fade nas extremidades de áreas roláveis — sinaliza conteúdo além da dobra */
+.scroll-fade-y {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 20px,
+    #000 calc(100% - 20px),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 20px,
+    #000 calc(100% - 20px),
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin-slow,
+  .animate-jarvis-wave,
+  .animate-jarvis-typing,
+  .animate-toast-in,
+  .animate-toast-out,
+  .animate-fade-up,
+  .animate-slide-in-right {
+    animation: none;
+  }
+}

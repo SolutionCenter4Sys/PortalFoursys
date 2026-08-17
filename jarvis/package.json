@@ -1,0 +1,52 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "dev:webpack": "next dev --webpack",
+    "dev:clean": "node -e \"try{require('fs').rmSync('.next',{recursive:true,force:true})}catch{}\" && next dev",
+    "warm": "node scripts/warm-dev.mjs",
+    "warm:wait": "node scripts/warm-dev.mjs --wait",
+    "build": "next build && node -e \"try{require('fs').rmSync('.next/cache',{recursive:true,force:true})}catch{}\"",
+    "start": "next start",
+    "start:standalone": "node .next/standalone/server.js",
+    "lint": "eslint",
+    "postinstall": "node scripts/copy-vad-assets.mjs",
+    "seed:portal-faq": "npx --yes tsx --env-file=.env.local scripts/seed-portal-faq-cache.ts",
+    "build:faq-embeddings": "npx --yes tsx --env-file=.env.local scripts/build-faq-embeddings.ts",
+    "seed:portal-tts": "npx --yes tsx --env-file=.env.local scripts/seed-portal-tts.ts",
+    "reindex": "npx --yes tsx --env-file=.env.local scripts/reindex.ts"
+  },
+  "dependencies": {
+    "@google/genai": "^2.13.0",
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
+    "@react-three/postprocessing": "^3.0.5",
+    "@ricky0123/vad-web": "^0.0.30",
+    "@supabase/ssr": "^0.12.3",
+    "@supabase/supabase-js": "^2.110.6",
+    "ioredis": "^5.11.1",
+    "mermaid": "^11.16.0",
+    "next": "16.2.10",
+    "onnxruntime-web": "^1.27.0",
+    "openai": "^6.47.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "three": "^0.185.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/three": "^0.185.4",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.10",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,471 @@
+import type { NavigationItem } from '../types'
+import type { Language } from '../i18n/types'
+
+const navigationItemsPt: NavigationItem[] = [
+  // ── Início ─────────────────────────────────────────────────────────────────
+  {
+    id: 'home',
+    label: 'Início',
+    icon: 'home',
+    category: 'Início',
+    description: '26 anos transformando negócios com tecnologia',
+  },
+
+  // ── Institucional ──────────────────────────────────────────────────────────
+  {
+    id: 'identity',
+    label: 'Quem Somos',
+    icon: 'star',
+    category: 'Institucional',
+    description: 'KPIs, missão e posicionamento da Foursys',
+  },
+  {
+    id: 'global',
+    label: 'Presença Global',
+    icon: 'globe',
+    category: 'Institucional',
+    description: 'Brasil, Estados Unidos, Portugal e Israel — 4 regiões do globo',
+  },
+  {
+    id: 'timeline',
+    label: 'Nossa Trajetória',
+    icon: 'calendar',
+    category: 'Institucional',
+    description: 'Evolução e marcos históricos — 26 anos de entrega',
+  },
+  {
+    id: 'why-foursys',
+    label: 'Por que a Foursys?',
+    icon: 'award',
+    category: 'Institucional',
+    description: 'Diferenciais competitivos que nos tornam a escolha certa',
+  },
+
+  // ── Portfólio 2026 S2 ──────────────────────────────────────────────────────
+  {
+    id: 'portfolio-ecosystem',
+    label: 'Ecossistema do Portfólio',
+    icon: 'network',
+    category: 'Portfólio',
+    description: 'Mapa completo: diferenciação, escala, futuro e as forças transversais que sustentam tudo',
+  },
+  {
+    id: 'portfolio-thesis',
+    label: 'Eixos de Valor',
+    icon: 'compass',
+    category: 'Portfólio',
+    description: 'Como o portfólio se organiza: 8 eixos, vitrine e motor',
+  },
+  {
+    id: 'portfolio-offers',
+    label: 'Catálogo de Ofertas',
+    icon: 'library',
+    category: 'Portfólio',
+    description: '18 ofertas com dor, entregáveis, método e lastro de prova',
+  },
+  {
+    id: 'portfolio-assets',
+    label: 'Ativos Transversais',
+    icon: 'blocks',
+    category: 'Portfólio',
+    description: 'NEXUS, Fusion Teams, FourBlox, Zeragon, SharpOps e demais ativos que atravessam as ofertas',
+  },
+  {
+    id: 'portfolio-start',
+    label: 'Por Onde Começar',
+    icon: 'route',
+    category: 'Portfólio',
+    description: 'Shortlist de abertura por persona — CEO, CIO, COO, CFO e CDO',
+  },
+  {
+    id: 'portfolio-future',
+    label: 'Visão de Futuro',
+    icon: 'telescope',
+    category: 'Portfólio',
+    description: 'Tokenização, ESG tecnológico, Machine as Customer e horizontes do próximo ciclo',
+  },
+
+  // ── Ofertas e Serviços ─────────────────────────────────────────────────────
+  {
+    id: 'offers-flagship',
+    label: 'Principais Ofertas',
+    icon: 'rocket',
+    category: 'Ofertas e Serviços',
+    description: 'AI Squad, Modernização, Cibersegurança, FourBlox e Qualidade & Testes com IA',
+  },
+  {
+    id: 'services',
+    label: 'Linhas de Serviço',
+    icon: 'layout-grid',
+    category: 'Ofertas e Serviços',
+    description: 'O que fazemos, para quem e que problema resolve',
+  },
+  {
+    id: 'delivery',
+    label: 'Estrutura de Delivery',
+    icon: 'package',
+    category: 'Ofertas e Serviços',
+    description: 'Projetos, Squads, Alocação, AMS e AI Squads',
+  },
+  {
+    id: 'alliances',
+    label: 'Alianças Estratégicas',
+    icon: 'network',
+    category: 'Ofertas e Serviços',
+    description: 'Adobe, AWS, Databricks, Digibee, Google Cloud, Intel, Microsoft, Pega, Snowflake',
+  },
+  {
+    id: 'innovation',
+    label: 'Inovação',
+    icon: 'sparkles',
+    category: 'Ofertas e Serviços',
+    description: 'Tendências globais em IA, Cloud, CX, Cyber e Data & Analytics',
+  },
+  {
+    id: 'ai-foursys',
+    label: 'IA na Foursys',
+    icon: 'brain-circuit',
+    category: 'Ofertas e Serviços',
+    description: 'AI Squads, Agentes de IA, Governança e Framework',
+  },
+
+  // ── Provas ─────────────────────────────────────────────────────────────────
+  {
+    id: 'cases',
+    label: 'Cases de Sucesso',
+    icon: 'trophy',
+    category: 'Provas',
+    description: 'Resultados mensuráveis em Saúde, Financeiro e Seguros',
+  },
+  {
+    id: 'testimonials',
+    label: 'Depoimentos',
+    icon: 'message-circle',
+    category: 'Provas',
+    description: 'O que nossos clientes dizem sobre a parceria com a Foursys',
+  },
+  {
+    id: 'awards',
+    label: 'Premiações',
+    icon: 'award',
+    category: 'Provas',
+    description: 'Prêmios, certificações e reconhecimentos que validam nossa entrega',
+  },
+  {
+    id: 'media',
+    label: 'Foursys na Mídia',
+    icon: 'newspaper',
+    category: 'Provas',
+    description: 'Cobertura editorial, lideranças visíveis e presença digital — 373k+ seguidores',
+  },
+  {
+    id: 'clients-showcase',
+    label: 'Nossos Clientes',
+    icon: 'briefcase',
+    category: 'Provas',
+    description: 'Empresas que confiam na Foursys em 4 regiões do globo',
+  },
+  {
+    id: 'capabilities',
+    label: 'Capacidades Técnicas',
+    icon: 'code',
+    category: 'Provas',
+    description: 'Stack, métodos e expertise por área',
+  },
+  {
+    id: 'benchmark',
+    label: 'Benchmark',
+    icon: 'users',
+    category: 'Provas',
+    description: 'Líderes de TI estratégicos · Santander Brasil e IT Fórum Trancoso 2026',
+  },
+  {
+    id: 'rh-talentos',
+    label: 'RH - Estratégia de Talentos',
+    icon: 'users',
+    category: 'Provas',
+    description: 'Atração, Desenvolvimento, Retenção e Governança para sustentar a excelência nas entregas',
+  },
+
+  // ── ESG ────────────────────────────────────────────────────────────────────
+  {
+    id: 'esg',
+    label: 'ESG na Foursys',
+    icon: 'leaf',
+    category: 'ESG',
+    description: 'Tecnologia que transforma vidas — impacto social e sustentabilidade',
+  },
+
+  // ── Referência ─────────────────────────────────────────────────────────────
+  {
+    id: 'insights',
+    label: 'Insights',
+    icon: 'file-text',
+    category: 'Referência',
+    description: 'Thought leadership e visões estratégicas sobre tecnologia',
+  },
+  {
+    id: 'faq',
+    label: 'Perguntas Frequentes',
+    icon: 'help-circle',
+    category: 'Referência',
+    description: 'Perguntas clássicas e como respondemos',
+  },
+  {
+    id: 'export-pdf',
+    label: 'Exportar para PDF',
+    icon: 'file-down',
+    category: 'Referência',
+    description: 'Selecione sessões, subsessões ou itens específicos para gerar um PDF',
+  },
+]
+
+const navigationItemsEn: NavigationItem[] = [
+  // ── Home ───────────────────────────────────────────────────────────────────
+  {
+    id: 'home',
+    label: 'Home',
+    icon: 'home',
+    category: 'Home',
+    description: '26 years transforming business with technology',
+  },
+
+  // ── About Us ───────────────────────────────────────────────────────────────
+  {
+    id: 'identity',
+    label: 'Who We Are',
+    icon: 'star',
+    category: 'About Us',
+    description: 'KPIs, mission and Foursys positioning',
+  },
+  {
+    id: 'global',
+    label: 'Global Presence',
+    icon: 'globe',
+    category: 'About Us',
+    description: 'Brazil, United States, Portugal and Israel — 4 global regions',
+  },
+  {
+    id: 'timeline',
+    label: 'Our Journey',
+    icon: 'calendar',
+    category: 'About Us',
+    description: 'Evolution and milestones — 26 years of delivery',
+  },
+  {
+    id: 'why-foursys',
+    label: 'Why Foursys?',
+    icon: 'award',
+    category: 'About Us',
+    description: 'Competitive advantages that make us the right choice',
+  },
+
+  // ── Portfolio 2026 H2 ──────────────────────────────────────────────────────
+  {
+    id: 'portfolio-ecosystem',
+    label: 'Portfolio Ecosystem',
+    icon: 'network',
+    category: 'Portfolio',
+    description: 'Full map: differentiation, scale, future and the cross-cutting forces that hold it together',
+  },
+  {
+    id: 'portfolio-thesis',
+    label: 'Value Axes',
+    icon: 'compass',
+    category: 'Portfolio',
+    description: 'How the portfolio is organized: 8 axes, showcase and engine',
+  },
+  {
+    id: 'portfolio-offers',
+    label: 'Offer Catalog',
+    icon: 'library',
+    category: 'Portfolio',
+    description: '18 offers with pain, deliverables, method and evidence status',
+  },
+  {
+    id: 'portfolio-assets',
+    label: 'Cross-cutting Assets',
+    icon: 'blocks',
+    category: 'Portfolio',
+    description: 'NEXUS, Fusion Teams, FourBlox, Zeragon, SharpOps and assets that run across every offer',
+  },
+  {
+    id: 'portfolio-start',
+    label: 'Where to Start',
+    icon: 'route',
+    category: 'Portfolio',
+    description: 'Opening shortlist by persona — CEO, CIO, COO, CFO and CDO',
+  },
+  {
+    id: 'portfolio-future',
+    label: 'Future Vision',
+    icon: 'telescope',
+    category: 'Portfolio',
+    description: 'Tokenization, technology-driven ESG, Machine as Customer and next-cycle horizons',
+  },
+
+  // ── Solutions & Services ───────────────────────────────────────────────────
+  {
+    id: 'offers-flagship',
+    label: 'Key Solutions',
+    icon: 'rocket',
+    category: 'Solutions & Services',
+    description: 'AI Squad, Modernization, Cybersecurity, FourBlox and Quality & AI Testing',
+  },
+  {
+    id: 'services',
+    label: 'Service Lines',
+    icon: 'layout-grid',
+    category: 'Solutions & Services',
+    description: 'What we do, for whom and what problem we solve',
+  },
+  {
+    id: 'delivery',
+    label: 'Delivery Framework',
+    icon: 'package',
+    category: 'Solutions & Services',
+    description: 'Projects, Squads, Staff Aug, AMS and AI Squads',
+  },
+  {
+    id: 'alliances',
+    label: 'Strategic Alliances',
+    icon: 'network',
+    category: 'Solutions & Services',
+    description: 'Adobe, AWS, Databricks, Digibee, Google Cloud, Intel, Microsoft, Pega, Snowflake',
+  },
+  {
+    id: 'innovation',
+    label: 'Innovation',
+    icon: 'sparkles',
+    category: 'Solutions & Services',
+    description: 'Global trends in AI, Cloud, CX, Cyber and Data & Analytics',
+  },
+  {
+    id: 'ai-foursys',
+    label: 'AI at Foursys',
+    icon: 'brain-circuit',
+    category: 'Solutions & Services',
+    description: 'AI Squads, AI Agents, Governance and Framework',
+  },
+
+  // ── Proof Points ───────────────────────────────────────────────────────────
+  {
+    id: 'cases',
+    label: 'Success Stories',
+    icon: 'trophy',
+    category: 'Proof Points',
+    description: 'Measurable results in Healthcare, Financial and Insurance',
+  },
+  {
+    id: 'testimonials',
+    label: 'Testimonials',
+    icon: 'message-circle',
+    category: 'Proof Points',
+    description: 'What our clients say about partnering with Foursys',
+  },
+  {
+    id: 'awards',
+    label: 'Awards',
+    icon: 'award',
+    category: 'Proof Points',
+    description: 'Awards, certifications and recognitions that validate our delivery',
+  },
+  {
+    id: 'media',
+    label: 'Foursys in the Media',
+    icon: 'newspaper',
+    category: 'Proof Points',
+    description: 'Editorial coverage, visible leadership and digital presence — 373k+ followers',
+  },
+  {
+    id: 'clients-showcase',
+    label: 'Our Clients',
+    icon: 'briefcase',
+    category: 'Proof Points',
+    description: 'Companies that trust Foursys across 4 regions worldwide',
+  },
+  {
+    id: 'capabilities',
+    label: 'Technical Capabilities',
+    icon: 'code',
+    category: 'Proof Points',
+    description: 'Stack, methods and expertise by area',
+  },
+  {
+    id: 'benchmark',
+    label: 'Benchmark',
+    icon: 'users',
+    category: 'Proof Points',
+    description: 'Strategic IT leaders · Santander Brazil and IT Forum Trancoso 2026',
+  },
+  {
+    id: 'rh-talentos',
+    label: 'HR - Talent Strategy',
+    icon: 'users',
+    category: 'Proof Points',
+    description: 'Attraction, Development, Retention and Governance to sustain delivery excellence',
+  },
+
+  // ── ESG ────────────────────────────────────────────────────────────────────
+  {
+    id: 'esg',
+    label: 'ESG at Foursys',
+    icon: 'leaf',
+    category: 'ESG',
+    description: 'Technology that transforms lives — social impact and sustainability',
+  },
+
+  // ── Reference ──────────────────────────────────────────────────────────────
+  {
+    id: 'insights',
+    label: 'Insights',
+    icon: 'file-text',
+    category: 'Reference',
+    description: 'Thought leadership and strategic technology perspectives',
+  },
+  {
+    id: 'faq',
+    label: 'FAQ',
+    icon: 'help-circle',
+    category: 'Reference',
+    description: 'Common questions and how we answer them',
+  },
+  {
+    id: 'export-pdf',
+    label: 'Export to PDF',
+    icon: 'file-down',
+    category: 'Reference',
+    description: 'Select sections, subsections or specific items to generate a PDF',
+  },
+]
+
+const sectionCategoriesPt = [
+  'Início',
+  'Institucional',
+  'Portfólio',
+  'Ofertas e Serviços',
+  'Provas',
+  'ESG',
+  'Referência',
+]
+
+const sectionCategoriesEn = [
+  'Home',
+  'About Us',
+  'Portfolio',
+  'Solutions & Services',
+  'Proof Points',
+  'ESG',
+  'Reference',
+]
+
+export function getNavigationItems(lang: Language): NavigationItem[] {
+  return lang === 'en' ? navigationItemsEn : navigationItemsPt
+}
+
+export function getSectionCategories(lang: Language): string[] {
+  return lang === 'en' ? sectionCategoriesEn : sectionCategoriesPt
+}
+
+export const navigationItems = navigationItemsPt
+export const sectionCategories = sectionCategoriesPt

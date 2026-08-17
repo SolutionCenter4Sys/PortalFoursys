@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing CIO - Laerte Kerber Franco | VITRU EDUCAÇÃO (UNIASSELVI)</title>
+    <style>
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #00b894;
+            --accent-orange: #e17055;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --border: #dfe6e9;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 40px 0; }
+        .header-content { max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .header h1 { font-size: 28px; font-weight: 700; }
+        .header h2 { font-size: 18px; font-weight: 400; opacity: 0.9; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 12px 24px; border-radius: 12px; text-align: center; }
+        .header-badge .label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .header-badge .value { font-size: 20px; font-weight: 700; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
+        .section { background: var(--card-bg); border-radius: 16px; padding: 30px; margin-bottom: 24px; box-shadow: var(--shadow); }
+        .section h3 { font-size: 20px; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .section h3 .icon { font-size: 24px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        .info-card { background: #f8f9ff; border-radius: 12px; padding: 16px; border-left: 4px solid var(--primary-light); }
+        .info-card .label { font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .info-card .value { font-size: 15px; font-weight: 600; }
+        .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 13px; margin: 4px; font-weight: 500; }
+        .tag-opportunity { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .tag-active { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .tag-priority { background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+        .competitor-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); transition: transform 0.2s; }
+        .competitor-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .competitor-card h4 { color: var(--primary); margin-bottom: 8px; font-size: 16px; }
+        .competitor-card p { color: var(--text-light); font-size: 14px; }
+        .oferta-card { background: #fafafa; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); }
+        .oferta-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .oferta-header h4 { color: var(--primary); font-size: 17px; }
+        .score-badge { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .reasons ul { margin-left: 20px; margin-top: 8px; }
+        .reasons li { font-size: 13px; color: var(--text-light); margin-bottom: 4px; }
+        .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .insight-box h4 { margin-bottom: 12px; font-size: 17px; }
+        .insight-box p { opacity: 0.95; font-size: 14px; line-height: 1.7; }
+        .chart-container { width: 100%; max-width: 600px; margin: 0 auto; }
+        .bar { display: flex; align-items: center; margin-bottom: 10px; }
+        .bar-label { width: 220px; font-size: 13px; color: var(--text-light); text-align: right; padding-right: 12px; flex-shrink: 0; }
+        .bar-track { flex: 1; background: #eee; border-radius: 8px; height: 24px; overflow: hidden; position: relative; }
+        .bar-fill { height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 12px; color: white; font-weight: 600; transition: width 1s ease; }
+        .timeline { padding: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); margin-top: 6px; flex-shrink: 0; }
+        .approach-card { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+        .approach-card h4 { margin-bottom: 8px; }
+        .approach-card p { opacity: 0.95; font-size: 14px; }
+        .foursys-logo { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+        .foursys-logo span { color: #00b894; }
+        .footer { text-align: center; padding: 30px; color: var(--text-light); font-size: 13px; }
+        .alert-box { background: #fff8e1; border: 1px solid #ffecb3; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .alert-box strong { color: #f57f17; }
+        .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; border: none; padding: 14px 24px; border-radius: 12px; cursor: pointer; font-size: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 100; }
+        .print-btn:hover { background: var(--primary-light); }
+        @media print { .print-btn { display: none; } }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">Imprimir / PDF</button>
+
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <div class="foursys-logo">four<span>sys</span> | Pre-Sales Intelligence</div>
+                <h1 style="margin-top:16px">Laerte Kerber Franco</h1>
+                <h2>Diretor de Tecnologia e Dados (CIO/CTO) — VITRU Educação (UNIASSELVI | UNICESUMAR)</h2>
+                <p style="opacity:0.8;margin-top:8px">Setor: Educação | São Paulo - SP</p>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+                <div class="header-badge">
+                    <div class="label">Faturamento</div>
+                    <div class="value">R$ 2,26 BI (2025)</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Base de Alunos</div>
+                    <div class="value">1+ Milhão</div>
+                </div>
+                <div class="header-badge">
+                    <div class="label">Perspectiva</div>
+                    <div class="value">Crescimento moderado</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="section">
+            <h3><span class="icon">&#127970;</span> Análise da Empresa: VITRU Educação (UNIASSELVI | UNICESUMAR)</h3>
+            <p style="margin-bottom:20px;line-height:1.8;color:var(--text-light)">A <strong>Vitru Educação</strong> é a maior empresa de educação a distância do Brasil, com <strong>23,1% de participação no mercado</strong> de ensino superior e mais de <strong>1 milhão de alunos matriculados</strong>. Opera por meio de duas marcas: <strong>UNIASSELVI</strong> e <strong>UNICESUMAR</strong> (adquirida em 2021 por R$ 3,2 bilhões). Listada na <strong>Nasdaq</strong> desde setembro de 2020, a empresa reportou receita de <strong>R$ 2,259 bilhões</strong> em 2025 (+5,5%) e lucro líquido de <strong>R$ 369,89 milhões</strong> (+28,1%). Possui <strong>2.630 polos</strong> distribuídos por todos os estados brasileiros, mais de 6.000 tutores e professores, e 350+ cursos de graduação e pós-graduação. A Vitru conquistou o <strong>1º lugar no Prêmio Valor Inovação Brasil 2025</strong> no segmento Educação e foi ranqueada como a <strong>5ª melhor EdTech do mundo</strong> em 2024 — única brasileira de EAD no ranking global. Sua plataforma de inovação, o <strong>VitruLab</strong>, produziu soluções como a assistente de IA <strong>SofIA</strong> e o simulador de entrevistas <strong>Entrevistador Virt.UAU</strong> (parceria AWS), além de firmar parceria estratégica com o <strong>Google Cloud</strong>. 98% de suas matrículas estão concentradas em EAD, o que torna o novo <strong>Marco Regulatório do MEC</strong> (2025) um fator crítico de adaptação.</p>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Abrangência</div>
+                        <div class="value">Nacional (todos os estados + Nasdaq)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Categoria</div>
+                        <div class="value">Capital Aberto (Nasdaq: VTRU)</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perspectiva de Faturamento</div>
+                        <div class="value">Crescimento moderado (+5,5% a.a.)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Colaboradores</div>
+                        <div class="value">6.000+ (tutores e professores) + equipe corporativa</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128200;</span> Resumo Executivo</h3>
+            <div class="insight-box">
+                <h4>Contexto Estratégico</h4>
+                <p>Empresa líder do setor de <strong>Educação EAD</strong> com abrangência <strong>Nacional</strong>, listada na <strong>Nasdaq</strong>. Laerte Kerber Franco lidera a área de Tecnologia e Dados, com foco em IA generativa, plataformas digitais de aprendizagem e compliance regulatório. A empresa enfrenta um momento de <strong>transição regulatória</strong> (novo Marco EAD do MEC) que exige investimentos em infraestrutura de polos, aulas síncronas e adequação pedagógica. Ao mesmo tempo, está em plena <strong>expansão de inovação com IA</strong> (SofIA, VitruLab, Google Cloud). Modelo de compra: <strong>parcerias tecnológicas estratégicas (AWS, Google Cloud)</strong>.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#127919;</span> Desafios Estratégicos e Prioridades 2026</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Desafios para 2026</h4>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Adaptar operação e tecnologia ao novo Marco Regulatório EAD do MEC (aulas síncronas, presencialidade)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Escalar IA generativa com governança e mensuração de valor (programa Geração IA → VitruLab)</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Unificar e modernizar plataformas tecnológicas de UNIASSELVI e UNICESUMAR pós-fusão</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Garantir experiência digital de qualidade para 1M+ alunos em 2.630 polos</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Otimizar custos operacionais de TI enquanto cresce a base de alunos e a complexidade regulatória</div></div>
+                        <div class="timeline-item"><div class="timeline-dot"></div><div>Fortalecer cibersegurança e proteção de dados de mais de 1 milhão de alunos (LGPD)</div></div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Top Prioridades de Investimento</h4>
+                    <div>
+                        <span class="tag tag-priority">IA Generativa &amp; Analytics Educacional</span>
+                        <span class="tag tag-priority">Plataformas Digitais de Aprendizagem</span>
+                        <span class="tag tag-priority">Cloud (AWS + Google Cloud)</span>
+                        <span class="tag tag-priority">Conformidade regulatória (Marco EAD)</span>
+                        <span class="tag tag-priority">Integração de sistemas pós-fusão</span>
+                        <span class="tag tag-priority">Cibersegurança &amp; LGPD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128640;</span> Mapa de Investimentos (Próximos 12 meses)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light)">Temas que receberão investimento nos próximos 12 meses (estimativa baseada em pesquisa pública):</p>
+            <div>
+                <span class="tag tag-active">Inteligência Artificial Generativa</span>
+                <span class="tag tag-active">Plataformas LMS / EdTech</span>
+                <span class="tag tag-active">Cloud Computing (AWS / Google Cloud)</span>
+                <span class="tag tag-active">Data Analytics &amp; BI Educacional</span>
+                <span class="tag tag-active">Infraestrutura de Polos (streaming/síncrono)</span>
+                <span class="tag tag-active">Automação de Processos Acadêmicos</span>
+                <span class="tag tag-active">Cibersegurança &amp; Compliance LGPD</span>
+                <span class="tag tag-active">Integração de Sistemas (UNIASSELVI + UNICESUMAR)</span>
+                <span class="tag tag-opportunity">Realidade Aumentada / Imersiva</span>
+                <span class="tag tag-opportunity">Chatbots e Assistentes Virtuais (SofIA)</span>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent-orange)">
+            <h3><span class="icon">&#128293;</span> Oportunidades Identificadas</h3>
+            <div class="alert-box">
+                <strong>Janela estratégica aberta:</strong> A VITRU está em plena transição regulatória e tecnológica. O novo Marco EAD do MEC exige investimentos em infraestrutura de aulas síncronas, adequação de polos e modernização de plataformas — criando demandas imediatas por parceiros de tecnologia.
+            </div>
+            <div class="grid-2">
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 1</div>
+                    <div class="value">Integração de sistemas pós-fusão UNIASSELVI + UNICESUMAR — unificação de ERPs, LMS e plataformas acadêmicas</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 2</div>
+                    <div class="value">Governança e escalabilidade de IA — o VitruLab precisa de frameworks de MLOps e compliance para escalar de 12 para centenas de projetos de IA</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 3</div>
+                    <div class="value">Automação de processos acadêmicos e administrativos — com 1M+ alunos, ganhos de eficiência operacional são multiplicadores</div>
+                </div>
+                <div class="info-card" style="margin-bottom:12px">
+                    <div class="label">Oportunidade 4</div>
+                    <div class="value">Cibersegurança e LGPD — proteção de dados pessoais de mais de 1 milhão de estudantes e adequação regulatória</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="border: 2px solid var(--accent)">
+            <h3><span class="icon">&#11088;</span> Ofertas Foursys Recomendadas para Laerte Kerber Franco</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Análise de fit entre o portfólio Foursys e as necessidades identificadas. Ordenado por relevância.</p>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>1. Dados &amp; Inteligência Artificial</h4>
+                    <span class="score-badge">Fit: 95%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Laerte lidera o programa "Geração IA" e o VitruLab — precisa escalar de 12 projetos para centenas com governança</li>
+                        <li>Foursys oferece estratégia e habilitação de dados, IA generativa e hiperautomação</li>
+                        <li>SofIA (assistente IA) e Virt.UAU já demonstram maturidade para escalar com MLOps e fundação de dados</li>
+                        <li>Analytics educacional preditivo para retenção de alunos (churn) é multiplicador de receita direto</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>2. Engenharia Digital (Squads + Integração)</h4>
+                    <span class="score-badge">Fit: 90%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Fusão UNIASSELVI + UNICESUMAR exige integração de plataformas, ERPs e sistemas acadêmicos</li>
+                        <li>Squads Foursys podem acelerar modernização de sistemas legados e desenvolvimento de novas plataformas</li>
+                        <li>Parceria Foursys-Digibee acelera integração de APIs entre sistemas acadêmicos, financeiros e de polos</li>
+                        <li>Sustentação/AMS para 2.630 polos com disponibilidade 24x7 durante período de aulas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>3. Cibersegurança &amp; Privacidade</h4>
+                    <span class="score-badge">Fit: 85%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>1M+ alunos = 1M+ registros pessoais sob LGPD — risco regulatório elevado</li>
+                        <li>Empresa listada na Nasdaq com obrigações SOX e compliance internacional</li>
+                        <li>Foursys com certificações ISO 27001/27701 é diferencial competitivo direto</li>
+                        <li>Proteção de plataformas de ensino contra ataques (ransomware em universidades é tendência global)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oferta-card">
+                <div class="oferta-header">
+                    <h4>4. Agilidade &amp; Org Design</h4>
+                    <span class="score-badge">Fit: 75%</span>
+                </div>
+                <div class="reasons">
+                    <ul>
+                        <li>Pós-fusão demanda redesenho do modelo operacional de TI (duas culturas, duas stacks)</li>
+                        <li>Otimização do fluxo de valor contínuo para acelerar entregas em cenário regulatório dinâmico</li>
+                        <li>Modelo ágil é essencial para responder rapidamente às mudanças do Marco EAD do MEC</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128173;</span> Estratégia de Abordagem Recomendada</h3>
+            <div class="approach-card">
+                <h4>Gancho de Entrada</h4>
+                <p>Laerte é um líder de tecnologia que valoriza <strong>inovação guiada por valor</strong> — ele próprio declarou que na Vitru "projetos de IA generativa são guiados por valor". Iniciar a conversa reconhecendo o <strong>1º lugar no Prêmio Valor Inovação Brasil 2025</strong> e a posição de <strong>5ª melhor EdTech do mundo</strong>, demonstrando que conhecemos a trajetória da empresa. Em seguida, apresentar como a Foursys pode ajudar a <strong>escalar a inovação</strong> do VitruLab com governança, MLOps e squads especializados em IA — transformando 12 projetos em centenas com mensurabilidade.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #e17055 0%, #d63031 100%);">
+                <h4>Oportunidade Quente</h4>
+                <p>O <strong>Marco Regulatório EAD do MEC</strong> é o maior vetor de mudança em 2026. A VITRU precisa adaptar 2.630 polos, implementar aulas síncronas obrigatórias (10%), contratar mais professores e adequar matrizes curriculares — tudo isso com pressão de prazo (transição até 2027-2028). Essa transformação exige <strong>integração de sistemas, automação de processos e infraestrutura de streaming/videoconferência</strong> em escala, gerando demanda imediata por parceiros de tecnologia.</p>
+            </div>
+            <div class="approach-card" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                <h4>Diferencial Competitivo Foursys</h4>
+                <p>Para esta conversa, destacar: (1) <strong>AI Squad proprietário</strong> da Foursys para acelerar projetos de IA generativa com governança — alinhado direto ao VitruLab; (2) <strong>Parceria Digibee</strong> para integração de plataformas pós-fusão UNIASSELVI/UNICESUMAR; (3) <strong>Certificações ISO 27001/27701</strong> para compliance LGPD e SOX (Nasdaq); (4) <strong>Modelo flexível de entrega</strong> (Squads, Projetos, AMS) que se adapta à sazonalidade do setor educacional.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Insights de Negócio para a Conversa</h4>
+                <p style="margin-bottom:12px"><strong>1. IA guiada por valor é a filosofia de Laerte:</strong> Ele declarou publicamente no IT Forum que na Vitru "projetos de IA generativa são guiados por valor". Isso significa que qualquer proposta deve demonstrar ROI claro e mensurável — churn de alunos, eficiência operacional, NPS. A Foursys deve falar em métricas, não em tecnologia.</p>
+                <p style="margin-bottom:12px"><strong>2. O Marco Regulatório EAD é a urgência do momento:</strong> Com 98% das matrículas em EAD, a VITRU é a empresa mais impactada pelo novo regulamento. A obrigatoriedade de 10% presencial e 10% síncrono para 1M+ alunos exige infraestrutura de videoconferência, streaming, integração com polos e automação — tudo no prazo de 2027-2028.</p>
+                <p style="margin-bottom:12px"><strong>3. Fusão ainda gera complexidade técnica:</strong> UNIASSELVI e UNICESUMAR operam com stacks tecnológicas distintas desde a aquisição de R$ 3,2 bi em 2021. A unificação de LMS, ERPs, sistemas acadêmicos e financeiros é uma agenda técnica massiva que demanda integração e modernização contínuas.</p>
+                <p style="margin-bottom:12px"><strong>4. Escala é o multiplicador:</strong> Com 1M+ alunos, qualquer ganho de eficiência tem impacto exponencial. Uma redução de 1% no churn pode representar 10.000 alunos retidos × ticket médio — ROI de milhões. Isso torna analytics preditivo e automação processos multiplicadores diretos de receita.</p>
+                <p><strong>5. Laerte valoriza ecossistema de inovação:</strong> Participou do Accelerate by Forbes, IT Forum Series e criou o VitruLab internamente. Ele busca parceiros que agreguem à cultura de inovação, não fornecedores transacionais. A Foursys deve se posicionar como extensão do VitruLab, não como terceirização.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#9878;</span> Benchmark de Concorrentes</h3>
+            <div class="competitor-card">
+                <h4>Cogna Educação (Kroton / Anhanguera / Vasta)</h4>
+                <p><strong>Segmento:</strong> Educação Superior EAD + Presencial + Ed. Básica | <strong>Receita:</strong> ~R$ 5,5 bilhões (2024)</p>
+                <p>Maior grupo educacional do Brasil em receita. Aposta em expansão de margens via digitalização e eficiência operacional. Possui a Vasta (plataforma de educação básica) como diferencial tecnológico. Investimentos em IA para personalização do aprendizado e redução de evasão. Forte presença presencial que facilita adaptação ao novo Marco Regulatório EAD.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Yduqs (Estácio / Ibmec / Damásio)</h4>
+                <p><strong>Segmento:</strong> Educação Superior Premium + EAD + Medicina | <strong>Receita:</strong> ~R$ 5,2 bilhões (2024)</p>
+                <p>Segundo maior grupo, com estratégia de premium + digital. Segmento digital gerou R$ 1,3 bilhão em lucro operacional em 2025, superando o presencial. Investimentos em IA para tutoria automatizada, plataformas adaptativas e predição de desempenho. Forte posição em cursos de Medicina (protegidos do EAD), diversificando risco regulatório.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Ânima Educação (Anhembi Morumbi / Una / São Judas)</h4>
+                <p><strong>Segmento:</strong> Educação Superior Premium + Híbrida | <strong>Receita:</strong> ~R$ 4,1 bilhões (2024)</p>
+                <p>Estratégia focada em modelo híbrido premium, o que a posiciona favoravelmente frente ao novo Marco Regulatório. Investimentos em ecossistema digital integrado (Ânima Hub) com conteúdo proprietário, IA e gamificação. Potencial beneficiária da regulamentação que limita EAD puro.</p>
+            </div>
+            <div class="competitor-card">
+                <h4>Ser Educacional (UNINASSAU / UNG)</h4>
+                <p><strong>Segmento:</strong> Educação Superior + Medicina | <strong>Receita:</strong> ~R$ 2,3 bilhões (2024)</p>
+                <p>Forte presença regional (Nordeste e Sudeste) com estratégia de expansão via cursos de Medicina. Investimentos em plataformas digitais proprietárias e aprendizado adaptativo. Menor dependência de EAD puro reduz impacto do Marco Regulatório. Competição direta com VITRU no segmento de graduação acessível.</p>
+            </div>
+            <div class="insight-box">
+                <h4>Gap Analysis — Oportunidades para a Foursys</h4>
+                <p>A VITRU é a mais dependente de EAD puro (98% das matrículas) entre os grandes grupos, o que a torna simultaneamente a mais <strong>inovadora em tecnologia educacional</strong> e a mais <strong>vulnerável ao Marco Regulatório</strong>. Enquanto concorrentes como Yduqs e Ânima diversificam com presencial/medicina, a VITRU precisa: (1) <strong>Automatizar processos de compliance regulatório</strong> em 2.630 polos simultaneamente; (2) <strong>Escalar infraestrutura de streaming/síncrono</strong> para atender à obrigatoriedade de 10% de aulas ao vivo para 1M+ alunos; (3) <strong>Integrar plataformas pós-fusão</strong> (UNIASSELVI + UNICESUMAR) enquanto implementa mudanças regulatórias; (4) <strong>Manter vantagem em IA</strong> (SofIA, VitruLab) escalando com governança. A Foursys pode se posicionar como parceira estratégica para essas quatro frentes com squads de IA, integração (Digibee), cibersegurança e automação.</p>
+            </div>
+        </div>
+
+        <div style="border-top: 3px solid var(--border); margin: 40px 0;"></div>
+
+        <div class="section" style="border: 2px solid #667eea">
+            <h3><span class="icon">&#128100;</span> Perfil Pessoal &amp; Dicas de Rapport</h3>
+            <p style="margin-bottom:20px;color:var(--text-light)">Informações pessoais e de interesse para uma abordagem amistosa e personalizada.</p>
+            <div class="grid-2" style="margin-bottom:20px">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cargo Atual</div>
+                        <div class="value">Diretor de Tecnologia e Dados (CIO/CTO) — Vitru Educação (UNIASSELVI | UNICESUMAR)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Localização</div>
+                        <div class="value">São Paulo, SP</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Formação Acadêmica</div>
+                        <div class="value">Mestrado em Computação Aplicada — Unisinos (2009). Professor de MBA em Gestão de Projetos e Governança de TI na Universidade Mackenzie</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Experiência Profissional</div>
+                        <div class="value">25+ anos em gestão de TI, projetos e processos institucionais. Setores: educação, finanças, saúde. Expertise em COBIT, ITIL, planejamento estratégico</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Presença em Eventos</div>
+                        <div class="value">IT Forum Series 2025 (ep.14 — "Transformação Digital na Educação"); Accelerate by Forbes; IT Forum ATI Trancoso 2026</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Temas de Interesse Público</div>
+                        <div class="value">IA generativa guiada por valor, transformação digital na educação, governança de TI, inovação com propósito pedagógico</div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h4>5 Dicas de Rapport para a Conversa</h4>
+                <p style="margin-bottom:10px"><strong>1. Parabenize pelo Prêmio Valor Inovação 2025:</strong> A VITRU conquistou o 1º lugar no segmento Educação e é a 5ª melhor EdTech do mundo. Reconhecer essa conquista logo no início cria conexão genuína — demonstra que você fez a lição de casa.</p>
+                <p style="margin-bottom:10px"><strong>2. Fale a linguagem de "valor", não de "tecnologia":</strong> Laerte declarou publicamente que na Vitru "projetos de IA são guiados por valor". Evite jargão técnico e foque em ROI, métricas de negócio (retenção de alunos, NPS, custo por aluno) e impacto pedagógico.</p>
+                <p style="margin-bottom:10px"><strong>3. Demonstre conhecimento do Marco Regulatório EAD:</strong> Este é o assunto nº 1 do setor educacional em 2026. Mostrar que entende os impactos (10% presencial, 10% síncrono, adequação de polos) e que a Foursys pode ajudar na transição tecnológica diferencia a conversa.</p>
+                <p style="margin-bottom:10px"><strong>4. Conecte-se pelo perfil acadêmico:</strong> Laerte tem mestrado em Computação Aplicada (Unisinos) e leciona MBA na Mackenzie. Ele é um executivo-acadêmico — valoriza profundidade técnica e fundamentação. Traga dados e referências, não apenas slides de vendas.</p>
+                <p><strong>5. Referencie o VitruLab como caso de sucesso:</strong> O laboratório de inovação que ele criou (programa Geração IA → VitruLab) é seu orgulho profissional. Perguntar sobre os próximos projetos do VitruLab e como a Foursys pode ser uma extensão desse ecossistema cria abertura natural para parceria.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128188;</span> Perfil do CIO e Posição de TI</h3>
+            <div class="grid-2">
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Hierarquia</div>
+                        <div class="value">Diretoria de Tecnologia e Dados</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Títulos</div>
+                        <div class="value">Diretor de TI / CTO / CIO / Head of IT</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Escopo</div>
+                        <div class="value">Lidera tecnologia para todo o grupo Vitru (UNIASSELVI + UNICESUMAR)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Poder de Decisão</div>
+                        <div class="value">Decisor em investimentos de tecnologia e dados para o grupo</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Base de Alunos (Usuários)</div>
+                        <div class="value">1.000.000+ alunos ativos</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Polos de Ensino</div>
+                        <div class="value">2.630 polos em todos os estados do Brasil</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Cloud Partners</div>
+                        <div class="value">AWS (Virt.UAU) + Google Cloud (parceria estratégica 2025)</div>
+                    </div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Papel da TI no Planejamento</div>
+                        <div class="value">Protagonista: TI lidera inovação (VitruLab), transformação digital e compliance regulatório</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#128176;</span> Distribuição Estimada do Orçamento de TI (%)</h3>
+            <p style="margin-bottom:16px;color:var(--text-light);font-size:13px">Estimativa baseada em pesquisa pública e perfil da empresa (98% EAD, cloud-first, 1M+ alunos).</p>
+            <div class="chart-container">
+                <div class="bar"><div class="bar-label">Operação em Nuvem (AWS/GCP)</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:#1a237e">30%</div></div></div>
+                <div class="bar"><div class="bar-label">Plataformas LMS / EdTech</div><div class="bar-track"><div class="bar-fill" style="width:22%;background:#1a237e">22%</div></div></div>
+                <div class="bar"><div class="bar-label">Pessoas &amp; Equipe de TI</div><div class="bar-track"><div class="bar-fill" style="width:18%;background:#3949ab">18%</div></div></div>
+                <div class="bar"><div class="bar-label">Dados &amp; IA (VitruLab)</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:#3949ab">12%</div></div></div>
+                <div class="bar"><div class="bar-label">Infra / Polos / Rede</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:#5c6bc0">8%</div></div></div>
+                <div class="bar"><div class="bar-label">Cibersegurança / LGPD</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:#5c6bc0">5%</div></div></div>
+                <div class="bar"><div class="bar-label">Consultoria / Outsourcing</div><div class="bar-track"><div class="bar-fill" style="width:3%;background:#7986cb">3%</div></div></div>
+                <div class="bar"><div class="bar-label">Capacitação / Treinamento</div><div class="bar-track"><div class="bar-fill" style="width:2%;background:#9fa8da">2%</div></div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3><span class="icon">&#129309;</span> Preferências de Fornecedor</h3>
+            <div class="grid-2">
+                <div>
+                    <h4 style="margin-bottom:12px;color:var(--primary)">Critérios de Alta Relevância</h4>
+                    <div>
+                        <span class="tag tag-active">Inovação e capacidade técnica em IA</span>
+                        <span class="tag tag-active">ROI mensurável e valor de negócio</span>
+                        <span class="tag tag-active">Experiência em educação / EdTech</span>
+                        <span class="tag tag-active">Flexibilidade e agilidade de entrega</span>
+                        <span class="tag tag-active">Compliance e certificações (ISO, LGPD)</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-card" style="margin-bottom:12px">
+                        <div class="label">Perfil de Fornecedor Buscado</div>
+                        <div class="value">Parceiro estratégico de inovação com capacidade técnica em IA, dados e integração — não fornecedor transacional</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="label">Modelo de Contratação Preferido</div>
+                        <div class="value">Parcerias estratégicas (modelo AWS/Google Cloud) com entrega por squads e co-criação</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p><strong>foursys</strong> | Pre-Sales Intelligence Report | IT Forum ATI Trancoso 2026</p>
+        <p>Gerado automaticamente — Confidencial | Data: Abril 2026</p>
+    </div>
+</body>
+</html>

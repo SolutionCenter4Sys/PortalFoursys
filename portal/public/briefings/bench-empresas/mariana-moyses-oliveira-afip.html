@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre-Sales Intelligence — Mariana Moyses Oliveira | AFIP</title>
+<style>
+:root{
+    --primary:#1a237e; --primary-light:#3949ab; --accent:#00b894; --accent-orange:#e17055;
+    --bg:#f5f6fa; --card-bg:#ffffff; --text:#2d3436; --text-light:#636e72;
+    --border:#dfe6e9; --shadow:0 2px 12px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
+header{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:#fff;border-radius:18px;padding:34px 38px;box-shadow:var(--shadow)}
+.logo{font-size:14px;letter-spacing:.5px;opacity:.95;margin-bottom:18px;font-weight:600}
+.logo b{font-weight:800}
+header h1{font-size:30px;margin-bottom:4px}
+header h2{font-size:17px;font-weight:600;opacity:.95;margin-bottom:6px}
+header .loc{font-size:13.5px;opacity:.85;margin-bottom:16px}
+.badges{display:flex;flex-wrap:wrap;gap:8px}
+.badge{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);padding:6px 12px;border-radius:999px;font-size:12.5px;font-weight:600}
+.badge-mode-hibrido{background:linear-gradient(90deg,#00b894 0%,#1a237e 100%);color:#fff;border:none}
+.anchor-nav{display:flex;flex-wrap:wrap;gap:8px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:10px 14px;margin:24px 0;box-shadow:var(--shadow);position:sticky;top:12px;z-index:50}
+.anchor-nav a{text-decoration:none;color:var(--primary);font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:999px;transition:background .2s}
+.anchor-nav a:hover{background:var(--bg)}
+section{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:26px 30px;margin-bottom:22px;box-shadow:var(--shadow)}
+h3.sec-title{font-size:20px;color:var(--primary);margin-bottom:6px}
+.sec-sub{font-size:13px;color:var(--text-light);margin-bottom:18px}
+h4{color:var(--primary);font-size:16px;margin:14px 0 8px}
+p{margin-bottom:10px}
+.muted{color:var(--text-light)}
+.hyp{border-left:3px dashed var(--accent-orange);padding-left:10px;font-style:italic}
+.fact{border-left:3px solid var(--accent);padding-left:10px}
+/* one-pager */
+.one-pager{background:linear-gradient(135deg,#fff 0%,#fafbfc 100%);border:2px solid var(--primary);border-radius:16px;padding:28px 32px;margin-bottom:24px;box-shadow:var(--shadow)}
+.one-pager h3{font-size:18px;color:var(--primary);margin-bottom:16px;text-transform:uppercase;letter-spacing:.6px}
+.one-pager-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.one-pager-block{padding:12px 14px;border-left:3px solid var(--accent)}
+.one-pager-block .lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--text-light);font-weight:700;margin-bottom:4px}
+.one-pager-block .val{font-size:13.5px;font-weight:600;color:var(--text);line-height:1.4}
+/* story */
+.story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.story-act{color:#fff;padding:22px 24px;border-radius:12px}
+.story-act .act-lbl{font-size:11px;text-transform:uppercase;letter-spacing:1px;opacity:.85;font-weight:700;margin-bottom:6px}
+.story-act h4{color:#fff;font-size:17px;margin-bottom:10px}
+.story-act p{color:#fff;opacity:.97;font-size:13.5px}
+.story-act-1{background:linear-gradient(135deg,#6c5ce7 0%,#a29bfe 100%)}
+.story-act-2{background:linear-gradient(135deg,#e17055 0%,#d63031 100%)}
+.story-act-3{background:linear-gradient(135deg,#00b894 0%,#00cec9 100%)}
+/* business card */
+.business-card{background:#fafbfc;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:10px;padding:18px 20px;margin-bottom:14px}
+.business-card h4{margin-top:0}
+.business-card .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-light);font-weight:700;margin-top:10px}
+/* msg list */
+.msg-list{counter-reset:msg;list-style:none;padding:0}
+.msg-list li{counter-increment:msg;background:#fafbfc;border-left:4px solid #6c5ce7;padding:14px 18px 14px 56px;margin-bottom:10px;border-radius:8px;position:relative}
+.msg-list li::before{content:counter(msg);position:absolute;left:14px;top:12px;width:30px;height:30px;background:#6c5ce7;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+/* roadmap */
+.roadmap-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px}
+.roadmap-table th{background:#6c5ce7;color:#fff;padding:10px 12px;text-align:left}
+.roadmap-table td{padding:12px;border-bottom:1px solid var(--border);vertical-align:top}
+.roadmap-table .phase{font-weight:700;color:var(--primary)}
+/* info cards */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px}
+.info-card{background:#fafbfc;border:1px solid var(--border);border-radius:8px;padding:12px 14px}
+.info-card .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-light);font-weight:700}
+.info-card .v{font-size:14px;font-weight:600;margin-top:3px}
+/* market */
+.market-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:14px}
+.market-card{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:#fff;border-radius:12px;padding:18px}
+.market-card .lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;opacity:.9;margin-bottom:6px}
+.market-card .val{font-size:22px;font-weight:800}
+.market-card .src{font-size:10.5px;opacity:.8;margin-top:6px}
+/* b2b */
+.b2b-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.b2b-card{background:#fafbfc;border:1px solid var(--border);border-top:4px solid var(--accent);border-radius:10px;padding:16px 18px}
+.b2b-card h4{margin-top:0}
+.b2b-card .sub{font-size:12px;color:var(--text-light);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-top:10px;margin-bottom:4px}
+/* tags */
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.tag{padding:5px 11px;border-radius:999px;font-size:12.5px;font-weight:600}
+.tag-opportunity{background:#fff3e0;color:#e65100;border:1px solid #ffcc80}
+.tag-active{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
+.tag-priority{background:#fce4ec;color:#c62828;border:1px solid #ef9a9a}
+.tag-tech{background:#e3f2fd;color:#0d47a1;border:1px solid #90caf9}
+/* timeline */
+.timeline{list-style:none;padding-left:20px;border-left:2px solid var(--border);margin-top:10px}
+.timeline li{position:relative;padding:0 0 16px 18px}
+.timeline li::before{content:'';position:absolute;left:-27px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--accent-orange);border:2px solid #fff;box-shadow:0 0 0 2px var(--accent-orange)}
+.timeline b{color:var(--primary)}
+/* insight box */
+.insight-box{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;border-radius:12px;padding:22px 24px;margin-top:14px}
+.insight-box h4{color:#fff;margin-top:0}
+.insight-box p{color:#fff;opacity:.97}
+/* ofertas */
+.ofertas-sec{border:2px solid var(--accent)}
+.oferta-card{background:#fafbfc;border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:12px}
+.oferta-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.oferta-head h4{margin:0}
+.score{font-weight:800;color:#fff;padding:4px 12px;border-radius:999px;font-size:13px}
+.s90{background:#00b894}.s80{background:#3949ab}.s70{background:#3949ab}.s60{background:#e17055}
+.oferta-card ul{margin:8px 0 0 18px;font-size:13.5px}
+/* approach */
+.approach-card{color:#fff;border-radius:12px;padding:18px 22px;margin-bottom:12px}
+.approach-card h4{color:#fff;margin-top:0}
+.approach-card p{color:#fff;opacity:.97}
+.ac-green{background:linear-gradient(135deg,#00b894 0%,#00cec9 100%)}
+.ac-red{background:linear-gradient(135deg,#e17055 0%,#d63031 100%)}
+.ac-purple{background:linear-gradient(135deg,#6c5ce7 0%,#a29bfe 100%)}
+/* competitor */
+.competitor-card{background:#fafbfc;border:1px solid var(--border);border-left:4px solid var(--primary-light);border-radius:10px;padding:16px 18px;margin-bottom:12px}
+.competitor-card h4{margin-top:0}
+/* zone divider */
+.zone-divider{margin:56px 0 32px;border:0;height:24px;background:linear-gradient(90deg,transparent 0%,var(--border) 50%,transparent 100%);position:relative}
+.zone-divider::after{content:attr(data-label);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--bg);padding:4px 18px;color:var(--text-light);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;font-weight:700}
+.zone-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:6px;margin-bottom:14px}
+.zt-a{background:#e3f2fd;color:#0d47a1}.zt-b{background:#e8f5e9;color:#2e7d32}.zt-c{background:#fff3e0;color:#e65100}
+/* app cards */
+.app-card{background:#fafbfc;border:1px solid var(--border);border-left:4px solid var(--primary-light);border-radius:10px;padding:18px 20px;margin-bottom:14px}
+.app-card h4{margin:0 0 4px}
+.app-card .url{font-size:12.5px;color:var(--text-light);margin-bottom:12px;word-break:break-all}
+.app-stack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.app-stack-item{background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+.app-stack-item .k{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-light);font-weight:700}
+.app-stack-item .v{font-size:13px;font-weight:600;color:var(--text);margin-top:4px}
+/* master table */
+.master-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:12.5px}
+.master-table th{background:#f1f3f5;color:var(--primary);text-align:left;padding:9px 10px;border-bottom:2px solid var(--border)}
+.master-table td{padding:9px 10px;border-bottom:1px solid var(--border)}
+.master-table tr:nth-child(even) td{background:#fafbfc}
+/* stack layer */
+.stack-layer{background:#fafbfc;border-left:5px solid var(--primary-light);border-radius:8px;padding:14px 18px;margin-bottom:10px}
+.stack-layer .lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--primary-light);font-weight:700;margin-bottom:4px}
+.stack-layer .name{font-size:15px;font-weight:700;color:var(--primary);margin-bottom:6px}
+.stack-layer .cmp{font-size:13.5px;color:var(--text)}
+/* empirical */
+.empirical-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+.empirical-table th{background:#f1f3f5;color:var(--primary);text-align:left;padding:10px 12px;border-bottom:2px solid var(--border)}
+.empirical-table td{padding:10px 12px;border-bottom:1px solid var(--border)}
+.empirical-table tr:nth-child(even) td{background:#fafbfc}
+.status-200{background:#e8f5e9;color:#2e7d32;font-weight:700;padding:2px 8px;border-radius:999px;font-size:12px}
+/* gap */
+.gap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:14px}
+.gap-card{background:linear-gradient(135deg,#e17055 0%,#d63031 100%);color:#fff;border-radius:12px;padding:18px 20px}
+.gap-card .num{font-size:11px;text-transform:uppercase;letter-spacing:1px;opacity:.85;margin-bottom:6px;font-weight:700}
+.gap-card h4{color:#fff;font-size:16px;margin:0 0 8px}
+.gap-card p{color:#fff;opacity:.95;font-size:13.5px}
+.gap-card .offer{background:rgba(255,255,255,.2);padding:6px 10px;border-radius:6px;margin-top:10px;font-size:12.5px;font-weight:700}
+/* rapport */
+.rapport-sec{border:2px solid #667eea}
+/* sources */
+.sources-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:14px}
+.sources-card{background:#fafbfc;border:1px solid var(--border);border-radius:8px;padding:14px}
+.sources-card h4{font-size:13.5px;color:var(--primary);margin:0 0 8px;text-transform:uppercase;letter-spacing:.5px}
+.sources-card ul{padding-left:18px;font-size:12.5px;color:var(--text)}
+.sources-card li{margin-bottom:4px;word-break:break-word}
+/* glossary */
+.gloss dt{font-weight:700;color:var(--primary);margin-top:10px}
+.gloss dd{margin:2px 0 0 0;font-size:13.5px;color:var(--text)}
+/* footer */
+footer{text-align:center;color:var(--text-light);font-size:12.5px;margin-top:30px;line-height:1.8}
+.print-btn{position:fixed;bottom:30px;right:30px;background:var(--primary);color:#fff;border:none;border-radius:50px;padding:14px 22px;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:100}
+@media (max-width:768px){.one-pager-grid,.story-grid{grid-template-columns:1fr}.wrap{padding:16px 12px 80px}header{padding:24px}}
+@media print{.print-btn,.anchor-nav{display:none}body{background:#fff}section,header{box-shadow:none;break-inside:avoid}.gap-card,.market-card,.story-act,.approach-card,.insight-box{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ============ HEADER ============ -->
+<header>
+    <div class="logo">four<b style="color:var(--accent)">sys</b> | Pre-Sales Intelligence</div>
+    <h1>Dra. Mariana Moyses Oliveira</h1>
+    <h2>Geneticista &amp; Coordenadora de Pesquisa (Genômica / Neurodesenvolvimento) — AFIP</h2>
+    <div class="loc">Saúde · Pesquisa Científica &amp; Medicina Diagnóstica · São Paulo/SP — atuação nacional (16 estados)</div>
+    <div class="badges">
+        <span class="badge badge-mode-hibrido">Modo: Híbrido</span>
+        <span class="badge">Instituição filantrópica (OSS)</span>
+        <span class="badge">~8 mi exames/mês · 120 mi/ano</span>
+        <span class="badge">3.400+ colaboradores</span>
+        <span class="badge">FAPESP 2023–2028 (Edição Genética)</span>
+        <span class="badge">Saída: --full</span>
+    </div>
+</header>
+
+<!-- ============ ANCHOR NAV ============ -->
+<nav class="anchor-nav">
+    <a href="#sumario">Sumário</a>
+    <a href="#historia">História</a>
+    <a href="#solucoes">Soluções</a>
+    <a href="#mensagens">Mensagens</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#empresa">Empresa</a>
+    <a href="#gestor">Gestora</a>
+    <a href="#segmento">Mercado</a>
+    <a href="#b2b">Cadeia B2B</a>
+    <a href="#tensoes">Tensões</a>
+    <a href="#ofertas">Ofertas</a>
+    <a href="#estrategia">Estratégia</a>
+    <a href="#concorrentes">Concorrentes</a>
+    <a href="#stack">Stack</a>
+    <a href="#empirico">Verificação</a>
+    <a href="#gaps">GAPs</a>
+    <a href="#rapport">Rapport</a>
+    <a href="#fontes">Fontes</a>
+</nav>
+
+<!-- =================================================== -->
+<!-- ZONA A — TOPO (COMERCIAL)                            -->
+<!-- =================================================== -->
+
+<!-- A2 — Sumário 1 página -->
+<div class="one-pager" id="sumario">
+    <span class="zone-tag zt-a">Zona A — Comercial</span>
+    <h3>Sumário Executivo — 1 Página</h3>
+    <div class="one-pager-grid">
+        <div class="one-pager-block"><div class="lbl">Quem é a empresa</div><div class="val">AFIP — instituição filantrópica de saúde (tripé: pesquisa, ensino e medicina diagnóstica). ~8 mi exames/mês, 120 mi/ano de capacidade, 3.400+ colaboradores, presença em 16 estados. Maior laboratório de análises clínicas da rede ambulatorial do SUS.</div></div>
+        <div class="one-pager-block"><div class="lbl">Quem é a gestora (contato)</div><div class="val">Dra. Mariana Moyses Oliveira — geneticista e líder de projeto FAPESP de edição genética (CRISPR/Perturb-seq) em doenças do neurodesenvolvimento. Pós-doc Harvard/Broad Institute. É liderança de pesquisa/dados, não de TI corporativa.</div></div>
+        <div class="one-pager-block"><div class="lbl">O que está em jogo agora</div><div class="val">Projeto de genômica de larga escala (2023–2028) gera dados massivos de single-cell e CRISPR sem plataforma de dados/IA evidente. Em paralelo, o portal institucional roda em PHP 7.4 (fim de vida) — risco de segurança em dado sensível de saúde.</div></div>
+        <div class="one-pager-block"><div class="lbl">3 soluções recomendadas</div><div class="val">1) AI Squad + Dados/Analytics para pipeline genômico e GenAI<br>2) Cibersegurança &amp; Privacidade (LGPD/dado de saúde, ISO 27701)<br>3) Modernização de Legado + iPaaS (interoperabilidade SUS↔privado)</div></div>
+        <div class="one-pager-block"><div class="lbl">Próximo passo recomendado</div><div class="val">Workshop técnico-científico de Plataforma de Dados Genômicos com a Dra. Mariana + discovery de TI/Segurança com o CIO Milton Vieira e o Diretor de Inovação/Dados/IA Jacques Chicourel.</div></div>
+        <div class="one-pager-block"><div class="lbl">Janela de timing</div><div class="val">Projeto FAPESP em fase de geração de dados (publicações previstas em ~2 anos) + ciclo de inovação recém-reforçado com a chegada do Diretor de Inovação. Momento de entrada quente para dados e IA.</div></div>
+    </div>
+</div>
+
+<!-- A3 — História em 3 atos -->
+<section id="historia">
+    <span class="zone-tag zt-a">Zona A — Comercial</span>
+    <h3 class="sec-title">A História desta Conta em 3 Atos</h3>
+    <p class="sec-sub">Modo Híbrido — a narrativa puxa pela ciência/dados (porta de entrada via Dra. Mariana) e pelo stack institucional (porta de expansão via CIO e Diretoria de Inovação).</p>
+    <div class="story-grid">
+        <div class="story-act story-act-1">
+            <div class="act-lbl">Ato 1 — O momento de virada</div>
+            <h4>De laboratório a plataforma de ciência de dados</h4>
+            <p>A AFIP nasceu na década de 70 como fundo de incentivo à pesquisa e virou o maior laboratório clínico do SUS ambulatorial. Agora reforça a frente de Inovação, Dados e IA e abriga pesquisa genômica de ponta financiada pela FAPESP.</p>
+        </div>
+        <div class="story-act story-act-2">
+            <div class="act-lbl">Ato 2 — A tensão</div>
+            <h4>Dado científico cresce, base tecnológica envelhece</h4>
+            <p>O projeto CRISPR/Perturb-seq gera volumes massivos de dados de célula única sem plataforma de dados/IA visível. Ao mesmo tempo, o portal institucional roda em PHP 7.4 (fim de vida) — exposição em uma instituição que trata dado sensível de saúde e do SUS.</p>
+        </div>
+        <div class="story-act story-act-3">
+            <div class="act-lbl">Ato 3 — A travessia</div>
+            <h4>Da pesquisa isolada ao ecossistema de dados confiável</h4>
+            <p>A Foursys liga a ponta científica (plataforma de dados genômicos + IA) à espinha dorsal corporativa (segurança, LGPD e interoperabilidade SUS↔privado), transformando dado disperso em ativo de pesquisa e de operação diagnóstica.</p>
+        </div>
+    </div>
+</section>
+
+<!-- A4 — Soluções foco no negócio -->
+<section id="solucoes">
+    <span class="zone-tag zt-a">Zona A — Comercial</span>
+    <h3 class="sec-title">Sugestão de Soluções com Foco no Negócio</h3>
+    <p class="sec-sub">As 3 soluções de maior fit. Demais ofertas detalhadas na Zona B (Ofertas Foursys).</p>
+
+    <div class="business-card">
+        <h4>1. Plataforma de Dados Genômicos + IA para Pesquisa (AI Squad + Dados/Analytics)</h4>
+        <div class="k">Dor / Oportunidade</div>
+        <p>O projeto de edição genética em larga escala combina CRISPR, Perturb-seq e single-cell RNA-seq — gerando terabytes de dados que exigem pipeline, governança e capacidade analítica. <span class="hyp">Hipótese consultiva: não há evidência pública de uma plataforma de dados/MLOps dedicada à pesquisa, o que cria gargalo de reprodutibilidade e tempo de análise.</span></p>
+        <div class="k">Solução Foursys</div>
+        <p>Squad de IA + Engenharia de Dados para montar pipeline de dados de pesquisa (ingestão, catálogo, versionamento de datasets), automação de análises (scRNA-seq/STM) e camada de GenAI para acelerar interpretação. Conecta ao ambiente cloud já existente (Azure no grupo).</p>
+        <div class="k">Impacto esperado</div>
+        <p>Redução do tempo de análise por experimento, reprodutibilidade científica e aceleração das publicações previstas no ciclo FAPESP.</p>
+        <div class="k">Descoberta com a gestora</div>
+        <p>"Como vocês hoje armazenam, versionam e analisam os dados de single-cell e CRISPR? Qual o gargalo entre gerar o dado e publicar?"</p>
+        <div class="k">Gancho de conversa</div>
+        <p>Começa pela ciência: "Vimos o projeto de edição genética em modelos isogênicos — esse tipo de escala costuma esbarrar em infraestrutura de dados antes de esbarrar em biologia."</p>
+    </div>
+
+    <div class="business-card">
+        <h4>2. Cibersegurança &amp; Privacidade de Dado de Saúde (ISO 27001/27701 + LGPD)</h4>
+        <div class="k">Dor / Oportunidade</div>
+        <p>A AFIP processa dado sensível de saúde de milhões de pacientes SUS e privados, sob obrigações de OSS. <span class="fact">Fato verificado: o portal institucional roda em PHP 7.4 (fim de vida desde 2022) — superfície de risco conhecida.</span> Uso de Securiti.ai para consentimento mostra preocupação com privacidade já em curso.</p>
+        <div class="k">Solução Foursys</div>
+        <p>Assessment de AppSec/DevSecOps, hardening do legado, gestão de privacidade (LGPD/dado sensível) e trilha de certificação alavancando o selo ISO 27001 e 27701 da Foursys.</p>
+        <div class="k">Impacto esperado</div>
+        <p>Mitigação de risco regulatório e reputacional, redução de superfície de ataque e prontidão de compliance para contratos públicos.</p>
+        <div class="k">Descoberta com TI</div>
+        <p>"Qual o plano para os sistemas em PHP 7.4? Como vocês tratam dado sensível de paciente nos contratos de gestão do SUS?"</p>
+        <div class="k">Gancho de conversa</div>
+        <p>"Em instituição que trata dado de saúde do SUS, segurança deixou de ser custo e virou condição de contrato. Onde está hoje o maior ponto de exposição?"</p>
+    </div>
+
+    <div class="business-card">
+        <h4>3. Modernização &amp; Interoperabilidade SUS ↔ Privado (Modernização de Legado + iPaaS Digibee)</h4>
+        <div class="k">Dor / Oportunidade</div>
+        <p>A AFIP opera entre SUS (contratos de gestão, OSS) e parceiros privados, com forte componente logístico (NTHs, +200 cidades). Interoperabilidade entre sistemas públicos e privados é apontada como prioridade do setor pelas próprias CEOs de Fleury e Sabin.</p>
+        <div class="k">Solução Foursys</div>
+        <p>Integração de ecossistemas via APIs (parceria Digibee/iPaaS), padronização de troca de resultados (laudos, imagem, genômica) e modernização do legado que sustenta o fluxo laboratorial.</p>
+        <div class="k">Impacto esperado</div>
+        <p>Menos retrabalho na troca de dados, ganho de produtividade logística e prontidão para interoperabilidade regulatória.</p>
+        <div class="k">Descoberta com negócio</div>
+        <p>"Quantos sistemas precisam conversar entre captação, NTH e resultado final? Onde a integração hoje quebra ou exige trabalho manual?"</p>
+        <div class="k">Gancho de conversa</div>
+        <p>"Produtividade no diagnóstico hoje depende de integração. Como está a troca de dados entre as 50 NTHs e a operação central?"</p>
+    </div>
+</section>
+
+<!-- A5 — Mensagens-chave -->
+<section id="mensagens">
+    <span class="zone-tag zt-a">Zona A — Comercial</span>
+    <h3 class="sec-title">Mensagens-chave para a 1ª Conversa</h3>
+    <p class="sec-sub">Frases prontas para a abordagem. Ajustar o interlocutor: Dra. Mariana (pesquisa) vs CIO/Inovação (corporativo).</p>
+    <ol class="msg-list">
+        <li>"Acompanhamos o projeto de edição genética em larga escala da AFIP com a FAPESP — é o tipo de ciência que normalmente esbarra primeiro em infraestrutura de dados, não em biologia."</li>
+        <li>"A próxima fronteira de quem faz Perturb-seq e single-cell não é gerar mais dado, é transformar dado em descoberta reprodutível e publicável em menos tempo."</li>
+        <li>"Vocês estão num momento raro: reforçaram a diretoria de Inovação, Dados e IA — o que abre espaço para conectar pesquisa de ponta e operação diagnóstica na mesma base de dados."</li>
+        <li>"Numa OSS que trata dado de saúde do SUS, segurança e privacidade viraram condição de contrato. Somos ISO 27001 e 27701 e ajudamos a fechar essas lacunas sem travar a operação."</li>
+        <li>"Vimos que o portal institucional ainda roda numa versão de PHP fora de suporte — é um ponto de exposição rápido de endereçar e de baixo risco para começar uma parceria."</li>
+        <li>"Interoperabilidade entre SUS e privado é a pauta que as próprias líderes do setor (Fleury, Sabin) colocaram como prioridade. Temos prática de integração via iPaaS para isso."</li>
+        <li>"Não viemos vender tecnologia: viemos entender onde o dado da AFIP perde valor entre ser gerado e ser usado — na pesquisa e na operação."</li>
+    </ol>
+</section>
+
+<!-- A6 — Roadmap -->
+<section id="roadmap">
+    <span class="zone-tag zt-a">Zona A — Comercial</span>
+    <h3 class="sec-title">Roadmap de Engajamento Foursys → AFIP</h3>
+    <table class="roadmap-table">
+        <thead><tr><th>Fase</th><th>Ação</th><th>Entregável</th><th>Prazo</th></tr></thead>
+        <tbody>
+            <tr><td class="phase">1 · Conexão</td><td>Conversa de valor com a Dra. Mariana (pesquisa) e contato paralelo com Diretoria de Inovação/Dados/IA</td><td>Mapa de stakeholders e dores priorizadas</td><td>Semana 1–2</td></tr>
+            <tr><td class="phase">2 · Discovery</td><td>Diagnóstico duplo: (a) pipeline de dados genômicos; (b) segurança/legado do portal institucional</td><td>Relatório de gaps + quick-wins de segurança</td><td>Semana 3–5</td></tr>
+            <tr><td class="phase">3 · POC</td><td>Prova de valor em um caso: automação de análise scRNA-seq OU hardening + LGPD do portal</td><td>POC funcional com métrica de ganho</td><td>Mês 2–3</td></tr>
+            <tr><td class="phase">4 · Squad Pilot</td><td>Squad de IA/Dados dedicado à plataforma de dados de pesquisa</td><td>MVP da plataforma + governança de dados</td><td>Mês 3–5</td></tr>
+            <tr><td class="phase">5 · Escala</td><td>Extensão para interoperabilidade SUS↔privado (iPaaS) e GenAI em produtividade laboratorial</td><td>Integrações em produção + roadmap de IA</td><td>Mês 6–9</td></tr>
+            <tr><td class="phase">6 · Programa</td><td>Modelo multi-squad / AMS com governança de segurança contínua</td><td>Contrato-programa (MSA) e SLAs</td><td>Mês 9–12</td></tr>
+        </tbody>
+    </table>
+</section>
+
+<hr class="zone-divider" data-label="Zona B — Pré-vendas">
+
+<!-- =================================================== -->
+<!-- ZONA B — MIOLO (PRÉ-VENDAS)                          -->
+<!-- =================================================== -->
+
+<!-- B1 — Empresa -->
+<section id="empresa">
+    <span class="zone-tag zt-b">Zona B — Pré-vendas</span>
+    <h3 class="sec-title">Mapeamento Estratégico da Empresa</h3>
+    <p>A AFIP (Associação Fundo de Incentivo à Pesquisa) é uma instituição privada, filantrópica e sem fins lucrativos, fundada na década de 1970 por médicos, pesquisadores e professores. Opera um tripé: pesquisa científica, ensino e medicina diagnóstica. É qualificada como Organização Social de Saúde (OSS) e celebra contratos de gestão com o poder público — é o maior laboratório de análises clínicas da rede ambulatorial do SUS. Foi pioneira em exames de HIV no fim dos anos 80.</p>
+    <div class="info-grid">
+        <div class="info-card"><div class="k">Razão social</div><div class="v">Associação Fundo de Incentivo à Pesquisa</div></div>
+        <div class="info-card"><div class="k">Sede</div><div class="v">São Paulo/SP (Rua Padre Machado, 1040 — Saúde)</div></div>
+        <div class="info-card"><div class="k">Abrangência</div><div class="v">16 estados · +200 cidades · 50 NTHs</div></div>
+        <div class="info-card"><div class="k">Categoria</div><div class="v">Privada filantrópica · OSS (Lei 9.637/1998) · CEBAS</div></div>
+        <div class="info-card"><div class="k">Fundação</div><div class="v">Década de 1970 (45+ anos)</div></div>
+        <div class="info-card"><div class="k">Colaboradores</div><div class="v">3.400+ (Gupy/2025)</div></div>
+        <div class="info-card"><div class="k">Volume</div><div class="v">~8 mi exames/mês · capacidade 120 mi/ano</div></div>
+        <div class="info-card"><div class="k">Acreditações</div><div class="v">ONA Nível 3 (Excelência) · PALC (SBPC/ML)</div></div>
+    </div>
+    <div class="tags">
+        <span class="tag tag-tech">Cloud: Azure (institucional)</span>
+        <span class="tag tag-tech">WordPress / PHP</span>
+        <span class="tag tag-tech">Webflow (Diagnóstica)</span>
+        <span class="tag tag-tech">Gupy (RH/ATS)</span>
+        <span class="tag tag-tech">Securiti.ai (consentimento)</span>
+    </div>
+</section>
+
+<!-- B2 — Gestora (decisão) -->
+<section id="gestor">
+    <span class="zone-tag zt-b">Zona B — Pré-vendas</span>
+    <h3 class="sec-title">Mapeamento da Gestora — Foco em Decisão</h3>
+    <p class="sec-sub">A contato indicada (mariana.oliveira@afip.com.br) é a Dra. Mariana Moyses Oliveira — liderança de pesquisa/dados científicos, não de TI corporativa. Decisões de TI institucional passam pelo CIO e pela Diretoria de Inovação (ver C5).</p>
+    <h4>Perfil executivo / científico</h4>
+    <p>Geneticista e coordenadora de projeto de pesquisa. Lidera a frente de edição genética em larga escala (CRISPR + Perturb-seq + single-cell RNA-seq) aplicada a doenças do neurodesenvolvimento e transtorno do espectro autista. Orienta alunos de IC, mestrado, doutorado e pós-doc em parceria com USP e UNIFESP.</p>
+    <h4>Trajetória</h4>
+    <p>Graduada em Biomedicina (UNIFESP); Mestre e Doutora em Genética (UNIFESP); estágio de pesquisa na Universidade de Lausanne (Suíça); pós-doutorado no Center for Genomic Medicine do Massachusetts General Hospital, ligado à Harvard Medical School e ao Broad Institute (Harvard/MIT). Coautora de papers em plataformas de high-throughput neural development e modelos neuronais iPSC (MEF2C).</p>
+    <h4>Contexto de decisão</h4>
+    <p>Influencia diretamente as escolhas de ferramentas/infraestrutura do projeto de pesquisa e a interlocução com a Diretoria de Inovação, Dados e IA. <span class="hyp">Hipótese consultiva: tem poder técnico e científico, mas o orçamento de TI corporativa e segurança está sob o CIO Milton Vieira e a VP de Operações Roberta Siufi.</span> É a porta de entrada ideal pelo ângulo de dados/IA de pesquisa.</p>
+    <h4>Temas prováveis de interesse</h4>
+    <div class="tags">
+        <span class="tag tag-priority">Reprodutibilidade científica</span>
+        <span class="tag tag-priority">Pipeline de dados de célula única</span>
+        <span class="tag tag-priority">Tempo até publicação</span>
+        <span class="tag tag-priority">Colaboração multi-instituição</span>
+        <span class="tag tag-priority">IA aplicada a genômica</span>
+    </div>
+</section>
+
+<!-- B3 — Segmento + Mercado -->
+<section id="segmento">
+    <span class="zone-tag zt-b">Zona B — Pré-vendas</span>
+    <h3 class="sec-title">Mapeamento do Segmento + Mercado Quantificado</h3>
+    <p>A AFIP atua em dois mundos conectados: <b>medicina diagnóstica</b> (análises clínicas, forte presença no SUS via OSS) e <b>pesquisa científica em saúde</b> (genômica, neurodesenvolvimento). O modelo operacional é logístico-intensivo: coleta distribuída em +200 cidades, processamento em NTHs e operação central de alta escala. As prioridades do setor são produtividade, interoperabilidade, digitalização e uso inteligente de dados.</p>
+    <div class="market-grid">
+        <div class="market-card"><div class="lbl">Exames no Brasil (2024)</div><div class="val">2,53 bi</div><div class="src">+10% a/a · Painel Abramed 2025</div></div>
+        <div class="market-card"><div class="lbl">Receita bruta associadas Abramed</div><div class="val">R$ 33,9 bi</div><div class="src">+28,6% vs 2023</div></div>
+        <div class="market-card"><div class="lbl">Análises clínicas (% volume)</div><div class="val">94%</div><div class="src">principal modalidade · Abramed</div></div>
+        <div class="market-card"><div class="lbl">Lab-to-Lab (CAGR)</div><div class="val">~11% a.a.</div><div class="src">desde 2018 · FID 2024</div></div>
+        <div class="market-card"><div class="lbl">Empregos no setor</div><div class="val">307 mil</div><div class="src">11% dos empregos em saúde</div></div>
+        <div class="market-card"><div class="lbl">Exames SUS (2024)</div><div class="val">1,34 bi</div><div class="src">vs 1,19 bi saúde suplementar</div></div>
+    </div>
+    <h4>Tendências e riscos relevantes</h4>
+    <div class="tags">
+        <span class="tag tag-active">Envelhecimento populacional → demanda</span>
+        <span class="tag tag-active">Interoperabilidade SUS↔privado</span>
+        <span class="tag tag-active">Genômica e oncologia de precisão</span>
+        <span class="tag tag-priority">Pressão de produtividade / overuse</span>
+        <span class="tag tag-priority">Inflação médica e custo de insumos</span>
+        <span class="tag tag-opportunity">IA em laudos e operação laboratorial</span>
+    </div>
+</section>
+
+<!-- B4 — Cadeia B2B -->
+<section id="b2b">
+    <span class="zone-tag zt-b">Zona B — Pré-vendas</span>
+    <h3 class="sec-title">Cadeia B2B Downstream</h3>
+    <p class="sec-sub">A AFIP é fortemente B2B/B2G: presta diagnóstico para o setor público e parceiros privados, além de fomentar pesquisa com universidades e agências.</p>
+    <div class="b2b-grid">
+        <div class="b2b-card">
+            <h4>Setor Público / SUS (B2G)</h4>
+            <div class="sub">Confirmado (fonte: site AFIP)</div>
+            <p>CEAC Norte (30 unidades, 12 hospitais), CAC Guarulhos (103 unidades). ~12,8 mi exames/ano (CEAC) + ~4,2 mi/ano (Guarulhos) via contratos de gestão OSS.</p>
+        </div>
+        <div class="b2b-card">
+            <h4>Pesquisa &amp; Academia</h4>
+            <div class="sub">Confirmado</div>
+            <p>FAPESP (financiamento 2023–2028), USP, UNIFESP. Colaboração internacional (Broad Institute/Harvard via trajetória da equipe).</p>
+        </div>
+        <div class="b2b-card">
+            <h4>Parceiros privados / Lab-to-Lab</h4>
+            <div class="sub">Provável (sob NDA)</div>
+            <p><span class="hyp">Hipótese consultiva:</span> apoio laboratorial a clínicas, hospitais e laboratórios menores — mercado Lab-to-Lab que cresce ~11% a.a. Sinais: capacidade instalada de 120 mi exames/ano e logística nacional (50 NTHs).</p>
+        </div>
+        <div class="b2b-card">
+            <h4>Operadoras &amp; Saúde Suplementar</h4>
+            <div class="sub">Provável (sob NDA)</div>
+            <p><span class="hyp">Hipótese consultiva:</span> exames para beneficiários de planos, dado o porte e acreditação. Sinais: posicionamento como referência nacional em medicina diagnóstica.</p>
+        </div>
+    </div>
+</section>
+
+<!-- B5 — Resumo executivo -->
+<section id="executivo">
+    <span class="zone-tag zt-b">Zona B — Pré-vendas</span>
+    <h3 class="sec-title">Resumo Executivo</h3>
+    <div class="insight-box">
+        <h4>Contexto estratégico &amp; timing</h4>
+        <p>A AFIP é uma instituição de saúde madura em operação diagnóstica e ambiciosa em ciência. A contratação recente de um Diretor de Inovação, Dados e IA (Jacques Chicourel) sinaliza apetite por transformação digital e por extrair mais valor dos dados — exatamente onde a Foursys joga. A porta de entrada via Dra. Mariana é técnica e de alto valor (genômica de larga escala), e abre caminho para a conversa corporativa.</p>
+        <p>A tensão central é a distância entre o dado e o valor: o projeto científico gera dados massivos sem plataforma evidente; a operação processa dado sensível de saúde sobre uma base institucional com componentes em fim de vida (PHP 7.4). São duas frentes de entrada de baixo atrito — uma pela inovação (dados/IA), outra pela segurança (LGPD/AppSec).</p>
+        <p>O setor reforça a urgência: mercado diagnóstico cresceu dois dígitos, com produtividade e interoperabilidade no topo da agenda das próprias líderes (Dasa, Fleury, Sabin). Para a AFIP, que equilibra missão filantrópica e excelência técnica, parceiros que conectem ciência, dados e segurança são estratégicos — e a Foursys tem o portfólio completo para isso.</p>
+    </div>
+</section>
+
+<!-- B6 — Tensões -->
+<section id="tensoes">
+    <span class="zone-tag zt-b">Zona B — Pré-vendas</span>
+    <h3 class="sec-title">Tensões, Lacunas e Oportunidades</h3>
+
+    <h4>6.1 — Top Dores Estruturais</h4>
+    <ul class="timeline">
+        <li><b>Dado científico sem plataforma:</b> Perturb-seq e scRNA-seq geram volumes massivos sem evidência de data platform/MLOps dedicada à pesquisa.</li>
+        <li><b>Legado em fim de vida:</b> portal institucional em PHP 7.4 (sem suporte desde 2022) tratando contexto de dado sensível de saúde.</li>
+        <li><b>Fragmentação digital:</b> três stacks distintos (WordPress/Azure, Webflow, Gupy) sem camada unificada de dados/experiência.</li>
+        <li><b>Interoperabilidade SUS↔privado:</b> troca de resultados entre 50 NTHs, contratos públicos e parceiros exige integração robusta.</li>
+        <li><b>Produtividade sob pressão:</b> inflação médica e overuse pressionam custo por exame; ganho depende de automação e dados.</li>
+        <li><b>Privacidade/LGPD em OSS:</b> obrigação reforçada de proteção de dado de paciente SUS e privado.</li>
+    </ul>
+
+    <h4>6.2 — Top Desejos Estratégicos</h4>
+    <div class="tags">
+        <span class="tag tag-priority">Acelerar publicações científicas</span>
+        <span class="tag tag-priority">Maximizar uso de dados (lab + pesquisa)</span>
+        <span class="tag tag-priority">Inovação para além do diagnóstico</span>
+        <span class="tag tag-priority">Experiência do cliente/paciente</span>
+        <span class="tag tag-priority">Sustentabilidade e eficiência operacional</span>
+    </div>
+
+    <h4>6.3 — Mapa de Investimentos (12 meses) — sinais públicos</h4>
+    <div class="tags">
+        <span class="tag tag-active">Diretoria de Inovação, Dados e IA (nova)</span>
+        <span class="tag tag-active">Projeto FAPESP de genômica (em curso)</span>
+        <span class="tag tag-active">Governança e consentimento (Securiti.ai)</span>
+        <span class="tag tag-active">Cultura/mindset digital (release oficial)</span>
+    </div>
+
+    <h4>6.4 — Oportunidades sem Fornecedor Definido</h4>
+    <div class="tags">
+        <span class="tag tag-opportunity">Plataforma de dados genômicos</span>
+        <span class="tag tag-opportunity">GenAI em produtividade laboratorial</span>
+        <span class="tag tag-opportunity">Modernização do portal institucional</span>
+        <span class="tag tag-opportunity">iPaaS / interoperabilidade</span>
+        <span class="tag tag-opportunity">AppSec / DevSecOps em dado de saúde</span>
+    </div>
+</section>
+
+<!-- B7 — Ofertas Foursys -->
+<section id="ofertas" class="ofertas-sec">
+    <span class="zone-tag zt-b">Zona B — Pré-vendas</span>
+    <h3 class="sec-title">Ofertas Foursys Recomendadas</h3>
+    <p class="sec-sub">Ordenadas por score de fit. Inclui apenas ofertas com score ≥ 50.</p>
+
+    <div class="oferta-card">
+        <div class="oferta-head"><h4>AI Squad (IA + Engenharia de Dados)</h4><span class="score s90">92</span></div>
+        <p>Squads de IA com produto proprietário para acelerar desenvolvimento, automação e analytics. Aplicável diretamente ao pipeline de dados genômicos (scRNA-seq/Perturb-seq/STM) e à GenAI para interpretação e produtividade laboratorial.</p>
+        <ul>
+            <li>Projeto científico ativo gerando dados massivos sem plataforma evidente — fit direto.</li>
+            <li>Diretoria de Inovação, Dados e IA recém-criada → sponsor natural.</li>
+            <li>GenAI conecta pesquisa e operação na mesma base de dados.</li>
+        </ul>
+    </div>
+
+    <div class="oferta-card">
+        <div class="oferta-head"><h4>Cibersegurança &amp; Privacidade (ISO 27001/27701)</h4><span class="score s80">85</span></div>
+        <p>Segurança da informação, privacidade (LGPD/DLP), gestão de risco e continuidade. Foursys é ISO 27001 e 27701 certificada — diferencial em dado sensível de saúde e contratos públicos.</p>
+        <ul>
+            <li>Portal institucional em PHP 7.4 (EOL) — risco concreto e verificado.</li>
+            <li>OSS com dado de paciente SUS → obrigação de compliance elevada.</li>
+            <li>Securiti.ai já em uso sinaliza maturidade inicial de privacidade a evoluir.</li>
+        </ul>
+    </div>
+
+    <div class="oferta-card">
+        <div class="oferta-head"><h4>Modernização de Legado + iPaaS (Digibee)</h4><span class="score s70">78</span></div>
+        <p>Modernização de sistemas e integração de ecossistemas via APIs (parceria Digibee/iPaaS). Endereça interoperabilidade SUS↔privado e o portal legado.</p>
+        <ul>
+            <li>Interoperabilidade é prioridade declarada pelas líderes do setor.</li>
+            <li>Operação multi-NTH e multi-contrato exige integração robusta.</li>
+            <li>Modernização do WordPress/PHP legado como quick-win inicial.</li>
+        </ul>
+    </div>
+
+    <div class="oferta-card">
+        <div class="oferta-head"><h4>Engenharia Digital (plataformas, cloud-native, observabilidade)</h4><span class="score s60">66</span></div>
+        <p>Construção de plataformas digitais, microsserviços, DevOps/SRE e observabilidade. Unifica os 3 stacks fragmentados e dá base à plataforma de dados.</p>
+        <ul>
+            <li>Três stacks distintos (WordPress, Webflow, Gupy) sem camada comum.</li>
+            <li>Ambiente Azure existente facilita evolução cloud-native.</li>
+        </ul>
+    </div>
+
+    <div class="oferta-card">
+        <div class="oferta-head"><h4>FourBlox (aceleração de desenvolvimento)</h4><span class="score s60">58</span></div>
+        <p>Plataforma proprietária de componentes reutilizáveis para reduzir time-to-market e custo de projetos — útil para frentes digitais voltadas a paciente/cliente.</p>
+        <ul>
+            <li>Pressão de eficiência/custo em instituição filantrópica.</li>
+            <li>Acelera entregas digitais de experiência sem inflar squad.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- B8 — Estratégia -->
+<section id="estrategia">
+    <span class="zone-tag zt-b">Zona B — Pré-vendas</span>
+    <h3 class="sec-title">Estratégia de Abordagem</h3>
+    <div class="approach-card ac-green">
+        <h4>Gancho de entrada</h4>
+        <p>Entrar pela ciência com a Dra. Mariana: oferecer um diagnóstico do pipeline de dados genômicos. É tema de alto valor, baixo atrito comercial e gera credibilidade técnica que abre a conversa corporativa com a Diretoria de Inovação/Dados/IA.</p>
+    </div>
+    <div class="approach-card ac-red">
+        <h4>Oportunidade quente</h4>
+        <p>Dois projetos sem fornecedor evidente: (1) plataforma de dados/IA para o projeto FAPESP em fase de geração de dados; (2) modernização + segurança do portal em PHP 7.4. Ambos com janela aberta agora.</p>
+    </div>
+    <div class="approach-card ac-purple">
+        <h4>Diferencial competitivo Foursys</h4>
+        <p>Combinação rara: AI Squad + Engenharia de Dados + Cibersegurança ISO 27001/27701 + iPaaS Digibee, com 24 anos e 41.000+ projetos. Capacidade de ligar ponta científica e operação diagnóstica na mesma parceria.</p>
+    </div>
+    <div class="insight-box">
+        <h4>Insights de negócio</h4>
+        <p>O setor cresce dois dígitos e coloca produtividade, interoperabilidade e dados no centro. Para uma OSS filantrópica, o argumento vencedor é "mais ciência e mais saúde por real investido" — eficiência via dados e IA, com segurança como condição de contrato. Evitar discurso de produto: falar de reprodutibilidade científica, tempo até publicação e risco regulatório.</p>
+    </div>
+</section>
+
+<!-- B9 — Concorrentes -->
+<section id="concorrentes">
+    <span class="zone-tag zt-b">Zona B — Pré-vendas</span>
+    <h3 class="sec-title">Benchmark de Concorrentes + Gap Analysis</h3>
+    <div class="competitor-card">
+        <h4>Dasa</h4>
+        <p>Maior rede de diagnóstico do país. Forte em escala, plataforma digital de saúde, dados e IA aplicada a laudos. Referência em produtividade e interoperabilidade.</p>
+    </div>
+    <div class="competitor-card">
+        <h4>Grupo Fleury</h4>
+        <p>530 unidades, 31 marcas, 14 UFs. Posicionamento premium e B2B. CEO Jeane Tsutsui pauta interoperabilidade e precisão de dados como diferencial estratégico.</p>
+    </div>
+    <div class="competitor-card">
+        <h4>Grupo Sabin</h4>
+        <p>Expansão nacional com forte cultura de dados. CEO Lídia Abdalla destaca interoperabilidade em genômica e oncologia como vetor de valor.</p>
+    </div>
+    <div class="competitor-card">
+        <h4>Hospital Israelita Albert Einstein (diagnóstico + pesquisa)</h4>
+        <p>Referência que combina, como a AFIP, pesquisa científica e diagnóstico — porém com investimento digital e de dados muito mais maduro. Benchmark direto da ambição AFIP.</p>
+    </div>
+    <div class="insight-box">
+        <h4>Gap Analysis</h4>
+        <p>Frente aos concorrentes, a AFIP tem ativo único (tripé pesquisa+ensino+diagnóstico + maior lab do SUS ambulatorial), mas maturidade digital aparentemente inferior: stacks fragmentados, legado em fim de vida e ausência de plataforma de dados evidente. O caminho competitivo é transformar o dado científico e operacional em vantagem — exatamente a lacuna que a Foursys preenche.</p>
+    </div>
+</section>
+
+<hr class="zone-divider" data-label="Zona C — Apêndice Técnico">
+
+<!-- =================================================== -->
+<!-- ZONA C — APÊNDICE TÉCNICO (SQUAD)                    -->
+<!-- =================================================== -->
+
+<!-- C1 — Mapeamento técnico -->
+<section id="stack">
+    <span class="zone-tag zt-c">Zona C — Apêndice Técnico</span>
+    <h3 class="sec-title">C1. Mapeamento Técnico Detalhado</h3>
+
+    <h4>C1.1 — Inventário de Aplicações</h4>
+    <div class="app-card">
+        <h4>Portal Institucional — AFIP <span style="font-weight:400;font-size:12px;color:var(--text-light)">(Institucional)</span></h4>
+        <div class="url">https://www.afip.com.br/</div>
+        <div class="app-stack-grid">
+            <div class="app-stack-item"><div class="k">Frontend/CMS</div><div class="v">WordPress (wp-json)</div></div>
+            <div class="app-stack-item"><div class="k">Linguagem</div><div class="v">PHP 7.4.30 (EOL)</div></div>
+            <div class="app-stack-item"><div class="k">Servidor</div><div class="v">Microsoft IIS 10.0 + ASP.NET</div></div>
+            <div class="app-stack-item"><div class="k">Cloud/Host</div><div class="v">Azure (App Gateway + ARRAffinity)</div></div>
+            <div class="app-stack-item"><div class="k">Consentimento</div><div class="v">Securiti.ai (cookie SDK)</div></div>
+            <div class="app-stack-item"><div class="k">Banco/API</div><div class="v">Não publicado</div></div>
+        </div>
+    </div>
+    <div class="app-card">
+        <h4>Afip Medicina Diagnóstica <span style="font-weight:400;font-size:12px;color:var(--text-light)">(Institucional/Serviços)</span></h4>
+        <div class="url">https://www.afipdiagnostica.com.br/</div>
+        <div class="app-stack-grid">
+            <div class="app-stack-item"><div class="k">Frontend/CMS</div><div class="v">Webflow</div></div>
+            <div class="app-stack-item"><div class="k">CDN/WAF</div><div class="v">Cloudflare</div></div>
+            <div class="app-stack-item"><div class="k">Edge/Compute</div><div class="v">Lambda (x-lambda-id) · us-east-1</div></div>
+            <div class="app-stack-item"><div class="k">Segurança</div><div class="v">HSTS habilitado</div></div>
+            <div class="app-stack-item"><div class="k">Linguagem/Backend</div><div class="v">Gerenciado (Webflow)</div></div>
+            <div class="app-stack-item"><div class="k">Banco/API</div><div class="v">Não publicado</div></div>
+        </div>
+    </div>
+    <div class="app-card">
+        <h4>Portal de Carreiras — AFIP <span style="font-weight:400;font-size:12px;color:var(--text-light)">(Portal/RH)</span></h4>
+        <div class="url">https://afip.gupy.io/</div>
+        <div class="app-stack-grid">
+            <div class="app-stack-item"><div class="k">Plataforma</div><div class="v">Gupy (ATS SaaS)</div></div>
+            <div class="app-stack-item"><div class="k">Frontend</div><div class="v">Next.js</div></div>
+            <div class="app-stack-item"><div class="k">CDN</div><div class="v">AWS CloudFront</div></div>
+            <div class="app-stack-item"><div class="k">CRM/Service</div><div class="v">Salesforce Service Cloud</div></div>
+            <div class="app-stack-item"><div class="k">Analytics</div><div class="v">Segment, Mixpanel, Heap, Hotjar, Clarity</div></div>
+            <div class="app-stack-item"><div class="k">Acessibilidade</div><div class="v">HandTalk</div></div>
+        </div>
+    </div>
+
+    <h4>C1.2 — Tabela Mestra Cross-Aplicação</h4>
+    <table class="master-table">
+        <thead><tr><th>Aplicação</th><th>Frontend/CMS</th><th>Linguagem</th><th>Servidor/Backend</th><th>CDN/WAF</th><th>Cloud</th></tr></thead>
+        <tbody>
+            <tr><td>Portal Institucional</td><td>WordPress</td><td>PHP 7.4.30</td><td>IIS 10 + ASP.NET</td><td>Não detectado</td><td>Azure</td></tr>
+            <tr><td>Afip Diagnóstica</td><td>Webflow</td><td>Gerenciado</td><td>Webflow + Lambda</td><td>Cloudflare</td><td>AWS (us-east-1)</td></tr>
+            <tr><td>Carreiras (Gupy)</td><td>Next.js</td><td>JavaScript/Node</td><td>Gupy SaaS</td><td>CloudFront</td><td>AWS</td></tr>
+        </tbody>
+    </table>
+
+    <h4>C1.3 — Stack em 7 Camadas Arquiteturais</h4>
+    <div class="stack-layer"><div class="lbl">C7 — Experiência &amp; Engajamento</div><div class="name">CMS fragmentado + ATS</div><div class="cmp">WordPress (institucional) + Webflow (diagnóstica) + Gupy (RH). Analytics via Segment/Mixpanel/Heap/Hotjar/Clarity no portal de carreiras. Sem CDP unificado evidente.</div></div>
+    <div class="stack-layer"><div class="lbl">C6 — Aplicações de Negócio</div><div class="name">LIS/Salesforce (parcial)</div><div class="cmp">Salesforce Service Cloud no fluxo de recrutamento. LIS (sistema laboratorial) não publicado. CRM/ERP corporativo: não publicado.</div></div>
+    <div class="stack-layer"><div class="lbl">C5 — Core Transacional</div><div class="name">ERP / Sistema laboratorial</div><div class="cmp">Não publicado. <span class="hyp">Hipótese: ERP + LIS dedicados à operação de 8 mi exames/mês e contratos OSS.</span></div></div>
+    <div class="stack-layer"><div class="lbl">C4 — Dados &amp; Analytics</div><div class="name">Sem plataforma de dados evidente</div><div class="cmp">Pesquisa gera scRNA-seq/Perturb-seq/STM (alto volume). Sem data lake/lakehouse/MLOps público. Lacuna central de oportunidade.</div></div>
+    <div class="stack-layer"><div class="lbl">C3 — IA, Automação &amp; Indústria 4.0</div><div class="name">IA científica pontual</div><div class="cmp">Uso de modelagem estatística (Structural Topic Modeling) e bioinformática na pesquisa. Sem GenAI corporativa evidente. Diretoria de IA recém-criada.</div></div>
+    <div class="stack-layer"><div class="lbl">C2 — Cibersegurança &amp; Compliance</div><div class="name">Consentimento + HSTS (parcial)</div><div class="cmp">Securiti.ai (consentimento/privacidade), HSTS no site diagnóstica, Cloudflare como WAF/CDN. Risco: PHP 7.4 EOL no institucional. ISO de segurança não publicada.</div></div>
+    <div class="stack-layer"><div class="lbl">C1 — Infraestrutura Cloud</div><div class="name">Multicloud de fato (Azure + AWS)</div><div class="cmp">Azure (portal institucional, App Gateway/IIS) + AWS (Webflow/Cloudflare e Gupy/CloudFront). Operação distribuída em 50 NTHs.</div></div>
+
+    <p class="muted" style="margin-top:14px">Comparativo Brasil vs Global (C1.4): não aplicável — instituição nacional, sem stack global de grupo multinacional.</p>
+</section>
+
+<!-- C2 — Verificação empírica -->
+<section id="empirico">
+    <span class="zone-tag zt-c">Zona C — Apêndice Técnico</span>
+    <h3 class="sec-title">C2. Verificação Empírica de Canais Digitais</h3>
+    <p class="sec-sub">Inspeção direta de headers HTTP via requisição em 05/06/2026, 12:00 (UTC-3).</p>
+    <table class="empirical-table">
+        <thead><tr><th>URL</th><th>Status</th><th>Frontend/Servidor detectado</th><th>CDN/Proxy</th><th>Observação</th></tr></thead>
+        <tbody>
+            <tr><td>www.afip.com.br</td><td><span class="status-200">200</span></td><td>WordPress · PHP 7.4.30 · IIS 10 · ASP.NET</td><td>Azure App Gateway</td><td>PHP em fim de vida; wp-json exposto; ARRAffinity (Azure App Service)</td></tr>
+            <tr><td>www.afipdiagnostica.com.br</td><td><span class="status-200">200</span></td><td>Webflow (x-wf-region, surrogate-key)</td><td>Cloudflare</td><td>HSTS ativo; cache HIT; Lambda edge us-east-1</td></tr>
+            <tr><td>afip.gupy.io</td><td><span class="status-200">200</span></td><td>Next.js (Gupy ATS)</td><td>AWS CloudFront</td><td>CSP robusta; Salesforce, Segment, Mixpanel, Heap, Hotjar, Clarity, HandTalk</td></tr>
+        </tbody>
+    </table>
+    <h4>Trackers / serviços detectados</h4>
+    <div class="tags">
+        <span class="tag tag-tech">Securiti.ai (consentimento)</span>
+        <span class="tag tag-tech">Salesforce Service Cloud</span>
+        <span class="tag tag-tech">Segment (CDP)</span>
+        <span class="tag tag-tech">Mixpanel</span>
+        <span class="tag tag-tech">Heap</span>
+        <span class="tag tag-tech">Hotjar</span>
+        <span class="tag tag-tech">Microsoft Clarity</span>
+        <span class="tag tag-tech">HandTalk (acessibilidade)</span>
+    </div>
+    <p class="muted" style="margin-top:10px">Verificação realizada em 05/06/2026. Banco de dados, LIS e ERP não são detectáveis externamente — registrados como "não publicado".</p>
+</section>
+
+<!-- C3 — GAPs -->
+<section id="gaps">
+    <span class="zone-tag zt-c">Zona C — Apêndice Técnico</span>
+    <h3 class="sec-title">C3. GAPs Tecnológicos Numerados</h3>
+    <div class="gap-grid">
+        <div class="gap-card">
+            <div class="num">GAP 1 · Dados / IA</div>
+            <h4>Plataforma de dados genômicos ausente</h4>
+            <p>Projeto FAPESP gera scRNA-seq/Perturb-seq sem data lake/MLOps evidente. Evidência: papers da equipe (PMC11463611) usam pipelines high-throughput que exigem infraestrutura de dados robusta — Einstein/Sabin já têm genômica em plataforma.</p>
+            <div class="offer">→ AI Squad + Engenharia de Dados</div>
+        </div>
+        <div class="gap-card">
+            <div class="num">GAP 2 · Segurança</div>
+            <h4>Legado em fim de vida (PHP 7.4)</h4>
+            <p>Portal institucional roda PHP 7.4.30, sem suporte de segurança desde 2022. Evidência: header X-Powered-By verificado empiricamente. Risco elevado por se tratar de instituição com dado de saúde.</p>
+            <div class="offer">→ Cibersegurança + Modernização</div>
+        </div>
+        <div class="gap-card">
+            <div class="num">GAP 3 · Integração</div>
+            <h4>Interoperabilidade SUS ↔ privado</h4>
+            <p>Operação multi-NTH e multi-contrato sem camada de integração evidente. Evidência: CEOs de Fleury e Sabin apontam interoperabilidade (radiologia, genômica, oncologia) como prioridade do setor.</p>
+            <div class="offer">→ iPaaS Digibee + Modernização</div>
+        </div>
+        <div class="gap-card">
+            <div class="num">GAP 4 · Governança / IA</div>
+            <h4>Governança de IA e GenAI inexistente</h4>
+            <p>Diretoria de Inovação/Dados/IA recém-criada, sem framework de GenAI/MLOps público. Evidência: release oficial AFIP sobre maximizar uso de dados em laboratórios. Concorrentes já aplicam IA a laudos.</p>
+            <div class="offer">→ AI Squad (estratégia de IA)</div>
+        </div>
+        <div class="gap-card">
+            <div class="num">GAP 5 · Segurança / Dados</div>
+            <h4>Privacidade de dado sensível (LGPD)</h4>
+            <p>OSS processa dado de paciente SUS e privado. Evidência: uso de Securiti.ai mostra início de jornada de consentimento, mas sem ISO 27701 pública nem DLP evidente.</p>
+            <div class="offer">→ Cibersegurança (ISO 27701)</div>
+        </div>
+        <div class="gap-card">
+            <div class="num">GAP 6 · Experiência</div>
+            <h4>Stacks digitais fragmentados</h4>
+            <p>Três plataformas distintas (WordPress/Azure, Webflow/Cloudflare, Gupy/AWS) sem CDP unificado. Evidência: verificação empírica dos 3 domínios. Dado de jornada disperso entre Segment/Mixpanel/Heap.</p>
+            <div class="offer">→ Engenharia Digital + FourBlox</div>
+        </div>
+    </div>
+</section>
+
+<!-- C4 — Rapport -->
+<section id="rapport" class="rapport-sec">
+    <span class="zone-tag zt-c">Zona C — Apêndice Técnico</span>
+    <h3 class="sec-title">C4. Perfil Pessoal &amp; Rapport — Dra. Mariana Moyses Oliveira</h3>
+    <div class="info-grid">
+        <div class="info-card"><div class="k">Formação base</div><div class="v">Biomedicina — UNIFESP</div></div>
+        <div class="info-card"><div class="k">Pós-graduação</div><div class="v">Mestrado e Doutorado em Genética — UNIFESP</div></div>
+        <div class="info-card"><div class="k">Internacional</div><div class="v">Estágio U. Lausanne (Suíça)</div></div>
+        <div class="info-card"><div class="k">Pós-doutorado</div><div class="v">Mass General / Harvard Medical School / Broad Institute (Harvard-MIT)</div></div>
+        <div class="info-card"><div class="k">Linha de pesquisa</div><div class="v">Genômica funcional · neurodesenvolvimento · TEA · CRISPR</div></div>
+        <div class="info-card"><div class="k">Parceria-chave</div><div class="v">Prof. Sergio Tufik (psicobiologia)</div></div>
+    </div>
+    <div class="insight-box">
+        <h4>Dicas de conversa para rapport</h4>
+        <p>1. Reconhecer o calibre internacional da trajetória (Broad Institute/Harvard) — é raro no Brasil e fonte de orgulho legítimo.</p>
+        <p>2. Falar a língua dela: Perturb-seq, modelos isogênicos iPSC, single-cell — demonstra que você entende a ciência, não só a TI.</p>
+        <p>3. Conectar com propósito: a pesquisa busca tratamentos para doenças raras do neurodesenvolvimento — impacto humano é o motor dela.</p>
+        <p>4. Valorizar a colaboração USP/UNIFESP/FAPESP — ela trabalha em rede; soluções que facilitem colaboração ressoam.</p>
+        <p>5. Mencionar o desafio de "dado vs descoberta": reprodutibilidade e tempo até publicação são dores reais de quem faz ciência de larga escala.</p>
+        <p>6. Evitar discurso de produto/venda agressiva — perfil acadêmico valoriza rigor, evidência e parceria de longo prazo.</p>
+    </div>
+</section>
+
+<!-- C5 — Posição -->
+<section id="posicao">
+    <span class="zone-tag zt-c">Zona C — Apêndice Técnico</span>
+    <h3 class="sec-title">C5. Liderança de TI &amp; Inovação (decisores corporativos)</h3>
+    <div class="info-grid">
+        <div class="info-card"><div class="k">CIO / Diretor de TI</div><div class="v">Milton Vicente Vieira Junior</div></div>
+        <div class="info-card"><div class="k">Visão do CIO</div><div class="v">TI como orquestradora entre negócio e cliente; "demitir tecnologia" redundante e reinvestir em inovação (HIS 2025)</div></div>
+        <div class="info-card"><div class="k">Diretor de Inovação, Dados e IA</div><div class="v">Jacques Chicourel — conectar AFIP a startups, maximizar uso de dados em laboratórios</div></div>
+        <div class="info-card"><div class="k">VP Operações, Pessoas &amp; Supply Chain</div><div class="v">Roberta Siufi</div></div>
+        <div class="info-card"><div class="k">Contato de pesquisa (porta de entrada)</div><div class="v">Dra. Mariana Moyses Oliveira</div></div>
+        <div class="info-card"><div class="k">Papel da TI</div><div class="v">Estratégica, com participação em fóruns de decisão (ABCIS/HIS)</div></div>
+    </div>
+    <p class="muted" style="margin-top:12px">Estratégia de conta de duas pontas: ganhar credibilidade técnica via Dra. Mariana (pesquisa/dados) e converter via CIO Milton Vieira + Diretor Jacques Chicourel (orçamento e decisão corporativa).</p>
+</section>
+
+<!-- C8 — Fontes -->
+<section id="fontes">
+    <span class="zone-tag zt-c">Zona C — Apêndice Técnico</span>
+    <h3 class="sec-title">C8. Fontes Consultadas</h3>
+    <div class="sources-grid">
+        <div class="sources-card">
+            <h4>Estratégia &amp; Operação</h4>
+            <ul>
+                <li>afip.com.br/institucional</li>
+                <li>afipdiagnostica.com.br/institucional</li>
+                <li>afip.com.br/relevancia-social, /filantropia, /perguntas-frequentes</li>
+                <li>afip.gupy.io (porte/colaboradores)</li>
+            </ul>
+        </div>
+        <div class="sources-card">
+            <h4>Stack Tecnológica</h4>
+            <ul>
+                <li>Verificação empírica direta (headers HTTP, 05/06/2026)</li>
+                <li>CSP e trackers do portal Gupy</li>
+            </ul>
+        </div>
+        <div class="sources-card">
+            <h4>Mercado</h4>
+            <ul>
+                <li>7º Painel Abramed — O DNA do Diagnóstico (2025)</li>
+                <li>abramed.org.br (receita/volume 2024)</li>
+                <li>Veja Saúde / Viva (cobertura Abramed)</li>
+                <li>Fleury Investor Day (FID 2024 — Lab-to-Lab)</li>
+            </ul>
+        </div>
+        <div class="sources-card">
+            <h4>Talento &amp; Liderança</h4>
+            <ul>
+                <li>Saúde Business (HIS 2025 — Milton Vieira)</li>
+                <li>ti.abcis.org.br/his-2025</li>
+                <li>afipdiagnostica.com.br (release novos diretores)</li>
+            </ul>
+        </div>
+        <div class="sources-card">
+            <h4>Pesquisa / Genômica</h4>
+            <ul>
+                <li>agencia.fapesp.br / namidia.fapesp.br</li>
+                <li>medicinasa.com.br (projeto neurodesenvolvimento)</li>
+                <li>PMC11463611 (Perturb-seq/ASD)</li>
+                <li>bioRxiv 2022.02.15.480098 (MEF2C)</li>
+            </ul>
+        </div>
+        <div class="sources-card">
+            <h4>Concorrência</h4>
+            <ul>
+                <li>Abramed (Dasa, Fleury, Sabin — declarações CEOs)</li>
+                <li>Fleury (530 unidades / 31 marcas)</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- C9 — Glossário -->
+<section>
+    <span class="zone-tag zt-c">Zona C — Apêndice Técnico</span>
+    <h3 class="sec-title">C9. Glossário Setorial</h3>
+    <dl class="gloss">
+        <dt>CRISPR</dt><dd>Técnica de edição genética que permite introduzir mutações precisas no DNA; usada para criar modelos celulares de doenças.</dd>
+        <dt>Perturb-seq</dt><dd>Método que combina perturbação genética via CRISPR com sequenciamento de RNA de célula única (scRNA-seq) para medir efeito de genes em larga escala.</dd>
+        <dt>scRNA-seq (single-cell RNA-seq)</dt><dd>Sequenciamento de RNA célula a célula — gera volumes massivos de dados que exigem pipeline e capacidade analítica.</dd>
+        <dt>STM (Structural Topic Modeling)</dt><dd>Modelagem estatística usada na pesquisa para identificar padrões latentes em dados de expressão genética.</dd>
+        <dt>iPSC / modelos isogênicos</dt><dd>Células-tronco de pluripotência induzida geneticamente idênticas, usadas para isolar o efeito de uma mutação.</dd>
+        <dt>OSS (Organização Social de Saúde)</dt><dd>Qualificação jurídica (Lei 9.637/1998) que habilita entidade privada sem fins lucrativos a celebrar contrato de gestão com o poder público.</dd>
+        <dt>NTH</dt><dd>Núcleo Técnico (unidade de processamento/apoio laboratorial da rede AFIP). A instituição cita ~50 NTHs.</dd>
+        <dt>Lab-to-Lab</dt><dd>Mercado de apoio laboratorial B2B: laboratórios terceirizam exames a um laboratório de referência.</dd>
+        <dt>iPaaS</dt><dd>Integration Platform as a Service — plataforma de integração de sistemas via APIs (ex.: Digibee).</dd>
+        <dt>ISO 27701</dt><dd>Norma de gestão de privacidade da informação, extensão da ISO 27001 voltada a dado pessoal (LGPD/GDPR).</dd>
+    </dl>
+</section>
+
+<footer>
+    four<b style="color:var(--accent)">sys</b> | Pre-Sales Intelligence Report | AFIP — Associação Fundo de Incentivo à Pesquisa<br>
+    Gerado automaticamente — Confidencial | Data: Junho 2026<br>
+    Agente Hunter v3 · Modo de saída: --full · Modo narrativo: Híbrido
+</footer>
+
+</div>
+<button class="print-btn" onclick="window.print()">🖨 Imprimir / PDF</button>
+</body>
+</html>

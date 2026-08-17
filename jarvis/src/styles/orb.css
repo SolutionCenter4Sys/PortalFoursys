@@ -1,0 +1,506 @@
+/* ============================================================
+   Jarvis VoiceOrb — orbe líquido de energia Foursys
+   Estilo: gota maleável (morph orgânico de border-radius),
+   membrana translúcida, halo que respira e 4 anéis orbitais
+   elípticos com "elétrons" viajando.
+   Estados controlados via [data-state] + custom properties;
+   as camadas de energia fazem cross-fade suave entre estados
+   (transições em opacity/box-shadow/border-color — GPU-friendly).
+   ============================================================ */
+
+.jarvis-orb {
+  /* defaults = idle */
+  --orb-glow: rgba(255, 83, 21, 0.25);
+  --orb-ring-1: rgba(137, 186, 177, 0.4);
+  --orb-ring-2: rgba(255, 120, 72, 0.3);
+  --orb-energy-orange: 0.45;
+  --orb-energy-mint: 0;
+  --orb-energy-red: 0;
+  --orb-shimmer: 0;
+  --orb-rings: 0.7;
+  perspective: 700px;
+}
+
+/* — halo difuso que respira (acompanha o morph do corpo) — */
+.jarvis-orb__halo {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  box-shadow: 0 0 44px 26px var(--orb-glow);
+  animation:
+    orb-breathe 4.5s ease-in-out infinite,
+    orb-morph 8s ease-in-out infinite;
+  transition: box-shadow 0.7s ease;
+  pointer-events: none;
+}
+
+/* — corpo líquido (clipa as camadas internas no formato da gota) — */
+.jarvis-orb__body {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  /* vidro fresnel: centro quase vazio, só as bordas densas — energia, não corpo sólido */
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(34, 34, 57, 0.05) 0%,
+    rgba(34, 34, 57, 0.12) 55%,
+    rgba(52, 52, 90, 0.35) 82%,
+    rgba(88, 88, 140, 0.5) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  /* vinheta uniforme (sem luz direcional — direcional = objeto físico) */
+  box-shadow:
+    inset 0 0 30px rgba(16, 16, 32, 0.45),
+    inset 0 0 14px rgba(255, 255, 255, 0.05);
+  animation:
+    orb-breathe 4.5s ease-in-out infinite,
+    orb-morph 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* — filamentos de plasma: estrias radiais girando, emanando do núcleo — */
+.jarvis-orb__plasma {
+  position: absolute;
+  inset: -15%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 9deg,
+    rgba(255, 255, 255, 0.28) 11deg,
+    transparent 13deg,
+    transparent 24deg
+  );
+  -webkit-mask-image: radial-gradient(
+    circle,
+    transparent 6%,
+    #000 30%,
+    transparent 70%
+  );
+  mask-image: radial-gradient(circle, transparent 6%, #000 30%, transparent 70%);
+  filter: blur(2px);
+  mix-blend-mode: screen;
+  animation: orb-spin 14s linear infinite;
+}
+
+.jarvis-orb__plasma--b {
+  inset: -8%;
+  background: repeating-conic-gradient(
+    from 45deg,
+    transparent 0deg,
+    transparent 14deg,
+    rgba(200, 220, 255, 0.22) 17deg,
+    transparent 20deg,
+    transparent 38deg
+  );
+  animation: orb-spin 23s linear infinite reverse;
+}
+
+/* — núcleo central pulsante — */
+.jarvis-orb__core {
+  position: absolute;
+  inset: 25%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.25) 40%,
+    transparent 70%
+  );
+  filter: blur(3px);
+  mix-blend-mode: screen;
+  animation: orb-core-pulse 3.2s ease-in-out infinite;
+}
+
+/* — núcleos menores nadando dentro da esfera — */
+.jarvis-orb__nucleus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30%;
+  height: 30%;
+  margin: -15% 0 0 -15%;
+  border-radius: 50%;
+  filter: blur(6px);
+  mix-blend-mode: screen;
+}
+
+.jarvis-orb__nucleus--a {
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 120, 72, 0.5) 45%,
+    transparent 70%
+  );
+  animation: orb-nucleus-a 6s ease-in-out infinite;
+}
+
+.jarvis-orb__nucleus--b {
+  background: radial-gradient(
+    circle,
+    rgba(255, 120, 72, 0.8) 0%,
+    rgba(255, 83, 21, 0.35) 50%,
+    transparent 72%
+  );
+  animation: orb-nucleus-b 8.5s ease-in-out infinite;
+}
+
+.jarvis-orb__nucleus--c {
+  background: radial-gradient(
+    circle,
+    rgba(200, 235, 228, 0.85) 0%,
+    rgba(137, 186, 177, 0.4) 48%,
+    transparent 70%
+  );
+  animation: orb-nucleus-c 7.3s ease-in-out infinite;
+}
+
+/* — camadas de energia (cross-fade por estado, núcleo vagueia) — */
+.jarvis-orb__energy {
+  position: absolute;
+  inset: -5%;
+  border-radius: 50%;
+  mix-blend-mode: screen; /* luz aditiva, não tinta */
+  transition: opacity 0.6s ease;
+}
+
+.jarvis-orb__energy--orange {
+  background: radial-gradient(
+    circle at 36% 32%,
+    rgba(255, 226, 169, 0.9) 0%,
+    rgba(255, 120, 72, 0.75) 22%,
+    rgba(255, 83, 21, 0.35) 48%,
+    transparent 70%
+  );
+  opacity: var(--orb-energy-orange);
+  animation: orb-drift 7s ease-in-out infinite alternate;
+}
+
+.jarvis-orb__energy--mint {
+  background: radial-gradient(
+    circle at 64% 36%,
+    rgba(233, 246, 243, 0.85) 0%,
+    rgba(137, 186, 177, 0.65) 26%,
+    rgba(137, 186, 177, 0.25) 50%,
+    transparent 72%
+  );
+  opacity: var(--orb-energy-mint);
+  animation: orb-drift 9s ease-in-out infinite alternate-reverse;
+}
+
+.jarvis-orb__energy--red {
+  background: radial-gradient(
+    circle at 50% 38%,
+    rgba(254, 202, 202, 0.9) 0%,
+    rgba(248, 113, 113, 0.6) 30%,
+    transparent 68%
+  );
+  opacity: var(--orb-energy-red);
+}
+
+/* — varredura cônica girando (processing) — */
+.jarvis-orb__shimmer {
+  position: absolute;
+  inset: -20%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(255, 255, 255, 0.18) 60deg,
+    transparent 130deg,
+    rgba(255, 83, 21, 0.35) 220deg,
+    transparent 300deg
+  );
+  opacity: var(--orb-shimmer);
+  transition: opacity 0.5s ease;
+  animation: orb-spin 2.6s linear infinite;
+}
+
+/* — brilho de vidro no topo (sutil, só uma dica de casca) — */
+.jarvis-orb__sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse 60% 30% at 50% 10%,
+    rgba(255, 255, 255, 0.18) 0%,
+    transparent 100%
+  );
+}
+
+/* — anéis orbitais elípticos com elétrons viajando — */
+.jarvis-orb__ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid;
+  opacity: var(--orb-rings);
+  transition:
+    border-color 0.7s ease,
+    opacity 0.7s ease,
+    color 0.7s ease;
+  pointer-events: none;
+}
+
+.jarvis-orb__ring::after {
+  content: "";
+  position: absolute;
+  top: -2.5px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  margin-left: -2.5px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 8px 2px currentColor;
+}
+
+.jarvis-orb__ring--1 {
+  inset: -22%;
+  border-color: var(--orb-ring-1);
+  color: var(--orb-ring-1);
+  animation: orb-orbit-1 10s linear infinite;
+}
+
+.jarvis-orb__ring--2 {
+  inset: -32%;
+  border-color: var(--orb-ring-2);
+  color: var(--orb-ring-2);
+  animation: orb-orbit-2 16s linear infinite;
+}
+
+/* anel tracejado — eco das guias pontilhadas da referência */
+.jarvis-orb__ring--3 {
+  inset: -12%;
+  border-style: dashed;
+  border-color: var(--orb-ring-1);
+  color: var(--orb-ring-1);
+  animation: orb-orbit-3 7s linear infinite;
+}
+
+/* órbita quase vertical, estilo átomo — leva dois elétrons */
+.jarvis-orb__ring--4 {
+  inset: -27%;
+  border-color: var(--orb-ring-2);
+  color: var(--orb-ring-2);
+  animation: orb-orbit-4 21s linear infinite;
+}
+
+.jarvis-orb__ring--4::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 30%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 6px 1.5px currentColor;
+}
+
+@keyframes orb-orbit-1 {
+  from {
+    transform: rotate(-18deg) rotateX(72deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotate(-18deg) rotateX(72deg) rotateZ(360deg);
+  }
+}
+
+@keyframes orb-orbit-2 {
+  from {
+    transform: rotate(22deg) rotateX(66deg) rotateZ(360deg);
+  }
+  to {
+    transform: rotate(22deg) rotateX(66deg) rotateZ(0deg);
+  }
+}
+
+@keyframes orb-orbit-3 {
+  from {
+    transform: rotate(58deg) rotateX(76deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotate(58deg) rotateX(76deg) rotateZ(360deg);
+  }
+}
+
+@keyframes orb-orbit-4 {
+  from {
+    transform: rotate(96deg) rotateX(68deg) rotateZ(360deg);
+  }
+  to {
+    transform: rotate(96deg) rotateX(68deg) rotateZ(0deg);
+  }
+}
+
+@keyframes orb-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+/* — morph líquido: a gota nunca é perfeitamente redonda — */
+@keyframes orb-morph {
+  0%,
+  100% {
+    border-radius: 47% 53% 51% 49% / 51% 46% 54% 49%;
+  }
+  25% {
+    border-radius: 55% 45% 48% 52% / 45% 55% 47% 55%;
+  }
+  50% {
+    border-radius: 48% 52% 56% 44% / 55% 48% 52% 45%;
+  }
+  75% {
+    border-radius: 53% 47% 44% 56% / 47% 53% 45% 55%;
+  }
+}
+
+@keyframes orb-drift {
+  from {
+    transform: translate(-3%, -2%) scale(1);
+  }
+  to {
+    transform: translate(4%, 4%) scale(1.12);
+  }
+}
+
+@keyframes orb-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orb-core-pulse {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+/* trajetórias independentes — durações primas entre si = nunca repete visualmente */
+@keyframes orb-nucleus-a {
+  0%,
+  100% {
+    transform: translate(-30%, -20%) scale(1);
+  }
+  33% {
+    transform: translate(25%, -35%) scale(1.25);
+  }
+  66% {
+    transform: translate(10%, 30%) scale(0.85);
+  }
+}
+
+@keyframes orb-nucleus-b {
+  0%,
+  100% {
+    transform: translate(28%, 10%) scale(0.9);
+  }
+  40% {
+    transform: translate(-25%, 25%) scale(1.2);
+  }
+  70% {
+    transform: translate(-15%, -30%) scale(1);
+  }
+}
+
+@keyframes orb-nucleus-c {
+  0%,
+  100% {
+    transform: translate(0%, 32%) scale(1.1);
+  }
+  50% {
+    transform: translate(15%, -25%) scale(0.8);
+  }
+}
+
+/* ============ estados ============ */
+
+.jarvis-orb[data-state="standby"] {
+  --orb-glow: rgba(137, 186, 177, 0.3);
+  --orb-energy-orange: 0.1;
+  --orb-energy-mint: 0.5;
+  --orb-ring-1: rgba(137, 186, 177, 0.55);
+  --orb-ring-2: rgba(137, 186, 177, 0.35);
+  --orb-rings: 0.85;
+}
+
+.jarvis-orb[data-state="armed"] {
+  --orb-glow: rgba(137, 186, 177, 0.5);
+  --orb-energy-orange: 0.15;
+  --orb-energy-mint: 0.9;
+  --orb-ring-1: rgba(137, 186, 177, 0.8);
+  --orb-ring-2: rgba(137, 186, 177, 0.5);
+  --orb-rings: 1;
+}
+
+.jarvis-orb[data-state="listening"] {
+  --orb-glow: rgba(255, 83, 21, 0.55);
+  --orb-energy-orange: 0.95;
+  --orb-energy-mint: 0.2;
+  --orb-ring-1: rgba(255, 120, 72, 0.7);
+  --orb-ring-2: rgba(255, 226, 169, 0.5);
+  --orb-rings: 1;
+}
+
+.jarvis-orb[data-state="processing"] {
+  --orb-glow: rgba(255, 83, 21, 0.45);
+  --orb-energy-orange: 0.65;
+  --orb-energy-mint: 0.25;
+  --orb-shimmer: 1;
+  --orb-rings: 0.9;
+}
+
+.jarvis-orb[data-state="speaking"] {
+  --orb-glow: rgba(255, 83, 21, 0.65);
+  --orb-energy-orange: 1;
+  --orb-energy-mint: 0;
+  --orb-ring-1: rgba(255, 120, 72, 0.8);
+  --orb-ring-2: rgba(255, 226, 169, 0.55);
+  --orb-rings: 1;
+}
+
+/* barge-in: usuário interrompeu a resposta — flash vanilla */
+.jarvis-orb[data-state="interrupted"] {
+  --orb-glow: rgba(255, 226, 169, 0.45);
+  --orb-energy-orange: 0.35;
+  --orb-energy-mint: 0.3;
+  --orb-ring-1: rgba(255, 226, 169, 0.6);
+  --orb-ring-2: rgba(255, 226, 169, 0.4);
+  --orb-rings: 0.85;
+}
+
+.jarvis-orb[data-state="error"] {
+  --orb-glow: rgba(248, 113, 113, 0.5);
+  --orb-energy-orange: 0;
+  --orb-energy-mint: 0;
+  --orb-energy-red: 1;
+  --orb-ring-1: rgba(248, 113, 113, 0.6);
+  --orb-ring-2: rgba(248, 113, 113, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jarvis-orb__halo,
+  .jarvis-orb__body,
+  .jarvis-orb__energy--orange,
+  .jarvis-orb__energy--mint,
+  .jarvis-orb__shimmer,
+  .jarvis-orb__ring,
+  .jarvis-orb__plasma,
+  .jarvis-orb__plasma--b,
+  .jarvis-orb__core,
+  .jarvis-orb__nucleus--a,
+  .jarvis-orb__nucleus--b,
+  .jarvis-orb__nucleus--c {
+    animation: none;
+  }
+}

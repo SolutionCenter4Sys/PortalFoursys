@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Foursys × Compra Agora — Preparação RFI/RFP (Briefing de Reunião)</title>
+<style>
+    :root {
+        --primary: #1a237e;
+        --primary-light: #3949ab;
+        --accent: #00b894;
+        --accent-orange: #e17055;
+        --bg: #f5f6fa;
+        --card-bg: #ffffff;
+        --text: #2d3436;
+        --text-light: #636e72;
+        --border: #dfe6e9;
+        --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px; }
+    .header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: #fff; padding: 48px 40px; border-radius: 16px; margin-bottom: 24px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+    .header::before { content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,184,148,0.18) 0%, transparent 70%); pointer-events: none; }
+    .brand { font-size: 14px; letter-spacing: 1.2px; text-transform: uppercase; opacity: 0.92; margin-bottom: 18px; font-weight: 600; }
+    .brand span.accent { color: var(--accent); }
+    .brand .pipe { opacity: 0.55; margin: 0 10px; }
+    .header h1 { font-size: 40px; font-weight: 700; line-height: 1.15; margin-bottom: 8px; }
+    .header h2 { font-size: 21px; font-weight: 500; opacity: 0.95; margin-bottom: 8px; }
+    .header .meta { font-size: 15px; opacity: 0.88; margin-bottom: 22px; }
+    .badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+    .badge { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.25); padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+    .badge.green { background: var(--accent); border-color: var(--accent); }
+    .anchor-nav { display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 10px 14px; margin-bottom: 24px; box-shadow: var(--shadow); position: sticky; top: 12px; z-index: 50; }
+    .anchor-nav a { text-decoration: none; color: var(--primary); font-size: 12.5px; font-weight: 600; padding: 6px 12px; border-radius: 999px; transition: background 0.2s; }
+    .anchor-nav a:hover { background: var(--bg); }
+    .section { background: var(--card-bg); border-radius: 16px; padding: 32px; margin-bottom: 24px; box-shadow: var(--shadow); }
+    .section h3 { font-size: 22px; color: var(--primary); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+    .section h4.sub { font-size: 16px; color: var(--primary); margin-top: 20px; margin-bottom: 10px; }
+    .section p { margin-bottom: 12px; }
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 18px; }
+    .info-card { background: #fafbfc; border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+    .info-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 700; margin-bottom: 6px; }
+    .info-card .value { font-size: 15px; font-weight: 600; line-height: 1.4; }
+    .insight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 24px 26px; border-radius: 12px; margin-top: 16px; }
+    .insight-box h4 { font-size: 17px; margin-bottom: 10px; font-weight: 700; }
+    .insight-box p, .insight-box li { color: #fff; opacity: 0.97; }
+    .insight-box ul { padding-left: 22px; margin-top: 10px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tag { font-size: 12.5px; font-weight: 600; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); }
+    .tag-priority { background: #fce4ec; color: #c62828; border-color: #ef9a9a; }
+    .tag-active { background: #e8f5e9; color: #2e7d32; border-color: #a5d6a7; }
+    .tag-opportunity { background: #fff3e0; color: #e65100; border-color: #ffcc80; }
+    .tag-tech { background: #e3f2fd; color: #0d47a1; border-color: #90caf9; }
+    .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13.5px; }
+    .data-table th { background: #f1f3f5; color: var(--primary); text-align: left; padding: 10px 12px; border-bottom: 2px solid var(--border); }
+    .data-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .data-table tr:nth-child(even) td { background: #fafbfc; }
+    .status-200 { background: #e8f5e9; color: #2e7d32; font-weight: 700; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+    .status-301 { background: #fff3e0; color: #e65100; font-weight: 700; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+    .stack-layer { background: #fafbfc; border-left: 5px solid var(--primary-light); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+    .stack-layer .lbl { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--primary-light); font-weight: 700; margin-bottom: 4px; }
+    .stack-layer .name { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+    .stack-layer .cmp { font-size: 13.5px; }
+    .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 14px; }
+    .pillar-card { color: #fff; padding: 20px 22px; border-radius: 12px; }
+    .pillar-card h4 { font-size: 16px; margin-bottom: 8px; }
+    .pillar-card p { color: #fff; opacity: 0.97; font-size: 13.5px; }
+    .p1 { background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%); }
+    .p2 { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); }
+    .p3 { background: linear-gradient(135deg, #e17055 0%, #d63031 100%); }
+    .p4 { background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%); }
+    .msg-list { counter-reset: msg; list-style: none; padding: 0; margin-top: 14px; }
+    .msg-list li { counter-increment: msg; background: #fafbfc; border-left: 4px solid #6c5ce7; padding: 14px 18px 14px 56px; margin-bottom: 10px; border-radius: 8px; position: relative; font-size: 14px; }
+    .msg-list li::before { content: counter(msg); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; background: #6c5ce7; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+    .qa-list { list-style: none; padding: 0; }
+    .qa-list li { background: #fafbfc; border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; margin-bottom: 8px; font-size: 13.5px; }
+    .qa-list li b { color: var(--primary); }
+    .new-flag { display: inline-block; background: var(--accent); color: #fff; font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 999px; letter-spacing: 0.5px; vertical-align: middle; margin-left: 8px; }
+    .section.foursys { border: 2px solid var(--accent); }
+    .section.foursys h3 { color: var(--accent); }
+    .section.alert { border: 2px solid var(--accent-orange); }
+    .section.alert h3 { color: var(--accent-orange); }
+    ul.bullets { padding-left: 22px; }
+    ul.bullets li { margin-bottom: 6px; }
+    footer { text-align: center; margin-top: 42px; padding: 28px 0 0; border-top: 1px solid var(--border); color: var(--text-light); font-size: 13px; }
+    footer .brand-line { font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+    .print-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: #fff; border: none; padding: 14px 22px; border-radius: 999px; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 6px 22px rgba(26,35,126,0.35); }
+    @media print { body { background: #fff; } .print-btn, .anchor-nav { display: none !important; } .section, .header { box-shadow: none; break-inside: avoid; } }
+</style>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <div class="brand">four<span class="accent">sys</span> <span class="pipe">|</span> Pre-Sales Intelligence · Preparação de Reunião</div>
+        <h1>Foursys × Compra Agora</h1>
+        <h2>Briefing executivo para a RFI/RFP — Sustentação, Eficiência e Evolução da Plataforma B2B</h2>
+        <div class="meta">Compra Agora (spin-off da Unilever) · Marketplace B2B para varejo de vizinhança · Incumbente: Accenture · Concorrência de mercado: BEES (Ambev)</div>
+        <div class="badges">
+            <span class="badge green">GMV 2024: R$ 6 bi · meta 2025: ~R$ 7 bi</span>
+            <span class="badge">530 mil lojistas · 120 distribuidores · 290 operações · 30 indústrias</span>
+            <span class="badge">Adobe Commerce + PWA Studio (Venia) — confirmado empiricamente</span>
+            <span class="badge">Programa Conecta: R$ 50 mi com a Accenture</span>
+        </div>
+    </header>
+
+    <nav class="anchor-nav">
+        <a href="#oportunidade">Oportunidade</a>
+        <a href="#empirico">Stack Verificado</a>
+        <a href="#correcoes">Correções do Briefing</a>
+        <a href="#tese">Tese (4 Pilares)</a>
+        <a href="#battlecard">Battle Card</a>
+        <a href="#transicao">Transição 90d</a>
+        <a href="#squad">Squad &amp; SLA</a>
+        <a href="#roadmap">Novos Projetos</a>
+        <a href="#comercial">Modelos Comerciais</a>
+        <a href="#perguntas">Perguntas-chave</a>
+        <a href="#riscos">Riscos</a>
+        <a href="#abertura">Abertura da Reunião</a>
+    </nav>
+
+    <section class="section" id="oportunidade">
+        <h3>1. Leitura Executiva da Oportunidade</h3>
+        <p>A RFI/RFP <strong>não é uma sustentação Magento comum</strong>. É a operação (run + evolução) de um ecossistema B2B bilionário que conecta indústria → distribuidor → pequeno varejo, recém-reconstruído no Programa Conecta. A dor declarada é "Accenture é cara", mas o problema real é <strong>custo + velocidade + autonomia + capacidade de evolução</strong>.</p>
+        <div class="insight-box">
+            <h4>O insight que mais muda o jogo <span class="new-flag">NOVO</span></h4>
+            <p>A Accenture não só sustenta — <strong>ela construiu a nova plataforma (Adobe Commerce/Conecta) em 2024-2025</strong>. A migração do legado (Infracommerce, usado desde 2016) para o novo backbone foi por ondas, prevista para concluir entre jul/ago de 2025. Ou seja: este RFP é o clássico <strong>handoff "build → run"</strong>. Quem constrói costuma ser caro para operar. A janela da Foursys é assumir o run + a evolução com TCO menor — <strong>e o maior risco é a transferência de conhecimento de uma plataforma nova</strong>, que se mitiga com takeover estruturado e a observabilidade que já existe (New Relic).</p>
+        </div>
+        <div class="info-grid">
+            <div class="info-card"><div class="label">Origem</div><div class="value">Nasceu na Unilever (2016) · spin-off em 2020 · Unilever é a principal acionista</div></div>
+            <div class="info-card"><div class="label">Liderança</div><div class="value">CEO Julio Campos · Diretora-geral &amp; CTO Thaise Hagge</div></div>
+            <div class="info-card"><div class="label">GMV</div><div class="value">R$ 6 bi (2024) · meta ~R$ 7 bi (2025)</div></div>
+            <div class="info-card"><div class="label">Escala</div><div class="value">~530 mil lojistas cadastrados · ~140 mil ativos · 98% dos municípios</div></div>
+            <div class="info-card"><div class="label">Ecossistema</div><div class="value">30 indústrias · 120 distribuidores · 290 operações</div></div>
+            <div class="info-card"><div class="label">Investimento Conecta</div><div class="value">~R$ 50 mi (com a Accenture)</div></div>
+            <div class="info-card"><div class="label">Backbone legado</div><div class="value">Infracommerce (2016 → migrado)</div></div>
+            <div class="info-card"><div class="label">Backbone novo</div><div class="value">Adobe Commerce (escolhido em 2024)</div></div>
+            <div class="info-card"><div class="label">Expansão planejada</div><div class="value">Farma e perfumaria (além do alimentar)</div></div>
+        </div>
+    </section>
+
+    <section class="section foursys" id="empirico">
+        <h3>2. Stack Técnico Verificado Empiricamente <span class="new-flag">NOVO · 08/06/2026</span></h3>
+        <p>Inspeção direta (HTTP HEAD/GET) dos canais reais da Compra Agora. Use isto para demonstrar preparo técnico já na 1ª conversa — é munição concreta que a maioria dos concorrentes não levará.</p>
+        <div style="overflow-x:auto;">
+        <table class="data-table">
+            <thead><tr><th>Canal / URL</th><th>Status</th><th>O que foi detectado</th></tr></thead>
+            <tbody>
+                <tr><td>www.compra-agora.com (loja)</td><td><span class="status-200">200</span></td><td>HTML com <code>ssr="true"</code> + <code>data-image-optimizing-origin</code> = <strong>Adobe Commerce PWA Studio (Venia)</strong>, server-side rendered</td></tr>
+                <tr><td>novo.compra-agora.com</td><td><span class="status-301">301</span></td><td>Redireciona para a loja · mesma stack</td></tr>
+                <tr><td>Infra da loja</td><td><span class="status-200">200</span></td><td><strong>AWS EC2</strong> (header <code>x-platform-server: i-0b35...</code>) + <strong>Fastly CDN</strong> (PoP GRU/São Paulo)</td></tr>
+                <tr><td>WAF da loja</td><td><span class="status-200">200</span></td><td><strong>Fastly Signal Sciences (Next-Gen WAF)</strong> — headers <code>x-sigsci-*</code> (bot analysis ativo)</td></tr>
+                <tr><td>Observabilidade</td><td><span class="status-200">200</span></td><td><strong>New Relic Browser</strong> + W3C trace context (<code>traceresponse/traceparent</code>) — já instrumentado</td></tr>
+                <tr><td>suportevendedor.compra-agora.com (SAC)</td><td><span class="status-301">302</span></td><td><strong>Freshworks Freshdesk</strong> (atrás de Cloudflare) + New Relic + Heap + GA/GTM</td></tr>
+                <tr><td>blog.compra-agora.com</td><td><span class="status-200">200</span></td><td><strong>WordPress em Hostinger</strong> (LiteSpeed, PHP 8.3) — fragmentado/baixo custo, fora do core</td></tr>
+                <tr><td>WhatsApp commerce</td><td>—</td><td><strong>Yalo</strong> (comércio conversacional) — fonte pública (Baguete)</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <h4 class="sub">Stack consolidada (para o discurso técnico)</h4>
+        <div class="stack-layer"><div class="lbl">Experiência / Storefront</div><div class="name">Adobe Commerce + PWA Studio (Venia), SSR</div><div class="cmp">Front headless JavaScript-heavy → exige domínio de performance, SEO em PWA, qualidade de build e deploy. GraphQL como camada de API do PWA Studio.</div></div>
+        <div class="stack-layer"><div class="lbl">Infra &amp; Borda</div><div class="name">AWS EC2 + Fastly CDN + Signal Sciences WAF</div><div class="cmp">Hospedagem em nuvem AWS, borda/cache na Fastly, proteção com Next-Gen WAF. Maturidade alta — o gargalo competitivo não está no perímetro.</div></div>
+        <div class="stack-layer"><div class="lbl">Observabilidade</div><div class="name">New Relic (browser + trace context)</div><div class="cmp">Já há APM/RUM instrumentado — facilita o takeover e dá base para SRE e observabilidade de negócio.</div></div>
+        <div class="stack-layer"><div class="lbl">Atendimento / SAC</div><div class="name">Freshworks Freshdesk</div><div class="cmp">SAC em Freshdesk (N1/N2). Integra ITSM, automação de chamados e CRM de atendimento.</div></div>
+        <div class="stack-layer"><div class="lbl">Conversacional</div><div class="name">Yalo (WhatsApp commerce)</div><div class="cmp">WhatsApp como canal de venda assistida, recompra e campanhas — frente estratégica para IA/agentes.</div></div>
+        <div class="stack-layer"><div class="lbl">Conteúdo</div><div class="name">WordPress / Hostinger (blog)</div><div class="cmp">Sinal de fragmentação: o blog roda em hospedagem barata, desconectado do core — oportunidade de consolidação e governança.</div></div>
+    </section>
+
+    <section class="section alert" id="correcoes">
+        <h3>3. Correções &amp; Confirmações ao Briefing <span class="new-flag">IMPORTANTE</span></h3>
+        <ul class="bullets">
+            <li><strong>Não são 15 mil SKUs como foco — é um ecossistema bilionário.</strong> A leitura correta é GMV R$ 6 bi (2024) e ~530 mil lojistas. O número de SKUs é detalhe operacional, não a dimensão da conta.</li>
+            <li><strong>Accenture construiu o Conecta (não apenas sustenta).</strong> A nova plataforma Adobe Commerce foi desenhada em 2023, construída em 2024 e migrada por ondas em 2025, com a Accenture. Abordar como "estabilizar + reduzir TCO + acelerar a próxima fase", nunca como "tirar a Accenture".</li>
+            <li><strong>O storefront é PWA Studio (Venia), confirmado.</strong> A intuição do "Venia store / JavaScript disabled" estava certa — confirmei via <code>ssr="true"</code>. Isso eleva a exigência de talento Adobe Commerce <em>headless</em> (não só Magento Luma tradicional).</li>
+            <li><strong>WhatsApp = Yalo</strong> (parceiro específico). Útil para falar com propriedade da jornada conversacional e propor evolução com IA/agentes por cima/integrado ao Yalo.</li>
+            <li><strong>SAC = Freshdesk</strong> e <strong>observabilidade = New Relic</strong> já existem — a transição é mais segura do que parece e devemos usar isso como argumento de baixo risco.</li>
+            <li><strong>Plataforma modular</strong> (declarado pela CTO): permite integrar ferramentas e testar funcionalidades de forma independente — perfeito para o modelo "sustentação + squad de evolução".</li>
+        </ul>
+    </section>
+
+    <section class="section" id="tese">
+        <h3>4. Tese de Posicionamento — 4 Pilares</h3>
+        <p>Entrar como <strong>parceira de plataforma B2B</strong>, não como fábrica de software nem como "hora mais barata que a Accenture".</p>
+        <div class="pillar-grid">
+            <div class="pillar-card p1"><h4>1. Operação Segura</h4><p>Assumir sustentação, chamados, SLAs, qualidade e estabilidade de uma operação crítica (se cai checkout/preço/catálogo/integração, para indústria, distribuidor e varejo).</p></div>
+            <div class="pillar-card p2"><h4>2. Eficiência de Custo</h4><p>Reduzir TCO progressivamente, sem aumentar risco — via automação, redução de incidentes recorrentes e ganho de produtividade.</p></div>
+            <div class="pillar-card p3"><h4>3. Evolução de Produto</h4><p>Esteira de evolução contínua: app, WhatsApp/Yalo, portal do distribuidor, campanhas, vitrine, performance PWA.</p></div>
+            <div class="pillar-card p4"><h4>4. Inteligência B2B</h4><p>IA, recomendação, personalização, pricing, analytics para indústria/distribuidor e observabilidade de negócio.</p></div>
+        </div>
+        <div class="insight-box">
+            <h4>Frase-âncora da reunião</h4>
+            <p>"Não vamos apenas substituir um custo por outro mais barato. Vamos <strong>reduzir o custo estrutural da operação, preservar a estabilidade da plataforma e acelerar a próxima fase de crescimento</strong> da Compra Agora com produto, dados, IA e engenharia."</p>
+        </div>
+    </section>
+
+    <section class="section" id="battlecard">
+        <h3>5. Battle Card Competitivo</h3>
+        <h4 class="sub">Accenture (incumbente que construiu a plataforma)</h4>
+        <div style="overflow-x:auto;">
+        <table class="data-table">
+            <thead><tr><th>Força da Accenture</th><th>Como a Foursys responde</th></tr></thead>
+            <tbody>
+                <tr><td>Conhece o ambiente (construiu o Conecta)</td><td>Takeover estruturado em 90 dias + shadowing; usar New Relic já instalado para acelerar o domínio do ambiente</td></tr>
+                <tr><td>Governança global e escala</td><td>Mesma governança e SLA, com proximidade local, executivo dedicado e resposta mais rápida</td></tr>
+                <tr><td>Marca de consultoria global</td><td>Custo estrutural menor + foco em engenharia/produto (não margem de consultoria); plano de redução de TCO com metas reais</td></tr>
+                <tr><td>Capacidade enterprise</td><td>Modelo híbrido: sustentação + squad evolutiva + laboratório de IA/dados (Fourmakers), com flexibilidade que um global não dá</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <h4 class="sub">BEES (Ambev) — a referência de mercado que assombra a conversa <span class="new-flag">DADOS NOVOS</span></h4>
+        <ul class="bullets">
+            <li><strong>US$ 52,5 bi de GMV global em 2025</strong> (+12% a/a), presente em 29 mercados, 72% da receita da AB InBev via B2B digital.</li>
+            <li><strong>Brasil: 1 milhão+ de PDVs</strong>, 90%+ da receita B2B da Ambev passa pelo BEES. BEES Marketplace: US$ 3,5 bi (+61%).</li>
+            <li>Diferenciais: <strong>BEES Bank (crédito embutido na jornada)</strong>, IA de recomendação e pricing dinâmico, demand sensing, Zé Delivery (DTC).</li>
+            <li><strong>Leitura para a Foursys:</strong> a Compra Agora compete por canal, dados e recorrência do pequeno varejo. A evolução (crédito, recomendação, WhatsApp, analytics) não é luxo — é sobrevivência competitiva. Esse é o argumento para a camada "Evolução + Inteligência B2B".</li>
+        </ul>
+    </section>
+
+    <section class="section" id="transicao">
+        <h3>6. Plano de Transição (Takeover em 90 dias)</h3>
+        <div style="overflow-x:auto;">
+        <table class="data-table">
+            <thead><tr><th>Fase</th><th>Período</th><th>Objetivo</th></tr></thead>
+            <tbody>
+                <tr><td><b>Fase 0 — Discovery</b></td><td>0–15 dias</td><td>Arquitetura, acessos, integrações, backlog, chamados, incidentes, mapa de riscos e SLAs</td></tr>
+                <tr><td><b>Fase 1 — Shadowing</b></td><td>15–45 dias</td><td>Operação assistida com Accenture/time atual; absorção de conhecimento da plataforma nova</td></tr>
+                <tr><td><b>Fase 2 — Co-gestão</b></td><td>45–75 dias</td><td>Foursys assume parte da operação com governança e war room</td></tr>
+                <tr><td><b>Fase 3 — Operação plena</b></td><td>75–90 dias</td><td>SLA estabilizado, KPIs, backlog e melhoria contínua sob gestão Foursys</td></tr>
+                <tr><td><b>Fase 4 — Otimização</b></td><td>90–180 dias</td><td>Redução de TCO, automação de regressão, qualidade e início do roadmap de evolução</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <p style="margin-top:12px; font-size:13.5px; color:var(--text-light);">A faseação tira o medo da troca de fornecedor numa plataforma crítica e recém-construída.</p>
+    </section>
+
+    <section class="section" id="squad">
+        <h3>7. Modelo Operacional &amp; SLA</h3>
+        <h4 class="sub">Célula dedicada (estrutura mínima)</h4>
+        <div class="tags">
+            <span class="tag tag-tech">Service Manager (governança/SLA)</span>
+            <span class="tag tag-tech">Tech Lead Adobe Commerce/PWA</span>
+            <span class="tag tag-tech">Devs Adobe Commerce/Magento</span>
+            <span class="tag tag-tech">Especialista Integrações/API</span>
+            <span class="tag tag-tech">QA funcional + automação</span>
+            <span class="tag tag-tech">DevOps/SRE (AWS/Fastly/New Relic)</span>
+            <span class="tag tag-tech">PO/BA</span>
+            <span class="tag tag-tech">Dados/Analytics</span>
+            <span class="tag tag-tech">UX/UI B2B</span>
+        </div>
+        <h4 class="sub">SLA sugerido</h4>
+        <div style="overflow-x:auto;">
+        <table class="data-table">
+            <thead><tr><th>Severidade</th><th>Exemplo</th><th>SLA de resposta</th></tr></thead>
+            <tbody>
+                <tr><td><b>P1 — Crítico</b></td><td>Plataforma/checkout indisponível, pedidos parados</td><td>até 15 min</td></tr>
+                <tr><td><b>P2 — Alto</b></td><td>Erro em pedido, preço, catálogo ou integração</td><td>até 30 min</td></tr>
+                <tr><td><b>P3 — Médio</b></td><td>Incidente sem parada operacional</td><td>até 4h úteis</td></tr>
+                <tr><td><b>P4 — Baixo</b></td><td>Ajustes, dúvidas, pequenas melhorias</td><td>até 1 dia útil</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="tags" style="margin-top:14px;">
+            <span class="tag tag-active">Disponibilidade 99,5%–99,9%</span>
+            <span class="tag tag-active">Cumprimento de SLA &gt; 95%</span>
+            <span class="tag tag-active">Redução 20–30% de incidentes recorrentes em 6 meses</span>
+            <span class="tag tag-active">Automação de regressão crescente</span>
+            <span class="tag tag-active">Custo por chamado decrescente após estabilização</span>
+        </div>
+    </section>
+
+    <section class="section" id="roadmap">
+        <h3>8. Frentes de Novos Projetos (onde se ganha a RFP)</h3>
+        <div style="overflow-x:auto;">
+        <table class="data-table">
+            <thead><tr><th>Frente</th><th>Valor para a Compra Agora</th></tr></thead>
+            <tbody>
+                <tr><td>Copiloto do varejista no WhatsApp (sobre Yalo)</td><td>Recompra, sugestão de mix, consulta de crédito, pedido assistido por IA</td></tr>
+                <tr><td>Recomendação inteligente de abastecimento</td><td>Aumenta ticket médio e recorrência (resposta direta ao BEES)</td></tr>
+                <tr><td>Motor de campanhas por perfil</td><td>Promoções por região, histórico, categoria, indústria e distribuidor</td></tr>
+                <tr><td>Portal do distribuidor 2.0</td><td>Status de pedidos, cobertura, positivação, ruptura, performance</td></tr>
+                <tr><td>Painel para a indústria</td><td>Sell-in/sell-out, mix, cobertura, campanhas, oportunidades por território</td></tr>
+                <tr><td>Crédito e fidelidade</td><td>Ofertas de crédito e recompensas (contraponto ao BEES Bank)</td></tr>
+                <tr><td>Observabilidade de negócio</td><td>Monitorar pedido, checkout, catálogo, cupom, integrações e conversão (sobre New Relic)</td></tr>
+                <tr><td>IA para qualidade de catálogo</td><td>Enriquecimento, categorização, atributos, busca — onboarding mais rápido de indústrias</td></tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <section class="section" id="comercial">
+        <h3>9. Modelos Comerciais</h3>
+        <div class="pillar-grid">
+            <div class="pillar-card p1"><h4>Modelo 1 — Sustentação mensal</h4><p>Preço fixo por capacidade dedicada, com SLA. Previsibilidade.</p></div>
+            <div class="pillar-card p2"><h4>Modelo 2 — Sustentação + squad evolutiva</h4><p>Um time mantém, outro evolui. Provavelmente o melhor encaixe para a Compra Agora.</p></div>
+            <div class="pillar-card p3"><h4>Modelo 3 — Ganho de eficiência</h4><p>Preço de transição (3 meses) + redução progressiva conforme automação e queda de incidentes. Bate direto na dor de custo da Accenture.</p></div>
+        </div>
+        <p style="margin-top:14px;"><strong>Recomendação:</strong> não entrar com preço fechado prematuro. Apresentar os 3 modelos e ancorar no Modelo 3 como diferencial ("temos um plano para reduzir o custo estrutural, não só uma hora mais barata").</p>
+    </section>
+
+    <section class="section" id="perguntas">
+        <h3>10. Perguntas-chave de Qualificação (priorizadas)</h3>
+        <h4 class="sub">Plataforma &amp; arquitetura</h4>
+        <ul class="qa-list">
+            <li><b>Adobe Commerce</b> é Cloud (ACSF) ou self-hosted no AWS? Qual versão? <em>(empiricamente vimos AWS EC2 + Fastly — confirmar se é Adobe Commerce Cloud ou infra própria)</em></li>
+            <li>O storefront <b>PWA Studio (Venia)</b> é totalmente headless? Há também áreas em Luma? Qual o estado do GraphQL?</li>
+            <li>Quantos ambientes (dev, homolog, staging, prod)? Há CI/CD, testes automatizados e rollback?</li>
+            <li>Adobe Commerce <b>B2B nativo</b> está habilitado (contas, hierarquia, catálogos e preços por cliente)?</li>
+        </ul>
+        <h4 class="sub">Operação &amp; sustentação</h4>
+        <ul class="qa-list">
+            <li>Chamados/mês e distribuição por severidade? Principais incidentes recorrentes? Backlog represado?</li>
+            <li>Qual o SLA atual da Accenture e o nível de satisfação? O que exatamente está caro: sustentação, evolução, gestão ou licenças?</li>
+            <li>Existe N1/N2 interno (Freshdesk) ou tudo fica no parceiro?</li>
+        </ul>
+        <h4 class="sub">Integrações &amp; dados</h4>
+        <ul class="qa-list">
+            <li>Quais ERPs dos distribuidores integram? Como funcionam preços/condições/crédito por CNPJ (a CTO citou "dezenas de listas por distribuidor")?</li>
+            <li>Pagamentos/crédito: quais gateways e parceiros (vimos sinais de Chargebee/Braintree no SAC)? Antifraude?</li>
+            <li>Yalo (WhatsApp): escopo, volume e roadmap?</li>
+        </ul>
+        <h4 class="sub">Produto &amp; transição</h4>
+        <ul class="qa-list">
+            <li>Roadmap 2026 e projetos prioritários (farma/perfumaria)? Quem prioriza o backlog?</li>
+            <li>Meta principal: reduzir custo, ganhar velocidade ou inovar? Modelo desejado (squad, capacity, banco de horas, preço por projeto)?</li>
+            <li>Haverá período de transição com a Accenture? Documentação atualizada? Acesso ao repositório e pipelines?</li>
+        </ul>
+    </section>
+
+    <section class="section alert" id="riscos">
+        <h3>11. Riscos &amp; Mitigação</h3>
+        <div style="overflow-x:auto;">
+        <table class="data-table">
+            <thead><tr><th>Risco</th><th>Mitigação</th></tr></thead>
+            <tbody>
+                <tr><td>Falta de case Adobe/Magento muito forte</td><td>Compor célula com especialistas certificados e/ou parceiro boutique, sob governança Foursys. Ser honesto (Caminho B) é melhor que inventar.</td></tr>
+                <tr><td>Conhecimento concentrado na Accenture (que construiu)</td><td>Takeover em 90 dias com shadowing + uso do New Relic existente para mapear o ambiente</td></tr>
+                <tr><td>Complexidade de integrações (ERPs, crédito, preços por CNPJ)</td><td>Discovery técnico profundo e mapa de interfaces na Fase 0</td></tr>
+                <tr><td>Plataforma crítica com pedidos reais</td><td>Operação assistida, war room e observabilidade de negócio</td></tr>
+                <tr><td>Comparação só por preço</td><td>Vender TCO, produtividade, qualidade e roadmap — ancorar no Modelo 3</td></tr>
+                <tr><td>Expectativa de inovação rápida</td><td>Separar sustentação de squad de evolução/produto</td></tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <section class="section" id="abertura">
+        <h3>12. Abertura da Reunião — Mensagens-chave</h3>
+        <ol class="msg-list">
+            <li><strong>Entendimento do tamanho:</strong> "Enxergamos a Compra Agora como um dos ecossistemas B2B mais relevantes do varejo de vizinhança no Brasil — R$ 6 bi de GMV, ~530 mil lojistas, 120 distribuidores. Não é um e-commerce, é uma operação de cadeia de abastecimento."</li>
+            <li><strong>Respeito ao que foi construído:</strong> "O Conecta deu um salto real de plataforma. Nossa proposta não é recomeçar — é assumir o run com segurança, reduzir o TCO e acelerar a próxima fase."</li>
+            <li><strong>Preparo técnico (diferencial):</strong> "Já inspecionamos os canais: Adobe Commerce com PWA Studio em AWS e Fastly, WAF Signal Sciences, New Relic instrumentado, SAC em Freshdesk, WhatsApp via Yalo. Sabemos o terreno que vamos pisar."</li>
+            <li><strong>Endereçar o custo sem atacar:</strong> "Trazemos governança equivalente, mais proximidade e um plano de redução de custo estrutural — não apenas uma hora mais barata."</li>
+            <li><strong>Visão de produto vs BEES:</strong> "O BEES mostrou que crédito, recomendação e WhatsApp viram recorrência. Podemos transformar a Compra Agora em uma plataforma cada vez mais preditiva e orientada por dados."</li>
+            <li><strong>Próximo passo concreto:</strong> "Topam um discovery técnico de 2 semanas e um plano de takeover de 90 dias? Saímos da reunião com um caminho de transição segura desenhado."</li>
+        </ol>
+    </section>
+
+    <footer>
+        <div class="brand-line">foursys | Preparação de Reunião — Compra Agora (RFI/RFP)</div>
+        <div>Confidencial · Uso interno comercial | Verificação empírica em 08/06/2026</div>
+        <div style="margin-top:4px;">Complemento ao briefing executivo · Stack confirmada por inspeção direta</div>
+    </footer>
+</div>
+<button class="print-btn" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
+</body>
+</html>
