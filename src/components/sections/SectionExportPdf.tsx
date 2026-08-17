@@ -49,6 +49,9 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
     'portfolio-assets': [
       { id: 'portfolio-assets-lista', label: 'Ativos transversais', sectionId: 'portfolio-assets' },
     ],
+    'portfolio-ecosystem': [
+      { id: 'portfolio-ecosystem-mapa', label: 'Mapa do ecossistema', sectionId: 'portfolio-ecosystem' },
+    ],
     'offers-flagship': [
       { id: 'offers-ai-squad', label: 'AI Squad', sectionId: 'offers-flagship' },
       { id: 'offers-legacy', label: 'Modernização de Legado', sectionId: 'offers-flagship' },
@@ -103,6 +106,9 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
     ],
     'portfolio-assets': [
       { id: 'portfolio-assets-lista', label: 'Cross-cutting assets', sectionId: 'portfolio-assets' },
+    ],
+    'portfolio-ecosystem': [
+      { id: 'portfolio-ecosystem-mapa', label: 'Ecosystem map', sectionId: 'portfolio-ecosystem' },
     ],
     'offers-flagship': [
       { id: 'offers-ai-squad', label: 'AI Squad', sectionId: 'offers-flagship' },

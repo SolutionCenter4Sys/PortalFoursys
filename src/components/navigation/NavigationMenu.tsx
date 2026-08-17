@@ -44,6 +44,7 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
   'portfolio-start':  Route,
   'portfolio-future': Telescope,
   'portfolio-assets': Blocks,
+  'portfolio-ecosystem': Network,
   'offers-flagship': Star,
   'services':        LayoutGrid,
   'delivery':        Rocket,

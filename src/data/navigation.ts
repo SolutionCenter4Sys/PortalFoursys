@@ -43,6 +43,13 @@ const navigationItemsPt: NavigationItem[] = [
 
   // ── Portfólio 2026 S2 ──────────────────────────────────────────────────────
   {
+    id: 'portfolio-ecosystem',
+    label: 'Ecossistema do Portfólio',
+    icon: 'network',
+    category: 'Portfólio',
+    description: 'Mapa completo: diferenciação, escala, futuro e as forças transversais que sustentam tudo',
+  },
+  {
     id: 'portfolio-thesis',
     label: 'Eixos de Valor',
     icon: 'compass',
@@ -254,6 +261,13 @@ const navigationItemsEn: NavigationItem[] = [
   },
 
   // ── Portfolio 2026 H2 ──────────────────────────────────────────────────────
+  {
+    id: 'portfolio-ecosystem',
+    label: 'Portfolio Ecosystem',
+    icon: 'network',
+    category: 'Portfolio',
+    description: 'Full map: differentiation, scale, future and the cross-cutting forces that hold it together',
+  },
   {
     id: 'portfolio-thesis',
     label: 'Value Axes',

@@ -1,0 +1,392 @@
+import { useMemo } from 'react'
+import { motion } from 'framer-motion'
+import {
+  Bot,
+  BrainCircuit,
+  Cloud,
+  Cpu,
+  Coins,
+  Database,
+  Gauge,
+  Layers,
+  Leaf,
+  LifeBuoy,
+  Network,
+  Package,
+  PackageCheck,
+  Rocket,
+  ShieldCheck,
+  Sparkles,
+  Users,
+  Wrench,
+} from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
+import { SectionWrapper } from '../ui/SectionWrapper'
+import { InterestButton } from '../ui/InterestButton'
+import { useLanguage } from '../../i18n'
+import { getPortfolio } from '../../data/portfolio'
+import type { PortfolioAxis } from '../../types'
+
+const ICONS: Record<string, LucideIcon> = {
+  sparkles: Sparkles,
+  cpu: Cpu,
+  layers: Layers,
+  database: Database,
+  cloud: Cloud,
+  'shield-check': ShieldCheck,
+  'life-buoy': LifeBuoy,
+  'package-check': PackageCheck,
+  'brain-circuit': BrainCircuit,
+  users: Users,
+  bot: Bot,
+  package: Package,
+  wrench: Wrench,
+  coins: Coins,
+  leaf: Leaf,
+}
+
+/* ── Pilar: coluna do ecossistema ──────────────────────────────────────────── */
+
+function PillarHeader({
+  icon: Icon,
+  accent,
+  kicker,
+  hint,
+  description,
+}: {
+  icon: LucideIcon
+  accent: string
+  kicker: string
+  hint: string
+  description: string
+}) {
+  return (
+    <div className="mb-4">
+      <div className="h-[3px] rounded-full mb-4" style={{ background: `linear-gradient(90deg, ${accent}, transparent)` }} />
+      <div className="flex items-center gap-3 mb-2">
+        <div
+          className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 border"
+          style={{
+            backgroundColor: `${accent}14`,
+            borderColor: `${accent}40`,
+            boxShadow: `0 0 24px ${accent}25`,
+          }}
+        >
+          <Icon size={20} style={{ color: accent }} aria-hidden="true" />
+        </div>
+        <div className="min-w-0">
+          <h3 className="text-lg md:text-xl font-black leading-none" style={{ color: accent }}>
+            {kicker}
+          </h3>
+          <p className="text-[11px] text-foursys-text-dim mt-1 leading-tight">{hint}</p>
+        </div>
+      </div>
+      <p className="text-xs text-foursys-text-muted leading-relaxed">{description}</p>
+    </div>
+  )
+}
+
+function AxisCard({
+  axis,
+  items,
+  index,
+  axisWord,
+}: {
+  axis: PortfolioAxis
+  items: string[]
+  index: number
+  axisWord: string
+}) {
+  const Icon = ICONS[axis.icon] ?? Layers
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.08 + index * 0.05, duration: 0.4 }}
+      whileHover={{ y: -4 }}
+      data-voz-detalhe={`portfolio-ecosystem-${axis.id}`}
+      data-voz-detalhe-secao="portfolio-ecosystem"
+      data-voz-detalhe-rotulo={axis.name}
+      className="group relative rounded-2xl bg-foursys-surface/30 border border-white/[0.07] p-4 overflow-hidden"
+    >
+      <div
+        className="absolute inset-x-0 top-0 h-px opacity-60"
+        style={{ background: `linear-gradient(90deg, transparent, ${axis.color}, transparent)` }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute -right-10 -top-10 w-28 h-28 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{ backgroundColor: `${axis.color}22` }}
+        aria-hidden="true"
+      />
+
+      <div className="relative flex items-start gap-3">
+        <div
+          className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 border"
+          style={{
+            backgroundColor: `${axis.color}1A`,
+            borderColor: `${axis.color}40`,
+            boxShadow: `0 0 16px ${axis.color}30`,
+          }}
+        >
+          <Icon size={16} style={{ color: axis.color }} aria-hidden="true" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-foursys-text-dim">
+            {axisWord} {axis.number}
+          </p>
+          <h4 className="text-sm font-black text-white leading-tight">{axis.name}</h4>
+        </div>
+      </div>
+
+      {items.length > 0 && (
+        <ul className="relative mt-3 space-y-1.5 pl-1">
+          {items.map(item => (
+            <li key={item} className="flex items-start gap-2 text-xs text-foursys-text-muted leading-snug">
+              <span
+                className="w-1 h-1 rounded-full mt-[6px] flex-shrink-0"
+                style={{ backgroundColor: axis.color }}
+                aria-hidden="true"
+              />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </motion.article>
+  )
+}
+
+/* ── Seção ─────────────────────────────────────────────────────────────────── */
+
+export function SectionPortfolioEcosystem() {
+  const { t, lang } = useLanguage()
+  const { axes, offers, futureVision, assets } = useMemo(() => getPortfolio(lang), [lang])
+
+  const itemsByAxis = useMemo(() => {
+    const map = new Map<string, string[]>()
+    for (const axis of axes) {
+      const own = offers.filter(o => o.axisId === axis.id).map(o => o.name)
+      map.set(axis.id, own.length > 0 ? own : axis.upcomingOffers ?? [])
+    }
+    return map
+  }, [axes, offers])
+
+  const showcaseAxes = useMemo(() => axes.filter(a => a.role === 'diferenciacao'), [axes])
+  const engineAxes = useMemo(() => axes.filter(a => a.role === 'capacidade'), [axes])
+
+  const axisWord = t('portfolio.thesis.axisWord')
+
+  return (
+    <SectionWrapper>
+      <div className="relative px-4 md:px-8 py-6 md:py-9 max-w-[1500px] mx-auto">
+        {/* Brilhos de fundo */}
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-24 left-1/4 w-[420px] h-[420px] rounded-full bg-foursys-primary/[0.07] blur-[110px]"
+          animate={{ opacity: [0.5, 0.9, 0.5] }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-10 right-10 w-[360px] h-[360px] rounded-full bg-cyan-400/[0.06] blur-[110px]"
+          animate={{ opacity: [0.4, 0.8, 0.4] }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+        />
+
+        <motion.div
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="relative mb-5 md:mb-7"
+        >
+          <div className="flex items-start md:items-end justify-between flex-wrap gap-3">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-foursys-primary mb-2 flex items-center gap-2">
+                <Network size={13} aria-hidden="true" /> {t('portfolio.badge')}
+              </p>
+              <h2 className="text-2xl md:text-4xl font-black text-white leading-none">
+                {t('portfolio.ecosystem.title')}
+              </h2>
+              <p className="text-foursys-text-muted mt-2 text-sm md:text-base max-w-3xl leading-relaxed">
+                {t('portfolio.ecosystem.subtitle')}
+              </p>
+            </div>
+            <InterestButton section="portfolio-ecosystem" />
+          </div>
+
+          <div className="mt-4 md:mt-5 h-px bg-gradient-to-r from-foursys-primary/30 via-white/[0.06] to-transparent" />
+        </motion.div>
+
+        <div
+          data-voz-caixa="portfolio-ecosystem-mapa"
+          data-voz-caixa-secao="portfolio-ecosystem"
+          data-voz-caixa-rotulo={t('portfolio.ecosystem.title')}
+          tabIndex={-1}
+          className="relative focus:outline-none"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.25fr_0.85fr] gap-4 lg:gap-5 items-start">
+            {/* Diferenciação */}
+            <motion.div
+              initial={{ opacity: 0, x: -18 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.45 }}
+              className="rounded-3xl border border-white/[0.07] bg-white/[0.015] p-4 lg:p-5"
+            >
+              <PillarHeader
+                icon={Sparkles}
+                accent="#FF6600"
+                kicker={t('portfolio.ecosystem.showcaseTitle')}
+                hint={t('portfolio.ecosystem.showcaseHint')}
+                description={t('portfolio.ecosystem.showcaseDesc')}
+              />
+              <div className="space-y-3">
+                {showcaseAxes.map((axis, i) => (
+                  <AxisCard
+                    key={axis.id}
+                    axis={axis}
+                    items={itemsByAxis.get(axis.id) ?? []}
+                    index={i}
+                    axisWord={axisWord}
+                  />
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Escala */}
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.05 }}
+              className="rounded-3xl border border-white/[0.07] bg-white/[0.015] p-4 lg:p-5"
+            >
+              <PillarHeader
+                icon={Gauge}
+                accent="#38BDF8"
+                kicker={t('portfolio.ecosystem.engineTitle')}
+                hint={t('portfolio.ecosystem.engineHint')}
+                description={t('portfolio.ecosystem.engineDesc')}
+              />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {engineAxes.map((axis, i) => (
+                  <AxisCard
+                    key={axis.id}
+                    axis={axis}
+                    items={itemsByAxis.get(axis.id) ?? []}
+                    index={i}
+                    axisWord={axisWord}
+                  />
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Futuro */}
+            <motion.div
+              initial={{ opacity: 0, x: 18 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.45, delay: 0.1 }}
+              className="rounded-3xl border border-white/[0.07] bg-white/[0.015] p-4 lg:p-5"
+            >
+              <PillarHeader
+                icon={Rocket}
+                accent="#A78BFA"
+                kicker={t('portfolio.ecosystem.futureTitle')}
+                hint={t('portfolio.ecosystem.futureHint')}
+                description={t('portfolio.ecosystem.futureDesc')}
+              />
+              <div className="space-y-3">
+                {futureVision.map((item, i) => {
+                  const Icon = ICONS[item.icon] ?? Rocket
+                  return (
+                    <motion.article
+                      key={item.id}
+                      initial={{ opacity: 0, y: 14 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.12 + i * 0.05, duration: 0.35 }}
+                      whileHover={{ y: -4 }}
+                      data-voz-detalhe={`portfolio-ecosystem-${item.id}`}
+                      data-voz-detalhe-secao="portfolio-ecosystem"
+                      data-voz-detalhe-rotulo={item.name}
+                      className="group relative rounded-2xl bg-foursys-surface/30 border border-white/[0.07] p-4 overflow-hidden"
+                    >
+                      <div
+                        className="absolute inset-x-0 top-0 h-px opacity-60 bg-gradient-to-r from-transparent via-violet-400 to-transparent"
+                        aria-hidden="true"
+                      />
+                      <div
+                        className="absolute -right-10 -top-10 w-24 h-24 rounded-full bg-violet-400/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        aria-hidden="true"
+                      />
+                      <div className="relative flex items-start gap-3">
+                        <div className="w-9 h-9 rounded-xl bg-violet-400/10 border border-violet-400/30 flex items-center justify-center flex-shrink-0 shadow-[0_0_16px_rgba(167,139,250,0.2)]">
+                          <Icon size={16} className="text-violet-300" aria-hidden="true" />
+                        </div>
+                        <div className="min-w-0">
+                          <h4 className="text-sm font-black text-white leading-tight">{item.name}</h4>
+                          <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-violet-400/10 text-violet-300 border border-violet-400/25">
+                            {item.horizon}
+                          </span>
+                        </div>
+                      </div>
+                    </motion.article>
+                  )
+                })}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Forças transversais — o alicerce */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.18 }}
+            className="relative mt-4 lg:mt-5 rounded-3xl border border-foursys-primary/25 overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-foursys-primary/[0.10] via-foursys-primary/[0.04] to-transparent" aria-hidden="true" />
+            <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-foursys-primary via-foursys-primary/40 to-transparent" aria-hidden="true" />
+
+            <div className="relative p-4 lg:p-5">
+              <div className="flex items-start gap-3 mb-3">
+                <div className="w-11 h-11 rounded-2xl bg-foursys-primary/12 border border-foursys-primary/35 flex items-center justify-center flex-shrink-0 shadow-[0_0_24px_rgba(255,102,0,0.18)]">
+                  <Layers size={20} className="text-foursys-primary" aria-hidden="true" />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="text-lg md:text-xl font-black text-white leading-none">
+                    {t('portfolio.ecosystem.foundationTitle')}
+                  </h3>
+                  <p className="text-xs text-foursys-text-muted mt-1.5 leading-relaxed max-w-3xl">
+                    {t('portfolio.ecosystem.foundationDesc')}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {assets.map((asset, i) => {
+                  const Icon = ICONS[asset.icon] ?? Wrench
+                  return (
+                    <motion.div
+                      key={asset.id}
+                      initial={{ opacity: 0, scale: 0.94 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.22 + i * 0.04, duration: 0.3 }}
+                      whileHover={{ y: -2 }}
+                      title={asset.description}
+                      data-voz-detalhe={`portfolio-ecosystem-asset-${asset.id}`}
+                      data-voz-detalhe-secao="portfolio-ecosystem"
+                      data-voz-detalhe-rotulo={asset.name}
+                      className="flex items-center gap-2 px-3 py-2 rounded-xl bg-foursys-surface/40 border border-white/[0.08] hover:border-foursys-primary/40 hover:shadow-[0_0_20px_rgba(255,102,0,0.15)] transition-colors duration-300"
+                    >
+                      <Icon size={14} className="text-foursys-primary flex-shrink-0" aria-hidden="true" />
+                      <span className="text-xs font-bold text-white leading-none">{asset.name}</span>
+                    </motion.div>
+                  )
+                })}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </SectionWrapper>
+  )
+}

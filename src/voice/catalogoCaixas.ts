@@ -93,6 +93,8 @@ const CAIXAS_PT: ReadonlyArray<CaixaSecao> = [
     rotulos: ['visao de futuro', 'futuro', 'tokenizacao'] },
   { id: 'portfolio-assets-grid', secao: 'portfolio-assets', rotulo: 'Ativos Transversais',
     rotulos: ['ativos transversais', 'ativos', 'nexus', 'fourblox', 'zeragon'] },
+  { id: 'portfolio-ecosystem-mapa', secao: 'portfolio-ecosystem', rotulo: 'Ecossistema do Portfólio',
+    rotulos: ['ecossistema do portfolio', 'ecossistema', 'mapa do portfolio', 'diferenciacao escala futuro'] },
 
   // ── Offers Flagship ─────────────────────────────────────────────────────
   { id: 'offers-grid', secao: 'offers-flagship', rotulo: 'Principais Ofertas',
@@ -172,6 +174,8 @@ const CAIXAS_EN: ReadonlyArray<CaixaSecao> = [
     rotulos: ['future vision', 'future', 'tokenization'] },
   { id: 'portfolio-assets-grid', secao: 'portfolio-assets', rotulo: 'Cross-cutting Assets',
     rotulos: ['cross-cutting assets', 'assets', 'nexus', 'fourblox', 'zeragon'] },
+  { id: 'portfolio-ecosystem-mapa', secao: 'portfolio-ecosystem', rotulo: 'Portfolio Ecosystem',
+    rotulos: ['portfolio ecosystem', 'ecosystem', 'portfolio map', 'differentiation scale future'] },
 
   // ── Offers Flagship ─────────────────────────────────────────────────────
   { id: 'offers-grid', secao: 'offers-flagship', rotulo: 'Main Offers',
