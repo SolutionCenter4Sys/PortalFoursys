@@ -27,7 +27,7 @@ import { BackToOriginChip } from '../ui/BackToOriginChip'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import { getPortfolio } from '../../data/portfolio'
-import { MUTED_COLOR, PILLAR_COLOR } from '../../theme/portfolioTokens'
+import { PILLAR_COLOR } from '../../theme/portfolioTokens'
 import type { PortfolioAxis } from '../../types'
 
 const ICONS: Record<string, LucideIcon> = {
@@ -94,7 +94,6 @@ function AxisCard({
   items,
   index,
   axisWord,
-  offerCount,
   onOpen,
   openLabel,
 }: {
@@ -102,7 +101,6 @@ function AxisCard({
   items: string[]
   index: number
   axisWord: string
-  offerCount: number
   onOpen?: () => void
   openLabel?: string
 }) {
@@ -161,17 +159,6 @@ function AxisCard({
           </p>
           <h4 className="text-sm font-black text-white leading-tight">{axis.name}</h4>
         </div>
-        <span
-          aria-hidden="true"
-          className="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-label font-black border"
-          style={{
-            borderColor: `${axis.color}40`,
-            backgroundColor: `${axis.color}12`,
-            color: offerCount > 1 ? axis.color : MUTED_COLOR,
-          }}
-        >
-          {offerCount}
-        </span>
       </div>
 
       {items.length > 0 && (
@@ -209,10 +196,10 @@ export function SectionPortfolioEcosystem() {
     return map
   }, [axes, offers])
 
-  const offerCountByAxis = useMemo(() => {
-    const map: Record<string, number> = {}
-    for (const offer of offers) map[offer.axisId] = (map[offer.axisId] ?? 0) + 1
-    return map
+  const axesWithOffers = useMemo(() => {
+    const set = new Set<string>()
+    for (const offer of offers) set.add(offer.axisId)
+    return set
   }, [offers])
 
   const openAxis = useCallback(
@@ -224,17 +211,14 @@ export function SectionPortfolioEcosystem() {
   )
 
   const axisCardProps = useCallback(
-    (axis: PortfolioAxis) => {
-      const offerCount = offerCountByAxis[axis.id] ?? 0
-      return offerCount > 0
+    (axis: PortfolioAxis) =>
+      axesWithOffers.has(axis.id)
         ? {
-            offerCount,
             onOpen: () => openAxis(axis.id),
             openLabel: t('portfolio.ecosystem.openAxis').replace('{name}', axis.name),
           }
-        : { offerCount }
-    },
-    [offerCountByAxis, openAxis, t],
+        : {},
+    [axesWithOffers, openAxis, t],
   )
 
   const showcaseAxes = useMemo(() => axes.filter(a => a.role === 'diferenciacao'), [axes])

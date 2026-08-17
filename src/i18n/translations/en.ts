@@ -633,10 +633,8 @@ export const en = {
       engineHint: 'Sustain delivery and volume',
       axisWord: 'Axis',
       audienceLabel: 'Who it speaks to',
-      offersInAxis: 'offers in this axis',
       seeOffers: 'See offers in this axis',
       axisEmpty: 'Offers in this axis without a detailed kit in this cycle',
-      densityHint: 'The number shows offers with a detailed kit',
     },
     offers: {
       title: 'Offer catalog',

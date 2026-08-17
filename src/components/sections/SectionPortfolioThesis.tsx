@@ -20,7 +20,7 @@ import { BackToOriginChip } from '../ui/BackToOriginChip'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import { getPortfolio } from '../../data/portfolio'
-import { AXIS_FALLBACK_COLOR, MUTED_COLOR, PILLAR_COLOR, SURFACE_DEEP_COLOR } from '../../theme/portfolioTokens'
+import { AXIS_FALLBACK_COLOR, PILLAR_COLOR } from '../../theme/portfolioTokens'
 import type { PortfolioAxis, PortfolioRole } from '../../types'
 
 const AXIS_ICONS: Record<string, LucideIcon> = {
@@ -50,13 +50,11 @@ function getLabelPosition(angleDeg: number) {
 function AxisOrbitRing({
   axes,
   activeId,
-  offerCountByAxis,
   onSelect,
   onKeyNav,
 }: {
   axes: PortfolioAxis[]
   activeId: string
-  offerCountByAxis: Record<string, number>
   onSelect: (id: string) => void
   onKeyNav: (e: React.KeyboardEvent, currentId: string) => void
 }) {
@@ -96,7 +94,6 @@ function AxisOrbitRing({
         const y = 50 + radius * Math.sin(angleRad)
         const isActive = activeId === axis.id
         const labelPos = getLabelPosition(angleDeg)
-        const offerCount = offerCountByAxis[axis.id] ?? 0
 
         return (
           <button
@@ -104,7 +101,7 @@ function AxisOrbitRing({
             type="button"
             role="radio"
             aria-checked={isActive}
-            aria-label={`${axis.name} — ${offerCount} ${t('portfolio.thesis.offersInAxis')}`}
+            aria-label={axis.name}
             tabIndex={isActive ? 0 : -1}
             onClick={() => onSelect(axis.id)}
             onKeyDown={e => onKeyNav(e, axis.id)}
@@ -127,18 +124,6 @@ function AxisOrbitRing({
               }}
             >
               <Icon size={22} style={{ color: axis.color }} strokeWidth={2.2} aria-hidden="true" />
-            </span>
-            {/* Densidade: quantas ofertas o eixo já tem detalhadas */}
-            <span
-              aria-hidden="true"
-              className="absolute -top-1 -right-1 w-5 h-5 lg:w-[22px] lg:h-[22px] rounded-full flex items-center justify-center text-meta lg:text-label font-black border"
-              style={{
-                backgroundColor: SURFACE_DEEP_COLOR,
-                borderColor: `${axis.color}66`,
-                color: offerCount > 1 ? axis.color : MUTED_COLOR,
-              }}
-            >
-              {offerCount}
             </span>
             <span
               className={`absolute w-[104px] lg:w-[120px] text-label lg:text-[12px] font-bold leading-tight pointer-events-none text-white/90 ${labelPos}`}
@@ -297,12 +282,6 @@ function AxisCard({
         <p className="text-xs text-foursys-text-muted leading-relaxed">{axis.promise}</p>
 
         <div className="flex items-center gap-2 flex-wrap">
-          <span
-            className="text-label font-semibold px-2 py-0.5 rounded-full border"
-            style={{ color: axis.color, borderColor: `${axis.color}40`, backgroundColor: `${axis.color}12` }}
-          >
-            {offerNames.length} {t('portfolio.thesis.offersInAxis')}
-          </span>
           <span className="text-label text-foursys-text-dim">{axis.audience}</span>
         </div>
       </button>
@@ -438,12 +417,6 @@ export function SectionPortfolioThesis() {
     return map
   }, [offers])
 
-  const offerCountByAxis = useMemo(() => {
-    const map: Record<string, number> = {}
-    for (const axis of axes) map[axis.id] = offersByAxis[axis.id]?.length ?? 0
-    return map
-  }, [axes, offersByAxis])
-
   const showcaseAxes = axes.filter(a => a.role === 'diferenciacao')
   const engineAxes = axes.filter(a => a.role === 'capacidade')
 
@@ -545,15 +518,6 @@ export function SectionPortfolioThesis() {
                 <span className="w-3 h-3 rounded-full border-2 border-dashed border-slate-400/60" aria-hidden="true" />
                 {t('portfolio.thesis.engine')}
               </span>
-              <span className="flex items-center gap-2 text-label text-foursys-text-dim">
-                <span
-                  className="w-[18px] h-[18px] rounded-full border border-white/25 flex items-center justify-center text-meta font-black text-foursys-text-dim"
-                  aria-hidden="true"
-                >
-                  n
-                </span>
-                {t('portfolio.thesis.densityHint')}
-              </span>
               <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent" />
             </div>
 
@@ -568,7 +532,6 @@ export function SectionPortfolioThesis() {
                 <AxisOrbitRing
                   axes={axes}
                   activeId={activeAxis.id}
-                  offerCountByAxis={offerCountByAxis}
                   onSelect={setActiveAxisId}
                   onKeyNav={handleKeyNav}
                 />

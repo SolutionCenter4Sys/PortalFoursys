@@ -633,10 +633,8 @@ export const pt = {
       engineHint: 'Sustentam a entrega e o volume',
       axisWord: 'Eixo',
       audienceLabel: 'Para quem fala',
-      offersInAxis: 'ofertas neste eixo',
       seeOffers: 'Ver ofertas do eixo',
       axisEmpty: 'Ofertas do eixo sem kit detalhado neste ciclo',
-      densityHint: 'O número indica ofertas com kit detalhado',
     },
     offers: {
       title: 'Catálogo de ofertas',
