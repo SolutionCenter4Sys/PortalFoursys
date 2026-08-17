@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Clock, BarChart2, MapPin, Copy, CheckCheck, ChevronRight, Star, History, FileDown, Download } from 'lucide-react'
+import { X, Clock, BarChart2, MapPin, Copy, CheckCheck, ChevronRight, Star, History, FileDown, Download, Library } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import { DynIcon } from '../../utils/iconMap'
@@ -274,6 +274,34 @@ export function SessionPanel() {
                       {getSectionLabel(s as AppSection)}
                     </span>
                   ))}
+                </div>
+              </div>
+            )}
+
+            {/* Ofertas abertas — sinal de interesse mais granular que a seção */}
+            {state.offerStats.length > 0 && (
+              <div className="px-4 py-3 border-b border-white/[0.06]">
+                <div className="flex items-center gap-1.5 mb-2">
+                  <Library size={11} className="text-cyan-400" />
+                  <span className="text-[10px] font-semibold text-cyan-300/80 uppercase tracking-widest">
+                    {t('session.offersOpened')}
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {[...state.offerStats]
+                    .sort((a, b) => b.openCount - a.openCount)
+                    .map(offer => (
+                      <span
+                        key={offer.code}
+                        className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-cyan-400/10 border border-cyan-400/25 text-cyan-200 text-[10px] font-medium"
+                      >
+                        <span className="font-mono font-bold">{offer.code}</span>
+                        {offer.name}
+                        {offer.openCount > 1 && (
+                          <span className="text-cyan-400/70">×{offer.openCount}</span>
+                        )}
+                      </span>
+                    ))}
                 </div>
               </div>
             )}

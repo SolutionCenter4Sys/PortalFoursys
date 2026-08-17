@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
 import { AppProvider, useApp } from './context/AppContext'
 import { ThemeProvider, useTheme } from './context/ThemeContext'
 import { LanguageProvider, useLanguage } from './i18n'
@@ -107,7 +107,9 @@ function AppInner() {
 
       {/* Backdrop drawer mobile */}
       {state.isMenuOpen && (
-        <div
+        <button
+          type="button"
+          aria-label={t('nav.closeMenu')}
           className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
           onClick={toggleMenu}
         />
@@ -180,15 +182,17 @@ function AppInner() {
 
 function App() {
   return (
-    <LanguageProvider>
-      <ThemeProvider>
-        <AppProvider>
-          <VoiceProvider>
-            <AppInner />
-          </VoiceProvider>
-        </AppProvider>
-      </ThemeProvider>
-    </LanguageProvider>
+    <MotionConfig reducedMotion="user">
+      <LanguageProvider>
+        <ThemeProvider>
+          <AppProvider>
+            <VoiceProvider>
+              <AppInner />
+            </VoiceProvider>
+          </AppProvider>
+        </ThemeProvider>
+      </LanguageProvider>
+    </MotionConfig>
   )
 }
 

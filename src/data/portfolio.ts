@@ -2,6 +2,7 @@ import type {
   PortfolioAsset,
   PortfolioAxis,
   PortfolioBundle,
+  PortfolioEngagement,
   PortfolioFutureItem,
   PortfolioOffer,
   PortfolioPersona,
@@ -2486,6 +2487,20 @@ const assets: PortfolioAsset[] = [
   },
 ]
 
+// ─── Base comercial ───────────────────────────────────────────────────────────
+
+const defaultEngagement: PortfolioEngagement = {
+  models: [
+    'Projeto fechado — escopo, prazo e entregáveis definidos',
+    'Squad dedicada — alocação mensal com time multidisciplinar',
+    'Operação assistida — sustentação e evolução contínua com SLA',
+    'Assinatura de produto — FourBlox e FourMakers por licença',
+  ],
+  sizing: 'Squad dimensionada por fase, conforme o cronograma da própria oferta.',
+  investmentGuidance:
+    'Faixa de investimento sai da proposta comercial, depois do dimensionamento aprovado. Não citar valor em apresentação sem passar pelo Solution Center.',
+}
+
 // ─── Bundle ───────────────────────────────────────────────────────────────────
 
 const portfolioPt: PortfolioBundle = {
@@ -2497,6 +2512,7 @@ const portfolioPt: PortfolioBundle = {
   futureVision,
   assets,
   institutionalBacking,
+  defaultEngagement,
 }
 
 // O conteúdo dos kits comerciais 2026 S2 só existe em português. Até a versão

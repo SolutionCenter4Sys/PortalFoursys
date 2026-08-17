@@ -30,10 +30,26 @@ export default {
           accent:        'rgb(var(--c-accent) / <alpha-value>)',
           success:       'rgb(var(--c-success) / <alpha-value>)',
           warning:       'rgb(var(--c-warning) / <alpha-value>)',
-        }
+        },
+        evidence: {
+          proven:     'rgb(var(--c-evidence-proven) / <alpha-value>)',
+          validating: 'rgb(var(--c-evidence-validating) / <alpha-value>)',
+          none:       'rgb(var(--c-evidence-none) / <alpha-value>)',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      fontSize: {
+        // Escala em rem para acompanhar o corpo de texto do sistema (Dynamic Type)
+        meta:  ['0.625rem',  { lineHeight: '0.875rem' }],
+        label: ['0.6875rem', { lineHeight: '1rem' }],
+      },
+      minHeight: {
+        touch: '44px',
+      },
+      minWidth: {
+        touch: '44px',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

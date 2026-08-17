@@ -1,533 +1,24 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import {
-  ArrowRight,
-  BadgeCheck,
-  CheckCircle2,
-  Eye,
-  EyeOff,
-  FlaskConical,
-  Library,
-  Link2,
-  Search,
-  ShieldAlert,
-  X,
-} from 'lucide-react'
+import { Eye, EyeOff, Library, Search } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { InterestButton } from '../ui/InterestButton'
 import { BackToOriginChip } from '../ui/BackToOriginChip'
+import { EVIDENCE_STYLE } from '../portfolio/EvidenceBadge'
+import { OfferCard } from '../portfolio/OfferCard'
+import { OfferModal } from '../portfolio/OfferModal'
 import { useApp } from '../../context/AppContext'
-import { useFocusTrap } from '../../hooks/useFocusTrap'
 import { useLanguage } from '../../i18n'
 import { getPortfolio } from '../../data/portfolio'
-import type { AppSection, EvidenceStatus, PortfolioAxis, PortfolioOffer, PortfolioRole } from '../../types'
-
-// ─── Selo de lastro de prova ─────────────────────────────────────────────────
-
-const EVIDENCE_STYLE: Record<EvidenceStatus, { color: string; icon: typeof BadgeCheck }> = {
-  'liberado': { color: '#4ADE80', icon: BadgeCheck },
-  'em-validacao': { color: '#F59E0B', icon: FlaskConical },
-  'sem-lastro': { color: '#94A3B8', icon: ShieldAlert },
-}
-
-function EvidenceBadge({ status, compact = false }: { status: EvidenceStatus; compact?: boolean }) {
-  const { t } = useLanguage()
-  const style = EVIDENCE_STYLE[status]
-  const Icon = style.icon
-
-  return (
-    <span
-      title={t(`portfolio.evidence.${status}Hint`)}
-      className={`inline-flex items-center gap-1.5 rounded-full border font-semibold ${
-        compact ? 'text-[10px] px-1.5 py-0.5' : 'text-[11px] px-2 py-1'
-      }`}
-      style={{ color: style.color, borderColor: `${style.color}44`, backgroundColor: `${style.color}12` }}
-    >
-      <Icon size={compact ? 9 : 11} aria-hidden="true" />
-      {t(`portfolio.evidence.${status}`)}
-    </span>
-  )
-}
-
-// ─── Modal de detalhe da oferta ──────────────────────────────────────────────
-
-function Block({
-  title,
-  children,
-  accent,
-}: {
-  title: string
-  children: React.ReactNode
-  accent: string
-}) {
-  return (
-    <div>
-      <h4
-        className="text-[11px] font-bold uppercase tracking-[0.14em] mb-2.5"
-        style={{ color: accent }}
-      >
-        {title}
-      </h4>
-      {children}
-    </div>
-  )
-}
-
-function OfferModal({
-  offer,
-  axis,
-  offersByCode,
-  presenterMode,
-  onClose,
-  onOpenOffer,
-  onCompareLegacy,
-}: {
-  offer: PortfolioOffer
-  axis: PortfolioAxis | undefined
-  offersByCode: Record<string, PortfolioOffer>
-  presenterMode: boolean
-  onClose: () => void
-  onOpenOffer: (offer: PortfolioOffer) => void
-  onCompareLegacy: (section: AppSection) => void
-}) {
-  const trapRef = useFocusTrap(true)
-  const { t } = useLanguage()
-  const accent = axis?.color ?? '#22D3EE'
-
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
-    }
-    document.addEventListener('keydown', onKeyDown)
-    return () => document.removeEventListener('keydown', onKeyDown)
-  }, [onClose])
-
-  // Sem isto o conteúdo atrás do modal continua rolando ao arrastar no celular.
-  useEffect(() => {
-    const previous = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.body.style.overflow = previous
-    }
-  }, [])
-
-  const roleLabel =
-    offer.role === 'diferenciacao'
-      ? t('portfolio.thesis.showcase')
-      : t('portfolio.thesis.engine')
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6"
-      role="dialog"
-      aria-modal="true"
-      aria-label={offer.name}
-      onClick={onClose}
-    >
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
-      <motion.div
-        ref={trapRef}
-        initial={{ scale: 0.96, y: 18 }}
-        animate={{ scale: 1, y: 0 }}
-        exit={{ scale: 0.96, y: 18 }}
-        onClick={e => e.stopPropagation()}
-        data-voz-scroll-root
-        className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-t-2xl sm:rounded-2xl max-w-3xl w-full overflow-y-auto overscroll-contain max-h-[92dvh]"
-      >
-        {/* ── Cabeçalho ── */}
-        <div
-          className="p-6 md:p-7 border-b"
-          style={{
-            borderColor: `${accent}33`,
-            background: `linear-gradient(135deg, ${accent}1F 0%, transparent 70%)`,
-          }}
-        >
-          <button
-            onClick={onClose}
-            aria-label={t('common.close')}
-            data-voz-fechar-detalhe="true"
-            className="absolute top-4 right-4 p-2 rounded-xl hover:bg-white/10 text-foursys-text-muted transition-colors"
-          >
-            <X size={16} aria-hidden="true" />
-          </button>
-
-          <div className="flex items-center gap-2 flex-wrap mb-3 pr-10">
-            <span
-              className="font-mono text-[11px] font-bold px-2 py-0.5 rounded"
-              style={{ color: accent, backgroundColor: `${accent}1A`, border: `1px solid ${accent}40` }}
-            >
-              {offer.code}
-            </span>
-            {axis && (
-              <span className="text-[10px] text-foursys-text-dim uppercase tracking-widest">
-                {t('portfolio.thesis.axisWord')} {axis.number} · {axis.name}
-              </span>
-            )}
-            <span className="text-[10px] text-foursys-text-dim">·</span>
-            <span className="text-[10px] text-foursys-text-dim uppercase tracking-widest">{roleLabel}</span>
-            {offer.portfolioRole && (
-              <span
-                className="text-[11px] font-bold px-2 py-0.5 rounded-full border"
-                style={{ color: '#22D3EE', borderColor: '#22D3EE44', backgroundColor: '#22D3EE12' }}
-              >
-                {offer.portfolioRole}
-              </span>
-            )}
-          </div>
-
-          <h3 className="text-xl md:text-2xl font-black text-white leading-tight mb-2">{offer.name}</h3>
-          <p className="text-sm md:text-base font-semibold" style={{ color: accent }}>
-            {offer.headline}
-          </p>
-
-          <div className="mt-4 flex items-center gap-2 flex-wrap">
-            <EvidenceBadge status={offer.proof.status} />
-            <span className="text-[11px] text-foursys-text-dim">
-              {t('portfolio.offer.duration')}: {offer.totalDuration}
-            </span>
-          </div>
-        </div>
-
-        {/* ── Corpo ── */}
-        <div className="p-6 md:p-7 space-y-6">
-
-          <div className="grid md:grid-cols-2 gap-5">
-            <Block title={t('portfolio.offer.whatItIs')} accent={accent}>
-              <p className="text-sm text-foursys-text-muted leading-relaxed">{offer.whatItIs}</p>
-            </Block>
-            <Block title={t('portfolio.offer.pain')} accent={accent}>
-              <p className="text-sm text-foursys-text-muted leading-relaxed">{offer.pain}</p>
-            </Block>
-          </div>
-
-          {offer.entryTriggers && offer.entryTriggers.length > 0 && (
-            <Block title={t('portfolio.offer.triggers')} accent={accent}>
-              <div className="flex flex-wrap gap-2">
-                {offer.entryTriggers.map(trigger => (
-                  <span
-                    key={trigger}
-                    className="text-[11px] px-2.5 py-1 rounded-lg bg-foursys-surface/40 border border-white/[0.08] text-foursys-text-muted"
-                  >
-                    {trigger}
-                  </span>
-                ))}
-              </div>
-            </Block>
-          )}
-
-          {/* Você sai com */}
-          <Block title={t('portfolio.offer.outcomes')} accent={accent}>
-            <ul className="grid md:grid-cols-2 gap-2">
-              {offer.outcomes.map(outcome => (
-                <li key={outcome} className="flex items-start gap-2.5 text-sm text-foursys-text-muted">
-                  <CheckCircle2 size={14} style={{ color: accent }} className="flex-shrink-0 mt-0.5" aria-hidden="true" />
-                  {outcome}
-                </li>
-              ))}
-            </ul>
-          </Block>
-
-          {/* Diferenciais */}
-          <Block title={t('portfolio.offer.differentials')} accent={accent}>
-            <div className="space-y-2.5">
-              {offer.differentials.map(diff => (
-                <div
-                  key={diff.title}
-                  className="p-3 rounded-xl bg-foursys-surface/30 border-l-2"
-                  style={{ borderColor: accent }}
-                >
-                  <div className="text-sm font-bold text-white mb-0.5">{diff.title}</div>
-                  <p className="text-xs text-foursys-text-muted leading-relaxed">{diff.detail}</p>
-                </div>
-              ))}
-            </div>
-          </Block>
-
-          {/* Método */}
-          <Block title={t('portfolio.offer.method')} accent={accent}>
-            <ol className="space-y-2.5">
-              {offer.phases.map((phase, i) => (
-                <li key={phase.name} className="flex gap-3">
-                  <div className="flex flex-col items-center flex-shrink-0">
-                    <span
-                      className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-black"
-                      style={{ backgroundColor: `${accent}1F`, color: accent, border: `1px solid ${accent}44` }}
-                    >
-                      {i + 1}
-                    </span>
-                    {i < offer.phases.length - 1 && (
-                      <div className="w-px flex-1 mt-1" style={{ backgroundColor: `${accent}30` }} />
-                    )}
-                  </div>
-                  <div className="pb-2">
-                    <div className="flex items-baseline gap-2 flex-wrap">
-                      <span className="text-sm font-bold text-white">{phase.name}</span>
-                      <span className="text-[11px] text-foursys-text-dim">{phase.duration}</span>
-                    </div>
-                    <p className="text-xs text-foursys-text-muted leading-relaxed mt-0.5">{phase.focus}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </Block>
-
-          {/* Entregáveis e ativos */}
-          {((offer.components?.length ?? 0) > 0 || (offer.assets?.length ?? 0) > 0) && (
-            <div className="grid md:grid-cols-2 gap-5">
-              {offer.components && offer.components.length > 0 && (
-                <Block title={t('portfolio.offer.components')} accent={accent}>
-                  <ul className="space-y-1.5">
-                    {offer.components.map(c => (
-                      <li key={c} className="text-xs text-foursys-text-muted flex items-start gap-2">
-                        <span className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5" style={{ backgroundColor: accent }} />
-                        {c}
-                      </li>
-                    ))}
-                  </ul>
-                </Block>
-              )}
-              {offer.assets && offer.assets.length > 0 && (
-                <Block title={t('portfolio.offer.assets')} accent={accent}>
-                  <div className="flex flex-wrap gap-2">
-                    {offer.assets.map(a => (
-                      <span
-                        key={a}
-                        className="text-[11px] font-semibold px-2.5 py-1 rounded-lg border"
-                        style={{ color: accent, borderColor: `${accent}33`, backgroundColor: `${accent}10` }}
-                      >
-                        {a}
-                      </span>
-                    ))}
-                  </div>
-                </Block>
-              )}
-            </div>
-          )}
-
-          {/* Mercado e regulatório */}
-          {offer.marketStats.length > 0 && (
-            <Block title={t('portfolio.offer.market')} accent={accent}>
-              <div className="space-y-2">
-                {offer.marketStats.map(stat => (
-                  <div key={stat.stat} className="p-3 rounded-xl bg-foursys-surface/25 border border-white/[0.06]">
-                    <p className="text-sm text-white leading-snug">{stat.stat}</p>
-                    <p className="text-[11px] text-foursys-text-dim mt-1">{stat.source}</p>
-                  </div>
-                ))}
-              </div>
-            </Block>
-          )}
-
-          {offer.regulatory && offer.regulatory.length > 0 && (
-            <Block title={t('portfolio.offer.regulatory')} accent={accent}>
-              <ul className="space-y-1.5">
-                {offer.regulatory.map(r => (
-                  <li key={r} className="text-xs text-foursys-text-muted flex items-start gap-2">
-                    <span className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5" style={{ backgroundColor: accent }} />
-                    {r}
-                  </li>
-                ))}
-              </ul>
-            </Block>
-          )}
-
-          {/* Personas */}
-          <Block title={t('portfolio.offer.personas')} accent={accent}>
-            <div className="grid md:grid-cols-2 gap-2">
-              {offer.personas.map(p => (
-                <div key={p.role} className="p-3 rounded-xl bg-foursys-surface/25 border border-white/[0.06]">
-                  <div className="text-xs font-bold text-white">{p.role}</div>
-                  <p className="text-[11px] text-foursys-text-muted leading-relaxed mt-0.5">{p.value}</p>
-                </div>
-              ))}
-            </div>
-          </Block>
-
-          {/* Conexões */}
-          {offer.connects.length > 0 && (
-            <Block title={t('portfolio.offer.connects')} accent={accent}>
-              <div className="flex flex-wrap gap-2">
-                {offer.connects.map(code => {
-                  const target = offersByCode[code]
-                  if (!target) {
-                    return (
-                      <span
-                        key={code}
-                        className="text-[11px] px-2.5 py-1 rounded-lg bg-foursys-surface/30 border border-white/[0.06] text-foursys-text-dim"
-                      >
-                        {code}
-                      </span>
-                    )
-                  }
-                  return (
-                    <button
-                      key={code}
-                      onClick={() => onOpenOffer(target)}
-                      className="text-[11px] px-2.5 py-1 rounded-lg border text-foursys-text-muted hover:text-white hover:border-white/20 transition-colors flex items-center gap-1.5"
-                      style={{ borderColor: 'rgba(255,255,255,0.08)' }}
-                    >
-                      <Link2 size={10} aria-hidden="true" />
-                      <span className="font-mono font-bold">{target.code}</span> {target.name}
-                    </button>
-                  )
-                })}
-              </div>
-            </Block>
-          )}
-
-          {/* Fronteira */}
-          {offer.boundary && (
-            <div className="p-4 rounded-xl bg-foursys-surface/25 border border-white/[0.08]">
-              <h4 className="text-[11px] font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-1.5">
-                {t('portfolio.offer.boundary')}
-              </h4>
-              <p className="text-xs text-foursys-text-muted leading-relaxed">{offer.boundary}</p>
-            </div>
-          )}
-
-          {/* CTA */}
-          <div
-            className="p-4 md:p-5 rounded-xl border"
-            style={{ borderColor: `${accent}33`, backgroundColor: `${accent}0D` }}
-          >
-            <h4 className="text-[11px] font-bold uppercase tracking-[0.14em] mb-1.5" style={{ color: accent }}>
-              {t('portfolio.offer.cta')}
-            </h4>
-            <p className="text-sm text-white leading-relaxed">{offer.cta}</p>
-          </div>
-
-          {/* Notas de condução — apenas em modo apresentador */}
-          {presenterMode && (
-            <div className="p-4 rounded-xl border border-amber-500/25 bg-amber-500/[0.06] space-y-2">
-              <h4 className="text-[11px] font-bold uppercase tracking-[0.14em] text-amber-400 flex items-center gap-1.5">
-                <Eye size={11} aria-hidden="true" /> {t('portfolio.presenter.title')}
-              </h4>
-              <div>
-                <span className="text-[10px] uppercase tracking-wider text-amber-400/70 font-bold">
-                  {t('portfolio.offer.proof')}
-                </span>
-                <p className="text-xs text-foursys-text-muted leading-relaxed">{offer.proof.note}</p>
-              </div>
-              {offer.proof.cases && offer.proof.cases.length > 0 && (
-                <ul className="space-y-1">
-                  {offer.proof.cases.map(c => (
-                    <li key={c} className="text-xs text-foursys-text-muted flex items-start gap-2">
-                      <span className="w-1 h-1 rounded-full bg-amber-400 flex-shrink-0 mt-1.5" />
-                      {c}
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {offer.editorialCare && (
-                <div>
-                  <span className="text-[10px] uppercase tracking-wider text-amber-400/70 font-bold">
-                    {t('portfolio.presenter.care')}
-                  </span>
-                  <p className="text-xs text-foursys-text-muted leading-relaxed">{offer.editorialCare}</p>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Comparação com a seção legada */}
-          {offer.legacyEquivalent && (
-            <button
-              onClick={() => onCompareLegacy(offer.legacyEquivalent!.section)}
-              className="w-full text-left p-3 rounded-xl border border-white/[0.07] bg-foursys-surface/20 hover:border-white/20 transition-colors flex items-center justify-between gap-3"
-            >
-              <span className="text-[11px] text-foursys-text-dim">
-                {t('portfolio.offer.legacy')}:{' '}
-                <span className="text-foursys-text-muted">{offer.legacyEquivalent.label}</span>
-              </span>
-              <ArrowRight size={13} className="text-foursys-text-dim flex-shrink-0" aria-hidden="true" />
-            </button>
-          )}
-        </div>
-      </motion.div>
-    </motion.div>
-  )
-}
-
-// ─── Card da oferta ──────────────────────────────────────────────────────────
-
-function OfferCard({
-  offer,
-  axis,
-  index,
-  onClick,
-}: {
-  offer: PortfolioOffer
-  axis: PortfolioAxis | undefined
-  index: number
-  onClick: () => void
-}) {
-  const { t } = useLanguage()
-  const accent = axis?.color ?? '#22D3EE'
-
-  return (
-    <motion.button
-      type="button"
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: Math.min(index * 0.04, 0.3), duration: 0.35 }}
-      onClick={onClick}
-      aria-label={t('portfolio.offers.openDetail').replace('{name}', offer.name)}
-      data-voz-detalhe={`portfolio-offer-${offer.id}`}
-      data-voz-detalhe-secao="portfolio-offers"
-      data-voz-detalhe-rotulo={offer.name}
-      className="p-5 text-left rounded-2xl bg-foursys-surface/30 border cursor-pointer hover:-translate-y-1 hover:bg-foursys-surface/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-all duration-300 flex flex-col group"
-      style={{ borderColor: `${accent}2E` }}
-    >
-      <div className="flex items-start justify-between gap-2 mb-3 w-full">
-        <span
-          className="font-mono text-[11px] font-bold px-1.5 py-0.5 rounded flex-shrink-0"
-          style={{ color: accent, backgroundColor: `${accent}18`, border: `1px solid ${accent}38` }}
-        >
-          {offer.code}
-        </span>
-        <EvidenceBadge status={offer.proof.status} compact />
-      </div>
-
-      <h3 className="text-base font-black text-white leading-tight mb-1">{offer.name}</h3>
-      <p className="text-xs font-semibold mb-3 leading-snug" style={{ color: accent }}>
-        {offer.tagline}
-      </p>
-
-      <p className="text-xs text-foursys-text-muted leading-relaxed flex-1 line-clamp-3 mb-3">
-        {offer.pain}
-      </p>
-
-      <div className="space-y-1.5 mb-3 w-full">
-        {offer.outcomes.slice(0, 2).map(outcome => (
-          <div key={outcome} className="flex items-start gap-1.5 text-[11px] text-foursys-text-dim">
-            <CheckCircle2 size={11} style={{ color: accent }} className="flex-shrink-0 mt-0.5" aria-hidden="true" />
-            <span className="line-clamp-1">{outcome}</span>
-          </div>
-        ))}
-      </div>
-
-      <div className="flex items-center justify-between gap-2 pt-3 border-t border-white/[0.06] w-full">
-        <span className="text-[11px] text-foursys-text-dim">{offer.totalDuration}</span>
-        <span
-          className="flex items-center gap-1 text-[11px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity"
-          style={{ color: accent }}
-        >
-          {t('common.seeMore')} <ArrowRight size={11} aria-hidden="true" />
-        </span>
-      </div>
-    </motion.button>
-  )
-}
+import { MUTED_COLOR } from '../../theme/portfolioTokens'
+import type { EvidenceStatus, PortfolioAxis, PortfolioOffer, PortfolioRole } from '../../types'
 
 // ─── Componente principal ────────────────────────────────────────────────────
 
 export function SectionPortfolioOffers() {
-  const { state, navigate, clearDeepDiveHint } = useApp()
+  const { state, navigate, clearDeepDiveHint, trackOfferView } = useApp()
   const { t, lang } = useLanguage()
-  const { axes, offers } = useMemo(() => getPortfolio(lang), [lang])
+  const { axes, offers, defaultEngagement } = useMemo(() => getPortfolio(lang), [lang])
 
   // Quem chega da tese pede um eixo; quem chega da shortlist pede uma oferta aberta.
   const entryHint = state.deepDiveHint
@@ -544,9 +35,31 @@ export function SectionPortfolioOffers() {
   )
   const [presenterMode, setPresenterMode] = useState(false)
 
+  // Quem chegou filtrado precisa saber disso — senão lê 3 ofertas achando que são todas.
+  const [entryAxisId] = useState<string | null>(() =>
+    entryHint?.startsWith('axis:') ? entryHint.slice(5) : null,
+  )
+
   useEffect(() => {
     if (entryHint) clearDeepDiveHint()
   }, [entryHint, clearDeepDiveHint])
+
+  // Qual oferta o cliente pediu para ver é o sinal comercial mais forte da sessão.
+  const openOffer = useCallback(
+    (offer: PortfolioOffer) => {
+      trackOfferView(offer.code, offer.name)
+      setSelected(offer)
+    },
+    [trackOfferView],
+  )
+
+  // Deep-link (chegou com a oferta já aberta) também conta como visualização.
+  const trackedEntry = useRef(false)
+  useEffect(() => {
+    if (trackedEntry.current || !selected) return
+    trackedEntry.current = true
+    trackOfferView(selected.code, selected.name)
+  }, [selected, trackOfferView])
 
   const axesById = useMemo(() => {
     const map: Record<string, PortfolioAxis> = {}
@@ -626,7 +139,7 @@ export function SectionPortfolioOffers() {
               <button
                 onClick={() => setPresenterMode(v => !v)}
                 aria-pressed={presenterMode}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-[11px] font-semibold border transition-colors ${
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-label font-semibold border transition-colors ${
                   presenterMode
                     ? 'text-amber-400 border-amber-500/40 bg-amber-500/10'
                     : 'text-foursys-text-dim border-white/[0.08] bg-foursys-surface/40 hover:text-foursys-text-muted'
@@ -667,7 +180,7 @@ export function SectionPortfolioOffers() {
                   key={role}
                   onClick={() => setRoleFilter(role)}
                   aria-pressed={roleFilter === role}
-                  className={`px-3 py-2 rounded-lg text-[11px] font-semibold border transition-colors ${
+                  className={`px-3 py-2 min-h-touch md:min-h-0 rounded-lg text-label font-semibold border transition-colors ${
                     roleFilter === role
                       ? 'text-white border-cyan-400/40 bg-cyan-500/15'
                       : 'text-foursys-text-dim border-white/[0.08] hover:text-foursys-text-muted'
@@ -692,7 +205,7 @@ export function SectionPortfolioOffers() {
             <button
               onClick={() => setAxisFilter('all')}
               aria-pressed={axisFilter === 'all'}
-              className={`flex-shrink-0 whitespace-nowrap px-3 py-2 rounded-lg text-[11px] font-semibold border transition-colors ${
+              className={`flex-shrink-0 whitespace-nowrap px-3 py-2 min-h-touch md:min-h-0 rounded-lg text-label font-semibold border transition-colors ${
                 axisFilter === 'all'
                   ? 'text-white border-cyan-400/40 bg-cyan-500/15'
                   : 'text-foursys-text-dim border-white/[0.08] hover:text-foursys-text-muted'
@@ -707,11 +220,11 @@ export function SectionPortfolioOffers() {
                   key={axis.id}
                   onClick={() => setAxisFilter(axis.id)}
                   aria-pressed={active}
-                  className="flex-shrink-0 whitespace-nowrap px-3 py-2 rounded-lg text-[11px] font-semibold border transition-colors"
+                  className="flex-shrink-0 whitespace-nowrap px-3 py-2 min-h-touch md:min-h-0 rounded-lg text-label font-semibold border transition-colors"
                   style={
                     active
                       ? { color: axis.color, borderColor: `${axis.color}55`, backgroundColor: `${axis.color}18` }
-                      : { color: '#64748B', borderColor: 'rgba(255,255,255,0.08)' }
+                      : { color: MUTED_COLOR, borderColor: 'rgba(255,255,255,0.08)' }
                   }
                 >
                   {t('portfolio.thesis.axisWord')} {axis.number} · {axis.name}
@@ -722,13 +235,13 @@ export function SectionPortfolioOffers() {
 
           {/* Lastro de prova como filtro: quem apresenta precisa saber o que pode afirmar */}
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-foursys-text-dim mr-1">
+            <span className="text-label font-bold uppercase tracking-[0.14em] text-foursys-text-dim mr-1">
               {t('portfolio.offers.filterEvidence')}
             </span>
             <button
               onClick={() => setEvidenceFilter('all')}
               aria-pressed={evidenceFilter === 'all'}
-              className={`px-3 py-2 rounded-lg text-[11px] font-semibold border transition-colors ${
+              className={`px-3 py-2 min-h-touch md:min-h-0 rounded-lg text-label font-semibold border transition-colors ${
                 evidenceFilter === 'all'
                   ? 'text-white border-cyan-400/40 bg-cyan-500/15'
                   : 'text-foursys-text-dim border-white/[0.08] hover:text-foursys-text-muted'
@@ -745,11 +258,11 @@ export function SectionPortfolioOffers() {
                   key={status}
                   onClick={() => setEvidenceFilter(status)}
                   aria-pressed={active}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-[11px] font-semibold border transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 min-h-touch md:min-h-0 rounded-lg text-label font-semibold border transition-colors"
                   style={
                     active
                       ? { color: style.color, borderColor: `${style.color}66`, backgroundColor: `${style.color}1A` }
-                      : { color: '#64748B', borderColor: 'rgba(255,255,255,0.08)' }
+                      : { color: MUTED_COLOR, borderColor: 'rgba(255,255,255,0.08)' }
                   }
                 >
                   <StatusIcon size={11} aria-hidden="true" />
@@ -759,12 +272,37 @@ export function SectionPortfolioOffers() {
             })}
           </div>
 
-          <p className="text-[11px] text-foursys-text-dim">
+          <p className="text-label text-foursys-text-dim">
             {t('portfolio.offers.resultCount')
               .replace('{count}', String(filtered.length))
               .replace('{total}', String(offers.length))}
           </p>
         </motion.div>
+
+        {/* Contexto de chegada: o usuário veio do mapa com um eixo já aplicado */}
+        {entryAxisId && axisFilter === entryAxisId && axesById[entryAxisId] && (
+          <div
+            className="mb-4 flex items-center gap-3 flex-wrap rounded-xl border px-4 py-3"
+            style={{
+              borderColor: `${axesById[entryAxisId].color}33`,
+              backgroundColor: `${axesById[entryAxisId].color}10`,
+            }}
+          >
+            <span className="text-label font-bold uppercase tracking-wider" style={{ color: axesById[entryAxisId].color }}>
+              {t('portfolio.thesis.axisWord')} {axesById[entryAxisId].number}
+            </span>
+            <span className="text-sm text-foursys-text-muted flex-1 min-w-[180px]">
+              {t('portfolio.offers.contextFrom').replace('{axis}', axesById[entryAxisId].name)}
+            </span>
+            <button
+              type="button"
+              onClick={() => setAxisFilter('all')}
+              className="flex items-center gap-1.5 px-3 py-2 min-h-touch md:min-h-0 rounded-lg text-label font-semibold border border-white/[0.12] text-foursys-text-muted hover:text-white hover:border-white/25 transition-colors"
+            >
+              {t('portfolio.offers.contextClear').replace('{total}', String(offers.length))}
+            </button>
+          </div>
+        )}
 
         {/* ── Grid ── */}
         <div
@@ -780,7 +318,7 @@ export function SectionPortfolioOffers() {
               offer={offer}
               axis={axesById[offer.axisId]}
               index={i}
-              onClick={() => setSelected(offer)}
+              onClick={() => openOffer(offer)}
             />
           ))}
         </div>
@@ -797,8 +335,9 @@ export function SectionPortfolioOffers() {
             axis={axesById[selected.axisId]}
             offersByCode={offersByCode}
             presenterMode={presenterMode}
+            engagement={selected.engagement ?? defaultEngagement}
             onClose={() => setSelected(null)}
-            onOpenOffer={next => setSelected(next)}
+            onOpenOffer={next => openOffer(next)}
             onCompareLegacy={section => {
               setSelected(null)
               navigate(section)
@@ -809,3 +348,4 @@ export function SectionPortfolioOffers() {
     </SectionWrapper>
   )
 }
+

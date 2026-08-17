@@ -27,6 +27,7 @@ import { BackToOriginChip } from '../ui/BackToOriginChip'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import { getPortfolio } from '../../data/portfolio'
+import { MUTED_COLOR, PILLAR_COLOR } from '../../theme/portfolioTokens'
 import type { PortfolioAxis } from '../../types'
 
 const ICONS: Record<string, LucideIcon> = {
@@ -80,7 +81,7 @@ function PillarHeader({
           <h3 className="text-lg md:text-xl font-black leading-none" style={{ color: accent }}>
             {kicker}
           </h3>
-          <p className="text-[11px] text-foursys-text-dim mt-1 leading-snug">{hint}</p>
+          <p className="text-label text-foursys-text-dim mt-1 leading-snug">{hint}</p>
         </div>
       </div>
       <p className="text-xs text-foursys-text-muted leading-relaxed">{description}</p>
@@ -155,18 +156,18 @@ function AxisCard({
           <Icon size={16} style={{ color: axis.color }} aria-hidden="true" />
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-foursys-text-dim">
+          <p className="text-label font-bold uppercase tracking-[0.16em] text-foursys-text-dim">
             {axisWord} {axis.number}
           </p>
           <h4 className="text-sm font-black text-white leading-tight">{axis.name}</h4>
         </div>
         <span
           aria-hidden="true"
-          className="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-[11px] font-black border"
+          className="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-label font-black border"
           style={{
             borderColor: `${axis.color}40`,
             backgroundColor: `${axis.color}12`,
-            color: offerCount > 1 ? axis.color : '#94A3B8',
+            color: offerCount > 1 ? axis.color : MUTED_COLOR,
           }}
         >
           {offerCount}
@@ -301,7 +302,7 @@ export function SectionPortfolioEcosystem() {
             >
               <PillarHeader
                 icon={Sparkles}
-                accent="#FF6600"
+                accent={PILLAR_COLOR.showcase}
                 kicker={t('portfolio.ecosystem.showcaseTitle')}
                 hint={t('portfolio.ecosystem.showcaseHint')}
                 description={t('portfolio.ecosystem.showcaseDesc')}
@@ -329,7 +330,7 @@ export function SectionPortfolioEcosystem() {
             >
               <PillarHeader
                 icon={Gauge}
-                accent="#38BDF8"
+                accent={PILLAR_COLOR.engine}
                 kicker={t('portfolio.ecosystem.engineTitle')}
                 hint={t('portfolio.ecosystem.engineHint')}
                 description={t('portfolio.ecosystem.engineDesc')}
@@ -358,7 +359,7 @@ export function SectionPortfolioEcosystem() {
             >
               <PillarHeader
                 icon={Rocket}
-                accent="#A78BFA"
+                accent={PILLAR_COLOR.future}
                 kicker={t('portfolio.ecosystem.futureTitle')}
                 hint={t('portfolio.ecosystem.futureHint')}
                 description={t('portfolio.ecosystem.futureDesc')}
@@ -395,7 +396,7 @@ export function SectionPortfolioEcosystem() {
                         </div>
                         <div className="min-w-0">
                           <h4 className="text-sm font-black text-white leading-tight">{item.name}</h4>
-                          <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-violet-400/10 text-violet-300 border border-violet-400/25">
+                          <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full text-label font-bold uppercase tracking-wider bg-violet-400/10 text-violet-300 border border-violet-400/25">
                             {item.horizon}
                           </span>
                         </div>

@@ -20,6 +20,7 @@ import { BackToOriginChip } from '../ui/BackToOriginChip'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import { getPortfolio } from '../../data/portfolio'
+import { AXIS_FALLBACK_COLOR, MUTED_COLOR, PILLAR_COLOR, SURFACE_DEEP_COLOR } from '../../theme/portfolioTokens'
 import type { PortfolioAxis, PortfolioRole } from '../../types'
 
 const AXIS_ICONS: Record<string, LucideIcon> = {
@@ -62,7 +63,7 @@ function AxisOrbitRing({
   const { t, lang } = useLanguage()
   const angleStep = 360 / axes.length
   const radius = 38
-  const activeColor = axes.find(a => a.id === activeId)?.color ?? '#22D3EE'
+  const activeColor = axes.find(a => a.id === activeId)?.color ?? AXIS_FALLBACK_COLOR
 
   return (
     <div
@@ -76,12 +77,12 @@ function AxisOrbitRing({
       <div className="absolute inset-[30%] rounded-full border border-white/10 bg-foursys-surface/40 shadow-[0_0_60px_rgba(0,0,0,0.35)]" />
 
       <div
-        className="absolute inset-[33%] rounded-full bg-[#23243D] border border-white/10 flex items-center justify-center transition-all duration-500"
+        className="absolute inset-[33%] rounded-full bg-[rgb(var(--c-mandala-core))] border border-white/10 flex items-center justify-center transition-all duration-500"
         style={{ boxShadow: `0 0 40px ${activeColor}15, inset 0 0 30px rgba(0,0,0,0.3)` }}
       >
         <div className="text-center px-2">
           <div className="text-xl md:text-2xl lg:text-3xl font-black text-white leading-none">foursys</div>
-          <div className="text-[8px] md:text-[9px] uppercase tracking-[0.28em] text-foursys-text-dim mt-1.5">
+          <div className="text-[8px] md:text-meta uppercase tracking-[0.28em] text-foursys-text-dim mt-1.5">
             {lang === 'pt' ? 'eixos de valor' : 'value axes'}
           </div>
         </div>
@@ -130,17 +131,17 @@ function AxisOrbitRing({
             {/* Densidade: quantas ofertas o eixo já tem detalhadas */}
             <span
               aria-hidden="true"
-              className="absolute -top-1 -right-1 w-5 h-5 lg:w-[22px] lg:h-[22px] rounded-full flex items-center justify-center text-[10px] lg:text-[11px] font-black border"
+              className="absolute -top-1 -right-1 w-5 h-5 lg:w-[22px] lg:h-[22px] rounded-full flex items-center justify-center text-meta lg:text-label font-black border"
               style={{
-                backgroundColor: '#0F1524',
+                backgroundColor: SURFACE_DEEP_COLOR,
                 borderColor: `${axis.color}66`,
-                color: offerCount > 1 ? axis.color : '#94A3B8',
+                color: offerCount > 1 ? axis.color : MUTED_COLOR,
               }}
             >
               {offerCount}
             </span>
             <span
-              className={`absolute w-[104px] lg:w-[120px] text-[11px] lg:text-[12px] font-bold leading-tight pointer-events-none text-white/90 ${labelPos}`}
+              className={`absolute w-[104px] lg:w-[120px] text-label lg:text-[12px] font-bold leading-tight pointer-events-none text-white/90 ${labelPos}`}
             >
               {axis.name}
             </span>
@@ -174,7 +175,7 @@ function AxisDetailPanel({
           <Icon size={18} style={{ color: axis.color }} aria-hidden="true" />
         </div>
         <div className="min-w-0">
-          <div className="text-[11px] font-bold uppercase tracking-widest text-foursys-text-dim">
+          <div className="text-label font-bold uppercase tracking-widest text-foursys-text-dim">
             {t('portfolio.thesis.axisWord')} {axis.number} ·{' '}
             {isShowcase ? t('portfolio.thesis.showcase') : t('portfolio.thesis.engine')}
           </div>
@@ -185,7 +186,7 @@ function AxisDetailPanel({
       <p className="text-foursys-text-muted text-sm leading-relaxed">{axis.promise}</p>
 
       <div className="mt-4 rounded-xl border border-white/[0.08] bg-white/[0.03] p-3.5">
-        <p className="text-[11px] font-bold uppercase tracking-widest text-foursys-text-dim mb-2">
+        <p className="text-label font-bold uppercase tracking-widest text-foursys-text-dim mb-2">
           {t('portfolio.thesis.audienceLabel')}
         </p>
         <p className="text-xs text-foursys-text-muted leading-relaxed">{axis.audience}</p>
@@ -196,7 +197,7 @@ function AxisDetailPanel({
           {offerNames.map(offer => (
             <li key={offer.code} className="flex items-start gap-2.5 text-xs text-foursys-text-muted">
               <span
-                className="font-mono font-bold text-[11px] px-1.5 py-0.5 rounded flex-shrink-0"
+                className="font-mono font-bold text-label px-1.5 py-0.5 rounded flex-shrink-0"
                 style={{ color: axis.color, backgroundColor: `${axis.color}15` }}
               >
                 {offer.code}
@@ -209,7 +210,7 @@ function AxisDetailPanel({
 
       {axis.upcomingOffers && axis.upcomingOffers.length > 0 && (
         <div className="mt-4 rounded-xl border border-dashed p-3" style={{ borderColor: `${axis.color}33` }}>
-          <p className="text-[11px] font-bold uppercase tracking-widest text-foursys-text-dim mb-2">
+          <p className="text-label font-bold uppercase tracking-widest text-foursys-text-dim mb-2">
             {t('portfolio.thesis.axisEmpty')}
           </p>
           <ul className="space-y-1.5">
@@ -280,7 +281,7 @@ function AxisCard({
               <Icon size={18} style={{ color: axis.color }} aria-hidden="true" />
             </div>
             <div>
-              <div className="text-[11px] font-bold uppercase tracking-widest text-foursys-text-dim">
+              <div className="text-label font-bold uppercase tracking-widest text-foursys-text-dim">
                 {t('portfolio.thesis.axisWord')} {axis.number}
               </div>
               <h3 className="text-base font-black text-white leading-tight">{axis.name}</h3>
@@ -297,12 +298,12 @@ function AxisCard({
 
         <div className="flex items-center gap-2 flex-wrap">
           <span
-            className="text-[11px] font-semibold px-2 py-0.5 rounded-full border"
+            className="text-label font-semibold px-2 py-0.5 rounded-full border"
             style={{ color: axis.color, borderColor: `${axis.color}40`, backgroundColor: `${axis.color}12` }}
           >
             {offerNames.length} {t('portfolio.thesis.offersInAxis')}
           </span>
-          <span className="text-[11px] text-foursys-text-dim">{axis.audience}</span>
+          <span className="text-label text-foursys-text-dim">{axis.audience}</span>
         </div>
       </button>
 
@@ -324,7 +325,7 @@ function AxisCard({
                 {offerNames.map(offer => (
                   <li key={offer.code} className="flex items-start gap-2.5 text-xs text-foursys-text-muted">
                     <span
-                      className="font-mono font-bold text-[11px] px-1.5 py-0.5 rounded flex-shrink-0"
+                      className="font-mono font-bold text-label px-1.5 py-0.5 rounded flex-shrink-0"
                       style={{ color: axis.color, backgroundColor: `${axis.color}15` }}
                     >
                       {offer.code}
@@ -336,7 +337,7 @@ function AxisCard({
 
               {axis.upcomingOffers && axis.upcomingOffers.length > 0 && (
                 <div className="rounded-xl border border-dashed p-3" style={{ borderColor: `${axis.color}33` }}>
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-foursys-text-dim mb-2">
+                  <p className="text-label font-bold uppercase tracking-widest text-foursys-text-dim mb-2">
                     {t('portfolio.thesis.axisEmpty')}
                   </p>
                   <ul className="space-y-1.5">
@@ -386,18 +387,18 @@ function RoleGroup({
 }) {
   const { t } = useLanguage()
   const isShowcase = variant === 'diferenciacao'
-  const accent = isShowcase ? '#22D3EE' : '#94A3B8'
+  const accent = isShowcase ? AXIS_FALLBACK_COLOR : PILLAR_COLOR.foundation
 
   return (
     <div>
       <div className="flex items-center gap-3 mb-3">
         <span
-          className="text-[11px] font-bold uppercase tracking-[0.16em]"
+          className="text-label font-bold uppercase tracking-[0.16em]"
           style={{ color: accent }}
         >
           {isShowcase ? t('portfolio.thesis.showcase') : t('portfolio.thesis.engine')}
         </span>
-        <span className="text-[11px] text-foursys-text-dim">
+        <span className="text-label text-foursys-text-dim">
           {isShowcase ? t('portfolio.thesis.showcaseHint') : t('portfolio.thesis.engineHint')}
         </span>
         <div className="flex-1 h-px" style={{ background: `linear-gradient(90deg, ${accent}44, transparent)` }} />
@@ -516,7 +517,7 @@ export function SectionPortfolioThesis() {
                   className="text-center px-3 md:px-4 py-1.5 md:py-2 rounded-xl bg-foursys-surface/40 border border-white/[0.08]"
                 >
                   <div className="text-base md:text-lg font-black text-cyan-400">{stat.value}</div>
-                  <div className="text-[11px] text-foursys-text-dim">{stat.label}</div>
+                  <div className="text-label text-foursys-text-dim">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -536,17 +537,17 @@ export function SectionPortfolioThesis() {
           {/* Desktop: mandala + painel lateral (abaixo de lg não há folga para os rótulos) */}
           <div className="hidden lg:block mb-6">
             <div className="flex items-center gap-4 flex-wrap mb-3 md:mb-4">
-              <span className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-cyan-400">
+              <span className="flex items-center gap-2 text-label font-bold uppercase tracking-[0.16em] text-cyan-400">
                 <span className="w-3 h-3 rounded-full border-2 border-cyan-400/60" aria-hidden="true" />
                 {t('portfolio.thesis.showcase')}
               </span>
-              <span className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-slate-400">
+              <span className="flex items-center gap-2 text-label font-bold uppercase tracking-[0.16em] text-slate-400">
                 <span className="w-3 h-3 rounded-full border-2 border-dashed border-slate-400/60" aria-hidden="true" />
                 {t('portfolio.thesis.engine')}
               </span>
-              <span className="flex items-center gap-2 text-[11px] text-foursys-text-dim">
+              <span className="flex items-center gap-2 text-label text-foursys-text-dim">
                 <span
-                  className="w-[18px] h-[18px] rounded-full border border-white/25 flex items-center justify-center text-[10px] font-black text-foursys-text-dim"
+                  className="w-[18px] h-[18px] rounded-full border border-white/25 flex items-center justify-center text-meta font-black text-foursys-text-dim"
                   aria-hidden="true"
                 >
                   n

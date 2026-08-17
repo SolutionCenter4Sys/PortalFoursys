@@ -242,6 +242,24 @@ export interface PortfolioOffer {
   proof: PortfolioProof
   /** Onde o mesmo assunto vive na seção legada, para comparação. */
   legacyEquivalent?: { label: string; section: AppSection }
+  /** Base comercial específica. Ausente = usa o padrão do bundle. */
+  engagement?: PortfolioEngagement
+}
+
+/**
+ * Base comercial de uma oferta.
+ *
+ * Valores de investimento NÃO vivem aqui: eles saem da proposta, com
+ * dimensionamento aprovado. O portal expõe modelo de contratação e a orientação
+ * de como conduzir a conversa — nunca um número que ninguém assinou.
+ */
+export interface PortfolioEngagement {
+  /** Modelos de contratação aplicáveis. */
+  models: string[]
+  /** Dimensionamento típico, sem preço. */
+  sizing: string
+  /** Como conduzir a conversa de investimento. Visível só em modo apresentador. */
+  investmentGuidance: string
 }
 
 export interface PortfolioPersona {
@@ -293,6 +311,8 @@ export interface PortfolioBundle {
   futureVision: PortfolioFutureItem[]
   assets: PortfolioAsset[]
   institutionalBacking: { value: string; label: string }[]
+  /** Base comercial aplicada a toda oferta que não declara a sua. */
+  defaultEngagement: PortfolioEngagement
 }
 
 // ─── App Sections ─────────────────────────────────────────────────────────────
@@ -403,6 +423,13 @@ export interface SectionStat {
   totalSeconds: number
 }
 
+/** Quantas vezes cada oferta do portfólio foi aberta na sessão. */
+export interface OfferStat {
+  code: string
+  name: string
+  openCount: number
+}
+
 // ─── Estado e Ações ──────────────────────────────────────────────────────────
 
 export interface AppState {
@@ -419,6 +446,7 @@ export interface AppState {
   sessionStartedAt: number
   sectionEnteredAt: number
   sessionStats: SectionStat[]
+  offerStats: OfferStat[]
   isMetricsPanelOpen: boolean
   // Cliente ativo
   activeClientId: string | null
@@ -448,6 +476,7 @@ export type AppAction =
   | { type: 'CLEAR_CLIENT' }
   | { type: 'TOGGLE_CLIENT_SELECTOR' }
   | { type: 'TOGGLE_INTEREST'; section: AppSection }
+  | { type: 'TRACK_OFFER_VIEW'; code: string; name: string }
   | { type: 'SET_PROFILE'; profile: SessionProfile }
   | { type: 'CLOSE_WIZARD' }
   | { type: 'TOGGLE_OVERVIEW' }

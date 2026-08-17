@@ -21,6 +21,7 @@ const initialState: AppState = {
   sessionStartedAt: now,
   sectionEnteredAt: now,
   sessionStats: [],
+  offerStats: [],
   isMetricsPanelOpen: false,
   // Cliente
   activeClientId: null,
@@ -173,6 +174,18 @@ function appReducer(state: AppState, action: AppAction): AppState {
       }
     }
 
+    case 'TRACK_OFFER_VIEW': {
+      const existing = state.offerStats.find(o => o.code === action.code)
+      return {
+        ...state,
+        offerStats: existing
+          ? state.offerStats.map(o =>
+              o.code === action.code ? { ...o, openCount: o.openCount + 1 } : o,
+            )
+          : [...state.offerStats, { code: action.code, name: action.name, openCount: 1 }],
+      }
+    }
+
     case 'SET_PROFILE':
       return { ...state, sessionProfile: action.profile, isWizardOpen: false }
 
@@ -215,6 +228,7 @@ interface AppContextValue {
   clearClient: () => void
   toggleClientSelector: () => void
   toggleInterest: (section: AppSection) => void
+  trackOfferView: (code: string, name: string) => void
   setProfile: (profile: SessionProfile) => void
   closeWizard: () => void
   toggleOverview: () => void
@@ -260,6 +274,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const clearClient = useCallback(() => dispatch({ type: 'CLEAR_CLIENT' }), [])
   const toggleClientSelector = useCallback(() => dispatch({ type: 'TOGGLE_CLIENT_SELECTOR' }), [])
   const toggleInterest = useCallback((section: AppSection) => dispatch({ type: 'TOGGLE_INTEREST', section }), [])
+  const trackOfferView = useCallback(
+    (code: string, name: string) => dispatch({ type: 'TRACK_OFFER_VIEW', code, name }),
+    [],
+  )
   const setProfile = useCallback((profile: SessionProfile) => dispatch({ type: 'SET_PROFILE', profile }), [])
   const closeWizard = useCallback(() => dispatch({ type: 'CLOSE_WIZARD' }), [])
   const toggleOverview = useCallback(() => dispatch({ type: 'TOGGLE_OVERVIEW' }), [])
@@ -320,6 +338,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     clearClient,
     toggleClientSelector,
     toggleInterest,
+    trackOfferView,
     setProfile,
     closeWizard,
     toggleOverview,

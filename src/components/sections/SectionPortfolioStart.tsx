@@ -17,13 +17,9 @@ import { BackToOriginChip } from '../ui/BackToOriginChip'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import { getPortfolio } from '../../data/portfolio'
-import type { EvidenceStatus, PortfolioAxis, PortfolioOffer } from '../../types'
+import { AXIS_FALLBACK_COLOR, EVIDENCE_COLOR } from '../../theme/portfolioTokens'
+import type { PortfolioAxis, PortfolioOffer } from '../../types'
 
-const EVIDENCE_COLOR: Record<EvidenceStatus, string> = {
-  'liberado': '#4ADE80',
-  'em-validacao': '#F59E0B',
-  'sem-lastro': '#94A3B8',
-}
 
 const PERSONA_ICONS: Record<string, LucideIcon> = {
   building: Building2,
@@ -46,7 +42,7 @@ function ShortlistStep({
   onOpen: () => void
 }) {
   const { t } = useLanguage()
-  const accent = axis?.color ?? '#22D3EE'
+  const accent = axis?.color ?? AXIS_FALLBACK_COLOR
   const isOpening = position === 0
 
   return (
@@ -69,13 +65,13 @@ function ShortlistStep({
 
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 flex-wrap mb-1">
-          <span className="font-mono text-[11px] font-bold" style={{ color: accent }}>
+          <span className="font-mono text-label font-bold" style={{ color: accent }}>
             {offer.code}
           </span>
           <span className="text-sm font-bold text-white leading-tight">{offer.name}</span>
           {isOpening && (
             <span
-              className="text-[10px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded"
+              className="text-meta font-bold uppercase tracking-widest px-1.5 py-0.5 rounded"
               style={{ color: accent, backgroundColor: `${accent}18` }}
             >
               {t('portfolio.start.opening')}
@@ -84,7 +80,7 @@ function ShortlistStep({
         </div>
         <p className="text-xs text-foursys-text-muted leading-relaxed line-clamp-2">{offer.tagline}</p>
         <span
-          className="inline-flex items-center gap-1.5 mt-1.5 text-[11px] font-semibold"
+          className="inline-flex items-center gap-1.5 mt-1.5 text-label font-semibold"
           style={{ color: EVIDENCE_COLOR[offer.proof.status] }}
         >
           <span
@@ -216,7 +212,7 @@ export function SectionPortfolioStart() {
                   <Icon size={16} style={{ color: p.color }} aria-hidden="true" />
                 </div>
                 <div className="text-sm font-black text-white leading-tight">{p.role}</div>
-                <p className="text-[11px] text-foursys-text-dim leading-snug mt-1 line-clamp-2">{p.concern}</p>
+                <p className="text-label text-foursys-text-dim leading-snug mt-1 line-clamp-2">{p.concern}</p>
               </motion.button>
             )
           })}
@@ -236,14 +232,14 @@ export function SectionPortfolioStart() {
               style={{ borderColor: `${persona.color}33`, backgroundColor: `${persona.color}0D` }}
             >
               <h3 className="text-lg font-black text-white mb-1">{persona.role}</h3>
-              <p className="text-[11px] font-bold uppercase tracking-widest mb-3" style={{ color: persona.color }}>
+              <p className="text-label font-bold uppercase tracking-widest mb-3" style={{ color: persona.color }}>
                 {t('portfolio.start.concern')}
               </p>
               <p className="text-sm text-foursys-text-muted leading-relaxed">{persona.concern}</p>
             </div>
 
             <div className="lg:col-span-2">
-              <h4 className="text-[11px] font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-3">
+              <h4 className="text-label font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-3">
                 {t('portfolio.start.shortlist')}
               </h4>
               <div className="space-y-2">
@@ -267,7 +263,7 @@ export function SectionPortfolioStart() {
 
         {/* ── Overlay por segmento ── */}
         <div>
-          <h4 className="text-[11px] font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-3">
+          <h4 className="text-label font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-3">
             {t('portfolio.start.segments')}
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
@@ -285,7 +281,7 @@ export function SectionPortfolioStart() {
                   {segment.priorityOffers.map(code => {
                     const offer = offersByCode[code]
                     const axis = offer ? axesById[offer.axisId] : undefined
-                    const accent = axis?.color ?? '#64748B'
+                    const accent = axis?.color ?? AXIS_FALLBACK_COLOR
                     const label = offer
                       ? t('portfolio.start.openOffer').replace('{name}', `${offer.code} ${offer.name}`)
                       : code
@@ -295,7 +291,7 @@ export function SectionPortfolioStart() {
                         onClick={() => openOffer(code)}
                         aria-label={label}
                         title={offer?.name ?? code}
-                        className="text-[11px] font-mono font-bold px-2.5 py-1.5 min-h-[28px] rounded-lg border transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
+                        className="text-label font-mono font-bold px-3 py-2 min-h-touch md:min-h-[30px] md:px-2.5 md:py-1.5 rounded-lg border transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
                         style={{ color: accent, borderColor: `${accent}38`, backgroundColor: `${accent}12` }}
                       >
                         {code}

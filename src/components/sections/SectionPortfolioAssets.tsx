@@ -126,7 +126,7 @@ export function SectionPortfolioAssets() {
 
                   {usedIn.length > 0 && (
                     <div className="mt-3 pt-3 border-t border-white/[0.06]">
-                      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-2">
+                      <p className="text-label font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-2">
                         {t('portfolio.assets.usedIn').replace('{count}', String(usedIn.length))}
                       </p>
                       <div className="flex flex-wrap gap-1.5">
@@ -139,7 +139,7 @@ export function SectionPortfolioAssets() {
                               '{name}',
                               `${offer.code} ${offer.name}`,
                             )}
-                            className="font-mono text-[11px] font-bold px-2.5 py-1.5 min-h-[28px] rounded-lg border border-foursys-primary/30 bg-foursys-primary/10 text-foursys-primary hover:bg-foursys-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-colors"
+                            className="font-mono text-label font-bold px-3 py-2 min-h-touch md:min-h-[30px] md:px-2.5 md:py-1.5 rounded-lg border border-foursys-primary/30 bg-foursys-primary/10 text-foursys-primary hover:bg-foursys-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-colors"
                           >
                             {offer.code}
                           </button>

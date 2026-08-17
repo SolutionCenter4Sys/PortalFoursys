@@ -86,11 +86,11 @@ export function SectionPortfolioFuture() {
             {groups.map((group, gi) => (
               <div key={group.horizon}>
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-cyan-400">
+                  <span className="flex items-center gap-2 text-label font-bold uppercase tracking-[0.16em] text-cyan-400">
                     <span className="w-2.5 h-2.5 rounded-full bg-cyan-400/70" aria-hidden="true" />
                     {group.horizon}
                   </span>
-                  <span className="text-[11px] text-foursys-text-dim">
+                  <span className="text-label text-foursys-text-dim">
                     {group.items.length} {t('portfolio.future.itemsInHorizon')}
                   </span>
                   <div className="flex-1 h-px bg-gradient-to-r from-cyan-400/25 to-transparent" />
@@ -118,10 +118,10 @@ export function SectionPortfolioFuture() {
                           {item.description}
                         </p>
                         <div className="mt-3 pt-3 border-t border-white/[0.06]">
-                          <span className="text-[10px] uppercase tracking-widest text-foursys-text-dim">
+                          <span className="text-meta uppercase tracking-widest text-foursys-text-dim">
                             {t('portfolio.future.horizon')}
                           </span>
-                          <div className="text-[11px] font-semibold text-cyan-400/90">{item.horizon}</div>
+                          <div className="text-label font-semibold text-cyan-400/90">{item.horizon}</div>
                         </div>
                       </motion.div>
                     )
