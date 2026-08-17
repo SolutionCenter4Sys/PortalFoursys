@@ -1,6 +1,6 @@
 import net from "net";
 
-const url = process.argv[2] || "tcp://192.168.31.47:10200";
+const url = process.argv[2] || "tcp://localhost:10200";
 const text = process.argv[3] || "Olá Jarvis";
 const [, host, port] = url.match(/^tcp:\/\/([^:]+):(\d+)$/) ?? [];
 
