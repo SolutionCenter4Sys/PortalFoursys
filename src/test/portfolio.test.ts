@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { portfolioPt } from '../data/portfolio'
 
-const { axes, offers, personas, segments, futureVision, assets } = portfolioPt
+const { axes, offers, personas, segments, futureVision, assets, defaultEngagement } = portfolioPt
 const codes = new Set(offers.map(o => o.code))
 
 describe('Portfólio 2026 S2 — integridade dos dados', () => {
@@ -114,6 +114,19 @@ describe('Portfólio 2026 S2 — integridade dos dados', () => {
       )
     })
     expect(traceable.length).toBeGreaterThanOrEqual(Math.ceil(assets.length / 2))
+  })
+
+  // O portal expõe COMO contratar, nunca quanto custa: preço sai da proposta,
+  // depois do dimensionamento aprovado pelo Solution Center.
+  it('base comercial declara modelos e não vaza valor de investimento', () => {
+    const bases = [defaultEngagement, ...offers.map(o => o.engagement).filter(Boolean)]
+    for (const base of bases) {
+      expect(base!.models.length).toBeGreaterThanOrEqual(2)
+      expect(base!.sizing.length).toBeGreaterThan(0)
+      expect(base!.investmentGuidance.length).toBeGreaterThan(0)
+      const texto = [...base!.models, base!.sizing].join(' ')
+      expect(texto).not.toMatch(/R\$|US\$|\d+\s?(mil|k\b|milh)/i)
+    }
   })
 
   it('visão de futuro e ativos transversais estão preenchidos', () => {
