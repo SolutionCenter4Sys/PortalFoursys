@@ -116,6 +116,15 @@ Migrations Supabase: aplicar os SQL em `jarvis/supabase/migrations/` no projeto 
 
 > Este documento **não** cria o GitHub Actions. Serve de contrato para quem for apontar a esteira desta branch.
 
+**Deploy em Docker (recomendado nesta branch):** ver **[DEPLOY.md](DEPLOY.md)** — primeira vez, atualização, TLS e troubleshooting.
+
+```bash
+cp .env.docker.example .env.docker   # preencher secrets
+npm run docker:deploy                # build + up
+```
+
+Sobe Redis → Jarvis → Portal (nginx). O Portal faz proxy de `/api` `/embed` `/vad` `/_next` para o Jarvis (streaming NDJSON sem buffer).
+
 ### 1. Mudança de branch na esteira
 
 1. Manter `main` como está (Portal flat legado), **ou** migrar gradualmente.
