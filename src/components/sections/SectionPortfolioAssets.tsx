@@ -13,6 +13,8 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { InterestButton } from '../ui/InterestButton'
+import { BackToOriginChip } from '../ui/BackToOriginChip'
+import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import { getPortfolio } from '../../data/portfolio'
 
@@ -28,12 +30,43 @@ const ICONS: Record<string, LucideIcon> = {
 }
 
 export function SectionPortfolioAssets() {
+  const { navigate, setDeepDiveHint } = useApp()
   const { t, lang } = useLanguage()
-  const { assets } = useMemo(() => getPortfolio(lang), [lang])
+  const { assets, offers } = useMemo(() => getPortfolio(lang), [lang])
+
+  // Um ativo transversal só prova que é transversal quando mostra onde é usado.
+  const offersByAsset = useMemo(() => {
+    const map: Record<string, { code: string; name: string }[]> = {}
+    for (const asset of assets) {
+      const needle = asset.name.toLowerCase()
+      map[asset.id] = offers
+        .filter(offer =>
+          [
+            ...(offer.assets ?? []),
+            ...(offer.components ?? []),
+            offer.name,
+            offer.whatItIs,
+            ...offer.differentials.map(d => `${d.title} ${d.detail}`),
+          ]
+            .join(' ')
+            .toLowerCase()
+            .includes(needle),
+        )
+        .map(offer => ({ code: offer.code, name: offer.name }))
+    }
+    return map
+  }, [assets, offers])
+
+  const openOffer = (code: string) => {
+    setDeepDiveHint(`offer:${code}`)
+    navigate('portfolio-offers')
+  }
 
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-6 md:py-10 max-w-7xl mx-auto">
+
+        <BackToOriginChip className="mb-4" />
 
         <motion.div
           initial={{ opacity: 0, y: -16 }}
@@ -69,6 +102,7 @@ export function SectionPortfolioAssets() {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
             {assets.map((asset, i) => {
               const Icon = ICONS[asset.icon] ?? Wrench
+              const usedIn = offersByAsset[asset.id] ?? []
               return (
                 <motion.div
                   key={asset.id}
@@ -78,15 +112,41 @@ export function SectionPortfolioAssets() {
                   data-voz-detalhe={`portfolio-asset-${asset.id}`}
                   data-voz-detalhe-secao="portfolio-assets"
                   data-voz-detalhe-rotulo={asset.name}
-                  className="p-4 rounded-2xl bg-foursys-surface/25 border border-white/[0.07] flex items-start gap-3"
+                  className="p-4 rounded-2xl bg-foursys-surface/25 border border-white/[0.07] flex flex-col"
                 >
-                  <div className="w-9 h-9 rounded-xl bg-foursys-primary/10 border border-foursys-primary/25 flex items-center justify-center flex-shrink-0">
-                    <Icon size={16} className="text-foursys-primary" aria-hidden="true" />
+                  <div className="flex items-start gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-foursys-primary/10 border border-foursys-primary/25 flex items-center justify-center flex-shrink-0">
+                      <Icon size={16} className="text-foursys-primary" aria-hidden="true" />
+                    </div>
+                    <div className="min-w-0">
+                      <h4 className="text-sm font-black text-white leading-tight mb-1">{asset.name}</h4>
+                      <p className="text-xs text-foursys-text-muted leading-relaxed">{asset.description}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-sm font-black text-white leading-tight mb-1">{asset.name}</h4>
-                    <p className="text-xs text-foursys-text-muted leading-relaxed">{asset.description}</p>
-                  </div>
+
+                  {usedIn.length > 0 && (
+                    <div className="mt-3 pt-3 border-t border-white/[0.06]">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-2">
+                        {t('portfolio.assets.usedIn').replace('{count}', String(usedIn.length))}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {usedIn.map(offer => (
+                          <button
+                            key={offer.code}
+                            onClick={() => openOffer(offer.code)}
+                            title={offer.name}
+                            aria-label={t('portfolio.start.openOffer').replace(
+                              '{name}',
+                              `${offer.code} ${offer.name}`,
+                            )}
+                            className="font-mono text-[11px] font-bold px-2.5 py-1.5 min-h-[28px] rounded-lg border border-foursys-primary/30 bg-foursys-primary/10 text-foursys-primary hover:bg-foursys-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-colors"
+                          >
+                            {offer.code}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </motion.div>
               )
             })}

@@ -635,12 +635,14 @@ export const en = {
       offersInAxis: 'offers in this axis',
       seeOffers: 'See offers in this axis',
       axisEmpty: 'Offers in this axis without a detailed kit in this cycle',
+      densityHint: 'The number shows offers with a detailed kit',
     },
     offers: {
       title: 'Offer catalog',
       subtitle: 'Each offer with the problem it solves, what you get, how we deliver and the real state of the evidence.',
       filterAxis: 'Axis',
       filterRole: 'Role',
+      filterEvidence: 'Evidence',
       filterAll: 'All',
       searchPlaceholder: 'Search offer, pain or deliverable...',
       empty: 'No offer matches the filters.',
@@ -662,10 +664,13 @@ export const en = {
       subtitle: 'What is being built for the next cycle — horizons, theses and bets taking shape.',
       futureTitle: 'Future vision',
       horizon: 'Horizon',
+      itemsInHorizon: 'in this window',
+      seeOnMap: 'See it on the portfolio ecosystem',
     },
     assets: {
       title: 'Cross-cutting assets',
       subtitle: 'Platforms, units and capabilities that run across every offer in the portfolio.',
+      usedIn: 'Backs {count} offers',
     },
     ecosystem: {
       title: 'Portfolio ecosystem',

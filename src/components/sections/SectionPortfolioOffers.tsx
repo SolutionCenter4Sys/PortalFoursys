@@ -102,6 +102,15 @@ function OfferModal({
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [onClose])
 
+  // Sem isto o conteúdo atrás do modal continua rolando ao arrastar no celular.
+  useEffect(() => {
+    const previous = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previous
+    }
+  }, [])
+
   const roleLabel =
     offer.role === 'diferenciacao'
       ? t('portfolio.thesis.showcase')
@@ -126,7 +135,7 @@ function OfferModal({
         exit={{ scale: 0.96, y: 18 }}
         onClick={e => e.stopPropagation()}
         data-voz-scroll-root
-        className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-t-2xl sm:rounded-2xl max-w-3xl w-full overflow-y-auto max-h-[92dvh]"
+        className="relative z-10 bg-foursys-dark-2 border border-white/[0.12] rounded-t-2xl sm:rounded-2xl max-w-3xl w-full overflow-y-auto overscroll-contain max-h-[92dvh]"
       >
         {/* ── Cabeçalho ── */}
         <div
@@ -526,6 +535,7 @@ export function SectionPortfolioOffers() {
     entryHint?.startsWith('axis:') ? entryHint.slice(5) : 'all',
   )
   const [roleFilter, setRoleFilter] = useState<PortfolioRole | 'all'>('all')
+  const [evidenceFilter, setEvidenceFilter] = useState<EvidenceStatus | 'all'>('all')
   const [query, setQuery] = useState('')
   const [selected, setSelected] = useState<PortfolioOffer | null>(() =>
     entryHint?.startsWith('offer:')
@@ -555,6 +565,7 @@ export function SectionPortfolioOffers() {
     return offers.filter(offer => {
       if (axisFilter !== 'all' && offer.axisId !== axisFilter) return false
       if (roleFilter !== 'all' && offer.role !== roleFilter) return false
+      if (evidenceFilter !== 'all' && offer.proof.status !== evidenceFilter) return false
       if (!q) return true
       const haystack = [
         offer.code,
@@ -569,7 +580,13 @@ export function SectionPortfolioOffers() {
         .toLowerCase()
       return haystack.includes(q)
     })
-  }, [offers, axisFilter, roleFilter, query])
+  }, [offers, axisFilter, roleFilter, evidenceFilter, query])
+
+  const evidenceCounts = useMemo(() => {
+    const map = { 'liberado': 0, 'em-validacao': 0, 'sem-lastro': 0 } as Record<EvidenceStatus, number>
+    for (const offer of offers) map[offer.proof.status] += 1
+    return map
+  }, [offers])
 
   const usedAxes = useMemo(
     () => axes.filter(axis => offers.some(o => o.axisId === axis.id)),
@@ -698,6 +715,45 @@ export function SectionPortfolioOffers() {
                   }
                 >
                   {t('portfolio.thesis.axisWord')} {axis.number} · {axis.name}
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Lastro de prova como filtro: quem apresenta precisa saber o que pode afirmar */}
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-foursys-text-dim mr-1">
+              {t('portfolio.offers.filterEvidence')}
+            </span>
+            <button
+              onClick={() => setEvidenceFilter('all')}
+              aria-pressed={evidenceFilter === 'all'}
+              className={`px-3 py-2 rounded-lg text-[11px] font-semibold border transition-colors ${
+                evidenceFilter === 'all'
+                  ? 'text-white border-cyan-400/40 bg-cyan-500/15'
+                  : 'text-foursys-text-dim border-white/[0.08] hover:text-foursys-text-muted'
+              }`}
+            >
+              {t('portfolio.offers.filterAll')} ({offers.length})
+            </button>
+            {(['liberado', 'em-validacao', 'sem-lastro'] as const).map(status => {
+              const style = EVIDENCE_STYLE[status]
+              const StatusIcon = style.icon
+              const active = evidenceFilter === status
+              return (
+                <button
+                  key={status}
+                  onClick={() => setEvidenceFilter(status)}
+                  aria-pressed={active}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-[11px] font-semibold border transition-colors"
+                  style={
+                    active
+                      ? { color: style.color, borderColor: `${style.color}66`, backgroundColor: `${style.color}1A` }
+                      : { color: '#64748B', borderColor: 'rgba(255,255,255,0.08)' }
+                  }
+                >
+                  <StatusIcon size={11} aria-hidden="true" />
+                  {t(`portfolio.evidence.${status}`)} ({evidenceCounts[status]})
                 </button>
               )
             })}

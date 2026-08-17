@@ -1,7 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { innovationTrends } from '../data/innovation'
 
-const VALID_ICONS = ['brain-circuit', 'factory', 'bot']
+// Espelha o ICON_MAP de SectionInnovation.tsx
+const VALID_ICONS = ['brain-circuit', 'factory', 'bot', 'network', 'dna', 'flask-conical']
 
 describe('Innovation trends data', () => {
   it('each trend has a unique id', () => {

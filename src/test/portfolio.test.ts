@@ -88,6 +88,34 @@ describe('Portfólio 2026 S2 — integridade dos dados', () => {
     }
   })
 
+  // O mapa do ecossistema só torna o card navegável quando o eixo tem oferta, e
+  // a mandala exibe a contagem no nó: eixo zerado quebraria as duas leituras.
+  it('todo eixo tem ao menos uma oferta detalhada', () => {
+    for (const axis of axes) {
+      expect(offers.filter(o => o.axisId === axis.id).length).toBeGreaterThan(0)
+    }
+  })
+
+  // Ativos transversais só se provam transversais se aparecerem nas ofertas.
+  it('a maioria dos ativos transversais é rastreável em ofertas', () => {
+    const traceable = assets.filter(asset => {
+      const needle = asset.name.toLowerCase()
+      return offers.some(offer =>
+        [
+          ...(offer.assets ?? []),
+          ...(offer.components ?? []),
+          offer.name,
+          offer.whatItIs,
+          ...offer.differentials.map(d => `${d.title} ${d.detail}`),
+        ]
+          .join(' ')
+          .toLowerCase()
+          .includes(needle),
+      )
+    })
+    expect(traceable.length).toBeGreaterThanOrEqual(Math.ceil(assets.length / 2))
+  })
+
   it('visão de futuro e ativos transversais estão preenchidos', () => {
     expect(futureVision.length).toBeGreaterThanOrEqual(4)
     expect(assets.length).toBeGreaterThanOrEqual(5)

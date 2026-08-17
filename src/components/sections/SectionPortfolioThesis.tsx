@@ -16,6 +16,7 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { InterestButton } from '../ui/InterestButton'
+import { BackToOriginChip } from '../ui/BackToOriginChip'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import { getPortfolio } from '../../data/portfolio'
@@ -48,11 +49,13 @@ function getLabelPosition(angleDeg: number) {
 function AxisOrbitRing({
   axes,
   activeId,
+  offerCountByAxis,
   onSelect,
   onKeyNav,
 }: {
   axes: PortfolioAxis[]
   activeId: string
+  offerCountByAxis: Record<string, number>
   onSelect: (id: string) => void
   onKeyNav: (e: React.KeyboardEvent, currentId: string) => void
 }) {
@@ -92,6 +95,7 @@ function AxisOrbitRing({
         const y = 50 + radius * Math.sin(angleRad)
         const isActive = activeId === axis.id
         const labelPos = getLabelPosition(angleDeg)
+        const offerCount = offerCountByAxis[axis.id] ?? 0
 
         return (
           <button
@@ -99,7 +103,7 @@ function AxisOrbitRing({
             type="button"
             role="radio"
             aria-checked={isActive}
-            aria-label={axis.name}
+            aria-label={`${axis.name} — ${offerCount} ${t('portfolio.thesis.offersInAxis')}`}
             tabIndex={isActive ? 0 : -1}
             onClick={() => onSelect(axis.id)}
             onKeyDown={e => onKeyNav(e, axis.id)}
@@ -122,6 +126,18 @@ function AxisOrbitRing({
               }}
             >
               <Icon size={22} style={{ color: axis.color }} strokeWidth={2.2} aria-hidden="true" />
+            </span>
+            {/* Densidade: quantas ofertas o eixo já tem detalhadas */}
+            <span
+              aria-hidden="true"
+              className="absolute -top-1 -right-1 w-5 h-5 lg:w-[22px] lg:h-[22px] rounded-full flex items-center justify-center text-[10px] lg:text-[11px] font-black border"
+              style={{
+                backgroundColor: '#0F1524',
+                borderColor: `${axis.color}66`,
+                color: offerCount > 1 ? axis.color : '#94A3B8',
+              }}
+            >
+              {offerCount}
             </span>
             <span
               className={`absolute w-[104px] lg:w-[120px] text-[11px] lg:text-[12px] font-bold leading-tight pointer-events-none text-white/90 ${labelPos}`}
@@ -421,6 +437,12 @@ export function SectionPortfolioThesis() {
     return map
   }, [offers])
 
+  const offerCountByAxis = useMemo(() => {
+    const map: Record<string, number> = {}
+    for (const axis of axes) map[axis.id] = offersByAxis[axis.id]?.length ?? 0
+    return map
+  }, [axes, offersByAxis])
+
   const showcaseAxes = axes.filter(a => a.role === 'diferenciacao')
   const engineAxes = axes.filter(a => a.role === 'capacidade')
 
@@ -463,6 +485,8 @@ export function SectionPortfolioThesis() {
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-5 md:py-7 max-w-[1400px] mx-auto">
+
+        <BackToOriginChip className="mb-4" />
 
         {/* ── Header ── */}
         <motion.div
@@ -520,6 +544,15 @@ export function SectionPortfolioThesis() {
                 <span className="w-3 h-3 rounded-full border-2 border-dashed border-slate-400/60" aria-hidden="true" />
                 {t('portfolio.thesis.engine')}
               </span>
+              <span className="flex items-center gap-2 text-[11px] text-foursys-text-dim">
+                <span
+                  className="w-[18px] h-[18px] rounded-full border border-white/25 flex items-center justify-center text-[10px] font-black text-foursys-text-dim"
+                  aria-hidden="true"
+                >
+                  n
+                </span>
+                {t('portfolio.thesis.densityHint')}
+              </span>
               <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent" />
             </div>
 
@@ -534,6 +567,7 @@ export function SectionPortfolioThesis() {
                 <AxisOrbitRing
                   axes={axes}
                   activeId={activeAxis.id}
+                  offerCountByAxis={offerCountByAxis}
                   onSelect={setActiveAxisId}
                   onKeyNav={handleKeyNav}
                 />

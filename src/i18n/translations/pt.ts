@@ -635,12 +635,14 @@ export const pt = {
       offersInAxis: 'ofertas neste eixo',
       seeOffers: 'Ver ofertas do eixo',
       axisEmpty: 'Ofertas do eixo sem kit detalhado neste ciclo',
+      densityHint: 'O número indica ofertas com kit detalhado',
     },
     offers: {
       title: 'Catálogo de ofertas',
       subtitle: 'Cada oferta com o problema que resolve, o que você recebe, como entregamos e o estado real da prova.',
       filterAxis: 'Eixo',
       filterRole: 'Papel',
+      filterEvidence: 'Lastro',
       filterAll: 'Todos',
       searchPlaceholder: 'Buscar oferta, dor ou entregável...',
       empty: 'Nenhuma oferta corresponde aos filtros.',
@@ -662,10 +664,13 @@ export const pt = {
       subtitle: 'O que está sendo construído para o próximo ciclo — horizontes, teses e apostas em formação.',
       futureTitle: 'Visão de futuro',
       horizon: 'Horizonte',
+      itemsInHorizon: 'nesta janela',
+      seeOnMap: 'Ver no ecossistema do portfólio',
     },
     assets: {
       title: 'Ativos transversais',
       subtitle: 'Plataformas, unidades e capacidades que atravessam todas as ofertas do portfólio.',
+      usedIn: 'Sustenta {count} ofertas',
     },
     ecosystem: {
       title: 'Ecossistema do portfólio',

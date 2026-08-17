@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   ArrowRight,
@@ -13,10 +13,17 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { InterestButton } from '../ui/InterestButton'
+import { BackToOriginChip } from '../ui/BackToOriginChip'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import { getPortfolio } from '../../data/portfolio'
-import type { PortfolioAxis, PortfolioOffer } from '../../types'
+import type { EvidenceStatus, PortfolioAxis, PortfolioOffer } from '../../types'
+
+const EVIDENCE_COLOR: Record<EvidenceStatus, string> = {
+  'liberado': '#4ADE80',
+  'em-validacao': '#F59E0B',
+  'sem-lastro': '#94A3B8',
+}
 
 const PERSONA_ICONS: Record<string, LucideIcon> = {
   building: Building2,
@@ -76,6 +83,17 @@ function ShortlistStep({
           )}
         </div>
         <p className="text-xs text-foursys-text-muted leading-relaxed line-clamp-2">{offer.tagline}</p>
+        <span
+          className="inline-flex items-center gap-1.5 mt-1.5 text-[11px] font-semibold"
+          style={{ color: EVIDENCE_COLOR[offer.proof.status] }}
+        >
+          <span
+            className="w-1.5 h-1.5 rounded-full"
+            style={{ backgroundColor: EVIDENCE_COLOR[offer.proof.status] }}
+            aria-hidden="true"
+          />
+          {t(`portfolio.evidence.${offer.proof.status}`)}
+        </span>
       </div>
 
       <ArrowRight size={14} className="text-foursys-text-dim flex-shrink-0 mt-1" aria-hidden="true" />
@@ -88,6 +106,7 @@ export function SectionPortfolioStart() {
   const { t, lang } = useLanguage()
   const { axes, offers, personas, segments } = useMemo(() => getPortfolio(lang), [lang])
   const [activePersona, setActivePersona] = useState(personas[0]?.id ?? '')
+  const personaRefs = useRef<(HTMLButtonElement | null)[]>([])
 
   const axesById = useMemo(() => {
     const map: Record<string, PortfolioAxis> = {}
@@ -108,9 +127,27 @@ export function SectionPortfolioStart() {
     navigate('portfolio-offers')
   }
 
+  const handlePersonaKeyNav = (e: React.KeyboardEvent, currentId: string) => {
+    const ids = personas.map(p => p.id)
+    const idx = ids.indexOf(currentId)
+    let next = idx
+
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = (idx + 1) % ids.length
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = (idx - 1 + ids.length) % ids.length
+    else if (e.key === 'Home') next = 0
+    else if (e.key === 'End') next = ids.length - 1
+    else return
+
+    e.preventDefault()
+    setActivePersona(ids[next])
+    personaRefs.current[next]?.focus()
+  }
+
   return (
     <SectionWrapper>
       <div className="px-4 md:px-8 py-6 md:py-10 max-w-7xl mx-auto">
+
+        <BackToOriginChip className="mb-4" />
 
         {/* ── Header ── */}
         <motion.div
@@ -142,7 +179,8 @@ export function SectionPortfolioStart() {
           data-voz-caixa="portfolio-personas-grid"
           data-voz-caixa-secao="portfolio-start"
           data-voz-caixa-rotulo={t('portfolio.start.title')}
-          tabIndex={-1}
+          role="radiogroup"
+          aria-label={t('portfolio.start.title')}
           className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-2.5 md:gap-3 mb-6 focus:outline-none"
         >
           {personas.map((p, i) => {
@@ -151,11 +189,17 @@ export function SectionPortfolioStart() {
             return (
               <motion.button
                 key={p.id}
+                ref={el => {
+                  personaRefs.current[i] = el
+                }}
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.05, duration: 0.35 }}
                 onClick={() => setActivePersona(p.id)}
-                aria-pressed={active}
+                onKeyDown={e => handlePersonaKeyNav(e, p.id)}
+                role="radio"
+                aria-checked={active}
+                tabIndex={active ? 0 : -1}
                 data-voz-detalhe={`portfolio-persona-${p.id}`}
                 data-voz-detalhe-secao="portfolio-start"
                 data-voz-detalhe-rotulo={p.role}

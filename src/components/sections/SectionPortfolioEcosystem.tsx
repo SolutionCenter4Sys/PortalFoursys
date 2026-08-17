@@ -23,6 +23,7 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { InterestButton } from '../ui/InterestButton'
+import { BackToOriginChip } from '../ui/BackToOriginChip'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import { getPortfolio } from '../../data/portfolio'
@@ -92,6 +93,7 @@ function AxisCard({
   items,
   index,
   axisWord,
+  offerCount,
   onOpen,
   openLabel,
 }: {
@@ -99,6 +101,7 @@ function AxisCard({
   items: string[]
   index: number
   axisWord: string
+  offerCount: number
   onOpen?: () => void
   openLabel?: string
 }) {
@@ -111,29 +114,24 @@ function AxisCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.08 + index * 0.05, duration: 0.4 }}
       whileHover={interactive ? { y: -4 } : undefined}
-      onClick={onOpen}
-      onKeyDown={
-        interactive
-          ? e => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault()
-                onOpen?.()
-              }
-            }
-          : undefined
-      }
-      role={interactive ? 'button' : undefined}
-      tabIndex={interactive ? 0 : undefined}
-      aria-label={interactive ? openLabel : undefined}
       data-voz-detalhe={`portfolio-ecosystem-${axis.id}`}
       data-voz-detalhe-secao="portfolio-ecosystem"
       data-voz-detalhe-rotulo={axis.name}
       className={`group relative rounded-2xl bg-foursys-surface/30 border border-white/[0.07] p-4 overflow-hidden ${
         interactive
-          ? 'cursor-pointer hover:border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60'
+          ? 'hover:border-white/20 focus-within:ring-2 focus-within:ring-cyan-400/60'
           : ''
       }`}
     >
+      {/* Botão em camada: mantém a lista como conteúdo válido e dá semântica real de ação */}
+      {interactive && (
+        <button
+          type="button"
+          onClick={onOpen}
+          aria-label={openLabel}
+          className="absolute inset-0 z-10 cursor-pointer focus:outline-none"
+        />
+      )}
       <div
         className="absolute inset-x-0 top-0 h-px opacity-60"
         style={{ background: `linear-gradient(90deg, transparent, ${axis.color}, transparent)` }}
@@ -162,6 +160,17 @@ function AxisCard({
           </p>
           <h4 className="text-sm font-black text-white leading-tight">{axis.name}</h4>
         </div>
+        <span
+          aria-hidden="true"
+          className="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-[11px] font-black border"
+          style={{
+            borderColor: `${axis.color}40`,
+            backgroundColor: `${axis.color}12`,
+            color: offerCount > 1 ? axis.color : '#94A3B8',
+          }}
+        >
+          {offerCount}
+        </span>
       </div>
 
       {items.length > 0 && (
@@ -182,6 +191,7 @@ function AxisCard({
   )
 }
 
+
 /* ── Seção ─────────────────────────────────────────────────────────────────── */
 
 export function SectionPortfolioEcosystem() {
@@ -198,10 +208,11 @@ export function SectionPortfolioEcosystem() {
     return map
   }, [axes, offers])
 
-  const axesWithOffers = useMemo(
-    () => new Set(offers.map(o => o.axisId)),
-    [offers],
-  )
+  const offerCountByAxis = useMemo(() => {
+    const map: Record<string, number> = {}
+    for (const offer of offers) map[offer.axisId] = (map[offer.axisId] ?? 0) + 1
+    return map
+  }, [offers])
 
   const openAxis = useCallback(
     (axisId: string) => {
@@ -212,14 +223,17 @@ export function SectionPortfolioEcosystem() {
   )
 
   const axisCardProps = useCallback(
-    (axis: PortfolioAxis) =>
-      axesWithOffers.has(axis.id)
+    (axis: PortfolioAxis) => {
+      const offerCount = offerCountByAxis[axis.id] ?? 0
+      return offerCount > 0
         ? {
+            offerCount,
             onOpen: () => openAxis(axis.id),
             openLabel: t('portfolio.ecosystem.openAxis').replace('{name}', axis.name),
           }
-        : {},
-    [axesWithOffers, openAxis, t],
+        : { offerCount }
+    },
+    [offerCountByAxis, openAxis, t],
   )
 
   const showcaseAxes = useMemo(() => axes.filter(a => a.role === 'diferenciacao'), [axes])
@@ -243,6 +257,8 @@ export function SectionPortfolioEcosystem() {
             transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           />
         </div>
+
+        <BackToOriginChip className="relative mb-4" />
 
         <motion.div
           initial={{ opacity: 0, y: -16 }}
