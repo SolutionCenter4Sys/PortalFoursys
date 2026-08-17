@@ -128,7 +128,7 @@ Modo **Manual** (toggle) ignora wake word. Barge-in: fala por cima → para TTS 
 
 ```env
 INFERENCE_PROVIDER=local
-VOICE_GATEWAY_URL=http://localhost:8787
+VOICE_GATEWAY_URL=http://192.168.31.47:8787
 ```
 
 Gateway FastAPI: `Jarvis/inference-gateway` — STT/LLM/TTS via localhost no host; Next mantém Harness + RAG.
