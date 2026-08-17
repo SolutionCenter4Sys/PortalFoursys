@@ -5,9 +5,9 @@ const { axes, offers, personas, segments, futureVision, assets } = portfolioPt
 const codes = new Set(offers.map(o => o.code))
 
 describe('Portfólio 2026 S2 — integridade dos dados', () => {
-  it('tem 6 eixos e 12 ofertas', () => {
-    expect(axes.length).toBe(6)
-    expect(offers.length).toBe(12)
+  it('tem 8 eixos e 18 ofertas', () => {
+    expect(axes.length).toBe(8)
+    expect(offers.length).toBe(18)
   })
 
   it('não há códigos nem ids de oferta duplicados', () => {

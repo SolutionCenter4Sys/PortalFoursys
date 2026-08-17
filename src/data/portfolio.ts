@@ -21,7 +21,7 @@ const thesis: PortfolioThesis = {
   label: 'Inteligência Artificial aplicada à transformação de negócios',
   sequence: ['Marca', 'Pipeline', 'Ticket'],
   description:
-    'O portfólio se organiza em seis eixos de valor, separados por função na conversa. Dois eixos são de diferenciação: definem posicionamento, abrem a agenda no nível certo e criam a preferência. Quatro são de capacidade: sustentam a entrega, o volume e a continuidade da conta. A sequência importa porque quem entra pela capacidade compete por preço, e quem entra pela diferenciação decide o critério.',
+    'O portfólio se organiza em oito eixos de valor, separados por função na conversa. Três eixos são de diferenciação: definem posicionamento, abrem a agenda no nível certo e criam a preferência. Cinco são de capacidade: sustentam a entrega, o volume e a continuidade da conta. A sequência importa porque quem entra pela capacidade compete por preço, e quem entra pela diferenciação decide o critério.',
   principles: [
     'Diferenciação abre a conversa; capacidade sustenta o contrato. As duas coisas são necessárias e não se substituem.',
     'Toda oferta tem uma porta de entrada declarada e uma fronteira: quando não é a oferta certa, dizemos qual é.',
@@ -32,8 +32,8 @@ const thesis: PortfolioThesis = {
 
 const institutionalBacking = [
   { value: '26', label: 'anos' },
-  { value: '6', label: 'eixos' },
-  { value: '12', label: 'ofertas' },
+  { value: '8', label: 'eixos' },
+  { value: '18', label: 'ofertas' },
 ]
 
 // ─── Eixos de valor ───────────────────────────────────────────────────────────
@@ -91,15 +91,14 @@ const axes: PortfolioAxis[] = [
   {
     id: 'eixo-5',
     number: 5,
-    name: 'Cloud & FinOps · SharpOps',
+    name: 'Cloud, DevOps & FinOps · SharpOps',
     role: 'capacidade',
     promise:
-      'Recupera previsibilidade de custo em cloud e on-premise, com a economia medida contra a linha de base do cliente.',
-    audience: 'CFO, CIO e infraestrutura',
+      'Sustenta a plataforma cloud-native e a esteira de entrega, e recupera previsibilidade de custo em cloud e on-premise, com a economia medida contra a linha de base do cliente.',
+    audience: 'CFO, CIO, arquitetura e infraestrutura',
     color: '#34D399',
     icon: 'cloud',
     upcomingOffers: [
-      '5.1 Otimização de Cloud e FinOps',
       '5.2 Otimização de Ambientes On-Premise',
       '5.3 Tokenomics',
     ],
@@ -114,7 +113,31 @@ const axes: PortfolioAxis[] = [
     audience: 'CISO, risco e compliance',
     color: '#84CC16',
     icon: 'shield-check',
-    upcomingOffers: ['Ofertas conduzidas pela Zeragon, detalhadas fora deste ciclo'],
+    upcomingOffers: ['Demais frentes da Zeragon detalhadas fora deste ciclo'],
+  },
+  {
+    id: 'eixo-7',
+    number: 7,
+    name: 'Sustentação, Continuidade e Evolução',
+    role: 'capacidade',
+    promise:
+      'Assume a operação de ambientes críticos com SLA, governança e visibilidade executiva, e mantém a evolução acontecendo sem sobressalto.',
+    audience: 'CIO, head de operações de TI e donos de sistema crítico',
+    color: '#818CF8',
+    icon: 'life-buoy',
+    upcomingOffers: ['Modelos de operação assistida detalhados fora deste ciclo'],
+  },
+  {
+    id: 'eixo-8',
+    number: 8,
+    name: 'Produtos Foursys',
+    role: 'diferenciacao',
+    promise:
+      'Entrega resultado por produto próprio em modelo de assinatura, com go-live em semanas em vez de projeto de meses.',
+    audience: 'CIO, COO e diretores de área que precisam de solução em produção rápido',
+    color: '#4ADE80',
+    icon: 'package-check',
+    upcomingOffers: ['Novas soluções do catálogo publicadas a cada ciclo'],
   },
 ]
 
@@ -1427,6 +1450,842 @@ const offers: PortfolioOffer[] = [
     },
     legacyEquivalent: {
       label: 'Principais Ofertas → AI Squad; Delivery → Squad + Agentes IA',
+      section: 'offers-flagship',
+    },
+  },
+
+  // ══ Eixo 4 ══════════════════════════════════════════════════════════════════
+  {
+    id: 'dados-analytics',
+    code: '4.4',
+    axisId: 'eixo-4',
+    role: 'capacidade',
+    name: 'Dados e Analytics · All In Data',
+    headline: 'A base analítica que transforma volume em decisão confiável',
+    tagline: 'Seis frentes em um CoE de dados: plataforma, engenharia, produtos, analytics, governança e cultura.',
+    whatItIs:
+      'Construção e modernização da base analítica da companhia, organizada em seis frentes que podem ser contratadas em conjunto ou por recorte: plataforma de dados, engenharia, produtos de dados, analytics, governança e cultura. Vai do desenho do Modern Data Stack — inclusive em modelo gerenciado, MDS as a Service — à operação de dashboards, modelos e indicadores, com um centro de excelência que concentra framework, padrão e conhecimento reutilizável.',
+    pain:
+      'O dado existe, mas está espalhado entre sistemas, sem dono claro e sem qualidade garantida na origem. Relatório que deveria ser instantâneo leva dias e chega quando a decisão já passou; cada área tem a sua versão do número; e a agenda de IA trava porque o dado não está pronto para alimentar modelo nem agente. É nesse contexto que a maioria dos projetos de dados não chega a gerar valor.',
+    entryTriggers: [
+      'Relatório executivo montado à mão, com dias de defasagem',
+      'Múltiplas fontes sem integração e números divergentes entre áreas',
+      'Ambiente analítico legado que não sustenta o volume atual',
+      'Agenda de IA barrada porque o dado não está pronto',
+      'Ausência de catálogo, linhagem e controle de qualidade',
+      'Demanda de autoatendimento analítico que hoje passa toda pelo time de BI',
+    ],
+    outcomes: [
+      'Plataforma de dados moderna: Modern Data Stack, data warehouse, data lake ou lakehouse conforme o caso',
+      'Pipelines construídos com DataOps e MLOps, do ingest à disponibilização',
+      'Dashboards, KPIs automatizados e alertas inteligentes em tempo real',
+      'Governança desde a origem: qualidade, catálogo, observabilidade, active metadata, segurança e privacidade',
+      'Produtos de dados descritivos, diagnósticos, preditivos e prescritivos, incluindo LLM e visão computacional',
+      'Cultura data-driven com alfabetização em dados e self-service BI',
+      'CoE de dados com frameworks reutilizáveis, padrões aplicados e métricas de qualidade',
+    ],
+    differentials: [
+      {
+        title: 'Governança e qualidade desde a origem',
+        detail:
+          'Catálogo, observabilidade, active metadata, segurança e privacidade entram no desenho da plataforma, não como camada posterior. É o ponto onde a maior parte dos projetos de dados falha.',
+      },
+      {
+        title: 'Parceria estratégica com Databricks',
+        detail:
+          'Data lakehouse unificando data warehouse e data lake, com arquitetura escolhida pelo problema: lakehouse, data mesh ou data fabric conforme o modelo de ownership da casa.',
+      },
+      {
+        title: 'Analytics em tempo real',
+        detail:
+          'Ingestão de múltiplas fontes, streaming, dashboards vivos e alertas automáticos: o relatório de três dias vira informação instantânea.',
+      },
+      {
+        title: 'Dado como produto, não como relatório',
+        detail:
+          'Modelos descritivos, diagnósticos, preditivos e prescritivos, agentes autônomos, LLM e visão computacional tratados como produto com dono, ciclo e MLOps em produção.',
+      },
+      {
+        title: 'IA generativa aplicada ao analytics',
+        detail:
+          'Consulta em linguagem natural — ask your data — democratiza o acesso ao insight, e dado sintético endereça a restrição de privacidade no treinamento de modelo.',
+      },
+      {
+        title: 'CoE de dados',
+        detail:
+          'Repositório de conhecimento centralizado, capacitação contínua, aconselhamento just in time, artefatos reutilizáveis e métricas de qualidade mensuráveis.',
+      },
+    ],
+    components: [
+      'Plataforma de dados: construção de Modern Data Stack, modernização do ambiente analítico e MDS as a Service',
+      'Engenharia: pipelines, DataOps e MLOps, data warehouse, data lake, lakehouse, data mesh e data fabric',
+      'Produtos de dados: modelos descritivos, diagnósticos, preditivos e prescritivos, agentes autônomos, LLM, NLP, visão computacional e automação inteligente',
+      'Analytics: dashboards e relatórios interativos, indicadores e KPIs automatizados, alertas inteligentes em tempo real',
+      'Governança de dados: segurança e privacidade, catálogo, observabilidade e active metadata',
+      'Cultura: assessment de maturidade analítica, alfabetização em dados, self-service BI e cultura data-driven',
+    ],
+    assets: [
+      'CoE de Dados e Analytics',
+      'Parceria estratégica Databricks',
+      'Frameworks e artefatos reutilizáveis de plataforma e governança',
+    ],
+    phases: [
+      {
+        name: 'Assessment de maturidade analítica',
+        duration: '3 a 6 semanas',
+        focus: 'Diagnóstico das fontes, da arquitetura atual, da governança e da cultura, com priorização dos casos de uso.',
+      },
+      {
+        name: 'Desenho e construção da plataforma',
+        duration: '2 a 4 meses',
+        focus: 'Arquitetura-alvo, Modern Data Stack, pipelines e DataOps, com governança e qualidade embarcadas na origem.',
+      },
+      {
+        name: 'Produtos de dados e analytics',
+        duration: '2 a 4 meses',
+        focus: 'Dashboards, KPIs, alertas em tempo real e modelos preditivos ou prescritivos com MLOps em produção.',
+      },
+      {
+        name: 'Governança, cultura e operação em CoE',
+        duration: 'contínuo',
+        focus: 'Catálogo, observabilidade, alfabetização em dados, self-service BI e evolução da maturidade.',
+      },
+    ],
+    totalDuration: 'assessment de 3 a 6 semanas · plataforma de 2 a 4 meses · produtos de dados de 2 a 4 meses · CoE contínuo',
+    marketStats: [
+      {
+        stat: 'O mercado global de Big Data e Analytics deve alcançar US$ 350 bilhões em 2026, com real-time analytics crescendo 28% ao ano e ferramentas de data governance, 35%.',
+        source: 'Dados de mercado citados no material de linhas de serviço — benchmark de setor, não métrica da Foursys',
+      },
+      {
+        stat: 'Empresas data-driven têm 23 vezes mais chance de adquirir clientes e 6 vezes mais de retê-los, enquanto 73% dos projetos de dados falham.',
+        source: 'Dados de mercado citados no material de linhas de serviço — benchmark de setor, não métrica da Foursys',
+      },
+      {
+        stat: 'O material cita case com 40% de redução de ruptura de estoque, 280% de ROI no primeiro ano e relatórios que saíram de três dias para instantâneos.',
+        source: 'Case citado no material de linhas de serviço — pendente de liberação de setor, porte e escopo',
+      },
+    ],
+    regulatory: [
+      'LGPD: segurança, privacidade e controle de acesso ao dado desde a origem',
+      'Dado sintético como alternativa ao uso de base real em treinamento de modelo',
+    ],
+    personas: [
+      {
+        role: 'CDO',
+        value: 'Plataforma, governança e cultura tratadas como um programa só, com maturidade medida e evolução planejada.',
+      },
+      {
+        role: 'CIO e CTO',
+        value: 'Ambiente analítico moderno e sustentável, com engenharia de dados operando em DataOps e MLOps.',
+      },
+      {
+        role: 'Head de BI e Analytics',
+        value: 'Sai da fila de relatório manual para self-service, alerta automático e indicador confiável.',
+      },
+      {
+        role: 'Diretor de negócio e operações',
+        value: 'Decide com número único e atualizado, em vez de conciliar versões divergentes entre áreas.',
+      },
+    ],
+    cta: 'A porta de entrada é o assessment de maturidade analítica: onde o dado está, o que impede a confiança nele e qual o primeiro caso de uso que paga a plataforma.',
+    connects: ['2.1B', '2.2', '5.4'],
+    boundary:
+      'Não é projeto isolado de dashboard nem implantação de ferramenta de BI. Se a dor é governar o uso de IA e não preparar o dado, a conversa começa pela oferta 2.1B; se é infraestrutura e custo do ambiente, pelo eixo de cloud.',
+    editorialCare:
+      'Os números de redução de ruptura e ROI vêm de case citado no material de linhas de serviço e ainda não têm setor, porte e escopo liberados. Usar como ordem de grandeza, sem nomear cliente, e manter os dados de mercado identificados como benchmark de setor.',
+    proof: {
+      status: 'em-validacao',
+      note: 'Há case citado no material com número de ruptura e de ROI, mas a liberação de setor, porte e escopo está pendente. O que já é publicável é a estrutura das seis frentes, o CoE e a arquitetura de referência.',
+    },
+    legacyEquivalent: {
+      label: 'Linhas de Serviço → Dados & Analytics',
+      section: 'services',
+    },
+  },
+
+  // ══ Eixo 5 ══════════════════════════════════════════════════════════════════
+  {
+    id: 'finops-automation',
+    code: '5.1',
+    axisId: 'eixo-5',
+    role: 'capacidade',
+    portfolioRole: 'Rampa de entrada',
+    name: 'Otimização de Cloud e FinOps · SharpOps',
+    headline: 'Do achado ao deploy, sem sair do controle do cliente',
+    tagline: 'Economia executada por Pull Request e cobrada só depois de comprovada em produção.',
+    whatItIs:
+      'Operação de FinOps conduzida pela SharpOps, unidade de FinOps do grupo, em quatro passos: o motor proprietário identifica a oportunidade, a mudança é proposta como Pull Request no repositório do próprio cliente, o cliente aprova e o deploy acontece. Não há licença de software nem hora de consultoria: o modelo é pure success fee, uma fração da economia que aparece no billing.',
+    pain:
+      'O custo de cloud cresce mais rápido do que a capacidade de governá-lo. Assessment tradicional entrega recomendação em PDF que o time interno nunca tem janela para executar; ferramenta SaaS resolve o outro extremo, mas muda o ambiente em caixa preta, exige acesso amplo de leitura e chega a mandar dado bruto de billing para modelo de linguagem. No fim, a economia fica na projeção e não no extrato.',
+    entryTriggers: [
+      'Fatura de cloud subindo mais rápido que o crescimento do negócio',
+      'Assessment anterior parado em relatório, sem execução',
+      'Time de infraestrutura sem janela para o backlog de otimização',
+      'Segurança barrando ferramenta que aplica mudança direto no ambiente',
+      'CFO cobrando previsibilidade e economia com número verificável',
+    ],
+    outcomes: [
+      'Baseline de custo por recurso, usada para decidir por onde começar',
+      'Oportunidades entregues como Pull Request revisável no repositório do cliente',
+      'Economia aferida pela diferença de custo real medida depois da mudança em produção',
+      'Modelo pure success fee: sem licença de software e sem cobrança de horas',
+      'Infraestrutura como código no repositório do cliente, sem lock-in na saída',
+      'Inventário de operações e controles compensatórios validado com o CISO antes da assinatura',
+    ],
+    differentials: [
+      {
+        title: 'Compliance por design, em GitOps',
+        detail:
+          'Nada muda no ambiente sem Pull Request aprovado pelo cliente. A mudança vive no repositório do cliente, não em um sistema proprietário: se o contrato termina, a infraestrutura não é afetada.',
+      },
+      {
+        title: 'Baseline prioriza, aferição cobra',
+        detail:
+          'A linha de base serve só para escolher por onde começar. O fee é calculado pela diferença de custo real, medida em janela de 15 dias depois do deploy — não há mecanismo para inflar projeção, porque o que conta é o impacto no billing.',
+      },
+      {
+        title: 'Contratação por modalidade',
+        detail:
+          'Assessment com 15% quando a identificação é da SharpOps e a execução fica com o cliente; 15% quando o cliente identifica e a SharpOps executa; 30% quando as duas pontas são da SharpOps.',
+      },
+      {
+        title: 'CISO-ready, sem caixa preta',
+        detail:
+          'Due diligence disponibilizada antes da assinatura, módulos críticos de infraestrutura como código com escrow e IA isolada para texto, sem enviar dado bruto de billing para modelo de linguagem.',
+      },
+      {
+        title: 'Saída sem penalidade escondida',
+        detail:
+          'Encerramento pelo cliente mantém o fee residual apenas das tranches já em produção. Encerramento pela SharpOps cessa toda cobrança futura, com o cliente retendo as mudanças no próprio repositório.',
+      },
+    ],
+    components: [
+      'Assessment inicial do ambiente com baseline por recurso e priorização de oportunidades',
+      'Identificação contínua de oportunidades pelo motor proprietário SharpOps',
+      'Execução via Pull Request revisado no repositório do cliente',
+      'Aferição da economia em janela de 15 dias após o deploy',
+      'Documento de inventário de operações e controles compensatórios para o CISO',
+      'Escrow dos módulos críticos de infraestrutura como código',
+    ],
+    assets: [
+      'SharpOps — unidade de FinOps do grupo',
+      'Motor proprietário de identificação de oportunidades',
+      'Módulos de infraestrutura como código com escrow',
+    ],
+    phases: [
+      {
+        name: 'Assessment sem custo',
+        duration: 'a calibrar por ambiente',
+        focus: 'Mapeamento inicial do ambiente para priorizar oportunidades e definir a baseline.',
+      },
+      {
+        name: 'Validação conjunta',
+        duration: 'a calibrar por escopo',
+        focus: 'Revisão dos resultados com a engenharia do cliente e definição das modalidades de execução.',
+      },
+      {
+        name: 'Assinatura e formalização',
+        duration: 'a calibrar por escopo',
+        focus: 'Acordo de escopo por recurso, métrica da janela de 15 dias e estruturação dos repositórios.',
+      },
+      {
+        name: 'Primeiros Pull Requests',
+        duration: 'primeiras semanas',
+        focus: 'Início da execução com as primeiras propostas de infraestrutura no repositório do cliente.',
+      },
+    ],
+    totalDuration: 'assessment inicial sem custo · primeiros Pull Requests em semanas · fee residual de 12 meses por tranche executada',
+    marketStats: [
+      {
+        stat: 'A régua de fee do modelo é de 15% para identificação, 15% para execução e 30% quando as duas pontas são da SharpOps.',
+        source: 'Modelo comercial SharpOps FinOps Automation',
+      },
+      {
+        stat: 'O material comercial usa um cenário ilustrativo de R$ 435 mil de economia mensal em run-rate sobre um custo de R$ 1,85 milhão por mês.',
+        source: 'Cenário ilustrativo do material SharpOps — não é resultado medido de cliente',
+      },
+    ],
+    personas: [
+      {
+        role: 'CFO',
+        value: 'Paga apenas pela economia que aparece no billing, com fee proporcional ao valor capturado.',
+      },
+      {
+        role: 'CIO e CTO',
+        value: 'Ganha execução sem abrir mão do controle: toda mudança entra por Pull Request no repositório da casa.',
+      },
+      {
+        role: 'Head de Infraestrutura e Cloud',
+        value: 'Recebe capacidade para o backlog de otimização que nunca encontra janela no time interno.',
+      },
+      {
+        role: 'CISO e risco',
+        value: 'Avalia inventário de operações e controles compensatórios antes de assinar, sem push direto no ambiente.',
+      },
+    ],
+    cta: 'A porta de entrada é o assessment sem custo: mapeamento do ambiente, baseline por recurso e priorização. A decisão de executar vem depois, já com número na mesa.',
+    connects: ['3.1', '3.4'],
+    boundary:
+      'Não é migração para cloud nem consultoria de arquitetura: o foco é o custo do que já está em produção. Se a dor é desenho de plataforma ou modernização do legado, a conversa começa pelo eixo de engenharia.',
+    editorialCare:
+      'O cenário de economia é ilustrativo e não pode ser apresentado como resultado de cliente. Não citar nome de cliente, número de proposta ou valores de proposta específica em conversa comercial.',
+    proof: {
+      status: 'sem-lastro',
+      note: 'O material comercial traz cenário ilustrativo de economia, não caso medido e liberado. Por isso publicamos o método — GitOps com Pull Request, success fee e janela de aferição de 15 dias — em vez de percentual de economia.',
+    },
+    legacyEquivalent: {
+      label: 'Linhas de Serviço → Arquitetura, DevOps, Cloud e FinOps',
+      section: 'services',
+    },
+  },
+  {
+    id: 'arquitetura-devops-cloud',
+    code: '5.4',
+    axisId: 'eixo-5',
+    role: 'capacidade',
+    name: 'Arquitetura, DevOps e Cloud',
+    headline: 'Plataforma cloud-native que sustenta escala, resiliência e cadência de entrega',
+    tagline: 'Arquitetura moderna, estratégia multicloud, esteira DevOps e integração tratada como produto.',
+    whatItIs:
+      'Estruturação de arquiteturas cloud-native, estratégias multicloud, esteiras DevOps e integrações via API — incluindo Open Finance — para suportar crescimento, alta disponibilidade, ciclos mais rápidos e conectividade segura entre ecossistemas. Cobre o desenho da arquitetura-alvo, a migração legacy-to-cloud, a automação de delivery, a observabilidade e a governança de APIs, do design à operação.',
+    pain:
+      'O crescimento esbarra na arquitetura: ambiente monolítico que não escala, deploy raro e arriscado, indisponibilidade em pico, custo de cloud sem previsibilidade e dependência de um único provedor. Integração feita ponto a ponto vira dívida silenciosa, e o time descobre o problema só quando o negócio precisa de velocidade que a plataforma não entrega.',
+    entryTriggers: [
+      'Crescimento ou pico de demanda travado pela arquitetura atual',
+      'Deploy pouco frequente, com janela longa e risco alto',
+      'Incidentes de disponibilidade em sistema de missão crítica',
+      'Migração de legado para cloud sem poder parar a operação',
+      'Exigência regulatória de soberania de dados ou de trilha na integração',
+      'Agenda de Open Finance ou de abertura de APIs para parceiros',
+    ],
+    outcomes: [
+      'Arquitetura cloud-native com microsserviços, event-driven e infraestrutura elástica',
+      'Migração legacy-to-cloud conduzida sem downtime da operação',
+      'Esteira de CI/CD previsível, com frequência de deploy maior e rollback claro',
+      'Kubernetes, containers e serverless operando em ambiente de missão crítica',
+      'Observabilidade end-to-end e prática de SRE sustentando alta disponibilidade',
+      'Governança multicloud reduzindo dependência de um único provedor',
+      'APIs, eventos e integrações governadas do design à operação',
+    ],
+    differentials: [
+      {
+        title: 'Arquitetura desenhada para o ritmo do negócio',
+        detail:
+          'Microsserviços, event-driven e infraestrutura elástica escolhidos pelo problema real, não por moda. A arquitetura-alvo vem com roadmap incremental, não com reescrita big-bang.',
+      },
+      {
+        title: 'DevOps por previsibilidade, não só por velocidade',
+        detail:
+          'A esteira é construída para reduzir risco de release: automação, gates, infraestrutura como código e rollback ensaiado. Velocidade é consequência da confiança, não o objetivo isolado.',
+      },
+      {
+        title: 'Parceria direta com os três grandes provedores',
+        detail:
+          'Relação direta com Microsoft Azure, AWS e Google Cloud, com governança multicloud e sovereign cloud quando o setor regulado exige — financeiro, saúde e governo.',
+      },
+      {
+        title: 'Integração tratada como produto',
+        detail:
+          'APIs, eventos e integrações complexas com governança do design à operação, com experiência prática em Open Finance e ambientes regulados.',
+      },
+      {
+        title: 'FinOps como disciplina embarcada',
+        detail:
+          'A eficiência de custo entra desde o desenho da plataforma e continua na operação. Quando a dor é o custo do que já está rodando, a execução acontece pela oferta 5.1, com economia medida contra a linha de base.',
+      },
+    ],
+    components: [
+      'Assessment de arquitetura, plataforma e maturidade de delivery',
+      'Desenho da arquitetura-alvo cloud-native e estratégia multicloud',
+      'Migração legacy-to-cloud sem downtime',
+      'Esteira DevOps com CI/CD, infraestrutura como código e automação de release',
+      'Kubernetes, containers e serverless para missão crítica',
+      'Observabilidade end-to-end e prática de SRE',
+      'Governança de APIs, eventos e integrações, incluindo Open Finance',
+    ],
+    assets: [
+      'Parcerias diretas com Microsoft Azure, AWS e Google Cloud',
+      'SharpOps — unidade de FinOps do grupo',
+    ],
+    phases: [
+      {
+        name: 'Assessment de arquitetura e plataforma',
+        duration: '3 a 6 semanas',
+        focus: 'Diagnóstico do ambiente, gargalos de escala e disponibilidade, maturidade de delivery e linha de base de custo.',
+      },
+      {
+        name: 'Arquitetura-alvo e roadmap',
+        duration: '4 a 8 semanas',
+        focus: 'Desenho cloud-native, estratégia multicloud, plano de migração e governança de APIs, com sequência incremental.',
+      },
+      {
+        name: 'Implantação da plataforma e da esteira',
+        duration: '3 a 6 meses',
+        focus: 'Infraestrutura como código, CI/CD, Kubernetes, observabilidade e migração legacy-to-cloud por onda, sem parar a operação.',
+      },
+      {
+        name: 'Operação e evolução',
+        duration: 'contínuo',
+        focus: 'SRE, confiabilidade, evolução da arquitetura e eficiência de custo contínua junto à SharpOps.',
+      },
+    ],
+    totalDuration: 'assessment de 3 a 6 semanas · arquitetura-alvo de 4 a 8 semanas · implantação de 3 a 6 meses · operação contínua',
+    marketStats: [
+      {
+        stat: 'O mercado global de cloud computing alcançou US$ 832 bilhões em 2025, e 92% dos workloads devem estar em cloud até 2028.',
+        source: 'Dados de mercado citados no material de linhas de serviço — benchmark de setor, não métrica da Foursys',
+      },
+      {
+        stat: 'A prática declara redução média de 35% em custo de cloud com FinOps, aumento de 40% na frequência de deploy e redução de 60% em vendor lock-in com governança multicloud.',
+        source: 'Números da prática declarados no material de linhas de serviço — pendentes de lastro por projeto e período',
+      },
+    ],
+    regulatory: [
+      'Sovereign cloud para setores regulados: financeiro, saúde e governo',
+      'Open Finance e integrações que exigem trilha, segurança e governança de API',
+    ],
+    personas: [
+      {
+        role: 'CIO e CTO',
+        value: 'Ganha plataforma que sustenta o crescimento sem trocar disponibilidade por velocidade.',
+      },
+      {
+        role: 'Head de Arquitetura e Plataforma',
+        value: 'Arquitetura-alvo com roadmap incremental, padrão de integração e governança de API do design à operação.',
+      },
+      {
+        role: 'Head de Infraestrutura e Cloud',
+        value: 'Esteira, infraestrutura como código e observabilidade que reduzem risco de release e tempo de resposta a incidente.',
+      },
+      {
+        role: 'CFO',
+        value: 'Previsibilidade de custo de cloud tratada como disciplina, com continuidade na execução de FinOps.',
+      },
+    ],
+    cta: 'A porta de entrada é o assessment de arquitetura e plataforma: onde a escala trava, onde o release arrisca e onde o custo escapa — com arquitetura-alvo e roadmap incremental na saída.',
+    connects: ['5.1', '3.1', '3.2'],
+    boundary:
+      'Não é otimização de custo do que já está em produção, que é o escopo da oferta 5.1, nem modernização de código legado, que vive no eixo de engenharia. Aqui a conversa é sobre a plataforma e a esteira que sustentam o software.',
+    editorialCare:
+      'Os percentuais de redução de custo, frequência de deploy e vendor lock-in vêm do material de linhas de serviço e ainda não têm projeto, período e metodologia citáveis. Usar apenas como ordem de grandeza em conversa, nunca como resultado medido pela casa.',
+    proof: {
+      status: 'em-validacao',
+      note: 'A experiência de plataforma, migração e integração é demonstrável no histórico de entrega, mas os cases dependem de liberação sobre setor, porte e escopo. Os percentuais herdados do material de linhas de serviço seguem pendentes de lastro.',
+    },
+    legacyEquivalent: {
+      label: 'Linhas de Serviço → Arquitetura, DevOps, Cloud e FinOps',
+      section: 'services',
+    },
+  },
+
+  // ══ Eixo 6 ══════════════════════════════════════════════════════════════════
+  {
+    id: 'ciberseguranca-riscos',
+    code: '6.1',
+    axisId: 'eixo-6',
+    role: 'capacidade',
+    name: 'Cibersegurança, Riscos e Privacidade · Zeragon',
+    headline: 'Segurança como atributo da transformação, não como barreira',
+    tagline: 'Consultoria e assessment ou segurança sob demanda, conduzidos pela Zeragon, empresa do grupo.',
+    whatItIs:
+      'Capacidade dedicada de cibersegurança, riscos corporativos e privacidade conduzida pela Zeragon, empresa do grupo especializada no tema. Chega por dois modelos de contratação: Consulting & Assessment, para definir estratégia, medir maturidade e estruturar o programa; e SECaaS, segurança sob demanda por assinatura ou contrato, da esteira de AppSec ao SOC. O portfólio cobre seis frentes: Segurança da Informação, Continuidade de Negócios e Gestão de Crises, Riscos Corporativos, Prevenção de Fraudes, Privacidade de Dados e Gestão de Risco de Terceiros.',
+    pain:
+      'Vulnerabilidade conhecida sem dono e sem prazo, exigência regulatória que o time não consegue evidenciar e segurança que só aparece no fim do ciclo, como veto ao release. Quando o incidente chega, falta plano de continuidade e playbook de crise; o risco do fornecedor crítico não é medido; e a agenda de IA amplia a superfície de exposição antes que a governança acompanhe.',
+    entryTriggers: [
+      'Apontamento de auditoria, do regulador ou de cliente corporativo',
+      'Incidente, tentativa de ransomware ou vazamento recente',
+      'Exigência de certificação ISO 27001 ou ISO 27701',
+      'Programa de LGPD parado no diagnóstico, sem política nem processo',
+      'Agenda de IA avançando sem controle de dado, acesso e trilha',
+      'Fornecedor crítico sem avaliação de risco de terceiro',
+      'Fraude com burla de biometria ou de camadas antifraude',
+    ],
+    outcomes: [
+      'Score de maturidade em NIST, arquitetura segura, SDLC e privacidade, com roadmap de evolução',
+      'Plano Diretor de Segurança da Informação, políticas e procedimentos formalizados',
+      'Gestão contínua de vulnerabilidades com scanning, pentest e Red Team',
+      'SOC, blue team e resposta a incidentes com plano de ação definido',
+      'DevSecOps e Security Champions embarcados no ciclo de desenvolvimento',
+      'Continuidade testada: BIA, PCN, plano de disaster recovery e playbook de crise',
+      'Programa de LGPD, gestão de risco de terceiros e camadas antifraude em operação',
+    ],
+    differentials: [
+      {
+        title: 'Empresa do grupo dedicada ao tema',
+        detail:
+          'A Zeragon, antiga Sec4Sys, é a vertical de riscos corporativos e cibersegurança do grupo. Não é time genérico alocado: é capacidade especializada em estratégia, detecção de ameaça, proteção de dado e mitigação de risco.',
+      },
+      {
+        title: 'Dois modelos de contratação',
+        detail:
+          'Consulting & Assessment para estratégia, maturidade e programa; SECaaS para segurança sob demanda por assinatura ou contrato, escalável e sem montar estrutura própria.',
+      },
+      {
+        title: 'Segurança como atributo, não como barreira',
+        detail:
+          'DevSecOps, arquitetura de referência, requisitos de segurança e Security Champions colocam o controle dentro do ciclo de desenvolvimento, em vez de transformá-lo em gate no fim da entrega.',
+      },
+      {
+        title: 'Liderança de segurança como serviço',
+        detail:
+          'CISO as a Service, BISO as a Service e Red Team as a Service dão acesso à senioridade e à capacidade ofensiva sem depender de contratação própria.',
+      },
+      {
+        title: 'Experiência em ambiente regulado',
+        detail:
+          'LGPD, Bacen, PCI-DSS, ISO 27001 e ISO 27701, com automação de controle e monitoramento contínuo em vez de evidência montada na véspera da auditoria.',
+      },
+      {
+        title: 'Pré-condição da agenda de IA',
+        detail:
+          'A mesma capacidade sustenta a governança e a soberania de IA: controle de dado, acesso, trilha e superfície de exposição dos agentes.',
+      },
+    ],
+    components: [
+      'Consulting & Assessment: maturidade NIST, arquitetura segura, SDLC, privacidade, ransomware, PDSI, políticas, risk assessment, TPRM e cultura',
+      'SECaaS: AppSec, pentest e ethical hacking, gestão de vulnerabilidades, operações (DLP, WAF, antispam), SOC, IAM, DevSecOps, segurança de redes, phishing e GRC',
+      'Segurança da Informação: ISO 27001 e 27701, CISO e BISO as a Service, Red Team, threat intelligence, segurança em nuvem e VIP protection',
+      'Continuidade e crise: BIA, PCN, disaster recovery, planos de resposta, playbook, simulações e treinamento',
+      'Riscos corporativos: GRC, controles internos e testes de efetividade, dashboard de apetite, cultura de risco e prevenção à lavagem de dinheiro',
+      'Prevenção de fraudes: score de maturidade, arquitetura e camadas antifraude, pentest de burla de biometria e fraud prevention as a service',
+      'Privacidade de dados: score de LGPD, políticas, procedimentos e programa de proteção de dados',
+      'Gestão de risco de terceiros: score TPRM, políticas e programa de gestão',
+    ],
+    assets: ['Zeragon — empresa do grupo, ex-Sec4Sys', 'NEXUS', 'Fusion Teams'],
+    phases: [
+      {
+        name: 'Assessment e score de maturidade',
+        duration: '3 a 6 semanas',
+        focus: 'Diagnóstico em NIST, arquitetura segura, SDLC, privacidade e risco de terceiro, com priorização das lacunas.',
+      },
+      {
+        name: 'Plano diretor e políticas',
+        duration: '4 a 8 semanas',
+        focus: 'PDSI, políticas, procedimentos e roadmap de evolução, com dono e prazo por controle.',
+      },
+      {
+        name: 'Implantação de controles e programas',
+        duration: '3 a 6 meses',
+        focus: 'DevSecOps, IAM, gestão de vulnerabilidades, continuidade, antifraude e programa de LGPD conforme a prioridade definida.',
+      },
+      {
+        name: 'Operação contínua em SECaaS',
+        duration: 'contínuo',
+        focus: 'SOC, resposta a incidentes, pentest recorrente, threat intelligence, campanhas de phishing e evolução da maturidade.',
+      },
+    ],
+    totalDuration: 'assessment de 3 a 6 semanas · plano diretor de 4 a 8 semanas · implantação de 3 a 6 meses · operação contínua',
+    marketStats: [
+      {
+        stat: 'A prática declara redução de 80% em vulnerabilidades, aumento de 70% em conformidade regulatória e queda de 60% no tempo de resposta a incidentes.',
+        source: 'Números da prática declarados no material de linhas de serviço — pendentes de lastro por projeto e período',
+      },
+    ],
+    regulatory: [
+      'LGPD: programa, políticas e score de proteção e privacidade de dados',
+      'ISO 27001 e ISO 27701: apoio e qualificação',
+      'Bacen e PCI-DSS: experiência em ambiente financeiro regulado',
+      'Prevenção à lavagem de dinheiro e gestão de risco de terceiros',
+    ],
+    personas: [
+      {
+        role: 'CISO',
+        value: 'Ganha score de maturidade, plano diretor e capacidade de execução sem montar estrutura própria.',
+      },
+      {
+        role: 'CIO e CTO',
+        value: 'Segurança embarcada no ciclo de desenvolvimento, com DevSecOps em vez de veto no fim da entrega.',
+      },
+      {
+        role: 'DPO e jurídico',
+        value: 'Programa de LGPD com política, procedimento e evidência, não apenas diagnóstico.',
+      },
+      {
+        role: 'Head de Risco e Compliance',
+        value: 'GRC, controles internos testados, risco de terceiro medido e continuidade de negócio exercitada.',
+      },
+    ],
+    cta: 'A porta de entrada é o assessment de maturidade: onde estão as lacunas de controle, quais têm exposição regulatória e o que entra primeiro no plano diretor. A execução vem em consultoria ou em SECaaS, conforme o momento da casa.',
+    connects: ['2.1B', '5.4', '3.1'],
+    boundary:
+      'Não é revenda de ferramenta de segurança nem projeto pontual de implantação de produto. Se a dor é governança da agenda de IA — política de uso, trilha e comitê —, a conversa começa pela oferta 2.1B, com a Zeragon entrando como capacidade de segurança.',
+    editorialCare:
+      'Os percentuais de redução de vulnerabilidade, conformidade e tempo de resposta vêm do material de linhas de serviço e ainda não têm projeto, período e metodologia citáveis. Usar apenas como ordem de grandeza em conversa, nunca como resultado medido.',
+    proof: {
+      status: 'em-validacao',
+      note: 'A capacidade é demonstrável pelo portfólio estruturado da Zeragon e pelos modelos de contratação, mas os cases dependem de liberação sobre setor, porte e escopo — o que é regra em segurança. Os percentuais herdados do material de linhas de serviço seguem pendentes de lastro.',
+    },
+    legacyEquivalent: {
+      label: 'Linhas de Serviço → Cibersegurança (Sec4Sys)',
+      section: 'services',
+    },
+  },
+
+  // ══ Eixo 7 ══════════════════════════════════════════════════════════════════
+  {
+    id: 'outsourcing-sustentacao',
+    code: '7.1',
+    axisId: 'eixo-7',
+    role: 'capacidade',
+    portfolioRole: 'Delivery puxado',
+    name: 'Outsourcing e Sustentação',
+    headline: 'Continuidade operacional com SLA, governança e evolução controlada',
+    tagline: 'A operação do ambiente crítico assumida por squads orientadas a resultado, não por alocação.',
+    whatItIs:
+      'Assunção da operação e da evolução de ambientes críticos — sustentação de aplicações, AMS e operação assistida — com SLA acordado, governança clara e visibilidade executiva. O time não entra apenas para manter o que existe: absorve o backlog técnico, reduz volatilidade da operação e mantém a evolução do sistema acontecendo, com aceleração por IA onde o ganho é real.',
+    pain:
+      'O ambiente crítico consome o time interno em chamado e apagão, e o que deveria evoluir fica parado no backlog. O custo da operação é imprevisível, a indisponibilidade aparece sem explicação e o contrato de terceiro entrega presença, não resultado. Quando o fornecedor sai, o conhecimento vai junto, porque nada estava documentado nem medido.',
+    entryTriggers: [
+      'Time interno consumido por chamado, sem espaço para evolução',
+      'Indisponibilidade recorrente em sistema crítico do negócio',
+      'Backlog técnico acumulado sem previsão de queima',
+      'Contrato de sustentação medido por presença, e não por resultado',
+      'Troca de fornecedor com risco de perda de conhecimento',
+      'Necessidade de previsibilidade de custo na operação de TI',
+    ],
+    outcomes: [
+      'Operação assumida com SLA acordado e métrica objetiva de cumprimento',
+      'Indisponibilidade operacional reduzida em ambiente crítico',
+      'Backlog técnico em queima contínua, com prioridade acordada com o negócio',
+      'Time interno liberado para agenda de evolução e de produto',
+      'Visibilidade executiva da operação: indicador, tendência e risco',
+      'Conhecimento documentado e retido, com transição reversível',
+      'Aceleração por IA no atendimento e na sustentação, sem abrir mão de qualidade e segurança',
+    ],
+    differentials: [
+      {
+        title: 'Squad orientada a resultado, não a alocação',
+        detail:
+          'O compromisso é com indicador de operação e queima de backlog, não com headcount presente. Especialistas entram pelo problema, não pela vaga.',
+      },
+      {
+        title: 'Governança e SLA com métrica objetiva',
+        detail:
+          'Acordo de nível de serviço, ritual de governança e visibilidade executiva desde o primeiro mês, para que a discussão seja sobre o número e não sobre percepção.',
+      },
+      {
+        title: 'Sustentação que evolui, não só mantém',
+        detail:
+          'A operação absorve dívida técnica e evolução controlada em paralelo ao atendimento, para que o ambiente não envelheça enquanto está estável.',
+      },
+      {
+        title: 'Aceleração por IA com qualidade preservada',
+        detail:
+          'IA aplicada ao ciclo de atendimento e de sustentação onde reduz tempo de resposta e retrabalho, mantendo o padrão de qualidade e os controles de segurança.',
+      },
+      {
+        title: 'Experiência em ambiente crítico e regulado',
+        detail:
+          'Operação de sistemas de missão crítica em setores com exigência de continuidade, trilha e conformidade.',
+      },
+    ],
+    components: [
+      'Sustentação de aplicações e AMS com SLA acordado',
+      'Operação assistida e suporte a ambientes críticos',
+      'Gestão e queima de backlog técnico',
+      'Governança, rituais e visibilidade executiva de indicadores',
+      'Evolução controlada do ambiente em paralelo ao atendimento',
+      'Aceleração por IA no atendimento e na sustentação',
+      'Documentação e retenção de conhecimento para transição reversível',
+    ],
+    assets: ['Fusion Teams', 'Modelos de contratação por projeto, squad e operação assistida'],
+    phases: [
+      {
+        name: 'Assessment do ambiente e do contrato',
+        duration: '2 a 4 semanas',
+        focus: 'Mapa das aplicações críticas, volume de chamado, backlog acumulado e linha de base de disponibilidade e custo.',
+      },
+      {
+        name: 'Transição e assunção da operação',
+        duration: '4 a 8 semanas',
+        focus: 'Transferência de conhecimento, documentação, definição de SLA, rituais de governança e painel de indicadores.',
+      },
+      {
+        name: 'Estabilização',
+        duration: '2 a 3 meses',
+        focus: 'Redução de incidente recorrente, queima das prioridades de backlog e ajuste fino do acordo de nível de serviço.',
+      },
+      {
+        name: 'Operação e evolução contínua',
+        duration: 'contínuo',
+        focus: 'Sustentação com SLA cumprido, evolução controlada do ambiente e revisão periódica de escopo com o negócio.',
+      },
+    ],
+    totalDuration: 'assessment de 2 a 4 semanas · transição de 4 a 8 semanas · estabilização de 2 a 3 meses · operação contínua',
+    marketStats: [
+      {
+        stat: 'A prática declara redução de 50% na indisponibilidade operacional, aumento de 30% na eficiência dos times internos e queda de 20% no backlog técnico.',
+        source: 'Números da prática declarados no material de linhas de serviço — pendentes de lastro por projeto e período',
+      },
+    ],
+    personas: [
+      {
+        role: 'CIO',
+        value: 'Previsibilidade de custo e de risco na operação, com indicador executivo em vez de percepção.',
+      },
+      {
+        role: 'Head de Operações de TI',
+        value: 'Chamado sob controle, backlog em queima e time interno liberado para a agenda de evolução.',
+      },
+      {
+        role: 'Dono de sistema crítico no negócio',
+        value: 'Continuidade do sistema que sustenta a operação, com evolução acontecendo em paralelo.',
+      },
+      {
+        role: 'CFO',
+        value: 'Custo de sustentação previsível e ligado a nível de serviço acordado.',
+      },
+    ],
+    cta: 'A porta de entrada é o assessment do ambiente: quais aplicações concentram o risco, qual o tamanho real do backlog e qual a linha de base de disponibilidade e custo antes de qualquer compromisso de SLA.',
+    connects: ['3.1', '5.4', '6.1'],
+    boundary:
+      'Não é alocação de profissional por hora nem projeto fechado de construção. Se a dor é reescrever o legado, a conversa começa pela oferta 3.1; se é a plataforma que hospeda o ambiente, pelo eixo de cloud.',
+    editorialCare:
+      'Os percentuais de indisponibilidade, eficiência e backlog vêm do material de linhas de serviço e ainda não têm projeto, período e metodologia citáveis. Usar apenas como ordem de grandeza em conversa. Evitar posicionar a oferta como body shop: o compromisso declarado é com resultado.',
+    proof: {
+      status: 'em-validacao',
+      note: 'O histórico de operação em ambiente crítico é a prova mais forte, mas os cases dependem de liberação sobre setor, porte e escopo. Os percentuais herdados do material de linhas de serviço seguem pendentes de lastro.',
+    },
+    legacyEquivalent: {
+      label: 'Linhas de Serviço → Outsourcing & Sustentação',
+      section: 'services',
+    },
+  },
+
+  // ══ Eixo 8 ══════════════════════════════════════════════════════════════════
+  {
+    id: 'produtos-foursys',
+    code: '8.1',
+    axisId: 'eixo-8',
+    role: 'diferenciacao',
+    portfolioRole: 'Rampa de entrada',
+    name: 'Produto Foursys',
+    headline: 'Chega de projeto interminável: a solução digital em produção em até 30 dias',
+    tagline: 'Plataforma modular por assinatura, configurada para a realidade da casa e com evolução contínua inclusa.',
+    whatItIs:
+      'Plataformas digitais prontas, customizáveis e mantidas pela Foursys em modelo SaaS. O FourBlox reúne mais de 18 soluções modulares em nove categorias de negócio, ativadas por bloco e configuradas sob medida; o FourMakers é o programa e a plataforma de co-criação e produtividade. O cliente contrata o resultado, não o esforço: assinatura mensal sem investimento inicial, com hospedagem, atualização, suporte e evolução inclusos.',
+    pain:
+      'Sistemas que não conversam entre si, planilha paralela fora de controle e baixa adoção das ferramentas que já existem. Quando a área tenta resolver, entra em projeto que nunca termina, com investimento alto e retorno indefinido — ou compra solução genérica que não cabe na realidade da operação.',
+    entryTriggers: [
+      'Processo crítico rodando em planilha paralela',
+      'Necessidade de solução em produção em semanas, não em meses',
+      'Projeto de software interno parado ou estourado em prazo',
+      'Ferramenta comprada com baixa adoção pelo time',
+      'Restrição de investimento inicial, com espaço para custo mensal previsível',
+      'Área de negócio sem fila na TI para construir do zero',
+    ],
+    outcomes: [
+      'Go-live em até 30 dias, com solução configurada para o fluxo real da área',
+      'Assinatura mensal com previsibilidade financeira e sem investimento inicial',
+      'Modularidade: ativa-se apenas o bloco que gera valor, e a solução cresce por adição',
+      'Retrabalho reduzido e eficiência operacional ampliada no processo atendido',
+      'Visibilidade gerencial e dado estruturado para decisão, no lugar da planilha',
+      'Menor risco de investimento e time-to-value acelerado',
+      'Hospedagem, atualização, suporte e evolução contínua inclusos na assinatura',
+    ],
+    differentials: [
+      {
+        title: 'Produção em 30 dias',
+        detail:
+          'O ciclo é de semanas, não de 6 a 12 meses. A entrega é uma solução em produção com acompanhamento e ajuste fino, não um piloto.',
+      },
+      {
+        title: 'Modelo por assinatura',
+        detail:
+          'Previsibilidade financeira sem investimento inicial: hospedagem, atualização e suporte entram no mesmo custo mensal.',
+      },
+      {
+        title: 'Modularidade inteligente',
+        detail:
+          'Mais de 18 soluções prontas em nove categorias — pessoas, operações, financeiro, comercial, projetos, ESG, dados e governança —, ativadas por bloco conforme a necessidade.',
+      },
+      {
+        title: 'UX centrada no usuário',
+        detail:
+          'A configuração parte do fluxo de quem usa, o que gera adoção real em vez de ferramenta imposta e abandonada.',
+      },
+      {
+        title: 'Evolução contínua baseada em dados',
+        detail:
+          'A solução cresce com a empresa: novos blocos e ajustes entram pelo uso observado, não por um novo projeto.',
+      },
+      {
+        title: 'Kits pré-configurados',
+        detail:
+          'Combinações prontas para resultado acelerado: eficiência operacional, gestão de pessoas 360°, performance comercial e governança executiva.',
+      },
+    ],
+    components: [
+      'FourBlox — plataforma modular de soluções por assinatura',
+      'FourMakers — programa e plataforma de co-criação e produtividade',
+      'Gestão de Pessoas: mapa de alocação inteligente, performance e OKR tracker, banco de talentos estratégico',
+      'Operações: controle de demandas e SLA, workflow personalizado, checkin de audiências, gestão de eventos',
+      'Financeiro: gestão de orçamento por área, forecast inteligente, cartão de crédito consignado, gestão orçamentária',
+      'Comercial: pipeline e performance comercial, gestão de comissões, prospecção e retenção de PMEs, CRM e SDR',
+      'Projetos, ESG, Dados e Governança: portfólio de projetos, monitor de indicadores ESG, data hub executivo e gestão de guarda compartilhada',
+      'Kits: Eficiência Operacional, Gestão de Pessoas 360°, Performance Comercial e Governança Executiva',
+    ],
+    assets: ['FourBlox', 'FourMakers'],
+    phases: [
+      {
+        name: 'Diagnóstico profundo',
+        duration: 'dias',
+        focus: 'Mapeamento de dores, usuários, fluxos e necessidades reais da área.',
+      },
+      {
+        name: 'Arquitetura da solução',
+        duration: 'dias',
+        focus: 'Definição dos blocos necessários para resolver o problema, com escopo acordado.',
+      },
+      {
+        name: 'Configuração personalizada',
+        duration: 'semanas',
+        focus: 'Customização inteligente dentro da plataforma modular, sem construção do zero.',
+      },
+      {
+        name: 'Go-live e evolução',
+        duration: 'até 30 dias no total, depois contínuo',
+        focus: 'Entrega em produção com acompanhamento, ajuste fino e evolução contínua baseada em uso.',
+      },
+    ],
+    totalDuration: 'go-live em até 30 dias · evolução contínua inclusa na assinatura',
+    marketStats: [
+      {
+        stat: 'O catálogo declara go-live em 30 dias, mais de 18 soluções prontas em nove categorias de negócio e modelo de assinatura mensal.',
+        source: 'Material de Principais Ofertas (Produtos · FourMakers · FourBlox) — números de catálogo, atualizados a cada ciclo',
+      },
+    ],
+    personas: [
+      {
+        role: 'Diretor de área — pessoas, financeiro, comercial ou operações',
+        value: 'Resolve o processo que hoje vive em planilha sem entrar na fila de projeto da TI.',
+      },
+      {
+        role: 'CIO e CTO',
+        value: 'Reduz demanda de construção sob medida para problemas já resolvidos por bloco pronto, com hospedagem e suporte inclusos.',
+      },
+      {
+        role: 'COO',
+        value: 'Ganha controle de demanda, SLA e visibilidade da operação em semanas.',
+      },
+      {
+        role: 'CFO',
+        value: 'Custo mensal previsível, sem investimento inicial e com risco de investimento menor.',
+      },
+    ],
+    cta: 'A porta de entrada é o diagnóstico estruturado: quais dores, usuários e fluxos estão em jogo e quais blocos resolvem o problema dentro da janela de 30 dias.',
+    connects: ['3.2', '4.4', '7.1'],
+    boundary:
+      'Não é software sob medida construído do zero: o valor está em configurar bloco pronto. Se o processo exige construção específica ou integração profunda com o legado, a conversa começa pelo eixo de engenharia.',
+    editorialCare:
+      'O go-live de 30 dias vale para solução configurada dentro do catálogo — não prometer a mesma janela para necessidade que exige construção. O número de soluções e categorias muda a cada ciclo e deve ser conferido no catálogo antes de citar.',
+    proof: {
+      status: 'em-validacao',
+      note: 'O catálogo de soluções, os kits e o modelo de assinatura são demonstráveis, mas os cases de cliente com número de adoção e de ganho dependem de liberação sobre setor, porte e escopo.',
+    },
+    legacyEquivalent: {
+      label: 'Principais Ofertas → Produtos · FourMakers · FourBlox',
       section: 'offers-flagship',
     },
   },

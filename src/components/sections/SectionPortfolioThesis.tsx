@@ -9,6 +9,8 @@ import {
   Database,
   Cloud,
   ShieldCheck,
+  LifeBuoy,
+  PackageCheck,
   Layers,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
@@ -26,6 +28,8 @@ const AXIS_ICONS: Record<string, LucideIcon> = {
   database: Database,
   cloud: Cloud,
   'shield-check': ShieldCheck,
+  'life-buoy': LifeBuoy,
+  'package-check': PackageCheck,
 }
 
 /* ── Mandala de eixos ─────────────────────────────────────────────────────────── */
@@ -33,12 +37,12 @@ const AXIS_ICONS: Record<string, LucideIcon> = {
 function getLabelPosition(angleDeg: number) {
   const norm = ((angleDeg % 360) + 360) % 360
   if (norm > 280 || norm < 70)
-    return 'left-[calc(100%+14px)] top-1/2 -translate-y-1/2 text-left'
+    return 'left-[calc(100%+22px)] top-1/2 -translate-y-1/2 text-left'
   if (norm >= 70 && norm <= 110)
-    return 'left-1/2 -translate-x-1/2 top-[calc(100%+12px)] text-center'
+    return 'left-1/2 -translate-x-1/2 top-[calc(100%+20px)] text-center'
   if (norm > 110 && norm < 250)
-    return 'right-[calc(100%+14px)] top-1/2 -translate-y-1/2 text-right'
-  return 'left-1/2 -translate-x-1/2 bottom-[calc(100%+12px)] text-center'
+    return 'right-[calc(100%+22px)] top-1/2 -translate-y-1/2 text-right'
+  return 'left-1/2 -translate-x-1/2 bottom-[calc(100%+20px)] text-center'
 }
 
 function AxisOrbitRing({
@@ -112,9 +116,9 @@ function AxisOrbitRing({
                 borderColor: `${axis.color}59`,
                 borderStyle: axis.role === 'diferenciacao' ? 'solid' : 'dashed',
                 boxShadow: isActive
-                  ? `0 0 0 6px ${axis.color}35, 0 0 32px ${axis.color}85`
+                  ? `0 0 0 4px ${axis.color}35, 0 0 34px ${axis.color}90`
                   : `0 0 14px ${axis.color}45`,
-                transform: isActive ? 'scale(1.22)' : 'scale(1)',
+                transform: isActive ? 'scale(1.12)' : 'scale(1)',
               }}
             >
               <Icon size={22} style={{ color: axis.color }} strokeWidth={2.2} aria-hidden="true" />
@@ -525,7 +529,7 @@ export function SectionPortfolioThesis() {
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.1, duration: 0.5 }}
-                className="px-[110px] lg:px-[128px] py-8 flex items-center justify-center"
+                className="px-[118px] lg:px-[136px] py-10 flex items-center justify-center"
               >
                 <AxisOrbitRing
                   axes={axes}
