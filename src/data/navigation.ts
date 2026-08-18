@@ -61,7 +61,7 @@ const navigationItemsPt: NavigationItem[] = [
     label: 'Catálogo de Ofertas',
     icon: 'library',
     category: 'Portfólio',
-    description: '18 ofertas com dor, entregáveis, método e lastro de prova',
+    description: '19 ofertas com dor, entregáveis, método e lastro de prova',
   },
   {
     id: 'portfolio-assets',
@@ -280,7 +280,7 @@ const navigationItemsEn: NavigationItem[] = [
     label: 'Offer Catalog',
     icon: 'library',
     category: 'Portfolio',
-    description: '18 offers with pain, deliverables, method and evidence status',
+    description: '19 offers with pain, deliverables, method and evidence status',
   },
   {
     id: 'portfolio-assets',

@@ -37,7 +37,7 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
       { id: 'portfolio-thesis-motor', label: 'Eixos de capacidade', sectionId: 'portfolio-thesis' },
     ],
     'portfolio-offers': [
-      { id: 'portfolio-offers-catalogo', label: 'Catálogo completo (18 ofertas)', sectionId: 'portfolio-offers' },
+      { id: 'portfolio-offers-catalogo', label: 'Catálogo completo (19 ofertas)', sectionId: 'portfolio-offers' },
     ],
     'portfolio-start': [
       { id: 'portfolio-start-personas', label: 'Shortlist por persona', sectionId: 'portfolio-start' },
@@ -95,7 +95,7 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
       { id: 'portfolio-thesis-motor', label: 'Capacity axes', sectionId: 'portfolio-thesis' },
     ],
     'portfolio-offers': [
-      { id: 'portfolio-offers-catalogo', label: 'Full catalog (18 offers)', sectionId: 'portfolio-offers' },
+      { id: 'portfolio-offers-catalogo', label: 'Full catalog (19 offers)', sectionId: 'portfolio-offers' },
     ],
     'portfolio-start': [
       { id: 'portfolio-start-personas', label: 'Shortlist by persona', sectionId: 'portfolio-start' },

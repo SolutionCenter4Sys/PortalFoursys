@@ -2165,7 +2165,7 @@ const offers: PortfolioOffer[] = [
     headline: 'Chega de projeto interminável: a solução digital em produção em até 30 dias',
     tagline: 'Plataforma modular por assinatura, configurada para a realidade da casa e com evolução contínua inclusa.',
     whatItIs:
-      'Plataformas digitais prontas, customizáveis e mantidas pela Foursys em modelo SaaS. O FourBlox reúne mais de 18 soluções modulares em nove categorias de negócio, ativadas por bloco e configuradas sob medida; o FourMakers é o programa e a plataforma de co-criação e produtividade. O cliente contrata o resultado, não o esforço: assinatura mensal sem investimento inicial, com hospedagem, atualização, suporte e evolução inclusos.',
+      'Plataformas digitais prontas, customizáveis e mantidas pela Foursys em modelo SaaS. O FourBlox reúne mais de 18 soluções modulares em nove categorias de negócio, ativadas por bloco e configuradas sob medida; o Fourmakers é a plataforma AI-First de gestão estratégica de pessoas e alocação de times, detalhada na oferta 8.2. O cliente contrata o resultado, não o esforço: assinatura mensal sem investimento inicial, com hospedagem, atualização, suporte e evolução inclusos.',
     pain:
       'Sistemas que não conversam entre si, planilha paralela fora de controle e baixa adoção das ferramentas que já existem. Quando a área tenta resolver, entra em projeto que nunca termina, com investimento alto e retorno indefinido — ou compra solução genérica que não cabe na realidade da operação.',
     entryTriggers: [
@@ -2219,7 +2219,7 @@ const offers: PortfolioOffer[] = [
     ],
     components: [
       'FourBlox — plataforma modular de soluções por assinatura',
-      'FourMakers — programa e plataforma de co-criação e produtividade',
+      'Fourmakers — plataforma modular de gestão estratégica de pessoas (oferta 8.2)',
       'Gestão de Pessoas: mapa de alocação inteligente, performance e OKR tracker, banco de talentos estratégico',
       'Operações: controle de demandas e SLA, workflow personalizado, checkin de audiências, gestão de eventos',
       'Financeiro: gestão de orçamento por área, forecast inteligente, cartão de crédito consignado, gestão orçamentária',
@@ -2276,7 +2276,7 @@ const offers: PortfolioOffer[] = [
       },
     ],
     cta: 'A porta de entrada é o diagnóstico estruturado: quais dores, usuários e fluxos estão em jogo e quais blocos resolvem o problema dentro da janela de 30 dias.',
-    connects: ['3.2', '4.4', '7.1'],
+    connects: ['8.2', '3.2', '4.4', '7.1'],
     boundary:
       'Não é software sob medida construído do zero: o valor está em configurar bloco pronto. Se o processo exige construção específica ou integração profunda com o legado, a conversa começa pelo eixo de engenharia.',
     editorialCare:
@@ -2284,6 +2284,170 @@ const offers: PortfolioOffer[] = [
     proof: {
       status: 'em-validacao',
       note: 'O catálogo de soluções, os kits e o modelo de assinatura são demonstráveis, mas os cases de cliente com número de adoção e de ganho dependem de liberação sobre setor, porte e escopo.',
+    },
+    legacyEquivalent: {
+      label: 'Principais Ofertas → Produtos · FourMakers · FourBlox',
+      section: 'offers-flagship',
+    },
+  },
+  {
+    id: 'fourmakers',
+    code: '8.2',
+    axisId: 'eixo-8',
+    role: 'diferenciacao',
+    portfolioRole: 'Rampa de entrada',
+    name: 'Fourmakers · Gestão Estratégica de Pessoas',
+    headline: 'O RH deixa de operar em planilha e passa a decidir com dado de gente, projeto e competência no mesmo lugar',
+    tagline: 'Plataforma AI-First de gestão de pessoas e alocação de times, contratada por assinatura e ativada em módulos.',
+    whatItIs:
+      'Plataforma modular que reúne, em um único fluxo, os dados de pessoas, projetos e competências: comunicação interna, assistente inteligente, timesheet, mapa de alocação, gestão de desempenho, reembolso, gestão de terceiros e contratos, além de módulos em evolução acelerada como recrutamento, trilha de treinamento, férias e ausências, engajamento e organograma. O cliente ativa apenas os módulos que resolvem a sua dor, com setup conduzido pela equipe do produto e evolução contínua inclusa na assinatura.',
+    pain:
+      'Alocação feita em planilha, ociosidade que ninguém enxerga, fechamento de timesheet que consome dias úteis e comunicação interna espalhada entre e-mail e grupos avulsos. O RH responde o mesmo chamado operacional todo mês, não tem visibilidade da população e decide sobre time e competência sem dado confiável — com risco trabalhista e fiscal em cima.',
+    entryTriggers: [
+      'Alocação de time controlada em planilha, sem visão de capacidade ociosa',
+      'Fechamento de timesheet consumindo dias no final do mês',
+      'Comunicação interna fragmentada e baixa adesão a conteúdo corporativo',
+      'RH afogado em chamado operacional repetitivo',
+      'Gestão manual de nota fiscal de terceiros, com risco fiscal e atraso de aprovação',
+      'Falta de visibilidade de competências para decidir promoção, alocação e sucessão',
+    ],
+    outcomes: [
+      'Dados de pessoas, projetos e competências centralizados em um único fluxo',
+      'Capacidade ociosa e sobrealocação visíveis em tempo real no mapa de alocação',
+      'Fechamento de timesheet reduzido de dias para menos de um dia útil',
+      'Queda expressiva no volume de chamado operacional ao RH',
+      'Comunicação segmentada com métrica de leitura e engajamento por grupo',
+      'Aprovação de nota fiscal de terceiro dentro de prazo, com validação automática',
+      'Perfil 360º atualizado como base de decisão para alocação e desenvolvimento',
+    ],
+    differentials: [
+      {
+        title: 'Plataforma AI-First',
+        detail:
+          'A IA está no núcleo do produto, não como acessório: assistente em linguagem natural com base de conhecimento do cliente, match entre projeto e perfil disponível, recomendação de alocação e leitura automática de documento.',
+      },
+      {
+        title: 'Modularidade real',
+        detail:
+          'Ativa-se apenas o módulo que resolve a dor do momento, e a plataforma cresce por adição — sem reimplantação e sem projeto novo a cada necessidade.',
+      },
+      {
+        title: 'Ativação em semanas',
+        detail:
+          'Ativação do ambiente em cerca de quinze dias e setup completo em torno de trinta, com cadastro de base, habilitação de módulos, treinamento por módulo e hypercare no primeiro mês.',
+      },
+      {
+        title: 'Laboratório de produto com o cliente dentro',
+        detail:
+          'Módulos em fase beta evoluem com input direto de quem usa, e nos planos superiores o cliente entra como cocriador do laboratório Fourmakers.',
+      },
+      {
+        title: 'Evolução inclusa na assinatura',
+        detail:
+          'Melhoria priorizada no roadmap do produto chega sem custo adicional, junto com hospedagem, licenciamento de nuvem, segurança e LGPD.',
+      },
+      {
+        title: 'Operação com rastreabilidade',
+        detail:
+          'Timesheet com trilha de auditoria, bloqueio automático após fechamento e workflow de aprovação em reembolso, terceiros e férias — controle que sustenta conversa trabalhista e fiscal.',
+      },
+    ],
+    components: [
+      'Operação de pessoas: timesheet, reembolso, gestão de terceiros, gestão de contratos e conciliação da folha (beta)',
+      'Gestão estratégica: mapa de alocação com match por IA, mapa demográfico e campanhas (beta), organograma (beta)',
+      'Desempenho: gestão de desempenho com 1:1, feedback e PDI, avaliação de desempenho (beta), trilha de treinamento (beta)',
+      'Comunicação: feed corporativo e comunidades, central de documentos, assistente inteligente com avatar da empresa',
+      'Ciclo de vida: recrutamento com vitrine e banco de talentos (beta), gestão de férias e ausências (beta), engajamento e reconhecimento (beta)',
+      'Base da plataforma: perfil 360º, cadastro de profissionais e projetos, grupos de acesso, login por AD Microsoft e home personalizada',
+      'Setup: cadastro da base de usuários e permissões, habilitação dos módulos contratados, treinamento por módulo e hypercare por trinta dias',
+    ],
+    assets: ['FourMakers'],
+    phases: [
+      {
+        name: 'Ativação',
+        duration: '~15 dias',
+        focus: 'Criação do ambiente, definição de acessos e perfis e habilitação dos módulos contratados.',
+      },
+      {
+        name: 'Setup e implementação',
+        duration: '~30 dias',
+        focus:
+          'Cadastro da base, configurações, ajustes ao modelo do cliente, treinamento por módulo e experimentação em ambiente controlado.',
+      },
+      {
+        name: 'Onboarding e hypercare',
+        duration: '30 dias após o go-live',
+        focus:
+          'Primeiras experiências dos usuários com equipe dedicada, monitoramento proativo da operação e relatório de avanço.',
+      },
+      {
+        name: 'Expansão e evolução',
+        duration: 'contínuo',
+        focus:
+          'Maturidade de uso, habilitação de novos módulos e evolução da plataforma pelo roadmap do produto.',
+      },
+    ],
+    totalDuration: 'ativação em ~15 dias · setup em ~30 dias · evolução contínua na assinatura',
+    marketStats: [
+      {
+        stat: 'O material do produto declara como meta redução de 40% no tempo de gestão operacional, 60% nos chamados ao RH, 30% na ociosidade de recursos e 10% no turnover, com visibilidade total da população.',
+        source: 'Material comercial Fourmakers (template v1.0) — metas de produto, a confirmar caso a caso com a linha de base do cliente',
+      },
+      {
+        stat: 'A plataforma opera com disponibilidade declarada de 99,9% e SLA por severidade, de 30 minutos de resposta em incidente crítico a 48 horas de resolução em demanda cosmética.',
+        source: 'Acordo de nível de serviço do produto Fourmakers, atendimento em dias úteis das 8h às 18h',
+      },
+    ],
+    regulatory: [
+      'LGPD e práticas de segurança da informação inclusas na assinatura, com controle de acesso por perfil e autenticação segura',
+      'Backup periódico, hospedagem em nuvem certificada e aplicação contínua de correções de segurança pela Foursys',
+      'Trilha de auditoria em timesheet e conciliação da folha, com histórico de alteração e evidência exportável',
+      'Gestão de acesso dos usuários permanece com o cliente, conforme a política interna de governança',
+    ],
+    personas: [
+      {
+        role: 'CHRO e diretoria de RH e DHO',
+        value: 'Sai da operação repetitiva e passa a decidir sobre pessoas com dado consolidado e visão da população inteira.',
+      },
+      {
+        role: 'Head de operações e de delivery',
+        value: 'Enxerga ociosidade e sobrealocação em tempo real e fecha timesheet sem consumir o começo do mês.',
+      },
+      {
+        role: 'CFO',
+        value: 'Reduz erro fiscal na gestão de terceiros e ganha custo mensal previsível por colaborador, sem investimento inicial de plataforma.',
+      },
+      {
+        role: 'Gestor de time',
+        value: 'Conduz 1:1, feedback e PDI no mesmo lugar em que enxerga alocação, competência e histórico do profissional.',
+      },
+    ],
+    cta: 'A porta de entrada é o desenho do desafio da casa: quais dores de gestão de pessoas estão em jogo e quais módulos entram no primeiro ciclo de ativação.',
+    connects: ['8.1', '3.2', '7.1'],
+    boundary:
+      'Não substitui o sistema de folha de pagamento nem o ERP de RH: a conciliação da folha compara e aponta divergência, não processa o cálculo. Integração com sistema do cliente depende de análise de viabilidade e entra como negociação comercial separada.',
+    editorialCare:
+      'Módulo marcado como beta está em experimentação e evolução acelerada — não apresentar como funcionalidade estável nem prometer prazo de estabilização. Os percentuais são metas do material do produto: só citar como resultado quando houver linha de base medida no cliente. Preço por colaborador, setup e condição de módulo beta saem da proposta comercial, nunca da apresentação. Custo de provedor de IA acima da franquia é responsabilidade do contratante e deve ser dito quando o assistente inteligente entrar na conversa.',
+    proof: {
+      status: 'liberado',
+      note: 'Resultados medidos em operação de cliente, publicados de forma anonimizada no material do produto. Nome do cliente depende de liberação específica.',
+      cases: [
+        'Consultoria de TI com cerca de 2.000 colaboradores — mapa de alocação, timesheet e perfil 360º: fechamento de timesheet caiu de cinco dias para menos de um, com 35% menos horas não faturáveis e visibilidade em tempo real da capacidade ociosa em 90 dias.',
+        'Empresa de serviços com cerca de 750 colaboradores — comunicação interna e assistente inteligente: 80% de adoção da plataforma em 90 dias, 60% mais leitura de comunicado estratégico e 70% menos chamado operacional ao RH.',
+        'Cooperativa com cerca de 330 cooperados — gestão de terceiros com workflow de aprovação e integração CNAB: 60% menos erro fiscal e 90% das notas aprovadas em até 48 horas, contra seis dias antes da plataforma.',
+      ],
+    },
+    engagement: {
+      models: [
+        'Assinatura mensal por colaborador ativo, com baseline mínimo faturável',
+        'Planos Prata, Ouro, Diamante e Safira — variam por quantidade de módulos e cadência de CS',
+        'Setup em parcela única, cobrado na ativação da plataforma',
+        'Módulos beta em condição comercial diferenciada durante a fase de experimentação',
+      ],
+      sizing:
+        'Baseline de referência até 450 colaboradores; usuário acima do contratado entra por valor unitário vigente e integrações são negociadas à parte.',
+      investmentGuidance:
+        'Valor por colaborador, setup e condição de módulo beta saem da proposta comercial do produto, com validade de 90 dias. Reajuste anual por IPCA e consumo de IA acima da franquia são temas de contrato — não antecipar número em apresentação sem passar pela equipe do Fourmakers.',
     },
     legacyEquivalent: {
       label: 'Principais Ofertas → Produtos · FourMakers · FourBlox',
@@ -2461,7 +2625,7 @@ const assets: PortfolioAsset[] = [
     id: 'fourmakers',
     name: 'FourMakers',
     description:
-      'Plataforma de gestão de pessoas e de talento técnico que sustenta a formação e a alocação dos times.',
+      'Plataforma AI-First de gestão estratégica de pessoas: comunicação interna, timesheet, desempenho e mapa de alocação com match por IA, ativados por módulo em modelo de assinatura.',
     icon: 'package',
   },
   {
