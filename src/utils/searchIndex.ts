@@ -8,7 +8,7 @@ import { alliances } from '../data/alliances'
 import { innovationTrends } from '../data/innovation'
 import { kpis, timeline } from '../data/kpis'
 import { showcaseClients } from '../data/clientShowcase'
-import { portfolioPt } from '../data/portfolio'
+import { portfolioPt, sectionForOffer } from '../data/portfolio'
 import type { AppSection } from '../types'
 
 export type SearchResultKind =
@@ -211,7 +211,7 @@ export function buildSearchIndex(): SearchEntry[] {
         `${offer.code} ${offer.name} ${offer.headline} ${offer.tagline} ${offer.whatItIs} ${offer.pain} ${offer.outcomes.join(' ')} ${offer.differentials.map(d => `${d.title} ${d.detail}`).join(' ')} ${offer.assets?.join(' ') ?? ''} ${axis?.name ?? ''}`
       ),
       icon: 'library',
-      targetSection: 'portfolio-offers',
+      targetSection: sectionForOffer(offer),
       category: 'Portfólio',
     })
   }

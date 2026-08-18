@@ -20,6 +20,7 @@ import { SectionPortfolioStart } from '../components/sections/SectionPortfolioSt
 import { SectionPortfolioFuture } from '../components/sections/SectionPortfolioFuture'
 import { SectionPortfolioAssets } from '../components/sections/SectionPortfolioAssets'
 import { SectionPortfolioEcosystem } from '../components/sections/SectionPortfolioEcosystem'
+import { SectionPortfolioProducts } from '../components/sections/SectionPortfolioProducts'
 
 function renderWithProvider(ui: React.ReactElement) {
   return render(
@@ -117,6 +118,11 @@ describe('Section smoke tests', () => {
 
   it('SectionPortfolioEcosystem renders without crash', () => {
     const { container } = renderWithProvider(<SectionPortfolioEcosystem />)
+    expect(container).toBeTruthy()
+  })
+
+  it('SectionPortfolioProducts renders without crash', () => {
+    const { container } = renderWithProvider(<SectionPortfolioProducts />)
     expect(container).toBeTruthy()
   })
 })

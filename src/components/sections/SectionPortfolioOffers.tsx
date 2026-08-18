@@ -9,16 +9,19 @@ import { OfferCard } from '../portfolio/OfferCard'
 import { OfferModal } from '../portfolio/OfferModal'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
-import { getPortfolio } from '../../data/portfolio'
+import { getPortfolio, isExtractedAxis, sectionForOffer, serviceAxes, serviceOffers } from '../../data/portfolio'
 import { MUTED_COLOR } from '../../theme/portfolioTokens'
 import type { EvidenceStatus, PortfolioAxis, PortfolioOffer, PortfolioRole } from '../../types'
 
 // ─── Componente principal ────────────────────────────────────────────────────
 
 export function SectionPortfolioOffers() {
-  const { state, navigate, clearDeepDiveHint, trackOfferView } = useApp()
+  const { state, navigate, clearDeepDiveHint, setDeepDiveHint, trackOfferView } = useApp()
   const { t, lang } = useLanguage()
-  const { axes, offers, defaultEngagement } = useMemo(() => getPortfolio(lang), [lang])
+  const bundle = useMemo(() => getPortfolio(lang), [lang])
+  const axes = useMemo(() => serviceAxes(bundle.axes), [bundle.axes])
+  const offers = useMemo(() => serviceOffers(bundle.offers), [bundle.offers])
+  const { defaultEngagement } = bundle
 
   // Quem chega da tese pede um eixo; quem chega da shortlist pede uma oferta aberta.
   const entryHint = state.deepDiveHint
@@ -36,21 +39,41 @@ export function SectionPortfolioOffers() {
   const [presenterMode, setPresenterMode] = useState(false)
 
   // Quem chegou filtrado precisa saber disso — senão lê 3 ofertas achando que são todas.
-  const [entryAxisId] = useState<string | null>(() =>
-    entryHint?.startsWith('axis:') ? entryHint.slice(5) : null,
-  )
+  const [entryAxisId] = useState<string | null>(() => {
+    if (!entryHint?.startsWith('axis:')) return null
+    const axisId = entryHint.slice(5)
+    return isExtractedAxis(axisId) ? null : axisId
+  })
 
   useEffect(() => {
-    if (entryHint) clearDeepDiveHint()
-  }, [entryHint, clearDeepDiveHint])
+    if (!entryHint) return
+    if (entryHint.startsWith('axis:') && isExtractedAxis(entryHint.slice(5))) {
+      navigate(sectionForOffer({ axisId: entryHint.slice(5) }))
+      return
+    }
+    if (entryHint.startsWith('offer:')) {
+      const target = bundle.offers.find(o => o.code === entryHint.slice(6))
+      if (target && isExtractedAxis(target.axisId)) {
+        navigate(sectionForOffer(target))
+        return
+      }
+    }
+    clearDeepDiveHint()
+  }, [entryHint, bundle.offers, clearDeepDiveHint, navigate])
 
   // Qual oferta o cliente pediu para ver é o sinal comercial mais forte da sessão.
   const openOffer = useCallback(
     (offer: PortfolioOffer) => {
+      const section = sectionForOffer(offer)
+      if (section !== 'portfolio-offers') {
+        setDeepDiveHint(`offer:${offer.code}`)
+        navigate(section)
+        return
+      }
       trackOfferView(offer.code, offer.name)
       setSelected(offer)
     },
-    [trackOfferView],
+    [navigate, setDeepDiveHint, trackOfferView],
   )
 
   // Deep-link (chegou com a oferta já aberta) também conta como visualização.

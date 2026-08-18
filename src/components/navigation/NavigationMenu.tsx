@@ -24,6 +24,7 @@ import {
   Route,
   Telescope,
   Blocks,
+  PackageCheck,
   type LucideIcon,
 } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
@@ -45,6 +46,7 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
   'portfolio-future': Telescope,
   'portfolio-assets': Blocks,
   'portfolio-ecosystem': Network,
+  'portfolio-products': PackageCheck,
   'offers-flagship': Star,
   'services':        LayoutGrid,
   'delivery':        Rocket,

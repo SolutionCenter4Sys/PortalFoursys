@@ -19,7 +19,7 @@ import { InterestButton } from '../ui/InterestButton'
 import { BackToOriginChip } from '../ui/BackToOriginChip'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
-import { getPortfolio } from '../../data/portfolio'
+import { getPortfolio, sectionForAxis, serviceAxes, serviceOffers } from '../../data/portfolio'
 import { AXIS_FALLBACK_COLOR, PILLAR_COLOR } from '../../theme/portfolioTokens'
 import type { PortfolioAxis, PortfolioRole } from '../../types'
 
@@ -403,7 +403,10 @@ function RoleGroup({
 export function SectionPortfolioThesis() {
   const { navigate, setDeepDiveHint } = useApp()
   const { t, lang } = useLanguage()
-  const { axes, offers, institutionalBacking } = useMemo(() => getPortfolio(lang), [lang])
+  const bundle = useMemo(() => getPortfolio(lang), [lang])
+  const axes = useMemo(() => serviceAxes(bundle.axes), [bundle.axes])
+  const offers = useMemo(() => serviceOffers(bundle.offers), [bundle.offers])
+  const { institutionalBacking } = bundle
   const [expandedAxis, setExpandedAxis] = useState<string | null>(null)
   const [activeAxisId, setActiveAxisId] = useState<string>(axes[0]?.id ?? '')
   const orbitRef = useRef<HTMLDivElement>(null)
@@ -424,7 +427,7 @@ export function SectionPortfolioThesis() {
 
   const handleSeeOffers = (axisId: string) => {
     setDeepDiveHint(`axis:${axisId}`)
-    navigate('portfolio-offers')
+    navigate(sectionForAxis(axisId))
   }
 
   const handleKeyNav = useCallback(

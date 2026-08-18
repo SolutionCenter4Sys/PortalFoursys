@@ -36,8 +36,11 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
       { id: 'portfolio-thesis-vitrine', label: 'Eixos de diferenciação', sectionId: 'portfolio-thesis' },
       { id: 'portfolio-thesis-motor', label: 'Eixos de capacidade', sectionId: 'portfolio-thesis' },
     ],
+    'portfolio-products': [
+      { id: 'portfolio-products-catalogo', label: 'FourBlox e Fourmakers', sectionId: 'portfolio-products' },
+    ],
     'portfolio-offers': [
-      { id: 'portfolio-offers-catalogo', label: 'Catálogo completo (19 ofertas)', sectionId: 'portfolio-offers' },
+      { id: 'portfolio-offers-catalogo', label: 'Catálogo completo (16 ofertas)', sectionId: 'portfolio-offers' },
     ],
     'portfolio-start': [
       { id: 'portfolio-start-personas', label: 'Shortlist por persona', sectionId: 'portfolio-start' },
@@ -47,6 +50,7 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
       { id: 'portfolio-future-visao', label: 'Visão de futuro', sectionId: 'portfolio-future' },
     ],
     'portfolio-assets': [
+      { id: 'portfolio-assets-sustain', label: 'Sustentação, continuidade e evolução', sectionId: 'portfolio-assets' },
       { id: 'portfolio-assets-lista', label: 'Ativos transversais', sectionId: 'portfolio-assets' },
     ],
     'portfolio-ecosystem': [
@@ -94,8 +98,11 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
       { id: 'portfolio-thesis-vitrine', label: 'Differentiation axes', sectionId: 'portfolio-thesis' },
       { id: 'portfolio-thesis-motor', label: 'Capacity axes', sectionId: 'portfolio-thesis' },
     ],
+    'portfolio-products': [
+      { id: 'portfolio-products-catalogo', label: 'FourBlox and Fourmakers', sectionId: 'portfolio-products' },
+    ],
     'portfolio-offers': [
-      { id: 'portfolio-offers-catalogo', label: 'Full catalog (19 offers)', sectionId: 'portfolio-offers' },
+      { id: 'portfolio-offers-catalogo', label: 'Full catalog (16 offers)', sectionId: 'portfolio-offers' },
     ],
     'portfolio-start': [
       { id: 'portfolio-start-personas', label: 'Shortlist by persona', sectionId: 'portfolio-start' },
@@ -105,6 +112,7 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
       { id: 'portfolio-future-visao', label: 'Future vision', sectionId: 'portfolio-future' },
     ],
     'portfolio-assets': [
+      { id: 'portfolio-assets-sustain', label: 'Sustainment, continuity and evolution', sectionId: 'portfolio-assets' },
       { id: 'portfolio-assets-lista', label: 'Cross-cutting assets', sectionId: 'portfolio-assets' },
     ],
     'portfolio-ecosystem': [

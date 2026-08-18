@@ -1,13 +1,18 @@
 import { describe, it, expect } from 'vitest'
-import { portfolioPt } from '../data/portfolio'
+import { portfolioPt, PRODUCT_AXIS_ID, productOffers, serviceAxes, serviceOffers, sustainOffers } from '../data/portfolio'
 
 const { axes, offers, personas, segments, futureVision, assets, defaultEngagement } = portfolioPt
 const codes = new Set(offers.map(o => o.code))
 
 describe('Portfólio 2026 S2 — integridade dos dados', () => {
-  it('tem 8 eixos e 19 ofertas', () => {
+  it('tem 8 eixos e 19 ofertas na fonte — 6 eixos e 16 ofertas no catálogo de serviço', () => {
     expect(axes.length).toBe(8)
     expect(offers.length).toBe(19)
+    expect(serviceAxes(axes).length).toBe(6)
+    expect(serviceOffers(offers).length).toBe(16)
+    expect(productOffers(offers).length).toBe(2)
+    expect(productOffers(offers).every(o => o.axisId === PRODUCT_AXIS_ID)).toBe(true)
+    expect(sustainOffers(offers).length).toBe(1)
   })
 
   it('não há códigos nem ids de oferta duplicados', () => {

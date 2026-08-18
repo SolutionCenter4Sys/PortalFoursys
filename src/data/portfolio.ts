@@ -1,4 +1,5 @@
 import type {
+  AppSection,
   PortfolioAsset,
   PortfolioAxis,
   PortfolioBundle,
@@ -22,7 +23,7 @@ const thesis: PortfolioThesis = {
   label: 'Inteligência Artificial aplicada à transformação de negócios',
   sequence: ['Marca', 'Pipeline', 'Ticket'],
   description:
-    'O portfólio se organiza em oito eixos de valor, separados por função na conversa. Três eixos são de diferenciação: definem posicionamento, abrem a agenda no nível certo e criam a preferência. Cinco são de capacidade: sustentam a entrega, o volume e a continuidade da conta. A sequência importa porque quem entra pela capacidade compete por preço, e quem entra pela diferenciação decide o critério.',
+    'O portfólio se organiza em seis eixos de valor, separados por função na conversa, mais produtos próprios e sustentação como ativos. Dois eixos são de diferenciação: definem posicionamento, abrem a agenda no nível certo e criam a preferência. Quatro são de capacidade: engenharia, dados, cloud e cibersegurança. Produtos Foursys vivem na subseção Produtos; Sustentação, Continuidade e Evolução vive em Ativos Transversais. A sequência importa porque quem entra pela capacidade compete por preço, e quem entra pela diferenciação decide o critério.',
   principles: [
     'Diferenciação abre a conversa; capacidade sustenta o contrato. As duas coisas são necessárias e não se substituem.',
     'Toda oferta tem uma porta de entrada declarada e uma fronteira: quando não é a oferta certa, dizemos qual é.',
@@ -33,8 +34,8 @@ const thesis: PortfolioThesis = {
 
 const institutionalBacking = [
   { value: '26', label: 'anos' },
-  { value: '8', label: 'eixos' },
-  { value: '18', label: 'ofertas' },
+  { value: '6', label: 'eixos' },
+  { value: '16', label: 'ofertas' },
 ]
 
 // ─── Eixos de valor ───────────────────────────────────────────────────────────
@@ -2684,6 +2685,66 @@ const portfolioPt: PortfolioBundle = {
 // mesmo conjunto para não exibir texto pela metade.
 export function getPortfolio(_lang: Language): PortfolioBundle {
   return portfolioPt
+}
+
+/** Eixos extraídos da mandala: produtos e sustentação têm subseção própria. */
+export const PRODUCT_AXIS_ID = 'eixo-8'
+export const SUSTAIN_AXIS_ID = 'eixo-7'
+export const EXTRACTED_AXIS_IDS = [PRODUCT_AXIS_ID, SUSTAIN_AXIS_ID] as const
+export const PRODUCT_ASSET_IDS = ['fourblox', 'fourmakers'] as const
+
+export function isExtractedAxis(axisId: string): boolean {
+  return (EXTRACTED_AXIS_IDS as readonly string[]).includes(axisId)
+}
+
+export function isProductOffer(offer: Pick<PortfolioOffer, 'axisId'>): boolean {
+  return offer.axisId === PRODUCT_AXIS_ID
+}
+
+export function isSustainOffer(offer: Pick<PortfolioOffer, 'axisId'>): boolean {
+  return offer.axisId === SUSTAIN_AXIS_ID
+}
+
+export function serviceAxes(axes: PortfolioAxis[]): PortfolioAxis[] {
+  return axes.filter(axis => !isExtractedAxis(axis.id))
+}
+
+export function productAxis(axes: PortfolioAxis[]): PortfolioAxis | undefined {
+  return axes.find(axis => axis.id === PRODUCT_AXIS_ID)
+}
+
+export function sustainAxis(axes: PortfolioAxis[]): PortfolioAxis | undefined {
+  return axes.find(axis => axis.id === SUSTAIN_AXIS_ID)
+}
+
+export function serviceOffers(offers: PortfolioOffer[]): PortfolioOffer[] {
+  return offers.filter(offer => !isExtractedAxis(offer.axisId))
+}
+
+export function productOffers(offers: PortfolioOffer[]): PortfolioOffer[] {
+  return offers.filter(offer => offer.axisId === PRODUCT_AXIS_ID)
+}
+
+export function sustainOffers(offers: PortfolioOffer[]): PortfolioOffer[] {
+  return offers.filter(offer => offer.axisId === SUSTAIN_AXIS_ID)
+}
+
+export function serviceAssets(assets: PortfolioAsset[]): PortfolioAsset[] {
+  return assets.filter(asset => !PRODUCT_ASSET_IDS.includes(asset.id as (typeof PRODUCT_ASSET_IDS)[number]))
+}
+
+export function productAssets(assets: PortfolioAsset[]): PortfolioAsset[] {
+  return assets.filter(asset => PRODUCT_ASSET_IDS.includes(asset.id as (typeof PRODUCT_ASSET_IDS)[number]))
+}
+
+export function sectionForAxis(axisId: string): AppSection {
+  if (axisId === PRODUCT_AXIS_ID) return 'portfolio-products'
+  if (axisId === SUSTAIN_AXIS_ID) return 'portfolio-assets'
+  return 'portfolio-offers'
+}
+
+export function sectionForOffer(offer: Pick<PortfolioOffer, 'axisId'>): AppSection {
+  return sectionForAxis(offer.axisId)
 }
 
 export { portfolioPt }

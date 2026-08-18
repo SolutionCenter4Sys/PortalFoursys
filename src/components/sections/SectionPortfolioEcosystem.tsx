@@ -26,7 +26,7 @@ import { InterestButton } from '../ui/InterestButton'
 import { BackToOriginChip } from '../ui/BackToOriginChip'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
-import { getPortfolio } from '../../data/portfolio'
+import { getPortfolio, sectionForAxis, serviceAssets, serviceAxes, serviceOffers } from '../../data/portfolio'
 import { PILLAR_COLOR } from '../../theme/portfolioTokens'
 import type { PortfolioAxis } from '../../types'
 
@@ -185,7 +185,11 @@ function AxisCard({
 export function SectionPortfolioEcosystem() {
   const { navigate, setDeepDiveHint } = useApp()
   const { t, lang } = useLanguage()
-  const { axes, offers, futureVision, assets } = useMemo(() => getPortfolio(lang), [lang])
+  const bundle = useMemo(() => getPortfolio(lang), [lang])
+  const axes = useMemo(() => serviceAxes(bundle.axes), [bundle.axes])
+  const offers = useMemo(() => serviceOffers(bundle.offers), [bundle.offers])
+  const assets = useMemo(() => serviceAssets(bundle.assets), [bundle.assets])
+  const { futureVision } = bundle
 
   const itemsByAxis = useMemo(() => {
     const map = new Map<string, string[]>()
@@ -205,7 +209,7 @@ export function SectionPortfolioEcosystem() {
   const openAxis = useCallback(
     (axisId: string) => {
       setDeepDiveHint(`axis:${axisId}`)
-      navigate('portfolio-offers')
+      navigate(sectionForAxis(axisId))
     },
     [navigate, setDeepDiveHint],
   )

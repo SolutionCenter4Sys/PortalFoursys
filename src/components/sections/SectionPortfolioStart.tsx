@@ -16,7 +16,7 @@ import { InterestButton } from '../ui/InterestButton'
 import { BackToOriginChip } from '../ui/BackToOriginChip'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
-import { getPortfolio } from '../../data/portfolio'
+import { getPortfolio, sectionForOffer, serviceOffers } from '../../data/portfolio'
 import { AXIS_FALLBACK_COLOR, EVIDENCE_COLOR } from '../../theme/portfolioTokens'
 import type { PortfolioAxis, PortfolioOffer } from '../../types'
 
@@ -100,7 +100,9 @@ function ShortlistStep({
 export function SectionPortfolioStart() {
   const { navigate, setDeepDiveHint } = useApp()
   const { t, lang } = useLanguage()
-  const { axes, offers, personas, segments } = useMemo(() => getPortfolio(lang), [lang])
+  const bundle = useMemo(() => getPortfolio(lang), [lang])
+  const { axes, personas, segments } = bundle
+  const offers = useMemo(() => serviceOffers(bundle.offers), [bundle.offers])
   const [activePersona, setActivePersona] = useState(personas[0]?.id ?? '')
   const personaRefs = useRef<(HTMLButtonElement | null)[]>([])
 
@@ -119,8 +121,9 @@ export function SectionPortfolioStart() {
   const persona = personas.find(p => p.id === activePersona) ?? personas[0]
 
   const openOffer = (code: string) => {
+    const offer = bundle.offers.find(o => o.code === code)
     setDeepDiveHint(`offer:${code}`)
-    navigate('portfolio-offers')
+    navigate(offer ? sectionForOffer(offer) : 'portfolio-offers')
   }
 
   const handlePersonaKeyNav = (e: React.KeyboardEvent, currentId: string) => {
@@ -280,6 +283,7 @@ export function SectionPortfolioStart() {
                 <div className="flex flex-wrap gap-1.5">
                   {segment.priorityOffers.map(code => {
                     const offer = offersByCode[code]
+                    if (!offer) return null
                     const axis = offer ? axesById[offer.axisId] : undefined
                     const accent = axis?.color ?? AXIS_FALLBACK_COLOR
                     const label = offer
