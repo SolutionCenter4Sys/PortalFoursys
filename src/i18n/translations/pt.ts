@@ -626,7 +626,7 @@ export const pt = {
     badge: 'Portfólio 2026 · 2º semestre',
     thesis: {
       title: 'Como nosso portfólio se organiza',
-      subtitle: 'Seis eixos de valor, dezesseis ofertas e uma ordem de conversa: primeiro a agenda estratégica, depois a capacidade que a sustenta. Produtos e sustentação têm subseção própria.',
+      subtitle: 'Seis eixos de valor, vinte e uma ofertas e uma ordem de conversa: primeiro a agenda estratégica, depois a capacidade que a sustenta. Produtos e sustentação têm subseção própria.',
       showcase: 'Vitrine · diferenciação',
       engine: 'Motor · capacidade',
       showcaseHint: 'Abrem a conversa e definem o posicionamento',

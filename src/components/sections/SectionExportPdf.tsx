@@ -40,7 +40,7 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
       { id: 'portfolio-products-catalogo', label: 'FourBlox e Fourmakers', sectionId: 'portfolio-products' },
     ],
     'portfolio-offers': [
-      { id: 'portfolio-offers-catalogo', label: 'Catálogo completo (16 ofertas)', sectionId: 'portfolio-offers' },
+      { id: 'portfolio-offers-catalogo', label: 'Catálogo completo (21 ofertas)', sectionId: 'portfolio-offers' },
     ],
     'portfolio-start': [
       { id: 'portfolio-start-personas', label: 'Shortlist por persona', sectionId: 'portfolio-start' },
@@ -102,7 +102,7 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
       { id: 'portfolio-products-catalogo', label: 'FourBlox and Fourmakers', sectionId: 'portfolio-products' },
     ],
     'portfolio-offers': [
-      { id: 'portfolio-offers-catalogo', label: 'Full catalog (16 offers)', sectionId: 'portfolio-offers' },
+      { id: 'portfolio-offers-catalogo', label: 'Full catalog (21 offers)', sectionId: 'portfolio-offers' },
     ],
     'portfolio-start': [
       { id: 'portfolio-start-personas', label: 'Shortlist by persona', sectionId: 'portfolio-start' },

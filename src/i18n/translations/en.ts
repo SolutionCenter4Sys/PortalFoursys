@@ -626,7 +626,7 @@ export const en = {
     badge: 'Portfolio 2026 · H2',
     thesis: {
       title: 'How our portfolio is organized',
-      subtitle: 'Six value axes, sixteen offers and one conversation order: the strategic agenda first, then the capacity that sustains it. Products and sustainment have their own subsections.',
+      subtitle: 'Six value axes, twenty-one offers and one conversation order: the strategic agenda first, then the capacity that sustains it. Products and sustainment have their own subsections.',
       showcase: 'Showcase · differentiation',
       engine: 'Engine · capacity',
       showcaseHint: 'Open the conversation and set the positioning',

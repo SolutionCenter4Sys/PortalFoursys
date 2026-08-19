@@ -29,13 +29,14 @@ const thesis: PortfolioThesis = {
     'Toda oferta tem uma porta de entrada declarada e uma fronteira: quando não é a oferta certa, dizemos qual é.',
     'Número próprio só aparece com lastro. Onde a medição ainda não existe, publicamos o método em vez da promessa.',
     'Entrar pela dor que o cliente nomeou é legítimo. O erro é ter só uma porta.',
+    'Núcleo da conversa: Governança & Soberania de IA (âncora), AI Discovery Workshop (rampa) e Novo Modelo Operacional (board).',
   ],
 }
 
 const institutionalBacking = [
   { value: '26', label: 'anos' },
   { value: '6', label: 'eixos' },
-  { value: '16', label: 'ofertas' },
+  { value: '21', label: 'ofertas' },
 ]
 
 // ─── Eixos de valor ───────────────────────────────────────────────────────────
@@ -84,11 +85,6 @@ const axes: PortfolioAxis[] = [
     audience: 'CDO, CIO e áreas de negócio',
     color: '#38BDF8',
     icon: 'database',
-    upcomingOffers: [
-      '4.1 Data Readiness para IA',
-      '4.2 Decision Intelligence',
-      '4.3 Autonomous Intelligence',
-    ],
   },
   {
     id: 'eixo-5',
@@ -100,10 +96,6 @@ const axes: PortfolioAxis[] = [
     audience: 'CFO, CIO, arquitetura e infraestrutura',
     color: '#34D399',
     icon: 'cloud',
-    upcomingOffers: [
-      '5.2 Otimização de Ambientes On-Premise',
-      '5.3 Tokenomics',
-    ],
   },
   {
     id: 'eixo-6',
@@ -1458,6 +1450,253 @@ const offers: PortfolioOffer[] = [
 
   // ══ Eixo 4 ══════════════════════════════════════════════════════════════════
   {
+    id: 'data-readiness-ia',
+    code: '4.1',
+    axisId: 'eixo-4',
+    role: 'capacidade',
+    name: 'Data Readiness para IA',
+    headline: 'Prepare o dado para a era dos agentes',
+    tagline: 'Prontidão, camada semântica e dado como produto — não só mais uma plataforma.',
+    whatItIs:
+      'Programa de prontidão analítica orientado a IA: avalia onde o dado trava agentes e modelos, estrutura camada semântica, metadados ativos e catálogo, e trata dado como produto com dono, qualidade e ciclo de vida. Não é implantação de ferramenta de BI; é a base que destrava a agenda de agentes.',
+    pain:
+      'A agenda de IA avança, mas o dado está espalhado, sem qualidade garantida na origem, sem modelo semântico e sem dono claro. Cada projeto recomeça a limpeza; agente e modelo falham por falta de contexto, não por falta de algoritmo.',
+    entryTriggers: [
+      'Pilotos de IA travados por qualidade ou acesso ao dado',
+      'Múltiplas versões do mesmo indicador entre áreas',
+      'Ausência de catálogo, linhagem ou metadados ativos',
+      'Dado sensível sem classificação nem controle de uso por modelo',
+      'Modernização analítica pedida como pré-condição de agentes',
+    ],
+    outcomes: [
+      'Diagnóstico de prontidão do dado para IA, com gargalos priorizados',
+      'Camada e modelo semântico que traduz dado técnico em linguagem de negócio',
+      'Catálogo, linhagem e metadados ativos operando na origem',
+      'Dado tratado como produto: dono, SLA de qualidade e ciclo de vida',
+      'Roadmap de preparação alinhado à fila de casos de IA',
+      'Base para Decision Intelligence e Autonomous Intelligence sem recomeçar do zero',
+    ],
+    differentials: [
+      {
+        title: 'AI-readiness, não data warehouse clássico',
+        detail:
+          'O critério de sucesso é alimentar agente e modelo com confiança, não entregar mais um repositório.',
+      },
+      {
+        title: 'Semântica antes do dashboard',
+        detail:
+          'Camada semântica e metadados ativos entram antes da camada de consumo, porque é onde a maioria dos projetos de dados falha.',
+      },
+      {
+        title: 'Conectado à governança de IA',
+        detail:
+          'Classificação de dado sensível, controle de acesso e trilha de uso por modelo seguem a mesma lógica da oferta 2.1B.',
+      },
+    ],
+    phases: [
+      {
+        name: 'Assessment de prontidão',
+        duration: '3 a 6 semanas',
+        focus: 'Mapa de fontes, qualidade, gaps de semântica e bloqueadores de agentes.',
+      },
+      {
+        name: 'Fundação semântica e catálogo',
+        duration: '2 a 4 meses',
+        focus: 'Modelo semântico, catálogo, linhagem e políticas de qualidade na origem.',
+      },
+      {
+        name: 'Produtos de dado e operação',
+        duration: 'contínuo',
+        focus: 'Dado como produto, com dono e evolução ligados à fila de IA.',
+      },
+    ],
+    totalDuration: 'assessment de 3 a 6 semanas · fundação de 2 a 4 meses · operação contínua',
+    marketStats: [
+      {
+        stat: '73% dos projetos de dados falham; empresas data-driven têm 23 vezes mais chance de adquirir clientes.',
+        source: 'Benchmark de setor citado no material de linhas de serviço — não métrica da Foursys',
+      },
+    ],
+    personas: [
+      { role: 'CDO', value: 'Sabe onde o dado impede a agenda de IA e o que preparar primeiro.' },
+      { role: 'CIO e CTO', value: 'Desbloqueia agentes e modelos sem projeto paralelo de plataforma.' },
+      { role: 'Head de dados e engenharia', value: 'Ganha catálogo, semântica e qualidade como produto, não como projeto avulso.' },
+    ],
+    cta: 'Traga o caso de IA que travou por dado. Mapeamos a prontidão mínima para destravar a próxima onda.',
+    connects: ['4.2', '4.3', '2.1B', '2.2', '4.4'],
+    boundary:
+      'Se a dor é só dashboard executivo sem agenda de IA, comece por Decision Intelligence. Se é plataforma completa com seis frentes, a oferta 4.4 integra o programa.',
+    proof: {
+      status: 'sem-lastro',
+      note: 'Oferta da Linha Mestra sem kit comercial dedicado neste ciclo. Conteúdo derivado do Documento de Foco e do material de Dados & Analytics.',
+    },
+    legacyEquivalent: {
+      label: 'Linhas de Serviço → Dados & Analytics (recorte AI-readiness)',
+      section: 'services',
+    },
+  },
+  {
+    id: 'decision-intelligence',
+    code: '4.2',
+    axisId: 'eixo-4',
+    role: 'capacidade',
+    portfolioRole: 'Rampa de entrada',
+    name: 'Decision Intelligence',
+    headline: 'Decisão confiável, não só dashboard bonito',
+    tagline: 'Dashboard é componente da decisão — o produto é a decisão rastreável.',
+    whatItIs:
+      'Camada de inteligência de decisão que combina dados confiáveis, modelos analíticos e interface de consumo para responder perguntas de negócio com trilha auditável. Ask your data, KPIs automatizados e alertas entram como meio; o fim é decisão tomada com número único, atualizado e defensável.',
+    pain:
+      'O relatório demora dias, chega desatualizado e cada área defende a sua versão do número. BI virou fábrica de dashboard sem dono da decisão; o board decide com planilha paralela porque não confia no que a TI entrega.',
+    entryTriggers: [
+      'Relatório executivo montado à mão com defasagem',
+      'Números divergentes entre finanças, operações e comercial',
+      'Demanda de autoatendimento analítico sem governança',
+      'CDO cobrado por decisão, não por quantidade de painéis',
+    ],
+    outcomes: [
+      'Perguntas de negócio respondidas em linguagem natural, com trilha até a fonte',
+      'KPIs automatizados e alertas quando o indicador sai da faixa acordada',
+      'Número único e atualizado para a decisão executiva',
+      'Dashboard tratado como componente, não como entrega final',
+      'Self-service BI com catálogo e governança embarcados',
+      'Ponte para modelos preditivos e autônomos quando o dado estiver pronto',
+    ],
+    differentials: [
+      {
+        title: 'Decisão como produto',
+        detail:
+          'Cada pergunta crítica vira artefato com dono, definição, fonte e frequência de atualização — não mais um painel solto.',
+      },
+      {
+        title: 'Ask your data com governança',
+        detail:
+          'Consulta em linguagem natural sobre dado catalogado, com controle de acesso e linhagem visível.',
+      },
+      {
+        title: 'Conectado à prontidão de IA',
+        detail:
+          'Quando o dado ainda não sustenta confiança, a conversa volta para Data Readiness antes de escalar consumo.',
+      },
+    ],
+    phases: [
+      {
+        name: 'Mapa de decisões críticas',
+        duration: '3 a 4 semanas',
+        focus: 'Quais decisões dependem de dado, quem decide e qual indicador hoje é disputado.',
+      },
+      {
+        name: 'Camada analítica e consumo',
+        duration: '2 a 4 meses',
+        focus: 'Modelos, KPIs, alertas e ask your data sobre base governada.',
+      },
+      {
+        name: 'Operação e evolução',
+        duration: 'contínuo',
+        focus: 'Dono da decisão, revisão de indicador e expansão para casos preditivos.',
+      },
+    ],
+    totalDuration: 'mapa de 3 a 4 semanas · camada de 2 a 4 meses · operação contínua',
+    marketStats: [],
+    personas: [
+      { role: 'CDO', value: 'Entrega decisão confiável, não fila de relatório.' },
+      { role: 'CFO e diretor de negócio', value: 'Decide com número único, sem conciliar versões na reunião.' },
+      { role: 'Head de BI e analytics', value: 'Sai da fila manual para alerta, self-service e trilha auditável.' },
+    ],
+    cta: 'Escolha uma decisão executiva que hoje depende de planilha paralela. Mostramos como virar indicador governado.',
+    connects: ['4.1', '4.3', '2.1A', '4.4'],
+    boundary:
+      'Não é projeto isolado de dashboard nem ferramenta de BI sem dono de decisão. Se o gargalo é qualidade de dado para agentes, comece por 4.1.',
+    proof: {
+      status: 'sem-lastro',
+      note: 'Oferta da Linha Mestra sem kit dedicado neste ciclo. Cases citados no material de linhas de serviço dependem de liberação.',
+    },
+    legacyEquivalent: {
+      label: 'Linhas de Serviço → Dados & Analytics (recorte decisão)',
+      section: 'services',
+    },
+  },
+  {
+    id: 'autonomous-intelligence',
+    code: '4.3',
+    axisId: 'eixo-4',
+    role: 'capacidade',
+    name: 'Autonomous Intelligence',
+    headline: 'Modelos que preveem e agem — com guardrails',
+    tagline: 'Do preditivo à ação autônoma, com trilha e limite declarado.',
+    whatItIs:
+      'Desenho, construção e operação de modelos que classificam, recomendam e decidem com guardrails: preditivo, classificação, recomendação e decisão autônoma supervisionada. Ponte natural para a Fábrica de Agentes quando a lógica precisa rodar em produção com MLOps, monitoramento e desativação controlada.',
+    pain:
+      'O modelo fica no notebook ou no piloto: ninguém monitora drift, ninguém sabe quem aprova a ação automática e o negócio não confia em decisão sem humano no loop. A ponte entre analytics e agentes em produção não existe.',
+    entryTriggers: [
+      'Modelo preditivo que nunca saiu do laboratório',
+      'Necessidade de recomendação ou classificação em escala operacional',
+      'Decisão repetitiva que ainda depende de analista manual',
+      'Agenda de agentes pedindo modelos embarcados com governança',
+    ],
+    outcomes: [
+      'Modelos preditivos, classificadores e recomendadores em produção com MLOps',
+      'Guardrails e limite de autonomia declarados por caso de uso',
+      'Monitoramento de drift, performance e incidente de modelo',
+      'Trilha auditável da decisão automatizada',
+      'Ponte documentada para agentes quando a lógica evoluir',
+      'Desativação e rollback definidos antes do go-live',
+    ],
+    differentials: [
+      {
+        title: 'Ação autônoma com limite',
+        detail:
+          'Autonomia é grau acordado por caso: recomenda, classifica ou age — sempre com guardrail e dono nomeado.',
+      },
+      {
+        title: 'MLOps desde o primeiro modelo',
+        detail:
+          'Versionamento, monitoramento e retraining entram no desenho, não como fase posterior.',
+      },
+      {
+        title: 'Conectado à Fábrica de Agentes',
+        detail:
+          'Quando a lógica vira agente conversacional ou orquestrado, a transição segue o mesmo inventário e governança.',
+      },
+    ],
+    phases: [
+      {
+        name: 'Casos e guardrails',
+        duration: '3 a 6 semanas',
+        focus: 'Seleção do caso, grau de autonomia, métrica de sucesso e limite de ação.',
+      },
+      {
+        name: 'Construção e MLOps',
+        duration: '2 a 4 meses',
+        focus: 'Modelo, pipeline, testes, monitoramento e entrada em produção supervisionada.',
+      },
+      {
+        name: 'Operação e evolução',
+        duration: 'contínuo',
+        focus: 'Drift, retreino, incidente de modelo e expansão para agentes quando aplicável.',
+      },
+    ],
+    totalDuration: 'casos de 3 a 6 semanas · construção de 2 a 4 meses · operação contínua',
+    marketStats: [],
+    personas: [
+      { role: 'CDO e head de ciência de dados', value: 'Modelo sai do laboratório com MLOps e guardrail.' },
+      { role: 'CIO e CTO', value: 'Autonomia controlada, com trilha e desativação definida.' },
+      { role: 'Dono de processo no negócio', value: 'Recebe recomendação ou ação automática dentro do limite acordado.' },
+    ],
+    cta: 'Traga um caso onde o modelo já existe mas não chega à operação. Desenhamos o caminho até produção com guardrail.',
+    connects: ['4.1', '4.2', '2.2', '2.1B', '4.4'],
+    boundary:
+      'Não substitui agente conversacional complexo — isso é Fábrica de Agentes. Se o dado não sustenta o modelo, volte para Data Readiness.',
+    proof: {
+      status: 'sem-lastro',
+      note: 'Oferta da Linha Mestra sem kit dedicado neste ciclo. Prova depende de cases de MLOps liberados.',
+    },
+    legacyEquivalent: {
+      label: 'Linhas de Serviço → Dados & Analytics (recorte modelos autônomos)',
+      section: 'services',
+    },
+  },
+  {
     id: 'dados-analytics',
     code: '4.4',
     axisId: 'eixo-4',
@@ -1591,9 +1830,9 @@ const offers: PortfolioOffer[] = [
       },
     ],
     cta: 'A porta de entrada é o assessment de maturidade analítica: onde o dado está, o que impede a confiança nele e qual o primeiro caso de uso que paga a plataforma.',
-    connects: ['2.1B', '2.2', '5.4'],
+    connects: ['4.1', '4.2', '4.3', '2.1B', '2.2', '5.4'],
     boundary:
-      'Não é projeto isolado de dashboard nem implantação de ferramenta de BI. Se a dor é governar o uso de IA e não preparar o dado, a conversa começa pela oferta 2.1B; se é infraestrutura e custo do ambiente, pelo eixo de cloud.',
+      'Programa integrado All In Data quando a casa precisa de várias frentes juntas. Se a dor é só prontidão para IA, decisão executiva ou modelos autônomos, use 4.1, 4.2 ou 4.3. Se é governança de IA, comece por 2.1B; se é infraestrutura cloud, pelo eixo 5.',
     editorialCare:
       'Os números de redução de ruptura e ROI vêm de case citado no material de linhas de serviço e ainda não têm setor, porte e escopo liberados. Usar como ordem de grandeza, sem nomear cliente, e manter os dados de mercado identificados como benchmark de setor.',
     proof: {
@@ -1737,8 +1976,164 @@ const offers: PortfolioOffer[] = [
       note: 'O material comercial traz cenário ilustrativo de economia, não caso medido e liberado. Por isso publicamos o método — GitOps com Pull Request, success fee e janela de aferição de 15 dias — em vez de percentual de economia.',
     },
     legacyEquivalent: {
-      label: 'Linhas de Serviço → Arquitetura, DevOps, Cloud e FinOps',
+      label: 'Linhas de Serviço → Arquitetura, DevOps, Cloud e FinOps (recorte SharpOps)',
       section: 'services',
+    },
+  },
+  {
+    id: 'otimizacao-on-premise',
+    code: '5.2',
+    axisId: 'eixo-5',
+    role: 'capacidade',
+    name: 'Otimização de Ambientes On-Premise',
+    headline: 'Eficiência onde a cloud ainda não chegou',
+    tagline: 'Desktop, datacenter e infraestrutura local com custo e uso medidos.',
+    whatItIs:
+      'Programa de otimização de ambientes on-premise: inventário de ativos, uso real de capacidade, consolidação e modernização incremental de desktops, servidores e infraestrutura local. Complementa a agenda cloud quando parte crítica da operação permanece no datacenter ou na borda.',
+    pain:
+      'A conversa de eficiência ficou só na cloud, mas metade da operação ainda vive em datacenter, desktop padronizado ou filial desconectada. Licença ociosa, servidor subutilizado e refresh de desktop sem critério inflam o custo invisível.',
+    entryTriggers: [
+      'Datacenter com capacidade ociosa ou refresh pendente',
+      'Parque de desktops sem política de uso nem ciclo de vida',
+      'Filial ou planta com infraestrutura envelhecida',
+      'Migração cloud parcial — o que ficou on-prem virou segundo-class',
+    ],
+    outcomes: [
+      'Inventário e linha de base de custo on-premise',
+      'Plano de consolidação, virtualização ou refresh por critério de negócio',
+      'Redução de licença e de energia onde há ociosidade comprovada',
+      'Política de ciclo de vida para desktop e servidor',
+      'Integração com a estratégia multicloud da oferta 5.4',
+      'Economia medida contra linha de base, no mesmo espírito FinOps',
+    ],
+    differentials: [
+      {
+        title: 'On-prem no mesmo rigor FinOps',
+        detail:
+          'Linha de base, priorização por impacto e medição pós-mudança — não só assessment de PDF.',
+      },
+      {
+        title: 'Complemento à cloud, não concorrente',
+        detail:
+          'Decide o que migra, o que moderniza localmente e o que descomissiona com critério.',
+      },
+      {
+        title: 'SharpOps como referência de disciplina',
+        detail:
+          'Mesma unidade de negócio que conduz FinOps em cloud aplica rigor de medição ao ambiente local.',
+      },
+    ],
+    phases: [
+      {
+        name: 'Inventário e linha de base',
+        duration: '3 a 6 semanas',
+        focus: 'Mapa de ativos, uso, licenças e custo oculto on-premise.',
+      },
+      {
+        name: 'Plano de otimização',
+        duration: '4 a 8 semanas',
+        focus: 'Consolidação, refresh, virtualização ou descomissionamento priorizado.',
+      },
+      {
+        name: 'Execução e medição',
+        duration: '2 a 6 meses',
+        focus: 'Mudanças implementadas com economia aferida contra a linha de base.',
+      },
+    ],
+    totalDuration: 'inventário de 3 a 6 semanas · plano de 4 a 8 semanas · execução de 2 a 6 meses',
+    marketStats: [],
+    personas: [
+      { role: 'CIO e head de infraestrutura', value: 'Visibilidade e plano para o que ficou fora da cloud.' },
+      { role: 'CFO', value: 'Custo on-prem quantificado e reduzido com critério auditável.' },
+      { role: 'COO de operações distribuídas', value: 'Filial e planta com infraestrutura previsível.' },
+    ],
+    cta: 'Traga o mapa do que ainda está on-premise. Quantificamos ociosidade e priorizamos o primeiro ciclo de economia.',
+    connects: ['5.1', '5.4', '3.1'],
+    boundary:
+      'Não é migração cloud completa — isso é 5.4. Se a dor é só fatura de hyperscaler, comece por 5.1 SharpOps.',
+    proof: {
+      status: 'sem-lastro',
+      note: 'Oferta da Linha Mestra sem kit dedicado neste ciclo. Métricas de economia seguem pendência de lastro por projeto.',
+    },
+    legacyEquivalent: {
+      label: 'Linhas de Serviço → Arquitetura, DevOps, Cloud e FinOps (recorte on-premise)',
+      section: 'services',
+    },
+  },
+  {
+    id: 'tokenomics',
+    code: '5.3',
+    axisId: 'eixo-5',
+    role: 'diferenciacao',
+    name: 'Tokenomics',
+    headline: 'Da tese tokenizada ao ativo em produção',
+    tagline: 'Economia digital com trilha verificável — conectada à visão de futuro do portfólio.',
+    whatItIs:
+      'Estratégia e construção de soluções de tokenomics: desenho do modelo econômico do token, arquitetura da plataforma, integração com sistemas legados e operação com trilha digital auditável. Ponte entre a visão de tokenização do portfólio e a entrega em produção.',
+    pain:
+      'A conversa de tokenização ficou no slide de inovação: ninguém sabe qual ativo tokenizar primeiro, como integrar com o core regulado nem quem responde pela trilha. Prova de conceito sem modelo econômico vira curiosidade, não receita.',
+    entryTriggers: [
+      'Tese de tokenização aprovada em board sem caminho de execução',
+      'Ativo físico ou digital que precisa de fracionamento ou liquidez',
+      'Programa ESG que precisa monetizar crédito ou pegada',
+      'Parceiro ou regulador cobrando trilha verificável do ativo digital',
+    ],
+    outcomes: [
+      'Tese tokenomics com modelo econômico, participantes e fluxo de valor',
+      'Arquitetura de plataforma integrada ao core existente',
+      'Ativo tokenizado em produção com trilha auditável',
+      'Conexão com GreenToken quando o caso é ESG monetizável',
+      'Governança de smart contract e operação definida',
+      'Roadmap de expansão para novos ativos tokenizáveis',
+    ],
+    differentials: [
+      {
+        title: 'Plataforma proprietária em construção',
+        detail:
+          'Visão de futuro do portfólio com caminho de execução — não só consultoria de whitepaper.',
+      },
+      {
+        title: 'Integração com core regulado',
+        detail:
+          'Tokenização desenhada para conviver com sistemas financeiros, ESG e legado crítico.',
+      },
+      {
+        title: 'Trilha verificável',
+        detail:
+          'Cada evento do ativo tokenizado deixa evidência auditável — requisito de regulador e de parceiro.',
+      },
+    ],
+    phases: [
+      {
+        name: 'Tese e modelagem',
+        duration: '4 a 8 semanas',
+        focus: 'Ativo candidato, participantes, modelo econômico e restrições regulatórias.',
+      },
+      {
+        name: 'Plataforma e integração',
+        duration: '3 a 6 meses',
+        focus: 'Arquitetura, smart contracts, integração e piloto controlado.',
+      },
+      {
+        name: 'Produção e expansão',
+        duration: 'contínuo',
+        focus: 'Operação, auditoria da trilha e novos ativos na mesma plataforma.',
+      },
+    ],
+    totalDuration: 'tese de 4 a 8 semanas · plataforma de 3 a 6 meses · operação contínua',
+    marketStats: [],
+    personas: [
+      { role: 'CEO e board', value: 'Tese tokenizada com caminho de execução, não só narrativa.' },
+      { role: 'CFO e tesouraria', value: 'Modelo econômico e trilha auditável do ativo digital.' },
+      { role: 'CIO e CTO', value: 'Integração segura com core e governança de plataforma.' },
+    ],
+    cta: 'Traga o ativo que vocês consideram tokenizável. Avaliamos tese, restrição e primeiro recorte de plataforma.',
+    connects: ['5.1', '2.1B', '4.2'],
+    boundary:
+      'Não é cripto especulativo nem NFT de marketing. Se o caso é só pegada ESG operacional, veja GreenOps na Visão de Futuro.',
+    proof: {
+      status: 'sem-lastro',
+      note: 'Horizonte em construção na Visão de Futuro do portfólio. Prova de plataforma proprietária ainda não liberada para uso comercial.',
     },
   },
   {
@@ -2494,7 +2889,7 @@ const personas: PortfolioPersona[] = [
       'Previsibilidade: custo de cloud, custo de IA e retorno declarado com premissa verificável.',
     icon: 'coins',
     color: '#F59E0B',
-    shortlist: ['2.3', '3.4', '2.1A', '3.1', '3.2'],
+    shortlist: ['5.1', '2.3', '2.1A', '3.4', '3.1'],
   },
   {
     id: 'cdo',
@@ -2503,7 +2898,7 @@ const personas: PortfolioPersona[] = [
       'Preparar o dado para a era dos agentes e transformar informação dispersa em decisão confiável.',
     icon: 'database',
     color: '#38BDF8',
-    shortlist: ['2.1C', '2.1A', '2.1B', '2.2', '3.1'],
+    shortlist: ['4.2', '4.1', '2.1C', '2.1A', '2.1B'],
   },
 ]
 
@@ -2514,19 +2909,19 @@ const segments: PortfolioSegment[] = [
     id: 'financeiro',
     name: 'Serviços financeiros',
     pain: 'Legado crítico em produção, agenda regulatória em movimento e pressão por eficiência com risco controlado.',
-    priorityOffers: ['2.1B', '3.1', '2.3'],
+    priorityOffers: ['2.1B', '3.1', '4.1', '2.3'],
   },
   {
     id: 'seguros',
     name: 'Seguros',
     pain: 'Sinistro e subscrição com muito documento não estruturado e decisão que precisa de trilha auditável.',
-    priorityOffers: ['2.3', '2.1B', '3.1'],
+    priorityOffers: ['2.3', '2.1B', '4.2', '3.1'],
   },
   {
     id: 'saude',
     name: 'Saúde',
     pain: 'Jornada fragmentada entre sistemas, dado sensível e conformidade difícil de evidenciar.',
-    priorityOffers: ['2.1B', '2.3', '3.1'],
+    priorityOffers: ['2.1B', '2.3', '4.1', '3.1'],
   },
   {
     id: 'industria',
