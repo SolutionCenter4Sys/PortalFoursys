@@ -32,6 +32,13 @@ describe('buildSearchIndex', () => {
     const faqEntries = index.filter(e => e.kind === 'faq')
     expect(faqEntries.length).toBeGreaterThan(0)
   })
+
+  it('adds deep-link hints to portfolio offers and glossary terms', () => {
+    const offer = index.find(e => e.kind === 'portfolio-offer')
+    const glossary = index.find(e => e.kind === 'portfolio-glossary')
+    expect(offer?.hint).toMatch(/^offer:/)
+    expect(glossary?.hint).toMatch(/^glossary:/)
+  })
 })
 
 describe('search', () => {

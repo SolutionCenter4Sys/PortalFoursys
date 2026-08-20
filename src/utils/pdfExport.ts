@@ -54,6 +54,9 @@ async function captureSections(
     navigateToSection(sectionId)
     await sleep(3000)
 
+    // Conteúdo editorial usa <details> para glossário e módulos. A exportação
+    // precisa capturar o conteúdo, sem alterar o estado que o usuário deixou na tela.
+    const detailsState = expandDetails(mainContent)
     document.head.appendChild(freezeStyle)
     neutralizeAnimations(mainContent)
     await sleep(300)
@@ -93,12 +96,14 @@ async function captureSections(
       console.error(`html2canvas failed for "${label}":`, canvasErr)
       restoreOverflow(overflowState)
       restoreAnimations(mainContent)
+      restoreDetails(detailsState)
       freezeStyle.remove()
       continue
     }
 
     restoreOverflow(overflowState)
     restoreAnimations(mainContent)
+    restoreDetails(detailsState)
     freezeStyle.remove()
 
     if (canvas.width === 0 || canvas.height === 0) {
@@ -473,6 +478,23 @@ function escapeHtml(str: string): string {
 function cleanup() {
   const leftover = document.getElementById('pdf-freeze-anims')
   if (leftover) leftover.remove()
+}
+
+interface DetailsEntry { el: HTMLDetailsElement; open: boolean }
+
+function expandDetails(root: HTMLElement): DetailsEntry[] {
+  return Array.from(root.querySelectorAll('details')).map(el => {
+    const detail = el as HTMLDetailsElement
+    const state = { el: detail, open: detail.open }
+    detail.open = true
+    return state
+  })
+}
+
+function restoreDetails(entries: DetailsEntry[]) {
+  entries.forEach(({ el, open }) => {
+    el.open = open
+  })
 }
 
 function neutralizeAnimations(root: HTMLElement) {

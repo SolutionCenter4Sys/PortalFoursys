@@ -3,8 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion'
 import {
   Blocks,
   CheckCircle2,
-  Eye,
-  EyeOff,
   Package,
   PackageCheck,
 } from 'lucide-react'
@@ -45,7 +43,6 @@ export function SectionPortfolioProducts() {
       ? catalog.find(o => o.code === entryHint.slice(6)) ?? null
       : null,
   )
-  const [presenterMode, setPresenterMode] = useState(false)
 
   useEffect(() => {
     if (entryHint) clearDeepDiveHint()
@@ -109,22 +106,7 @@ export function SectionPortfolioProducts() {
               </p>
             </div>
 
-            <div className="flex items-center gap-2 flex-wrap">
-              <InterestButton section="portfolio-products" />
-              <button
-                type="button"
-                onClick={() => setPresenterMode(v => !v)}
-                aria-pressed={presenterMode}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-label font-semibold border transition-colors ${
-                  presenterMode
-                    ? 'text-amber-400 border-amber-500/40 bg-amber-500/10'
-                    : 'text-foursys-text-dim border-white/[0.08] bg-foursys-surface/40 hover:text-foursys-text-muted'
-                }`}
-              >
-                {presenterMode ? <Eye size={12} aria-hidden="true" /> : <EyeOff size={12} aria-hidden="true" />}
-                {t('portfolio.presenter.toggle')}
-              </button>
-            </div>
+            <InterestButton section="portfolio-products" />
           </div>
           <div className="mt-4 md:mt-6 h-px bg-gradient-to-r from-cyan-400/30 via-white/[0.06] to-transparent" />
         </motion.div>
@@ -154,20 +136,32 @@ export function SectionPortfolioProducts() {
               <h3 className="text-lg md:text-xl font-black text-white leading-tight">{axis.promise}</h3>
             </div>
           </div>
-          <p className="text-sm text-foursys-text-muted leading-relaxed mb-4">{t('portfolio.products.axisAudience')}: {axis.audience}</p>
-          <ul className="grid sm:grid-cols-2 gap-2">
-            {[
-              t('portfolio.products.pointSaaS'),
-              t('portfolio.products.pointModules'),
-              t('portfolio.products.pointGoLive'),
-              t('portfolio.products.pointEvolution'),
-            ].map(item => (
-              <li key={item} className="flex items-start gap-2 text-sm text-foursys-text-muted">
-                <CheckCircle2 size={14} style={{ color: axis.color }} className="flex-shrink-0 mt-0.5" aria-hidden="true" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
+          <details className="group mt-4 rounded-xl border border-white/[0.07] bg-foursys-surface/20 overflow-hidden">
+            <summary className="list-none cursor-pointer p-3.5 flex items-center justify-between gap-3 rounded-xl hover:bg-white/[0.025] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
+              <span>
+                <span className="block text-sm font-bold text-white">{t('portfolio.products.modelDetails')}</span>
+                <span className="block text-label text-foursys-text-dim mt-0.5">
+                  {t('portfolio.products.axisAudience')}: {axis.audience}
+                </span>
+              </span>
+              <span className="text-label font-bold group-open:hidden" style={{ color: axis.color }}>
+                {t('common.seeMore')}
+              </span>
+            </summary>
+            <ul className="grid sm:grid-cols-2 gap-2 p-4 border-t border-white/[0.06]">
+              {[
+                t('portfolio.products.pointSaaS'),
+                t('portfolio.products.pointModules'),
+                t('portfolio.products.pointGoLive'),
+                t('portfolio.products.pointEvolution'),
+              ].map(item => (
+                <li key={item} className="flex items-start gap-2 text-sm text-foursys-text-muted">
+                  <CheckCircle2 size={14} style={{ color: axis.color }} className="flex-shrink-0 mt-0.5" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </details>
         </motion.article>
 
         <div
@@ -224,14 +218,9 @@ export function SectionPortfolioProducts() {
             offer={selected}
             axis={axesById[selected.axisId]}
             offersByCode={offersByCode}
-            presenterMode={presenterMode}
             engagement={selected.engagement ?? defaultEngagement}
             onClose={() => setSelected(null)}
             onOpenOffer={next => openOffer(next)}
-            onCompareLegacy={section => {
-              setSelected(null)
-              navigate(section)
-            }}
           />
         )}
       </AnimatePresence>

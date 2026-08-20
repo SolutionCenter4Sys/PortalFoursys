@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer, useCallback, useMemo, type ReactNode } from 'react'
-import type { AppState, AppAction, AppSection, SectionStat, NavigationItem, SessionProfile } from '../types'
+import type { AppState, AppAction, AppSection, SectionStat, NavigationItem, OfferInterest, SessionProfile } from '../types'
 import { getNavigationItems, getSectionCategories } from '../data/navigation'
 import { useLanguage } from '../i18n'
 import { getTrailById } from '../data/trails'
@@ -28,6 +28,7 @@ const initialState: AppState = {
   isClientSelectorOpen: false,
   // Interesse e perfil
   interestedSections: [],
+  interestedOffers: [],
   sessionProfile: null,
   isWizardOpen: false,
   isOverviewOpen: false,
@@ -174,6 +175,16 @@ function appReducer(state: AppState, action: AppAction): AppState {
       }
     }
 
+    case 'TOGGLE_OFFER_INTEREST': {
+      const already = state.interestedOffers.some(offer => offer.code === action.interest.code)
+      return {
+        ...state,
+        interestedOffers: already
+          ? state.interestedOffers.filter(offer => offer.code !== action.interest.code)
+          : [...state.interestedOffers, action.interest],
+      }
+    }
+
     case 'TRACK_OFFER_VIEW': {
       const existing = state.offerStats.find(o => o.code === action.code)
       return {
@@ -228,6 +239,7 @@ interface AppContextValue {
   clearClient: () => void
   toggleClientSelector: () => void
   toggleInterest: (section: AppSection) => void
+  toggleOfferInterest: (interest: OfferInterest) => void
   trackOfferView: (code: string, name: string) => void
   setProfile: (profile: SessionProfile) => void
   closeWizard: () => void
@@ -274,6 +286,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const clearClient = useCallback(() => dispatch({ type: 'CLEAR_CLIENT' }), [])
   const toggleClientSelector = useCallback(() => dispatch({ type: 'TOGGLE_CLIENT_SELECTOR' }), [])
   const toggleInterest = useCallback((section: AppSection) => dispatch({ type: 'TOGGLE_INTEREST', section }), [])
+  const toggleOfferInterest = useCallback(
+    (interest: OfferInterest) => dispatch({ type: 'TOGGLE_OFFER_INTEREST', interest }),
+    [],
+  )
   const trackOfferView = useCallback(
     (code: string, name: string) => dispatch({ type: 'TRACK_OFFER_VIEW', code, name }),
     [],
@@ -338,6 +354,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     clearClient,
     toggleClientSelector,
     toggleInterest,
+    toggleOfferInterest,
     trackOfferView,
     setProfile,
     closeWizard,

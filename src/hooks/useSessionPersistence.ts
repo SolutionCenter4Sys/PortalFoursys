@@ -61,6 +61,7 @@ export function useSessionPersistence() {
       sectionsVisited: state.sessionStats.filter(s => s.totalSeconds > 0).length,
       topSections,
       interestedSections: state.interestedSections,
+      interestedOffers: state.interestedOffers,
     }
   }, [state, getSectionLabel])
 

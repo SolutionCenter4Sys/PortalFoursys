@@ -63,6 +63,9 @@ export function SessionPanel() {
     const dateFmt = lang === 'pt' ? 'pt-BR' : 'en-US'
     const date = new Date().toLocaleDateString(dateFmt, { dateStyle: 'long' })
     const interestLabels = state.interestedSections.map(s => getSectionLabel(s as AppSection))
+    const offerInterestLabels = state.interestedOffers.map(
+      offer => `${offer.code} ${offer.name} — ${offer.nextStep}`,
+    )
     const profileLine = state.sessionProfile
       ? `[${t('session.summaryProfile')}] ${state.sessionProfile.role?.toUpperCase() ?? '—'} · ${state.sessionProfile.sector ?? '—'} · ${state.sessionProfile.objective ?? '—'}`
       : ''
@@ -75,6 +78,9 @@ export function SessionPanel() {
       profileLine,
       ``,
       interestLabels.length > 0 ? `${t('session.summaryInterest')}: ${interestLabels.join(', ')}` : '',
+      offerInterestLabels.length > 0
+        ? `${t('session.summaryOfferInterest')}: ${offerInterestLabels.join(', ')}`
+        : '',
       ``,
       `── ${t('session.summarySectionsPresented')} ──`,
       ...visitedStats.map(s =>
@@ -119,8 +125,9 @@ export function SessionPanel() {
       sectionsVisited: visitedStats.length,
       topSections,
       interestedSections: state.interestedSections,
+      interestedOffers: state.interestedOffers,
     })
-  }, [elapsed, visitedStats, currentTrail, getSectionIcon, getSectionLabel, state.interestedSections, state.sessionProfile, state.activeClientId, state.currentTrailId, save, t, lang])
+  }, [elapsed, visitedStats, currentTrail, getSectionIcon, getSectionLabel, state.interestedSections, state.interestedOffers, state.sessionProfile, state.activeClientId, state.currentTrailId, save, t, lang])
 
   return (
     <AnimatePresence>
@@ -274,6 +281,53 @@ export function SessionPanel() {
                       {getSectionLabel(s as AppSection)}
                     </span>
                   ))}
+                </div>
+              </div>
+            )}
+
+            {state.interestedOffers.length > 0 && (
+              <div className="px-4 py-3 border-b border-white/[0.06]">
+                <div className="flex items-center gap-1.5 mb-2">
+                  <Library size={11} className="text-cyan-400" />
+                  <span className="text-[10px] font-semibold text-cyan-300/80 uppercase tracking-widest">
+                    {t('session.offerInterests')}
+                  </span>
+                </div>
+                <div className="space-y-1.5">
+                  {state.interestedOffers.map(offer => {
+                    const clientName = offer.clientId ? getClientById(offer.clientId)?.name : null
+                    return (
+                      <details
+                        key={offer.code}
+                        className="group rounded-lg bg-cyan-400/[0.06] border border-cyan-400/20 overflow-hidden"
+                      >
+                        <summary className="list-none cursor-pointer px-2.5 py-2 flex items-center justify-between gap-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
+                          <span className="min-w-0 text-[10px] text-cyan-100">
+                            <span className="font-mono font-bold text-cyan-300">{offer.code}</span>{' '}
+                            <span className="font-semibold">{offer.name}</span>
+                          </span>
+                          <span className="text-[9px] text-cyan-300/75 flex-shrink-0">
+                            {t(`portfolio.evidence.${offer.maturity}`)}
+                          </span>
+                        </summary>
+                        <div className="px-2.5 pb-2.5 pt-2 border-t border-cyan-400/15 space-y-2">
+                          <p className="text-[10px] text-foursys-text-muted leading-relaxed">
+                            <span className="font-semibold text-white/80">{t('session.challenge')}:</span>{' '}
+                            {offer.challenge}
+                          </p>
+                          <p className="text-[10px] text-foursys-text-muted leading-relaxed">
+                            <span className="font-semibold text-white/80">{t('session.agreedNextStep')}:</span>{' '}
+                            {offer.nextStep}
+                          </p>
+                          {(clientName || offer.sessionRole) && (
+                            <p className="text-[9px] text-foursys-text-dim">
+                              {t('session.context')}: {[clientName, offer.sessionRole?.toUpperCase()].filter(Boolean).join(' · ')}
+                            </p>
+                          )}
+                        </div>
+                      </details>
+                    )
+                  })}
                 </div>
               </div>
             )}

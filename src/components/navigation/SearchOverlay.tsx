@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, X, ArrowRight, Mic } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
@@ -20,6 +20,7 @@ const KIND_LABEL_KEY: Record<SearchResultKind, string> = {
   alliance: 'search.kinds.service',
   innovation: 'search.kinds.section',
   'portfolio-offer': 'search.kinds.service',
+  'portfolio-glossary': 'search.kinds.section',
   kpi: 'search.kinds.kpi',
   timeline: 'search.kinds.timeline',
   client: 'search.kinds.client',
@@ -37,6 +38,7 @@ const KIND_COLOR: Record<SearchResultKind, string> = {
   alliance: 'text-blue-400 bg-blue-400/15 border-blue-400/25',
   innovation: 'text-green-400 bg-green-400/15 border-green-400/25',
   'portfolio-offer': 'text-cyan-300 bg-cyan-300/15 border-cyan-300/25',
+  'portfolio-glossary': 'text-teal-300 bg-teal-300/15 border-teal-300/25',
   kpi: 'text-cyan-400 bg-cyan-400/15 border-cyan-400/25',
   timeline: 'text-orange-400 bg-orange-400/15 border-orange-400/25',
   client: 'text-indigo-400 bg-indigo-400/15 border-indigo-400/25',
@@ -99,7 +101,7 @@ function highlightMatch(text: string, query: string): JSX.Element {
 }
 
 export function SearchOverlay() {
-  const { state, navigate, closeSearch, activeNavigationItems } = useApp()
+  const { state, navigate, closeSearch, setDeepDiveHint, activeNavigationItems } = useApp()
   const { t } = useLanguage()
   const [query, setQuery] = useState('')
   const [selected, setSelected] = useState(0)
@@ -139,6 +141,12 @@ export function SearchOverlay() {
     return groups
   }, [results])
 
+  const openResult = useCallback((result: SearchEntry) => {
+    if (result.hint) setDeepDiveHint(result.hint)
+    navigate(result.targetSection as AppSection)
+    closeSearch()
+  }, [closeSearch, navigate, setDeepDiveHint])
+
   useEffect(() => {
     if (state.isSearchOpen) {
       setQuery('')
@@ -170,13 +178,12 @@ export function SearchOverlay() {
       if (e.key === 'ArrowDown') { e.preventDefault(); setSelected(s => Math.min(s + 1, results.length - 1)); return }
       if (e.key === 'ArrowUp') { e.preventDefault(); setSelected(s => Math.max(s - 1, 0)); return }
       if (e.key === 'Enter' && results[selected]) {
-        navigate(results[selected].targetSection as AppSection)
-        closeSearch()
+        openResult(results[selected])
       }
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [state.isSearchOpen, results, selected, navigate, closeSearch])
+  }, [state.isSearchOpen, results, selected, closeSearch, openResult])
 
   let flatIdx = -1
 
@@ -271,7 +278,7 @@ export function SearchOverlay() {
                         <button
                           key={item.id}
                           data-selected={isSelected}
-                          onClick={() => { navigate(item.targetSection as AppSection); closeSearch() }}
+                          onClick={() => openResult(item)}
                           className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors group ${
                             isSelected ? 'bg-foursys-primary/15' : 'hover:bg-white/[0.04]'
                           }`}

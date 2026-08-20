@@ -104,6 +104,8 @@ describe('Section smoke tests', () => {
   it('SectionPortfolioStart renders without crash', () => {
     const { container } = renderWithProvider(<SectionPortfolioStart />)
     expect(container).toBeTruthy()
+    expect(screen.queryByText(/roteiro comercial/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/evite/i)).not.toBeInTheDocument()
   })
 
   it('SectionPortfolioFuture renders without crash', () => {

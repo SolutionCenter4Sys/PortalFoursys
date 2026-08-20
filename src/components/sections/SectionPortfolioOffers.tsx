@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Eye, EyeOff, Library, Search } from 'lucide-react'
+import { BookOpen, ChevronDown, Library, Search } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { InterestButton } from '../ui/InterestButton'
 import { BackToOriginChip } from '../ui/BackToOriginChip'
@@ -10,6 +10,8 @@ import { OfferModal } from '../portfolio/OfferModal'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import { getPortfolio, isExtractedAxis, sectionForOffer, serviceAxes, serviceOffers } from '../../data/portfolio'
+import { getPortfolioExample } from '../../data/portfolioExamples'
+import { portfolioGlossary } from '../../data/portfolioGuidance'
 import { MUTED_COLOR } from '../../theme/portfolioTokens'
 import type { EvidenceStatus, PortfolioAxis, PortfolioOffer, PortfolioRole } from '../../types'
 
@@ -36,7 +38,11 @@ export function SectionPortfolioOffers() {
       ? offers.find(o => o.code === entryHint.slice(6)) ?? null
       : null,
   )
-  const [presenterMode, setPresenterMode] = useState(false)
+  const [entryGlossary] = useState<string | null>(() =>
+    entryHint?.startsWith('glossary:') ? entryHint.slice('glossary:'.length) : null,
+  )
+  const [glossaryOpen, setGlossaryOpen] = useState(() => Boolean(entryHint?.startsWith('glossary:')))
+  const glossaryRef = useRef<HTMLDetailsElement>(null)
 
   // Quem chegou filtrado precisa saber disso — senão lê 3 ofertas achando que são todas.
   const [entryAxisId] = useState<string | null>(() => {
@@ -60,6 +66,14 @@ export function SectionPortfolioOffers() {
     }
     clearDeepDiveHint()
   }, [entryHint, bundle.offers, clearDeepDiveHint, navigate])
+
+  useEffect(() => {
+    if (!entryGlossary) return
+    const timer = window.setTimeout(() => {
+      glossaryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 250)
+    return () => window.clearTimeout(timer)
+  }, [entryGlossary])
 
   // Qual oferta o cliente pediu para ver é o sinal comercial mais forte da sessão.
   const openOffer = useCallback(
@@ -109,14 +123,22 @@ export function SectionPortfolioOffers() {
         offer.tagline,
         offer.whatItIs,
         offer.pain,
+        getPortfolioExample(offer.code, lang) ?? '',
+        ...(offer.entryTriggers ?? []),
         ...offer.outcomes,
         ...offer.differentials.map(d => d.title),
+        ...(offer.modules?.flatMap(module => [
+          module.name,
+          module.description,
+          module.clientValue,
+          ...module.deliverables,
+        ]) ?? []),
       ]
         .join(' ')
         .toLowerCase()
       return haystack.includes(q)
     })
-  }, [offers, axisFilter, roleFilter, evidenceFilter, query])
+  }, [offers, axisFilter, roleFilter, evidenceFilter, query, lang])
 
   const evidenceCounts = useMemo(() => {
     const map = { 'liberado': 0, 'em-validacao': 0, 'sem-lastro': 0 } as Record<EvidenceStatus, number>
@@ -157,25 +179,58 @@ export function SectionPortfolioOffers() {
               </p>
             </div>
 
-            <div className="flex items-center gap-2 flex-wrap">
-              <InterestButton section="portfolio-offers" />
-              <button
-                onClick={() => setPresenterMode(v => !v)}
-                aria-pressed={presenterMode}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-label font-semibold border transition-colors ${
-                  presenterMode
-                    ? 'text-amber-400 border-amber-500/40 bg-amber-500/10'
-                    : 'text-foursys-text-dim border-white/[0.08] bg-foursys-surface/40 hover:text-foursys-text-muted'
-                }`}
-              >
-                {presenterMode ? <Eye size={12} aria-hidden="true" /> : <EyeOff size={12} aria-hidden="true" />}
-                {t('portfolio.presenter.toggle')}
-              </button>
-            </div>
+            <InterestButton section="portfolio-offers" />
           </div>
 
           <div className="mt-4 md:mt-6 h-px bg-gradient-to-r from-cyan-400/30 via-white/[0.06] to-transparent" />
         </motion.div>
+
+        <details
+          ref={glossaryRef}
+          open={glossaryOpen}
+          onToggle={event => setGlossaryOpen(event.currentTarget.open)}
+          data-voz-caixa="portfolio-glossary"
+          data-voz-caixa-secao="portfolio-offers"
+          data-voz-caixa-rotulo={t('portfolio.offers.glossaryTitle')}
+          className="group mb-5 rounded-2xl border border-cyan-400/20 bg-cyan-500/[0.035] overflow-hidden"
+        >
+          <summary className="list-none cursor-pointer p-4 flex items-center justify-between gap-3 rounded-xl hover:bg-white/[0.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
+            <span className="flex items-center gap-3">
+              <span className="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-400/25 flex items-center justify-center">
+                <BookOpen size={16} className="text-cyan-400" aria-hidden="true" />
+              </span>
+              <span>
+                <span className="block text-sm font-black text-white">{t('portfolio.offers.glossaryTitle')}</span>
+                <span className="block text-label text-foursys-text-muted mt-0.5">
+                  {t('portfolio.offers.glossarySubtitle')}
+                </span>
+              </span>
+            </span>
+            <ChevronDown
+              size={16}
+              className="text-foursys-text-dim transition-transform group-open:rotate-180"
+              aria-hidden="true"
+            />
+          </summary>
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-2.5 p-4 pt-0 border-t border-white/[0.05]">
+            {portfolioGlossary.map(item => (
+              <div
+                key={item.term}
+                className={`rounded-xl border p-3 ${
+                  item.term === entryGlossary
+                    ? 'border-cyan-400/45 bg-cyan-500/[0.09]'
+                    : 'border-white/[0.07] bg-foursys-surface/25'
+                }`}
+              >
+                <h3 className="text-xs font-black text-cyan-300">{item.term}</h3>
+                <p className="text-label text-foursys-text-muted leading-relaxed mt-1">{item.definition[lang]}</p>
+                <p className="text-label text-white/75 leading-relaxed mt-1.5">
+                  <span className="font-bold">{t('portfolio.offers.clientLanguage')}:</span> {item.clientLanguage[lang]}
+                </p>
+              </div>
+            ))}
+          </div>
+        </details>
 
         {/* ── Filtros ── */}
         <motion.div
@@ -219,6 +274,17 @@ export function SectionPortfolioOffers() {
             </div>
           </div>
 
+          <details className="group rounded-xl border border-white/[0.07] bg-foursys-surface/15 overflow-hidden">
+            <summary className="list-none cursor-pointer px-3 py-2.5 flex items-center justify-between gap-3 rounded-xl hover:bg-white/[0.025] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
+              <span className="text-label font-bold text-foursys-text-muted">{t('portfolio.offers.refine')}</span>
+              <ChevronDown
+                size={14}
+                className="text-foursys-text-dim transition-transform group-open:rotate-180"
+                aria-hidden="true"
+              />
+            </summary>
+            <div className="p-3 border-t border-white/[0.06] space-y-3">
+
           {/* Com 8 eixos os chips viram parede no celular: rolagem horizontal abaixo de md */}
           <div
             data-voz-filtro="portfolio-axis-filter"
@@ -256,7 +322,7 @@ export function SectionPortfolioOffers() {
             })}
           </div>
 
-          {/* Lastro de prova como filtro: quem apresenta precisa saber o que pode afirmar */}
+          {/* Maturidade como filtro público do catálogo */}
           <div className="flex items-center gap-1.5 flex-wrap">
             <span className="text-label font-bold uppercase tracking-[0.14em] text-foursys-text-dim mr-1">
               {t('portfolio.offers.filterEvidence')}
@@ -294,6 +360,8 @@ export function SectionPortfolioOffers() {
               )
             })}
           </div>
+            </div>
+          </details>
 
           <p className="text-label text-foursys-text-dim">
             {t('portfolio.offers.resultCount')
@@ -357,14 +425,9 @@ export function SectionPortfolioOffers() {
             offer={selected}
             axis={axesById[selected.axisId]}
             offersByCode={offersByCode}
-            presenterMode={presenterMode}
             engagement={selected.engagement ?? defaultEngagement}
             onClose={() => setSelected(null)}
             onOpenOffer={next => openOffer(next)}
-            onCompareLegacy={section => {
-              setSelected(null)
-              navigate(section)
-            }}
           />
         )}
       </AnimatePresence>

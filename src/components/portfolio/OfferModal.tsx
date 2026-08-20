@@ -1,12 +1,27 @@
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, CheckCircle2, Eye, Handshake, Link2, X } from 'lucide-react'
+import {
+  ArrowRight,
+  BookOpen,
+  CheckCircle2,
+  ChevronDown,
+  Handshake,
+  Lightbulb,
+  Link2,
+  PackageCheck,
+  Route,
+  Target,
+  X,
+} from 'lucide-react'
 import { EvidenceBadge } from './EvidenceBadge'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
+import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
+import { portfolioBridges, portfolioGlossary } from '../../data/portfolioGuidance'
+import { getPortfolioExample } from '../../data/portfolioExamples'
+import { trackCTAClick } from '../../hooks/useSessionPersistence'
 import { AXIS_FALLBACK_COLOR } from '../../theme/portfolioTokens'
 import type {
-  AppSection,
   PortfolioAxis,
   PortfolioEngagement,
   PortfolioOffer,
@@ -40,24 +55,41 @@ export function OfferModal({
   offer,
   axis,
   offersByCode,
-  presenterMode,
   engagement,
   onClose,
   onOpenOffer,
-  onCompareLegacy,
 }: {
   offer: PortfolioOffer
   axis: PortfolioAxis | undefined
   offersByCode: Record<string, PortfolioOffer>
-  presenterMode: boolean
   engagement: PortfolioEngagement
   onClose: () => void
   onOpenOffer: (offer: PortfolioOffer) => void
-  onCompareLegacy: (section: AppSection) => void
 }) {
   const trapRef = useFocusTrap(true)
-  const { t } = useLanguage()
+  const { state, toggleInterest, toggleOfferInterest } = useApp()
+  const { t, lang } = useLanguage()
+  const conversationRequested = state.interestedOffers.some(item => item.code === offer.code)
   const accent = axis?.color ?? AXIS_FALLBACK_COLOR
+  const bridge = portfolioBridges.find(item => item.entryCode === offer.code)
+  const glossaryHaystack = [
+    offer.name,
+    offer.headline,
+    offer.tagline,
+    offer.whatItIs,
+    offer.pain,
+    ...(offer.assets ?? []),
+    ...offer.outcomes,
+    ...offer.differentials.flatMap(item => [item.title, item.detail]),
+  ].join(' ').toLocaleLowerCase('pt-BR')
+  const contextualGlossary = portfolioGlossary.filter(item =>
+    glossaryHaystack.includes(item.term.toLocaleLowerCase('pt-BR')),
+  )
+  const simpleExample =
+    getPortfolioExample(offer.code, lang) ??
+    t('portfolio.offer.fallbackExample')
+      .replace('{trigger}', offer.entryTriggers?.[0] ?? offer.pain)
+      .replace('{outcome}', offer.outcomes[0] ?? offer.whatItIs)
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -80,6 +112,23 @@ export function OfferModal({
     offer.role === 'diferenciacao'
       ? t('portfolio.thesis.showcase')
       : t('portfolio.thesis.engine')
+
+  const requestConversation = () => {
+    if (!state.interestedSections.includes('portfolio-offers')) {
+      toggleInterest('portfolio-offers')
+    }
+    toggleOfferInterest({
+      code: offer.code,
+      name: offer.name,
+      challenge: offer.pain,
+      maturity: offer.proof.status,
+      nextStep: offer.cta,
+      clientId: state.activeClientId,
+      sessionRole: state.sessionProfile?.role ?? null,
+      createdAt: Date.now(),
+    })
+    trackCTAClick(`portfolio-offer:${offer.code}`)
+  }
 
   return (
     <motion.div
@@ -133,18 +182,6 @@ export function OfferModal({
             )}
             <span className="text-meta text-foursys-text-dim">·</span>
             <span className="text-meta text-foursys-text-dim uppercase tracking-widest">{roleLabel}</span>
-            {offer.portfolioRole && (
-              <span
-                className="text-label font-bold px-2 py-0.5 rounded-full border"
-                style={{
-                  color: AXIS_FALLBACK_COLOR,
-                  borderColor: `${AXIS_FALLBACK_COLOR}44`,
-                  backgroundColor: `${AXIS_FALLBACK_COLOR}12`,
-                }}
-              >
-                {offer.portfolioRole}
-              </span>
-            )}
           </div>
 
           <h3 className="text-xl md:text-2xl font-black text-white leading-tight mb-2">{offer.name}</h3>
@@ -163,14 +200,108 @@ export function OfferModal({
         {/* ── Corpo ── */}
         <div className="p-6 md:p-7 space-y-6">
 
-          <div className="grid md:grid-cols-2 gap-5">
-            <Block title={t('portfolio.offer.whatItIs')} accent={accent}>
-              <p className="text-sm text-foursys-text-muted leading-relaxed">{offer.whatItIs}</p>
-            </Block>
-            <Block title={t('portfolio.offer.pain')} accent={accent}>
-              <p className="text-sm text-foursys-text-muted leading-relaxed">{offer.pain}</p>
-            </Block>
+          <div>
+            <h4 className="text-label font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-3">
+              {t('portfolio.offer.snapshot')}
+            </h4>
+            <div className="grid sm:grid-cols-2 gap-2.5">
+              {[
+                {
+                  label: t('portfolio.offer.challenge'),
+                  value: offer.pain,
+                  icon: Target,
+                },
+                {
+                  label: t('portfolio.offer.delivery'),
+                  value: offer.outcomes[0] ?? offer.whatItIs,
+                  icon: PackageCheck,
+                },
+                {
+                  label: t('portfolio.offer.journey'),
+                  value: `${offer.phases.length} ${t('portfolio.offer.steps')} · ${offer.totalDuration}`,
+                  icon: Route,
+                },
+                {
+                  label: t('portfolio.offer.cta'),
+                  value: offer.cta,
+                  icon: ArrowRight,
+                },
+              ].map(item => {
+                const Icon = item.icon
+                return (
+                  <div
+                    key={item.label}
+                    className="p-3.5 rounded-xl border bg-foursys-surface/25 flex items-start gap-3"
+                    style={{ borderColor: `${accent}24` }}
+                  >
+                    <span
+                      className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                      style={{ color: accent, backgroundColor: `${accent}14` }}
+                    >
+                      <Icon size={14} aria-hidden="true" />
+                    </span>
+                    <div className="min-w-0">
+                      <span className="block text-meta font-bold uppercase tracking-wider" style={{ color: accent }}>
+                        {item.label}
+                      </span>
+                      <p className="text-xs text-foursys-text-muted leading-relaxed mt-1 line-clamp-3">{item.value}</p>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
           </div>
+
+          <details className="group rounded-xl border border-white/[0.07] bg-foursys-surface/15 overflow-hidden">
+            <summary className="list-none cursor-pointer p-4 flex items-center justify-between gap-3 rounded-xl hover:bg-white/[0.025] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
+              <span className="text-sm font-bold text-white">{t('portfolio.offer.understand')}</span>
+              <ChevronDown
+                size={15}
+                className="text-foursys-text-dim transition-transform group-open:rotate-180"
+                aria-hidden="true"
+              />
+            </summary>
+            <div className="grid md:grid-cols-2 gap-5 p-4 border-t border-white/[0.06]">
+              <Block title={t('portfolio.offer.whatItIs')} accent={accent}>
+                <p className="text-sm text-foursys-text-muted leading-relaxed">{offer.whatItIs}</p>
+              </Block>
+              <Block title={t('portfolio.offer.pain')} accent={accent}>
+                <p className="text-sm text-foursys-text-muted leading-relaxed">{offer.pain}</p>
+              </Block>
+            </div>
+          </details>
+
+          <div
+            className="p-4 rounded-xl border flex items-start gap-3"
+            style={{ borderColor: `${accent}2E`, backgroundColor: `${accent}0A` }}
+          >
+            <Lightbulb size={16} style={{ color: accent }} className="flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <div>
+              <h4 className="text-label font-bold uppercase tracking-[0.14em] mb-1" style={{ color: accent }}>
+                {t('portfolio.offer.example')}
+              </h4>
+              <p className="text-sm text-foursys-text-muted leading-relaxed">{simpleExample}</p>
+            </div>
+          </div>
+
+          {contextualGlossary.length > 0 && (
+            <Block title={t('portfolio.offer.glossary')} accent={accent}>
+              <div className="flex flex-wrap gap-2">
+                {contextualGlossary.map(item => (
+                  <span
+                    key={item.term}
+                    title={item.definition[lang]}
+                    className="inline-flex items-center gap-1.5 text-label px-2.5 py-1.5 rounded-lg border border-white/[0.08] bg-foursys-surface/30 text-foursys-text-muted"
+                  >
+                    <BookOpen size={10} style={{ color: accent }} aria-hidden="true" />
+                    <span className="font-bold text-white">{item.term}</span>
+                    <span aria-hidden="true">·</span>
+                    {item.clientLanguage[lang]}
+                  </span>
+                ))}
+              </div>
+            </Block>
+          )}
 
           {offer.entryTriggers && offer.entryTriggers.length > 0 && (
             <Block title={t('portfolio.offer.triggers')} accent={accent}>
@@ -186,6 +317,17 @@ export function OfferModal({
               </div>
             </Block>
           )}
+
+          <details className="group rounded-xl border border-white/[0.07] bg-foursys-surface/15 overflow-hidden">
+            <summary className="list-none cursor-pointer p-4 flex items-center justify-between gap-3 rounded-xl hover:bg-white/[0.025] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
+              <span className="text-sm font-bold text-white">{t('portfolio.offer.deliveryDetails')}</span>
+              <ChevronDown
+                size={15}
+                className="text-foursys-text-dim transition-transform group-open:rotate-180"
+                aria-hidden="true"
+              />
+            </summary>
+            <div className="p-4 border-t border-white/[0.06] space-y-6">
 
           {/* Você sai com */}
           <Block title={t('portfolio.offer.outcomes')} accent={accent}>
@@ -244,9 +386,9 @@ export function OfferModal({
           </Block>
 
           {/* Entregáveis e ativos */}
-          {((offer.components?.length ?? 0) > 0 || (offer.assets?.length ?? 0) > 0) && (
+          {(((offer.components?.length ?? 0) > 0 && !offer.modules?.length) || (offer.assets?.length ?? 0) > 0) && (
             <div className="grid md:grid-cols-2 gap-5">
-              {offer.components && offer.components.length > 0 && (
+              {offer.components && offer.components.length > 0 && !offer.modules?.length && (
                 <Block title={t('portfolio.offer.components')} accent={accent}>
                   <ul className="space-y-1.5">
                     {offer.components.map(c => (
@@ -275,6 +417,66 @@ export function OfferModal({
               )}
             </div>
           )}
+
+          {offer.modules && offer.modules.length > 0 && (
+            <Block title={t('portfolio.offer.modules')} accent={accent}>
+              <div className="grid md:grid-cols-2 gap-2.5">
+                {offer.modules.map((module, index) => (
+                  <details
+                    key={module.name}
+                    className="group rounded-xl bg-foursys-surface/25 border border-white/[0.07] overflow-hidden"
+                  >
+                    <summary className="list-none cursor-pointer p-3.5 flex items-center justify-between gap-3 rounded-xl hover:bg-white/[0.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
+                      <span className="flex items-center gap-2.5 min-w-0">
+                        <span
+                          className="w-6 h-6 rounded-lg flex items-center justify-center text-label font-black flex-shrink-0"
+                          style={{ backgroundColor: `${accent}1A`, color: accent }}
+                        >
+                          {index + 1}
+                        </span>
+                        <span className="text-sm font-bold text-white leading-tight">{module.name}</span>
+                      </span>
+                      <ChevronDown
+                        size={14}
+                        className="text-foursys-text-dim flex-shrink-0 transition-transform group-open:rotate-180"
+                        aria-hidden="true"
+                      />
+                    </summary>
+                    <div className="px-3.5 pb-3.5 pt-0 border-t border-white/[0.05]">
+                      <p className="text-xs text-foursys-text-muted leading-relaxed mt-3">{module.description}</p>
+                      <p className="text-xs text-white leading-relaxed mt-2">
+                        <span className="font-bold" style={{ color: accent }}>
+                          {t('portfolio.offer.clientValue')}:
+                        </span>{' '}
+                        {module.clientValue}
+                      </p>
+                      <ul className="mt-2 space-y-1">
+                        {module.deliverables.map(deliverable => (
+                          <li key={deliverable} className="text-label text-foursys-text-dim flex items-start gap-2">
+                            <span className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5" style={{ backgroundColor: accent }} />
+                            {deliverable}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </Block>
+          )}
+            </div>
+          </details>
+
+          <details className="group rounded-xl border border-white/[0.07] bg-foursys-surface/15 overflow-hidden">
+            <summary className="list-none cursor-pointer p-4 flex items-center justify-between gap-3 rounded-xl hover:bg-white/[0.025] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
+              <span className="text-sm font-bold text-white">{t('portfolio.offer.contextDetails')}</span>
+              <ChevronDown
+                size={15}
+                className="text-foursys-text-dim transition-transform group-open:rotate-180"
+                aria-hidden="true"
+              />
+            </summary>
+            <div className="p-4 border-t border-white/[0.06] space-y-6">
 
           {/* Mercado e regulatório */}
           {offer.marketStats.length > 0 && (
@@ -314,10 +516,15 @@ export function OfferModal({
               ))}
             </div>
           </Block>
+            </div>
+          </details>
 
           {/* Conexões */}
           {offer.connects.length > 0 && (
             <Block title={t('portfolio.offer.connects')} accent={accent}>
+              <p className="text-xs text-foursys-text-dim leading-relaxed mb-2.5">
+                {t('portfolio.offer.connectsHint').replace('{offer}', offer.name)}
+              </p>
               <div className="flex flex-wrap gap-2">
                 {offer.connects.map(code => {
                   const target = offersByCode[code]
@@ -347,6 +554,46 @@ export function OfferModal({
             </Block>
           )}
 
+          {bridge && (
+            <div className="p-4 rounded-xl border border-white/[0.08] bg-foursys-surface/20">
+              <h4 className="text-label font-bold uppercase tracking-[0.14em] mb-2" style={{ color: accent }}>
+                {t('portfolio.offer.recommendedPath')}
+              </h4>
+              <p className="text-xs text-foursys-text-muted leading-relaxed mb-3">
+                {t('portfolio.offer.pathCondition').replace('{agenda}', bridge.clientAgenda[lang])}
+              </p>
+              <div className="flex items-center gap-2 flex-wrap">
+                <span
+                  className="font-mono text-label font-bold px-2.5 py-1 rounded-lg border"
+                  style={{ color: accent, borderColor: `${accent}44`, backgroundColor: `${accent}12` }}
+                >
+                  {bridge.entryCode}
+                </span>
+                <ArrowRight size={13} className="text-foursys-text-dim" aria-hidden="true" />
+                {bridge.capacityCodes.map(code => {
+                  const target = offersByCode[code]
+                  return target ? (
+                    <button
+                      key={code}
+                      onClick={() => onOpenOffer(target)}
+                      className="text-label px-2.5 py-1 rounded-lg border border-white/[0.09] text-foursys-text-muted hover:text-white hover:border-white/20 transition-colors"
+                    >
+                      <span className="font-mono font-bold">{code}</span> {target.name}
+                    </button>
+                  ) : null
+                })}
+                {bridge.assetNames.map(asset => (
+                  <span
+                    key={asset}
+                    className="text-label px-2.5 py-1 rounded-lg border border-white/[0.07] bg-white/[0.025] text-foursys-text-dim"
+                  >
+                    {asset}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Fronteira */}
           {offer.boundary && (
             <div className="p-4 rounded-xl bg-foursys-surface/25 border border-white/[0.08]">
@@ -366,75 +613,51 @@ export function OfferModal({
               {t('portfolio.offer.cta')}
             </h4>
             <p className="text-sm text-white leading-relaxed">{offer.cta}</p>
-          </div>
-
-          {/* Notas de condução — apenas em modo apresentador */}
-          {presenterMode && (
-            <div className="p-4 rounded-xl border border-amber-500/25 bg-amber-500/[0.06] space-y-2">
-              <h4 className="text-label font-bold uppercase tracking-[0.14em] text-amber-400 flex items-center gap-1.5">
-                <Eye size={11} aria-hidden="true" /> {t('portfolio.presenter.title')}
-              </h4>
-              <div>
-                <span className="text-meta uppercase tracking-wider text-amber-400/70 font-bold">
-                  {t('portfolio.offer.proof')}
-                </span>
-                <p className="text-xs text-foursys-text-muted leading-relaxed">{offer.proof.note}</p>
-              </div>
-              {offer.proof.cases && offer.proof.cases.length > 0 && (
-                <ul className="space-y-1">
-                  {offer.proof.cases.map(c => (
-                    <li key={c} className="text-xs text-foursys-text-muted flex items-start gap-2">
-                      <span className="w-1 h-1 rounded-full bg-amber-400 flex-shrink-0 mt-1.5" />
-                      {c}
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {offer.editorialCare && (
-                <div>
-                  <span className="text-meta uppercase tracking-wider text-amber-400/70 font-bold">
-                    {t('portfolio.presenter.care')}
-                  </span>
-                  <p className="text-xs text-foursys-text-muted leading-relaxed">{offer.editorialCare}</p>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Base comercial: modelo de contratação sempre; valor, nunca sem proposta */}
-          <div className="p-4 rounded-xl border border-white/[0.07] bg-foursys-surface/20 space-y-3">
-            <h4 className="text-label font-bold uppercase tracking-[0.14em] text-foursys-text-muted flex items-center gap-1.5">
-              <Handshake size={12} aria-hidden="true" /> {t('portfolio.offer.engagement')}
-            </h4>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-              {engagement.models.map(model => (
-                <li key={model} className="text-xs text-foursys-text-muted flex items-start gap-2">
-                  <span className="w-1 h-1 rounded-full bg-foursys-primary flex-shrink-0 mt-1.5" />
-                  {model}
-                </li>
-              ))}
-            </ul>
-            <p className="text-xs text-foursys-text-dim leading-relaxed">{engagement.sizing}</p>
-            {presenterMode && (
-              <p className="text-xs text-amber-300/90 leading-relaxed border-t border-amber-500/20 pt-2">
-                {engagement.investmentGuidance}
-              </p>
-            )}
-          </div>
-
-          {/* Comparação com a seção legada */}
-          {offer.legacyEquivalent && (
             <button
-              onClick={() => onCompareLegacy(offer.legacyEquivalent!.section)}
-              className="w-full text-left p-3 rounded-xl border border-white/[0.07] bg-foursys-surface/20 hover:border-white/20 transition-colors flex items-center justify-between gap-3"
+              type="button"
+              onClick={requestConversation}
+              disabled={conversationRequested}
+              className={`mt-4 inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-touch rounded-xl text-sm font-bold border transition-all disabled:cursor-default ${
+                conversationRequested
+                  ? 'text-emerald-200 border-emerald-300/35 bg-emerald-500/10'
+                  : ''
+              }`}
+              style={
+                conversationRequested
+                  ? undefined
+                  : { color: accent, borderColor: `${accent}55`, backgroundColor: `${accent}14` }
+              }
             >
-              <span className="text-label text-foursys-text-dim">
-                {t('portfolio.offer.legacy')}:{' '}
-                <span className="text-foursys-text-muted">{offer.legacyEquivalent.label}</span>
-              </span>
-              <ArrowRight size={13} className="text-foursys-text-dim flex-shrink-0" aria-hidden="true" />
+              {conversationRequested ? <CheckCircle2 size={15} aria-hidden="true" /> : <Handshake size={15} aria-hidden="true" />}
+              {conversationRequested
+                ? t('portfolio.offer.requestRecorded')
+                : t('portfolio.offer.requestConversation')}
             </button>
-          )}
+          </div>
+
+          <details className="group rounded-xl border border-white/[0.07] bg-foursys-surface/20 overflow-hidden">
+            <summary className="list-none cursor-pointer p-4 flex items-center justify-between gap-3 rounded-xl hover:bg-white/[0.025] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
+              <span className="text-label font-bold uppercase tracking-[0.14em] text-foursys-text-muted flex items-center gap-1.5">
+                <Handshake size={12} aria-hidden="true" /> {t('portfolio.offer.engagement')}
+              </span>
+              <ChevronDown
+                size={15}
+                className="text-foursys-text-dim transition-transform group-open:rotate-180"
+                aria-hidden="true"
+              />
+            </summary>
+            <div className="p-4 border-t border-white/[0.06] space-y-3">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                {engagement.models.map(model => (
+                  <li key={model} className="text-xs text-foursys-text-muted flex items-start gap-2">
+                    <span className="w-1 h-1 rounded-full bg-foursys-primary flex-shrink-0 mt-1.5" />
+                    {model}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-xs text-foursys-text-dim leading-relaxed">{engagement.sizing}</p>
+            </div>
+          </details>
         </div>
       </motion.div>
     </motion.div>

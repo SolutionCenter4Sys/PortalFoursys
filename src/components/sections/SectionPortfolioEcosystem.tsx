@@ -55,13 +55,11 @@ function PillarHeader({
   accent,
   kicker,
   hint,
-  description,
 }: {
   icon: LucideIcon
   accent: string
   kicker: string
   hint: string
-  description: string
 }) {
   return (
     <div className="mb-4">
@@ -84,7 +82,6 @@ function PillarHeader({
           <p className="text-label text-foursys-text-dim mt-1 leading-snug">{hint}</p>
         </div>
       </div>
-      <p className="text-xs text-foursys-text-muted leading-relaxed">{description}</p>
     </div>
   )
 }
@@ -104,6 +101,7 @@ function AxisCard({
   onOpen?: () => void
   openLabel?: string
 }) {
+  const { t } = useLanguage()
   const Icon = ICONS[axis.icon] ?? Layers
   const interactive = Boolean(onOpen)
 
@@ -162,18 +160,9 @@ function AxisCard({
       </div>
 
       {items.length > 0 && (
-        <ul className="relative mt-3 space-y-1.5 pl-1">
-          {items.map(item => (
-            <li key={item} className="flex items-start gap-2 text-xs text-foursys-text-muted leading-snug">
-              <span
-                className="w-1 h-1 rounded-full mt-[6px] flex-shrink-0"
-                style={{ backgroundColor: axis.color }}
-                aria-hidden="true"
-              />
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
+        <p className="relative mt-3 text-label font-semibold" style={{ color: axis.color }}>
+          {t('portfolio.ecosystem.paths').replace('{count}', String(items.length))}
+        </p>
       )}
     </motion.article>
   )
@@ -293,7 +282,6 @@ export function SectionPortfolioEcosystem() {
                 accent={PILLAR_COLOR.showcase}
                 kicker={t('portfolio.ecosystem.showcaseTitle')}
                 hint={t('portfolio.ecosystem.showcaseHint')}
-                description={t('portfolio.ecosystem.showcaseDesc')}
               />
               <div className="space-y-3">
                 {showcaseAxes.map((axis, i) => (
@@ -321,7 +309,6 @@ export function SectionPortfolioEcosystem() {
                 accent={PILLAR_COLOR.engine}
                 kicker={t('portfolio.ecosystem.engineTitle')}
                 hint={t('portfolio.ecosystem.engineHint')}
-                description={t('portfolio.ecosystem.engineDesc')}
               />
               {/* 2 colunas só a partir de xl: em lg esta coluna tem ~380px e os cards ficariam espremidos */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-3">
@@ -350,7 +337,6 @@ export function SectionPortfolioEcosystem() {
                 accent={PILLAR_COLOR.future}
                 kicker={t('portfolio.ecosystem.futureTitle')}
                 hint={t('portfolio.ecosystem.futureHint')}
-                description={t('portfolio.ecosystem.futureDesc')}
               />
               <div className="space-y-3">
                 {futureVision.map((item, i) => {

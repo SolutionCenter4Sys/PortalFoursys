@@ -201,6 +201,13 @@ export interface PortfolioDifferential {
   detail: string
 }
 
+export interface PortfolioOfferModule {
+  name: string
+  description: string
+  clientValue: string
+  deliverables: string[]
+}
+
 export interface PortfolioPersonaFit {
   role: string
   value: string
@@ -208,7 +215,6 @@ export interface PortfolioPersonaFit {
 
 export interface PortfolioProof {
   status: EvidenceStatus
-  note: string
   cases?: string[]
 }
 
@@ -217,8 +223,6 @@ export interface PortfolioOffer {
   code: string
   axisId: string
   role: PortfolioRole
-  /** Papel especial no portfólio: âncora, rampa de entrada, delivery puxado. */
-  portfolioRole?: string
   name: string
   headline: string
   tagline: string
@@ -228,6 +232,8 @@ export interface PortfolioOffer {
   outcomes: string[]
   differentials: PortfolioDifferential[]
   components?: string[]
+  /** Módulos comerciais de uma oferta-mãe, exibidos como detalhes expansíveis. */
+  modules?: PortfolioOfferModule[]
   assets?: string[]
   phases: PortfolioPhase[]
   totalDuration: string
@@ -237,11 +243,7 @@ export interface PortfolioOffer {
   cta: string
   connects: string[]
   boundary?: string
-  /** Como esta oferta NÃO deve ser comunicada ao cliente. */
-  editorialCare?: string
   proof: PortfolioProof
-  /** Onde o mesmo assunto vive na seção legada, para comparação. */
-  legacyEquivalent?: { label: string; section: AppSection }
   /** Base comercial específica. Ausente = usa o padrão do bundle. */
   engagement?: PortfolioEngagement
 }
@@ -250,22 +252,22 @@ export interface PortfolioOffer {
  * Base comercial de uma oferta.
  *
  * Valores de investimento NÃO vivem aqui: eles saem da proposta, com
- * dimensionamento aprovado. O portal expõe modelo de contratação e a orientação
- * de como conduzir a conversa — nunca um número que ninguém assinou.
+ * dimensionamento aprovado. O portal expõe somente modelos de contratação e
+ * critérios públicos de dimensionamento.
  */
 export interface PortfolioEngagement {
   /** Modelos de contratação aplicáveis. */
   models: string[]
   /** Dimensionamento típico, sem preço. */
   sizing: string
-  /** Como conduzir a conversa de investimento. Visível só em modo apresentador. */
-  investmentGuidance: string
 }
 
 export interface PortfolioPersona {
   id: string
   role: string
   concern: string
+  /** Pergunta simples para abrir a conversa com esta persona. */
+  openingQuestion: string
   icon: string
   color: string
   /** Códigos de oferta em ordem de abertura. */
@@ -291,6 +293,9 @@ export interface PortfolioFutureItem {
   id: string
   name: string
   description: string
+  example: string
+  /** Gate comercial: observar, experimentar ou industrializar. */
+  maturity: string
   horizon: string
   icon: string
 }
@@ -414,6 +419,7 @@ export interface SessionRecord {
   sectionsVisited: number
   topSections: { section: AppSection; seconds: number }[]
   interestedSections: AppSection[]
+  interestedOffers?: OfferInterest[]
 }
 
 // ─── Analytics de Sessão ────────────────────────────────────────────────────
@@ -429,6 +435,17 @@ export interface OfferStat {
   code: string
   name: string
   openCount: number
+}
+
+export interface OfferInterest {
+  code: string
+  name: string
+  challenge: string
+  maturity: EvidenceStatus
+  nextStep: string
+  clientId: string | null
+  sessionRole: SessionProfile['role']
+  createdAt: number
 }
 
 // ─── Estado e Ações ──────────────────────────────────────────────────────────
@@ -454,6 +471,7 @@ export interface AppState {
   isClientSelectorOpen: boolean
   // Sinais de interesse
   interestedSections: AppSection[]
+  interestedOffers: OfferInterest[]
   // Perfil da reunião
   sessionProfile: SessionProfile | null
   isWizardOpen: boolean
@@ -477,6 +495,7 @@ export type AppAction =
   | { type: 'CLEAR_CLIENT' }
   | { type: 'TOGGLE_CLIENT_SELECTOR' }
   | { type: 'TOGGLE_INTEREST'; section: AppSection }
+  | { type: 'TOGGLE_OFFER_INTEREST'; interest: OfferInterest }
   | { type: 'TRACK_OFFER_VIEW'; code: string; name: string }
   | { type: 'SET_PROFILE'; profile: SessionProfile }
   | { type: 'CLOSE_WIZARD' }

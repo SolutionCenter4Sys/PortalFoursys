@@ -33,21 +33,23 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
       { id: 'identity-timeline', label: 'Linha do Tempo', sectionId: 'identity' },
     ],
     'portfolio-thesis': [
-      { id: 'portfolio-thesis-vitrine', label: 'Eixos de diferenciação', sectionId: 'portfolio-thesis' },
-      { id: 'portfolio-thesis-motor', label: 'Eixos de capacidade', sectionId: 'portfolio-thesis' },
+      { id: 'portfolio-thesis-vitrine', label: 'Pilares de diferenciação', sectionId: 'portfolio-thesis' },
+      { id: 'portfolio-thesis-motor', label: 'Pilares de capacidade', sectionId: 'portfolio-thesis' },
     ],
     'portfolio-products': [
-      { id: 'portfolio-products-catalogo', label: 'FourBlox e Fourmakers', sectionId: 'portfolio-products' },
+      { id: 'portfolio-products-catalogo', label: 'FourBlox e FourMakers', sectionId: 'portfolio-products' },
     ],
     'portfolio-offers': [
       { id: 'portfolio-offers-catalogo', label: 'Catálogo completo (21 ofertas)', sectionId: 'portfolio-offers' },
+      { id: 'portfolio-offers-glossario', label: 'Glossário para clientes', sectionId: 'portfolio-offers' },
+      { id: 'portfolio-offers-cyber', label: 'Cibersegurança e seus 6 módulos', sectionId: 'portfolio-offers' },
     ],
     'portfolio-start': [
-      { id: 'portfolio-start-personas', label: 'Shortlist por persona', sectionId: 'portfolio-start' },
-      { id: 'portfolio-start-segmentos', label: 'Prioridades por segmento', sectionId: 'portfolio-start' },
+      { id: 'portfolio-start-personas', label: 'Caminhos por contexto', sectionId: 'portfolio-start' },
+      { id: 'portfolio-start-segmentos', label: 'Caminhos por segmento', sectionId: 'portfolio-start' },
     ],
     'portfolio-future': [
-      { id: 'portfolio-future-visao', label: 'Visão de futuro', sectionId: 'portfolio-future' },
+      { id: 'portfolio-future-visao', label: 'Visão de futuro, exemplos e gates', sectionId: 'portfolio-future' },
     ],
     'portfolio-assets': [
       { id: 'portfolio-assets-sustain', label: 'Sustentação, continuidade e evolução', sectionId: 'portfolio-assets' },
@@ -95,21 +97,23 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
       { id: 'identity-timeline', label: 'Timeline', sectionId: 'identity' },
     ],
     'portfolio-thesis': [
-      { id: 'portfolio-thesis-vitrine', label: 'Differentiation axes', sectionId: 'portfolio-thesis' },
-      { id: 'portfolio-thesis-motor', label: 'Capacity axes', sectionId: 'portfolio-thesis' },
+      { id: 'portfolio-thesis-vitrine', label: 'Differentiation pillars', sectionId: 'portfolio-thesis' },
+      { id: 'portfolio-thesis-motor', label: 'Capacity pillars', sectionId: 'portfolio-thesis' },
     ],
     'portfolio-products': [
-      { id: 'portfolio-products-catalogo', label: 'FourBlox and Fourmakers', sectionId: 'portfolio-products' },
+      { id: 'portfolio-products-catalogo', label: 'FourBlox and FourMakers', sectionId: 'portfolio-products' },
     ],
     'portfolio-offers': [
       { id: 'portfolio-offers-catalogo', label: 'Full catalog (21 offers)', sectionId: 'portfolio-offers' },
+      { id: 'portfolio-offers-glossario', label: 'Client glossary', sectionId: 'portfolio-offers' },
+      { id: 'portfolio-offers-cyber', label: 'Cybersecurity and its 6 modules', sectionId: 'portfolio-offers' },
     ],
     'portfolio-start': [
-      { id: 'portfolio-start-personas', label: 'Shortlist by persona', sectionId: 'portfolio-start' },
-      { id: 'portfolio-start-segmentos', label: 'Priorities by segment', sectionId: 'portfolio-start' },
+      { id: 'portfolio-start-personas', label: 'Paths by context', sectionId: 'portfolio-start' },
+      { id: 'portfolio-start-segmentos', label: 'Paths by industry', sectionId: 'portfolio-start' },
     ],
     'portfolio-future': [
-      { id: 'portfolio-future-visao', label: 'Future vision', sectionId: 'portfolio-future' },
+      { id: 'portfolio-future-visao', label: 'Future vision, examples and gates', sectionId: 'portfolio-future' },
     ],
     'portfolio-assets': [
       { id: 'portfolio-assets-sustain', label: 'Sustainment, continuity and evolution', sectionId: 'portfolio-assets' },

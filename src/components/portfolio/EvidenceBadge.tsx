@@ -1,4 +1,4 @@
-import { BadgeCheck, FlaskConical, ShieldAlert } from 'lucide-react'
+import { BadgeCheck, FlaskConical, Layers3 } from 'lucide-react'
 import { useLanguage } from '../../i18n'
 import { EVIDENCE_COLOR } from '../../theme/portfolioTokens'
 import type { EvidenceStatus } from '../../types'
@@ -8,7 +8,7 @@ import type { EvidenceStatus } from '../../types'
 export const EVIDENCE_STYLE: Record<EvidenceStatus, { color: string; icon: typeof BadgeCheck }> = {
   'liberado': { color: EVIDENCE_COLOR['liberado'], icon: BadgeCheck },
   'em-validacao': { color: EVIDENCE_COLOR['em-validacao'], icon: FlaskConical },
-  'sem-lastro': { color: EVIDENCE_COLOR['sem-lastro'], icon: ShieldAlert },
+  'sem-lastro': { color: EVIDENCE_COLOR['sem-lastro'], icon: Layers3 },
 }
 
 export function EvidenceBadge({ status, compact = false }: { status: EvidenceStatus; compact?: boolean }) {

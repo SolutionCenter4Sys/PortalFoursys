@@ -43,6 +43,13 @@ const navigationItemsPt: NavigationItem[] = [
 
   // ── Portfólio 2026 S2 ──────────────────────────────────────────────────────
   {
+    id: 'portfolio-start',
+    label: 'Por Onde Começar',
+    icon: 'route',
+    category: 'Portfólio',
+    description: 'Escolha seu contexto e descubra os caminhos mais aderentes',
+  },
+  {
     id: 'portfolio-ecosystem',
     label: 'Ecossistema do Portfólio',
     icon: 'network',
@@ -51,17 +58,17 @@ const navigationItemsPt: NavigationItem[] = [
   },
   {
     id: 'portfolio-thesis',
-    label: 'Eixos de Valor',
+    label: 'Pilares de Valor',
     icon: 'compass',
     category: 'Portfólio',
-    description: 'Como o portfólio se organiza: 6 eixos, vitrine e motor',
+    description: 'Como o portfólio se organiza: 6 pilares, diferenciação e capacidade',
   },
   {
     id: 'portfolio-products',
     label: 'Produtos',
     icon: 'package-check',
     category: 'Portfólio',
-    description: 'FourBlox e Fourmakers — plataformas próprias por assinatura, com kit comercial completo',
+    description: 'FourBlox e FourMakers — plataformas próprias por assinatura',
   },
   {
     id: 'portfolio-offers',
@@ -76,13 +83,6 @@ const navigationItemsPt: NavigationItem[] = [
     icon: 'blocks',
     category: 'Portfólio',
     description: 'Sustentação de ambientes críticos, NEXUS, Fusion Teams, Zeragon, SharpOps e demais ativos transversais',
-  },
-  {
-    id: 'portfolio-start',
-    label: 'Por Onde Começar',
-    icon: 'route',
-    category: 'Portfólio',
-    description: 'Shortlist de abertura por persona — CEO, CIO, COO, CFO e CDO',
   },
   {
     id: 'portfolio-future',
@@ -269,6 +269,13 @@ const navigationItemsEn: NavigationItem[] = [
 
   // ── Portfolio 2026 H2 ──────────────────────────────────────────────────────
   {
+    id: 'portfolio-start',
+    label: 'Where to Start',
+    icon: 'route',
+    category: 'Portfolio',
+    description: 'Choose your context and discover the most relevant paths',
+  },
+  {
     id: 'portfolio-ecosystem',
     label: 'Portfolio Ecosystem',
     icon: 'network',
@@ -277,17 +284,17 @@ const navigationItemsEn: NavigationItem[] = [
   },
   {
     id: 'portfolio-thesis',
-    label: 'Value Axes',
+    label: 'Value Pillars',
     icon: 'compass',
     category: 'Portfolio',
-    description: 'How the portfolio is organized: 6 axes, showcase and engine',
+    description: 'How the portfolio is organized: 6 pillars, differentiation and capacity',
   },
   {
     id: 'portfolio-products',
     label: 'Products',
     icon: 'package-check',
     category: 'Portfolio',
-    description: 'FourBlox and Fourmakers — proprietary subscription platforms with a full commercial kit',
+    description: 'FourBlox and FourMakers — proprietary subscription platforms',
   },
   {
     id: 'portfolio-offers',
@@ -302,13 +309,6 @@ const navigationItemsEn: NavigationItem[] = [
     icon: 'blocks',
     category: 'Portfolio',
     description: 'Sustainment of critical environments, NEXUS, Fusion Teams, Zeragon, SharpOps and other cross-cutting assets',
-  },
-  {
-    id: 'portfolio-start',
-    label: 'Where to Start',
-    icon: 'route',
-    category: 'Portfolio',
-    description: 'Opening shortlist by persona — CEO, CIO, COO, CFO and CDO',
   },
   {
     id: 'portfolio-future',

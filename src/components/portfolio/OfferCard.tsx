@@ -50,23 +50,17 @@ export function OfferCard({
         {offer.tagline}
       </p>
 
-      <p className="text-xs text-foursys-text-muted leading-relaxed flex-1 line-clamp-3 mb-3">
-        {offer.pain}
-      </p>
-
-      <div className="space-y-1.5 mb-3 w-full">
-        {offer.outcomes.slice(0, 2).map(outcome => (
-          <div key={outcome} className="flex items-start gap-1.5 text-label text-foursys-text-dim">
-            <CheckCircle2 size={11} style={{ color: accent }} className="flex-shrink-0 mt-0.5" aria-hidden="true" />
-            <span className="line-clamp-1">{outcome}</span>
-          </div>
-        ))}
+      <div className="flex items-start gap-2 mb-4 w-full flex-1">
+        <CheckCircle2 size={12} style={{ color: accent }} className="flex-shrink-0 mt-0.5" aria-hidden="true" />
+        <span className="text-label text-foursys-text-muted leading-relaxed line-clamp-2">
+          {offer.outcomes[0]}
+        </span>
       </div>
 
       <div className="flex items-center justify-between gap-2 pt-3 border-t border-white/[0.06] w-full">
         <span className="text-label text-foursys-text-dim">{offer.totalDuration}</span>
         <span
-          className="flex items-center gap-1 text-label font-semibold opacity-0 group-hover:opacity-100 transition-opacity"
+          className="flex items-center gap-1 text-label font-semibold"
           style={{ color: accent }}
         >
           {t('common.seeMore')} <ArrowRight size={11} aria-hidden="true" />

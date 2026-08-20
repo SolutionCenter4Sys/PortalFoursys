@@ -44,4 +44,9 @@ describe('Navigation items integrity', () => {
   it('sectionCategories has no duplicates', () => {
     expect(new Set(sectionCategories).size).toBe(sectionCategories.length)
   })
+
+  it('abre a categoria Portfólio por Por Onde Começar', () => {
+    const portfolioItems = navigationItems.filter(item => item.category === 'Portfólio')
+    expect(portfolioItems[0]?.id).toBe('portfolio-start')
+  })
 })

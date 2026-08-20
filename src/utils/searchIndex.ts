@@ -9,6 +9,8 @@ import { innovationTrends } from '../data/innovation'
 import { kpis, timeline } from '../data/kpis'
 import { showcaseClients } from '../data/clientShowcase'
 import { portfolioPt, sectionForOffer } from '../data/portfolio'
+import { getPortfolioExample } from '../data/portfolioExamples'
+import { portfolioGlossary } from '../data/portfolioGuidance'
 import type { AppSection } from '../types'
 
 export type SearchResultKind =
@@ -23,6 +25,7 @@ export type SearchResultKind =
   | 'alliance'
   | 'innovation'
   | 'portfolio-offer'
+  | 'portfolio-glossary'
   | 'kpi'
   | 'timeline'
   | 'client'
@@ -36,6 +39,8 @@ export interface SearchEntry {
   icon: string
   targetSection: AppSection
   category: string
+  /** Contexto opcional consumido pela seção de destino. */
+  hint?: string
 }
 
 function norm(text: string): string {
@@ -208,11 +213,26 @@ export function buildSearchIndex(): SearchEntry[] {
       title: `${offer.code} · ${offer.name}`,
       subtitle: `${axis?.name ?? 'Portfólio'} · ${offer.tagline}`,
       searchable: norm(
-        `${offer.code} ${offer.name} ${offer.headline} ${offer.tagline} ${offer.whatItIs} ${offer.pain} ${offer.outcomes.join(' ')} ${offer.differentials.map(d => `${d.title} ${d.detail}`).join(' ')} ${offer.assets?.join(' ') ?? ''} ${axis?.name ?? ''}`
+        `${offer.code} ${offer.name} ${offer.headline} ${offer.tagline} ${offer.whatItIs} ${offer.pain} ${offer.outcomes.join(' ')} ${offer.differentials.map(d => `${d.title} ${d.detail}`).join(' ')} ${offer.assets?.join(' ') ?? ''} ${getPortfolioExample(offer.code, 'pt') ?? ''} ${offer.modules?.map(m => `${m.name} ${m.description} ${m.clientValue} ${m.deliverables.join(' ')}`).join(' ') ?? ''} ${axis?.name ?? ''}`
       ),
       icon: 'library',
       targetSection: sectionForOffer(offer),
       category: 'Portfólio',
+      hint: `offer:${offer.code}`,
+    })
+  }
+
+  for (const item of portfolioGlossary) {
+    entries.push({
+      id: `pf-glossary-${norm(item.term).replace(/\s+/g, '-')}`,
+      kind: 'portfolio-glossary',
+      title: item.term,
+      subtitle: item.clientLanguage.pt,
+      searchable: norm(`${item.term} ${item.definition.pt} ${item.clientLanguage.pt}`),
+      icon: 'book-open',
+      targetSection: 'portfolio-offers',
+      category: 'Glossário do portfólio',
+      hint: `glossary:${item.term}`,
     })
   }
 

@@ -23,7 +23,7 @@ const thesis: PortfolioThesis = {
   label: 'Inteligência Artificial aplicada à transformação de negócios',
   sequence: ['Marca', 'Pipeline', 'Ticket'],
   description:
-    'O portfólio se organiza em seis eixos de valor, separados por função na conversa, mais produtos próprios e sustentação como ativos. Dois eixos são de diferenciação: definem posicionamento, abrem a agenda no nível certo e criam a preferência. Quatro são de capacidade: engenharia, dados, cloud e cibersegurança. Produtos Foursys vivem na subseção Produtos; Sustentação, Continuidade e Evolução vive em Ativos Transversais. A sequência importa porque quem entra pela capacidade compete por preço, e quem entra pela diferenciação decide o critério.',
+    'O portfólio se organiza em seis pilares de valor, separados por função na conversa, mais produtos próprios e sustentação como ativos. Dois pilares são de diferenciação: definem posicionamento, abrem a agenda no nível certo e criam a preferência. Quatro são de capacidade: engenharia, dados, cloud e cibersegurança. Produtos Foursys vivem na subseção Produtos; Sustentação, Continuidade e Evolução vive em Ativos Transversais. A sequência importa porque quem entra pela capacidade compete por preço, e quem entra pela diferenciação decide o critério.',
   principles: [
     'Diferenciação abre a conversa; capacidade sustenta o contrato. As duas coisas são necessárias e não se substituem.',
     'Toda oferta tem uma porta de entrada declarada e uma fronteira: quando não é a oferta certa, dizemos qual é.',
@@ -35,7 +35,7 @@ const thesis: PortfolioThesis = {
 
 const institutionalBacking = [
   { value: '26', label: 'anos' },
-  { value: '6', label: 'eixos' },
+  { value: '6', label: 'pilares' },
   { value: '21', label: 'ofertas' },
 ]
 
@@ -220,11 +220,6 @@ const offers: PortfolioOffer[] = [
       'Se o objetivo é gerar volume de ideias ou sensibilizar a organização, esta não é a oferta: aqui o produto é governança do portfólio.',
     proof: {
       status: 'sem-lastro',
-      note: 'O kit pede iniciativas do próprio Innovation Center que avançaram ou morreram por gate, e esse material ainda não foi documentado. Não há case liberado.',
-    },
-    legacyEquivalent: {
-      label: 'Inovação → Estrutura e Governança de Inovação, Gestão do Portfólio (TBM)',
-      section: 'innovation',
     },
   },
   {
@@ -232,7 +227,7 @@ const offers: PortfolioOffer[] = [
     code: '1.2',
     axisId: 'eixo-1',
     role: 'diferenciacao',
-    name: 'Lab as a Service',
+    name: 'Lab como Serviço (Lab as a Service)',
     headline: 'Valide antes de investir pesado',
     tagline: 'Da hipótese ao MVP, sem carregar a lógica corporativa para dentro do experimento.',
     whatItIs:
@@ -303,11 +298,6 @@ const offers: PortfolioOffer[] = [
       'Se a decisão de construir já foi tomada e o escopo está fechado, o caminho é engenharia direto, não laboratório.',
     proof: {
       status: 'em-validacao',
-      note: 'O kit aponta o NEXUS como case-âncora (produto próprio em produção com cliente pagante), mas o detalhamento de setor, porte e escopo ainda depende de liberação. Os demais MVPs seguem pendentes de documentação.',
-    },
-    legacyEquivalent: {
-      label: 'IA na Foursys → Laboratório de Inovação Aberta; Inovação → Studio de Inovação',
-      section: 'innovation',
     },
   },
   {
@@ -315,7 +305,6 @@ const offers: PortfolioOffer[] = [
     code: '1.3',
     axisId: 'eixo-1',
     role: 'diferenciacao',
-    portfolioRole: 'Conversa de board',
     name: 'Novo Modelo Operacional para a Era da IA',
     headline: 'Reinvente, não só otimize',
     tagline: 'A régua que separa quem ganhou eficiência de quem reinventou a estrutura de custo.',
@@ -392,7 +381,6 @@ const offers: PortfolioOffer[] = [
       'Se a pergunta é qual processo automatizar primeiro, o caminho é Hiper-eficiência. Esta oferta trata do modelo, não da cadeia.',
     proof: {
       status: 'sem-lastro',
-      note: 'O kit registra a narrativa da própria travessia da Foursys como o case mais importante a documentar de todo o portfólio — e ele ainda não existe em formato liberado.',
     },
   },
 
@@ -402,7 +390,7 @@ const offers: PortfolioOffer[] = [
     code: '2.1A',
     axisId: 'eixo-2',
     role: 'diferenciacao',
-    name: 'AI Strategy & Roadmap',
+    name: 'Estratégia e Roadmap de IA (AI Strategy & Roadmap)',
     headline: 'Decida onde investir em IA com critério, não com intuição',
     tagline: 'O custo unitário entra na conta antes da aprovação, não depois.',
     whatItIs:
@@ -488,11 +476,6 @@ const offers: PortfolioOffer[] = [
       'Se ainda não há critério nem orçamento definido, o caminho de menor atrito é o AI Discovery Workshop.',
     proof: {
       status: 'em-validacao',
-      note: 'Os cases de estratégia dependem de liberação sobre setor, porte e escopo. O que já é demonstrável é a plataforma própria em produção.',
-    },
-    legacyEquivalent: {
-      label: 'IA na Foursys → AI Strategy & Roadmap',
-      section: 'ai-foursys',
     },
   },
   {
@@ -500,7 +483,6 @@ const offers: PortfolioOffer[] = [
     code: '2.1B',
     axisId: 'eixo-2',
     role: 'diferenciacao',
-    portfolioRole: 'Âncora do portfólio',
     name: 'Governança e Soberania de IA',
     headline: 'Escale IA sem perder o controle dela',
     tagline: 'Política de IA é o que você publica; governança é o que você prova depois.',
@@ -624,11 +606,6 @@ const offers: PortfolioOffer[] = [
       'Se a organização ainda não tem nada em produção, a conversa começa por estratégia ou por discovery — governança sem parque para governar vira documento.',
     proof: {
       status: 'em-validacao',
-      note: 'Parte dos sete componentes já é ativo formalizado e parte precisa de confirmação. A instrumentação em runtime é demonstrável na plataforma própria; os cases de cliente dependem de liberação.',
-    },
-    legacyEquivalent: {
-      label: 'IA na Foursys → Governança de IA e 10 Pilares de Governança',
-      section: 'ai-foursys',
     },
   },
   {
@@ -636,8 +613,7 @@ const offers: PortfolioOffer[] = [
     code: '2.1C',
     axisId: 'eixo-2',
     role: 'diferenciacao',
-    portfolioRole: 'Rampa de entrada',
-    name: 'AI Discovery Workshop',
+    name: 'Workshop de Discovery para IA (AI Discovery Workshop)',
     headline: 'Saia com quatro decisões, não com cinquenta ideias',
     tagline: 'O produto é decisão fundamentada, incluindo o que foi descartado e por quê.',
     whatItIs:
@@ -729,7 +705,6 @@ const offers: PortfolioOffer[] = [
       'Se já existe critério e orçamento, vá direto para AI Strategy & Roadmap. Se o objetivo é capacitar pessoas, esta não é a oferta.',
     proof: {
       status: 'sem-lastro',
-      note: 'O número de discoveries conduzidos e a taxa de conversão da rampa são a pendência número um do eixo, e ainda não há dado consolidado para publicar.',
     },
   },
   {
@@ -737,7 +712,6 @@ const offers: PortfolioOffer[] = [
     code: '2.2',
     axisId: 'eixo-2',
     role: 'capacidade',
-    portfolioRole: 'Delivery puxado',
     name: 'Fábrica de Agentes de IA',
     headline: 'A unidade de entrega é agente em produção, não agente construído',
     tagline: 'O gargalo não é o primeiro agente. É o quadragésimo continuar de pé.',
@@ -834,15 +808,8 @@ const offers: PortfolioOffer[] = [
     connects: ['2.1C', '2.1B', '2.3', '2.1A'],
     boundary:
       'Esta oferta é puxada, não de abertura. Se o assunto é software, o caminho é Agentic Squad Model; se é processo de negócio, é Hiper-eficiência.',
-    editorialCare:
-      'Não reforçar contagem de agentes como métrica de sucesso. Quantidade de agentes é sintoma; agente sustentado em produção é o resultado.',
     proof: {
       status: 'sem-lastro',
-      note: 'A prova central da oferta seria o número real de agentes em produção sustentados, com tempo de vida e taxa de sobrevivência. Esse dado ainda não está consolidado.',
-    },
-    legacyEquivalent: {
-      label: 'IA na Foursys → Criação de Agentes de IA',
-      section: 'ai-foursys',
     },
   },
   {
@@ -945,15 +912,8 @@ const offers: PortfolioOffer[] = [
     connects: ['2.2', '2.1B', '2.1C', '3.1'],
     boundary:
       'Hiper-eficiência decide se, onde e por quê mudar o processo. A construção dos agentes é a Fábrica de Agentes. A conversa de modelo operacional inteiro é 1.3.',
-    editorialCare:
-      'Jamais comunicar como redução de quadro. O enquadramento é capacidade: absorver mais volume com a mesma estrutura. Promessa de corte ativa RH, jurídico e relação sindical e trava o programa.',
     proof: {
       status: 'sem-lastro',
-      note: 'Os cases de eficiência e o dado de mercado sobre custo de áreas meio no Brasil seguem pendentes. O que existe é o método e a régua de medição.',
-    },
-    legacyEquivalent: {
-      label: 'Linhas de Serviço → Hiperautomação & RPA',
-      section: 'services',
     },
   },
 
@@ -980,8 +940,8 @@ const offers: PortfolioOffer[] = [
       'Iniciativa de IA bloqueada por falta de dado e de API',
     ],
     outcomes: [
-      'Redução de custo e de risco operacional do legado (referência de projetos anteriores: até 30%)',
-      'Ciclo de modernização acelerado (referência de projetos anteriores: até 70% de time-to-market)',
+      'Redução mensurável de custo e de risco operacional do legado, conforme linha de base do projeto',
+      'Ciclo de modernização acelerado, com cadência comparada ao processo anterior do cliente',
       'Lógica de negócio preservada e testada, mesmo sem documentação ou desenvolvedor original',
       'O conhecimento do seu legado de volta, documentado pelo Extrator de Regras',
       'Base API-first e cloud-ready, pronta para evoluir',
@@ -1075,19 +1035,14 @@ const offers: PortfolioOffer[] = [
     cta: 'Um diagnóstico de legado que mapeia as regras de negócio, quantifica o custo de manter e mostra o caminho de modernização com prazo e investimento.',
     connects: ['3.3', '3.2', '2.1B', '1.3'],
     boundary:
-      'Se o problema real é dado fragmentado e não código legado, a entrada é pelo eixo de Inteligência de Dados.',
+      'Se o problema real é dado fragmentado e não código legado, a entrada é pelo pilar de Inteligência de Dados.',
     proof: {
       status: 'liberado',
-      note: 'É a única oferta do portfólio com cases nomeados e liberados para uso comercial.',
       cases: [
         'Instituição financeira nos Estados Unidos — monolito de 4 milhões de linhas convertido em microsserviços Python em 12 meses.',
         'Seguradora — mais de 2 milhões de linhas de mainframe COBOL e Visual Age migradas para .NET e React, acompanhadas de cerca de 20% de aumento de negócios do cliente.',
         'Risk Score Global — AS400 migrado para Java em cloud, com 600 mil linhas e tempo de instalação caindo de 12 para 3 meses.',
       ],
-    },
-    legacyEquivalent: {
-      label: 'Principais Ofertas e Linhas de Serviço → Modernização de Legados',
-      section: 'services',
     },
   },
   {
@@ -1107,7 +1062,7 @@ const offers: PortfolioOffer[] = [
       'Ciclo de entrega longo frente à competição',
       'Custo unitário de entrega insustentável',
       'Necessidade de capacidade elástica sem inflar o time fixo',
-      'Continuidade de Lab as a Service, modernização ou novo modelo operacional que puxa a engenharia',
+      'Continuidade de Lab como Serviço, modernização ou novo modelo operacional que puxa a engenharia',
     ],
     outcomes: [
       'Produtos digitais entregues mais rápido, com IA no ciclo',
@@ -1131,7 +1086,7 @@ const offers: PortfolioOffer[] = [
       {
         title: 'Continuidade com contexto estratégico',
         detail:
-          'Delivery conectado à governança do Eixo 2 e às conversas de inovação, não fábrica avulsa contratada por headcount.',
+          'Delivery conectado à governança do Pilar 2 e às conversas de inovação, não fábrica avulsa contratada por headcount.',
       },
       {
         title: 'Multi-cloud, sem aprisionamento',
@@ -1188,14 +1143,9 @@ const offers: PortfolioOffer[] = [
     cta: 'Comece por um piloto de entrega de três meses em uma frente do roadmap, com critério de sucesso acordado por escrito sobre uma métrica única: custo unitário de entrega ou lead time.',
     connects: ['3.3', '3.4', '3.1'],
     boundary:
-      'Não é oferta de abertura por padrão: o delivery é puxado por Lab as a Service, Modernização ou Novo Modelo Operacional. É a contraparte de engenharia de software frente à hiper-eficiência de processos, que não constrói sistema. Se o problema é o legado que impede evoluir, comece por Modernização.',
+      'Não é oferta de abertura por padrão: o delivery é puxado por Lab como Serviço, Modernização ou Novo Modelo Operacional. É a contraparte de engenharia de software frente à hiper-eficiência de processos, que não constrói sistema. Se o problema é o legado que impede evoluir, comece por Modernização.',
     proof: {
       status: 'em-validacao',
-      note: 'O kit é enxuto: não tem one-pager formal, case liberado nem número próprio de produtividade validado. Parte do escopo embutido segue pendente de confirmação com delivery. A prova disponível é o histórico de entrega e os cases de modernização da oferta 3.1.',
-    },
-    legacyEquivalent: {
-      label: 'Linhas de Serviço → Design e Engenharia de Software com IA',
-      section: 'services',
     },
   },
   {
@@ -1318,15 +1268,8 @@ const offers: PortfolioOffer[] = [
     connects: ['3.2', '3.1', '3.4'],
     boundary:
       'São duas ofertas autônomas e não devem ser confundidas: o CoE trata de organização e governança da qualidade, o CSC de capacidade dentro de uma squad. Se a dor é volume de construção e não escape de defeito, a conversa começa por Engenharia Digital.',
-    editorialCare:
-      'Os ganhos próprios da prática (multiplicadores de cenário, massa e automação) estão marcados para validação de origem no material interno. Não publicar percentual até haver projeto, período e metodologia citáveis; usar apenas como ordem de grandeza em conversa.',
     proof: {
       status: 'sem-lastro',
-      note: 'Não há case liberado neste kit. Todos os números de ganho da prática estão marcados para validação de origem e lastro. Por isso publicamos o método, as torres e os gates, e os dados de mercado aparecem identificados como benchmark de setor, não como métrica da casa.',
-    },
-    legacyEquivalent: {
-      label: 'Principais Ofertas e Linhas de Serviço → Qualidade & Testes com IA',
-      section: 'services',
     },
   },
   {
@@ -1334,7 +1277,7 @@ const offers: PortfolioOffer[] = [
     code: '3.4',
     axisId: 'eixo-3',
     role: 'capacidade',
-    name: 'Agentic Squad Model',
+    name: 'Agentic Squad Model · Squads humano-agente',
     headline: 'A squad que opera, não a que se promete',
     tagline: 'Squads híbridas humano-agente, governadas, medidas e entregando software.',
     whatItIs:
@@ -1440,11 +1383,6 @@ const offers: PortfolioOffer[] = [
       'Não é exclusiva de setor regulado: governança é universal e conformidade (BACEN, ANS, ANPD, LGPD) é caso de aplicação. Não é consultoria de redesenho nem squad por headcount. Se a necessidade é agente de negócio operando em processo, e não construção de software, o caminho é a Fábrica de Agentes; se é processo de negócio sem engenharia, é hiper-eficiência.',
     proof: {
       status: 'sem-lastro',
-      note: 'O ganho de produtividade real das squads Foursys medido pela régua interna está marcado para formalização e não pode ser publicado como percentual. O kit reconhece a exposição: concorrentes têm números públicos, a casa ainda não. Publicamos a composição, o método e a instrumentação de custo.',
-    },
-    legacyEquivalent: {
-      label: 'Principais Ofertas → AI Squad; Delivery → Squad + Agentes IA',
-      section: 'offers-flagship',
     },
   },
 
@@ -1454,7 +1392,7 @@ const offers: PortfolioOffer[] = [
     code: '4.1',
     axisId: 'eixo-4',
     role: 'capacidade',
-    name: 'Data Readiness para IA',
+    name: 'Prontidão de Dados para IA (Data Readiness)',
     headline: 'Prepare o dado para a era dos agentes',
     tagline: 'Prontidão, camada semântica e dado como produto — não só mais uma plataforma.',
     whatItIs:
@@ -1528,11 +1466,6 @@ const offers: PortfolioOffer[] = [
       'Se a dor é só dashboard executivo sem agenda de IA, comece por Decision Intelligence. Se é plataforma completa com seis frentes, a oferta 4.4 integra o programa.',
     proof: {
       status: 'sem-lastro',
-      note: 'Oferta da Linha Mestra sem kit comercial dedicado neste ciclo. Conteúdo derivado do Documento de Foco e do material de Dados & Analytics.',
-    },
-    legacyEquivalent: {
-      label: 'Linhas de Serviço → Dados & Analytics (recorte AI-readiness)',
-      section: 'services',
     },
   },
   {
@@ -1540,8 +1473,7 @@ const offers: PortfolioOffer[] = [
     code: '4.2',
     axisId: 'eixo-4',
     role: 'capacidade',
-    portfolioRole: 'Rampa de entrada',
-    name: 'Decision Intelligence',
+    name: 'Inteligência de Decisão (Decision Intelligence)',
     headline: 'Decisão confiável, não só dashboard bonito',
     tagline: 'Dashboard é componente da decisão — o produto é a decisão rastreável.',
     whatItIs:
@@ -1609,11 +1541,6 @@ const offers: PortfolioOffer[] = [
       'Não é projeto isolado de dashboard nem ferramenta de BI sem dono de decisão. Se o gargalo é qualidade de dado para agentes, comece por 4.1.',
     proof: {
       status: 'sem-lastro',
-      note: 'Oferta da Linha Mestra sem kit dedicado neste ciclo. Cases citados no material de linhas de serviço dependem de liberação.',
-    },
-    legacyEquivalent: {
-      label: 'Linhas de Serviço → Dados & Analytics (recorte decisão)',
-      section: 'services',
     },
   },
   {
@@ -1621,7 +1548,7 @@ const offers: PortfolioOffer[] = [
     code: '4.3',
     axisId: 'eixo-4',
     role: 'capacidade',
-    name: 'Autonomous Intelligence',
+    name: 'Inteligência Autônoma (Autonomous Intelligence)',
     headline: 'Modelos que preveem e agem — com guardrails',
     tagline: 'Do preditivo à ação autônoma, com trilha e limite declarado.',
     whatItIs:
@@ -1689,11 +1616,6 @@ const offers: PortfolioOffer[] = [
       'Não substitui agente conversacional complexo — isso é Fábrica de Agentes. Se o dado não sustenta o modelo, volte para Data Readiness.',
     proof: {
       status: 'sem-lastro',
-      note: 'Oferta da Linha Mestra sem kit dedicado neste ciclo. Prova depende de cases de MLOps liberados.',
-    },
-    legacyEquivalent: {
-      label: 'Linhas de Serviço → Dados & Analytics (recorte modelos autônomos)',
-      section: 'services',
     },
   },
   {
@@ -1802,10 +1724,6 @@ const offers: PortfolioOffer[] = [
         stat: 'Empresas data-driven têm 23 vezes mais chance de adquirir clientes e 6 vezes mais de retê-los, enquanto 73% dos projetos de dados falham.',
         source: 'Dados de mercado citados no material de linhas de serviço — benchmark de setor, não métrica da Foursys',
       },
-      {
-        stat: 'O material cita case com 40% de redução de ruptura de estoque, 280% de ROI no primeiro ano e relatórios que saíram de três dias para instantâneos.',
-        source: 'Case citado no material de linhas de serviço — pendente de liberação de setor, porte e escopo',
-      },
     ],
     regulatory: [
       'LGPD: segurança, privacidade e controle de acesso ao dado desde a origem',
@@ -1832,16 +1750,9 @@ const offers: PortfolioOffer[] = [
     cta: 'A porta de entrada é o assessment de maturidade analítica: onde o dado está, o que impede a confiança nele e qual o primeiro caso de uso que paga a plataforma.',
     connects: ['4.1', '4.2', '4.3', '2.1B', '2.2', '5.4'],
     boundary:
-      'Programa integrado All In Data quando a casa precisa de várias frentes juntas. Se a dor é só prontidão para IA, decisão executiva ou modelos autônomos, use 4.1, 4.2 ou 4.3. Se é governança de IA, comece por 2.1B; se é infraestrutura cloud, pelo eixo 5.',
-    editorialCare:
-      'Os números de redução de ruptura e ROI vêm de case citado no material de linhas de serviço e ainda não têm setor, porte e escopo liberados. Usar como ordem de grandeza, sem nomear cliente, e manter os dados de mercado identificados como benchmark de setor.',
+      'Programa integrado All In Data quando a casa precisa de várias frentes juntas. Se a dor é só prontidão para IA, decisão executiva ou modelos autônomos, use 4.1, 4.2 ou 4.3. Se é governança de IA, comece por 2.1B; se é infraestrutura cloud, pelo Pilar 5.',
     proof: {
       status: 'em-validacao',
-      note: 'Há case citado no material com número de ruptura e de ROI, mas a liberação de setor, porte e escopo está pendente. O que já é publicável é a estrutura das seis frentes, o CoE e a arquitetura de referência.',
-    },
-    legacyEquivalent: {
-      label: 'Linhas de Serviço → Dados & Analytics',
-      section: 'services',
     },
   },
 
@@ -1851,12 +1762,11 @@ const offers: PortfolioOffer[] = [
     code: '5.1',
     axisId: 'eixo-5',
     role: 'capacidade',
-    portfolioRole: 'Rampa de entrada',
     name: 'Otimização de Cloud e FinOps · SharpOps',
     headline: 'Do achado ao deploy, sem sair do controle do cliente',
     tagline: 'Economia executada por Pull Request e cobrada só depois de comprovada em produção.',
     whatItIs:
-      'Operação de FinOps conduzida pela SharpOps, unidade de FinOps do grupo, em quatro passos: o motor proprietário identifica a oportunidade, a mudança é proposta como Pull Request no repositório do próprio cliente, o cliente aprova e o deploy acontece. Não há licença de software nem hora de consultoria: o modelo é pure success fee, uma fração da economia que aparece no billing.',
+      'Operação de FinOps conduzida pela SharpOps, unidade de FinOps do grupo, em quatro passos: o motor proprietário identifica a oportunidade, a mudança é proposta como Pull Request no repositório do próprio cliente, o cliente aprova e o deploy acontece. A remuneração pode ser vinculada à economia aferida, conforme baseline e condições aprovadas na proposta comercial.',
     pain:
       'O custo de cloud cresce mais rápido do que a capacidade de governá-lo. Assessment tradicional entrega recomendação em PDF que o time interno nunca tem janela para executar; ferramenta SaaS resolve o outro extremo, mas muda o ambiente em caixa preta, exige acesso amplo de leitura e chega a mandar dado bruto de billing para modelo de linguagem. No fim, a economia fica na projeção e não no extrato.',
     entryTriggers: [
@@ -1870,7 +1780,7 @@ const offers: PortfolioOffer[] = [
       'Baseline de custo por recurso, usada para decidir por onde começar',
       'Oportunidades entregues como Pull Request revisável no repositório do cliente',
       'Economia aferida pela diferença de custo real medida depois da mudança em produção',
-      'Modelo pure success fee: sem licença de software e sem cobrança de horas',
+      'Modelo comercial alinhado à economia aferida, definido na proposta',
       'Infraestrutura como código no repositório do cliente, sem lock-in na saída',
       'Inventário de operações e controles compensatórios validado com o CISO antes da assinatura',
     ],
@@ -1886,9 +1796,9 @@ const offers: PortfolioOffer[] = [
           'A linha de base serve só para escolher por onde começar. O fee é calculado pela diferença de custo real, medida em janela de 15 dias depois do deploy — não há mecanismo para inflar projeção, porque o que conta é o impacto no billing.',
       },
       {
-        title: 'Contratação por modalidade',
+        title: 'Incentivos alinhados ao resultado',
         detail:
-          'Assessment com 15% quando a identificação é da SharpOps e a execução fica com o cliente; 15% quando o cliente identifica e a SharpOps executa; 30% quando as duas pontas são da SharpOps.',
+          'Baseline, responsabilidade de identificação, execução e janela de aferição ficam explícitos antes da contratação. Percentuais e condições saem apenas na proposta aprovada.',
       },
       {
         title: 'CISO-ready, sem caixa preta',
@@ -1916,9 +1826,9 @@ const offers: PortfolioOffer[] = [
     ],
     phases: [
       {
-        name: 'Assessment sem custo',
+        name: 'Assessment inicial',
         duration: 'a calibrar por ambiente',
-        focus: 'Mapeamento inicial do ambiente para priorizar oportunidades e definir a baseline.',
+        focus: 'Mapeamento do ambiente para priorizar oportunidades e definir a baseline, sob escopo comercial aprovado.',
       },
       {
         name: 'Validação conjunta',
@@ -1936,21 +1846,12 @@ const offers: PortfolioOffer[] = [
         focus: 'Início da execução com as primeiras propostas de infraestrutura no repositório do cliente.',
       },
     ],
-    totalDuration: 'assessment inicial sem custo · primeiros Pull Requests em semanas · fee residual de 12 meses por tranche executada',
-    marketStats: [
-      {
-        stat: 'A régua de fee do modelo é de 15% para identificação, 15% para execução e 30% quando as duas pontas são da SharpOps.',
-        source: 'Modelo comercial SharpOps FinOps Automation',
-      },
-      {
-        stat: 'O material comercial usa um cenário ilustrativo de R$ 435 mil de economia mensal em run-rate sobre um custo de R$ 1,85 milhão por mês.',
-        source: 'Cenário ilustrativo do material SharpOps — não é resultado medido de cliente',
-      },
-    ],
+    totalDuration: 'assessment calibrado por ambiente · primeiros Pull Requests em semanas · operação conforme proposta',
+    marketStats: [],
     personas: [
       {
         role: 'CFO',
-        value: 'Paga apenas pela economia que aparece no billing, com fee proporcional ao valor capturado.',
+        value: 'Conecta remuneração à economia aferida, com baseline e condições explícitas na proposta.',
       },
       {
         role: 'CIO e CTO',
@@ -1965,19 +1866,12 @@ const offers: PortfolioOffer[] = [
         value: 'Avalia inventário de operações e controles compensatórios antes de assinar, sem push direto no ambiente.',
       },
     ],
-    cta: 'A porta de entrada é o assessment sem custo: mapeamento do ambiente, baseline por recurso e priorização. A decisão de executar vem depois, já com número na mesa.',
+    cta: 'A porta de entrada é o assessment do ambiente: mapeamento, baseline por recurso e priorização. A decisão de executar vem depois, já com número verificável na mesa.',
     connects: ['3.1', '3.4'],
     boundary:
-      'Não é migração para cloud nem consultoria de arquitetura: o foco é o custo do que já está em produção. Se a dor é desenho de plataforma ou modernização do legado, a conversa começa pelo eixo de engenharia.',
-    editorialCare:
-      'O cenário de economia é ilustrativo e não pode ser apresentado como resultado de cliente. Não citar nome de cliente, número de proposta ou valores de proposta específica em conversa comercial.',
+      'Não é migração para cloud nem consultoria de arquitetura: o foco é o custo do que já está em produção. Se a dor é desenho de plataforma ou modernização do legado, a conversa começa pelo pilar de engenharia.',
     proof: {
       status: 'sem-lastro',
-      note: 'O material comercial traz cenário ilustrativo de economia, não caso medido e liberado. Por isso publicamos o método — GitOps com Pull Request, success fee e janela de aferição de 15 dias — em vez de percentual de economia.',
-    },
-    legacyEquivalent: {
-      label: 'Linhas de Serviço → Arquitetura, DevOps, Cloud e FinOps (recorte SharpOps)',
-      section: 'services',
     },
   },
   {
@@ -2053,87 +1947,82 @@ const offers: PortfolioOffer[] = [
       'Não é migração cloud completa — isso é 5.4. Se a dor é só fatura de hyperscaler, comece por 5.1 SharpOps.',
     proof: {
       status: 'sem-lastro',
-      note: 'Oferta da Linha Mestra sem kit dedicado neste ciclo. Métricas de economia seguem pendência de lastro por projeto.',
-    },
-    legacyEquivalent: {
-      label: 'Linhas de Serviço → Arquitetura, DevOps, Cloud e FinOps (recorte on-premise)',
-      section: 'services',
     },
   },
   {
     id: 'tokenomics',
     code: '5.3',
     axisId: 'eixo-5',
-    role: 'diferenciacao',
-    name: 'Tokenomics',
-    headline: 'Da tese tokenizada ao ativo em produção',
-    tagline: 'Economia digital com trilha verificável — conectada à visão de futuro do portfólio.',
+    role: 'capacidade',
+    name: 'Tokenomics · FinOps para consumo por tokens',
+    headline: 'O custo por transação não pode inviabilizar a IA quando ela escala',
+    tagline: 'Governança econômica para tokens de IA, APIs e orquestração agêntica.',
     whatItIs:
-      'Estratégia e construção de soluções de tokenomics: desenho do modelo econômico do token, arquitetura da plataforma, integração com sistemas legados e operação com trilha digital auditável. Ponte entre a visão de tokenização do portfólio e a entrega em produção.',
+      'Disciplina de FinOps aplicada a ambientes cujo custo nasce do consumo por token de IA, chamada de API, execução de agente e fluxo de orquestração. Mapeia o custo unitário, atribui consumo a produto e squad, define políticas de roteamento e acompanha a economia para impedir que uma solução viável no piloto quebre financeiramente quando escala.',
     pain:
-      'A conversa de tokenização ficou no slide de inovação: ninguém sabe qual ativo tokenizar primeiro, como integrar com o core regulado nem quem responde pela trilha. Prova de conceito sem modelo econômico vira curiosidade, não receita.',
+      'O piloto de IA funciona, mas ninguém sabe quanto custa uma transação em regime. A fatura mistura tokens de modelos, APIs, ferramentas e agentes sem atribuição por produto; o time otimiza qualidade sem enxergar unit economics e descobre tarde que o caso não fecha quando o volume cresce.',
     entryTriggers: [
-      'Tese de tokenização aprovada em board sem caminho de execução',
-      'Ativo físico ou digital que precisa de fracionamento ou liquidez',
-      'Programa ESG que precisa monetizar crédito ou pegada',
-      'Parceiro ou regulador cobrando trilha verificável do ativo digital',
+      'Fatura de modelos ou APIs crescendo sem atribuição por produto',
+      'Agentes em produção sem custo por execução conhecido',
+      'Piloto aprovado sem projeção financeira para volume de regime',
+      'Squads usando modelos diferentes sem política de roteamento',
+      'Margem de produto digital pressionada por custo variável de IA',
     ],
     outcomes: [
-      'Tese tokenomics com modelo econômico, participantes e fluxo de valor',
-      'Arquitetura de plataforma integrada ao core existente',
-      'Ativo tokenizado em produção com trilha auditável',
-      'Conexão com GreenToken quando o caso é ESG monetizável',
-      'Governança de smart contract e operação definida',
-      'Roadmap de expansão para novos ativos tokenizáveis',
+      'Custo unitário por transação, produto, squad, agente e fase do fluxo',
+      'Projeção de custo em regime antes da aprovação da escala',
+      'Políticas de roteamento por custo, qualidade, latência e risco',
+      'Orçamentos e alertas para impedir consumo sem atribuição',
+      'Backlog de otimização por impacto financeiro verificável',
+      'Unit economics da solução de IA acompanhado como indicador de produto',
     ],
     differentials: [
       {
-        title: 'Plataforma proprietária em construção',
+        title: 'FinOps para a nova unidade de consumo',
         detail:
-          'Visão de futuro do portfólio com caminho de execução — não só consultoria de whitepaper.',
+          'Aplica baseline, atribuição e aferição ao que o FinOps clássico não cobre bem: token de IA, API e execução agêntica.',
       },
       {
-        title: 'Integração com core regulado',
+        title: 'Custo conectado à arquitetura',
         detail:
-          'Tokenização desenhada para conviver com sistemas financeiros, ESG e legado crítico.',
+          'Roteamento de modelo, cache, compressão de contexto e desenho do fluxo são tratados junto com a engenharia, não depois da fatura.',
       },
       {
-        title: 'Trilha verificável',
+        title: 'Decisão de escala com unit economics',
         detail:
-          'Cada evento do ativo tokenizado deixa evidência auditável — requisito de regulador e de parceiro.',
+          'O caso só avança quando custo por transação, volume e retorno cabem na mesma premissa financeira.',
       },
     ],
     phases: [
       {
-        name: 'Tese e modelagem',
+        name: 'Linha de base tokenizada',
+        duration: '3 a 6 semanas',
+        focus: 'Inventário de modelos, APIs, agentes e fluxos; atribuição do consumo e custo unitário atual.',
+      },
+      {
+        name: 'Governança econômica',
         duration: '4 a 8 semanas',
-        focus: 'Ativo candidato, participantes, modelo econômico e restrições regulatórias.',
+        focus: 'Políticas de roteamento, orçamento, alertas e critérios de escala por produto.',
       },
       {
-        name: 'Plataforma e integração',
-        duration: '3 a 6 meses',
-        focus: 'Arquitetura, smart contracts, integração e piloto controlado.',
-      },
-      {
-        name: 'Produção e expansão',
+        name: 'Otimização contínua',
         duration: 'contínuo',
-        focus: 'Operação, auditoria da trilha e novos ativos na mesma plataforma.',
+        focus: 'Aferição da economia, ajuste de arquitetura e revisão do unit economics conforme volume e modelos mudam.',
       },
     ],
-    totalDuration: 'tese de 4 a 8 semanas · plataforma de 3 a 6 meses · operação contínua',
+    totalDuration: 'baseline de 3 a 6 semanas · governança de 4 a 8 semanas · otimização contínua',
     marketStats: [],
     personas: [
-      { role: 'CEO e board', value: 'Tese tokenizada com caminho de execução, não só narrativa.' },
-      { role: 'CFO e tesouraria', value: 'Modelo econômico e trilha auditável do ativo digital.' },
-      { role: 'CIO e CTO', value: 'Integração segura com core e governança de plataforma.' },
+      { role: 'CFO e controladoria', value: 'Vê custo e margem de IA por produto antes de autorizar a escala.' },
+      { role: 'CIO e CTO', value: 'Controla consumo sem amarrar a arquitetura a um único modelo.' },
+      { role: 'Head de Produto ou IA', value: 'Passa a gerir custo por transação junto com qualidade e adoção.' },
     ],
-    cta: 'Traga o ativo que vocês consideram tokenizável. Avaliamos tese, restrição e primeiro recorte de plataforma.',
-    connects: ['5.1', '2.1B', '4.2'],
+    cta: 'Traga uma fatura de IA e um fluxo em produção. Mapeamos onde o token é consumido e qual custo unitário ameaça a escala.',
+    connects: ['5.1', '2.1A', '2.2', '3.4'],
     boundary:
-      'Não é cripto especulativo nem NFT de marketing. Se o caso é só pegada ESG operacional, veja GreenOps na Visão de Futuro.',
+      'Não é tokenização de ativos, blockchain, RWA nem smart contract — esses temas ficam em Tokenização e Economia Digital, na Visão de Futuro. Aqui token é unidade de consumo e custo.',
     proof: {
       status: 'sem-lastro',
-      note: 'Horizonte em construção na Visão de Futuro do portfólio. Prova de plataforma proprietária ainda não liberada para uso comercial.',
     },
   },
   {
@@ -2233,10 +2122,6 @@ const offers: PortfolioOffer[] = [
         stat: 'O mercado global de cloud computing alcançou US$ 832 bilhões em 2025, e 92% dos workloads devem estar em cloud até 2028.',
         source: 'Dados de mercado citados no material de linhas de serviço — benchmark de setor, não métrica da Foursys',
       },
-      {
-        stat: 'A prática declara redução média de 35% em custo de cloud com FinOps, aumento de 40% na frequência de deploy e redução de 60% em vendor lock-in com governança multicloud.',
-        source: 'Números da prática declarados no material de linhas de serviço — pendentes de lastro por projeto e período',
-      },
     ],
     regulatory: [
       'Sovereign cloud para setores regulados: financeiro, saúde e governo',
@@ -2263,16 +2148,9 @@ const offers: PortfolioOffer[] = [
     cta: 'A porta de entrada é o assessment de arquitetura e plataforma: onde a escala trava, onde o release arrisca e onde o custo escapa — com arquitetura-alvo e roadmap incremental na saída.',
     connects: ['5.1', '3.1', '3.2'],
     boundary:
-      'Não é otimização de custo do que já está em produção, que é o escopo da oferta 5.1, nem modernização de código legado, que vive no eixo de engenharia. Aqui a conversa é sobre a plataforma e a esteira que sustentam o software.',
-    editorialCare:
-      'Os percentuais de redução de custo, frequência de deploy e vendor lock-in vêm do material de linhas de serviço e ainda não têm projeto, período e metodologia citáveis. Usar apenas como ordem de grandeza em conversa, nunca como resultado medido pela casa.',
+      'Não é otimização de custo do que já está em produção, que é o escopo da oferta 5.1, nem modernização de código legado, que vive no pilar de engenharia. Aqui a conversa é sobre a plataforma e a esteira que sustentam o software.',
     proof: {
       status: 'em-validacao',
-      note: 'A experiência de plataforma, migração e integração é demonstrável no histórico de entrega, mas os cases dependem de liberação sobre setor, porte e escopo. Os percentuais herdados do material de linhas de serviço seguem pendentes de lastro.',
-    },
-    legacyEquivalent: {
-      label: 'Linhas de Serviço → Arquitetura, DevOps, Cloud e FinOps',
-      section: 'services',
     },
   },
 
@@ -2311,7 +2189,7 @@ const offers: PortfolioOffer[] = [
       {
         title: 'Empresa do grupo dedicada ao tema',
         detail:
-          'A Zeragon, antiga Sec4Sys, é a vertical de riscos corporativos e cibersegurança do grupo. Não é time genérico alocado: é capacidade especializada em estratégia, detecção de ameaça, proteção de dado e mitigação de risco.',
+          'A Zeragon é a vertical de riscos corporativos e cibersegurança do grupo. Não é time genérico alocado: é capacidade especializada em estratégia, detecção de ameaça, proteção de dado e mitigação de risco.',
       },
       {
         title: 'Dois modelos de contratação',
@@ -2349,7 +2227,45 @@ const offers: PortfolioOffer[] = [
       'Privacidade de dados: score de LGPD, políticas, procedimentos e programa de proteção de dados',
       'Gestão de risco de terceiros: score TPRM, políticas e programa de gestão',
     ],
-    assets: ['Zeragon — empresa do grupo, ex-Sec4Sys', 'NEXUS', 'Fusion Teams'],
+    modules: [
+      {
+        name: 'Segurança da Informação',
+        description: 'Estratégia, arquitetura, operação e cultura para reduzir exposição e tornar o controle demonstrável.',
+        clientValue: 'Saber onde está a exposição crítica, quem responde e qual controle entra primeiro.',
+        deliverables: ['Score NIST e PDSI', 'SOC, AppSec e gestão de vulnerabilidades', 'CISO/BISO as a Service'],
+      },
+      {
+        name: 'Continuidade de Negócios e Gestão de Crises',
+        description: 'Preparação para manter processos críticos e responder com papéis claros quando o incidente acontece.',
+        clientValue: 'Reduzir improviso, tempo de parada e conflito de decisão durante a crise.',
+        deliverables: ['BIA e PCN', 'Disaster recovery', 'Playbooks, simulações e treinamento'],
+      },
+      {
+        name: 'Riscos Corporativos',
+        description: 'Governança, controles internos e leitura executiva do apetite e da exposição da organização.',
+        clientValue: 'Transformar risco disperso em prioridade executiva com dono, evidência e prazo.',
+        deliverables: ['GRC e matriz de riscos', 'Testes de efetividade', 'Dashboard de apetite e cultura de risco'],
+      },
+      {
+        name: 'Prevenção de Fraudes',
+        description: 'Diagnóstico e evolução das camadas antifraude, inclusive testes de burla e resposta operacional.',
+        clientValue: 'Localizar o ponto fraco da jornada sem aumentar atrito indiscriminadamente.',
+        deliverables: ['Score de maturidade', 'Arquitetura antifraude', 'Pentest de burla e operação como serviço'],
+      },
+      {
+        name: 'Privacidade de Dados',
+        description: 'Programa de proteção de dados que sai do diagnóstico e entra em política, processo e evidência.',
+        clientValue: 'Responder à LGPD com operação contínua, não com documentação produzida na véspera.',
+        deliverables: ['Score LGPD', 'Políticas e procedimentos', 'Programa de proteção de dados'],
+      },
+      {
+        name: 'Gestão de Risco de Terceiros',
+        description: 'Avaliação e acompanhamento do risco criado por fornecedores, parceiros e serviços críticos.',
+        clientValue: 'Entender qual terceiro pode interromper ou expor a operação antes do incidente.',
+        deliverables: ['Score TPRM', 'Política de terceiros', 'Programa de monitoramento e remediação'],
+      },
+    ],
+    assets: ['Zeragon — empresa do grupo', 'NEXUS', 'Fusion Teams'],
     phases: [
       {
         name: 'Assessment e score de maturidade',
@@ -2373,12 +2289,7 @@ const offers: PortfolioOffer[] = [
       },
     ],
     totalDuration: 'assessment de 3 a 6 semanas · plano diretor de 4 a 8 semanas · implantação de 3 a 6 meses · operação contínua',
-    marketStats: [
-      {
-        stat: 'A prática declara redução de 80% em vulnerabilidades, aumento de 70% em conformidade regulatória e queda de 60% no tempo de resposta a incidentes.',
-        source: 'Números da prática declarados no material de linhas de serviço — pendentes de lastro por projeto e período',
-      },
-    ],
+    marketStats: [],
     regulatory: [
       'LGPD: programa, políticas e score de proteção e privacidade de dados',
       'ISO 27001 e ISO 27701: apoio e qualificação',
@@ -2407,15 +2318,8 @@ const offers: PortfolioOffer[] = [
     connects: ['2.1B', '5.4', '3.1'],
     boundary:
       'Não é revenda de ferramenta de segurança nem projeto pontual de implantação de produto. Se a dor é governança da agenda de IA — política de uso, trilha e comitê —, a conversa começa pela oferta 2.1B, com a Zeragon entrando como capacidade de segurança.',
-    editorialCare:
-      'Os percentuais de redução de vulnerabilidade, conformidade e tempo de resposta vêm do material de linhas de serviço e ainda não têm projeto, período e metodologia citáveis. Usar apenas como ordem de grandeza em conversa, nunca como resultado medido.',
     proof: {
       status: 'em-validacao',
-      note: 'A capacidade é demonstrável pelo portfólio estruturado da Zeragon e pelos modelos de contratação, mas os cases dependem de liberação sobre setor, porte e escopo — o que é regra em segurança. Os percentuais herdados do material de linhas de serviço seguem pendentes de lastro.',
-    },
-    legacyEquivalent: {
-      label: 'Linhas de Serviço → Cibersegurança (Sec4Sys)',
-      section: 'services',
     },
   },
 
@@ -2425,7 +2329,6 @@ const offers: PortfolioOffer[] = [
     code: '7.1',
     axisId: 'eixo-7',
     role: 'capacidade',
-    portfolioRole: 'Delivery puxado',
     name: 'Outsourcing e Sustentação',
     headline: 'Continuidade operacional com SLA, governança e evolução controlada',
     tagline: 'A operação do ambiente crítico assumida por squads orientadas a resultado, não por alocação.',
@@ -2510,12 +2413,7 @@ const offers: PortfolioOffer[] = [
       },
     ],
     totalDuration: 'assessment de 2 a 4 semanas · transição de 4 a 8 semanas · estabilização de 2 a 3 meses · operação contínua',
-    marketStats: [
-      {
-        stat: 'A prática declara redução de 50% na indisponibilidade operacional, aumento de 30% na eficiência dos times internos e queda de 20% no backlog técnico.',
-        source: 'Números da prática declarados no material de linhas de serviço — pendentes de lastro por projeto e período',
-      },
-    ],
+    marketStats: [],
     personas: [
       {
         role: 'CIO',
@@ -2537,16 +2435,9 @@ const offers: PortfolioOffer[] = [
     cta: 'A porta de entrada é o assessment do ambiente: quais aplicações concentram o risco, qual o tamanho real do backlog e qual a linha de base de disponibilidade e custo antes de qualquer compromisso de SLA.',
     connects: ['3.1', '5.4', '6.1'],
     boundary:
-      'Não é alocação de profissional por hora nem projeto fechado de construção. Se a dor é reescrever o legado, a conversa começa pela oferta 3.1; se é a plataforma que hospeda o ambiente, pelo eixo de cloud.',
-    editorialCare:
-      'Os percentuais de indisponibilidade, eficiência e backlog vêm do material de linhas de serviço e ainda não têm projeto, período e metodologia citáveis. Usar apenas como ordem de grandeza em conversa. Evitar posicionar a oferta como body shop: o compromisso declarado é com resultado.',
+      'Não é alocação de profissional por hora nem projeto fechado de construção. Se a dor é reescrever o legado, a conversa começa pela oferta 3.1; se é a plataforma que hospeda o ambiente, pelo pilar de cloud.',
     proof: {
       status: 'em-validacao',
-      note: 'O histórico de operação em ambiente crítico é a prova mais forte, mas os cases dependem de liberação sobre setor, porte e escopo. Os percentuais herdados do material de linhas de serviço seguem pendentes de lastro.',
-    },
-    legacyEquivalent: {
-      label: 'Linhas de Serviço → Outsourcing & Sustentação',
-      section: 'services',
     },
   },
 
@@ -2556,12 +2447,11 @@ const offers: PortfolioOffer[] = [
     code: '8.1',
     axisId: 'eixo-8',
     role: 'diferenciacao',
-    portfolioRole: 'Rampa de entrada',
-    name: 'Produto Foursys',
+    name: 'FourBlox · Soluções Digitais Modulares',
     headline: 'Chega de projeto interminável: a solução digital em produção em até 30 dias',
     tagline: 'Plataforma modular por assinatura, configurada para a realidade da casa e com evolução contínua inclusa.',
     whatItIs:
-      'Plataformas digitais prontas, customizáveis e mantidas pela Foursys em modelo SaaS. O FourBlox reúne mais de 18 soluções modulares em nove categorias de negócio, ativadas por bloco e configuradas sob medida; o Fourmakers é a plataforma AI-First de gestão estratégica de pessoas e alocação de times, detalhada na oferta 8.2. O cliente contrata o resultado, não o esforço: assinatura mensal sem investimento inicial, com hospedagem, atualização, suporte e evolução inclusos.',
+      'Plataforma digital pronta, customizável e mantida pela Foursys em modelo SaaS. O FourBlox reúne mais de 18 soluções modulares em nove categorias de negócio, ativadas por bloco e configuradas sob medida. O cliente contrata o resultado, não o esforço: assinatura mensal sem investimento inicial, com hospedagem, atualização, suporte e evolução inclusos. Gestão estratégica de pessoas vive separadamente na oferta 8.2, FourMakers.',
     pain:
       'Sistemas que não conversam entre si, planilha paralela fora de controle e baixa adoção das ferramentas que já existem. Quando a área tenta resolver, entra em projeto que nunca termina, com investimento alto e retorno indefinido — ou compra solução genérica que não cabe na realidade da operação.',
     entryTriggers: [
@@ -2615,7 +2505,6 @@ const offers: PortfolioOffer[] = [
     ],
     components: [
       'FourBlox — plataforma modular de soluções por assinatura',
-      'Fourmakers — plataforma modular de gestão estratégica de pessoas (oferta 8.2)',
       'Gestão de Pessoas: mapa de alocação inteligente, performance e OKR tracker, banco de talentos estratégico',
       'Operações: controle de demandas e SLA, workflow personalizado, checkin de audiências, gestão de eventos',
       'Financeiro: gestão de orçamento por área, forecast inteligente, cartão de crédito consignado, gestão orçamentária',
@@ -2623,7 +2512,7 @@ const offers: PortfolioOffer[] = [
       'Projetos, ESG, Dados e Governança: portfólio de projetos, monitor de indicadores ESG, data hub executivo e gestão de guarda compartilhada',
       'Kits: Eficiência Operacional, Gestão de Pessoas 360°, Performance Comercial e Governança Executiva',
     ],
-    assets: ['FourBlox', 'FourMakers'],
+    assets: ['FourBlox'],
     phases: [
       {
         name: 'Diagnóstico profundo',
@@ -2674,16 +2563,9 @@ const offers: PortfolioOffer[] = [
     cta: 'A porta de entrada é o diagnóstico estruturado: quais dores, usuários e fluxos estão em jogo e quais blocos resolvem o problema dentro da janela de 30 dias.',
     connects: ['8.2', '3.2', '4.4', '7.1'],
     boundary:
-      'Não é software sob medida construído do zero: o valor está em configurar bloco pronto. Se o processo exige construção específica ou integração profunda com o legado, a conversa começa pelo eixo de engenharia.',
-    editorialCare:
-      'O go-live de 30 dias vale para solução configurada dentro do catálogo — não prometer a mesma janela para necessidade que exige construção. O número de soluções e categorias muda a cada ciclo e deve ser conferido no catálogo antes de citar.',
+      'Não é software sob medida construído do zero: o valor está em configurar bloco pronto. Se o processo exige construção específica ou integração profunda com o legado, a conversa começa pelo pilar de engenharia.',
     proof: {
       status: 'em-validacao',
-      note: 'O catálogo de soluções, os kits e o modelo de assinatura são demonstráveis, mas os cases de cliente com número de adoção e de ganho dependem de liberação sobre setor, porte e escopo.',
-    },
-    legacyEquivalent: {
-      label: 'Principais Ofertas → Produtos · FourMakers · FourBlox',
-      section: 'offers-flagship',
     },
   },
   {
@@ -2691,8 +2573,7 @@ const offers: PortfolioOffer[] = [
     code: '8.2',
     axisId: 'eixo-8',
     role: 'diferenciacao',
-    portfolioRole: 'Rampa de entrada',
-    name: 'Fourmakers · Gestão Estratégica de Pessoas',
+    name: 'FourMakers · Gestão Estratégica de Pessoas',
     headline: 'O RH deixa de operar em planilha e passa a decidir com dado de gente, projeto e competência no mesmo lugar',
     tagline: 'Plataforma AI-First de gestão de pessoas e alocação de times, contratada por assinatura e ativada em módulos.',
     whatItIs:
@@ -2735,7 +2616,7 @@ const offers: PortfolioOffer[] = [
       {
         title: 'Laboratório de produto com o cliente dentro',
         detail:
-          'Módulos em fase beta evoluem com input direto de quem usa, e nos planos superiores o cliente entra como cocriador do laboratório Fourmakers.',
+          'Módulos em fase beta evoluem com input direto de quem usa, e nos planos superiores o cliente entra como cocriador do laboratório FourMakers.',
       },
       {
         title: 'Evolução inclusa na assinatura',
@@ -2786,12 +2667,8 @@ const offers: PortfolioOffer[] = [
     totalDuration: 'ativação em ~15 dias · setup em ~30 dias · evolução contínua na assinatura',
     marketStats: [
       {
-        stat: 'O material do produto declara como meta redução de 40% no tempo de gestão operacional, 60% nos chamados ao RH, 30% na ociosidade de recursos e 10% no turnover, com visibilidade total da população.',
-        source: 'Material comercial Fourmakers (template v1.0) — metas de produto, a confirmar caso a caso com a linha de base do cliente',
-      },
-      {
         stat: 'A plataforma opera com disponibilidade declarada de 99,9% e SLA por severidade, de 30 minutos de resposta em incidente crítico a 48 horas de resolução em demanda cosmética.',
-        source: 'Acordo de nível de serviço do produto Fourmakers, atendimento em dias úteis das 8h às 18h',
+        source: 'Acordo de nível de serviço do produto FourMakers, atendimento em dias úteis das 8h às 18h',
       },
     ],
     regulatory: [
@@ -2822,11 +2699,8 @@ const offers: PortfolioOffer[] = [
     connects: ['8.1', '3.2', '7.1'],
     boundary:
       'Não substitui o sistema de folha de pagamento nem o ERP de RH: a conciliação da folha compara e aponta divergência, não processa o cálculo. Integração com sistema do cliente depende de análise de viabilidade e entra como negociação comercial separada.',
-    editorialCare:
-      'Módulo marcado como beta está em experimentação e evolução acelerada — não apresentar como funcionalidade estável nem prometer prazo de estabilização. Os percentuais são metas do material do produto: só citar como resultado quando houver linha de base medida no cliente. Preço por colaborador, setup e condição de módulo beta saem da proposta comercial, nunca da apresentação. Custo de provedor de IA acima da franquia é responsabilidade do contratante e deve ser dito quando o assistente inteligente entrar na conversa.',
     proof: {
       status: 'liberado',
-      note: 'Resultados medidos em operação de cliente, publicados de forma anonimizada no material do produto. Nome do cliente depende de liberação específica.',
       cases: [
         'Consultoria de TI com cerca de 2.000 colaboradores — mapa de alocação, timesheet e perfil 360º: fechamento de timesheet caiu de cinco dias para menos de um, com 35% menos horas não faturáveis e visibilidade em tempo real da capacidade ociosa em 90 dias.',
         'Empresa de serviços com cerca de 750 colaboradores — comunicação interna e assistente inteligente: 80% de adoção da plataforma em 90 dias, 60% mais leitura de comunicado estratégico e 70% menos chamado operacional ao RH.',
@@ -2841,13 +2715,7 @@ const offers: PortfolioOffer[] = [
         'Módulos beta em condição comercial diferenciada durante a fase de experimentação',
       ],
       sizing:
-        'Baseline de referência até 450 colaboradores; usuário acima do contratado entra por valor unitário vigente e integrações são negociadas à parte.',
-      investmentGuidance:
-        'Valor por colaborador, setup e condição de módulo beta saem da proposta comercial do produto, com validade de 90 dias. Reajuste anual por IPCA e consumo de IA acima da franquia são temas de contrato — não antecipar número em apresentação sem passar pela equipe do Fourmakers.',
-    },
-    legacyEquivalent: {
-      label: 'Principais Ofertas → Produtos · FourMakers · FourBlox',
-      section: 'offers-flagship',
+        'Dimensionamento conforme número de colaboradores ativos, módulos contratados, integrações e cadência de atendimento.',
     },
   },
 ]
@@ -2860,6 +2728,8 @@ const personas: PortfolioPersona[] = [
     role: 'CEO e Board',
     concern:
       'Saber se a companhia está apenas otimizando enquanto o concorrente reinventa a estrutura de custo.',
+    openingQuestion:
+      'Qual decisão sobre crescimento, eficiência ou IA o board precisa tomar nos próximos 90 dias — e qual premissa ainda não consegue defender?',
     icon: 'building',
     color: '#22D3EE',
     shortlist: ['1.3', '2.1B', '2.1C', '1.1', '1.2'],
@@ -2869,6 +2739,8 @@ const personas: PortfolioPersona[] = [
     role: 'CIO e CTO',
     concern:
       'Escalar IA e modernizar o legado sem perder controle de custo, de risco e de governança.',
+    openingQuestion:
+      'Quantos modelos e agentes já estão em produção, e quem responde hoje por custo, acesso, risco e continuidade?',
     icon: 'server',
     color: '#A78BFA',
     shortlist: ['2.1B', '2.1A', '3.1', '2.2', '3.4'],
@@ -2878,6 +2750,8 @@ const personas: PortfolioPersona[] = [
     role: 'COO',
     concern:
       'Absorver mais volume sem crescer a operação na mesma proporção, e sem depender de poucas pessoas.',
+    openingQuestion:
+      'Qual processo precisa absorver mais volume sem aumentar equipe, erro ou tempo de resposta na mesma proporção?',
     icon: 'settings',
     color: '#34D399',
     shortlist: ['1.3', '2.3', '2.2', '2.1C', '3.1'],
@@ -2887,18 +2761,22 @@ const personas: PortfolioPersona[] = [
     role: 'CFO',
     concern:
       'Previsibilidade: custo de cloud, custo de IA e retorno declarado com premissa verificável.',
+    openingQuestion:
+      'Onde cloud ou IA já virou custo variável relevante sem dono, baseline e retorno por produto?',
     icon: 'coins',
     color: '#F59E0B',
-    shortlist: ['5.1', '2.3', '2.1A', '3.4', '3.1'],
+    shortlist: ['5.1', '5.3', '2.3', '2.1A', '3.4'],
   },
   {
     id: 'cdo',
     role: 'CDO',
     concern:
       'Preparar o dado para a era dos agentes e transformar informação dispersa em decisão confiável.',
+    openingQuestion:
+      'Qual decisão crítica ainda depende de conciliar planilhas, versões de indicador ou contexto que o dado não explica?',
     icon: 'database',
     color: '#38BDF8',
-    shortlist: ['4.2', '4.1', '2.1C', '2.1A', '2.1B'],
+    shortlist: ['4.2', '4.1', '4.3', '2.1C', '2.1B'],
   },
 ]
 
@@ -2956,7 +2834,10 @@ const futureVision: PortfolioFutureItem[] = [
     id: 'tokenizacao',
     name: 'Tokenização e Economia Digital',
     description:
-      'Estratégia e construção de soluções de tokenização com plataforma proprietária: da tese ao ativo tokenizado em produção, com trilha digital verificável.',
+      'Tese em experimentação para representar ativos e direitos digitalmente, com trilha verificável. Não confundir com Tokenomics 5.3, que governa custo de tokens de IA.',
+    example:
+      'Exemplo: validar se um recebível ou crédito ambiental pode ser representado e negociado digitalmente dentro das restrições regulatórias.',
+    maturity: 'Experimentar · validar ativo, modelo econômico e enquadramento antes de industrializar',
     horizon: 'Em construção',
     icon: 'coins',
   },
@@ -2965,6 +2846,9 @@ const futureVision: PortfolioFutureItem[] = [
     name: 'GreenOps e GreenToken',
     description:
       'ESG tratado como oferta tecnológica e auditável: o GreenOps mede e reduz a pegada da operação digital, o GreenToken tokeniza e monetiza o resultado.',
+    example:
+      'Exemplo: medir a pegada da cloud, reduzir consumo e só então avaliar um crédito digital verificável.',
+    maturity: 'Experimentar · comprovar medição e adicionalidade antes de monetizar',
     horizon: 'Em construção',
     icon: 'leaf',
   },
@@ -2973,6 +2857,9 @@ const futureVision: PortfolioFutureItem[] = [
     name: 'Machine as Customer',
     description:
       'Preparar produto e canal para o cliente que é uma máquina: agente que pesquisa, negocia e compra sem humano no meio.',
+    example:
+      'Exemplo: um agente compara fornecedores, confirma política de compra e solicita cotação diretamente por API.',
+    maturity: 'Observar e experimentar · começar por jornada B2B controlada',
     horizon: 'Emergente',
     icon: 'bot',
   },
@@ -2981,6 +2868,9 @@ const futureVision: PortfolioFutureItem[] = [
     name: 'Tecnologias Emergentes',
     description:
       'Acompanhamento aplicado de computação quântica, wearables, robótica e IoT industrial, com leitura de quando cada uma entra na conta.',
+    example:
+      'Exemplo: testar visão computacional ou IoT em uma célula industrial quando o ganho e a integração puderem ser medidos.',
+    maturity: 'Observar · avançar só com problema, sponsor e métrica definidos',
     horizon: 'Observação ativa',
     icon: 'cpu',
   },
@@ -2993,7 +2883,7 @@ const assets: PortfolioAsset[] = [
     id: 'nexus',
     name: 'NEXUS',
     description:
-      'Sistema operacional cognitivo da casa: cria, orquestra e governa agentes, fluxos agênticos e skills em multi-cloud, com seleção dinâmica de modelo e integração ao conhecimento do cliente.',
+      'Camada Foursys que cria, orquestra e governa agentes, fluxos agênticos e skills em multi-cloud, com seleção dinâmica de modelo e integração ao conhecimento do cliente. Entra quando agrega controle e velocidade; não é licença obrigatória nem pré-requisito para contratar uma oferta.',
     icon: 'brain-circuit',
   },
   {
@@ -3028,14 +2918,14 @@ const assets: PortfolioAsset[] = [
     id: 'zeragon',
     name: 'Zeragon',
     description:
-      'Empresa do grupo especializada em cibersegurança (ex-Sec4Sys), com capacidade dedicada conectada à tese de governança e soberania de IA.',
+      'Empresa do grupo especializada em cibersegurança, com capacidade dedicada conectada à tese de governança e soberania de IA.',
     icon: 'shield-check',
   },
   {
     id: 'sharpops',
     name: 'SharpOps',
     description:
-      'Unidade de negócio dedicada a FinOps, responsável pelo eixo de Cloud e otimização de custo com foco em resultado realizado.',
+      'Unidade de negócio dedicada a FinOps, responsável pelo pilar de Cloud e otimização de custo com foco em resultado realizado.',
     icon: 'cloud',
   },
   {
@@ -3057,8 +2947,6 @@ const defaultEngagement: PortfolioEngagement = {
     'Assinatura de produto — FourBlox e FourMakers por licença',
   ],
   sizing: 'Squad dimensionada por fase, conforme o cronograma da própria oferta.',
-  investmentGuidance:
-    'Faixa de investimento sai da proposta comercial, depois do dimensionamento aprovado. Não citar valor em apresentação sem passar pelo Solution Center.',
 }
 
 // ─── Bundle ───────────────────────────────────────────────────────────────────

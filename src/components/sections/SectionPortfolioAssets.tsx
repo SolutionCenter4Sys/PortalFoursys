@@ -5,8 +5,6 @@ import {
   BrainCircuit,
   Bot,
   Cloud,
-  Eye,
-  EyeOff,
   LifeBuoy,
   Package,
   ShieldCheck,
@@ -63,7 +61,6 @@ export function SectionPortfolioAssets() {
     }
     return null
   })
-  const [presenterMode, setPresenterMode] = useState(false)
 
   useEffect(() => {
     if (entryHint) clearDeepDiveHint()
@@ -106,18 +103,7 @@ export function SectionPortfolioAssets() {
     for (const asset of assets) {
       const needle = asset.name.toLowerCase()
       map[asset.id] = catalogOffers
-        .filter(offer =>
-          [
-            ...(offer.assets ?? []),
-            ...(offer.components ?? []),
-            offer.name,
-            offer.whatItIs,
-            ...offer.differentials.map(d => `${d.title} ${d.detail}`),
-          ]
-            .join(' ')
-            .toLowerCase()
-            .includes(needle),
-        )
+        .filter(offer => offer.assets?.some(name => name.toLowerCase() === needle))
         .map(offer => ({ code: offer.code, name: offer.name }))
     }
     return map
@@ -162,22 +148,7 @@ export function SectionPortfolioAssets() {
                 {t('portfolio.assets.subtitle')}
               </p>
             </div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <InterestButton section="portfolio-assets" />
-              <button
-                type="button"
-                onClick={() => setPresenterMode(v => !v)}
-                aria-pressed={presenterMode}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-label font-semibold border transition-colors ${
-                  presenterMode
-                    ? 'text-amber-400 border-amber-500/40 bg-amber-500/10'
-                    : 'text-foursys-text-dim border-white/[0.08] bg-foursys-surface/40 hover:text-foursys-text-muted'
-                }`}
-              >
-                {presenterMode ? <Eye size={12} aria-hidden="true" /> : <EyeOff size={12} aria-hidden="true" />}
-                {t('portfolio.presenter.toggle')}
-              </button>
-            </div>
+            <InterestButton section="portfolio-assets" />
           </div>
 
           <div className="mt-4 md:mt-6 h-px bg-gradient-to-r from-foursys-primary/30 via-white/[0.06] to-transparent" />
@@ -245,7 +216,7 @@ export function SectionPortfolioAssets() {
               const Icon = ICONS[asset.icon] ?? Wrench
               const usedIn = offersByAsset[asset.id] ?? []
               return (
-                <motion.div
+                <motion.details
                   key={asset.id}
                   initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -253,19 +224,28 @@ export function SectionPortfolioAssets() {
                   data-voz-detalhe={`portfolio-asset-${asset.id}`}
                   data-voz-detalhe-secao="portfolio-assets"
                   data-voz-detalhe-rotulo={asset.name}
-                  className="p-4 rounded-2xl bg-foursys-surface/25 border border-white/[0.07] flex flex-col"
+                  className="group rounded-2xl bg-foursys-surface/25 border border-white/[0.07] overflow-hidden"
                 >
-                  <div className="flex items-start gap-3">
+                  <summary className="list-none cursor-pointer p-4 flex items-center justify-between gap-3 rounded-xl hover:bg-white/[0.025] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
+                    <span className="flex items-center gap-3 min-w-0">
                     <div className="w-9 h-9 rounded-xl bg-foursys-primary/10 border border-foursys-primary/25 flex items-center justify-center flex-shrink-0">
                       <Icon size={16} className="text-foursys-primary" aria-hidden="true" />
                     </div>
-                    <div className="min-w-0">
-                      <h4 className="text-sm font-black text-white leading-tight mb-1">{asset.name}</h4>
-                      <p className="text-xs text-foursys-text-muted leading-relaxed">{asset.description}</p>
-                    </div>
-                  </div>
+                    <span className="min-w-0">
+                      <span className="block text-sm font-black text-white leading-tight">{asset.name}</span>
+                      <span className="block text-label text-foursys-text-dim mt-1">
+                        {t('portfolio.assets.usedIn').replace('{count}', String(usedIn.length))}
+                      </span>
+                    </span>
+                    </span>
+                    <span className="text-label font-bold text-foursys-primary group-open:hidden">
+                      {t('common.seeMore')}
+                    </span>
+                  </summary>
 
-                  {usedIn.length > 0 && (
+                  <div className="p-4 pt-3 border-t border-white/[0.06]">
+                    <p className="text-xs text-foursys-text-muted leading-relaxed">{asset.description}</p>
+                    {usedIn.length > 0 && (
                     <div className="mt-3 pt-3 border-t border-white/[0.06]">
                       <p className="text-label font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-2">
                         {t('portfolio.assets.usedIn').replace('{count}', String(usedIn.length))}
@@ -287,8 +267,9 @@ export function SectionPortfolioAssets() {
                         ))}
                       </div>
                     </div>
-                  )}
-                </motion.div>
+                    )}
+                  </div>
+                </motion.details>
               )
             })}
           </div>
@@ -302,14 +283,9 @@ export function SectionPortfolioAssets() {
             offer={selected}
             axis={axesById[selected.axisId]}
             offersByCode={offersByCode}
-            presenterMode={presenterMode}
             engagement={selected.engagement ?? bundle.defaultEngagement}
             onClose={() => setSelected(null)}
             onOpenOffer={next => openLocalOffer(next)}
-            onCompareLegacy={section => {
-              setSelected(null)
-              navigate(section)
-            }}
           />
         )}
       </AnimatePresence>

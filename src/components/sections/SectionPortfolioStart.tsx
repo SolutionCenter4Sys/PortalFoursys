@@ -4,6 +4,7 @@ import {
   ArrowRight,
   Briefcase,
   Building2,
+  ChevronDown,
   Coins,
   Database,
   Route,
@@ -209,13 +210,15 @@ export function SectionPortfolioStart() {
                 }}
               >
                 <div
-                  className="w-9 h-9 rounded-xl flex items-center justify-center mb-3"
+                  className="w-9 h-9 rounded-xl flex items-center justify-center mb-2.5"
                   style={{ backgroundColor: `${p.color}1A`, border: `1px solid ${p.color}3A` }}
                 >
                   <Icon size={16} style={{ color: p.color }} aria-hidden="true" />
                 </div>
                 <div className="text-sm font-black text-white leading-tight">{p.role}</div>
-                <p className="text-label text-foursys-text-dim leading-snug mt-1 line-clamp-2">{p.concern}</p>
+                <p className="text-label font-semibold mt-1" style={{ color: p.color }}>
+                  {t('portfolio.start.seePaths')}
+                </p>
               </motion.button>
             )
           })}
@@ -235,10 +238,16 @@ export function SectionPortfolioStart() {
               style={{ borderColor: `${persona.color}33`, backgroundColor: `${persona.color}0D` }}
             >
               <h3 className="text-lg font-black text-white mb-1">{persona.role}</h3>
-              <p className="text-label font-bold uppercase tracking-widest mb-3" style={{ color: persona.color }}>
-                {t('portfolio.start.concern')}
+              <p className="text-label font-bold uppercase tracking-widest mb-2" style={{ color: persona.color }}>
+                {t('portfolio.start.priority')}
               </p>
               <p className="text-sm text-foursys-text-muted leading-relaxed">{persona.concern}</p>
+              <div className="mt-4 pt-4 border-t border-white/[0.08]">
+                <p className="text-label font-bold uppercase tracking-widest mb-1.5" style={{ color: persona.color }}>
+                  {t('portfolio.start.openingQuestion')}
+                </p>
+                <p className="text-sm text-white/85 leading-relaxed">“{persona.openingQuestion}”</p>
+              </div>
             </div>
 
             <div className="lg:col-span-2">
@@ -271,16 +280,29 @@ export function SectionPortfolioStart() {
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
             {segments.map((segment, i) => (
-              <motion.div
+              <motion.details
                 key={segment.id}
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.04, duration: 0.35 }}
-                className="p-4 rounded-2xl bg-foursys-surface/25 border border-white/[0.07]"
+                className="group rounded-2xl bg-foursys-surface/25 border border-white/[0.07] overflow-hidden"
               >
-                <div className="text-sm font-black text-white mb-1.5">{segment.name}</div>
-                <p className="text-xs text-foursys-text-muted leading-relaxed mb-3">{segment.pain}</p>
-                <div className="flex flex-wrap gap-1.5">
+                <summary className="list-none cursor-pointer p-4 flex items-center justify-between gap-3 rounded-xl hover:bg-white/[0.025] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
+                  <span>
+                    <span className="block text-sm font-black text-white">{segment.name}</span>
+                    <span className="block text-label text-foursys-text-dim mt-1">
+                      {segment.priorityOffers.length} {t('portfolio.start.recommendedPaths')}
+                    </span>
+                  </span>
+                  <ChevronDown
+                    size={15}
+                    className="text-foursys-text-dim transition-transform group-open:rotate-180"
+                    aria-hidden="true"
+                  />
+                </summary>
+                <div className="px-4 pb-4 pt-3 border-t border-white/[0.06]">
+                  <p className="text-xs text-foursys-text-muted leading-relaxed mb-3">{segment.pain}</p>
+                  <div className="flex flex-wrap gap-1.5">
                   {segment.priorityOffers.map(code => {
                     const offer = offersByCode[code]
                     if (!offer) return null
@@ -302,8 +324,9 @@ export function SectionPortfolioStart() {
                       </button>
                     )
                   })}
+                  </div>
                 </div>
-              </motion.div>
+              </motion.details>
             ))}
           </div>
         </div>
