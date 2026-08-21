@@ -82,7 +82,7 @@ const navigationItemsPt: NavigationItem[] = [
     label: 'Ativos Transversais',
     icon: 'blocks',
     category: 'Portfólio',
-    description: 'Sustentação de ambientes críticos, NEXUS, Fusion Teams e demais ativos transversais',
+    description: 'Forças transversais: NEXUS, FourMakers, Fusion Teams, Capacity, Agentes e Hyperscalers',
   },
   {
     id: 'portfolio-future',
@@ -308,7 +308,7 @@ const navigationItemsEn: NavigationItem[] = [
     label: 'Cross-cutting Assets',
     icon: 'blocks',
     category: 'Portfolio',
-    description: 'Sustainment of critical environments, NEXUS, Fusion Teams and other cross-cutting assets',
+    description: 'Cross-cutting forces: NEXUS, FourMakers, Fusion Teams, Capacity, Agents and Hyperscalers',
   },
   {
     id: 'portfolio-future',

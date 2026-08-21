@@ -2876,24 +2876,57 @@ const futureVision: PortfolioFutureItem[] = [
 const assets: PortfolioAsset[] = [
   {
     id: 'nexus',
-    name: 'NEXUS',
+    name: 'Foursys NEXUS',
+    tagline: 'O Sistema Operacional Cognitivo',
     description:
-      'Camada Foursys que cria, orquestra e governa agentes, fluxos agênticos e skills em multi-cloud, com seleção dinâmica de modelo e integração ao conhecimento do cliente. Entra quando agrega controle e velocidade; não é licença obrigatória nem pré-requisito para contratar uma oferta.',
+      'Plataforma proprietária que orquestra, cria e governa fluxos agênticos e de IA de forma centralizada. Garante monitoramento contínuo de custos de inferência, governança de modelos e independência de nuvem ou de stack de fabricante em todas as frentes ativas da organização.',
     icon: 'brain-circuit',
+    aliases: ['NEXUS', 'Foursys NEXUS'],
+  },
+  {
+    id: 'fourmakers',
+    name: 'FourMakers',
+    tagline: 'Gestão Inteligente de Talentos',
+    description:
+      'Plataforma corporativa de alocação de pessoas baseada em IA de match de competências. Garante que cada squad e projeto receba profissionais com o perfil e a maturidade certos para o sucesso da entrega, com foco em retenção e desenvolvimento.',
+    icon: 'package',
+    aliases: ['FourMakers'],
   },
   {
     id: 'fusion-teams',
     name: 'Fusion Teams',
+    tagline: 'Execução de Parcerias com Autonomia Devolvida',
     description:
-      'Times híbridos de execução e capacitação, com trilha de maturidade por belts e compromisso de autonomia do cliente ao final do programa.',
+      'Times de engenharia e consultoria híbridos que atuam lado a lado com os profissionais do cliente. Transferem método e autonomia tecnológica de forma gradual e documentada para a organização operar e evoluir as soluções sozinha após a saída da Foursys.',
     icon: 'users',
+    aliases: ['Fusion Teams'],
+  },
+  {
+    id: 'capacity',
+    name: 'Capacity as a Service',
+    tagline: 'Elasticidade sob Demanda',
+    description:
+      'Elasticidade e velocidade de squads e times de tecnologia enterprise especializados, prontos para integrar as esteiras no ritmo e no escopo que a demanda comercial pedir.',
+    icon: 'wrench',
+    aliases: ['Capacity as a Service'],
   },
   {
     id: 'agentes-alocados',
-    name: 'Agentes de IA alocados junto às pessoas',
+    name: 'Aceleração com Agentes',
+    tagline: 'Consultor e Dev Amplificados',
     description:
-      'Agentes treinados e customizados que amplificam cada profissional da casa, com o contexto do cliente e o método de entrega da Foursys.',
+      'Cada profissional alocado nas frentes trabalha de forma nativa e contínua amplificado por agentes cognitivos de IA que carregam o método sênior da engenharia Foursys e o contexto histórico de negócio do cliente, elevando o patamar de output e entrega.',
     icon: 'bot',
+    aliases: ['Agentes de IA alocados junto às pessoas', 'Aceleração com Agentes'],
+  },
+  {
+    id: 'hyperscalers',
+    name: 'Hyperscalers',
+    tagline: 'Independência Multi-Cloud',
+    description:
+      'Parcerias e integrações nativas com os principais provedores globais de nuvem, para escalar e operar as soluções em qualquer ecossistema — com independência multi-cloud.',
+    icon: 'cloud',
+    aliases: ['Hyperscalers', 'hyperscaler'],
   },
   {
     id: 'fourblox',
@@ -2901,13 +2934,6 @@ const assets: PortfolioAsset[] = [
     description:
       'Catálogo modular de soluções por assinatura, com mais de 18 soluções em 9 categorias e entrada em produção em prazo curto.',
     icon: 'blocks',
-  },
-  {
-    id: 'fourmakers',
-    name: 'FourMakers',
-    description:
-      'Plataforma AI-First de gestão estratégica de pessoas: comunicação interna, timesheet, desempenho e mapa de alocação com match por IA, ativados por módulo em modelo de assinatura.',
-    icon: 'package',
   },
   {
     id: 'zeragon',
@@ -2922,13 +2948,6 @@ const assets: PortfolioAsset[] = [
     description:
       'Unidade de negócio dedicada a FinOps, responsável por Cloud e otimização de custo com foco em resultado realizado.',
     icon: 'cloud',
-  },
-  {
-    id: 'capacity',
-    name: 'Capacity as a Service',
-    description:
-      'Elasticidade de capacidade técnica especializada sob demanda, em squad dedicada ou alocação, com o padrão de entrega da casa.',
-    icon: 'wrench',
   },
 ]
 
@@ -3033,7 +3052,7 @@ export function getPortfolio(_lang: Language): PortfolioBundle {
 export const PRODUCT_AXIS_ID = 'eixo-8'
 export const SUSTAIN_AXIS_ID = 'eixo-7'
 export const EXTRACTED_AXIS_IDS = [PRODUCT_AXIS_ID, SUSTAIN_AXIS_ID] as const
-export const PRODUCT_ASSET_IDS = ['fourblox', 'fourmakers'] as const
+export const PRODUCT_ASSET_IDS = ['fourblox'] as const
 export const HIDDEN_SERVICE_ASSET_IDS = ['zeragon', 'sharpops'] as const
 
 export function isExtractedAxis(axisId: string): boolean {
@@ -3082,6 +3101,15 @@ export function serviceAssets(assets: PortfolioAsset[]): PortfolioAsset[] {
 
 export function productAssets(assets: PortfolioAsset[]): PortfolioAsset[] {
   return assets.filter(asset => PRODUCT_ASSET_IDS.includes(asset.id as (typeof PRODUCT_ASSET_IDS)[number]))
+}
+
+export function offerUsesAsset(offer: Pick<PortfolioOffer, 'assets'>, asset: PortfolioAsset): boolean {
+  const needles = [asset.name, asset.id.replace(/-/g, ' '), ...(asset.aliases ?? [])]
+    .map(value => value.toLowerCase())
+  return (offer.assets ?? []).some(label => {
+    const hay = label.toLowerCase()
+    return needles.some(needle => hay === needle || hay.includes(needle) || needle.includes(hay))
+  })
 }
 
 export function sectionForAxis(axisId: string): AppSection {

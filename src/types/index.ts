@@ -303,8 +303,10 @@ export interface PortfolioFutureItem {
 export interface PortfolioAsset {
   id: string
   name: string
+  tagline?: string
   description: string
   icon: string
+  aliases?: string[]
 }
 
 export interface PortfolioProductItem {

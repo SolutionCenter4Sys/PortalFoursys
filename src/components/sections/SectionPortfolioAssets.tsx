@@ -20,6 +20,7 @@ import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import {
   getPortfolio,
+  offerUsesAsset,
   sectionForOffer,
   serviceAssets,
   serviceOffers,
@@ -101,9 +102,8 @@ export function SectionPortfolioAssets() {
   const offersByAsset = useMemo(() => {
     const map: Record<string, { code: string; name: string }[]> = {}
     for (const asset of assets) {
-      const needle = asset.name.toLowerCase()
       map[asset.id] = catalogOffers
-        .filter(offer => offer.assets?.some(name => name.toLowerCase() === needle))
+        .filter(offer => offerUsesAsset(offer, asset))
         .map(offer => ({ code: offer.code, name: offer.name }))
     }
     return map
@@ -161,10 +161,79 @@ export function SectionPortfolioAssets() {
           tabIndex={-1}
           className="focus:outline-none"
         >
-          <h3 className="text-label font-bold uppercase tracking-[0.16em] text-foursys-text-dim mb-3">
+          <h3 className="text-label font-bold uppercase tracking-[0.16em] text-foursys-text-dim mb-1.5">
             {t('portfolio.assets.foundationTitle')}
           </h3>
+          <p className="text-sm text-foursys-text-muted leading-relaxed max-w-3xl mb-4">
+            {t('portfolio.assets.foundationDesc')}
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+            {assets.map((asset, i) => {
+              const Icon = ICONS[asset.icon] ?? Wrench
+              const usedIn = offersByAsset[asset.id] ?? []
+              return (
+                <motion.details
+                  key={asset.id}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: (i + 1) * 0.04, duration: 0.35 }}
+                  data-voz-detalhe={`portfolio-asset-${asset.id}`}
+                  data-voz-detalhe-secao="portfolio-assets"
+                  data-voz-detalhe-rotulo={asset.name}
+                  className="group rounded-2xl bg-foursys-surface/25 border border-white/[0.07] overflow-hidden"
+                >
+                  <summary className="list-none cursor-pointer p-4 flex items-center justify-between gap-3 rounded-xl hover:bg-white/[0.025] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
+                    <span className="flex items-center gap-3 min-w-0">
+                    <div className="w-9 h-9 rounded-xl bg-foursys-primary/10 border border-foursys-primary/25 flex items-center justify-center flex-shrink-0">
+                      <Icon size={16} className="text-foursys-primary" aria-hidden="true" />
+                    </div>
+                    <span className="min-w-0">
+                      <span className="block text-sm font-black text-white leading-tight">{asset.name}</span>
+                      {asset.tagline && (
+                        <span className="block text-label font-semibold text-foursys-primary/90 mt-0.5">
+                          {asset.tagline}
+                        </span>
+                      )}
+                      <span className="block text-label text-foursys-text-dim mt-1">
+                        {t('portfolio.assets.usedIn').replace('{count}', String(usedIn.length))}
+                      </span>
+                    </span>
+                    </span>
+                    <span className="text-label font-bold text-foursys-primary group-open:hidden">
+                      {t('common.seeMore')}
+                    </span>
+                  </summary>
+
+                  <div className="p-4 pt-3 border-t border-white/[0.06]">
+                    <p className="text-xs text-foursys-text-muted leading-relaxed">{asset.description}</p>
+                    {usedIn.length > 0 && (
+                    <div className="mt-3 pt-3 border-t border-white/[0.06]">
+                      <p className="text-label font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-2">
+                        {t('portfolio.assets.usedIn').replace('{count}', String(usedIn.length))}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {usedIn.map(offer => (
+                          <button
+                            key={offer.code}
+                            onClick={() => openAssetOffer(offer.code)}
+                            title={offer.name}
+                            aria-label={t('portfolio.start.openOffer').replace(
+                              '{name}',
+                              offer.name,
+                            )}
+                            className="text-label font-bold px-3 py-2 min-h-touch md:min-h-[30px] md:px-2.5 md:py-1.5 rounded-lg border border-foursys-primary/30 bg-foursys-primary/10 text-foursys-primary hover:bg-foursys-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-colors"
+                          >
+                            {offer.name}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    )}
+                  </div>
+                </motion.details>
+              )
+            })}
+
             {axis && (
               <motion.button
                 type="button"
@@ -211,67 +280,6 @@ export function SectionPortfolioAssets() {
                 )}
               </motion.button>
             )}
-
-            {assets.map((asset, i) => {
-              const Icon = ICONS[asset.icon] ?? Wrench
-              const usedIn = offersByAsset[asset.id] ?? []
-              return (
-                <motion.details
-                  key={asset.id}
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: (i + 1) * 0.04, duration: 0.35 }}
-                  data-voz-detalhe={`portfolio-asset-${asset.id}`}
-                  data-voz-detalhe-secao="portfolio-assets"
-                  data-voz-detalhe-rotulo={asset.name}
-                  className="group rounded-2xl bg-foursys-surface/25 border border-white/[0.07] overflow-hidden"
-                >
-                  <summary className="list-none cursor-pointer p-4 flex items-center justify-between gap-3 rounded-xl hover:bg-white/[0.025] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
-                    <span className="flex items-center gap-3 min-w-0">
-                    <div className="w-9 h-9 rounded-xl bg-foursys-primary/10 border border-foursys-primary/25 flex items-center justify-center flex-shrink-0">
-                      <Icon size={16} className="text-foursys-primary" aria-hidden="true" />
-                    </div>
-                    <span className="min-w-0">
-                      <span className="block text-sm font-black text-white leading-tight">{asset.name}</span>
-                      <span className="block text-label text-foursys-text-dim mt-1">
-                        {t('portfolio.assets.usedIn').replace('{count}', String(usedIn.length))}
-                      </span>
-                    </span>
-                    </span>
-                    <span className="text-label font-bold text-foursys-primary group-open:hidden">
-                      {t('common.seeMore')}
-                    </span>
-                  </summary>
-
-                  <div className="p-4 pt-3 border-t border-white/[0.06]">
-                    <p className="text-xs text-foursys-text-muted leading-relaxed">{asset.description}</p>
-                    {usedIn.length > 0 && (
-                    <div className="mt-3 pt-3 border-t border-white/[0.06]">
-                      <p className="text-label font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-2">
-                        {t('portfolio.assets.usedIn').replace('{count}', String(usedIn.length))}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {usedIn.map(offer => (
-                          <button
-                            key={offer.code}
-                            onClick={() => openAssetOffer(offer.code)}
-                            title={offer.name}
-                            aria-label={t('portfolio.start.openOffer').replace(
-                              '{name}',
-                              offer.name,
-                            )}
-                            className="text-label font-bold px-3 py-2 min-h-touch md:min-h-[30px] md:px-2.5 md:py-1.5 rounded-lg border border-foursys-primary/30 bg-foursys-primary/10 text-foursys-primary hover:bg-foursys-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-colors"
-                          >
-                            {offer.name}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                    )}
-                  </div>
-                </motion.details>
-              )
-            })}
           </div>
         </div>
 

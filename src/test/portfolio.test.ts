@@ -46,6 +46,15 @@ describe('Portfólio 2026 S2 — integridade dos dados', () => {
     const ids = serviceAssets(assets).map(a => a.id)
     expect(ids).not.toContain('zeragon')
     expect(ids).not.toContain('sharpops')
+    expect(ids).not.toContain('fourblox')
+    expect(ids).toEqual([
+      'nexus',
+      'fourmakers',
+      'fusion-teams',
+      'capacity',
+      'agentes-alocados',
+      'hyperscalers',
+    ])
   })
 
   it('não há códigos nem ids de oferta duplicados', () => {
@@ -244,12 +253,14 @@ describe('Portfólio 2026 S2 — integridade dos dados', () => {
   })
 
   it('pontes comerciais referenciam ofertas e ativos existentes', () => {
-    const assetNames = new Set(assets.map(asset => asset.name))
+    const assetLabels = new Set(
+      assets.flatMap(asset => [asset.name, ...(asset.aliases ?? [])]),
+    )
     for (const bridge of portfolioBridges) {
       expect(codes).toContain(bridge.entryCode)
       expect(bridge.capacityCodes.length).toBeGreaterThan(0)
       for (const code of bridge.capacityCodes) expect(codes).toContain(code)
-      for (const name of bridge.assetNames) expect(assetNames).toContain(name)
+      for (const name of bridge.assetNames) expect(assetLabels).toContain(name)
     }
   })
 
@@ -302,9 +313,9 @@ describe('Portfólio 2026 S2 — integridade dos dados', () => {
 
   it('usa Categoria como nomenclatura pública em português e inglês', () => {
     expect(pt.portfolio.thesis.axisWord).toBe('Categoria')
-    expect(pt.portfolio.thesis.subtitle).toMatch(/seis categorias/i)
+    expect(pt.portfolio.thesis.subtitle).not.toMatch(/pilar/i)
     expect(en.portfolio.thesis.axisWord).toBe('Category')
-    expect(en.portfolio.thesis.subtitle).toMatch(/six value categories/i)
+    expect(en.portfolio.thesis.subtitle).not.toMatch(/pillar/i)
 
     const publicData = [
       portfolioPt.thesis.description,

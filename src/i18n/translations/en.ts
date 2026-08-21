@@ -697,7 +697,8 @@ export const en = {
       usedIn: 'Backs {count} offers',
       sustainEyebrow: 'Sustainment, continuity and evolution',
       sustainAudience: 'Who it speaks to',
-      foundationTitle: 'Cross-cutting forces',
+      foundationTitle: 'Cross-cutting forces · the foundation',
+      foundationDesc: 'Elements that cut across and strengthen every Foursys portfolio category, securing end-to-end delivery of our distinctive value.',
     },
     ecosystem: {
       title: 'Portfolio ecosystem',
@@ -712,7 +713,7 @@ export const en = {
       futureHint: 'Macro offers taking shape',
       futureDesc: 'Emerging technologies and new digital economies: what is being built for the next cycle.',
       foundationTitle: 'Cross-cutting forces · the foundation',
-      foundationDesc: 'Platforms, units and capabilities that cross and strengthen every category of the portfolio — tap one to see what it delivers.',
+      foundationDesc: 'Elements that cut across and strengthen every Foursys portfolio category, securing end-to-end delivery of our distinctive value.',
       openAxis: 'See offers in category {name}',
       openFuture: 'See future vision: {name}',
       openAsset: 'See asset {name}',

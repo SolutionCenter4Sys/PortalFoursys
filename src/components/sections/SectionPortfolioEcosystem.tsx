@@ -402,7 +402,14 @@ export function SectionPortfolioEcosystem() {
                       className="flex items-center gap-2 px-3 py-2 min-h-[36px] rounded-xl bg-foursys-surface/40 border border-white/[0.08] hover:border-foursys-primary/40 hover:shadow-[0_0_20px_rgba(255,102,0,0.15)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-all duration-300"
                     >
                       <Icon size={14} className="text-foursys-primary flex-shrink-0" aria-hidden="true" />
-                      <span className="text-xs font-bold text-white leading-none">{asset.name}</span>
+                      <span className="min-w-0 text-left">
+                        <span className="block text-xs font-bold text-white leading-none">{asset.name}</span>
+                        {asset.tagline && (
+                          <span className="block text-[10px] text-foursys-text-muted mt-0.5 leading-tight">
+                            {asset.tagline}
+                          </span>
+                        )}
+                      </span>
                     </motion.button>
                   )
                 })}

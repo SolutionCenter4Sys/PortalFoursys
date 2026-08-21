@@ -697,7 +697,8 @@ export const pt = {
       usedIn: 'Sustenta {count} ofertas',
       sustainEyebrow: 'Sustentação, continuidade e evolução',
       sustainAudience: 'Para quem fala',
-      foundationTitle: 'Forças transversais',
+      foundationTitle: 'Forças transversais · o alicerce',
+      foundationDesc: 'Elementos que cruzam e fortalecem todas as categorias do portfólio Foursys, garantindo a entrega do nosso valor diferencial de ponta a ponta.',
     },
     ecosystem: {
       title: 'Ecossistema do portfólio',
@@ -712,7 +713,7 @@ export const pt = {
       futureHint: 'Macro ofertas em formação',
       futureDesc: 'Tecnologias emergentes e novas economias digitais: o que está sendo construído para o próximo ciclo.',
       foundationTitle: 'Forças transversais · o alicerce',
-      foundationDesc: 'Plataformas, unidades e capacidades que cruzam e fortalecem todas as categorias do portfólio — toque em uma delas para ver o que entrega.',
+      foundationDesc: 'Elementos que cruzam e fortalecem todas as categorias do portfólio Foursys, garantindo a entrega do nosso valor diferencial de ponta a ponta.',
       openAxis: 'Ver ofertas da categoria {name}',
       openFuture: 'Ver a visão de futuro: {name}',
       openAsset: 'Ver o ativo {name}',
