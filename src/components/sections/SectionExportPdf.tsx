@@ -33,11 +33,11 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
       { id: 'identity-timeline', label: 'Linha do Tempo', sectionId: 'identity' },
     ],
     'portfolio-thesis': [
-      { id: 'portfolio-thesis-vitrine', label: 'Pilares de diferenciação', sectionId: 'portfolio-thesis' },
-      { id: 'portfolio-thesis-motor', label: 'Pilares de capacidade', sectionId: 'portfolio-thesis' },
+      { id: 'portfolio-thesis-vitrine', label: 'Categorias de diferenciação', sectionId: 'portfolio-thesis' },
+      { id: 'portfolio-thesis-motor', label: 'Categorias de capacidade', sectionId: 'portfolio-thesis' },
     ],
     'portfolio-products': [
-      { id: 'portfolio-products-catalogo', label: 'FourBlox e FourMakers', sectionId: 'portfolio-products' },
+      { id: 'portfolio-products-catalogo', label: 'FourBlox, FourMakers e catálogo de produtos', sectionId: 'portfolio-products' },
     ],
     'portfolio-offers': [
       { id: 'portfolio-offers-catalogo', label: 'Catálogo completo (21 ofertas)', sectionId: 'portfolio-offers' },
@@ -97,11 +97,11 @@ const STATIC_SUBITEMS_I18N: Record<'pt' | 'en', Partial<Record<AppSection, SubIt
       { id: 'identity-timeline', label: 'Timeline', sectionId: 'identity' },
     ],
     'portfolio-thesis': [
-      { id: 'portfolio-thesis-vitrine', label: 'Differentiation pillars', sectionId: 'portfolio-thesis' },
-      { id: 'portfolio-thesis-motor', label: 'Capacity pillars', sectionId: 'portfolio-thesis' },
+      { id: 'portfolio-thesis-vitrine', label: 'Differentiation categories', sectionId: 'portfolio-thesis' },
+      { id: 'portfolio-thesis-motor', label: 'Capacity categories', sectionId: 'portfolio-thesis' },
     ],
     'portfolio-products': [
-      { id: 'portfolio-products-catalogo', label: 'FourBlox and FourMakers', sectionId: 'portfolio-products' },
+      { id: 'portfolio-products-catalogo', label: 'FourBlox, FourMakers and product catalog', sectionId: 'portfolio-products' },
     ],
     'portfolio-offers': [
       { id: 'portfolio-offers-catalogo', label: 'Full catalog (21 offers)', sectionId: 'portfolio-offers' },

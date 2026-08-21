@@ -7,6 +7,7 @@ import type {
   PortfolioFutureItem,
   PortfolioOffer,
   PortfolioPersona,
+  PortfolioProductFamily,
   PortfolioSegment,
   PortfolioThesis,
 } from '../types'
@@ -23,7 +24,7 @@ const thesis: PortfolioThesis = {
   label: 'Inteligência Artificial aplicada à transformação de negócios',
   sequence: ['Marca', 'Pipeline', 'Ticket'],
   description:
-    'O portfólio se organiza em seis pilares de valor, separados por função na conversa, mais produtos próprios e sustentação como ativos. Dois pilares são de diferenciação: definem posicionamento, abrem a agenda no nível certo e criam a preferência. Quatro são de capacidade: engenharia, dados, cloud e cibersegurança. Produtos Foursys vivem na subseção Produtos; Sustentação, Continuidade e Evolução vive em Ativos Transversais. A sequência importa porque quem entra pela capacidade compete por preço, e quem entra pela diferenciação decide o critério.',
+    'O portfólio se organiza em seis categorias de valor, separadas por função na conversa, mais produtos próprios e sustentação como ativos. Duas categorias são de diferenciação: definem posicionamento, abrem a agenda no nível certo e criam a preferência. Quatro são de capacidade: engenharia, dados, cloud e cibersegurança. Produtos Foursys vivem na subseção Produtos; Sustentação, Continuidade e Evolução vive em Ativos Transversais. A sequência importa porque quem entra pela capacidade compete por preço, e quem entra pela diferenciação decide o critério.',
   principles: [
     'Diferenciação abre a conversa; capacidade sustenta o contrato. As duas coisas são necessárias e não se substituem.',
     'Toda oferta tem uma porta de entrada declarada e uma fronteira: quando não é a oferta certa, dizemos qual é.',
@@ -35,7 +36,7 @@ const thesis: PortfolioThesis = {
 
 const institutionalBacking = [
   { value: '26', label: 'anos' },
-  { value: '6', label: 'pilares' },
+  { value: '6', label: 'categorias' },
   { value: '21', label: 'ofertas' },
 ]
 
@@ -47,8 +48,7 @@ const axes: PortfolioAxis[] = [
     number: 1,
     name: 'Inovação & Estratégia',
     role: 'diferenciacao',
-    promise:
-      'Transforma inovação de evento isolado em portfólio governado e conecta a decisão do conselho à operação que a executa.',
+    promise: 'Inovação que vira crescimento.',
     audience: 'CEO, board e diretoria de inovação',
     color: '#22D3EE',
     icon: 'sparkles',
@@ -58,8 +58,7 @@ const axes: PortfolioAxis[] = [
     number: 2,
     name: 'IA Estratégica & Governança',
     role: 'diferenciacao',
-    promise:
-      'Leva a IA de piloto a produção com critério de investimento, governança que se prova e controle sobre a stack.',
+    promise: 'Escale IA com controle total e prova de que está no controle.',
     audience: 'CIO, CTO, CDO e comitê de risco',
     color: '#A78BFA',
     icon: 'cpu',
@@ -69,8 +68,7 @@ const axes: PortfolioAxis[] = [
     number: 3,
     name: 'Engenharia & Modernização acelerada por IA',
     role: 'capacidade',
-    promise:
-      'Moderniza o legado que trava o negócio e sustenta a construção de software em escala industrial, com qualidade medida.',
+    promise: 'Engenharia e modernização de software na velocidade que a IA exige.',
     audience: 'CIO, CTO, arquitetura e engenharia',
     color: '#8B5CF6',
     icon: 'layers',
@@ -80,8 +78,7 @@ const axes: PortfolioAxis[] = [
     number: 4,
     name: 'Inteligência de Dados & Decisão',
     role: 'capacidade',
-    promise:
-      'Prepara o dado para a era dos agentes e transforma informação dispersa em decisão confiável e rastreável.',
+    promise: 'Dados prontos para a era dos agentes de IA.',
     audience: 'CDO, CIO e áreas de negócio',
     color: '#38BDF8',
     icon: 'database',
@@ -91,8 +88,7 @@ const axes: PortfolioAxis[] = [
     number: 5,
     name: 'Cloud, DevOps & FinOps · SharpOps',
     role: 'capacidade',
-    promise:
-      'Sustenta a plataforma cloud-native e a esteira de entrega, e recupera previsibilidade de custo em cloud e on-premise, com a economia medida contra a linha de base do cliente.',
+    promise: 'Economia real na nuvem, comprovada.',
     audience: 'CFO, CIO, arquitetura e infraestrutura',
     color: '#34D399',
     icon: 'cloud',
@@ -102,8 +98,7 @@ const axes: PortfolioAxis[] = [
     number: 6,
     name: 'Cybersegurança · Zeragon',
     role: 'capacidade',
-    promise:
-      'Segurança como pré-condição da transformação e da governança de IA, conduzida pela Zeragon, empresa do grupo.',
+    promise: 'Segurança que acompanha a velocidade da inovação, inclusive da IA.',
     audience: 'CISO, risco e compliance',
     color: '#84CC16',
     icon: 'shield-check',
@@ -285,7 +280,7 @@ const offers: PortfolioOffer[] = [
       },
       {
         role: 'Diretor de Inovação',
-        value: 'Ganha um caminho de validação que a estrutura corporativa não consegue oferecer internamente.',
+        value: 'Ganha uma abordagem de validação que a estrutura corporativa não consegue oferecer internamente.',
       },
       {
         role: 'Líder de produto ou de nova unidade',
@@ -295,7 +290,7 @@ const offers: PortfolioOffer[] = [
     cta: 'Traga uma tese travada — daquelas que ninguém aprova nem descarta. Em um ciclo curto ela sai com evidência para decidir.',
     connects: ['1.1', '1.3', '3.2'],
     boundary:
-      'Se a decisão de construir já foi tomada e o escopo está fechado, o caminho é engenharia direto, não laboratório.',
+      'Se a decisão de construir já foi tomada e o escopo está fechado, a indicação é engenharia direta, não laboratório.',
     proof: {
       status: 'em-validacao',
     },
@@ -378,7 +373,7 @@ const offers: PortfolioOffer[] = [
     cta: 'Uma conversa de board sobre a régua de maturidade: em que degrau a operação está hoje e o que separa a casa do degrau seguinte.',
     connects: ['3.4', '2.3', '2.2', '1.1'],
     boundary:
-      'Se a pergunta é qual processo automatizar primeiro, o caminho é Hiper-eficiência. Esta oferta trata do modelo, não da cadeia.',
+      'Se a pergunta é qual processo automatizar primeiro, a indicação é Hiper-eficiência. Esta oferta trata do modelo, não da cadeia.',
     proof: {
       status: 'sem-lastro',
     },
@@ -473,7 +468,7 @@ const offers: PortfolioOffer[] = [
     cta: 'Traga sua lista de iniciativas de IA. Mostramos quais mudam de posição quando o custo unitário entra na conta.',
     connects: ['2.1C', '2.1B', '2.2', '2.3'],
     boundary:
-      'Se ainda não há critério nem orçamento definido, o caminho de menor atrito é o AI Discovery Workshop.',
+      'Se ainda não há critério nem orçamento definido, a opção de menor atrito é o AI Discovery Workshop.',
     proof: {
       status: 'em-validacao',
     },
@@ -807,7 +802,7 @@ const offers: PortfolioOffer[] = [
     cta: 'Escolha um agente que já está em produção na sua casa. Percorremos com você o que precisaria estar resolvido para ele sobreviver ao próximo ano.',
     connects: ['2.1C', '2.1B', '2.3', '2.1A'],
     boundary:
-      'Esta oferta é puxada, não de abertura. Se o assunto é software, o caminho é Agentic Squad Model; se é processo de negócio, é Hiper-eficiência.',
+      'Esta oferta é puxada, não de abertura. Para software, a indicação é Agentic Squad Model; para processo de negócio, Hiper-eficiência.',
     proof: {
       status: 'sem-lastro',
     },
@@ -911,7 +906,7 @@ const offers: PortfolioOffer[] = [
     cta: 'Escolha a cadeia que mais consome sua operação. O diagnóstico entrega a linha de base quantificada e o caso de eficiência — e vale mesmo que a implantação seja feita por outro.',
     connects: ['2.2', '2.1B', '2.1C', '3.1'],
     boundary:
-      'Hiper-eficiência decide se, onde e por quê mudar o processo. A construção dos agentes é a Fábrica de Agentes. A conversa de modelo operacional inteiro é 1.3.',
+      'Hiper-eficiência decide se, onde e por quê mudar o processo. A construção dos agentes é a Fábrica de Agentes. A conversa de modelo operacional inteiro é Novo Modelo Operacional.',
     proof: {
       status: 'sem-lastro',
     },
@@ -975,7 +970,7 @@ const offers: PortfolioOffer[] = [
       {
         name: 'Assessment e inventário',
         duration: '3 a 4 semanas',
-        focus: 'Mapeamento das regras de negócio, do custo de manter e do caminho de modernização.',
+        focus: 'Mapeamento das regras de negócio, do custo de manter e da estratégia de modernização.',
       },
       {
         name: 'Setup da arquitetura-alvo',
@@ -1032,10 +1027,10 @@ const offers: PortfolioOffer[] = [
         value: 'Endereça exposição regulatória e de segurança que o legado carrega.',
       },
     ],
-    cta: 'Um diagnóstico de legado que mapeia as regras de negócio, quantifica o custo de manter e mostra o caminho de modernização com prazo e investimento.',
+    cta: 'Um diagnóstico de legado que mapeia as regras de negócio, quantifica o custo de manter e mostra a estratégia de modernização com prazo e investimento.',
     connects: ['3.3', '3.2', '2.1B', '1.3'],
     boundary:
-      'Se o problema real é dado fragmentado e não código legado, a entrada é pelo pilar de Inteligência de Dados.',
+      'Se o problema real é dado fragmentado e não código legado, a entrada é por Inteligência de Dados.',
     proof: {
       status: 'liberado',
       cases: [
@@ -1086,7 +1081,7 @@ const offers: PortfolioOffer[] = [
       {
         title: 'Continuidade com contexto estratégico',
         detail:
-          'Delivery conectado à governança do Pilar 2 e às conversas de inovação, não fábrica avulsa contratada por headcount.',
+          'Delivery conectado à governança de IA e às conversas de inovação, não fábrica avulsa contratada por headcount.',
       },
       {
         title: 'Multi-cloud, sem aprisionamento',
@@ -1201,7 +1196,7 @@ const offers: PortfolioOffer[] = [
     ],
     components: [
       'CoE: metodologia, padrões, reports e indicadores, testes não funcionais transversais, equalização e treinamentos',
-      'CSC: teste funcional manual e automatizado, certificação de patch e GMUD, regressão e caminho crítico',
+      'CSC: teste funcional manual e automatizado, certificação de patch e GMUD, regressão e fluxo crítico',
       'Validação de US antes do desenvolvimento',
       'Design de cenário em BDD e Gherkin',
       'Massa sintética e evidência de gate',
@@ -1232,7 +1227,7 @@ const offers: PortfolioOffer[] = [
       {
         name: 'CSC em operação',
         duration: 'contínuo por squad',
-        focus: 'QA dentro da squad, com certificação de GMUD, regressão e caminho crítico.',
+        focus: 'QA dentro da squad, com certificação de GMUD, regressão e fluxo crítico.',
       },
     ],
     totalDuration: 'assessment de 3 a 6 semanas · piloto de 8 a 12 semanas · operação contínua',
@@ -1380,7 +1375,7 @@ const offers: PortfolioOffer[] = [
     cta: 'A conversa começa por onde a engenharia captura só uma fração do ganho de IA — e quanto disso sai em custo sem virar entrega.',
     connects: ['3.2', '3.3', '1.3', '2.2'],
     boundary:
-      'Não é exclusiva de setor regulado: governança é universal e conformidade (BACEN, ANS, ANPD, LGPD) é caso de aplicação. Não é consultoria de redesenho nem squad por headcount. Se a necessidade é agente de negócio operando em processo, e não construção de software, o caminho é a Fábrica de Agentes; se é processo de negócio sem engenharia, é hiper-eficiência.',
+      'Não é exclusiva de setor regulado: governança é universal e conformidade (BACEN, ANS, ANPD, LGPD) é caso de aplicação. Não é consultoria de redesenho nem squad por headcount. Para agente de negócio operando em processo, a indicação é Fábrica de Agentes; para processo de negócio sem engenharia, Hiper-eficiência.',
     proof: {
       status: 'sem-lastro',
     },
@@ -1428,7 +1423,7 @@ const offers: PortfolioOffer[] = [
       {
         title: 'Conectado à governança de IA',
         detail:
-          'Classificação de dado sensível, controle de acesso e trilha de uso por modelo seguem a mesma lógica da oferta 2.1B.',
+          'Classificação de dado sensível, controle de acesso e trilha de uso por modelo seguem a mesma lógica de Governança & Soberania de IA.',
       },
     ],
     phases: [
@@ -1463,7 +1458,7 @@ const offers: PortfolioOffer[] = [
     cta: 'Traga o caso de IA que travou por dado. Mapeamos a prontidão mínima para destravar a próxima onda.',
     connects: ['4.2', '4.3', '2.1B', '2.2', '4.4'],
     boundary:
-      'Se a dor é só dashboard executivo sem agenda de IA, comece por Decision Intelligence. Se é plataforma completa com seis frentes, a oferta 4.4 integra o programa.',
+      'Se a dor é só dashboard executivo sem agenda de IA, comece por Decision Intelligence. Se é plataforma completa com seis frentes, All In Data integra o programa.',
     proof: {
       status: 'sem-lastro',
     },
@@ -1538,7 +1533,7 @@ const offers: PortfolioOffer[] = [
     cta: 'Escolha uma decisão executiva que hoje depende de planilha paralela. Mostramos como virar indicador governado.',
     connects: ['4.1', '4.3', '2.1A', '4.4'],
     boundary:
-      'Não é projeto isolado de dashboard nem ferramenta de BI sem dono de decisão. Se o gargalo é qualidade de dado para agentes, comece por 4.1.',
+      'Não é projeto isolado de dashboard nem ferramenta de BI sem dono de decisão. Se o gargalo é qualidade de dado para agentes, comece por Data Readiness para IA.',
     proof: {
       status: 'sem-lastro',
     },
@@ -1610,7 +1605,7 @@ const offers: PortfolioOffer[] = [
       { role: 'CIO e CTO', value: 'Autonomia controlada, com trilha e desativação definida.' },
       { role: 'Dono de processo no negócio', value: 'Recebe recomendação ou ação automática dentro do limite acordado.' },
     ],
-    cta: 'Traga um caso onde o modelo já existe mas não chega à operação. Desenhamos o caminho até produção com guardrail.',
+    cta: 'Traga um caso onde o modelo já existe mas não chega à operação. Desenhamos a evolução até produção com guardrail.',
     connects: ['4.1', '4.2', '2.2', '2.1B', '4.4'],
     boundary:
       'Não substitui agente conversacional complexo — isso é Fábrica de Agentes. Se o dado não sustenta o modelo, volte para Data Readiness.',
@@ -1750,7 +1745,7 @@ const offers: PortfolioOffer[] = [
     cta: 'A porta de entrada é o assessment de maturidade analítica: onde o dado está, o que impede a confiança nele e qual o primeiro caso de uso que paga a plataforma.',
     connects: ['4.1', '4.2', '4.3', '2.1B', '2.2', '5.4'],
     boundary:
-      'Programa integrado All In Data quando a casa precisa de várias frentes juntas. Se a dor é só prontidão para IA, decisão executiva ou modelos autônomos, use 4.1, 4.2 ou 4.3. Se é governança de IA, comece por 2.1B; se é infraestrutura cloud, pelo Pilar 5.',
+      'Programa integrado All In Data quando a casa precisa de várias frentes juntas. Para prontidão de IA, decisão executiva ou modelos autônomos, use Data Readiness para IA, Decision Intelligence ou Autonomous Intelligence. Para governança de IA, comece por Governança & Soberania de IA; para infraestrutura, por Cloud & Eficiência.',
     proof: {
       status: 'em-validacao',
     },
@@ -1869,7 +1864,7 @@ const offers: PortfolioOffer[] = [
     cta: 'A porta de entrada é o assessment do ambiente: mapeamento, baseline por recurso e priorização. A decisão de executar vem depois, já com número verificável na mesa.',
     connects: ['3.1', '3.4'],
     boundary:
-      'Não é migração para cloud nem consultoria de arquitetura: o foco é o custo do que já está em produção. Se a dor é desenho de plataforma ou modernização do legado, a conversa começa pelo pilar de engenharia.',
+      'Não é migração para cloud nem consultoria de arquitetura: o foco é o custo do que já está em produção. Se a dor é desenho de plataforma ou modernização do legado, a conversa começa por Engenharia Digital.',
     proof: {
       status: 'sem-lastro',
     },
@@ -1897,7 +1892,7 @@ const offers: PortfolioOffer[] = [
       'Plano de consolidação, virtualização ou refresh por critério de negócio',
       'Redução de licença e de energia onde há ociosidade comprovada',
       'Política de ciclo de vida para desktop e servidor',
-      'Integração com a estratégia multicloud da oferta 5.4',
+      'Integração com a estratégia de Arquitetura, DevOps & Cloud',
       'Economia medida contra linha de base, no mesmo espírito FinOps',
     ],
     differentials: [
@@ -1944,7 +1939,7 @@ const offers: PortfolioOffer[] = [
     cta: 'Traga o mapa do que ainda está on-premise. Quantificamos ociosidade e priorizamos o primeiro ciclo de economia.',
     connects: ['5.1', '5.4', '3.1'],
     boundary:
-      'Não é migração cloud completa — isso é 5.4. Se a dor é só fatura de hyperscaler, comece por 5.1 SharpOps.',
+      'Não é migração cloud completa — isso é Arquitetura, DevOps & Cloud. Se a dor é só fatura de hyperscaler, comece por SharpOps.',
     proof: {
       status: 'sem-lastro',
     },
@@ -2078,7 +2073,7 @@ const offers: PortfolioOffer[] = [
       {
         title: 'FinOps como disciplina embarcada',
         detail:
-          'A eficiência de custo entra desde o desenho da plataforma e continua na operação. Quando a dor é o custo do que já está rodando, a execução acontece pela oferta 5.1, com economia medida contra a linha de base.',
+          'A eficiência de custo entra desde o desenho da plataforma e continua na operação. Quando a dor é o custo do que já está rodando, a execução acontece pelo SharpOps, com economia medida contra a linha de base.',
       },
     ],
     components: [
@@ -2148,7 +2143,7 @@ const offers: PortfolioOffer[] = [
     cta: 'A porta de entrada é o assessment de arquitetura e plataforma: onde a escala trava, onde o release arrisca e onde o custo escapa — com arquitetura-alvo e roadmap incremental na saída.',
     connects: ['5.1', '3.1', '3.2'],
     boundary:
-      'Não é otimização de custo do que já está em produção, que é o escopo da oferta 5.1, nem modernização de código legado, que vive no pilar de engenharia. Aqui a conversa é sobre a plataforma e a esteira que sustentam o software.',
+      'Não é otimização de custo do que já está em produção, que é o escopo do SharpOps, nem modernização de código legado, que vive em Engenharia Digital. Aqui a conversa é sobre a plataforma e a esteira que sustentam o software.',
     proof: {
       status: 'em-validacao',
     },
@@ -2317,7 +2312,7 @@ const offers: PortfolioOffer[] = [
     cta: 'A porta de entrada é o assessment de maturidade: onde estão as lacunas de controle, quais têm exposição regulatória e o que entra primeiro no plano diretor. A execução vem em consultoria ou em SECaaS, conforme o momento da casa.',
     connects: ['2.1B', '5.4', '3.1'],
     boundary:
-      'Não é revenda de ferramenta de segurança nem projeto pontual de implantação de produto. Se a dor é governança da agenda de IA — política de uso, trilha e comitê —, a conversa começa pela oferta 2.1B, com a Zeragon entrando como capacidade de segurança.',
+      'Não é revenda de ferramenta de segurança nem projeto pontual de implantação de produto. Se a dor é governança da agenda de IA — política de uso, trilha e comitê —, a conversa começa por Governança & Soberania de IA, com a Zeragon entrando como capacidade de segurança.',
     proof: {
       status: 'em-validacao',
     },
@@ -2435,7 +2430,7 @@ const offers: PortfolioOffer[] = [
     cta: 'A porta de entrada é o assessment do ambiente: quais aplicações concentram o risco, qual o tamanho real do backlog e qual a linha de base de disponibilidade e custo antes de qualquer compromisso de SLA.',
     connects: ['3.1', '5.4', '6.1'],
     boundary:
-      'Não é alocação de profissional por hora nem projeto fechado de construção. Se a dor é reescrever o legado, a conversa começa pela oferta 3.1; se é a plataforma que hospeda o ambiente, pelo pilar de cloud.',
+      'Não é alocação de profissional por hora nem projeto fechado de construção. Se a dor é reescrever o legado, a conversa começa por Modernização de Aplicações; se é a plataforma que hospeda o ambiente, por Cloud & Eficiência.',
     proof: {
       status: 'em-validacao',
     },
@@ -2451,7 +2446,7 @@ const offers: PortfolioOffer[] = [
     headline: 'Chega de projeto interminável: a solução digital em produção em até 30 dias',
     tagline: 'Plataforma modular por assinatura, configurada para a realidade da casa e com evolução contínua inclusa.',
     whatItIs:
-      'Plataforma digital pronta, customizável e mantida pela Foursys em modelo SaaS. O FourBlox reúne mais de 18 soluções modulares em nove categorias de negócio, ativadas por bloco e configuradas sob medida. O cliente contrata o resultado, não o esforço: assinatura mensal sem investimento inicial, com hospedagem, atualização, suporte e evolução inclusos. Gestão estratégica de pessoas vive separadamente na oferta 8.2, FourMakers.',
+      'Plataforma digital pronta, customizável e mantida pela Foursys em modelo SaaS. O FourBlox reúne mais de 18 soluções modulares em nove categorias de negócio, ativadas por bloco e configuradas sob medida. O cliente contrata o resultado, não o esforço: assinatura mensal sem investimento inicial, com hospedagem, atualização, suporte e evolução inclusos. Gestão estratégica de pessoas vive separadamente no FourMakers.',
     pain:
       'Sistemas que não conversam entre si, planilha paralela fora de controle e baixa adoção das ferramentas que já existem. Quando a área tenta resolver, entra em projeto que nunca termina, com investimento alto e retorno indefinido — ou compra solução genérica que não cabe na realidade da operação.',
     entryTriggers: [
@@ -2563,7 +2558,7 @@ const offers: PortfolioOffer[] = [
     cta: 'A porta de entrada é o diagnóstico estruturado: quais dores, usuários e fluxos estão em jogo e quais blocos resolvem o problema dentro da janela de 30 dias.',
     connects: ['8.2', '3.2', '4.4', '7.1'],
     boundary:
-      'Não é software sob medida construído do zero: o valor está em configurar bloco pronto. Se o processo exige construção específica ou integração profunda com o legado, a conversa começa pelo pilar de engenharia.',
+      'Não é software sob medida construído do zero: o valor está em configurar bloco pronto. Se o processo exige construção específica ou integração profunda com o legado, a conversa começa por Engenharia Digital.',
     proof: {
       status: 'em-validacao',
     },
@@ -2834,7 +2829,7 @@ const futureVision: PortfolioFutureItem[] = [
     id: 'tokenizacao',
     name: 'Tokenização e Economia Digital',
     description:
-      'Tese em experimentação para representar ativos e direitos digitalmente, com trilha verificável. Não confundir com Tokenomics 5.3, que governa custo de tokens de IA.',
+      'Tese em experimentação para representar ativos e direitos digitalmente, com trilha verificável. Não confundir com Tokenomics, que governa custo de tokens de IA.',
     example:
       'Exemplo: validar se um recebível ou crédito ambiental pode ser representado e negociado digitalmente dentro das restrições regulatórias.',
     maturity: 'Experimentar · validar ativo, modelo econômico e enquadramento antes de industrializar',
@@ -2925,7 +2920,7 @@ const assets: PortfolioAsset[] = [
     id: 'sharpops',
     name: 'SharpOps',
     description:
-      'Unidade de negócio dedicada a FinOps, responsável pelo pilar de Cloud e otimização de custo com foco em resultado realizado.',
+      'Unidade de negócio dedicada a FinOps, responsável por Cloud e otimização de custo com foco em resultado realizado.',
     icon: 'cloud',
   },
   {
@@ -2934,6 +2929,69 @@ const assets: PortfolioAsset[] = [
     description:
       'Elasticidade de capacidade técnica especializada sob demanda, em squad dedicada ou alocação, com o padrão de entrega da casa.',
     icon: 'wrench',
+  },
+]
+
+const productFamilies: PortfolioProductFamily[] = [
+  {
+    id: 'web3-tokenizacao',
+    name: 'Web3, Tokenização e Ativos Digitais',
+    products: [
+      {
+        id: 'token4you',
+        name: 'Token4You',
+        description:
+          'Plataforma Web3 as a Service para criar e gerenciar tokens próprios, configurar carteiras digitais, converter ativos digitais em moedas fiduciárias e operar como mesa de câmbio cripto-fiat. Suporta coins proprietárias, gestão de staking e estruturas de participação em ecossistemas digitais.',
+        icon: 'coins',
+      },
+      {
+        id: 'greentoken',
+        name: 'GreenToken',
+        description:
+          'Integra tokenização de energia renovável e mercado de créditos de carbono em uma única solução. Permite estruturar, registrar e negociar ativos com rastreabilidade completa, além de viabilizar financiamentos para construção de usinas de energia renovável.',
+        icon: 'leaf',
+      },
+    ],
+  },
+  {
+    id: 'mobilidade-energia',
+    name: 'Mobilidade, Energia e Sustentabilidade',
+    products: [
+      {
+        id: 'weble',
+        name: 'Weble',
+        description:
+          'Solução de mobilidade urbana baseada em veículos elétricos que combina software, IoT e conectividade para orquestrar frotas em cidades, empresas ou condomínios, com gestão de rotas, uso, cobrança e telemetria em tempo quase real.',
+        icon: 'zap',
+      },
+    ],
+  },
+  {
+    id: 'inovacao-ecossistemas',
+    name: 'Inovação, Ecossistemas e Educação',
+    products: [
+      {
+        id: 'loome',
+        name: 'Loome',
+        description:
+          'Marketplace digital que conecta empresas e profissionais a espaços de coworking, salas privativas e escritórios flexíveis, com reserva, billing e gestão distribuída. Usado por empresas na gestão de times híbridos e na concessão de benefícios para colaboradores remotos.',
+        icon: 'building',
+      },
+      {
+        id: 'stephubs',
+        name: 'Stephubs',
+        description:
+          'Plataforma de incubação digital que apoia empreendedores early stage a tracionar seus negócios, com base de mais de 190 mil startups cadastradas e utilizada por empresas como fonte de dealflow qualificado.',
+        icon: 'rocket',
+      },
+      {
+        id: 'educ360',
+        name: 'Educ360',
+        description:
+          'Edtech que forma jovens em habilidades de tecnologia — desenvolvimento de software, dados e nuvem — com foco em empregabilidade. O braço ESG financia a formação de um jovem em situação de vulnerabilidade para cada jovem capacitado por uma corporação, ligando desenvolvimento de talentos, inclusão social e demanda por profissionais de tecnologia.',
+        icon: 'graduation-cap',
+      },
+    ],
   },
 ]
 
@@ -2959,6 +3017,7 @@ const portfolioPt: PortfolioBundle = {
   segments,
   futureVision,
   assets,
+  productFamilies,
   institutionalBacking,
   defaultEngagement,
 }
@@ -2975,6 +3034,7 @@ export const PRODUCT_AXIS_ID = 'eixo-8'
 export const SUSTAIN_AXIS_ID = 'eixo-7'
 export const EXTRACTED_AXIS_IDS = [PRODUCT_AXIS_ID, SUSTAIN_AXIS_ID] as const
 export const PRODUCT_ASSET_IDS = ['fourblox', 'fourmakers'] as const
+export const HIDDEN_SERVICE_ASSET_IDS = ['zeragon', 'sharpops'] as const
 
 export function isExtractedAxis(axisId: string): boolean {
   return (EXTRACTED_AXIS_IDS as readonly string[]).includes(axisId)
@@ -3013,7 +3073,11 @@ export function sustainOffers(offers: PortfolioOffer[]): PortfolioOffer[] {
 }
 
 export function serviceAssets(assets: PortfolioAsset[]): PortfolioAsset[] {
-  return assets.filter(asset => !PRODUCT_ASSET_IDS.includes(asset.id as (typeof PRODUCT_ASSET_IDS)[number]))
+  return assets.filter(
+    asset =>
+      !PRODUCT_ASSET_IDS.includes(asset.id as (typeof PRODUCT_ASSET_IDS)[number]) &&
+      !HIDDEN_SERVICE_ASSET_IDS.includes(asset.id as (typeof HIDDEN_SERVICE_ASSET_IDS)[number]),
+  )
 }
 
 export function productAssets(assets: PortfolioAsset[]): PortfolioAsset[] {

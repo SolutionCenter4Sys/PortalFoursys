@@ -15,7 +15,6 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
-import { InterestButton } from '../ui/InterestButton'
 import { BackToOriginChip } from '../ui/BackToOriginChip'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
@@ -161,7 +160,6 @@ function AxisDetailPanel({
         </div>
         <div className="min-w-0">
           <div className="text-label font-bold uppercase tracking-widest text-foursys-text-dim">
-            {t('portfolio.thesis.axisWord')} {axis.number} ·{' '}
             {isShowcase ? t('portfolio.thesis.showcase') : t('portfolio.thesis.engine')}
           </div>
           <h3 className="text-lg lg:text-xl font-black text-white leading-tight">{axis.name}</h3>
@@ -180,13 +178,7 @@ function AxisDetailPanel({
       {offerNames.length > 0 && (
         <ul className="mt-4 space-y-2">
           {offerNames.map(offer => (
-            <li key={offer.code} className="flex items-start gap-2.5 text-xs text-foursys-text-muted">
-              <span
-                className="font-mono font-bold text-label px-1.5 py-0.5 rounded flex-shrink-0"
-                style={{ color: axis.color, backgroundColor: `${axis.color}15` }}
-              >
-                {offer.code}
-              </span>
+            <li key={offer.code} className="text-xs text-foursys-text-muted">
               {offer.name}
             </li>
           ))}
@@ -266,9 +258,6 @@ function AxisCard({
               <Icon size={18} style={{ color: axis.color }} aria-hidden="true" />
             </div>
             <div>
-              <div className="text-label font-bold uppercase tracking-widest text-foursys-text-dim">
-                {t('portfolio.thesis.axisWord')} {axis.number}
-              </div>
               <h3 className="text-base font-black text-white leading-tight">{axis.name}</h3>
             </div>
           </div>
@@ -302,13 +291,7 @@ function AxisCard({
             <div className="p-5 pt-4 space-y-3">
               <ul className="space-y-2">
                 {offerNames.map(offer => (
-                  <li key={offer.code} className="flex items-start gap-2.5 text-xs text-foursys-text-muted">
-                    <span
-                      className="font-mono font-bold text-label px-1.5 py-0.5 rounded flex-shrink-0"
-                      style={{ color: axis.color, backgroundColor: `${axis.color}15` }}
-                    >
-                      {offer.code}
-                    </span>
+                  <li key={offer.code} className="text-xs text-foursys-text-muted">
                     {offer.name}
                   </li>
                 ))}
@@ -406,7 +389,6 @@ export function SectionPortfolioThesis() {
   const bundle = useMemo(() => getPortfolio(lang), [lang])
   const axes = useMemo(() => serviceAxes(bundle.axes), [bundle.axes])
   const offers = useMemo(() => serviceOffers(bundle.offers), [bundle.offers])
-  const { institutionalBacking } = bundle
   const [expandedAxis, setExpandedAxis] = useState<string | null>(null)
   const [activeAxisId, setActiveAxisId] = useState<string>(axes[0]?.id ?? '')
   const orbitRef = useRef<HTMLDivElement>(null)
@@ -472,31 +454,16 @@ export function SectionPortfolioThesis() {
           transition={{ duration: 0.4 }}
           className="mb-4 md:mb-5"
         >
-          <div className="flex items-start md:items-end justify-between flex-wrap gap-3">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-400 mb-2 flex items-center gap-2">
-                <Compass size={13} aria-hidden="true" /> {t('portfolio.badge')}
-              </p>
-              <h2 className="text-2xl md:text-4xl font-black text-white leading-none">
-                {t('portfolio.thesis.title')}
-              </h2>
-              <p className="text-foursys-text-muted mt-2 text-sm md:text-base max-w-2xl leading-relaxed">
-                {t('portfolio.thesis.subtitle')}
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2 md:gap-3 flex-wrap">
-              <InterestButton section="portfolio-thesis" />
-              {institutionalBacking.map(stat => (
-                <div
-                  key={stat.label}
-                  className="text-center px-3 md:px-4 py-1.5 md:py-2 rounded-xl bg-foursys-surface/40 border border-white/[0.08]"
-                >
-                  <div className="text-base md:text-lg font-black text-cyan-400">{stat.value}</div>
-                  <div className="text-label text-foursys-text-dim">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-400 mb-2 flex items-center gap-2">
+              <Compass size={13} aria-hidden="true" /> {t('portfolio.badge')}
+            </p>
+            <h2 className="text-2xl md:text-4xl font-black text-white leading-none">
+              {t('portfolio.thesis.title')}
+            </h2>
+            <p className="text-foursys-text-muted mt-2 text-sm md:text-base max-w-2xl leading-relaxed">
+              {t('portfolio.thesis.subtitle')}
+            </p>
           </div>
 
           <div className="mt-3 md:mt-4 h-px bg-gradient-to-r from-cyan-400/30 via-white/[0.06] to-transparent" />

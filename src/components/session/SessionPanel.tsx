@@ -64,7 +64,7 @@ export function SessionPanel() {
     const date = new Date().toLocaleDateString(dateFmt, { dateStyle: 'long' })
     const interestLabels = state.interestedSections.map(s => getSectionLabel(s as AppSection))
     const offerInterestLabels = state.interestedOffers.map(
-      offer => `${offer.code} ${offer.name} — ${offer.nextStep}`,
+      offer => `${offer.name} — ${offer.nextStep}`,
     )
     const profileLine = state.sessionProfile
       ? `[${t('session.summaryProfile')}] ${state.sessionProfile.role?.toUpperCase() ?? '—'} · ${state.sessionProfile.sector ?? '—'} · ${state.sessionProfile.objective ?? '—'}`
@@ -302,12 +302,8 @@ export function SessionPanel() {
                         className="group rounded-lg bg-cyan-400/[0.06] border border-cyan-400/20 overflow-hidden"
                       >
                         <summary className="list-none cursor-pointer px-2.5 py-2 flex items-center justify-between gap-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
-                          <span className="min-w-0 text-[10px] text-cyan-100">
-                            <span className="font-mono font-bold text-cyan-300">{offer.code}</span>{' '}
-                            <span className="font-semibold">{offer.name}</span>
-                          </span>
-                          <span className="text-[9px] text-cyan-300/75 flex-shrink-0">
-                            {t(`portfolio.evidence.${offer.maturity}`)}
+                          <span className="min-w-0 text-[10px] font-semibold text-cyan-100">
+                            {offer.name}
                           </span>
                         </summary>
                         <div className="px-2.5 pb-2.5 pt-2 border-t border-cyan-400/15 space-y-2">
@@ -349,7 +345,6 @@ export function SessionPanel() {
                         key={offer.code}
                         className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-cyan-400/10 border border-cyan-400/25 text-cyan-200 text-[10px] font-medium"
                       >
-                        <span className="font-mono font-bold">{offer.code}</span>
                         {offer.name}
                         {offer.openCount > 1 && (
                           <span className="text-cyan-400/70">×{offer.openCount}</span>

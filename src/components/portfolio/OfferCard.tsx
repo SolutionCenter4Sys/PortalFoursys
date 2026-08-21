@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
-import { EvidenceBadge } from './EvidenceBadge'
 import { useLanguage } from '../../i18n'
 import { AXIS_FALLBACK_COLOR } from '../../theme/portfolioTokens'
 import type { PortfolioAxis, PortfolioOffer } from '../../types'
@@ -35,16 +34,6 @@ export function OfferCard({
       className="p-5 text-left rounded-2xl bg-foursys-surface/30 border cursor-pointer hover:-translate-y-1 hover:bg-foursys-surface/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-all duration-300 flex flex-col group"
       style={{ borderColor: `${accent}2E` }}
     >
-      <div className="flex items-start justify-between gap-2 mb-3 w-full">
-        <span
-          className="font-mono text-label font-bold px-1.5 py-0.5 rounded flex-shrink-0"
-          style={{ color: accent, backgroundColor: `${accent}18`, border: `1px solid ${accent}38` }}
-        >
-          {offer.code}
-        </span>
-        <EvidenceBadge status={offer.proof.status} compact />
-      </div>
-
       <h3 className="text-base font-black text-white leading-tight mb-1">{offer.name}</h3>
       <p className="text-xs font-semibold mb-3 leading-snug" style={{ color: accent }}>
         {offer.tagline}

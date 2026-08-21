@@ -10,7 +10,6 @@ import { kpis, timeline } from '../data/kpis'
 import { showcaseClients } from '../data/clientShowcase'
 import { portfolioPt, sectionForOffer } from '../data/portfolio'
 import { getPortfolioExample } from '../data/portfolioExamples'
-import { portfolioGlossary } from '../data/portfolioGuidance'
 import type { AppSection } from '../types'
 
 export type SearchResultKind =
@@ -25,7 +24,6 @@ export type SearchResultKind =
   | 'alliance'
   | 'innovation'
   | 'portfolio-offer'
-  | 'portfolio-glossary'
   | 'kpi'
   | 'timeline'
   | 'client'
@@ -222,18 +220,19 @@ export function buildSearchIndex(): SearchEntry[] {
     })
   }
 
-  for (const item of portfolioGlossary) {
-    entries.push({
-      id: `pf-glossary-${norm(item.term).replace(/\s+/g, '-')}`,
-      kind: 'portfolio-glossary',
-      title: item.term,
-      subtitle: item.clientLanguage.pt,
-      searchable: norm(`${item.term} ${item.definition.pt} ${item.clientLanguage.pt}`),
-      icon: 'book-open',
-      targetSection: 'portfolio-offers',
-      category: 'Glossário do portfólio',
-      hint: `glossary:${item.term}`,
-    })
+  for (const family of portfolioPt.productFamilies) {
+    for (const product of family.products) {
+      entries.push({
+        id: `pf-product-${product.id}`,
+        kind: 'portfolio-offer',
+        title: product.name,
+        subtitle: family.name,
+        searchable: norm(`${product.name} ${family.name} ${product.description}`),
+        icon: product.icon,
+        targetSection: 'portfolio-products',
+        category: 'Produtos Foursys',
+      })
+    }
   }
 
   for (const kpi of kpis) {

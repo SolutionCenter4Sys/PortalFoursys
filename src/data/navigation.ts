@@ -47,7 +47,7 @@ const navigationItemsPt: NavigationItem[] = [
     label: 'Por Onde Começar',
     icon: 'route',
     category: 'Portfólio',
-    description: 'Escolha seu contexto e descubra os caminhos mais aderentes',
+    description: 'Escolha seu contexto e descubra as ofertas mais aderentes',
   },
   {
     id: 'portfolio-ecosystem',
@@ -58,17 +58,17 @@ const navigationItemsPt: NavigationItem[] = [
   },
   {
     id: 'portfolio-thesis',
-    label: 'Pilares de Valor',
+    label: 'Categorias de Valor',
     icon: 'compass',
     category: 'Portfólio',
-    description: 'Como o portfólio se organiza: 6 pilares, diferenciação e capacidade',
+    description: 'Como o portfólio se organiza: diferenciação e capacidade',
   },
   {
     id: 'portfolio-products',
     label: 'Produtos',
     icon: 'package-check',
     category: 'Portfólio',
-    description: 'FourBlox e FourMakers — plataformas próprias por assinatura',
+    description: 'FourBlox, FourMakers, Token4You, GreenToken, Weble, Loome, Stephubs e Educ360',
   },
   {
     id: 'portfolio-offers',
@@ -82,7 +82,7 @@ const navigationItemsPt: NavigationItem[] = [
     label: 'Ativos Transversais',
     icon: 'blocks',
     category: 'Portfólio',
-    description: 'Sustentação de ambientes críticos, NEXUS, Fusion Teams, Zeragon, SharpOps e demais ativos transversais',
+    description: 'Sustentação de ambientes críticos, NEXUS, Fusion Teams e demais ativos transversais',
   },
   {
     id: 'portfolio-future',
@@ -273,7 +273,7 @@ const navigationItemsEn: NavigationItem[] = [
     label: 'Where to Start',
     icon: 'route',
     category: 'Portfolio',
-    description: 'Choose your context and discover the most relevant paths',
+    description: 'Choose your context and discover the most relevant offers',
   },
   {
     id: 'portfolio-ecosystem',
@@ -284,17 +284,17 @@ const navigationItemsEn: NavigationItem[] = [
   },
   {
     id: 'portfolio-thesis',
-    label: 'Value Pillars',
+    label: 'Value Categories',
     icon: 'compass',
     category: 'Portfolio',
-    description: 'How the portfolio is organized: 6 pillars, differentiation and capacity',
+    description: 'How the portfolio is organized: differentiation and capacity',
   },
   {
     id: 'portfolio-products',
     label: 'Products',
     icon: 'package-check',
     category: 'Portfolio',
-    description: 'FourBlox and FourMakers — proprietary subscription platforms',
+    description: 'FourBlox, FourMakers, Token4You, GreenToken, Weble, Loome, Stephubs and Educ360',
   },
   {
     id: 'portfolio-offers',
@@ -308,7 +308,7 @@ const navigationItemsEn: NavigationItem[] = [
     label: 'Cross-cutting Assets',
     icon: 'blocks',
     category: 'Portfolio',
-    description: 'Sustainment of critical environments, NEXUS, Fusion Teams, Zeragon, SharpOps and other cross-cutting assets',
+    description: 'Sustainment of critical environments, NEXUS, Fusion Teams and other cross-cutting assets',
   },
   {
     id: 'portfolio-future',

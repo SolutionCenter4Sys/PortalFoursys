@@ -13,7 +13,6 @@ import {
   Target,
   X,
 } from 'lucide-react'
-import { EvidenceBadge } from './EvidenceBadge'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
@@ -169,15 +168,9 @@ export function OfferModal({
           </button>
 
           <div className="flex items-center gap-2 flex-wrap mb-3 pr-10">
-            <span
-              className="font-mono text-label font-bold px-2 py-0.5 rounded"
-              style={{ color: accent, backgroundColor: `${accent}1A`, border: `1px solid ${accent}40` }}
-            >
-              {offer.code}
-            </span>
             {axis && (
               <span className="text-meta text-foursys-text-dim uppercase tracking-widest">
-                {t('portfolio.thesis.axisWord')} {axis.number} · {axis.name}
+                {axis.name}
               </span>
             )}
             <span className="text-meta text-foursys-text-dim">·</span>
@@ -190,7 +183,6 @@ export function OfferModal({
           </p>
 
           <div className="mt-4 flex items-center gap-2 flex-wrap">
-            <EvidenceBadge status={offer.proof.status} />
             <span className="text-label text-foursys-text-dim">
               {t('portfolio.offer.duration')}: {offer.totalDuration}
             </span>
@@ -528,16 +520,7 @@ export function OfferModal({
               <div className="flex flex-wrap gap-2">
                 {offer.connects.map(code => {
                   const target = offersByCode[code]
-                  if (!target) {
-                    return (
-                      <span
-                        key={code}
-                        className="text-label px-2.5 py-1 rounded-lg bg-foursys-surface/30 border border-white/[0.06] text-foursys-text-dim"
-                      >
-                        {code}
-                      </span>
-                    )
-                  }
+                  if (!target) return null
                   return (
                     <button
                       key={code}
@@ -546,7 +529,7 @@ export function OfferModal({
                       style={{ borderColor: 'rgba(255,255,255,0.08)' }}
                     >
                       <Link2 size={10} aria-hidden="true" />
-                      <span className="font-mono font-bold">{target.code}</span> {target.name}
+                      {target.name}
                     </button>
                   )
                 })}
@@ -563,13 +546,6 @@ export function OfferModal({
                 {t('portfolio.offer.pathCondition').replace('{agenda}', bridge.clientAgenda[lang])}
               </p>
               <div className="flex items-center gap-2 flex-wrap">
-                <span
-                  className="font-mono text-label font-bold px-2.5 py-1 rounded-lg border"
-                  style={{ color: accent, borderColor: `${accent}44`, backgroundColor: `${accent}12` }}
-                >
-                  {bridge.entryCode}
-                </span>
-                <ArrowRight size={13} className="text-foursys-text-dim" aria-hidden="true" />
                 {bridge.capacityCodes.map(code => {
                   const target = offersByCode[code]
                   return target ? (
@@ -578,7 +554,7 @@ export function OfferModal({
                       onClick={() => onOpenOffer(target)}
                       className="text-label px-2.5 py-1 rounded-lg border border-white/[0.09] text-foursys-text-muted hover:text-white hover:border-white/20 transition-colors"
                     >
-                      <span className="font-mono font-bold">{code}</span> {target.name}
+                      {target.name}
                     </button>
                   ) : null
                 })}

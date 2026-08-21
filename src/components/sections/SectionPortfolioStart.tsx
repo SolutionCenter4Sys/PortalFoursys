@@ -18,7 +18,7 @@ import { BackToOriginChip } from '../ui/BackToOriginChip'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import { getPortfolio, sectionForOffer, serviceOffers } from '../../data/portfolio'
-import { AXIS_FALLBACK_COLOR, EVIDENCE_COLOR } from '../../theme/portfolioTokens'
+import { AXIS_FALLBACK_COLOR } from '../../theme/portfolioTokens'
 import type { PortfolioAxis, PortfolioOffer } from '../../types'
 
 
@@ -66,9 +66,6 @@ function ShortlistStep({
 
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 flex-wrap mb-1">
-          <span className="font-mono text-label font-bold" style={{ color: accent }}>
-            {offer.code}
-          </span>
           <span className="text-sm font-bold text-white leading-tight">{offer.name}</span>
           {isOpening && (
             <span
@@ -80,17 +77,6 @@ function ShortlistStep({
           )}
         </div>
         <p className="text-xs text-foursys-text-muted leading-relaxed line-clamp-2">{offer.tagline}</p>
-        <span
-          className="inline-flex items-center gap-1.5 mt-1.5 text-label font-semibold"
-          style={{ color: EVIDENCE_COLOR[offer.proof.status] }}
-        >
-          <span
-            className="w-1.5 h-1.5 rounded-full"
-            style={{ backgroundColor: EVIDENCE_COLOR[offer.proof.status] }}
-            aria-hidden="true"
-          />
-          {t(`portfolio.evidence.${offer.proof.status}`)}
-        </span>
       </div>
 
       <ArrowRight size={14} className="text-foursys-text-dim flex-shrink-0 mt-1" aria-hidden="true" />
@@ -164,7 +150,7 @@ export function SectionPortfolioStart() {
               <h2 className="text-2xl md:text-4xl font-black text-white leading-none">
                 {t('portfolio.start.title')}
               </h2>
-              <p className="text-foursys-text-muted mt-2 text-sm md:text-base max-w-2xl leading-relaxed">
+              <p className="text-foursys-text-muted mt-2 text-sm md:text-base max-w-3xl leading-relaxed">
                 {t('portfolio.start.subtitle')}
               </p>
             </div>
@@ -291,7 +277,7 @@ export function SectionPortfolioStart() {
                   <span>
                     <span className="block text-sm font-black text-white">{segment.name}</span>
                     <span className="block text-label text-foursys-text-dim mt-1">
-                      {segment.priorityOffers.length} {t('portfolio.start.recommendedPaths')}
+                      {t('portfolio.start.recommendedPaths')}
                     </span>
                   </span>
                   <ChevronDown
@@ -309,7 +295,7 @@ export function SectionPortfolioStart() {
                     const axis = offer ? axesById[offer.axisId] : undefined
                     const accent = axis?.color ?? AXIS_FALLBACK_COLOR
                     const label = offer
-                      ? t('portfolio.start.openOffer').replace('{name}', `${offer.code} ${offer.name}`)
+                      ? t('portfolio.start.openOffer').replace('{name}', offer.name)
                       : code
                     return (
                       <button
@@ -317,10 +303,10 @@ export function SectionPortfolioStart() {
                         onClick={() => openOffer(code)}
                         aria-label={label}
                         title={offer?.name ?? code}
-                        className="text-label font-mono font-bold px-3 py-2 min-h-touch md:min-h-[30px] md:px-2.5 md:py-1.5 rounded-lg border transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
+                        className="text-label font-bold px-3 py-2 min-h-touch md:min-h-[30px] md:px-2.5 md:py-1.5 rounded-lg border transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
                         style={{ color: accent, borderColor: `${accent}38`, backgroundColor: `${accent}12` }}
                       >
-                        {code}
+                        {offer?.name ?? code}
                       </button>
                     )
                   })}

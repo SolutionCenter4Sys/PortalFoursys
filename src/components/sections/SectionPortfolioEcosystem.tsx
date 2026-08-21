@@ -48,7 +48,7 @@ const ICONS: Record<string, LucideIcon> = {
   leaf: Leaf,
 }
 
-/* ── Pilar: coluna do ecossistema ──────────────────────────────────────────── */
+/* ── Categoria: coluna do ecossistema ─────────────────────────────────────── */
 
 function PillarHeader({
   icon: Icon,
@@ -88,20 +88,15 @@ function PillarHeader({
 
 function AxisCard({
   axis,
-  items,
   index,
-  axisWord,
   onOpen,
   openLabel,
 }: {
   axis: PortfolioAxis
-  items: string[]
   index: number
-  axisWord: string
   onOpen?: () => void
   openLabel?: string
 }) {
-  const { t } = useLanguage()
   const Icon = ICONS[axis.icon] ?? Layers
   const interactive = Boolean(onOpen)
 
@@ -152,18 +147,14 @@ function AxisCard({
           <Icon size={16} style={{ color: axis.color }} aria-hidden="true" />
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-label font-bold uppercase tracking-[0.16em] text-foursys-text-dim">
-            {axisWord} {axis.number}
+          <h4 className="text-sm font-black text-white leading-tight">
+            {axis.name.replace(/\s*·\s*(SharpOps|Zeragon)\s*$/i, '')}
+          </h4>
+          <p className="mt-1.5 text-label text-foursys-text-muted leading-relaxed">
+            {axis.promise}
           </p>
-          <h4 className="text-sm font-black text-white leading-tight">{axis.name}</h4>
         </div>
       </div>
-
-      {items.length > 0 && (
-        <p className="relative mt-3 text-label font-semibold" style={{ color: axis.color }}>
-          {t('portfolio.ecosystem.paths').replace('{count}', String(items.length))}
-        </p>
-      )}
     </motion.article>
   )
 }
@@ -179,15 +170,6 @@ export function SectionPortfolioEcosystem() {
   const offers = useMemo(() => serviceOffers(bundle.offers), [bundle.offers])
   const assets = useMemo(() => serviceAssets(bundle.assets), [bundle.assets])
   const { futureVision } = bundle
-
-  const itemsByAxis = useMemo(() => {
-    const map = new Map<string, string[]>()
-    for (const axis of axes) {
-      const own = offers.filter(o => o.axisId === axis.id).map(o => o.name)
-      map.set(axis.id, own.length > 0 ? own : axis.upcomingOffers ?? [])
-    }
-    return map
-  }, [axes, offers])
 
   const axesWithOffers = useMemo(() => {
     const set = new Set<string>()
@@ -208,7 +190,10 @@ export function SectionPortfolioEcosystem() {
       axesWithOffers.has(axis.id)
         ? {
             onOpen: () => openAxis(axis.id),
-            openLabel: t('portfolio.ecosystem.openAxis').replace('{name}', axis.name),
+            openLabel: t('portfolio.ecosystem.openAxis').replace(
+              '{name}',
+              axis.name.replace(/\s*·\s*(SharpOps|Zeragon)\s*$/i, ''),
+            ),
           }
         : {},
     [axesWithOffers, openAxis, t],
@@ -216,8 +201,6 @@ export function SectionPortfolioEcosystem() {
 
   const showcaseAxes = useMemo(() => axes.filter(a => a.role === 'diferenciacao'), [axes])
   const engineAxes = useMemo(() => axes.filter(a => a.role === 'capacidade'), [axes])
-
-  const axisWord = t('portfolio.thesis.axisWord')
 
   return (
     <SectionWrapper>
@@ -288,9 +271,7 @@ export function SectionPortfolioEcosystem() {
                   <AxisCard
                     key={axis.id}
                     axis={axis}
-                    items={itemsByAxis.get(axis.id) ?? []}
                     index={i}
-                    axisWord={axisWord}
                     {...axisCardProps(axis)}
                   />
                 ))}
@@ -316,9 +297,7 @@ export function SectionPortfolioEcosystem() {
                   <AxisCard
                     key={axis.id}
                     axis={axis}
-                    items={itemsByAxis.get(axis.id) ?? []}
                     index={i}
-                    axisWord={axisWord}
                     {...axisCardProps(axis)}
                   />
                 ))}
@@ -370,9 +349,6 @@ export function SectionPortfolioEcosystem() {
                         </div>
                         <div className="min-w-0">
                           <h4 className="text-sm font-black text-white leading-tight">{item.name}</h4>
-                          <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full text-label font-bold uppercase tracking-wider bg-violet-400/10 text-violet-300 border border-violet-400/25">
-                            {item.horizon}
-                          </span>
                         </div>
                       </div>
                     </motion.button>

@@ -201,9 +201,9 @@ export function SectionPortfolioAssets() {
                         <span
                           key={offer.code}
                           title={offer.name}
-                          className="font-mono text-label font-bold px-3 py-2 min-h-touch md:min-h-[30px] md:px-2.5 md:py-1.5 rounded-lg border border-foursys-primary/30 bg-foursys-primary/10 text-foursys-primary"
+                          className="text-label font-bold px-3 py-2 min-h-touch md:min-h-[30px] md:px-2.5 md:py-1.5 rounded-lg border border-foursys-primary/30 bg-foursys-primary/10 text-foursys-primary"
                         >
-                          {offer.code}
+                          {offer.name}
                         </span>
                       ))}
                     </div>
@@ -258,11 +258,11 @@ export function SectionPortfolioAssets() {
                             title={offer.name}
                             aria-label={t('portfolio.start.openOffer').replace(
                               '{name}',
-                              `${offer.code} ${offer.name}`,
+                              offer.name,
                             )}
-                            className="font-mono text-label font-bold px-3 py-2 min-h-touch md:min-h-[30px] md:px-2.5 md:py-1.5 rounded-lg border border-foursys-primary/30 bg-foursys-primary/10 text-foursys-primary hover:bg-foursys-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-colors"
+                            className="text-label font-bold px-3 py-2 min-h-touch md:min-h-[30px] md:px-2.5 md:py-1.5 rounded-lg border border-foursys-primary/30 bg-foursys-primary/10 text-foursys-primary hover:bg-foursys-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-colors"
                           >
-                            {offer.code}
+                            {offer.name}
                           </button>
                         ))}
                       </div>

@@ -307,6 +307,19 @@ export interface PortfolioAsset {
   icon: string
 }
 
+export interface PortfolioProductItem {
+  id: string
+  name: string
+  description: string
+  icon: string
+}
+
+export interface PortfolioProductFamily {
+  id: string
+  name: string
+  products: PortfolioProductItem[]
+}
+
 export interface PortfolioBundle {
   thesis: PortfolioThesis
   axes: PortfolioAxis[]
@@ -315,6 +328,7 @@ export interface PortfolioBundle {
   segments: PortfolioSegment[]
   futureVision: PortfolioFutureItem[]
   assets: PortfolioAsset[]
+  productFamilies: PortfolioProductFamily[]
   institutionalBacking: { value: string; label: string }[]
   /** Base comercial aplicada a toda oferta que não declara a sua. */
   defaultEngagement: PortfolioEngagement

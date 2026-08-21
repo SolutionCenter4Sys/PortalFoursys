@@ -1,10 +1,15 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
-  Blocks,
+  Building2,
   CheckCircle2,
+  Coins,
+  GraduationCap,
+  Leaf,
   Package,
   PackageCheck,
+  Rocket,
+  Zap,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
@@ -16,7 +21,6 @@ import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import {
   getPortfolio,
-  productAssets,
   productAxis,
   productOffers,
   sectionForOffer,
@@ -24,18 +28,21 @@ import {
 import type { PortfolioOffer } from '../../types'
 
 const ASSET_ICONS: Record<string, LucideIcon> = {
-  blocks: Blocks,
-  package: Package,
+  coins: Coins,
+  leaf: Leaf,
+  zap: Zap,
+  building: Building2,
+  rocket: Rocket,
+  'graduation-cap': GraduationCap,
 }
 
 export function SectionPortfolioProducts() {
   const { state, navigate, clearDeepDiveHint, setDeepDiveHint, trackOfferView } = useApp()
   const { t, lang } = useLanguage()
-  const { axes, offers, assets, defaultEngagement } = useMemo(() => getPortfolio(lang), [lang])
+  const { axes, offers, productFamilies, defaultEngagement } = useMemo(() => getPortfolio(lang), [lang])
 
   const axis = useMemo(() => productAxis(axes), [axes])
   const catalog = useMemo(() => productOffers(offers), [offers])
-  const productOnlyAssets = useMemo(() => productAssets(assets), [assets])
 
   const entryHint = state.deepDiveHint
   const [selected, setSelected] = useState<PortfolioOffer | null>(() =>
@@ -182,34 +189,42 @@ export function SectionPortfolioProducts() {
           ))}
         </div>
 
-        {productOnlyAssets.length > 0 && (
-          <div>
-            <h3 className="text-label font-bold uppercase tracking-[0.16em] text-foursys-text-dim mb-3">
-              {t('portfolio.products.assetsTitle')}
+        {productFamilies.map(family => (
+          <div key={family.id} className="mb-8">
+            <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-cyan-400 mb-3">
+              {family.name}
             </h3>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {productOnlyAssets.map(asset => {
-                const Icon = ASSET_ICONS[asset.icon] ?? Package
+            <div
+              data-voz-caixa={`portfolio-products-${family.id}`}
+              data-voz-caixa-secao="portfolio-products"
+              data-voz-caixa-rotulo={family.name}
+              className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4"
+            >
+              {family.products.map(product => {
+                const Icon = ASSET_ICONS[product.icon] ?? Package
                 return (
-                  <div
-                    key={asset.id}
-                    className="p-4 rounded-xl border border-white/[0.08] bg-foursys-surface/25"
+                  <article
+                    key={product.id}
+                    data-voz-detalhe={`portfolio-product-${product.id}`}
+                    data-voz-detalhe-secao="portfolio-products"
+                    data-voz-detalhe-rotulo={product.name}
+                    className="p-5 rounded-2xl border border-white/[0.08] bg-foursys-surface/25"
                   >
                     <div className="flex items-start gap-3">
-                      <div className="w-9 h-9 rounded-xl bg-foursys-primary/10 border border-foursys-primary/25 flex items-center justify-center flex-shrink-0">
-                        <Icon size={16} className="text-foursys-primary" aria-hidden="true" />
+                      <div className="w-11 h-11 rounded-xl bg-foursys-primary/10 border border-foursys-primary/25 flex items-center justify-center flex-shrink-0">
+                        <Icon size={18} className="text-foursys-primary" aria-hidden="true" />
                       </div>
-                      <div>
-                        <h4 className="text-sm font-black text-white">{asset.name}</h4>
-                        <p className="text-xs text-foursys-text-muted leading-relaxed mt-1">{asset.description}</p>
+                      <div className="min-w-0">
+                        <h4 className="text-base md:text-lg font-black text-white leading-tight">{product.name}</h4>
+                        <p className="text-sm text-foursys-text-muted leading-relaxed mt-2">{product.description}</p>
                       </div>
                     </div>
-                  </div>
+                  </article>
                 )
               })}
             </div>
           </div>
-        )}
+        ))}
       </div>
 
       <AnimatePresence>

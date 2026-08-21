@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { portfolioPt, PRODUCT_AXIS_ID, productOffers, serviceAxes, serviceOffers, sustainOffers } from '../data/portfolio'
+import { portfolioPt, PRODUCT_AXIS_ID, productOffers, serviceAssets, serviceAxes, serviceOffers, sustainOffers } from '../data/portfolio'
 import { portfolioBridges, portfolioGlossary } from '../data/portfolioGuidance'
 import { hasPortfolioExample } from '../data/portfolioExamples'
 import { pt } from '../i18n/translations/pt'
@@ -17,6 +17,35 @@ describe('Portfólio 2026 S2 — integridade dos dados', () => {
     expect(productOffers(offers).length).toBe(2)
     expect(productOffers(offers).every(o => o.axisId === PRODUCT_AXIS_ID)).toBe(true)
     expect(sustainOffers(offers).length).toBe(1)
+  })
+
+  it('usa as headlines institucionais nas seis categorias de serviço', () => {
+    expect(serviceAxes(axes).map(axis => axis.promise)).toEqual([
+      'Inovação que vira crescimento.',
+      'Escale IA com controle total e prova de que está no controle.',
+      'Engenharia e modernização de software na velocidade que a IA exige.',
+      'Dados prontos para a era dos agentes de IA.',
+      'Economia real na nuvem, comprovada.',
+      'Segurança que acompanha a velocidade da inovação, inclusive da IA.',
+    ])
+  })
+
+  it('Produtos inclui Token4You, GreenToken, Weble, Loome, Stephubs e Educ360', () => {
+    const names = portfolioPt.productFamilies.flatMap(family => family.products.map(p => p.name))
+    expect(portfolioPt.productFamilies).toHaveLength(3)
+    expect(names).toEqual(['Token4You', 'GreenToken', 'Weble', 'Loome', 'Stephubs', 'Educ360'])
+    for (const family of portfolioPt.productFamilies) {
+      expect(family.name.length).toBeGreaterThan(0)
+      for (const product of family.products) {
+        expect(product.description.length).toBeGreaterThan(40)
+      }
+    }
+  })
+
+  it('Ativos transversais e ecossistema não expõem Zeragon nem SharpOps', () => {
+    const ids = serviceAssets(assets).map(a => a.id)
+    expect(ids).not.toContain('zeragon')
+    expect(ids).not.toContain('sharpops')
   })
 
   it('não há códigos nem ids de oferta duplicados', () => {
@@ -271,11 +300,11 @@ describe('Portfólio 2026 S2 — integridade dos dados', () => {
     expect(publicText).not.toMatch(/a prática declara|pendente de liberação|metas? do produto/i)
   })
 
-  it('usa Pilar como nomenclatura pública em português e inglês', () => {
-    expect(pt.portfolio.thesis.axisWord).toBe('Pilar')
-    expect(pt.portfolio.thesis.subtitle).toMatch(/seis pilares/i)
-    expect(en.portfolio.thesis.axisWord).toBe('Pillar')
-    expect(en.portfolio.thesis.subtitle).toMatch(/six value pillars/i)
+  it('usa Categoria como nomenclatura pública em português e inglês', () => {
+    expect(pt.portfolio.thesis.axisWord).toBe('Categoria')
+    expect(pt.portfolio.thesis.subtitle).toMatch(/seis categorias/i)
+    expect(en.portfolio.thesis.axisWord).toBe('Category')
+    expect(en.portfolio.thesis.subtitle).toMatch(/six value categories/i)
 
     const publicData = [
       portfolioPt.thesis.description,
@@ -288,6 +317,7 @@ describe('Portfólio 2026 S2 — integridade dos dados', () => {
       ...assets.map(asset => asset.description),
     ].join(' ')
     expect(publicData).not.toMatch(/\beixos?\b/i)
-    expect(publicData).toMatch(/\bpilares?\b/i)
+    expect(publicData).not.toMatch(/\bpilares?\b/i)
+    expect(publicData).toMatch(/\bcategorias?\b/i)
   })
 })

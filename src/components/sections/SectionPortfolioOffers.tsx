@@ -1,19 +1,17 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { BookOpen, ChevronDown, Library, Search } from 'lucide-react'
+import { ChevronDown, Library, Search } from 'lucide-react'
 import { SectionWrapper } from '../ui/SectionWrapper'
 import { InterestButton } from '../ui/InterestButton'
 import { BackToOriginChip } from '../ui/BackToOriginChip'
-import { EVIDENCE_STYLE } from '../portfolio/EvidenceBadge'
 import { OfferCard } from '../portfolio/OfferCard'
 import { OfferModal } from '../portfolio/OfferModal'
 import { useApp } from '../../context/AppContext'
 import { useLanguage } from '../../i18n'
 import { getPortfolio, isExtractedAxis, sectionForOffer, serviceAxes, serviceOffers } from '../../data/portfolio'
 import { getPortfolioExample } from '../../data/portfolioExamples'
-import { portfolioGlossary } from '../../data/portfolioGuidance'
 import { MUTED_COLOR } from '../../theme/portfolioTokens'
-import type { EvidenceStatus, PortfolioAxis, PortfolioOffer, PortfolioRole } from '../../types'
+import type { PortfolioAxis, PortfolioOffer, PortfolioRole } from '../../types'
 
 // ─── Componente principal ────────────────────────────────────────────────────
 
@@ -31,18 +29,12 @@ export function SectionPortfolioOffers() {
     entryHint?.startsWith('axis:') ? entryHint.slice(5) : 'all',
   )
   const [roleFilter, setRoleFilter] = useState<PortfolioRole | 'all'>('all')
-  const [evidenceFilter, setEvidenceFilter] = useState<EvidenceStatus | 'all'>('all')
   const [query, setQuery] = useState('')
   const [selected, setSelected] = useState<PortfolioOffer | null>(() =>
     entryHint?.startsWith('offer:')
       ? offers.find(o => o.code === entryHint.slice(6)) ?? null
       : null,
   )
-  const [entryGlossary] = useState<string | null>(() =>
-    entryHint?.startsWith('glossary:') ? entryHint.slice('glossary:'.length) : null,
-  )
-  const [glossaryOpen, setGlossaryOpen] = useState(() => Boolean(entryHint?.startsWith('glossary:')))
-  const glossaryRef = useRef<HTMLDetailsElement>(null)
 
   // Quem chegou filtrado precisa saber disso — senão lê 3 ofertas achando que são todas.
   const [entryAxisId] = useState<string | null>(() => {
@@ -66,14 +58,6 @@ export function SectionPortfolioOffers() {
     }
     clearDeepDiveHint()
   }, [entryHint, bundle.offers, clearDeepDiveHint, navigate])
-
-  useEffect(() => {
-    if (!entryGlossary) return
-    const timer = window.setTimeout(() => {
-      glossaryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }, 250)
-    return () => window.clearTimeout(timer)
-  }, [entryGlossary])
 
   // Qual oferta o cliente pediu para ver é o sinal comercial mais forte da sessão.
   const openOffer = useCallback(
@@ -115,7 +99,6 @@ export function SectionPortfolioOffers() {
     return offers.filter(offer => {
       if (axisFilter !== 'all' && offer.axisId !== axisFilter) return false
       if (roleFilter !== 'all' && offer.role !== roleFilter) return false
-      if (evidenceFilter !== 'all' && offer.proof.status !== evidenceFilter) return false
       if (!q) return true
       const haystack = [
         offer.code,
@@ -138,13 +121,7 @@ export function SectionPortfolioOffers() {
         .toLowerCase()
       return haystack.includes(q)
     })
-  }, [offers, axisFilter, roleFilter, evidenceFilter, query, lang])
-
-  const evidenceCounts = useMemo(() => {
-    const map = { 'liberado': 0, 'em-validacao': 0, 'sem-lastro': 0 } as Record<EvidenceStatus, number>
-    for (const offer of offers) map[offer.proof.status] += 1
-    return map
-  }, [offers])
+  }, [offers, axisFilter, roleFilter, query, lang])
 
   const usedAxes = useMemo(
     () => axes.filter(axis => offers.some(o => o.axisId === axis.id)),
@@ -184,53 +161,6 @@ export function SectionPortfolioOffers() {
 
           <div className="mt-4 md:mt-6 h-px bg-gradient-to-r from-cyan-400/30 via-white/[0.06] to-transparent" />
         </motion.div>
-
-        <details
-          ref={glossaryRef}
-          open={glossaryOpen}
-          onToggle={event => setGlossaryOpen(event.currentTarget.open)}
-          data-voz-caixa="portfolio-glossary"
-          data-voz-caixa-secao="portfolio-offers"
-          data-voz-caixa-rotulo={t('portfolio.offers.glossaryTitle')}
-          className="group mb-5 rounded-2xl border border-cyan-400/20 bg-cyan-500/[0.035] overflow-hidden"
-        >
-          <summary className="list-none cursor-pointer p-4 flex items-center justify-between gap-3 rounded-xl hover:bg-white/[0.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
-            <span className="flex items-center gap-3">
-              <span className="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-400/25 flex items-center justify-center">
-                <BookOpen size={16} className="text-cyan-400" aria-hidden="true" />
-              </span>
-              <span>
-                <span className="block text-sm font-black text-white">{t('portfolio.offers.glossaryTitle')}</span>
-                <span className="block text-label text-foursys-text-muted mt-0.5">
-                  {t('portfolio.offers.glossarySubtitle')}
-                </span>
-              </span>
-            </span>
-            <ChevronDown
-              size={16}
-              className="text-foursys-text-dim transition-transform group-open:rotate-180"
-              aria-hidden="true"
-            />
-          </summary>
-          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-2.5 p-4 pt-0 border-t border-white/[0.05]">
-            {portfolioGlossary.map(item => (
-              <div
-                key={item.term}
-                className={`rounded-xl border p-3 ${
-                  item.term === entryGlossary
-                    ? 'border-cyan-400/45 bg-cyan-500/[0.09]'
-                    : 'border-white/[0.07] bg-foursys-surface/25'
-                }`}
-              >
-                <h3 className="text-xs font-black text-cyan-300">{item.term}</h3>
-                <p className="text-label text-foursys-text-muted leading-relaxed mt-1">{item.definition[lang]}</p>
-                <p className="text-label text-white/75 leading-relaxed mt-1.5">
-                  <span className="font-bold">{t('portfolio.offers.clientLanguage')}:</span> {item.clientLanguage[lang]}
-                </p>
-              </div>
-            ))}
-          </div>
-        </details>
 
         {/* ── Filtros ── */}
         <motion.div
@@ -316,50 +246,12 @@ export function SectionPortfolioOffers() {
                       : { color: MUTED_COLOR, borderColor: 'rgba(255,255,255,0.08)' }
                   }
                 >
-                  {t('portfolio.thesis.axisWord')} {axis.number} · {axis.name}
+                  {axis.name}
                 </button>
               )
             })}
           </div>
 
-          {/* Maturidade como filtro público do catálogo */}
-          <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="text-label font-bold uppercase tracking-[0.14em] text-foursys-text-dim mr-1">
-              {t('portfolio.offers.filterEvidence')}
-            </span>
-            <button
-              onClick={() => setEvidenceFilter('all')}
-              aria-pressed={evidenceFilter === 'all'}
-              className={`px-3 py-2 min-h-touch md:min-h-0 rounded-lg text-label font-semibold border transition-colors ${
-                evidenceFilter === 'all'
-                  ? 'text-white border-cyan-400/40 bg-cyan-500/15'
-                  : 'text-foursys-text-dim border-white/[0.08] hover:text-foursys-text-muted'
-              }`}
-            >
-              {t('portfolio.offers.filterAll')} ({offers.length})
-            </button>
-            {(['liberado', 'em-validacao', 'sem-lastro'] as const).map(status => {
-              const style = EVIDENCE_STYLE[status]
-              const StatusIcon = style.icon
-              const active = evidenceFilter === status
-              return (
-                <button
-                  key={status}
-                  onClick={() => setEvidenceFilter(status)}
-                  aria-pressed={active}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 min-h-touch md:min-h-0 rounded-lg text-label font-semibold border transition-colors"
-                  style={
-                    active
-                      ? { color: style.color, borderColor: `${style.color}66`, backgroundColor: `${style.color}1A` }
-                      : { color: MUTED_COLOR, borderColor: 'rgba(255,255,255,0.08)' }
-                  }
-                >
-                  <StatusIcon size={11} aria-hidden="true" />
-                  {t(`portfolio.evidence.${status}`)} ({evidenceCounts[status]})
-                </button>
-              )
-            })}
-          </div>
             </div>
           </details>
 
@@ -379,9 +271,6 @@ export function SectionPortfolioOffers() {
               backgroundColor: `${axesById[entryAxisId].color}10`,
             }}
           >
-            <span className="text-label font-bold uppercase tracking-wider" style={{ color: axesById[entryAxisId].color }}>
-              {t('portfolio.thesis.axisWord')} {axesById[entryAxisId].number}
-            </span>
             <span className="text-sm text-foursys-text-muted flex-1 min-w-[180px]">
               {t('portfolio.offers.contextFrom').replace('{axis}', axesById[entryAxisId].name)}
             </span>
