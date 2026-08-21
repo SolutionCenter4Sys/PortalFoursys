@@ -161,10 +161,10 @@ export function SectionPortfolioAssets() {
           tabIndex={-1}
           className="focus:outline-none"
         >
-          <h3 className="text-label font-bold uppercase tracking-[0.16em] text-foursys-text-dim mb-1.5">
+          <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-foursys-text-dim mb-1.5">
             {t('portfolio.assets.foundationTitle')}
           </h3>
-          <p className="text-sm text-foursys-text-muted leading-relaxed max-w-3xl mb-4">
+          <p className="text-base text-foursys-text-muted leading-relaxed max-w-3xl mb-4">
             {t('portfolio.assets.foundationDesc')}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
@@ -172,7 +172,7 @@ export function SectionPortfolioAssets() {
               const Icon = ICONS[asset.icon] ?? Wrench
               const usedIn = offersByAsset[asset.id] ?? []
               return (
-                <motion.details
+                <motion.article
                   key={asset.id}
                   initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -180,35 +180,29 @@ export function SectionPortfolioAssets() {
                   data-voz-detalhe={`portfolio-asset-${asset.id}`}
                   data-voz-detalhe-secao="portfolio-assets"
                   data-voz-detalhe-rotulo={asset.name}
-                  className="group rounded-2xl bg-foursys-surface/25 border border-white/[0.07] overflow-hidden"
+                  className="rounded-2xl bg-foursys-surface/25 border border-white/[0.07] p-5 flex flex-col"
                 >
-                  <summary className="list-none cursor-pointer p-4 flex items-center justify-between gap-3 rounded-xl hover:bg-white/[0.025] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
-                    <span className="flex items-center gap-3 min-w-0">
-                    <div className="w-9 h-9 rounded-xl bg-foursys-primary/10 border border-foursys-primary/25 flex items-center justify-center flex-shrink-0">
-                      <Icon size={16} className="text-foursys-primary" aria-hidden="true" />
+                  <div className="flex items-start gap-3">
+                    <div className="w-11 h-11 rounded-xl bg-foursys-primary/10 border border-foursys-primary/25 flex items-center justify-center flex-shrink-0">
+                      <Icon size={20} className="text-foursys-primary" aria-hidden="true" />
                     </div>
-                    <span className="min-w-0">
-                      <span className="block text-sm font-black text-white leading-tight">{asset.name}</span>
+                    <div className="min-w-0">
+                      <h4 className="text-lg font-black text-white leading-tight">{asset.name}</h4>
                       {asset.tagline && (
-                        <span className="block text-label font-semibold text-foursys-primary/90 mt-0.5">
+                        <p className="text-sm font-semibold text-foursys-primary/90 mt-1 leading-snug">
                           {asset.tagline}
-                        </span>
+                        </p>
                       )}
-                      <span className="block text-label text-foursys-text-dim mt-1">
-                        {t('portfolio.assets.usedIn').replace('{count}', String(usedIn.length))}
-                      </span>
-                    </span>
-                    </span>
-                    <span className="text-label font-bold text-foursys-primary group-open:hidden">
-                      {t('common.seeMore')}
-                    </span>
-                  </summary>
+                    </div>
+                  </div>
 
-                  <div className="p-4 pt-3 border-t border-white/[0.06]">
-                    <p className="text-xs text-foursys-text-muted leading-relaxed">{asset.description}</p>
-                    {usedIn.length > 0 && (
-                    <div className="mt-3 pt-3 border-t border-white/[0.06]">
-                      <p className="text-label font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-2">
+                  <p className="text-sm md:text-base text-foursys-text-muted leading-relaxed mt-4">
+                    {asset.description}
+                  </p>
+
+                  {usedIn.length > 0 && (
+                    <div className="mt-4 pt-3 border-t border-white/[0.06]">
+                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-2">
                         {t('portfolio.assets.usedIn').replace('{count}', String(usedIn.length))}
                       </p>
                       <div className="flex flex-wrap gap-1.5">
@@ -221,16 +215,15 @@ export function SectionPortfolioAssets() {
                               '{name}',
                               offer.name,
                             )}
-                            className="text-label font-bold px-3 py-2 min-h-touch md:min-h-[30px] md:px-2.5 md:py-1.5 rounded-lg border border-foursys-primary/30 bg-foursys-primary/10 text-foursys-primary hover:bg-foursys-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-colors"
+                            className="text-xs font-bold px-3 py-2 min-h-touch md:min-h-[32px] md:px-2.5 md:py-1.5 rounded-lg border border-foursys-primary/30 bg-foursys-primary/10 text-foursys-primary hover:bg-foursys-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-colors"
                           >
                             {offer.name}
                           </button>
                         ))}
                       </div>
                     </div>
-                    )}
-                  </div>
-                </motion.details>
+                  )}
+                </motion.article>
               )
             })}
 
@@ -248,21 +241,21 @@ export function SectionPortfolioAssets() {
                 data-voz-detalhe="portfolio-asset-sustain"
                 data-voz-detalhe-secao="portfolio-assets"
                 data-voz-detalhe-rotulo={axis.name}
-                className="p-4 rounded-2xl bg-foursys-surface/25 border border-white/[0.07] flex flex-col text-left cursor-pointer hover:-translate-y-0.5 hover:bg-foursys-surface/40 hover:border-foursys-primary/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-all"
+                className="p-5 rounded-2xl bg-foursys-surface/25 border border-white/[0.07] flex flex-col text-left cursor-pointer hover:-translate-y-0.5 hover:bg-foursys-surface/40 hover:border-foursys-primary/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 transition-all"
               >
                 <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-foursys-primary/10 border border-foursys-primary/25 flex items-center justify-center flex-shrink-0">
-                    <LifeBuoy size={16} className="text-foursys-primary" aria-hidden="true" />
+                  <div className="w-11 h-11 rounded-xl bg-foursys-primary/10 border border-foursys-primary/25 flex items-center justify-center flex-shrink-0">
+                    <LifeBuoy size={20} className="text-foursys-primary" aria-hidden="true" />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-sm font-black text-white leading-tight mb-1">{axis.name}</h4>
-                    <p className="text-xs text-foursys-text-muted leading-relaxed">{axis.promise}</p>
+                    <h4 className="text-lg font-black text-white leading-tight mb-1">{axis.name}</h4>
+                    <p className="text-sm md:text-base text-foursys-text-muted leading-relaxed">{axis.promise}</p>
                   </div>
                 </div>
 
                 {sustainCatalog.length > 0 && (
-                  <div className="mt-3 pt-3 border-t border-white/[0.06]">
-                    <p className="text-label font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-2">
+                  <div className="mt-4 pt-3 border-t border-white/[0.06]">
+                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-2">
                       {t('portfolio.assets.usedIn').replace('{count}', String(sustainCatalog.length))}
                     </p>
                     <div className="flex flex-wrap gap-1.5">
@@ -270,7 +263,7 @@ export function SectionPortfolioAssets() {
                         <span
                           key={offer.code}
                           title={offer.name}
-                          className="text-label font-bold px-3 py-2 min-h-touch md:min-h-[30px] md:px-2.5 md:py-1.5 rounded-lg border border-foursys-primary/30 bg-foursys-primary/10 text-foursys-primary"
+                          className="text-xs font-bold px-3 py-2 min-h-touch md:min-h-[32px] md:px-2.5 md:py-1.5 rounded-lg border border-foursys-primary/30 bg-foursys-primary/10 text-foursys-primary"
                         >
                           {offer.name}
                         </span>
