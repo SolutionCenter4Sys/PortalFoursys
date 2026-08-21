@@ -4,7 +4,6 @@ import {
   ArrowRight,
   Briefcase,
   Building2,
-  ChevronDown,
   Coins,
   Database,
   Route,
@@ -261,34 +260,26 @@ export function SectionPortfolioStart() {
 
         {/* ── Overlay por segmento ── */}
         <div>
-          <h4 className="text-label font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-3">
+          <h4 className="text-sm font-bold uppercase tracking-[0.14em] text-foursys-text-dim mb-3">
             {t('portfolio.start.segments')}
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
             {segments.map((segment, i) => (
-              <motion.details
+              <motion.article
                 key={segment.id}
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.04, duration: 0.35 }}
-                className="group rounded-2xl bg-foursys-surface/25 border border-white/[0.07] overflow-hidden"
+                className="rounded-2xl bg-foursys-surface/25 border border-white/[0.07] p-5 flex flex-col"
               >
-                <summary className="list-none cursor-pointer p-4 flex items-center justify-between gap-3 rounded-xl hover:bg-white/[0.025] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60">
-                  <span>
-                    <span className="block text-sm font-black text-white">{segment.name}</span>
-                    <span className="block text-label text-foursys-text-dim mt-1">
-                      {t('portfolio.start.recommendedPaths')}
-                    </span>
-                  </span>
-                  <ChevronDown
-                    size={15}
-                    className="text-foursys-text-dim transition-transform group-open:rotate-180"
-                    aria-hidden="true"
-                  />
-                </summary>
-                <div className="px-4 pb-4 pt-3 border-t border-white/[0.06]">
-                  <p className="text-xs text-foursys-text-muted leading-relaxed mb-3">{segment.pain}</p>
-                  <div className="flex flex-wrap gap-1.5">
+                <h5 className="text-lg font-black text-white leading-tight">{segment.name}</h5>
+                <p className="text-sm font-semibold text-foursys-primary/90 mt-1">
+                  {t('portfolio.start.recommendedPaths')}
+                </p>
+                <p className="text-sm md:text-base text-foursys-text-muted leading-relaxed mt-3">
+                  {segment.pain}
+                </p>
+                <div className="flex flex-wrap gap-1.5 mt-4">
                   {segment.priorityOffers.map(code => {
                     const offer = offersByCode[code]
                     if (!offer) return null
@@ -303,16 +294,15 @@ export function SectionPortfolioStart() {
                         onClick={() => openOffer(code)}
                         aria-label={label}
                         title={offer?.name ?? code}
-                        className="text-label font-bold px-3 py-2 min-h-touch md:min-h-[30px] md:px-2.5 md:py-1.5 rounded-lg border transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
+                        className="text-xs font-bold px-3 py-2 min-h-touch md:min-h-[32px] md:px-2.5 md:py-1.5 rounded-lg border transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
                         style={{ color: accent, borderColor: `${accent}38`, backgroundColor: `${accent}12` }}
                       >
                         {offer?.name ?? code}
                       </button>
                     )
                   })}
-                  </div>
                 </div>
-              </motion.details>
+              </motion.article>
             ))}
           </div>
         </div>
